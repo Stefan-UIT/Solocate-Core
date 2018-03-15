@@ -64,7 +64,7 @@ struct DeviceType {
 }
 
 struct AppColor {
-  static let mainColor            = UIColor(hex: "#3CB9E0")
+  static let mainColor            = UIColor(hex: "#037AFF")
 }
 
 
@@ -83,5 +83,6 @@ struct NotificationName {
 struct SegueIdentifier {
   static let orderDetail = "orderDetailSegue"
   static let showHome = "showHomeSegue"
+  static let showOrderDetail = "orderDetailSegue"
 }
 

@@ -26,6 +26,25 @@
 		5A499CB820591E4100A1D944 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CB620591E4100A1D944 /* Constants.swift */; };
 		5A499CBB2059277D00A1D944 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CBA2059277D00A1D944 /* BaseViewController.swift */; };
 		5A6895AEBC8BB017DC2EA816 /* Pods_SRSDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B660F041976D0FC4B84CB8F1 /* Pods_SRSDriver.framework */; };
+		5A68A449205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A448205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift */; };
+		5A68A44B205A200700CA9DB8 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A44A205A200700CA9DB8 /* OrderDetailViewController.swift */; };
+		5A68A44D205A201A00CA9DB8 /* OrderSignatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A44C205A201A00CA9DB8 /* OrderSignatureViewController.swift */; };
+		5A68A44F205A202400CA9DB8 /* OrderNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A44E205A202400CA9DB8 /* OrderNotesViewController.swift */; };
+		5A68A451205A202F00CA9DB8 /* OrderPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A450205A202F00CA9DB8 /* OrderPictureViewController.swift */; };
+		5A68A455205A223200CA9DB8 /* OrderDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A453205A223200CA9DB8 /* OrderDetailCollectionViewCell.swift */; };
+		5A68A456205A223200CA9DB8 /* OrderDetailCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5A68A454205A223200CA9DB8 /* OrderDetailCollectionViewCell.xib */; };
+		5A68A458205A5A0F00CA9DB8 /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A457205A5A0F00CA9DB8 /* APIs.swift */; };
+		5A68A45B205A5E3600CA9DB8 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A45A205A5E3600CA9DB8 /* Order.swift */; };
+		5A68A45D205A5ECF00CA9DB8 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A45C205A5ECE00CA9DB8 /* Route.swift */; };
+		5A68A45F205A619300CA9DB8 /* PickupPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A45E205A619300CA9DB8 /* PickupPlace.swift */; };
+		5A68A461205A86B500CA9DB8 /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A460205A86B500CA9DB8 /* MapsViewController.swift */; };
+		5A82E9C4205A038900F34351 /* RESTConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C0205A038900F34351 /* RESTConstants.swift */; };
+		5A82E9C5205A038900F34351 /* RESTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C1205A038900F34351 /* RESTError.swift */; };
+		5A82E9C6205A038900F34351 /* RESTRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C2205A038900F34351 /* RESTRequest.swift */; };
+		5A82E9C7205A038900F34351 /* RESTResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C3205A038900F34351 /* RESTResponse.swift */; };
+		5A82E9CA205A04EE00F34351 /* OrderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C9205A04EE00F34351 /* OrderListViewController.swift */; };
+		5A82E9CC205A148F00F34351 /* OrderItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9CB205A148F00F34351 /* OrderItemTableViewCell.swift */; };
+		5A82E9CE205A197800F34351 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9CD205A197800F34351 /* Date.swift */; };
 		5AA4CA4020590AD4003F8E6F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA4CA3F20590AD4003F8E6F /* AppDelegate.swift */; };
 		5AA4CA4520590AD4003F8E6F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4320590AD4003F8E6F /* Main.storyboard */; };
 		5AA4CA4720590AD4003F8E6F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4620590AD4003F8E6F /* Assets.xcassets */; };
@@ -56,6 +75,25 @@
 		5A499CB520591E4100A1D944 /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		5A499CB620591E4100A1D944 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		5A499CBA2059277D00A1D944 /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		5A68A448205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailContainerViewController.swift; sourceTree = "<group>"; };
+		5A68A44A205A200700CA9DB8 /* OrderDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailViewController.swift; sourceTree = "<group>"; };
+		5A68A44C205A201A00CA9DB8 /* OrderSignatureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderSignatureViewController.swift; sourceTree = "<group>"; };
+		5A68A44E205A202400CA9DB8 /* OrderNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderNotesViewController.swift; sourceTree = "<group>"; };
+		5A68A450205A202F00CA9DB8 /* OrderPictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPictureViewController.swift; sourceTree = "<group>"; };
+		5A68A453205A223200CA9DB8 /* OrderDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailCollectionViewCell.swift; sourceTree = "<group>"; };
+		5A68A454205A223200CA9DB8 /* OrderDetailCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderDetailCollectionViewCell.xib; sourceTree = "<group>"; };
+		5A68A457205A5A0F00CA9DB8 /* APIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIs.swift; sourceTree = "<group>"; };
+		5A68A45A205A5E3600CA9DB8 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
+		5A68A45C205A5ECE00CA9DB8 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		5A68A45E205A619300CA9DB8 /* PickupPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupPlace.swift; sourceTree = "<group>"; };
+		5A68A460205A86B500CA9DB8 /* MapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
+		5A82E9C0205A038900F34351 /* RESTConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTConstants.swift; sourceTree = "<group>"; };
+		5A82E9C1205A038900F34351 /* RESTError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTError.swift; sourceTree = "<group>"; };
+		5A82E9C2205A038900F34351 /* RESTRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTRequest.swift; sourceTree = "<group>"; };
+		5A82E9C3205A038900F34351 /* RESTResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTResponse.swift; sourceTree = "<group>"; };
+		5A82E9C9205A04EE00F34351 /* OrderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListViewController.swift; sourceTree = "<group>"; };
+		5A82E9CB205A148F00F34351 /* OrderItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemTableViewCell.swift; sourceTree = "<group>"; };
+		5A82E9CD205A197800F34351 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		5AA4CA3C20590AD4003F8E6F /* SRSDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SRSDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AA4CA3F20590AD4003F8E6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5AA4CA4420590AD4003F8E6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -103,6 +141,7 @@
 				5A499C9B20591D0400A1D944 /* UITextView.swift */,
 				5A499C9C20591D0400A1D944 /* UIView.swift */,
 				5A499C9D20591D0400A1D944 /* UIViewController.swift */,
+				5A82E9CD205A197800F34351 /* Date.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -143,6 +182,52 @@
 			path = Base;
 			sourceTree = "<group>";
 		};
+		5A68A447205A1FD500CA9DB8 /* OrderDetails */ = {
+			isa = PBXGroup;
+			children = (
+				5A68A448205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift */,
+				5A68A44A205A200700CA9DB8 /* OrderDetailViewController.swift */,
+				5A68A44C205A201A00CA9DB8 /* OrderSignatureViewController.swift */,
+				5A68A44E205A202400CA9DB8 /* OrderNotesViewController.swift */,
+				5A68A450205A202F00CA9DB8 /* OrderPictureViewController.swift */,
+				5A68A453205A223200CA9DB8 /* OrderDetailCollectionViewCell.swift */,
+				5A68A454205A223200CA9DB8 /* OrderDetailCollectionViewCell.xib */,
+			);
+			path = OrderDetails;
+			sourceTree = "<group>";
+		};
+		5A68A459205A5A2100CA9DB8 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				5A68A457205A5A0F00CA9DB8 /* APIs.swift */,
+				5A68A45A205A5E3600CA9DB8 /* Order.swift */,
+				5A68A45C205A5ECE00CA9DB8 /* Route.swift */,
+				5A68A45E205A619300CA9DB8 /* PickupPlace.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		5A82E9BF205A038900F34351 /* Webservices */ = {
+			isa = PBXGroup;
+			children = (
+				5A82E9C0205A038900F34351 /* RESTConstants.swift */,
+				5A82E9C1205A038900F34351 /* RESTError.swift */,
+				5A82E9C2205A038900F34351 /* RESTRequest.swift */,
+				5A82E9C3205A038900F34351 /* RESTResponse.swift */,
+			);
+			path = Webservices;
+			sourceTree = "<group>";
+		};
+		5A82E9C8205A04D500F34351 /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				5A82E9C9205A04EE00F34351 /* OrderListViewController.swift */,
+				5A82E9CB205A148F00F34351 /* OrderItemTableViewCell.swift */,
+				5A68A460205A86B500CA9DB8 /* MapsViewController.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		5AA4CA3320590AD4003F8E6F = {
 			isa = PBXGroup;
 			children = (
@@ -178,6 +263,8 @@
 		5AA4CA5120590B08003F8E6F /* App */ = {
 			isa = PBXGroup;
 			children = (
+				5A68A447205A1FD500CA9DB8 /* OrderDetails */,
+				5A82E9C8205A04D500F34351 /* Home */,
 				5A499CB92059277400A1D944 /* Base */,
 				5AA4CA5320590B22003F8E6F /* Authorization */,
 				5AA4CA5220590B0F003F8E6F /* Main */,
@@ -204,6 +291,8 @@
 		5AA4CA5820590B69003F8E6F /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				5A68A459205A5A2100CA9DB8 /* Models */,
+				5A82E9BF205A038900F34351 /* Webservices */,
 				5A499CB420591E4100A1D944 /* Helpers */,
 				5A499CAB20591D8300A1D944 /* Libs */,
 				5A499C9020591D0400A1D944 /* Extensions */,
@@ -286,6 +375,7 @@
 				5AA4CA4A20590AD4003F8E6F /* LaunchScreen.storyboard in Resources */,
 				5AA4CA4720590AD4003F8E6F /* Assets.xcassets in Resources */,
 				5AA4CA4520590AD4003F8E6F /* Main.storyboard in Resources */,
+				5A68A456205A223200CA9DB8 /* OrderDetailCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -365,24 +455,42 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5A68A451205A202F00CA9DB8 /* OrderPictureViewController.swift in Sources */,
+				5A68A44B205A200700CA9DB8 /* OrderDetailViewController.swift in Sources */,
+				5A68A44D205A201A00CA9DB8 /* OrderSignatureViewController.swift in Sources */,
 				5A499CA920591D0400A1D944 /* UIViewController.swift in Sources */,
 				5A499CA820591D0400A1D944 /* UIView.swift in Sources */,
 				5A499CA320591D0400A1D944 /* UIImageView.swift in Sources */,
+				5A68A45B205A5E3600CA9DB8 /* Order.swift in Sources */,
 				5A499CA720591D0400A1D944 /* UITextView.swift in Sources */,
 				5A499CBB2059277D00A1D944 /* BaseViewController.swift in Sources */,
+				5A68A45F205A619300CA9DB8 /* PickupPlace.swift in Sources */,
+				5A82E9C4205A038900F34351 /* RESTConstants.swift in Sources */,
+				5A82E9C5205A038900F34351 /* RESTError.swift in Sources */,
+				5A82E9CA205A04EE00F34351 /* OrderListViewController.swift in Sources */,
 				5A499CB720591E4100A1D944 /* Cache.swift in Sources */,
 				5A499CA020591D0400A1D944 /* UIButton.swift in Sources */,
 				5A499CA220591D0400A1D944 /* UIColor.swift in Sources */,
+				5A82E9CE205A197800F34351 /* Date.swift in Sources */,
+				5A68A449205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift in Sources */,
+				5A68A458205A5A0F00CA9DB8 /* APIs.swift in Sources */,
 				5A499CB220591D9600A1D944 /* HCSStarRatingView.m in Sources */,
+				5A68A461205A86B500CA9DB8 /* MapsViewController.swift in Sources */,
 				5A499CA620591D0400A1D944 /* UITextField.swift in Sources */,
 				5AA4CA5520590B31003F8E6F /* LoginViewController.swift in Sources */,
 				5A499CAD20591D9000A1D944 /* Reachability.swift in Sources */,
+				5A68A455205A223200CA9DB8 /* OrderDetailCollectionViewCell.swift in Sources */,
 				5A499CA420591D0400A1D944 /* UILabel.swift in Sources */,
+				5A82E9CC205A148F00F34351 /* OrderItemTableViewCell.swift in Sources */,
+				5A82E9C6205A038900F34351 /* RESTRequest.swift in Sources */,
 				5A499CA520591D0400A1D944 /* UITableView-Extensions.swift in Sources */,
 				5AA4CA4020590AD4003F8E6F /* AppDelegate.swift in Sources */,
 				5A499C9F20591D0400A1D944 /* String.swift in Sources */,
 				5A499CA120591D0400A1D944 /* UICollectionView-Extensions.swift in Sources */,
+				5A82E9C7205A038900F34351 /* RESTResponse.swift in Sources */,
+				5A68A44F205A202400CA9DB8 /* OrderNotesViewController.swift in Sources */,
 				5A499C9E20591D0400A1D944 /* NSString+SDString.m in Sources */,
+				5A68A45D205A5ECF00CA9DB8 /* Route.swift in Sources */,
 				5A499CB820591E4100A1D944 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -526,6 +634,7 @@
 				INFOPLIST_FILE = SRSDriver/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9aa6a24a-a1d0-4b1c-a723-fe07fa9e1698";
@@ -545,6 +654,7 @@
 				INFOPLIST_FILE = SRSDriver/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "9aa6a24a-a1d0-4b1c-a723-fe07fa9e1698";

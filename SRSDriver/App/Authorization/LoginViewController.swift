@@ -13,20 +13,41 @@ class LoginViewController: BaseViewController {
   @IBOutlet weak var userNameTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   
-    override func viewDidLoad() {
-        super.viewDidLoad()
+  override func viewDidLoad() {
+    super.viewDidLoad()
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    if let tk = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String, tk.length > 0 {
+      self.performSegue(withIdentifier: SegueIdentifier.showHome, sender: nil)
     }
+  }
+  
+  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+    super.touchesEnded(touches, with: event)
+    view.endEditing(true)
+  }
   
   
   @IBAction func didClickLogin(_ sender: UIButton) {
     guard userNameTextField.hasText, passwordTextField.hasText,
-      let _ = userNameTextField.text,
-      let _ = passwordTextField.text
+      let email = userNameTextField.text,
+      let password = passwordTextField.text
       else {
         showAlertView("Invalid info")
         return
     }
-    performSegue(withIdentifier: SegueIdentifier.showHome, sender: nil)
+    showLoadingIndicator()
+    APIs.login(email, password: password) { (token, errorMsg) in
+      self.dismissLoadingIndicator()
+      guard let tken = token else {
+        self.showAlertView(errorMsg ?? "")
+        return
+      }
+      Cache.shared.setObject(obj: tken, forKey: Defaultkey.tokenKey)
+      self.performSegue(withIdentifier: SegueIdentifier.showHome, sender: nil)
+    }
   }
-
+  
 }
