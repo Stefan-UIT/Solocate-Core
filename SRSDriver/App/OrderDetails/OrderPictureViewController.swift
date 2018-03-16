@@ -9,7 +9,7 @@
 import UIKit
 import XLPagerTabStrip
 
-class OrderPictureViewController: UIViewController, IndicatorInfoProvider {
+class OrderPictureViewController: BaseOrderDetailViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -17,7 +17,7 @@ class OrderPictureViewController: UIViewController, IndicatorInfoProvider {
     // Do any additional setup after loading the view.
   }
   
-  func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+  override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
     return IndicatorInfo(title: "Picture")
   }
   

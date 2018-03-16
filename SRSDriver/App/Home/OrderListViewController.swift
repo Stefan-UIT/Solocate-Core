@@ -87,6 +87,14 @@ class OrderListViewController: UIViewController {
       self.pickerContainerView.transform = .identity
     }
   }
+  
+  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+    if segue.identifier == SegueIdentifier.orderDetail,
+      let destVC = segue.destination as? OrderDetailContainerViewController,
+      let order = sender as? Order {
+      destVC.orderID = "\(order.id)"
+    }
+  }
 }
 
 // MARK: - Private methods
@@ -134,10 +142,10 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-//    let movedObject = self.fruits[sourceIndexPath.row]
-//    fruits.remove(at: sourceIndexPath.row)
-//    fruits.insert(movedObject, at: destinationIndexPath.row)
-//    NSLog("%@", "\(sourceIndexPath.row) => \(destinationIndexPath.row) \(fruits)")
+    //    let movedObject = self.fruits[sourceIndexPath.row]
+    //    fruits.remove(at: sourceIndexPath.row)
+    //    fruits.insert(movedObject, at: destinationIndexPath.row)
+    //    NSLog("%@", "\(sourceIndexPath.row) => \(destinationIndexPath.row) \(fruits)")
     // To check for correctness enable: self.tableView.reloadData()
   }
   
@@ -146,7 +154,7 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    performSegue(withIdentifier: SegueIdentifier.orderDetail, sender: nil)
+    performSegue(withIdentifier: SegueIdentifier.orderDetail, sender: route.orderList[indexPath.row])
     tableView.deselectRow(at: indexPath, animated: true)
   }
   
@@ -155,6 +163,9 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension OrderListViewController: UITabBarControllerDelegate {
   func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-    if let vc = viewController as? 
+    if let navigationController = viewController as? UINavigationController,
+      let mapVC = navigationController.topViewController as? MapsViewController {
+      mapVC.route = route
+    }
   }
 }

@@ -23,7 +23,12 @@ class PickupPlace: NSObject, Mappable {
   }
   
   func mapping(map: Map) {
-    
+    contactName   <- map["pkup_ctt_name"]
+    contactEmail  <- map["pkup_ctt_email"]
+    contactPhone  <- map["pkup_ctt_phone"]
+    shopID        <- map["shop_id"]
+    shopName      <- map["shop"]
+    lat           <- map["lat"]
+    lng           <- map["long"]
   }
-
 }

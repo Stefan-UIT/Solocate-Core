@@ -35,7 +35,7 @@ class Order: NSObject, Mappable {
   }
   
   func mapping(map: Map) {
-    id                <- map["route_id"]
+    id                <- map["order_id"]
     deliveryZip       <- map["dlvy_zip"]
     totalVolume       <- map["tot_vol"]
     totalWeight       <- map["tot_weight"]
@@ -56,8 +56,36 @@ class Order: NSObject, Mappable {
     deliveryAdd       <- map["delivery"]
     timeWindowName    <- map["TimeWindowName"]
   }
+}
+
+class OrderDetail: Order {
+  var deliveryContactName = ""
+  var deliveryContactPhone = ""
+  var deliveryCity = ""
+  var deliveryState = ""
+  var descriptionNote = ""
+  var descriptionNoteExt = ""
+  var sign = ""
+  var notes = [Note]()
   
+  override init() {
+    super.init()
+  }
   
+  override func mapping(map: Map) {
+    super.mapping(map: map)
+    id <- map["id"]
+    deliveryContactName <- map["dlvy_ctt_name"]
+    deliveryContactPhone <- map["dlvy_ctt_phone"]
+    timeWindowName <- map["time_window_text"]
+    deliveryAdd <- map["dlvy_addr"]
+    deliveryCity <- map["dlvy_city"]
+    deliveryState <- map["dlvy_state"]
+    descriptionNote <- map["note"]
+    descriptionNoteExt <- map["note_ext"]
+    sign <- map["sig"]
+    notes <- map["notes"]
+  }
 }
 
 

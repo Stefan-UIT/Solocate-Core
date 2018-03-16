@@ -13,7 +13,7 @@ class OrderDetailCollectionViewCell: UICollectionViewCell {
   @IBOutlet weak var titleLabel: UILabel!
   
   
-  
+  var orderDetail: OrderDetail?
   override func awakeFromNib() {
     super.awakeFromNib()
     // Initialization code
