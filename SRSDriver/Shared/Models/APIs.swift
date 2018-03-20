@@ -98,6 +98,37 @@ class APIs {
     }
   }
   
+  static func updateRouteSequenceOrders(_ routeID: String, routeStatus: String, orderIDs: [String],
+                                        completion: @escaping ((_ errorMsg: String?) -> Void)) {
+    let params = [[
+      "route_id": routeID,
+      "route_sts": routeStatus,
+      "order_ids": orderIDs
+    ]]
+
+    let jsonData = APIs.convertArray2Json(from: params)
+    guard let url = URL(string: RESTConstants.baseURL + RESTConstants.updateSequence) else {
+      return
+    }
+    var request = URLRequest(url: url)
+    request.httpMethod = HTTPMethod.post.rawValue
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.httpBody = jsonData
+    if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+      request.setValue("Bearer " + token, forHTTPHeaderField: "Authorization")
+    }
+    Alamofire.request(request).responseJSON { (response) in
+      print(response)
+    }
+  }
+  
+  static func convertArray2Json(from object:Any) -> Data? {
+    guard let data = try? JSONSerialization.data(withJSONObject: object, options: []) else {
+      return nil
+    }
+    return data
+  }
+  
   
   static func getDirection(fromLocation startLocation: CLLocationCoordinate2D,
                            toLocation destinationLocation: CLLocationCoordinate2D, completion: @escaping ((_ polyLines: [String]?) -> Void)) {

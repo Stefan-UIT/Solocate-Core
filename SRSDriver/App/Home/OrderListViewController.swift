@@ -30,6 +30,7 @@ class OrderListViewController: UIViewController {
       noOrdersLabel.isHidden = true
       tableView.isHidden = false
       navigationItem.rightBarButtonItem?.isEnabled = true
+//      navigationItem.rightBarButtonItem?.isEnabled = route.status != "DV"
       tableView.reloadData()
     }
   }
@@ -72,6 +73,15 @@ class OrderListViewController: UIViewController {
   @IBAction func editMode(_ sender: UIBarButtonItem) {
     tableView.isEditing = !tableView.isEditing
     sender.title = tableView.isEditing ? "Done" : "Edit"
+    guard !tableView.isEditing else {
+      return
+    }
+    //
+    print("Call api update list")
+    let orderIDs = route.orderList.map { "\($0.id)" }
+    APIs.updateRouteSequenceOrders("\(route.id)", routeStatus: route.status, orderIDs: orderIDs) { (msgError) in
+      print("completion update sequence")
+    }
   }
   
   @IBAction func logout(_ sender: UIBarButtonItem) {
@@ -142,11 +152,11 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-    //    let movedObject = self.fruits[sourceIndexPath.row]
-    //    fruits.remove(at: sourceIndexPath.row)
-    //    fruits.insert(movedObject, at: destinationIndexPath.row)
-    //    NSLog("%@", "\(sourceIndexPath.row) => \(destinationIndexPath.row) \(fruits)")
-    // To check for correctness enable: self.tableView.reloadData()
+    guard route != nil else { return }
+    let movedOrder = route.orderList[sourceIndexPath.row]
+    route.orderList.remove(at: sourceIndexPath.row)
+    route.orderList.insert(movedOrder, at: destinationIndexPath.row)
+    tableView.reloadData()
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

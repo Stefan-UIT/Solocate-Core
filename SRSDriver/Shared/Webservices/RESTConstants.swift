@@ -26,7 +26,8 @@ class RESTConstants: NSObject {
   static let defaultMessageKeyFromResponseData  = "unknow_error"
 
 //  #if DEV
-  static let baseURL = "https://apigw.seldatdirect.com/dev/srs/api"
+//  static let baseURL = "https://apigw.seldatdirect.com/dev/srs/api"
+  static let baseURL = "https://apigw.seldatdirect.com/dev/sdms-masof/api"
 //  #else
 //  static let baseURL = "https://apigw.seldatdirect.com/demo/srs/api"
 //  #endif
@@ -37,5 +38,6 @@ class RESTConstants: NSObject {
   static let orderDetails = "/backend-api/v1/orders/%@"//orderID
   static let updateOrderStatus = "/backend-api/v1/orders/%@/%@"//OrderID, status
   static let uploadSignature = "/backend-api/v1/orders/add-sign/%@"// orderID
+  static let updateSequence = "/backend-api/v1/routes/update-sequence"
   
 }
