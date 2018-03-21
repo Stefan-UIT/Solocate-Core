@@ -29,15 +29,13 @@ class OrderListViewController: UIViewController {
       }
       noOrdersLabel.isHidden = true
       tableView.isHidden = false
-      navigationItem.rightBarButtonItem?.isEnabled = true
-//      navigationItem.rightBarButtonItem?.isEnabled = route.status != "DV"
+      navigationItem.rightBarButtonItem?.isEnabled = route.status != "DV"
       tableView.reloadData()
     }
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    getOrders()
     tabBarController?.delegate = self
   }
   
@@ -45,6 +43,7 @@ class OrderListViewController: UIViewController {
     super.viewWillAppear(animated)
     let dateString = datePickerView.date.toString()
     navigationItem.title = dateString
+    getOrders(byDate: datePickerView.date.toString("yyyy-MM-dd"))
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -103,6 +102,7 @@ class OrderListViewController: UIViewController {
       let destVC = segue.destination as? OrderDetailContainerViewController,
       let order = sender as? Order {
       destVC.orderID = "\(order.id)"
+      destVC.routeID = route.id
     }
   }
 }

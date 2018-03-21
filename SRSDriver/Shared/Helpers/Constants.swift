@@ -85,5 +85,6 @@ struct SegueIdentifier {
   static let showHome = "showHomeSegue"
   static let showOrderDetail = "orderDetailSegue"
   static let showMapView = "showMapView"
+  static let showReasonList = "showReasonList"
 }
 

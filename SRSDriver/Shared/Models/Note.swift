@@ -17,7 +17,7 @@ class Note: NSObject, Mappable {
   required convenience init?(map: Map) {
     self.init()
   }
-  
+    
   func mapping(map: Map) {
     author <- map["author"]
     createdAt <- map["created_at"]

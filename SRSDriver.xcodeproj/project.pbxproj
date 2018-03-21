@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		24B331942061FA66001FAC49 /* PictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B331932061FA66001FAC49 /* PictureTableViewCell.swift */; };
+		24B3319620623B5A001FAC49 /* ReasonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3319520623B5A001FAC49 /* ReasonListViewController.swift */; };
+		24B3319820623C25001FAC49 /* Reason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3319720623C25001FAC49 /* Reason.swift */; };
 		5A499C9E20591D0400A1D944 /* NSString+SDString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9220591D0400A1D944 /* NSString+SDString.m */; };
 		5A499C9F20591D0400A1D944 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9320591D0400A1D944 /* String.swift */; };
 		5A499CA020591D0400A1D944 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9420591D0400A1D944 /* UIButton.swift */; };
@@ -61,6 +64,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		24B331932061FA66001FAC49 /* PictureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureTableViewCell.swift; sourceTree = "<group>"; };
+		24B3319520623B5A001FAC49 /* ReasonListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReasonListViewController.swift; sourceTree = "<group>"; };
+		24B3319720623C25001FAC49 /* Reason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reason.swift; sourceTree = "<group>"; };
 		2CE28C0EBCCC67BF0FD1791B /* Pods-SRSDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SRSDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SRSDriver/Pods-SRSDriver.debug.xcconfig"; sourceTree = "<group>"; };
 		5A499C9120591D0400A1D944 /* NSString+SDString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SDString.h"; sourceTree = "<group>"; };
 		5A499C9220591D0400A1D944 /* NSString+SDString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SDString.m"; sourceTree = "<group>"; };
@@ -209,9 +215,11 @@
 				5A68A44C205A201A00CA9DB8 /* OrderSignatureViewController.swift */,
 				5A68A44E205A202400CA9DB8 /* OrderNotesViewController.swift */,
 				5A68A450205A202F00CA9DB8 /* OrderPictureViewController.swift */,
+				24B331932061FA66001FAC49 /* PictureTableViewCell.swift */,
 				5A68A453205A223200CA9DB8 /* OrderDetailCollectionViewCell.swift */,
 				5ACCE8DA205BAD2800A1532D /* OrderDetailTableViewCell.swift */,
 				5ACCE8D6205BA46800A1532D /* OrderDetailMapViewController.swift */,
+				24B3319520623B5A001FAC49 /* ReasonListViewController.swift */,
 				5ACCE8D8205BA94A00A1532D /* NoteTableViewCell.swift */,
 			);
 			path = OrderDetails;
@@ -226,6 +234,7 @@
 				5A68A45E205A619300CA9DB8 /* PickupPlace.swift */,
 				5ACCE8CE205B585900A1532D /* OrderMarker.swift */,
 				5ACCE8D2205B761E00A1532D /* Note.swift */,
+				24B3319720623C25001FAC49 /* Reason.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -462,7 +471,9 @@
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/TLPhotoPicker/TLPhotoPicker.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
@@ -472,7 +483,9 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TLPhotoPicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -502,13 +515,16 @@
 				5A499CA720591D0400A1D944 /* UITextView.swift in Sources */,
 				5ACCE8D1205B689000A1532D /* Array.swift in Sources */,
 				5A499CBB2059277D00A1D944 /* BaseViewController.swift in Sources */,
+				24B3319820623C25001FAC49 /* Reason.swift in Sources */,
 				5A68A45F205A619300CA9DB8 /* PickupPlace.swift in Sources */,
 				5A82E9C4205A038900F34351 /* RESTConstants.swift in Sources */,
 				5A82E9C5205A038900F34351 /* RESTError.swift in Sources */,
 				5A82E9CA205A04EE00F34351 /* OrderListViewController.swift in Sources */,
 				5A499CB720591E4100A1D944 /* Cache.swift in Sources */,
 				5A499CA020591D0400A1D944 /* UIButton.swift in Sources */,
+				24B3319620623B5A001FAC49 /* ReasonListViewController.swift in Sources */,
 				5A499CA220591D0400A1D944 /* UIColor.swift in Sources */,
+				24B331942061FA66001FAC49 /* PictureTableViewCell.swift in Sources */,
 				5A82E9CE205A197800F34351 /* Date.swift in Sources */,
 				5A68A449205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift in Sources */,
 				5A68A458205A5A0F00CA9DB8 /* APIs.swift in Sources */,

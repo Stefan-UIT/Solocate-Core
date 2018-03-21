@@ -8,13 +8,15 @@ inhibit_all_warnings!
 # pod 'FBSDKCoreKit', :inhibit_warnings => true
 
 def shared
-	pod 'GoogleMaps'	
+	pod 'GoogleMaps', '2.5.0'	
 	pod 'ObjectMapper'
 	pod 'RealmSwift'
 	pod 'Alamofire'
 	pod 'XLPagerTabStrip'
 	pod 'IQKeyboardManager'
-  pod 'SVProgressHUD'  
+  pod 'SVProgressHUD'
+  pod 'TLPhotoPicker'
+  pod 'SDWebImage'
 end
 
 

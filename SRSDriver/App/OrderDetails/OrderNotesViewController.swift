@@ -32,17 +32,34 @@ class OrderNotesViewController: BaseOrderDetailViewController {
   
   
   @IBAction func addNote(_ sender: UIButton) {
+    guard  let _orderDetail = orderDetail else {
+      return
+    }
     let alert = UIAlertController(title: "DriverSRS", message: "Add note", preferredStyle: .alert)
     alert.addTextField { (textField) in
       textField.placeholder = "Add note"
     }
     let submitAction = UIAlertAction(title: "Send", style: .default) { (action) in
-      // Submit note
       alert.dismiss(animated: true, completion: nil)
+      guard let textField = alert.textFields?.first,
+        textField.hasText,
+        let noteText = textField.text else {
+        return
+      }
+      APIs.addNote("\(_orderDetail.id)", content: noteText, completion: { [unowned self] (note, errorMsg) in
+        if let err = errorMsg {
+          self.showAlertView(err)
+        }
+        else if let _note = note {
+          _orderDetail.notes.append(_note)
+          self.tableView.reloadData()
+        }
+      })
+      
     }
     let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-    alert.addAction(submitAction)
     alert.addAction(cancel)
+    alert.addAction(submitAction)
     present(alert, animated: true, completion: nil)
   }
   

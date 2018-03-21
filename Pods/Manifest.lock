@@ -12,16 +12,22 @@ PODS:
   - Realm/Headers (3.0.2)
   - RealmSwift (3.0.2):
     - Realm (= 3.0.2)
+  - SDWebImage (4.3.3):
+    - SDWebImage/Core (= 4.3.3)
+  - SDWebImage/Core (4.3.3)
   - SVProgressHUD (2.2.2)
+  - TLPhotoPicker (1.5.4)
   - XLPagerTabStrip (8.0.0)
 
 DEPENDENCIES:
   - Alamofire
-  - GoogleMaps
+  - GoogleMaps (= 2.5.0)
   - IQKeyboardManager
   - ObjectMapper
   - RealmSwift
+  - SDWebImage
   - SVProgressHUD
+  - TLPhotoPicker
   - XLPagerTabStrip
 
 SPEC CHECKSUMS:
@@ -31,9 +37,11 @@ SPEC CHECKSUMS:
   ObjectMapper: 20505058f54e5c3ca69e1d6de9897d152a5369a6
   Realm: 6f23fd1f178a09342eac21bfa7c2bf4312a7a180
   RealmSwift: 695393add1b8f9d5fa75dd16e6355cf3935f71e2
+  SDWebImage: de4d90b5bff3571eae7bd16202b1f43135409fa5
   SVProgressHUD: 59b2d3dabacbd051576d21d32293ca7228dc18b0
+  TLPhotoPicker: 23cf96367d0aa5cfe35d324be1f2c0db76d72c32
   XLPagerTabStrip: d1ab378af0923320ec0b5eab11d7b2f803d31261
 
-PODFILE CHECKSUM: 66930b37c973b91233e2e503ef94a1b8f48bf1d4
+PODFILE CHECKSUM: 2814252ecaafd9837e30cd04b0e90fbd71e33571
 
 COCOAPODS: 1.4.0

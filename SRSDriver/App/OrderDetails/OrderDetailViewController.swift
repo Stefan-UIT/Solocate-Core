@@ -14,10 +14,12 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var unableToStartButton: UIButton!
   @IBOutlet weak var finishButton: UIButton!
+  @IBOutlet weak var controlsStackView: UIStackView!
   
   fileprivate var detailItems = [OrderDetailItem]()
-  fileprivate let cellHeight: CGFloat = 85.0
+  fileprivate let cellHeight: CGFloat = 70.0
   fileprivate let cellIdentifier = "OrderDetailTableViewCell"
+  
   override var orderDetail: OrderDetail? {
     didSet {      
       guard let _orderDetail = orderDetail else { return }
@@ -44,12 +46,19 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       detailItems.append(address)
       detailItems.append(description)
       tableView.reloadData()
-      
-      finishButton.isEnabled = _orderDetail.statusCode != "DV"
+      // MARK: - FIX ME
+      finishButton.isEnabled = _orderDetail.statusCode == "OP" || _orderDetail.statusCode == "IP"
       let finishButtonTitle = _orderDetail.statusCode == "OP" ? "Start" : "Finish"
       finishButton.setTitle(finishButtonTitle, for: .normal)
+      
+      unableToStartButton.isEnabled = _orderDetail.statusCode == "OP" || _orderDetail.statusCode == "IP"
+      let unableTitle = _orderDetail.statusCode == "OP" ? "Unable to Start" : "Unable to Finish"
+      unableToStartButton.setTitle(unableTitle, for: .normal)
     }
   }
+  
+  var didUpdateStatus:(() -> Void)?
+  
   override func viewDidLoad() {
     super.viewDidLoad()
   }
@@ -59,12 +68,16 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   }
   
   @IBAction func didClickFinish(_ sender: UIButton) {
-    
+    guard let _orderDetail = orderDetail else {return}
+    let status = _orderDetail.statusCode == "OP" ? "IP" : "DV"
+    updateOrderStatus(status)
   }
   
   @IBAction func didClickUnableToStart(_ sender: UIButton) {
-    
+    performSegue(withIdentifier: SegueIdentifier.showReasonList, sender: nil)
   }
+  
+  
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == SegueIdentifier.showMapView,
@@ -73,8 +86,30 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       let orderLocation = CLLocationCoordinate2D(latitude: _orderDetail.lat.doubleValue, longitude: _orderDetail.lng.doubleValue)
       vc.orderLocation = orderLocation
     }
+    else if segue.identifier == SegueIdentifier.showReasonList,
+      let vc = segue.destination as? ReasonListViewController {
+      vc.orderDetail = orderDetail
+      vc.routeID = routeID
+    }
   }
   
+}
+
+extension OrderDetailViewController {
+  func updateOrderStatus(_ status: String) {
+    guard let _orderDetail = orderDetail,
+      let _routeID = routeID else { return }
+    showLoadingIndicator()
+    APIs.updateOrderStatus("\(_orderDetail.id)", expectedStatus: status, routeID: "\(_routeID)") { [unowned self] (errMsg) in
+      self.dismissLoadingIndicator()
+      if let err = errMsg {
+        self.showAlertView(err)
+      }
+      else {
+        self.didUpdateStatus?()
+      }
+    }
+  }
 }
 
 extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate {

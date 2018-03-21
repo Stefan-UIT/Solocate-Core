@@ -10,6 +10,7 @@ import Foundation
 import Alamofire
 import ObjectMapper
 import CoreLocation
+import TLPhotoPicker
 
 class APIs {
   class func login(_ email: String, password: String, completion: @escaping((_ token: String?, _ msg: String?) -> Void)) {
@@ -48,6 +49,49 @@ class APIs {
       }
       else {
         completion(nil, "Unknown")
+      }
+    }
+  }
+  
+  static func updateOrderStatus(_ orderID: String, expectedStatus: String, routeID: String, reason: Reason? = nil, completion: @escaping((_ errMsg: String?) -> Void)) {
+    var uri = String.init(format: RESTConstants.updateOrderStatus, orderID, expectedStatus)
+    uri = uri.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
+    let request = RESTRequest(functionName: uri, method: .put, encoding: .default)
+    var params = ["route_id": routeID]
+    if let _reason = reason {
+      params["reason_msg"] = _reason.reasonDescription
+      params["reason_id"] = "\(_reason.id)"
+    }
+    request.setParameters(params)
+    request.setContentType("application/x-www-form-urlencoded")
+    if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+      request.setAuthorization(token)
+    }
+    request.baseInvoker { (resp, error) in
+      if let response = resp as? [String: Any],
+        let _ = response["data"] as? [String : Any] {
+        completion(nil)        
+      }
+      if let err = error {
+        completion(err.message)
+      }
+    }
+  }
+  
+  static func getReasonList(_ completion: @escaping ((_ reasons:[Reason]?, _ errMsg: String?) -> Void)) {
+    let request = RESTRequest(functionName: RESTConstants.getListReason, method: .get, encoding: .default)
+    request.baseInvoker { (resp, error) in
+      if let response = resp as? [[String: Any]]{
+        var list = [Reason]()
+        for item in response {
+          if let r = Mapper<Reason>().map(JSON: item) {
+            list.append(r)
+          }
+        }
+        completion(list, nil)
+      }
+      else if let err = error {
+        completion(nil, err.message)
       }
     }
   }
@@ -129,6 +173,35 @@ class APIs {
     return data
   }
   
+  static func uploadFiles(_ files: [TLPHAsset], name: String = "", orderID: String, completion: @escaping ((_ errorMsg: String?) -> Void)) {
+    let url = String.init(format: "\(RESTConstants.baseURL)\(RESTConstants.uploadFiles)", orderID)
+    var headers = [String: String]()
+    if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+      headers["Authorization"] = "Bearer " + token
+    }
+//    headers["Content-Type"] = "multipart/form-data"
+    
+    Alamofire.upload(multipartFormData: { (formData) in
+      for item in files {
+        let data = UIImageJPEGRepresentation(item.fullResolutionImage!, 0.4)
+        let imgName = name.length > 0 ? name : item.originalFileName ?? "image"
+        formData.append(data ?? Data(), withName: "file[]", fileName: imgName , mimeType: "image/jpg")
+      }
+    }, usingThreshold: SessionManager.multipartFormDataEncodingMemoryThreshold, to: url, method: .post, headers: headers) { (encodingResult) in
+      switch encodingResult {
+      case .success(let upload, _, _):
+        upload.responseJSON(completionHandler: { (response) in
+          if let resp = response.result.value as? [String: Any],
+            let _ = resp["data"] as? [String : Any] {
+            completion(nil)
+          }
+        })
+      case .failure(let error):
+        completion(error.localizedDescription)
+      }
+    }
+  }
+  
   
   static func getDirection(fromLocation startLocation: CLLocationCoordinate2D,
                            toLocation destinationLocation: CLLocationCoordinate2D, completion: @escaping ((_ polyLines: [String]?) -> Void)) {
@@ -158,6 +231,24 @@ class APIs {
         }
       }
     }).resume()
+  }
+  
+  static func addNote(_ orderID: String, content: String, completion: @escaping ((_ note: Note?,_ msgError: String?) -> Void)) {
+    let uri = String.init(format: RESTConstants.addNote, orderID)
+    let params = ["content": content]
+    let request = RESTRequest(functionName: uri, method: .post, encoding: .default)
+    request.setParameters(params)
+    if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+      request.setAuthorization("Bearer " + token)
+    }
+    request.baseInvoker { (resp, error) in
+      if let note = Mapper<Note>().map(JSONObject: resp) {
+        completion(note, nil)
+      }
+      else if let err = error {
+        completion(nil, err.message)
+      }
+    }
   }
   
   

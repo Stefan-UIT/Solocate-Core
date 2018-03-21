@@ -67,6 +67,8 @@ class OrderDetail: Order {
   var descriptionNoteExt = ""
   var sign = ""
   var notes = [Note]()
+  var items = [String]()
+  var pictures = [Picture]()
   
   override init() {
     super.init()
@@ -85,7 +87,25 @@ class OrderDetail: Order {
     descriptionNoteExt <- map["note_ext"]
     sign <- map["sig"]
     notes <- map["notes"]
+    pictures <- map["url"]
+    items <- map["details"]
   }
+}
+
+class Picture: NSObject, Mappable {
+  var link = ""
+  var name = ""
+  
+  required convenience init?(map: Map) {
+    self.init()
+  }
+  
+  func mapping(map: Map) {
+    link <- map["link"]
+    name <- map["name"]
+  }
+  
+  
 }
 
 

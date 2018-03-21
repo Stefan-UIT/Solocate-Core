@@ -85,6 +85,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
 
 class BaseOrderDetailViewController: BaseViewController, IndicatorInfoProvider {
   var orderDetail: OrderDetail?
+  var routeID: Int?
   var indicatorInfo = IndicatorInfo(title: "Detail")
   
   convenience init(_ title: String) {

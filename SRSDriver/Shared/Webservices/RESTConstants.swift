@@ -39,5 +39,8 @@ class RESTConstants: NSObject {
   static let updateOrderStatus = "/backend-api/v1/orders/%@/%@"//OrderID, status
   static let uploadSignature = "/backend-api/v1/orders/add-sign/%@"// orderID
   static let updateSequence = "/backend-api/v1/routes/update-sequence"
+  static let uploadFiles = "/backend-api/v1/orders/add-picture/%@" // orderID
+  static let getListReason = "/backend-api/v1/reason"
+  static let addNote = "/backend-api/v1/orders/%@/notes" //order ID
   
 }
