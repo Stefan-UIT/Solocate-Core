@@ -78,8 +78,9 @@ class APIs {
     }
   }
   
-  static func getReasonList(_ completion: @escaping ((_ reasons:[Reason]?, _ errMsg: String?) -> Void)) {
-    let request = RESTRequest(functionName: RESTConstants.getListReason, method: .get, encoding: .default)
+  static func getReasonList(_ type: String = "1", completion: @escaping ((_ reasons:[Reason]?, _ errMsg: String?) -> Void)) {
+    let uri = String.init(format: RESTConstants.getListReason, type)
+    let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
     request.baseInvoker { (resp, error) in
       if let response = resp as? [[String: Any]]{
         var list = [Reason]()
@@ -248,6 +249,25 @@ class APIs {
       else if let err = error {
         completion(nil, err.message)
       }
+    }
+  }
+  
+  static func updateOrderItemStatus(_ itemID: String, status: String, reason: Reason?, completion: @escaping (() -> Void)) {
+    let uri = String.init(format: RESTConstants.updateItemStatus, itemID, status)
+    let request = RESTRequest(functionName: uri, method: .put, encoding: .default)
+    var reasonMsg = ""
+    var reasonID = ""
+    if let _reason = reason {
+      reasonMsg = _reason.reasonDescription
+      reasonID = "\(_reason.id)"
+    }
+    let params = ["reason_msg": reasonMsg,"reason_id ": reasonID]
+    request.setParameters(params)
+    if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+      request.setAuthorization("Bearer " + token)
+    }
+    request.baseInvoker { (resp, error) in
+      print(resp)
     }
   }
   

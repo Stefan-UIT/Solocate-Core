@@ -26,9 +26,12 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
     return [child_1, child_2, child_3, child_4]
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     title = "Detail"
     if let _orderID = orderID {
       showLoadingIndicator()

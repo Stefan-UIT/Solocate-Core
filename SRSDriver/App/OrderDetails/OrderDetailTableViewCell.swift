@@ -50,6 +50,7 @@ struct OrderDetailItem {
   var type: OrderDetailType
   var name: String
   var content: String = ""
+  var items = [OrderItem]()
   
   init(_ type: OrderDetailType) {    
     self.type = type
@@ -68,6 +69,8 @@ struct OrderDetailItem {
       name = "Delivery Address"
     case .description:
       name = "Description"
+    case .items:
+      name = "Items"
     }
   }
 }
@@ -81,6 +84,7 @@ enum OrderDetailType {
   case phone
   case address
   case description
+  case items
 }
 
 

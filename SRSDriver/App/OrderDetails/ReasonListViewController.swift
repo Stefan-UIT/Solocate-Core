@@ -13,17 +13,19 @@ class ReasonListViewController: BaseViewController {
   fileprivate var selectedIndex: Int = -1
   var orderDetail: OrderDetail?
   var routeID: Int?
+  var type: String = "1"
+  var itemID: String?
   
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var finishButton: UIButton!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    getReasonList()
-    if let _orderDetail = orderDetail {
-      let unableTitle = _orderDetail.statusCode == "OP" ? "Unable to Start" : "Unable to Finish"
-      finishButton.setTitle(unableTitle, for: .normal)
+    if let _orderDetail = orderDetail, type == "1" {
+        let unableTitle = _orderDetail.statusCode == "OP" ? "Unable to Start" : "Unable to Finish"
+        finishButton.setTitle(unableTitle, for: .normal)
     }
+    getReasonList()
     title = "Choose a reason"
   }
   
@@ -32,6 +34,14 @@ class ReasonListViewController: BaseViewController {
       showAlertView("Plz choose at least a reason")
       return
     }
+    if let id = itemID, type == "2" { // for item
+      APIs.updateOrderItemStatus(id, status: "MT", reason: reasonList[selectedIndex], completion: {
+        print("Update item successfully")
+      })
+      return
+    }
+    
+    // for order
     guard let _orderDetail = orderDetail,
       let _routeID = routeID else { return }
     showLoadingIndicator()
@@ -52,7 +62,7 @@ class ReasonListViewController: BaseViewController {
 extension ReasonListViewController {
   func getReasonList() {
     showLoadingIndicator()
-    APIs.getReasonList { [unowned self] (response, errMsg) in
+    APIs.getReasonList(type, completion: { [unowned self] (response, errMsg) in
       self.dismissLoadingIndicator()
       guard let list = response else {
         self.showAlertView(errMsg ?? "")
@@ -60,7 +70,7 @@ extension ReasonListViewController {
       }
       self.reasonList.append(contentsOf: list)
       self.tableView.reloadData()
-    }
+    })
   }
 }
 
