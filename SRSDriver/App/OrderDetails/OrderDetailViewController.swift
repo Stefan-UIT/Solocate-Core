@@ -15,10 +15,23 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   @IBOutlet weak var unableToStartButton: UIButton!
   @IBOutlet weak var finishButton: UIButton!
   @IBOutlet weak var controlsStackView: UIStackView!
+  var subTableView: UITableView!
   
   fileprivate var detailItems = [OrderDetailItem]()
   fileprivate let cellHeight: CGFloat = 70.0
+  fileprivate let orderItemsPaddingTop: CGFloat = 40.0
+  fileprivate let orderItemCellHeight: CGFloat = 100.0
   fileprivate let cellIdentifier = "OrderDetailTableViewCell"
+  fileprivate let orderItemsCellIdentifier = "OrderItemsTableViewCell"
+  fileprivate let orderScanItemCellIdentifier = "OrderScanItemTableViewCell"
+  fileprivate var scanItems = [String]()
+  fileprivate let itemsIndex = 7
+  fileprivate var scannedString = "" {
+    didSet {
+      tableView.reloadData()
+      subTableView.reloadData()
+    }
+  }
   
   override var orderDetail: OrderDetail? {
     didSet {      
@@ -37,6 +50,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       address.content = _orderDetail.deliveryAdd + "\n\(_orderDetail.deliveryCity)"
       var description = OrderDetailItem(.description)
       description.content = _orderDetail.descriptionNote + " " + _orderDetail.descriptionNoteExt
+      var items = OrderDetailItem(.items)
+      items.content = ""
+      items.items = _orderDetail.items
       
       detailItems.append(refe)
       detailItems.append(status)
@@ -45,8 +61,10 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       detailItems.append(phone)
       detailItems.append(address)
       detailItems.append(description)
+      detailItems.append(items)
+      
       tableView.reloadData()
-      // MARK: - FIX ME
+      
       finishButton.isEnabled = _orderDetail.statusCode == "OP" || _orderDetail.statusCode == "IP"
       let finishButtonTitle = _orderDetail.statusCode == "OP" ? "Start" : "Finish"
       finishButton.setTitle(finishButtonTitle, for: .normal)
@@ -61,6 +79,12 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    subTableView = UITableView(frame: CGRect.zero, style: .plain)
+    subTableView.delegate = self
+    subTableView.dataSource = self
+    let orderScanItemNib = UINib(nibName: "OrderScanItemTableViewCell", bundle: nil)
+    subTableView.register(orderScanItemNib, forCellReuseIdentifier: orderScanItemCellIdentifier)
+    subTableView.isScrollEnabled = false
   }
   
   override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -90,12 +114,57 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       let vc = segue.destination as? ReasonListViewController {
       vc.orderDetail = orderDetail
       vc.routeID = routeID
+      vc.type = "1"
+      if let orderItem = sender as? OrderItem { // for order item
+        vc.type = "2"
+        vc.itemID = "\(orderItem.id)"
+      }
     }
   }
   
 }
 
+// MARK: - Private methods
+
 extension OrderDetailViewController {
+  
+  func updateItemStatus(_ status: String, orderItem: OrderItem) {
+    APIs.updateOrderItemStatus("\(orderItem.id)", status: status, reason: nil) { [unowned self] (errMsg) in
+      if let msg = errMsg {
+        self.showAlertView(msg)
+      }
+      else {
+        self.navigationController?.popToRootViewController(animated: true)
+      }
+    }
+  }
+  
+  func findObject(_ code: String, items: [OrderItem]) -> OrderItem? {
+    return items.filter { (item) -> Bool in
+      return item.barcode == code
+    }.first
+  }
+  
+  func showActionForOrderItem(_ item: OrderItem) {
+    let actionSheet = UIAlertController(title: "SRSDriver", message: nil, preferredStyle: .actionSheet)
+    let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+    let reject = UIAlertAction(title: "Reject", style: .default) { [unowned self] (reject) in
+      self.performSegue(withIdentifier: SegueIdentifier.showReasonList, sender: item)
+    }
+    let management = UIAlertAction(title: "Scan barcode", style: .default) { [unowned self] (management) in
+      self.performSegue(withIdentifier: SegueIdentifier.showScanBarCode, sender: nil)
+    }
+    let finish = UIAlertAction(title: "Finish", style: .default) { [unowned self] (finihs) in
+      self.updateItemStatus("DV", orderItem: item)
+    }
+    
+    actionSheet.addAction(reject)
+    actionSheet.addAction(management)
+    actionSheet.addAction(finish)
+    actionSheet.addAction(cancel)
+    present(actionSheet, animated: true, completion: nil)
+  }
+  
   func updateOrderStatus(_ status: String) {
     guard let _orderDetail = orderDetail,
       let _routeID = routeID else { return }
@@ -114,6 +183,10 @@ extension OrderDetailViewController {
 
 extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    if tableView == subTableView {
+      let item = detailItems[itemsIndex]
+      return scannedString.length > 0 ? 1 : item.items.count
+    }
     if let _ = orderDetail {
       return detailItems.count
     }
@@ -121,19 +194,78 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    let item = detailItems[indexPath.row]
+    if tableView == subTableView {
+      return orderItemCellHeight.scaleHeight()
+    }
+    if item.type == .items {
+      let itemNumber = scannedString.length > 0 ? 1 : item.items.count
+      return item.items.count > 0 ? CGFloat(itemNumber) * orderItemCellHeight.scaleHeight() + orderItemsPaddingTop : 0.0
+    }
     return cellHeight.scaleHeight()
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
-      cell.orderDetailItem = detailItems[indexPath.row]
-      return cell
+    let item = detailItems[indexPath.row]
+    
+    if tableView == subTableView  { // subtableview
+      if let cell = subTableView.dequeueReusableCell(withIdentifier: orderScanItemCellIdentifier, for: indexPath) as? OrderScanItemTableViewCell {
+        let orderItem = detailItems[itemsIndex]
+        if scannedString.length > 0,
+          let scanObject = findObject(scannedString, items: orderItem.items)
+          {
+          cell.orderItem = scanObject
+        }
+        else {
+          if indexPath.row < orderItem.items.count {
+            cell.orderItem = orderItem.items[indexPath.row]
+          }
+        }
+        return cell
+      }
+    }
+    else if tableView == self.tableView {
+      
+      if item.type == .items && item.items.count > 0,
+        let cell = tableView.dequeueReusableCell(withIdentifier: orderItemsCellIdentifier, for: indexPath) as? OrderItemsTableViewCell {
+        let itemNumber = scannedString.length > 0 ? 1 : item.items.count
+        subTableView.frame = CGRect(x: 0, y: orderItemsPaddingTop, width: cell.frame.width, height: CGFloat(itemNumber)*orderItemCellHeight.scaleHeight())
+        cell.contentView.addSubview(subTableView)
+        cell.selectionStyle = .none
+        cell.didClickScanButton = { [unowned self] () in
+          let scanVC = ScanBarCodeViewController.loadViewController(type: ScanBarCodeViewController.self)
+          scanVC.didScan = {
+            [unowned self] (code) in
+            let orderItem = self.detailItems[self.itemsIndex]
+            if code.length > 0,
+              let _ = self.findObject(code, items: orderItem.items) {
+              self.scannedString = code
+            }
+          }
+          self.scannedString = ""
+          self.present(scanVC, animated: true, completion: nil)
+        }
+        cell.didClickResetList = {
+          [unowned self] () in
+          self.scannedString = ""
+        }
+        return cell
+      }
+      else if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
+        cell.orderDetailItem = item
+        cell.selectionStyle = !(item.type == .phone && item.type == .address) ? .none : .default
+        return cell
+      }
     }
     return UITableViewCell()
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
+    if tableView == subTableView {
+      let orderItem = detailItems[itemsIndex]
+      showActionForOrderItem(orderItem.items[indexPath.row])
+    }
     let item = detailItems[indexPath.row]
     if item.type == .address {
       performSegue(withIdentifier: SegueIdentifier.showMapView, sender: nil)

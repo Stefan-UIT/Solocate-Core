@@ -15,7 +15,7 @@ class RESTResponse: NSObject, Mappable {
   var data: Any?
   
   override init() {
-    statusCode = 0
+    statusCode = -1
     message = ""
   }
   
@@ -24,8 +24,8 @@ class RESTResponse: NSObject, Mappable {
   }
   
   func mapping(map: Map) {
-    self.message      <- map["msg"]
-    self.statusCode   <- map["code"]
+    self.message      <- map["message"]
+    self.statusCode   <- map["status_code"]
     self.data         <- map["data"]
   }
   

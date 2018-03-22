@@ -29,7 +29,8 @@ class OrderListViewController: UIViewController {
       }
       noOrdersLabel.isHidden = true
       tableView.isHidden = false
-      navigationItem.rightBarButtonItem?.isEnabled = route.status != "DV"
+      // MARK: - FIXME
+//      navigationItem.rightBarButtonItem?.isEnabled = route.status != "DV"
       tableView.reloadData()
     }
   }
@@ -78,8 +79,14 @@ class OrderListViewController: UIViewController {
     //
     print("Call api update list")
     let orderIDs = route.orderList.map { "\($0.id)" }
-    APIs.updateRouteSequenceOrders("\(route.id)", routeStatus: route.status, orderIDs: orderIDs) { (msgError) in
-      print("completion update sequence")
+    APIs.updateRouteSequenceOrders("\(route.id)", routeStatus: route.status, orderIDs: orderIDs) { [unowned self] (msgError) in
+      if let msg = msgError {
+        self.showAlertView(msg)
+      }
+      else {
+        self.getOrders(byDate: self.datePickerView.date.toString("yyyy-MM-dd"))
+      }
+      
     }
   }
   
@@ -111,6 +118,7 @@ class OrderListViewController: UIViewController {
 
 extension OrderListViewController {
   func getOrders(byDate date: String? = nil) {
+    navigationItem.rightBarButtonItem?.isEnabled = true
     showLoadingIndicator()
     APIs.getOrders(byDate: date) { [unowned self] (resp, msg) in
       self.dismissLoadingIndicator()

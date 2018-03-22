@@ -11,7 +11,7 @@ import SVProgressHUD
 
 extension UIViewController {
   func showAlertView(_ message: String, completionHandler:((_ action: UIAlertAction) -> Void)? = nil)  {
-    let alert = UIAlertController(title: "app_name".localized, message: message, preferredStyle: .alert)
+    let alert = UIAlertController(title: "SRS Driver", message: message, preferredStyle: .alert)
     let okAction = UIAlertAction(title: "ok".localized, style: .default, handler: completionHandler)
     alert.addAction(okAction)
     

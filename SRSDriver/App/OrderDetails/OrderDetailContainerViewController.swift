@@ -26,9 +26,12 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
     return [child_1, child_2, child_3, child_4]
   }
   
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
-    
     title = "Detail"
     if let _orderID = orderID {
       showLoadingIndicator()
@@ -39,8 +42,8 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
           return
         }
         if orderDetail.id < 0 {
-          self.showAlertView("Have something wrong, /nplz try again", completionHandler: { (action) in
-            self.navigationController?.popViewController(animated: true)
+          self.showAlertView("Have something wrong, plz try again!", completionHandler: { [unowned self] (action) in
+            self.navigationController?.navigationController?.popViewController(animated: true)
           })
           return
         }

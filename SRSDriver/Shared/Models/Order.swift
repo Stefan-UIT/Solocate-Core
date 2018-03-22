@@ -67,7 +67,7 @@ class OrderDetail: Order {
   var descriptionNoteExt = ""
   var sign = ""
   var notes = [Note]()
-  var items = [String]()
+  var items = [OrderItem]()
   var pictures = [Picture]()
   
   override init() {
