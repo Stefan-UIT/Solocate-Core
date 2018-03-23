@@ -45,6 +45,7 @@ class OrderListViewController: UIViewController {
     let dateString = datePickerView.date.toString()
     navigationItem.title = dateString
     getOrders(byDate: datePickerView.date.toString("yyyy-MM-dd"))
+//    getOrders(byDate: "2018-03-21")
   }
   
   override func viewWillDisappear(_ animated: Bool) {
