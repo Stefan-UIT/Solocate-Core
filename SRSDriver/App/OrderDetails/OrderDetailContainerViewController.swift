@@ -18,7 +18,12 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
     let child_1 = OrderDetailViewController.loadViewController(type: OrderDetailViewController.self)
     child_1.didUpdateStatus = {
       [unowned self] in
-      self.moveToViewController(at: 1, animated: true)
+      self.getOrderDetail()
+      self.moveToViewController(at: 1, animated: true) // move to signature tab
+    }
+    child_1.updateOrderDetail = {
+      [unowned self] in
+      self.getOrderDetail()
     }
     let child_2 = OrderSignatureViewController.loadViewController(type: OrderSignatureViewController.self)
     let child_3 = OrderNotesViewController.loadViewController(type: OrderNotesViewController.self)
@@ -33,27 +38,30 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     title = "Detail"
-    if let _orderID = orderID {
-      showLoadingIndicator()
-      APIs.getOrderDetail(_orderID, completion: { [unowned self] (resp, errorMsg) in
-        self.dismissLoadingIndicator()
-        guard let orderDetail = resp else {
-          self.showAlertView(errorMsg ?? " ")
-          return
-        }
-        if orderDetail.id < 0 {
-          self.showAlertView("Have something wrong, plz try again!", completionHandler: { [unowned self] (action) in
-            self.navigationController?.navigationController?.popViewController(animated: true)
-          })
-          return
-        }
-        
-        for v in self.viewControllers {
-          (v as? BaseOrderDetailViewController)?.orderDetail = orderDetail
-          (v as? BaseOrderDetailViewController)?.routeID = self.routeID
-        }        
-      })
-    }
+    getOrderDetail()
+  }
+  
+  private func getOrderDetail() {
+    guard let _orderID = orderID else { return }
+    showLoadingIndicator()
+    APIs.getOrderDetail(_orderID, completion: { [unowned self] (resp, errorMsg) in
+      self.dismissLoadingIndicator()
+      guard let orderDetail = resp else {
+        self.showAlertView(errorMsg ?? " ")
+        return
+      }
+      if orderDetail.id < 0 {
+        self.showAlertView("Have something wrong, plz try again!", completionHandler: { [unowned self] (action) in
+          self.navigationController?.navigationController?.popViewController(animated: true)
+        })
+        return
+      }
+      
+      for v in self.viewControllers {
+        (v as? BaseOrderDetailViewController)?.orderDetail = orderDetail
+        (v as? BaseOrderDetailViewController)?.routeID = self.routeID
+      }
+    })
   }
   
   override func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int) {

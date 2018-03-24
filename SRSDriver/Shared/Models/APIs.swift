@@ -267,19 +267,19 @@ class APIs {
       reasonMsg = _reason.reasonDescription
       reasonID = "\(_reason.id)"
     }
-    let params = ["reason_msg": reasonMsg,"reason_id ": reasonID]
+    let params = ["reason_msg": reasonMsg,"reason_id": reasonID]
     request.setParameters(params)
     if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
       request.setAuthorization("Bearer " + token)
     }
-    request.baseInvoker { (resp, error) in
-      if let response = resp as? [String: Any],
-        let _ = response["data"] as? [String : Any] {
-        completion(nil)
+    request.baseInvoker { (response, error) in
+      if let errors = response as? [String: Any]  {
+        if let resp = Mapper<RESTResponse>().map(JSONObject: errors["errors"]) {
+          completion(resp.message)
+          return
+        }
       }
-      if let err = error {
-        completion(err.message)
-      }
+      completion(nil)
     }
   }
   

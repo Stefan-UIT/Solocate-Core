@@ -32,7 +32,7 @@ class OrderPictureViewController: BaseOrderDetailViewController {
   }
   
   @IBAction func takePicture(_ sender: UIButton) {
-    guard selectedAssets.count > 0 else {
+    guard selectedAssets != nil && selectedAssets.count > 0 else {
       let picker = TLPhotosPickerViewController()
       picker.delegate = self
       present(picker, animated: true, completion: nil)
@@ -47,7 +47,9 @@ class OrderPictureViewController: BaseOrderDetailViewController {
       let data = UIImageJPEGRepresentation(item.fullResolutionImage ?? UIImage(), 0.5)
       imgData.append(data ?? Data())
     }
-    APIs.uploadFiles(selectedAssets, name: imgTitle, orderID: "\(order.id)") { (errMsg) in
+    showLoadingIndicator()
+    APIs.uploadFiles(selectedAssets, name: imgTitle, orderID: "\(order.id)") { [unowned self] (errMsg) in
+      self.dismissLoadingIndicator()
       if let msg = errMsg {
         self.showAlertView(msg)
       }
@@ -91,6 +93,7 @@ extension OrderPictureViewController {
     selectedAssets.removeAll()
     actionButton.setImage(UIImage(named: "plus_white"), for: .normal)
     tableView.reloadData()
+    imgTitle = "" // clear title
   }
 }
 
@@ -100,7 +103,7 @@ extension OrderPictureViewController: UITableViewDataSource, UITableViewDelegate
     if let _orderDetail = orderDetail, _orderDetail.pictures.count > 0 {
       return _orderDetail.pictures.count
     }
-    return selectedAssets.count
+    return selectedAssets != nil ? selectedAssets.count : 0
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -108,11 +111,13 @@ extension OrderPictureViewController: UITableViewDataSource, UITableViewDelegate
       if let _orderDetail = orderDetail, _orderDetail.pictures.count > 0 {
         let picture =  _orderDetail.pictures[indexPath.row]
         cell.nameLabel.text = picture.name
-        cell.imgView.sd_setImage(with: URL(string: picture.link), placeholderImage: UIImage(named: "place_holder"), options: .refreshCached, completed: nil)
+        cell.imgView.sd_setImage(with: URL(string: picture.link),
+                                 placeholderImage: UIImage(named: "place_holder"),
+                                 options: .refreshCached, completed: nil)
       }
       else {
         let asset = selectedAssets[indexPath.row]
-        let imgName = imgTitle.length > 0 ? "\(imgTitle)" + "\(indexPath.row)" : asset.originalFileName
+        let imgName = imgTitle.length > 0 ? "\(imgTitle)" + "_\(indexPath.row)" : asset.originalFileName
         cell.nameLabel.text = imgName
         cell.imgView.image = asset.fullResolutionImage
       }
@@ -150,7 +155,6 @@ extension OrderPictureViewController: TLPhotosPickerViewControllerDelegate {
     let iconName = withTLPHAssets.count > 0 ? "upload" : "plus_white"
     actionButton.setImage(UIImage(named: iconName), for: .normal)
     selectedAssets = withTLPHAssets
-    tableView.reloadData()
   }
   
   func dismissComplete() {

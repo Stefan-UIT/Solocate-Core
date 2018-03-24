@@ -372,17 +372,17 @@
                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" translatesAutoresizingMaskIntoConstraints="NO" id="Pc7-Vy-3xD">
                                                     <rect key="frame" x="333" y="26" width="32" height="32"/>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="8MU-yS-xaQ">
-                                                    <rect key="frame" x="10" y="15" width="313" height="54.5"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="8MU-yS-xaQ">
+                                                    <rect key="frame" x="10" y="10" width="313" height="64.5"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rSV-Jc-f1d">
-                                                            <rect key="frame" x="0.0" y="0.0" width="39" height="24"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="39" height="27.5"/>
                                                             <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O1B-pD-l3Z">
-                                                            <rect key="frame" x="0.0" y="34" width="61.5" height="20.5"/>
+                                                            <rect key="frame" x="0.0" y="37.5" width="61.5" height="27"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -395,6 +395,8 @@
                                                 <constraint firstAttribute="trailing" secondItem="Pc7-Vy-3xD" secondAttribute="trailing" constant="10" id="DCY-vm-KGt"/>
                                                 <constraint firstItem="Pc7-Vy-3xD" firstAttribute="centerY" secondItem="U2W-Ok-1fR" secondAttribute="centerY" id="Q3f-Ig-W8e"/>
                                                 <constraint firstItem="8MU-yS-xaQ" firstAttribute="leading" secondItem="U2W-Ok-1fR" secondAttribute="leading" constant="10" id="SBx-8e-o7b"/>
+                                                <constraint firstAttribute="bottom" secondItem="8MU-yS-xaQ" secondAttribute="bottom" constant="10" id="aMh-PT-RLw"/>
+                                                <constraint firstItem="8MU-yS-xaQ" firstAttribute="top" secondItem="U2W-Ok-1fR" secondAttribute="top" constant="10" id="iGK-iW-1Xb"/>
                                                 <constraint firstItem="Pc7-Vy-3xD" firstAttribute="leading" secondItem="8MU-yS-xaQ" secondAttribute="trailing" constant="10" id="udL-Gw-2tc"/>
                                             </constraints>
                                         </tableViewCellContentView>

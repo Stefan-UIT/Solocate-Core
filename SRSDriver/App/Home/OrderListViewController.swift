@@ -45,7 +45,7 @@ class OrderListViewController: UIViewController {
     let dateString = datePickerView.date.toString()
     navigationItem.title = dateString
     getOrders(byDate: datePickerView.date.toString("yyyy-MM-dd"))
-//    getOrders(byDate: "2018-03-21")
+    tabBarController?.tabBar.isHidden = false
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -173,8 +173,9 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    performSegue(withIdentifier: SegueIdentifier.orderDetail, sender: route.orderList[indexPath.row])
     tableView.deselectRow(at: indexPath, animated: true)
+    performSegue(withIdentifier: SegueIdentifier.orderDetail, sender: route.orderList[indexPath.row])
+    tabBarController?.tabBar.isHidden = true
   }
   
 }

@@ -46,7 +46,9 @@ class OrderNotesViewController: BaseOrderDetailViewController {
         let noteText = textField.text else {
         return
       }
+      self.showLoadingIndicator()
       APIs.addNote("\(_orderDetail.id)", content: noteText, completion: { [unowned self] (note, errorMsg) in
+        self.dismissLoadingIndicator()
         if let err = errorMsg {
           self.showAlertView(err)
         }
