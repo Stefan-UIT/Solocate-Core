@@ -30,7 +30,7 @@ class OrderListViewController: UIViewController {
       noOrdersLabel.isHidden = true
       tableView.isHidden = false
       // MARK: - FIXME
-//      navigationItem.rightBarButtonItem?.isEnabled = route.status != "DV"
+      navigationItem.rightBarButtonItem?.isEnabled = route.status != "DV" && route.orderList.count > 1
       tableView.reloadData()
     }
   }
@@ -38,6 +38,10 @@ class OrderListViewController: UIViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     tabBarController?.delegate = self
+    let iconName = Constants.isLeftToRight ? "logout" : "logout_inv"
+    if let leftButton = navigationItem.leftBarButtonItems?.first {
+      leftButton.image = UIImage(named: iconName)
+    }
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -80,7 +84,9 @@ class OrderListViewController: UIViewController {
     //
     print("Call api update list")
     let orderIDs = route.orderList.map { "\($0.id)" }
+    showLoadingIndicator()
     APIs.updateRouteSequenceOrders("\(route.id)", routeStatus: route.status, orderIDs: orderIDs) { [unowned self] (msgError) in
+      self.dismissLoadingIndicator()
       if let msg = msgError {
         self.showAlertView(msg)
       }

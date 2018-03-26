@@ -17,8 +17,8 @@ class LoginViewController: BaseViewController {
     super.viewDidLoad()
   }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
+  override func viewDidAppear(_ animated: Bool) {
+    super.viewDidAppear(animated)
     if let tk = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String, tk.length > 0 {
       self.performSegue(withIdentifier: SegueIdentifier.showHome, sender: nil)
     }

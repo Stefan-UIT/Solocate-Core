@@ -21,6 +21,7 @@ struct Network {
 
 /// Constants
 struct Constants {
+  static let isLeftToRight = UIApplication.shared.userInterfaceLayoutDirection == .leftToRight
   static let toolbarHeight: CGFloat = 44.0
   static let pickerViewHeight: CGFloat = 216.0
   static let maxSizeForImageUploading = 500000

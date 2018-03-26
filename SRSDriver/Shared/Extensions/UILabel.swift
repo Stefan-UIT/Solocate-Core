@@ -33,4 +33,14 @@ extension UILabel {
     
     return label.frame.height
   }
+  
+  func from(html: String) {
+    if let htmlData = html.data(using: String.Encoding.unicode) {
+      do {
+        self.attributedText = try NSAttributedString(data: htmlData, options: [NSAttributedString.DocumentReadingOptionKey.documentType:  NSAttributedString.DocumentType.html], documentAttributes: nil)
+      } catch let e as NSError {
+        print("Couldn't parse \(html): \(e.localizedDescription)")
+      }
+    }
+  }
 }

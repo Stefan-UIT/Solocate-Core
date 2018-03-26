@@ -15,6 +15,8 @@
 		24D3876D2063513600BE51D9 /* OrderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D3876C2063513600BE51D9 /* OrderItem.swift */; };
 		24D3876F2063625B00BE51D9 /* OrderScanItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24D3876E2063625B00BE51D9 /* OrderScanItemTableViewCell.xib */; };
 		24D387712063674100BE51D9 /* ScanBarCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D387702063674100BE51D9 /* ScanBarCodeViewController.swift */; };
+		24DCDCD42068DD8200D3313F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DCDCD32068DD8200D3313F /* LocationManager.swift */; };
+		24DCDCD62068E2FD00D3313F /* OrderDetailMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DCDCD52068E2FD00D3313F /* OrderDetailMapTableViewCell.swift */; };
 		5A499C9E20591D0400A1D944 /* NSString+SDString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9220591D0400A1D944 /* NSString+SDString.m */; };
 		5A499C9F20591D0400A1D944 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9320591D0400A1D944 /* String.swift */; };
 		5A499CA020591D0400A1D944 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9420591D0400A1D944 /* UIButton.swift */; };
@@ -77,6 +79,8 @@
 		24D3876C2063513600BE51D9 /* OrderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItem.swift; sourceTree = "<group>"; };
 		24D3876E2063625B00BE51D9 /* OrderScanItemTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderScanItemTableViewCell.xib; sourceTree = "<group>"; };
 		24D387702063674100BE51D9 /* ScanBarCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanBarCodeViewController.swift; sourceTree = "<group>"; };
+		24DCDCD32068DD8200D3313F /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
+		24DCDCD52068E2FD00D3313F /* OrderDetailMapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailMapTableViewCell.swift; sourceTree = "<group>"; };
 		2CE28C0EBCCC67BF0FD1791B /* Pods-SRSDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SRSDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SRSDriver/Pods-SRSDriver.debug.xcconfig"; sourceTree = "<group>"; };
 		5A499C9120591D0400A1D944 /* NSString+SDString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SDString.h"; sourceTree = "<group>"; };
 		5A499C9220591D0400A1D944 /* NSString+SDString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+SDString.m"; sourceTree = "<group>"; };
@@ -203,6 +207,7 @@
 		5A499CB420591E4100A1D944 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				24DCDCD32068DD8200D3313F /* LocationManager.swift */,
 				5A499CB520591E4100A1D944 /* Cache.swift */,
 				5A499CB620591E4100A1D944 /* Constants.swift */,
 			);
@@ -229,6 +234,7 @@
 				5A68A453205A223200CA9DB8 /* OrderDetailCollectionViewCell.swift */,
 				5ACCE8DA205BAD2800A1532D /* OrderDetailTableViewCell.swift */,
 				5ACCE8D6205BA46800A1532D /* OrderDetailMapViewController.swift */,
+				24DCDCD52068E2FD00D3313F /* OrderDetailMapTableViewCell.swift */,
 				24B3319520623B5A001FAC49 /* ReasonListViewController.swift */,
 				5ACCE8D8205BA94A00A1532D /* NoteTableViewCell.swift */,
 				24D38768206350ED00BE51D9 /* OrderItemsTableViewCell.swift */,
@@ -518,6 +524,7 @@
 			files = (
 				5A68A451205A202F00CA9DB8 /* OrderPictureViewController.swift in Sources */,
 				5A68A44B205A200700CA9DB8 /* OrderDetailViewController.swift in Sources */,
+				24DCDCD62068E2FD00D3313F /* OrderDetailMapTableViewCell.swift in Sources */,
 				5A68A44D205A201A00CA9DB8 /* OrderSignatureViewController.swift in Sources */,
 				5A499CA920591D0400A1D944 /* UIViewController.swift in Sources */,
 				5A499CA820591D0400A1D944 /* UIView.swift in Sources */,
@@ -550,6 +557,7 @@
 				5A68A461205A86B500CA9DB8 /* MapsViewController.swift in Sources */,
 				5A499CA620591D0400A1D944 /* UITextField.swift in Sources */,
 				5AA4CA5520590B31003F8E6F /* LoginViewController.swift in Sources */,
+				24DCDCD42068DD8200D3313F /* LocationManager.swift in Sources */,
 				5A499CAD20591D9000A1D944 /* Reachability.swift in Sources */,
 				5A68A455205A223200CA9DB8 /* OrderDetailCollectionViewCell.swift in Sources */,
 				5A499CA420591D0400A1D944 /* UILabel.swift in Sources */,
@@ -705,7 +713,7 @@
 			baseConfigurationReference = 2CE28C0EBCCC67BF0FD1791B /* Pods-SRSDriver.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				INFOPLIST_FILE = SRSDriver/Info.plist;
@@ -714,8 +722,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9aa6a24a-a1d0-4b1c-a723-fe07fa9e1698";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-allInhouse";
+				PROVISIONING_PROFILE = "0c9a7fe7-c431-465c-9d5e-200e2eb48d33";
+				PROVISIONING_PROFILE_SPECIFIER = "dis-srsdriver";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -726,7 +734,7 @@
 			baseConfigurationReference = E024BF2881A42290DDB61CAC /* Pods-SRSDriver.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				INFOPLIST_FILE = SRSDriver/Info.plist;
@@ -735,8 +743,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9aa6a24a-a1d0-4b1c-a723-fe07fa9e1698";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-allInhouse";
+				PROVISIONING_PROFILE = "0c9a7fe7-c431-465c-9d5e-200e2eb48d33";
+				PROVISIONING_PROFILE_SPECIFIER = "dis-srsdriver";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

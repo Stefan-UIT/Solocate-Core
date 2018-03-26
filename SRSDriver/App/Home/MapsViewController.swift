@@ -70,10 +70,10 @@ class MapsViewController: UIViewController {
   }
   
   func drawPath(fromLocation from: CLLocationCoordinate2D, toLocation to: CLLocationCoordinate2D) {
-    APIs.getDirection(fromLocation: from, toLocation: to) { (lines) in
-      guard let _lines = lines else { return }
-      for line in _lines {
-        let path = GMSPath(fromEncodedPath: line)
+    APIs.getDirection(fromLocation: from, toLocation: to) { (routes) in
+      guard let _routes = routes else { return }
+      for route in _routes {
+        let path = GMSPath(fromEncodedPath: route.polyline)
         let polyLine = GMSPolyline.init(path: path)
         polyLine.strokeWidth = Constants.ROUTE_WIDTH
         polyLine.strokeColor = AppColor.mainColor
