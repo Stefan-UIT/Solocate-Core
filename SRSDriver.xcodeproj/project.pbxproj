@@ -746,7 +746,7 @@
 			baseConfigurationReference = 2CE28C0EBCCC67BF0FD1791B /* Pods-SRSDriver.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				INFOPLIST_FILE = SRSDriver/Info.plist;
@@ -755,8 +755,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9aa6a24a-a1d0-4b1c-a723-fe07fa9e1698";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-allInhouse";
+				PROVISIONING_PROFILE = "191283da-88d3-4682-98cf-12b3751875e9";
+				PROVISIONING_PROFILE_SPECIFIER = "dis-srsdriver";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -767,7 +767,7 @@
 			baseConfigurationReference = E024BF2881A42290DDB61CAC /* Pods-SRSDriver.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				INFOPLIST_FILE = SRSDriver/Info.plist;
@@ -776,8 +776,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9aa6a24a-a1d0-4b1c-a723-fe07fa9e1698";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-allInhouse";
+				PROVISIONING_PROFILE = "191283da-88d3-4682-98cf-12b3751875e9";
+				PROVISIONING_PROFILE_SPECIFIER = "dis-srsdriver";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

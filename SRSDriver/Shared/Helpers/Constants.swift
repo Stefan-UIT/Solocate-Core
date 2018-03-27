@@ -74,6 +74,7 @@ struct Defaultkey {
   static let fcmToken = "fcmToken"
   static let firstLaunch = "firstLaunch"
   static let userStatus = "userStatus"
+  static let keepLogin = "keepLogin"
 }
 
 struct NotificationName {
