@@ -15,6 +15,7 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
   var routeID: Int?
   
   override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
+    
     let child_1 = OrderDetailViewController.loadViewController(type: OrderDetailViewController.self)
     child_1.didUpdateStatus = {
       [unowned self] in
@@ -51,6 +52,7 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
         return
       }
       if orderDetail.id < 0 {
+        Cache.shared.setObject(obj: "", forKey: Defaultkey.tokenKey)
         self.showAlertView("Have something wrong, plz try again!", completionHandler: { [unowned self] (action) in
           self.navigationController?.navigationController?.popViewController(animated: true)
         })

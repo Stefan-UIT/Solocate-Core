@@ -290,13 +290,14 @@
         <!--Order Detail Container View Controller-->
         <scene sceneID="5qc-rF-XgY">
             <objects>
-                <viewController id="oRT-6o-zHc" customClass="OrderDetailContainerViewController" customModule="SRSDriver" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OrderDetailContainerViewController" id="oRT-6o-zHc" customClass="OrderDetailContainerViewController" customModule="SRSDriver" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="anM-TJ-pCW">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SNl-eV-9Yp">
                                 <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.29411764709999999" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -965,7 +966,8 @@
         <!--Navigation Controller-->
         <scene sceneID="aQe-sf-Mu0">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="pGL-1S-ObC" sceneMemberID="viewController">
+                <navigationController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="pGL-1S-ObC" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0N4-jV-8cK">
                         <autoresizingMask key="autoresizingMask"/>
@@ -983,6 +985,7 @@
         <scene sceneID="cOr-iW-u6Q">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="apT-nT-w3w" sceneMemberID="viewController">
+                    <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" title="Orders" image="list" id="Lea-q3-u2e"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zcx-HS-pOf">

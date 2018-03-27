@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>BASE_URL</key>
+	<string>https://apigw.seldatdirect.com/dev/sdms-masof/api</string>
+	<key>LOGIN</key>
+	<string>/master-service/v1/login</string>
+	<key>GET_ORDERS</key>
+	<string>/backend-api/driver/v1/orders</string>
+	<key>GET_ORDER_BY_DATE</key>
+	<string>/backend-api/v1/routes/get-routes-by-date</string>
+	<key>GET_ORDER_DETAIL</key>
+	<string>/backend-api/v1/orders/%@</string>
+	<key>UPDATE_ORDER_STATUS</key>
+	<string>/backend-api/v1/orders/%@/%@</string>
+	<key>UPLOAD_SIGNATURE</key>
+	<string>/backend-api/v1/orders/add-sign/%@</string>
+	<key>UPDATE_SEQUENCE</key>
+	<string>/backend-api/v1/routes/update-sequence</string>
+	<key>UPLOAD_FILES</key>
+	<string>/backend-api/v1/orders/add-picture/%@</string>
+	<key>GET_REASON_LIST</key>
+	<string>/backend-api/v1/reason/%@</string>
+	<key>ADD_NOTE</key>
+	<string>/backend-api/v1/orders/%@/notes</string>
+	<key>UPDATE_ORDER_ITEM_STATUS</key>
+	<string>/backend-api/v1/orders/update-status-items/%@/%@</string>
+	<key>UPDATE_BARCODE_ORDER_ITEM</key>
+	<string>/backend-api/v1/orders/update-barcode-items/%@</string>
+</dict>
+</plist>

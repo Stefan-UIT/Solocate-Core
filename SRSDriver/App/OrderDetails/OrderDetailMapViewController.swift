@@ -28,13 +28,19 @@ class OrderDetailMapViewController: BaseViewController {
       let _locattion = orderLocation else {
         LocationManager.shared.delegate = self
         LocationManager.shared.requestLocation()
-      return
+        return
     }
     getDirection(from: userLocation.coordinate, toLocation: _locattion)
   }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
+    if let _locattion = orderLocation {
+      mapView.animate(toLocation: _locattion)
+      let marker = GMSMarker(position: _locattion)
+      marker.map = mapView
+    }
+    
   }
   
 }
@@ -100,11 +106,11 @@ extension OrderDetailMapViewController {
   func getDirection(from fromLocation: CLLocationCoordinate2D, toLocation: CLLocationCoordinate2D) {
     APIs.getDirection(fromLocation: fromLocation, toLocation: toLocation) { [unowned self] (routes) in
       guard let _routes = routes else {return}
-      self.mapView.clear()
       guard let firstRoute = _routes.first else {
         return
       }
-      
+      self.mapView.clear()
+
       //
       let path = GMSPath(fromEncodedPath: firstRoute.polyline)
       let polyLine = GMSPolyline.init(path: path)

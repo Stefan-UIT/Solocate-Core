@@ -14,7 +14,8 @@ import TLPhotoPicker
 
 class APIs {
   class func login(_ email: String, password: String, completion: @escaping((_ token: String?, _ msg: String?) -> Void)) {
-    let request = RESTRequest(functionName: RESTConstants.login, method: .post, encoding: .default)
+    let request = RESTRequest(functionName: RESTConstants.configs[RESTConstants.LOGIN] ?? ""
+      , method: .post, encoding: .default)
     let params = ["email": email, "password": password]
     request.setParameters(params)
     request.setContentType("application/x-www-form-urlencoded")
@@ -34,7 +35,7 @@ class APIs {
   }
   
   class func getOrderDetail(_ orderID: String, completion: @escaping ((_ resp: OrderDetail?, _ msg: String?) -> Void)) {
-    let uri = String.init(format: RESTConstants.orderDetails, orderID)
+    let uri = String.init(format: RESTConstants.configs[RESTConstants.GET_ORDER_DETAIL] ?? "", orderID)
     let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
     if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
       request.setAuthorization(token)
@@ -54,7 +55,7 @@ class APIs {
   }
   
   static func updateOrderStatus(_ orderID: String, expectedStatus: String, routeID: String, reason: Reason? = nil, completion: @escaping((_ errMsg: String?) -> Void)) {
-    var uri = String.init(format: RESTConstants.updateOrderStatus, orderID, expectedStatus)
+    var uri = String.init(format: RESTConstants.configs[RESTConstants.UPDATE_ORDER_STATUS] ?? "", orderID, expectedStatus)
     uri = uri.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
     let request = RESTRequest(functionName: uri, method: .put, encoding: .default)
     var params = ["route_id": routeID]
@@ -79,7 +80,7 @@ class APIs {
   }
   
   static func getReasonList(_ type: String = "1", completion: @escaping ((_ reasons:[Reason]?, _ errMsg: String?) -> Void)) {
-    let uri = String.init(format: RESTConstants.getListReason, type)
+    let uri = String.init(format: RESTConstants.configs[RESTConstants.GET_REASON_LIST] ?? "", type)
     let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
     request.baseInvoker { (resp, error) in
       if let response = resp as? [[String: Any]]{
@@ -99,7 +100,7 @@ class APIs {
   
   
   class func getOrders(byDate date: String? = nil, completion: @escaping ((_ route: Route?, _ msg: String?) -> Void)) {
-    let request = RESTRequest(functionName: RESTConstants.getOrdersByDate, method: .put, encoding: .default)
+    let request = RESTRequest(functionName: RESTConstants.configs[RESTConstants.GET_ORDER_BY_DATE] ?? "", method: .put, encoding: .default)
     var dateString = Date().toString("yyyy-MM-dd")
     if let _date = date {
       dateString = _date
@@ -124,7 +125,7 @@ class APIs {
   }
   
   static func uploadSignature(_ orderID: String, signBase64: String, completion: @escaping ((_ errMsg: String?) -> Void)) {
-    let uri = String.init(format: RESTConstants.uploadSignature, orderID)
+    let uri = String.init(format: RESTConstants.configs[RESTConstants.UPLOAD_SIGNATURE] ?? "", orderID)
     let request = RESTRequest(functionName: uri, method: .put, encoding: .default)
     request.setContentType("application/x-www-form-urlencoded")
     let params = ["sign": signBase64]
@@ -152,9 +153,12 @@ class APIs {
     ]]
 
     let jsonData = APIs.convertArray2Json(from: params)
-    guard let url = URL(string: RESTConstants.baseURL + RESTConstants.updateSequence) else {
-      return
+    guard let baseURL = RESTConstants.configs[RESTConstants.BASE_URL],
+    let updateSequence = RESTConstants.configs[RESTConstants.UPDATE_SEQUENCE],
+      let url = URL(string: baseURL + updateSequence) else {
+        return
     }
+    
     var request = URLRequest(url: url)
     request.httpMethod = HTTPMethod.post.rawValue
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -181,12 +185,16 @@ class APIs {
   }
   
   static func uploadFiles(_ files: [TLPHAsset], name: String = "", orderID: String, completion: @escaping ((_ errorMsg: String?) -> Void)) {
-    let url = String.init(format: "\(RESTConstants.baseURL)\(RESTConstants.uploadFiles)", orderID)
+    guard let baseURL = RESTConstants.configs[RESTConstants.BASE_URL],
+      let uploadFiles = RESTConstants.configs[RESTConstants.UPLOAD_FILES] else {
+        return
+    }
+    let url = String.init(format: "\(baseURL)\(uploadFiles)", orderID)
     var headers = [String: String]()
     if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
       headers["Authorization"] = "Bearer " + token
     }
-//    headers["Content-Type"] = "multipart/form-data"
+
     
     Alamofire.upload(multipartFormData: { (formData) in
       for item in files {
@@ -228,16 +236,6 @@ class APIs {
             return
           }
           completion(nil)
-          
-//          guard let routes = json["routes"] as? [[String: Any]] else { return }
-//          var lines: [String] = [String]()
-//          for route in routes {
-//            if let overview = route["overview_polyline"] as? [String: Any],
-//              let points = overview["points"] as? String {
-//              lines.append(points)
-//              completion(lines)
-//            }
-//          }
         }
         catch let err {
           completion(nil)
@@ -248,7 +246,7 @@ class APIs {
   }
   
   static func addNote(_ orderID: String, content: String, completion: @escaping ((_ note: Note?,_ msgError: String?) -> Void)) {
-    let uri = String.init(format: RESTConstants.addNote, orderID)
+    let uri = String.init(format: RESTConstants.configs[RESTConstants.ADD_NOTE] ?? "", orderID)
     let params = ["content": content]
     let request = RESTRequest(functionName: uri, method: .post, encoding: .default)
     request.setParameters(params)
@@ -266,7 +264,7 @@ class APIs {
   }
   
   static func updateOrderItemStatus(_ itemID: String, status: String, reason: Reason?, completion: @escaping ((_ msgError: String?) -> Void)) {
-    let uri = String.init(format: RESTConstants.updateItemStatus, itemID, status)
+    let uri = String.init(format: RESTConstants.configs[RESTConstants.UPDATE_ORDER_ITEM_STATUS] ?? "", itemID, status)
     let request = RESTRequest(functionName: uri, method: .put, encoding: .default)
     var reasonMsg = ""
     var reasonID = ""
@@ -291,7 +289,7 @@ class APIs {
   }
   
   static func updateBarcode(_ itemID: String, newBarcode: String, completion: @escaping ((_ errorMsg: String?) -> Void)) {
-    let uri = String.init(format: RESTConstants.updateBarcodeItem, itemID)
+    let uri = String.init(format: RESTConstants.configs[RESTConstants.UPDATE_BARCODE_ORDER_ITEM] ?? "", itemID)
     let request = RESTRequest(functionName: uri, method: .put, encoding: .default)
     let params = ["barcode": newBarcode]
     request.setParameters(params)
@@ -312,118 +310,4 @@ class APIs {
   
 }
 
-class DirectionStep: NSObject, Mappable {
-  var distance = Object()
-  var duration = Object()
-  var travelMode = ""
-  var endLocation = GoogleCoordinate()
-  var startLocation = GoogleCoordinate()
-  var instructions = ""
-  var polyline = ""
-  var maneuver = ""
-  
-  convenience required init?(map: Map) {
-    self.init()
-  }
-  
-  func mapping(map: Map) {
-    distance <- map["distance"]
-    duration <- map["duration"]
-    endLocation <- map["end_location"]
-    startLocation <- map["start_location"]
-    travelMode <- map["travel_mode"]
-    instructions <- map["html_instructions"]
-    polyline <- map["polyline.points"]
-    maneuver <- map["maneuver"]
-  }
-  
-  
-}
 
-class Object: NSObject, Mappable {
-  var text: String = ""
-  var value: Int = 0
-  
-  convenience required init?(map: Map) {
-    self.init()
-  }
-  
-  func mapping(map: Map) {
-    text <- map["text"]
-    value <- map["map"]
-  }
-}
-
-class DirectionLeg: NSObject, Mappable {
-  var distance = Object()
-  var duration = Object()
-  var endAddress = ""
-  var startAddress = ""
-  var steps = [DirectionStep]()
-  
-  convenience required init?(map: Map) {
-    self.init()
-  }
-  
-  func mapping(map: Map) {
-    distance <- map["distance"]
-    duration <- map["duration"]
-    endAddress <- map["end_address"]
-    startAddress <- map["start_address"]
-    steps <- map["steps"]
-  }
-  
-}
-
-class GoogleCoordinate: NSObject, Mappable {
-  var lat: Double = 0.0
-  var lng: Double = 0.0
-  
-  convenience required init?(map: Map) {
-    self.init()
-  }
-  
-  func mapping(map: Map) {
-    lat <- map["lat"]
-    lng <- map["lng"]
-  }
-  
-  func toCoordinate() -> CLLocationCoordinate2D {
-    return CLLocationCoordinate2D(latitude: lat, longitude: lng)
-  }
-  
-}
-
-class DirectionRoute: NSObject, Mappable {
-  var polyline: String = ""
-  var boundsNortheast = GoogleCoordinate()
-  var boundsSouthest = GoogleCoordinate()
-  var legs = [DirectionLeg]()
-  
-  
-  convenience required init?(map: Map) {
-    self.init()
-  }
-  
-  func mapping(map: Map) {
-    polyline <- map["overview_polyline.points"]
-    boundsSouthest <- map["bounds.southwest"]
-    boundsNortheast <- map["bounds.northeast"]
-    legs <- map["legs"]
-  }
-}
-
-class MapDirectionResponse: NSObject, Mappable {
-  var routes: [DirectionRoute] = [DirectionRoute]()
-  var status = ""
- convenience required init?(map: Map) {
-    self.init()
-  }
-  
-  func mapping(map: Map) {
-    routes <- map["routes"]
-    status <- map["status"]
-  }
-  
-  
-}

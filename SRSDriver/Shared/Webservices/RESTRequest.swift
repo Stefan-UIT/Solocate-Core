@@ -31,7 +31,7 @@ class RESTRequest: NSObject {
     switch response.result {
     case .success(let success):
       completion(success, nil)
-    case .failure(let error):
+    case .failure(let _):
       completion(nil, RESTError.parseError(response))
     }
 //    guard let restResponse = Mapper<RESTResponse>().map(JSONObject: response.result.value) else {
@@ -90,7 +90,8 @@ class RESTRequest: NSObject {
   
   init(functionName: String, method: HTTPMethod, encoding: URLEncoding) {
     super.init()
-    self.handleInitialization(url: RESTConstants.baseURL + functionName, method: method, encoding: encoding)
+    let baseURL = RESTConstants.configs[RESTConstants.BASE_URL] ?? ""
+    self.handleInitialization(url: baseURL + functionName, method: method, encoding: encoding)
   }
   
   
