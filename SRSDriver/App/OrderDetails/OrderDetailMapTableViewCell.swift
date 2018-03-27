@@ -17,7 +17,8 @@ class OrderDetailMapTableViewCell: UITableViewCell {
     didSet {
       instructionsLabel.from(html: step.instructions)
       distanceLabel.text = step.distance.text
-      instructionIcon.image = UIImage(named: step.maneuver)
+      let imgName = "direction_" + step.maneuver.replacingOccurrences(of: "-", with: "_")
+      instructionIcon.image = UIImage(named: imgName)
     }
   }
     override func awakeFromNib() {
