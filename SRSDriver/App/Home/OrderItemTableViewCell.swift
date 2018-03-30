@@ -18,7 +18,8 @@ class OrderItemTableViewCell: UITableViewCell {
   var order: Order! {
     didSet {
       orderReference.text = "\(order.sequence). \(order.orderReference)"
-      orderStatus.text = "\(order.statusName)"
+      let status = OrderStatus(rawValue: order.statusCode)!
+      orderStatus.text = "\(status.statusName)"
       deliveryAddress.text = "\(order.deliveryAdd)"
       deliveryDate.text = "\(order.deliveryDate) - (\(order.timeWindowName))"
       let color = order.statusCode == "DV" ? "#757575" : "#FFFFFF"

@@ -87,4 +87,28 @@ enum OrderDetailType {
   case items
 }
 
+enum OrderStatus: String {
+  case open = "OP"
+  case inprogress = "IP"
+  case delivered = "DV"
+  case cancel = "CC"
+  
+  var statusName: String {
+    switch self {
+    case .open:
+      return "Open"
+    case .inprogress:
+      return "In Progress"
+    case .delivered:
+      return "Delivered"
+    case .cancel:
+      return "Cancelled"
+    }
+  }
+  
+  
+  
+  
+}
+
 

@@ -41,8 +41,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       detailItems.removeAll()
       var refe = OrderDetailItem(.reference)
       refe.content = _orderDetail.orderReference
-      var status = OrderDetailItem(.status)
-      status.content = _orderDetail.statusCode == "DV" ? "Delivery" : (_orderDetail.statusCode == "IP" ? "In Progress" : "Open")
+      var statusItem = OrderDetailItem(.status)
+      let status = OrderStatus(rawValue: _orderDetail.statusCode)!
+      statusItem.content = status.statusName      
       var delDate = OrderDetailItem(.deliveryDate)
       delDate.content = _orderDetail.deliveryDate + " - " + _orderDetail.timeWindowName
       var customer = OrderDetailItem(.customerName)
@@ -58,7 +59,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       items.items = _orderDetail.items
       
       detailItems.append(refe)
-      detailItems.append(status)
+      detailItems.append(statusItem)
       detailItems.append(delDate)
       detailItems.append(customer)
       detailItems.append(phone)

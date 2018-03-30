@@ -180,11 +180,6 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-//    let orderDetailVC = OrderDetailContainerViewController.loadViewController(type: OrderDetailContainerViewController.self)
-//    orderDetailVC.orderID = "\(route.orderList[indexPath.row].id)"
-//    orderDetailVC.routeID = route.id
-//    navigationController?.navigationController?.pushViewController(orderDetailVC, animated: true)
-
     performSegue(withIdentifier: SegueIdentifier.orderDetail, sender: route.orderList[indexPath.row])
     tabBarController?.tabBar.isHidden = true
   }

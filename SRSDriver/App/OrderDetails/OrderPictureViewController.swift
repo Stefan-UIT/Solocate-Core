@@ -148,6 +148,10 @@ extension OrderPictureViewController: UITableViewDataSource, UITableViewDelegate
     return selectedAssets != nil && selectedAssets.count > 0 ? headerHeight.scaleHeight() : 0.0000000001
   }
   
+  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: true)
+  }
+  
 }
 
 extension OrderPictureViewController: TLPhotosPickerViewControllerDelegate {

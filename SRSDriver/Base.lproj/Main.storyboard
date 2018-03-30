@@ -113,11 +113,11 @@
             <objects>
                 <viewController id="iIr-5E-DPd" customClass="OrderListViewController" customModule="SRSDriver" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7O1-3m-l7t">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="uM3-WE-nIO">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="662"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="sectionIndexBackgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
@@ -203,13 +203,13 @@
                                 </connections>
                             </tableView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have no orders Choose another date" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pt8-vn-HK0">
-                                <rect key="frame" x="129.5" y="323" width="116" height="21"/>
+                                <rect key="frame" x="129.5" y="291" width="116" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2w5-hA-Mzr">
-                                <rect key="frame" x="0.0" y="412" width="375" height="206"/>
+                                <rect key="frame" x="0.0" y="348" width="375" height="206"/>
                                 <subviews>
                                     <datePicker contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="date" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="qab-mO-iTj">
                                         <rect key="frame" x="0.0" y="50" width="375" height="162"/>
@@ -249,12 +249,12 @@
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="2w5-hA-Mzr" firstAttribute="trailing" secondItem="YlG-v3-wY4" secondAttribute="trailing" id="7yw-Jj-4N3"/>
-                            <constraint firstItem="uM3-WE-nIO" firstAttribute="top" secondItem="YlG-v3-wY4" secondAttribute="top" constant="-64" id="Igu-Os-zce"/>
+                            <constraint firstItem="uM3-WE-nIO" firstAttribute="top" secondItem="YlG-v3-wY4" secondAttribute="top" id="Igu-Os-zce"/>
                             <constraint firstItem="uM3-WE-nIO" firstAttribute="leading" secondItem="YlG-v3-wY4" secondAttribute="leading" id="VfG-76-bW8"/>
                             <constraint firstItem="uM3-WE-nIO" firstAttribute="trailing" secondItem="YlG-v3-wY4" secondAttribute="trailing" id="ZHR-kW-lkI"/>
                             <constraint firstItem="pt8-vn-HK0" firstAttribute="centerX" secondItem="7O1-3m-l7t" secondAttribute="centerX" id="ckx-dI-y2s"/>
                             <constraint firstItem="2w5-hA-Mzr" firstAttribute="bottom" secondItem="YlG-v3-wY4" secondAttribute="bottom" id="fJn-yU-OMs"/>
-                            <constraint firstItem="uM3-WE-nIO" firstAttribute="bottom" secondItem="YlG-v3-wY4" secondAttribute="bottom" constant="44" id="i9P-lB-LlD"/>
+                            <constraint firstItem="uM3-WE-nIO" firstAttribute="bottom" secondItem="YlG-v3-wY4" secondAttribute="bottom" id="i9P-lB-LlD"/>
                             <constraint firstItem="pt8-vn-HK0" firstAttribute="centerY" secondItem="7O1-3m-l7t" secondAttribute="centerY" id="obJ-Pr-ND7"/>
                             <constraint firstItem="2w5-hA-Mzr" firstAttribute="leading" secondItem="YlG-v3-wY4" secondAttribute="leading" id="ofb-CY-Z54"/>
                         </constraints>
@@ -296,11 +296,11 @@
             <objects>
                 <viewController storyboardIdentifier="OrderDetailContainerViewController" id="oRT-6o-zHc" customClass="OrderDetailContainerViewController" customModule="SRSDriver" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="anM-TJ-pCW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="603"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SNl-eV-9Yp">
-                                <rect key="frame" x="0.0" y="64" width="375" height="554"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="554"/>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -991,7 +991,7 @@
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
                     <tabBarItem key="tabBarItem" title="Orders" image="list" id="Lea-q3-u2e"/>
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="zcx-HS-pOf">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="zcx-HS-pOf">
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>

@@ -13,6 +13,7 @@
 		24B331942061FA66001FAC49 /* PictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B331932061FA66001FAC49 /* PictureTableViewCell.swift */; };
 		24B3319620623B5A001FAC49 /* ReasonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3319520623B5A001FAC49 /* ReasonListViewController.swift */; };
 		24B3319820623C25001FAC49 /* Reason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3319720623C25001FAC49 /* Reason.swift */; };
+		24B96CEB206B9CC9000FD6CD /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B96CEA206B9CC9000FD6CD /* Theme.swift */; };
 		24D38769206350ED00BE51D9 /* OrderItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D38768206350ED00BE51D9 /* OrderItemsTableViewCell.swift */; };
 		24D3876B2063511F00BE51D9 /* OrderScanItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D3876A2063511F00BE51D9 /* OrderScanItemTableViewCell.swift */; };
 		24D3876D2063513600BE51D9 /* OrderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D3876C2063513600BE51D9 /* OrderItem.swift */; };
@@ -81,6 +82,7 @@
 		24B331932061FA66001FAC49 /* PictureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureTableViewCell.swift; sourceTree = "<group>"; };
 		24B3319520623B5A001FAC49 /* ReasonListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReasonListViewController.swift; sourceTree = "<group>"; };
 		24B3319720623C25001FAC49 /* Reason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reason.swift; sourceTree = "<group>"; };
+		24B96CEA206B9CC9000FD6CD /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		24D38768206350ED00BE51D9 /* OrderItemsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemsTableViewCell.swift; sourceTree = "<group>"; };
 		24D3876A2063511F00BE51D9 /* OrderScanItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderScanItemTableViewCell.swift; sourceTree = "<group>"; };
 		24D3876C2063513600BE51D9 /* OrderItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItem.swift; sourceTree = "<group>"; };
@@ -225,6 +227,7 @@
 				24DCDCD32068DD8200D3313F /* LocationManager.swift */,
 				5A499CB520591E4100A1D944 /* Cache.swift */,
 				5A499CB620591E4100A1D944 /* Constants.swift */,
+				24B96CEA206B9CC9000FD6CD /* Theme.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -584,6 +587,7 @@
 				5A499CA420591D0400A1D944 /* UILabel.swift in Sources */,
 				5A82E9CC205A148F00F34351 /* OrderItemTableViewCell.swift in Sources */,
 				24D387712063674100BE51D9 /* ScanBarCodeViewController.swift in Sources */,
+				24B96CEB206B9CC9000FD6CD /* Theme.swift in Sources */,
 				5A82E9C6205A038900F34351 /* RESTRequest.swift in Sources */,
 				5A499CA520591D0400A1D944 /* UITableView-Extensions.swift in Sources */,
 				5AA4CA4020590AD4003F8E6F /* AppDelegate.swift in Sources */,
