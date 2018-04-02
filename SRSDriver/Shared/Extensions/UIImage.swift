@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 //public enum ImageFormat {
 //  case png
@@ -25,3 +26,22 @@ import Foundation
 //  }
 //}
 
+extension UIBarButtonItem {
+  @IBInspectable var localizeKey: String {
+    get {
+      return ""
+    } set {
+      self.title = NSLocalizedString(newValue, comment: "")
+    }
+  }
+}
+
+extension UITabBarItem {
+  @IBInspectable var localizeKey: String {
+    get {
+      return ""
+    } set {
+      self.title = NSLocalizedString(newValue, comment: "")
+    }
+  }
+}

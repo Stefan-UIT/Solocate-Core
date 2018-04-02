@@ -54,20 +54,20 @@ class OrderPictureViewController: BaseOrderDetailViewController {
         self.showAlertView(msg)
       }
       else {
-        self.showAlertView("Add image successfully")
+        self.showAlertView("order_detail_add_image_successfully".localized)
       }
     }
   }
   
   override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-    return IndicatorInfo(title: "Picture")
+    return IndicatorInfo(title: "order_detail_picture".localized)
   }
 }
 
 extension OrderPictureViewController {
   func showInputImageTitleWindow() {
-    let alert = UIAlertController(title: "SRS Driver", message: "Plz input your image title", preferredStyle: .alert)
-    let okAction = UIAlertAction(title: "OK", style: .default) { [unowned self] (okAction) in
+    let alert = UIAlertController(title: "app_name".localized, message: "order_detail_input_img_title".localized, preferredStyle: .alert)
+    let okAction = UIAlertAction(title: "ok".localized, style: .default) { [unowned self] (okAction) in
       alert.dismiss(animated: true, completion: nil)
       guard let textField = alert.textFields?.first,
         textField.hasText,
@@ -77,14 +77,14 @@ extension OrderPictureViewController {
       self.imgTitle = text
       self.tableView.reloadData()
     }
-    let cancelAction = UIAlertAction(title: "Cancel", style: .default) { [unowned self] (action) in
+    let cancelAction = UIAlertAction(title: "cancel".localized, style: .default) { [unowned self] (action) in
       alert.dismiss(animated: true, completion: nil)
       self.tableView.reloadData()
     }
     alert.addAction(cancelAction)
     alert.addAction(okAction)
     alert.addTextField { (textField) in
-      textField.placeholder = "Input image title"
+      textField.placeholder = "order_detail_input_img_title_hint".localized
     }
     present(alert, animated: true, completion: nil)
   }
@@ -138,7 +138,7 @@ extension OrderPictureViewController: UITableViewDataSource, UITableViewDelegate
     let padding: CGFloat = 10.0
     let clearButton = UIButton(frame: CGRect(x: padding, y: padding, width: view.frame.width - 2*padding , height: 40))
     clearButton.addTarget(self, action: #selector(self.didClearSelectedPhotot(_:)), for: .touchUpInside)
-    clearButton.setTitle("Clear", for: .normal)
+    clearButton.setTitle("clear".localized, for: .normal)
     clearButton.setTitleColor(AppColor.mainColor, for: .normal)
     clearButton.titleLabel?.textAlignment = .right
     return clearButton
@@ -168,7 +168,7 @@ extension OrderPictureViewController: TLPhotosPickerViewControllerDelegate {
   }
   
   func didExceedMaximumNumberOfSelection(picker: TLPhotosPickerViewController) {
-    showAlertView("Your selection did exceed maximum number")    
+    showAlertView("You reached the maximum number")    
   }
   
 }

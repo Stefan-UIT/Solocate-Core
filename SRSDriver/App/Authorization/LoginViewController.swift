@@ -49,7 +49,7 @@ class LoginViewController: BaseViewController {
       let email = userNameTextField.text,
       let password = passwordTextField.text
       else {
-        showAlertView("Invalid info")
+        showAlertView("error_fill_info".localized)
         return
     }
     showLoadingIndicator()

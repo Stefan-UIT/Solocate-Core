@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		241D68792069DB2200914E4F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 241D68772069DB2200914E4F /* Localizable.strings */; };
+		246FA3522071EB7300C5E707 /* RouteMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FA3512071EB7300C5E707 /* RouteMessagesViewController.swift */; };
+		246FA3542071EBA600C5E707 /* RouteMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FA3532071EBA600C5E707 /* RouteMessageTableViewCell.swift */; };
 		248F20902069E2CA00E6902D /* configs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 248F208F2069E2CA00E6902D /* configs.plist */; };
 		248F20922069F16300E6902D /* GoogleDirectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F20912069F16300E6902D /* GoogleDirectionResponse.swift */; };
 		24B331942061FA66001FAC49 /* PictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B331932061FA66001FAC49 /* PictureTableViewCell.swift */; };
@@ -77,6 +79,8 @@
 /* Begin PBXFileReference section */
 		241D68782069DB2200914E4F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		241D687A2069DB5E00914E4F /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
+		246FA3512071EB7300C5E707 /* RouteMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMessagesViewController.swift; sourceTree = "<group>"; };
+		246FA3532071EBA600C5E707 /* RouteMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMessageTableViewCell.swift; sourceTree = "<group>"; };
 		248F208F2069E2CA00E6902D /* configs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = configs.plist; sourceTree = "<group>"; };
 		248F20912069F16300E6902D /* GoogleDirectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleDirectionResponse.swift; sourceTree = "<group>"; };
 		24B331932061FA66001FAC49 /* PictureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureTableViewCell.swift; sourceTree = "<group>"; };
@@ -294,9 +298,11 @@
 		5A82E9C8205A04D500F34351 /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				246FA3512071EB7300C5E707 /* RouteMessagesViewController.swift */,
 				5A82E9C9205A04EE00F34351 /* OrderListViewController.swift */,
 				5A82E9CB205A148F00F34351 /* OrderItemTableViewCell.swift */,
 				5A68A460205A86B500CA9DB8 /* MapsViewController.swift */,
+				246FA3532071EBA600C5E707 /* RouteMessageTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -601,7 +607,9 @@
 				5A499C9E20591D0400A1D944 /* NSString+SDString.m in Sources */,
 				5A68A45D205A5ECF00CA9DB8 /* Route.swift in Sources */,
 				5A499CB820591E4100A1D944 /* Constants.swift in Sources */,
+				246FA3542071EBA600C5E707 /* RouteMessageTableViewCell.swift in Sources */,
 				24D3876D2063513600BE51D9 /* OrderItem.swift in Sources */,
+				246FA3522071EB7300C5E707 /* RouteMessagesViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

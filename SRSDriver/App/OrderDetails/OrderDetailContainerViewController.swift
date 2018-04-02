@@ -38,7 +38,7 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = "Detail"
+    title = "order_detail_title".localized
     getOrderDetail()
   }
   
@@ -53,7 +53,7 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
       }
       if orderDetail.id < 0 {
         Cache.shared.setObject(obj: "", forKey: Defaultkey.tokenKey)
-        self.showAlertView("Have something wrong, plz try again!", completionHandler: { [unowned self] (action) in
+        self.showAlertView("error_network".localized, completionHandler: { [unowned self] (action) in
           self.navigationController?.navigationController?.popViewController(animated: true)
         })
         return

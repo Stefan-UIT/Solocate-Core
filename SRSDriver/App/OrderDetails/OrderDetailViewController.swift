@@ -75,11 +75,11 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       tableView.estimatedRowHeight = cellHeight
       tableView.rowHeight = UITableViewAutomaticDimension
       finishButton.isEnabled = _orderDetail.statusCode == "OP" || _orderDetail.statusCode == "IP"
-      let finishButtonTitle = _orderDetail.statusCode == "OP" ? "Start" : "Finish"
+      let finishButtonTitle = _orderDetail.statusCode == "OP" ? "start".localized : "finish".localized
       finishButton.setTitle(finishButtonTitle, for: .normal)
       
       unableToStartButton.isEnabled = _orderDetail.statusCode == "OP" || _orderDetail.statusCode == "IP"
-      let unableTitle = _orderDetail.statusCode == "OP" ? "Unable to Start" : "Unable to Finish"
+      let unableTitle = _orderDetail.statusCode == "OP" ? "order_detail_unable_start".localized : "order_detail_unable_finish".localized
       unableToStartButton.setTitle(unableTitle, for: .normal)
     }
   }
@@ -99,7 +99,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   }
   
   override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-    return IndicatorInfo(title: "Detail")
+    return IndicatorInfo(title: "order_detail_title".localized)
   }
   
   @IBAction func didClickFinish(_ sender: UIButton) {
@@ -143,13 +143,13 @@ extension OrderDetailViewController {
     guard let order = orderDetail else {
       return
     }
-    let message = "Add new order item with \(barcode) and quality: "
-    let alert = UIAlertController(title: "SRS Driver", message: message, preferredStyle: .alert)
+    let message = String.init(format: "order_detail_add_order_item".localized, barcode)
+    let alert = UIAlertController(title: "app_name", message: message, preferredStyle: .alert)
     alert.addTextField { (textField) in
-      textField.placeholder = "Quality"
+      textField.placeholder = "order_detail_quality".localized
       textField.keyboardType = .numberPad
     }
-    let okAction = UIAlertAction(title: "Submit", style: .default) { [unowned self] (action) in
+    let okAction = UIAlertAction(title: "submit".localized, style: .default) { [unowned self] (action) in
       guard let textField = alert.textFields?.first,
         textField.hasText,
         let qtyText = textField.text else {
@@ -166,16 +166,16 @@ extension OrderDetailViewController {
         self.showAlertView(msg)
       })
     }
-    let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+    let cancel = UIAlertAction(title: "cancel".localized, style: .default, handler: nil)
     alert.addAction(cancel)
     alert.addAction(okAction)
     present(alert, animated: true, completion: nil)
   }
   
   func showAlertUpdateBarcode(_ barcode: String, item: OrderItem) {
-    let message = "Do you want to update barcode to \(barcode)"
-    let alert = UIAlertController(title: "SRS Driver", message: message, preferredStyle: .alert)
-    let okAction = UIAlertAction(title: "Submit", style: .default) { [unowned self] (action) in
+    let message = String.init(format: "order_detail_update_barcode".localized, barcode)
+    let alert = UIAlertController(title: "app_name".localized, message: message, preferredStyle: .alert)
+    let okAction = UIAlertAction(title: "submit".localized, style: .default) { [unowned self] (action) in
       self.showLoadingIndicator()
       APIs.updateBarcode("\(item.id)", newBarcode: barcode, completion: { (errMsg) in
         self.dismissLoadingIndicator()
@@ -188,7 +188,7 @@ extension OrderDetailViewController {
         self.showAlertView(msg)
       })
     }
-    let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+    let cancel = UIAlertAction(title: "cancel".localized, style: .default, handler: nil)
     alert.addAction(cancel)
     alert.addAction(okAction)
     present(alert, animated: true, completion: nil)
@@ -223,15 +223,15 @@ extension OrderDetailViewController {
   
   
   func showActionForOrderItem(_ item: OrderItem) {
-//    guard item.statusCode != "DV" && item.statusCode != "CC" else {
-//      return
-//    }
-    let actionSheet = UIAlertController(title: "SRSDriver", message: nil, preferredStyle: .actionSheet)
-    let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-    let reject = UIAlertAction(title: "Reject", style: .default) { [unowned self] (reject) in
+    guard item.statusCode != "DV" && item.statusCode != "CC" else {
+      return
+    }
+    let actionSheet = UIAlertController(title: "app_name".localized, message: nil, preferredStyle: .actionSheet)
+    let cancel = UIAlertAction(title: "cancel".localized, style: .cancel, handler: nil)
+    let reject = UIAlertAction(title: "reject".localized, style: .default) { [unowned self] (reject) in
       self.performSegue(withIdentifier: SegueIdentifier.showReasonList, sender: item)
     }
-    let management = UIAlertAction(title: "Scan barcode", style: .default) { [unowned self] (management) in
+    let management = UIAlertAction(title: "order_detail_scan_barcode".localized, style: .default) { [unowned self] (management) in
       let scanVC = ScanBarCodeViewController.loadViewController(type: ScanBarCodeViewController.self)
       scanVC.didScan = {
         [unowned self] (code) in
@@ -242,7 +242,7 @@ extension OrderDetailViewController {
       self.present(scanVC, animated: true, completion: nil)
       
     }
-    let finish = UIAlertAction(title: "Finish", style: .default) { [unowned self] (finihs) in
+    let finish = UIAlertAction(title: "finish".localized, style: .default) { [unowned self] (finihs) in
       self.updateItemStatus("DV", orderItem: item)
     }
     

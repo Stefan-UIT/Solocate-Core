@@ -27,7 +27,7 @@ class OrderNotesViewController: BaseOrderDetailViewController {
   }
   
   override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-    return IndicatorInfo(title: "Notes")
+    return IndicatorInfo(title: "order_detail_notes".localized)
   }
   
   
@@ -35,11 +35,11 @@ class OrderNotesViewController: BaseOrderDetailViewController {
     guard  let _orderDetail = orderDetail else {
       return
     }
-    let alert = UIAlertController(title: "DriverSRS", message: "Add note", preferredStyle: .alert)
+    let alert = UIAlertController(title: "app_name", message: "order_detail_add_note".localized, preferredStyle: .alert)
     alert.addTextField { (textField) in
-      textField.placeholder = "Add note"
+      textField.placeholder = "order_detail_add_note".localized
     }
-    let submitAction = UIAlertAction(title: "Send", style: .default) { (action) in
+    let submitAction = UIAlertAction(title: "send".localized, style: .default) { (action) in
       alert.dismiss(animated: true, completion: nil)
       guard let textField = alert.textFields?.first,
         textField.hasText,
@@ -59,7 +59,7 @@ class OrderNotesViewController: BaseOrderDetailViewController {
       })
       
     }
-    let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+    let cancel = UIAlertAction(title: "cancel".localized, style: .default, handler: nil)
     alert.addAction(cancel)
     alert.addAction(submitAction)
     present(alert, animated: true, completion: nil)

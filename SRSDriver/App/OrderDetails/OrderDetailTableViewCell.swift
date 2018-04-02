@@ -96,13 +96,13 @@ enum OrderStatus: String {
   var statusName: String {
     switch self {
     case .open:
-      return "Open"
+      return "orders_open".localized
     case .inprogress:
-      return "In Progress"
+      return "orders_in_progress".localized
     case .delivered:
-      return "Delivered"
+      return "orders_delivered".localized
     case .cancel:
-      return "Cancelled"
+      return "orders_cancelled".localized
     }
   }
   

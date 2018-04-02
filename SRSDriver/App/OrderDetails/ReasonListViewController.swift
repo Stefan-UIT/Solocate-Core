@@ -22,16 +22,16 @@ class ReasonListViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     if let _orderDetail = orderDetail, type == "1" {
-        let unableTitle = _orderDetail.statusCode == "OP" ? "Unable to Start" : "Unable to Finish"
+        let unableTitle = _orderDetail.statusCode == "OP" ? "order_detail_unable_start".localized : "order_detail_unable_finish".localized
         finishButton.setTitle(unableTitle, for: .normal)
     }
     getReasonList()
-    title = "Choose a reason"
+    title = "reason_list_title".localized
   }
   
   @IBAction func submit(_ sender: UIButton) {
     guard selectedIndex >= 0 else {
-      showAlertView("Plz choose at least a reason")
+      showAlertView("reason_choose_at_least_reason".localized)
       return
     }
     if let id = itemID, type == "2" { // for item

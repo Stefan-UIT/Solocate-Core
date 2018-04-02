@@ -29,9 +29,14 @@ class OrderListViewController: UIViewController {
       }
       noOrdersLabel.isHidden = true
       tableView.isHidden = false
-      // MARK: - FIXME
       navigationItem.rightBarButtonItem?.isEnabled = route.status != "DV" && route.orderList.count > 1
       tableView.reloadData()
+      
+      // messgae
+      if let messageTab = self.tabBarController?.tabBar.items?.last {
+        messageTab.badgeValue = "3"
+      }
+      
     }
   }
   
@@ -77,12 +82,11 @@ class OrderListViewController: UIViewController {
   
   @IBAction func editMode(_ sender: UIBarButtonItem) {
     tableView.isEditing = !tableView.isEditing
-    sender.title = tableView.isEditing ? "Done" : "Edit"
+    sender.title = tableView.isEditing ? "done".localized : "edit".localized
     guard !tableView.isEditing else {
       return
     }
-    //
-    print("Call api update list")
+    //    
     let orderIDs = route.orderList.map { "\($0.id)" }
     showLoadingIndicator()
     APIs.updateRouteSequenceOrders("\(route.id)", routeStatus: route.status, orderIDs: orderIDs) { [unowned self] (msgError) in

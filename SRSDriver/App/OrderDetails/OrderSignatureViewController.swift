@@ -31,7 +31,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
   
   
   override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-    return IndicatorInfo(title: "Signature")
+    return IndicatorInfo(title: "order_detail_signature".localized)
   }
   
   @IBAction func cancelDrawSignature(_ sender: UIButton) {
@@ -42,7 +42,6 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
   @IBAction func submitSignature(_ sender: UIButton) {
     let rect = signatureView.frame
     guard signatureView.signLayer != nil else {
-      print("null")
       return
     }
     
@@ -86,7 +85,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
 class BaseOrderDetailViewController: BaseViewController, IndicatorInfoProvider {
   var orderDetail: OrderDetail?
   var routeID: Int?
-  var indicatorInfo = IndicatorInfo(title: "Detail")
+  var indicatorInfo = IndicatorInfo(title: "")
   
   convenience init(_ title: String) {
     self.init()

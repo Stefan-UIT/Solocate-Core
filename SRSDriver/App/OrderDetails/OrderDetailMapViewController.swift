@@ -135,7 +135,7 @@ extension OrderDetailMapViewController {
       return
     }
     guard CLLocationManager.authorizationStatus() == .notDetermined || CLLocationManager.authorizationStatus() == .denied else {return}
-    showAlertView("Allow access your location to show direction") { (ok) in
+    showAlertView("order_detail_access_location".localized) { (ok) in
       let appBundleIdentifier =  Bundle.main.bundleIdentifier!
       if let url = URL(string: "App-Prefs:root=Privacy&path=LOCATION/\(appBundleIdentifier)") {
         UIApplication.shared.open(url, options: [:], completionHandler: nil)

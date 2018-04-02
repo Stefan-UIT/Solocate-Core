@@ -28,12 +28,18 @@
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderKey" value="login_username_hint"/>
+                                        </userDefinedRuntimeAttributes>
                                     </textField>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="JnO-uZ-ngY">
                                         <rect key="frame" x="0.0" y="40" width="335" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="placeholderKey" value="login_password_hint"/>
+                                        </userDefinedRuntimeAttributes>
                                     </textField>
                                 </subviews>
                             </stackView>
@@ -48,6 +54,9 @@
                                 <state key="normal" title="Login">
                                     <color key="titleColor" red="0.011764705882352941" green="0.47843137254901957" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="login_title"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="didClickLogin:" destination="BYZ-38-t0r" eventType="touchUpInside" id="iue-J4-9Rq"/>
                                 </connections>
@@ -207,6 +216,9 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="orders_have_no_orders"/>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2w5-hA-Mzr">
                                 <rect key="frame" x="0.0" y="348" width="375" height="206"/>
@@ -233,6 +245,9 @@
                                         <items>
                                             <barButtonItem style="plain" systemItem="flexibleSpace" id="wJk-iY-kBe"/>
                                             <barButtonItem title="Done" id="uKw-X0-lPh">
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="done"/>
+                                                </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="didChooseCalendar:" destination="iIr-5E-DPd" id="OHX-Kc-je0"/>
                                                 </connections>
@@ -268,6 +283,9 @@
                         </barButtonItem>
                         <rightBarButtonItems>
                             <barButtonItem title="Edit" id="iB3-1s-GtE">
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="edit"/>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="editMode:" destination="iIr-5E-DPd" id="JVR-0k-wCI"/>
                                 </connections>
@@ -435,10 +453,13 @@
                                                     </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ela-L0-UiE">
-                                                    <rect key="frame" x="15" y="5" width="222" height="40"/>
+                                                    <rect key="frame" x="10" y="5" width="227" height="40"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="hb3-Tz-hmM"/>
                                                     </constraints>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="items"/>
+                                                    </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="resetScanList:" destination="fH7-gM-67t" eventType="touchUpInside" id="ZzJ-BA-MXH"/>
                                                     </connections>
@@ -447,7 +468,7 @@
                                             <constraints>
                                                 <constraint firstItem="ela-L0-UiE" firstAttribute="top" secondItem="ZVd-cH-Hhk" secondAttribute="top" constant="5" id="5GP-6d-aG1"/>
                                                 <constraint firstItem="sPN-Wc-Dub" firstAttribute="top" secondItem="ZVd-cH-Hhk" secondAttribute="top" constant="10" id="Jdt-KH-BfA"/>
-                                                <constraint firstItem="ela-L0-UiE" firstAttribute="leading" secondItem="ZVd-cH-Hhk" secondAttribute="leading" constant="15" id="Jgm-rn-TZD"/>
+                                                <constraint firstItem="ela-L0-UiE" firstAttribute="leading" secondItem="ZVd-cH-Hhk" secondAttribute="leading" constant="10" id="Jgm-rn-TZD"/>
                                                 <constraint firstItem="fBa-D9-KH1" firstAttribute="leading" secondItem="ela-L0-UiE" secondAttribute="trailing" constant="82" id="LYY-pN-Wds"/>
                                                 <constraint firstAttribute="trailing" secondItem="fBa-D9-KH1" secondAttribute="trailing" constant="16" id="Ntb-57-QjJ"/>
                                                 <constraint firstItem="sPN-Wc-Dub" firstAttribute="leading" secondItem="ZVd-cH-Hhk" secondAttribute="leading" constant="16" id="jYa-rJ-EfS"/>
@@ -517,6 +538,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="60"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <state key="normal" title="Submit"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="submit"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="didClickFinish:" destination="MAu-y5-iy0" eventType="touchUpInside" id="etG-VU-bQk"/>
                                             <action selector="submit:" destination="ekD-gK-Lpq" eventType="touchUpInside" id="SKK-5O-ldj"/>
@@ -704,6 +728,9 @@
                                         <rect key="frame" x="0.0" y="0.0" width="172.5" height="60"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <state key="normal" title="Cancel"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="cancel"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="cancelDrawSignature:" destination="gwE-sX-u0y" eventType="touchUpInside" id="Ap6-9o-rGd"/>
                                             <action selector="didClickUnableToStart:" destination="MAu-y5-iy0" eventType="touchUpInside" id="Zdh-JW-r95"/>
@@ -713,6 +740,9 @@
                                         <rect key="frame" x="182.5" y="0.0" width="172.5" height="60"/>
                                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                         <state key="normal" title="Done"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="done"/>
+                                        </userDefinedRuntimeAttributes>
                                         <connections>
                                             <action selector="didClickFinish:" destination="MAu-y5-iy0" eventType="touchUpInside" id="kbV-UY-mbJ"/>
                                             <action selector="submitSignature:" destination="gwE-sX-u0y" eventType="touchUpInside" id="RQG-xu-Crv"/>
@@ -854,7 +884,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Fb2-Dq-93y" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5256.8000000000002" y="-236.13193403298354"/>
+            <point key="canvasLocation" x="5257" y="-236"/>
         </scene>
         <!--Order Picture View Controller-->
         <scene sceneID="6p8-EY-M1d">
@@ -960,6 +990,7 @@
                     <connections>
                         <segue destination="apT-nT-w3w" kind="relationship" relationship="viewControllers" id="a13-D2-Ebr"/>
                         <segue destination="XlN-mZ-jqi" kind="relationship" relationship="viewControllers" id="8DR-oZ-2KS"/>
+                        <segue destination="Nkb-vw-tzJ" kind="relationship" relationship="viewControllers" id="IN8-xu-H0C"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GMV-Pn-0Sm" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -989,7 +1020,11 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="apT-nT-w3w" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout" bottom="YES"/>
-                    <tabBarItem key="tabBarItem" title="Orders" image="list" id="Lea-q3-u2e"/>
+                    <tabBarItem key="tabBarItem" title="Orders" image="list" id="Lea-q3-u2e">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="orders"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" id="zcx-HS-pOf">
                         <autoresizingMask key="autoresizingMask"/>
@@ -1007,7 +1042,11 @@
         <scene sceneID="YUa-bk-S5m">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="XlN-mZ-jqi" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Map" image="map" id="8Xr-Bv-mly"/>
+                    <tabBarItem key="tabBarItem" title="Map" image="map" id="8Xr-Bv-mly">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="map"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="z8I-TV-lLo">
                         <autoresizingMask key="autoresizingMask"/>
@@ -1021,6 +1060,121 @@
             </objects>
             <point key="canvasLocation" x="1513.5999999999999" y="412.89355322338832"/>
         </scene>
+        <!--Messages-->
+        <scene sceneID="8Jl-iI-san">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Nkb-vw-tzJ" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Messages" image="message" id="OV0-nC-VD4">
+                        <userDefinedRuntimeAttributes>
+                            <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="messages"/>
+                        </userDefinedRuntimeAttributes>
+                    </tabBarItem>
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="53P-Sm-CM9">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Nf9-4Y-x7e" kind="relationship" relationship="rootViewController" id="N9J-Wx-xsq"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="qUe-sd-KPe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1512" y="1100.1499250374814"/>
+        </scene>
+        <!--Messages-->
+        <scene sceneID="JJo-r7-CcG">
+            <objects>
+                <viewController storyboardIdentifier="RouteMessagesViewController" id="Nf9-4Y-x7e" customClass="RouteMessagesViewController" customModule="SRSDriver" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="38g-ny-nq5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LSm-ld-NKc">
+                                <rect key="frame" x="0.0" y="74" width="375" height="544"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <prototypes>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoteTableViewCell" rowHeight="90" id="6bt-6v-OuU" customClass="NoteTableViewCell" customModule="SRSDriver" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="28" width="375" height="90"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6bt-6v-OuU" id="6dn-00-JmG">
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFr-kr-VbI">
+                                                    <rect key="frame" x="10" y="10" width="48" height="24"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TgM-uZ-7VY">
+                                                    <rect key="frame" x="68" y="12" width="42" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZuW-Wd-Dmy">
+                                                    <rect key="frame" x="10" y="50" width="355" height="29.5"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="YFr-kr-VbI" firstAttribute="top" secondItem="6dn-00-JmG" secondAttribute="top" constant="10" id="29q-1R-pGO"/>
+                                                <constraint firstAttribute="trailing" secondItem="TgM-uZ-7VY" secondAttribute="trailing" priority="250" constant="10" id="4fp-Rv-yKZ"/>
+                                                <constraint firstAttribute="bottom" secondItem="ZuW-Wd-Dmy" secondAttribute="bottom" constant="10" id="DVp-M5-9F2"/>
+                                                <constraint firstAttribute="trailing" secondItem="ZuW-Wd-Dmy" secondAttribute="trailing" constant="10" id="Kt8-4d-CvQ"/>
+                                                <constraint firstItem="TgM-uZ-7VY" firstAttribute="leading" secondItem="YFr-kr-VbI" secondAttribute="trailing" constant="10" id="M43-nE-LTg"/>
+                                                <constraint firstItem="TgM-uZ-7VY" firstAttribute="centerY" secondItem="YFr-kr-VbI" secondAttribute="centerY" id="MZV-fE-2Fg"/>
+                                                <constraint firstItem="ZuW-Wd-Dmy" firstAttribute="top" secondItem="6dn-00-JmG" secondAttribute="top" constant="50" id="b9n-GH-V9J"/>
+                                                <constraint firstItem="ZuW-Wd-Dmy" firstAttribute="leading" secondItem="6dn-00-JmG" secondAttribute="leading" constant="10" id="fcY-gC-eR5"/>
+                                                <constraint firstItem="YFr-kr-VbI" firstAttribute="leading" secondItem="6dn-00-JmG" secondAttribute="leading" constant="10" id="wYj-Wf-cgx"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="authorLabel" destination="YFr-kr-VbI" id="3pI-fA-FZw"/>
+                                            <outlet property="contentLabel" destination="ZuW-Wd-Dmy" id="fu7-Sa-yhl"/>
+                                            <outlet property="createdAtLabel" destination="TgM-uZ-7VY" id="xuU-33-TkC"/>
+                                        </connections>
+                                    </tableViewCell>
+                                </prototypes>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7iD-oV-Zb5">
+                                <rect key="frame" x="265" y="508" width="80" height="80"/>
+                                <color key="backgroundColor" red="0.8862745098" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="7iD-oV-Zb5" secondAttribute="height" multiplier="1:1" id="8gL-QF-fdF"/>
+                                    <constraint firstAttribute="width" constant="80" id="rgr-dC-Wpe"/>
+                                </constraints>
+                                <state key="normal" image="plus_white"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="40"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="addMessage:" destination="Nf9-4Y-x7e" eventType="touchUpInside" id="e0q-4z-h1n"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="LSm-ld-NKc" firstAttribute="leading" secondItem="R56-qv-EMj" secondAttribute="leading" id="79e-TB-hYD"/>
+                            <constraint firstItem="LSm-ld-NKc" firstAttribute="top" secondItem="R56-qv-EMj" secondAttribute="top" constant="10" id="JF5-dw-UMP"/>
+                            <constraint firstItem="R56-qv-EMj" firstAttribute="bottom" secondItem="LSm-ld-NKc" secondAttribute="bottom" id="gbR-LX-Gvw"/>
+                            <constraint firstItem="R56-qv-EMj" firstAttribute="trailing" secondItem="7iD-oV-Zb5" secondAttribute="trailing" constant="30" id="hEt-rF-rvt"/>
+                            <constraint firstItem="R56-qv-EMj" firstAttribute="trailing" secondItem="LSm-ld-NKc" secondAttribute="trailing" id="jQ5-ai-PV5"/>
+                            <constraint firstItem="R56-qv-EMj" firstAttribute="bottom" secondItem="7iD-oV-Zb5" secondAttribute="bottom" constant="30" id="tEF-ZA-WqC"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="R56-qv-EMj"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="Messages" id="Ho2-hG-WPo"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RnA-SG-JlL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2666" y="1100"/>
+        </scene>
     </scenes>
     <resources>
         <image name="barcode-scan" width="32" height="32"/>
@@ -1031,6 +1185,7 @@
         <image name="list" width="32" height="32"/>
         <image name="logout" width="32" height="32"/>
         <image name="map" width="32" height="32"/>
+        <image name="message" width="32" height="32"/>
         <image name="place_holder" width="97" height="85"/>
         <image name="plus_white" width="32" height="32"/>
     </resources>
