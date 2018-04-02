@@ -30,5 +30,7 @@
 	<string>/backend-api/v1/orders/update-barcode-items/%@</string>
 	<key>ADD_NEW_ORDER_ITEM</key>
 	<string>/backend-api/v1/mobile/orders/%@/items</string>
+	<key>UPDATE_NOTIFICATION_TOKEN</key>
+	<string>/backend-api/v1/notificationtokens/notification</string>
 </dict>
 </plist>

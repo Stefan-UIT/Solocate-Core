@@ -10,6 +10,7 @@
 		241D68792069DB2200914E4F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 241D68772069DB2200914E4F /* Localizable.strings */; };
 		246FA3522071EB7300C5E707 /* RouteMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FA3512071EB7300C5E707 /* RouteMessagesViewController.swift */; };
 		246FA3542071EBA600C5E707 /* RouteMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FA3532071EBA600C5E707 /* RouteMessageTableViewCell.swift */; };
+		246FA3572072278D00C5E707 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 246FA3562072278D00C5E707 /* GoogleService-Info.plist */; };
 		248F20902069E2CA00E6902D /* configs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 248F208F2069E2CA00E6902D /* configs.plist */; };
 		248F20922069F16300E6902D /* GoogleDirectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F20912069F16300E6902D /* GoogleDirectionResponse.swift */; };
 		24B331942061FA66001FAC49 /* PictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B331932061FA66001FAC49 /* PictureTableViewCell.swift */; };
@@ -81,6 +82,7 @@
 		241D687A2069DB5E00914E4F /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
 		246FA3512071EB7300C5E707 /* RouteMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMessagesViewController.swift; sourceTree = "<group>"; };
 		246FA3532071EBA600C5E707 /* RouteMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMessageTableViewCell.swift; sourceTree = "<group>"; };
+		246FA3562072278D00C5E707 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		248F208F2069E2CA00E6902D /* configs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = configs.plist; sourceTree = "<group>"; };
 		248F20912069F16300E6902D /* GoogleDirectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleDirectionResponse.swift; sourceTree = "<group>"; };
 		24B331932061FA66001FAC49 /* PictureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureTableViewCell.swift; sourceTree = "<group>"; };
@@ -180,6 +182,14 @@
 				241D68772069DB2200914E4F /* Localizable.strings */,
 			);
 			path = Localize;
+			sourceTree = "<group>";
+		};
+		246FA3552072277D00C5E707 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				246FA3562072278D00C5E707 /* GoogleService-Info.plist */,
+			);
+			path = "Supporting Files";
 			sourceTree = "<group>";
 		};
 		5A499C9020591D0400A1D944 /* Extensions */ = {
@@ -328,6 +338,7 @@
 		5AA4CA3E20590AD4003F8E6F /* SRSDriver */ = {
 			isa = PBXGroup;
 			children = (
+				246FA3552072277D00C5E707 /* Supporting Files */,
 				5AA4CA5820590B69003F8E6F /* Shared */,
 				5AA4CA5120590B08003F8E6F /* App */,
 				5AA4CA4320590AD4003F8E6F /* Main.storyboard */,
@@ -463,6 +474,7 @@
 			files = (
 				248F20902069E2CA00E6902D /* configs.plist in Resources */,
 				24D3876F2063625B00BE51D9 /* OrderScanItemTableViewCell.xib in Resources */,
+				246FA3572072278D00C5E707 /* GoogleService-Info.plist in Resources */,
 				5A499CB320591D9600A1D944 /* Info.plist in Resources */,
 				5ACCE8E4205BB31600A1532D /* SignatureView.xib in Resources */,
 				241D68792069DB2200914E4F /* Localizable.strings in Resources */,
@@ -519,26 +531,32 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-SRSDriver/Pods-SRSDriver-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
 				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
 				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/TLPhotoPicker/TLPhotoPicker.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TLPhotoPicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -767,8 +785,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9aa6a24a-a1d0-4b1c-a723-fe07fa9e1698";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-allInhouse";
+				PROVISIONING_PROFILE = "397d6a7a-7d3a-4751-b880-6ef4cb548158";
+				PROVISIONING_PROFILE_SPECIFIER = "dev-SRSDriver";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -788,8 +806,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "9aa6a24a-a1d0-4b1c-a723-fe07fa9e1698";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-allInhouse";
+				PROVISIONING_PROFILE = "397d6a7a-7d3a-4751-b880-6ef4cb548158";
+				PROVISIONING_PROFILE_SPECIFIER = "dev-SRSDriver";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

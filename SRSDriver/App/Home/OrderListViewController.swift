@@ -47,6 +47,11 @@ class OrderListViewController: UIViewController {
     if let leftButton = navigationItem.leftBarButtonItems?.first {
       leftButton.image = UIImage(named: iconName)
     }
+    
+    // Update fcm token
+    if let fcmtoken = Cache.shared.getObject(forKey: Defaultkey.fcmToken) as? String {
+      APIs.updateNotificationToken(fcmtoken)
+    }
   }
   
   override func viewWillAppear(_ animated: Bool) {

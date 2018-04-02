@@ -344,6 +344,23 @@ class APIs {
     }
   }
   
+  static func updateNotificationToken(_ token: String) {
+    let request = RESTRequest(functionName: RESTConstants.configs[RESTConstants.UPDATE_NOTIFICATION_TOKEN] ?? "", method: .post, encoding: .default)
+    let params = [
+      "notification_token": token,
+      "device": "2" // 2 for iOS
+    ]
+    request.setParameters(params)
+    request.setContentType("application/x-www-form-urlencoded")
+    if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+      request.setAuthorization("Bearer " + token)
+    }
+    request.baseInvoker { (resp, error) in
+      print(resp)
+    }
+    
+  }
+  
   
 }
 

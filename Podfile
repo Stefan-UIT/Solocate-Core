@@ -17,6 +17,8 @@ def shared
   pod 'SVProgressHUD'
   pod 'TLPhotoPicker'
   pod 'SDWebImage'
+  pod 'Firebase/Core'
+  pod 'Firebase/Messaging'
 end
 
 
