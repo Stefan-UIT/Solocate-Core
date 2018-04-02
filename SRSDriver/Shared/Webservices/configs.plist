@@ -28,5 +28,7 @@
 	<string>/backend-api/v1/orders/update-status-items/%@/%@</string>
 	<key>UPDATE_BARCODE_ORDER_ITEM</key>
 	<string>/backend-api/v1/orders/update-barcode-items/%@</string>
+	<key>ADD_NEW_ORDER_ITEM</key>
+	<string>/backend-api/v1/mobile/orders/%@/items</string>
 </dict>
 </plist>

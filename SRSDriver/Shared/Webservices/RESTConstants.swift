@@ -32,6 +32,7 @@ class RESTConstants: NSObject {
   static let ADD_NOTE = "ADD_NOTE"
   static let UPDATE_ORDER_ITEM_STATUS = "UPDATE_ORDER_ITEM_STATUS"
   static let UPDATE_BARCODE_ORDER_ITEM = "UPDATE_BARCODE_ORDER_ITEM"
+  static let ADD_NEW_ORDER_ITEM = "ADD_NEW_ORDER_ITEM"
   
   
   //MARK: Keys for parser
@@ -41,23 +42,23 @@ class RESTConstants: NSObject {
 
 //  #if DEV
 //  static let baseURL = "https://apigw.seldatdirect.com/dev/srs/api"
-  static let baseURL = "https://apigw.seldatdirect.com/dev/sdms-masof/api"
+//  static let baseURL = "https://apigw.seldatdirect.com/dev/sdms-masof/api"
 //  #else
 //  static let baseURL = "https://apigw.seldatdirect.com/demo/srs/api"
 //  #endif
   
-  static let login = "/master-service/v1/login"
-  static let getOrders = "/backend-api/driver/v1/orders"
-  static let getOrdersByDate = "/backend-api/v1/routes/get-routes-by-date"
-  static let orderDetails = "/backend-api/v1/orders/%@"//orderID
-  static let updateOrderStatus = "/backend-api/v1/orders/%@/%@"//OrderID, status
-  static let uploadSignature = "/backend-api/v1/orders/add-sign/%@"// orderID
-  static let updateSequence = "/backend-api/v1/routes/update-sequence"
-  static let uploadFiles = "/backend-api/v1/orders/add-picture/%@" // orderID
-  static let getListReason = "/backend-api/v1/reason/%@" //type 
-  static let addNote = "/backend-api/v1/orders/%@/notes" //order ID
-  static let updateItemStatus = "/backend-api/v1/orders/update-status-items/%@/%@" // itemID, status
-  static let updateBarcodeItem = "/backend-api/v1/orders/update-barcode-items/%@" // itemID
+//  static let login = "/master-service/v1/login"
+//  static let getOrders = "/backend-api/driver/v1/orders"
+//  static let getOrdersByDate = "/backend-api/v1/routes/get-routes-by-date"
+//  static let orderDetails = "/backend-api/v1/orders/%@"//orderID
+//  static let updateOrderStatus = "/backend-api/v1/orders/%@/%@"//OrderID, status
+//  static let uploadSignature = "/backend-api/v1/orders/add-sign/%@"// orderID
+//  static let updateSequence = "/backend-api/v1/routes/update-sequence"
+//  static let uploadFiles = "/backend-api/v1/orders/add-picture/%@" // orderID
+//  static let getListReason = "/backend-api/v1/reason/%@" //type
+//  static let addNote = "/backend-api/v1/orders/%@/notes" //order ID
+//  static let updateItemStatus = "/backend-api/v1/orders/update-status-items/%@/%@" // itemID, status
+//  static let updateBarcodeItem = "/backend-api/v1/orders/update-barcode-items/%@" // itemID
   
   static let configs: [String: String] = {
     if let bundle = Bundle.main.url(forResource: "configs", withExtension: "plist"),

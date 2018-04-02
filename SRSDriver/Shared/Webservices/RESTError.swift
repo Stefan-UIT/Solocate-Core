@@ -43,3 +43,21 @@ class RESTError: RESTResponse {
   }
 
 }
+
+
+class ImageDownloader {
+  private var didDownload: ((UIImage) -> Void)?
+  
+  func setDidDownload<DelegateObject: AnyObject>(delegate: DelegateObject, callback: @escaping (DelegateObject, UIImage) -> Void) {
+    self.didDownload = { [weak delegate] image in
+      if let _delegate = delegate {
+        callback(_delegate, image)
+      }
+    }
+  }
+  
+  func downloadImage(for url: URL) {
+    
+  }
+  
+}

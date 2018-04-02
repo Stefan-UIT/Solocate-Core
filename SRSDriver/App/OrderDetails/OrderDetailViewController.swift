@@ -26,7 +26,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   fileprivate let orderScanItemCellIdentifier = "OrderScanItemTableViewCell"
   fileprivate var scanItems = [String]()
   fileprivate let itemsIndex = 7
-
+  fileprivate var scannedObjectIndexs = [Int]()
+  fileprivate var shouldFilterOrderItemsList = true
   fileprivate var scannedString = "" {
     didSet {
       tableView.reloadData()
@@ -57,6 +58,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       var items = OrderDetailItem(.items)
       items.content = ""
       items.items = _orderDetail.items
+      shouldFilterOrderItemsList = _orderDetail.items.filter({$0.statusCode == "OP"}).count > 0
+      
       
       detailItems.append(refe)
       detailItems.append(statusItem)
@@ -68,6 +71,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       detailItems.append(items)
       
       tableView.reloadData()
+      subTableView.reloadData()
       tableView.estimatedRowHeight = cellHeight
       tableView.rowHeight = UITableViewAutomaticDimension
       finishButton.isEnabled = _orderDetail.statusCode == "OP" || _orderDetail.statusCode == "IP"
@@ -112,8 +116,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == SegueIdentifier.showMapView,
-    let vc = segue.destination as? OrderDetailMapViewController,
-    let _orderDetail = orderDetail {
+      let vc = segue.destination as? OrderDetailMapViewController,
+      let _orderDetail = orderDetail {
       let orderLocation = CLLocationCoordinate2D(latitude: _orderDetail.lat.doubleValue, longitude: _orderDetail.lng.doubleValue)
       vc.orderLocation = orderLocation
     }
@@ -135,14 +139,49 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 
 extension OrderDetailViewController {
   
-  func showAlertUpdateBarcode(_ barcode: String, item: OrderItem) {
-    let message = "Do you want to update \(barcode)"
+  func showAlertAddNewOrderItem(_ barcode: String) {
+    guard let order = orderDetail else {
+      return
+    }
+    let message = "Add new order item with \(barcode) and quality: "
     let alert = UIAlertController(title: "SRS Driver", message: message, preferredStyle: .alert)
-    let okAction = UIAlertAction(title: "OK", style: .default) { [unowned self] (action) in
+    alert.addTextField { (textField) in
+      textField.placeholder = "Quality"
+      textField.keyboardType = .numberPad
+    }
+    let okAction = UIAlertAction(title: "Submit", style: .default) { [unowned self] (action) in
+      guard let textField = alert.textFields?.first,
+        textField.hasText,
+        let qtyText = textField.text else {
+          return
+      }
+      self.showLoadingIndicator()
+      APIs.addNewOrderItem("\(order.id)", barcode: barcode, qty: qtyText, completion: { (errMsg) in
+        guard let msg = errMsg else {
+          self.updateOrderDetail?()
+          self.scannedString = ""
+          self.scannedObjectIndexs.removeAll()
+          return
+        }
+        self.showAlertView(msg)
+      })
+    }
+    let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+    alert.addAction(cancel)
+    alert.addAction(okAction)
+    present(alert, animated: true, completion: nil)
+  }
+  
+  func showAlertUpdateBarcode(_ barcode: String, item: OrderItem) {
+    let message = "Do you want to update barcode to \(barcode)"
+    let alert = UIAlertController(title: "SRS Driver", message: message, preferredStyle: .alert)
+    let okAction = UIAlertAction(title: "Submit", style: .default) { [unowned self] (action) in
       self.showLoadingIndicator()
       APIs.updateBarcode("\(item.id)", newBarcode: barcode, completion: { (errMsg) in
         self.dismissLoadingIndicator()
         guard let msg = errMsg else {
+          self.scannedString = ""
+          self.scannedObjectIndexs.removeAll()
           self.updateOrderDetail?()
           return
         }
@@ -150,8 +189,8 @@ extension OrderDetailViewController {
       })
     }
     let cancel = UIAlertAction(title: "Cancel", style: .default, handler: nil)
-    alert.addAction(okAction)
     alert.addAction(cancel)
+    alert.addAction(okAction)
     present(alert, animated: true, completion: nil)
   }
   
@@ -169,13 +208,24 @@ extension OrderDetailViewController {
   func findObject(_ code: String, items: [OrderItem]) -> OrderItem? {
     return items.filter { (item) -> Bool in
       return item.barcode == code
-    }.first
+      }.first
   }
   
-  func showActionForOrderItem(_ item: OrderItem) {
-    guard item.statusCode != "DV" && item.statusCode != "CC" else {
-      return
+  func findIndexOfScannedObject(_ code: String, items: [OrderItem]) -> [Int] {
+    var indexs = [Int]()
+    for (idx, item) in items.enumerated() {
+      if item.barcode == code {
+        indexs.append(idx)
+      }
     }
+    return indexs
+  }
+  
+  
+  func showActionForOrderItem(_ item: OrderItem) {
+//    guard item.statusCode != "DV" && item.statusCode != "CC" else {
+//      return
+//    }
     let actionSheet = UIAlertController(title: "SRSDriver", message: nil, preferredStyle: .actionSheet)
     let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
     let reject = UIAlertAction(title: "Reject", style: .default) { [unowned self] (reject) in
@@ -221,53 +271,43 @@ extension OrderDetailViewController {
 
 extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    guard itemsIndex < detailItems.count else {return 0}
+    let item = detailItems[itemsIndex]
     if tableView == subTableView {
-      let item = detailItems[itemsIndex]
-      return scannedString.length > 0 ? 1 : item.items.count
+      return item.items.count
     }
-    if let _ = orderDetail {
-      return detailItems.count
-    }
-    return 0
+    return detailItems.count
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    guard indexPath.row < detailItems.count else {return UITableViewAutomaticDimension}
     let item = detailItems[indexPath.row]
     if tableView == subTableView {
       return orderItemCellHeight.scaleHeight()
     }
     if item.type == .items {
-      let itemNumber = scannedString.length > 0 ? 1 : item.items.count
-      return item.items.count > 0 ? CGFloat(itemNumber) * orderItemCellHeight.scaleHeight() + orderItemsPaddingTop : 0.0
+      return item.items.count > 0 ? CGFloat(item.items.count) * orderItemCellHeight.scaleHeight() + orderItemsPaddingTop : 0.0
     }
     return UITableViewAutomaticDimension
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    let item = detailItems[indexPath.row]
-    
-    if tableView == subTableView  { // subtableview
-      if let cell = subTableView.dequeueReusableCell(withIdentifier: orderScanItemCellIdentifier, for: indexPath) as? OrderScanItemTableViewCell {
+    if tableView == subTableView, let cell = subTableView.dequeueReusableCell(withIdentifier: orderScanItemCellIdentifier, for: indexPath) as? OrderScanItemTableViewCell {
         let orderItem = detailItems[itemsIndex]
-        if scannedString.length > 0,
-          let scanObject = findObject(scannedString, items: orderItem.items)
-          {
-          cell.orderItem = scanObject
+        cell.orderItem = orderItem.items[indexPath.row]
+        if scannedString.length > 0, scannedObjectIndexs.contains(indexPath.row), shouldFilterOrderItemsList {
+          cell.contentView.backgroundColor = AppColor.highLightColor
         }
         else {
-          if indexPath.row < orderItem.items.count {
-            cell.orderItem = orderItem.items[indexPath.row]
-          }
+          cell.contentView.backgroundColor = .white
         }
         return cell
-      }
     }
     else if tableView == self.tableView {
-      
+      let item = detailItems[indexPath.row]
       if item.type == .items && item.items.count > 0,
         let cell = tableView.dequeueReusableCell(withIdentifier: orderItemsCellIdentifier, for: indexPath) as? OrderItemsTableViewCell {
-        let itemNumber = scannedString.length > 0 ? 1 : item.items.count
-        subTableView.frame = CGRect(x: 0, y: orderItemsPaddingTop, width: cell.frame.width, height: CGFloat(itemNumber)*orderItemCellHeight.scaleHeight())
+        subTableView.frame = CGRect(x: 0, y: orderItemsPaddingTop, width: cell.frame.width, height: CGFloat(item.items.count)*orderItemCellHeight.scaleHeight())
         cell.contentView.addSubview(subTableView)
         cell.selectionStyle = .none
         cell.didClickScanButton = { [unowned self] () in
@@ -275,8 +315,13 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
           scanVC.didScan = {
             [unowned self] (code) in
             let orderItem = self.detailItems[self.itemsIndex]
-            if code.length > 0,
-              let _ = self.findObject(code, items: orderItem.items) {
+            if code.length > 0 {
+              if self.shouldFilterOrderItemsList {
+                self.scannedObjectIndexs = self.findIndexOfScannedObject(code, items: orderItem.items)
+              }
+              else {
+                self.showAlertAddNewOrderItem(code)
+              }
               self.scannedString = code
             }
           }
@@ -285,6 +330,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         }
         cell.didClickResetList = {
           [unowned self] () in
+          self.scannedObjectIndexs.removeAll()
           self.scannedString = ""
         }
         return cell
@@ -302,12 +348,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     tableView.deselectRow(at: indexPath, animated: true)
     if tableView == subTableView {
       let orderItem = detailItems[itemsIndex]
-      if let scannedObject = self.findObject(scannedString, items: orderItem.items) {
-        showActionForOrderItem(scannedObject)
-      }
-      else {
-        showActionForOrderItem(orderItem.items[indexPath.row])
-      }
+      showActionForOrderItem(orderItem.items[indexPath.row])
       return
     }
     let item = detailItems[indexPath.row]

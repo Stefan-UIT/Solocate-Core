@@ -66,6 +66,7 @@ struct DeviceType {
 
 struct AppColor {
   static let mainColor            = UIColor(hex: "#037AFF")
+  static let highLightColor       = UIColor(hex: "#b3e6ff")
 }
 
 

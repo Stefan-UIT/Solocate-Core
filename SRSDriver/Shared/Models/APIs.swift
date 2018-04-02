@@ -152,13 +152,50 @@ class APIs {
       "order_ids": orderIDs
     ]]
 
-    let jsonData = APIs.convertArray2Json(from: params)
+//    let jsonData = APIs.convertArray2Json(from: params)
     guard let baseURL = RESTConstants.configs[RESTConstants.BASE_URL],
-    let updateSequence = RESTConstants.configs[RESTConstants.UPDATE_SEQUENCE],
-      let url = URL(string: baseURL + updateSequence) else {
+    let updateSequence = RESTConstants.configs[RESTConstants.UPDATE_SEQUENCE] else {
         return
     }
-    
+    APIs.invoke(params: params, uri: (baseURL+updateSequence), completion: completion)
+//    var request = URLRequest(url: url)
+//    request.httpMethod = HTTPMethod.post.rawValue
+//    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+//    request.httpBody = jsonData
+//    if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+//      request.setValue("Bearer " + token, forHTTPHeaderField: "Authorization")
+//    }
+//    Alamofire.request(request).responseJSON { (response) in
+//      if let errors = response.result.value as? [String: Any]  {
+//        if let resp = Mapper<RESTResponse>().map(JSONObject: errors["errors"]) {
+//          completion(resp.message)
+//          return
+//        }
+//      }
+//      completion(nil)
+//    }
+  }
+  
+  static func addNewOrderItem(_ orderID: String, barcode: String, qty: String, completion: @escaping ((_ errorMsg: String?) -> Void)) {
+    let params = [
+      [
+        "barcode": barcode,
+        "qty": qty
+      ]
+    ]
+    guard let baseURL = RESTConstants.configs[RESTConstants.BASE_URL],
+      let addNewItem = RESTConstants.configs[RESTConstants.ADD_NEW_ORDER_ITEM] else {
+        return
+    }
+    let uri = String.init(format: baseURL+addNewItem, orderID)
+    APIs.invoke(params: params, uri: uri, completion: completion)
+  }
+  
+  static func invoke(params: Any, uri: String, completion: @escaping ((_ errorMsg: String?) -> Void)) {
+    guard let url = URL(string: uri) else {
+      return
+    }
+    let jsonData = APIs.convertArray2Json(from: params)
     var request = URLRequest(url: url)
     request.httpMethod = HTTPMethod.post.rawValue
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
