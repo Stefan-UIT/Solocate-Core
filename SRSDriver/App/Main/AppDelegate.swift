@@ -14,11 +14,12 @@ import Firebase
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
-
+  
   var window: UIWindow?
-
-
+  
+  
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
     // Override point for customization after application launch.
     GMSServices.provideAPIKey(Network.googleAPIKey)
     SVProgressHUD.setDefaultMaskType(.clear)
@@ -32,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     FirebaseApp.configure()
     Messaging.messaging().delegate = self
-
+    
     return true
   }
   
@@ -56,6 +57,42 @@ extension AppDelegate: MessagingDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
   func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
     print("didReceive \(response)")
+    if let userInfo = response.notification.request.content.userInfo as? [String: Any],
+      let routeID = userInfo["route_id"] as? String {
+      print("Route id \(routeID)")
+      let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+      if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String, token.length > 0 {
+        // firstly, check stak
+        if let currentNavController = window?.rootViewController as? UINavigationController,
+          let tabbar = currentNavController.topViewController as? UITabBarController {
+          tabbar.selectedIndex = 0
+          if let type = userInfo["type"] as? String, type == "1" {
+            tabbar.selectedIndex = 2
+          }
+          if let listNC = tabbar.selectedViewController as? UINavigationController,
+            let listVC = listNC.topViewController as? OrderListViewController {
+            listVC.getRouteDetail(routeID)
+          }
+          (tabbar.selectedViewController as? UINavigationController)?.popToRootViewController(animated: true)
+          return
+        }
+        
+        let rootNavigationController = mainStoryboard.instantiateInitialViewController() as? UINavigationController
+        let tabbarVC = mainStoryboard.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController
+        if let listNavigationController = tabbarVC?.viewControllers?.first as? UINavigationController,
+          let listVC = listNavigationController.topViewController as? OrderListViewController {
+          listVC.getRouteDetail(routeID)
+        }
+        if let type = userInfo["type"] as? String, type == "1" {
+          tabbarVC?.selectedIndex = 2
+        }
+        rootNavigationController?.pushViewController(tabbarVC!, animated: true)
+        window?.rootViewController = rootNavigationController
+      }
+      else {
+        // Launch app normally
+      }
+    }
   }
   
   func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {

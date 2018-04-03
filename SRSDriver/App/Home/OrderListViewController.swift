@@ -40,6 +40,10 @@ class OrderListViewController: UIViewController {
     }
   }
   
+  func getRouteDetail(_ routeID: String) {
+    // Call api get route detail
+  }
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     tabBarController?.delegate = self
@@ -108,6 +112,7 @@ class OrderListViewController: UIViewController {
   
   @IBAction func logout(_ sender: UIBarButtonItem) {
     Cache.shared.setObject(obj: "", forKey: Defaultkey.tokenKey)
+    APIs.updateNotificationToken("")
     navigationController?.navigationController?.popToRootViewController(animated: true)
   }
   
@@ -121,7 +126,7 @@ class OrderListViewController: UIViewController {
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == SegueIdentifier.orderDetail,
+    if segue.identifier == SegueIdentifier.showOrderDetail,
       let destVC = segue.destination as? OrderDetailContainerViewController,
       let order = sender as? Order {
       destVC.orderID = "\(order.id)"
@@ -189,7 +194,7 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    performSegue(withIdentifier: SegueIdentifier.orderDetail, sender: route.orderList[indexPath.row])
+    performSegue(withIdentifier: SegueIdentifier.showOrderDetail, sender: route.orderList[indexPath.row])
     tabBarController?.tabBar.isHidden = true
   }
   
@@ -198,9 +203,12 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension OrderListViewController: UITabBarControllerDelegate {
   func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
-    if let navigationController = viewController as? UINavigationController,
-      let mapVC = navigationController.topViewController as? MapsViewController {
+    guard  let navigationController = viewController as? UINavigationController else {return}
+    if let mapVC = navigationController.topViewController as? MapsViewController {
       mapVC.route = route
+    }
+    if let routeMessageVC = navigationController.topViewController as? RouteMessagesViewController {
+      routeMessageVC.route = route
     }
   }
 }

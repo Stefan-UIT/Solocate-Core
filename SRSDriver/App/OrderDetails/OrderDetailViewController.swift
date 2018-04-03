@@ -223,6 +223,9 @@ extension OrderDetailViewController {
   
   
   func showActionForOrderItem(_ item: OrderItem) {
+    guard let _orderDetail = orderDetail, _orderDetail.statusCode == "IP" else {
+      return
+    }
     guard item.statusCode != "DV" && item.statusCode != "CC" else {
       return
     }

@@ -28,6 +28,10 @@
 	<string>Show your location on Map</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Post your image</string>
+	<key>UIBackgroundModes</key>
+	<array>
+		<string>remote-notification</string>
+	</array>
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>

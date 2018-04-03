@@ -41,15 +41,18 @@ class APIs {
       request.setAuthorization(token)
     }
     request.setContentType("application/x-www-form-urlencoded")
-    request.baseInvoker { (resp, error) in
+    request.baseInvoker { (response, error) in
+      guard let resp = response as? [String: Any] else {
+        completion(nil, error != nil ? error!.message : "error_network".localized)
+        return
+      }
+      if let errors = resp["errors"] as? [String: Any],
+        let err = Mapper<RESTResponse>().map(JSON: errors) {
+        completion(nil, err.message)
+        return
+      }
       if let orderDetail = Mapper<OrderDetail>().map(JSONObject: resp) {
         completion(orderDetail, nil)
-      }
-      else if let err = error {
-        completion(nil, err.message)
-      }
-      else {
-        completion(nil, "Unknown")
       }
     }
   }
@@ -111,15 +114,18 @@ class APIs {
     if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
       request.setAuthorization(token)
     }
-    request.baseInvoker { (resp, error) in
+    request.baseInvoker { (response, error) in
+      guard let resp = response as? [String: Any] else {
+        completion(nil, error != nil ? error!.message : "error_network".localized)
+        return
+      }
+      if let errors = resp["errors"] as? [String: Any],
+        let err = Mapper<RESTResponse>().map(JSON: errors) {
+        completion(nil, err.message)
+        return
+      }
       if let route = Mapper<Route>().map(JSONObject: resp) {
         completion(route, nil)
-      }
-      else if let err = error {
-        completion(nil, err.message)
-      }
-      else {
-        completion(nil, "Unknown")
       }
     }
   }
@@ -152,28 +158,11 @@ class APIs {
       "order_ids": orderIDs
     ]]
 
-//    let jsonData = APIs.convertArray2Json(from: params)
     guard let baseURL = RESTConstants.configs[RESTConstants.BASE_URL],
     let updateSequence = RESTConstants.configs[RESTConstants.UPDATE_SEQUENCE] else {
         return
     }
     APIs.invoke(params: params, uri: (baseURL+updateSequence), completion: completion)
-//    var request = URLRequest(url: url)
-//    request.httpMethod = HTTPMethod.post.rawValue
-//    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-//    request.httpBody = jsonData
-//    if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
-//      request.setValue("Bearer " + token, forHTTPHeaderField: "Authorization")
-//    }
-//    Alamofire.request(request).responseJSON { (response) in
-//      if let errors = response.result.value as? [String: Any]  {
-//        if let resp = Mapper<RESTResponse>().map(JSONObject: errors["errors"]) {
-//          completion(resp.message)
-//          return
-//        }
-//      }
-//      completion(nil)
-//    }
   }
   
   static func addNewOrderItem(_ orderID: String, barcode: String, qty: String, completion: @escaping ((_ errorMsg: String?) -> Void)) {

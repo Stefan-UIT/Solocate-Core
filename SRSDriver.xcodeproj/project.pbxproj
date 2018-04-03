@@ -8,9 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		241D68792069DB2200914E4F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 241D68772069DB2200914E4F /* Localizable.strings */; };
+		245BBAA22073616D00EE3E47 /* MessageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245BBAA12073616D00EE3E47 /* MessageAPI.swift */; };
+		245BBAA4207363EC00EE3E47 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245BBAA3207363EC00EE3E47 /* Message.swift */; };
+		24677EEE2073231200C41E4F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24677EED2073231200C41E4F /* GoogleService-Info.plist */; };
 		246FA3522071EB7300C5E707 /* RouteMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FA3512071EB7300C5E707 /* RouteMessagesViewController.swift */; };
 		246FA3542071EBA600C5E707 /* RouteMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FA3532071EBA600C5E707 /* RouteMessageTableViewCell.swift */; };
-		246FA3572072278D00C5E707 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 246FA3562072278D00C5E707 /* GoogleService-Info.plist */; };
 		248F20902069E2CA00E6902D /* configs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 248F208F2069E2CA00E6902D /* configs.plist */; };
 		248F20922069F16300E6902D /* GoogleDirectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F20912069F16300E6902D /* GoogleDirectionResponse.swift */; };
 		24B331942061FA66001FAC49 /* PictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B331932061FA66001FAC49 /* PictureTableViewCell.swift */; };
@@ -80,9 +82,12 @@
 /* Begin PBXFileReference section */
 		241D68782069DB2200914E4F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		241D687A2069DB5E00914E4F /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
+		245BBAA12073616D00EE3E47 /* MessageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAPI.swift; sourceTree = "<group>"; };
+		245BBAA3207363EC00EE3E47 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		24677EED2073231200C41E4F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		24677EEF20732D8C00C41E4F /* SRSDriver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SRSDriver.entitlements; sourceTree = "<group>"; };
 		246FA3512071EB7300C5E707 /* RouteMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMessagesViewController.swift; sourceTree = "<group>"; };
 		246FA3532071EBA600C5E707 /* RouteMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMessageTableViewCell.swift; sourceTree = "<group>"; };
-		246FA3562072278D00C5E707 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		248F208F2069E2CA00E6902D /* configs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = configs.plist; sourceTree = "<group>"; };
 		248F20912069F16300E6902D /* GoogleDirectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleDirectionResponse.swift; sourceTree = "<group>"; };
 		24B331932061FA66001FAC49 /* PictureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureTableViewCell.swift; sourceTree = "<group>"; };
@@ -187,7 +192,7 @@
 		246FA3552072277D00C5E707 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				246FA3562072278D00C5E707 /* GoogleService-Info.plist */,
+				24677EED2073231200C41E4F /* GoogleService-Info.plist */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -281,11 +286,13 @@
 			isa = PBXGroup;
 			children = (
 				5A68A457205A5A0F00CA9DB8 /* APIs.swift */,
+				245BBAA12073616D00EE3E47 /* MessageAPI.swift */,
 				5A68A45A205A5E3600CA9DB8 /* Order.swift */,
 				5A68A45C205A5ECE00CA9DB8 /* Route.swift */,
 				5A68A45E205A619300CA9DB8 /* PickupPlace.swift */,
 				5ACCE8CE205B585900A1532D /* OrderMarker.swift */,
 				5ACCE8D2205B761E00A1532D /* Note.swift */,
+				245BBAA3207363EC00EE3E47 /* Message.swift */,
 				24B3319720623C25001FAC49 /* Reason.swift */,
 				24D3876C2063513600BE51D9 /* OrderItem.swift */,
 				248F20912069F16300E6902D /* GoogleDirectionResponse.swift */,
@@ -308,10 +315,10 @@
 		5A82E9C8205A04D500F34351 /* Home */ = {
 			isa = PBXGroup;
 			children = (
-				246FA3512071EB7300C5E707 /* RouteMessagesViewController.swift */,
 				5A82E9C9205A04EE00F34351 /* OrderListViewController.swift */,
 				5A82E9CB205A148F00F34351 /* OrderItemTableViewCell.swift */,
 				5A68A460205A86B500CA9DB8 /* MapsViewController.swift */,
+				246FA3512071EB7300C5E707 /* RouteMessagesViewController.swift */,
 				246FA3532071EBA600C5E707 /* RouteMessageTableViewCell.swift */,
 			);
 			path = Home;
@@ -338,6 +345,7 @@
 		5AA4CA3E20590AD4003F8E6F /* SRSDriver */ = {
 			isa = PBXGroup;
 			children = (
+				24677EEF20732D8C00C41E4F /* SRSDriver.entitlements */,
 				246FA3552072277D00C5E707 /* Supporting Files */,
 				5AA4CA5820590B69003F8E6F /* Shared */,
 				5AA4CA5120590B08003F8E6F /* App */,
@@ -445,6 +453,14 @@
 					5AA4CA3B20590AD4003F8E6F = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -474,7 +490,7 @@
 			files = (
 				248F20902069E2CA00E6902D /* configs.plist in Resources */,
 				24D3876F2063625B00BE51D9 /* OrderScanItemTableViewCell.xib in Resources */,
-				246FA3572072278D00C5E707 /* GoogleService-Info.plist in Resources */,
+				24677EEE2073231200C41E4F /* GoogleService-Info.plist in Resources */,
 				5A499CB320591D9600A1D944 /* Info.plist in Resources */,
 				5ACCE8E4205BB31600A1532D /* SignatureView.xib in Resources */,
 				241D68792069DB2200914E4F /* Localizable.strings in Resources */,
@@ -585,6 +601,7 @@
 				5A68A45B205A5E3600CA9DB8 /* Order.swift in Sources */,
 				5A499CA720591D0400A1D944 /* UITextView.swift in Sources */,
 				24D38769206350ED00BE51D9 /* OrderItemsTableViewCell.swift in Sources */,
+				245BBAA22073616D00EE3E47 /* MessageAPI.swift in Sources */,
 				5ACCE8D1205B689000A1532D /* Array.swift in Sources */,
 				5A499CBB2059277D00A1D944 /* BaseViewController.swift in Sources */,
 				24B3319820623C25001FAC49 /* Reason.swift in Sources */,
@@ -626,6 +643,7 @@
 				5A68A45D205A5ECF00CA9DB8 /* Route.swift in Sources */,
 				5A499CB820591E4100A1D944 /* Constants.swift in Sources */,
 				246FA3542071EBA600C5E707 /* RouteMessageTableViewCell.swift in Sources */,
+				245BBAA4207363EC00EE3E47 /* Message.swift in Sources */,
 				24D3876D2063513600BE51D9 /* OrderItem.swift in Sources */,
 				246FA3522071EB7300C5E707 /* RouteMessagesViewController.swift in Sources */,
 			);
@@ -776,6 +794,7 @@
 			baseConfigurationReference = 2CE28C0EBCCC67BF0FD1791B /* Pods-SRSDriver.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SRSDriver/SRSDriver.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
@@ -797,6 +816,7 @@
 			baseConfigurationReference = E024BF2881A42290DDB61CAC /* Pods-SRSDriver.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SRSDriver/SRSDriver.entitlements;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;

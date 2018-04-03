@@ -436,7 +436,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sPN-Wc-Dub">
-                                                    <rect key="frame" x="16" y="10" width="49.5" height="24"/>
+                                                    <rect key="frame" x="10" y="10" width="49.5" height="24"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="20"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -457,9 +457,6 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="40" id="hb3-Tz-hmM"/>
                                                     </constraints>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="items"/>
-                                                    </userDefinedRuntimeAttributes>
                                                     <connections>
                                                         <action selector="resetScanList:" destination="fH7-gM-67t" eventType="touchUpInside" id="ZzJ-BA-MXH"/>
                                                     </connections>
@@ -471,7 +468,7 @@
                                                 <constraint firstItem="ela-L0-UiE" firstAttribute="leading" secondItem="ZVd-cH-Hhk" secondAttribute="leading" constant="10" id="Jgm-rn-TZD"/>
                                                 <constraint firstItem="fBa-D9-KH1" firstAttribute="leading" secondItem="ela-L0-UiE" secondAttribute="trailing" constant="82" id="LYY-pN-Wds"/>
                                                 <constraint firstAttribute="trailing" secondItem="fBa-D9-KH1" secondAttribute="trailing" constant="16" id="Ntb-57-QjJ"/>
-                                                <constraint firstItem="sPN-Wc-Dub" firstAttribute="leading" secondItem="ZVd-cH-Hhk" secondAttribute="leading" constant="16" id="jYa-rJ-EfS"/>
+                                                <constraint firstItem="sPN-Wc-Dub" firstAttribute="leading" secondItem="ZVd-cH-Hhk" secondAttribute="leading" constant="10" id="jYa-rJ-EfS"/>
                                                 <constraint firstItem="fBa-D9-KH1" firstAttribute="centerY" secondItem="sPN-Wc-Dub" secondAttribute="centerY" id="zC7-To-4SZ"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -981,7 +978,7 @@
         <!--Tab Bar Controller-->
         <scene sceneID="UaV-my-2cW">
             <objects>
-                <tabBarController id="RD2-8f-A9x" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabBarController" id="RD2-8f-A9x" sceneMemberID="viewController">
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="rz1-og-63S">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1094,7 +1091,7 @@
                                 <rect key="frame" x="0.0" y="74" width="375" height="544"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoteTableViewCell" rowHeight="90" id="6bt-6v-OuU" customClass="NoteTableViewCell" customModule="SRSDriver" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RouteMessageTableViewCell" rowHeight="90" id="6bt-6v-OuU" customClass="RouteMessageTableViewCell" customModule="SRSDriver" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="6bt-6v-OuU" id="6dn-00-JmG">
@@ -1140,7 +1137,7 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7iD-oV-Zb5">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7iD-oV-Zb5">
                                 <rect key="frame" x="265" y="508" width="80" height="80"/>
                                 <color key="backgroundColor" red="0.8862745098" green="0.23529411759999999" blue="0.23529411759999999" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
@@ -1170,6 +1167,10 @@
                         <viewLayoutGuide key="safeArea" id="R56-qv-EMj"/>
                     </view>
                     <navigationItem key="navigationItem" title="Messages" id="Ho2-hG-WPo"/>
+                    <connections>
+                        <outlet property="addMessageButton" destination="7iD-oV-Zb5" id="XpS-ot-1AS"/>
+                        <outlet property="tableView" destination="LSm-ld-NKc" id="WHa-HU-iYR"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="RnA-SG-JlL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
