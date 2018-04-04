@@ -34,14 +34,22 @@ class OrderListViewController: UIViewController {
       
       // messgae
       if let messageTab = self.tabBarController?.tabBar.items?.last {
-        messageTab.badgeValue = "3"
+        messageTab.badgeValue = "\(route.messages.count)"
       }
       
     }
   }
   
   func getRouteDetail(_ routeID: String) {
-    // Call api get route detail
+    showLoadingIndicator()
+    APIs.getRouteDetail(routeID) { [weak self] (response, errMsg) in
+      self?.dismissLoadingIndicator()
+      guard let route = response else {
+        self?.showAlertView(errMsg ?? " ")
+        return
+      }
+      self?.route = route
+    }
   }
   
   override func viewDidLoad() {
@@ -60,9 +68,8 @@ class OrderListViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    let dateString = datePickerView.date.toString()
-    navigationItem.title = dateString
-    getOrders(byDate: datePickerView.date.toString("yyyy-MM-dd"))
+    let dateString = datePickerView.date.toString("date")
+    getOrders(byDate: dateString)
     tabBarController?.tabBar.isHidden = false
   }
   
@@ -139,6 +146,7 @@ class OrderListViewController: UIViewController {
 
 extension OrderListViewController {
   func getOrders(byDate date: String? = nil) {
+    navigationItem.title = date ?? ""
     navigationItem.rightBarButtonItem?.isEnabled = true
     showLoadingIndicator()
     APIs.getOrders(byDate: date) { [unowned self] (resp, msg) in

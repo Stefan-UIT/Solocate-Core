@@ -34,10 +34,35 @@ class MessageAPI {
         completion(nil, err.message)
         return
       }
-      if let message = Mapper<Message>().map(JSON: resp) {
+      if let data = resp["data"] as? [String: Any],
+        let message = Mapper<Message>().map(JSON: data) {
         completion(message,nil)
       }
     }
+  }
+  
+  static func getList(_ routeID: String, completion:@escaping ((_ messages: [Message]?, _ errMsg: String?) -> Void)) {
+    let uri = String.init(format: RESTConstants.configs[RESTConstants.GET_LIST_NOTIFICATIONS] ?? "%@", routeID)
+    let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
+    if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+      request.setAuthorization(token)
+    }
+    request.baseInvoker { (response, error) in
+      guard let resp = response as? [String: Any] else {
+        completion(nil, error != nil ? error!.message : "error_network".localized)
+        return
+      }
+      if let errors = resp["errors"] as? [String: Any],
+        let err = Mapper<RESTResponse>().map(JSON: errors) {
+        completion(nil, err.message)
+        return
+      }
+      if let data = resp["data"] as? [String: Any],
+        let messageResp = Mapper<ListMessageResponse>().map(JSON: data) {
+        completion(messageResp.messages, nil)
+      }
+    }
+    
   }
   
   func getMessageNumber(_ type: String, routeID: String, completion: @escaping ((_ number: Int?,_ errMSg: String?) -> Void)) {
@@ -71,6 +96,25 @@ class MessageAPI {
       count <- map["data.total_row"]
     }
   }
+  
+  class ListMessageResponse: NSObject, Mappable {
+    var messages: [Message]!
+    var total: Int = 0
+    required convenience init?(map: Map) {
+      self.init()
+    }
+    
+    func mapping(map: Map) {
+      total <- map["total"]
+      messages <- map["data"]
+    }
+    
+    
+  }
+  
+  
+
+  
   
 }
 

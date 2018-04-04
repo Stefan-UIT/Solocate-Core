@@ -25,7 +25,7 @@ class Route: NSObject, Mappable {
   var status = ""
   var orderList = [Order]()
   var pickupList = [PickupPlace]()
-  
+  var messages = [Message]()
   
   convenience required init?(map: Map) {
     self.init()
@@ -46,6 +46,7 @@ class Route: NSObject, Mappable {
     status      <- map["route_sts"]
     orderList   <- map["order_list"]
     pickupList  <- map["pickup_list"]
+    messages    <- map["messages"]
   }
 }
 

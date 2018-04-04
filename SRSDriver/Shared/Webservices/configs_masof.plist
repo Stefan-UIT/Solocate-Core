@@ -38,5 +38,7 @@
 	<string>/backend-api/v1/messages/count-message?type_message=%@&amp;route_id=%@</string>
 	<key>GET_LIST_NOTIFICATIONS</key>
 	<string>/backend-api/v1/messages/list-message?page=1&amp;limit=100&amp;route_id=%@</string>
+	<key>GET_ROUTE_DETAIL</key>
+	<string>/backend-api/v1/routes/%@</string>
 </dict>
 </plist>

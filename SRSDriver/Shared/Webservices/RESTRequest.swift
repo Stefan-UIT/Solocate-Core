@@ -15,7 +15,7 @@ typealias RESTAPICompletion = (_ result: Any?, _ error: RESTError?) -> Void
 class RESTRequest: NSObject {
   var baseURL: String = ""
   var params: [String: Any] = [:]
-  var headers: [String: String] = [:]
+  var headers: [String: String] = RESTConstants.headers
   var multiparts = NSMutableArray()
   var requestMethod: HTTPMethod = .get
   var endcoding: URLEncoding = .default

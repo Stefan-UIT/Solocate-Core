@@ -13,8 +13,78 @@
 		24677EEE2073231200C41E4F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24677EED2073231200C41E4F /* GoogleService-Info.plist */; };
 		246FA3522071EB7300C5E707 /* RouteMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FA3512071EB7300C5E707 /* RouteMessagesViewController.swift */; };
 		246FA3542071EBA600C5E707 /* RouteMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FA3532071EBA600C5E707 /* RouteMessageTableViewCell.swift */; };
-		248F20902069E2CA00E6902D /* configs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 248F208F2069E2CA00E6902D /* configs.plist */; };
 		248F20922069F16300E6902D /* GoogleDirectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F20912069F16300E6902D /* GoogleDirectionResponse.swift */; };
+		2494A9292074926A005A2622 /* OrderPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A450205A202F00CA9DB8 /* OrderPictureViewController.swift */; };
+		2494A92A2074926A005A2622 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A44A205A200700CA9DB8 /* OrderDetailViewController.swift */; };
+		2494A92B2074926A005A2622 /* OrderDetailMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DCDCD52068E2FD00D3313F /* OrderDetailMapTableViewCell.swift */; };
+		2494A92C2074926A005A2622 /* OrderSignatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A44C205A201A00CA9DB8 /* OrderSignatureViewController.swift */; };
+		2494A92D2074926A005A2622 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9D20591D0400A1D944 /* UIViewController.swift */; };
+		2494A92E2074926A005A2622 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9C20591D0400A1D944 /* UIView.swift */; };
+		2494A92F2074926A005A2622 /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACCE8D8205BA94A00A1532D /* NoteTableViewCell.swift */; };
+		2494A9302074926A005A2622 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACCE8E5205BC16300A1532D /* UIImage.swift */; };
+		2494A9312074926A005A2622 /* OrderDetailMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACCE8D6205BA46800A1532D /* OrderDetailMapViewController.swift */; };
+		2494A9322074926A005A2622 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9720591D0400A1D944 /* UIImageView.swift */; };
+		2494A9332074926A005A2622 /* OrderDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACCE8DA205BAD2800A1532D /* OrderDetailTableViewCell.swift */; };
+		2494A9342074926A005A2622 /* OrderMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACCE8CE205B585900A1532D /* OrderMarker.swift */; };
+		2494A9352074926A005A2622 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A45A205A5E3600CA9DB8 /* Order.swift */; };
+		2494A9362074926A005A2622 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9B20591D0400A1D944 /* UITextView.swift */; };
+		2494A9372074926A005A2622 /* OrderItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D38768206350ED00BE51D9 /* OrderItemsTableViewCell.swift */; };
+		2494A9382074926A005A2622 /* MessageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245BBAA12073616D00EE3E47 /* MessageAPI.swift */; };
+		2494A9392074926A005A2622 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACCE8D0205B689000A1532D /* Array.swift */; };
+		2494A93A2074926A005A2622 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CBA2059277D00A1D944 /* BaseViewController.swift */; };
+		2494A93B2074926A005A2622 /* Reason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3319720623C25001FAC49 /* Reason.swift */; };
+		2494A93C2074926A005A2622 /* PickupPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A45E205A619300CA9DB8 /* PickupPlace.swift */; };
+		2494A93D2074926A005A2622 /* OrderScanItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D3876A2063511F00BE51D9 /* OrderScanItemTableViewCell.swift */; };
+		2494A93E2074926A005A2622 /* RESTConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C0205A038900F34351 /* RESTConstants.swift */; };
+		2494A93F2074926A005A2622 /* RESTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C1205A038900F34351 /* RESTError.swift */; };
+		2494A9402074926A005A2622 /* OrderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C9205A04EE00F34351 /* OrderListViewController.swift */; };
+		2494A9412074926A005A2622 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CB520591E4100A1D944 /* Cache.swift */; };
+		2494A9422074926A005A2622 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9420591D0400A1D944 /* UIButton.swift */; };
+		2494A9432074926A005A2622 /* ReasonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3319520623B5A001FAC49 /* ReasonListViewController.swift */; };
+		2494A9442074926A005A2622 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9620591D0400A1D944 /* UIColor.swift */; };
+		2494A9452074926A005A2622 /* PictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B331932061FA66001FAC49 /* PictureTableViewCell.swift */; };
+		2494A9462074926A005A2622 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9CD205A197800F34351 /* Date.swift */; };
+		2494A9472074926A005A2622 /* OrderDetailContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A448205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift */; };
+		2494A9482074926A005A2622 /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A457205A5A0F00CA9DB8 /* APIs.swift */; };
+		2494A9492074926A005A2622 /* HCSStarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CB020591D9600A1D944 /* HCSStarRatingView.m */; };
+		2494A94A2074926A005A2622 /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A460205A86B500CA9DB8 /* MapsViewController.swift */; };
+		2494A94B2074926A005A2622 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9A20591D0400A1D944 /* UITextField.swift */; };
+		2494A94C2074926A005A2622 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA4CA5420590B31003F8E6F /* LoginViewController.swift */; };
+		2494A94D2074926A005A2622 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DCDCD32068DD8200D3313F /* LocationManager.swift */; };
+		2494A94E2074926A005A2622 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CAC20591D9000A1D944 /* Reachability.swift */; };
+		2494A94F2074926A005A2622 /* OrderDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A453205A223200CA9DB8 /* OrderDetailCollectionViewCell.swift */; };
+		2494A9502074926A005A2622 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9820591D0400A1D944 /* UILabel.swift */; };
+		2494A9512074926A005A2622 /* OrderItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9CB205A148F00F34351 /* OrderItemTableViewCell.swift */; };
+		2494A9522074926A005A2622 /* ScanBarCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D387702063674100BE51D9 /* ScanBarCodeViewController.swift */; };
+		2494A9532074926A005A2622 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B96CEA206B9CC9000FD6CD /* Theme.swift */; };
+		2494A9542074926A005A2622 /* RESTRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C2205A038900F34351 /* RESTRequest.swift */; };
+		2494A9552074926A005A2622 /* UITableView-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9920591D0400A1D944 /* UITableView-Extensions.swift */; };
+		2494A9562074926A005A2622 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA4CA3F20590AD4003F8E6F /* AppDelegate.swift */; };
+		2494A9572074926A005A2622 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9320591D0400A1D944 /* String.swift */; };
+		2494A9582074926A005A2622 /* GoogleDirectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F20912069F16300E6902D /* GoogleDirectionResponse.swift */; };
+		2494A9592074926A005A2622 /* SignatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACCE8E1205BB30C00A1532D /* SignatureView.swift */; };
+		2494A95A2074926A005A2622 /* UICollectionView-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9520591D0400A1D944 /* UICollectionView-Extensions.swift */; };
+		2494A95B2074926A005A2622 /* RESTResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C3205A038900F34351 /* RESTResponse.swift */; };
+		2494A95C2074926A005A2622 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACCE8D2205B761E00A1532D /* Note.swift */; };
+		2494A95D2074926A005A2622 /* OrderNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A44E205A202400CA9DB8 /* OrderNotesViewController.swift */; };
+		2494A95E2074926A005A2622 /* NSString+SDString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9220591D0400A1D944 /* NSString+SDString.m */; };
+		2494A95F2074926A005A2622 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A45C205A5ECE00CA9DB8 /* Route.swift */; };
+		2494A9602074926A005A2622 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CB620591E4100A1D944 /* Constants.swift */; };
+		2494A9612074926A005A2622 /* RouteMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FA3532071EBA600C5E707 /* RouteMessageTableViewCell.swift */; };
+		2494A9622074926A005A2622 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245BBAA3207363EC00EE3E47 /* Message.swift */; };
+		2494A9632074926A005A2622 /* OrderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D3876C2063513600BE51D9 /* OrderItem.swift */; };
+		2494A9642074926A005A2622 /* RouteMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FA3512071EB7300C5E707 /* RouteMessagesViewController.swift */; };
+		2494A9662074926A005A2622 /* Pods_SRSDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B660F041976D0FC4B84CB8F1 /* Pods_SRSDriver.framework */; };
+		2494A9692074926A005A2622 /* OrderScanItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24D3876E2063625B00BE51D9 /* OrderScanItemTableViewCell.xib */; };
+		2494A96A2074926A005A2622 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24677EED2073231200C41E4F /* GoogleService-Info.plist */; };
+		2494A96B2074926A005A2622 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A499CB120591D9600A1D944 /* Info.plist */; };
+		2494A96C2074926A005A2622 /* SignatureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ACCE8E3205BB31600A1532D /* SignatureView.xib */; };
+		2494A96D2074926A005A2622 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 241D68772069DB2200914E4F /* Localizable.strings */; };
+		2494A96E2074926A005A2622 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4820590AD4003F8E6F /* LaunchScreen.storyboard */; };
+		2494A96F2074926A005A2622 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4620590AD4003F8E6F /* Assets.xcassets */; };
+		2494A9702074926A005A2622 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4320590AD4003F8E6F /* Main.storyboard */; };
+		2494A97820749288005A2622 /* configs_masof.plist in Resources */ = {isa = PBXBuildFile; fileRef = 248F208F2069E2CA00E6902D /* configs_masof.plist */; };
+		2494A97B2074AD41005A2622 /* configs_malee.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2494A97A2074AD41005A2622 /* configs_malee.plist */; };
 		24B331942061FA66001FAC49 /* PictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B331932061FA66001FAC49 /* PictureTableViewCell.swift */; };
 		24B3319620623B5A001FAC49 /* ReasonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3319520623B5A001FAC49 /* ReasonListViewController.swift */; };
 		24B3319820623C25001FAC49 /* Reason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3319720623C25001FAC49 /* Reason.swift */; };
@@ -88,8 +158,11 @@
 		24677EEF20732D8C00C41E4F /* SRSDriver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SRSDriver.entitlements; sourceTree = "<group>"; };
 		246FA3512071EB7300C5E707 /* RouteMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMessagesViewController.swift; sourceTree = "<group>"; };
 		246FA3532071EBA600C5E707 /* RouteMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMessageTableViewCell.swift; sourceTree = "<group>"; };
-		248F208F2069E2CA00E6902D /* configs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = configs.plist; sourceTree = "<group>"; };
+		248F208F2069E2CA00E6902D /* configs_masof.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = configs_masof.plist; sourceTree = "<group>"; };
 		248F20912069F16300E6902D /* GoogleDirectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleDirectionResponse.swift; sourceTree = "<group>"; };
+		2494A9762074926A005A2622 /* SRSDriver_Malee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SRSDriver_Malee.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2494A9772074926B005A2622 /* SRSDriver_Malee.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = SRSDriver_Malee.plist; path = /Users/nguyenphu/Documents/Seldatinc/projects/SRS/Driver/ios/SRSDriver_Malee.plist; sourceTree = "<absolute>"; };
+		2494A97A2074AD41005A2622 /* configs_malee.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = configs_malee.plist; sourceTree = "<group>"; };
 		24B331932061FA66001FAC49 /* PictureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureTableViewCell.swift; sourceTree = "<group>"; };
 		24B3319520623B5A001FAC49 /* ReasonListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReasonListViewController.swift; sourceTree = "<group>"; };
 		24B3319720623C25001FAC49 /* Reason.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reason.swift; sourceTree = "<group>"; };
@@ -162,6 +235,14 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		2494A9652074926A005A2622 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2494A9662074926A005A2622 /* Pods_SRSDriver.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5AA4CA3920590AD4003F8E6F /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -307,7 +388,8 @@
 				5A82E9C1205A038900F34351 /* RESTError.swift */,
 				5A82E9C2205A038900F34351 /* RESTRequest.swift */,
 				5A82E9C3205A038900F34351 /* RESTResponse.swift */,
-				248F208F2069E2CA00E6902D /* configs.plist */,
+				248F208F2069E2CA00E6902D /* configs_masof.plist */,
+				2494A97A2074AD41005A2622 /* configs_malee.plist */,
 			);
 			path = Webservices;
 			sourceTree = "<group>";
@@ -331,6 +413,7 @@
 				5AA4CA3D20590AD4003F8E6F /* Products */,
 				5E88CBE52394B31245C0615A /* Pods */,
 				20E91CE0E02FEDA2CB697433 /* Frameworks */,
+				2494A9772074926B005A2622 /* SRSDriver_Malee.plist */,
 			);
 			sourceTree = "<group>";
 		};
@@ -338,6 +421,7 @@
 			isa = PBXGroup;
 			children = (
 				5AA4CA3C20590AD4003F8E6F /* SRSDriver.app */,
+				2494A9762074926A005A2622 /* SRSDriver_Malee.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -420,6 +504,26 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2494A9262074926A005A2622 /* SRSDriver_Malee */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2494A9732074926A005A2622 /* Build configuration list for PBXNativeTarget "SRSDriver_Malee" */;
+			buildPhases = (
+				2494A9272074926A005A2622 /* [CP] Check Pods Manifest.lock */,
+				2494A9282074926A005A2622 /* Sources */,
+				2494A9652074926A005A2622 /* Frameworks */,
+				2494A9672074926A005A2622 /* Resources */,
+				2494A9712074926A005A2622 /* [CP] Embed Pods Frameworks */,
+				2494A9722074926A005A2622 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SRSDriver_Malee;
+			productName = SRSDriver;
+			productReference = 2494A9762074926A005A2622 /* SRSDriver_Malee.app */;
+			productType = "com.apple.product-type.application";
+		};
 		5AA4CA3B20590AD4003F8E6F /* SRSDriver */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 5AA4CA4E20590AD4003F8E6F /* Build configuration list for PBXNativeTarget "SRSDriver" */;
@@ -450,6 +554,9 @@
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = SeldatInc;
 				TargetAttributes = {
+					2494A9262074926A005A2622 = {
+						ProvisioningStyle = Manual;
+					};
 					5AA4CA3B20590AD4003F8E6F = {
 						CreatedOnToolsVersion = 9.2;
 						ProvisioningStyle = Manual;
@@ -479,22 +586,39 @@
 			projectRoot = "";
 			targets = (
 				5AA4CA3B20590AD4003F8E6F /* SRSDriver */,
+				2494A9262074926A005A2622 /* SRSDriver_Malee */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2494A9672074926A005A2622 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2494A9692074926A005A2622 /* OrderScanItemTableViewCell.xib in Resources */,
+				2494A96A2074926A005A2622 /* GoogleService-Info.plist in Resources */,
+				2494A96B2074926A005A2622 /* Info.plist in Resources */,
+				2494A96C2074926A005A2622 /* SignatureView.xib in Resources */,
+				2494A96D2074926A005A2622 /* Localizable.strings in Resources */,
+				2494A96E2074926A005A2622 /* LaunchScreen.storyboard in Resources */,
+				2494A96F2074926A005A2622 /* Assets.xcassets in Resources */,
+				2494A9702074926A005A2622 /* Main.storyboard in Resources */,
+				2494A97B2074AD41005A2622 /* configs_malee.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5AA4CA3A20590AD4003F8E6F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				248F20902069E2CA00E6902D /* configs.plist in Resources */,
 				24D3876F2063625B00BE51D9 /* OrderScanItemTableViewCell.xib in Resources */,
 				24677EEE2073231200C41E4F /* GoogleService-Info.plist in Resources */,
 				5A499CB320591D9600A1D944 /* Info.plist in Resources */,
 				5ACCE8E4205BB31600A1532D /* SignatureView.xib in Resources */,
 				241D68792069DB2200914E4F /* Localizable.strings in Resources */,
 				5AA4CA4A20590AD4003F8E6F /* LaunchScreen.storyboard in Resources */,
+				2494A97820749288005A2622 /* configs_masof.plist in Resources */,
 				5AA4CA4720590AD4003F8E6F /* Assets.xcassets in Resources */,
 				5AA4CA4520590AD4003F8E6F /* Main.storyboard in Resources */,
 			);
@@ -519,6 +643,82 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2494A9272074926A005A2622 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SRSDriver-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2494A9712074926A005A2622 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SRSDriver/Pods-SRSDriver-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/TLPhotoPicker/TLPhotoPicker.framework",
+				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TLPhotoPicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SRSDriver/Pods-SRSDriver-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		2494A9722074926A005A2622 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SRSDriver/Pods-SRSDriver-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SRSDriver/Pods-SRSDriver-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		B2B75F36A9C47339D954EC0E /* [CP] Copy Pods Resources */ = {
@@ -582,6 +782,73 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		2494A9282074926A005A2622 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2494A9292074926A005A2622 /* OrderPictureViewController.swift in Sources */,
+				2494A92A2074926A005A2622 /* OrderDetailViewController.swift in Sources */,
+				2494A92B2074926A005A2622 /* OrderDetailMapTableViewCell.swift in Sources */,
+				2494A92C2074926A005A2622 /* OrderSignatureViewController.swift in Sources */,
+				2494A92D2074926A005A2622 /* UIViewController.swift in Sources */,
+				2494A92E2074926A005A2622 /* UIView.swift in Sources */,
+				2494A92F2074926A005A2622 /* NoteTableViewCell.swift in Sources */,
+				2494A9302074926A005A2622 /* UIImage.swift in Sources */,
+				2494A9312074926A005A2622 /* OrderDetailMapViewController.swift in Sources */,
+				2494A9322074926A005A2622 /* UIImageView.swift in Sources */,
+				2494A9332074926A005A2622 /* OrderDetailTableViewCell.swift in Sources */,
+				2494A9342074926A005A2622 /* OrderMarker.swift in Sources */,
+				2494A9352074926A005A2622 /* Order.swift in Sources */,
+				2494A9362074926A005A2622 /* UITextView.swift in Sources */,
+				2494A9372074926A005A2622 /* OrderItemsTableViewCell.swift in Sources */,
+				2494A9382074926A005A2622 /* MessageAPI.swift in Sources */,
+				2494A9392074926A005A2622 /* Array.swift in Sources */,
+				2494A93A2074926A005A2622 /* BaseViewController.swift in Sources */,
+				2494A93B2074926A005A2622 /* Reason.swift in Sources */,
+				2494A93C2074926A005A2622 /* PickupPlace.swift in Sources */,
+				2494A93D2074926A005A2622 /* OrderScanItemTableViewCell.swift in Sources */,
+				2494A93E2074926A005A2622 /* RESTConstants.swift in Sources */,
+				2494A93F2074926A005A2622 /* RESTError.swift in Sources */,
+				2494A9402074926A005A2622 /* OrderListViewController.swift in Sources */,
+				2494A9412074926A005A2622 /* Cache.swift in Sources */,
+				2494A9422074926A005A2622 /* UIButton.swift in Sources */,
+				2494A9432074926A005A2622 /* ReasonListViewController.swift in Sources */,
+				2494A9442074926A005A2622 /* UIColor.swift in Sources */,
+				2494A9452074926A005A2622 /* PictureTableViewCell.swift in Sources */,
+				2494A9462074926A005A2622 /* Date.swift in Sources */,
+				2494A9472074926A005A2622 /* OrderDetailContainerViewController.swift in Sources */,
+				2494A9482074926A005A2622 /* APIs.swift in Sources */,
+				2494A9492074926A005A2622 /* HCSStarRatingView.m in Sources */,
+				2494A94A2074926A005A2622 /* MapsViewController.swift in Sources */,
+				2494A94B2074926A005A2622 /* UITextField.swift in Sources */,
+				2494A94C2074926A005A2622 /* LoginViewController.swift in Sources */,
+				2494A94D2074926A005A2622 /* LocationManager.swift in Sources */,
+				2494A94E2074926A005A2622 /* Reachability.swift in Sources */,
+				2494A94F2074926A005A2622 /* OrderDetailCollectionViewCell.swift in Sources */,
+				2494A9502074926A005A2622 /* UILabel.swift in Sources */,
+				2494A9512074926A005A2622 /* OrderItemTableViewCell.swift in Sources */,
+				2494A9522074926A005A2622 /* ScanBarCodeViewController.swift in Sources */,
+				2494A9532074926A005A2622 /* Theme.swift in Sources */,
+				2494A9542074926A005A2622 /* RESTRequest.swift in Sources */,
+				2494A9552074926A005A2622 /* UITableView-Extensions.swift in Sources */,
+				2494A9562074926A005A2622 /* AppDelegate.swift in Sources */,
+				2494A9572074926A005A2622 /* String.swift in Sources */,
+				2494A9582074926A005A2622 /* GoogleDirectionResponse.swift in Sources */,
+				2494A9592074926A005A2622 /* SignatureView.swift in Sources */,
+				2494A95A2074926A005A2622 /* UICollectionView-Extensions.swift in Sources */,
+				2494A95B2074926A005A2622 /* RESTResponse.swift in Sources */,
+				2494A95C2074926A005A2622 /* Note.swift in Sources */,
+				2494A95D2074926A005A2622 /* OrderNotesViewController.swift in Sources */,
+				2494A95E2074926A005A2622 /* NSString+SDString.m in Sources */,
+				2494A95F2074926A005A2622 /* Route.swift in Sources */,
+				2494A9602074926A005A2622 /* Constants.swift in Sources */,
+				2494A9612074926A005A2622 /* RouteMessageTableViewCell.swift in Sources */,
+				2494A9622074926A005A2622 /* Message.swift in Sources */,
+				2494A9632074926A005A2622 /* OrderItem.swift in Sources */,
+				2494A9642074926A005A2622 /* RouteMessagesViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		5AA4CA3820590AD4003F8E6F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -680,6 +947,50 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		2494A9742074926A005A2622 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2CE28C0EBCCC67BF0FD1791B /* Pods-SRSDriver.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SRSDriver/SRSDriver.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = T7R2AKHVA7;
+				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver_Malee.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMALEE";
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "397d6a7a-7d3a-4751-b880-6ef4cb548158";
+				PROVISIONING_PROFILE_SPECIFIER = "dev-SRSDriver";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2494A9752074926A005A2622 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E024BF2881A42290DDB61CAC /* Pods-SRSDriver.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SRSDriver/SRSDriver.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = T7R2AKHVA7;
+				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver_Malee.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMALEE";
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "397d6a7a-7d3a-4751-b880-6ef4cb548158";
+				PROVISIONING_PROFILE_SPECIFIER = "dev-SRSDriver";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		5AA4CA4C20590AD4003F8E6F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -795,17 +1106,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SRSDriver/SRSDriver.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				INFOPLIST_FILE = SRSDriver/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMASOF";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "397d6a7a-7d3a-4751-b880-6ef4cb548158";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-SRSDriver";
+				PROVISIONING_PROFILE = "7927ead9-5fdd-4154-9e64-45386021fd6d";
+				PROVISIONING_PROFILE_SPECIFIER = "dis-srsdriver";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -817,17 +1128,17 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SRSDriver/SRSDriver.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				INFOPLIST_FILE = SRSDriver/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\"";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMASOF";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "397d6a7a-7d3a-4751-b880-6ef4cb548158";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-SRSDriver";
+				PROVISIONING_PROFILE = "7927ead9-5fdd-4154-9e64-45386021fd6d";
+				PROVISIONING_PROFILE_SPECIFIER = "dis-srsdriver";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -836,6 +1147,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2494A9732074926A005A2622 /* Build configuration list for PBXNativeTarget "SRSDriver_Malee" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2494A9742074926A005A2622 /* Debug */,
+				2494A9752074926A005A2622 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		5AA4CA3720590AD4003F8E6F /* Build configuration list for PBXProject "SRSDriver" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

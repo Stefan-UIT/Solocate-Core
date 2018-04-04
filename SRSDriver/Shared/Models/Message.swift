@@ -13,18 +13,24 @@ import ObjectMapper
 class Message: NSObject, Mappable {
   var id = -1
   var content = ""
-  var createdBy = -1
+  var updatedBy = -1
   var createdAt = ""
+  var sendFrom = ""
+  var sendTo = ""
+  var status = 0
   
   required convenience init?(map: Map) {
     self.init()
   }
   
   func mapping(map: Map) {
-    id <- map["id"]
+    id        <- map["id"]
     createdAt <- map["created_at"]
-    content <- map["content"]
-    createdBy <- map["created_by"]
+    content   <- map["content"]
+    updatedBy <- map["updated_by"]
+    sendFrom  <- map["msg_from"]
+    sendTo    <- map["msg_to"]
+    status    <- map["sts"]
   }
 }
 

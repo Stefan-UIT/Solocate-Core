@@ -57,6 +57,28 @@ class APIs {
     }
   }
   
+  class func getRouteDetail(_ routeID: String, completion: @escaping ((_ route: Route?, _ msg: String?) -> Void)) {
+    let uri = String.init(format: RESTConstants.configs[RESTConstants.GET_ROUTE_DETAIL] ?? "%@", routeID)
+    let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
+    if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+      request.setAuthorization(token)
+    }
+    request.baseInvoker { (response, error) in
+      guard let resp = response as? [String: Any] else {
+        completion(nil, error != nil ? error!.message : "error_network".localized)
+        return
+      }
+      if let errors = resp["errors"] as? [String: Any],
+        let err = Mapper<RESTResponse>().map(JSON: errors) {
+        completion(nil, err.message)
+        return
+      }
+      if let route = Mapper<Route>().map(JSONObject: resp) {
+        completion(route, nil)
+      }
+    }
+  }
+  
   static func updateOrderStatus(_ orderID: String, expectedStatus: String, routeID: String, reason: Reason? = nil, completion: @escaping((_ errMsg: String?) -> Void)) {
     var uri = String.init(format: RESTConstants.configs[RESTConstants.UPDATE_ORDER_STATUS] ?? "", orderID, expectedStatus)
     uri = uri.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -345,7 +367,7 @@ class APIs {
       request.setAuthorization("Bearer " + token)
     }
     request.baseInvoker { (resp, error) in
-      print(resp)
+      print("did update token key")
     }
     
   }

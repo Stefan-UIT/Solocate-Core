@@ -33,6 +33,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     FirebaseApp.configure()
     Messaging.messaging().delegate = self
+    #if MASOF
+      print("Masoffffff")
+    #elseif MALEE
+      print("Maleee")
+    #else
+      print("Anything")
+    #endif
+    
+    
+    
     
     return true
   }
@@ -66,7 +76,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if let currentNavController = window?.rootViewController as? UINavigationController,
           let tabbar = currentNavController.topViewController as? UITabBarController {
           tabbar.selectedIndex = 0
-          if let type = userInfo["type"] as? String, type == "1" {
+          if let type = userInfo["type"] as? String, type == "new message" {
             tabbar.selectedIndex = 2
           }
           if let listNC = tabbar.selectedViewController as? UINavigationController,
@@ -83,7 +93,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
           let listVC = listNavigationController.topViewController as? OrderListViewController {
           listVC.getRouteDetail(routeID)
         }
-        if let type = userInfo["type"] as? String, type == "1" {
+        if let type = userInfo["type"] as? String, type == "new message" {
           tabbarVC?.selectedIndex = 2
         }
         rootNavigationController?.pushViewController(tabbarVC!, animated: true)

@@ -72,8 +72,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       
       tableView.reloadData()
       subTableView.reloadData()
-      tableView.estimatedRowHeight = cellHeight
-      tableView.rowHeight = UITableViewAutomaticDimension
       finishButton.isEnabled = _orderDetail.statusCode == "OP" || _orderDetail.statusCode == "IP"
       let finishButtonTitle = _orderDetail.statusCode == "OP" ? "start".localized : "finish".localized
       finishButton.setTitle(finishButtonTitle, for: .normal)
@@ -96,6 +94,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     subTableView.register(orderScanItemNib, forCellReuseIdentifier: orderScanItemCellIdentifier)
     subTableView.isScrollEnabled = false
     controlsStackView.isHidden = true
+    
+    tableView.estimatedRowHeight = cellHeight
+    tableView.rowHeight = UITableViewAutomaticDimension
   }
   
   override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -144,7 +145,7 @@ extension OrderDetailViewController {
       return
     }
     let message = String.init(format: "order_detail_add_order_item".localized, barcode)
-    let alert = UIAlertController(title: "app_name", message: message, preferredStyle: .alert)
+    let alert = UIAlertController(title: "app_name".localized, message: message, preferredStyle: .alert)
     alert.addTextField { (textField) in
       textField.placeholder = "order_detail_quality".localized
       textField.keyboardType = .numberPad
