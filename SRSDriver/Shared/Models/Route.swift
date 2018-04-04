@@ -26,6 +26,8 @@ class Route: NSObject, Mappable {
   var orderList = [Order]()
   var pickupList = [PickupPlace]()
   var messages = [Message]()
+  var endDate = ""
+  var startDate = ""
   
   convenience required init?(map: Map) {
     self.init()

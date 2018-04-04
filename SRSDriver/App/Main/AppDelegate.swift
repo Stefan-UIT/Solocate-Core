@@ -76,14 +76,14 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         if let currentNavController = window?.rootViewController as? UINavigationController,
           let tabbar = currentNavController.topViewController as? UITabBarController {
           tabbar.selectedIndex = 0
-          if let type = userInfo["type"] as? String, type == "new message" {
-            tabbar.selectedIndex = 2
-          }
+          (tabbar.selectedViewController as? UINavigationController)?.popToRootViewController(animated: false)
           if let listNC = tabbar.selectedViewController as? UINavigationController,
             let listVC = listNC.topViewController as? OrderListViewController {
             listVC.getRouteDetail(routeID)
           }
-          (tabbar.selectedViewController as? UINavigationController)?.popToRootViewController(animated: true)
+          if let type = userInfo["type"] as? String, type == "new message" {
+            tabbar.selectedIndex = 2
+          }
           return
         }
         

@@ -153,7 +153,7 @@ class APIs {
   }
   
   static func uploadSignature(_ orderID: String, signBase64: String, completion: @escaping ((_ errMsg: String?) -> Void)) {
-    let uri = String.init(format: RESTConstants.configs[RESTConstants.UPLOAD_SIGNATURE] ?? "", orderID)
+    let uri = String.init(format: RESTConstants.configs[RESTConstants.UPLOAD_SIGNATURE] ?? "%@", orderID)
     let request = RESTRequest(functionName: uri, method: .put, encoding: .default)
     request.setContentType("application/x-www-form-urlencoded")
     let params = ["sign": signBase64]

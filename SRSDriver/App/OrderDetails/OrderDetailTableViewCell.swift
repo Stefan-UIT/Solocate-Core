@@ -56,15 +56,15 @@ struct OrderDetailItem {
     self.type = type
     switch type {
     case .reference:
-      name = "Order Reference"
+      name = "Order Ref"
     case .status:
       name = "Status"
     case .deliveryDate:
-      name = "Delivery Date"
+      name = "Expected Date"
     case .customerName:
-      name = "Delivery Contact Name"
+      name = "Contact Name"
     case .phone:
-      name = "Delivery Contact Phone"
+      name = "Phone"
     case .address:
       name = "Delivery Address"
     case .description:

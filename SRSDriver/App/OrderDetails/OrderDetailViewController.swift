@@ -290,13 +290,14 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
       return orderItemCellHeight.scaleHeight()
     }
     if item.type == .items {
-      return item.items.count > 0 ? CGFloat(item.items.count) * orderItemCellHeight.scaleHeight() + orderItemsPaddingTop : 0.0
+      return item.items.count > 0 ? CGFloat(item.items.count) * orderItemCellHeight.scaleHeight() + orderItemsPaddingTop : orderItemsPaddingTop.scaleHeight() + cellHeight
     }
     return UITableViewAutomaticDimension
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if tableView == subTableView, let cell = subTableView.dequeueReusableCell(withIdentifier: orderScanItemCellIdentifier, for: indexPath) as? OrderScanItemTableViewCell {
+    if tableView == subTableView,
+      let cell = subTableView.dequeueReusableCell(withIdentifier: orderScanItemCellIdentifier, for: indexPath) as? OrderScanItemTableViewCell {
         let orderItem = detailItems[itemsIndex]
         cell.orderItem = orderItem.items[indexPath.row]
         if scannedString.length > 0, scannedObjectIndexs.contains(indexPath.row), shouldFilterOrderItemsList {

@@ -52,7 +52,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
     signatureView.layer.render(in: context)
     let img = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
-    if let image = img, let data = UIImageJPEGRepresentation(image, 0.8) {
+    if let image = img, let data = UIImageJPEGRepresentation(image, 1.0) {
       let dataBase = data.base64EncodedString(options: .lineLength64Characters)
       // submit data
       submitSignature(dataBase)
@@ -65,13 +65,13 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
   private func submitSignature(_ baseString: String) {
     guard let order = orderDetail else { return }
     showLoadingIndicator()
-    APIs.uploadSignature("\(order.id)", signBase64: baseString) { (errorMsg) in
-      self.dismissLoadingIndicator()
+    APIs.uploadSignature("\(order.id)", signBase64: baseString) { [weak self] (errorMsg) in
+      self?.dismissLoadingIndicator()
       guard let msg = errorMsg else {
-        self.controlsContainerView.isHidden = true
+        self?.controlsContainerView.isHidden = true
         return
       }
-      self.showAlertView(msg)
+      self?.showAlertView(msg)
     }
   }
   

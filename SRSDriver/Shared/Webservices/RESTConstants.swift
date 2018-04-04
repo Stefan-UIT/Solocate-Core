@@ -24,7 +24,7 @@ class RESTConstants: NSObject {
   static let requestAuthorizationKey            = "Authorization"
   static let requestContentTypeKey              = "Content-Type"
   static let requestAcceptKey                   = "Accept"
-  //  static let headers                            = ["Content-Type" : "application/json"]
+//    static let headers                            = ["Content-Type" : "application/json"]
   static let headers                            = ["Content-Type" : "application/x-www-form-urlencoded"]
   static let frefixToken                        = "Bearer "
   static let statusCodeSuccess: Int             = 0
@@ -35,7 +35,7 @@ class RESTConstants: NSObject {
   static let GET_ORDER_BY_DATE = "GET_ORDER_BY_DATE"
   static let GET_ORDER_DETAIL = "GET_ORDER_DETAIL"
   static let UPDATE_ORDER_STATUS = "UPDATE_ORDER_STATUS"
-  static let UPLOAD_SIGNATURE = "UPDATE_ORDER_STATUS"
+  static let UPLOAD_SIGNATURE = "UPLOAD_SIGNATURE"
   static let UPDATE_SEQUENCE = "UPDATE_SEQUENCE"
   static let UPLOAD_FILES = "UPLOAD_FILES"
   static let GET_REASON_LIST = "GET_REASON_LIST"

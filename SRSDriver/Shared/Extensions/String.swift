@@ -50,10 +50,6 @@ extension String {
     let dateFormater = DateFormatter()
     dateFormater.dateFormat = "yyyy-MM-dd hh:mm"
     return dateFormater.date(from: self)
-  }
-  
-//  var cgFloat: CGFloat {
-//    return CGFloat(self.doubleValue)
-//  }
+  }    
   
 }

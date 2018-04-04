@@ -72,6 +72,10 @@ class RouteMessagesViewController: BaseViewController {
         }
         else if let _message = message {
           _route.messages.insert(_message, at: 0)
+          if let item = self?.tabBarController?.tabBar.items?.last {
+            let current = item.badgeValue?.integerValue ?? 0
+            item.badgeValue = "\(current + 1)"
+          }
           self?.tableView.reloadData()
         }
       })

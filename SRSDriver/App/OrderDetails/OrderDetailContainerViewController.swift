@@ -13,6 +13,7 @@ import SVProgressHUD
 class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
   var orderID: String?
   var routeID: Int?
+  fileprivate var orderDetail: OrderDetail?
   
   override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
     
@@ -58,7 +59,9 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
         })
         return
       }
-      
+      self.orderDetail = orderDetail
+      self.segmentedControl.isUserInteractionEnabled = orderDetail.statusCode == "IP" || orderDetail.statusCode == "DV"
+      self.containerView.isScrollEnabled = orderDetail.statusCode == "IP" || orderDetail.statusCode == "DV"
       for v in self.viewControllers {
         (v as? BaseOrderDetailViewController)?.orderDetail = orderDetail
         (v as? BaseOrderDetailViewController)?.routeID = self.routeID
@@ -68,6 +71,7 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
   
   override func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int) {
     super.updateIndicator(for: viewController, fromIndex: fromIndex, toIndex: toIndex)
+//    guard let _orderDetail = orderDetail else {return}
     containerView.isScrollEnabled = !(toIndex == 1)
   }
   

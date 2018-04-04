@@ -18,9 +18,16 @@ class OrderListViewController: UIViewController {
   
   fileprivate let cellIdentifier = "OrderItemTableViewCell"
   fileprivate let cellHeight: CGFloat = 130.0
-  
+  fileprivate var selectedString = "" {
+    didSet {
+      navigationItem.title = selectedString
+    }
+  }
   fileprivate var route: Route! {
     didSet {
+      if let messageTab = self.tabBarController?.tabBar.items?.last {
+        messageTab.badgeValue = nil
+      }
       guard route.orderList.count > 0 else {
         noOrdersLabel.isHidden = false
         tableView.isHidden = true
@@ -34,7 +41,11 @@ class OrderListViewController: UIViewController {
       
       // messgae
       if let messageTab = self.tabBarController?.tabBar.items?.last {
-        messageTab.badgeValue = "\(route.messages.count)"
+        messageTab.badgeValue = route.messages.count > 0 ? "\(route.messages.count)" : nil
+      }
+      if let messageNV = self.tabBarController?.viewControllers?.last as? UINavigationController,
+        let messageVC = messageNV.topViewController as? RouteMessagesViewController {
+        messageVC.route = route        
       }
       
     }
@@ -44,16 +55,18 @@ class OrderListViewController: UIViewController {
     showLoadingIndicator()
     APIs.getRouteDetail(routeID) { [weak self] (response, errMsg) in
       self?.dismissLoadingIndicator()
-      guard let route = response else {
+      guard let route = response, let strongSelf = self else {
         self?.showAlertView(errMsg ?? " ")
         return
       }
-      self?.route = route
+      strongSelf.route = route
+      strongSelf.selectedString = strongSelf.convertString(route.date)
     }
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    selectedString = datePickerView.date.toString("yyyy-MM-dd")
     tabBarController?.delegate = self
     let iconName = Constants.isLeftToRight ? "logout" : "logout_inv"
     if let leftButton = navigationItem.leftBarButtonItems?.first {
@@ -68,8 +81,8 @@ class OrderListViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    let dateString = datePickerView.date.toString("date")
-    getOrders(byDate: dateString)
+    navigationItem.title = selectedString
+    getOrders(byDate: selectedString)
     tabBarController?.tabBar.isHidden = false
   }
   
@@ -79,11 +92,12 @@ class OrderListViewController: UIViewController {
   }
   
   @IBAction func didPickDate(_ sender: UIDatePicker) {
-    navigationItem.title = sender.date.toString()
+    selectedString = sender.date.toString()
   }
   
   @IBAction func didChooseCalendar(_ sender: UIBarButtonItem) {
     let dateString = datePickerView.date.toString("yyyy-MM-dd")
+    selectedString = dateString
     getOrders(byDate: dateString)
     noOrdersLabel.isHidden = true
     let height = Constants.toolbarHeight + Constants.pickerViewHeight;
@@ -145,8 +159,16 @@ class OrderListViewController: UIViewController {
 // MARK: - Private methods
 
 extension OrderListViewController {
+  func convertString(_ text: String, withFormat format: String = "yyyy-MM-dd") -> String {
+    let dateFormater = DateFormatter()
+    dateFormater.dateFormat = "MM/dd/yyyy"
+    let date = dateFormater.date(from: text) ?? Date()
+    dateFormater.dateFormat = format
+    
+    return dateFormater.string(from: date)
+  }
+  
   func getOrders(byDate date: String? = nil) {
-    navigationItem.title = date ?? ""
     navigationItem.rightBarButtonItem?.isEnabled = true
     showLoadingIndicator()
     APIs.getOrders(byDate: date) { [unowned self] (resp, msg) in
