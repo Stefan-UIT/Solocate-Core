@@ -75,10 +75,10 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         // firstly, check stak
         if let currentNavController = window?.rootViewController as? UINavigationController,
           let tabbar = currentNavController.topViewController as? UITabBarController {
-          tabbar.selectedIndex = 0
+//          tabbar.selectedIndex = 0
           (tabbar.selectedViewController as? UINavigationController)?.popToRootViewController(animated: false)
-          if let listNC = tabbar.selectedViewController as? UINavigationController,
-            let listVC = listNC.topViewController as? OrderListViewController {
+          if let listNC = tabbar.viewControllers?.first as? UINavigationController,
+            let listVC = listNC.viewControllers.first as? OrderListViewController {
             listVC.getRouteDetail(routeID)
           }
           if let type = userInfo["type"] as? String, type == "new message" {

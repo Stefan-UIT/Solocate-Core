@@ -19,7 +19,8 @@ class OrderScanItemTableViewCell: UITableViewCell {
       skuLabel.text = orderItem.sku
       quantityLabel.text = "\(orderItem.qty)"
       descriptionLabel.text = orderItem.desc
-      statusLabel.text = "(\(orderItem.statusName))"
+      let status = OrderStatus(rawValue: orderItem.statusCode)!
+      statusLabel.text = "(\(status.statusName))"
     }
   }
     override func awakeFromNib() {

@@ -14,6 +14,9 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
   
   @IBOutlet weak var signatureView: SignatureView!
   @IBOutlet weak var signatureImgView: UIImageView!
+  @IBOutlet weak var finishButton: UIButton!
+  @IBOutlet weak var unableToFinishButton: UIButton!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     
@@ -21,6 +24,15 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
     controlsContainerView.isHidden = order.sign.length > 0
     signatureView.isHidden = order.sign.length > 0
     signatureImgView.isHidden = !(order.sign.length > 0)
+    
+//    finishButton.isEnabled = order.statusCode == "OP" || order.statusCode == "IP"
+//    let finishButtonTitle = order.statusCode == "OP" ? "start".localized : "finish".localized
+//    finishButton.setTitle(finishButtonTitle, for: .normal)
+//
+//    unableToFinishButton.isEnabled = order.statusCode == "OP" || order.statusCode == "IP"
+//    let unableTitle = order.statusCode == "OP" ? "order_detail_unable_start".localized : "order_detail_unable_finish".localized
+//    unableToFinishButton.setTitle(unableTitle, for: .normal)
+    
     guard order.sign.length > 0 else {
       return
     }
@@ -69,6 +81,9 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
       self?.dismissLoadingIndicator()
       guard let msg = errorMsg else {
         self?.controlsContainerView.isHidden = true
+        self?.showAlertView("order_detail_add_signature_successfully".localized, completionHandler: { (action) in
+          self?.navigationController?.popViewController(animated: true)
+        })
         return
       }
       self?.showAlertView(msg)

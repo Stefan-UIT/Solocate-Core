@@ -56,21 +56,21 @@ struct OrderDetailItem {
     self.type = type
     switch type {
     case .reference:
-      name = "Order Ref"
+      name = "order_detail_order_reference".localized
     case .status:
-      name = "Status"
+      name = "order_detail_status".localized
     case .deliveryDate:
-      name = "Expected Date"
+      name = "order_detail_expected_date".localized
     case .customerName:
-      name = "Contact Name"
+      name = "order_detail_contact_name".localized
     case .phone:
-      name = "Phone"
+      name = "order_detail_phone".localized
     case .address:
-      name = "Delivery Address"
+      name = "order_detail_delivery_address".localized
     case .description:
-      name = "Description"
+      name = "order_detail_description".localized
     case .items:
-      name = "Items"
+      name = "items".localized
     }
   }
 }

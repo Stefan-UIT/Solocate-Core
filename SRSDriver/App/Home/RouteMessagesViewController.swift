@@ -46,7 +46,11 @@ class RouteMessagesViewController: BaseViewController {
     }
     tableView.estimatedRowHeight = estimatedRowHeight
     tableView.rowHeight = UITableViewAutomaticDimension
-    
+  }
+  
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    tabBarController?.tabBar.isHidden = false
   }
   
   @IBAction func addMessage(_ sender: UIButton) {

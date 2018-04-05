@@ -310,41 +310,39 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     }
     else if tableView == self.tableView {
       let item = detailItems[indexPath.row]
-      if item.type == .items && item.items.count > 0,
+      if item.type == .items,
         let cell = tableView.dequeueReusableCell(withIdentifier: orderItemsCellIdentifier, for: indexPath) as? OrderItemsTableViewCell {
         subTableView.frame = CGRect(x: 0, y: orderItemsPaddingTop, width: cell.frame.width, height: CGFloat(item.items.count)*orderItemCellHeight.scaleHeight())
         cell.contentView.addSubview(subTableView)
         cell.selectionStyle = .none
-        cell.didClickScanButton = { [unowned self] () in
+        cell.didClickScanButton = { [weak self] () in
+          guard let strongSelf = self else {return}
+          guard let _orderDetail = strongSelf.orderDetail, _orderDetail.statusCode == "IP" else {return}
           let scanVC = ScanBarCodeViewController.loadViewController(type: ScanBarCodeViewController.self)
           scanVC.didScan = {
-            [unowned self] (code) in
-            let orderItem = self.detailItems[self.itemsIndex]
+            [weak self] (code) in
+            guard let strongSelf = self else {return}
+            let orderItem = strongSelf.detailItems[strongSelf.itemsIndex]
             if code.length > 0 {
-              if self.shouldFilterOrderItemsList {
-                self.scannedObjectIndexs = self.findIndexOfScannedObject(code, items: orderItem.items)
+              if strongSelf.shouldFilterOrderItemsList {
+                strongSelf.scannedObjectIndexs = strongSelf.findIndexOfScannedObject(code, items: orderItem.items)
               }
               else {
-                self.showAlertAddNewOrderItem(code)
+                strongSelf.showAlertAddNewOrderItem(code)
               }
-              self.scannedString = code
+              strongSelf.scannedString = code
             }
           }
-          self.scannedString = ""
-          self.present(scanVC, animated: true, completion: nil)
-        }
-        cell.didClickResetList = {
-          [unowned self] () in
-          self.scannedObjectIndexs.removeAll()
-          self.scannedString = ""
+          strongSelf.scannedString = ""
+          strongSelf.present(scanVC, animated: true, completion: nil)
         }
         return cell
-      }
+      } // end if order item cell
       else if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
         cell.orderDetailItem = item
         cell.selectionStyle = !(item.type == .phone && item.type == .address) ? .none : .default
         return cell
-      }
+      } // detail item cell
     }
     return UITableViewCell()
   }
