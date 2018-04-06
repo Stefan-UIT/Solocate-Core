@@ -8,6 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		241D68792069DB2200914E4F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 241D68772069DB2200914E4F /* Localizable.strings */; };
+		242DC4B9207775F50047F19C /* PackagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242DC4B8207775F50047F19C /* PackagesViewController.swift */; };
+		242DC4BA207775F80047F19C /* PackagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242DC4B8207775F50047F19C /* PackagesViewController.swift */; };
+		242DC4BC207779FC0047F19C /* PackageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242DC4BB207779FC0047F19C /* PackageTableViewCell.swift */; };
+		242DC4BD207779FC0047F19C /* PackageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242DC4BB207779FC0047F19C /* PackageTableViewCell.swift */; };
 		245BBAA22073616D00EE3E47 /* MessageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245BBAA12073616D00EE3E47 /* MessageAPI.swift */; };
 		245BBAA4207363EC00EE3E47 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245BBAA3207363EC00EE3E47 /* Message.swift */; };
 		24677EEE2073231200C41E4F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24677EED2073231200C41E4F /* GoogleService-Info.plist */; };
@@ -152,6 +156,8 @@
 /* Begin PBXFileReference section */
 		241D68782069DB2200914E4F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		241D687A2069DB5E00914E4F /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
+		242DC4B8207775F50047F19C /* PackagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagesViewController.swift; sourceTree = "<group>"; };
+		242DC4BB207779FC0047F19C /* PackageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageTableViewCell.swift; sourceTree = "<group>"; };
 		245BBAA12073616D00EE3E47 /* MessageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAPI.swift; sourceTree = "<group>"; };
 		245BBAA3207363EC00EE3E47 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		24677EED2073231200C41E4F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -348,17 +354,17 @@
 				5A68A44C205A201A00CA9DB8 /* OrderSignatureViewController.swift */,
 				5A68A44E205A202400CA9DB8 /* OrderNotesViewController.swift */,
 				5A68A450205A202F00CA9DB8 /* OrderPictureViewController.swift */,
-				24B331932061FA66001FAC49 /* PictureTableViewCell.swift */,
-				5A68A453205A223200CA9DB8 /* OrderDetailCollectionViewCell.swift */,
-				5ACCE8DA205BAD2800A1532D /* OrderDetailTableViewCell.swift */,
 				5ACCE8D6205BA46800A1532D /* OrderDetailMapViewController.swift */,
-				24DCDCD52068E2FD00D3313F /* OrderDetailMapTableViewCell.swift */,
 				24B3319520623B5A001FAC49 /* ReasonListViewController.swift */,
+				24D387702063674100BE51D9 /* ScanBarCodeViewController.swift */,
+				5ACCE8DA205BAD2800A1532D /* OrderDetailTableViewCell.swift */,
+				5A68A453205A223200CA9DB8 /* OrderDetailCollectionViewCell.swift */,
 				5ACCE8D8205BA94A00A1532D /* NoteTableViewCell.swift */,
+				24DCDCD52068E2FD00D3313F /* OrderDetailMapTableViewCell.swift */,
 				24D38768206350ED00BE51D9 /* OrderItemsTableViewCell.swift */,
 				24D3876A2063511F00BE51D9 /* OrderScanItemTableViewCell.swift */,
+				24B331932061FA66001FAC49 /* PictureTableViewCell.swift */,
 				24D3876E2063625B00BE51D9 /* OrderScanItemTableViewCell.xib */,
-				24D387702063674100BE51D9 /* ScanBarCodeViewController.swift */,
 			);
 			path = OrderDetails;
 			sourceTree = "<group>";
@@ -402,6 +408,8 @@
 				5A68A460205A86B500CA9DB8 /* MapsViewController.swift */,
 				246FA3512071EB7300C5E707 /* RouteMessagesViewController.swift */,
 				246FA3532071EBA600C5E707 /* RouteMessageTableViewCell.swift */,
+				242DC4B8207775F50047F19C /* PackagesViewController.swift */,
+				242DC4BB207779FC0047F19C /* PackageTableViewCell.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -802,6 +810,7 @@
 				2494A9362074926A005A2622 /* UITextView.swift in Sources */,
 				2494A9372074926A005A2622 /* OrderItemsTableViewCell.swift in Sources */,
 				2494A9382074926A005A2622 /* MessageAPI.swift in Sources */,
+				242DC4BD207779FC0047F19C /* PackageTableViewCell.swift in Sources */,
 				2494A9392074926A005A2622 /* Array.swift in Sources */,
 				2494A93A2074926A005A2622 /* BaseViewController.swift in Sources */,
 				2494A93B2074926A005A2622 /* Reason.swift in Sources */,
@@ -832,6 +841,7 @@
 				2494A9542074926A005A2622 /* RESTRequest.swift in Sources */,
 				2494A9552074926A005A2622 /* UITableView-Extensions.swift in Sources */,
 				2494A9562074926A005A2622 /* AppDelegate.swift in Sources */,
+				242DC4BA207775F80047F19C /* PackagesViewController.swift in Sources */,
 				2494A9572074926A005A2622 /* String.swift in Sources */,
 				2494A9582074926A005A2622 /* GoogleDirectionResponse.swift in Sources */,
 				2494A9592074926A005A2622 /* SignatureView.swift in Sources */,
@@ -869,6 +879,7 @@
 				5A499CA720591D0400A1D944 /* UITextView.swift in Sources */,
 				24D38769206350ED00BE51D9 /* OrderItemsTableViewCell.swift in Sources */,
 				245BBAA22073616D00EE3E47 /* MessageAPI.swift in Sources */,
+				242DC4BC207779FC0047F19C /* PackageTableViewCell.swift in Sources */,
 				5ACCE8D1205B689000A1532D /* Array.swift in Sources */,
 				5A499CBB2059277D00A1D944 /* BaseViewController.swift in Sources */,
 				24B3319820623C25001FAC49 /* Reason.swift in Sources */,
@@ -899,6 +910,7 @@
 				5A82E9C6205A038900F34351 /* RESTRequest.swift in Sources */,
 				5A499CA520591D0400A1D944 /* UITableView-Extensions.swift in Sources */,
 				5AA4CA4020590AD4003F8E6F /* AppDelegate.swift in Sources */,
+				242DC4B9207775F50047F19C /* PackagesViewController.swift in Sources */,
 				5A499C9F20591D0400A1D944 /* String.swift in Sources */,
 				248F20922069F16300E6902D /* GoogleDirectionResponse.swift in Sources */,
 				5ACCE8E2205BB30C00A1532D /* SignatureView.swift in Sources */,
@@ -1106,7 +1118,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SRSDriver/SRSDriver.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				INFOPLIST_FILE = SRSDriver/Info.plist;
@@ -1115,8 +1127,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMASOF";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "397d6a7a-7d3a-4751-b880-6ef4cb548158";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-SRSDriver";
+				PROVISIONING_PROFILE = "7927ead9-5fdd-4154-9e64-45386021fd6d";
+				PROVISIONING_PROFILE_SPECIFIER = "dis-srsdriver";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1128,7 +1140,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SRSDriver/SRSDriver.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				INFOPLIST_FILE = SRSDriver/Info.plist;
@@ -1137,8 +1149,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMASOF";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "397d6a7a-7d3a-4751-b880-6ef4cb548158";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-SRSDriver";
+				PROVISIONING_PROFILE = "7927ead9-5fdd-4154-9e64-45386021fd6d";
+				PROVISIONING_PROFILE_SPECIFIER = "dis-srsdriver";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

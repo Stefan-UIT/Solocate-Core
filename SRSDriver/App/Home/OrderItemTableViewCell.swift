@@ -23,7 +23,8 @@ class OrderItemTableViewCell: UITableViewCell {
       let status = OrderStatus(rawValue: order.statusCode)!
       orderStatus.text = "\(status.statusName)"
       deliveryAddress.text = "\(order.deliveryAdd)"
-      deliveryDate.text = "\(order.deliveryDate) - (\(order.timeWindowName))"
+      let deliveryDateString = order.timeWindowName.length > 0 ? "\(order.deliveryDate) - (\(order.timeWindowName))" : "\(order.deliveryDate)"
+      deliveryDate.text = deliveryDateString
       let color = order.statusCode == "DV" ? AppColor.highLightColor : UIColor(hex: "#FFFFFF")
       cellContainerView.backgroundColor = color
       orderType.text = order.orderType

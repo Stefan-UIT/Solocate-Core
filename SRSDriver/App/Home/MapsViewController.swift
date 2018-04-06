@@ -23,6 +23,7 @@ class MapsViewController: UIViewController {
     mapView.isMyLocationEnabled = true
     mapView.delegate = self
     drawMap()
+    title = "map".localized
   }
   
   override func viewWillAppear(_ animated: Bool) {

@@ -25,6 +25,8 @@ struct Constants {
   static let toolbarHeight: CGFloat = 44.0
   static let pickerViewHeight: CGFloat = 216.0
   static let maxSizeForImageUploading = 500000
+  static let messageTabIndex: Int = 3
+  static let packageTabIndex: Int = 1
 
   static let refreshTimeInterval: Double = 15
 

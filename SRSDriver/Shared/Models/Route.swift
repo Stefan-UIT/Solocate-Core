@@ -26,6 +26,7 @@ class Route: NSObject, Mappable {
   var orderList = [Order]()
   var pickupList = [PickupPlace]()
   var messages = [Message]()
+  var currentItems = [OrderItem]()
   var endDate = ""
   var startDate = ""
   
@@ -49,6 +50,7 @@ class Route: NSObject, Mappable {
     orderList   <- map["order_list"]
     pickupList  <- map["pickup_list"]
     messages    <- map["messages"]
+    currentItems <- map["current_item"]
   }
 }
 

@@ -11,14 +11,15 @@ import ObjectMapper
 
 class OrderItem: NSObject, Mappable {
   var id = -1
-  var sku = "-"
-  var desc = "-"
-  var vol = "-"
-  var weight = "-"
+  var sku = ""
+  var desc = ""
+  var vol = ""
+  var weight = ""
   var qty = 0
-  var barcode = "-"
-  var statusName = "-"
+  var barcode = ""
+  var statusName = ""
   var statusCode = ""
+  var total = -1
   
   required convenience init?(map: Map) {
     self.init()
@@ -34,6 +35,7 @@ class OrderItem: NSObject, Mappable {
     statusName <- map["status_name"]
     statusCode <- map["status_code"]
     id <- map["id"]
+    total <- map["total"]
     
   }
   

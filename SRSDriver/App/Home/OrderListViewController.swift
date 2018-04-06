@@ -25,9 +25,15 @@ class OrderListViewController: UIViewController {
   }
   fileprivate var route: Route! {
     didSet {
-      if let messageTab = self.tabBarController?.tabBar.items?.last {
+      guard let tabItems = self.tabBarController?.tabBar.items else { return }
+      if let messageTab = tabItems.last {
         messageTab.badgeValue = nil
       }
+      if Constants.packageTabIndex < tabItems.count {
+        let packageTab = tabItems[Constants.packageTabIndex]
+        packageTab.badgeValue = nil
+      }
+      
       guard route.orderList.count > 0 else {
         noOrdersLabel.isHidden = false
         tableView.isHidden = true
@@ -40,14 +46,24 @@ class OrderListViewController: UIViewController {
       tableView.reloadData()
       
       // messgae
-      if let messageTab = self.tabBarController?.tabBar.items?.last {
+      if let messageTab = tabItems.last {
         messageTab.badgeValue = route.messages.count > 0 ? "\(route.messages.count)" : nil
       }
-      if let messageNV = self.tabBarController?.viewControllers?.last as? UINavigationController,
+      let packageTab = tabItems[Constants.packageTabIndex]
+      packageTab.badgeValue = route.currentItems.count > 0 ? "\(route.currentItems.count)" : nil
+      
+      guard let viewControllers = tabBarController?.viewControllers else {return}
+      
+      if let messageNV = viewControllers.last as? UINavigationController,
         let messageVC = messageNV.topViewController as? RouteMessagesViewController {
         messageVC.route = route        
       }
-      
+      if Constants.packageTabIndex < viewControllers.count {
+        let packageNavC = viewControllers[Constants.packageTabIndex] as? UINavigationController
+        if let package = packageNavC?.topViewController as? PackagesViewController {
+          package.route = route
+        }
+      }
     }
   }
   
@@ -237,8 +253,11 @@ extension OrderListViewController: UITabBarControllerDelegate {
     if let mapVC = navigationController.topViewController as? MapsViewController {
       mapVC.route = route
     }
-    if let routeMessageVC = navigationController.topViewController as? RouteMessagesViewController {
+    else if let routeMessageVC = navigationController.topViewController as? RouteMessagesViewController {
       routeMessageVC.route = route
+    }
+    else if let packageVC = navigationController.topViewController as? PackagesViewController {
+      packageVC.route = route
     }
   }
 }

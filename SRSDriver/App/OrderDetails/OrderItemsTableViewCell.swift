@@ -21,9 +21,6 @@ class OrderItemsTableViewCell: UITableViewCell {
     didClickScanButton?()
   }
   
-  @IBAction func resetScanList(_ sender: UIButton) {
-    didClickResetList?()
-  }
   override func setSelected(_ selected: Bool, animated: Bool) {
     super.setSelected(selected, animated: animated)
     

@@ -48,7 +48,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       var type = OrderDetailItem(.type)
       type.content = _orderDetail.orderType
       var delDate = OrderDetailItem(.deliveryDate)
-      delDate.content = _orderDetail.deliveryDate + " - " + _orderDetail.timeWindowName
+      let dateTime = _orderDetail.timeWindowName.length > 0 ? _orderDetail.deliveryDate + " - " + _orderDetail.timeWindowName : _orderDetail.deliveryDate
+      delDate.content = dateTime
       var customer = OrderDetailItem(.customerName)
       customer.content = _orderDetail.deliveryContactName
       var phone = OrderDetailItem(.phone)

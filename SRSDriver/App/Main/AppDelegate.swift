@@ -72,7 +72,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
             listVC.getRouteDetail(routeID)
           }
           if let type = userInfo["type"] as? String, type == "new message" {
-            tabbar.selectedIndex = 2
+            tabbar.selectedIndex = Constants.messageTabIndex
           }
           return
         }
@@ -84,7 +84,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
           listVC.getRouteDetail(routeID)
         }
         if let type = userInfo["type"] as? String, type == "new message" {
-          tabbarVC?.selectedIndex = 2
+          tabbarVC?.selectedIndex = Constants.messageTabIndex
         }
         rootNavigationController?.pushViewController(tabbarVC!, animated: true)
         window?.rootViewController = rootNavigationController

@@ -18,19 +18,6 @@ class RouteMessagesViewController: BaseViewController {
         return
       }
       tableView.reloadData()
-//      showLoadingIndicator()
-//      MessageAPI.getList("\(_route.id)") { [weak self] (resp, errMsg) in
-//        self?.dismissLoadingIndicator()
-//        if let _messages = resp {
-//          self?.messages.removeAll()
-//          self?.messages.append(contentsOf: _messages)
-//          self?.tableView.reloadData()
-//          self?.tabBarController?.tabBar.selectedItem?.badgeValue = "\(_messages.count)"
-//        }
-//        else if let _msg = errMsg {
-//          self?.showAlertView(_msg)
-//        }
-//      }
     }
   }
   
@@ -46,6 +33,7 @@ class RouteMessagesViewController: BaseViewController {
     }
     tableView.estimatedRowHeight = estimatedRowHeight
     tableView.rowHeight = UITableViewAutomaticDimension
+    title = "messages".localized
   }
   
   override func viewWillAppear(_ animated: Bool) {

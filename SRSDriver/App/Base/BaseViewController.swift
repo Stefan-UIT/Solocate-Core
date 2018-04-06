@@ -25,6 +25,10 @@ class BaseViewController: UIViewController {
     noInternetLabel.tag = 10001
     noInternetLabel.isHidden = true
     view.insertSubview(noInternetLabel, at: 10001)
+    addNetworkObserver()
+  }
+  deinit {
+    removeNetworkObserver()
   }
 
   
