@@ -44,7 +44,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       refe.content = _orderDetail.orderReference
       var statusItem = OrderDetailItem(.status)
       let status = OrderStatus(rawValue: _orderDetail.statusCode)!
-      statusItem.content = status.statusName      
+      statusItem.content = status.statusName
+      var type = OrderDetailItem(.type)
+      type.content = _orderDetail.orderType
       var delDate = OrderDetailItem(.deliveryDate)
       delDate.content = _orderDetail.deliveryDate + " - " + _orderDetail.timeWindowName
       var customer = OrderDetailItem(.customerName)
@@ -63,6 +65,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       
       detailItems.append(refe)
       detailItems.append(statusItem)
+      detailItems.append(type)
       detailItems.append(delDate)
       detailItems.append(customer)
       detailItems.append(phone)
@@ -82,7 +85,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
   }
   
-  var didUpdateStatus:(() -> Void)?
+  var didUpdateStatus:((_ shouldMoveSigatureTab: Bool ) -> Void)?
   var updateOrderDetail:(() -> Void)?
   
   override func viewDidLoad() {
@@ -97,6 +100,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
     tableView.estimatedRowHeight = cellHeight
     tableView.rowHeight = UITableViewAutomaticDimension
+    
+    navigationController?.navigationBar.tintColor = .white
   }
   
   override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -267,7 +272,8 @@ extension OrderDetailViewController {
         self.showAlertView(err)
       }
       else {
-        self.didUpdateStatus?()
+        let shouldMoveSignatureTab = status == "DV" // Expected Status DV
+        self.didUpdateStatus?(shouldMoveSignatureTab)
       }
     }
   }

@@ -17,7 +17,7 @@ class OrderListViewController: UIViewController {
   @IBOutlet weak var pickerContainerView: UIView!
   
   fileprivate let cellIdentifier = "OrderItemTableViewCell"
-  fileprivate let cellHeight: CGFloat = 130.0
+  fileprivate let cellHeight: CGFloat = 150.0
   fileprivate var selectedString = "" {
     didSet {
       navigationItem.title = selectedString

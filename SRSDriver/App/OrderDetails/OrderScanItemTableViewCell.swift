@@ -13,6 +13,7 @@ class OrderScanItemTableViewCell: UITableViewCell {
   @IBOutlet weak var quantityLabel: UILabel!
   @IBOutlet weak var descriptionLabel: UILabel!
   @IBOutlet weak var statusLabel: UILabel!
+  @IBOutlet weak var barcodeLabel: UILabel!
   
   var orderItem: OrderItem! {
     didSet {
@@ -21,6 +22,7 @@ class OrderScanItemTableViewCell: UITableViewCell {
       descriptionLabel.text = orderItem.desc
       let status = OrderStatus(rawValue: orderItem.statusCode)!
       statusLabel.text = "(\(status.statusName))"
+      barcodeLabel.text = orderItem.barcode
     }
   }
     override func awakeFromNib() {

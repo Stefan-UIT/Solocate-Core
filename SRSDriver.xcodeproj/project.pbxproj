@@ -160,7 +160,7 @@
 		246FA3532071EBA600C5E707 /* RouteMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMessageTableViewCell.swift; sourceTree = "<group>"; };
 		248F208F2069E2CA00E6902D /* configs_masof.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = configs_masof.plist; sourceTree = "<group>"; };
 		248F20912069F16300E6902D /* GoogleDirectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleDirectionResponse.swift; sourceTree = "<group>"; };
-		2494A9762074926A005A2622 /* SRSDriver_Malee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SRSDriver_Malee.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2494A9762074926A005A2622 /* DMSDriver_Malee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMSDriver_Malee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2494A9772074926B005A2622 /* SRSDriver_Malee.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = SRSDriver_Malee.plist; path = /Users/nguyenphu/Documents/Seldatinc/projects/SRS/Driver/ios/SRSDriver_Malee.plist; sourceTree = "<absolute>"; };
 		2494A97A2074AD41005A2622 /* configs_malee.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = configs_malee.plist; sourceTree = "<group>"; };
 		24B331932061FA66001FAC49 /* PictureTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PictureTableViewCell.swift; sourceTree = "<group>"; };
@@ -214,7 +214,7 @@
 		5A82E9C9205A04EE00F34351 /* OrderListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListViewController.swift; sourceTree = "<group>"; };
 		5A82E9CB205A148F00F34351 /* OrderItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderItemTableViewCell.swift; sourceTree = "<group>"; };
 		5A82E9CD205A197800F34351 /* Date.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
-		5AA4CA3C20590AD4003F8E6F /* SRSDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SRSDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		5AA4CA3C20590AD4003F8E6F /* DMSDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMSDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5AA4CA3F20590AD4003F8E6F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		5AA4CA4420590AD4003F8E6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5AA4CA4620590AD4003F8E6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -420,8 +420,8 @@
 		5AA4CA3D20590AD4003F8E6F /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				5AA4CA3C20590AD4003F8E6F /* SRSDriver.app */,
-				2494A9762074926A005A2622 /* SRSDriver_Malee.app */,
+				5AA4CA3C20590AD4003F8E6F /* DMSDriver.app */,
+				2494A9762074926A005A2622 /* DMSDriver_Malee.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -504,9 +504,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2494A9262074926A005A2622 /* SRSDriver_Malee */ = {
+		2494A9262074926A005A2622 /* DMSDriver_Malee */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2494A9732074926A005A2622 /* Build configuration list for PBXNativeTarget "SRSDriver_Malee" */;
+			buildConfigurationList = 2494A9732074926A005A2622 /* Build configuration list for PBXNativeTarget "DMSDriver_Malee" */;
 			buildPhases = (
 				2494A9272074926A005A2622 /* [CP] Check Pods Manifest.lock */,
 				2494A9282074926A005A2622 /* Sources */,
@@ -519,14 +519,14 @@
 			);
 			dependencies = (
 			);
-			name = SRSDriver_Malee;
+			name = DMSDriver_Malee;
 			productName = SRSDriver;
-			productReference = 2494A9762074926A005A2622 /* SRSDriver_Malee.app */;
+			productReference = 2494A9762074926A005A2622 /* DMSDriver_Malee.app */;
 			productType = "com.apple.product-type.application";
 		};
-		5AA4CA3B20590AD4003F8E6F /* SRSDriver */ = {
+		5AA4CA3B20590AD4003F8E6F /* DMSDriver */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 5AA4CA4E20590AD4003F8E6F /* Build configuration list for PBXNativeTarget "SRSDriver" */;
+			buildConfigurationList = 5AA4CA4E20590AD4003F8E6F /* Build configuration list for PBXNativeTarget "DMSDriver" */;
 			buildPhases = (
 				09DA3144996B9F211A5A9126 /* [CP] Check Pods Manifest.lock */,
 				5AA4CA3820590AD4003F8E6F /* Sources */,
@@ -539,9 +539,9 @@
 			);
 			dependencies = (
 			);
-			name = SRSDriver;
+			name = DMSDriver;
 			productName = SRSDriver;
-			productReference = 5AA4CA3C20590AD4003F8E6F /* SRSDriver.app */;
+			productReference = 5AA4CA3C20590AD4003F8E6F /* DMSDriver.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -585,8 +585,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				5AA4CA3B20590AD4003F8E6F /* SRSDriver */,
-				2494A9262074926A005A2622 /* SRSDriver_Malee */,
+				5AA4CA3B20590AD4003F8E6F /* DMSDriver */,
+				2494A9262074926A005A2622 /* DMSDriver_Malee */,
 			);
 		};
 /* End PBXProject section */
@@ -1106,7 +1106,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SRSDriver/SRSDriver.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				INFOPLIST_FILE = SRSDriver/Info.plist;
@@ -1115,8 +1115,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMASOF";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7927ead9-5fdd-4154-9e64-45386021fd6d";
-				PROVISIONING_PROFILE_SPECIFIER = "dis-srsdriver";
+				PROVISIONING_PROFILE = "397d6a7a-7d3a-4751-b880-6ef4cb548158";
+				PROVISIONING_PROFILE_SPECIFIER = "dev-SRSDriver";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1128,7 +1128,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = SRSDriver/SRSDriver.entitlements;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				INFOPLIST_FILE = SRSDriver/Info.plist;
@@ -1137,8 +1137,8 @@
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMASOF";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "7927ead9-5fdd-4154-9e64-45386021fd6d";
-				PROVISIONING_PROFILE_SPECIFIER = "dis-srsdriver";
+				PROVISIONING_PROFILE = "397d6a7a-7d3a-4751-b880-6ef4cb548158";
+				PROVISIONING_PROFILE_SPECIFIER = "dev-SRSDriver";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1147,7 +1147,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2494A9732074926A005A2622 /* Build configuration list for PBXNativeTarget "SRSDriver_Malee" */ = {
+		2494A9732074926A005A2622 /* Build configuration list for PBXNativeTarget "DMSDriver_Malee" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2494A9742074926A005A2622 /* Debug */,
@@ -1165,7 +1165,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		5AA4CA4E20590AD4003F8E6F /* Build configuration list for PBXNativeTarget "SRSDriver" */ = {
+		5AA4CA4E20590AD4003F8E6F /* Build configuration list for PBXNativeTarget "DMSDriver" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5AA4CA4F20590AD4003F8E6F /* Debug */,

@@ -232,7 +232,7 @@ class APIs {
     return data
   }
   
-  static func uploadFiles(_ files: [TLPHAsset], name: String = "", orderID: String, completion: @escaping ((_ errorMsg: String?) -> Void)) {
+  static func uploadFiles(_ files: [PictureObject], orderID: String, completion: @escaping ((_ errorMsg: String?) -> Void)) {
     guard let baseURL = RESTConstants.configs[RESTConstants.BASE_URL],
       let uploadFiles = RESTConstants.configs[RESTConstants.UPLOAD_FILES] else {
         return
@@ -242,12 +242,11 @@ class APIs {
     if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
       headers["Authorization"] = "Bearer " + token
     }
-
     
     Alamofire.upload(multipartFormData: { (formData) in
-      for item in files {
-        let data = UIImageJPEGRepresentation(item.fullResolutionImage!, 0.4)
-        let imgName = name.length > 0 ? name : item.originalFileName ?? "image"
+      for (idx, item) in files.enumerated() {
+        let data = UIImageJPEGRepresentation(item.image, 0.4)
+        let imgName = item.name.length > 0 ? item.name : "Untitle_\(idx)"
         formData.append(data ?? Data(), withName: "file[]", fileName: imgName , mimeType: "image/jpg")
       }
     }, usingThreshold: SessionManager.multipartFormDataEncodingMemoryThreshold, to: url, method: .post, headers: headers) { (encodingResult) in

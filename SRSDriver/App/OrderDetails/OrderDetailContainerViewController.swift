@@ -19,13 +19,15 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
     
     let child_1 = OrderDetailViewController.loadViewController(type: OrderDetailViewController.self)
     child_1.didUpdateStatus = {
-      [unowned self] in
-      self.getOrderDetail()
-      self.moveToViewController(at: 1, animated: true) // move to signature tab
+      [weak self] shouldMoveTab  in
+      self?.getOrderDetail()
+      if shouldMoveTab {
+        self?.moveToViewController(at: 1, animated: true) // move to signature tab
+      }
     }
     child_1.updateOrderDetail = {
-      [unowned self] in
-      self.getOrderDetail()
+      [weak self] in
+      self?.getOrderDetail()
     }
     let child_2 = OrderSignatureViewController.loadViewController(type: OrderSignatureViewController.self)
 //    let child_3 = OrderNotesViewController.loadViewController(type: OrderNotesViewController.self)

@@ -15,7 +15,7 @@ enum Theme: Int {
   var mainColor: UIColor {
     switch self {
     case .light:
-      return UIColor(red: 87.0/255.0, green: 188.0/255.0, blue: 95.0/255.0, alpha: 1.0)
+      return AppColor.mainColor
     case .dark:
       return UIColor(red: 242.0/255.0, green: 101.0/255.0, blue: 34.0/255.0, alpha: 1.0)
     default:
@@ -26,9 +26,9 @@ enum Theme: Int {
   var barStyle: UIBarStyle {
     switch self {
     case .light, .graphical:
-      return .default
-    case .dark:
       return .black
+    case .dark:
+      return .default
     }
   }
   
@@ -47,16 +47,14 @@ struct ThemeManager {
   }
   
   static func applyTheme(_ theme: Theme) {
-    UserDefaults.standard.setValue(theme.rawValue, forKey: "selectedThemeKey")
-    UserDefaults.standard.synchronize()
-    
-    UIApplication.shared.delegate?.window??.tintColor = theme.mainColor
-    UINavigationBar.appearance().barStyle = theme.barStyle
-    UINavigationBar().barTintColor = theme.mainColor
-    UINavigationBar().isTranslucent = false
+//    UserDefaults.standard.setValue(theme.rawValue, forKey: "selectedThemeKey")
+//    UserDefaults.standard.synchronize()
+//    UIApplication.shared.delegate?.window??.tintColor = theme.mainColor
+//    UINavigationBar.appearance().barStyle = theme.barStyle
+//    UINavigationBar().barTintColor = theme.mainColor
+//    UINavigationBar().isTranslucent = false
 //    UINavigationBar.appearance().transli
-    UINavigationBar.appearance().setBackgroundImage(theme.navigationBackgroundImage, for: .default)
-    
+//    UINavigationBar.appearance().setBackgroundImage(theme.navigationBackgroundImage, for: .default)
   }
   
   

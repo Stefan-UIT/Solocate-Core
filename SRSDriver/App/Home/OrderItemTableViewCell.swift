@@ -9,6 +9,8 @@
 import UIKit
 
 class OrderItemTableViewCell: UITableViewCell {
+  
+  @IBOutlet weak var orderType: UILabel!
   @IBOutlet weak var orderReference: UILabel!
   @IBOutlet weak var orderStatus: UILabel!
   @IBOutlet weak var deliveryAddress: UILabel!
@@ -22,8 +24,9 @@ class OrderItemTableViewCell: UITableViewCell {
       orderStatus.text = "\(status.statusName)"
       deliveryAddress.text = "\(order.deliveryAdd)"
       deliveryDate.text = "\(order.deliveryDate) - (\(order.timeWindowName))"
-      let color = order.statusCode == "DV" ? "#757575" : "#FFFFFF"
-      cellContainerView.backgroundColor = UIColor(hex: color)
+      let color = order.statusCode == "DV" ? AppColor.highLightColor : UIColor(hex: "#FFFFFF")
+      cellContainerView.backgroundColor = color
+      orderType.text = order.orderType
     }
   }
   

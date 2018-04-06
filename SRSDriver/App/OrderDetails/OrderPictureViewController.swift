@@ -9,54 +9,62 @@
 import UIKit
 import Photos
 import XLPagerTabStrip
-import TLPhotoPicker
 import SDWebImage
 
-class OrderPictureViewController: BaseOrderDetailViewController {
+class OrderPictureViewController: BaseOrderDetailViewController, UINavigationControllerDelegate {
   
-  fileprivate var selectedAssets: [TLPHAsset]!
   fileprivate let cellIdentifier = "PictureTableViewCell"
   fileprivate var imgTitle = ""
   fileprivate let cellHeight: CGFloat = 90.0
   fileprivate let headerHeight: CGFloat = 40.0
   
+  fileprivate var selectedPictures = Array<PictureObject>()
+  
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var actionButton: UIButton!
+  @IBOutlet weak var takePictureButton: UIButton!
+  @IBOutlet weak var headerView: UIView!
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
     if let _orderDetail = orderDetail {
       actionButton.isHidden = _orderDetail.pictures.count > 0
+      if _orderDetail.pictures.count > 0 {
+        headerView.removeFromSuperview()
+      }
     }
   }
   
   @IBAction func takePicture(_ sender: UIButton) {
-    guard selectedAssets != nil && selectedAssets.count > 0 else {
-      let picker = TLPhotosPickerViewController()
-      picker.delegate = self
-      present(picker, animated: true, completion: nil)
-      return
-    }
-    // upload photos
-    guard let order = orderDetail else {
-      return
-    }
-    var imgData = [Data]()
-    for item in selectedAssets {
-      let data = UIImageJPEGRepresentation(item.fullResolutionImage ?? UIImage(), 0.5)
-      imgData.append(data ?? Data())
-    }
-    showLoadingIndicator()
-    APIs.uploadFiles(selectedAssets, name: imgTitle, orderID: "\(order.id)") { [unowned self] (errMsg) in
-      self.dismissLoadingIndicator()
-      if let msg = errMsg {
-        self.showAlertView(msg)
+    let picker = UIImagePickerController()
+    picker.delegate = self
+    picker.sourceType = .camera
+    present(picker, animated: true, completion: nil)
+  }
+  
+  @IBAction func clearPhotos(_ sender: UIButton) {
+    selectedPictures.removeAll()
+    tableView.reloadData()
+  }
+  
+  @IBAction func uploadPhotos(_ sender: UIButton) {
+//     upload photos
+      guard let order = orderDetail, selectedPictures.count > 0 else {
+        return
       }
-      else {
-        self.showAlertView("order_detail_add_image_successfully".localized)
+      showLoadingIndicator()
+      APIs.uploadFiles(selectedPictures, orderID: "\(order.id)") { [weak self] (errMsg) in
+        self?.dismissLoadingIndicator()
+        if let msg = errMsg {
+          self?.showAlertView(msg)
+        }
+        else {
+          self?.showAlertView("order_detail_add_image_successfully".localized, completionHandler: { (action) in
+            self?.navigationController?.popToRootViewController(animated: true)
+          })
+        }
       }
-    }
   }
   
   override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -65,7 +73,7 @@ class OrderPictureViewController: BaseOrderDetailViewController {
 }
 
 extension OrderPictureViewController {
-  func showInputImageTitleWindow() {
+  func inputTitleFor(_ image: UIImage) {
     let alert = UIAlertController(title: "app_name".localized, message: "order_detail_input_img_title".localized, preferredStyle: .alert)
     let okAction = UIAlertAction(title: "ok".localized, style: .default) { [unowned self] (okAction) in
       alert.dismiss(animated: true, completion: nil)
@@ -75,10 +83,14 @@ extension OrderPictureViewController {
           return
       }
       self.imgTitle = text
+      let pic = PictureObject(name: text, image: image)
+      self.selectedPictures.insert(pic, at: 0)
       self.tableView.reloadData()
     }
     let cancelAction = UIAlertAction(title: "cancel".localized, style: .default) { [unowned self] (action) in
       alert.dismiss(animated: true, completion: nil)
+      let pic = PictureObject(name: "", image: image)
+      self.selectedPictures.insert(pic, at: 0)
       self.tableView.reloadData()
     }
     alert.addAction(cancelAction)
@@ -90,8 +102,6 @@ extension OrderPictureViewController {
   }
   
   @objc func didClearSelectedPhotot(_ sender: Any) {
-    selectedAssets.removeAll()
-    actionButton.setImage(UIImage(named: "plus_white"), for: .normal)
     tableView.reloadData()
     imgTitle = "" // clear title
   }
@@ -103,7 +113,7 @@ extension OrderPictureViewController: UITableViewDataSource, UITableViewDelegate
     if let _orderDetail = orderDetail, _orderDetail.pictures.count > 0 {
       return _orderDetail.pictures.count
     }
-    return selectedAssets != nil ? selectedAssets.count : 0
+    return selectedPictures.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -116,10 +126,9 @@ extension OrderPictureViewController: UITableViewDataSource, UITableViewDelegate
                                  options: .refreshCached, completed: nil)
       }
       else {
-        let asset = selectedAssets[indexPath.row]
-        let imgName = imgTitle.length > 0 ? "\(imgTitle)" + "_\(indexPath.row)" : asset.originalFileName
-        cell.nameLabel.text = imgName
-        cell.imgView.image = asset.fullResolutionImage
+        let asset = selectedPictures[indexPath.row]
+        cell.nameLabel.text = asset.name.length > 0 ? asset.name : "Untitle_\(indexPath.row)"
+        cell.imgView.image = asset.image
       }
       
       return cell
@@ -130,45 +139,36 @@ extension OrderPictureViewController: UITableViewDataSource, UITableViewDelegate
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return cellHeight.scaleHeight()
   }
-
-  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-    guard selectedAssets != nil && selectedAssets.count > 0 else {
-      return nil
-    }
-    let padding: CGFloat = 10.0
-    let clearButton = UIButton(frame: CGRect(x: padding, y: padding, width: view.frame.width - 2*padding , height: 40))
-    clearButton.addTarget(self, action: #selector(self.didClearSelectedPhotot(_:)), for: .touchUpInside)
-    clearButton.setTitle("clear".localized, for: .normal)
-    clearButton.setTitleColor(AppColor.mainColor, for: .normal)
-    clearButton.titleLabel?.textAlignment = .right
-    return clearButton
-  }
-  
-  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return selectedAssets != nil && selectedAssets.count > 0 ? headerHeight.scaleHeight() : 0.0000000001
-  }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
+    if let cell = tableView.cellForRow(at: indexPath) as? PictureTableViewCell {
+     showImage(cell.imgView.image ?? UIImage(named: "place_holder")!)
+    }
   }
   
 }
 
-extension OrderPictureViewController: TLPhotosPickerViewControllerDelegate {
-  func dismissPhotoPicker(withTLPHAssets: [TLPHAsset]) {
-    let iconName = withTLPHAssets.count > 0 ? "upload" : "plus_white"
-    actionButton.setImage(UIImage(named: iconName), for: .normal)
-    selectedAssets = withTLPHAssets
+extension OrderPictureViewController: UIImagePickerControllerDelegate {
+  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+    picker.dismiss(animated: true, completion: nil)
   }
   
-  func dismissComplete() {
-    if selectedAssets.count > 0 {
-      showInputImageTitleWindow()
+  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    guard let img = info[UIImagePickerControllerOriginalImage] as? UIImage else {
+      return
     }
+    picker.dismiss(animated: true, completion: nil)
+    inputTitleFor(img)
   }
+}
+
+
+struct PictureObject {
+  var name: String
+  var image: UIImage
   
-  func didExceedMaximumNumberOfSelection(picker: TLPhotosPickerViewController) {
-    showAlertView("You reached the maximum number")    
+  mutating func changeName(_ newName: String)  {
+    self.name = newName
   }
-  
 }

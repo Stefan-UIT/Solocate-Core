@@ -25,14 +25,6 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
     signatureView.isHidden = order.sign.length > 0
     signatureImgView.isHidden = !(order.sign.length > 0)
     
-//    finishButton.isEnabled = order.statusCode == "OP" || order.statusCode == "IP"
-//    let finishButtonTitle = order.statusCode == "OP" ? "start".localized : "finish".localized
-//    finishButton.setTitle(finishButtonTitle, for: .normal)
-//
-//    unableToFinishButton.isEnabled = order.statusCode == "OP" || order.statusCode == "IP"
-//    let unableTitle = order.statusCode == "OP" ? "order_detail_unable_start".localized : "order_detail_unable_finish".localized
-//    unableToFinishButton.setTitle(unableTitle, for: .normal)
-    
     guard order.sign.length > 0 else {
       return
     }
@@ -49,7 +41,8 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
   @IBAction func cancelDrawSignature(_ sender: UIButton) {
     signatureView.sign.removeAllPoints()
     signatureView.signLayer.path = nil
-  }
+    signatureView.layer.sublayers?.forEach({$0.removeFromSuperlayer()})
+  }    
   
   @IBAction func submitSignature(_ sender: UIButton) {
     let rect = signatureView.frame
@@ -89,6 +82,8 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
       self?.showAlertView(msg)
     }
   }
+  
+  
   
   
   

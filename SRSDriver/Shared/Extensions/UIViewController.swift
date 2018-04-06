@@ -11,11 +11,36 @@ import SVProgressHUD
 
 extension UIViewController {
   func showAlertView(_ message: String, completionHandler:((_ action: UIAlertAction) -> Void)? = nil)  {
-    let alert = UIAlertController(title: "app_name".localized, message: message, preferredStyle: .alert)
+    let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
     let okAction = UIAlertAction(title: "ok".localized, style: .default, handler: completionHandler)
     alert.addAction(okAction)
     
     present(alert, animated: true, completion: nil)
+  }
+  
+  func showImage(_ image: UIImage) {
+    guard let window = UIApplication.shared.keyWindow else {
+      return
+    }
+    let imgView = UIImageView(frame: CGRect(origin: .zero, size: window.frame.size))
+    imgView.isUserInteractionEnabled = true
+    let button = UIButton(frame: CGRect(x: window.frame.size.width - 60.0, y: 40, width: 40, height: 40))
+    button.setImage(UIImage(named: "close"), for: .normal)
+    button.backgroundColor = .gray
+    button.addTarget(self, action: #selector(self.dismissImageView(_:)), for: .touchUpInside)
+    imgView.addSubview(button)
+    imgView.contentMode = .scaleAspectFit
+    imgView.backgroundColor = .black
+    window.addSubview(imgView)
+    imgView.image = image
+    imgView.tag = 1001
+  }
+  
+  @objc private func dismissImageView(_ sender: UIButton) {
+    if let window = UIApplication.shared.keyWindow,
+      let imgView = window.viewWithTag(1001){
+      imgView.removeFromSuperview()
+    }
   }
   
   func showLoadingIndicator() {

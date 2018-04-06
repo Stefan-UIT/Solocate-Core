@@ -33,17 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     FirebaseApp.configure()
     Messaging.messaging().delegate = self
-    #if MASOF
-      print("Masoffffff")
-    #elseif MALEE
-      print("Maleee")
-    #else
-      print("Anything")
-    #endif
-    
-    
-    
-    
+//    ThemeManager.applyTheme(.light)
     return true
   }
   

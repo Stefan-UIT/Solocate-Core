@@ -59,6 +59,8 @@ struct OrderDetailItem {
       name = "order_detail_order_reference".localized
     case .status:
       name = "order_detail_status".localized
+    case .type:
+      name = "order_detail_order_type".localized
     case .deliveryDate:
       name = "order_detail_expected_date".localized
     case .customerName:
@@ -79,6 +81,7 @@ struct OrderDetailItem {
 enum OrderDetailType {
   case reference
   case status
+  case type
   case deliveryDate
   case customerName
   case phone
