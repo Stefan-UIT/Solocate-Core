@@ -14,7 +14,7 @@ class RouteMessagesViewController: BaseViewController {
   private let estimatedRowHeight: CGFloat = 80.0
   var route: Route? {
     didSet {
-      guard let _route = route, tableView != nil else {
+      guard let _ = route, tableView != nil else {
         return
       }
       tableView.reloadData()
