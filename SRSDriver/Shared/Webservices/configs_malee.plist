@@ -40,5 +40,7 @@
 	<string>/backend-api/v1/messages/list-message?page=1&amp;limit=100&amp;route_id=%@</string>
 	<key>GET_ROUTE_DETAIL</key>
 	<string>/backend-api/v1/routes/%@</string>
+	<key>READ_MESSAGE</key>
+	<string>/backend-api/v1/messages/%@</string>
 </dict>
 </plist>

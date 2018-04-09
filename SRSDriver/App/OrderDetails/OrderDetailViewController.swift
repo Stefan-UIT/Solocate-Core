@@ -15,17 +15,20 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   @IBOutlet weak var unableToStartButton: UIButton!
   @IBOutlet weak var finishButton: UIButton!
   @IBOutlet weak var controlsStackView: UIStackView!
+  @IBOutlet weak var controlsFooter: UIStackView!
+  
+  
   var subTableView: UITableView!
   
   fileprivate var detailItems = [OrderDetailItem]()
   fileprivate let cellHeight: CGFloat = 70.0
   fileprivate let orderItemsPaddingTop: CGFloat = 40.0
-  fileprivate let orderItemCellHeight: CGFloat = 100.0
+  fileprivate let orderItemCellHeight: CGFloat = 130.0
   fileprivate let cellIdentifier = "OrderDetailTableViewCell"
   fileprivate let orderItemsCellIdentifier = "OrderItemsTableViewCell"
   fileprivate let orderScanItemCellIdentifier = "OrderScanItemTableViewCell"
   fileprivate var scanItems = [String]()
-  fileprivate let itemsIndex = 7
+  fileprivate let itemsIndex = 8
   fileprivate var scannedObjectIndexs = [Int]()
   fileprivate var shouldFilterOrderItemsList = true
   fileprivate var scannedString = "" {
@@ -34,6 +37,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       subTableView.reloadData()
     }
   }
+  
   
   override var orderDetail: OrderDetail? {
     didSet {      
@@ -83,6 +87,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       unableToStartButton.isEnabled = _orderDetail.statusCode == "OP" || _orderDetail.statusCode == "IP"
       let unableTitle = _orderDetail.statusCode == "OP" ? "order_detail_unable_start".localized : "order_detail_unable_finish".localized
       unableToStartButton.setTitle(unableTitle, for: .normal)
+      
+      controlsFooter.isHidden = _orderDetail.statusCode != "OP" && _orderDetail.statusCode != "IP"
     }
   }
   
@@ -94,7 +100,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     subTableView = UITableView(frame: CGRect.zero, style: .plain)
     subTableView.delegate = self
     subTableView.dataSource = self
-    let orderScanItemNib = UINib(nibName: "OrderScanItemTableViewCell", bundle: nil)
+    let orderScanItemNib = UINib(nibName: orderScanItemCellIdentifier, bundle: nil)
     subTableView.register(orderScanItemNib, forCellReuseIdentifier: orderScanItemCellIdentifier)
     subTableView.isScrollEnabled = false
     controlsStackView.isHidden = true
@@ -151,7 +157,7 @@ extension OrderDetailViewController {
       return
     }
     let message = String.init(format: "order_detail_add_order_item".localized, barcode)
-    let alert = UIAlertController(title: "app_name".localized, message: message, preferredStyle: .alert)
+    let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
     alert.addTextField { (textField) in
       textField.placeholder = "order_detail_quality".localized
       textField.keyboardType = .numberPad
@@ -181,7 +187,7 @@ extension OrderDetailViewController {
   
   func showAlertUpdateBarcode(_ barcode: String, item: OrderItem) {
     let message = String.init(format: "order_detail_update_barcode".localized, barcode)
-    let alert = UIAlertController(title: "app_name".localized, message: message, preferredStyle: .alert)
+    let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
     let okAction = UIAlertAction(title: "submit".localized, style: .default) { [unowned self] (action) in
       self.showLoadingIndicator()
       APIs.updateBarcode("\(item.id)", newBarcode: barcode, completion: { (errMsg) in

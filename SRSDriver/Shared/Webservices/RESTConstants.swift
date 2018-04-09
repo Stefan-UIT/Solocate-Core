@@ -48,6 +48,7 @@ class RESTConstants: NSObject {
   static let GET_COUNT_MESSAGE_NUMBER = "GET_COUNT_MESSAGE_NUMBER"
   static let GET_LIST_NOTIFICATIONS = "GET_LIST_NOTIFICATIONS"
   static let GET_ROUTE_DETAIL = "GET_ROUTE_DETAIL"
+  static let READ_MESSAGE = "READ_MESSAGE"
   
   //MARK: Keys for parser
   static let successKeyFromResponseData         = "status"

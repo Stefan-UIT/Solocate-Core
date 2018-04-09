@@ -74,7 +74,7 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
 
 extension OrderPictureViewController {
   func inputTitleFor(_ image: UIImage) {
-    let alert = UIAlertController(title: "app_name".localized, message: "order_detail_input_img_title".localized, preferredStyle: .alert)
+    let alert = UIAlertController(title: "order_detail_input_img_title".localized, message: nil, preferredStyle: .alert)
     let okAction = UIAlertAction(title: "ok".localized, style: .default) { [unowned self] (okAction) in
       alert.dismiss(animated: true, completion: nil)
       guard let textField = alert.textFields?.first,

@@ -14,10 +14,14 @@ class RouteMessagesViewController: BaseViewController {
   private let estimatedRowHeight: CGFloat = 80.0
   var route: Route? {
     didSet {
-      guard let _ = route, tableView != nil else {
+      guard let _route = route, tableView != nil else {
         return
       }
       tableView.reloadData()
+      //
+//      let unreadMessages = _route.messages.filter{ $0.status < 1}
+      //call read unread message
+//      readMessages(unreadMessages)
     }
   }
   
@@ -45,7 +49,7 @@ class RouteMessagesViewController: BaseViewController {
     guard  let _route = route else {
       return
     }
-    let alert = UIAlertController(title: "app_name".localized, message: "message_send_new_message".localized, preferredStyle: .alert)
+    let alert = UIAlertController(title: "message_send_new_message".localized, message: nil, preferredStyle: .alert)
     alert.addTextField { (textField) in
       textField.placeholder = "message_add_message_hint".localized
     }
@@ -64,10 +68,10 @@ class RouteMessagesViewController: BaseViewController {
         }
         else if let _message = message {
           _route.messages.insert(_message, at: 0)
-          if let item = self?.tabBarController?.tabBar.items?.last {
-            let current = item.badgeValue?.integerValue ?? 0
-            item.badgeValue = "\(current + 1)"
-          }
+//          if let item = self?.tabBarController?.tabBar.items?.last {
+//            let current = item.badgeValue?.integerValue ?? 0
+//            item.badgeValue = "\(current + 1)"
+//          }
           self?.tableView.reloadData()
         }
       })
@@ -82,7 +86,11 @@ class RouteMessagesViewController: BaseViewController {
 }
 
 extension RouteMessagesViewController {
-  
+  func readMessages(_ messages: [Message]) {
+    for msg in messages {
+      MessageAPI.readMessage("\(msg.id)")
+    }
+  }
 }
 
 extension RouteMessagesViewController: UITableViewDataSource, UITableViewDelegate {

@@ -17,7 +17,7 @@ class Message: NSObject, Mappable {
   var createdAt = ""
   var sendFrom = ""
   var sendTo = ""
-  var status = 0
+  var status = -1
   
   required convenience init?(map: Map) {
     self.init()

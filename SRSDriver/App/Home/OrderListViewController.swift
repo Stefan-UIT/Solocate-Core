@@ -47,7 +47,8 @@ class OrderListViewController: UIViewController {
       
       // messgae
       if let messageTab = tabItems.last {
-        messageTab.badgeValue = route.messages.count > 0 ? "\(route.messages.count)" : nil
+        let unreadMessage = route.messages.filter{$0.status < 1}.count
+        messageTab.badgeValue = unreadMessage > 0 ? "\(unreadMessage)" : nil
       }
       let packageTab = tabItems[Constants.packageTabIndex]
       packageTab.badgeValue = route.currentItems.count > 0 ? "\(route.currentItems.count)" : nil

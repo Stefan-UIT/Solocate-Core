@@ -35,7 +35,7 @@ class OrderNotesViewController: BaseOrderDetailViewController {
     guard  let _orderDetail = orderDetail else {
       return
     }
-    let alert = UIAlertController(title: "app_name".localized, message: "order_detail_add_note".localized, preferredStyle: .alert)
+    let alert = UIAlertController(title: "order_detail_add_note".localized, message: nil, preferredStyle: .alert)
     alert.addTextField { (textField) in
       textField.placeholder = "order_detail_add_note".localized
     }

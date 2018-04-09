@@ -12,6 +12,8 @@ class PackagesViewController: BaseViewController {
   
   @IBOutlet weak var tableView: UITableView!
   fileprivate let cellIdentifier = "PackageTableViewCell"
+  fileprivate let cellHeight: CGFloat = 80.0
+  
   var route: Route? {
     didSet {
       guard let _ = route, tableView != nil else {
@@ -42,4 +44,9 @@ extension PackagesViewController: UITableViewDataSource, UITableViewDelegate {
     }
     return UITableViewCell()
   }
+  
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return cellHeight.scaleHeight()
+  }
+  
 }

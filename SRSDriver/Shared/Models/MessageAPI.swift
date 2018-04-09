@@ -62,10 +62,20 @@ class MessageAPI {
         completion(messageResp.messages, nil)
       }
     }
-    
   }
   
-  func getMessageNumber(_ type: String, routeID: String, completion: @escaping ((_ number: Int?,_ errMSg: String?) -> Void)) {
+  static func readMessage(_ messageID: String) {
+    let uri = String.init(format: RESTConstants.configs[RESTConstants.READ_MESSAGE] ?? "", messageID)
+    let request = RESTRequest(functionName: uri, method: .put, encoding: .default)
+    if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+      request.setAuthorization(token)
+    }
+    request.baseInvoker { (resp, error) in
+      print("did update status for message: \(messageID)")      
+    }
+  }
+  
+  static func getMessageNumber(_ type: String, routeID: String, completion: @escaping ((_ number: Int?,_ errMSg: String?) -> Void)) {
     let uri = String.init(format: RESTConstants.configs[RESTConstants.GET_COUNT_MESSAGE_NUMBER] ?? "%@%@", type, routeID)
     let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
     if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
