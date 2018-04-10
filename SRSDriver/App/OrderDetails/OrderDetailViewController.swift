@@ -311,15 +311,15 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if tableView == subTableView,
       let cell = subTableView.dequeueReusableCell(withIdentifier: orderScanItemCellIdentifier, for: indexPath) as? OrderScanItemTableViewCell {
-        let orderItem = detailItems[itemsIndex]
-        cell.orderItem = orderItem.items[indexPath.row]
-        if scannedString.length > 0, scannedObjectIndexs.contains(indexPath.row), shouldFilterOrderItemsList {
-          cell.contentView.backgroundColor = AppColor.highLightColor
-        }
-        else {
-          cell.contentView.backgroundColor = .white
-        }
-        return cell
+      let orderItem = detailItems[itemsIndex]
+      cell.orderItem = orderItem.items[indexPath.row]
+      if scannedString.length > 0, scannedObjectIndexs.contains(indexPath.row), shouldFilterOrderItemsList {
+        cell.contentView.backgroundColor = AppColor.highLightColor
+      }
+      else {
+        cell.contentView.backgroundColor = .white
+      }
+      return cell
     }
     else if tableView == self.tableView {
       let item = detailItems[indexPath.row]
@@ -336,15 +336,19 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             [weak self] (code) in
             guard let strongSelf = self else {return}
             let orderItem = strongSelf.detailItems[strongSelf.itemsIndex]
-            if code.length > 0 {
-              if strongSelf.shouldFilterOrderItemsList {
-                strongSelf.scannedObjectIndexs = strongSelf.findIndexOfScannedObject(code, items: orderItem.items)
+            guard code.length > 0 else {return}
+            
+            if strongSelf.shouldFilterOrderItemsList {
+              strongSelf.scannedObjectIndexs = strongSelf.findIndexOfScannedObject(code, items: orderItem.items)
+              if strongSelf.scannedObjectIndexs.count == 0 {
+                strongSelf.showAlertView("order_detail_barcode_notmatch".localized)
               }
-              else {
-                strongSelf.showAlertAddNewOrderItem(code)
-              }
-              strongSelf.scannedString = code
             }
+            else {
+              strongSelf.showAlertAddNewOrderItem(code)
+            }
+            strongSelf.scannedString = code
+            
           }
           strongSelf.scannedString = ""
           strongSelf.present(scanVC, animated: true, completion: nil)
