@@ -18,6 +18,7 @@ class OrderListViewController: UIViewController {
   
   fileprivate let cellIdentifier = "OrderItemTableViewCell"
   fileprivate let cellHeight: CGFloat = 150.0
+    
   fileprivate var selectedString = "" {
     didSet {
       navigationItem.title = selectedString
@@ -67,7 +68,9 @@ class OrderListViewController: UIViewController {
       }
     }
   }
-  
+
+  fileprivate var leftMenuView : LeftMenuView = LeftMenuView() /* Added by Hoang Trinh */
+    
   func getRouteDetail(_ routeID: String) {
     showLoadingIndicator()
     APIs.getRouteDetail(routeID) { [weak self] (response, errMsg) in
@@ -85,15 +88,18 @@ class OrderListViewController: UIViewController {
     super.viewDidLoad()
     selectedString = datePickerView.date.toString("yyyy-MM-dd")
     tabBarController?.delegate = self
-    let iconName = Constants.isLeftToRight ? "logout" : "logout_inv"
-    if let leftButton = navigationItem.leftBarButtonItems?.first {
-      leftButton.image = UIImage(named: iconName)
-    }
+//    let iconName = Constants.isLeftToRight ? "logout" : "logout_inv"
+//    if let leftButton = navigationItem.leftBarButtonItems?.first {
+//      leftButton.image = UIImage(named: iconName)
+//    }
     
     // Update fcm token
     if let fcmtoken = Cache.shared.getObject(forKey: Defaultkey.fcmToken) as? String {
       APIs.updateNotificationToken(fcmtoken)
     }
+    /* Added by Hoang Trinh - Begin */
+    leftMenuView.delegate = self
+    /* Added by Hoang Trinh - Begin */
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -147,12 +153,15 @@ class OrderListViewController: UIViewController {
       
     }
   }
-  
-  @IBAction func logout(_ sender: UIBarButtonItem) {
-    Cache.shared.setObject(obj: "", forKey: Defaultkey.tokenKey)
-    APIs.updateNotificationToken("")
-    navigationController?.navigationController?.popToRootViewController(animated: true)
+  /* Added by Hoang Trinh - Begin */
+  @IBAction func tapLeftMenuBarButtonItemAction(_ sender: UIBarButtonItem) {
+    if leftMenuView.isDisplayed {
+      leftMenuView.hideView()
+    } else {
+      leftMenuView.showViewInView(superView: self.view, isHiddenStatusBar: false)
+    }
   }
+  /* Added by Hoang Trinh - End */
   
   @IBAction func showCalendar(_ sender: UIBarButtonItem) {
     pickerContainerView.isHidden = false
@@ -262,3 +271,14 @@ extension OrderListViewController: UITabBarControllerDelegate {
     }
   }
 }
+
+/* Added by Hoang Trinh - Begin */
+extension OrderListViewController : LeftMenuViewDelegate {
+    func leftMenuView(_ view: LeftMenuView, _ isLogout: Bool) {
+      view.hideView()
+      Cache.shared.setObject(obj: "", forKey: Defaultkey.tokenKey)
+      APIs.updateNotificationToken("")
+      navigationController?.navigationController?.popToRootViewController(animated: true)
+    }
+}
+/* Added by Hoang Trinh - End */

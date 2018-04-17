@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LeftMenuView" customModule="DMSDriver" customModuleProvider="target">
+            <connections>
+                <outlet property="contentView" destination="Jf0-ZP-TaH" id="Z4G-jx-P9v"/>
+                <outlet property="tableView" destination="Cms-iR-qD1" id="6qW-Yi-Cnn"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <visualEffectView opaque="NO" alpha="0.80000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hyp-r8-sB0">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="QQw-96-Jww">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                    </view>
+                    <blurEffect style="dark"/>
+                </visualEffectView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jf0-ZP-TaH">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lC5-gZ-xOw">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <connections>
+                                <action selector="tapbackgroundButtonAction:" destination="-1" eventType="touchUpInside" id="j4R-Iz-Pgi"/>
+                            </connections>
+                        </button>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Cms-iR-qD1">
+                            <rect key="frame" x="0.0" y="0.0" width="250" height="667"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <connections>
+                                <outlet property="dataSource" destination="-1" id="Egt-1D-JMg"/>
+                                <outlet property="delegate" destination="-1" id="3Ef-Yx-hlI"/>
+                            </connections>
+                        </tableView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="lC5-gZ-xOw" firstAttribute="top" secondItem="Jf0-ZP-TaH" secondAttribute="top" id="AgH-ew-hir"/>
+                        <constraint firstItem="Cms-iR-qD1" firstAttribute="top" secondItem="Jf0-ZP-TaH" secondAttribute="top" id="Azt-aw-B6z"/>
+                        <constraint firstAttribute="trailing" secondItem="lC5-gZ-xOw" secondAttribute="trailing" id="KLB-dS-FSG"/>
+                        <constraint firstAttribute="bottom" secondItem="lC5-gZ-xOw" secondAttribute="bottom" id="PV4-ti-Yxt"/>
+                        <constraint firstItem="Cms-iR-qD1" firstAttribute="width" secondItem="Jf0-ZP-TaH" secondAttribute="width" multiplier="2:3" id="bb2-kK-ihz"/>
+                        <constraint firstItem="lC5-gZ-xOw" firstAttribute="leading" secondItem="Jf0-ZP-TaH" secondAttribute="leading" id="mLt-R7-eqR"/>
+                        <constraint firstItem="Cms-iR-qD1" firstAttribute="leading" secondItem="Jf0-ZP-TaH" secondAttribute="leading" id="sZM-BG-nAi"/>
+                        <constraint firstAttribute="bottom" secondItem="Cms-iR-qD1" secondAttribute="bottom" id="uru-X7-LdG"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <constraints>
+                <constraint firstItem="hyp-r8-sB0" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="754-Gm-3Jv"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="hyp-r8-sB0" secondAttribute="bottom" id="79j-11-QKp"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="hyp-r8-sB0" secondAttribute="trailing" id="OTd-ed-r5e"/>
+                <constraint firstItem="Jf0-ZP-TaH" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="Orj-E0-4XK"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Jf0-ZP-TaH" secondAttribute="trailing" id="SbO-Ld-Bm7"/>
+                <constraint firstItem="Jf0-ZP-TaH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="acp-1b-x0m"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Jf0-ZP-TaH" secondAttribute="bottom" id="dap-0x-39A"/>
+                <constraint firstItem="hyp-r8-sB0" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="rhl-tU-r7a"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="163.5" y="51.5"/>
+        </view>
+    </objects>
+</document>

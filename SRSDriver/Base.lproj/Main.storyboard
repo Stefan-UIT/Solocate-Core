@@ -399,10 +399,10 @@
                         <viewLayoutGuide key="safeArea" id="YlG-v3-wY4"/>
                     </view>
                     <navigationItem key="navigationItem" id="7bx-Ei-nYo">
-                        <barButtonItem key="leftBarButtonItem" image="logout" id="qRK-Hf-r3K">
+                        <barButtonItem key="leftBarButtonItem" title="Menu" id="qRK-Hf-r3K">
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
-                                <action selector="logout:" destination="iIr-5E-DPd" id="8we-mW-9KM"/>
+                                <action selector="tapLeftMenuBarButtonItemAction:" destination="iIr-5E-DPd" id="q5R-ww-lRg"/>
                             </connections>
                         </barButtonItem>
                         <rightBarButtonItems>
@@ -1556,7 +1556,6 @@
         <image name="ic_login_user" width="18" height="18"/>
         <image name="list" width="32" height="32"/>
         <image name="logo_masof_s" width="189" height="52"/>
-        <image name="logout" width="32" height="32"/>
         <image name="map" width="32" height="32"/>
         <image name="message" width="32" height="32"/>
         <image name="place_holder" width="97" height="85"/>

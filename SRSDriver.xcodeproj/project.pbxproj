@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0AF8BA692085D820001321D1 /* LeftMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8BA682085D820001321D1 /* LeftMenuView.swift */; };
+		0AF8BA6B2085D82B001321D1 /* LeftMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8BA6A2085D82B001321D1 /* LeftMenuView.xib */; };
+		0AF8BA6C2085D837001321D1 /* LeftMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8BA6A2085D82B001321D1 /* LeftMenuView.xib */; };
+		0AF8BA6D2085D83B001321D1 /* LeftMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8BA682085D820001321D1 /* LeftMenuView.swift */; };
+		0AF8BA6F2085D99D001321D1 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8BA6E2085D99D001321D1 /* BaseView.swift */; };
+		0AF8BA732085E3C5001321D1 /* LogoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8BA712085E3C5001321D1 /* LogoutTableViewCell.swift */; };
+		0AF8BA742085E3C5001321D1 /* LogoutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8BA722085E3C5001321D1 /* LogoutTableViewCell.xib */; };
+		0AF8BA752085E3C8001321D1 /* LogoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8BA712085E3C5001321D1 /* LogoutTableViewCell.swift */; };
 		241D68792069DB2200914E4F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 241D68772069DB2200914E4F /* Localizable.strings */; };
 		242DC4B9207775F50047F19C /* PackagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242DC4B8207775F50047F19C /* PackagesViewController.swift */; };
 		242DC4BA207775F80047F19C /* PackagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242DC4B8207775F50047F19C /* PackagesViewController.swift */; };
@@ -154,6 +162,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0AF8BA682085D820001321D1 /* LeftMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuView.swift; sourceTree = "<group>"; };
+		0AF8BA6A2085D82B001321D1 /* LeftMenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeftMenuView.xib; sourceTree = "<group>"; };
+		0AF8BA6E2085D99D001321D1 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
+		0AF8BA712085E3C5001321D1 /* LogoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutTableViewCell.swift; sourceTree = "<group>"; };
+		0AF8BA722085E3C5001321D1 /* LogoutTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoutTableViewCell.xib; sourceTree = "<group>"; };
 		241D68782069DB2200914E4F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		241D687A2069DB5E00914E4F /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
 		242DC4B8207775F50047F19C /* PackagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagesViewController.swift; sourceTree = "<group>"; };
@@ -260,6 +273,25 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0AF8BA672085D811001321D1 /* LeftMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				0AF8BA702085E39F001321D1 /* LeftMenuCell */,
+				0AF8BA682085D820001321D1 /* LeftMenuView.swift */,
+				0AF8BA6A2085D82B001321D1 /* LeftMenuView.xib */,
+			);
+			path = LeftMenuView;
+			sourceTree = "<group>";
+		};
+		0AF8BA702085E39F001321D1 /* LeftMenuCell */ = {
+			isa = PBXGroup;
+			children = (
+				0AF8BA712085E3C5001321D1 /* LogoutTableViewCell.swift */,
+				0AF8BA722085E3C5001321D1 /* LogoutTableViewCell.xib */,
+			);
+			path = LeftMenuCell;
+			sourceTree = "<group>";
+		};
 		20E91CE0E02FEDA2CB697433 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -342,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				5A499CBA2059277D00A1D944 /* BaseViewController.swift */,
+				0AF8BA6E2085D99D001321D1 /* BaseView.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -453,6 +486,7 @@
 		5AA4CA5120590B08003F8E6F /* App */ = {
 			isa = PBXGroup;
 			children = (
+				0AF8BA672085D811001321D1 /* LeftMenuView */,
 				5A68A447205A1FD500CA9DB8 /* OrderDetails */,
 				5A82E9C8205A04D500F34351 /* Home */,
 				5A499CB92059277400A1D944 /* Base */,
@@ -612,6 +646,7 @@
 				2494A96E2074926A005A2622 /* LaunchScreen.storyboard in Resources */,
 				2494A96F2074926A005A2622 /* Assets.xcassets in Resources */,
 				2494A9702074926A005A2622 /* Main.storyboard in Resources */,
+				0AF8BA6C2085D837001321D1 /* LeftMenuView.xib in Resources */,
 				2494A97B2074AD41005A2622 /* configs_malee.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -624,10 +659,12 @@
 				24677EEE2073231200C41E4F /* GoogleService-Info.plist in Resources */,
 				5A499CB320591D9600A1D944 /* Info.plist in Resources */,
 				5ACCE8E4205BB31600A1532D /* SignatureView.xib in Resources */,
+				0AF8BA742085E3C5001321D1 /* LogoutTableViewCell.xib in Resources */,
 				241D68792069DB2200914E4F /* Localizable.strings in Resources */,
 				5AA4CA4A20590AD4003F8E6F /* LaunchScreen.storyboard in Resources */,
 				2494A97820749288005A2622 /* configs_masof.plist in Resources */,
 				5AA4CA4720590AD4003F8E6F /* Assets.xcassets in Resources */,
+				0AF8BA6B2085D82B001321D1 /* LeftMenuView.xib in Resources */,
 				5AA4CA4520590AD4003F8E6F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -824,6 +861,7 @@
 				2494A9432074926A005A2622 /* ReasonListViewController.swift in Sources */,
 				2494A9442074926A005A2622 /* UIColor.swift in Sources */,
 				2494A9452074926A005A2622 /* PictureTableViewCell.swift in Sources */,
+				0AF8BA6D2085D83B001321D1 /* LeftMenuView.swift in Sources */,
 				2494A9462074926A005A2622 /* Date.swift in Sources */,
 				2494A9472074926A005A2622 /* OrderDetailContainerViewController.swift in Sources */,
 				2494A9482074926A005A2622 /* APIs.swift in Sources */,
@@ -842,6 +880,7 @@
 				2494A9552074926A005A2622 /* UITableView-Extensions.swift in Sources */,
 				2494A9562074926A005A2622 /* AppDelegate.swift in Sources */,
 				242DC4BA207775F80047F19C /* PackagesViewController.swift in Sources */,
+				0AF8BA752085E3C8001321D1 /* LogoutTableViewCell.swift in Sources */,
 				2494A9572074926A005A2622 /* String.swift in Sources */,
 				2494A9582074926A005A2622 /* GoogleDirectionResponse.swift in Sources */,
 				2494A9592074926A005A2622 /* SignatureView.swift in Sources */,
@@ -889,10 +928,12 @@
 				5A82E9C5205A038900F34351 /* RESTError.swift in Sources */,
 				5A82E9CA205A04EE00F34351 /* OrderListViewController.swift in Sources */,
 				5A499CB720591E4100A1D944 /* Cache.swift in Sources */,
+				0AF8BA732085E3C5001321D1 /* LogoutTableViewCell.swift in Sources */,
 				5A499CA020591D0400A1D944 /* UIButton.swift in Sources */,
 				24B3319620623B5A001FAC49 /* ReasonListViewController.swift in Sources */,
 				5A499CA220591D0400A1D944 /* UIColor.swift in Sources */,
 				24B331942061FA66001FAC49 /* PictureTableViewCell.swift in Sources */,
+				0AF8BA692085D820001321D1 /* LeftMenuView.swift in Sources */,
 				5A82E9CE205A197800F34351 /* Date.swift in Sources */,
 				5A68A449205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift in Sources */,
 				5A68A458205A5A0F00CA9DB8 /* APIs.swift in Sources */,
@@ -925,6 +966,7 @@
 				245BBAA4207363EC00EE3E47 /* Message.swift in Sources */,
 				24D3876D2063513600BE51D9 /* OrderItem.swift in Sources */,
 				246FA3522071EB7300C5E707 /* RouteMessagesViewController.swift in Sources */,
+				0AF8BA6F2085D99D001321D1 /* BaseView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
