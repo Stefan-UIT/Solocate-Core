@@ -21,6 +21,7 @@ class OrderListViewController: UIViewController {
     
   fileprivate var selectedString = "" {
     didSet {
+      let date = Date()
       navigationItem.title = selectedString
     }
   }
@@ -86,7 +87,7 @@ class OrderListViewController: UIViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    selectedString = datePickerView.date.toString("yyyy-MM-dd")
+    selectedString = datePickerView.date.toString("MM/dd/yyyy")
     tabBarController?.delegate = self
 //    let iconName = Constants.isLeftToRight ? "logout" : "logout_inv"
 //    if let leftButton = navigationItem.leftBarButtonItems?.first {
@@ -105,7 +106,7 @@ class OrderListViewController: UIViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     navigationItem.title = selectedString
-    getOrders(byDate: selectedString)
+    getOrders(byDate: datePickerView.date.toString("yyyy-MM-dd"))
     tabBarController?.tabBar.isHidden = false
   }
   
@@ -120,7 +121,7 @@ class OrderListViewController: UIViewController {
   
   @IBAction func didChooseCalendar(_ sender: UIBarButtonItem) {
     let dateString = datePickerView.date.toString("yyyy-MM-dd")
-    selectedString = dateString
+    selectedString = datePickerView.date.toString("MM/dd/yyyy")
     getOrders(byDate: dateString)
     noOrdersLabel.isHidden = true
     let height = Constants.toolbarHeight + Constants.pickerViewHeight;
