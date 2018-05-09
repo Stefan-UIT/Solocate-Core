@@ -29,7 +29,15 @@ class APIs {
         completion(nil, err.message)
       }
       else {
-        completion(nil, "Unknown")
+        guard let response = resp as? [String: Any] else {
+            completion(nil, "Unknown")
+            return
+        }
+        if let message = response["message"]  as? String {
+            completion(nil, message)
+        } else {
+            completion(nil, "Unknown")
+        }
       }
     }
   }
@@ -94,9 +102,21 @@ class APIs {
       request.setAuthorization(token)
     }
     request.baseInvoker { (resp, error) in
-      if let response = resp as? [String: Any],
-        let _ = response["data"] as? [String : Any] {
-        completion(nil)        
+      if let response = resp as? [String: Any] {
+        guard let _ = response["data"] as? [String : Any] else {
+            if let errors = Mapper<RESTResponse>().map(JSONObject: response["errors"]) {
+                completion(errors.message)
+            }
+            else {
+                if let msg = response["msg"] as? String {
+                completion(msg)
+                } else {
+                completion("UNKNOWN")
+                }
+            }
+            return
+        }
+        completion(nil)
       }
       if let err = error {
         completion(err.message)
@@ -162,14 +182,27 @@ class APIs {
       request.setAuthorization(token)
     }
     request.baseInvoker { (resp, error) in
-      if let response = resp as? [String: Any],
-        let _ = response["data"] as? [String : Any] {
-        completion(nil)
-      }
-      if let err = error {
-        completion(err.message)
-      }
+        if let response = resp as? [String: Any] {
+            guard let _ = response["data"] as? [String : Any] else {
+                if let errors = Mapper<RESTResponse>().map(JSONObject: response["errors"]) {
+                    completion(errors.message)
+                }
+                else {
+                    if let msg = response["msg"] as? String {
+                        completion("\(orderID) - \(msg)")
+                    } else {
+                        completion("UNKNOWN")
+                    }
+                }
+                return
+            }
+            completion(nil)
+        }
+        if let err = error {
+            completion(err.message)
+        }
     }
+    
   }
   
   static func updateRouteSequenceOrders(_ routeID: String, routeStatus: String, orderIDs: [String],

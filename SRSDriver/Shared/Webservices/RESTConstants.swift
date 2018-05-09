@@ -60,8 +60,12 @@ class RESTConstants: NSObject {
       let configName = "configs_masof"
     #elseif MALEE
       let configName = "configs_malee"
+    #elseif TALRON
+      let configName = "configs_talron"
+    #elseif DMS
+    let configName = "configs_dms"
     #else
-      let configName = "configs_masof"
+      let configName = "configs_dms"
     #endif
     
     

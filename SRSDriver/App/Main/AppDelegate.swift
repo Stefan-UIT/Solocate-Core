@@ -34,6 +34,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     FirebaseApp.configure()
     Messaging.messaging().delegate = self
 //    ThemeManager.applyTheme(.light)
+    
+    if let bundle = Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist"),
+        let dic = NSDictionary(contentsOf: bundle) {
+        print("BUNDLE_ID - \(dic["BUNDLE_ID"] as! String)")
+    }
+    
     return true
   }
   

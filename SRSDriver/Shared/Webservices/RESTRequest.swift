@@ -21,6 +21,7 @@ class RESTRequest: NSObject {
   var endcoding: URLEncoding = .default
   
   func baseInvoker(_ completion: @escaping RESTAPICompletion) {
+    print("baseURL - \(self.baseURL)")
     Alamofire.request(self.baseURL, method: self.requestMethod, parameters: self.params, encoding: self.endcoding, headers: self.headers)
       .responseJSON { (response) in
         self.handleResponse(response, completion: completion)

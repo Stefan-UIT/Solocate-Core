@@ -92,8 +92,11 @@ enum OrderDetailType {
 
 enum OrderStatus: String {
   case open = "OP"
-  case inprogress = "IP"
+  case pickedUp = "PU"
   case delivered = "DV"
+  case inprogress = "IP"
+  case missingInTruck = "MT"
+  case missingAnPickUP = "MP"
   case cancel = "CC"
   
   var statusName: String {
@@ -106,6 +109,13 @@ enum OrderStatus: String {
       return "orders_delivered".localized
     case .cancel:
       return "orders_cancelled".localized
+        
+    case .pickedUp:
+        return "picked_up".localized
+    case .missingInTruck:
+        return "orders_missing_in_truck".localized
+    case .missingAnPickUP:
+        return "orders_missing_at_pick_up".localized
     }
   }
   

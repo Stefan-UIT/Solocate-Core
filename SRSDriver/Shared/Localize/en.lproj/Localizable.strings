@@ -45,10 +45,13 @@
 
 //LIST_ORDERS
 "orders_have_no_orders"="You have no order";
-"orders_cancelled"="Cancelled";
 "orders_open"="New";
 "orders_in_progress"="In Progress";
 "orders_delivered"="Finished";
+"picked_up" = "Picked Up";
+"orders_missing_in_truck" = "Missing in Trunk";
+"orders_missing_at_pick_up" = "Missing at Pick-up";
+"orders_cancelled"="Cancelled";
 
 //ODER_DETAIL
 "order_detail_title"="Detail";
@@ -76,10 +79,10 @@
 "order_detail_add_image_successfully"="Add image successfully";
 "order_detail_add_signature_successfully"="Add signature successfully";
 "order_detail_should_be_start"="Should be change order status first";
-"order_detail_package"="Package";
-"order_detail_qty"="Quantity";
-"order_detail_desc"="Description";
-"order_detail_barcode"="Barcode";
+"order_detail_package"="Package:";
+"order_detail_qty"="Quantity:";
+"order_detail_desc"="Description:";
+"order_detail_barcode"="Barcode:";
 "order_detail_take_picture"="Take Picture";
 "order_detail_total"="Total";
 "order_detail_barcode_notmatch"="Barcode does not match";

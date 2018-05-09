@@ -12,12 +12,8 @@ import CoreLocation
 
 class OrderDetailViewController: BaseOrderDetailViewController {
   @IBOutlet weak var tableView: UITableView!
-  @IBOutlet weak var unableToStartButton: UIButton!
-  @IBOutlet weak var finishButton: UIButton!
-  @IBOutlet weak var controlsStackView: UIStackView!
-  @IBOutlet weak var controlsFooter: UIStackView!
-  
-  
+  @IBOutlet weak var updateStatusButton: UIButton!
+    
   var subTableView: UITableView!
   
   fileprivate var detailItems = [OrderDetailItem]()
@@ -42,7 +38,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   override var orderDetail: OrderDetail? {
     didSet {      
       guard let _orderDetail = orderDetail else { return }
-      controlsStackView.isHidden = false
+      updateStatusButton.isHidden = false
       detailItems.removeAll()
       var refe = OrderDetailItem(.reference)
       refe.content = _orderDetail.orderReference
@@ -59,7 +55,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       var phone = OrderDetailItem(.phone)
       phone.content = _orderDetail.deliveryContactPhone
       var address = OrderDetailItem(.address)
-      address.content = _orderDetail.deliveryAdd + "\n\(_orderDetail.deliveryCity)"
+        address.content = (_orderDetail.deliveryAdd.isEmpty ? _orderDetail.deliveryAdd : _orderDetail.deliveryAdd)
+        + "\n\(_orderDetail.deliveryCity)"
       var description = OrderDetailItem(.description)
       description.content = _orderDetail.descriptionNote + " " + _orderDetail.descriptionNoteExt
       var items = OrderDetailItem(.items)
@@ -80,15 +77,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       
       tableView.reloadData()
       subTableView.reloadData()
-      finishButton.isEnabled = _orderDetail.statusCode == "OP" || _orderDetail.statusCode == "IP"
-      let finishButtonTitle = _orderDetail.statusCode == "OP" ? "start".localized : "finish".localized
-      finishButton.setTitle(finishButtonTitle, for: .normal)
       
-      unableToStartButton.isEnabled = _orderDetail.statusCode == "OP" || _orderDetail.statusCode == "IP"
-      let unableTitle = _orderDetail.statusCode == "OP" ? "order_detail_unable_start".localized : "order_detail_unable_finish".localized
-      unableToStartButton.setTitle(unableTitle, for: .normal)
-      
-      controlsFooter.isHidden = _orderDetail.statusCode != "OP" && _orderDetail.statusCode != "IP"
+      updateStatusButton.isHidden = _orderDetail.statusCode != "OP" && _orderDetail.statusCode != "IP"
     }
   }
   
@@ -103,7 +93,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     let orderScanItemNib = UINib(nibName: orderScanItemCellIdentifier, bundle: nil)
     subTableView.register(orderScanItemNib, forCellReuseIdentifier: orderScanItemCellIdentifier)
     subTableView.isScrollEnabled = false
-    controlsStackView.isHidden = true
+    updateStatusButton.isHidden = true
     
     tableView.estimatedRowHeight = cellHeight
     tableView.rowHeight = UITableViewAutomaticDimension
@@ -125,7 +115,10 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     performSegue(withIdentifier: SegueIdentifier.showReasonList, sender: nil)
   }
   
-  
+    @IBAction func tapUpdateStatusButtonAction(_ sender: UIButton) {
+        handleUpdateStatus()
+    }
+    
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
     if segue.identifier == SegueIdentifier.showMapView,
@@ -145,7 +138,45 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       }
     }
   }
-  
+    
+    
+    // MARK: - Function -
+    func handleUpdateStatus() {
+        
+        guard let _orderDetail = orderDetail else { return }
+
+        let alert = UIAlertController(title: "", message: "Update Status Order", preferredStyle: .actionSheet)
+
+        let unableTitle = _orderDetail.statusCode == "OP" ? "order_detail_unable_start".localized : "order_detail_unable_finish".localized
+
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        let unableToStartAction = UIAlertAction(title: unableTitle, style: .destructive) { (alertAction) in
+            self.handleUnableToStartAction()
+        }
+        
+        let finishActionTitle = _orderDetail.statusCode == "OP" ? "start".localized : "finish".localized
+
+        let finishAction = UIAlertAction(title: finishActionTitle, style: .default) { (alertAction) in
+            self.handleFinishAction()
+        }
+        
+        alert.addAction(cancelAction)
+        alert.addAction(finishAction)
+        alert.addAction(unableToStartAction)
+        
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func handleUnableToStartAction() {
+        performSegue(withIdentifier: SegueIdentifier.showReasonList, sender: nil)
+    }
+    
+    func handleFinishAction() {
+        guard let _orderDetail = orderDetail else {return}
+        let status = _orderDetail.statusCode == "OP" ? "IP" : "DV"
+        updateOrderStatus(status)
+    }
 }
 
 // MARK: - Private methods

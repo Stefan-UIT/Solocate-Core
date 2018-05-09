@@ -66,7 +66,6 @@ class MapsViewController: UIViewController {
         let fromLocation = CLLocationCoordinate2D(latitude: lastPoint.lat.doubleValue, longitude: lastPoint.lng.doubleValue)
         drawPath(fromLocation: fromLocation, toLocation: pickupLocation)
       }
-      //
       for m in _route.orderList {
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: m.lat.doubleValue, longitude: m.lng.doubleValue))
         let labelOrder = UILabel(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
@@ -76,7 +75,8 @@ class MapsViewController: UIViewController {
         labelOrder.backgroundColor = .gray
         labelOrder.cornerRadius = 15.0
         labelOrder.clipsToBounds = true
-        marker.title = m.shopName
+        marker.title = "\(m.shopName)"
+        marker.snippet = "\(m.deliveryAdd)"
         marker.map = mapView
         marker.iconView = labelOrder
       }

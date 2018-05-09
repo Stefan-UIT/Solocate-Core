@@ -30,7 +30,7 @@ class Order: NSObject, Mappable {
   var deliveryAdd = ""
   var timeWindowName = ""
   var orderType = ""
-  
+  var fullAddress = ""
   convenience required init?(map: Map) {
     self.init()
   }
@@ -57,6 +57,7 @@ class Order: NSObject, Mappable {
     deliveryAdd       <- map["delivery"]
     timeWindowName    <- map["TimeWindowName"]
     orderType         <- map["order_type_name"]
+    fullAddress       <- map["full_addr"]
   }
 }
 

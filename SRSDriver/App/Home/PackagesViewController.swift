@@ -38,11 +38,13 @@ extension PackagesViewController: UITableViewDataSource, UITableViewDelegate {
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? PackageTableViewCell, let _route = route {
-      cell.item = _route.currentItems[indexPath.row]
-      return cell
+    guard
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? PackageTableViewCell
+        else { return UITableViewCell() }
+    if let _route = route {
+        cell.item = _route.currentItems[indexPath.row]
     }
-    return UITableViewCell()
+    return cell
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

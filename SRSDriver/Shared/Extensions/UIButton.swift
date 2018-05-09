@@ -14,14 +14,13 @@ extension UIButton {
     }
 
     @IBInspectable var localizeKey: String {
-
         get {
             return ""
         } set {
             self.setTitle(NSLocalizedString(newValue, comment: ""), for: .normal)
         }
     }
-
+    
     func roundedButton() {
         self.layer.cornerRadius = self.frame.height/2
     }

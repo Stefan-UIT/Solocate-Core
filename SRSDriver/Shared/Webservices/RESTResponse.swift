@@ -24,7 +24,7 @@ class RESTResponse: NSObject, Mappable {
   }
   
   func mapping(map: Map) {
-    self.message      <- map["message"]
+    self.message      <- map["msg"]
     self.statusCode   <- map["status_code"]
     self.data         <- map["data"]
   }

@@ -29,10 +29,10 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
       [weak self] in
       self?.getOrderDetail()
     }
-    let child_2 = OrderSignatureViewController.loadViewController(type: OrderSignatureViewController.self)
+//    let child_2 = OrderSignatureViewController.loadViewController(type: OrderSignatureViewController.self)
 //    let child_3 = OrderNotesViewController.loadViewController(type: OrderNotesViewController.self)
     let child_4 = OrderPictureViewController.loadViewController(type: OrderPictureViewController.self)
-    return [child_1, child_2, child_4]
+    return [child_1, child_4]
   }
   
   override func viewDidAppear(_ animated: Bool) {
