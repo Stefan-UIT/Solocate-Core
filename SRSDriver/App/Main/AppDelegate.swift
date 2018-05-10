@@ -11,6 +11,7 @@ import UserNotifications
 import GoogleMaps
 import SVProgressHUD
 import Firebase
+import IQKeyboardManager
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -39,7 +40,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let dic = NSDictionary(contentsOf: bundle) {
         print("BUNDLE_ID - \(dic["BUNDLE_ID"] as! String)")
     }
-    
+    IQKeyboardManager.shared().isEnabled = true
     return true
   }
   

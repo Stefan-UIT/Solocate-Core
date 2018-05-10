@@ -8,15 +8,20 @@
 
 import UIKit
 
+enum IdentifierType : Int {
+    case CHANGE_INVIROMENT = 0
+    case CHANGE_PASSWORD = 1
+    case LOG_OUT = 2
+}
+
 protocol LeftMenuViewDelegate: class {
-  func leftMenuView(_ view: LeftMenuView, _ isLogout: Bool)
+  func leftMenuView(_ view: LeftMenuView, _ selectedItem: IdentifierType)
 }
 
 class LeftMenuView: BaseView {
   
   @IBOutlet weak var contentView: UIView!
   @IBOutlet weak var tableView: UITableView!
-  fileprivate let logoutIdentifier = "LogoutTableViewCell"
   
   var isDisplayed = false
   weak var delegate : LeftMenuViewDelegate? = nil
@@ -24,7 +29,12 @@ class LeftMenuView: BaseView {
   
   override func config() {
     super.config()
-    tableView.register(UINib(nibName: logoutIdentifier, bundle: nil), forCellReuseIdentifier: logoutIdentifier)
+    tableView.register(UINib(nibName: getIndentifier(.LOG_OUT), bundle: nil), forCellReuseIdentifier: getIndentifier(.LOG_OUT))
+    
+    tableView.register(UINib(nibName: getIndentifier(.CHANGE_PASSWORD), bundle: nil), forCellReuseIdentifier: getIndentifier(.CHANGE_PASSWORD))
+    
+    tableView.register(UINib(nibName: getIndentifier(.CHANGE_INVIROMENT), bundle: nil), forCellReuseIdentifier: getIndentifier(.CHANGE_INVIROMENT))
+    
     tableView.estimatedRowHeight = 50.0
     tableView.rowHeight = UITableViewAutomaticDimension
   }
@@ -65,23 +75,40 @@ class LeftMenuView: BaseView {
 }
 
 //MARK: Extension
+extension LeftMenuView {
+    func getIndentifier(_ type: IdentifierType) -> String {
+        switch type {
+        case .LOG_OUT:
+            return "LogoutTableViewCell"
+        case .CHANGE_PASSWORD:
+            return "ChangePasswordTableViewCell"
+        case .CHANGE_INVIROMENT:
+            return "ChangeInviromentTableViewCell"
+        }
+    }
+}
+
+//MARK: Extension - UITableView
 extension LeftMenuView : UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 1
+    return 3
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let logoutCell = tableView.dequeueReusableCell(withIdentifier: logoutIdentifier) else {
+    let identifier = getIndentifier(IdentifierType(rawValue: indexPath.row)!)
+    guard let cell = tableView.dequeueReusableCell(withIdentifier: identifier) else {
       return UITableViewCell()
     }
-    return logoutCell
+    return cell
   }
 }
 
 extension LeftMenuView : UITableViewDelegate {
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    tableView.deselectRow(at: indexPath, animated: false)
+    let identifier = IdentifierType(rawValue: indexPath.row)
     if delegate != nil {
-      delegate?.leftMenuView(self, true)
+        delegate?.leftMenuView(self, identifier!)
     }
   }
 }

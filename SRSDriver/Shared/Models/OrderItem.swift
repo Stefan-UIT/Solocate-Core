@@ -11,6 +11,7 @@ import ObjectMapper
 
 class OrderItem: NSObject, Mappable {
   var id = -1
+  var name = ""
   var sku = ""
   var desc = ""
   var vol = ""
@@ -26,6 +27,8 @@ class OrderItem: NSObject, Mappable {
   }
   
   func mapping(map: Map) {
+    
+    name <- map["name"]
     sku <- map["sku"]
     desc <- map["desc"]
     vol <- map["vol"]

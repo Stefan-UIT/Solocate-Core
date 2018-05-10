@@ -22,6 +22,9 @@ class RESTRequest: NSObject {
   
   func baseInvoker(_ completion: @escaping RESTAPICompletion) {
     print("baseURL - \(self.baseURL)")
+    
+    
+    
     Alamofire.request(self.baseURL, method: self.requestMethod, parameters: self.params, encoding: self.endcoding, headers: self.headers)
       .responseJSON { (response) in
         self.handleResponse(response, completion: completion)
@@ -64,6 +67,7 @@ class RESTRequest: NSObject {
   }
   
   func setAuthorization(_ token: String) {
+    print("DMS - Token : \(token)")
     headers[RESTConstants.requestAuthorizationKey] = "Bearer " + token
   }
   
@@ -91,14 +95,7 @@ class RESTRequest: NSObject {
   
   init(functionName: String, method: HTTPMethod, encoding: URLEncoding) {
     super.init()
-    let baseURL = RESTConstants.configs[RESTConstants.BASE_URL] ?? ""
+    let baseURL = RESTConstants.getBASEURL() ?? ""
     self.handleInitialization(url: baseURL + functionName, method: method, encoding: encoding)
   }
-  
-  
-  
-  
-  
-  
-
 }

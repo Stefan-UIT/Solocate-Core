@@ -19,9 +19,9 @@ class OrderItemTableViewCell: UITableViewCell {
 
   var order: Order! {
     didSet {
-      orderReference.text = "\(order.sequence). \(order.orderReference)"
+      orderReference.text = "\(order.sequence) - \(order.orderReference)"
       let status = OrderStatus(rawValue: order.statusCode)!
-      orderStatus.text = "\(status.statusName)"
+      orderStatus.text = "(\(status.statusName))"
       deliveryAddress.text = "\(order.deliveryAdd)"
       let deliveryDateString = order.timeWindowName.length > 0 ? "\(order.deliveryDate) - (\(order.timeWindowName))" : "\(order.deliveryDate)"
       deliveryDate.text = deliveryDateString

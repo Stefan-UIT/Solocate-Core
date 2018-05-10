@@ -9,6 +9,7 @@
 import UIKit
 
 class OrderScanItemTableViewCell: UITableViewCell {
+    
   @IBOutlet weak var skuLabel: UILabel!
   @IBOutlet weak var quantityLabel: UILabel!
   @IBOutlet weak var descriptionLabel: UILabel!

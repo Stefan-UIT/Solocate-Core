@@ -42,5 +42,9 @@
 	<string>/backend-api/v1/routes/%@</string>
 	<key>READ_MESSAGE</key>
 	<string>/backend-api/v1/messages/%@</string>
+	<key>CHECK_TOKEN</key>
+	<string>authentication/users/token</string>
+	<key>CHANGE_PASSWORD</key>
+	<string>/master-service/v1/users/change-password</string>
 </dict>
 </plist>

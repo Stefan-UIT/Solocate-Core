@@ -7,6 +7,46 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A465E9720A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465E9520A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift */; };
+		0A465E9820A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465E9620A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib */; };
+		0A465E9920A3E84C009BFE69 /* ChangePasswordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465E9520A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift */; };
+		0A465E9A20A3E84D009BFE69 /* ChangePasswordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465E9520A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift */; };
+		0A465E9B20A3E84D009BFE69 /* ChangePasswordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465E9520A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift */; };
+		0A465E9C20A3E84F009BFE69 /* ChangePasswordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465E9620A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib */; };
+		0A465E9D20A3E850009BFE69 /* ChangePasswordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465E9620A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib */; };
+		0A465E9E20A3E850009BFE69 /* ChangePasswordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465E9620A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib */; };
+		0A465EA220A3EDFB009BFE69 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EA120A3EDFB009BFE69 /* ChangePasswordView.swift */; };
+		0A465EA420A3EE03009BFE69 /* ChangePasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465EA320A3EE03009BFE69 /* ChangePasswordView.xib */; };
+		0A465EA520A3EE16009BFE69 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EA120A3EDFB009BFE69 /* ChangePasswordView.swift */; };
+		0A465EA620A3EE16009BFE69 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EA120A3EDFB009BFE69 /* ChangePasswordView.swift */; };
+		0A465EA720A3EE16009BFE69 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EA120A3EDFB009BFE69 /* ChangePasswordView.swift */; };
+		0A465EA820A3EE19009BFE69 /* ChangePasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465EA320A3EE03009BFE69 /* ChangePasswordView.xib */; };
+		0A465EA920A3EE1A009BFE69 /* ChangePasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465EA320A3EE03009BFE69 /* ChangePasswordView.xib */; };
+		0A465EAA20A3EE1A009BFE69 /* ChangePasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465EA320A3EE03009BFE69 /* ChangePasswordView.xib */; };
+		0A465EAD20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EAB20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.swift */; };
+		0A465EAE20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465EAC20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib */; };
+		0A465EB020A3FEDF009BFE69 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EAF20A3FEDF009BFE69 /* BaseTableViewCell.swift */; };
+		0A465EB320A3FF9E009BFE69 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EB220A3FF9E009BFE69 /* DataManager.swift */; };
+		0A465EB420A401D7009BFE69 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EB220A3FF9E009BFE69 /* DataManager.swift */; };
+		0A465EB520A401D7009BFE69 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EB220A3FF9E009BFE69 /* DataManager.swift */; };
+		0A465EB620A401D7009BFE69 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EB220A3FF9E009BFE69 /* DataManager.swift */; };
+		0A465EB720A404CC009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465EAC20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib */; };
+		0A465EB820A404CD009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465EAC20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib */; };
+		0A465EB920A404CD009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465EAC20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib */; };
+		0A465EBA20A404CF009BFE69 /* ChangeInviromentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EAB20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.swift */; };
+		0A465EBB20A404CF009BFE69 /* ChangeInviromentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EAB20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.swift */; };
+		0A465EBC20A404D0009BFE69 /* ChangeInviromentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EAB20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.swift */; };
+		0A465EBD20A404FB009BFE69 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EAF20A3FEDF009BFE69 /* BaseTableViewCell.swift */; };
+		0A465EBE20A404FB009BFE69 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EAF20A3FEDF009BFE69 /* BaseTableViewCell.swift */; };
+		0A465EBF20A404FC009BFE69 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EAF20A3FEDF009BFE69 /* BaseTableViewCell.swift */; };
+		0A465EC120A427C3009BFE69 /* CheckTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EC020A427C3009BFE69 /* CheckTokenModel.swift */; };
+		0A465EC220A428C1009BFE69 /* CheckTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EC020A427C3009BFE69 /* CheckTokenModel.swift */; };
+		0A465EC320A428C1009BFE69 /* CheckTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EC020A427C3009BFE69 /* CheckTokenModel.swift */; };
+		0A465EC420A428C2009BFE69 /* CheckTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EC020A427C3009BFE69 /* CheckTokenModel.swift */; };
+		0A465EC620A43174009BFE69 /* ChangePasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EC520A43174009BFE69 /* ChangePasswordModel.swift */; };
+		0A465EC720A43371009BFE69 /* ChangePasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EC520A43174009BFE69 /* ChangePasswordModel.swift */; };
+		0A465EC820A43371009BFE69 /* ChangePasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EC520A43174009BFE69 /* ChangePasswordModel.swift */; };
+		0A465EC920A43371009BFE69 /* ChangePasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EC520A43174009BFE69 /* ChangePasswordModel.swift */; };
 		0A7FB46120917EE700F5058D /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8BA6E2085D99D001321D1 /* BaseView.swift */; };
 		0A7FB46220917EE800F5058D /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8BA6E2085D99D001321D1 /* BaseView.swift */; };
 		0A7FB463209180DF00F5058D /* LogoutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8BA722085E3C5001321D1 /* LogoutTableViewCell.xib */; };
@@ -330,6 +370,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A465E9520A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordTableViewCell.swift; sourceTree = "<group>"; };
+		0A465E9620A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordTableViewCell.xib; sourceTree = "<group>"; };
+		0A465EA120A3EDFB009BFE69 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
+		0A465EA320A3EE03009BFE69 /* ChangePasswordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordView.xib; sourceTree = "<group>"; };
+		0A465EAB20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeInviromentTableViewCell.swift; sourceTree = "<group>"; };
+		0A465EAC20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeInviromentTableViewCell.xib; sourceTree = "<group>"; };
+		0A465EAF20A3FEDF009BFE69 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		0A465EB220A3FF9E009BFE69 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		0A465EC020A427C3009BFE69 /* CheckTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTokenModel.swift; sourceTree = "<group>"; };
+		0A465EC520A43174009BFE69 /* ChangePasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordModel.swift; sourceTree = "<group>"; };
 		0A7FB46520918A9800F5058D /* Assets.xcassets.Masof.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets.Masof.xcassets; sourceTree = "<group>"; };
 		0A7FB46720918B9900F5058D /* Assets.xcassets.Talron.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets.Talron.xcassets; sourceTree = "<group>"; };
 		0A7FB46920918C4000F5058D /* Assets.xcassets.Malee.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets.Malee.xcassets; sourceTree = "<group>"; };
@@ -469,6 +519,32 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A465E9F20A3EDC0009BFE69 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				0A465EA020A3EDD0009BFE69 /* ChangePasswordView */,
+				0AF8BA672085D811001321D1 /* LeftMenuView */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		0A465EA020A3EDD0009BFE69 /* ChangePasswordView */ = {
+			isa = PBXGroup;
+			children = (
+				0A465EA120A3EDFB009BFE69 /* ChangePasswordView.swift */,
+				0A465EA320A3EE03009BFE69 /* ChangePasswordView.xib */,
+			);
+			path = ChangePasswordView;
+			sourceTree = "<group>";
+		};
+		0A465EB120A3FF86009BFE69 /* GlobalServices */ = {
+			isa = PBXGroup;
+			children = (
+				0A465EB220A3FF9E009BFE69 /* DataManager.swift */,
+			);
+			path = GlobalServices;
+			sourceTree = "<group>";
+		};
 		0AB6911F20A153F60041E529 /* Designables */ = {
 			isa = PBXGroup;
 			children = (
@@ -501,6 +577,10 @@
 			children = (
 				0AF8BA712085E3C5001321D1 /* LogoutTableViewCell.swift */,
 				0AF8BA722085E3C5001321D1 /* LogoutTableViewCell.xib */,
+				0A465E9520A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift */,
+				0A465E9620A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib */,
+				0A465EAB20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.swift */,
+				0A465EAC20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib */,
 			);
 			path = LeftMenuCell;
 			sourceTree = "<group>";
@@ -589,6 +669,7 @@
 			children = (
 				5A499CBA2059277D00A1D944 /* BaseViewController.swift */,
 				0AF8BA6E2085D99D001321D1 /* BaseView.swift */,
+				0A465EAF20A3FEDF009BFE69 /* BaseTableViewCell.swift */,
 			);
 			path = Base;
 			sourceTree = "<group>";
@@ -630,6 +711,8 @@
 				24B3319720623C25001FAC49 /* Reason.swift */,
 				24D3876C2063513600BE51D9 /* OrderItem.swift */,
 				248F20912069F16300E6902D /* GoogleDirectionResponse.swift */,
+				0A465EC020A427C3009BFE69 /* CheckTokenModel.swift */,
+				0A465EC520A43174009BFE69 /* ChangePasswordModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -708,7 +791,7 @@
 		5AA4CA5120590B08003F8E6F /* App */ = {
 			isa = PBXGroup;
 			children = (
-				0AF8BA672085D811001321D1 /* LeftMenuView */,
+				0A465E9F20A3EDC0009BFE69 /* Views */,
 				5A68A447205A1FD500CA9DB8 /* OrderDetails */,
 				5A82E9C8205A04D500F34351 /* Home */,
 				5A499CB92059277400A1D944 /* Base */,
@@ -737,6 +820,7 @@
 		5AA4CA5820590B69003F8E6F /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				0A465EB120A3FF86009BFE69 /* GlobalServices */,
 				0AB6912220A156B60041E529 /* Configs */,
 				0AB6911F20A153F60041E529 /* Designables */,
 				241D68762069DA4400914E4F /* Localize */,
@@ -913,14 +997,17 @@
 				0AB690FE20A0099E0041E529 /* OrderScanItemTableViewCell.xib in Resources */,
 				0AB690FF20A0099E0041E529 /* Assets.xcassets.Masof.xcassets in Resources */,
 				0AB6910020A0099E0041E529 /* GoogleService-Info.plist in Resources */,
+				0A465EAA20A3EE1A009BFE69 /* ChangePasswordView.xib in Resources */,
 				0AB6910120A0099E0041E529 /* Info.plist in Resources */,
 				0AB6910220A0099E0041E529 /* SignatureView.xib in Resources */,
 				0AB6912C20A15F0E0041E529 /* MainConfigs.plist in Resources */,
 				0AB6910320A0099E0041E529 /* LogoutTableViewCell.xib in Resources */,
 				0AB6910420A0099E0041E529 /* Localizable.strings in Resources */,
 				0AB6910520A0099E0041E529 /* LaunchScreen.storyboard in Resources */,
+				0A465EB820A404CD009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
 				0AB6910620A0099E0041E529 /* configs_masof.plist in Resources */,
 				0AB6910720A0099E0041E529 /* LeftMenuView.xib in Resources */,
+				0A465E9E20A3E850009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
 				0AB6910820A0099E0041E529 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -932,14 +1019,17 @@
 				0AE327E9208DC84C00EF1F4C /* OrderScanItemTableViewCell.xib in Resources */,
 				0A7FB464209180DF00F5058D /* LogoutTableViewCell.xib in Resources */,
 				0AE327EA208DC84C00EF1F4C /* GoogleService-Info.plist in Resources */,
+				0A465EA920A3EE1A009BFE69 /* ChangePasswordView.xib in Resources */,
 				0AE327EB208DC84C00EF1F4C /* Info.plist in Resources */,
 				0AE327EC208DC84C00EF1F4C /* SignatureView.xib in Resources */,
 				0AB6912B20A15F0E0041E529 /* MainConfigs.plist in Resources */,
 				0AE327ED208DC84C00EF1F4C /* Localizable.strings in Resources */,
 				0AE327EE208DC84C00EF1F4C /* LaunchScreen.storyboard in Resources */,
 				0AE327F0208DC84C00EF1F4C /* Main.storyboard in Resources */,
+				0A465EB720A404CC009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
 				0A7FB46820918B9900F5058D /* Assets.xcassets.Talron.xcassets in Resources */,
 				0AE327F1208DC84C00EF1F4C /* LeftMenuView.xib in Resources */,
+				0A465E9D20A3E850009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
 				0AE327FB208DC94700EF1F4C /* configs_talron.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -951,14 +1041,17 @@
 				2494A9692074926A005A2622 /* OrderScanItemTableViewCell.xib in Resources */,
 				2494A96A2074926A005A2622 /* GoogleService-Info.plist in Resources */,
 				2494A96B2074926A005A2622 /* Info.plist in Resources */,
+				0A465EA820A3EE19009BFE69 /* ChangePasswordView.xib in Resources */,
 				2494A96C2074926A005A2622 /* SignatureView.xib in Resources */,
 				0A7FB463209180DF00F5058D /* LogoutTableViewCell.xib in Resources */,
 				0AB6912A20A15F0E0041E529 /* MainConfigs.plist in Resources */,
 				2494A96D2074926A005A2622 /* Localizable.strings in Resources */,
 				2494A96E2074926A005A2622 /* LaunchScreen.storyboard in Resources */,
 				2494A9702074926A005A2622 /* Main.storyboard in Resources */,
+				0A465EB920A404CD009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
 				0A7FB46A20918C4000F5058D /* Assets.xcassets.Malee.xcassets in Resources */,
 				0AF8BA6C2085D837001321D1 /* LeftMenuView.xib in Resources */,
+				0A465E9C20A3E84F009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
 				2494A97B2074AD41005A2622 /* configs_malee.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -970,14 +1063,17 @@
 				24D3876F2063625B00BE51D9 /* OrderScanItemTableViewCell.xib in Resources */,
 				5A499CB320591D9600A1D944 /* Info.plist in Resources */,
 				0AB6911C20A03DEC0041E529 /* Assets.xcassets in Resources */,
+				0A465EA420A3EE03009BFE69 /* ChangePasswordView.xib in Resources */,
 				0AB6911E20A042710041E529 /* configs_dms.plist in Resources */,
 				5ACCE8E4205BB31600A1532D /* SignatureView.xib in Resources */,
 				0AB6912420A156CA0041E529 /* MainConfigs.plist in Resources */,
 				0AF8BA742085E3C5001321D1 /* LogoutTableViewCell.xib in Resources */,
 				0AB6911520A010380041E529 /* GoogleService-Info.plist in Resources */,
 				241D68792069DB2200914E4F /* Localizable.strings in Resources */,
+				0A465EAE20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
 				5AA4CA4A20590AD4003F8E6F /* LaunchScreen.storyboard in Resources */,
 				0AF8BA6B2085D82B001321D1 /* LeftMenuView.xib in Resources */,
+				0A465E9820A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
 				5AA4CA4520590AD4003F8E6F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1296,11 +1392,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A465EBC20A404D0009BFE69 /* ChangeInviromentTableViewCell.swift in Sources */,
 				0AB690BA20A0099E0041E529 /* OrderPictureViewController.swift in Sources */,
 				0AB690BB20A0099E0041E529 /* OrderDetailViewController.swift in Sources */,
 				0AB690BC20A0099E0041E529 /* OrderDetailMapTableViewCell.swift in Sources */,
 				0AB690BD20A0099E0041E529 /* OrderSignatureViewController.swift in Sources */,
 				0AB690BE20A0099E0041E529 /* UIViewController.swift in Sources */,
+				0A465EC920A43371009BFE69 /* ChangePasswordModel.swift in Sources */,
 				0AB690BF20A0099E0041E529 /* UIView.swift in Sources */,
 				0AB690C020A0099E0041E529 /* NoteTableViewCell.swift in Sources */,
 				0AB690C120A0099E0041E529 /* UIImage.swift in Sources */,
@@ -1315,6 +1413,7 @@
 				0AB690CA20A0099E0041E529 /* PackageTableViewCell.swift in Sources */,
 				0AB690CB20A0099E0041E529 /* Array.swift in Sources */,
 				0AB690CC20A0099E0041E529 /* BaseViewController.swift in Sources */,
+				0A465EA720A3EE16009BFE69 /* ChangePasswordView.swift in Sources */,
 				0AB690CD20A0099E0041E529 /* Reason.swift in Sources */,
 				0AB690CE20A0099E0041E529 /* PickupPlace.swift in Sources */,
 				0AB690CF20A0099E0041E529 /* OrderScanItemTableViewCell.swift in Sources */,
@@ -1326,6 +1425,7 @@
 				0AB690D520A0099E0041E529 /* UIButton.swift in Sources */,
 				0AB690D620A0099E0041E529 /* ReasonListViewController.swift in Sources */,
 				0AB690D720A0099E0041E529 /* UIColor.swift in Sources */,
+				0A465EB620A401D7009BFE69 /* DataManager.swift in Sources */,
 				0AB690D820A0099E0041E529 /* PictureTableViewCell.swift in Sources */,
 				0AB690D920A0099E0041E529 /* LeftMenuView.swift in Sources */,
 				0AB690DA20A0099E0041E529 /* Date.swift in Sources */,
@@ -1333,6 +1433,7 @@
 				0AB690DC20A0099E0041E529 /* APIs.swift in Sources */,
 				0AB690DD20A0099E0041E529 /* HCSStarRatingView.m in Sources */,
 				0AB690DE20A0099E0041E529 /* MapsViewController.swift in Sources */,
+				0A465EBF20A404FC009BFE69 /* BaseTableViewCell.swift in Sources */,
 				0AB690DF20A0099E0041E529 /* UITextField.swift in Sources */,
 				0AB690E020A0099E0041E529 /* LoginViewController.swift in Sources */,
 				0AB690E120A0099E0041E529 /* LocationManager.swift in Sources */,
@@ -1348,6 +1449,7 @@
 				0AB6912F20A161990041E529 /* UIButtonDesignable.swift in Sources */,
 				0AB690EB20A0099E0041E529 /* PackagesViewController.swift in Sources */,
 				0AB690EC20A0099E0041E529 /* String.swift in Sources */,
+				0A465E9B20A3E84D009BFE69 /* ChangePasswordTableViewCell.swift in Sources */,
 				0AB690ED20A0099E0041E529 /* GoogleDirectionResponse.swift in Sources */,
 				0AB690EE20A0099E0041E529 /* SignatureView.swift in Sources */,
 				0AB690EF20A0099E0041E529 /* UICollectionView-Extensions.swift in Sources */,
@@ -1359,6 +1461,7 @@
 				0AB690F520A0099E0041E529 /* Constants.swift in Sources */,
 				0AB690F620A0099E0041E529 /* RouteMessageTableViewCell.swift in Sources */,
 				0AB690F720A0099E0041E529 /* Message.swift in Sources */,
+				0A465EC420A428C2009BFE69 /* CheckTokenModel.swift in Sources */,
 				0AB690F820A0099E0041E529 /* OrderItem.swift in Sources */,
 				0AB690F920A0099E0041E529 /* RouteMessagesViewController.swift in Sources */,
 				0AB690FA20A0099E0041E529 /* BaseView.swift in Sources */,
@@ -1370,11 +1473,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A465EBB20A404CF009BFE69 /* ChangeInviromentTableViewCell.swift in Sources */,
 				0AE327A6208DC84C00EF1F4C /* OrderPictureViewController.swift in Sources */,
 				0AE327A7208DC84C00EF1F4C /* OrderDetailViewController.swift in Sources */,
 				0AE327A8208DC84C00EF1F4C /* OrderDetailMapTableViewCell.swift in Sources */,
 				0AE327A9208DC84C00EF1F4C /* OrderSignatureViewController.swift in Sources */,
 				0AE327AA208DC84C00EF1F4C /* UIViewController.swift in Sources */,
+				0A465EC820A43371009BFE69 /* ChangePasswordModel.swift in Sources */,
 				0AE327AB208DC84C00EF1F4C /* UIView.swift in Sources */,
 				0AE327AC208DC84C00EF1F4C /* NoteTableViewCell.swift in Sources */,
 				0AE327AD208DC84C00EF1F4C /* UIImage.swift in Sources */,
@@ -1389,6 +1494,7 @@
 				0AE327B6208DC84C00EF1F4C /* PackageTableViewCell.swift in Sources */,
 				0AE327B7208DC84C00EF1F4C /* Array.swift in Sources */,
 				0AE327B8208DC84C00EF1F4C /* BaseViewController.swift in Sources */,
+				0A465EA620A3EE16009BFE69 /* ChangePasswordView.swift in Sources */,
 				0AE327B9208DC84C00EF1F4C /* Reason.swift in Sources */,
 				0AE327BA208DC84C00EF1F4C /* PickupPlace.swift in Sources */,
 				0AE327BB208DC84C00EF1F4C /* OrderScanItemTableViewCell.swift in Sources */,
@@ -1400,6 +1506,7 @@
 				0A7FB46220917EE800F5058D /* BaseView.swift in Sources */,
 				0AE327C1208DC84C00EF1F4C /* ReasonListViewController.swift in Sources */,
 				0AE327C2208DC84C00EF1F4C /* UIColor.swift in Sources */,
+				0A465EB520A401D7009BFE69 /* DataManager.swift in Sources */,
 				0AE327C3208DC84C00EF1F4C /* PictureTableViewCell.swift in Sources */,
 				0AE327C4208DC84C00EF1F4C /* LeftMenuView.swift in Sources */,
 				0AE327C5208DC84C00EF1F4C /* Date.swift in Sources */,
@@ -1407,6 +1514,7 @@
 				0AE327C7208DC84C00EF1F4C /* APIs.swift in Sources */,
 				0AE327C8208DC84C00EF1F4C /* HCSStarRatingView.m in Sources */,
 				0AE327C9208DC84C00EF1F4C /* MapsViewController.swift in Sources */,
+				0A465EBE20A404FB009BFE69 /* BaseTableViewCell.swift in Sources */,
 				0AE327CA208DC84C00EF1F4C /* UITextField.swift in Sources */,
 				0AE327CB208DC84C00EF1F4C /* LoginViewController.swift in Sources */,
 				0AE327CC208DC84C00EF1F4C /* LocationManager.swift in Sources */,
@@ -1422,6 +1530,7 @@
 				0AB6912E20A161990041E529 /* UIButtonDesignable.swift in Sources */,
 				0AE327D6208DC84C00EF1F4C /* PackagesViewController.swift in Sources */,
 				0AE327D7208DC84C00EF1F4C /* LogoutTableViewCell.swift in Sources */,
+				0A465E9A20A3E84D009BFE69 /* ChangePasswordTableViewCell.swift in Sources */,
 				0AE327D8208DC84C00EF1F4C /* String.swift in Sources */,
 				0AE327D9208DC84C00EF1F4C /* GoogleDirectionResponse.swift in Sources */,
 				0AE327DA208DC84C00EF1F4C /* SignatureView.swift in Sources */,
@@ -1433,6 +1542,7 @@
 				0AE327E0208DC84C00EF1F4C /* Route.swift in Sources */,
 				0AE327E1208DC84C00EF1F4C /* Constants.swift in Sources */,
 				0AE327E2208DC84C00EF1F4C /* RouteMessageTableViewCell.swift in Sources */,
+				0A465EC320A428C1009BFE69 /* CheckTokenModel.swift in Sources */,
 				0AE327E3208DC84C00EF1F4C /* Message.swift in Sources */,
 				0AE327E4208DC84C00EF1F4C /* OrderItem.swift in Sources */,
 				0AE327E5208DC84C00EF1F4C /* RouteMessagesViewController.swift in Sources */,
@@ -1444,11 +1554,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A465EBA20A404CF009BFE69 /* ChangeInviromentTableViewCell.swift in Sources */,
 				2494A9292074926A005A2622 /* OrderPictureViewController.swift in Sources */,
 				2494A92A2074926A005A2622 /* OrderDetailViewController.swift in Sources */,
 				2494A92B2074926A005A2622 /* OrderDetailMapTableViewCell.swift in Sources */,
 				2494A92C2074926A005A2622 /* OrderSignatureViewController.swift in Sources */,
 				2494A92D2074926A005A2622 /* UIViewController.swift in Sources */,
+				0A465EC720A43371009BFE69 /* ChangePasswordModel.swift in Sources */,
 				2494A92E2074926A005A2622 /* UIView.swift in Sources */,
 				2494A92F2074926A005A2622 /* NoteTableViewCell.swift in Sources */,
 				2494A9302074926A005A2622 /* UIImage.swift in Sources */,
@@ -1463,6 +1575,7 @@
 				242DC4BD207779FC0047F19C /* PackageTableViewCell.swift in Sources */,
 				2494A9392074926A005A2622 /* Array.swift in Sources */,
 				2494A93A2074926A005A2622 /* BaseViewController.swift in Sources */,
+				0A465EA520A3EE16009BFE69 /* ChangePasswordView.swift in Sources */,
 				2494A93B2074926A005A2622 /* Reason.swift in Sources */,
 				2494A93C2074926A005A2622 /* PickupPlace.swift in Sources */,
 				2494A93D2074926A005A2622 /* OrderScanItemTableViewCell.swift in Sources */,
@@ -1474,6 +1587,7 @@
 				0A7FB46120917EE700F5058D /* BaseView.swift in Sources */,
 				2494A9432074926A005A2622 /* ReasonListViewController.swift in Sources */,
 				2494A9442074926A005A2622 /* UIColor.swift in Sources */,
+				0A465EB420A401D7009BFE69 /* DataManager.swift in Sources */,
 				2494A9452074926A005A2622 /* PictureTableViewCell.swift in Sources */,
 				0AF8BA6D2085D83B001321D1 /* LeftMenuView.swift in Sources */,
 				2494A9462074926A005A2622 /* Date.swift in Sources */,
@@ -1481,6 +1595,7 @@
 				2494A9482074926A005A2622 /* APIs.swift in Sources */,
 				2494A9492074926A005A2622 /* HCSStarRatingView.m in Sources */,
 				2494A94A2074926A005A2622 /* MapsViewController.swift in Sources */,
+				0A465EBD20A404FB009BFE69 /* BaseTableViewCell.swift in Sources */,
 				2494A94B2074926A005A2622 /* UITextField.swift in Sources */,
 				2494A94C2074926A005A2622 /* LoginViewController.swift in Sources */,
 				2494A94D2074926A005A2622 /* LocationManager.swift in Sources */,
@@ -1496,6 +1611,7 @@
 				0AB6912D20A161980041E529 /* UIButtonDesignable.swift in Sources */,
 				242DC4BA207775F80047F19C /* PackagesViewController.swift in Sources */,
 				0AF8BA752085E3C8001321D1 /* LogoutTableViewCell.swift in Sources */,
+				0A465E9920A3E84C009BFE69 /* ChangePasswordTableViewCell.swift in Sources */,
 				2494A9572074926A005A2622 /* String.swift in Sources */,
 				2494A9582074926A005A2622 /* GoogleDirectionResponse.swift in Sources */,
 				2494A9592074926A005A2622 /* SignatureView.swift in Sources */,
@@ -1507,6 +1623,7 @@
 				2494A95F2074926A005A2622 /* Route.swift in Sources */,
 				2494A9602074926A005A2622 /* Constants.swift in Sources */,
 				2494A9612074926A005A2622 /* RouteMessageTableViewCell.swift in Sources */,
+				0A465EC220A428C1009BFE69 /* CheckTokenModel.swift in Sources */,
 				2494A9622074926A005A2622 /* Message.swift in Sources */,
 				2494A9632074926A005A2622 /* OrderItem.swift in Sources */,
 				2494A9642074926A005A2622 /* RouteMessagesViewController.swift in Sources */,
@@ -1524,6 +1641,7 @@
 				5A68A44D205A201A00CA9DB8 /* OrderSignatureViewController.swift in Sources */,
 				5A499CA920591D0400A1D944 /* UIViewController.swift in Sources */,
 				0AB6912120A154280041E529 /* UIButtonDesignable.swift in Sources */,
+				0A465EC620A43174009BFE69 /* ChangePasswordModel.swift in Sources */,
 				5A499CA820591D0400A1D944 /* UIView.swift in Sources */,
 				5ACCE8D9205BA94A00A1532D /* NoteTableViewCell.swift in Sources */,
 				5ACCE8E6205BC16300A1532D /* UIImage.swift in Sources */,
@@ -1537,10 +1655,13 @@
 				245BBAA22073616D00EE3E47 /* MessageAPI.swift in Sources */,
 				242DC4BC207779FC0047F19C /* PackageTableViewCell.swift in Sources */,
 				5ACCE8D1205B689000A1532D /* Array.swift in Sources */,
+				0A465EA220A3EDFB009BFE69 /* ChangePasswordView.swift in Sources */,
+				0A465EAD20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.swift in Sources */,
 				0AB6912620A156ED0041E529 /* Configs.swift in Sources */,
 				5A499CBB2059277D00A1D944 /* BaseViewController.swift in Sources */,
 				24B3319820623C25001FAC49 /* Reason.swift in Sources */,
 				5A68A45F205A619300CA9DB8 /* PickupPlace.swift in Sources */,
+				0A465EB320A3FF9E009BFE69 /* DataManager.swift in Sources */,
 				24D3876B2063511F00BE51D9 /* OrderScanItemTableViewCell.swift in Sources */,
 				5A82E9C4205A038900F34351 /* RESTConstants.swift in Sources */,
 				5A82E9C5205A038900F34351 /* RESTError.swift in Sources */,
@@ -1563,6 +1684,7 @@
 				5A499CAD20591D9000A1D944 /* Reachability.swift in Sources */,
 				5A68A455205A223200CA9DB8 /* OrderDetailCollectionViewCell.swift in Sources */,
 				5A499CA420591D0400A1D944 /* UILabel.swift in Sources */,
+				0A465EB020A3FEDF009BFE69 /* BaseTableViewCell.swift in Sources */,
 				5A82E9CC205A148F00F34351 /* OrderItemTableViewCell.swift in Sources */,
 				24D387712063674100BE51D9 /* ScanBarCodeViewController.swift in Sources */,
 				24B96CEB206B9CC9000FD6CD /* Theme.swift in Sources */,
@@ -1570,6 +1692,7 @@
 				5A499CA520591D0400A1D944 /* UITableView-Extensions.swift in Sources */,
 				5AA4CA4020590AD4003F8E6F /* AppDelegate.swift in Sources */,
 				242DC4B9207775F50047F19C /* PackagesViewController.swift in Sources */,
+				0A465E9720A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift in Sources */,
 				5A499C9F20591D0400A1D944 /* String.swift in Sources */,
 				248F20922069F16300E6902D /* GoogleDirectionResponse.swift in Sources */,
 				5ACCE8E2205BB30C00A1532D /* SignatureView.swift in Sources */,
@@ -1581,6 +1704,7 @@
 				5A68A45D205A5ECF00CA9DB8 /* Route.swift in Sources */,
 				5A499CB820591E4100A1D944 /* Constants.swift in Sources */,
 				246FA3542071EBA600C5E707 /* RouteMessageTableViewCell.swift in Sources */,
+				0A465EC120A427C3009BFE69 /* CheckTokenModel.swift in Sources */,
 				245BBAA4207363EC00EE3E47 /* Message.swift in Sources */,
 				24D3876D2063513600BE51D9 /* OrderItem.swift in Sources */,
 				246FA3522071EB7300C5E707 /* RouteMessagesViewController.swift in Sources */,

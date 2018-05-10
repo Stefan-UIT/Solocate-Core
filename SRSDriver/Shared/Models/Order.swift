@@ -30,7 +30,6 @@ class Order: NSObject, Mappable {
   var deliveryAdd = ""
   var timeWindowName = ""
   var orderType = ""
-  var fullAddress = ""
   convenience required init?(map: Map) {
     self.init()
   }
@@ -51,13 +50,12 @@ class Order: NSObject, Mappable {
     lat               <- map["lat"]
     lng               <- map["long"]
     statusCode        <- map["order_sts"]
-    statusName        <- map["order_status"]
+    statusName        <- map["order_stmainatus"]
     orderReference    <- map["order_ref"]
     deliveryDate      <- map["dlvy_date"]
     deliveryAdd       <- map["delivery"]
     timeWindowName    <- map["TimeWindowName"]
     orderType         <- map["order_type_name"]
-    fullAddress       <- map["full_addr"]
   }
 }
 
@@ -80,10 +78,10 @@ class OrderDetail: Order {
   override func mapping(map: Map) {
     super.mapping(map: map)
     id <- map["id"]
-    deliveryContactName <- map["dlvy_ctt_name"]
-    deliveryContactPhone <- map["dlvy_ctt_phone"]
+    deliveryContactName <- map["ctt_name"]
+    deliveryContactPhone <- map["ctt_phone"]
     timeWindowName <- map["time_window_text"]
-    deliveryAdd <- map["dlvy_addr"]
+    deliveryAdd <- map["full_addr"]
     deliveryCity <- map["dlvy_city"]
     deliveryState <- map["dlvy_state"]
     descriptionNote <- map["note"]

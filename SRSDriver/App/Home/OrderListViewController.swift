@@ -18,7 +18,7 @@ class OrderListViewController: UIViewController {
   
   fileprivate let cellIdentifier = "OrderItemTableViewCell"
   fileprivate let cellHeight: CGFloat = 150.0
-    
+  fileprivate var changePasswordView : ChangePasswordView!
   fileprivate var selectedString = "" {
     didSet {
       let date = Date()
@@ -275,11 +275,87 @@ extension OrderListViewController: UITabBarControllerDelegate {
 
 /* Added by Hoang Trinh - Begin */
 extension OrderListViewController : LeftMenuViewDelegate {
-    func leftMenuView(_ view: LeftMenuView, _ isLogout: Bool) {
-      view.hideView()
-      Cache.shared.setObject(obj: "", forKey: Defaultkey.tokenKey)
-      APIs.updateNotificationToken("")
-      navigationController?.navigationController?.popToRootViewController(animated: true)
+    func leftMenuView(_ view: LeftMenuView, _ selectedItem: IdentifierType) {
+        view.hideView()
+        handleSelectedItemLeftMenu(selectedItem)
+    }
+    
+    func handleSelectedItemLeftMenu(_ type : IdentifierType) {
+        switch type {
+        case .CHANGE_PASSWORD:
+            handleChangePassword()
+            break
+        case.LOG_OUT:
+        handleLogOut()
+            break
+        case .CHANGE_INVIROMENT:
+            handleChangeEnviroment()
+            break
+        }
+    }
+    
+    func handleChangeEnviroment() {
+        
+        DataManager.changeEnviroment()
+        
+        Cache.shared.setObject(obj: "", forKey: Defaultkey.tokenKey)
+        APIs.updateNotificationToken("")
+        navigationController?.navigationController?.popToRootViewController(animated: true)
+    }
+    
+    func handleChangePassword() {
+        if (changePasswordView != nil) {
+            changePasswordView.resetData()
+            changePasswordView.showViewInWindow()
+            
+        } else {
+            changePasswordView = ChangePasswordView()
+            changePasswordView.delegate = self
+            changePasswordView.showViewInWindow()
+        }
+    }
+    
+    func handleLogOut() {
+        Cache.shared.setObject(obj: "", forKey: Defaultkey.tokenKey)
+        APIs.updateNotificationToken("")
+        navigationController?.navigationController?.popToRootViewController(animated: true)
+    }
+}
+
+extension OrderListViewController : ChangePasswordViewDelegate {
+    func changePasswordView(_ view: ChangePasswordView, _ success: Bool, _ errorMessage: String, _ model: ChangePasswordModel?) {
+        if success {
+            view.removeFromSuperview()
+            showAlertView(errorMessage)
+        } else {
+            if let model = model {
+                view.removeFromSuperview()
+                if model.oldPassword.count > 0 {
+                    showAlertView(model.oldPassword.first!) { (alertAction) in
+                        view.showViewInWindow()
+                    }
+                } else if model.newPassword.count > 0 {
+                    showAlertView(model.newPassword.first!) { (alertAction) in
+                        view.showViewInWindow()
+                    }
+                }else if model.rePassword.count > 0 {()
+                    showAlertView(model.rePassword.first!) { (alertAction) in
+                        view.showViewInWindow()
+                    }
+                } else {
+                    showAlertView(errorMessage) { (alertAction) in
+                        view.showViewInWindow()
+                    }
+                }
+            } else {
+                view.removeFromSuperview()
+                showAlertView(errorMessage) { (alertAction) in
+                    view.showViewInWindow()
+                }
+            }
+        }
     }
 }
 /* Added by Hoang Trinh - End */
+
+

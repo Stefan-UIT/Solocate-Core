@@ -213,7 +213,7 @@ class APIs {
       "order_ids": orderIDs
     ]]
 
-    guard let baseURL = RESTConstants.configs[RESTConstants.BASE_URL],
+    guard let baseURL = RESTConstants.getBASEURL(),
     let updateSequence = RESTConstants.configs[RESTConstants.UPDATE_SEQUENCE] else {
         return
     }
@@ -227,7 +227,7 @@ class APIs {
         "qty": qty
       ]
     ]
-    guard let baseURL = RESTConstants.configs[RESTConstants.BASE_URL],
+    guard let baseURL = RESTConstants.getBASEURL(),
       let addNewItem = RESTConstants.configs[RESTConstants.ADD_NEW_ORDER_ITEM] else {
         return
     }
@@ -266,7 +266,7 @@ class APIs {
   }
   
   static func uploadFiles(_ files: [PictureObject], orderID: String, completion: @escaping ((_ errorMsg: String?) -> Void)) {
-    guard let baseURL = RESTConstants.configs[RESTConstants.BASE_URL],
+    guard let baseURL = RESTConstants.getBASEURL(),
       let uploadFiles = RESTConstants.configs[RESTConstants.UPLOAD_FILES] else {
         return
     }
@@ -404,7 +404,68 @@ class APIs {
     
   }
   
-  
+    static func changePassword( _ para : [String: Any], completion: @escaping ((_ successful: Bool, _ message: String?, _ model: ChangePasswordModel?) -> Void)) {
+        let request = RESTRequest(functionName: RESTConstants.configs[RESTConstants.CHANGE_PASSWORD] ?? ""
+            , method: .post, encoding: .default)
+        request.setParameters(para)
+        if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+            request.setAuthorization(token)
+        }
+        request.setContentType("application/x-www-form-urlencoded")
+        request.baseInvoker { (resp, error) in
+            if let error = error {
+                completion(false, error.message, nil)
+                return
+            }
+            if let response = resp as? [String: Any] {
+                if let error = response["error"] as? [String: Any] {
+                    if let model = Mapper<ChangePasswordModel>().map(JSON: error) {
+                        completion(false, "Change password fail", model)
+                        return
+                    } else {
+                        completion(false, "Something wrong with data. Please check agian", nil)
+                        return
+                    }
+                } else if let data = response["data"] as? [String: Any] {
+                    if let success = data["success"] as? Bool {
+                        completion(success, "Change password successful", nil)
+                        return
+                    }
+                }
+            }
+            completion(false, "Something wrong with data. Please check agian", nil)
+        }
+  }
+    
+    
+  static func checkToken( completion: @escaping ((_ isValid: Bool, _ message: String?) -> Void)) {
+        let uri = String.init(format: RESTConstants.configs[RESTConstants.CHECK_TOKEN] ?? "")
+        let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
+        if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+            request.setAuthorization(token)
+        }
+        request.setContentType("application/x-www-form-urlencoded")
+        request.baseInvoker { (response, error) in
+            
+            if let error = error {
+                completion(false, "\(error.message)")
+                return
+            }
+            guard let resp = response as? [String: Any] else {
+                completion(false, "Invalid token")
+                return
+            }
+            guard let model = Mapper<CheckTokenModel>().map(JSONObject: resp) else {
+                completion(false, "Invalid token")
+                return
+            }
+            if model.status == 401 {
+                completion(false, "Invalid token")
+                return
+            }
+            completion(true, "Valid token")
+        }
+  }
 }
 
 

@@ -30,6 +30,7 @@ class RESTConstants: NSObject {
   static let statusCodeSuccess: Int             = 0
   
   static let BASE_URL = "BASE_URL"
+  static let BASE_URL_DEV = "BASE_URL_DEV"
   static let LOGIN = "LOGIN"
   static let GET_ORDERS = "GET_ORDERS"
   static let GET_ORDER_BY_DATE = "GET_ORDER_BY_DATE"
@@ -49,6 +50,8 @@ class RESTConstants: NSObject {
   static let GET_LIST_NOTIFICATIONS = "GET_LIST_NOTIFICATIONS"
   static let GET_ROUTE_DETAIL = "GET_ROUTE_DETAIL"
   static let READ_MESSAGE = "READ_MESSAGE"
+  static let CHECK_TOKEN = "CHECK_TOKEN"
+  static let CHANGE_PASSWORD = "CHANGE_PASSWORD"
   
   //MARK: Keys for parser
   static let successKeyFromResponseData         = "status"
@@ -76,5 +79,14 @@ class RESTConstants: NSObject {
     return [String: String]()
   }()
   
-  
+    class func getBASEURL() -> String? {
+        let type = DataManager.getEnviroment()
+        switch type {
+        case .DEMO:
+            return RESTConstants.configs[RESTConstants.BASE_URL]
+
+        case .DEV:
+            return RESTConstants.configs[RESTConstants.BASE_URL_DEV]
+        }
+    }
 }

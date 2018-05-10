@@ -55,8 +55,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       var phone = OrderDetailItem(.phone)
       phone.content = _orderDetail.deliveryContactPhone
       var address = OrderDetailItem(.address)
-        address.content = (_orderDetail.deliveryAdd.isEmpty ? _orderDetail.deliveryAdd : _orderDetail.deliveryAdd)
-        + "\n\(_orderDetail.deliveryCity)"
+        address.content = _orderDetail.deliveryAdd + "\n\(_orderDetail.deliveryCity)"
       var description = OrderDetailItem(.description)
       description.content = _orderDetail.descriptionNote + " " + _orderDetail.descriptionNoteExt
       var items = OrderDetailItem(.items)

@@ -13,6 +13,8 @@ class LoginViewController: BaseViewController {
   @IBOutlet weak var userNameTextField: UITextField!
   @IBOutlet weak var passwordTextField: UITextField!
   @IBOutlet weak var rememberButton: UIButton!
+  @IBOutlet weak var enviromentButton: UIButton!
+    
   private var keepLogin = true
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -25,6 +27,11 @@ class LoginViewController: BaseViewController {
       Cache.shared.setObject(obj: true, forKey: Defaultkey.keepLogin)
     }
   }
+    
+  override func viewWillAppear(_ animated: Bool) {
+    super.viewWillAppear(animated)
+    updateStatusEnviromentButton()
+  }
   
   override func viewDidAppear(_ animated: Bool) {
     super.viewDidAppear(animated)
@@ -32,9 +39,28 @@ class LoginViewController: BaseViewController {
       return
     }
     if let tk = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String, tk.length > 0 {
-      self.performSegue(withIdentifier: SegueIdentifier.showHome, sender: nil)
+        showLoadingIndicator()
+        APIs.checkToken { (isValid, message) in
+            self.dismissLoadingIndicator()
+            if isValid {
+                self.performSegue(withIdentifier: SegueIdentifier.showHome, sender: nil)
+            }
+        }
     }
   }
+  
+  func updateStatusEnviromentButton() {
+        let type = DataManager.getEnviroment()
+        switch type {
+        case .DEMO:
+            enviromentButton.setTitle("Demo", for: .normal)
+            break
+        case .DEV:
+            enviromentButton.setTitle("Developer", for: .normal)
+            break
+        }
+  }
+    
   @IBAction func didClickRemember(_ sender: UIButton) {
     keepLogin = !keepLogin
     let imgName = keepLogin ? "check_selected" : "check_normal"
@@ -69,4 +95,8 @@ class LoginViewController: BaseViewController {
     }
   }
   
+    @IBAction func tapEnviromentButtonAction(_ sender: UIButton) {
+        DataManager.changeEnviroment()
+        updateStatusEnviromentButton()
+    }
 }
