@@ -41,8 +41,43 @@ class APIs {
       }
     }
   }
+    
+  class func forgetPassword(_ email: String, completion: @escaping((_ token: String?, _ msg: String?) -> Void)) {
+        let request = RESTRequest(functionName: RESTConstants.configs[RESTConstants.FORGET_PASSWORD] ?? ""
+            , method: .post, encoding: .default)
+    
+        let resetUrl = "\(RESTConstants.getBASEURL() ?? "")\(RESTConstants.configs[RESTConstants.RESET_PASSWORD_URL] ?? "")"
+        let params = ["email": email,
+                      "reset_password_url": resetUrl]
+        request.setParameters(params)
+        request.setContentType("application/x-www-form-urlencoded")
+        request.baseInvoker { (resp, error) in
+            if let response = resp as? [String: Any],
+                let data = response["data"] as? [String : String],
+                let forgotPassword = data["forgot_password"] {
+                completion(forgotPassword, nil)
+            }
+            else if let err = error {
+                completion(nil, err.message)
+                return
+            }
+            else {
+                guard let response = resp as? [String: Any] else {
+                    completion(nil, "Unknown")
+                    return
+                }
+                if let errors = response["errors"]  as? [String: Any] {
+                    if let detail = errors["detail"] as? String {
+                        completion(nil, detail)
+                        return
+                    }
+                }
+                completion(nil, "Unknown")
+            }
+        }
+  }
   
-  class func getOrderDetail(_ orderID: String, completion: @escaping ((_ resp: OrderDetail?, _ msg: String?) -> Void)) {
+    class func getOrderDetail(_ orderID: String, completion: @escaping ((_ resp: OrderDetail?,_ error: RESTError?, _ msg: String?) -> Void)) {
     let uri = String.init(format: RESTConstants.configs[RESTConstants.GET_ORDER_DETAIL] ?? "", orderID)
     let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
     if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
@@ -51,16 +86,16 @@ class APIs {
     request.setContentType("application/x-www-form-urlencoded")
     request.baseInvoker { (response, error) in
       guard let resp = response as? [String: Any] else {
-        completion(nil, error != nil ? error!.message : "error_network".localized)
+        completion(nil, error, error != nil ? error!.message : "error_network".localized)
         return
       }
       if let errors = resp["errors"] as? [String: Any],
         let err = Mapper<RESTResponse>().map(JSON: errors) {
-        completion(nil, err.message)
+        completion(nil, nil, err.message)
         return
       }
       if let orderDetail = Mapper<OrderDetail>().map(JSONObject: resp) {
-        completion(orderDetail, nil)
+        completion(orderDetail, nil, nil)
       }
     }
   }
@@ -391,7 +426,7 @@ class APIs {
     let request = RESTRequest(functionName: RESTConstants.configs[RESTConstants.UPDATE_NOTIFICATION_TOKEN] ?? "", method: .post, encoding: .default)
     let params = [
       "notification_token": token,
-      "device": "2" // 2 for iOS
+      "device": "2" // iOS : device = 2
     ]
     request.setParameters(params)
     request.setContentType("application/x-www-form-urlencoded")
@@ -401,7 +436,6 @@ class APIs {
     request.baseInvoker { (resp, error) in
       print("did update token key")
     }
-    
   }
   
     static func changePassword( _ para : [String: Any], completion: @escaping ((_ successful: Bool, _ message: String?, _ model: ChangePasswordModel?) -> Void)) {
@@ -465,7 +499,40 @@ class APIs {
             }
             completion(true, "Valid token")
         }
-  }
+   }
+    
+    static func logout(completion: @escaping ((_ isValid: Bool, _ message: String?) -> Void)) {
+        let uri = String.init(format: RESTConstants.configs[RESTConstants.LOGOUT] ?? "")
+        let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
+        if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+            request.setAuthorization(token)
+        }
+        request.setContentType("application/x-www-form-urlencoded")
+        request.baseInvoker { (response, error) in
+            
+            if let error = error {
+                completion(false, "\(error.message)")
+                return
+            }
+            guard let resp = response as? [String: Any] else {
+                completion(false, "Logout fail")
+                return
+            }
+            guard let data = resp["data"] as? [String: Any] else {
+                completion(false, "Logout fail")
+                return
+            }
+            guard let success = data["success"] as? Bool else {
+                completion(false, "Logout fail")
+                return
+            }
+            if success {
+                completion(true, "Valid token")
+            } else {
+                completion(false, "Logout fail")
+            }
+        }
+    }
 }
 
 

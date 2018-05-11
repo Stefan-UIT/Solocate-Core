@@ -56,6 +56,7 @@ class MapsViewController: UIViewController {
       let pickupMarker = GMSMarker(position: CLLocationCoordinate2D(latitude: pickupAdd.lat, longitude: pickupAdd.lng))
       pickupMarker.title = pickupAdd.shopName
       pickupMarker.map = mapView
+        
       let pickupLocation = CLLocationCoordinate2D(latitude: pickupAdd.lat, longitude: pickupAdd.lng)
       
       if let firstPoint = _route.orderList.first {
@@ -95,9 +96,6 @@ class MapsViewController: UIViewController {
       }
     }
   }
-  
-  
-  
 }
 
 extension MapsViewController: GMSMapViewDelegate {

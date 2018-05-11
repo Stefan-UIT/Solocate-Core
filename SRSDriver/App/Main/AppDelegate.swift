@@ -51,9 +51,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 extension AppDelegate: MessagingDelegate {
   func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-    APIs.updateNotificationToken(fcmToken)
-    Cache.shared.setObject(obj: fcmToken, forKey: Defaultkey.fcmToken)
-    print("did receive fcm token \(fcmToken)")
+    if let _ = Cache.getTokenKeyLogin() {
+        APIs.updateNotificationToken(fcmToken)
+        Cache.shared.setObject(obj: fcmToken, forKey: Defaultkey.fcmToken)
+        print("did receive fcm token \(fcmToken)")
+    }
   }
   
   func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {

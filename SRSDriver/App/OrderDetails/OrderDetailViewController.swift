@@ -308,10 +308,10 @@ extension OrderDetailViewController {
       if let err = errMsg {
         self.showAlertView(err)
       }
-      else {
-        let shouldMoveSignatureTab = status == "DV" // Expected Status DV
-        self.didUpdateStatus?(shouldMoveSignatureTab)
-      }
+//      else {
+//        let shouldMoveSignatureTab = status == "DV" // Expected Status DV
+//        self.didUpdateStatus?(shouldMoveSignatureTab)
+//      }
     }
   }
 }

@@ -48,9 +48,17 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
   private func getOrderDetail() {
     guard let _orderID = orderID else { return }
     showLoadingIndicator()
-    APIs.getOrderDetail(_orderID, completion: { [unowned self] (resp, errorMsg) in
+    APIs.getOrderDetail(_orderID, completion: { [unowned self] (resp,error,errorMsg) in
       self.dismissLoadingIndicator()
       guard let orderDetail = resp else {
+        if let error = error {
+            if error.statusCode == 401 {
+                self.showAlertView(errorMsg ?? " ", completionHandler: { [unowned self] (action) in
+                    self.navigationController?.popViewController(animated: true)
+                })
+                return
+            }
+        }
         self.showAlertView(errorMsg ?? " ")
         return
       }

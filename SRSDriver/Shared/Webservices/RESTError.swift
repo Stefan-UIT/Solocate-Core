@@ -41,7 +41,6 @@ class RESTError: RESTResponse {
       return _err
     }
   }
-
 }
 
 

@@ -21,6 +21,7 @@ class OrderItem: NSObject, Mappable {
   var statusName = ""
   var statusCode = ""
   var total = -1
+  var bearconId = "" // Add by Hoang Trinh for Masof
   
   required convenience init?(map: Map) {
     self.init()
@@ -39,9 +40,7 @@ class OrderItem: NSObject, Mappable {
     statusCode <- map["status_code"]
     id <- map["id"]
     total <- map["total"]
-    
+    bearconId <- map["beacon_id"] // Add by Hoang Trinh for Masof
   }
   
-  
-
 }

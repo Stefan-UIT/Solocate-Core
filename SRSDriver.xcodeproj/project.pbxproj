@@ -7,6 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0A27215A20A597B1009E527F /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A27215920A597B1009E527F /* ForgetPasswordView.swift */; };
+		0A27215C20A597C1009E527F /* ForgetPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A27215B20A597C1009E527F /* ForgetPasswordView.xib */; };
+		0A27215D20A599A7009E527F /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A27215920A597B1009E527F /* ForgetPasswordView.swift */; };
+		0A27215E20A599A7009E527F /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A27215920A597B1009E527F /* ForgetPasswordView.swift */; };
+		0A27215F20A599A7009E527F /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A27215920A597B1009E527F /* ForgetPasswordView.swift */; };
+		0A27216020A599AC009E527F /* ForgetPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A27215B20A597C1009E527F /* ForgetPasswordView.xib */; };
+		0A27216120A599AC009E527F /* ForgetPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A27215B20A597C1009E527F /* ForgetPasswordView.xib */; };
+		0A27216220A599AC009E527F /* ForgetPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A27215B20A597C1009E527F /* ForgetPasswordView.xib */; };
 		0A465E9720A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465E9520A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift */; };
 		0A465E9820A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465E9620A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib */; };
 		0A465E9920A3E84C009BFE69 /* ChangePasswordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465E9520A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift */; };
@@ -370,6 +378,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0A27215920A597B1009E527F /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
+		0A27215B20A597C1009E527F /* ForgetPasswordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgetPasswordView.xib; sourceTree = "<group>"; };
 		0A465E9520A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordTableViewCell.swift; sourceTree = "<group>"; };
 		0A465E9620A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordTableViewCell.xib; sourceTree = "<group>"; };
 		0A465EA120A3EDFB009BFE69 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
@@ -519,9 +529,19 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0A27215820A5979B009E527F /* ForgetPasswordView */ = {
+			isa = PBXGroup;
+			children = (
+				0A27215920A597B1009E527F /* ForgetPasswordView.swift */,
+				0A27215B20A597C1009E527F /* ForgetPasswordView.xib */,
+			);
+			path = ForgetPasswordView;
+			sourceTree = "<group>";
+		};
 		0A465E9F20A3EDC0009BFE69 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0A27215820A5979B009E527F /* ForgetPasswordView */,
 				0A465EA020A3EDD0009BFE69 /* ChangePasswordView */,
 				0AF8BA672085D811001321D1 /* LeftMenuView */,
 			);
@@ -1006,6 +1026,7 @@
 				0AB6910520A0099E0041E529 /* LaunchScreen.storyboard in Resources */,
 				0A465EB820A404CD009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
 				0AB6910620A0099E0041E529 /* configs_masof.plist in Resources */,
+				0A27216220A599AC009E527F /* ForgetPasswordView.xib in Resources */,
 				0AB6910720A0099E0041E529 /* LeftMenuView.xib in Resources */,
 				0A465E9E20A3E850009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
 				0AB6910820A0099E0041E529 /* Main.storyboard in Resources */,
@@ -1028,6 +1049,7 @@
 				0AE327F0208DC84C00EF1F4C /* Main.storyboard in Resources */,
 				0A465EB720A404CC009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
 				0A7FB46820918B9900F5058D /* Assets.xcassets.Talron.xcassets in Resources */,
+				0A27216120A599AC009E527F /* ForgetPasswordView.xib in Resources */,
 				0AE327F1208DC84C00EF1F4C /* LeftMenuView.xib in Resources */,
 				0A465E9D20A3E850009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
 				0AE327FB208DC94700EF1F4C /* configs_talron.plist in Resources */,
@@ -1050,6 +1072,7 @@
 				2494A9702074926A005A2622 /* Main.storyboard in Resources */,
 				0A465EB920A404CD009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
 				0A7FB46A20918C4000F5058D /* Assets.xcassets.Malee.xcassets in Resources */,
+				0A27216020A599AC009E527F /* ForgetPasswordView.xib in Resources */,
 				0AF8BA6C2085D837001321D1 /* LeftMenuView.xib in Resources */,
 				0A465E9C20A3E84F009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
 				2494A97B2074AD41005A2622 /* configs_malee.plist in Resources */,
@@ -1072,6 +1095,7 @@
 				241D68792069DB2200914E4F /* Localizable.strings in Resources */,
 				0A465EAE20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
 				5AA4CA4A20590AD4003F8E6F /* LaunchScreen.storyboard in Resources */,
+				0A27215C20A597C1009E527F /* ForgetPasswordView.xib in Resources */,
 				0AF8BA6B2085D82B001321D1 /* LeftMenuView.xib in Resources */,
 				0A465E9820A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
 				5AA4CA4520590AD4003F8E6F /* Main.storyboard in Resources */,
@@ -1447,6 +1471,7 @@
 				0AB690E920A0099E0041E529 /* UITableView-Extensions.swift in Sources */,
 				0AB690EA20A0099E0041E529 /* AppDelegate.swift in Sources */,
 				0AB6912F20A161990041E529 /* UIButtonDesignable.swift in Sources */,
+				0A27215F20A599A7009E527F /* ForgetPasswordView.swift in Sources */,
 				0AB690EB20A0099E0041E529 /* PackagesViewController.swift in Sources */,
 				0AB690EC20A0099E0041E529 /* String.swift in Sources */,
 				0A465E9B20A3E84D009BFE69 /* ChangePasswordTableViewCell.swift in Sources */,
@@ -1528,6 +1553,7 @@
 				0AE327D4208DC84C00EF1F4C /* UITableView-Extensions.swift in Sources */,
 				0AE327D5208DC84C00EF1F4C /* AppDelegate.swift in Sources */,
 				0AB6912E20A161990041E529 /* UIButtonDesignable.swift in Sources */,
+				0A27215E20A599A7009E527F /* ForgetPasswordView.swift in Sources */,
 				0AE327D6208DC84C00EF1F4C /* PackagesViewController.swift in Sources */,
 				0AE327D7208DC84C00EF1F4C /* LogoutTableViewCell.swift in Sources */,
 				0A465E9A20A3E84D009BFE69 /* ChangePasswordTableViewCell.swift in Sources */,
@@ -1609,6 +1635,7 @@
 				2494A9552074926A005A2622 /* UITableView-Extensions.swift in Sources */,
 				2494A9562074926A005A2622 /* AppDelegate.swift in Sources */,
 				0AB6912D20A161980041E529 /* UIButtonDesignable.swift in Sources */,
+				0A27215D20A599A7009E527F /* ForgetPasswordView.swift in Sources */,
 				242DC4BA207775F80047F19C /* PackagesViewController.swift in Sources */,
 				0AF8BA752085E3C8001321D1 /* LogoutTableViewCell.swift in Sources */,
 				0A465E9920A3E84C009BFE69 /* ChangePasswordTableViewCell.swift in Sources */,
@@ -1690,6 +1717,7 @@
 				24B96CEB206B9CC9000FD6CD /* Theme.swift in Sources */,
 				5A82E9C6205A038900F34351 /* RESTRequest.swift in Sources */,
 				5A499CA520591D0400A1D944 /* UITableView-Extensions.swift in Sources */,
+				0A27215A20A597B1009E527F /* ForgetPasswordView.swift in Sources */,
 				5AA4CA4020590AD4003F8E6F /* AppDelegate.swift in Sources */,
 				242DC4B9207775F50047F19C /* PackagesViewController.swift in Sources */,
 				0A465E9720A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift in Sources */,

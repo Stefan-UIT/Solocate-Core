@@ -6,6 +6,10 @@
 	<string>https://apigw.seldatdirect.com/dev/sdms/api</string>
 	<key>LOGIN</key>
 	<string>/master-service/v1/login</string>
+	<key>FORGET_PASSWORD</key>
+	<string>/master-service/v1/forgot-password</string>
+	<key>LOGOUT</key>
+	<string>/master-service/v1/logout</string>
 	<key>GET_ORDERS</key>
 	<string>/backend-api/driver/v1/orders</string>
 	<key>GET_ORDER_BY_DATE</key>
@@ -46,5 +50,7 @@
 	<string>authentication/users/token</string>
 	<key>CHANGE_PASSWORD</key>
 	<string>/master-service/v1/users/change-password</string>
+	<key>RESET_PASSWORD_URL</key>
+	<string>/#/reset-password</string>
 </dict>
 </plist>

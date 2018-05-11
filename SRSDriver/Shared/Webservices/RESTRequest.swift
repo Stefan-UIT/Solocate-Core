@@ -22,9 +22,6 @@ class RESTRequest: NSObject {
   
   func baseInvoker(_ completion: @escaping RESTAPICompletion) {
     print("baseURL - \(self.baseURL)")
-    
-    
-    
     Alamofire.request(self.baseURL, method: self.requestMethod, parameters: self.params, encoding: self.endcoding, headers: self.headers)
       .responseJSON { (response) in
         self.handleResponse(response, completion: completion)
@@ -34,19 +31,20 @@ class RESTRequest: NSObject {
   private func handleResponse(_ response: DataResponse<Any>, completion: RESTAPICompletion) {
     switch response.result {
     case .success(let success):
+        if let success = success as? [String: Any] {
+            if let errors = success["errors"] as? [String: Any] {
+                if let statusCode = errors["status_code"] as? Int {
+                    if statusCode == 401 {
+                        completion(nil, RESTError(code: statusCode, msg: "Your Account Permission Denied"))
+                        return
+                    }
+                }
+            }
+        }
       completion(success, nil)
-    case .failure(let _):
+    case .failure( _):
       completion(nil, RESTError.parseError(response))
     }
-//    guard let restResponse = Mapper<RESTResponse>().map(JSONObject: response.result.value) else {
-//      completion(nil, RESTError.parseError(response))
-//      return
-//    }
-//    if restResponse.statusCode == RESTConstants.statusCodeSuccess {
-//      completion(restResponse.data, nil)
-//    } else {
-//      completion(nil, RESTError.parseError(response))
-//    }
   }
   
   func addQueryParam(_ name: String, value: Any) {

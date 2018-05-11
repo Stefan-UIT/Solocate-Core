@@ -32,6 +32,8 @@ class RESTConstants: NSObject {
   static let BASE_URL = "BASE_URL"
   static let BASE_URL_DEV = "BASE_URL_DEV"
   static let LOGIN = "LOGIN"
+  static let FORGET_PASSWORD = "FORGET_PASSWORD"
+  static let LOGOUT = "LOGOUT"
   static let GET_ORDERS = "GET_ORDERS"
   static let GET_ORDER_BY_DATE = "GET_ORDER_BY_DATE"
   static let GET_ORDER_DETAIL = "GET_ORDER_DETAIL"
@@ -52,6 +54,8 @@ class RESTConstants: NSObject {
   static let READ_MESSAGE = "READ_MESSAGE"
   static let CHECK_TOKEN = "CHECK_TOKEN"
   static let CHANGE_PASSWORD = "CHANGE_PASSWORD"
+  static let RESET_PASSWORD_URL = "RESET_PASSWORD_URL"
+
   
   //MARK: Keys for parser
   static let successKeyFromResponseData         = "status"

@@ -295,12 +295,8 @@ extension OrderListViewController : LeftMenuViewDelegate {
     }
     
     func handleChangeEnviroment() {
-        
         DataManager.changeEnviroment()
-        
-        Cache.shared.setObject(obj: "", forKey: Defaultkey.tokenKey)
-        APIs.updateNotificationToken("")
-        navigationController?.navigationController?.popToRootViewController(animated: true)
+        handleLogOut()
     }
     
     func handleChangePassword() {
@@ -316,9 +312,14 @@ extension OrderListViewController : LeftMenuViewDelegate {
     }
     
     func handleLogOut() {
-        Cache.shared.setObject(obj: "", forKey: Defaultkey.tokenKey)
-        APIs.updateNotificationToken("")
-        navigationController?.navigationController?.popToRootViewController(animated: true)
+        APIs.logout { [unowned self] (success, msg) in
+            if success {
+                Cache.setTokenKeyLogin("")
+                self.navigationController?.navigationController?.popToRootViewController(animated: true)
+            } else {
+                print(msg ?? "")
+            }
+        }
     }
 }
 

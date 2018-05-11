@@ -30,7 +30,7 @@ class LoginViewController: BaseViewController {
     
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    updateStatusEnviromentButton()
+    updateStatusEnviroment()
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -49,7 +49,7 @@ class LoginViewController: BaseViewController {
     }
   }
   
-  func updateStatusEnviromentButton() {
+  func updateStatusEnviroment() {
         let type = DataManager.getEnviroment()
         switch type {
         case .DEMO:
@@ -59,6 +59,12 @@ class LoginViewController: BaseViewController {
             enviromentButton.setTitle("Developer", for: .normal)
             break
         }
+  }
+    
+  func handleForgetPassword() {
+    let forgetPasswordView : ForgetPasswordView = ForgetPasswordView()
+    forgetPasswordView.delegate = self
+    forgetPasswordView.showViewInView(superView: self.view)
   }
     
   @IBAction func didClickRemember(_ sender: UIButton) {
@@ -94,9 +100,29 @@ class LoginViewController: BaseViewController {
       self.performSegue(withIdentifier: SegueIdentifier.showHome, sender: nil)
     }
   }
+    
+    @IBAction func tapForgetPasswordButtonAction(_ sender: UIButton) {
+        handleForgetPassword()
+    }
+    
   
     @IBAction func tapEnviromentButtonAction(_ sender: UIButton) {
         DataManager.changeEnviroment()
-        updateStatusEnviromentButton()
+        updateStatusEnviroment()
+    }
+}
+
+extension LoginViewController: ForgetPasswordViewDelegate {
+    func forgetPasswordView(_ view: ForgetPasswordView, _ email: String) {
+        view.removeFromSuperview()
+        APIs.forgetPassword(email) { [unowned self] (msg, error) in
+            if let msg = msg {
+                self.showAlertView(msg)
+            } else if let error = error {
+                self.showAlertView(error)
+            } else {
+                self.showAlertView("Something Wrong.")
+            }
+        }
     }
 }

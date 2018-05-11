@@ -11,14 +11,24 @@ import UIKit
 class OrderScanItemTableViewCell: UITableViewCell {
     
   @IBOutlet weak var skuLabel: UILabel!
+  @IBOutlet weak var coolerName: UILabel!
+  @IBOutlet weak var beaconId: UILabel!
+  @IBOutlet weak var statusLabel: UILabel!
   @IBOutlet weak var quantityLabel: UILabel!
   @IBOutlet weak var descriptionLabel: UILabel!
-  @IBOutlet weak var statusLabel: UILabel!
   @IBOutlet weak var barcodeLabel: UILabel!
-  
+  @IBOutlet weak var qtyStackView: UIStackView!
+    
   var orderItem: OrderItem! {
     didSet {
       skuLabel.text = orderItem.sku
+      /* Added by Hoang Trinh for Masof - Begin */
+      coolerName.text = orderItem.name
+      if !orderItem.bearconId.isEmpty {
+        beaconId.text = "- \(orderItem.bearconId)"
+      }
+      
+      /* Added by Hoang Trinh for Masof - End */
       quantityLabel.text = "\(orderItem.qty)"
       descriptionLabel.text = orderItem.desc
       let status = OrderStatus(rawValue: orderItem.statusCode)!
@@ -29,6 +39,7 @@ class OrderScanItemTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        qtyStackView.isHidden = true
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
