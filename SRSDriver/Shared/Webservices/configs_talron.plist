@@ -4,6 +4,8 @@
 <dict>
 	<key>BASE_URL</key>
 	<string>https://apigw.seldatdirect.com/demo/sdms-malee/api</string>
+	<key>BASE_URL_DEV</key>
+	<string>https://apigw.seldatdirect.com/dev/sdms-malee/api</string>
 	<key>LOGIN</key>
 	<string>/master-service/v1/login</string>
 	<key>FORGET_PASSWORD</key>

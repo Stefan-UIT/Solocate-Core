@@ -3,6 +3,8 @@
 <plist version="1.0">
 <dict>
 	<key>BASE_URL</key>
+	<string>https://apigw.seldatdirect.com/demo/sdms/api</string>
+	<key>BASE_URL_DEV</key>
 	<string>https://apigw.seldatdirect.com/dev/sdms/api</string>
 	<key>LOGIN</key>
 	<string>/master-service/v1/login</string>
