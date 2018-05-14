@@ -178,6 +178,7 @@ class OrderListViewController: UIViewController {
       let destVC = segue.destination as? OrderDetailContainerViewController,
       let order = sender as? Order {
       destVC.orderID = "\(order.id)"
+      destVC.orderStatus = order.statusCode
       destVC.routeID = route.id
     }
   }

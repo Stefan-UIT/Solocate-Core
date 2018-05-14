@@ -13,6 +13,8 @@ import SVProgressHUD
 class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
   var orderID: String?
   var routeID: Int?
+  var orderStatus: String?
+    
   fileprivate var orderDetail: OrderDetail?
   
   override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
@@ -32,7 +34,10 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
 //    let child_2 = OrderSignatureViewController.loadViewController(type: OrderSignatureViewController.self)
 //    let child_3 = OrderNotesViewController.loadViewController(type: OrderNotesViewController.self)
     let child_4 = OrderPictureViewController.loadViewController(type: OrderPictureViewController.self)
-    return [child_1, child_4]
+    if orderStatus?.compare("DV") == ComparisonResult.orderedSame {
+        return [child_1, child_4]
+    }
+    return [child_1]
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -84,8 +89,5 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
 //    guard let _orderDetail = orderDetail else {return}
     containerView.isScrollEnabled = !(toIndex == 1)
   }
-  
-  
-  
 }
 

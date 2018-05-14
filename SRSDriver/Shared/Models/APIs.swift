@@ -12,6 +12,10 @@ import ObjectMapper
 import CoreLocation
 import TLPhotoPicker
 
+typealias OnCompletion = (Bool, String) -> Void
+typealias OnError = (RESTResponse) -> Void
+typealias JSONData = [String: Any]
+
 class APIs {
   class func login(_ email: String, password: String, completion: @escaping((_ token: String?, _ msg: String?) -> Void)) {
     let request = RESTRequest(functionName: RESTConstants.configs[RESTConstants.LOGIN] ?? ""
@@ -122,7 +126,12 @@ class APIs {
     }
   }
   
-  static func updateOrderStatus(_ orderID: String, expectedStatus: String, routeID: String, reason: Reason? = nil, completion: @escaping((_ errMsg: String?) -> Void)) {
+  static func updateOrderStatus(_ orderID: String,
+                                expectedStatus: String,
+                                routeID: String,
+                                reason: Reason? = nil,
+                                _ onCompletion: OnCompletion? = nil,
+                                _ onError: OnError? = nil) {
     var uri = String.init(format: RESTConstants.configs[RESTConstants.UPDATE_ORDER_STATUS] ?? "", orderID, expectedStatus)
     uri = uri.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
     let request = RESTRequest(functionName: uri, method: .put, encoding: .default)
@@ -137,25 +146,22 @@ class APIs {
       request.setAuthorization(token)
     }
     request.baseInvoker { (resp, error) in
-      if let response = resp as? [String: Any] {
-        guard let _ = response["data"] as? [String : Any] else {
-            if let errors = Mapper<RESTResponse>().map(JSONObject: response["errors"]) {
-                completion(errors.message)
-            }
-            else {
-                if let msg = response["msg"] as? String {
-                completion(msg)
-                } else {
-                completion("UNKNOWN")
-                }
-            }
+        if let error = error {
+            onError?(error)
             return
         }
-        completion(nil)
-      }
-      if let err = error {
-        completion(err.message)
-      }
+        if let jsonData = resp as? JSONData {
+            if let data = jsonData["data"] as? JSONData {
+                if let msg = data["msg"] as? String, msg.compare("Successful") == ComparisonResult.orderedSame {
+                    onCompletion?(true, msg)
+                    return
+                }
+            } else if let code = jsonData["code"] as? Int, let msg = jsonData["msg"] as? String {
+                onError?(RESTError(code: code, msg: msg))
+                return
+            }
+        }
+        onError?(RESTError(code: 000, msg: "Sorry! Something wrong.\nPlease contact with us. Thanks."))
     }
   }
   

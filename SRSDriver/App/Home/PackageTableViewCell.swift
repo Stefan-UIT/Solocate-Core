@@ -10,13 +10,13 @@ import UIKit
 
 class PackageTableViewCell: UITableViewCell {
   
-  @IBOutlet weak var skuLabel: UILabel!
+  @IBOutlet weak var nameLabel: UILabel!
   @IBOutlet weak var totalLabel: UILabel!
   @IBOutlet weak var barcodeLabel: UILabel!
   
   var item: OrderItem! {
     didSet {
-      skuLabel.text = item.sku
+      nameLabel.text = item.name
       totalLabel.text = item.total > 0 ? "\(item.total)" : "-"
       barcodeLabel.text = item.barcode
     }

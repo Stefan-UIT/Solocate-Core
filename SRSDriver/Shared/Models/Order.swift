@@ -79,9 +79,18 @@ class OrderDetail: Order {
     super.mapping(map: map)
     id <- map["id"]
     deliveryContactName <- map["ctt_name"]
+    if deliveryContactName.isEmpty {
+        deliveryContactName <- map["dlvy_ctt_name"]
+    }
     deliveryContactPhone <- map["ctt_phone"]
+    if deliveryContactPhone.isEmpty {
+        deliveryContactPhone <- map["dlvy_ctt_phone"]
+    }
     timeWindowName <- map["time_window_text"]
     deliveryAdd <- map["full_addr"]
+    if deliveryAdd.isEmpty {
+        deliveryAdd <- map["dlvy_full_addr"]
+    }
     deliveryCity <- map["dlvy_city"]
     deliveryState <- map["dlvy_state"]
     descriptionNote <- map["note"]

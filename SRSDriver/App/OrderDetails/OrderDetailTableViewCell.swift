@@ -118,10 +118,6 @@ enum OrderStatus: String {
         return "orders_missing_at_pick_up".localized
     }
   }
-  
-  
-  
-  
 }
 
 

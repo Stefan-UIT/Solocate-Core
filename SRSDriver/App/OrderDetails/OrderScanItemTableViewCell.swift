@@ -24,9 +24,7 @@ class OrderScanItemTableViewCell: UITableViewCell {
       skuLabel.text = orderItem.sku
       /* Added by Hoang Trinh for Masof - Begin */
       coolerName.text = orderItem.name
-      if !orderItem.bearconId.isEmpty {
-        beaconId.text = "- \(orderItem.bearconId)"
-      }
+      beaconId.text = "- \(orderItem.bearconId)"
       
       /* Added by Hoang Trinh for Masof - End */
       quantityLabel.text = "\(orderItem.qty)"

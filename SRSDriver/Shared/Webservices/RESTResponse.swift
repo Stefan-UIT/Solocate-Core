@@ -28,6 +28,4 @@ class RESTResponse: NSObject, Mappable {
     self.statusCode   <- map["status_code"]
     self.data         <- map["data"]
   }
-  
-  
 }

@@ -43,7 +43,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       var refe = OrderDetailItem(.reference)
       refe.content = _orderDetail.orderReference
       var statusItem = OrderDetailItem(.status)
-      let status = OrderStatus(rawValue: _orderDetail.statusCode)!
+      let status = OrderStatus(rawValue: _orderDetail.statusCode) ?? OrderStatus.open
       statusItem.content = status.statusName
       var type = OrderDetailItem(.type)
       type.content = _orderDetail.orderType
@@ -303,15 +303,15 @@ extension OrderDetailViewController {
     guard let _orderDetail = orderDetail,
       let _routeID = routeID else { return }
     showLoadingIndicator()
-    APIs.updateOrderStatus("\(_orderDetail.id)", expectedStatus: status, routeID: "\(_routeID)") { [unowned self] (errMsg) in
-      self.dismissLoadingIndicator()
-      if let err = errMsg {
-        self.showAlertView(err)
-      }
-//      else {
-//        let shouldMoveSignatureTab = status == "DV" // Expected Status DV
-//        self.didUpdateStatus?(shouldMoveSignatureTab)
-//      }
+    
+    APIs.updateOrderStatus("\(_orderDetail.id)", expectedStatus: status, routeID: "\(_routeID)", reason: nil, { [unowned self] (successful, msg) in
+        self.dismissLoadingIndicator()
+        self.showAlertView(msg, completionHandler: { [unowned self] (alertAction) in
+            self.navigationController?.popToRootViewController(animated: true)
+        })
+    }) { [unowned self] (error) in
+        self.dismissLoadingIndicator()
+        self.showAlertView(error.message)
     }
   }
 }

@@ -55,6 +55,9 @@
 		0A465EC720A43371009BFE69 /* ChangePasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EC520A43174009BFE69 /* ChangePasswordModel.swift */; };
 		0A465EC820A43371009BFE69 /* ChangePasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EC520A43174009BFE69 /* ChangePasswordModel.swift */; };
 		0A465EC920A43371009BFE69 /* ChangePasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EC520A43174009BFE69 /* ChangePasswordModel.swift */; };
+		0A6623F520A948A600FEA932 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A6623F420A948A600FEA932 /* GoogleService-Info.plist */; };
+		0A66244B20A94B5700FEA932 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A66244820A94B5700FEA932 /* Localizable.strings */; };
+		0A66245320A94B6F00FEA932 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A66245020A94B6F00FEA932 /* Localizable.strings */; };
 		0A7FB46120917EE700F5058D /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8BA6E2085D99D001321D1 /* BaseView.swift */; };
 		0A7FB46220917EE800F5058D /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8BA6E2085D99D001321D1 /* BaseView.swift */; };
 		0A7FB463209180DF00F5058D /* LogoutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8BA722085E3C5001321D1 /* LogoutTableViewCell.xib */; };
@@ -133,12 +136,10 @@
 		0AB6910120A0099E0041E529 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A499CB120591D9600A1D944 /* Info.plist */; };
 		0AB6910220A0099E0041E529 /* SignatureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ACCE8E3205BB31600A1532D /* SignatureView.xib */; };
 		0AB6910320A0099E0041E529 /* LogoutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8BA722085E3C5001321D1 /* LogoutTableViewCell.xib */; };
-		0AB6910420A0099E0041E529 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 241D68772069DB2200914E4F /* Localizable.strings */; };
 		0AB6910520A0099E0041E529 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4820590AD4003F8E6F /* LaunchScreen.storyboard */; };
 		0AB6910620A0099E0041E529 /* configs_masof.plist in Resources */ = {isa = PBXBuildFile; fileRef = 248F208F2069E2CA00E6902D /* configs_masof.plist */; };
 		0AB6910720A0099E0041E529 /* LeftMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8BA6A2085D82B001321D1 /* LeftMenuView.xib */; };
 		0AB6910820A0099E0041E529 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4320590AD4003F8E6F /* Main.storyboard */; };
-		0AB6911520A010380041E529 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6911420A010370041E529 /* GoogleService-Info.plist */; };
 		0AB6911C20A03DEC0041E529 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4620590AD4003F8E6F /* Assets.xcassets */; };
 		0AB6911E20A042710041E529 /* configs_dms.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6911D20A042710041E529 /* configs_dms.plist */; };
 		0AB6912120A154280041E529 /* UIButtonDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912020A154280041E529 /* UIButtonDesignable.swift */; };
@@ -219,10 +220,8 @@
 		0AE327E5208DC84C00EF1F4C /* RouteMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FA3512071EB7300C5E707 /* RouteMessagesViewController.swift */; };
 		0AE327E7208DC84C00EF1F4C /* Pods_SRSDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B660F041976D0FC4B84CB8F1 /* Pods_SRSDriver.framework */; };
 		0AE327E9208DC84C00EF1F4C /* OrderScanItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24D3876E2063625B00BE51D9 /* OrderScanItemTableViewCell.xib */; };
-		0AE327EA208DC84C00EF1F4C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24677EED2073231200C41E4F /* GoogleService-Info.plist */; };
 		0AE327EB208DC84C00EF1F4C /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A499CB120591D9600A1D944 /* Info.plist */; };
 		0AE327EC208DC84C00EF1F4C /* SignatureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ACCE8E3205BB31600A1532D /* SignatureView.xib */; };
-		0AE327ED208DC84C00EF1F4C /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 241D68772069DB2200914E4F /* Localizable.strings */; };
 		0AE327EE208DC84C00EF1F4C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4820590AD4003F8E6F /* LaunchScreen.storyboard */; };
 		0AE327F0208DC84C00EF1F4C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4320590AD4003F8E6F /* Main.storyboard */; };
 		0AE327F1208DC84C00EF1F4C /* LeftMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8BA6A2085D82B001321D1 /* LeftMenuView.xib */; };
@@ -235,7 +234,6 @@
 		0AF8BA732085E3C5001321D1 /* LogoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8BA712085E3C5001321D1 /* LogoutTableViewCell.swift */; };
 		0AF8BA742085E3C5001321D1 /* LogoutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8BA722085E3C5001321D1 /* LogoutTableViewCell.xib */; };
 		0AF8BA752085E3C8001321D1 /* LogoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8BA712085E3C5001321D1 /* LogoutTableViewCell.swift */; };
-		241D68792069DB2200914E4F /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 241D68772069DB2200914E4F /* Localizable.strings */; };
 		242DC4B9207775F50047F19C /* PackagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242DC4B8207775F50047F19C /* PackagesViewController.swift */; };
 		242DC4BA207775F80047F19C /* PackagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242DC4B8207775F50047F19C /* PackagesViewController.swift */; };
 		242DC4BC207779FC0047F19C /* PackageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242DC4BB207779FC0047F19C /* PackageTableViewCell.swift */; };
@@ -307,10 +305,8 @@
 		2494A9642074926A005A2622 /* RouteMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FA3512071EB7300C5E707 /* RouteMessagesViewController.swift */; };
 		2494A9662074926A005A2622 /* Pods_SRSDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B660F041976D0FC4B84CB8F1 /* Pods_SRSDriver.framework */; };
 		2494A9692074926A005A2622 /* OrderScanItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24D3876E2063625B00BE51D9 /* OrderScanItemTableViewCell.xib */; };
-		2494A96A2074926A005A2622 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 24677EED2073231200C41E4F /* GoogleService-Info.plist */; };
 		2494A96B2074926A005A2622 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A499CB120591D9600A1D944 /* Info.plist */; };
 		2494A96C2074926A005A2622 /* SignatureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ACCE8E3205BB31600A1532D /* SignatureView.xib */; };
-		2494A96D2074926A005A2622 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 241D68772069DB2200914E4F /* Localizable.strings */; };
 		2494A96E2074926A005A2622 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4820590AD4003F8E6F /* LaunchScreen.storyboard */; };
 		2494A9702074926A005A2622 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4320590AD4003F8E6F /* Main.storyboard */; };
 		2494A97B2074AD41005A2622 /* configs_malee.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2494A97A2074AD41005A2622 /* configs_malee.plist */; };
@@ -390,12 +386,16 @@
 		0A465EB220A3FF9E009BFE69 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		0A465EC020A427C3009BFE69 /* CheckTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTokenModel.swift; sourceTree = "<group>"; };
 		0A465EC520A43174009BFE69 /* ChangePasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordModel.swift; sourceTree = "<group>"; };
+		0A6623F420A948A600FEA932 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0A66244920A94B5700FEA932 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0A66244A20A94B5700FEA932 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0A66245120A94B6F00FEA932 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
+		0A66245220A94B6F00FEA932 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		0A7FB46520918A9800F5058D /* Assets.xcassets.Masof.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets.Masof.xcassets; sourceTree = "<group>"; };
 		0A7FB46720918B9900F5058D /* Assets.xcassets.Talron.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets.Talron.xcassets; sourceTree = "<group>"; };
 		0A7FB46920918C4000F5058D /* Assets.xcassets.Malee.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets.Malee.xcassets; sourceTree = "<group>"; };
 		0AB6910F20A0099E0041E529 /* DMSDriver_Masof.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMSDriver_Masof.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AB6911020A0099E0041E529 /* DMSDriver_Masof.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = DMSDriver_Masof.plist; path = "/Users/mrj/Desktop/SeldatInc/SRS/git-project/ios/DMSDriver_Masof.plist"; sourceTree = "<absolute>"; };
-		0AB6911420A010370041E529 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0AB6911D20A042710041E529 /* configs_dms.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = configs_dms.plist; sourceTree = "<group>"; };
 		0AB6912020A154280041E529 /* UIButtonDesignable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonDesignable.swift; sourceTree = "<group>"; };
 		0AB6912320A156CA0041E529 /* MainConfigs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MainConfigs.plist; sourceTree = "<group>"; };
@@ -408,8 +408,6 @@
 		0AF8BA6E2085D99D001321D1 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		0AF8BA712085E3C5001321D1 /* LogoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutTableViewCell.swift; sourceTree = "<group>"; };
 		0AF8BA722085E3C5001321D1 /* LogoutTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoutTableViewCell.xib; sourceTree = "<group>"; };
-		241D68782069DB2200914E4F /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		241D687A2069DB5E00914E4F /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
 		242DC4B8207775F50047F19C /* PackagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagesViewController.swift; sourceTree = "<group>"; };
 		242DC4BB207779FC0047F19C /* PackageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageTableViewCell.swift; sourceTree = "<group>"; };
 		245BBAA12073616D00EE3E47 /* MessageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAPI.swift; sourceTree = "<group>"; };
@@ -565,6 +563,42 @@
 			path = GlobalServices;
 			sourceTree = "<group>";
 		};
+		0A6623F320A9486700FEA932 /* DMSDriver_Core */ = {
+			isa = PBXGroup;
+			children = (
+				0A66244720A94B5700FEA932 /* Localize */,
+				0AB6911D20A042710041E529 /* configs_dms.plist */,
+				0A6623F420A948A600FEA932 /* GoogleService-Info.plist */,
+			);
+			path = DMSDriver_Core;
+			sourceTree = "<group>";
+		};
+		0A6623F620A948C600FEA932 /* DMSDriver_Masof */ = {
+			isa = PBXGroup;
+			children = (
+				0A66244F20A94B6F00FEA932 /* Localize */,
+				248F208F2069E2CA00E6902D /* configs_masof.plist */,
+				24677EED2073231200C41E4F /* GoogleService-Info.plist */,
+			);
+			path = DMSDriver_Masof;
+			sourceTree = "<group>";
+		};
+		0A66244720A94B5700FEA932 /* Localize */ = {
+			isa = PBXGroup;
+			children = (
+				0A66244820A94B5700FEA932 /* Localizable.strings */,
+			);
+			path = Localize;
+			sourceTree = "<group>";
+		};
+		0A66244F20A94B6F00FEA932 /* Localize */ = {
+			isa = PBXGroup;
+			children = (
+				0A66245020A94B6F00FEA932 /* Localizable.strings */,
+			);
+			path = Localize;
+			sourceTree = "<group>";
+		};
 		0AB6911F20A153F60041E529 /* Designables */ = {
 			isa = PBXGroup;
 			children = (
@@ -613,19 +647,11 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		241D68762069DA4400914E4F /* Localize */ = {
-			isa = PBXGroup;
-			children = (
-				241D68772069DB2200914E4F /* Localizable.strings */,
-			);
-			path = Localize;
-			sourceTree = "<group>";
-		};
 		246FA3552072277D00C5E707 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				0AB6911420A010370041E529 /* GoogleService-Info.plist */,
-				24677EED2073231200C41E4F /* GoogleService-Info.plist */,
+				0A6623F320A9486700FEA932 /* DMSDriver_Core */,
+				0A6623F620A948C600FEA932 /* DMSDriver_Masof */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -744,8 +770,6 @@
 				5A82E9C1205A038900F34351 /* RESTError.swift */,
 				5A82E9C2205A038900F34351 /* RESTRequest.swift */,
 				5A82E9C3205A038900F34351 /* RESTResponse.swift */,
-				0AB6911D20A042710041E529 /* configs_dms.plist */,
-				248F208F2069E2CA00E6902D /* configs_masof.plist */,
 				2494A97A2074AD41005A2622 /* configs_malee.plist */,
 				0AE327FA208DC94700EF1F4C /* configs_talron.plist */,
 			);
@@ -843,7 +867,6 @@
 				0A465EB120A3FF86009BFE69 /* GlobalServices */,
 				0AB6912220A156B60041E529 /* Configs */,
 				0AB6911F20A153F60041E529 /* Designables */,
-				241D68762069DA4400914E4F /* Localize */,
 				5A68A459205A5A2100CA9DB8 /* Models */,
 				5A82E9BF205A038900F34351 /* Webservices */,
 				5A499CB420591E4100A1D944 /* Helpers */,
@@ -1022,10 +1045,10 @@
 				0AB6910220A0099E0041E529 /* SignatureView.xib in Resources */,
 				0AB6912C20A15F0E0041E529 /* MainConfigs.plist in Resources */,
 				0AB6910320A0099E0041E529 /* LogoutTableViewCell.xib in Resources */,
-				0AB6910420A0099E0041E529 /* Localizable.strings in Resources */,
 				0AB6910520A0099E0041E529 /* LaunchScreen.storyboard in Resources */,
 				0A465EB820A404CD009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
 				0AB6910620A0099E0041E529 /* configs_masof.plist in Resources */,
+				0A66245320A94B6F00FEA932 /* Localizable.strings in Resources */,
 				0A27216220A599AC009E527F /* ForgetPasswordView.xib in Resources */,
 				0AB6910720A0099E0041E529 /* LeftMenuView.xib in Resources */,
 				0A465E9E20A3E850009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
@@ -1039,12 +1062,10 @@
 			files = (
 				0AE327E9208DC84C00EF1F4C /* OrderScanItemTableViewCell.xib in Resources */,
 				0A7FB464209180DF00F5058D /* LogoutTableViewCell.xib in Resources */,
-				0AE327EA208DC84C00EF1F4C /* GoogleService-Info.plist in Resources */,
 				0A465EA920A3EE1A009BFE69 /* ChangePasswordView.xib in Resources */,
 				0AE327EB208DC84C00EF1F4C /* Info.plist in Resources */,
 				0AE327EC208DC84C00EF1F4C /* SignatureView.xib in Resources */,
 				0AB6912B20A15F0E0041E529 /* MainConfigs.plist in Resources */,
-				0AE327ED208DC84C00EF1F4C /* Localizable.strings in Resources */,
 				0AE327EE208DC84C00EF1F4C /* LaunchScreen.storyboard in Resources */,
 				0AE327F0208DC84C00EF1F4C /* Main.storyboard in Resources */,
 				0A465EB720A404CC009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
@@ -1061,13 +1082,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2494A9692074926A005A2622 /* OrderScanItemTableViewCell.xib in Resources */,
-				2494A96A2074926A005A2622 /* GoogleService-Info.plist in Resources */,
 				2494A96B2074926A005A2622 /* Info.plist in Resources */,
 				0A465EA820A3EE19009BFE69 /* ChangePasswordView.xib in Resources */,
 				2494A96C2074926A005A2622 /* SignatureView.xib in Resources */,
 				0A7FB463209180DF00F5058D /* LogoutTableViewCell.xib in Resources */,
 				0AB6912A20A15F0E0041E529 /* MainConfigs.plist in Resources */,
-				2494A96D2074926A005A2622 /* Localizable.strings in Resources */,
 				2494A96E2074926A005A2622 /* LaunchScreen.storyboard in Resources */,
 				2494A9702074926A005A2622 /* Main.storyboard in Resources */,
 				0A465EB920A404CD009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
@@ -1083,6 +1102,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A66244B20A94B5700FEA932 /* Localizable.strings in Resources */,
 				24D3876F2063625B00BE51D9 /* OrderScanItemTableViewCell.xib in Resources */,
 				5A499CB320591D9600A1D944 /* Info.plist in Resources */,
 				0AB6911C20A03DEC0041E529 /* Assets.xcassets in Resources */,
@@ -1091,10 +1111,9 @@
 				5ACCE8E4205BB31600A1532D /* SignatureView.xib in Resources */,
 				0AB6912420A156CA0041E529 /* MainConfigs.plist in Resources */,
 				0AF8BA742085E3C5001321D1 /* LogoutTableViewCell.xib in Resources */,
-				0AB6911520A010380041E529 /* GoogleService-Info.plist in Resources */,
-				241D68792069DB2200914E4F /* Localizable.strings in Resources */,
 				0A465EAE20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
 				5AA4CA4A20590AD4003F8E6F /* LaunchScreen.storyboard in Resources */,
+				0A6623F520A948A600FEA932 /* GoogleService-Info.plist in Resources */,
 				0A27215C20A597C1009E527F /* ForgetPasswordView.xib in Resources */,
 				0AF8BA6B2085D82B001321D1 /* LeftMenuView.xib in Resources */,
 				0A465E9820A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
@@ -1743,11 +1762,20 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		241D68772069DB2200914E4F /* Localizable.strings */ = {
+		0A66244820A94B5700FEA932 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				241D68782069DB2200914E4F /* en */,
-				241D687A2069DB5E00914E4F /* he */,
+				0A66244920A94B5700FEA932 /* he */,
+				0A66244A20A94B5700FEA932 /* en */,
+			);
+			name = Localizable.strings;
+			sourceTree = "<group>";
+		};
+		0A66245020A94B6F00FEA932 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0A66245120A94B6F00FEA932 /* he */,
+				0A66245220A94B6F00FEA932 /* en */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";

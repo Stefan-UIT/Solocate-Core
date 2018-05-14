@@ -1,0 +1,102 @@
+//Generated IOS file for locale : he
+
+"language"="he";
+
+//APPLICATION_GLOBAL
+"app_name"="מנהל התקן DMS";
+"app_version"="1.0.0.0";
+
+//COMMON
+"cancel"="לְבַטֵל";
+"ok"="בסדר";
+"save"="להציל";
+"edit"="לַעֲרוֹך";
+"back"="חזור";
+"submit"="שלח";
+"reject"="לִדחוֹת";
+"send"="לִשְׁלוֹחַ";
+"finish"="סִיוּם";
+"start"="הַתחָלָה";
+"unknown"="לא ידוע";
+"clear"="ברור";
+"accept"="לְקַבֵּל";
+"error_field_required"="שדה נדרש";
+"error_lost_network_connection"="אין חיבור אינטרנט. בדוק את הרשת שלך.";
+"deny"="לְהַכּחִישׁ";
+"orders"="הזמנות";
+"items"="פריטים";
+"packages"="חבילות\n"; // DMS-Core
+"map"="מַפָּה";
+"messages"="הודעות";
+"done"="בוצע";
+
+//LOGIN_SCREEN
+"login_title"="התחברות";
+"login_username_hint"="שם משתמש";
+"login_password_hint"="סיסמה";
+"login_forgot_password"="שכחת את הסיסמא";
+"error_invalid_password"="הסיסימא אינה תקפה";
+"error_incorrect_password"="סיסמא לא נכונה";
+"error_network"="אירעה בעיה לא ידועה. בבקשה נסה שוב.";
+"error_fill_info"="שדות מסוימים בטופס שלך אינם חוקיים. בדוק את המידע שלך.";
+"login_sign_in"="היכנס";
+"login_guide"="היכנס כדי לגשת לחשבון שלך.";
+"login_remember_me"="זכור אותי";
+
+//MENU
+"menu"="תַפרִיט";
+"change_password"="שנה סיסמא";
+"log_out"="להתנתק";
+
+//LIST_ORDERS
+"orders_have_no_orders"="אין לך הזמנה";
+"orders_cancelled"="מבוטל";
+"orders_open"="חָדָשׁ";
+"orders_in_progress"="בתהליך";
+"orders_delivered"="גָמוּר";
+
+"picked_up" = "Picked Up";
+"orders_missing_in_truck" = "Missing in Trunk";
+"orders_missing_at_pick_up" = "Missing at Pick-up";
+
+//ODER_DETAIL
+"order_detail_title"="פרט";
+"order_detail_signature"="חֲתִימָה";
+"order_detail_notes"="הערות";
+"order_detail_picture"="תְמוּנָה";
+"order_detail_order_reference"="הזמנה Ref";
+"order_detail_status"="סטָטוּס";
+"order_detail_expected_date"="תאריך צפוי";
+"order_detail_contact_name"="שם איש קשר";
+"order_detail_phone"="טלפון";
+"order_detail_delivery_address"="כתובת";
+"order_detail_description"="תיאור";
+"order_detail_order_type"="סוּג";
+"order_detail_unable_start"="לא יכול להתחיל";
+"order_detail_unable_finish"="לא ניתן לסיים";
+"order_detail_add_note"="להוסיף הערה";
+"order_detail_update_barcode"="עדכון ברקוד:% @?";
+"order_detail_add_order_item"="ברקוד:% @";
+"order_detail_scan_barcode"="ברקוד סריקה";
+"order_detail_input_img_title_hint"="הזן כותרת";
+"order_detail_input_img_title"="הזן כותרת";
+"order_detail_access_location"="אפשר לגשת למיקום שלך לקבלת כיוון";
+"order_detail_quality"="כַּמוּת";
+"order_detail_add_image_successfully"="הוסף תמונה בהצלחה";
+"order_detail_add_signature_successfully"="הוסף חתימה בהצלחה";
+"order_detail_should_be_start"="יש לשנות את סטטוס ההזמנה תחילה";
+"order_detail_package"=":חֲבִילָה";// DMS-Core
+"order_detail_qty"=":כַּמוּת";
+"order_detail_desc"=":תיאור";
+"order_detail_barcode"=":ברקוד";
+"order_detail_take_picture"="צלם תמונה";
+"order_detail_total"="סה\"כ";
+"order_detail_barcode_notmatch"="ברקוד אינו תואם";
+
+//REASON_LIST
+"reason_list_title"="בחר סיבה";
+"reason_choose_at_least_reason"="בחר סיבה אחת לפחות";
+
+//MESSAGE_SCREEN
+"message_send_new_message"="שלח הודעה חדשה";
+"message_add_message_hint"="הקלד הודעה";
