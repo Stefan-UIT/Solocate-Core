@@ -19,6 +19,8 @@
 		0A360D5620AAD5E60015A64B /* ResultsRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360D5420AAD50C0015A64B /* ResultsRequestModel.swift */; };
 		0A360D5720AAD5E60015A64B /* ResultsRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360D5420AAD50C0015A64B /* ResultsRequestModel.swift */; };
 		0A360D5820AAD5E60015A64B /* ResultsRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360D5420AAD50C0015A64B /* ResultsRequestModel.swift */; };
+		0A360D5E20AADC300015A64B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A360D5D20AADC2F0015A64B /* Info.plist */; };
+		0A360D6020AADC3E0015A64B /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A360D5F20AADC3D0015A64B /* Info.plist */; };
 		0A465E9720A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465E9520A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift */; };
 		0A465E9820A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465E9620A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib */; };
 		0A465E9920A3E84C009BFE69 /* ChangePasswordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465E9520A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift */; };
@@ -393,6 +395,8 @@
 		0A27215920A597B1009E527F /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
 		0A27215B20A597C1009E527F /* ForgetPasswordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgetPasswordView.xib; sourceTree = "<group>"; };
 		0A360D5420AAD50C0015A64B /* ResultsRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsRequestModel.swift; sourceTree = "<group>"; };
+		0A360D5D20AADC2F0015A64B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A360D5F20AADC3D0015A64B /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0A465E9520A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordTableViewCell.swift; sourceTree = "<group>"; };
 		0A465E9620A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordTableViewCell.xib; sourceTree = "<group>"; };
 		0A465EA120A3EDFB009BFE69 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
@@ -496,7 +500,6 @@
 		5AA4CA4420590AD4003F8E6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		5AA4CA4620590AD4003F8E6F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		5AA4CA4920590AD4003F8E6F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		5AA4CA4B20590AD4003F8E6F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		5AA4CA5420590B31003F8E6F /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		5ACCE8CE205B585900A1532D /* OrderMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderMarker.swift; sourceTree = "<group>"; };
 		5ACCE8D0205B689000A1532D /* Array.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
@@ -587,9 +590,10 @@
 		0A6623F320A9486700FEA932 /* DMSDriver_Core */ = {
 			isa = PBXGroup;
 			children = (
-				0A66244720A94B5700FEA932 /* Localize */,
+				0A360D5D20AADC2F0015A64B /* Info.plist */,
 				0AB6911D20A042710041E529 /* configs_dms.plist */,
 				0A6623F420A948A600FEA932 /* GoogleService-Info.plist */,
+				0A66244720A94B5700FEA932 /* Localize */,
 			);
 			path = DMSDriver_Core;
 			sourceTree = "<group>";
@@ -597,9 +601,10 @@
 		0A6623F620A948C600FEA932 /* DMSDriver_Masof */ = {
 			isa = PBXGroup;
 			children = (
-				0A66244F20A94B6F00FEA932 /* Localize */,
+				0A360D5F20AADC3D0015A64B /* Info.plist */,
 				248F208F2069E2CA00E6902D /* configs_masof.plist */,
 				24677EED2073231200C41E4F /* GoogleService-Info.plist */,
+				0A66244F20A94B6F00FEA932 /* Localize */,
 			);
 			path = DMSDriver_Masof;
 			sourceTree = "<group>";
@@ -858,7 +863,6 @@
 				0A7FB46920918C4000F5058D /* Assets.xcassets.Malee.xcassets */,
 				0A7FB46720918B9900F5058D /* Assets.xcassets.Talron.xcassets */,
 				5AA4CA4820590AD4003F8E6F /* LaunchScreen.storyboard */,
-				5AA4CA4B20590AD4003F8E6F /* Info.plist */,
 				5A499CAA20591D4800A1D944 /* SRSDriver-Bridging-Header.h */,
 			);
 			path = SRSDriver;
@@ -1071,6 +1075,7 @@
 			files = (
 				0AB690FE20A0099E0041E529 /* OrderScanItemTableViewCell.xib in Resources */,
 				0AB690FF20A0099E0041E529 /* Assets.xcassets.Masof.xcassets in Resources */,
+				0A360D6020AADC3E0015A64B /* Info.plist in Resources */,
 				0AB6910020A0099E0041E529 /* GoogleService-Info.plist in Resources */,
 				0A465EAA20A3EE1A009BFE69 /* ChangePasswordView.xib in Resources */,
 				0AB6910120A0099E0041E529 /* Info.plist in Resources */,
@@ -1139,6 +1144,7 @@
 			files = (
 				0A66244B20A94B5700FEA932 /* Localizable.strings in Resources */,
 				24D3876F2063625B00BE51D9 /* OrderScanItemTableViewCell.xib in Resources */,
+				0A360D5E20AADC300015A64B /* Info.plist in Resources */,
 				5A499CB320591D9600A1D944 /* Info.plist in Resources */,
 				0AB6911C20A03DEC0041E529 /* Assets.xcassets in Resources */,
 				0A465EA420A3EE03009BFE69 /* ChangePasswordView.xib in Resources */,
@@ -1858,7 +1864,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
-				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_Masof/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMASOF";
@@ -1882,7 +1888,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
-				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_Masof/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMASOF";
@@ -2103,7 +2109,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
-				INFOPLIST_FILE = SRSDriver/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_Core/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMS";
@@ -2127,7 +2133,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
-				INFOPLIST_FILE = SRSDriver/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_Core/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMS";
