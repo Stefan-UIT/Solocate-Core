@@ -11,14 +11,12 @@ import ObjectMapper
 
 class AlertDetailModel: NSObject, Mappable {
 
+    var id : Int?
     var alertMsg : String?
-    var comment : AnyObject?
-    var itemRef : AnyObject?
-    var ntfTypeName : AnyObject?
     var refId : Int?
     var refType : String?
-    var ruleTypeName : String?
     var sts : Int?
+    var orderStsName : String?
     
     required convenience init?(map: Map) {
         self.init()
@@ -26,13 +24,11 @@ class AlertDetailModel: NSObject, Mappable {
     
     func mapping(map: Map)
     {
+        id <- map["id"]
         alertMsg <- map["alert_msg"]
-        comment <- map["comment"]
-        itemRef <- map["item_ref"]
-        ntfTypeName <- map["ntf_type_name"]
         refId <- map["ref_id"]
         refType <- map["ref_type"]
-        ruleTypeName <- map["rule_type_name"]
         sts <- map["sts"]
+        orderStsName <- map["order_sts_name"]
     }
 }

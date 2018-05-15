@@ -31,7 +31,7 @@ class RouteMessagesViewController: BaseViewController {
     }
   }
   
-  var listAlertDetail = [AlertDetailModel]()
+  var listAlertMessage = [AlertDetailModel]()
     
   @IBOutlet weak var addMessageButton: UIButton!
   @IBOutlet weak var tableView: UITableView!
@@ -51,15 +51,22 @@ class RouteMessagesViewController: BaseViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     tabBarController?.tabBar.isHidden = false
+    loadData()
   }
   
-  func getDataAlertDetail(_ alertID: Int) {
-    APIs.getAlertDetail("\(alertID)", { [unowned self] (successful, model) in
-        if successful, let alertDetailModel = model as? AlertDetailModel {
-//            self.alertDetail = alertDetailModel
+  func loadData() {
+    showLoadingIndicator()
+    APIs.getListAlertMessage({ [unowned self] (successful, list) in
+        self.dismissLoadingIndicator()
+        if successful {
+            if let _list = list as? [AlertDetailModel] {
+                self.listAlertMessage = _list
+                self.updateData()
+            }
         }
     }) { (error) in
-        
+        self.dismissLoadingIndicator()
+        print(error.message)
     }
   }
     
@@ -117,13 +124,13 @@ extension RouteMessagesViewController {
 
 extension RouteMessagesViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return listAlertDetail.count
+    return listAlertMessage.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
     if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? RouteMessageTableViewCell {
-      cell.alertDetail = listAlertDetail[indexPath.row]
+      cell.alertDetail = listAlertMessage[indexPath.row]
       return cell
     }
     

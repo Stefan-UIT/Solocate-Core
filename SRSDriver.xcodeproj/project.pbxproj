@@ -15,6 +15,10 @@
 		0A27216020A599AC009E527F /* ForgetPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A27215B20A597C1009E527F /* ForgetPasswordView.xib */; };
 		0A27216120A599AC009E527F /* ForgetPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A27215B20A597C1009E527F /* ForgetPasswordView.xib */; };
 		0A27216220A599AC009E527F /* ForgetPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A27215B20A597C1009E527F /* ForgetPasswordView.xib */; };
+		0A360D5520AAD50C0015A64B /* ResultsRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360D5420AAD50C0015A64B /* ResultsRequestModel.swift */; };
+		0A360D5620AAD5E60015A64B /* ResultsRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360D5420AAD50C0015A64B /* ResultsRequestModel.swift */; };
+		0A360D5720AAD5E60015A64B /* ResultsRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360D5420AAD50C0015A64B /* ResultsRequestModel.swift */; };
+		0A360D5820AAD5E60015A64B /* ResultsRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360D5420AAD50C0015A64B /* ResultsRequestModel.swift */; };
 		0A465E9720A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465E9520A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift */; };
 		0A465E9820A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465E9620A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib */; };
 		0A465E9920A3E84C009BFE69 /* ChangePasswordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465E9520A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift */; };
@@ -388,6 +392,7 @@
 /* Begin PBXFileReference section */
 		0A27215920A597B1009E527F /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
 		0A27215B20A597C1009E527F /* ForgetPasswordView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ForgetPasswordView.xib; sourceTree = "<group>"; };
+		0A360D5420AAD50C0015A64B /* ResultsRequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsRequestModel.swift; sourceTree = "<group>"; };
 		0A465E9520A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordTableViewCell.swift; sourceTree = "<group>"; };
 		0A465E9620A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangePasswordTableViewCell.xib; sourceTree = "<group>"; };
 		0A465EA120A3EDFB009BFE69 /* ChangePasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordView.swift; sourceTree = "<group>"; };
@@ -785,6 +790,7 @@
 				0A465EC020A427C3009BFE69 /* CheckTokenModel.swift */,
 				0A465EC520A43174009BFE69 /* ChangePasswordModel.swift */,
 				0AEBA56F20AA89C90053F2BF /* AlertDetailModel.swift */,
+				0A360D5420AAD50C0015A64B /* ResultsRequestModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1503,6 +1509,7 @@
 				0AB690D920A0099E0041E529 /* LeftMenuView.swift in Sources */,
 				0AB690DA20A0099E0041E529 /* Date.swift in Sources */,
 				0AB690DB20A0099E0041E529 /* OrderDetailContainerViewController.swift in Sources */,
+				0A360D5820AAD5E60015A64B /* ResultsRequestModel.swift in Sources */,
 				0AB690DC20A0099E0041E529 /* APIs.swift in Sources */,
 				0AB690DD20A0099E0041E529 /* HCSStarRatingView.m in Sources */,
 				0AEBA57D20AA9E800053F2BF /* AlertMessageView.swift in Sources */,
@@ -1587,6 +1594,7 @@
 				0AE327C4208DC84C00EF1F4C /* LeftMenuView.swift in Sources */,
 				0AE327C5208DC84C00EF1F4C /* Date.swift in Sources */,
 				0AE327C6208DC84C00EF1F4C /* OrderDetailContainerViewController.swift in Sources */,
+				0A360D5720AAD5E60015A64B /* ResultsRequestModel.swift in Sources */,
 				0AE327C7208DC84C00EF1F4C /* APIs.swift in Sources */,
 				0AE327C8208DC84C00EF1F4C /* HCSStarRatingView.m in Sources */,
 				0AEBA57B20AA9E7F0053F2BF /* AlertMessageView.swift in Sources */,
@@ -1671,6 +1679,7 @@
 				0AF8BA6D2085D83B001321D1 /* LeftMenuView.swift in Sources */,
 				2494A9462074926A005A2622 /* Date.swift in Sources */,
 				2494A9472074926A005A2622 /* OrderDetailContainerViewController.swift in Sources */,
+				0A360D5620AAD5E60015A64B /* ResultsRequestModel.swift in Sources */,
 				2494A9482074926A005A2622 /* APIs.swift in Sources */,
 				2494A9492074926A005A2622 /* HCSStarRatingView.m in Sources */,
 				0AEBA57920AA9E7F0053F2BF /* AlertMessageView.swift in Sources */,
@@ -1755,6 +1764,7 @@
 				5A499CA220591D0400A1D944 /* UIColor.swift in Sources */,
 				24B331942061FA66001FAC49 /* PictureTableViewCell.swift in Sources */,
 				0AF8BA692085D820001321D1 /* LeftMenuView.swift in Sources */,
+				0A360D5520AAD50C0015A64B /* ResultsRequestModel.swift in Sources */,
 				5A82E9CE205A197800F34351 /* Date.swift in Sources */,
 				5A68A449205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift in Sources */,
 				0AEBA57620AA9E480053F2BF /* AlertMessageView.swift in Sources */,

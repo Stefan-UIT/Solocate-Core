@@ -555,8 +555,8 @@ class APIs {
         }
     }
     
-    static func getAlertDetail(_ alertID: String, _ onCompletion:((Bool, Any) -> Void)? = nil, _ onError:((RESTError)->Void)? = nil) {
-        let uri = String.init(format: RESTConstants.configs[RESTConstants.GET_ALERT_DETAIL] ?? "", alertID)
+    static func getListAlertMessage(_ onCompletion:((Bool, Any?) -> Void)? = nil, _ onError:((RESTError)->Void)? = nil) {
+        let uri = String.init(format: RESTConstants.configs[RESTConstants.GET_ALERT_DETAIL] ?? "")
         let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
         if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
             request.setAuthorization(token)
@@ -567,11 +567,16 @@ class APIs {
                 onError?(_error)
                 return
             }
-            if let resp = response as? [String: Any] {
-                if let jsonData = resp["data"] as? [String: Any] {
-                    if let model = Mapper<AlertDetailModel>().map(JSON: jsonData) {
-                        onCompletion?(true, model)
-                        return
+            if let jsonData = response as? [String: Any] {
+                if let model = Mapper<ResultsRequestModel>().map(JSON: jsonData) {
+                    if let status = model.status, status == true {
+                        if let listAlertMessage = model.listAlertMessage {
+                            onCompletion?(true, listAlertMessage)
+                            return
+                        } else {
+                            onCompletion?(true, nil)
+                            return
+                        }
                     }
                 }
             }
