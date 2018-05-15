@@ -55,8 +55,9 @@ class RESTConstants: NSObject {
   static let CHECK_TOKEN = "CHECK_TOKEN"
   static let CHANGE_PASSWORD = "CHANGE_PASSWORD"
   static let RESET_PASSWORD_URL = "RESET_PASSWORD_URL"
+  static let GET_ALERT_DETAIL = "GET_ALERT_DETAIL"
+  static let RESOLVE_ALERT = "RESOLVE_ALERT"
 
-  
   //MARK: Keys for parser
   static let successKeyFromResponseData         = "status"
   static let messageKeyFromResponseData         = "error"

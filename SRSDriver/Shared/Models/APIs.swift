@@ -539,6 +539,46 @@ class APIs {
             }
         }
     }
+    
+    static func resolveAlert(_ alertID: String, _ content: String , _ onCompletion:((Bool, Any)->Void)? = nil, onError:((RESTError)->Void)? = nil) {
+        let uri = String.init(format: RESTConstants.configs[RESTConstants.RESOLVE_ALERT] ?? "", alertID, content)
+        let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
+        if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+            request.setAuthorization(token)
+        }
+        request.setContentType("application/x-www-form-urlencoded")
+        request.baseInvoker { (response, error) in
+            if let err = error {
+                onError?(err)
+                return
+            }
+        }
+    }
+    
+    static func getAlertDetail(_ alertID: String, _ onCompletion:((Bool, Any) -> Void)? = nil, _ onError:((RESTError)->Void)? = nil) {
+        let uri = String.init(format: RESTConstants.configs[RESTConstants.GET_ALERT_DETAIL] ?? "", alertID)
+        let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
+        if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+            request.setAuthorization(token)
+        }
+        request.setContentType("application/x-www-form-urlencoded")
+        request.baseInvoker { (response, error) in
+            if let _error = error {
+                onError?(_error)
+                return
+            }
+            if let resp = response as? [String: Any] {
+                if let jsonData = resp["data"] as? [String: Any] {
+                    if let model = Mapper<AlertDetailModel>().map(JSON: jsonData) {
+                        onCompletion?(true, model)
+                        return
+                    }
+                }
+            }
+            onError?(RESTError(code: 0, msg: "Something wrong. Please contact with us. Thanks."))
+        }
+    }
 }
+
 
 

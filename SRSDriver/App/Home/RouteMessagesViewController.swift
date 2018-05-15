@@ -24,7 +24,15 @@ class RouteMessagesViewController: BaseViewController {
 //      readMessages(unreadMessages)
     }
   }
+    
+  var alertID: Int? {
+    didSet {
+        
+    }
+  }
   
+  var listAlertDetail = [AlertDetailModel]()
+    
   @IBOutlet weak var addMessageButton: UIButton!
   @IBOutlet weak var tableView: UITableView!
   fileprivate var messages = [Message]()
@@ -45,6 +53,20 @@ class RouteMessagesViewController: BaseViewController {
     tabBarController?.tabBar.isHidden = false
   }
   
+  func getDataAlertDetail(_ alertID: Int) {
+    APIs.getAlertDetail("\(alertID)", { [unowned self] (successful, model) in
+        if successful, let alertDetailModel = model as? AlertDetailModel {
+//            self.alertDetail = alertDetailModel
+        }
+    }) { (error) in
+        
+    }
+  }
+    
+  func updateData() {
+    tableView.reloadData()
+  }
+    
   @IBAction func addMessage(_ sender: UIButton) {
     guard  let _route = route else {
       return
@@ -95,18 +117,13 @@ extension RouteMessagesViewController {
 
 extension RouteMessagesViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if let _route = route {
-      return _route.messages.count
-    }
-    return 0
+    return listAlertDetail.count
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    guard let _route = route else {
-      return UITableViewCell()
-    }
+    
     if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? RouteMessageTableViewCell {
-      cell.message = _route.messages[indexPath.row]
+      cell.alertDetail = listAlertDetail[indexPath.row]
       return cell
     }
     
@@ -116,5 +133,4 @@ extension RouteMessagesViewController: UITableViewDataSource, UITableViewDelegat
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return UITableViewAutomaticDimension
   }
-
 }

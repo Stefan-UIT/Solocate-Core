@@ -54,5 +54,9 @@
 	<string>/master-service/v1/users/change-password</string>
 	<key>RESET_PASSWORD_URL</key>
 	<string>/#/reset-password</string>
+	<key>GET_ALERT_DETAIL</key>
+	<string>/backend-api/v1/alert-management/%@</string>
+	<key>RESOLVE_ALERT</key>
+	<string>/backend-api/v1/alert-management/%@?comment=%@</string>
 </dict>
 </plist>

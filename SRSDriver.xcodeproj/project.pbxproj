@@ -226,6 +226,18 @@
 		0AE327F0208DC84C00EF1F4C /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4320590AD4003F8E6F /* Main.storyboard */; };
 		0AE327F1208DC84C00EF1F4C /* LeftMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8BA6A2085D82B001321D1 /* LeftMenuView.xib */; };
 		0AE327FB208DC94700EF1F4C /* configs_talron.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AE327FA208DC94700EF1F4C /* configs_talron.plist */; };
+		0AEBA57020AA89C90053F2BF /* AlertDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEBA56F20AA89C90053F2BF /* AlertDetailModel.swift */; };
+		0AEBA57120AA8AB40053F2BF /* AlertDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEBA56F20AA89C90053F2BF /* AlertDetailModel.swift */; };
+		0AEBA57220AA8AB50053F2BF /* AlertDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEBA56F20AA89C90053F2BF /* AlertDetailModel.swift */; };
+		0AEBA57320AA8AB50053F2BF /* AlertDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEBA56F20AA89C90053F2BF /* AlertDetailModel.swift */; };
+		0AEBA57620AA9E480053F2BF /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEBA57520AA9E480053F2BF /* AlertMessageView.swift */; };
+		0AEBA57820AA9E530053F2BF /* AlertMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AEBA57720AA9E530053F2BF /* AlertMessageView.xib */; };
+		0AEBA57920AA9E7F0053F2BF /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEBA57520AA9E480053F2BF /* AlertMessageView.swift */; };
+		0AEBA57A20AA9E7F0053F2BF /* AlertMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AEBA57720AA9E530053F2BF /* AlertMessageView.xib */; };
+		0AEBA57B20AA9E7F0053F2BF /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEBA57520AA9E480053F2BF /* AlertMessageView.swift */; };
+		0AEBA57C20AA9E7F0053F2BF /* AlertMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AEBA57720AA9E530053F2BF /* AlertMessageView.xib */; };
+		0AEBA57D20AA9E800053F2BF /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEBA57520AA9E480053F2BF /* AlertMessageView.swift */; };
+		0AEBA57E20AA9E800053F2BF /* AlertMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AEBA57720AA9E530053F2BF /* AlertMessageView.xib */; };
 		0AF8BA692085D820001321D1 /* LeftMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8BA682085D820001321D1 /* LeftMenuView.swift */; };
 		0AF8BA6B2085D82B001321D1 /* LeftMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8BA6A2085D82B001321D1 /* LeftMenuView.xib */; };
 		0AF8BA6C2085D837001321D1 /* LeftMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8BA6A2085D82B001321D1 /* LeftMenuView.xib */; };
@@ -403,6 +415,9 @@
 		0AE327F8208DC84C00EF1F4C /* DMSDriver_Talron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMSDriver_Talron.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AE327F9208DC84D00EF1F4C /* DMSDriver_Talron.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = DMSDriver_Talron.plist; path = "/Users/mrj/Desktop/SeldatInc/SRS/git-project/ios/DMSDriver_Talron.plist"; sourceTree = "<absolute>"; };
 		0AE327FA208DC94700EF1F4C /* configs_talron.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = configs_talron.plist; sourceTree = "<group>"; };
+		0AEBA56F20AA89C90053F2BF /* AlertDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertDetailModel.swift; sourceTree = "<group>"; };
+		0AEBA57520AA9E480053F2BF /* AlertMessageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertMessageView.swift; sourceTree = "<group>"; };
+		0AEBA57720AA9E530053F2BF /* AlertMessageView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = AlertMessageView.xib; sourceTree = "<group>"; };
 		0AF8BA682085D820001321D1 /* LeftMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LeftMenuView.swift; sourceTree = "<group>"; };
 		0AF8BA6A2085D82B001321D1 /* LeftMenuView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LeftMenuView.xib; sourceTree = "<group>"; };
 		0AF8BA6E2085D99D001321D1 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
@@ -539,6 +554,7 @@
 		0A465E9F20A3EDC0009BFE69 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0AEBA57420AA9E350053F2BF /* AlertMessageView */,
 				0A27215820A5979B009E527F /* ForgetPasswordView */,
 				0A465EA020A3EDD0009BFE69 /* ChangePasswordView */,
 				0AF8BA672085D811001321D1 /* LeftMenuView */,
@@ -614,6 +630,15 @@
 				0AB6912520A156ED0041E529 /* Configs.swift */,
 			);
 			path = Configs;
+			sourceTree = "<group>";
+		};
+		0AEBA57420AA9E350053F2BF /* AlertMessageView */ = {
+			isa = PBXGroup;
+			children = (
+				0AEBA57520AA9E480053F2BF /* AlertMessageView.swift */,
+				0AEBA57720AA9E530053F2BF /* AlertMessageView.xib */,
+			);
+			path = AlertMessageView;
 			sourceTree = "<group>";
 		};
 		0AF8BA672085D811001321D1 /* LeftMenuView */ = {
@@ -759,6 +784,7 @@
 				248F20912069F16300E6902D /* GoogleDirectionResponse.swift */,
 				0A465EC020A427C3009BFE69 /* CheckTokenModel.swift */,
 				0A465EC520A43174009BFE69 /* ChangePasswordModel.swift */,
+				0AEBA56F20AA89C90053F2BF /* AlertDetailModel.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -1047,6 +1073,7 @@
 				0AB6910320A0099E0041E529 /* LogoutTableViewCell.xib in Resources */,
 				0AB6910520A0099E0041E529 /* LaunchScreen.storyboard in Resources */,
 				0A465EB820A404CD009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
+				0AEBA57E20AA9E800053F2BF /* AlertMessageView.xib in Resources */,
 				0AB6910620A0099E0041E529 /* configs_masof.plist in Resources */,
 				0A66245320A94B6F00FEA932 /* Localizable.strings in Resources */,
 				0A27216220A599AC009E527F /* ForgetPasswordView.xib in Resources */,
@@ -1060,6 +1087,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AEBA57C20AA9E7F0053F2BF /* AlertMessageView.xib in Resources */,
 				0AE327E9208DC84C00EF1F4C /* OrderScanItemTableViewCell.xib in Resources */,
 				0A7FB464209180DF00F5058D /* LogoutTableViewCell.xib in Resources */,
 				0A465EA920A3EE1A009BFE69 /* ChangePasswordView.xib in Resources */,
@@ -1081,6 +1109,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0AEBA57A20AA9E7F0053F2BF /* AlertMessageView.xib in Resources */,
 				2494A9692074926A005A2622 /* OrderScanItemTableViewCell.xib in Resources */,
 				2494A96B2074926A005A2622 /* Info.plist in Resources */,
 				0A465EA820A3EE19009BFE69 /* ChangePasswordView.xib in Resources */,
@@ -1112,6 +1141,7 @@
 				0AB6912420A156CA0041E529 /* MainConfigs.plist in Resources */,
 				0AF8BA742085E3C5001321D1 /* LogoutTableViewCell.xib in Resources */,
 				0A465EAE20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
+				0AEBA57820AA9E530053F2BF /* AlertMessageView.xib in Resources */,
 				5AA4CA4A20590AD4003F8E6F /* LaunchScreen.storyboard in Resources */,
 				0A6623F520A948A600FEA932 /* GoogleService-Info.plist in Resources */,
 				0A27215C20A597C1009E527F /* ForgetPasswordView.xib in Resources */,
@@ -1475,6 +1505,7 @@
 				0AB690DB20A0099E0041E529 /* OrderDetailContainerViewController.swift in Sources */,
 				0AB690DC20A0099E0041E529 /* APIs.swift in Sources */,
 				0AB690DD20A0099E0041E529 /* HCSStarRatingView.m in Sources */,
+				0AEBA57D20AA9E800053F2BF /* AlertMessageView.swift in Sources */,
 				0AB690DE20A0099E0041E529 /* MapsViewController.swift in Sources */,
 				0A465EBF20A404FC009BFE69 /* BaseTableViewCell.swift in Sources */,
 				0AB690DF20A0099E0041E529 /* UITextField.swift in Sources */,
@@ -1508,6 +1539,7 @@
 				0A465EC420A428C2009BFE69 /* CheckTokenModel.swift in Sources */,
 				0AB690F820A0099E0041E529 /* OrderItem.swift in Sources */,
 				0AB690F920A0099E0041E529 /* RouteMessagesViewController.swift in Sources */,
+				0AEBA57320AA8AB50053F2BF /* AlertDetailModel.swift in Sources */,
 				0AB690FA20A0099E0041E529 /* BaseView.swift in Sources */,
 				0AB6912720A15D330041E529 /* Configs.swift in Sources */,
 			);
@@ -1557,6 +1589,7 @@
 				0AE327C6208DC84C00EF1F4C /* OrderDetailContainerViewController.swift in Sources */,
 				0AE327C7208DC84C00EF1F4C /* APIs.swift in Sources */,
 				0AE327C8208DC84C00EF1F4C /* HCSStarRatingView.m in Sources */,
+				0AEBA57B20AA9E7F0053F2BF /* AlertMessageView.swift in Sources */,
 				0AE327C9208DC84C00EF1F4C /* MapsViewController.swift in Sources */,
 				0A465EBE20A404FB009BFE69 /* BaseTableViewCell.swift in Sources */,
 				0AE327CA208DC84C00EF1F4C /* UITextField.swift in Sources */,
@@ -1590,6 +1623,7 @@
 				0A465EC320A428C1009BFE69 /* CheckTokenModel.swift in Sources */,
 				0AE327E3208DC84C00EF1F4C /* Message.swift in Sources */,
 				0AE327E4208DC84C00EF1F4C /* OrderItem.swift in Sources */,
+				0AEBA57220AA8AB50053F2BF /* AlertDetailModel.swift in Sources */,
 				0AE327E5208DC84C00EF1F4C /* RouteMessagesViewController.swift in Sources */,
 				0AB6912920A15D3A0041E529 /* Configs.swift in Sources */,
 			);
@@ -1639,6 +1673,7 @@
 				2494A9472074926A005A2622 /* OrderDetailContainerViewController.swift in Sources */,
 				2494A9482074926A005A2622 /* APIs.swift in Sources */,
 				2494A9492074926A005A2622 /* HCSStarRatingView.m in Sources */,
+				0AEBA57920AA9E7F0053F2BF /* AlertMessageView.swift in Sources */,
 				2494A94A2074926A005A2622 /* MapsViewController.swift in Sources */,
 				0A465EBD20A404FB009BFE69 /* BaseTableViewCell.swift in Sources */,
 				2494A94B2074926A005A2622 /* UITextField.swift in Sources */,
@@ -1672,6 +1707,7 @@
 				0A465EC220A428C1009BFE69 /* CheckTokenModel.swift in Sources */,
 				2494A9622074926A005A2622 /* Message.swift in Sources */,
 				2494A9632074926A005A2622 /* OrderItem.swift in Sources */,
+				0AEBA57120AA8AB40053F2BF /* AlertDetailModel.swift in Sources */,
 				2494A9642074926A005A2622 /* RouteMessagesViewController.swift in Sources */,
 				0AB6912820A15D390041E529 /* Configs.swift in Sources */,
 			);
@@ -1721,6 +1757,7 @@
 				0AF8BA692085D820001321D1 /* LeftMenuView.swift in Sources */,
 				5A82E9CE205A197800F34351 /* Date.swift in Sources */,
 				5A68A449205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift in Sources */,
+				0AEBA57620AA9E480053F2BF /* AlertMessageView.swift in Sources */,
 				5A68A458205A5A0F00CA9DB8 /* APIs.swift in Sources */,
 				5A499CB220591D9600A1D944 /* HCSStarRatingView.m in Sources */,
 				5A68A461205A86B500CA9DB8 /* MapsViewController.swift in Sources */,
@@ -1754,6 +1791,7 @@
 				0A465EC120A427C3009BFE69 /* CheckTokenModel.swift in Sources */,
 				245BBAA4207363EC00EE3E47 /* Message.swift in Sources */,
 				24D3876D2063513600BE51D9 /* OrderItem.swift in Sources */,
+				0AEBA57020AA89C90053F2BF /* AlertDetailModel.swift in Sources */,
 				246FA3522071EB7300C5E707 /* RouteMessagesViewController.swift in Sources */,
 				0AF8BA6F2085D99D001321D1 /* BaseView.swift in Sources */,
 			);

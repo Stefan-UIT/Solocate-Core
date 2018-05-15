@@ -93,3 +93,9 @@ struct SegueIdentifier {
   static let showScanBarCode = "showScanBarCode"
 }
 
+
+enum NotificationType : String {
+    case ALERT = "alert"
+    case NEW_ROUTE = "new_route"
+}
+

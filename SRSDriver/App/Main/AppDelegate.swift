@@ -66,41 +66,19 @@ extension AppDelegate: MessagingDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
   func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
     print("didReceive \(response)")
-    if let userInfo = response.notification.request.content.userInfo as? [String: Any],
-      let routeID = userInfo["route_id"] as? String {
-      print("Route id \(routeID)")
-      let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-      if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String, token.length > 0 {
-        // firstly, check stak
-        if let currentNavController = window?.rootViewController as? UINavigationController,
-          let tabbar = currentNavController.topViewController as? UITabBarController {
-//          tabbar.selectedIndex = 0
-          (tabbar.selectedViewController as? UINavigationController)?.popToRootViewController(animated: false)
-          if let listNC = tabbar.viewControllers?.first as? UINavigationController,
-            let listVC = listNC.viewControllers.first as? OrderListViewController {
-            listVC.getRouteDetail(routeID)
-          }
-          if let type = userInfo["type"] as? String, type == "new message" {
-            tabbar.selectedIndex = Constants.messageTabIndex
-          }
-          return
+    if let userInfo = response.notification.request.content.userInfo as? [String: Any]
+    {
+        if let type = userInfo["type"] as? String {
+            let _type : NotificationType = NotificationType(rawValue: type)!
+            switch _type {
+            case .ALERT:
+                handleAlert(userInfo)
+                break
+            case .NEW_ROUTE:
+                handleNewRoute(userInfo)
+                break
+            }
         }
-        
-        let rootNavigationController = mainStoryboard.instantiateInitialViewController() as? UINavigationController
-        let tabbarVC = mainStoryboard.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController
-        if let listNavigationController = tabbarVC?.viewControllers?.first as? UINavigationController,
-          let listVC = listNavigationController.topViewController as? OrderListViewController {
-          listVC.getRouteDetail(routeID)
-        }
-        if let type = userInfo["type"] as? String, type == "new message" {
-          tabbarVC?.selectedIndex = Constants.messageTabIndex
-        }
-        rootNavigationController?.pushViewController(tabbarVC!, animated: true)
-        window?.rootViewController = rootNavigationController
-      }
-      else {
-        // Launch app normally
-      }
     }
   }
   
@@ -108,5 +86,70 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     completionHandler(.alert)
   }
   
+    func handleNewRoute(_ userInfo: [String: Any]) {
+        if let routeID = userInfo["route_id"] as? String {
+            print("PUSH_NOTIFICATION: routeID = \(routeID)")
+            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+            if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String, token.length > 0 {
+                // firstly, check stak
+                if let currentNavController = window?.rootViewController as? UINavigationController,
+                    let tabbar = currentNavController.topViewController as? UITabBarController {
+                    //          tabbar.selectedIndex = 0
+                    (tabbar.selectedViewController as? UINavigationController)?.popToRootViewController(animated: false)
+                    if let listNC = tabbar.viewControllers?.first as? UINavigationController,
+                        let listVC = listNC.viewControllers.first as? OrderListViewController {
+                        listVC.getRouteDetail(routeID)
+                    }
+                    if let type = userInfo["type"] as? String, type == "new message" {
+                        tabbar.selectedIndex = Constants.messageTabIndex
+                    }
+                    return
+                }
+                
+                let rootNavigationController = mainStoryboard.instantiateInitialViewController() as? UINavigationController
+                let tabbarVC = mainStoryboard.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController
+                if let listNavigationController = tabbarVC?.viewControllers?.first as? UINavigationController,
+                    let listVC = listNavigationController.topViewController as? OrderListViewController {
+                    listVC.getRouteDetail(routeID)
+                }
+                if let type = userInfo["type"] as? String, type == "new message" {
+                    tabbarVC?.selectedIndex = Constants.messageTabIndex
+                }
+                rootNavigationController?.pushViewController(tabbarVC!, animated: true)
+                window?.rootViewController = rootNavigationController
+            }
+            else {
+                // Launch app normally
+            }
+        }
+    }
+    
+    func handleAlert(_ userInfo: [String: Any]) {
+        guard let alertID = userInfo["alert_id"] as? String  else {
+            return
+        }
+        
+        guard let messageAlert = userInfo["title"] as? String  else {
+            return
+        }
+        let alertMessageView : AlertMessageView = AlertMessageView()
+        alertMessageView.delegate = self
+        alertMessageView.config(alertID, messageAlert)
+        alertMessageView.showViewInWindow()
+    }
 }
 
+
+extension AppDelegate: AlertMessageViewDelegate {
+    func alertMessageView(_ alertMessageView: AlertMessageView, _ alertID: String, _ content: String) {
+        APIs.resolveAlert(alertID, content, { (successful, model) in
+            if successful {
+                
+            } else {
+                
+            }
+        }) { (error) in
+            
+        }
+    }
+}
