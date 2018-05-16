@@ -112,6 +112,14 @@ class RouteMessagesViewController: BaseViewController {
     
     present(alert, animated: true, completion: nil)
   }
+    
+  func handleAlert(_ alertID: String, _ messageAlert: String) {
+
+        let alertMessageView : AlertMessageView = AlertMessageView()
+        alertMessageView.delegate = self
+        alertMessageView.config(alertID, messageAlert)
+        alertMessageView.showViewInWindow()
+  }
 }
 
 extension RouteMessagesViewController {
@@ -140,4 +148,43 @@ extension RouteMessagesViewController: UITableViewDataSource, UITableViewDelegat
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return UITableViewAutomaticDimension
   }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let model = listAlertMessage[indexPath.row]
+        guard let alertID = model.id else {
+            return
+        }
+        guard let messageAlert = model.alertMsg else {
+            return
+        }
+        handleAlert("\(alertID)", messageAlert)
+    }
+}
+
+extension RouteMessagesViewController: AlertMessageViewDelegate {
+    func alertMessageView(_ alertMessageView: AlertMessageView, _ alertID: String, _ content: String) {
+        alertMessageView.removeFromSuperview()
+        showLoadingIndicator()
+        APIs.resolveAlert(alertID, content, { [weak self] (successful, model) in
+            self?.dismissLoadingIndicator()
+            if successful {
+                if let message = model as? String {
+                    self?.showAlert(message)
+                }
+            } else {
+                self?.showAlert("Something wrong. Please contact with us. Thanks.")
+            }
+        }) { [weak self] (error) in
+            self?.dismissLoadingIndicator()
+            print(error.message)
+            self?.showAlert(error.message)
+        }
+    }
+    
+    func showAlert(_ message: String) {
+        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Done", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        self.present(alert, animated: true, completion: nil)
+    }
 }

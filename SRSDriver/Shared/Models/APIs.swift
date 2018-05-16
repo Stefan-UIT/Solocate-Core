@@ -541,8 +541,11 @@ class APIs {
     }
     
     static func resolveAlert(_ alertID: String, _ content: String , _ onCompletion:((Bool, Any)->Void)? = nil, onError:((RESTError)->Void)? = nil) {
-        let uri = String.init(format: RESTConstants.configs[RESTConstants.RESOLVE_ALERT] ?? "", alertID, content)
-        let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
+        let uri = String.init(format: RESTConstants.configs[RESTConstants.RESOLVE_ALERT] ?? "", alertID)
+        let request = RESTRequest(functionName: uri, method: .put, encoding: .default)
+        let params = ["comment": content]
+        request.setParameters(params)
+
         if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
             request.setAuthorization(token)
         }
@@ -552,6 +555,12 @@ class APIs {
                 onError?(err)
                 return
             }
+            if let jsonData = response as? JSONData {
+                if let message = jsonData["message"] as? String {
+                    onCompletion?(true, message)
+                }
+            }
+            onError?(RESTError(code: 0, msg: "Something wrong. Please contact with us. Thanks."))
         }
     }
     

@@ -57,6 +57,6 @@
 	<key>GET_ALERT_DETAIL</key>
 	<string>/backend-api/v1/alert/my-list</string>
 	<key>RESOLVE_ALERT</key>
-	<string>/backend-api/v1/alert-management/%@?comment=%@</string>
+	<string>/backend-api/v1/alert-management/%@</string>
 </dict>
 </plist>
