@@ -18,6 +18,8 @@ class LoginViewController: BaseViewController {
   private var keepLogin = true
   override func viewDidLoad() {
     super.viewDidLoad()
+    enviromentButton.isHidden = true
+    
     if let _keepLogin = Cache.shared.getObject(forKey: Defaultkey.keepLogin) as? Bool {
       let imgName = _keepLogin ? "check_selected" : "check_normal"
       rememberButton.setImage(UIImage(named: imgName), for: .normal)

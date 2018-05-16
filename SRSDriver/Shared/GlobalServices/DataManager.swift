@@ -17,7 +17,7 @@ class DataManager: NSObject {
     
     class func getEnviroment() -> EnviromentType {
         guard let type = UserDefaults.standard.value(forKey: "ENVIROMENT") as? Int else {
-            return .DEV
+            return .DEMO
         }
         return EnviromentType(rawValue: type)!
     }
