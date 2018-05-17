@@ -75,7 +75,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       detailItems.append(items)
       
       tableView.reloadData()
-      subTableView.reloadData()
+//      subTableView.reloadData()
       
       updateStatusButton.isHidden = _orderDetail.statusCode != "OP" && _orderDetail.statusCode != "IP"
     }
@@ -86,14 +86,14 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    subTableView = UITableView(frame: CGRect.zero, style: .plain)
-    subTableView.delegate = self
-    subTableView.dataSource = self
+//    subTableView = UITableView(frame: CGRect.zero, style: .plain)
+//    subTableView.delegate = self
+//    subTableView.dataSource = self
     let orderScanItemNib = UINib(nibName: orderScanItemCellIdentifier, bundle: nil)
-    subTableView.register(orderScanItemNib, forCellReuseIdentifier: orderScanItemCellIdentifier)
-    subTableView.isScrollEnabled = false
+//    subTableView.register(orderScanItemNib, forCellReuseIdentifier: orderScanItemCellIdentifier)
+//    subTableView.isScrollEnabled = false
     updateStatusButton.isHidden = true
-    
+    tableView.register(orderScanItemNib, forCellReuseIdentifier: orderScanItemCellIdentifier)
     tableView.estimatedRowHeight = cellHeight
     tableView.rowHeight = UITableViewAutomaticDimension
     
@@ -317,79 +317,61 @@ extension OrderDetailViewController {
 }
 
 extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    guard itemsIndex < detailItems.count else {return 0}
-    let item = detailItems[itemsIndex]
-    if tableView == subTableView {
-      return item.items.count
+    
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 2
     }
-    return detailItems.count
+    
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    guard itemsIndex < detailItems.count else { return 0 }
+    switch section {
+    case 0:
+        return detailItems.count
+    case 1:
+        let item = detailItems[itemsIndex]
+        return item.items.count
+    default:
+        return 0
+    }
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    guard indexPath.row < detailItems.count else {return UITableViewAutomaticDimension}
-    let item = detailItems[indexPath.row]
-    if tableView == subTableView {
-      return orderItemCellHeight.scaleHeight()
-    }
-    if item.type == .items {
-      return item.items.count > 0 ? CGFloat(item.items.count) * orderItemCellHeight.scaleHeight() + orderItemsPaddingTop : orderItemsPaddingTop.scaleHeight() + cellHeight
-    }
+//    guard indexPath.row < detailItems.count else { return UITableViewAutomaticDimension }
+//    let item = detailItems[indexPath.row]
+//    if tableView == subTableView {
+//      return orderItemCellHeight.scaleHeight()
+//    }
+//    if item.type == .items {
+//
+//      return item.items.count > 0 ? CGFloat(item.items.count) * orderItemCellHeight.scaleHeight() + orderItemsPaddingTop : orderItemsPaddingTop.scaleHeight() + cellHeight
+//    }
     return UITableViewAutomaticDimension
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if tableView == subTableView,
-      let cell = subTableView.dequeueReusableCell(withIdentifier: orderScanItemCellIdentifier, for: indexPath) as? OrderScanItemTableViewCell {
-      let orderItem = detailItems[itemsIndex]
-      cell.orderItem = orderItem.items[indexPath.row]
-      if scannedString.length > 0, scannedObjectIndexs.contains(indexPath.row), shouldFilterOrderItemsList {
-        cell.contentView.backgroundColor = AppColor.highLightColor
-      }
-      else {
-        cell.contentView.backgroundColor = .white
-      }
-      return cell
-    }
-    else if tableView == self.tableView {
-      let item = detailItems[indexPath.row]
-      if item.type == .items,
-        let cell = tableView.dequeueReusableCell(withIdentifier: orderItemsCellIdentifier, for: indexPath) as? OrderItemsTableViewCell {
-        subTableView.frame = CGRect(x: 0, y: orderItemsPaddingTop, width: cell.frame.width, height: CGFloat(item.items.count)*orderItemCellHeight.scaleHeight())
-        cell.contentView.addSubview(subTableView)
-        cell.selectionStyle = .none
-        cell.didClickScanButton = { [weak self] () in
-          guard let strongSelf = self else {return}
-          guard let _orderDetail = strongSelf.orderDetail, _orderDetail.statusCode == "IP" else {return}
-          let scanVC = ScanBarCodeViewController.loadViewController(type: ScanBarCodeViewController.self)
-          scanVC.didScan = {
-            [weak self] (code) in
-            guard let strongSelf = self else {return}
-            let orderItem = strongSelf.detailItems[strongSelf.itemsIndex]
-            guard code.length > 0 else {return}
-            
-            if strongSelf.shouldFilterOrderItemsList {
-              strongSelf.scannedObjectIndexs = strongSelf.findIndexOfScannedObject(code, items: orderItem.items)
-              if strongSelf.scannedObjectIndexs.count == 0 {
-                strongSelf.showAlertView("order_detail_barcode_notmatch".localized)
-              }
+    
+    switch indexPath.section {
+    case 0:
+        let item = detailItems[indexPath.row]
+        if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
+            cell.orderDetailItem = item
+            cell.selectionStyle = !(item.type == .phone && item.type == .address) ? .none : .default
+            return cell
+        }
+    case 1:
+        if let cell = tableView.dequeueReusableCell(withIdentifier: orderScanItemCellIdentifier, for: indexPath) as? OrderScanItemTableViewCell {
+            let orderItem = detailItems[itemsIndex]
+            cell.orderItem = orderItem.items[indexPath.row]
+            if scannedString.length > 0, scannedObjectIndexs.contains(indexPath.row), shouldFilterOrderItemsList {
+                cell.contentView.backgroundColor = AppColor.highLightColor
             }
             else {
-              strongSelf.showAlertAddNewOrderItem(code)
+                cell.contentView.backgroundColor = .white
             }
-            strongSelf.scannedString = code
-            
-          }
-          strongSelf.scannedString = ""
-          strongSelf.present(scanVC, animated: true, completion: nil)
+            return cell
         }
-        return cell
-      } // end if order item cell
-      else if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
-        cell.orderDetailItem = item
-        cell.selectionStyle = !(item.type == .phone && item.type == .address) ? .none : .default
-        return cell
-      } // detail item cell
+    default:
+        return UITableViewCell()
     }
     return UITableViewCell()
   }
