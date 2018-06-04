@@ -30,7 +30,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   fileprivate var scannedString = "" {
     didSet {
       tableView.reloadData()
-      subTableView.reloadData()
+//      subTableView.reloadData()
     }
   }
   
@@ -176,6 +176,33 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let status = _orderDetail.statusCode == "OP" ? "IP" : "DV"
         updateOrderStatus(status)
     }
+    
+    func handleScanMatchBarCode() {
+        guard let _orderDetail = orderDetail, _orderDetail.statusCode == "IP" else {return}
+        let scanVC = ScanBarCodeViewController.loadViewController(type: ScanBarCodeViewController.self)
+        scanVC.didScan = { [weak self] (code) in
+            self?.handleDidScanMatchBarCode(code)
+        }
+        scannedString = ""
+        present(scanVC, animated: true, completion: nil)
+
+    }
+    
+    func handleDidScanMatchBarCode(_ code: String) {
+        let orderItem = detailItems[itemsIndex]
+        
+        guard code.length > 0 else { return }
+        
+        if shouldFilterOrderItemsList {
+            scannedObjectIndexs = findIndexOfScannedObject(code, items: orderItem.items)
+            if scannedObjectIndexs.count == 0 {
+                showAlertView("order_detail_barcode_notmatch".localized)
+            }
+        } else {
+            showAlertAddNewOrderItem(code)
+        }
+        scannedString = code
+    }
 }
 
 // MARK: - Private methods
@@ -267,6 +294,7 @@ extension OrderDetailViewController {
   
   func showActionForOrderItem(_ item: OrderItem) {
     guard let _orderDetail = orderDetail, _orderDetail.statusCode == "IP" else {
+        showAlertView("Order is not yet started.")
       return
     }
     guard item.statusCode != "DV" && item.statusCode != "CC" else {
@@ -306,12 +334,12 @@ extension OrderDetailViewController {
     
     APIs.updateOrderStatus("\(_orderDetail.id)", expectedStatus: status, routeID: "\(_routeID)", reason: nil, { [unowned self] (successful, msg) in
         self.dismissLoadingIndicator()
-        self.showAlertView(msg, completionHandler: { [unowned self] (alertAction) in
+        self.showAlertView(msg as! String, completionHandler: { [unowned self] (alertAction) in
             self.navigationController?.popToRootViewController(animated: true)
         })
     }) { [unowned self] (error) in
         self.dismissLoadingIndicator()
-        self.showAlertView(error.message)
+        self.showAlertView(error?.message ?? "")
     }
   }
 }
@@ -347,6 +375,31 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
 //    }
     return UITableViewAutomaticDimension
   }
+   
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        guard let _orderDetail = orderDetail, _orderDetail.statusCode == "IP" else { return 0.0 }
+        if section == 1 {
+            return 50.0
+        }
+        return 0.0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 1 {
+            let itemsSectionView : ItemsSectionView = ItemsSectionView()
+            if let _orderDetail = orderDetail, _orderDetail.statusCode == "IP" {
+                itemsSectionView.config(false)
+            } else {
+                itemsSectionView.config(true)
+            }
+            itemsSectionView.didClickScanButton = { [weak self] () in
+                self?.handleScanMatchBarCode()
+            }
+            return itemsSectionView
+        }
+        
+        return nil
+    }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     
@@ -378,21 +431,26 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    if tableView == subTableView {
-      let orderItem = detailItems[itemsIndex]
-      showActionForOrderItem(orderItem.items[indexPath.row])
-      return
+    switch indexPath.section {
+    case 0:
+        let item = detailItems[indexPath.row]
+        if item.type == .address {
+            performSegue(withIdentifier: SegueIdentifier.showMapView, sender: nil)
+        }
+        else if item.type == .phone {
+            let urlString = "tel://\(item.content)"
+            if let url = URL(string: urlString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }
+        break
+    case 1:
+        let orderItem = detailItems[itemsIndex]
+        showActionForOrderItem(orderItem.items[indexPath.row])
+        break
+    default:
+        break
     }
-    let item = detailItems[indexPath.row]
-    if item.type == .address {
-      performSegue(withIdentifier: SegueIdentifier.showMapView, sender: nil)
-    }
-    else if item.type == .phone {
-      let urlString = "tel://\(item.content)"
-      if let url = URL(string: urlString) {
-        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-      }
-    }
+
   }
-  
 }

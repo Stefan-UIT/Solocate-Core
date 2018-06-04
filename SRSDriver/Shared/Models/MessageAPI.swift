@@ -15,7 +15,7 @@ class MessageAPI {
   }
   
   static func addNewMessage(_ routeID: String, content: String, completion: @escaping ((_ message: Message?,_ errMsg: String?) -> Void)) {
-    let request = RESTRequest(functionName: RESTConstants.configs[RESTConstants.CREATE_NEW_MESSAGE] ?? "", method: .post, encoding: .default)
+    let request = RESTRequest(functionName: RESTConstants.ServicesConfigs[RESTConstants.CREATE_NEW_MESSAGE] ?? "", method: .post, encoding: .default)
     let params = [
       "route_id": routeID,
       "content": content
@@ -42,7 +42,7 @@ class MessageAPI {
   }
   
   static func getList(_ routeID: String, completion:@escaping ((_ messages: [Message]?, _ errMsg: String?) -> Void)) {
-    let uri = String.init(format: RESTConstants.configs[RESTConstants.GET_LIST_NOTIFICATIONS] ?? "%@", routeID)
+    let uri = String.init(format: RESTConstants.ServicesConfigs[RESTConstants.GET_LIST_NOTIFICATIONS] ?? "%@", routeID)
     let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
     if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
       request.setAuthorization(token)
@@ -65,7 +65,7 @@ class MessageAPI {
   }
   
   static func readMessage(_ messageID: String) {
-    let uri = String.init(format: RESTConstants.configs[RESTConstants.READ_MESSAGE] ?? "", messageID)
+    let uri = String.init(format: RESTConstants.ServicesConfigs[RESTConstants.READ_MESSAGE] ?? "", messageID)
     let request = RESTRequest(functionName: uri, method: .put, encoding: .default)
     if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
       request.setAuthorization(token)
@@ -76,7 +76,7 @@ class MessageAPI {
   }
   
   static func getMessageNumber(_ type: String, routeID: String, completion: @escaping ((_ number: Int?,_ errMSg: String?) -> Void)) {
-    let uri = String.init(format: RESTConstants.configs[RESTConstants.GET_COUNT_MESSAGE_NUMBER] ?? "%@%@", type, routeID)
+    let uri = String.init(format: RESTConstants.ServicesConfigs[RESTConstants.GET_COUNT_MESSAGE_NUMBER] ?? "%@%@", type, routeID)
     let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
     if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
       request.setAuthorization(token)

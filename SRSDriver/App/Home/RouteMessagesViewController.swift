@@ -150,6 +150,7 @@ extension RouteMessagesViewController: UITableViewDataSource, UITableViewDelegat
   }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: false)
         let model = listAlertMessage[indexPath.row]
         guard let alertID = model.id else {
             return

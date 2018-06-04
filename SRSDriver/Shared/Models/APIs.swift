@@ -12,13 +12,9 @@ import ObjectMapper
 import CoreLocation
 import TLPhotoPicker
 
-typealias OnCompletion = (Bool, String) -> Void
-typealias OnError = (RESTResponse) -> Void
-typealias JSONData = [String: Any]
-
 class APIs {
   class func login(_ email: String, password: String, completion: @escaping((_ token: String?, _ msg: String?) -> Void)) {
-    let request = RESTRequest(functionName: RESTConstants.configs[RESTConstants.LOGIN] ?? ""
+    let request = RESTRequest(functionName: RESTConstants.ServicesConfigs[RESTConstants.LOGIN] ?? ""
       , method: .post, encoding: .default)
     let params = ["email": email, "password": password]
     request.setParameters(params)
@@ -47,10 +43,10 @@ class APIs {
   }
     
   class func forgetPassword(_ email: String, completion: @escaping((_ token: String?, _ msg: String?) -> Void)) {
-        let request = RESTRequest(functionName: RESTConstants.configs[RESTConstants.FORGET_PASSWORD] ?? ""
+        let request = RESTRequest(functionName: RESTConstants.ServicesConfigs[RESTConstants.FORGET_PASSWORD] ?? ""
             , method: .post, encoding: .default)
     
-        let resetUrl = "\(RESTConstants.getBASEURL() ?? "")\(RESTConstants.configs[RESTConstants.RESET_PASSWORD_URL] ?? "")"
+        let resetUrl = "\(RESTConstants.getBASEURL() ?? "")\(RESTConstants.ServicesConfigs[RESTConstants.RESET_PASSWORD_URL] ?? "")"
         let params = ["email": email,
                       "reset_password_url": resetUrl]
         request.setParameters(params)
@@ -82,7 +78,7 @@ class APIs {
   }
   
     class func getOrderDetail(_ orderID: String, completion: @escaping ((_ resp: OrderDetail?,_ error: RESTError?, _ msg: String?) -> Void)) {
-    let uri = String.init(format: RESTConstants.configs[RESTConstants.GET_ORDER_DETAIL] ?? "", orderID)
+    let uri = String.init(format: RESTConstants.ServicesConfigs[RESTConstants.GET_ORDER_DETAIL] ?? "", orderID)
     let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
     if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
       request.setAuthorization(token)
@@ -105,7 +101,7 @@ class APIs {
   }
   
   class func getRouteDetail(_ routeID: String, completion: @escaping ((_ route: Route?, _ msg: String?) -> Void)) {
-    let uri = String.init(format: RESTConstants.configs[RESTConstants.GET_ROUTE_DETAIL] ?? "%@", routeID)
+    let uri = String.init(format: RESTConstants.ServicesConfigs[RESTConstants.GET_ROUTE_DETAIL] ?? "%@", routeID)
     let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
     if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
       request.setAuthorization(token)
@@ -132,7 +128,7 @@ class APIs {
                                 reason: Reason? = nil,
                                 _ onCompletion: OnCompletion? = nil,
                                 _ onError: OnError? = nil) {
-    var uri = String.init(format: RESTConstants.configs[RESTConstants.UPDATE_ORDER_STATUS] ?? "", orderID, expectedStatus)
+    var uri = String.init(format: RESTConstants.ServicesConfigs[RESTConstants.UPDATE_ORDER_STATUS] ?? "", orderID, expectedStatus)
     uri = uri.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
     let request = RESTRequest(functionName: uri, method: .put, encoding: .default)
     var params = ["route_id": routeID]
@@ -166,7 +162,7 @@ class APIs {
   }
   
   static func getReasonList(_ type: String = "1", completion: @escaping ((_ reasons:[Reason]?, _ errMsg: String?) -> Void)) {
-    let uri = String.init(format: RESTConstants.configs[RESTConstants.GET_REASON_LIST] ?? "", type)
+    let uri = String.init(format: RESTConstants.ServicesConfigs[RESTConstants.GET_REASON_LIST] ?? "", type)
     let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
     request.baseInvoker { (resp, error) in
       if let response = resp as? [[String: Any]]{
@@ -186,7 +182,7 @@ class APIs {
   
   
   class func getOrders(byDate date: String? = nil, completion: @escaping ((_ route: Route?, _ msg: String?) -> Void)) {
-    let request = RESTRequest(functionName: RESTConstants.configs[RESTConstants.GET_ORDER_BY_DATE] ?? "", method: .put, encoding: .default)
+    let request = RESTRequest(functionName: RESTConstants.ServicesConfigs[RESTConstants.GET_ORDER_BY_DATE] ?? "", method: .put, encoding: .default)
     var dateString = Date().toString("yyyy-MM-dd")
     if let _date = date {
       dateString = _date
@@ -214,7 +210,7 @@ class APIs {
   }
   
   static func uploadSignature(_ orderID: String, signBase64: String, completion: @escaping ((_ errMsg: String?) -> Void)) {
-    let uri = String.init(format: RESTConstants.configs[RESTConstants.UPLOAD_SIGNATURE] ?? "%@", orderID)
+    let uri = String.init(format: RESTConstants.ServicesConfigs[RESTConstants.UPLOAD_SIGNATURE] ?? "%@", orderID)
     let request = RESTRequest(functionName: uri, method: .put, encoding: .default)
     request.setContentType("application/x-www-form-urlencoded")
     let params = ["sign": signBase64]
@@ -255,7 +251,7 @@ class APIs {
     ]]
 
     guard let baseURL = RESTConstants.getBASEURL(),
-    let updateSequence = RESTConstants.configs[RESTConstants.UPDATE_SEQUENCE] else {
+    let updateSequence = RESTConstants.ServicesConfigs[RESTConstants.UPDATE_SEQUENCE] else {
         return
     }
     APIs.invoke(params: params, uri: (baseURL+updateSequence), completion: completion)
@@ -269,7 +265,7 @@ class APIs {
       ]
     ]
     guard let baseURL = RESTConstants.getBASEURL(),
-      let addNewItem = RESTConstants.configs[RESTConstants.ADD_NEW_ORDER_ITEM] else {
+      let addNewItem = RESTConstants.ServicesConfigs[RESTConstants.ADD_NEW_ORDER_ITEM] else {
         return
     }
     let uri = String.init(format: baseURL+addNewItem, orderID)
@@ -308,7 +304,7 @@ class APIs {
   
   static func uploadFiles(_ files: [PictureObject], orderID: String, completion: @escaping ((_ errorMsg: String?) -> Void)) {
     guard let baseURL = RESTConstants.getBASEURL(),
-      let uploadFiles = RESTConstants.configs[RESTConstants.UPLOAD_FILES] else {
+      let uploadFiles = RESTConstants.ServicesConfigs[RESTConstants.UPLOAD_FILES] else {
         return
     }
     let url = String.init(format: "\(baseURL)\(uploadFiles)", orderID)
@@ -367,7 +363,7 @@ class APIs {
   }
   
   static func addNote(_ orderID: String, content: String, completion: @escaping ((_ note: Note?,_ msgError: String?) -> Void)) {
-    let uri = String.init(format: RESTConstants.configs[RESTConstants.ADD_NOTE] ?? "", orderID)
+    let uri = String.init(format: RESTConstants.ServicesConfigs[RESTConstants.ADD_NOTE] ?? "", orderID)
     let params = ["content": content]
     let request = RESTRequest(functionName: uri, method: .post, encoding: .default)
     request.setParameters(params)
@@ -385,7 +381,7 @@ class APIs {
   }
   
   static func updateOrderItemStatus(_ itemID: String, status: String, reason: Reason?, completion: @escaping ((_ msgError: String?) -> Void)) {
-    let uri = String.init(format: RESTConstants.configs[RESTConstants.UPDATE_ORDER_ITEM_STATUS] ?? "", itemID, status)
+    let uri = String.init(format: RESTConstants.ServicesConfigs[RESTConstants.UPDATE_ORDER_ITEM_STATUS] ?? "", itemID, status)
     let request = RESTRequest(functionName: uri, method: .put, encoding: .default)
     var reasonMsg = ""
     var reasonID = ""
@@ -410,7 +406,7 @@ class APIs {
   }
   
   static func updateBarcode(_ itemID: String, newBarcode: String, completion: @escaping ((_ errorMsg: String?) -> Void)) {
-    let uri = String.init(format: RESTConstants.configs[RESTConstants.UPDATE_BARCODE_ORDER_ITEM] ?? "", itemID)
+    let uri = String.init(format: RESTConstants.ServicesConfigs[RESTConstants.UPDATE_BARCODE_ORDER_ITEM] ?? "", itemID)
     let request = RESTRequest(functionName: uri, method: .put, encoding: .default)
     let params = ["barcode": newBarcode]
     request.setParameters(params)
@@ -429,7 +425,7 @@ class APIs {
   }
   
   static func updateNotificationToken(_ token: String) {
-    let request = RESTRequest(functionName: RESTConstants.configs[RESTConstants.UPDATE_NOTIFICATION_TOKEN] ?? "", method: .post, encoding: .default)
+    let request = RESTRequest(functionName: RESTConstants.ServicesConfigs[RESTConstants.UPDATE_NOTIFICATION_TOKEN] ?? "", method: .post, encoding: .default)
     let params = [
       "notification_token": token,
       "device": "2" // iOS : device = 2
@@ -445,7 +441,7 @@ class APIs {
   }
   
     static func changePassword( _ para : [String: Any], completion: @escaping ((_ successful: Bool, _ message: String?, _ model: ChangePasswordModel?) -> Void)) {
-        let request = RESTRequest(functionName: RESTConstants.configs[RESTConstants.CHANGE_PASSWORD] ?? ""
+        let request = RESTRequest(functionName: RESTConstants.ServicesConfigs[RESTConstants.CHANGE_PASSWORD] ?? ""
             , method: .post, encoding: .default)
         request.setParameters(para)
         if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
@@ -479,7 +475,7 @@ class APIs {
     
     
   static func checkToken( completion: @escaping ((_ isValid: Bool, _ message: String?) -> Void)) {
-        let uri = String.init(format: RESTConstants.configs[RESTConstants.CHECK_TOKEN] ?? "")
+        let uri = String.init(format: RESTConstants.ServicesConfigs[RESTConstants.CHECK_TOKEN] ?? "")
         let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
         if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
             request.setAuthorization(token)
@@ -508,7 +504,7 @@ class APIs {
    }
     
     static func logout(completion: @escaping ((_ isValid: Bool, _ message: String?) -> Void)) {
-        let uri = String.init(format: RESTConstants.configs[RESTConstants.LOGOUT] ?? "")
+        let uri = String.init(format: RESTConstants.ServicesConfigs[RESTConstants.LOGOUT] ?? "")
         let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
         if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
             request.setAuthorization(token)
@@ -541,7 +537,7 @@ class APIs {
     }
     
     static func resolveAlert(_ alertID: String, _ content: String , _ onCompletion:((Bool, Any)->Void)? = nil, onError:((RESTError)->Void)? = nil) {
-        let uri = String.init(format: RESTConstants.configs[RESTConstants.RESOLVE_ALERT] ?? "", alertID)
+        let uri = String.init(format: RESTConstants.ServicesConfigs[RESTConstants.RESOLVE_ALERT] ?? "", alertID)
         let request = RESTRequest(functionName: uri, method: .put, encoding: .default)
         let params = ["comment": content]
         request.setParameters(params)
@@ -565,7 +561,7 @@ class APIs {
     }
     
     static func getListAlertMessage(_ onCompletion:((Bool, Any?) -> Void)? = nil, _ onError:((RESTError)->Void)? = nil) {
-        let uri = String.init(format: RESTConstants.configs[RESTConstants.GET_ALERT_DETAIL] ?? "")
+        let uri = String.init(format: RESTConstants.ServicesConfigs[RESTConstants.GET_ALERT_DETAIL] ?? "")
         let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
         if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
             request.setAuthorization(token)

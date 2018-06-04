@@ -40,10 +40,6 @@
 		0A465EAD20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EAB20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.swift */; };
 		0A465EAE20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465EAC20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib */; };
 		0A465EB020A3FEDF009BFE69 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EAF20A3FEDF009BFE69 /* BaseTableViewCell.swift */; };
-		0A465EB320A3FF9E009BFE69 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EB220A3FF9E009BFE69 /* DataManager.swift */; };
-		0A465EB420A401D7009BFE69 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EB220A3FF9E009BFE69 /* DataManager.swift */; };
-		0A465EB520A401D7009BFE69 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EB220A3FF9E009BFE69 /* DataManager.swift */; };
-		0A465EB620A401D7009BFE69 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EB220A3FF9E009BFE69 /* DataManager.swift */; };
 		0A465EB720A404CC009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465EAC20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib */; };
 		0A465EB820A404CD009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465EAC20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib */; };
 		0A465EB920A404CD009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465EAC20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib */; };
@@ -70,6 +66,16 @@
 		0A7FB464209180DF00F5058D /* LogoutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8BA722085E3C5001321D1 /* LogoutTableViewCell.xib */; };
 		0A7FB46820918B9900F5058D /* Assets.xcassets.Talron.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A7FB46720918B9900F5058D /* Assets.xcassets.Talron.xcassets */; };
 		0A7FB46A20918C4000F5058D /* Assets.xcassets.Malee.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A7FB46920918C4000F5058D /* Assets.xcassets.Malee.xcassets */; };
+		0AA44BE520B3F9C900A95147 /* ItemsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA44BE420B3F9C900A95147 /* ItemsSectionView.swift */; };
+		0AA44BE720B3F9DB00A95147 /* ItemsSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA44BE620B3F9DB00A95147 /* ItemsSectionView.xib */; };
+		0AA44BE820B3FB7F00A95147 /* ItemsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA44BE420B3F9C900A95147 /* ItemsSectionView.swift */; };
+		0AA44BE920B3FB7F00A95147 /* ItemsSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA44BE620B3F9DB00A95147 /* ItemsSectionView.xib */; };
+		0AA44BEA20B3FB7F00A95147 /* ItemsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA44BE420B3F9C900A95147 /* ItemsSectionView.swift */; };
+		0AA44BEB20B3FB7F00A95147 /* ItemsSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA44BE620B3F9DB00A95147 /* ItemsSectionView.xib */; };
+		0AA44BEC20B3FB7F00A95147 /* ItemsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA44BE420B3F9C900A95147 /* ItemsSectionView.swift */; };
+		0AA44BED20B3FB7F00A95147 /* ItemsSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA44BE620B3F9DB00A95147 /* ItemsSectionView.xib */; };
+		0AA44BEE20B3FB8000A95147 /* ItemsSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AA44BE420B3F9C900A95147 /* ItemsSectionView.swift */; };
+		0AA44BEF20B3FB8000A95147 /* ItemsSectionView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AA44BE620B3F9DB00A95147 /* ItemsSectionView.xib */; };
 		0AB690BA20A0099E0041E529 /* OrderPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A450205A202F00CA9DB8 /* OrderPictureViewController.swift */; };
 		0AB690BB20A0099E0041E529 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A44A205A200700CA9DB8 /* OrderDetailViewController.swift */; };
 		0AB690BC20A0099E0041E529 /* OrderDetailMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DCDCD52068E2FD00D3313F /* OrderDetailMapTableViewCell.swift */; };
@@ -143,11 +149,9 @@
 		0AB6910220A0099E0041E529 /* SignatureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ACCE8E3205BB31600A1532D /* SignatureView.xib */; };
 		0AB6910320A0099E0041E529 /* LogoutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8BA722085E3C5001321D1 /* LogoutTableViewCell.xib */; };
 		0AB6910520A0099E0041E529 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4820590AD4003F8E6F /* LaunchScreen.storyboard */; };
-		0AB6910620A0099E0041E529 /* configs_masof.plist in Resources */ = {isa = PBXBuildFile; fileRef = 248F208F2069E2CA00E6902D /* configs_masof.plist */; };
 		0AB6910720A0099E0041E529 /* LeftMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8BA6A2085D82B001321D1 /* LeftMenuView.xib */; };
 		0AB6910820A0099E0041E529 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4320590AD4003F8E6F /* Main.storyboard */; };
 		0AB6911C20A03DEC0041E529 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4620590AD4003F8E6F /* Assets.xcassets */; };
-		0AB6911E20A042710041E529 /* configs_dms.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6911D20A042710041E529 /* configs_dms.plist */; };
 		0AB6912120A154280041E529 /* UIButtonDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912020A154280041E529 /* UIButtonDesignable.swift */; };
 		0AB6912420A156CA0041E529 /* MainConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6912320A156CA0041E529 /* MainConfigs.plist */; };
 		0AB6912620A156ED0041E529 /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912520A156ED0041E529 /* Configs.swift */; };
@@ -160,6 +164,115 @@
 		0AB6912D20A161980041E529 /* UIButtonDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912020A154280041E529 /* UIButtonDesignable.swift */; };
 		0AB6912E20A161990041E529 /* UIButtonDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912020A154280041E529 /* UIButtonDesignable.swift */; };
 		0AB6912F20A161990041E529 /* UIButtonDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912020A154280041E529 /* UIButtonDesignable.swift */; };
+		0ACCCB8F20AE7C5C006B4F6E /* ServicesConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ACCCB8E20AE7C5C006B4F6E /* ServicesConfigs.plist */; };
+		0ACCCB9020AE7C60006B4F6E /* ServicesConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ACCCB8E20AE7C5C006B4F6E /* ServicesConfigs.plist */; };
+		0ACCCB9120AE7C60006B4F6E /* ServicesConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ACCCB8E20AE7C5C006B4F6E /* ServicesConfigs.plist */; };
+		0ACCCB9220AE7C60006B4F6E /* ServicesConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ACCCB8E20AE7C5C006B4F6E /* ServicesConfigs.plist */; };
+		0ACCCBA320AE7EEA006B4F6E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCCBA220AE7EEA006B4F6E /* DataManager.swift */; };
+		0ACCCBA420AE7EEA006B4F6E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCCBA220AE7EEA006B4F6E /* DataManager.swift */; };
+		0ACCCBA520AE7EEA006B4F6E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCCBA220AE7EEA006B4F6E /* DataManager.swift */; };
+		0ACCCBA620AE7EEA006B4F6E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCCBA220AE7EEA006B4F6E /* DataManager.swift */; };
+		0ADAF3DF20B3B95A00A88E14 /* OrderPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A450205A202F00CA9DB8 /* OrderPictureViewController.swift */; };
+		0ADAF3E020B3B95A00A88E14 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A44A205A200700CA9DB8 /* OrderDetailViewController.swift */; };
+		0ADAF3E120B3B95A00A88E14 /* OrderDetailMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DCDCD52068E2FD00D3313F /* OrderDetailMapTableViewCell.swift */; };
+		0ADAF3E220B3B95A00A88E14 /* OrderSignatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A44C205A201A00CA9DB8 /* OrderSignatureViewController.swift */; };
+		0ADAF3E320B3B95A00A88E14 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9D20591D0400A1D944 /* UIViewController.swift */; };
+		0ADAF3E420B3B95A00A88E14 /* UIButtonDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912020A154280041E529 /* UIButtonDesignable.swift */; };
+		0ADAF3E520B3B95A00A88E14 /* ChangePasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EC520A43174009BFE69 /* ChangePasswordModel.swift */; };
+		0ADAF3E620B3B95A00A88E14 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9C20591D0400A1D944 /* UIView.swift */; };
+		0ADAF3E720B3B95A00A88E14 /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACCE8D8205BA94A00A1532D /* NoteTableViewCell.swift */; };
+		0ADAF3E820B3B95A00A88E14 /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACCE8E5205BC16300A1532D /* UIImage.swift */; };
+		0ADAF3E920B3B95A00A88E14 /* OrderDetailMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACCE8D6205BA46800A1532D /* OrderDetailMapViewController.swift */; };
+		0ADAF3EA20B3B95A00A88E14 /* UIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9720591D0400A1D944 /* UIImageView.swift */; };
+		0ADAF3EB20B3B95A00A88E14 /* OrderDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACCE8DA205BAD2800A1532D /* OrderDetailTableViewCell.swift */; };
+		0ADAF3EC20B3B95A00A88E14 /* OrderMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACCE8CE205B585900A1532D /* OrderMarker.swift */; };
+		0ADAF3ED20B3B95A00A88E14 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A45A205A5E3600CA9DB8 /* Order.swift */; };
+		0ADAF3EE20B3B95A00A88E14 /* UITextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9B20591D0400A1D944 /* UITextView.swift */; };
+		0ADAF3EF20B3B95A00A88E14 /* OrderItemsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D38768206350ED00BE51D9 /* OrderItemsTableViewCell.swift */; };
+		0ADAF3F020B3B95A00A88E14 /* MessageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245BBAA12073616D00EE3E47 /* MessageAPI.swift */; };
+		0ADAF3F120B3B95A00A88E14 /* PackageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242DC4BB207779FC0047F19C /* PackageTableViewCell.swift */; };
+		0ADAF3F220B3B95A00A88E14 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACCE8D0205B689000A1532D /* Array.swift */; };
+		0ADAF3F320B3B95A00A88E14 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EA120A3EDFB009BFE69 /* ChangePasswordView.swift */; };
+		0ADAF3F420B3B95A00A88E14 /* ChangeInviromentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EAB20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.swift */; };
+		0ADAF3F520B3B95A00A88E14 /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912520A156ED0041E529 /* Configs.swift */; };
+		0ADAF3F620B3B95A00A88E14 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CBA2059277D00A1D944 /* BaseViewController.swift */; };
+		0ADAF3F720B3B95A00A88E14 /* Reason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3319720623C25001FAC49 /* Reason.swift */; };
+		0ADAF3F820B3B95A00A88E14 /* PickupPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A45E205A619300CA9DB8 /* PickupPlace.swift */; };
+		0ADAF3F920B3B95A00A88E14 /* OrderScanItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D3876A2063511F00BE51D9 /* OrderScanItemTableViewCell.swift */; };
+		0ADAF3FA20B3B95A00A88E14 /* RESTConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C0205A038900F34351 /* RESTConstants.swift */; };
+		0ADAF3FB20B3B95A00A88E14 /* RESTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C1205A038900F34351 /* RESTError.swift */; };
+		0ADAF3FC20B3B95A00A88E14 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCCBA220AE7EEA006B4F6E /* DataManager.swift */; };
+		0ADAF3FD20B3B95A00A88E14 /* OrderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C9205A04EE00F34351 /* OrderListViewController.swift */; };
+		0ADAF3FE20B3B95A00A88E14 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CB520591E4100A1D944 /* Cache.swift */; };
+		0ADAF3FF20B3B95A00A88E14 /* LogoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8BA712085E3C5001321D1 /* LogoutTableViewCell.swift */; };
+		0ADAF40020B3B95A00A88E14 /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9420591D0400A1D944 /* UIButton.swift */; };
+		0ADAF40120B3B95A00A88E14 /* ReasonListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3319520623B5A001FAC49 /* ReasonListViewController.swift */; };
+		0ADAF40220B3B95A00A88E14 /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9620591D0400A1D944 /* UIColor.swift */; };
+		0ADAF40320B3B95A00A88E14 /* PictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B331932061FA66001FAC49 /* PictureTableViewCell.swift */; };
+		0ADAF40420B3B95A00A88E14 /* LeftMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8BA682085D820001321D1 /* LeftMenuView.swift */; };
+		0ADAF40520B3B95A00A88E14 /* ResultsRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A360D5420AAD50C0015A64B /* ResultsRequestModel.swift */; };
+		0ADAF40620B3B95A00A88E14 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9CD205A197800F34351 /* Date.swift */; };
+		0ADAF40720B3B95A00A88E14 /* OrderDetailContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A448205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift */; };
+		0ADAF40820B3B95A00A88E14 /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEBA57520AA9E480053F2BF /* AlertMessageView.swift */; };
+		0ADAF40920B3B95A00A88E14 /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A457205A5A0F00CA9DB8 /* APIs.swift */; };
+		0ADAF40A20B3B95A00A88E14 /* HCSStarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CB020591D9600A1D944 /* HCSStarRatingView.m */; };
+		0ADAF40B20B3B95A00A88E14 /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A460205A86B500CA9DB8 /* MapsViewController.swift */; };
+		0ADAF40C20B3B95A00A88E14 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9A20591D0400A1D944 /* UITextField.swift */; };
+		0ADAF40D20B3B95A00A88E14 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA4CA5420590B31003F8E6F /* LoginViewController.swift */; };
+		0ADAF40E20B3B95A00A88E14 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DCDCD32068DD8200D3313F /* LocationManager.swift */; };
+		0ADAF40F20B3B95A00A88E14 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CAC20591D9000A1D944 /* Reachability.swift */; };
+		0ADAF41020B3B95A00A88E14 /* OrderDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A453205A223200CA9DB8 /* OrderDetailCollectionViewCell.swift */; };
+		0ADAF41120B3B95A00A88E14 /* UILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9820591D0400A1D944 /* UILabel.swift */; };
+		0ADAF41220B3B95A00A88E14 /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EAF20A3FEDF009BFE69 /* BaseTableViewCell.swift */; };
+		0ADAF41320B3B95A00A88E14 /* OrderItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9CB205A148F00F34351 /* OrderItemTableViewCell.swift */; };
+		0ADAF41420B3B95A00A88E14 /* ScanBarCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D387702063674100BE51D9 /* ScanBarCodeViewController.swift */; };
+		0ADAF41520B3B95A00A88E14 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B96CEA206B9CC9000FD6CD /* Theme.swift */; };
+		0ADAF41620B3B95A00A88E14 /* RESTRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C2205A038900F34351 /* RESTRequest.swift */; };
+		0ADAF41720B3B95A00A88E14 /* UITableView-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9920591D0400A1D944 /* UITableView-Extensions.swift */; };
+		0ADAF41820B3B95A00A88E14 /* ForgetPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A27215920A597B1009E527F /* ForgetPasswordView.swift */; };
+		0ADAF41920B3B95A00A88E14 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5AA4CA3F20590AD4003F8E6F /* AppDelegate.swift */; };
+		0ADAF41A20B3B95A00A88E14 /* PackagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 242DC4B8207775F50047F19C /* PackagesViewController.swift */; };
+		0ADAF41B20B3B95A00A88E14 /* ChangePasswordTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465E9520A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift */; };
+		0ADAF41C20B3B95A00A88E14 /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9320591D0400A1D944 /* String.swift */; };
+		0ADAF41D20B3B95A00A88E14 /* GoogleDirectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 248F20912069F16300E6902D /* GoogleDirectionResponse.swift */; };
+		0ADAF41E20B3B95A00A88E14 /* SignatureView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACCE8E1205BB30C00A1532D /* SignatureView.swift */; };
+		0ADAF41F20B3B95A00A88E14 /* UICollectionView-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9520591D0400A1D944 /* UICollectionView-Extensions.swift */; };
+		0ADAF42020B3B95A00A88E14 /* RESTResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C3205A038900F34351 /* RESTResponse.swift */; };
+		0ADAF42120B3B95A00A88E14 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACCE8D2205B761E00A1532D /* Note.swift */; };
+		0ADAF42220B3B95A00A88E14 /* OrderNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A44E205A202400CA9DB8 /* OrderNotesViewController.swift */; };
+		0ADAF42320B3B95A00A88E14 /* NSString+SDString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9220591D0400A1D944 /* NSString+SDString.m */; };
+		0ADAF42420B3B95A00A88E14 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A45C205A5ECE00CA9DB8 /* Route.swift */; };
+		0ADAF42520B3B95A00A88E14 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CB620591E4100A1D944 /* Constants.swift */; };
+		0ADAF42620B3B95A00A88E14 /* RouteMessageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FA3532071EBA600C5E707 /* RouteMessageTableViewCell.swift */; };
+		0ADAF42720B3B95A00A88E14 /* CheckTokenModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EC020A427C3009BFE69 /* CheckTokenModel.swift */; };
+		0ADAF42820B3B95A00A88E14 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 245BBAA3207363EC00EE3E47 /* Message.swift */; };
+		0ADAF42920B3B95A00A88E14 /* OrderItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D3876C2063513600BE51D9 /* OrderItem.swift */; };
+		0ADAF42A20B3B95A00A88E14 /* AlertDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEBA56F20AA89C90053F2BF /* AlertDetailModel.swift */; };
+		0ADAF42B20B3B95A00A88E14 /* RouteMessagesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 246FA3512071EB7300C5E707 /* RouteMessagesViewController.swift */; };
+		0ADAF42C20B3B95A00A88E14 /* BaseView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8BA6E2085D99D001321D1 /* BaseView.swift */; };
+		0ADAF42E20B3B95A00A88E14 /* Pods_SRSDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B660F041976D0FC4B84CB8F1 /* Pods_SRSDriver.framework */; };
+		0ADAF43020B3B95A00A88E14 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 0A66244820A94B5700FEA932 /* Localizable.strings */; };
+		0ADAF43120B3B95A00A88E14 /* OrderScanItemTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 24D3876E2063625B00BE51D9 /* OrderScanItemTableViewCell.xib */; };
+		0ADAF43220B3B95A00A88E14 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A360D5D20AADC2F0015A64B /* Info.plist */; };
+		0ADAF43320B3B95A00A88E14 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 5A499CB120591D9600A1D944 /* Info.plist */; };
+		0ADAF43420B3B95A00A88E14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4620590AD4003F8E6F /* Assets.xcassets */; };
+		0ADAF43520B3B95A00A88E14 /* ChangePasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465EA320A3EE03009BFE69 /* ChangePasswordView.xib */; };
+		0ADAF43720B3B95A00A88E14 /* SignatureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ACCE8E3205BB31600A1532D /* SignatureView.xib */; };
+		0ADAF43820B3B95A00A88E14 /* MainConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6912320A156CA0041E529 /* MainConfigs.plist */; };
+		0ADAF43920B3B95A00A88E14 /* LogoutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8BA722085E3C5001321D1 /* LogoutTableViewCell.xib */; };
+		0ADAF43A20B3B95A00A88E14 /* ChangeInviromentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465EAC20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib */; };
+		0ADAF43B20B3B95A00A88E14 /* AlertMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AEBA57720AA9E530053F2BF /* AlertMessageView.xib */; };
+		0ADAF43C20B3B95A00A88E14 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4820590AD4003F8E6F /* LaunchScreen.storyboard */; };
+		0ADAF43D20B3B95A00A88E14 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A6623F420A948A600FEA932 /* GoogleService-Info.plist */; };
+		0ADAF43E20B3B95A00A88E14 /* ServicesConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ACCCB8E20AE7C5C006B4F6E /* ServicesConfigs.plist */; };
+		0ADAF43F20B3B95A00A88E14 /* ForgetPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A27215B20A597C1009E527F /* ForgetPasswordView.xib */; };
+		0ADAF44020B3B95A00A88E14 /* LeftMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8BA6A2085D82B001321D1 /* LeftMenuView.xib */; };
+		0ADAF44120B3B95A00A88E14 /* ChangePasswordTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465E9620A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib */; };
+		0ADAF44220B3B95A00A88E14 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4320590AD4003F8E6F /* Main.storyboard */; };
+		0ADAF44E20B3BD1500A88E14 /* MainConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ADAF44C20B3BD1500A88E14 /* MainConfigs.plist */; };
+		0ADAF44F20B3BD1500A88E14 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ADAF44D20B3BD1500A88E14 /* Info.plist */; };
+		0ADAF45120B3BD7700A88E14 /* MainConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ADAF45020B3BD7700A88E14 /* MainConfigs.plist */; };
+		0ADAF45320B3BDC500A88E14 /* MainConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ADAF45220B3BDC500A88E14 /* MainConfigs.plist */; };
 		0AE327A6208DC84C00EF1F4C /* OrderPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A450205A202F00CA9DB8 /* OrderPictureViewController.swift */; };
 		0AE327A7208DC84C00EF1F4C /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A44A205A200700CA9DB8 /* OrderDetailViewController.swift */; };
 		0AE327A8208DC84C00EF1F4C /* OrderDetailMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DCDCD52068E2FD00D3313F /* OrderDetailMapTableViewCell.swift */; };
@@ -404,7 +517,6 @@
 		0A465EAB20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangeInviromentTableViewCell.swift; sourceTree = "<group>"; };
 		0A465EAC20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChangeInviromentTableViewCell.xib; sourceTree = "<group>"; };
 		0A465EAF20A3FEDF009BFE69 /* BaseTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
-		0A465EB220A3FF9E009BFE69 /* DataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		0A465EC020A427C3009BFE69 /* CheckTokenModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckTokenModel.swift; sourceTree = "<group>"; };
 		0A465EC520A43174009BFE69 /* ChangePasswordModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChangePasswordModel.swift; sourceTree = "<group>"; };
 		0A6623F420A948A600FEA932 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -415,12 +527,20 @@
 		0A7FB46520918A9800F5058D /* Assets.xcassets.Masof.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets.Masof.xcassets; sourceTree = "<group>"; };
 		0A7FB46720918B9900F5058D /* Assets.xcassets.Talron.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets.Talron.xcassets; sourceTree = "<group>"; };
 		0A7FB46920918C4000F5058D /* Assets.xcassets.Malee.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets.Malee.xcassets; sourceTree = "<group>"; };
+		0AA44BE420B3F9C900A95147 /* ItemsSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemsSectionView.swift; sourceTree = "<group>"; };
+		0AA44BE620B3F9DB00A95147 /* ItemsSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemsSectionView.xib; sourceTree = "<group>"; };
 		0AB6910F20A0099E0041E529 /* DMSDriver_Masof.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMSDriver_Masof.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AB6911020A0099E0041E529 /* DMSDriver_Masof.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = DMSDriver_Masof.plist; path = "/Users/mrj/Desktop/SeldatInc/SRS/git-project/ios/DMSDriver_Masof.plist"; sourceTree = "<absolute>"; };
-		0AB6911D20A042710041E529 /* configs_dms.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = configs_dms.plist; sourceTree = "<group>"; };
 		0AB6912020A154280041E529 /* UIButtonDesignable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonDesignable.swift; sourceTree = "<group>"; };
 		0AB6912320A156CA0041E529 /* MainConfigs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MainConfigs.plist; sourceTree = "<group>"; };
 		0AB6912520A156ED0041E529 /* Configs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configs.swift; sourceTree = "<group>"; };
+		0ACCCB8E20AE7C5C006B4F6E /* ServicesConfigs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ServicesConfigs.plist; sourceTree = "<group>"; };
+		0ACCCBA220AE7EEA006B4F6E /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
+		0ADAF44820B3B95A00A88E14 /* DMSDriver_ Taavura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DMSDriver_ Taavura.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0ADAF44C20B3BD1500A88E14 /* MainConfigs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MainConfigs.plist; sourceTree = "<group>"; };
+		0ADAF44D20B3BD1500A88E14 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0ADAF45020B3BD7700A88E14 /* MainConfigs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MainConfigs.plist; sourceTree = "<group>"; };
+		0ADAF45220B3BDC500A88E14 /* MainConfigs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MainConfigs.plist; sourceTree = "<group>"; };
 		0AE327F8208DC84C00EF1F4C /* DMSDriver_Talron.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMSDriver_Talron.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AE327F9208DC84D00EF1F4C /* DMSDriver_Talron.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = DMSDriver_Talron.plist; path = "/Users/mrj/Desktop/SeldatInc/SRS/git-project/ios/DMSDriver_Talron.plist"; sourceTree = "<absolute>"; };
 		0AE327FA208DC94700EF1F4C /* configs_talron.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = configs_talron.plist; sourceTree = "<group>"; };
@@ -440,7 +560,6 @@
 		24677EEF20732D8C00C41E4F /* SRSDriver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = SRSDriver.entitlements; sourceTree = "<group>"; };
 		246FA3512071EB7300C5E707 /* RouteMessagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMessagesViewController.swift; sourceTree = "<group>"; };
 		246FA3532071EBA600C5E707 /* RouteMessageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteMessageTableViewCell.swift; sourceTree = "<group>"; };
-		248F208F2069E2CA00E6902D /* configs_masof.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = configs_masof.plist; sourceTree = "<group>"; };
 		248F20912069F16300E6902D /* GoogleDirectionResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleDirectionResponse.swift; sourceTree = "<group>"; };
 		2494A9762074926A005A2622 /* DMSDriver_Malee.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMSDriver_Malee.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2494A97A2074AD41005A2622 /* configs_malee.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = configs_malee.plist; sourceTree = "<group>"; };
@@ -523,6 +642,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0ADAF42D20B3B95A00A88E14 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0ADAF42E20B3B95A00A88E14 /* Pods_SRSDriver.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0AE327E6208DC84C00EF1F4C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -582,7 +709,8 @@
 		0A465EB120A3FF86009BFE69 /* GlobalServices */ = {
 			isa = PBXGroup;
 			children = (
-				0A465EB220A3FF9E009BFE69 /* DataManager.swift */,
+				0ACCCBA220AE7EEA006B4F6E /* DataManager.swift */,
+				0ACCCB8E20AE7C5C006B4F6E /* ServicesConfigs.plist */,
 			);
 			path = GlobalServices;
 			sourceTree = "<group>";
@@ -590,9 +718,9 @@
 		0A6623F320A9486700FEA932 /* DMSDriver_Core */ = {
 			isa = PBXGroup;
 			children = (
-				0A360D5D20AADC2F0015A64B /* Info.plist */,
-				0AB6911D20A042710041E529 /* configs_dms.plist */,
 				0A6623F420A948A600FEA932 /* GoogleService-Info.plist */,
+				0A360D5D20AADC2F0015A64B /* Info.plist */,
+				0ADAF45020B3BD7700A88E14 /* MainConfigs.plist */,
 				0A66244720A94B5700FEA932 /* Localize */,
 			);
 			path = DMSDriver_Core;
@@ -601,9 +729,9 @@
 		0A6623F620A948C600FEA932 /* DMSDriver_Masof */ = {
 			isa = PBXGroup;
 			children = (
-				0A360D5F20AADC3D0015A64B /* Info.plist */,
-				248F208F2069E2CA00E6902D /* configs_masof.plist */,
 				24677EED2073231200C41E4F /* GoogleService-Info.plist */,
+				0A360D5F20AADC3D0015A64B /* Info.plist */,
+				0ADAF45220B3BDC500A88E14 /* MainConfigs.plist */,
 				0A66244F20A94B6F00FEA932 /* Localize */,
 			);
 			path = DMSDriver_Masof;
@@ -625,6 +753,15 @@
 			path = Localize;
 			sourceTree = "<group>";
 		};
+		0AA44BE320B3F9B000A95147 /* SectionView */ = {
+			isa = PBXGroup;
+			children = (
+				0AA44BE420B3F9C900A95147 /* ItemsSectionView.swift */,
+				0AA44BE620B3F9DB00A95147 /* ItemsSectionView.xib */,
+			);
+			path = SectionView;
+			sourceTree = "<group>";
+		};
 		0AB6911F20A153F60041E529 /* Designables */ = {
 			isa = PBXGroup;
 			children = (
@@ -640,6 +777,15 @@
 				0AB6912520A156ED0041E529 /* Configs.swift */,
 			);
 			path = Configs;
+			sourceTree = "<group>";
+		};
+		0ADAF44A20B3B9C200A88E14 /* DMSDriver_Taavura */ = {
+			isa = PBXGroup;
+			children = (
+				0ADAF44D20B3BD1500A88E14 /* Info.plist */,
+				0ADAF44C20B3BD1500A88E14 /* MainConfigs.plist */,
+			);
+			path = DMSDriver_Taavura;
 			sourceTree = "<group>";
 		};
 		0AEBA57420AA9E350053F2BF /* AlertMessageView */ = {
@@ -687,6 +833,7 @@
 			children = (
 				0A6623F320A9486700FEA932 /* DMSDriver_Core */,
 				0A6623F620A948C600FEA932 /* DMSDriver_Masof */,
+				0ADAF44A20B3B9C200A88E14 /* DMSDriver_Taavura */,
 			);
 			path = "Supporting Files";
 			sourceTree = "<group>";
@@ -758,6 +905,7 @@
 		5A68A447205A1FD500CA9DB8 /* OrderDetails */ = {
 			isa = PBXGroup;
 			children = (
+				0AA44BE320B3F9B000A95147 /* SectionView */,
 				5A68A448205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift */,
 				5A68A44A205A200700CA9DB8 /* OrderDetailViewController.swift */,
 				5A68A44C205A201A00CA9DB8 /* OrderSignatureViewController.swift */,
@@ -846,6 +994,7 @@
 				2494A9762074926A005A2622 /* DMSDriver_Malee.app */,
 				0AE327F8208DC84C00EF1F4C /* DMSDriver_Talron.app */,
 				0AB6910F20A0099E0041E529 /* DMSDriver_Masof.app */,
+				0ADAF44820B3B95A00A88E14 /* DMSDriver_ Taavura.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -953,6 +1102,26 @@
 			productReference = 0AB6910F20A0099E0041E529 /* DMSDriver_Masof.app */;
 			productType = "com.apple.product-type.application";
 		};
+		0ADAF3DC20B3B95A00A88E14 /* DMSDriver_ Taavura */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0ADAF44520B3B95A00A88E14 /* Build configuration list for PBXNativeTarget "DMSDriver_ Taavura" */;
+			buildPhases = (
+				0ADAF3DD20B3B95A00A88E14 /* [CP] Check Pods Manifest.lock */,
+				0ADAF3DE20B3B95A00A88E14 /* Sources */,
+				0ADAF42D20B3B95A00A88E14 /* Frameworks */,
+				0ADAF42F20B3B95A00A88E14 /* Resources */,
+				0ADAF44320B3B95A00A88E14 /* [CP] Embed Pods Frameworks */,
+				0ADAF44420B3B95A00A88E14 /* [CP] Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "DMSDriver_ Taavura";
+			productName = SRSDriver;
+			productReference = 0ADAF44820B3B95A00A88E14 /* DMSDriver_ Taavura.app */;
+			productType = "com.apple.product-type.application";
+		};
 		0AE327A3208DC84C00EF1F4C /* DMSDriver_Talron */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0AE327F5208DC84C00EF1F4C /* Build configuration list for PBXNativeTarget "DMSDriver_Talron" */;
@@ -1026,6 +1195,9 @@
 					0AB690B720A0099E0041E529 = {
 						ProvisioningStyle = Automatic;
 					};
+					0ADAF3DC20B3B95A00A88E14 = {
+						ProvisioningStyle = Automatic;
+					};
 					0AE327A3208DC84C00EF1F4C = {
 						ProvisioningStyle = Manual;
 					};
@@ -1064,6 +1236,7 @@
 				2494A9262074926A005A2622 /* DMSDriver_Malee */,
 				0AE327A3208DC84C00EF1F4C /* DMSDriver_Talron */,
 				0AB690B720A0099E0041E529 /* DMSDriver_Masof */,
+				0ADAF3DC20B3B95A00A88E14 /* DMSDriver_ Taavura */,
 			);
 		};
 /* End PBXProject section */
@@ -1076,6 +1249,7 @@
 				0AB690FE20A0099E0041E529 /* OrderScanItemTableViewCell.xib in Resources */,
 				0AB690FF20A0099E0041E529 /* Assets.xcassets.Masof.xcassets in Resources */,
 				0A360D6020AADC3E0015A64B /* Info.plist in Resources */,
+				0AA44BED20B3FB7F00A95147 /* ItemsSectionView.xib in Resources */,
 				0AB6910020A0099E0041E529 /* GoogleService-Info.plist in Resources */,
 				0A465EAA20A3EE1A009BFE69 /* ChangePasswordView.xib in Resources */,
 				0AB6910120A0099E0041E529 /* Info.plist in Resources */,
@@ -1085,12 +1259,41 @@
 				0AB6910520A0099E0041E529 /* LaunchScreen.storyboard in Resources */,
 				0A465EB820A404CD009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
 				0AEBA57E20AA9E800053F2BF /* AlertMessageView.xib in Resources */,
-				0AB6910620A0099E0041E529 /* configs_masof.plist in Resources */,
 				0A66245320A94B6F00FEA932 /* Localizable.strings in Resources */,
+				0ACCCB9220AE7C60006B4F6E /* ServicesConfigs.plist in Resources */,
 				0A27216220A599AC009E527F /* ForgetPasswordView.xib in Resources */,
 				0AB6910720A0099E0041E529 /* LeftMenuView.xib in Resources */,
+				0ADAF45320B3BDC500A88E14 /* MainConfigs.plist in Resources */,
 				0A465E9E20A3E850009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
 				0AB6910820A0099E0041E529 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		0ADAF42F20B3B95A00A88E14 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0ADAF44F20B3BD1500A88E14 /* Info.plist in Resources */,
+				0ADAF43020B3B95A00A88E14 /* Localizable.strings in Resources */,
+				0ADAF43120B3B95A00A88E14 /* OrderScanItemTableViewCell.xib in Resources */,
+				0ADAF43220B3B95A00A88E14 /* Info.plist in Resources */,
+				0ADAF43320B3B95A00A88E14 /* Info.plist in Resources */,
+				0ADAF43420B3B95A00A88E14 /* Assets.xcassets in Resources */,
+				0AA44BEF20B3FB8000A95147 /* ItemsSectionView.xib in Resources */,
+				0ADAF43520B3B95A00A88E14 /* ChangePasswordView.xib in Resources */,
+				0ADAF43720B3B95A00A88E14 /* SignatureView.xib in Resources */,
+				0ADAF44E20B3BD1500A88E14 /* MainConfigs.plist in Resources */,
+				0ADAF43820B3B95A00A88E14 /* MainConfigs.plist in Resources */,
+				0ADAF43920B3B95A00A88E14 /* LogoutTableViewCell.xib in Resources */,
+				0ADAF43A20B3B95A00A88E14 /* ChangeInviromentTableViewCell.xib in Resources */,
+				0ADAF43B20B3B95A00A88E14 /* AlertMessageView.xib in Resources */,
+				0ADAF43C20B3B95A00A88E14 /* LaunchScreen.storyboard in Resources */,
+				0ADAF43D20B3B95A00A88E14 /* GoogleService-Info.plist in Resources */,
+				0ADAF43E20B3B95A00A88E14 /* ServicesConfigs.plist in Resources */,
+				0ADAF43F20B3B95A00A88E14 /* ForgetPasswordView.xib in Resources */,
+				0ADAF44020B3B95A00A88E14 /* LeftMenuView.xib in Resources */,
+				0ADAF44120B3B95A00A88E14 /* ChangePasswordTableViewCell.xib in Resources */,
+				0ADAF44220B3B95A00A88E14 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1104,12 +1307,14 @@
 				0A465EA920A3EE1A009BFE69 /* ChangePasswordView.xib in Resources */,
 				0AE327EB208DC84C00EF1F4C /* Info.plist in Resources */,
 				0AE327EC208DC84C00EF1F4C /* SignatureView.xib in Resources */,
+				0AA44BEB20B3FB7F00A95147 /* ItemsSectionView.xib in Resources */,
 				0AB6912B20A15F0E0041E529 /* MainConfigs.plist in Resources */,
 				0AE327EE208DC84C00EF1F4C /* LaunchScreen.storyboard in Resources */,
 				0AE327F0208DC84C00EF1F4C /* Main.storyboard in Resources */,
 				0A465EB720A404CC009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
 				0A7FB46820918B9900F5058D /* Assets.xcassets.Talron.xcassets in Resources */,
 				0A27216120A599AC009E527F /* ForgetPasswordView.xib in Resources */,
+				0ACCCB9120AE7C60006B4F6E /* ServicesConfigs.plist in Resources */,
 				0AE327F1208DC84C00EF1F4C /* LeftMenuView.xib in Resources */,
 				0A465E9D20A3E850009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
 				0AE327FB208DC94700EF1F4C /* configs_talron.plist in Resources */,
@@ -1126,12 +1331,14 @@
 				0A465EA820A3EE19009BFE69 /* ChangePasswordView.xib in Resources */,
 				2494A96C2074926A005A2622 /* SignatureView.xib in Resources */,
 				0A7FB463209180DF00F5058D /* LogoutTableViewCell.xib in Resources */,
+				0AA44BE920B3FB7F00A95147 /* ItemsSectionView.xib in Resources */,
 				0AB6912A20A15F0E0041E529 /* MainConfigs.plist in Resources */,
 				2494A96E2074926A005A2622 /* LaunchScreen.storyboard in Resources */,
 				2494A9702074926A005A2622 /* Main.storyboard in Resources */,
 				0A465EB920A404CD009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
 				0A7FB46A20918C4000F5058D /* Assets.xcassets.Malee.xcassets in Resources */,
 				0A27216020A599AC009E527F /* ForgetPasswordView.xib in Resources */,
+				0ACCCB9020AE7C60006B4F6E /* ServicesConfigs.plist in Resources */,
 				0AF8BA6C2085D837001321D1 /* LeftMenuView.xib in Resources */,
 				0A465E9C20A3E84F009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
 				2494A97B2074AD41005A2622 /* configs_malee.plist in Resources */,
@@ -1145,10 +1352,10 @@
 				0A66244B20A94B5700FEA932 /* Localizable.strings in Resources */,
 				24D3876F2063625B00BE51D9 /* OrderScanItemTableViewCell.xib in Resources */,
 				0A360D5E20AADC300015A64B /* Info.plist in Resources */,
+				0AA44BE720B3F9DB00A95147 /* ItemsSectionView.xib in Resources */,
 				5A499CB320591D9600A1D944 /* Info.plist in Resources */,
 				0AB6911C20A03DEC0041E529 /* Assets.xcassets in Resources */,
 				0A465EA420A3EE03009BFE69 /* ChangePasswordView.xib in Resources */,
-				0AB6911E20A042710041E529 /* configs_dms.plist in Resources */,
 				5ACCE8E4205BB31600A1532D /* SignatureView.xib in Resources */,
 				0AB6912420A156CA0041E529 /* MainConfigs.plist in Resources */,
 				0AF8BA742085E3C5001321D1 /* LogoutTableViewCell.xib in Resources */,
@@ -1156,8 +1363,10 @@
 				0AEBA57820AA9E530053F2BF /* AlertMessageView.xib in Resources */,
 				5AA4CA4A20590AD4003F8E6F /* LaunchScreen.storyboard in Resources */,
 				0A6623F520A948A600FEA932 /* GoogleService-Info.plist in Resources */,
+				0ACCCB8F20AE7C5C006B4F6E /* ServicesConfigs.plist in Resources */,
 				0A27215C20A597C1009E527F /* ForgetPasswordView.xib in Resources */,
 				0AF8BA6B2085D82B001321D1 /* LeftMenuView.xib in Resources */,
+				0ADAF45120B3BD7700A88E14 /* MainConfigs.plist in Resources */,
 				0A465E9820A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
 				5AA4CA4520590AD4003F8E6F /* Main.storyboard in Resources */,
 			);
@@ -1243,6 +1452,82 @@
 			showEnvVarsInLog = 0;
 		};
 		0AB6910B20A0099E0041E529 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SRSDriver/Pods-SRSDriver-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SRSDriver/Pods-SRSDriver-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0ADAF3DD20B3B95A00A88E14 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-SRSDriver-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0ADAF44320B3B95A00A88E14 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-SRSDriver/Pods-SRSDriver-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/Realm/Realm.framework",
+				"${BUILT_PRODUCTS_DIR}/RealmSwift/RealmSwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/TLPhotoPicker/TLPhotoPicker.framework",
+				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Realm.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RealmSwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TLPhotoPicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SRSDriver/Pods-SRSDriver-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		0ADAF44420B3B95A00A88E14 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -1503,14 +1788,15 @@
 				0AB690CE20A0099E0041E529 /* PickupPlace.swift in Sources */,
 				0AB690CF20A0099E0041E529 /* OrderScanItemTableViewCell.swift in Sources */,
 				0AB690D020A0099E0041E529 /* RESTConstants.swift in Sources */,
+				0AA44BEC20B3FB7F00A95147 /* ItemsSectionView.swift in Sources */,
 				0AB690D120A0099E0041E529 /* RESTError.swift in Sources */,
 				0AB690D220A0099E0041E529 /* OrderListViewController.swift in Sources */,
 				0AB690D320A0099E0041E529 /* Cache.swift in Sources */,
+				0ACCCBA620AE7EEA006B4F6E /* DataManager.swift in Sources */,
 				0AB690D420A0099E0041E529 /* LogoutTableViewCell.swift in Sources */,
 				0AB690D520A0099E0041E529 /* UIButton.swift in Sources */,
 				0AB690D620A0099E0041E529 /* ReasonListViewController.swift in Sources */,
 				0AB690D720A0099E0041E529 /* UIColor.swift in Sources */,
-				0A465EB620A401D7009BFE69 /* DataManager.swift in Sources */,
 				0AB690D820A0099E0041E529 /* PictureTableViewCell.swift in Sources */,
 				0AB690D920A0099E0041E529 /* LeftMenuView.swift in Sources */,
 				0AB690DA20A0099E0041E529 /* Date.swift in Sources */,
@@ -1558,6 +1844,92 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		0ADAF3DE20B3B95A00A88E14 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0ADAF3DF20B3B95A00A88E14 /* OrderPictureViewController.swift in Sources */,
+				0ADAF3E020B3B95A00A88E14 /* OrderDetailViewController.swift in Sources */,
+				0ADAF3E120B3B95A00A88E14 /* OrderDetailMapTableViewCell.swift in Sources */,
+				0ADAF3E220B3B95A00A88E14 /* OrderSignatureViewController.swift in Sources */,
+				0ADAF3E320B3B95A00A88E14 /* UIViewController.swift in Sources */,
+				0ADAF3E420B3B95A00A88E14 /* UIButtonDesignable.swift in Sources */,
+				0ADAF3E520B3B95A00A88E14 /* ChangePasswordModel.swift in Sources */,
+				0ADAF3E620B3B95A00A88E14 /* UIView.swift in Sources */,
+				0ADAF3E720B3B95A00A88E14 /* NoteTableViewCell.swift in Sources */,
+				0ADAF3E820B3B95A00A88E14 /* UIImage.swift in Sources */,
+				0ADAF3E920B3B95A00A88E14 /* OrderDetailMapViewController.swift in Sources */,
+				0ADAF3EA20B3B95A00A88E14 /* UIImageView.swift in Sources */,
+				0ADAF3EB20B3B95A00A88E14 /* OrderDetailTableViewCell.swift in Sources */,
+				0ADAF3EC20B3B95A00A88E14 /* OrderMarker.swift in Sources */,
+				0ADAF3ED20B3B95A00A88E14 /* Order.swift in Sources */,
+				0ADAF3EE20B3B95A00A88E14 /* UITextView.swift in Sources */,
+				0ADAF3EF20B3B95A00A88E14 /* OrderItemsTableViewCell.swift in Sources */,
+				0ADAF3F020B3B95A00A88E14 /* MessageAPI.swift in Sources */,
+				0ADAF3F120B3B95A00A88E14 /* PackageTableViewCell.swift in Sources */,
+				0ADAF3F220B3B95A00A88E14 /* Array.swift in Sources */,
+				0ADAF3F320B3B95A00A88E14 /* ChangePasswordView.swift in Sources */,
+				0ADAF3F420B3B95A00A88E14 /* ChangeInviromentTableViewCell.swift in Sources */,
+				0ADAF3F520B3B95A00A88E14 /* Configs.swift in Sources */,
+				0ADAF3F620B3B95A00A88E14 /* BaseViewController.swift in Sources */,
+				0ADAF3F720B3B95A00A88E14 /* Reason.swift in Sources */,
+				0ADAF3F820B3B95A00A88E14 /* PickupPlace.swift in Sources */,
+				0AA44BEE20B3FB8000A95147 /* ItemsSectionView.swift in Sources */,
+				0ADAF3F920B3B95A00A88E14 /* OrderScanItemTableViewCell.swift in Sources */,
+				0ADAF3FA20B3B95A00A88E14 /* RESTConstants.swift in Sources */,
+				0ADAF3FB20B3B95A00A88E14 /* RESTError.swift in Sources */,
+				0ADAF3FC20B3B95A00A88E14 /* DataManager.swift in Sources */,
+				0ADAF3FD20B3B95A00A88E14 /* OrderListViewController.swift in Sources */,
+				0ADAF3FE20B3B95A00A88E14 /* Cache.swift in Sources */,
+				0ADAF3FF20B3B95A00A88E14 /* LogoutTableViewCell.swift in Sources */,
+				0ADAF40020B3B95A00A88E14 /* UIButton.swift in Sources */,
+				0ADAF40120B3B95A00A88E14 /* ReasonListViewController.swift in Sources */,
+				0ADAF40220B3B95A00A88E14 /* UIColor.swift in Sources */,
+				0ADAF40320B3B95A00A88E14 /* PictureTableViewCell.swift in Sources */,
+				0ADAF40420B3B95A00A88E14 /* LeftMenuView.swift in Sources */,
+				0ADAF40520B3B95A00A88E14 /* ResultsRequestModel.swift in Sources */,
+				0ADAF40620B3B95A00A88E14 /* Date.swift in Sources */,
+				0ADAF40720B3B95A00A88E14 /* OrderDetailContainerViewController.swift in Sources */,
+				0ADAF40820B3B95A00A88E14 /* AlertMessageView.swift in Sources */,
+				0ADAF40920B3B95A00A88E14 /* APIs.swift in Sources */,
+				0ADAF40A20B3B95A00A88E14 /* HCSStarRatingView.m in Sources */,
+				0ADAF40B20B3B95A00A88E14 /* MapsViewController.swift in Sources */,
+				0ADAF40C20B3B95A00A88E14 /* UITextField.swift in Sources */,
+				0ADAF40D20B3B95A00A88E14 /* LoginViewController.swift in Sources */,
+				0ADAF40E20B3B95A00A88E14 /* LocationManager.swift in Sources */,
+				0ADAF40F20B3B95A00A88E14 /* Reachability.swift in Sources */,
+				0ADAF41020B3B95A00A88E14 /* OrderDetailCollectionViewCell.swift in Sources */,
+				0ADAF41120B3B95A00A88E14 /* UILabel.swift in Sources */,
+				0ADAF41220B3B95A00A88E14 /* BaseTableViewCell.swift in Sources */,
+				0ADAF41320B3B95A00A88E14 /* OrderItemTableViewCell.swift in Sources */,
+				0ADAF41420B3B95A00A88E14 /* ScanBarCodeViewController.swift in Sources */,
+				0ADAF41520B3B95A00A88E14 /* Theme.swift in Sources */,
+				0ADAF41620B3B95A00A88E14 /* RESTRequest.swift in Sources */,
+				0ADAF41720B3B95A00A88E14 /* UITableView-Extensions.swift in Sources */,
+				0ADAF41820B3B95A00A88E14 /* ForgetPasswordView.swift in Sources */,
+				0ADAF41920B3B95A00A88E14 /* AppDelegate.swift in Sources */,
+				0ADAF41A20B3B95A00A88E14 /* PackagesViewController.swift in Sources */,
+				0ADAF41B20B3B95A00A88E14 /* ChangePasswordTableViewCell.swift in Sources */,
+				0ADAF41C20B3B95A00A88E14 /* String.swift in Sources */,
+				0ADAF41D20B3B95A00A88E14 /* GoogleDirectionResponse.swift in Sources */,
+				0ADAF41E20B3B95A00A88E14 /* SignatureView.swift in Sources */,
+				0ADAF41F20B3B95A00A88E14 /* UICollectionView-Extensions.swift in Sources */,
+				0ADAF42020B3B95A00A88E14 /* RESTResponse.swift in Sources */,
+				0ADAF42120B3B95A00A88E14 /* Note.swift in Sources */,
+				0ADAF42220B3B95A00A88E14 /* OrderNotesViewController.swift in Sources */,
+				0ADAF42320B3B95A00A88E14 /* NSString+SDString.m in Sources */,
+				0ADAF42420B3B95A00A88E14 /* Route.swift in Sources */,
+				0ADAF42520B3B95A00A88E14 /* Constants.swift in Sources */,
+				0ADAF42620B3B95A00A88E14 /* RouteMessageTableViewCell.swift in Sources */,
+				0ADAF42720B3B95A00A88E14 /* CheckTokenModel.swift in Sources */,
+				0ADAF42820B3B95A00A88E14 /* Message.swift in Sources */,
+				0ADAF42920B3B95A00A88E14 /* OrderItem.swift in Sources */,
+				0ADAF42A20B3B95A00A88E14 /* AlertDetailModel.swift in Sources */,
+				0ADAF42B20B3B95A00A88E14 /* RouteMessagesViewController.swift in Sources */,
+				0ADAF42C20B3B95A00A88E14 /* BaseView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		0AE327A5208DC84C00EF1F4C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1588,14 +1960,15 @@
 				0AE327BA208DC84C00EF1F4C /* PickupPlace.swift in Sources */,
 				0AE327BB208DC84C00EF1F4C /* OrderScanItemTableViewCell.swift in Sources */,
 				0AE327BC208DC84C00EF1F4C /* RESTConstants.swift in Sources */,
+				0AA44BEA20B3FB7F00A95147 /* ItemsSectionView.swift in Sources */,
 				0AE327BD208DC84C00EF1F4C /* RESTError.swift in Sources */,
 				0AE327BE208DC84C00EF1F4C /* OrderListViewController.swift in Sources */,
 				0AE327BF208DC84C00EF1F4C /* Cache.swift in Sources */,
+				0ACCCBA520AE7EEA006B4F6E /* DataManager.swift in Sources */,
 				0AE327C0208DC84C00EF1F4C /* UIButton.swift in Sources */,
 				0A7FB46220917EE800F5058D /* BaseView.swift in Sources */,
 				0AE327C1208DC84C00EF1F4C /* ReasonListViewController.swift in Sources */,
 				0AE327C2208DC84C00EF1F4C /* UIColor.swift in Sources */,
-				0A465EB520A401D7009BFE69 /* DataManager.swift in Sources */,
 				0AE327C3208DC84C00EF1F4C /* PictureTableViewCell.swift in Sources */,
 				0AE327C4208DC84C00EF1F4C /* LeftMenuView.swift in Sources */,
 				0AE327C5208DC84C00EF1F4C /* Date.swift in Sources */,
@@ -1673,14 +2046,15 @@
 				2494A93C2074926A005A2622 /* PickupPlace.swift in Sources */,
 				2494A93D2074926A005A2622 /* OrderScanItemTableViewCell.swift in Sources */,
 				2494A93E2074926A005A2622 /* RESTConstants.swift in Sources */,
+				0AA44BE820B3FB7F00A95147 /* ItemsSectionView.swift in Sources */,
 				2494A93F2074926A005A2622 /* RESTError.swift in Sources */,
 				2494A9402074926A005A2622 /* OrderListViewController.swift in Sources */,
 				2494A9412074926A005A2622 /* Cache.swift in Sources */,
+				0ACCCBA420AE7EEA006B4F6E /* DataManager.swift in Sources */,
 				2494A9422074926A005A2622 /* UIButton.swift in Sources */,
 				0A7FB46120917EE700F5058D /* BaseView.swift in Sources */,
 				2494A9432074926A005A2622 /* ReasonListViewController.swift in Sources */,
 				2494A9442074926A005A2622 /* UIColor.swift in Sources */,
-				0A465EB420A401D7009BFE69 /* DataManager.swift in Sources */,
 				2494A9452074926A005A2622 /* PictureTableViewCell.swift in Sources */,
 				0AF8BA6D2085D83B001321D1 /* LeftMenuView.swift in Sources */,
 				2494A9462074926A005A2622 /* Date.swift in Sources */,
@@ -1758,10 +2132,11 @@
 				5A499CBB2059277D00A1D944 /* BaseViewController.swift in Sources */,
 				24B3319820623C25001FAC49 /* Reason.swift in Sources */,
 				5A68A45F205A619300CA9DB8 /* PickupPlace.swift in Sources */,
-				0A465EB320A3FF9E009BFE69 /* DataManager.swift in Sources */,
+				0AA44BE520B3F9C900A95147 /* ItemsSectionView.swift in Sources */,
 				24D3876B2063511F00BE51D9 /* OrderScanItemTableViewCell.swift in Sources */,
 				5A82E9C4205A038900F34351 /* RESTConstants.swift in Sources */,
 				5A82E9C5205A038900F34351 /* RESTError.swift in Sources */,
+				0ACCCBA320AE7EEA006B4F6E /* DataManager.swift in Sources */,
 				5A82E9CA205A04EE00F34351 /* OrderListViewController.swift in Sources */,
 				5A499CB720591E4100A1D944 /* Cache.swift in Sources */,
 				0AF8BA732085E3C5001321D1 /* LogoutTableViewCell.swift in Sources */,
@@ -1893,6 +2268,54 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMASOF";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		0ADAF44620B3B95A00A88E14 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2CE28C0EBCCC67BF0FD1791B /* Pods-SRSDriver.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = SRSDriver/SRSDriver.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T7R2AKHVA7;
+				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_Taavura/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.DMSDriver.Taavura;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		0ADAF44720B3B95A00A88E14 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = E024BF2881A42290DDB61CAC /* Pods-SRSDriver.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = SRSDriver/SRSDriver.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T7R2AKHVA7;
+				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_Taavura/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.DMSDriver.Taavura;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -2154,6 +2577,15 @@
 			buildConfigurations = (
 				0AB6910D20A0099E0041E529 /* Debug */,
 				0AB6910E20A0099E0041E529 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		0ADAF44520B3B95A00A88E14 /* Build configuration list for PBXNativeTarget "DMSDriver_ Taavura" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0ADAF44620B3B95A00A88E14 /* Debug */,
+				0ADAF44720B3B95A00A88E14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

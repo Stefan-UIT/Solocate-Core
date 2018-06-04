@@ -14,6 +14,13 @@ class RouteMessageTableViewCell: UITableViewCell {
   @IBOutlet weak var contentLabel: UILabel!
   @IBOutlet weak var createdAt: UILabel!
   
+    override func awakeFromNib() {
+        super.awakeFromNib()
+        authorLabel.text = ""
+        contentLabel.text = ""
+        createdAt.text = ""
+    }
+    
   var alertDetail: AlertDetailModel? {
     didSet {
         contentLabel.text = alertDetail?.alertMsg
@@ -25,10 +32,5 @@ class RouteMessageTableViewCell: UITableViewCell {
       contentLabel.text = "\(message.content)"
       createdAt.text = "\(message.createdAt)"
     }
-  }
-  
-  override func awakeFromNib() {
-    super.awakeFromNib()
-    // Initialization code
   }
 }
