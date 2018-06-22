@@ -142,14 +142,30 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 extension AppDelegate: AlertMessageViewDelegate {
     func alertMessageView(_ alertMessageView: AlertMessageView, _ alertID: String, _ content: String) {
-        APIs.resolveAlert(alertID, content, { (successful, model) in
+        alertMessageView.removeFromSuperview()
+        SVProgressHUD.show()
+        APIs.resolveAlert(alertID, content, { [weak self] (successful, model) in
+            SVProgressHUD.dismiss()
             if successful {
-                
+                if let message = model as? String {
+                    self?.showAlert(message)
+                }
             } else {
-                
+                self?.showAlert("Something wrong. Please contact with us. Thanks.")
             }
-        }) { (error) in
-            
+        }) { [weak self] (error) in
+            SVProgressHUD.dismiss()
+            print(error.message)
+            self?.showAlert(error.message)
+        }
+    }
+    
+    func showAlert(_ message: String) {
+        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Done", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        if let viewController = window?.rootViewController {
+            viewController.present(alert, animated: true, completion: nil)
         }
     }
 }

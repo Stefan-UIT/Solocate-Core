@@ -53,12 +53,12 @@ class ReasonListViewController: BaseViewController {
     let status = _orderDetail.statusCode == "OP" ? "US" : "UF"
     APIs.updateOrderStatus("\(_orderDetail.id)", expectedStatus: status, routeID: "\(_routeID)", reason: reasonList[selectedIndex], { [unowned self] (successful, msg) in
         self.dismissLoadingIndicator()
-        self.showAlertView(msg, completionHandler: { [unowned self] (alertAction) in
+        self.showAlertView("\(msg ?? "")", completionHandler: { [unowned self] (alertAction) in
             self.navigationController?.popToRootViewController(animated: true)
         })
     }) { [unowned self] (error) in
         self.dismissLoadingIndicator()
-        self.showAlertView(error.message)
+        self.showAlertView(error?.message ?? "")
     }
   }
 }

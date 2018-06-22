@@ -9,9 +9,10 @@
 import UIKit
 
 enum IdentifierType : Int {
-    case CHANGE_INVIROMENT = 0
-    case CHANGE_PASSWORD = 1
-    case LOG_OUT = 2
+    
+    case CHANGE_PASSWORD = 0
+    case LOG_OUT = 1
+    case CHANGE_INVIROMENT = 2
 }
 
 protocol LeftMenuViewDelegate: class {
@@ -91,7 +92,7 @@ extension LeftMenuView {
 //MARK: Extension - UITableView
 extension LeftMenuView : UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return 3
+    return 2
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
