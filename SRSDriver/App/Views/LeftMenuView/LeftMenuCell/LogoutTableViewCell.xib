@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="LogoutTableViewCell" rowHeight="50" id="KGk-i7-Jjw" customClass="LogoutTableViewCell" customModule="DMSDriver" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="A22-hk-FX8">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="49.5"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logout" translatesAutoresizingMaskIntoConstraints="NO" id="Gh0-uO-Plm">
+                                <rect key="frame" x="10" y="10" width="30" height="30"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="30" id="Scw-u4-kEu"/>
+                                    <constraint firstAttribute="width" secondItem="Gh0-uO-Plm" secondAttribute="height" id="VQW-V9-eew"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Logout" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I3B-t3-SYe">
+                                <rect key="frame" x="50" y="14" width="52.5" height="22"/>
+                                <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
+                                <color key="textColor" red="0.49803921569999998" green="0.49803921569999998" blue="0.49803921569999998" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="log_out"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Gh0-uO-Plm" firstAttribute="leading" secondItem="A22-hk-FX8" secondAttribute="leading" constant="10" id="Isw-3e-Ntd"/>
+                            <constraint firstItem="I3B-t3-SYe" firstAttribute="centerY" secondItem="A22-hk-FX8" secondAttribute="centerY" id="fF9-eF-bgR"/>
+                            <constraint firstItem="I3B-t3-SYe" firstAttribute="leading" secondItem="Gh0-uO-Plm" secondAttribute="trailing" constant="10" id="htl-iX-mUV"/>
+                            <constraint firstItem="Gh0-uO-Plm" firstAttribute="centerY" secondItem="A22-hk-FX8" secondAttribute="centerY" id="lUq-nb-LoE"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="trailing" secondItem="A22-hk-FX8" secondAttribute="trailing" id="15B-EX-M9n"/>
+                    <constraint firstItem="A22-hk-FX8" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="MWy-hP-biO"/>
+                    <constraint firstAttribute="bottom" secondItem="A22-hk-FX8" secondAttribute="bottom" id="ZeR-V2-MFO"/>
+                    <constraint firstItem="A22-hk-FX8" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" id="lJ6-HB-fmu"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <point key="canvasLocation" x="-89" y="-104"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="logout" width="32" height="32"/>
+    </resources>
+</document>
