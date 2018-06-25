@@ -831,11 +831,61 @@
 		246FA3552072277D00C5E707 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				3B939DB220E08E9300B90C77 /* BridgingHeaders */,
 				0A6623F320A9486700FEA932 /* DMSDriver_Core */,
 				0A6623F620A948C600FEA932 /* DMSDriver_Masof */,
 				0ADAF44A20B3B9C200A88E14 /* DMSDriver_Taavura */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3B939DAF20E08DBE00B90C77 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				3B939DB120E08DF900B90C77 /* Images */,
+				3B939DB020E08DD400B90C77 /* Storyboards */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		3B939DB020E08DD400B90C77 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				5AA4CA4820590AD4003F8E6F /* LaunchScreen.storyboard */,
+				5AA4CA4320590AD4003F8E6F /* Main.storyboard */,
+			);
+			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		3B939DB120E08DF900B90C77 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				5AA4CA4620590AD4003F8E6F /* Assets.xcassets */,
+				0A7FB46520918A9800F5058D /* Assets.xcassets.Masof.xcassets */,
+				0A7FB46920918C4000F5058D /* Assets.xcassets.Malee.xcassets */,
+				0A7FB46720918B9900F5058D /* Assets.xcassets.Talron.xcassets */,
+			);
+			path = Images;
+			sourceTree = "<group>";
+		};
+		3B939DB220E08E9300B90C77 /* BridgingHeaders */ = {
+			isa = PBXGroup;
+			children = (
+				5A499CAA20591D4800A1D944 /* SRSDriver-Bridging-Header.h */,
+			);
+			path = BridgingHeaders;
+			sourceTree = "<group>";
+		};
+		3B939DB320E08EED00B90C77 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				5A68A447205A1FD500CA9DB8 /* OrderDetails */,
+				5A82E9C8205A04D500F34351 /* Home */,
+				5A499CB92059277400A1D944 /* Base */,
+				5AA4CA5320590B22003F8E6F /* Authorization */,
+				5AA4CA5220590B0F003F8E6F /* Main */,
+			);
+			path = ViewControllers;
 			sourceTree = "<group>";
 		};
 		5A499C9020591D0400A1D944 /* Extensions */ = {
@@ -1006,13 +1056,7 @@
 				246FA3552072277D00C5E707 /* Supporting Files */,
 				5AA4CA5820590B69003F8E6F /* Shared */,
 				5AA4CA5120590B08003F8E6F /* App */,
-				5AA4CA4320590AD4003F8E6F /* Main.storyboard */,
-				5AA4CA4620590AD4003F8E6F /* Assets.xcassets */,
-				0A7FB46520918A9800F5058D /* Assets.xcassets.Masof.xcassets */,
-				0A7FB46920918C4000F5058D /* Assets.xcassets.Malee.xcassets */,
-				0A7FB46720918B9900F5058D /* Assets.xcassets.Talron.xcassets */,
-				5AA4CA4820590AD4003F8E6F /* LaunchScreen.storyboard */,
-				5A499CAA20591D4800A1D944 /* SRSDriver-Bridging-Header.h */,
+				3B939DAF20E08DBE00B90C77 /* Resources */,
 			);
 			path = SRSDriver;
 			sourceTree = "<group>";
@@ -1020,12 +1064,9 @@
 		5AA4CA5120590B08003F8E6F /* App */ = {
 			isa = PBXGroup;
 			children = (
+				5A68A459205A5A2100CA9DB8 /* Models */,
+				3B939DB320E08EED00B90C77 /* ViewControllers */,
 				0A465E9F20A3EDC0009BFE69 /* Views */,
-				5A68A447205A1FD500CA9DB8 /* OrderDetails */,
-				5A82E9C8205A04D500F34351 /* Home */,
-				5A499CB92059277400A1D944 /* Base */,
-				5AA4CA5320590B22003F8E6F /* Authorization */,
-				5AA4CA5220590B0F003F8E6F /* Main */,
 			);
 			path = App;
 			sourceTree = "<group>";
@@ -1052,7 +1093,6 @@
 				0A465EB120A3FF86009BFE69 /* GlobalServices */,
 				0AB6912220A156B60041E529 /* Configs */,
 				0AB6911F20A153F60041E529 /* Designables */,
-				5A68A459205A5A2100CA9DB8 /* Models */,
 				5A82E9BF205A038900F34351 /* Webservices */,
 				5A499CB420591E4100A1D944 /* Helpers */,
 				5A499CAB20591D8300A1D944 /* Libs */,
@@ -1206,7 +1246,7 @@
 					};
 					5AA4CA3B20590AD4003F8E6F = {
 						CreatedOnToolsVersion = 9.2;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2530,8 +2570,8 @@
 				CODE_SIGN_ENTITLEMENTS = SRSDriver/SRSDriver.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T7R2AKHVA7;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_Core/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -2554,8 +2594,8 @@
 				CODE_SIGN_ENTITLEMENTS = SRSDriver/SRSDriver.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T7R2AKHVA7;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_Core/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
