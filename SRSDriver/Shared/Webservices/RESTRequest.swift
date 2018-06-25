@@ -32,6 +32,7 @@ class RESTRequest: NSObject {
     switch response.result {
     case .success(let success):
         if let success = success as? [String: Any] {
+            print(success)
             if let errors = success["errors"] as? [String: Any] {
                 if let statusCode = errors["status_code"] as? Int {
                     if statusCode == 401 {

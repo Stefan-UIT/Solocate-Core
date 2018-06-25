@@ -23,6 +23,7 @@ class APIs {
       if let response = resp as? [String: Any],
       let data = response["data"] as? [String : String],
       let token = data["token"] {
+        
         completion(token, nil)
       }
       else if let err = error {

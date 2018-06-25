@@ -78,6 +78,9 @@ struct Defaultkey {
   static let firstLaunch = "firstLaunch"
   static let userStatus = "userStatus"
   static let keepLogin = "keepLogin"
+  static let SF_USER = "SF_USER"
+  static let SF_REMEBER_LOGIN = "SF_REMEBER_LOGIN"
+
 }
 
 struct NotificationName {
@@ -98,4 +101,20 @@ enum NotificationType : String {
     case ALERT = "alert"
     case NEW_ROUTE = "new_route"
 }
+
+func API() ->BaseAPIService {
+    return BaseAPIService.shared()
+}
+
+func Caches() -> Cache {
+    return Cache.shared
+}
+
+let ServicesConfigs: [String : String] = {
+    if let bundle = Bundle.main.url(forResource: "ServicesConfigs", withExtension: "plist"),
+        let dic = NSDictionary(contentsOf: bundle) {
+        return dic as! [String: String]
+    }
+    return [String: String]()
+}()
 

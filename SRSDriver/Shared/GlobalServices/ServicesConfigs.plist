@@ -3,11 +3,11 @@
 <plist version="1.0">
 <dict>
 	<key>LOGIN</key>
-	<string>/master-service/v1/login</string>
+	<string>/auth/v1/login</string>
 	<key>FORGET_PASSWORD</key>
 	<string>/master-service/v1/forgot-password</string>
 	<key>LOGOUT</key>
-	<string>/master-service/v1/logout</string>
+	<string>/auth/v1/user/logout</string>
 	<key>GET_ORDERS</key>
 	<string>/backend-api/driver/v1/orders</string>
 	<key>GET_ORDER_BY_DATE</key>

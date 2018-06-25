@@ -313,6 +313,18 @@ extension OrderListViewController : LeftMenuViewDelegate {
     }
     
     func handleLogOut() {
+        
+        API().logout { (result) in
+            switch result{
+            case .object(_):
+                Caches().user = nil;
+            self.navigationController?.navigationController?.popToRootViewController(animated: true)
+            case .error(let error):
+                self.showAlertView(error.getMessage())
+            }
+        }
+        
+        /*
         APIs.logout { [unowned self] (success, msg) in
             if success {
                 Cache.setTokenKeyLogin("")
@@ -321,6 +333,7 @@ extension OrderListViewController : LeftMenuViewDelegate {
                 print(msg ?? "")
             }
         }
+         */
     }
 }
 
