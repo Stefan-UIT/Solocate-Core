@@ -202,23 +202,18 @@ extension OrderListViewController {
   
   func getOrders(byDate date: String? = nil) {
     navigationItem.rightBarButtonItem?.isEnabled = true
-    showLoadingIndicator()
     
+    showLoadingIndicator()
     API().getRoutes(byDate: date!) {[weak self] (result) in
         self?.dismissLoadingIndicator()
 
-        //
+        switch result{
+        case .object(let obj):
+            self?.route = obj
+        case .error(let error):
+            self?.showAlertView(error.getMessage())
+        }
     }
-    /*
-    APIs.getOrders(byDate: date) { [unowned self] (resp, msg) in
-      self.dismissLoadingIndicator()
-      guard let route = resp else {
-        self.showAlertView(msg ?? " ")
-        return
-      }
-      self.route = route
-    }
-  */
   }
 }
 

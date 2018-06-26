@@ -81,7 +81,7 @@ class APIs {
     class func getOrderDetail(_ orderID: String, completion: @escaping ((_ resp: OrderDetail?,_ error: RESTError?, _ msg: String?) -> Void)) {
     let uri = String.init(format: RESTConstants.ServicesConfigs[RESTConstants.GET_ORDER_DETAIL] ?? "", orderID)
     let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
-    if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+    if let token = Caches().getTokenKeyLogin() {
       request.setAuthorization(token)
     }
     request.setContentType("application/x-www-form-urlencoded")
@@ -104,7 +104,7 @@ class APIs {
   class func getRouteDetail(_ routeID: String, completion: @escaping ((_ route: Route?, _ msg: String?) -> Void)) {
     let uri = String.init(format: RESTConstants.ServicesConfigs[RESTConstants.GET_ROUTE_DETAIL] ?? "%@", routeID)
     let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
-    if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+    if let token = Caches().getTokenKeyLogin() as? String {
       request.setAuthorization(token)
     }
     request.baseInvoker { (response, error) in
@@ -139,7 +139,7 @@ class APIs {
     }
     request.setParameters(params)
     request.setContentType("application/x-www-form-urlencoded")
-    if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+    if let token = Caches().getTokenKeyLogin() {
       request.setAuthorization(token)
     }
     request.baseInvoker { (resp, error) in
@@ -216,7 +216,7 @@ class APIs {
     request.setContentType("application/x-www-form-urlencoded")
     let params = ["sign": signBase64]
     request.setParameters(params)
-    if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+    if let token = Caches().getTokenKeyLogin(){
       request.setAuthorization(token)
     }
     request.baseInvoker { (resp, error) in
@@ -282,7 +282,7 @@ class APIs {
     request.httpMethod = HTTPMethod.post.rawValue
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
     request.httpBody = jsonData
-    if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+    if let token = Caches().getTokenKeyLogin() {
       request.setValue("Bearer " + token, forHTTPHeaderField: "Authorization")
     }
     Alamofire.request(request).responseJSON { (response) in
@@ -310,7 +310,7 @@ class APIs {
     }
     let url = String.init(format: "\(baseURL)\(uploadFiles)", orderID)
     var headers = [String: String]()
-    if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+    if let token = Caches().getTokenKeyLogin() as? String {
       headers["Authorization"] = "Bearer " + token
     }
     
@@ -368,7 +368,7 @@ class APIs {
     let params = ["content": content]
     let request = RESTRequest(functionName: uri, method: .post, encoding: .default)
     request.setParameters(params)
-    if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+    if let token = Caches().getTokenKeyLogin() {
       request.setAuthorization("Bearer " + token)
     }
     request.baseInvoker { (resp, error) in

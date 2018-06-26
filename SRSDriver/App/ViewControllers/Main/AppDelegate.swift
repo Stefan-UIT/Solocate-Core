@@ -17,6 +17,7 @@ import IQKeyboardManager
 class AppDelegate: UIResponder, UIApplicationDelegate {
   
   var window: UIWindow?
+  var rootNV:BaseNV?
   
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
@@ -41,12 +42,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("BUNDLE_ID - \(dic["BUNDLE_ID"] as! String)")
     }
     IQKeyboardManager.shared().isEnabled = true
+    
+    checkLoginStatus()
+    
     return true
   }
   
   func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     Messaging.messaging().apnsToken = deviceToken
   }
+    
+    func checkLoginStatus() {
+        rootNV = window?.rootViewController as? BaseNV
+
+        if Caches().hasLogin {
+            loginSuccess()
+        }else {
+            reLogin()
+        }
+    }
+    
+    func reLogin() {
+        let vc: LoginViewController = .loadSB(SB: .Login)
+        rootNV?.setViewControllers([vc], animated: false)
+    }
+    
+    func loginSuccess() {
+        let vc:MainVC = .loadSB(SB: .Main)
+        rootNV?.setViewControllers([vc], animated: false)
+    }
 }
 
 extension AppDelegate: MessagingDelegate {

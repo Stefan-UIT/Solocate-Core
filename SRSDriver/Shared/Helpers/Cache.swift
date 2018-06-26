@@ -8,6 +8,12 @@ class Cache: NSObject {
     static let shared = Cache()
     
     private let userDefaults = UserDefaults.standard
+    
+    var hasLogin:Bool {
+        get{
+            return getTokenKeyLogin() != nil
+        }
+    }
 
     var user:UserModel? {
         set (newValue){

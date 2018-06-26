@@ -144,7 +144,8 @@ fileprivate extension LoginViewController {
                 if self?.keepLogin  ?? false{
                     Caches().userLogin = userLogin;
                 }
-                self?.performSegue(withIdentifier: SegueIdentifier.showHome, sender: nil)
+                
+                App().loginSuccess()
                 
             case .error(let error):
                 self?.showAlertView(error.getMessage())

@@ -99,7 +99,8 @@ struct SegueIdentifier {
 //SBName
 public enum SBName : String {
     case Main = "Main";
-    case OrderHistory = "OrderHistory";
+    case Route = "Route";
+    case Login = "Login";
 }
 
 
@@ -107,6 +108,10 @@ public enum SBName : String {
 enum NotificationType : String {
     case ALERT = "alert"
     case NEW_ROUTE = "new_route"
+}
+
+func App() -> AppDelegate {
+    return UIApplication.shared.delegate as! AppDelegate;
 }
 
 func API() ->BaseAPIService {
