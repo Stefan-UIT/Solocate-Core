@@ -23,6 +23,7 @@ class RouteListVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        updateNavigationBar(.Menu, "List Route")
         setupTableView()
         updateDataRows()
         getRoutes()

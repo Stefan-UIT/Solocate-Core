@@ -66,11 +66,6 @@ struct DeviceType {
   static let IS_IPAD              = UIDevice.current.userInterfaceIdiom == .pad && ScreenSize.SCREEN_MAX_LENGTH == 1024.0
 }
 
-struct AppColor {
-  static let mainColor            = UIColor(hex: "#F18A20")
-  static let highLightColor       = UIColor(hex: "#b3e6ff")
-}
-
 
 struct Defaultkey {
   static let tokenKey = "token"

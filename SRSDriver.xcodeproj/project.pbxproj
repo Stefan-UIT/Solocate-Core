@@ -459,6 +459,10 @@
 		3B0F86C920E2456200E5092B /* BaseNV.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F86C820E2456200E5092B /* BaseNV.swift */; };
 		3B0F86CB20E246E800E5092B /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B0F86CA20E246E800E5092B /* Login.storyboard */; };
 		3B0F86CE20E24F0700E5092B /* MainVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F86CD20E24F0700E5092B /* MainVC.swift */; };
+		3B0F86D020E256B400E5092B /* UIBarButtonItem + Style.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F86CF20E256B300E5092B /* UIBarButtonItem + Style.swift */; };
+		3B0F86D620E2583400E5092B /* NSAtribitedString+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F86D320E2583400E5092B /* NSAtribitedString+Ext.swift */; };
+		3B0F86D720E2583400E5092B /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F86D420E2583400E5092B /* Font.swift */; };
+		3B0F86D820E2583400E5092B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F86D520E2583400E5092B /* Color.swift */; };
 		3B230D2820E09D2900C867C8 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D2420E09D2800C867C8 /* ListModel.swift */; };
 		3B230D2920E09D2900C867C8 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D2520E09D2800C867C8 /* APIError.swift */; };
 		3B230D2A20E09D2900C867C8 /* UploadFileResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D2620E09D2800C867C8 /* UploadFileResponse.swift */; };
@@ -634,6 +638,10 @@
 		3B0F86C820E2456200E5092B /* BaseNV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseNV.swift; sourceTree = "<group>"; };
 		3B0F86CA20E246E800E5092B /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		3B0F86CD20E24F0700E5092B /* MainVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVC.swift; sourceTree = "<group>"; };
+		3B0F86CF20E256B300E5092B /* UIBarButtonItem + Style.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIBarButtonItem + Style.swift"; sourceTree = "<group>"; };
+		3B0F86D320E2583400E5092B /* NSAtribitedString+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSAtribitedString+Ext.swift"; sourceTree = "<group>"; };
+		3B0F86D420E2583400E5092B /* Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
+		3B0F86D520E2583400E5092B /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		3B230D2420E09D2800C867C8 /* ListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		3B230D2520E09D2800C867C8 /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
 		3B230D2620E09D2800C867C8 /* UploadFileResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadFileResponse.swift; sourceTree = "<group>"; };
@@ -953,6 +961,24 @@
 			path = MainVC;
 			sourceTree = "<group>";
 		};
+		3B0F86D120E2582400E5092B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				3B0F86D220E2583400E5092B /* Style */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		3B0F86D220E2583400E5092B /* Style */ = {
+			isa = PBXGroup;
+			children = (
+				3B0F86D320E2583400E5092B /* NSAtribitedString+Ext.swift */,
+				3B0F86D420E2583400E5092B /* Font.swift */,
+				3B0F86D520E2583400E5092B /* Color.swift */,
+			);
+			path = Style;
+			sourceTree = "<group>";
+		};
 		3B230D2320E09D2800C867C8 /* APIModels */ = {
 			isa = PBXGroup;
 			children = (
@@ -1063,6 +1089,7 @@
 		5A499C9020591D0400A1D944 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				3B0F86CF20E256B300E5092B /* UIBarButtonItem + Style.swift */,
 				5A499C9120591D0400A1D944 /* NSString+SDString.h */,
 				5A499C9220591D0400A1D944 /* NSString+SDString.m */,
 				5A499C9320591D0400A1D944 /* String.swift */,
@@ -1271,6 +1298,7 @@
 		5AA4CA5820590B69003F8E6F /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				3B0F86D120E2582400E5092B /* Common */,
 				0AB6912220A156B60041E529 /* Configs */,
 				0AB6911F20A153F60041E529 /* Designables */,
 				5A82E9BF205A038900F34351 /* Services */,
@@ -2392,11 +2420,13 @@
 				24B3319820623C25001FAC49 /* Reason.swift in Sources */,
 				5A68A45F205A619300CA9DB8 /* PickupPlace.swift in Sources */,
 				0AA44BE520B3F9C900A95147 /* ItemsSectionView.swift in Sources */,
+				3B0F86D720E2583400E5092B /* Font.swift in Sources */,
 				3B0F86C720E2396600E5092B /* RouteListCell.swift in Sources */,
 				24D3876B2063511F00BE51D9 /* OrderScanItemTableViewCell.swift in Sources */,
 				5A82E9C4205A038900F34351 /* RESTConstants.swift in Sources */,
 				5A82E9C5205A038900F34351 /* RESTError.swift in Sources */,
 				3B939DBE20E0970600B90C77 /* BaseAPIService.swift in Sources */,
+				3B0F86D020E256B400E5092B /* UIBarButtonItem + Style.swift in Sources */,
 				0ACCCBA320AE7EEA006B4F6E /* DataManager.swift in Sources */,
 				5A82E9CA205A04EE00F34351 /* OrderListViewController.swift in Sources */,
 				3B721AFA20E1E29900F58783 /* ResponseDataModel.swift in Sources */,
@@ -2434,6 +2464,7 @@
 				5A82E9C6205A038900F34351 /* RESTRequest.swift in Sources */,
 				5A499CA520591D0400A1D944 /* UITableView-Extensions.swift in Sources */,
 				0A27215A20A597B1009E527F /* ForgetPasswordView.swift in Sources */,
+				3B0F86D620E2583400E5092B /* NSAtribitedString+Ext.swift in Sources */,
 				5AA4CA4020590AD4003F8E6F /* AppDelegate.swift in Sources */,
 				242DC4B9207775F50047F19C /* PackagesViewController.swift in Sources */,
 				0A465E9720A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift in Sources */,
@@ -2442,6 +2473,7 @@
 				5ACCE8E2205BB30C00A1532D /* SignatureView.swift in Sources */,
 				5A499CA120591D0400A1D944 /* UICollectionView-Extensions.swift in Sources */,
 				5A82E9C7205A038900F34351 /* RESTResponse.swift in Sources */,
+				3B0F86D820E2583400E5092B /* Color.swift in Sources */,
 				5ACCE8D3205B761E00A1532D /* Note.swift in Sources */,
 				5A68A44F205A202400CA9DB8 /* OrderNotesViewController.swift in Sources */,
 				3B939DCA20E097CB00B90C77 /* BaseModel.swift in Sources */,
