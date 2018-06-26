@@ -10,6 +10,19 @@ import Foundation
 import SVProgressHUD
 
 extension UIViewController {
+    
+   static func loadSB<T>(SB:SBName) -> T {
+        return UIStoryboard(name: SB.rawValue,
+                            bundle: nil)
+            .instantiateViewController(withIdentifier: String(describing: T.self)) as! T;
+    }
+    
+   static func load<T: UIViewController>(nib: String? = nil) -> T {
+        return T(nibName: nib != nil ? nib : String(describing: T.self),
+                 bundle: nil);
+    }
+    
+    
   func showAlertView(_ message: String, completionHandler:((_ action: UIAlertAction) -> Void)? = nil)  {
     let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
     let okAction = UIAlertAction(title: "ok".localized, style: .default, handler: completionHandler)

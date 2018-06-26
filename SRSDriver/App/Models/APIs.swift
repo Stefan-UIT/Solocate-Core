@@ -191,7 +191,7 @@ class APIs {
     let params = ["date": dateString]
     request.setContentType("application/x-www-form-urlencoded")
     request.setParameters(params)
-    if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+    if let token = Caches().getTokenKeyLogin() {
       request.setAuthorization(token)
     }
     request.baseInvoker { (response, error) in
@@ -426,7 +426,7 @@ class APIs {
   }
   
   static func updateNotificationToken(_ token: String) {
-    let request = RESTRequest(functionName: RESTConstants.ServicesConfigs[RESTConstants.UPDATE_NOTIFICATION_TOKEN] ?? "", method: .post, encoding: .default)
+    let request = RESTRequest(functionName: RESTConstants.ServicesConfigs[RESTConstants.UPDATE_TOKEN_FCM] ?? "", method: .post, encoding: .default)
     let params = [
       "notification_token": token,
       "device": "2" // iOS : device = 2

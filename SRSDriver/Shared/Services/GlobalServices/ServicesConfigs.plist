@@ -12,6 +12,8 @@
 	<string>/backend-api/driver/v1/orders</string>
 	<key>GET_ORDER_BY_DATE</key>
 	<string>/backend-api/v1/routes/get-routes-by-date</string>
+	<key>GET_ROUTES_BY_DATE</key>
+	<string>/backend-api/v1/routes/get-routes-by-date</string>
 	<key>GET_ORDER_DETAIL</key>
 	<string>/backend-api/v1/orders/%@</string>
 	<key>UPDATE_ORDER_STATUS</key>
@@ -32,7 +34,7 @@
 	<string>/backend-api/v1/orders/update-barcode-items/%@</string>
 	<key>ADD_NEW_ORDER_ITEM</key>
 	<string>/backend-api/v1/mobile/orders/%@/items</string>
-	<key>UPDATE_NOTIFICATION_TOKEN</key>
+	<key>UPDATE_TOKEN_FCM</key>
 	<string>/backend-api/v1/notificationtokens/notification</string>
 	<key>CREATE_NEW_MESSAGE</key>
 	<string>/backend-api/v1/messages</string>

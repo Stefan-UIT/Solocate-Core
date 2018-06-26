@@ -37,8 +37,10 @@ enum APIInput {
     case mutiFile([AttachFileModel])
 }
 
-public protocol APIDataPresentable {
-    var rawData: Data {get set}
+protocol APIDataPresentable {
+    var rawData: Data? {get set}
+    var rawObject: Any? {get set}
+
 }
 
 typealias APIParams = [String: Any];
@@ -327,12 +329,22 @@ fileprivate extension BaseAPIService{
                 print("Invalid Response Data.");
             }
             
-            let resultObject = RESULT(JSON: newResults)!
-            return .object(resultObject)
+            if var resultObject = RESULT(JSON: newResults) {
+                
+                if var responseData = resultObject as? APIDataPresentable{
+                    responseData.rawData = dataResponse.data ?? Data()
+                    responseData.rawObject = object
+                    
+                    resultObject = responseData as! RESULT
+                }
+                
+                return .object(resultObject)
+            }
             
         case .tokenFail:
             
             //reLogin
+            
             break
         
         default:

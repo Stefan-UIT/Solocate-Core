@@ -120,7 +120,7 @@ class LoginViewController: BaseViewController {
     
  @IBAction func tapForgetPasswordButtonAction(_ sender: UIButton) {
         handleForgetPassword()
-    }
+}
     
   
 @IBAction func tapEnviromentButtonAction(_ sender: UIButton) {

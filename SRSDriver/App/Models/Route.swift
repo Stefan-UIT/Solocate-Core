@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class Route: NSObject, Mappable {
+class Route: BaseModel {
   
   var id = -1
   var truckID = -1
@@ -34,7 +34,7 @@ class Route: NSObject, Mappable {
     self.init()
   }
   
-  func mapping(map: Map) {
+    override func mapping(map: Map) {
     id          <- map["route_id"]
     truckID     <- map["truck_id"]
     driverID    <- map["driver_id"]

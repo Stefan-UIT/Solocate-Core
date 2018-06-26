@@ -96,6 +96,13 @@ struct SegueIdentifier {
   static let showScanBarCode = "showScanBarCode"
 }
 
+//SBName
+public enum SBName : String {
+    case Main = "Main";
+    case OrderHistory = "OrderHistory";
+}
+
+
 
 enum NotificationType : String {
     case ALERT = "alert"

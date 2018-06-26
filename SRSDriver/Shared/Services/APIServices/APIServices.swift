@@ -37,6 +37,38 @@ extension BaseAPIService {
                        callback: callback);
     }
     
+    @discardableResult
+    func updateNotificationFCMToken(_ fcmToken:String,
+                                    callback: @escaping APICallback<ResponseDataModel<EmptyModel>>) -> APIRequest {
+        
+        let params = [
+            "notification_token": fcmToken,
+            "device": "2" // iOS : device = 2
+        ]
+        return request(method: .POST,
+                       path: E(ServicesConfigs[RESTConstants.UPDATE_TOKEN_FCM]),
+                       input: .json(params),
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func getOrders(byDate date:String = Date().toString("yyyy-MM-dd"), callback: @escaping APICallback<Route>) -> APIRequest {
+        let params = ["date": date]
+        return request(method: .PUT,
+                       path: E(ServicesConfigs[RESTConstants.GET_ORDER_BY_DATE]),
+                       input: .json(params),
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func getRoutes(byDate date:String = Date().toString("yyyy-MM-dd"), callback: @escaping APICallback<Route>) -> APIRequest {
+        let params = ["date": date]
+        return request(method: .PUT,
+                       path: E(ServicesConfigs[RESTConstants.GET_ORDER_BY_DATE]),
+                       input: .json(params),
+                       callback: callback);
+    }
+    
   
   /*
   

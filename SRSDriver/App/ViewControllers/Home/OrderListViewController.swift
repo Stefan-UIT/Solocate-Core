@@ -96,7 +96,11 @@ class OrderListViewController: UIViewController {
     
     // Update fcm token
     if let fcmtoken = Cache.shared.getObject(forKey: Defaultkey.fcmToken) as? String {
-      APIs.updateNotificationToken(fcmtoken)
+        //APIs.updateNotificationToken(fcmtoken)
+        
+        API().updateNotificationFCMToken(fcmtoken) { (result) in
+            //
+        }
     }
     /* Added by Hoang Trinh - Begin */
     leftMenuView.delegate = self
@@ -199,6 +203,13 @@ extension OrderListViewController {
   func getOrders(byDate date: String? = nil) {
     navigationItem.rightBarButtonItem?.isEnabled = true
     showLoadingIndicator()
+    
+    API().getRoutes(byDate: date!) {[weak self] (result) in
+        self?.dismissLoadingIndicator()
+
+        //
+    }
+    /*
     APIs.getOrders(byDate: date) { [unowned self] (resp, msg) in
       self.dismissLoadingIndicator()
       guard let route = resp else {
@@ -207,6 +218,7 @@ extension OrderListViewController {
       }
       self.route = route
     }
+  */
   }
 }
 

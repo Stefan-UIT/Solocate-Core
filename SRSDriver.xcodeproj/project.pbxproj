@@ -475,6 +475,8 @@
 		3B230D4120E09F5400C867C8 /* UserLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D3320E09F5400C867C8 /* UserLoginModel.swift */; };
 		3B230D4220E09F5400C867C8 /* UserLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D3320E09F5400C867C8 /* UserLoginModel.swift */; };
 		3B230D4420E0EC8400C867C8 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D4320E0EC8400C867C8 /* Manager.swift */; };
+		3B721AF820E1E04600F58783 /* EmptyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B721AF720E1E04600F58783 /* EmptyModel.swift */; };
+		3B721AFA20E1E29900F58783 /* ResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B721AF920E1E29900F58783 /* ResponseDataModel.swift */; };
 		3B939DB920E0970600B90C77 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B939DB620E0970600B90C77 /* APIServices.swift */; };
 		3B939DBA20E0970600B90C77 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B939DB620E0970600B90C77 /* APIServices.swift */; };
 		3B939DBB20E0970600B90C77 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B939DB620E0970600B90C77 /* APIServices.swift */; };
@@ -625,6 +627,8 @@
 		3B230D3220E09F5400C867C8 /* UserRole.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
 		3B230D3320E09F5400C867C8 /* UserLoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLoginModel.swift; sourceTree = "<group>"; };
 		3B230D4320E0EC8400C867C8 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
+		3B721AF720E1E04600F58783 /* EmptyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyModel.swift; sourceTree = "<group>"; };
+		3B721AF920E1E29900F58783 /* ResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDataModel.swift; sourceTree = "<group>"; };
 		3B939DB620E0970600B90C77 /* APIServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIServices.swift; sourceTree = "<group>"; };
 		3B939DB720E0970600B90C77 /* BaseAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPIService.swift; sourceTree = "<group>"; };
 		3B939DC920E097CB00B90C77 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
@@ -899,6 +903,8 @@
 				3B230D2420E09D2800C867C8 /* ListModel.swift */,
 				3B230D2520E09D2800C867C8 /* APIError.swift */,
 				3B230D2620E09D2800C867C8 /* UploadFileResponse.swift */,
+				3B721AF720E1E04600F58783 /* EmptyModel.swift */,
+				3B721AF920E1E29900F58783 /* ResponseDataModel.swift */,
 			);
 			path = APIModels;
 			sourceTree = "<group>";
@@ -966,7 +972,6 @@
 			isa = PBXGroup;
 			children = (
 				3B230D4320E0EC8400C867C8 /* Manager.swift */,
-				3B939DB520E0967700B90C77 /* APIServices */,
 			);
 			path = Managers;
 			sourceTree = "<group>";
@@ -1110,9 +1115,11 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		5A82E9BF205A038900F34351 /* Webservices */ = {
+		5A82E9BF205A038900F34351 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3B939DB520E0967700B90C77 /* APIServices */,
+				0A465EB120A3FF86009BFE69 /* GlobalServices */,
 				5A82E9C0205A038900F34351 /* RESTConstants.swift */,
 				5A82E9C1205A038900F34351 /* RESTError.swift */,
 				5A82E9C2205A038900F34351 /* RESTRequest.swift */,
@@ -1120,7 +1127,7 @@
 				2494A97A2074AD41005A2622 /* configs_malee.plist */,
 				0AE327FA208DC94700EF1F4C /* configs_talron.plist */,
 			);
-			path = Webservices;
+			path = Services;
 			sourceTree = "<group>";
 		};
 		5A82E9C8205A04D500F34351 /* Home */ = {
@@ -1203,10 +1210,9 @@
 		5AA4CA5820590B69003F8E6F /* Shared */ = {
 			isa = PBXGroup;
 			children = (
-				0A465EB120A3FF86009BFE69 /* GlobalServices */,
 				0AB6912220A156B60041E529 /* Configs */,
 				0AB6911F20A153F60041E529 /* Designables */,
-				5A82E9BF205A038900F34351 /* Webservices */,
+				5A82E9BF205A038900F34351 /* Services */,
 				5A499CB420591E4100A1D944 /* Helpers */,
 				5A499CAB20591D8300A1D944 /* Libs */,
 				5A499C9020591D0400A1D944 /* Extensions */,
@@ -2327,6 +2333,7 @@
 				3B939DBE20E0970600B90C77 /* BaseAPIService.swift in Sources */,
 				0ACCCBA320AE7EEA006B4F6E /* DataManager.swift in Sources */,
 				5A82E9CA205A04EE00F34351 /* OrderListViewController.swift in Sources */,
+				3B721AFA20E1E29900F58783 /* ResponseDataModel.swift in Sources */,
 				3B939DD120E0983B00B90C77 /* AttachFileModel.swift in Sources */,
 				5A499CB720591E4100A1D944 /* Cache.swift in Sources */,
 				0AF8BA732085E3C5001321D1 /* LogoutTableViewCell.swift in Sources */,
@@ -2347,6 +2354,7 @@
 				5A68A461205A86B500CA9DB8 /* MapsViewController.swift in Sources */,
 				3B230D3420E09F5400C867C8 /* UserModel.swift in Sources */,
 				5A499CA620591D0400A1D944 /* UITextField.swift in Sources */,
+				3B721AF820E1E04600F58783 /* EmptyModel.swift in Sources */,
 				5AA4CA5520590B31003F8E6F /* LoginViewController.swift in Sources */,
 				24DCDCD42068DD8200D3313F /* LocationManager.swift in Sources */,
 				5A499CAD20591D9000A1D944 /* Reachability.swift in Sources */,
