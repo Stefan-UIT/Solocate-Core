@@ -23,10 +23,17 @@ class RouteListVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        updateNavigationBar(.Menu, "List Route")
         setupTableView()
         updateDataRows()
         getRoutes()
+    }
+    
+    override func updateNavigationBar() {
+        setupNavigateBar()
+    }
+    
+    func setupNavigateBar() {
+        self.navigationService.updateNavigationBar(.Menu, "Routes List")
     }
 
     override func didReceiveMemoryWarning() {
@@ -45,10 +52,10 @@ class RouteListVC: BaseViewController {
     
     func updateDataRows(_ route:Route? = nil) {
         dataRows.removeAll()
-        dataRows = [["Truck", "\(String(describing: route?.truckID))"],
-                    ["Total Orders",""],
-                    ["Distance",""],
-                    ["Job Date", E(route?.date)]]
+        dataRows = [["Truck :", "\(route?.truckID ?? 0)"],
+                    ["Total Orders :",""],
+                    ["Distance :",""],
+                    ["Job Date :", E(route?.date)]]
     }
     
 
@@ -112,7 +119,8 @@ extension RouteListVC: UITableViewDataSource{
 //MARK: - UITableViewDelegate
 extension RouteListVC:UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //
+        let vc:RouteDetailVC = .loadSB(SB: .Route)
+        self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 

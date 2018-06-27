@@ -9,14 +9,10 @@
 import UIKit
 
 class BaseViewController: UIViewController {
-    
-    fileprivate lazy var backBarItem : UIBarButtonItem = UIBarButtonItem.back(target: self, action: #selector(onNavigationBack(_:)))
-    fileprivate lazy var menuBarItem : UIBarButtonItem = UIBarButtonItem.menu(target: self, action: #selector(onNavigationMenu(_:)))
-    fileprivate lazy var saveBarItem : UIBarButtonItem = UIBarButtonItem.SaveButton(target: self, action: #selector(onNavigationSaveDone(_:)))
-    fileprivate lazy var doneBarItem : UIBarButtonItem = UIBarButtonItem.doneButton(target: self, action: #selector(onNavigationSaveDone(_:)))
-    fileprivate lazy var cancelBarItem : UIBarButtonItem = UIBarButtonItem.cancelButton(target: self, action: #selector(onNavigationBack(_:)))
   
   private var isRoot = true
+    
+  var navigationService = DMSNavigationService()
   
   let reachability = Reachability()!
   var hasNetworkConnection = true
@@ -32,6 +28,9 @@ class BaseViewController: UIViewController {
     noInternetLabel.isHidden = true
     view.insertSubview(noInternetLabel, at: 10001)
     addNetworkObserver()
+    
+    navigationService.navigationItem = self.navigationItem
+    updateNavigationBar()
   }
   deinit {
     removeNetworkObserver()
@@ -80,8 +79,11 @@ class BaseViewController: UIViewController {
   func removeNetworkObserver() {
     NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "ReachabilityChangedNotification"), object: reachability)
   }
-  
-  
+    
+    func updateNavigationBar() {
+        print("Please update navigation Bar in \(ClassName(self))")
+        
+    }
   
 }
 
@@ -91,72 +93,5 @@ extension UIViewController {
     let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
     return mainStoryboard.instantiateViewController(withIdentifier: className) as! T
   }
-}
-
-
-enum BarStyle {
-    case Menu;
-    case BackOnly;
-    case BackDone;
-    case CancelSave;
-    case CanCelDone;
-}
-
-
-// MARK: - Navigation
-extension BaseViewController {
-    func updateNavigationBar(_ barStyle:BarStyle, _ title:String?) {
-        
-        if let title = title {
-            self.addTitleToNavigationBar(title: title)
-        }
-        switch barStyle {
-        case .Menu:
-            self.navigationItem.leftBarButtonItem = menuBarItem
-            break;
-        case .BackOnly:
-            self.navigationItem.leftBarButtonItem = backBarItem
-            break;
-        case .BackDone:
-            self.navigationItem.leftBarButtonItem = backBarItem
-            self.navigationItem.rightBarButtonItem = doneBarItem
-            break;
-        case .CancelSave:
-            self.navigationItem.leftBarButtonItem = cancelBarItem
-            self.navigationItem.rightBarButtonItem = saveBarItem
-            
-            break;
-        case .CanCelDone:
-            break;
-        }
-    }
-    
-    @objc func onNavigationBack(_ sender: UIBarButtonItem) {
-        self.view.endEditing(true)
-        
-        if let navi = self.navigationController {
-            
-            if (navi.viewControllers.count <= 1) {
-                if (navi.presentingViewController != nil) {
-                    navi.dismiss(animated: true, completion: nil)
-                }
-            }else {
-                navi.popViewController(animated: true);
-            }
-            
-        }else {
-            if (self.presentingViewController != nil) {
-                self.dismiss(animated: true, completion: nil);
-            }
-        }
-    }
-    
-    @objc func onNavigationMenu(_ sender: UIBarButtonItem) {
-       // App().mainVC?.showSlideMenu(isShow: true, animation: true)
-    }
-    
-    @objc func onNavigationSaveDone(_ sender: UIBarButtonItem) {
-    }
-    
 }
 

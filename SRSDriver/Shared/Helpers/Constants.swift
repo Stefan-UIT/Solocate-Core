@@ -96,6 +96,12 @@ public enum SBName : String {
     case Main = "Main";
     case Route = "Route";
     case Login = "Login";
+    case Order = "Order";
+    case Packages = "Packages";
+    case Map = "Map";
+    case Message = "Message";
+
+
 }
 
 
@@ -103,6 +109,11 @@ public enum SBName : String {
 enum NotificationType : String {
     case ALERT = "alert"
     case NEW_ROUTE = "new_route"
+}
+
+
+func ClassName(_ object: Any) -> String {
+    return String(describing: type(of: object))
 }
 
 func App() -> AppDelegate {

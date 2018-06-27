@@ -124,7 +124,24 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OYu-Se-AJ8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="56.799999999999997" y="54.422788605697157"/>
+            <point key="canvasLocation" x="-41" y="-51"/>
+        </scene>
+        <!--Route DetailVC-->
+        <scene sceneID="c8d-2y-v4z">
+            <objects>
+                <tabBarController storyboardIdentifier="RouteDetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="934-Et-Kxr" customClass="RouteDetailVC" customModule="DMSDriver" customModuleProvider="target" sceneMemberID="viewController">
+                    <navigationItem key="navigationItem" id="WAZ-Hl-5nC"/>
+                    <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="LsQ-iK-FMa">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="tintColor" red="0.94509803920000002" green="0.54117647059999996" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="selectedImageTintColor" red="0.94509803920000002" green="0.54117647059999996" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    </tabBar>
+                </tabBarController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Um1-Aa-XBC" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="972" y="-52"/>
         </scene>
     </scenes>
 </document>

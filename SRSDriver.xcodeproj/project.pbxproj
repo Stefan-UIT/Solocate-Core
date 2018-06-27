@@ -488,6 +488,12 @@
 		3B230D4420E0EC8400C867C8 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D4320E0EC8400C867C8 /* Manager.swift */; };
 		3B721AF820E1E04600F58783 /* EmptyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B721AF720E1E04600F58783 /* EmptyModel.swift */; };
 		3B721AFA20E1E29900F58783 /* ResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B721AF920E1E29900F58783 /* ResponseDataModel.swift */; };
+		3B7942B820E3322E005AD12F /* Order.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B7942B720E3322E005AD12F /* Order.storyboard */; };
+		3B7942BA20E33236005AD12F /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B7942B920E33236005AD12F /* Map.storyboard */; };
+		3B7942BC20E33258005AD12F /* Packages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B7942BB20E33258005AD12F /* Packages.storyboard */; };
+		3B7942BE20E33367005AD12F /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B7942BD20E33367005AD12F /* Message.storyboard */; };
+		3B7942C120E371C2005AD12F /* NavigationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7942C020E371C2005AD12F /* NavigationService.swift */; };
+		3B7942C420E37287005AD12F /* DMSNavigationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7942C320E37287005AD12F /* DMSNavigationService.swift */; };
 		3B939DB920E0970600B90C77 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B939DB620E0970600B90C77 /* APIServices.swift */; };
 		3B939DBA20E0970600B90C77 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B939DB620E0970600B90C77 /* APIServices.swift */; };
 		3B939DBB20E0970600B90C77 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B939DB620E0970600B90C77 /* APIServices.swift */; };
@@ -651,6 +657,12 @@
 		3B230D4320E0EC8400C867C8 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		3B721AF720E1E04600F58783 /* EmptyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyModel.swift; sourceTree = "<group>"; };
 		3B721AF920E1E29900F58783 /* ResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDataModel.swift; sourceTree = "<group>"; };
+		3B7942B720E3322E005AD12F /* Order.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Order.storyboard; sourceTree = "<group>"; };
+		3B7942B920E33236005AD12F /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
+		3B7942BB20E33258005AD12F /* Packages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Packages.storyboard; sourceTree = "<group>"; };
+		3B7942BD20E33367005AD12F /* Message.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
+		3B7942C020E371C2005AD12F /* NavigationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationService.swift; sourceTree = "<group>"; };
+		3B7942C320E37287005AD12F /* DMSNavigationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMSNavigationService.swift; sourceTree = "<group>"; };
 		3B939DB620E0970600B90C77 /* APIServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIServices.swift; sourceTree = "<group>"; };
 		3B939DB720E0970600B90C77 /* BaseAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPIService.swift; sourceTree = "<group>"; };
 		3B939DC920E097CB00B90C77 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
@@ -964,6 +976,8 @@
 		3B0F86D120E2582400E5092B /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3B7942C220E37265005AD12F /* DMSNavigationService */,
+				3B7942BF20E37172005AD12F /* NavigationService */,
 				3B0F86D220E2583400E5092B /* Style */,
 			);
 			path = Common;
@@ -1001,6 +1015,22 @@
 			path = LoginModel;
 			sourceTree = "<group>";
 		};
+		3B7942BF20E37172005AD12F /* NavigationService */ = {
+			isa = PBXGroup;
+			children = (
+				3B7942C020E371C2005AD12F /* NavigationService.swift */,
+			);
+			path = NavigationService;
+			sourceTree = "<group>";
+		};
+		3B7942C220E37265005AD12F /* DMSNavigationService */ = {
+			isa = PBXGroup;
+			children = (
+				3B7942C320E37287005AD12F /* DMSNavigationService.swift */,
+			);
+			path = DMSNavigationService;
+			sourceTree = "<group>";
+		};
 		3B939DAF20E08DBE00B90C77 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -1013,6 +1043,10 @@
 		3B939DB020E08DD400B90C77 /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				3B7942BD20E33367005AD12F /* Message.storyboard */,
+				3B7942BB20E33258005AD12F /* Packages.storyboard */,
+				3B7942B920E33236005AD12F /* Map.storyboard */,
+				3B7942B720E3322E005AD12F /* Order.storyboard */,
 				3B0F86CA20E246E800E5092B /* Login.storyboard */,
 				3B0F86BC20E2337A00E5092B /* Route.storyboard */,
 				5AA4CA4820590AD4003F8E6F /* LaunchScreen.storyboard */,
@@ -1603,19 +1637,23 @@
 				0AA44BE720B3F9DB00A95147 /* ItemsSectionView.xib in Resources */,
 				5A499CB320591D9600A1D944 /* Info.plist in Resources */,
 				0AB6911C20A03DEC0041E529 /* Assets.xcassets in Resources */,
+				3B7942BC20E33258005AD12F /* Packages.storyboard in Resources */,
 				0A465EA420A3EE03009BFE69 /* ChangePasswordView.xib in Resources */,
 				5ACCE8E4205BB31600A1532D /* SignatureView.xib in Resources */,
 				0AB6912420A156CA0041E529 /* MainConfigs.plist in Resources */,
 				0AF8BA742085E3C5001321D1 /* LogoutTableViewCell.xib in Resources */,
 				3B0F86CB20E246E800E5092B /* Login.storyboard in Resources */,
+				3B7942BA20E33236005AD12F /* Map.storyboard in Resources */,
 				0A465EAE20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
 				0AEBA57820AA9E530053F2BF /* AlertMessageView.xib in Resources */,
 				5AA4CA4A20590AD4003F8E6F /* LaunchScreen.storyboard in Resources */,
 				3B0F86BD20E2337A00E5092B /* Route.storyboard in Resources */,
+				3B7942BE20E33367005AD12F /* Message.storyboard in Resources */,
 				0A6623F520A948A600FEA932 /* GoogleService-Info.plist in Resources */,
 				0ACCCB8F20AE7C5C006B4F6E /* ServicesConfigs.plist in Resources */,
 				0A27215C20A597C1009E527F /* ForgetPasswordView.xib in Resources */,
 				0AF8BA6B2085D82B001321D1 /* LeftMenuView.xib in Resources */,
+				3B7942B820E3322E005AD12F /* Order.storyboard in Resources */,
 				0ADAF45120B3BD7700A88E14 /* MainConfigs.plist in Resources */,
 				0A465E9820A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
 				5AA4CA4520590AD4003F8E6F /* Main.storyboard in Resources */,
@@ -2391,6 +2429,7 @@
 				5A68A451205A202F00CA9DB8 /* OrderPictureViewController.swift in Sources */,
 				5A68A44B205A200700CA9DB8 /* OrderDetailViewController.swift in Sources */,
 				24DCDCD62068E2FD00D3313F /* OrderDetailMapTableViewCell.swift in Sources */,
+				3B7942C420E37287005AD12F /* DMSNavigationService.swift in Sources */,
 				3B0F86C120E236CA00E5092B /* RouteListVC.swift in Sources */,
 				3B230D2920E09D2900C867C8 /* APIError.swift in Sources */,
 				5A68A44D205A201A00CA9DB8 /* OrderSignatureViewController.swift in Sources */,
@@ -2443,6 +2482,7 @@
 				24B331942061FA66001FAC49 /* PictureTableViewCell.swift in Sources */,
 				0AF8BA692085D820001321D1 /* LeftMenuView.swift in Sources */,
 				0A360D5520AAD50C0015A64B /* ResultsRequestModel.swift in Sources */,
+				3B7942C120E371C2005AD12F /* NavigationService.swift in Sources */,
 				5A82E9CE205A197800F34351 /* Date.swift in Sources */,
 				5A68A449205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift in Sources */,
 				0AEBA57620AA9E480053F2BF /* AlertMessageView.swift in Sources */,
