@@ -10,6 +10,9 @@ import UIKit
 
 class RouteListVC: BaseViewController {
     
+    @IBOutlet weak var datePickerView: UIDatePicker!
+    @IBOutlet weak var pickerContainerView: UIView!
+
     @IBOutlet weak var tbvContent:UITableView?
     
     var listRoutes:[Route]?{
@@ -33,7 +36,8 @@ class RouteListVC: BaseViewController {
     }
     
     func setupNavigateBar() {
-        self.navigationService.updateNavigationBar(.Menu, "Routes List")
+        self.navigationService.delegate = self
+        self.navigationService.updateNavigationBar(.Menu_Calenda, "Routes List")
     }
 
     override func didReceiveMemoryWarning() {
@@ -58,17 +62,18 @@ class RouteListVC: BaseViewController {
                     ["Job Date :", E(route?.date)]]
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    @IBAction func didChooseCalendar(_ sender: UIBarButtonItem) {
+        let dateString = datePickerView.date.toString("yyyy-MM-dd")
+        getRoutes(byDate: dateString)
+        let height = Constants.toolbarHeight + Constants.pickerViewHeight;
+        pickerContainerView.transform = CGAffineTransform(translationX: 0, y: -height)
+        UIView.animate(withDuration: 0.25, animations: {
+            self.pickerContainerView.transform = CGAffineTransform(translationX: 0, y: -height)
+        }) { (isFinish) in
+            self.pickerContainerView.isHidden = true
+            self.pickerContainerView.transform = .identity
+        }
     }
-    */
-
 }
 
 //MARK: - UITableViewDataSource
@@ -130,7 +135,7 @@ fileprivate extension RouteListVC{
     
     func getRoutes(byDate date: String? = nil) {
         showLoadingIndicator()
-        API().getRoutes() {[weak self] (result) in
+        API().getRoutes(byDate: date) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             
             switch result{
@@ -139,6 +144,22 @@ fileprivate extension RouteListVC{
             case .error(let error):
                 self?.showAlertView(error.getMessage())
             }
+        }
+    }
+}
+
+extension RouteListVC:DMSNavigationServiceDelegate{
+    func didSelectedBackOrMenu() {
+        //
+    }
+    
+    func didSelectedRightButton() {
+        
+        pickerContainerView.isHidden = false
+        let height = Constants.toolbarHeight + Constants.pickerViewHeight;
+        pickerContainerView.transform = CGAffineTransform(translationX: 0, y: height)
+        UIView.animate(withDuration: 0.25) {
+            self.pickerContainerView.transform = .identity
         }
     }
 }

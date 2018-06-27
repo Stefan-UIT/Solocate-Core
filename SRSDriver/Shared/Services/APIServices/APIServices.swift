@@ -61,7 +61,7 @@ extension BaseAPIService {
     }
     
     @discardableResult
-    func getRoutes(byDate date:String = Date().toString("yyyy-MM-dd"), callback: @escaping APICallback<Route>) -> APIRequest {
+    func getRoutes(byDate date:String? = Date().toString("yyyy-MM-dd"), callback: @escaping APICallback<Route>) -> APIRequest {
         let params = ["date": date]
         return request(method: .PUT,
                        path: E(ServicesConfigs[RESTConstants.GET_ORDER_BY_DATE]),

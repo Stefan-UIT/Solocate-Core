@@ -19,7 +19,7 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
   
   override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
     
-    let child_1 = OrderDetailViewController.loadViewController(type: OrderDetailViewController.self)
+    let child_1:OrderDetailViewController = .loadSB(SB: .Order)
     child_1.didUpdateStatus = {
       [weak self] shouldMoveTab  in
       self?.getOrderDetail()
@@ -33,7 +33,7 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
     }
 //    let child_2 = OrderSignatureViewController.loadViewController(type: OrderSignatureViewController.self)
 //    let child_3 = OrderNotesViewController.loadViewController(type: OrderNotesViewController.self)
-    let child_4 = OrderPictureViewController.loadViewController(type: OrderPictureViewController.self)
+    let child_4:OrderPictureViewController = .loadSB(SB:.Order)
     if orderStatus?.compare("DV") == ComparisonResult.orderedSame {
         return [child_1, child_4]
     }

@@ -9,7 +9,7 @@
 import UIKit
 import SVProgressHUD
 
-class OrderListViewController: UIViewController {
+class OrderListViewController: BaseViewController {
   
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var noOrdersLabel: UILabel!
@@ -112,6 +112,7 @@ class OrderListViewController: UIViewController {
     navigationItem.title = selectedString
     getOrders(byDate: datePickerView.date.toString("yyyy-MM-dd"))
     tabBarController?.tabBar.isHidden = false
+    
   }
   
   override func viewWillDisappear(_ animated: Bool) {
@@ -178,13 +179,13 @@ class OrderListViewController: UIViewController {
   }
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == SegueIdentifier.showOrderDetail,
-      let destVC = segue.destination as? OrderDetailContainerViewController,
-      let order = sender as? Order {
-      destVC.orderID = "\(order.id)"
-      destVC.orderStatus = order.statusCode
-      destVC.routeID = route.id
-    }
+//    if segue.identifier == SegueIdentifier.showOrderDetail,
+//      let destVC = segue.destination as? OrderDetailContainerViewController,
+//      let order = sender as? Order {
+//      destVC.orderID = "\(order.id)"
+//      destVC.orderStatus = order.statusCode
+//      destVC.routeID = route.id
+//    }
   }
 }
 
@@ -259,8 +260,15 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    performSegue(withIdentifier: SegueIdentifier.showOrderDetail, sender: route.orderList[indexPath.row])
     tabBarController?.tabBar.isHidden = true
+    
+    let vc:OrderDetailContainerViewController = .loadSB(SB: .Order)
+    
+    let order = route.orderList[indexPath.row];
+    vc.orderID = "\(order.id)"
+    vc.orderStatus = order.statusCode
+    vc.routeID = route.id
+    self.navigationController?.pushViewController(vc, animated: true)
   }
   
 }

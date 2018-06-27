@@ -8,13 +8,27 @@
 
 import UIKit
 
+protocol DMSNavigationServiceDelegate {
+    func didSelectedBackOrMenu()
+    func didSelectedRightButton()
+
+}
+
 class DMSNavigationService: NSObject , NavigationService {
     
-    fileprivate lazy var backBarItem : UIBarButtonItem = UIBarButtonItem.back(target: self, action: #selector(onNavigationBack(_:)))
-    fileprivate lazy var menuBarItem : UIBarButtonItem = UIBarButtonItem.menu(target: self, action: #selector(onNavigationMenu(_:)))
-    fileprivate lazy var saveBarItem : UIBarButtonItem = UIBarButtonItem.SaveButton(target: self, action: #selector(onNavigationSaveDone(_:)))
-    fileprivate lazy var doneBarItem : UIBarButtonItem = UIBarButtonItem.doneButton(target: self, action: #selector(onNavigationSaveDone(_:)))
-    fileprivate lazy var cancelBarItem : UIBarButtonItem = UIBarButtonItem.cancelButton(target: self, action: #selector(onNavigationBack(_:)))
+    fileprivate lazy var backBarItem : UIBarButtonItem = UIBarButtonItem.back(target: self,
+                                                                              action: #selector(onNavigationBack(_:)))
+    fileprivate lazy var menuBarItem : UIBarButtonItem = UIBarButtonItem.menu(target: self,
+                                                                              action: #selector(onNavigationMenu(_:)))
+    fileprivate lazy var saveBarItem : UIBarButtonItem = UIBarButtonItem.SaveButton(target: self,
+                                                                                    action: #selector(onNavigationSaveDone(_:)))
+    fileprivate lazy var doneBarItem : UIBarButtonItem = UIBarButtonItem.doneButton(target: self,
+                                                                                    action: #selector(onNavigationSaveDone(_:)))
+    fileprivate lazy var cancelBarItem : UIBarButtonItem = UIBarButtonItem.cancelButton(target: self,
+                                                                                        action: #selector(onNavigationBack(_:)))
+    fileprivate lazy var calendarBarItem = UIBarButtonItem.barButtonItem(with: UIImage(named: "calendarWhite")!,
+                                                                         target: self,
+                                                                         action: #selector(onNavigationClickRightButton(_:)))
     
     
     fileprivate(set) var leftBarButtonItemType: NavigationItemType?
@@ -23,6 +37,7 @@ class DMSNavigationService: NSObject , NavigationService {
     fileprivate(set) var rightBarButtonItemType: NavigationItemType?
     fileprivate(set) var rightBarButtonAction: NavigationServiceItemAction?
     
+    var delegate:DMSNavigationServiceDelegate?
     var navigationItem: UINavigationItem?
     var defaultTitle: String?
     var shouldShowOrderTrackingIndicator: Bool = false
@@ -114,6 +129,7 @@ fileprivate extension DMSNavigationService {
 extension DMSNavigationService {
     enum BarStyle {
         case Menu;
+        case Menu_Calenda;
         case BackOnly;
         case BackDone;
         case CancelSave;
@@ -128,6 +144,11 @@ extension DMSNavigationService {
         switch barStyle {
         case .Menu:
             navigationItem?.leftBarButtonItem  = menuBarItem
+            break;
+        case .Menu_Calenda:
+            navigationItem?.leftBarButtonItem  = menuBarItem
+            navigationItem?.rightBarButtonItem  = calendarBarItem
+            
             break;
         case .BackOnly:
             navigationItem?.leftBarButtonItem = backBarItem
@@ -147,27 +168,15 @@ extension DMSNavigationService {
     }
     
     @objc func onNavigationBack(_ sender: UIBarButtonItem) {
-//        self.view.endEditing(true)
-//
-//        if let navi = self.navigationController {
-//
-//            if (navi.viewControllers.count <= 1) {
-//                if (navi.presentingViewController != nil) {
-//                    navi.dismiss(animated: true, completion: nil)
-//                }
-//            }else {
-//                navi.popViewController(animated: true);
-//            }
-//
-//        }else {
-//            if (self.presentingViewController != nil) {
-//                self.dismiss(animated: true, completion: nil);
-//            }
-//        }
+        delegate?.didSelectedBackOrMenu()
     }
     
     @objc func onNavigationMenu(_ sender: UIBarButtonItem) {
         // App().mainVC?.showSlideMenu(isShow: true, animation: true)
+    }
+    
+    @objc func onNavigationClickRightButton(_ sender: UIBarButtonItem) {
+        delegate?.didSelectedRightButton()
     }
     
     @objc func onNavigationSaveDone(_ sender: UIBarButtonItem) {

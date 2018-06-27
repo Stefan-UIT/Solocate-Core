@@ -8,19 +8,51 @@
 
 import UIKit
 
+enum TabBarItem:String {
+    case Order = "Orders";
+    case Packages = "Packages";
+    case Map = "Map";
+    case Messages = "Messages";
+
+}
+
 class RouteDetailVC: UITabBarController {
+
+    let navigationService = DMSNavigationService()
+    
+    var selectedTabBarItem:TabBarItem = .Order{
+        didSet{
+           updateNavigationBar()
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.delegate = self;
         setupNavigateBar()
         setupTabBarController()
     }
     
     func setupNavigateBar() {
-        let navigationService = DMSNavigationService()
         navigationService.navigationItem = self.navigationItem
-        navigationService.updateNavigationBar(.BackOnly, "Route Detail")
+        navigationService.delegate = self;
+        navigationService.updateNavigationBar(.BackOnly, "Orders List")
+    }
+    
+    func updateNavigationBar()  {
+        
+        switch selectedTabBarItem {
+        case .Order:
+            navigationService.updateNavigationBar(.BackOnly, "Orders List")
+        case .Packages:
+            navigationService.updateNavigationBar(.BackOnly, "Packages")
+        case .Map:
+            navigationService.updateNavigationBar(.BackOnly, "Map")
+        case .Messages:
+            navigationService.updateNavigationBar(.BackOnly, "Messanges")
+
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,7 +67,7 @@ class RouteDetailVC: UITabBarController {
         let mapVC:MapsViewController = .loadSB(SB: .Map)
         let messageVC:RouteMessagesViewController = .loadSB(SB: .Message)
         
-        orderVC.tabBarItem.title = "Order"
+        orderVC.tabBarItem.title = "Orders"
         packageVC.tabBarItem.title = "Packages"
         mapVC.tabBarItem.title = "Map"
         messageVC.tabBarItem.title = "Messages"
@@ -59,4 +91,27 @@ class RouteDetailVC: UITabBarController {
     }
     */
 
+}
+
+//MARK: UITabBarControllerDelegate
+extension RouteDetailVC:UITabBarControllerDelegate{
+    
+    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
+        if let title = item.title {
+            selectedTabBarItem = TabBarItem(rawValue: title) ?? .Order
+        }
+    }
+    
+}
+
+
+//MARK: - DMSNavigationServiceDelegate
+extension RouteDetailVC:DMSNavigationServiceDelegate{
+    func didSelectedRightButton() {
+        //
+    }
+    
+    func didSelectedBackOrMenu() {
+        self.navigationController?.popViewController(animated: true)
+    }
 }

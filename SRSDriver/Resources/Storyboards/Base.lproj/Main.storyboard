@@ -6,151 +6,10 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Order Picture View Controller-->
-        <scene sceneID="6p8-EY-M1d">
-            <objects>
-                <viewController storyboardIdentifier="OrderPictureViewController" id="adS-JX-7bW" customClass="OrderPictureViewController" customModule="DMSDriver" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="F2L-40-fGW">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="6gA-Pg-YkQ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="7Tp-MX-OL4">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="40"/>
-                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                    <subviews>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="twW-PW-6BN">
-                                            <rect key="frame" x="275" y="0.0" width="100" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="100" id="SEi-sN-W9e"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                            <state key="normal" title="Take Picture">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="order_detail_take_picture"/>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="takePicture:" destination="adS-JX-7bW" eventType="touchUpInside" id="aIa-MI-ucx"/>
-                                            </connections>
-                                        </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GyW-Pd-4mM">
-                                            <rect key="frame" x="0.0" y="0.0" width="60" height="40"/>
-                                            <constraints>
-                                                <constraint firstAttribute="width" constant="60" id="QuN-zh-uZk"/>
-                                            </constraints>
-                                            <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
-                                            <state key="normal" title="Clear">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                            </state>
-                                            <userDefinedRuntimeAttributes>
-                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="clear"/>
-                                            </userDefinedRuntimeAttributes>
-                                            <connections>
-                                                <action selector="clearPhotos:" destination="adS-JX-7bW" eventType="touchUpInside" id="TIC-x7-7jm"/>
-                                            </connections>
-                                        </button>
-                                    </subviews>
-                                    <color key="backgroundColor" red="0.94509803920000002" green="0.54117647059999996" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    <constraints>
-                                        <constraint firstItem="twW-PW-6BN" firstAttribute="top" secondItem="7Tp-MX-OL4" secondAttribute="top" id="8IN-KD-JEE"/>
-                                        <constraint firstItem="GyW-Pd-4mM" firstAttribute="leading" secondItem="7Tp-MX-OL4" secondAttribute="leading" id="E2L-mq-dDk"/>
-                                        <constraint firstAttribute="bottom" secondItem="GyW-Pd-4mM" secondAttribute="bottom" id="OS9-2G-H03"/>
-                                        <constraint firstItem="GyW-Pd-4mM" firstAttribute="top" secondItem="7Tp-MX-OL4" secondAttribute="top" id="Wbu-RJ-WMy"/>
-                                        <constraint firstAttribute="trailing" secondItem="twW-PW-6BN" secondAttribute="trailing" id="bPC-9s-a6v"/>
-                                        <constraint firstAttribute="bottom" secondItem="twW-PW-6BN" secondAttribute="bottom" id="gXU-fP-Cvc"/>
-                                    </constraints>
-                                </view>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PictureTableViewCell" rowHeight="90" id="TAW-99-o4N" customClass="PictureTableViewCell" customModule="DMSDriver" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="68" width="375" height="90"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="TAW-99-o4N" id="UP9-gj-eje">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="place_holder" translatesAutoresizingMaskIntoConstraints="NO" id="MoC-BP-Ha8">
-                                                    <rect key="frame" x="16" y="8" width="91.5" height="73.5"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="MoC-BP-Ha8" secondAttribute="height" multiplier="5:4" id="501-wC-WOu"/>
-                                                    </constraints>
-                                                </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="justified" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sD0-Nv-mUB">
-                                                    <rect key="frame" x="115.5" y="10" width="243.5" height="69.5"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstItem="sD0-Nv-mUB" firstAttribute="leading" secondItem="MoC-BP-Ha8" secondAttribute="trailing" constant="8" id="4NE-P8-Xl4"/>
-                                                <constraint firstItem="MoC-BP-Ha8" firstAttribute="top" secondItem="UP9-gj-eje" secondAttribute="top" constant="8" id="Bb0-RY-f9Y"/>
-                                                <constraint firstItem="MoC-BP-Ha8" firstAttribute="leading" secondItem="UP9-gj-eje" secondAttribute="leading" constant="16" id="EQh-4R-ITi"/>
-                                                <constraint firstItem="sD0-Nv-mUB" firstAttribute="top" secondItem="UP9-gj-eje" secondAttribute="top" constant="10" id="Ii8-6Q-lTk"/>
-                                                <constraint firstAttribute="bottom" secondItem="MoC-BP-Ha8" secondAttribute="bottom" constant="8" id="YyB-ky-CM3"/>
-                                                <constraint firstAttribute="trailing" secondItem="sD0-Nv-mUB" secondAttribute="trailing" constant="16" id="cgp-cW-TAb"/>
-                                                <constraint firstAttribute="bottom" secondItem="sD0-Nv-mUB" secondAttribute="bottom" constant="10" id="jaB-oa-l5s"/>
-                                            </constraints>
-                                        </tableViewCellContentView>
-                                        <connections>
-                                            <outlet property="imgView" destination="MoC-BP-Ha8" id="5uS-hi-9fq"/>
-                                            <outlet property="nameLabel" destination="sD0-Nv-mUB" id="PJO-3J-0iw"/>
-                                        </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="adS-JX-7bW" id="JAh-Cf-4W6"/>
-                                    <outlet property="delegate" destination="adS-JX-7bW" id="1Ml-Ea-Kxu"/>
-                                </connections>
-                            </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="02O-y5-Gxn">
-                                <rect key="frame" x="275" y="567" width="60" height="60"/>
-                                <color key="backgroundColor" red="0.94509803920000002" green="0.54117647059999996" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="60" id="XgR-LH-u7Q"/>
-                                </constraints>
-                                <state key="normal" image="upload"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="30"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="uploadPhotos:" destination="adS-JX-7bW" eventType="touchUpInside" id="ee1-ae-Hbr"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                        <constraints>
-                            <constraint firstItem="6gA-Pg-YkQ" firstAttribute="leading" secondItem="qqZ-mu-vze" secondAttribute="leading" id="3gZ-1Z-3by"/>
-                            <constraint firstItem="qqZ-mu-vze" firstAttribute="bottom" secondItem="6gA-Pg-YkQ" secondAttribute="bottom" id="BqR-BY-IUv"/>
-                            <constraint firstItem="qqZ-mu-vze" firstAttribute="trailing" secondItem="02O-y5-Gxn" secondAttribute="trailing" constant="40" id="Enw-5Q-i7t"/>
-                            <constraint firstItem="qqZ-mu-vze" firstAttribute="bottom" secondItem="02O-y5-Gxn" secondAttribute="bottom" constant="40" id="NYk-kw-YGD"/>
-                            <constraint firstItem="6gA-Pg-YkQ" firstAttribute="trailing" secondItem="qqZ-mu-vze" secondAttribute="trailing" id="RoO-FT-gpK"/>
-                            <constraint firstItem="02O-y5-Gxn" firstAttribute="width" secondItem="02O-y5-Gxn" secondAttribute="height" multiplier="1:1" id="VHy-7S-fzr"/>
-                            <constraint firstItem="6gA-Pg-YkQ" firstAttribute="top" secondItem="qqZ-mu-vze" secondAttribute="top" id="uPY-so-fDg"/>
-                        </constraints>
-                        <viewLayoutGuide key="safeArea" id="qqZ-mu-vze"/>
-                    </view>
-                    <connections>
-                        <outlet property="actionButton" destination="02O-y5-Gxn" id="FcQ-hb-S2J"/>
-                        <outlet property="headerView" destination="7Tp-MX-OL4" id="l3j-86-OGq"/>
-                        <outlet property="tableView" destination="6gA-Pg-YkQ" id="57n-rS-EBK"/>
-                        <outlet property="takePictureButton" destination="twW-PW-6BN" id="GT8-ca-hxi"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="SQc-z3-Iei" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="3388" y="-1085"/>
-        </scene>
         <!--MainVC-->
         <scene sceneID="SLU-9K-zXl">
             <objects>
@@ -178,7 +37,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UZi-yH-ExB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-298" y="61"/>
+            <point key="canvasLocation" x="-513" y="71"/>
         </scene>
         <!--BaseNV-->
         <scene sceneID="aQe-sf-Mu0">
@@ -207,11 +66,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SgN-zo-euq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-298" y="788"/>
+            <point key="canvasLocation" x="-514" y="970"/>
         </scene>
     </scenes>
-    <resources>
-        <image name="place_holder" width="97" height="85"/>
-        <image name="upload" width="32" height="32"/>
-    </resources>
 </document>
