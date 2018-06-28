@@ -61,7 +61,7 @@ extension BaseAPIService {
     }
     
     @discardableResult
-    func getRoutes(byDate date:String? = nil, callback: @escaping APICallback<Route>) -> APIRequest {
+    func getRoutes(byDate date:String? = nil, callback: @escaping APICallback<ListModel<Route>>) -> APIRequest {
         var newDate = date;
         if newDate == nil {
             newDate = Date().toString("yyyy-MM-dd")
@@ -70,6 +70,32 @@ extension BaseAPIService {
         return request(method: .PUT,
                        path: E(ServicesConfigs[RESTConstants.GET_ORDER_BY_DATE]),
                        input: .json(params),
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func updateOrderStatus(_ order:OrderDetail,reason: Reason? = nil, callback: @escaping APICallback<Route>) -> APIRequest {
+        
+        let path = String(format:E(RESTConstants.ServicesConfigs[RESTConstants.UPDATE_ORDER_STATUS]), "\(order.id)", order.statusCode)
+        
+        var params = ["route_id": "\(order.routeId)"]
+        if let _reason = reason {
+            params["reason_msg"] = _reason.reasonDescription
+            params["reason_id"] = "\(_reason.id)"
+        }
+        return request(method: .PUT,
+                       path: path,
+                       input: .json(params),
+                       callback: callback);
+    }
+    
+    
+    @discardableResult
+    func getOrderDetail(orderId:String, callback: @escaping APICallback<OrderDetail>) -> APIRequest {
+        let uri = String(format:E(ServicesConfigs[RESTConstants.GET_ORDER_DETAIL]), orderId)
+        return request(method: .GET,
+                       path: uri,
+                       input: .empty,
                        callback: callback);
     }
     

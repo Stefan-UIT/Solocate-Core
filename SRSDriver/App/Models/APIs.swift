@@ -104,7 +104,7 @@ class APIs {
   class func getRouteDetail(_ routeID: String, completion: @escaping ((_ route: Route?, _ msg: String?) -> Void)) {
     let uri = String.init(format: RESTConstants.ServicesConfigs[RESTConstants.GET_ROUTE_DETAIL] ?? "%@", routeID)
     let request = RESTRequest(functionName: uri, method: .get, encoding: .default)
-    if let token = Caches().getTokenKeyLogin() as? String {
+    if let token = Caches().getTokenKeyLogin() {
       request.setAuthorization(token)
     }
     request.baseInvoker { (response, error) in

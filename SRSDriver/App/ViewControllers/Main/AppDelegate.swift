@@ -65,6 +65,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func reLogin() {
         let vc: LoginViewController = .loadSB(SB: .Login)
         rootNV?.setViewControllers([vc], animated: false)
+        Caches().user = nil
     }
     
     func loginSuccess() {

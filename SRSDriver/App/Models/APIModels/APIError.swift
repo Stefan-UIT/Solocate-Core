@@ -46,7 +46,11 @@ fileprivate extension APIError {
         var message = object["ErrorMessage"] as? String
         
         if message == nil {
-            message = object["message"] as? String
+            if let mes = object["message"] as? String{
+                message = mes
+            }else if let mes = object["message"] as? ResponseDictionary{
+                message = mes["message"] as? String
+            }
         }
         
         return message ?? "Unknown"

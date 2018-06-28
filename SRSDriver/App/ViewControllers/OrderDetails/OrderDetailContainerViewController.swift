@@ -46,42 +46,37 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = "order_detail_title".localized
+    
+    setupNavigationBar()
     getOrderDetail()
   }
+    
+    func setupNavigationBar()  {
+        let nv:DMSNavigationService = DMSNavigationService()
+        nv.navigationItem = self.navigationItem
+        nv.updateNavigationBar(.BackOnly, "order_detail_title".localized)
+    }
   
   private func getOrderDetail() {
     guard let _orderID = orderID else { return }
     showLoadingIndicator()
-    APIs.getOrderDetail(_orderID, completion: { [unowned self] (resp,error,errorMsg) in
-      self.dismissLoadingIndicator()
-      guard let orderDetail = resp else {
-        if let error = error {
-            if error.statusCode == 401 {
-                self.showAlertView(errorMsg ?? " ", completionHandler: { [unowned self] (action) in
-                    self.navigationController?.popViewController(animated: true)
-                })
-                return
+    API().getOrderDetail(orderId: _orderID) {[weak self] (result) in
+        self?.dismissLoadingIndicator()
+        
+        switch result{
+        case .object(let object):
+            self?.orderDetail = object
+            self?.segmentedControl.isUserInteractionEnabled = object.statusCode == "IP" || object.statusCode == "DV"
+            self?.containerView.isScrollEnabled = object.statusCode == "IP" || object.statusCode == "DV"
+            for v in (self?.viewControllers)! {
+                (v as? BaseOrderDetailViewController)?.orderDetail = object
+                (v as? BaseOrderDetailViewController)?.routeID = self?.routeID
             }
+            
+        case .error(let error):
+            self?.showAlertView(error.getMessage())
         }
-        self.showAlertView(errorMsg ?? " ")
-        return
-      }
-      if orderDetail.id < 0 {
-        Cache.shared.setObject(obj: "", forKey: Defaultkey.tokenKey)
-        self.showAlertView("error_network".localized, completionHandler: { [unowned self] (action) in
-          self.navigationController?.navigationController?.popViewController(animated: true)
-        })
-        return
-      }
-      self.orderDetail = orderDetail
-      self.segmentedControl.isUserInteractionEnabled = orderDetail.statusCode == "IP" || orderDetail.statusCode == "DV"
-      self.containerView.isScrollEnabled = orderDetail.statusCode == "IP" || orderDetail.statusCode == "DV"
-      for v in self.viewControllers {
-        (v as? BaseOrderDetailViewController)?.orderDetail = orderDetail
-        (v as? BaseOrderDetailViewController)?.routeID = self.routeID
-      }
-    })
+    }
   }
   
   override func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int) {

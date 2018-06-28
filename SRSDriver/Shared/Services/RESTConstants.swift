@@ -124,7 +124,7 @@ class RESTConstants: NSObject {
         switch type {
         case .DEMO:
             return RESTConstants.configs[RESTConstants.BASE_URL]
-            
+
         case .DEV:
             return RESTConstants.configs[RESTConstants.BASE_URL_DEV]
         }

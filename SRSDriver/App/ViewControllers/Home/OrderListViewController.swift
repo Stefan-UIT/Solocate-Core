@@ -12,63 +12,15 @@ import SVProgressHUD
 class OrderListViewController: BaseViewController {
   
   @IBOutlet weak var tableView: UITableView!
-  @IBOutlet weak var noOrdersLabel: UILabel!
+  @IBOutlet weak var noOrdersLabel: UILabel?
   @IBOutlet weak var datePickerView: UIDatePicker!
-  @IBOutlet weak var pickerContainerView: UIView!
+  @IBOutlet weak var pickerContainerView: UIView?
   
   fileprivate let cellIdentifier = "OrderItemTableViewCell"
   fileprivate let cellHeight: CGFloat = 150.0
   fileprivate var changePasswordView : ChangePasswordView!
-  fileprivate var selectedString = "" {
-    didSet {
-      let date = Date()
-      navigationItem.title = selectedString
-    }
-  }
-  var route: Route! {
-    didSet {
-      guard let tabItems = self.tabBarController?.tabBar.items else { return }
-      if let messageTab = tabItems.last {
-        messageTab.badgeValue = nil
-      }
-      if Constants.packageTabIndex < tabItems.count {
-        let packageTab = tabItems[Constants.packageTabIndex]
-        packageTab.badgeValue = nil
-      }
-      
-      guard route.orderList.count > 0 else {
-        noOrdersLabel.isHidden = false
-        tableView.isHidden = true
-        navigationItem.rightBarButtonItem?.isEnabled = false
-        return
-      }
-      noOrdersLabel.isHidden = true
-      tableView.isHidden = false
-      navigationItem.rightBarButtonItem?.isEnabled = route.status != "DV" && route.orderList.count > 1
-      tableView.reloadData()
-      
-      // messgae
-      if let messageTab = tabItems.last {
-        let unreadMessage = route.messages.filter{$0.status < 1}.count
-        messageTab.badgeValue = unreadMessage > 0 ? "\(unreadMessage)" : nil
-      }
-      let packageTab = tabItems[Constants.packageTabIndex]
-      packageTab.badgeValue = route.currentItems.count > 0 ? "\(route.currentItems.count)" : nil
-      
-      guard let viewControllers = tabBarController?.viewControllers else {return}
-      
-      if let messageNV = viewControllers.last as? UINavigationController,
-        let messageVC = messageNV.topViewController as? RouteMessagesViewController {
-        messageVC.route = route        
-      }
-      if Constants.packageTabIndex < viewControllers.count {
-        let packageNavC = viewControllers[Constants.packageTabIndex] as? UINavigationController
-        if let package = packageNavC?.topViewController as? PackagesViewController {
-          package.route = route
-        }
-      }
-    }
-  }
+    
+  var route: Route?
 
   fileprivate var leftMenuView : LeftMenuView = LeftMenuView() /* Added by Hoang Trinh */
     
@@ -81,84 +33,43 @@ class OrderListViewController: BaseViewController {
         return
       }
       strongSelf.route = route
-      strongSelf.selectedString = strongSelf.convertString(route.date)
+      strongSelf.tableView.reloadData()
     }
   }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    selectedString = datePickerView.date.toString("MM/dd/yyyy")
-    tabBarController?.delegate = self
-//    let iconName = Constants.isLeftToRight ? "logout" : "logout_inv"
-//    if let leftButton = navigationItem.leftBarButtonItems?.first {
-//      leftButton.image = UIImage(named: iconName)
-//    }
-    
-    // Update fcm token
-    if let fcmtoken = Cache.shared.getObject(forKey: Defaultkey.fcmToken) as? String {
-        //APIs.updateNotificationToken(fcmtoken)
-        
-        API().updateNotificationFCMToken(fcmtoken) { (result) in
-            //
-        }
-    }
+ 
+    updateUI()
     /* Added by Hoang Trinh - Begin */
     leftMenuView.delegate = self
     /* Added by Hoang Trinh - Begin */
   }
+
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    navigationItem.title = selectedString
-    //getOrders(byDate: datePickerView.date.toString("yyyy-MM-dd"))
-    tabBarController?.tabBar.isHidden = false
     
+    /*
+    if let route = self.route {
+        getRouteDetail("\(route.id)")
+    }
+    */
+    tabBarController?.tabBar.isHidden = false
   }
+    
+    func updateUI() {
+        if let orderList = self.route?.orderList {
+            noOrdersLabel?.isHidden = orderList.count > 0
+        }
+    }
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillAppear(animated)
     navigationItem.title = ""// clear title
   }
   
-  @IBAction func didPickDate(_ sender: UIDatePicker) {
-    selectedString = sender.date.toString()
-  }
-  
-  @IBAction func didChooseCalendar(_ sender: UIBarButtonItem) {
-    let dateString = datePickerView.date.toString("yyyy-MM-dd")
-    selectedString = datePickerView.date.toString("MM/dd/yyyy")
-    getOrders(byDate: dateString)
-    noOrdersLabel.isHidden = true
-    let height = Constants.toolbarHeight + Constants.pickerViewHeight;
-    pickerContainerView.transform = CGAffineTransform(translationX: 0, y: -height)
-    UIView.animate(withDuration: 0.25, animations: {
-      self.pickerContainerView.transform = CGAffineTransform(translationX: 0, y: -height)
-    }) { (isFinish) in
-      self.pickerContainerView.isHidden = true
-      self.pickerContainerView.transform = .identity
-    }
-  }
-  
-  @IBAction func editMode(_ sender: UIBarButtonItem) {
-    tableView.isEditing = !tableView.isEditing
-    sender.title = tableView.isEditing ? "done".localized : "edit".localized
-    guard !tableView.isEditing else {
-      return
-    }
-    //    
-    let orderIDs = route.orderList.map { "\($0.id)" }
-    showLoadingIndicator()
-    APIs.updateRouteSequenceOrders("\(route.id)", routeStatus: route.status, orderIDs: orderIDs) { [unowned self] (msgError) in
-      self.dismissLoadingIndicator()
-      if let msg = msgError {
-        self.showAlertView(msg)
-      }
-      else {
-        self.getOrders(byDate: self.datePickerView.date.toString("yyyy-MM-dd"))
-      }
-      
-    }
-  }
+    
   /* Added by Hoang Trinh - Begin */
   @IBAction func tapLeftMenuBarButtonItemAction(_ sender: UIBarButtonItem) {
     if leftMenuView.isDisplayed {
@@ -166,26 +77,6 @@ class OrderListViewController: BaseViewController {
     } else {
       leftMenuView.showViewInView(superView: self.view, isHiddenStatusBar: false)
     }
-  }
-  /* Added by Hoang Trinh - End */
-  
-  @IBAction func showCalendar(_ sender: UIBarButtonItem) {
-    pickerContainerView.isHidden = false
-    let height = Constants.toolbarHeight + Constants.pickerViewHeight;
-    pickerContainerView.transform = CGAffineTransform(translationX: 0, y: height)
-    UIView.animate(withDuration: 0.25) {
-      self.pickerContainerView.transform = .identity
-    }
-  }
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//    if segue.identifier == SegueIdentifier.showOrderDetail,
-//      let destVC = segue.destination as? OrderDetailContainerViewController,
-//      let order = sender as? Order {
-//      destVC.orderID = "\(order.id)"
-//      destVC.orderStatus = order.statusCode
-//      destVC.routeID = route.id
-//    }
   }
 }
 
@@ -199,36 +90,18 @@ extension OrderListViewController {
     dateFormater.dateFormat = format
     
     return dateFormater.string(from: date)
-  }
-  
-  func getOrders(byDate date: String? = nil) {
-    navigationItem.rightBarButtonItem?.isEnabled = true
     
-    showLoadingIndicator()
-    API().getRoutes(byDate: date!) {[weak self] (result) in
-        self?.dismissLoadingIndicator()
-
-        switch result{
-        case .object(let obj):
-            self?.route = obj
-        case .error(let error):
-            self?.showAlertView(error.getMessage())
-        }
-    }
   }
 }
 
 extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if route == nil {
-      return 0
-    }
-    return route.orderList.count
+    return route?.orderList.count ?? 0
   }
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderItemTableViewCell {
-      cell.order = route.orderList[indexPath.row]
+      cell.order = route?.orderList[indexPath.row]
       return cell
     }
     return UITableViewCell()
@@ -248,9 +121,9 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
     guard route != nil else { return }
-    let movedOrder = route.orderList[sourceIndexPath.row]
-    route.orderList.remove(at: sourceIndexPath.row)
-    route.orderList.insert(movedOrder, at: destinationIndexPath.row)
+    let movedOrder = route?.orderList[sourceIndexPath.row]
+    route?.orderList.remove(at: sourceIndexPath.row)
+    route?.orderList.insert(movedOrder!, at: destinationIndexPath.row)
     tableView.reloadData()
   }
   
@@ -264,10 +137,11 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
     
     let vc:OrderDetailContainerViewController = .loadSB(SB: .Order)
     
-    let order = route.orderList[indexPath.row];
-    vc.orderID = "\(order.id)"
-    vc.orderStatus = order.statusCode
-    vc.routeID = route.id
+    if let order = route?.orderList[indexPath.row] {
+        vc.orderID = "\(order.id)"
+        vc.orderStatus = order.statusCode
+        vc.routeID = route?.id
+    }
     self.navigationController?.pushViewController(vc, animated: true)
   }
   

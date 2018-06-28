@@ -10,18 +10,25 @@ import UIKit
 import XLPagerTabStrip
 import CoreLocation
 
+enum OrderDetailSection:Int {
+    case sectionOrderInfor = 0;
+    case sectionOrderItems = 1;
+}
+
 class OrderDetailViewController: BaseOrderDetailViewController {
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var updateStatusButton: UIButton!
     
   var subTableView: UITableView!
   
-  fileprivate var detailItems = [OrderDetailItem]()
+  fileprivate var arrTitleHeader:[String] = []
+
+  fileprivate var detailInforRows = [OrderDetailInforRow]()
   fileprivate let cellHeight: CGFloat = 70.0
   fileprivate let orderItemsPaddingTop: CGFloat = 40.0
   fileprivate let orderItemCellHeight: CGFloat = 130.0
   fileprivate let cellIdentifier = "OrderDetailTableViewCell"
-  fileprivate let orderItemsCellIdentifier = "OrderItemsTableViewCell"
+  fileprivate let headerCellIdentifier = "OrderDetailHeaderCell"
   fileprivate let orderScanItemCellIdentifier = "OrderScanItemTableViewCell"
   fileprivate var scanItems = [String]()
   fileprivate let itemsIndex = 8
@@ -36,50 +43,51 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   
   
   override var orderDetail: OrderDetail? {
-    didSet {      
-      guard let _orderDetail = orderDetail else { return }
-      updateStatusButton.isHidden = false
-      detailItems.removeAll()
-      var refe = OrderDetailItem(.reference)
-      refe.content = _orderDetail.orderReference
-      var statusItem = OrderDetailItem(.status)
-      let status = OrderStatus(rawValue: _orderDetail.statusCode) ?? OrderStatus.open
-      statusItem.content = status.statusName
-      var type = OrderDetailItem(.type)
-      type.content = _orderDetail.orderType
-      var delDate = OrderDetailItem(.deliveryDate)
-      let dateTime = _orderDetail.timeWindowName.length > 0 ? _orderDetail.deliveryDate + " - " + _orderDetail.timeWindowName : _orderDetail.deliveryDate
-      delDate.content = dateTime
-      var customer = OrderDetailItem(.customerName)
-      customer.content = _orderDetail.deliveryContactName
-      var phone = OrderDetailItem(.phone)
-      phone.content = _orderDetail.deliveryContactPhone
-      var address = OrderDetailItem(.address)
-        address.content = _orderDetail.deliveryAdd + "\n\(_orderDetail.deliveryCity)"
-      var description = OrderDetailItem(.description)
-      description.content = _orderDetail.descriptionNote + " " + _orderDetail.descriptionNoteExt
-      var items = OrderDetailItem(.items)
-      items.content = ""
-      items.items = _orderDetail.items
-      shouldFilterOrderItemsList = _orderDetail.items.filter({$0.statusCode == "OP"}).count > 0
-      
-      
-      detailItems.append(refe)
-      detailItems.append(statusItem)
-      detailItems.append(type)
-      detailItems.append(delDate)
-      detailItems.append(customer)
-      detailItems.append(phone)
-      detailItems.append(address)
-      detailItems.append(description)
-      detailItems.append(items)
-      
+    didSet {
+        
+      setupDataDetailInforRows()
       tableView.reloadData()
 //      subTableView.reloadData()
       
-      updateStatusButton.isHidden = _orderDetail.statusCode != "OP" && _orderDetail.statusCode != "IP"
     }
   }
+    
+    func setupDataDetailInforRows() {
+        
+        guard let _orderDetail = orderDetail else { return }
+        updateStatusButton.isHidden = false
+        detailInforRows.removeAll()
+        let refe = OrderDetailInforRow(.reference,_orderDetail.orderReference)
+        
+        let status = OrderStatus(rawValue: _orderDetail.statusCode) ?? OrderStatus.open
+        let statusItem = OrderDetailInforRow(.status,status.statusName)
+        
+        let type = OrderDetailInforRow(.type, _orderDetail.orderType)
+        
+        let dateTime = _orderDetail.timeWindowName.length > 0 ? _orderDetail.deliveryDate + " - " + _orderDetail.timeWindowName : _orderDetail.deliveryDate
+        let delDate = OrderDetailInforRow(.deliveryDate,dateTime )
+        
+        let customer = OrderDetailInforRow(.customerName,_orderDetail.deliveryContactName)
+        let phone = OrderDetailInforRow(.phone,_orderDetail.deliveryContactPhone)
+        
+        let address = OrderDetailInforRow(.address,_orderDetail.deliveryAdd + "\n\(_orderDetail.deliveryCity)")
+        
+        let des = _orderDetail.descriptionNote + " " + _orderDetail.descriptionNoteExt
+        let description = OrderDetailInforRow(.description,des)
+        
+        shouldFilterOrderItemsList = _orderDetail.items.filter({$0.statusCode == "OP"}).count > 0
+        
+        detailInforRows.append(refe)
+        detailInforRows.append(statusItem)
+        detailInforRows.append(type)
+        detailInforRows.append(delDate)
+        detailInforRows.append(customer)
+        detailInforRows.append(phone)
+        detailInforRows.append(address)
+        detailInforRows.append(description)
+        
+        updateStatusButton.isHidden = _orderDetail.statusCode != "OP" && _orderDetail.statusCode != "IP"
+    }
   
   var didUpdateStatus:((_ shouldMoveSigatureTab: Bool ) -> Void)?
   var updateOrderDetail:(() -> Void)?
@@ -98,7 +106,13 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     tableView.rowHeight = UITableViewAutomaticDimension
     
     navigationController?.navigationBar.tintColor = .white
+    
+    initVar()
   }
+    
+    func initVar()  {
+        arrTitleHeader = ["Order Information","Items List"]
+    }
   
   override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
     return IndicatorInfo(title: "order_detail_title".localized)
@@ -189,12 +203,12 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     func handleDidScanMatchBarCode(_ code: String) {
-        let orderItem = detailItems[itemsIndex]
+        let orderItem = orderDetail?.items
         
         guard code.length > 0 else { return }
         
         if shouldFilterOrderItemsList {
-            scannedObjectIndexs = findIndexOfScannedObject(code, items: orderItem.items)
+            scannedObjectIndexs = findIndexOfScannedObject(code, items: orderItem!)
             if scannedObjectIndexs.count == 0 {
                 showAlertView("order_detail_barcode_notmatch".localized)
             }
@@ -330,8 +344,17 @@ extension OrderDetailViewController {
   func updateOrderStatus(_ status: String) {
     guard let _orderDetail = orderDetail,
       let _routeID = routeID else { return }
-    showLoadingIndicator()
     
+    _orderDetail.routeId = _routeID;
+    _orderDetail.statusCode = status
+    
+    showLoadingIndicator()
+    API().updateOrderStatus(_orderDetail) {[weak self] (result) in
+        self?.dismissLoadingIndicator()
+
+        
+    }
+/*
     APIs.updateOrderStatus("\(_orderDetail.id)", expectedStatus: status, routeID: "\(_routeID)", reason: nil, { [unowned self] (successful, msg) in
         self.dismissLoadingIndicator()
         self.showAlertView(msg as! String, completionHandler: { [unowned self] (alertAction) in
@@ -341,99 +364,74 @@ extension OrderDetailViewController {
         self.dismissLoadingIndicator()
         self.showAlertView(error?.message ?? "")
     }
+ */
   }
 }
 
 extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 2
+        return arrTitleHeader.count
     }
     
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    guard itemsIndex < detailItems.count else { return 0 }
-    switch section {
-    case 0:
-        return detailItems.count
-    case 1:
-        let item = detailItems[itemsIndex]
-        return item.items.count
-    default:
-        return 0
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section)!
+        switch orderSection {
+        case .sectionOrderInfor:
+            return detailInforRows.count
+        case .sectionOrderItems:
+            return orderDetail?.items.count ?? 0
+        }
     }
-  }
   
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//    guard indexPath.row < detailItems.count else { return UITableViewAutomaticDimension }
-//    let item = detailItems[indexPath.row]
-//    if tableView == subTableView {
-//      return orderItemCellHeight.scaleHeight()
-//    }
-//    if item.type == .items {
-//
-//      return item.items.count > 0 ? CGFloat(item.items.count) * orderItemCellHeight.scaleHeight() + orderItemsPaddingTop : orderItemsPaddingTop.scaleHeight() + cellHeight
-//    }
-    return UITableViewAutomaticDimension
-  }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard let _orderDetail = orderDetail, _orderDetail.statusCode == "IP" else { return 0.0 }
-        if section == 1 {
-            return 50.0
-        }
-        return 0.0
+        return 45.0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if section == 1 {
-            let itemsSectionView : ItemsSectionView = ItemsSectionView()
-            if let _orderDetail = orderDetail, _orderDetail.statusCode == "IP" {
-                itemsSectionView.config(false)
-            } else {
-                itemsSectionView.config(true)
-            }
-            itemsSectionView.didClickScanButton = { [weak self] () in
-                self?.handleScanMatchBarCode()
-            }
-            return itemsSectionView
+        if let headerCell = tableView.dequeueReusableCell(withIdentifier: headerCellIdentifier) as? OrderDetailTableViewCell{
+            headerCell.nameLabel?.text = arrTitleHeader[section];
+            
+            return headerCell;
         }
-        
+
         return nil
     }
   
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    
-    switch indexPath.section {
-    case 0:
-        let item = detailItems[indexPath.row]
-        if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
-            cell.orderDetailItem = item
-            cell.selectionStyle = !(item.type == .phone && item.type == .address) ? .none : .default
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let orderSection:OrderDetailSection = OrderDetailSection(rawValue: indexPath.section)!
+        switch orderSection {
+        case .sectionOrderInfor:
+            let item = detailInforRows[indexPath.row]
+            if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
+                cell.orderDetailItem = item
+                cell.selectionStyle = !(item.type == .phone && item.type == .address) ? .none : .default
+                return cell
+            }
+        
+        case .sectionOrderItems:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: orderScanItemCellIdentifier, for: indexPath) as? OrderScanItemTableViewCell {
+            let orderItem = orderDetail?.items[itemsIndex]
+            cell.orderItem = orderItem
+                    
             return cell
         }
-    case 1:
-        if let cell = tableView.dequeueReusableCell(withIdentifier: orderScanItemCellIdentifier, for: indexPath) as? OrderScanItemTableViewCell {
-            let orderItem = detailItems[itemsIndex]
-            cell.orderItem = orderItem.items[indexPath.row]
-            if scannedString.length > 0, scannedObjectIndexs.contains(indexPath.row), shouldFilterOrderItemsList {
-                cell.contentView.backgroundColor = AppColor.highLightColor
-            }
-            else {
-                cell.contentView.backgroundColor = .white
-            }
-            return cell
-        }
-    default:
-        return UITableViewCell()
     }
+   
     return UITableViewCell()
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     tableView.deselectRow(at: indexPath, animated: true)
-    switch indexPath.section {
-    case 0:
-        let item = detailItems[indexPath.row]
+    
+    let orderSection:OrderDetailSection = OrderDetailSection(rawValue: indexPath.section)!
+    switch orderSection {
+    case .sectionOrderInfor:
+        let item = detailInforRows[indexPath.row]
         if item.type == .address {
             performSegue(withIdentifier: SegueIdentifier.showMapView, sender: nil)
         }
@@ -443,14 +441,13 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         }
-        break
-    case 1:
-        let orderItem = detailItems[itemsIndex]
-        showActionForOrderItem(orderItem.items[indexPath.row])
-        break
+        
+    case .sectionOrderItems:
+        if let orderItem = orderDetail?.items[itemsIndex] {
+            showActionForOrderItem(orderItem)
+        }
     default:
-        break
+        break;
     }
-
   }
 }

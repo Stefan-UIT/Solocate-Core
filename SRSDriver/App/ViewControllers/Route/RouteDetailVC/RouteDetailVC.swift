@@ -21,7 +21,6 @@ class RouteDetailVC: UITabBarController {
     let navigationService = DMSNavigationService()
     
     var route:Route?
-
     
     var selectedTabBarItem:TabBarItem = .Order{
         didSet{
@@ -70,8 +69,17 @@ class RouteDetailVC: UITabBarController {
             orderVC.route = route
         }
         let packageVC:PackagesViewController = .loadSB(SB: .Packages)
+        if let route = self.route {
+            packageVC.route = route
+        }
         let mapVC:MapsViewController = .loadSB(SB: .Map)
+        if let route = self.route {
+            mapVC.route = route
+        }
         let messageVC:RouteMessagesViewController = .loadSB(SB: .Message)
+        if let route = self.route {
+            messageVC.route = route
+        }
         
         orderVC.tabBarItem.title = "Orders"
         packageVC.tabBarItem.title = "Packages"

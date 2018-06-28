@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class Order: NSObject, Mappable {
+class Order: BaseModel {
   var id = -1
   var deliveryZip = ""
   var totalVolume = ""
@@ -30,11 +30,13 @@ class Order: NSObject, Mappable {
   var deliveryAdd = ""
   var timeWindowName = ""
   var orderType = ""
+  var routeId = -1
+
   convenience required init?(map: Map) {
     self.init()
   }
   
-  func mapping(map: Map) {
+    override func mapping(map: Map) {
     id                <- map["order_id"]
     deliveryZip       <- map["dlvy_zip"]
     totalVolume       <- map["tot_vol"]
@@ -56,6 +58,8 @@ class Order: NSObject, Mappable {
     deliveryAdd       <- map["delivery"]
     timeWindowName    <- map["TimeWindowName"]
     orderType         <- map["order_type_name"]
+    routeId           <- map["route_id"]
+
   }
 }
 

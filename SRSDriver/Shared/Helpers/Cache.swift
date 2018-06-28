@@ -21,6 +21,8 @@ class Cache: NSObject {
                 setObject(obj: dic, forKey: Defaultkey.SF_USER)
             }else {
                 userDefaults.removeObject(forKey: Defaultkey.tokenKey)
+                userDefaults.removeObject(forKey: Defaultkey.SF_USER)
+
             }
         }
         

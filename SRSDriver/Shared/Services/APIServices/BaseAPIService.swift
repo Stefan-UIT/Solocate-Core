@@ -139,7 +139,7 @@ class BaseAPIService {
         }
         
         func APILog(_ STATUS: String, _ MSG: String?) {
-            print(">>> [API]  [\( String(format: "%04u", identifier) )] [\( method )] [\( path)] \( STATUS )");
+            print(">>> [API]  [\( String(format: "%04u", identifier) )] [\( method )] [\( url)] \( STATUS )");
             if let msg = MSG { print("\( msg )\n\n"); }
         }
         
@@ -341,12 +341,14 @@ fileprivate extension BaseAPIService{
                 return .object(resultObject)
             }
             
-        case .tokenFail:
+        case .tokenFail,
+             .notAuthorized:
             
-            //reLogin
+        App().reLogin()
+
+        let err = ERROR(dataResponse: dataResponse)
+        return .error(err)
             
-            break
-        
         default:
             break;
         }

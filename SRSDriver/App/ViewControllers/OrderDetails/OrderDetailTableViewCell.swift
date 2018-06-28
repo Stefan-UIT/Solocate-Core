@@ -10,22 +10,25 @@ import UIKit
 
 class OrderDetailTableViewCell: UITableViewCell {
   
-  @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var contentLabel: UILabel!
-  @IBOutlet weak var iconImgView: UIImageView!
+  @IBOutlet weak var nameLabel: UILabel?
+  @IBOutlet weak var contentLabel: UILabel?
+  @IBOutlet weak var iconImgView: UIImageView?
+  @IBOutlet weak var lineView: UIView?
+
   
-  var orderDetailItem: OrderDetailItem! {
+  var orderDetailItem: OrderDetailInforRow! {
     didSet {
-      nameLabel.text = orderDetailItem.name
-      contentLabel.text = orderDetailItem.content
-      iconImgView.isHidden = true
+      nameLabel?.text = orderDetailItem.name
+      contentLabel?.text = orderDetailItem.content
+      iconImgView?.isHidden = true
+      lineView?.isHidden = (orderDetailItem.type == .description)
       if orderDetailItem.type == .address {
-        iconImgView.image = UIImage(named: "map")
-        iconImgView.isHidden = false
+        iconImgView?.image = UIImage(named: "map")
+        iconImgView?.isHidden = false
       }
       else if orderDetailItem.type == .phone {
-        iconImgView.image = UIImage(named: "phone")
-        iconImgView.isHidden = false
+        iconImgView?.image = UIImage(named: "phone")
+        iconImgView?.isHidden = false
       }
     }
   }
@@ -33,7 +36,7 @@ class OrderDetailTableViewCell: UITableViewCell {
   override func awakeFromNib() {
     super.awakeFromNib()
     // Initialization code
-    contentLabel.numberOfLines = 0
+    contentLabel?.numberOfLines = 0
   }
   
   override func setSelected(_ selected: Bool, animated: Bool) {
@@ -46,34 +49,33 @@ class OrderDetailTableViewCell: UITableViewCell {
 
 
 
-struct OrderDetailItem {
+struct OrderDetailInforRow {
   var type: OrderDetailType
   var name: String
   var content: String = ""
-  var items = [OrderItem]()
   
-  init(_ type: OrderDetailType) {    
-    self.type = type
-    switch type {
-    case .reference:
-      name = "order_detail_order_reference".localized
-    case .status:
-      name = "order_detail_status".localized
-    case .type:
-      name = "order_detail_order_type".localized
-    case .deliveryDate:
-      name = "order_detail_expected_date".localized
-    case .customerName:
-      name = "order_detail_contact_name".localized
-    case .phone:
-      name = "order_detail_phone".localized
-    case .address:
-      name = "order_detail_delivery_address".localized
-    case .description:
-      name = "order_detail_description".localized
-    case .items:
-      name = "items".localized
-    }
+    init(_ type: OrderDetailType, _ content:String) {
+        self.type = type
+        self.content = content
+        
+        switch type {
+        case .reference:
+          name = "order_detail_order_reference".localized
+        case .status:
+          name = "order_detail_status".localized
+        case .type:
+          name = "order_detail_order_type".localized
+        case .deliveryDate:
+          name = "order_detail_expected_date".localized
+        case .customerName:
+          name = "order_detail_contact_name".localized
+        case .phone:
+          name = "order_detail_phone".localized
+        case .address:
+          name = "order_detail_delivery_address".localized
+        case .description:
+          name = "order_detail_description".localized
+        }
   }
 }
 
@@ -87,7 +89,6 @@ enum OrderDetailType {
   case phone
   case address
   case description
-  case items
 }
 
 enum OrderStatus: String {
