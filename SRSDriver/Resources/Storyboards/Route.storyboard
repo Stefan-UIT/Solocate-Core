@@ -147,11 +147,22 @@
                                     <constraint firstAttribute="height" constant="206" id="3RY-KS-MRP"/>
                                 </constraints>
                             </view>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have no routes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpg-qv-SkC">
+                                <rect key="frame" x="137" y="334.5" width="102" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <color key="textColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="You have no route"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Bhx-uf-sCd" firstAttribute="bottom" secondItem="KQA-xX-EPy" secondAttribute="bottom" id="3nq-P2-G9t"/>
                             <constraint firstItem="KQA-xX-EPy" firstAttribute="top" secondItem="Bhx-uf-sCd" secondAttribute="top" id="EBe-Ar-k1Y"/>
+                            <constraint firstItem="xpg-qv-SkC" firstAttribute="centerY" secondItem="KQA-xX-EPy" secondAttribute="centerY" id="Jgv-Ki-UsO"/>
+                            <constraint firstItem="xpg-qv-SkC" firstAttribute="centerX" secondItem="KQA-xX-EPy" secondAttribute="centerX" id="Ocf-iR-pfE"/>
                             <constraint firstItem="h6R-mN-a1V" firstAttribute="trailing" secondItem="Bhx-uf-sCd" secondAttribute="trailing" id="aL6-tx-ag8"/>
                             <constraint firstItem="KQA-xX-EPy" firstAttribute="leading" secondItem="Bhx-uf-sCd" secondAttribute="leading" id="bWP-DK-Cja"/>
                             <constraint firstItem="h6R-mN-a1V" firstAttribute="leading" secondItem="Bhx-uf-sCd" secondAttribute="leading" id="lUs-BD-LqF"/>
@@ -162,6 +173,7 @@
                     </view>
                     <connections>
                         <outlet property="datePickerView" destination="gia-BM-VGq" id="VmV-tW-G9X"/>
+                        <outlet property="lblNoResult" destination="xpg-qv-SkC" id="55C-Wq-sJl"/>
                         <outlet property="pickerContainerView" destination="h6R-mN-a1V" id="HhO-Cf-FyC"/>
                         <outlet property="tbvContent" destination="KQA-xX-EPy" id="t5n-MH-shR"/>
                     </connections>

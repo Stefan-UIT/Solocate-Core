@@ -25,7 +25,7 @@ class OrderListViewController: BaseViewController {
       navigationItem.title = selectedString
     }
   }
-  fileprivate var route: Route! {
+  var route: Route! {
     didSet {
       guard let tabItems = self.tabBarController?.tabBar.items else { return }
       if let messageTab = tabItems.last {
@@ -110,7 +110,7 @@ class OrderListViewController: BaseViewController {
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     navigationItem.title = selectedString
-    getOrders(byDate: datePickerView.date.toString("yyyy-MM-dd"))
+    //getOrders(byDate: datePickerView.date.toString("yyyy-MM-dd"))
     tabBarController?.tabBar.isHidden = false
     
   }

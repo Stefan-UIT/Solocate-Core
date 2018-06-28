@@ -20,6 +20,9 @@ class RouteDetailVC: UITabBarController {
 
     let navigationService = DMSNavigationService()
     
+    var route:Route?
+
+    
     var selectedTabBarItem:TabBarItem = .Order{
         didSet{
            updateNavigationBar()
@@ -63,6 +66,9 @@ class RouteDetailVC: UITabBarController {
     func setupTabBarController() {
         
         let orderVC:OrderListViewController = .loadSB(SB: .Order)
+        if let route = self.route {
+            orderVC.route = route
+        }
         let packageVC:PackagesViewController = .loadSB(SB: .Packages)
         let mapVC:MapsViewController = .loadSB(SB: .Map)
         let messageVC:RouteMessagesViewController = .loadSB(SB: .Message)

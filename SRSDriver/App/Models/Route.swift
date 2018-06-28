@@ -28,7 +28,8 @@ class Route: BaseModel {
   var messages = [Message]()
   var currentItems = [OrderItem]()
   var endDate = ""
-  var startDate = ""
+  var startDate = ""    
+    
   
   convenience required init?(map: Map) {
     self.init()

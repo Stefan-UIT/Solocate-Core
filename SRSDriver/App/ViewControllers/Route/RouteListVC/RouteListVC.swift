@@ -14,6 +14,8 @@ class RouteListVC: BaseViewController {
     @IBOutlet weak var pickerContainerView: UIView!
 
     @IBOutlet weak var tbvContent:UITableView?
+    @IBOutlet weak var lblNoResult:UILabel?
+
     
     var listRoutes:[Route]?{
         didSet{
@@ -125,6 +127,10 @@ extension RouteListVC: UITableViewDataSource{
 extension RouteListVC:UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc:RouteDetailVC = .loadSB(SB: .Route)
+        if let routes = listRoutes {
+            let route = routes[indexPath.section];
+            vc.route = route;
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -140,7 +146,14 @@ fileprivate extension RouteListVC{
             
             switch result{
             case .object(let obj):
-                self?.listRoutes = [obj]
+                if (obj.id != -1){
+                    self?.listRoutes = [obj]
+                }else {
+                    self?.listRoutes = nil
+                }
+                
+                self?.lblNoResult?.isHidden = (self?.listRoutes?.count ?? 0 > 0)
+
             case .error(let error):
                 self?.showAlertView(error.getMessage())
             }
