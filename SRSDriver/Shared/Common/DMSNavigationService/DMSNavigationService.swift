@@ -8,10 +8,9 @@
 
 import UIKit
 
-protocol DMSNavigationServiceDelegate {
+@objc protocol DMSNavigationServiceDelegate {
     func didSelectedBackOrMenu()
-    func didSelectedRightButton()
-
+    @objc optional func didSelectedRightButton()
 }
 
 class DMSNavigationService: NSObject , NavigationService {
@@ -176,7 +175,7 @@ extension DMSNavigationService {
     }
     
     @objc func onNavigationClickRightButton(_ sender: UIBarButtonItem) {
-        delegate?.didSelectedRightButton()
+        delegate?.didSelectedRightButton!()
     }
     
     @objc func onNavigationSaveDone(_ sender: UIBarButtonItem) {

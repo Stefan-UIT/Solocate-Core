@@ -76,7 +76,7 @@ class MapsViewController: UIViewController {
         labelOrder.backgroundColor = .gray
         labelOrder.cornerRadius = 15.0
         labelOrder.clipsToBounds = true
-        marker.title = "\(m.shopName)"
+        marker.title = "\(m.storeName)"
         marker.snippet = "\(m.deliveryAdd)"
         marker.map = mapView
         marker.iconView = labelOrder

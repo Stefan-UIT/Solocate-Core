@@ -16,7 +16,7 @@ class Order: BaseModel {
   var totalWeight = ""
   var floorSpace = ""
   var shopID = -1
-  var shopName = ""
+  var storeName = ""
   var sequence = -1
   var pickupContactName = ""
   var pickupContactPhone = ""
@@ -31,6 +31,11 @@ class Order: BaseModel {
   var timeWindowName = ""
   var orderType = ""
   var routeId = -1
+    
+  var seq = -1
+  var pallets = -1
+  var cases = -1
+
 
   convenience required init?(map: Map) {
     self.init()
@@ -43,7 +48,7 @@ class Order: BaseModel {
     totalWeight       <- map["tot_weight"]
     floorSpace        <- map["floor_space"]
     shopID            <- map["shop_id"]
-    shopName          <- map["shop"]
+    storeName          <- map["store_name"]
     sequence          <- map["seq"]
     pickupContactName <- map["pkup_ctt_name"]
     
@@ -59,11 +64,62 @@ class Order: BaseModel {
     timeWindowName    <- map["TimeWindowName"]
     orderType         <- map["order_type_name"]
     routeId           <- map["route_id"]
-
+        
+    seq  <- map["seq"]
+    pallets  <- map["pallets"]
+    cases  <- map["cases"]
   }
 }
+/*
+ "id": 63,
+ "shop_id": 45,
+ "store_name": "L.V. - NELLIS",
+ "addr": "115/24 Phan Đăng Lưu",
+ "full_addr": "115/24 Phan Đăng Lưu, Phường 7, Phú Nhuận, Hồ Chí Minh, Vietnam",
+ "city": "Hồ Chí Minh",
+ "state": null,
+ "zip": "70000",
+ "ctt_name": "Tri Le",
+ "ctt_phone": "0978756054",
+ "ctt_phone2": null,
+ "ctt_email": "ldtri0209@gmail.com",
+ "lat": "10.8032150",
+ "long": "106.6855360",
+ "note": "abc",
+ "dlvy_start_time": "11:39",
+ "dlvy_end_time": "12:09",
+ "order_sts": "DV",
+ "route_id": 51,
+ "order_ref": "234",
+ "sig": null,
+ "seq": 2,
+ "service_time": 30,
+ "order_type_name": "Delivery",
+ "order_type_id": 1,
+ "reason_msg": null,
+ "loc_id": 1,
+ "dlvy_date": "06/29/2018",
+ "send_email": 0,
+ "send_sms": 0,
+ "pallets": 12,
+ "cases": 33,
+ "driver_name": "mach nguyen",
+ "order_status_name": "Finished",
+ "created_at": "06/29/2018",
+ "dlvd_dt": "06/29/2018 03:42",
+ "dlvd_dt_date": "06/29/2018",
+ "dlvd_dt_time": "03:42",
+ "url": {
+ "link": "https://apigw.seldatdirect.com/dev/dms/99cents/api/backend-api/v1/file/",
+ "name": null
+ }
+ }
+ */
 
 class OrderDetail: Order {
+  var startTime = ""
+  var endTime = ""
+  var serviceTime = -1
   var deliveryContactName = ""
   var deliveryContactPhone = ""
   var deliveryCity = ""
@@ -103,6 +159,11 @@ class OrderDetail: Order {
     notes <- map["notes"]
     pictures <- map["url"]
     items <- map["details"]
+    
+    startTime <- map["dlvy_start_time"]
+    endTime <- map["dlvy_end_time"]
+    deliveryDate <- map["dlvy_date"];
+    serviceTime <- map["service_time"]
   }
 }
 

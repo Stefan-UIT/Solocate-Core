@@ -28,8 +28,27 @@ class Route: BaseModel {
   var messages = [Message]()
   var currentItems = [OrderItem]()
   var endDate = ""
-  var startDate = ""    
+  var startDate = ""
     
+  var route_number = 0
+  var route_name_sts = ""
+    var colorStatus:UIColor {
+        get{
+            
+            switch status {
+            case "OP":
+                return AppColor.newStatus;
+            case "IP":
+                return AppColor.inProcessStatus;
+            case "DV":
+                return AppColor.deliveryStatus;
+            default:
+                return AppColor.white;
+            }
+            
+        }
+    }
+
   
   convenience required init?(map: Map) {
     self.init()
@@ -52,6 +71,9 @@ class Route: BaseModel {
     pickupList  <- map["pickup_list"]
     messages    <- map["messages"]
     currentItems <- map["current_item"]
+        
+    route_number <- map["route_number"]
+    route_name_sts <- map["route_name_sts"]
   }
 }
 

@@ -97,7 +97,7 @@ open class SegmentedPagerTabStripViewController: PagerTabStripViewController, Pa
 
     open func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int) {
         if shouldUpdateSegmentedControl {
-            segmentedControl.selectedSegmentIndex = toIndex
+           // segmentedControl.selectedSegmentIndex = toIndex
         }
     }
 

@@ -58,10 +58,9 @@ class RouteListVC: BaseViewController {
     
     func updateDataRows(_ route:Route? = nil) {
         dataRows.removeAll()
-        dataRows = [["Truck :", "\(route?.truckID ?? 0)"],
-                    ["Total Orders :",""],
-                    ["Distance :",""],
-                    ["Job Date :", E(route?.date)]]
+        dataRows = [["Route number ", "\(route?.route_number ?? 0)"],
+                    ["Total ordes ","\(route?.totalOrders ?? 0)"],
+                    ["Date ", E(route?.date)]]
     }
     
     @IBAction func didChooseCalendar(_ sender: UIBarButtonItem) {
@@ -96,6 +95,8 @@ extension RouteListVC: UITableViewDataSource{
         if let routes = listRoutes {
             let route = routes[section]
             headerCell.lblTitle?.text = "Route ID-\(route.id)"
+            headerCell.btnStatus?.setTitle(route.route_name_sts, for: .normal)
+            headerCell.btnStatus?.setTitleColor(route.colorStatus, for: .normal);
         }
         
         return headerCell;

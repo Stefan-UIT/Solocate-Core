@@ -32,6 +32,11 @@ class BaseViewController: UIViewController {
     navigationService.navigationItem = self.navigationItem
     updateNavigationBar()
   }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return UIStatusBarStyle.lightContent
+    }
+    
   deinit {
     removeNetworkObserver()
   }

@@ -14,7 +14,7 @@ class OrderMarker: GMSMarker {
   
   convenience init(_ order: Order) {
     self.init()
-    title = order.shopName
+    title = order.storeName
     position = CLLocationCoordinate2D(latitude: order.lat.doubleValue, longitude: order.lng.doubleValue)
   }
 }

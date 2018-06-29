@@ -15,6 +15,8 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
   var routeID: Int?
   var orderStatus: String?
     
+  var navigateService:DMSNavigationService?
+    
   fileprivate var orderDetail: OrderDetail?
   
   override func viewControllers(for pagerTabStripController: PagerTabStripViewController) -> [UIViewController] {
@@ -40,49 +42,59 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
     return [child_1]
   }
   
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-  }
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    setupNavigationBar()
-    getOrderDetail()
-  }
-    
-    func setupNavigationBar()  {
-        let nv:DMSNavigationService = DMSNavigationService()
-        nv.navigationItem = self.navigationItem
-        nv.updateNavigationBar(.BackOnly, "order_detail_title".localized)
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
   
-  private func getOrderDetail() {
-    guard let _orderID = orderID else { return }
-    showLoadingIndicator()
-    API().getOrderDetail(orderId: _orderID) {[weak self] (result) in
-        self?.dismissLoadingIndicator()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    
+        setupNavigationBar()
+        getOrderDetail()
+    }
+    
+    func setupNavigationBar()  {
+        navigateService = DMSNavigationService()
+        navigateService?.navigationItem = self.navigationItem
+        navigateService?.delegate = self
+        navigateService?.updateNavigationBar(.BackOnly, "Order Detail")
+    }
+  
+    private func getOrderDetail() {
+        guard let _orderID = orderID else { return }
+        showLoadingIndicator()
+        API().getOrderDetail(orderId: _orderID) {[weak self] (result) in
+            self?.dismissLoadingIndicator()
         
-        switch result{
-        case .object(let object):
-            self?.orderDetail = object
-            self?.segmentedControl.isUserInteractionEnabled = object.statusCode == "IP" || object.statusCode == "DV"
-            self?.containerView.isScrollEnabled = object.statusCode == "IP" || object.statusCode == "DV"
-            for v in (self?.viewControllers)! {
-                (v as? BaseOrderDetailViewController)?.orderDetail = object
-                (v as? BaseOrderDetailViewController)?.routeID = self?.routeID
-            }
+            switch result{
+            case .object(let object):
+                self?.orderDetail = object
+//                self?.segmentedControl.isUserInteractionEnabled = object.statusCode == "IP" || object.statusCode == "DV"
+                self?.containerView.isScrollEnabled = object.statusCode == "IP" || object.statusCode == "DV"
+                for v in (self?.viewControllers)! {
+                    (v as? BaseOrderDetailViewController)?.orderDetail = object
+                    (v as? BaseOrderDetailViewController)?.routeID = self?.routeID
+                }
             
-        case .error(let error):
-            self?.showAlertView(error.getMessage())
+                case .error(let error):
+                    self?.showAlertView(error.getMessage())
         }
     }
   }
+    
   
   override func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int) {
     super.updateIndicator(for: viewController, fromIndex: fromIndex, toIndex: toIndex)
 //    guard let _orderDetail = orderDetail else {return}
     containerView.isScrollEnabled = !(toIndex == 1)
   }
+    
+}
+
+extension OrderDetailContainerViewController:DMSNavigationServiceDelegate{
+    
+    func didSelectedBackOrMenu() {
+        self.navigationController?.popViewController(animated: true)
+    }
 }
 

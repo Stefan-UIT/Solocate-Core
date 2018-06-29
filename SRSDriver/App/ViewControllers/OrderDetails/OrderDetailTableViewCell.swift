@@ -59,14 +59,28 @@ struct OrderDetailInforRow {
         self.content = content
         
         switch type {
-        case .reference:
-          name = "order_detail_order_reference".localized
+        case .orderId:
+          name = "Order Id"
         case .status:
           name = "order_detail_status".localized
         case .type:
           name = "order_detail_order_type".localized
+        case.reference:
+          name = "order_detail_order_reference".localized
         case .deliveryDate:
           name = "order_detail_expected_date".localized
+        case .startTime:
+            name = "Window Start Time"
+        case .endTime:
+            name = "Window End Time"
+        case .serviceTime:
+            name = "Service Time"
+        case .seq:
+            name = "SEQ"
+        case .pallets:
+            name = "Pallets"
+        case .cases:
+            name = "Cases"
         case .customerName:
           name = "order_detail_contact_name".localized
         case .phone:
@@ -81,10 +95,17 @@ struct OrderDetailInforRow {
 
 
 enum OrderDetailType {
-  case reference
+  case orderId
   case status
   case type
+  case reference
   case deliveryDate
+  case startTime
+  case endTime
+  case serviceTime
+  case seq
+  case pallets
+  case cases
   case customerName
   case phone
   case address

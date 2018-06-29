@@ -37,7 +37,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   fileprivate var scannedString = "" {
     didSet {
       tableView.reloadData()
-//      subTableView.reloadData()
     }
   }
   
@@ -46,23 +45,75 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     didSet {
         
       setupDataDetailInforRows()
+      updateButtonStatus()
       tableView.reloadData()
-//      subTableView.reloadData()
-      
+    
     }
   }
-    
+    /*
+    "id": 63,
+    "shop_id": 45,
+    "store_name": "L.V. - NELLIS",
+    "addr": "115/24 Phan Đăng Lưu",
+    "full_addr": "115/24 Phan Đăng Lưu, Phường 7, Phú Nhuận, Hồ Chí Minh, Vietnam",
+    "city": "Hồ Chí Minh",
+    "state": null,
+    "zip": "70000",
+    "ctt_name": "Tri Le",
+    "ctt_phone": "0978756054",
+    "ctt_phone2": null,
+    "ctt_email": "ldtri0209@gmail.com",
+    "lat": "10.8032150",
+    "long": "106.6855360",
+    "note": "abc",
+    "dlvy_start_time": "11:39",
+    "dlvy_end_time": "12:09",
+    "order_sts": "DV",
+    "route_id": 51,
+    "order_ref": "234",
+    "sig": null,
+    "seq": 2,
+    "service_time": 30,
+    "order_type_name": "Delivery",
+    "order_type_id": 1,
+    "reason_msg": null,
+    "loc_id": 1,
+    "dlvy_date": "06/29/2018",
+    "send_email": 0,
+    "send_sms": 0,
+    "pallets": 12,
+    "cases": 33,
+    "driver_name": "mach nguyen",
+    "order_status_name": "Finished",
+    "created_at": "06/29/2018",
+    "dlvd_dt": "06/29/2018 03:42",
+    "dlvd_dt_date": "06/29/2018",
+    "dlvd_dt_time": "03:42",
+    "url": {
+    "link": "https://apigw.seldatdirect.com/dev/dms/99cents/api/backend-api/v1/file/",
+    "name": null
+    }
+}
+    */
     func setupDataDetailInforRows() {
         
         guard let _orderDetail = orderDetail else { return }
         updateStatusButton.isHidden = false
         detailInforRows.removeAll()
-        let refe = OrderDetailInforRow(.reference,_orderDetail.orderReference)
+        let orderId = OrderDetailInforRow(.orderId,"\(_orderDetail.id)")
         
         let status = OrderStatus(rawValue: _orderDetail.statusCode) ?? OrderStatus.open
         let statusItem = OrderDetailInforRow(.status,status.statusName)
         
         let type = OrderDetailInforRow(.type, _orderDetail.orderType)
+        let ref = OrderDetailInforRow(.reference , _orderDetail.orderReference)
+        
+        let startTime = OrderDetailInforRow(.startTime, _orderDetail.startTime)
+        let endTime = OrderDetailInforRow(.endTime , _orderDetail.endTime)
+        let serviceTime = OrderDetailInforRow(.serviceTime ,"\(_orderDetail.serviceTime)")
+        let seq = OrderDetailInforRow(.seq ,"\(_orderDetail.seq)")
+        let pallets = OrderDetailInforRow(.pallets ,"\(_orderDetail.pallets)")
+        let cases = OrderDetailInforRow(.cases ,"\(_orderDetail.cases)")
         
         let dateTime = _orderDetail.timeWindowName.length > 0 ? _orderDetail.deliveryDate + " - " + _orderDetail.timeWindowName : _orderDetail.deliveryDate
         let delDate = OrderDetailInforRow(.deliveryDate,dateTime )
@@ -77,9 +128,16 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         
         shouldFilterOrderItemsList = _orderDetail.items.filter({$0.statusCode == "OP"}).count > 0
         
-        detailInforRows.append(refe)
+        detailInforRows.append(orderId)
         detailInforRows.append(statusItem)
         detailInforRows.append(type)
+        detailInforRows.append(ref)
+        detailInforRows.append(startTime)
+        detailInforRows.append(endTime)
+        detailInforRows.append(serviceTime)
+        detailInforRows.append(seq)
+        detailInforRows.append(pallets)
+        detailInforRows.append(cases)
         detailInforRows.append(delDate)
         detailInforRows.append(customer)
         detailInforRows.append(phone)
@@ -94,12 +152,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-//    subTableView = UITableView(frame: CGRect.zero, style: .plain)
-//    subTableView.delegate = self
-//    subTableView.dataSource = self
+
     let orderScanItemNib = UINib(nibName: orderScanItemCellIdentifier, bundle: nil)
-//    subTableView.register(orderScanItemNib, forCellReuseIdentifier: orderScanItemCellIdentifier)
-//    subTableView.isScrollEnabled = false
     updateStatusButton.isHidden = true
     tableView.register(orderScanItemNib, forCellReuseIdentifier: orderScanItemCellIdentifier)
     tableView.estimatedRowHeight = cellHeight
@@ -352,19 +406,21 @@ extension OrderDetailViewController {
     API().updateOrderStatus(_orderDetail) {[weak self] (result) in
         self?.dismissLoadingIndicator()
 
-        
+        switch result{
+        case .object(_):
+            self?.setupDataDetailInforRows()
+            self?.updateButtonStatus()
+            self?.tableView.reloadData()
+            
+            if let didUpdateStatus = self?.didUpdateStatus{
+                didUpdateStatus(false)
+            }
+
+        case .error(let error):
+            self?.showAlertView(error.getMessage())
+            
+        }
     }
-/*
-    APIs.updateOrderStatus("\(_orderDetail.id)", expectedStatus: status, routeID: "\(_routeID)", reason: nil, { [unowned self] (successful, msg) in
-        self.dismissLoadingIndicator()
-        self.showAlertView(msg as! String, completionHandler: { [unowned self] (alertAction) in
-            self.navigationController?.popToRootViewController(animated: true)
-        })
-    }) { [unowned self] (error) in
-        self.dismissLoadingIndicator()
-        self.showAlertView(error?.message ?? "")
-    }
- */
   }
 }
 
@@ -450,4 +506,24 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         break;
     }
   }
+}
+
+//MARK: - Otherfuntion
+fileprivate extension OrderDetailViewController{
+    
+    func updateButtonStatus() {
+        updateStatusButton.backgroundColor = AppColor.mainColor
+        updateStatusButton.isHidden = false
+
+        switch orderDetail?.statusCode {
+        case "OP":
+            updateStatusButton.setTitle("Start", for: .normal)
+        case "IP":
+            updateStatusButton.setTitle("Finish", for: .normal)
+
+        default:
+            updateStatusButton.isHidden = true
+        }
+    }
+    
 }
