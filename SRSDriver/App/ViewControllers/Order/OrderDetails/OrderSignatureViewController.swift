@@ -20,6 +20,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    setupSignatureView()
     guard let order = orderDetail else { return }
     controlsContainerView.isHidden = order.sign.length > 0
     signatureView.isHidden = order.sign.length > 0
@@ -32,6 +33,12 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
     let data = Data(base64Encoded: baseURL, options: .ignoreUnknownCharacters)
     signatureImgView.image = UIImage(data: data ?? Data())
   }
+    
+    func setupSignatureView() {
+        signatureView.cornerRadius = 5.0;
+        signatureView.borderColor = UIColor.lightGray
+        signatureView.borderWidth = 1.0;
+    }
   
   
   override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {

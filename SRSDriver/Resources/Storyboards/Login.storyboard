@@ -20,7 +20,7 @@
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3A8-0o-UpW">
                                 <rect key="frame" x="30" y="455" width="315" height="48"/>
-                                <color key="backgroundColor" red="0.94509803920000002" green="0.54117647059999996" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.0" green="0.61568627450000002" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="48" id="Htf-2y-WBK"/>
                                 </constraints>
@@ -38,8 +38,8 @@
                                     <action selector="didClickLogin:" destination="3T1-w1-Qsx" eventType="touchUpInside" id="u79-Yh-8ep"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_masof_s" translatesAutoresizingMaskIntoConstraints="NO" id="c15-3W-M3X">
-                                <rect key="frame" x="122.5" y="89" width="130" height="65"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_99Cents" translatesAutoresizingMaskIntoConstraints="NO" id="c15-3W-M3X">
+                                <rect key="frame" x="117" y="56" width="141" height="98"/>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="xBQ-JA-gRu">
                                 <rect key="frame" x="63.5" y="194" width="248.5" height="60"/>
@@ -201,6 +201,6 @@
         <image name="check_selected" width="24" height="24"/>
         <image name="ic_login_password" width="18" height="18"/>
         <image name="ic_login_user" width="18" height="18"/>
-        <image name="logo_masof_s" width="130" height="65"/>
+        <image name="logo_99Cents" width="141" height="98"/>
     </resources>
 </document>

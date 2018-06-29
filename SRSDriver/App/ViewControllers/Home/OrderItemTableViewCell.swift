@@ -19,17 +19,20 @@ class OrderItemTableViewCell: UITableViewCell {
 
   var order: Order! {
     didSet {
-      orderReference.text = "\(order.sequence) - \(order.orderReference)"
-      let status = OrderStatus(rawValue: order.statusCode) ?? OrderStatus.open
-      orderStatus.text = "(\(status.statusName))"
-      deliveryAddress.text = "\(order.deliveryAdd)"
-      let deliveryDateString = order.timeWindowName.length > 0 ? "\(order.deliveryDate) - (\(order.timeWindowName))" : "\(order.deliveryDate)"
-      deliveryDate.text = deliveryDateString
-      let color = order.statusCode == "DV" ? AppColor.highLightColor : UIColor(hex: "#FFFFFF")
-      cellContainerView.backgroundColor = color
-      orderType.text = order.orderType
+        updateCell()
     }
   }
+    
+    func updateCell() {
+        orderReference.text = "\(order.sequence) - \(order.orderReference)"
+        let status = OrderStatus(rawValue: order.statusCode) ?? OrderStatus.open
+        orderStatus.text = "\(status.statusName)"
+        orderStatus.textColor = order.colorStatus
+        deliveryAddress.text = "\(order.deliveryAdd)"
+        let deliveryDateString = order.timeWindowName.length > 0 ? "\(order.deliveryDate) - (\(order.timeWindowName))" : "\(order.deliveryDate)"
+        deliveryDate.text = deliveryDateString
+        orderType.text = order.orderType
+    }
   
   override func awakeFromNib() {
     super.awakeFromNib()

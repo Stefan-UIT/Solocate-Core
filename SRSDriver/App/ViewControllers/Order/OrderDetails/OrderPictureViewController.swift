@@ -24,23 +24,37 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
   @IBOutlet weak var actionButton: UIButton!
   @IBOutlet weak var takePictureButton: UIButton!
   @IBOutlet weak var headerView: UIView!
+  @IBOutlet weak var lblNoData: UILabel?
+
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    if let _orderDetail = orderDetail {
-      actionButton.isHidden = _orderDetail.pictures.count > 0
-      if _orderDetail.pictures.count > 0 {
-        headerView.removeFromSuperview()
-      }
-    }
+    
+    upateUI()
   }
+    
+    func upateUI() {
+        if let _orderDetail = orderDetail {
+            actionButton.isHidden = _orderDetail.pictures.count > 0
+            if _orderDetail.pictures.count > 0 {
+                headerView.removeFromSuperview()
+            }
+        }
+        
+        lblNoData?.isHidden = (selectedPictures.count > 0)
+    }
   
   @IBAction func takePicture(_ sender: UIButton) {
-    let picker = UIImagePickerController()
-    picker.delegate = self
-    picker.sourceType = .camera
-    present(picker, animated: true, completion: nil)
+    ImagePickerView.shared().showImageGallarySinglePick(atVC: self) { [weak self] (success, data) in
+        if success{
+            
+            guard let img = data as? UIImage else {
+                return
+            }
+            self?.inputTitleFor(img)
+        }
+    }
   }
   
   @IBAction func clearPhotos(_ sender: UIButton) {
@@ -86,13 +100,16 @@ extension OrderPictureViewController {
       let pic = PictureObject(name: text, image: image)
       self.selectedPictures.insert(pic, at: 0)
       self.tableView.reloadData()
+      self.upateUI();
     }
     let cancelAction = UIAlertAction(title: "cancel".localized, style: .default) { [unowned self] (action) in
       alert.dismiss(animated: true, completion: nil)
       let pic = PictureObject(name: "", image: image)
       self.selectedPictures.insert(pic, at: 0)
       self.tableView.reloadData()
+      self.upateUI();
     }
+    
     alert.addAction(cancelAction)
     alert.addAction(okAction)
     alert.addTextField { (textField) in
@@ -137,7 +154,7 @@ extension OrderPictureViewController: UITableViewDataSource, UITableViewDelegate
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return cellHeight.scaleHeight()
+    return  60
   }
   
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -147,20 +164,6 @@ extension OrderPictureViewController: UITableViewDataSource, UITableViewDelegate
     }
   }
   
-}
-
-extension OrderPictureViewController: UIImagePickerControllerDelegate {
-  func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-    picker.dismiss(animated: true, completion: nil)
-  }
-  
-  func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-    guard let img = info[UIImagePickerControllerOriginalImage] as? UIImage else {
-      return
-    }
-    picker.dismiss(animated: true, completion: nil)
-    inputTitleFor(img)
-  }
 }
 
 

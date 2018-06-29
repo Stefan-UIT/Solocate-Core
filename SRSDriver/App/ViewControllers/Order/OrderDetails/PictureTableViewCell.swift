@@ -15,7 +15,7 @@ class PictureTableViewCell: UITableViewCell {
   
   override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        imgView.cornerRadius = 5.0;
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

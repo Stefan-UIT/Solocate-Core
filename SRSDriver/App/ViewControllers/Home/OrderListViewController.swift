@@ -137,13 +137,27 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
     
     let vc:OrderDetailContainerViewController = .loadSB(SB: .Order)
     
+    vc.onUpdateOrderStatus = {[weak self]  (order)  in
+        self?.updateStatusOrder(order)
+    }
+
     if let order = route?.orderList[indexPath.row] {
-        vc.orderID = "\(order.id)"
-        vc.orderStatus = order.statusCode
+        vc.order = order
         vc.routeID = route?.id
     }
     self.navigationController?.pushViewController(vc, animated: true)
   }
+    
+    func updateStatusOrder(_ order:OrderDetail) {
+        if (route?.orderList.contains{$0.id == order.id}) ?? false {
+            if let _index = route?.orderList.index(where: {$0.id == order.id}){
+                route?.orderList[_index].statusCode = order.statusCode
+                route?.orderList[_index].statusName = order.statusName
+            }
+        }
+        
+        self.tableView.reloadData()
+    }
   
 }
 

@@ -51,51 +51,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
     }
   }
-    /*
-    "id": 63,
-    "shop_id": 45,
-    "store_name": "L.V. - NELLIS",
-    "addr": "115/24 Phan Đăng Lưu",
-    "full_addr": "115/24 Phan Đăng Lưu, Phường 7, Phú Nhuận, Hồ Chí Minh, Vietnam",
-    "city": "Hồ Chí Minh",
-    "state": null,
-    "zip": "70000",
-    "ctt_name": "Tri Le",
-    "ctt_phone": "0978756054",
-    "ctt_phone2": null,
-    "ctt_email": "ldtri0209@gmail.com",
-    "lat": "10.8032150",
-    "long": "106.6855360",
-    "note": "abc",
-    "dlvy_start_time": "11:39",
-    "dlvy_end_time": "12:09",
-    "order_sts": "DV",
-    "route_id": 51,
-    "order_ref": "234",
-    "sig": null,
-    "seq": 2,
-    "service_time": 30,
-    "order_type_name": "Delivery",
-    "order_type_id": 1,
-    "reason_msg": null,
-    "loc_id": 1,
-    "dlvy_date": "06/29/2018",
-    "send_email": 0,
-    "send_sms": 0,
-    "pallets": 12,
-    "cases": 33,
-    "driver_name": "mach nguyen",
-    "order_status_name": "Finished",
-    "created_at": "06/29/2018",
-    "dlvd_dt": "06/29/2018 03:42",
-    "dlvd_dt_date": "06/29/2018",
-    "dlvd_dt_time": "03:42",
-    "url": {
-    "link": "https://apigw.seldatdirect.com/dev/dms/99cents/api/backend-api/v1/file/",
-    "name": null
-    }
-}
-    */
+ 
+    
     func setupDataDetailInforRows() {
         
         guard let _orderDetail = orderDetail else { return }
@@ -148,8 +105,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         updateStatusButton.isHidden = _orderDetail.statusCode != "OP" && _orderDetail.statusCode != "IP"
     }
   
-  var didUpdateStatus:((_ shouldMoveSigatureTab: Bool ) -> Void)?
-  var updateOrderDetail:(() -> Void)?
+    var didUpdateStatus:((_ orderDetail:OrderDetail, _ shouldMoveSigatureTab: Bool ) -> Void)?
+    var updateOrderDetail:(() -> Void)?
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -413,13 +370,10 @@ extension OrderDetailViewController {
             self?.updateButtonStatus()
             self?.tableView.reloadData()
             
-            if let didUpdateStatus = self?.didUpdateStatus{
-                didUpdateStatus(false)
-            }
+            self?.didUpdateStatus?(_orderDetail, (status == "DV"))
 
         case .error(let error):
             self?.showAlertView(error.getMessage())
-            
         }
     }
   }
@@ -450,7 +404,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     }
    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 45.0
+        return 40.0
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -512,8 +466,6 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         if let orderItem = orderDetail?.items[itemsIndex] {
             showActionForOrderItem(orderItem)
         }
-    default:
-        break;
     }
   }
 }

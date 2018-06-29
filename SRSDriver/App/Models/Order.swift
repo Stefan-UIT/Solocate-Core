@@ -35,6 +35,22 @@ class Order: BaseModel {
   var seq = -1
   var pallets = -1
   var cases = -1
+    
+  var colorStatus:UIColor {
+    get{
+            
+        switch statusCode {
+        case "OP":
+            return AppColor.newStatus;
+        case "IP":
+            return AppColor.inProcessStatus;
+        case "DV":
+            return AppColor.deliveryStatus;
+        default:
+            return AppColor.white;
+        }
+     }
+    }
 
 
   convenience required init?(map: Map) {

@@ -36,6 +36,8 @@ public struct SegmentedPagerTabStripSettings {
 open class SegmentedPagerTabStripViewController: PagerTabStripViewController, PagerTabStripDataSource, PagerTabStripDelegate {
 
     @IBOutlet weak public var segmentedControl: UISegmentedControl!
+    @IBOutlet weak public var conHSegmentedControl: NSLayoutConstraint?
+
 
     open var settings = SegmentedPagerTabStripSettings()
 
@@ -57,13 +59,14 @@ open class SegmentedPagerTabStripViewController: PagerTabStripViewController, Pa
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-        segmentedControl = segmentedControl ?? UISegmentedControl()
-        if segmentedControl.superview == nil {
-            navigationItem.titleView = segmentedControl
-        }
+
+        setupSegmentedControl()
+        reloadSegmentedControl()
+    }
+    
+    func setupSegmentedControl() {
         segmentedControl.tintColor = settings.style.segmentedControlColor ?? segmentedControl.tintColor
         segmentedControl.addTarget(self, action: #selector(SegmentedPagerTabStripViewController.segmentedControlChanged(_:)), for: .valueChanged)
-        reloadSegmentedControl()
     }
 
     open override func reloadPagerTabStripView() {
