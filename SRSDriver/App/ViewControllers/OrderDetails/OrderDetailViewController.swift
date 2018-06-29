@@ -29,6 +29,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   fileprivate let orderItemCellHeight: CGFloat = 130.0
   fileprivate let cellIdentifier = "OrderDetailTableViewCell"
   fileprivate let headerCellIdentifier = "OrderDetailHeaderCell"
+  fileprivate let addressCellIdentifier =  "OrderDetailAddressCell"
   fileprivate let orderScanItemCellIdentifier = "OrderScanItemTableViewCell"
   fileprivate var scanItems = [String]()
   fileprivate let itemsIndex = 8
@@ -443,6 +444,10 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
+    }
    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 45.0
@@ -463,7 +468,12 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         switch orderSection {
         case .sectionOrderInfor:
             let item = detailInforRows[indexPath.row]
-            if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
+            let indentifier = (item.type == .address ||
+                               item.type ==  .description) ?
+                                addressCellIdentifier : cellIdentifier
+            
+            if let cell = tableView.dequeueReusableCell(withIdentifier: indentifier,
+                                                        for: indexPath) as? OrderDetailTableViewCell {
                 cell.orderDetailItem = item
                 cell.selectionStyle = !(item.type == .phone && item.type == .address) ? .none : .default
                 return cell
