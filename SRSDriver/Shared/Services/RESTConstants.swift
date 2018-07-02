@@ -1,4 +1,4 @@
-//
+	//
 //  RESTConstants.swift
 //  CoreWebservice
 //
@@ -123,10 +123,10 @@ class RESTConstants: NSObject {
         let type = DataManager.getEnviroment()
         switch type {
         case .DEMO:
-            return RESTConstants.configs[RESTConstants.BASE_URL]
+            return E(Configs.MainConfigs(RESTConstants.BASE_URL))
 
         case .DEV:
-            return RESTConstants.configs[RESTConstants.BASE_URL_DEV]
+            return E(Configs.MainConfigs(RESTConstants.BASE_URL_DEV))
         }
     }
 }

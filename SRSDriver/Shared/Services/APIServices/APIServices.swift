@@ -24,7 +24,7 @@ extension BaseAPIService {
     @discardableResult
     func login(_ userLogin:UserLoginModel, callback: @escaping APICallback<UserModel>) -> APIRequest {
         return request(method: .POST,
-                   path: E(ServicesConfigs[RESTConstants.LOGIN]),
+                   path: E(Configs.ServicesConfigs(RESTConstants.LOGIN)),
                    input: .dto(userLogin),
                    callback: callback);
     }
@@ -32,7 +32,7 @@ extension BaseAPIService {
     @discardableResult
     func logout(callback: @escaping APICallback<UserModel>) -> APIRequest {
         return request(method: .GET,
-                       path: E(ServicesConfigs[RESTConstants.LOGOUT]),
+                       path: E(Configs.ServicesConfigs(RESTConstants.LOGOUT)),
                        input: .empty,
                        callback: callback);
     }
@@ -46,7 +46,7 @@ extension BaseAPIService {
             "device": "2" // iOS : device = 2
         ]
         return request(method: .POST,
-                       path: E(ServicesConfigs[RESTConstants.UPDATE_TOKEN_FCM]),
+                       path: E(Configs.ServicesConfigs(RESTConstants.UPDATE_TOKEN_FCM)),
                        input: .json(params),
                        callback: callback);
     }
@@ -55,7 +55,7 @@ extension BaseAPIService {
     func getOrders(byDate date:String = Date().toString("yyyy-MM-dd"), callback: @escaping APICallback<Route>) -> APIRequest {
         let params = ["date": date]
         return request(method: .PUT,
-                       path: E(ServicesConfigs[RESTConstants.GET_ORDER_BY_DATE]),
+                       path: E(Configs.ServicesConfigs(RESTConstants.GET_ORDER_BY_DATE)),
                        input: .json(params),
                        callback: callback);
     }
@@ -68,7 +68,7 @@ extension BaseAPIService {
         }
         let params = ["date": newDate]
         return request(method: .PUT,
-                       path: E(ServicesConfigs[RESTConstants.GET_ORDER_BY_DATE]),
+                       path: E(Configs.ServicesConfigs(RESTConstants.GET_ORDER_BY_DATE)),
                        input: .json(params),
                        callback: callback);
     }
@@ -92,12 +92,24 @@ extension BaseAPIService {
     
     @discardableResult
     func getOrderDetail(orderId:String, callback: @escaping APICallback<OrderDetail>) -> APIRequest {
-        let uri = String(format:E(ServicesConfigs[RESTConstants.GET_ORDER_DETAIL]), orderId)
+        let uri = String(format:E(Configs.ServicesConfigs(RESTConstants.GET_ORDER_DETAIL)), orderId)
         return request(method: .GET,
                        path: uri,
                        input: .empty,
                        callback: callback);
     }
+  
+  @discardableResult
+  func submitSignature(_ file:AttachFileModel,_ orderId:String, callback: @escaping APICallback<AttachFileModel>) -> APIRequest {
+    let uri = String(format:E(Configs.ServicesConfigs(RESTConstants.UPLOAD_SIGNATURE)), orderId)
+    let headers = ["Content-Type":"multipart/form-data; boundary=\(E(file.boundary))"];
+
+    return request(method: .POST,
+                   headers:headers,
+                   path: uri,
+                   input: .dto(file),
+                   callback: callback);
+  }
     
   
   /*
@@ -199,7 +211,7 @@ extension BaseAPIService {
   
   
   
-  
+
   //MARK: - FILES
   
   // Solution 1
@@ -250,5 +262,5 @@ extension BaseAPIService {
                             input: files,
                             callback: callback)
   }
- */
+*/
 }

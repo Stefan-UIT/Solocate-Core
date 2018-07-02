@@ -128,11 +128,4 @@ func Caches() -> Cache {
     return Cache.shared
 }
 
-let ServicesConfigs: [String : String] = {
-    if let bundle = Bundle.main.url(forResource: "ServicesConfigs", withExtension: "plist"),
-        let dic = NSDictionary(contentsOf: bundle) {
-        return dic as! [String: String]
-    }
-    return [String: String]()
-}()
 

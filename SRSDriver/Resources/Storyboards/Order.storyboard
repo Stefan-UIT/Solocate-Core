@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -658,7 +658,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gyd-Xo-C8g" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3828" y="-734"/>
+            <point key="canvasLocation" x="3854" y="-188"/>
         </scene>
         <!--Order Detail Map View Controller-->
         <scene sceneID="H9N-9m-JN6">
@@ -850,24 +850,24 @@
                                     <constraint firstAttribute="height" constant="40" id="rok-rd-MlC"/>
                                 </constraints>
                             </stackView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E9I-BD-aqR">
-                                <rect key="frame" x="10" y="30" width="355" height="597"/>
-                            </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kTo-3J-74r" customClass="SignatureView" customModule="DMSDriver" customModuleProvider="target">
                                 <rect key="frame" x="20" y="40" width="335" height="557"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="E9I-BD-aqR">
+                                <rect key="frame" x="25" y="45" width="325" height="547"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="Ilb-vb-1Od" firstAttribute="trailing" secondItem="E9I-BD-aqR" secondAttribute="trailing" constant="10" id="13M-ah-X4F"/>
-                            <constraint firstItem="Ilb-vb-1Od" firstAttribute="bottom" secondItem="E9I-BD-aqR" secondAttribute="bottom" constant="40" id="1xD-Xs-8yp"/>
-                            <constraint firstItem="E9I-BD-aqR" firstAttribute="leading" secondItem="Ilb-vb-1Od" secondAttribute="leading" constant="10" id="3Ob-wg-bFe"/>
+                            <constraint firstItem="Ilb-vb-1Od" firstAttribute="trailing" secondItem="E9I-BD-aqR" secondAttribute="trailing" constant="25" id="13M-ah-X4F"/>
+                            <constraint firstItem="E9I-BD-aqR" firstAttribute="leading" secondItem="Ilb-vb-1Od" secondAttribute="leading" constant="25" id="3Ob-wg-bFe"/>
                             <constraint firstItem="QGf-2J-tgu" firstAttribute="top" secondItem="kTo-3J-74r" secondAttribute="bottom" constant="20" id="ATu-u6-W7p"/>
-                            <constraint firstItem="E9I-BD-aqR" firstAttribute="top" secondItem="Ilb-vb-1Od" secondAttribute="top" constant="10" id="E4z-kL-B3C"/>
+                            <constraint firstItem="E9I-BD-aqR" firstAttribute="top" secondItem="Ilb-vb-1Od" secondAttribute="top" constant="25" id="E4z-kL-B3C"/>
                             <constraint firstItem="QGf-2J-tgu" firstAttribute="leading" secondItem="Ilb-vb-1Od" secondAttribute="leading" constant="10" id="Xpy-iS-QPm"/>
                             <constraint firstItem="Ilb-vb-1Od" firstAttribute="bottom" secondItem="QGf-2J-tgu" secondAttribute="bottom" constant="10" id="a0B-3r-ND8"/>
                             <constraint firstItem="kTo-3J-74r" firstAttribute="leading" secondItem="Ilb-vb-1Od" secondAttribute="leading" constant="20" id="dNi-hw-GTv"/>
+                            <constraint firstItem="QGf-2J-tgu" firstAttribute="top" secondItem="E9I-BD-aqR" secondAttribute="bottom" constant="25" id="eB8-Ag-qWC"/>
                             <constraint firstItem="Ilb-vb-1Od" firstAttribute="trailing" secondItem="kTo-3J-74r" secondAttribute="trailing" constant="20" id="snP-fL-Hrv"/>
                             <constraint firstItem="Ilb-vb-1Od" firstAttribute="trailing" secondItem="QGf-2J-tgu" secondAttribute="trailing" constant="10" id="vk0-gn-9fZ"/>
                             <constraint firstItem="kTo-3J-74r" firstAttribute="top" secondItem="Ilb-vb-1Od" secondAttribute="top" constant="20" id="w3j-A4-IKm"/>
@@ -884,7 +884,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="557-kM-yAc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4573.6000000000004" y="-236.13193403298354"/>
+            <point key="canvasLocation" x="4685.6000000000004" y="-188.45577211394306"/>
         </scene>
         <!--Order Notes View Controller-->
         <scene sceneID="QKY-Sa-X2d">
@@ -898,7 +898,7 @@
                                 <rect key="frame" x="0.0" y="30" width="375" height="637"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoteTableViewCell" rowHeight="90" id="Oy8-7o-UDC" customClass="NoteTableViewCell" customModule="DMSDriver" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="NoteTableViewCell" rowHeight="90" id="Oy8-7o-UDC" customClass="NoteTableViewCell" customModule="DMSDriver" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Oy8-7o-UDC" id="xXG-9b-EFD">

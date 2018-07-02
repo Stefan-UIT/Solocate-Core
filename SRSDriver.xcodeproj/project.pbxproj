@@ -153,14 +153,10 @@
 		0AB6910820A0099E0041E529 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4320590AD4003F8E6F /* Main.storyboard */; };
 		0AB6911C20A03DEC0041E529 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4620590AD4003F8E6F /* Assets.xcassets */; };
 		0AB6912120A154280041E529 /* UIButtonDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912020A154280041E529 /* UIButtonDesignable.swift */; };
-		0AB6912420A156CA0041E529 /* MainConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6912320A156CA0041E529 /* MainConfigs.plist */; };
 		0AB6912620A156ED0041E529 /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912520A156ED0041E529 /* Configs.swift */; };
 		0AB6912720A15D330041E529 /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912520A156ED0041E529 /* Configs.swift */; };
 		0AB6912820A15D390041E529 /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912520A156ED0041E529 /* Configs.swift */; };
 		0AB6912920A15D3A0041E529 /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912520A156ED0041E529 /* Configs.swift */; };
-		0AB6912A20A15F0E0041E529 /* MainConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6912320A156CA0041E529 /* MainConfigs.plist */; };
-		0AB6912B20A15F0E0041E529 /* MainConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6912320A156CA0041E529 /* MainConfigs.plist */; };
-		0AB6912C20A15F0E0041E529 /* MainConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6912320A156CA0041E529 /* MainConfigs.plist */; };
 		0AB6912D20A161980041E529 /* UIButtonDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912020A154280041E529 /* UIButtonDesignable.swift */; };
 		0AB6912E20A161990041E529 /* UIButtonDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912020A154280041E529 /* UIButtonDesignable.swift */; };
 		0AB6912F20A161990041E529 /* UIButtonDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912020A154280041E529 /* UIButtonDesignable.swift */; };
@@ -258,7 +254,6 @@
 		0ADAF43420B3B95A00A88E14 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4620590AD4003F8E6F /* Assets.xcassets */; };
 		0ADAF43520B3B95A00A88E14 /* ChangePasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465EA320A3EE03009BFE69 /* ChangePasswordView.xib */; };
 		0ADAF43720B3B95A00A88E14 /* SignatureView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 5ACCE8E3205BB31600A1532D /* SignatureView.xib */; };
-		0ADAF43820B3B95A00A88E14 /* MainConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0AB6912320A156CA0041E529 /* MainConfigs.plist */; };
 		0ADAF43920B3B95A00A88E14 /* LogoutTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8BA722085E3C5001321D1 /* LogoutTableViewCell.xib */; };
 		0ADAF43A20B3B95A00A88E14 /* ChangeInviromentTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0A465EAC20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib */; };
 		0ADAF43B20B3B95A00A88E14 /* AlertMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AEBA57720AA9E530053F2BF /* AlertMessageView.xib */; };
@@ -596,7 +591,6 @@
 		0AB6910F20A0099E0041E529 /* DMSDriver_Masof.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMSDriver_Masof.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AB6911020A0099E0041E529 /* DMSDriver_Masof.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = DMSDriver_Masof.plist; path = "/Users/mrj/Desktop/SeldatInc/SRS/git-project/ios/DMSDriver_Masof.plist"; sourceTree = "<absolute>"; };
 		0AB6912020A154280041E529 /* UIButtonDesignable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonDesignable.swift; sourceTree = "<group>"; };
-		0AB6912320A156CA0041E529 /* MainConfigs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = MainConfigs.plist; sourceTree = "<group>"; };
 		0AB6912520A156ED0041E529 /* Configs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configs.swift; sourceTree = "<group>"; };
 		0ACCCB8E20AE7C5C006B4F6E /* ServicesConfigs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ServicesConfigs.plist; sourceTree = "<group>"; };
 		0ACCCBA220AE7EEA006B4F6E /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
@@ -869,7 +863,6 @@
 		0AB6912220A156B60041E529 /* Configs */ = {
 			isa = PBXGroup;
 			children = (
-				0AB6912320A156CA0041E529 /* MainConfigs.plist */,
 				0AB6912520A156ED0041E529 /* Configs.swift */,
 			);
 			path = Configs;
@@ -1566,7 +1559,6 @@
 				0A465EAA20A3EE1A009BFE69 /* ChangePasswordView.xib in Resources */,
 				0AB6910120A0099E0041E529 /* Info.plist in Resources */,
 				0AB6910220A0099E0041E529 /* SignatureView.xib in Resources */,
-				0AB6912C20A15F0E0041E529 /* MainConfigs.plist in Resources */,
 				0AB6910320A0099E0041E529 /* LogoutTableViewCell.xib in Resources */,
 				0AB6910520A0099E0041E529 /* LaunchScreen.storyboard in Resources */,
 				0A465EB820A404CD009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
@@ -1595,7 +1587,6 @@
 				0ADAF43520B3B95A00A88E14 /* ChangePasswordView.xib in Resources */,
 				0ADAF43720B3B95A00A88E14 /* SignatureView.xib in Resources */,
 				0ADAF44E20B3BD1500A88E14 /* MainConfigs.plist in Resources */,
-				0ADAF43820B3B95A00A88E14 /* MainConfigs.plist in Resources */,
 				0ADAF43920B3B95A00A88E14 /* LogoutTableViewCell.xib in Resources */,
 				0ADAF43A20B3B95A00A88E14 /* ChangeInviromentTableViewCell.xib in Resources */,
 				0ADAF43B20B3B95A00A88E14 /* AlertMessageView.xib in Resources */,
@@ -1620,7 +1611,6 @@
 				0AE327EB208DC84C00EF1F4C /* Info.plist in Resources */,
 				0AE327EC208DC84C00EF1F4C /* SignatureView.xib in Resources */,
 				0AA44BEB20B3FB7F00A95147 /* ItemsSectionView.xib in Resources */,
-				0AB6912B20A15F0E0041E529 /* MainConfigs.plist in Resources */,
 				0AE327EE208DC84C00EF1F4C /* LaunchScreen.storyboard in Resources */,
 				0AE327F0208DC84C00EF1F4C /* Main.storyboard in Resources */,
 				0A465EB720A404CC009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
@@ -1644,7 +1634,6 @@
 				2494A96C2074926A005A2622 /* SignatureView.xib in Resources */,
 				0A7FB463209180DF00F5058D /* LogoutTableViewCell.xib in Resources */,
 				0AA44BE920B3FB7F00A95147 /* ItemsSectionView.xib in Resources */,
-				0AB6912A20A15F0E0041E529 /* MainConfigs.plist in Resources */,
 				2494A96E2074926A005A2622 /* LaunchScreen.storyboard in Resources */,
 				2494A9702074926A005A2622 /* Main.storyboard in Resources */,
 				0A465EB920A404CD009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
@@ -1670,7 +1659,6 @@
 				3B7942BC20E33258005AD12F /* Packages.storyboard in Resources */,
 				0A465EA420A3EE03009BFE69 /* ChangePasswordView.xib in Resources */,
 				5ACCE8E4205BB31600A1532D /* SignatureView.xib in Resources */,
-				0AB6912420A156CA0041E529 /* MainConfigs.plist in Resources */,
 				0AF8BA742085E3C5001321D1 /* LogoutTableViewCell.xib in Resources */,
 				3B0F86CB20E246E800E5092B /* Login.storyboard in Resources */,
 				3B7942BA20E33236005AD12F /* Map.storyboard in Resources */,

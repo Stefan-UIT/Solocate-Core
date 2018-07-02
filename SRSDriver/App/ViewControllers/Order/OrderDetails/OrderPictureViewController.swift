@@ -63,22 +63,7 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
   }
   
   @IBAction func uploadPhotos(_ sender: UIButton) {
-//     upload photos
-      guard let order = orderDetail, selectedPictures.count > 0 else {
-        return
-      }
-      showLoadingIndicator()
-      APIs.uploadFiles(selectedPictures, orderID: "\(order.id)") { [weak self] (errMsg) in
-        self?.dismissLoadingIndicator()
-        if let msg = errMsg {
-          self?.showAlertView(msg)
-        }
-        else {
-          self?.showAlertView("order_detail_add_image_successfully".localized, completionHandler: { (action) in
-            self?.navigationController?.popToRootViewController(animated: true)
-          })
-        }
-      }
+    //
   }
   
   override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {

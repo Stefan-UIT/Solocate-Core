@@ -20,18 +20,28 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
+    updateUI()
+  }
+  
+  func updateUI() {
     setupSignatureView()
     guard let order = orderDetail else { return }
-    controlsContainerView.isHidden = order.sign.length > 0
-    signatureView.isHidden = order.sign.length > 0
-    signatureImgView.isHidden = !(order.sign.length > 0)
     
-    guard order.sign.length > 0 else {
-      return
+    if let signFile:AttachFileModel = order.signFile{
+      controlsContainerView.isHidden = true
+      signatureView.isHidden = true
+      signatureImgView.isHidden = false
+      
+      signatureImgView.sd_setImage(with: URL(string: E(signFile.link)),
+                                   placeholderImage: nil,
+                                   options: .allowInvalidSSLCertificates,
+                                   completed: nil)
+      
+    }else {
+      controlsContainerView.isHidden = false
+      signatureView.isHidden = false
+      signatureImgView.isHidden = true
     }
-    let baseURL = order.sign
-    let data = Data(base64Encoded: baseURL, options: .ignoreUnknownCharacters)
-    signatureImgView.image = UIImage(data: data ?? Data())
   }
     
     func setupSignatureView() {
@@ -65,37 +75,34 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
     let img = UIGraphicsGetImageFromCurrentImageContext()
     UIGraphicsEndImageContext()
     if let image = img, let data = UIImageJPEGRepresentation(image, 1.0) {
-      let dataBase = data.base64EncodedString(options: .lineLength64Characters)
-      // submit data
-      submitSignature(dataBase)
-    }
-    else {
+
+      let signatureFile: AttachFileModel = AttachFileModel()
+      signatureFile.name = "Signature_\(orderDetail?.id ?? 0)"
+      signatureFile.type = ".png"
+      signatureFile.mimeType = "image/png"
+      signatureFile.contentFile = data
+      
+      submitSignature(signatureFile)
+      
+    }else {
       print("encode failure")
     }
   }
   
-  private func submitSignature(_ baseString: String) {
+  private func submitSignature(_ file: AttachFileModel) {
     guard let order = orderDetail else { return }
-    showLoadingIndicator()
-    APIs.uploadSignature("\(order.id)", signBase64: baseString) { [weak self] (errorMsg) in
+    showLoadingIndicator()		
+    API().submitSignature(file, "\(order.id)") {[weak self] (result) in
       self?.dismissLoadingIndicator()
-      guard let msg = errorMsg else {
-        self?.controlsContainerView.isHidden = true
-        self?.showAlertView("order_detail_add_signature_successfully".localized, completionHandler: { (action) in
-          self?.navigationController?.popViewController(animated: true)
-        })
-        return
+      switch result{
+      case .object(let obj):
+        break
+      case .error(let error):
+        break
+        
       }
-      self?.showAlertView(msg)
     }
   }
-  
-  
-  
-  
-  
-  
-  
 }
 
 

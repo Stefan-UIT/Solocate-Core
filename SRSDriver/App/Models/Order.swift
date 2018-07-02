@@ -146,6 +146,7 @@ class OrderDetail: Order {
   var notes = [Note]()
   var items = [OrderItem]()
   var pictures = [Picture]()
+  var signFile:AttachFileModel?
   
   override init() {
     super.init()
@@ -180,6 +181,8 @@ class OrderDetail: Order {
     endTime <- map["dlvy_end_time"]
     deliveryDate <- map["dlvy_date"];
     serviceTime <- map["service_time"]
+    
+    signFile <- map["url"]
   }
 }
 
