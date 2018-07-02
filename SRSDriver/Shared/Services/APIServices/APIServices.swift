@@ -61,7 +61,7 @@ extension BaseAPIService {
     }
     
     @discardableResult
-    func getRoutes(byDate date:String? = nil, callback: @escaping APICallback<ListModel<Route>>) -> APIRequest {
+    func getRoutes(byDate date:String? = nil, callback: @escaping APICallback<ResponseDataListModel<Route>>) -> APIRequest {
         var newDate = date;
         if newDate == nil {
             newDate = Date().toString("yyyy-MM-dd")

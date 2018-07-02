@@ -324,7 +324,7 @@ fileprivate extension BaseAPIService{
             if let dic = object as? ResponseDictionary {
                 newResults = dic
             }else if let rs =  object as? ResponseArray {
-               newResults = ["list": rs]
+               newResults = ["data": rs]
             }else {
                 print("Invalid Response Data.");
             }

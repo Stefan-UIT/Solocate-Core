@@ -147,7 +147,7 @@ fileprivate extension RouteListVC{
             
             switch result{
             case .object(let obj):
-                self?.listRoutes = obj.toArray()
+                self?.listRoutes = obj.data
                 self?.lblNoResult?.isHidden = (self?.listRoutes?.count ?? 0 > 0)
 
             case .error(let error):

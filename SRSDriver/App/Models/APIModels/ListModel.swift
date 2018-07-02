@@ -11,13 +11,13 @@ import ObjectMapper
 
 class ListModel<SUB_OBJECT:BaseModel>: BaseModel {
   
-  var contents:[SUB_OBJECT]?
+  fileprivate var contents:[SUB_OBJECT]?
   required public convenience init?(map: Map) {
     self.init()
   }
   
   override public func mapping(map: Map) {
-    contents <- map["list"]
+    contents <- map["data"]
     super.mapping(map: map)
   }
   

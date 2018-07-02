@@ -9,8 +9,9 @@
 import UIKit
 import ObjectMapper
 
-class ResponseDataModel<T: BaseModel>: BaseModel, APIDataPresentable {    
-    
+class ResponseDataModel<T: BaseModel>: BaseModel, APIDataPresentable {
+  
+    var message:String?
     var status:Int?
     var data: T?
     
@@ -23,7 +24,29 @@ class ResponseDataModel<T: BaseModel>: BaseModel, APIDataPresentable {
     }
     
     override func mapping(map: Map) {
+        message <- map["message"]
         status <- map["status"]
         data <- map["data"]
     }
+}
+
+class ResponseDataListModel<T: BaseModel>: BaseModel, APIDataPresentable {
+  
+  var message:String?
+  var status:Int?
+  var data:[T]?
+  
+  var rawData: Data?
+  var rawObject: Any?
+  
+  
+  required init?(map: Map) {
+    super.init()
+  }
+  
+  override func mapping(map: Map) {
+    message <- map["message"]
+    status <- map["status"]
+    data <- map["data"]
+  }
 }
