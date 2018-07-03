@@ -447,11 +447,21 @@
 		24D387712063674100BE51D9 /* ScanBarCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D387702063674100BE51D9 /* ScanBarCodeViewController.swift */; };
 		24DCDCD42068DD8200D3313F /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DCDCD32068DD8200D3313F /* LocationManager.swift */; };
 		24DCDCD62068E2FD00D3313F /* OrderDetailMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DCDCD52068E2FD00D3313F /* OrderDetailMapTableViewCell.swift */; };
-		2E3828ED20EB3B9B00415AF0 /* DMSAppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3828EC20EB3B9B00415AF0 /* DMSAppConfiguration.swift */; };
-		2E3828EE20EB3B9B00415AF0 /* DMSAppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3828EC20EB3B9B00415AF0 /* DMSAppConfiguration.swift */; };
-		2E3828EF20EB3B9B00415AF0 /* DMSAppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3828EC20EB3B9B00415AF0 /* DMSAppConfiguration.swift */; };
-		2E3828F020EB3B9B00415AF0 /* DMSAppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3828EC20EB3B9B00415AF0 /* DMSAppConfiguration.swift */; };
-		2E3828F120EB3B9B00415AF0 /* DMSAppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3828EC20EB3B9B00415AF0 /* DMSAppConfiguration.swift */; };
+		2E3828ED20EB3B9B00415AF0 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3828EC20EB3B9B00415AF0 /* AppConfiguration.swift */; };
+		2E3828EE20EB3B9B00415AF0 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3828EC20EB3B9B00415AF0 /* AppConfiguration.swift */; };
+		2E3828EF20EB3B9B00415AF0 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3828EC20EB3B9B00415AF0 /* AppConfiguration.swift */; };
+		2E3828F020EB3B9B00415AF0 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3828EC20EB3B9B00415AF0 /* AppConfiguration.swift */; };
+		2E3828F120EB3B9B00415AF0 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3828EC20EB3B9B00415AF0 /* AppConfiguration.swift */; };
+		2E382A1020EB6A0000415AF0 /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E382A0F20EB6A0000415AF0 /* LocationTracker.swift */; };
+		2E382A1120EB6A0000415AF0 /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E382A0F20EB6A0000415AF0 /* LocationTracker.swift */; };
+		2E382A1220EB6A0000415AF0 /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E382A0F20EB6A0000415AF0 /* LocationTracker.swift */; };
+		2E382A1320EB6A0000415AF0 /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E382A0F20EB6A0000415AF0 /* LocationTracker.swift */; };
+		2E382A1420EB6A0000415AF0 /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E382A0F20EB6A0000415AF0 /* LocationTracker.swift */; };
+		2E382A1620EB730900415AF0 /* KeyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E382A1520EB730900415AF0 /* KeyConstants.swift */; };
+		2E382A1720EB730900415AF0 /* KeyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E382A1520EB730900415AF0 /* KeyConstants.swift */; };
+		2E382A1820EB730900415AF0 /* KeyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E382A1520EB730900415AF0 /* KeyConstants.swift */; };
+		2E382A1920EB730900415AF0 /* KeyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E382A1520EB730900415AF0 /* KeyConstants.swift */; };
+		2E382A1A20EB730900415AF0 /* KeyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E382A1520EB730900415AF0 /* KeyConstants.swift */; };
 		3B0F86BD20E2337A00E5092B /* Route.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B0F86BC20E2337A00E5092B /* Route.storyboard */; };
 		3B0F86C120E236CA00E5092B /* RouteListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F86C020E236CA00E5092B /* RouteListVC.swift */; };
 		3B0F86C420E2370000E5092B /* RouteDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F86C320E2370000E5092B /* RouteDetailVC.swift */; };
@@ -638,7 +648,9 @@
 		24DCDCD32068DD8200D3313F /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		24DCDCD52068E2FD00D3313F /* OrderDetailMapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailMapTableViewCell.swift; sourceTree = "<group>"; };
 		2CE28C0EBCCC67BF0FD1791B /* Pods-SRSDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SRSDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SRSDriver/Pods-SRSDriver.debug.xcconfig"; sourceTree = "<group>"; };
-		2E3828EC20EB3B9B00415AF0 /* DMSAppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMSAppConfiguration.swift; sourceTree = "<group>"; };
+		2E3828EC20EB3B9B00415AF0 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
+		2E382A0F20EB6A0000415AF0 /* LocationTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTracker.swift; sourceTree = "<group>"; };
+		2E382A1520EB730900415AF0 /* KeyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyConstants.swift; sourceTree = "<group>"; };
 		3B0F86BC20E2337A00E5092B /* Route.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Route.storyboard; sourceTree = "<group>"; };
 		3B0F86C020E236CA00E5092B /* RouteListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteListVC.swift; sourceTree = "<group>"; };
 		3B0F86C320E2370000E5092B /* RouteDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailVC.swift; sourceTree = "<group>"; };
@@ -870,7 +882,7 @@
 			isa = PBXGroup;
 			children = (
 				0AB6912520A156ED0041E529 /* Configs.swift */,
-				2E3828EC20EB3B9B00415AF0 /* DMSAppConfiguration.swift */,
+				2E3828EC20EB3B9B00415AF0 /* AppConfiguration.swift */,
 			);
 			path = Configs;
 			sourceTree = "<group>";
@@ -933,6 +945,14 @@
 				0ADAF44A20B3B9C200A88E14 /* DMSDriver_Taavura */,
 			);
 			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		2E382A0E20EB69F200415AF0 /* LocationTracker */ = {
+			isa = PBXGroup;
+			children = (
+				2E382A0F20EB6A0000415AF0 /* LocationTracker.swift */,
+			);
+			path = LocationTracker;
 			sourceTree = "<group>";
 		};
 		3B0F86BE20E2368500E5092B /* Route */ = {
@@ -1201,6 +1221,7 @@
 				5A499CB520591E4100A1D944 /* Cache.swift */,
 				5A499CB620591E4100A1D944 /* Constants.swift */,
 				24B96CEA206B9CC9000FD6CD /* Theme.swift */,
+				2E382A1520EB730900415AF0 /* KeyConstants.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -1362,6 +1383,7 @@
 		5AA4CA5820590B69003F8E6F /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				2E382A0E20EB69F200415AF0 /* LocationTracker */,
 				3B0F86D120E2582400E5092B /* Common */,
 				0AB6912220A156B60041E529 /* Configs */,
 				0AB6911F20A153F60041E529 /* Designables */,
@@ -2086,6 +2108,7 @@
 				0AB690C020A0099E0041E529 /* NoteTableViewCell.swift in Sources */,
 				0AB690C120A0099E0041E529 /* UIImage.swift in Sources */,
 				0AB690C220A0099E0041E529 /* OrderDetailMapViewController.swift in Sources */,
+				2E382A1920EB730900415AF0 /* KeyConstants.swift in Sources */,
 				0AB690C320A0099E0041E529 /* UIImageView.swift in Sources */,
 				0AB690C420A0099E0041E529 /* OrderDetailTableViewCell.swift in Sources */,
 				0AB690C520A0099E0041E529 /* OrderMarker.swift in Sources */,
@@ -2116,7 +2139,8 @@
 				3B230D3C20E09F5400C867C8 /* UserRole.swift in Sources */,
 				0AB690D620A0099E0041E529 /* ReasonListViewController.swift in Sources */,
 				0AB690D720A0099E0041E529 /* UIColor.swift in Sources */,
-				2E3828F020EB3B9B00415AF0 /* DMSAppConfiguration.swift in Sources */,
+				2E3828F020EB3B9B00415AF0 /* AppConfiguration.swift in Sources */,
+				2E382A1320EB6A0000415AF0 /* LocationTracker.swift in Sources */,
 				0AB690D820A0099E0041E529 /* PictureTableViewCell.swift in Sources */,
 				3B230D2E20E09D8800C867C8 /* ListModel.swift in Sources */,
 				0AB690D920A0099E0041E529 /* LeftMenuView.swift in Sources */,
@@ -2181,6 +2205,7 @@
 				0ADAF3E720B3B95A00A88E14 /* NoteTableViewCell.swift in Sources */,
 				0ADAF3E820B3B95A00A88E14 /* UIImage.swift in Sources */,
 				0ADAF3E920B3B95A00A88E14 /* OrderDetailMapViewController.swift in Sources */,
+				2E382A1A20EB730900415AF0 /* KeyConstants.swift in Sources */,
 				0ADAF3EA20B3B95A00A88E14 /* UIImageView.swift in Sources */,
 				0ADAF3EB20B3B95A00A88E14 /* OrderDetailTableViewCell.swift in Sources */,
 				0ADAF3EC20B3B95A00A88E14 /* OrderMarker.swift in Sources */,
@@ -2211,7 +2236,8 @@
 				3B230D3D20E09F5400C867C8 /* UserRole.swift in Sources */,
 				0ADAF3FF20B3B95A00A88E14 /* LogoutTableViewCell.swift in Sources */,
 				0ADAF40020B3B95A00A88E14 /* UIButton.swift in Sources */,
-				2E3828F120EB3B9B00415AF0 /* DMSAppConfiguration.swift in Sources */,
+				2E3828F120EB3B9B00415AF0 /* AppConfiguration.swift in Sources */,
+				2E382A1420EB6A0000415AF0 /* LocationTracker.swift in Sources */,
 				0ADAF40120B3B95A00A88E14 /* ReasonListViewController.swift in Sources */,
 				3B230D2F20E09D8900C867C8 /* ListModel.swift in Sources */,
 				0ADAF40220B3B95A00A88E14 /* UIColor.swift in Sources */,
@@ -2276,6 +2302,7 @@
 				0AE327AC208DC84C00EF1F4C /* NoteTableViewCell.swift in Sources */,
 				0AE327AD208DC84C00EF1F4C /* UIImage.swift in Sources */,
 				0AE327AE208DC84C00EF1F4C /* OrderDetailMapViewController.swift in Sources */,
+				2E382A1820EB730900415AF0 /* KeyConstants.swift in Sources */,
 				0AE327AF208DC84C00EF1F4C /* UIImageView.swift in Sources */,
 				0AE327B0208DC84C00EF1F4C /* OrderDetailTableViewCell.swift in Sources */,
 				0AE327B1208DC84C00EF1F4C /* OrderMarker.swift in Sources */,
@@ -2306,7 +2333,8 @@
 				3B230D3B20E09F5400C867C8 /* UserRole.swift in Sources */,
 				0AE327C1208DC84C00EF1F4C /* ReasonListViewController.swift in Sources */,
 				0AE327C2208DC84C00EF1F4C /* UIColor.swift in Sources */,
-				2E3828EF20EB3B9B00415AF0 /* DMSAppConfiguration.swift in Sources */,
+				2E3828EF20EB3B9B00415AF0 /* AppConfiguration.swift in Sources */,
+				2E382A1220EB6A0000415AF0 /* LocationTracker.swift in Sources */,
 				0AE327C3208DC84C00EF1F4C /* PictureTableViewCell.swift in Sources */,
 				3B230D2D20E09D8800C867C8 /* ListModel.swift in Sources */,
 				0AE327C4208DC84C00EF1F4C /* LeftMenuView.swift in Sources */,
@@ -2371,6 +2399,7 @@
 				2494A92F2074926A005A2622 /* NoteTableViewCell.swift in Sources */,
 				2494A9302074926A005A2622 /* UIImage.swift in Sources */,
 				2494A9312074926A005A2622 /* OrderDetailMapViewController.swift in Sources */,
+				2E382A1720EB730900415AF0 /* KeyConstants.swift in Sources */,
 				2494A9322074926A005A2622 /* UIImageView.swift in Sources */,
 				2494A9332074926A005A2622 /* OrderDetailTableViewCell.swift in Sources */,
 				2494A9342074926A005A2622 /* OrderMarker.swift in Sources */,
@@ -2401,7 +2430,8 @@
 				3B230D3A20E09F5400C867C8 /* UserRole.swift in Sources */,
 				2494A9432074926A005A2622 /* ReasonListViewController.swift in Sources */,
 				2494A9442074926A005A2622 /* UIColor.swift in Sources */,
-				2E3828EE20EB3B9B00415AF0 /* DMSAppConfiguration.swift in Sources */,
+				2E3828EE20EB3B9B00415AF0 /* AppConfiguration.swift in Sources */,
+				2E382A1120EB6A0000415AF0 /* LocationTracker.swift in Sources */,
 				2494A9452074926A005A2622 /* PictureTableViewCell.swift in Sources */,
 				3B230D2C20E09D8700C867C8 /* ListModel.swift in Sources */,
 				0AF8BA6D2085D83B001321D1 /* LeftMenuView.swift in Sources */,
@@ -2462,10 +2492,11 @@
 				3B27CB8E20E647A700B1918D /* ImagePickerView.swift in Sources */,
 				3B0F86C120E236CA00E5092B /* RouteListVC.swift in Sources */,
 				3B230D2920E09D2900C867C8 /* APIError.swift in Sources */,
-				2E3828ED20EB3B9B00415AF0 /* DMSAppConfiguration.swift in Sources */,
+				2E3828ED20EB3B9B00415AF0 /* AppConfiguration.swift in Sources */,
 				5A68A44D205A201A00CA9DB8 /* OrderSignatureViewController.swift in Sources */,
 				3B0F86C920E2456200E5092B /* BaseNV.swift in Sources */,
 				5A499CA920591D0400A1D944 /* UIViewController.swift in Sources */,
+				2E382A1620EB730900415AF0 /* KeyConstants.swift in Sources */,
 				0AB6912120A154280041E529 /* UIButtonDesignable.swift in Sources */,
 				0A465EC620A43174009BFE69 /* ChangePasswordModel.swift in Sources */,
 				5A499CA820591D0400A1D944 /* UIView.swift in Sources */,
@@ -2548,6 +2579,7 @@
 				3B0F86D820E2583400E5092B /* Color.swift in Sources */,
 				5ACCE8D3205B761E00A1532D /* Note.swift in Sources */,
 				5A68A44F205A202400CA9DB8 /* OrderNotesViewController.swift in Sources */,
+				2E382A1020EB6A0000415AF0 /* LocationTracker.swift in Sources */,
 				3B939DCA20E097CB00B90C77 /* BaseModel.swift in Sources */,
 				3B230D4420E0EC8400C867C8 /* Manager.swift in Sources */,
 				5A499C9E20591D0400A1D944 /* NSString+SDString.m in Sources */,

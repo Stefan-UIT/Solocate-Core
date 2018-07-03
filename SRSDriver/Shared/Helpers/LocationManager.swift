@@ -35,6 +35,37 @@ class LocationManager: NSObject {
       locManager.startUpdatingLocation()
     }
   }
+    
+    func stopUpdatingLocation() {
+        locManager.stopUpdatingLocation()
+    }
+    
+    func getPrivacy() {
+        if !CLLocationManager.locationServicesEnabled() {
+            print("Couldn't turn on ranging: Location services are not enabled.")
+            return
+        }
+        
+        if !CLLocationManager.isRangingAvailable() {
+            print("Couldn't turn on ranging: Ranging is not available.")
+            return
+        }
+        
+        if !locManager.rangedRegions.isEmpty {
+            print("Didn't turn on ranging: Ranging already on.")
+            return
+        }
+        
+        switch CLLocationManager.authorizationStatus() {
+        case .authorizedAlways, .authorizedWhenInUse:
+            print("success")
+        case .denied, .restricted:
+            print("Couldn't turn on ranging: Required Location Access (When In Use) missing.")
+            
+        case .notDetermined:
+            locManager.requestWhenInUseAuthorization()
+        }
+    }
   
 }
 

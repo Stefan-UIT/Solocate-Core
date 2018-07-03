@@ -8,11 +8,11 @@
 
 import UIKit
 
-let appConfiguration = DMSAppConfiguration.sharedInstance
+let DMSAppConfiguration = AppConfiguration.sharedInstance
 
-class DMSAppConfiguration: NSObject {
+class AppConfiguration: NSObject {
     
-    static let sharedInstance = DMSAppConfiguration()
+    static let sharedInstance = AppConfiguration()
     
     // MARK: - Variables
     
