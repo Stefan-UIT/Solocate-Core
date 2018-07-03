@@ -67,6 +67,8 @@ class RESTConstants: NSObject {
     static let headers                            = ["Content-Type" : "application/x-www-form-urlencoded"]
     static let frefixToken                        = "Bearer "
     static let statusCodeSuccess: Int             = 0
+  
+    static let serverFile = "https://apigw.seldatdirect.com/dev/dms/99cents/api/backend-api/v1/file/"
     
     static let BASE_URL = "BASE_URL"
     static let BASE_URL_DEV = "BASE_URL_DEV"

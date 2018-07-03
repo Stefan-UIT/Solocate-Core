@@ -63,7 +63,7 @@ class RouteDetailVC: UITabBarController {
     }
     
     func setupTabBarController() {
-        
+        self.tabBar.tintColor = AppColor.mainColor
         let orderVC:OrderListViewController = .loadSB(SB: .Order)
         if let route = self.route {
             orderVC.route = route
@@ -86,10 +86,10 @@ class RouteDetailVC: UITabBarController {
         mapVC.tabBarItem.title = "Map"
         messageVC.tabBarItem.title = "Messages"
         
-        orderVC.tabBarItem.image = UIImage.init(named: "list")
-        packageVC.tabBarItem.image = UIImage.init(named: "truck-fast")
-        mapVC.tabBarItem.image = UIImage.init(named: "map")
-        messageVC.tabBarItem.image = UIImage.init(named: "message")
+        orderVC.tabBarItem.image = #imageLiteral(resourceName: "ic_orderlist")
+        packageVC.tabBarItem.image = #imageLiteral(resourceName: "ic_car")
+        mapVC.tabBarItem.image = #imageLiteral(resourceName: "ic_location")
+        messageVC.tabBarItem.image = #imageLiteral(resourceName: "ic_message")
 
         self.setViewControllers([orderVC,packageVC,mapVC,messageVC], animated: false)
     }

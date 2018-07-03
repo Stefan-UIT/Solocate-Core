@@ -10,12 +10,14 @@ import UIKit
 
 class OrderItemTableViewCell: UITableViewCell {
   
-  @IBOutlet weak var orderType: UILabel!
-  @IBOutlet weak var orderReference: UILabel!
-  @IBOutlet weak var orderStatus: UILabel!
-  @IBOutlet weak var deliveryAddress: UILabel!
-  @IBOutlet weak var deliveryDate: UILabel!
-  @IBOutlet weak var cellContainerView: UIView!
+  @IBOutlet weak var lblTitle: UILabel?
+  @IBOutlet weak var lblSubtitle: UILabel?
+  @IBOutlet weak var lblDate: UILabel?
+  @IBOutlet weak var btnStatus: UIButton?
+  @IBOutlet weak var btnNumber: UIButton?
+
+  
+  @IBOutlet weak var vContent: UIView?
 
   var order: Order! {
     didSet {
@@ -23,16 +25,16 @@ class OrderItemTableViewCell: UITableViewCell {
     }
   }
     
-    func updateCell() {
-        orderReference.text = "\(order.sequence) - \(order.orderReference)"
-        let status = OrderStatus(rawValue: order.statusCode) ?? OrderStatus.open
-        orderStatus.text = "\(status.statusName)"
-        orderStatus.textColor = order.colorStatus
-        deliveryAddress.text = "\(order.deliveryAdd)"
-        let deliveryDateString = order.timeWindowName.length > 0 ? "\(order.deliveryDate) - (\(order.timeWindowName))" : "\(order.deliveryDate)"
-        deliveryDate.text = deliveryDateString
-        orderType.text = order.orderType
-    }
+  func updateCell() {
+      lblTitle?.text = "\(order.sequence) - \(order.orderReference)"
+      lblSubtitle?.text = order.orderType
+      let status = OrderStatus(rawValue: order.statusCode) ?? OrderStatus.open
+      btnStatus?.setTitle("\(status.statusName)", for: .normal)
+      btnStatus?.borderWidth = 1.0;
+      btnStatus?.borderColor = AppColor.grayColor;
+      lblDate?.text = order.deliveryDate
+      vContent?.cornerRadius = 4.0;
+  }
   
   override func awakeFromNib() {
     super.awakeFromNib()

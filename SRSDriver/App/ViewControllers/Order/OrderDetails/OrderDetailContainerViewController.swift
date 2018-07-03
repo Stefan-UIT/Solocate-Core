@@ -44,8 +44,10 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
         child_1.didUpdateStatus = { [weak self] (orderDetail, shouldMoveTab)  in
             self?.getOrderDetail()
             self?.onUpdateOrderStatus?(orderDetail)
+
             if shouldMoveTab {
-                self?.moveToViewController(at: 1, animated: true) // move to signature tab
+                self?.reloadPagerTabStripView()
+                self?.moveToViewController(at: 1, animated: false) // move to signature tab
             }
         }
         
@@ -69,6 +71,7 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
         
         self.containerView.isScrollEnabled = E(order?.statusCode) == "IP" ||
                                               E(order?.statusCode) == "DV"
+      
     }
     
     private func setupNavigationBar()  {

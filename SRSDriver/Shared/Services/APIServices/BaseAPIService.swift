@@ -345,9 +345,6 @@ fileprivate extension BaseAPIService{
              .notAuthorized:
             
         App().reLogin()
-
-        let err = ERROR(dataResponse: dataResponse)
-        return .error(err)
             
         default:
             break;

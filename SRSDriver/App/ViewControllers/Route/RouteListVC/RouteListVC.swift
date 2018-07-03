@@ -22,14 +22,11 @@ class RouteListVC: BaseViewController {
             tbvContent?.reloadData()
         }
     }
-    
-    var dataRows:[[String]] = []
-
+  
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupTableView()
-        updateDataRows()
         getRoutes()
     }
     
@@ -50,18 +47,10 @@ class RouteListVC: BaseViewController {
     func setupTableView() {
         self.tbvContent?.delegate = self
         self.tbvContent?.dataSource = self
-        self.tbvContent?.sectionHeaderHeight = UITableViewAutomaticDimension
         self.tbvContent?.rowHeight = UITableViewAutomaticDimension
-        self.tbvContent?.estimatedSectionHeaderHeight = 100;
         self.tbvContent?.estimatedRowHeight = 100;
     }
-    
-    func updateDataRows(_ route:Route? = nil) {
-        dataRows.removeAll()
-        dataRows = [["Route number ", "\(route?.route_number ?? 0)"],
-                    ["Total ordes ","\(route?.totalOrders ?? 0)"],
-                    ["Date ", E(route?.date)]]
-    }
+  
     
     @IBAction func didChooseCalendar(_ sender: UIBarButtonItem) {
         let dateString = datePickerView.date.toString("yyyy-MM-dd")
@@ -81,46 +70,31 @@ class RouteListVC: BaseViewController {
 extension RouteListVC: UITableViewDataSource{
     
     func numberOfSections(in tableView: UITableView) -> Int {
-        return listRoutes?.count ?? 0
+        return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataRows.count
+        return listRoutes?.count ?? 0
     }
-    
-    
-    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let headerCell:RouteListCell = tableView.dequeueReusableCell(withIdentifier: "RouteListHeaderCell") as! RouteListCell
-        
-        if let routes = listRoutes {
-            let route = routes[section]
-            headerCell.lblTitle?.text = "Route ID-\(route.id)"
-            headerCell.btnStatus?.setTitle(route.route_name_sts, for: .normal)
-            headerCell.btnStatus?.setTitleColor(route.colorStatus, for: .normal);
-        }
-        
-        return headerCell;
-    }
-    
+  
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell:RouteListCell = tableView.dequeueReusableCell(withIdentifier: "RouteListRowCell", for: indexPath) as! RouteListCell
         
         let row = indexPath.row
-        let section = indexPath.section
-
         if let routes = listRoutes {
-            let route = routes[section]
-            
-            self.updateDataRows(route)
-
-            cell.lblTitle?.text = dataRows[row].first
-            cell.lblSubtitle?.text = dataRows[row].last
+            let route = routes[row]
+          
+           cell.lblTitle?.text = "Route ID-\(route.id)"
+           cell.lblSubtitle?.text = E(route.date)
+           cell.btnStatus?.setTitle(route.route_name_sts, for: .normal)
+           cell.btnColor?.backgroundColor = route.colorStatus
+           cell.lblRouteNumber?.text = "\(route.route_number)";
+           cell.lblTotal?.text = "\(route.totalOrders)"
         }
         cell.selectionStyle = .none
         return cell
     }
-    
 }
 
 

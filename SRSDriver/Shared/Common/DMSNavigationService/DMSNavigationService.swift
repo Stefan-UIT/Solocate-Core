@@ -25,7 +25,7 @@ class DMSNavigationService: NSObject , NavigationService {
                                                                                     action: #selector(onNavigationSaveDone(_:)))
     fileprivate lazy var cancelBarItem : UIBarButtonItem = UIBarButtonItem.cancelButton(target: self,
                                                                                         action: #selector(onNavigationBack(_:)))
-    fileprivate lazy var calendarBarItem = UIBarButtonItem.barButtonItem(with: UIImage(named: "calendarWhite")!,
+    fileprivate lazy var calendarBarItem = UIBarButtonItem.barButtonItem(with: #imageLiteral(resourceName: "ic_calenda"),
                                                                          target: self,
                                                                          action: #selector(onNavigationClickRightButton(_:)))
     

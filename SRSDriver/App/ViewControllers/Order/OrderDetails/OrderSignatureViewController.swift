@@ -28,18 +28,21 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
     guard let order = orderDetail else { return }
     
     if let signFile:AttachFileModel = order.signFile{
-      controlsContainerView.isHidden = true
-      signatureView.isHidden = true
-      signatureImgView.isHidden = false
-      
-      signatureImgView.sd_setImage(with: URL(string: E(signFile.link)),
-                                   placeholderImage: nil,
-                                   options: .allowInvalidSSLCertificates,
-                                   completed: nil)
+      if E(signFile.link).length > RESTConstants.serverFile.length{
+        controlsContainerView.isHidden = true
+        signatureImgView.isHidden = false
+        
+        signatureImgView.sd_setImage(with: URL(string: E(signFile.link)),
+                                     placeholderImage: nil,
+                                     options: .allowInvalidSSLCertificates,
+                                     completed: nil)
+      }else {
+        controlsContainerView.isHidden = false
+        signatureImgView.isHidden = true
+      }
       
     }else {
       controlsContainerView.isHidden = false
-      signatureView.isHidden = false
       signatureImgView.isHidden = true
     }
   }
