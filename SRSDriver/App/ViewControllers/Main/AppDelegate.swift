@@ -42,11 +42,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("BUNDLE_ID - \(dic["BUNDLE_ID"] as! String)")
     }
     IQKeyboardManager.shared().isEnabled = true
-    
     checkLoginStatus()
+    appConfiguration.enableConfiguration()
     
     return true
   }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        //connectToFcm()
+        
+        
+    }
   
   func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     Messaging.messaging().apnsToken = deviceToken

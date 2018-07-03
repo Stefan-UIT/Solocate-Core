@@ -111,6 +111,26 @@ extension BaseAPIService {
                    callback: callback);
   }
     
+    func updateDriverLocation() {
+        
+    }
+    
+//    @discardableResult
+//    func updateDriverLocation(_ order:OrderDetail,reason: Reason? = nil, callback: @escaping APICallback<Route>) -> APIRequest {
+//
+//        let path = String(format:E(RESTConstants.ServicesConfigs[RESTConstants.UPDATE_ORDER_STATUS]), "\(order.id)", order.statusCode)
+//
+//        var params = ["route_id": "\(order.routeId)"]
+//        if let _reason = reason {
+//            params["reason_msg"] = _reason.reasonDescription
+//            params["reason_id"] = "\(_reason.id)"
+//        }
+//        return request(method: .PUT,
+//                       path: path,
+//                       input: .json(params),
+//                       callback: callback);
+//    }
+    
   
   /*
   
