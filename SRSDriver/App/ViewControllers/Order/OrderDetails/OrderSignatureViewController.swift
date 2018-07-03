@@ -24,7 +24,6 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
   }
   
   func updateUI() {
-    setupSignatureView()
     guard let order = orderDetail else { return }
     
     if let signFile:AttachFileModel = order.signFile{
@@ -46,12 +45,6 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
       signatureImgView.isHidden = true
     }
   }
-    
-    func setupSignatureView() {
-        signatureView.cornerRadius = 5.0;
-        signatureView.borderColor = UIColor.lightGray
-        signatureView.borderWidth = 1.0;
-    }
   
   
   override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
