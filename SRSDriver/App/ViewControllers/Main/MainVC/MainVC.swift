@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenu
 
 class MainVC: BaseViewController {
 
@@ -15,6 +16,7 @@ class MainVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        setupSideMenu()
         pushRouteListVC()
     }
 
@@ -30,6 +32,20 @@ class MainVC: BaseViewController {
         if segue.identifier == "Main_NV" {
             rootNV = segue.destination as? BaseNV
         }
+    }
+  
+    func setupSideMenu() {
+      
+      let slideMenu: SlideMenuVC = .loadSB(SB: .Main)
+      
+      let slideMenuNC = UISideMenuNavigationController(rootViewController: slideMenu)
+      
+      slideMenuNC.navigationBar.isHidden = true
+      SideMenuManager.default.menuPresentMode = .viewSlideOut
+      SideMenuManager.default.menuFadeStatusBar = false
+      SideMenuManager.default.menuAnimationTransformScaleFactor = 0.95
+      
+      SideMenuManager.default.menuLeftNavigationController = slideMenuNC
     }
     
     func pushRouteListVC() {

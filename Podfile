@@ -1,40 +1,22 @@
 # Uncomment the next line to define a global platform for your project
-# platform :ios, '9.0'
+platform :ios, '9.0'
+use_frameworks!
 
-# ignore all warnings from all pods
-inhibit_all_warnings!
+target 'DMSDriver' do
 
-# ignore warnings from a specific pod
-# pod 'FBSDKCoreKit', :inhibit_warnings => true
-
-def shared
 	pod 'GoogleMaps', '2.5.0'	
 	pod 'ObjectMapper'
 	pod 'RealmSwift'
 	pod 'Alamofire'
-	pod 'XLPagerTabStrip'
+	pod 'XLPagerTabStrip' , '~> 8.0.1'
 	pod 'IQKeyboardManager'
-  pod 'SVProgressHUD'
-  pod 'TLPhotoPicker'
-  pod 'SDWebImage'
-  pod 'Firebase/Core'
-  pod 'Firebase/Messaging'
+  	pod 'SVProgressHUD'
+  	pod 'TLPhotoPicker'
+ 	pod 'SDWebImage'
+ 	pod 'Firebase/Core'
+  	pod 'Firebase/Messaging'
+ 	pod 'SideMenu'
+
 end
 
-
-target 'SRSDriver' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
-
-  # Pods for SRSDriver
-  shared
-end
-
-target 'SRSDriver_Malee' do
-  # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
-  use_frameworks!
-  
-  # Pods for SRSDriver
-  shared
-end
 
