@@ -136,18 +136,29 @@ fileprivate extension LoginViewController {
     func login(_ userLogin:UserLoginModel)  {
         showLoadingIndicator()
         API().login(userLogin) {[weak self] (result) in
-            self?.dismissLoadingIndicator()
-            switch result{
-            case .object(let obj):
-                
-                Caches().user = obj
+            switch result {
+            case .object(let user):
+                Caches().user = user // need to set, cause need token to call getUserProfile
                 if self?.keepLogin  ?? false{
                     Caches().userLogin = userLogin;
                 }
-                
-                App().loginSuccess()
+                API().getUserProfile(callback: { [weak self] (response) in
+                    self?.dismissLoadingIndicator()
+                    switch response {
+                    case .object(let obj):
+                        if let x = obj.data {
+                            user.userID = x.userID
+                            Caches().user = user
+                        } // just need to get userID atm.
+                        break
+                    case .error(_):
+                        break
+                    }
+                    App().loginSuccess()
+                })
                 
             case .error(let error):
+                self?.dismissLoadingIndicator()
                 self?.showAlertView(error.getMessage())
                 
             }
