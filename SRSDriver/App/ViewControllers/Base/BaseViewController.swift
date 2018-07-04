@@ -44,7 +44,15 @@ class BaseViewController: UIViewController {
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
+    printControllerName()
   }
+    
+    func printControllerName() {
+        #if DEBUG
+            let name = String(describing: self)
+            print("Current Screen is \(name)")
+        #endif
+    }
   
   func addNetworkObserver() {
     do {

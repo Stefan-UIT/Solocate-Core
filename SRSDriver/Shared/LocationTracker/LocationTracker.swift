@@ -25,7 +25,6 @@ class LocationTracker: NSObject {
             timer.invalidate()
             return
         }
-        
         scheduledTimerWithTimeInterval()
     }
     
@@ -35,7 +34,6 @@ class LocationTracker: NSObject {
             LocationManager.shared.requestLocation()
             return
         }
-        
         API().updateDriverLocation(long: userLocation.coordinate.longitude,
                                    lat: userLocation.coordinate.latitude) { [weak self] (result) in
                print(result)
@@ -43,10 +41,13 @@ class LocationTracker: NSObject {
         
     }
     
+    // Schedule to update driver location
     func scheduledTimerWithTimeInterval(){
+        requestUpdateDriverLocation()
+        
+        timer.invalidate()
         timer = Timer.scheduledTimer(timeInterval: TimeInterval(DMSAppConfiguration.trackingTimeInterval), target: self, selector: #selector(requestUpdateDriverLocation), userInfo: nil, repeats: true)
     }
-    
 }
 
 // MARK: - Location Manager Delegate
@@ -54,7 +55,5 @@ extension LocationTracker: LocationManagerDelegate {
     func didUpdateLocation(_ location: CLLocation?) {
         requestUpdateDriverLocation()
     }
-    
-    
 }
 
