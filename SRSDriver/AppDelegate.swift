@@ -24,6 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")
     // Override point for customization after application launch.
+    DMSAppConfiguration.enableConfiguration()
+    
     GMSServices.provideAPIKey(Network.googleAPIKey)
     SVProgressHUD.setDefaultMaskType(.clear)
     UNUserNotificationCenter.current().delegate = self
@@ -43,11 +45,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("BUNDLE_ID - \(dic["BUNDLE_ID"] as! String)")
     }
     IQKeyboardManager.shared().isEnabled = true
-    
     checkLoginStatus()
     
     return true
   }
+    
+    func applicationDidBecomeActive(_ application: UIApplication) {
+        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
+        //connectToFcm()
+        
+        DMSLocationManager.startUpdatingDriverLocationIfNeeded()
+    }
   
   func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
     Messaging.messaging().apnsToken = deviceToken
@@ -70,6 +78,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func loginSuccess() {
+        DMSLocationManager.startUpdatingDriverLocationIfNeeded()
+        
         let vc:MainVC = .loadSB(SB: .Main)
         mainVC = vc
         rootNV?.setViewControllers([vc], animated: false)

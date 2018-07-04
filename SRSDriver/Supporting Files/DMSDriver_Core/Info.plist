@@ -26,8 +26,10 @@
 	<true/>
 	<key>NSCameraUsageDescription</key>
 	<string>Using your camera to scan bar code</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>This app needs your current location</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>Show your location on Map</string>
+	<string>This app needs your current location</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Post your image</string>
 	<key>UIBackgroundModes</key>
