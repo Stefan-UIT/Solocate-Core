@@ -560,6 +560,8 @@
 		5A7D1B4A20ECC5A4003F1565 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A7D1B4720ECC5A4003F1565 /* Profile.storyboard */; };
 		5A7D1B4B20ECC5A4003F1565 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A7D1B4720ECC5A4003F1565 /* Profile.storyboard */; };
 		5A7D1B4C20ECC5A4003F1565 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5A7D1B4720ECC5A4003F1565 /* Profile.storyboard */; };
+		5A7D1B5020ECD64F003F1565 /* ProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7D1B4F20ECD64F003F1565 /* ProfileVC.swift */; };
+		5A7D1B5320ECD6E4003F1565 /* ProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A7D1B5220ECD6E4003F1565 /* ProfileCell.swift */; };
 		5A82E9C4205A038900F34351 /* RESTConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C0205A038900F34351 /* RESTConstants.swift */; };
 		5A82E9C5205A038900F34351 /* RESTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C1205A038900F34351 /* RESTError.swift */; };
 		5A82E9C6205A038900F34351 /* RESTRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C2205A038900F34351 /* RESTRequest.swift */; };
@@ -722,6 +724,8 @@
 		5A7D1B3C20EC8207003F1565 /* SlideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuCell.swift; sourceTree = "<group>"; };
 		5A7D1B4120ECA4F9003F1565 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = SRSDriver/App/AppDelegate/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		5A7D1B4720ECC5A4003F1565 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		5A7D1B4F20ECD64F003F1565 /* ProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileVC.swift; sourceTree = "<group>"; };
+		5A7D1B5220ECD6E4003F1565 /* ProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileCell.swift; sourceTree = "<group>"; };
 		5A82E9C0205A038900F34351 /* RESTConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTConstants.swift; sourceTree = "<group>"; };
 		5A82E9C1205A038900F34351 /* RESTError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTError.swift; sourceTree = "<group>"; };
 		5A82E9C2205A038900F34351 /* RESTRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTRequest.swift; sourceTree = "<group>"; };
@@ -1134,6 +1138,7 @@
 		3B939DB320E08EED00B90C77 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				5A7D1B4E20ECD61E003F1565 /* Profile */,
 				3B1AF09C20E619220099C299 /* Order */,
 				3B0F86BE20E2368500E5092B /* Route */,
 				5A82E9C8205A04D500F34351 /* Home */,
@@ -1317,6 +1322,23 @@
 				5A7D1B4120ECA4F9003F1565 /* AppDelegate.swift */,
 			);
 			path = AppDelegate;
+			sourceTree = "<group>";
+		};
+		5A7D1B4E20ECD61E003F1565 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				5A7D1B5120ECD655003F1565 /* Cell */,
+				5A7D1B4F20ECD64F003F1565 /* ProfileVC.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		5A7D1B5120ECD655003F1565 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				5A7D1B5220ECD6E4003F1565 /* ProfileCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		5A82E9BF205A038900F34351 /* Services */ = {
@@ -2222,6 +2244,7 @@
 				5A499CA920591D0400A1D944 /* UIViewController.swift in Sources */,
 				2E382A1620EB730900415AF0 /* KeyConstants.swift in Sources */,
 				0AB6912120A154280041E529 /* UIButtonDesignable.swift in Sources */,
+				5A7D1B5320ECD6E4003F1565 /* ProfileCell.swift in Sources */,
 				0A465EC620A43174009BFE69 /* ChangePasswordModel.swift in Sources */,
 				5A499CA820591D0400A1D944 /* UIView.swift in Sources */,
 				5ACCE8D9205BA94A00A1532D /* NoteTableViewCell.swift in Sources */,
@@ -2248,6 +2271,7 @@
 				0AA44BE520B3F9C900A95147 /* ItemsSectionView.swift in Sources */,
 				3B0F86D720E2583400E5092B /* Font.swift in Sources */,
 				3B0F86C720E2396600E5092B /* RouteListCell.swift in Sources */,
+				5A7D1B5020ECD64F003F1565 /* ProfileVC.swift in Sources */,
 				24D3876B2063511F00BE51D9 /* OrderScanItemTableViewCell.swift in Sources */,
 				5A82E9C4205A038900F34351 /* RESTConstants.swift in Sources */,
 				5A82E9C5205A038900F34351 /* RESTError.swift in Sources */,
