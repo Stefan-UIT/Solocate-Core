@@ -328,9 +328,9 @@ fileprivate extension BaseAPIService{
             }else {
                 print("Invalid Response Data.");
             }
-            
+
             if var resultObject = RESULT(JSON: newResults) {
-                
+                	
                 if var responseData = resultObject as? APIDataPresentable{
                     responseData.rawData = dataResponse.data ?? Data()
                     responseData.rawObject = object
@@ -343,9 +343,11 @@ fileprivate extension BaseAPIService{
             
         case .tokenFail,
              .notAuthorized:
-            
-        App().reLogin()
-            
+          
+          DispatchQueue.main.async {
+            App().reLogin()
+          }
+          
         default:
             break;
         }

@@ -140,6 +140,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     return IndicatorInfo(title: "order_detail_title".localized)
   }
   
+  
+  // MARK: ACTION
   @IBAction func didClickFinish(_ sender: UIButton) {
     guard let _orderDetail = orderDetail else {return}
     let status = _orderDetail.statusCode == "OP" ? "IP" : "DV"
@@ -147,12 +149,12 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   }
   
   @IBAction func didClickUnableToStart(_ sender: UIButton) {
-    performSegue(withIdentifier: SegueIdentifier.showReasonList, sender: nil)
+    handleUnableToStartAction()
   }
   
-    @IBAction func tapUpdateStatusButtonAction(_ sender: UIButton) {
-        handleUpdateStatus()
-    }
+  @IBAction func tapUpdateStatusButtonAction(_ sender: UIButton) {
+    handleUpdateStatus()
+  }
     
   
   override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -182,13 +184,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 
         let alert = UIAlertController(title: "", message: "Update Status Order", preferredStyle: .actionSheet)
 
-        let unableTitle = _orderDetail.statusCode == "OP" ? "order_detail_unable_start".localized : "order_detail_unable_finish".localized
-
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        let unableToStartAction = UIAlertAction(title: unableTitle, style: .destructive) { (alertAction) in
-            self.handleUnableToStartAction()
-        }
+  
         
         let finishActionTitle = _orderDetail.statusCode == "OP" ? "start".localized : "finish".localized
 
@@ -198,13 +195,13 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         
         alert.addAction(cancelAction)
         alert.addAction(finishAction)
-        alert.addAction(unableToStartAction)
         
         self.present(alert, animated: true, completion: nil)
     }
     
     func handleUnableToStartAction() {
-        performSegue(withIdentifier: SegueIdentifier.showReasonList, sender: nil)
+      self.showAlertView("Sorry, this feature hasn't developed!")
+      //performSegue(withIdentifier: SegueIdentifier.showReasonList, sender: nil)
     }
     
     func handleFinishAction() {
@@ -365,8 +362,7 @@ extension OrderDetailViewController {
   
   func updateOrderStatus(_ status: String) {
     guard let _orderDetail = orderDetail,
-      let _routeID = routeID else { return }
-    
+          let _routeID = routeID else { return }
     _orderDetail.routeId = _routeID;
     _orderDetail.statusCode = status
     
@@ -379,7 +375,6 @@ extension OrderDetailViewController {
             self?.setupDataDetailInforRows()
             self?.updateButtonStatus()
             self?.tableView.reloadData()
-            
             self?.didUpdateStatus?(_orderDetail, (status == "DV"))
 
         case .error(let error):
@@ -475,6 +470,13 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
 
 //MARK: - Otherfuntion
 fileprivate extension OrderDetailViewController{
+  
+  func scrollToBottom(){
+    DispatchQueue.main.async {
+      let indexPath = IndexPath(row: 0, section: OrderDetailSection.sectionDescription.rawValue)
+      self.tableView.scrollToRow(at: indexPath, at: .bottom, animated: true)
+    }
+  }
     
     func updateButtonStatus() {
         updateStatusButton.backgroundColor = AppColor.mainColor
@@ -487,8 +489,11 @@ fileprivate extension OrderDetailViewController{
         switch orderDetail?.statusCode {
         case "OP":
             updateStatusButton.setTitle("Start", for: .normal)
+            btnUnable.setTitle("Unable To Start", for: .normal)
+
         case "IP":
             updateStatusButton.setTitle("Finish", for: .normal)
+            btnUnable.setTitle("Unable To Finish", for: .normal)
 
         default:
             updateStatusButton.isHidden = true

@@ -91,9 +91,13 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
     API().submitSignature(file, "\(order.id)") {[weak self] (result) in
       self?.dismissLoadingIndicator()
       switch result{
-      case .object(let obj):
+      case .object(_):
+        self?.controlsContainerView.isHidden = true
+        self?.showAlertView("Successful")
+
         break
       case .error(let error):
+        self?.showAlertView(error.getMessage())
         break
         
       }

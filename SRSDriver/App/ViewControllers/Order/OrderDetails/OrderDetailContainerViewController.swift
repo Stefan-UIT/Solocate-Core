@@ -47,6 +47,7 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
 
             if shouldMoveTab {
                 self?.reloadPagerTabStripView()
+                self?.segmentedControl.selectedSegmentIndex = 1;
                 self?.moveToViewController(at: 1, animated: false) // move to signature tab
             }
         }
