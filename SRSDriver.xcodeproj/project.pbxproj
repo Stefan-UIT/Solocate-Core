@@ -651,13 +651,9 @@
 		24D387702063674100BE51D9 /* ScanBarCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScanBarCodeViewController.swift; sourceTree = "<group>"; };
 		24DCDCD32068DD8200D3313F /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		24DCDCD52068E2FD00D3313F /* OrderDetailMapTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailMapTableViewCell.swift; sourceTree = "<group>"; };
-<<<<<<< HEAD
-=======
-		2CE28C0EBCCC67BF0FD1791B /* Pods-SRSDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SRSDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SRSDriver/Pods-SRSDriver.debug.xcconfig"; sourceTree = "<group>"; };
 		2E3828EC20EB3B9B00415AF0 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		2E382A0F20EB6A0000415AF0 /* LocationTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTracker.swift; sourceTree = "<group>"; };
 		2E382A1520EB730900415AF0 /* KeyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyConstants.swift; sourceTree = "<group>"; };
->>>>>>> bf163dfd27402ac01b8e7c8d665268efd0e144e5
 		3B0F86BC20E2337A00E5092B /* Route.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Route.storyboard; sourceTree = "<group>"; };
 		3B0F86C020E236CA00E5092B /* RouteListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteListVC.swift; sourceTree = "<group>"; };
 		3B0F86C320E2370000E5092B /* RouteDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailVC.swift; sourceTree = "<group>"; };
@@ -724,7 +720,7 @@
 		5A68A45E205A619300CA9DB8 /* PickupPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupPlace.swift; sourceTree = "<group>"; };
 		5A68A460205A86B500CA9DB8 /* MapsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapsViewController.swift; sourceTree = "<group>"; };
 		5A7D1B3C20EC8207003F1565 /* SlideMenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuCell.swift; sourceTree = "<group>"; };
-		5A7D1B4120ECA4F9003F1565 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = SRSDriver/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
+		5A7D1B4120ECA4F9003F1565 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AppDelegate.swift; path = SRSDriver/App/AppDelegate/AppDelegate.swift; sourceTree = SOURCE_ROOT; };
 		5A7D1B4720ECC5A4003F1565 /* Profile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		5A82E9C0205A038900F34351 /* RESTConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTConstants.swift; sourceTree = "<group>"; };
 		5A82E9C1205A038900F34351 /* RESTError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTError.swift; sourceTree = "<group>"; };
@@ -1315,13 +1311,12 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
-		5A7D1B4020ECA444003F1565 /* AppDelegate */ = {
+		5A7D1B4D20ECCC42003F1565 /* AppDelegate */ = {
 			isa = PBXGroup;
 			children = (
 				5A7D1B4120ECA4F9003F1565 /* AppDelegate.swift */,
 			);
-			name = AppDelegate;
-			path = "New Group";
+			path = AppDelegate;
 			sourceTree = "<group>";
 		};
 		5A82E9BF205A038900F34351 /* Services */ = {
@@ -1393,7 +1388,7 @@
 		5AA4CA5120590B08003F8E6F /* App */ = {
 			isa = PBXGroup;
 			children = (
-				5A7D1B4020ECA444003F1565 /* AppDelegate */,
+				5A7D1B4D20ECCC42003F1565 /* AppDelegate */,
 				5A68A459205A5A2100CA9DB8 /* Models */,
 				3B939DB320E08EED00B90C77 /* ViewControllers */,
 				0A465E9F20A3EDC0009BFE69 /* Views */,
