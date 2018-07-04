@@ -102,6 +102,7 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderItemTableViewCell {
       cell.order = route?.orderList[indexPath.row]
+      cell.btnNumber?.setTitle("\(indexPath.row + 1)", for: .normal)
       return cell
     }
     return UITableViewCell()

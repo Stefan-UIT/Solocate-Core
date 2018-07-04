@@ -24,7 +24,8 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
   @IBOutlet weak var actionButton: UIButton!
   @IBOutlet weak var takePictureButton: UIButton!
   @IBOutlet weak var headerView: UIView!
-  @IBOutlet weak var lblNoData: UILabel?
+  @IBOutlet weak var vNoImage: UIView?
+
 
   
   
@@ -42,7 +43,7 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
             }
         }
         
-        lblNoData?.isHidden = (selectedPictures.count > 0)
+        vNoImage?.isHidden = (selectedPictures.count > 0)
     }
   
   @IBAction func takePicture(_ sender: UIButton) {
@@ -148,7 +149,6 @@ extension OrderPictureViewController: UITableViewDataSource, UITableViewDelegate
      showImage(cell.imgView.image ?? UIImage(named: "place_holder")!)
     }
   }
-  
 }
 
 

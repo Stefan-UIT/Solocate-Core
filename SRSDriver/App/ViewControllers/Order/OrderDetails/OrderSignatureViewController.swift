@@ -24,31 +24,27 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
   }
   
   func updateUI() {
-    setupSignatureView()
     guard let order = orderDetail else { return }
     
     if let signFile:AttachFileModel = order.signFile{
-      controlsContainerView.isHidden = true
-      signatureView.isHidden = true
-      signatureImgView.isHidden = false
-      
-      signatureImgView.sd_setImage(with: URL(string: E(signFile.link)),
-                                   placeholderImage: nil,
-                                   options: .allowInvalidSSLCertificates,
-                                   completed: nil)
+      if E(signFile.link).length > RESTConstants.serverFile.length{
+        controlsContainerView.isHidden = true
+        signatureImgView.isHidden = false
+        
+        signatureImgView.sd_setImage(with: URL(string: E(signFile.link)),
+                                     placeholderImage: nil,
+                                     options: .allowInvalidSSLCertificates,
+                                     completed: nil)
+      }else {
+        controlsContainerView.isHidden = false
+        signatureImgView.isHidden = true
+      }
       
     }else {
       controlsContainerView.isHidden = false
-      signatureView.isHidden = false
       signatureImgView.isHidden = true
     }
   }
-    
-    func setupSignatureView() {
-        signatureView.cornerRadius = 5.0;
-        signatureView.borderColor = UIColor.lightGray
-        signatureView.borderWidth = 1.0;
-    }
   
   
   override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -95,9 +91,13 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
     API().submitSignature(file, "\(order.id)") {[weak self] (result) in
       self?.dismissLoadingIndicator()
       switch result{
-      case .object(let obj):
+      case .object(_):
+        self?.controlsContainerView.isHidden = true
+        self?.showAlertView("Successful")
+
         break
       case .error(let error):
+        self?.showAlertView(error.getMessage())
         break
         
       }

@@ -12,13 +12,19 @@ class RouteListCell: UITableViewCell {
     
     @IBOutlet weak var lblTitle:UILabel?
     @IBOutlet weak var lblSubtitle:UILabel?
-    
+    @IBOutlet weak var lblRouteNumber:UILabel?
+    @IBOutlet weak var lblTotal:UILabel?
     @IBOutlet weak var btnStatus:UIButton?
+    @IBOutlet weak var btnColor:UIButton?
+  
+    @IBOutlet weak var vContent:UIView?
+
 
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+      
+        vContent?.cornerRadius = 5.0
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
