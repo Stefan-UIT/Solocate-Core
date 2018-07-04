@@ -113,21 +113,28 @@ extension BaseAPIService {
     
     @discardableResult
     func updateDriverLocation(long :Double, lat:Double, callback: @escaping APICallback<Route>) -> APIRequest {
-        
         let path = String(format:E(RESTConstants.ServicesConfigs[RESTConstants.UPDATE_DRIVER_LOCATION]))
-        
-        var params = [
+        let driverID = Caches().user?.userID ?? -1
+        let timestamps = Date().timeIntervalSince1970
+        let params = [
             KEY_LONGITUDE: long,
-            KEY_LATITUDE : lat
-                      ]
-//        var params = ["route_id": "\(order.routeId)"]
-//        if let _reason = reason {
-//            params["reason_msg"] = _reason.reasonDescription
-//            params["reason_id"] = "\(_reason.id)"
+            KEY_LATITUDE : lat,
+            KEY_TIMESTAMPS: timestamps,
+            KEY_DRIVER_ID: driverID
+            ] as [String : Any]
         
         return request(method: .POST,
                        path: path,
                        input: .json(params),
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func getUserProfile(callback: @escaping APICallback<ResponseDataModel<UserModel>>) -> APIRequest {
+        let path = String(format:E(RESTConstants.ServicesConfigs[RESTConstants.GET_USER_PROFILE]))
+        return request(method: .GET,
+                       path: path,
+                       input: .empty,
                        callback: callback);
     }
     

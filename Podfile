@@ -8,7 +8,7 @@ target 'DMSDriver' do
 	pod 'ObjectMapper'
 	pod 'RealmSwift'
 	pod 'Alamofire'
-	pod 'XLPagerTabStrip'
+	pod 'XLPagerTabStrip' , '~> 8.0.1'
 	pod 'IQKeyboardManager'
   	pod 'SVProgressHUD'
   	pod 'TLPhotoPicker'

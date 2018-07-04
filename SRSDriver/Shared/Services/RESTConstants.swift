@@ -52,8 +52,12 @@ enum RequestType : String {
     case GET_ALERT_DETAIL = "GET_ALERT_DETAIL"
     case RESOLVE_ALERT = "RESOLVE_ALERT"
     
+    // Profile
+    case GET_USERID_BY_TOKEN        = "GET_USERID_BY_TOKEN"
+    case GET_USER_PROFILE        = "GET_USER_PROFILE"
+    
     // Tracking
-    case UPDATE_DRIVER_LOCATION = "UPDATE_DRIVER_LOCATION"
+    case UPDATE_DRIVER_LOCATION     = "UPDATE_DRIVER_LOCATION"
     
 }
 
@@ -102,6 +106,10 @@ class RESTConstants: NSObject {
     static let RESET_PASSWORD_URL = "RESET_PASSWORD_URL"
     static let GET_ALERT_DETAIL = "GET_ALERT_DETAIL"
     static let RESOLVE_ALERT = "RESOLVE_ALERT"
+    
+    // Profile
+    static let GET_USERID_BY_TOKEN = "GET_USERID_BY_TOKEN"
+    static let GET_USER_PROFILE = "GET_USER_PROFILE"
     
     // Tracking
     static let UPDATE_DRIVER_LOCATION = "UPDATE_DRIVER_LOCATION"
