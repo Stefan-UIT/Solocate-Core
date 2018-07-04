@@ -59,14 +59,14 @@ open class SegmentedPagerTabStripViewController: PagerTabStripViewController, Pa
 
     open override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupSegmentedControl()
-        reloadSegmentedControl()
-    }
-    
-    func setupSegmentedControl() {
+        let auxSegmentedControl = segmentedControl ?? UISegmentedControl()
+        segmentedControl = auxSegmentedControl
+        if segmentedControl.superview == nil {
+            navigationItem.titleView = segmentedControl
+        }
         segmentedControl.tintColor = settings.style.segmentedControlColor ?? segmentedControl.tintColor
         segmentedControl.addTarget(self, action: #selector(SegmentedPagerTabStripViewController.segmentedControlChanged(_:)), for: .valueChanged)
+        reloadSegmentedControl()
     }
 
     open override func reloadPagerTabStripView() {
@@ -100,7 +100,7 @@ open class SegmentedPagerTabStripViewController: PagerTabStripViewController, Pa
 
     open func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int) {
         if shouldUpdateSegmentedControl {
-           // segmentedControl.selectedSegmentIndex = toIndex
+            segmentedControl.selectedSegmentIndex = toIndex
         }
     }
 

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenu
 
 class RouteListVC: BaseViewController {
     
@@ -133,7 +134,7 @@ fileprivate extension RouteListVC{
 
 extension RouteListVC:DMSNavigationServiceDelegate{
     func didSelectedBackOrMenu() {
-        //
+      present(SideMenuManager.default.menuLeftNavigationController!, animated: true, completion: nil)
     }
     
     func didSelectedRightButton() {

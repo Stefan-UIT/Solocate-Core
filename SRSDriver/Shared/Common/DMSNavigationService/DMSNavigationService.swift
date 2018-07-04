@@ -171,7 +171,7 @@ extension DMSNavigationService {
     }
     
     @objc func onNavigationMenu(_ sender: UIBarButtonItem) {
-        // App().mainVC?.showSlideMenu(isShow: true, animation: true)
+      delegate?.didSelectedBackOrMenu()
     }
     
     @objc func onNavigationClickRightButton(_ sender: UIBarButtonItem) {
