@@ -2677,15 +2677,15 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_Core/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMS";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.DMSDriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "dcb4e569-3e72-478c-8740-c5a35b64797a";
+				PROVISIONING_PROFILE_SPECIFIER = "dev-allInhouse";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
