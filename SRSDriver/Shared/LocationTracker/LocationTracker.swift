@@ -54,6 +54,7 @@ class LocationTracker: NSObject {
         requestUpdateDriverLocation()
         invalidTimer()
         
+        // bring timer to background thread
         self.backgroundTaskIdentifier = UIApplication.shared.beginBackgroundTask {
             self.invalidTimer()
         }
