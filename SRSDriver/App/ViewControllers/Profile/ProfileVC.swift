@@ -183,7 +183,7 @@ extension ProfileVC:UITableViewDataSource {
       }else {
         cell.lineEdit?.isHidden = true
       }
-      //cell.tfContent?.isUserInteractionEnabled = self.isEditPublicInfor
+      cell.tfContent?.isUserInteractionEnabled = self.isEditPublicInfor
 
     case .sectionPrivate:
       cell.lblTitle?.text = privateInforDatas[row].first
@@ -199,7 +199,7 @@ extension ProfileVC:UITableViewDataSource {
       }else {
         cell.lineEdit?.isHidden = true
       }
-     // cell.tfContent?.isUserInteractionEnabled = self.isEditPrivateInfor
+      cell.tfContent?.isUserInteractionEnabled = self.isEditPrivateInfor
     }
     cell.tfContent?.delegate = self
     cell.selectionStyle = .none
