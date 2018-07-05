@@ -2,7 +2,6 @@
 
 import UIKit
 import ObjectMapper
-import RealmSwift
 
 class Cache: NSObject {
     static let shared = Cache()

@@ -11,10 +11,10 @@ PODS:
   - FirebaseAnalytics (5.0.1):
     - FirebaseCore (~> 5.0)
     - FirebaseInstanceID (~> 3.0)
-    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
     - nanopb (~> 0.3)
   - FirebaseCore (5.0.5):
-    - "GoogleToolboxForMac/NSData+zlib (~> 2.1)"
+    - GoogleToolboxForMac/NSData+zlib (~> 2.1)
   - FirebaseInstanceID (3.1.1):
     - FirebaseCore (~> 5.0)
   - FirebaseMessaging (3.0.3):
@@ -30,7 +30,7 @@ PODS:
   - GoogleToolboxForMac/Defines (2.1.4)
   - GoogleToolboxForMac/Logger (2.1.4):
     - GoogleToolboxForMac/Defines (= 2.1.4)
-  - "GoogleToolboxForMac/NSData+zlib (2.1.4)":
+  - GoogleToolboxForMac/NSData+zlib (2.1.4):
     - GoogleToolboxForMac/Defines (= 2.1.4)
   - IQKeyboardManager (6.0.4)
   - nanopb (0.3.8):
@@ -40,11 +40,6 @@ PODS:
   - nanopb/encode (0.3.8)
   - ObjectMapper (3.3.0)
   - Protobuf (3.6.0)
-  - Realm (3.7.4):
-    - Realm/Headers (= 3.7.4)
-  - Realm/Headers (3.7.4)
-  - RealmSwift (3.7.4):
-    - Realm (= 3.7.4)
   - SDWebImage (4.4.1):
     - SDWebImage/Core (= 4.4.1)
   - SDWebImage/Core (4.4.1)
@@ -60,34 +55,11 @@ DEPENDENCIES:
   - GoogleMaps (= 2.5.0)
   - IQKeyboardManager
   - ObjectMapper
-  - RealmSwift
   - SDWebImage
   - SideMenu
   - SVProgressHUD
   - TLPhotoPicker
-  - XLPagerTabStrip
-
-SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
-    - Alamofire
-    - Firebase
-    - FirebaseAnalytics
-    - FirebaseCore
-    - FirebaseInstanceID
-    - FirebaseMessaging
-    - GoogleMaps
-    - GoogleToolboxForMac
-    - IQKeyboardManager
-    - nanopb
-    - ObjectMapper
-    - Protobuf
-    - Realm
-    - RealmSwift
-    - SDWebImage
-    - SideMenu
-    - SVProgressHUD
-    - TLPhotoPicker
-    - XLPagerTabStrip
+  - XLPagerTabStrip (~> 8.0.1)
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
@@ -102,14 +74,12 @@ SPEC CHECKSUMS:
   nanopb: 5601e6bca2dbf1ed831b519092ec110f66982ca3
   ObjectMapper: b612bf8c8e99c4dc0bb6013a51f7c27966ed5da9
   Protobuf: 0fc0ad8bec688b2a3017a139953e01374fedbd5f
-  Realm: a469bb59e33f9926102ccaea4349822c53b9117e
-  RealmSwift: a45861b21c180f5cf0f122144b9759fa8dde3e9e
   SDWebImage: 47e9b5b925cbce75946c23f0c42dd19464189af4
   SideMenu: 70ee5657df63ec3382660ec4ef470bf1cf5db07d
   SVProgressHUD: 1428aafac632c1f86f62aa4243ec12008d7a51d6
   TLPhotoPicker: 05463d0aea62633f4066acf219f3952ab8b1d488
   XLPagerTabStrip: c908b17cbf42fcd2598ee1adfc49bae25444d88a
 
-PODFILE CHECKSUM: bbb190a0a71335e2cdcddfbcff80fc36eac4d439
+PODFILE CHECKSUM: 24473b5e09a86de6b8bca6cc460cbabafd15dfe9
 
-COCOAPODS: 1.5.3
+COCOAPODS: 1.4.0

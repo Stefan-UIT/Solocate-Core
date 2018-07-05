@@ -137,6 +137,15 @@ extension BaseAPIService {
                        input: .empty,
                        callback: callback);
     }
+  
+  @discardableResult
+  func updateUserProfile(_ user:UserModel, callback: @escaping APICallback<ResponseDataModel<UserModel>>) -> APIRequest {
+    let path = String(format:E(RESTConstants.ServicesConfigs[RESTConstants.UPDATE_USER_PROFILE]))
+    return request(method: .PUT,
+                   path: path,
+                   input: .dto(user),
+                   callback: callback);
+  }
     
   
   /*

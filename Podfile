@@ -6,7 +6,6 @@ target 'DMSDriver' do
 
 	pod 'GoogleMaps', '2.5.0'	
 	pod 'ObjectMapper'
-	pod 'RealmSwift'
 	pod 'Alamofire'
 	pod 'XLPagerTabStrip' , '~> 8.0.1'
 	pod 'IQKeyboardManager'

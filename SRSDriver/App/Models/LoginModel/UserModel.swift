@@ -30,7 +30,7 @@ class UserModel: BaseModel {
         firstName <- map[KEY_FIRST_NAME]
         lastName <- map[KEY_LAST_NAME]
         mobile <- map[KEY_MOBILE]
-        phone <- map[KEY_MOBILE]
+        phone <- map[KEY_PHONE]
         token <- map[KEY_TOKEN]
         role <- map["role"]
         
