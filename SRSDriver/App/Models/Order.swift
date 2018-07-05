@@ -8,6 +8,7 @@
 
 import UIKit
 import ObjectMapper
+import CoreLocation
 
 class Order: BaseModel {
   var id = -1
@@ -16,6 +17,7 @@ class Order: BaseModel {
   var totalWeight = ""
   var floorSpace = ""
   var shopID = -1
+    var locationID = -1
   var storeName = ""
   var sequence = -1
   var pickupContactName = ""
@@ -35,6 +37,12 @@ class Order: BaseModel {
   var seq = -1
   var pallets = -1
   var cases = -1
+    
+    var location:CLLocationCoordinate2D {
+        get {
+            return CLLocationCoordinate2D(latitude: lat.doubleValue, longitude: lng.doubleValue)
+        }
+    }
     
   var colorStatus:UIColor {
     get{
@@ -58,32 +66,33 @@ class Order: BaseModel {
   }
   
     override func mapping(map: Map) {
-    id                <- map["order_id"]
-    deliveryZip       <- map["dlvy_zip"]
-    totalVolume       <- map["tot_vol"]
-    totalWeight       <- map["tot_weight"]
-    floorSpace        <- map["floor_space"]
-    shopID            <- map["shop_id"]
-    storeName          <- map["store_name"]
-    sequence          <- map["seq"]
-    pickupContactName <- map["pkup_ctt_name"]
-    
-    pickupContactPhone <- map["pkup_ctt_phone"]
-    pickupContactEmail <- map["pkup_ctt_email"]
-    lat               <- map["lat"]
-    lng               <- map["long"]
-    statusCode        <- map["order_sts"]
-    statusName        <- map["order_stmainatus"]
-    orderReference    <- map["order_ref"]
-    deliveryDate      <- map["dlvy_date"]
-    deliveryAdd       <- map["delivery"]
-    timeWindowName    <- map["TimeWindowName"]
-    orderType         <- map["order_type_name"]
-    routeId           <- map["route_id"]
+        id                <- map["order_id"]
+        deliveryZip       <- map["dlvy_zip"]
+        totalVolume       <- map["tot_vol"]
+        totalWeight       <- map["tot_weight"]
+        floorSpace        <- map["floor_space"]
+        shopID            <- map["shop_id"]
+        locationID            <- map["loc_id"]
+        storeName          <- map["store_name"]
+        sequence          <- map["seq"]
+        pickupContactName <- map["pkup_ctt_name"]
         
-    seq  <- map["seq"]
-    pallets  <- map["pallets"]
-    cases  <- map["cases"]
+        pickupContactPhone <- map["pkup_ctt_phone"]
+        pickupContactEmail <- map["pkup_ctt_email"]
+        lat               <- map["lat"]
+        lng               <- map["long"]
+        statusCode        <- map["order_sts"]
+        statusName        <- map["order_stmainatus"]
+        orderReference    <- map["order_ref"]
+        deliveryDate      <- map["dlvy_date"]
+        deliveryAdd       <- map["delivery"]
+        timeWindowName    <- map["TimeWindowName"]
+        orderType         <- map["order_type_name"]
+        routeId           <- map["route_id"]
+        
+        seq  <- map["seq"]
+        pallets  <- map["pallets"]
+        cases  <- map["cases"]
   }
 }
 /*
@@ -198,8 +207,6 @@ class Picture: NSObject, Mappable {
     link <- map["link"]
     name <- map["name"]
   }
-  
-  
 }
 
 

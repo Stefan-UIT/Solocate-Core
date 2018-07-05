@@ -8,6 +8,7 @@
 
 import UIKit
 import ObjectMapper
+import GoogleMaps
 
 class Route: BaseModel {
   
@@ -27,6 +28,7 @@ class Route: BaseModel {
   var pickupList = [PickupPlace]()
   var messages = [Message]()
   var currentItems = [OrderItem]()
+    var warehouse:WarehouseModel!
   var endDate = ""
   var startDate = ""
     
@@ -71,10 +73,41 @@ class Route: BaseModel {
     pickupList  <- map["pickup_list"]
     messages    <- map["messages"]
     currentItems <- map["current_item"]
-        
     route_number <- map["route_number"]
     route_name_sts <- map["route_name_sts"]
+    warehouse <- map[KEY_WARE_HOUSE]
   }
+    
+    func arrayOrderMarkersFromOrderList() -> [OrderMarker] {
+        var array = [OrderMarker]()
+        for order in orderList {
+            let orderMarker = OrderMarker.init(order)
+            array.append(orderMarker)
+        }
+        return array
+    }
+    
+    func distinctArrayOrderList() -> [Order] {
+        //temp function
+        var addedArray = [Order]()
+        for index in orderList {
+            var repeatedCount = 0
+            orderList.forEach{
+                if $0.locationID == index.locationID {
+                    repeatedCount += 1
+                }
+            }
+            if repeatedCount > 1 {
+                let array = addedArray.filter({$0.locationID == index.locationID})
+                if array.count > 0 {
+                    continue
+                }
+            }
+            addedArray.append(index)
+        }
+        
+        return addedArray
+    }
 }
 
 

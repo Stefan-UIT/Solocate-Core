@@ -454,6 +454,11 @@
 		2E382A1820EB730900415AF0 /* KeyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E382A1520EB730900415AF0 /* KeyConstants.swift */; };
 		2E382A1920EB730900415AF0 /* KeyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E382A1520EB730900415AF0 /* KeyConstants.swift */; };
 		2E382A1A20EB730900415AF0 /* KeyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E382A1520EB730900415AF0 /* KeyConstants.swift */; };
+		2E382A2220EDCF8B00415AF0 /* WarehouseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E382A2120EDCF8B00415AF0 /* WarehouseModel.swift */; };
+		2E382A2320EDCF8B00415AF0 /* WarehouseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E382A2120EDCF8B00415AF0 /* WarehouseModel.swift */; };
+		2E382A2420EDCF8B00415AF0 /* WarehouseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E382A2120EDCF8B00415AF0 /* WarehouseModel.swift */; };
+		2E382A2520EDCF8B00415AF0 /* WarehouseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E382A2120EDCF8B00415AF0 /* WarehouseModel.swift */; };
+		2E382A2620EDCF8B00415AF0 /* WarehouseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E382A2120EDCF8B00415AF0 /* WarehouseModel.swift */; };
 		3B0F86BD20E2337A00E5092B /* Route.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B0F86BC20E2337A00E5092B /* Route.storyboard */; };
 		3B0F86C120E236CA00E5092B /* RouteListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F86C020E236CA00E5092B /* RouteListVC.swift */; };
 		3B0F86C420E2370000E5092B /* RouteDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F86C320E2370000E5092B /* RouteDetailVC.swift */; };
@@ -656,6 +661,7 @@
 		2E3828EC20EB3B9B00415AF0 /* AppConfiguration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppConfiguration.swift; sourceTree = "<group>"; };
 		2E382A0F20EB6A0000415AF0 /* LocationTracker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationTracker.swift; sourceTree = "<group>"; };
 		2E382A1520EB730900415AF0 /* KeyConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyConstants.swift; sourceTree = "<group>"; };
+		2E382A2120EDCF8B00415AF0 /* WarehouseModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WarehouseModel.swift; sourceTree = "<group>"; };
 		3B0F86BC20E2337A00E5092B /* Route.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Route.storyboard; sourceTree = "<group>"; };
 		3B0F86C020E236CA00E5092B /* RouteListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteListVC.swift; sourceTree = "<group>"; };
 		3B0F86C320E2370000E5092B /* RouteDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailVC.swift; sourceTree = "<group>"; };
@@ -1053,6 +1059,7 @@
 				3B230D2620E09D2800C867C8 /* UploadFileResponse.swift */,
 				3B721AF720E1E04600F58783 /* EmptyModel.swift */,
 				3B721AF920E1E29900F58783 /* ResponseDataModel.swift */,
+				2E382A2120EDCF8B00415AF0 /* WarehouseModel.swift */,
 			);
 			path = APIModels;
 			sourceTree = "<group>";
@@ -1883,6 +1890,7 @@
 				0AB690D420A0099E0041E529 /* LogoutTableViewCell.swift in Sources */,
 				3B939DD420E0983B00B90C77 /* AttachFileModel.swift in Sources */,
 				0AB690D520A0099E0041E529 /* UIButton.swift in Sources */,
+				2E382A2520EDCF8B00415AF0 /* WarehouseModel.swift in Sources */,
 				3B230D3C20E09F5400C867C8 /* UserRole.swift in Sources */,
 				0AB690D620A0099E0041E529 /* ReasonListViewController.swift in Sources */,
 				0AB690D720A0099E0041E529 /* UIColor.swift in Sources */,
@@ -1980,6 +1988,7 @@
 				0ADAF3FD20B3B95A00A88E14 /* OrderListViewController.swift in Sources */,
 				3B939DD520E0983B00B90C77 /* AttachFileModel.swift in Sources */,
 				0ADAF3FE20B3B95A00A88E14 /* Cache.swift in Sources */,
+				2E382A2620EDCF8B00415AF0 /* WarehouseModel.swift in Sources */,
 				3B230D3D20E09F5400C867C8 /* UserRole.swift in Sources */,
 				0ADAF3FF20B3B95A00A88E14 /* LogoutTableViewCell.swift in Sources */,
 				0ADAF40020B3B95A00A88E14 /* UIButton.swift in Sources */,
@@ -2077,6 +2086,7 @@
 				0AE327C0208DC84C00EF1F4C /* UIButton.swift in Sources */,
 				3B939DD320E0983B00B90C77 /* AttachFileModel.swift in Sources */,
 				0A7FB46220917EE800F5058D /* BaseView.swift in Sources */,
+				2E382A2420EDCF8B00415AF0 /* WarehouseModel.swift in Sources */,
 				3B230D3B20E09F5400C867C8 /* UserRole.swift in Sources */,
 				0AE327C1208DC84C00EF1F4C /* ReasonListViewController.swift in Sources */,
 				0AE327C2208DC84C00EF1F4C /* UIColor.swift in Sources */,
@@ -2174,6 +2184,7 @@
 				2494A9422074926A005A2622 /* UIButton.swift in Sources */,
 				3B939DD220E0983B00B90C77 /* AttachFileModel.swift in Sources */,
 				0A7FB46120917EE700F5058D /* BaseView.swift in Sources */,
+				2E382A2320EDCF8B00415AF0 /* WarehouseModel.swift in Sources */,
 				3B230D3A20E09F5400C867C8 /* UserRole.swift in Sources */,
 				2494A9432074926A005A2622 /* ReasonListViewController.swift in Sources */,
 				2494A9442074926A005A2622 /* UIColor.swift in Sources */,
@@ -2290,6 +2301,7 @@
 				3B230D2A20E09D2900C867C8 /* UploadFileResponse.swift in Sources */,
 				3B0F86CE20E24F0700E5092B /* MainVC.swift in Sources */,
 				5A499CA220591D0400A1D944 /* UIColor.swift in Sources */,
+				2E382A2220EDCF8B00415AF0 /* WarehouseModel.swift in Sources */,
 				3B230D3E20E09F5400C867C8 /* UserLoginModel.swift in Sources */,
 				24B331942061FA66001FAC49 /* PictureTableViewCell.swift in Sources */,
 				0AF8BA692085D820001321D1 /* LeftMenuView.swift in Sources */,

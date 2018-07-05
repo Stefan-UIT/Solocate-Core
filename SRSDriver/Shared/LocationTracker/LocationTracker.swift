@@ -44,7 +44,6 @@ class LocationTracker: NSObject {
         let latitude = userLocation.coordinate.latitude
         API().updateDriverLocation(long: longitude,
                                    lat: latitude) { [weak self] (result) in
-               print(result)
         }
     }
     

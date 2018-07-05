@@ -22,6 +22,9 @@ let KEY_FIRST_NAME              = "first_name"
 let KEY_LAST_NAME               = "last_name"
 let KEY_MOBILE                  = "mobile"
 let KEY_PHONE                   = "phone"
-//let KEY_PHONE                   = "phone"
 
+let KEY_WARE_HOUSE              = "ware_house"
+let KEY_ID                      = "id"
+let KEY_NAME                    = "name"
+let KEY_LAT_LONG                = "lat_log"
 
