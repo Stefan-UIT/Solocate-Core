@@ -46,7 +46,6 @@ class LocationTracker: NSObject {
                                    lat: latitude) { [weak self] (result) in
                print(result)
         }
-        
     }
     
     // Schedule to update driver location
