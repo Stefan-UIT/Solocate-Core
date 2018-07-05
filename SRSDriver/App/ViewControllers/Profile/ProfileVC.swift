@@ -183,11 +183,13 @@ extension ProfileVC:UITableViewDataSource {
       }else {
         cell.lineEdit?.isHidden = true
       }
+      cell.tfContent?.tag = row
       cell.tfContent?.isUserInteractionEnabled = self.isEditPublicInfor
 
     case .sectionPrivate:
       cell.lblTitle?.text = privateInforDatas[row].first
       cell.tfContent?.text = privateInforDatas[row].last
+      cell.tfContent?.tag = publicInforDatas.count + row
       
       if (self.isEditPrivateInfor) {
          cell.lineEdit?.isHidden = false
@@ -201,6 +203,7 @@ extension ProfileVC:UITableViewDataSource {
       }
       cell.tfContent?.isUserInteractionEnabled = self.isEditPrivateInfor
     }
+
     cell.tfContent?.delegate = self
     cell.selectionStyle = .none
     cell.delegate = self
@@ -299,6 +302,19 @@ extension ProfileVC:UITextFieldDelegate{
   func textFieldDidBeginEditing(_ textField: UITextField) {
       textFieldEdit = textField
       //self.tbvContent?.reloadData()
+  }
+  
+  func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+    let tag = textField.tag;
+    if tag == 0 {
+      user?.firstName = textField.text;
+    }else if tag == 1 {
+      user?.lastName = textField.text;
+    }else if tag ==  publicInforDatas.count {
+      user?.phone = textField.text
+    }else if (tag == publicInforDatas.count + 1){
+      user?.email = textField.text
+    }
   }
 }
 
