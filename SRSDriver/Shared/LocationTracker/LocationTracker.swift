@@ -17,25 +17,33 @@ class LocationTracker: NSObject {
     
     // MARK: - Variables
     private var timer = Timer()
+    private var backgroundTaskIdentifier = UIBackgroundTaskIdentifier()
     
     // MARK: - Utility Methods
     func startUpdatingDriverLocationIfNeeded() {
         // if user did not login, no need to update location
         if !Cache.shared.hasLogin {
-            timer.invalidate()
+            invalidTimer()
             return
         }
         scheduledTimerWithTimeInterval()
     }
     
     @objc func requestUpdateDriverLocation() {
+        if !Caches().hasLogin { // suddenly user logout
+            invalidTimer()
+            return
+        }
         guard let userLocation = LocationManager.shared.currentLocation else {
             LocationManager.shared.delegate = self
             LocationManager.shared.requestLocation()
             return
         }
-        API().updateDriverLocation(long: userLocation.coordinate.longitude,
-                                   lat: userLocation.coordinate.latitude) { [weak self] (result) in
+        
+        let longitude = userLocation.coordinate.longitude
+        let latitude = userLocation.coordinate.latitude
+        API().updateDriverLocation(long: longitude,
+                                   lat: latitude) { [weak self] (result) in
                print(result)
         }
         
@@ -44,9 +52,21 @@ class LocationTracker: NSObject {
     // Schedule to update driver location
     func scheduledTimerWithTimeInterval(){
         requestUpdateDriverLocation()
+        invalidTimer()
         
-        timer.invalidate()
+        self.backgroundTaskIdentifier = UIApplication.shared.beginBackgroundTask {
+            self.invalidTimer()
+        }
         timer = Timer.scheduledTimer(timeInterval: TimeInterval(DMSAppConfiguration.trackingTimeInterval), target: self, selector: #selector(requestUpdateDriverLocation), userInfo: nil, repeats: true)
+    }
+    
+    func invalidTimer() {
+        timer.invalidate()
+        UIApplication.shared.endBackgroundTask(self.backgroundTaskIdentifier)
+    }
+    
+    deinit {
+        invalidTimer()
     }
 }
 
