@@ -100,7 +100,7 @@ public enum SBName : String {
     case Packages = "Packages";
     case Map = "Map";
     case Message = "Message";
-
+    case Profile = "Profile";
 
 }
 

@@ -8,13 +8,23 @@
 
 import UIKit
 
+protocol ProfileCellDelegate {
+  func didSelctEdit(cell:ProfileCell, btn:UIButton)
+  func didSelctChagePassword(cell:ProfileCell, btn:UIButton)
+
+}
+
 class ProfileCell: UITableViewCell {
 
     @IBOutlet weak var lblTitle:UILabel?
     @IBOutlet weak var tfContent:UITextField?
     @IBOutlet weak var imvAvartar:UIImageView?
     @IBOutlet weak var btnEdit:UIButton?
+    @IBOutlet weak var lineEdit:UIView?
 
+  
+    var delegate:ProfileCellDelegate?
+  
   
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,5 +36,12 @@ class ProfileCell: UITableViewCell {
 
         // Configure the view for the selected state
     }
-
+  
+    @IBAction func onbtnClickEdit(btn:UIButton){
+      delegate?.didSelctEdit(cell: self, btn: btn)
+    }
+  
+    @IBAction func onbtnClickChagePassword(btn:UIButton){
+      delegate?.didSelctChagePassword(cell: self, btn: btn)
+    }
 }

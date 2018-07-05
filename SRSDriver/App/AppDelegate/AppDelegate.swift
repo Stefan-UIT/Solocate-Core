@@ -10,8 +10,9 @@ import UIKit
 import UserNotifications
 import GoogleMaps
 import SVProgressHUD
-import Firebase
 import IQKeyboardManager
+import FirebaseCore
+import FirebaseMessaging
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {

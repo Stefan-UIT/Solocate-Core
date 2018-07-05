@@ -92,15 +92,15 @@ extension SlideMenuVC: UITableViewDataSource{
 extension SlideMenuVC:UITableViewDelegate{
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     if let menuType = MenuItemType(rawValue: indexPath.row){
-      
       if currentItem != menuType{
         currentItem = menuType
         switch menuType {
         case .PROFILE:
+          let vc:ProfileVC = .loadSB(SB: .Profile)
+          App().mainVC?.rootNV?.pushViewController(vc, animated: false)
           break
         case .ROUTES:
-          let vc: RouteListVC = .loadSB(SB: .Route)
-          App().mainVC?.rootNV?.navigationController?.setViewControllers([vc], animated: false)
+          App().mainVC?.pushRouteListVC()
           break
         case .LOGOUT:
           self.handleLogOut()
@@ -128,3 +128,4 @@ private extension SlideMenuVC{
     }
   }
 }
+

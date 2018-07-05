@@ -110,6 +110,8 @@ class RESTConstants: NSObject {
     // Profile
     static let GET_USERID_BY_TOKEN = "GET_USERID_BY_TOKEN"
     static let GET_USER_PROFILE = "GET_USER_PROFILE"
+    static let UPDATE_USER_PROFILE = "UPDATE_USER_PROFILE"
+
     
     // Tracking
     static let UPDATE_DRIVER_LOCATION = "UPDATE_DRIVER_LOCATION"
