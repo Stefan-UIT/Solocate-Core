@@ -2694,10 +2694,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMS";
-				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.DMSDriver;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.99cents.driver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "dcb4e569-3e72-478c-8740-c5a35b64797a";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-allInhouse";
+				PROVISIONING_PROFILE = "95deab8e-8b05-454f-86be-179f202681eb";
+				PROVISIONING_PROFILE_SPECIFIER = dev_99cents;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2718,7 +2718,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMS";
-				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.DMSDriver;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.99cents.driver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
