@@ -74,6 +74,16 @@ extension BaseAPIService {
     }
     
     @discardableResult
+    func getRouteDetail(route:String, callback: @escaping APICallback<Route>) -> APIRequest {
+        let path = String(format:E(Configs.ServicesConfigs(RESTConstants.GET_ROUTE_DETAIL)), route)
+        return request(method: .GET,
+                       path: path,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    
+    @discardableResult
     func updateOrderStatus(_ order:OrderDetail,reason: Reason? = nil, callback: @escaping APICallback<Route>) -> APIRequest {
         
         let path = String(format:E(RESTConstants.ServicesConfigs[RESTConstants.UPDATE_ORDER_STATUS]), "\(order.id)", order.statusCode)
@@ -99,17 +109,17 @@ extension BaseAPIService {
                        callback: callback);
     }
   
-  @discardableResult
-  func submitSignature(_ file:AttachFileModel,_ orderId:String, callback: @escaping APICallback<AttachFileModel>) -> APIRequest {
-    let uri = String(format:E(Configs.ServicesConfigs(RESTConstants.UPLOAD_SIGNATURE)), orderId)
-    let headers = ["Content-Type":"multipart/form-data; boundary=\(E(file.boundary))"];
+    @discardableResult
+    func submitSignature(_ file:AttachFileModel,_ orderId:String, callback: @escaping APICallback<AttachFileModel>) -> APIRequest {
+        let uri = String(format:E(Configs.ServicesConfigs(RESTConstants.UPLOAD_SIGNATURE)), orderId)
+        let headers = ["Content-Type":"multipart/form-data; boundary=\(E(file.boundary))"];
 
-    return request(method: .POST,
+        return request(method: .POST,
                    headers:headers,
                    path: uri,
                    input: .dto(file),
                    callback: callback);
-  }
+    }
     
     @discardableResult
     func updateDriverLocation(long :Double, lat:Double, callback: @escaping APICallback<Route>) -> APIRequest {

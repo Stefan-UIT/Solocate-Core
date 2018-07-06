@@ -21,63 +21,42 @@ class OrderListViewController: BaseViewController {
   fileprivate var changePasswordView : ChangePasswordView!
     
   var route: Route?
-
-  fileprivate var leftMenuView : LeftMenuView = LeftMenuView() /* Added by Hoang Trinh */
-    
-  func getRouteDetail(_ routeID: String) {
-    showLoadingIndicator()
-    APIs.getRouteDetail(routeID) { [weak self] (response, errMsg) in
-      self?.dismissLoadingIndicator()
-      guard let route = response, let strongSelf = self else {
-        self?.showAlertView(errMsg ?? " ")
-        return
-      }
-      strongSelf.route = route
-      strongSelf.tableView.reloadData()
-    }
-  }
   
   override func viewDidLoad() {
     super.viewDidLoad()
  
     updateUI()
-    /* Added by Hoang Trinh - Begin */
-    leftMenuView.delegate = self
-    /* Added by Hoang Trinh - Begin */
   }
 
   
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
     
-    /*
     if let route = self.route {
         getRouteDetail("\(route.id)")
     }
-    */
+    
     tabBarController?.tabBar.isHidden = false
   }
-    
-    func updateUI() {
-        if let orderList = self.route?.orderList {
-            noOrdersLabel?.isHidden = orderList.count > 0
-        }
-    }
+
   
   override func viewWillDisappear(_ animated: Bool) {
     super.viewWillAppear(animated)
     navigationItem.title = ""// clear title
   }
-  
     
-  /* Added by Hoang Trinh - Begin */
-  @IBAction func tapLeftMenuBarButtonItemAction(_ sender: UIBarButtonItem) {
-    if leftMenuView.isDisplayed {
-      leftMenuView.hideView()
-    } else {
-      leftMenuView.showViewInView(superView: self.view, isHiddenStatusBar: false)
+    
+    func updateUI() {
+        setupTableView()
+        if let orderList = self.route?.orderList {
+            noOrdersLabel?.isHidden = orderList.count > 0
+        }
     }
-  }
+    
+    func setupTableView() {
+        tableView.addRefreshControl(self, action: #selector(fetchData))
+    }
+
 }
 
 // MARK: - Private methods
@@ -217,7 +196,6 @@ extension OrderListViewController : LeftMenuViewDelegate {
     }
     
     func handleLogOut() {
-        
         API().logout { (result) in
             switch result{
             case .object(_):
@@ -227,17 +205,6 @@ extension OrderListViewController : LeftMenuViewDelegate {
                 self.showAlertView(error.getMessage())
             }
         }
-        
-        /*
-        APIs.logout { [unowned self] (success, msg) in
-            if success {
-                Cache.setTokenKeyLogin("")
-                self.navigationController?.navigationController?.popToRootViewController(animated: true)
-            } else {
-                print(msg ?? "")
-            }
-        }
-         */
     }
 }
 
@@ -275,6 +242,38 @@ extension OrderListViewController : ChangePasswordViewDelegate {
         }
     }
 }
-/* Added by Hoang Trinh - End */
+
+//MARK: - API
+extension OrderListViewController{
+    
+    @objc func fetchData()  {
+        if let route = self.route {
+            getRouteDetail("\(route.id)", isFetch: true)
+        }
+    }
+    
+    func getRouteDetail(_ routeID:String, isFetch:Bool = false) {
+        if !isFetch {
+            self.showLoadingIndicator()
+        }
+        API().getRouteDetail(route: routeID) {[weak self] (result) in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.dismissLoadingIndicator()
+            strongSelf.tableView.endRefreshControl()
+
+            switch result{
+            case .object(let obj):
+                strongSelf.route = obj
+                strongSelf.tableView.reloadData()
+            case .error(let error):
+                strongSelf.showAlertView(error.getMessage())
+                
+            }
+        }
+    }
+}
+
 
 

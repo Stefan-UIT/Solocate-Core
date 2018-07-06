@@ -28,7 +28,7 @@ class Route: BaseModel {
   var pickupList = [PickupPlace]()
   var messages = [Message]()
   var currentItems = [OrderItem]()
-    var warehouse:WarehouseModel!
+  var warehouse:WarehouseModel!
   var endDate = ""
   var startDate = ""
     

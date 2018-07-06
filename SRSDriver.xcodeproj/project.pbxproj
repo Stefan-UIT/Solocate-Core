@@ -110,7 +110,6 @@
 		0AB690D920A0099E0041E529 /* LeftMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8BA682085D820001321D1 /* LeftMenuView.swift */; };
 		0AB690DA20A0099E0041E529 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9CD205A197800F34351 /* Date.swift */; };
 		0AB690DB20A0099E0041E529 /* OrderDetailContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A448205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift */; };
-		0AB690DC20A0099E0041E529 /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A457205A5A0F00CA9DB8 /* APIs.swift */; };
 		0AB690DD20A0099E0041E529 /* HCSStarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CB020591D9600A1D944 /* HCSStarRatingView.m */; };
 		0AB690DE20A0099E0041E529 /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A460205A86B500CA9DB8 /* MapsViewController.swift */; };
 		0AB690DF20A0099E0041E529 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9A20591D0400A1D944 /* UITextField.swift */; };
@@ -208,7 +207,6 @@
 		0ADAF40620B3B95A00A88E14 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9CD205A197800F34351 /* Date.swift */; };
 		0ADAF40720B3B95A00A88E14 /* OrderDetailContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A448205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift */; };
 		0ADAF40820B3B95A00A88E14 /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AEBA57520AA9E480053F2BF /* AlertMessageView.swift */; };
-		0ADAF40920B3B95A00A88E14 /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A457205A5A0F00CA9DB8 /* APIs.swift */; };
 		0ADAF40A20B3B95A00A88E14 /* HCSStarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CB020591D9600A1D944 /* HCSStarRatingView.m */; };
 		0ADAF40B20B3B95A00A88E14 /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A460205A86B500CA9DB8 /* MapsViewController.swift */; };
 		0ADAF40C20B3B95A00A88E14 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9A20591D0400A1D944 /* UITextField.swift */; };
@@ -297,7 +295,6 @@
 		0AE327C4208DC84C00EF1F4C /* LeftMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8BA682085D820001321D1 /* LeftMenuView.swift */; };
 		0AE327C5208DC84C00EF1F4C /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9CD205A197800F34351 /* Date.swift */; };
 		0AE327C6208DC84C00EF1F4C /* OrderDetailContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A448205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift */; };
-		0AE327C7208DC84C00EF1F4C /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A457205A5A0F00CA9DB8 /* APIs.swift */; };
 		0AE327C8208DC84C00EF1F4C /* HCSStarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CB020591D9600A1D944 /* HCSStarRatingView.m */; };
 		0AE327C9208DC84C00EF1F4C /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A460205A86B500CA9DB8 /* MapsViewController.swift */; };
 		0AE327CA208DC84C00EF1F4C /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9A20591D0400A1D944 /* UITextField.swift */; };
@@ -394,7 +391,6 @@
 		2494A9452074926A005A2622 /* PictureTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B331932061FA66001FAC49 /* PictureTableViewCell.swift */; };
 		2494A9462074926A005A2622 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9CD205A197800F34351 /* Date.swift */; };
 		2494A9472074926A005A2622 /* OrderDetailContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A448205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift */; };
-		2494A9482074926A005A2622 /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A457205A5A0F00CA9DB8 /* APIs.swift */; };
 		2494A9492074926A005A2622 /* HCSStarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CB020591D9600A1D944 /* HCSStarRatingView.m */; };
 		2494A94A2074926A005A2622 /* MapsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A460205A86B500CA9DB8 /* MapsViewController.swift */; };
 		2494A94B2074926A005A2622 /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9A20591D0400A1D944 /* UITextField.swift */; };
@@ -503,6 +499,7 @@
 		3B7942BE20E33367005AD12F /* Message.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B7942BD20E33367005AD12F /* Message.storyboard */; };
 		3B7942C120E371C2005AD12F /* NavigationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7942C020E371C2005AD12F /* NavigationService.swift */; };
 		3B7942C420E37287005AD12F /* DMSNavigationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7942C320E37287005AD12F /* DMSNavigationService.swift */; };
+		3B87E07B20EF5A02002DDEF3 /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B87E07A20EF5A02002DDEF3 /* APIs.swift */; };
 		3B939DB920E0970600B90C77 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B939DB620E0970600B90C77 /* APIServices.swift */; };
 		3B939DBA20E0970600B90C77 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B939DB620E0970600B90C77 /* APIServices.swift */; };
 		3B939DBB20E0970600B90C77 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B939DB620E0970600B90C77 /* APIServices.swift */; };
@@ -542,14 +539,12 @@
 		5A499CB720591E4100A1D944 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CB520591E4100A1D944 /* Cache.swift */; };
 		5A499CB820591E4100A1D944 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CB620591E4100A1D944 /* Constants.swift */; };
 		5A499CBB2059277D00A1D944 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CBA2059277D00A1D944 /* BaseViewController.swift */; };
-		5A6895AEBC8BB017DC2EA816 /* Pods_SRSDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B660F041976D0FC4B84CB8F1 /* Pods_SRSDriver.framework */; };
 		5A68A449205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A448205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift */; };
 		5A68A44B205A200700CA9DB8 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A44A205A200700CA9DB8 /* OrderDetailViewController.swift */; };
 		5A68A44D205A201A00CA9DB8 /* OrderSignatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A44C205A201A00CA9DB8 /* OrderSignatureViewController.swift */; };
 		5A68A44F205A202400CA9DB8 /* OrderNotesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A44E205A202400CA9DB8 /* OrderNotesViewController.swift */; };
 		5A68A451205A202F00CA9DB8 /* OrderPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A450205A202F00CA9DB8 /* OrderPictureViewController.swift */; };
 		5A68A455205A223200CA9DB8 /* OrderDetailCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A453205A223200CA9DB8 /* OrderDetailCollectionViewCell.swift */; };
-		5A68A458205A5A0F00CA9DB8 /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A457205A5A0F00CA9DB8 /* APIs.swift */; };
 		5A68A45B205A5E3600CA9DB8 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A45A205A5E3600CA9DB8 /* Order.swift */; };
 		5A68A45D205A5ECF00CA9DB8 /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A45C205A5ECE00CA9DB8 /* Route.swift */; };
 		5A68A45F205A619300CA9DB8 /* PickupPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A45E205A619300CA9DB8 /* PickupPlace.swift */; };
@@ -588,6 +583,19 @@
 		5ACCE8E6205BC16300A1532D /* UIImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACCE8E5205BC16300A1532D /* UIImage.swift */; };
 		FE3E8567F8D92DE95E0D3279 /* Pods_DMSDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B79B796DBB6F3424101EC745 /* Pods_DMSDriver.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		3B87E09B20EF5FFE002DDEF3 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		0A27215920A597B1009E527F /* ForgetPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgetPasswordView.swift; sourceTree = "<group>"; };
@@ -690,6 +698,7 @@
 		3B7942BD20E33367005AD12F /* Message.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Message.storyboard; sourceTree = "<group>"; };
 		3B7942C020E371C2005AD12F /* NavigationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationService.swift; sourceTree = "<group>"; };
 		3B7942C320E37287005AD12F /* DMSNavigationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DMSNavigationService.swift; sourceTree = "<group>"; };
+		3B87E07A20EF5A02002DDEF3 /* APIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIs.swift; sourceTree = "<group>"; };
 		3B939DB620E0970600B90C77 /* APIServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIServices.swift; sourceTree = "<group>"; };
 		3B939DB720E0970600B90C77 /* BaseAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPIService.swift; sourceTree = "<group>"; };
 		3B939DC920E097CB00B90C77 /* BaseModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseModel.swift; sourceTree = "<group>"; };
@@ -722,7 +731,6 @@
 		5A68A44E205A202400CA9DB8 /* OrderNotesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderNotesViewController.swift; sourceTree = "<group>"; };
 		5A68A450205A202F00CA9DB8 /* OrderPictureViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderPictureViewController.swift; sourceTree = "<group>"; };
 		5A68A453205A223200CA9DB8 /* OrderDetailCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailCollectionViewCell.swift; sourceTree = "<group>"; };
-		5A68A457205A5A0F00CA9DB8 /* APIs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIs.swift; sourceTree = "<group>"; };
 		5A68A45A205A5E3600CA9DB8 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		5A68A45C205A5ECE00CA9DB8 /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		5A68A45E205A619300CA9DB8 /* PickupPlace.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickupPlace.swift; sourceTree = "<group>"; };
@@ -754,7 +762,6 @@
 		5ACCE8E3205BB31600A1532D /* SignatureView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignatureView.xib; sourceTree = "<group>"; };
 		5ACCE8E5205BC16300A1532D /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
 		8353A4C75A879A0B19D97CA5 /* Pods-DMSDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.debug.xcconfig"; sourceTree = "<group>"; };
-		B660F041976D0FC4B84CB8F1 /* Pods_SRSDriver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SRSDriver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B79B796DBB6F3424101EC745 /* Pods_DMSDriver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DMSDriver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C6D76BCA4F1CB8260E973BEE /* Pods-DMSDriver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -792,7 +799,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				5A6895AEBC8BB017DC2EA816 /* Pods_SRSDriver.framework in Frameworks */,
 				FE3E8567F8D92DE95E0D3279 /* Pods_DMSDriver.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -946,7 +952,6 @@
 		20E91CE0E02FEDA2CB697433 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				B660F041976D0FC4B84CB8F1 /* Pods_SRSDriver.framework */,
 				B79B796DBB6F3424101EC745 /* Pods_DMSDriver.framework */,
 			);
 			name = Frameworks;
@@ -1296,7 +1301,7 @@
 				3B230D3020E09F5400C867C8 /* LoginModel */,
 				3B939DCF20E0983B00B90C77 /* AttachFileModel */,
 				3B939DC820E097A000B90C77 /* BaseModel */,
-				5A68A457205A5A0F00CA9DB8 /* APIs.swift */,
+				3B87E07A20EF5A02002DDEF3 /* APIs.swift */,
 				245BBAA12073616D00EE3E47 /* MessageAPI.swift */,
 				5A68A45A205A5E3600CA9DB8 /* Order.swift */,
 				5A68A45C205A5ECE00CA9DB8 /* Route.swift */,
@@ -1556,6 +1561,7 @@
 				5AA4CA3A20590AD4003F8E6F /* Resources */,
 				F3D3DA29302AC3D9BA85F8BB /* [CP] Embed Pods Frameworks */,
 				B2B75F36A9C47339D954EC0E /* [CP] Copy Pods Resources */,
+				3B87E09B20EF5FFE002DDEF3 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -1572,7 +1578,7 @@
 		5AA4CA3420590AD4003F8E6F /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0920;
+				LastSwiftUpdateCheck = 0940;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = SeldatInc;
 				TargetAttributes = {
@@ -1816,7 +1822,6 @@
 				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
 				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
 				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
-				"${BUILT_PRODUCTS_DIR}/TLPhotoPicker/TLPhotoPicker.framework",
 				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -1830,7 +1835,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TLPhotoPicker.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -1898,7 +1902,6 @@
 				0AB690DA20A0099E0041E529 /* Date.swift in Sources */,
 				0AB690DB20A0099E0041E529 /* OrderDetailContainerViewController.swift in Sources */,
 				0A360D5820AAD5E60015A64B /* ResultsRequestModel.swift in Sources */,
-				0AB690DC20A0099E0041E529 /* APIs.swift in Sources */,
 				0AB690DD20A0099E0041E529 /* HCSStarRatingView.m in Sources */,
 				0AEBA57D20AA9E800053F2BF /* AlertMessageView.swift in Sources */,
 				0AB690DE20A0099E0041E529 /* MapsViewController.swift in Sources */,
@@ -1999,7 +2002,6 @@
 				0ADAF40620B3B95A00A88E14 /* Date.swift in Sources */,
 				0ADAF40720B3B95A00A88E14 /* OrderDetailContainerViewController.swift in Sources */,
 				0ADAF40820B3B95A00A88E14 /* AlertMessageView.swift in Sources */,
-				0ADAF40920B3B95A00A88E14 /* APIs.swift in Sources */,
 				0ADAF40A20B3B95A00A88E14 /* HCSStarRatingView.m in Sources */,
 				0ADAF40B20B3B95A00A88E14 /* MapsViewController.swift in Sources */,
 				0ADAF40C20B3B95A00A88E14 /* UITextField.swift in Sources */,
@@ -2094,7 +2096,6 @@
 				0AE327C5208DC84C00EF1F4C /* Date.swift in Sources */,
 				0AE327C6208DC84C00EF1F4C /* OrderDetailContainerViewController.swift in Sources */,
 				0A360D5720AAD5E60015A64B /* ResultsRequestModel.swift in Sources */,
-				0AE327C7208DC84C00EF1F4C /* APIs.swift in Sources */,
 				0AE327C8208DC84C00EF1F4C /* HCSStarRatingView.m in Sources */,
 				0AEBA57B20AA9E7F0053F2BF /* AlertMessageView.swift in Sources */,
 				0AE327C9208DC84C00EF1F4C /* MapsViewController.swift in Sources */,
@@ -2192,7 +2193,6 @@
 				2494A9462074926A005A2622 /* Date.swift in Sources */,
 				2494A9472074926A005A2622 /* OrderDetailContainerViewController.swift in Sources */,
 				0A360D5620AAD5E60015A64B /* ResultsRequestModel.swift in Sources */,
-				2494A9482074926A005A2622 /* APIs.swift in Sources */,
 				2494A9492074926A005A2622 /* HCSStarRatingView.m in Sources */,
 				0AEBA57920AA9E7F0053F2BF /* AlertMessageView.swift in Sources */,
 				2494A94A2074926A005A2622 /* MapsViewController.swift in Sources */,
@@ -2298,6 +2298,7 @@
 				3B0F86CE20E24F0700E5092B /* MainVC.swift in Sources */,
 				5A499CA220591D0400A1D944 /* UIColor.swift in Sources */,
 				2E382A2220EDCF8B00415AF0 /* WarehouseModel.swift in Sources */,
+				3B87E07B20EF5A02002DDEF3 /* APIs.swift in Sources */,
 				3B230D3E20E09F5400C867C8 /* UserLoginModel.swift in Sources */,
 				24B331942061FA66001FAC49 /* PictureTableViewCell.swift in Sources */,
 				0AF8BA692085D820001321D1 /* LeftMenuView.swift in Sources */,
@@ -2306,7 +2307,6 @@
 				5A82E9CE205A197800F34351 /* Date.swift in Sources */,
 				5A68A449205A1FF600CA9DB8 /* OrderDetailContainerViewController.swift in Sources */,
 				0AEBA57620AA9E480053F2BF /* AlertMessageView.swift in Sources */,
-				5A68A458205A5A0F00CA9DB8 /* APIs.swift in Sources */,
 				5A499CB220591D9600A1D944 /* HCSStarRatingView.m in Sources */,
 				5A68A461205A86B500CA9DB8 /* MapsViewController.swift in Sources */,
 				3B230D3420E09F5400C867C8 /* UserModel.swift in Sources */,
@@ -2694,10 +2694,10 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMS";
-				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.99cents.driver;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.99centsdriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "95deab8e-8b05-454f-86be-179f202681eb";
-				PROVISIONING_PROFILE_SPECIFIER = dev_99cents;
+				PROVISIONING_PROFILE = "1cadbf5c-5940-4232-9a70-f4e642241bf1";
+				PROVISIONING_PROFILE_SPECIFIER = "dev-99centsDriver";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2713,15 +2713,15 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_Core/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMS";
-				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.99cents.driver;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.99centsdriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "1cadbf5c-5940-4232-9a70-f4e642241bf1";
+				PROVISIONING_PROFILE_SPECIFIER = "dev-99centsDriver";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

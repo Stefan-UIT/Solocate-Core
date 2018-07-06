@@ -16,7 +16,8 @@ class RouteListVC: BaseViewController {
 
     @IBOutlet weak var tbvContent:UITableView?
     @IBOutlet weak var lblNoResult:UILabel?
-
+    
+    var dateStringFilter:String?
     
     var listRoutes:[Route]?{
         didSet{
@@ -50,12 +51,14 @@ class RouteListVC: BaseViewController {
         self.tbvContent?.dataSource = self
         self.tbvContent?.rowHeight = UITableViewAutomaticDimension
         self.tbvContent?.estimatedRowHeight = 100;
+        
+        self.tbvContent?.addRefreshControl(self, action: #selector(fetchData))
     }
   
     
     @IBAction func didChooseCalendar(_ sender: UIBarButtonItem) {
-        let dateString = datePickerView.date.toString("yyyy-MM-dd")
-        getRoutes(byDate: dateString)
+        dateStringFilter = datePickerView.date.toString("yyyy-MM-dd")
+        getRoutes(byDate: dateStringFilter)
         let height = Constants.toolbarHeight + Constants.pickerViewHeight;
         pickerContainerView.transform = CGAffineTransform(translationX: 0, y: -height)
         UIView.animate(withDuration: 0.25, animations: {
@@ -115,10 +118,17 @@ extension RouteListVC:UITableViewDelegate {
 //MARK: - API
 fileprivate extension RouteListVC{
     
-    func getRoutes(byDate date: String? = nil) {
-        showLoadingIndicator()
+    @objc func fetchData() {
+        getRoutes(byDate: dateStringFilter, isFetch: true)
+    }
+    
+    func getRoutes(byDate date: String? = nil, isFetch:Bool = false) {
+        if !isFetch {
+            showLoadingIndicator()
+        }
         API().getRoutes(byDate: date) {[weak self] (result) in
             self?.dismissLoadingIndicator()
+            self?.tbvContent?.endRefreshControl()
             
             switch result{
             case .object(let obj):
