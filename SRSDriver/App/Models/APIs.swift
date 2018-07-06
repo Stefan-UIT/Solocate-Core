@@ -10,7 +10,6 @@ import Foundation
 import Alamofire
 import ObjectMapper
 import CoreLocation
-import TLPhotoPicker
 
 class APIs {
   class func login(_ email: String, password: String, completion: @escaping((_ token: String?, _ msg: String?) -> Void)) {

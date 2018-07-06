@@ -33,16 +33,12 @@ class RouteMessagesViewController: BaseViewController {
   
   var listAlertMessage = [AlertDetailModel]()
     
-  @IBOutlet weak var addMessageButton: UIButton!
   @IBOutlet weak var tableView: UITableView!
   fileprivate var messages = [Message]()
   
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    if let _route = route {
-      addMessageButton.isHidden = _route.id < 0
-    }
     tableView.estimatedRowHeight = estimatedRowHeight
     tableView.rowHeight = UITableViewAutomaticDimension
     title = "messages".localized
