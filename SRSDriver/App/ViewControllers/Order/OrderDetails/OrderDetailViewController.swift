@@ -54,20 +54,19 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   }
   
   
-  override var orderDetail: OrderDetail? {
-    didSet {
-        
-      setupDataDetailInforRows()
-      updateButtonStatus()
-      tableView.reloadData()
-    
+    override var orderDetail: OrderDetail? {
+        didSet {
+            setupDataDetailInforRows()
+            updateButtonStatus()
+            tableView.reloadData()
+        }
     }
-  }
- 
     
     func setupDataDetailInforRows() {
-        
-        guard let _orderDetail = orderDetail else { return }
+        var _orderDetail:OrderDetail = OrderDetail()
+        if orderDetail != nil {
+            _orderDetail = orderDetail!
+        }
         updateStatusButton.isHidden = false
         orderInforRows.removeAll()
         let orderId = OrderDetailInforRow(.orderId,"\(_orderDetail.id)")
@@ -117,19 +116,20 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     var didUpdateStatus:((_ orderDetail:OrderDetail, _ shouldMoveSigatureTab: Bool ) -> Void)?
     var updateOrderDetail:(() -> Void)?
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
+    override func viewDidLoad() {
+        super.viewDidLoad()
 
-    let orderScanItemNib = UINib(nibName: orderScanItemCellIdentifier, bundle: nil)
-    updateStatusButton.isHidden = true
-    tableView.register(orderScanItemNib, forCellReuseIdentifier: orderScanItemCellIdentifier)
-    tableView.estimatedRowHeight = cellHeight
-    tableView.rowHeight = UITableViewAutomaticDimension
+        let orderScanItemNib = UINib(nibName: orderScanItemCellIdentifier, bundle: nil)
+        updateStatusButton.isHidden = true
+        tableView.register(orderScanItemNib, forCellReuseIdentifier: orderScanItemCellIdentifier)
+        tableView.estimatedRowHeight = cellHeight
+        tableView.rowHeight = UITableViewAutomaticDimension
     
-    navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.tintColor = .white
     
-    initVar()
-  }
+        initVar()
+        setupDataDetailInforRows()
+    }
     
     func initVar()  {
         arrTitleHeader = ["Order Information",
@@ -137,9 +137,10 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                           "Description"]
     }
   
-  override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-    return IndicatorInfo(title: "order_detail_title".localized)
-  }
+    override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "order_detail_title".localized)
+    }
+    
   
   
   // MARK: ACTION
