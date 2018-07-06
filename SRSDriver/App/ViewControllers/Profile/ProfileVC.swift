@@ -55,6 +55,7 @@ class ProfileVC: BaseViewController {
         super.viewDidLoad()
 
         setupTableView()
+        initData()
         getUserProfile()
     }
 
@@ -104,6 +105,7 @@ extension ProfileVC:UITableViewDataSource {
   func numberOfSections(in tableView: UITableView) -> Int {
     return ProfileSection.count
   }
+    
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
     let profileSection = ProfileSection(rawValue: section)!
     switch profileSection {
@@ -117,6 +119,7 @@ extension ProfileVC:UITableViewDataSource {
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return UITableViewAutomaticDimension
   }
+    
   func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
     return 80
   }
