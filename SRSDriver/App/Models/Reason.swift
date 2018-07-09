@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class Reason: NSObject, Mappable {
+class Reason: BaseModel {
   var name = ""
   var id = -1
   var reasonDescription = ""
@@ -18,7 +18,7 @@ class Reason: NSObject, Mappable {
     self.init()
   }
   
-  func mapping(map: Map) {
+    override func mapping(map: Map) {
     id <- map["reason_id"]
     name <- map["rsn_fails_name"]
     reasonDescription <- map["des"]

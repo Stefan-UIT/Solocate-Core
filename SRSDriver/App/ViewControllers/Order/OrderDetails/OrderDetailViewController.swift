@@ -11,9 +11,10 @@ import XLPagerTabStrip
 import CoreLocation
 
 enum OrderDetailSection:Int {
-    case sectionOrderInfor = 0;
-    case sectionInformation = 1;
-    case sectionDescription = 2;
+    case sectionOrderStatus = 0
+    case sectionOrderInfor
+    case sectionInformation
+    case sectionDescription
   
     static let count: Int = {
       var max: Int = 0
@@ -33,6 +34,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   
   fileprivate var arrTitleHeader:[String] = []
 
+  fileprivate var orderInforStatus = [OrderDetailInforRow]()
   fileprivate var orderInforRows = [OrderDetailInforRow]()
   fileprivate var informationRows = [OrderDetailInforRow]()
 
@@ -68,13 +70,19 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             _orderDetail = orderDetail!
         }
         updateStatusButton.isHidden = false
+        orderInforStatus.removeAll()
         orderInforRows.removeAll()
         informationRows.removeAll()
-        let orderId = OrderDetailInforRow(.orderId,"\(_orderDetail.id)")
         
         let status = OrderStatus(rawValue: _orderDetail.statusCode) ?? OrderStatus.open
         let statusItem = OrderDetailInforRow(.status,status.statusName)
+        orderInforStatus.append(statusItem)
+        if  _orderDetail.status == .cancelStatus {
+            let reason = OrderDetailInforRow(.reason, _orderDetail.reason_msg)
+            orderInforStatus.append(reason)
+        }
         
+        let orderId = OrderDetailInforRow(.orderId,"\(_orderDetail.id)")
         let type = OrderDetailInforRow(.type, _orderDetail.orderType)
         let ref = OrderDetailInforRow(.reference , _orderDetail.orderReference)
         
@@ -96,7 +104,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         shouldFilterOrderItemsList = _orderDetail.items.filter({$0.statusCode == "OP"}).count > 0
         
         orderInforRows.append(orderId)
-        orderInforRows.append(statusItem)
         orderInforRows.append(type)
         orderInforRows.append(ref)
         orderInforRows.append(startTime)
@@ -111,7 +118,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         informationRows.append(phone)
         informationRows.append(address)
       
-        updateStatusButton.isHidden = _orderDetail.statusCode != "OP" && _orderDetail.statusCode != "IP"
+        updateStatusButton.isHidden = _orderDetail.status != .newStatus && _orderDetail.status != .inProcessStatus
     }
   
     var didUpdateStatus:((_ orderDetail:OrderDetail, _ shouldMoveSigatureTab: Bool ) -> Void)?
@@ -133,7 +140,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     func initVar()  {
-        arrTitleHeader = ["Order Information",
+        arrTitleHeader = ["Order Status",
+                          "Order Information",
                           "Information",
                           "Description"]
     }
@@ -147,7 +155,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   // MARK: ACTION
   @IBAction func didClickFinish(_ sender: UIButton) {
     guard let _orderDetail = orderDetail else {return}
-    let status = _orderDetail.statusCode == "OP" ? "IP" : "DV"
+    let status = _orderDetail.status == .newStatus ? StatusOrder.inProcessStatus.rawValue : StatusOrder.deliveryStatus.rawValue
     updateOrderStatus(status)
   }
   
@@ -167,16 +175,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
       let _orderDetail = orderDetail {
       let orderLocation = CLLocationCoordinate2D(latitude: _orderDetail.lat.doubleValue, longitude: _orderDetail.lng.doubleValue)
       vc.orderLocation = orderLocation
-    }
-    else if segue.identifier == SegueIdentifier.showReasonList,
-      let vc = segue.destination as? ReasonListViewController {
-      vc.orderDetail = orderDetail
-      vc.routeID = routeID
-      vc.type = "1"
-      if let orderItem = sender as? OrderItem { // for order item
-        vc.type = "2"
-        vc.itemID = "\(orderItem.id)"
-      }
     }
   }
     
@@ -204,13 +202,16 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     func handleUnableToStartAction() {
-      self.showAlertView("Sorry, this feature hasn't developed!")
-      //performSegue(withIdentifier: SegueIdentifier.showReasonList, sender: nil)
+        let vc:ReasonListViewController = .loadSB(SB: .Order)
+        vc.orderDetail = orderDetail
+        vc.routeID = routeID
+        vc.type = "1"
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func handleFinishAction() {
         guard let _orderDetail = orderDetail else {return}
-        let status = _orderDetail.statusCode == "OP" ? "IP" : "DV"
+        let status = _orderDetail.status == .newStatus ? "IP" : "DV"
         updateOrderStatus(status)
     }
     
@@ -397,13 +398,15 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section)!
         switch orderSection {
+        case .sectionOrderStatus:
+            return orderInforStatus.count
         case .sectionOrderInfor:
             return orderInforRows.count
         case .sectionInformation:
             return informationRows.count
         case .sectionDescription:
           return 1;
-      }
+        }
     }
   
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -441,6 +444,12 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let orderSection:OrderDetailSection = OrderDetailSection(rawValue: indexPath.section)!
         switch orderSection {
+        case .sectionOrderStatus:
+            let item = orderInforStatus[indexPath.row]
+            if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
+                cell.orderDetailItem = item
+                return cell
+            }
         case .sectionOrderInfor:
             let item = orderInforRows[indexPath.row]
             if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,

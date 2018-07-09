@@ -21,12 +21,20 @@ class ReasonListViewController: BaseViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    if let _orderDetail = orderDetail, type == "1" {
-        let unableTitle = _orderDetail.statusCode == "OP" ? "order_detail_unable_start".localized : "order_detail_unable_finish".localized
-        finishButton.setTitle(unableTitle, for: .normal)
-    }
+    updateUI()
     getReasonList()
-    title = "reason_list_title".localized
+  }
+    
+  func updateUI()  {
+    if let _orderDetail = orderDetail, type == "1" {
+      let unableTitle = _orderDetail.status == .newStatus ? "order_detail_unable_start".localized : "order_detail_unable_finish".localized
+            finishButton.setTitle(unableTitle, for: .normal)
+    }
+  }
+    
+  override func updateNavigationBar() {
+    self.navigationService.delegate = self
+    self.navigationService.updateNavigationBar(.BackOnly, "Select Reason")
   }
   
   @IBAction func submit(_ sender: UIButton) {
@@ -34,31 +42,17 @@ class ReasonListViewController: BaseViewController {
       showAlertView("reason_choose_at_least_reason".localized)
       return
     }
-    if let id = itemID, type == "2" { // for item
-      APIs.updateOrderItemStatus(id, status: "CC", reason: reasonList[selectedIndex], completion: { [unowned self] (errMsg) in
-        if let msg = errMsg {
-          self.showAlertView(msg)
+
+    orderDetail?.statusCode = "CC"
+    orderDetail?.routeId = routeID!
+    guard let order = orderDetail else{return}
+    API().updateOrderStatus(order, reason: reasonList[selectedIndex]) { (result) in
+        switch result{
+        case .object(_):
+            self.navigationController?.popViewController(animated: true)
+        case .error(let error):
+            self.showAlertView(error.getMessage())
         }
-        else {
-          self.navigationController?.popToRootViewController(animated: true)
-        }
-      })      
-      return
-    }
-    
-    // for order
-    guard let _orderDetail = orderDetail,
-      let _routeID = routeID else { return }
-    showLoadingIndicator()
-    let status = _orderDetail.statusCode == "OP" ? "US" : "UF"
-    APIs.updateOrderStatus("\(_orderDetail.id)", expectedStatus: status, routeID: "\(_routeID)", reason: reasonList[selectedIndex], { [unowned self] (successful, msg) in
-        self.dismissLoadingIndicator()
-        self.showAlertView("\(msg ?? "")", completionHandler: { [unowned self] (alertAction) in
-            self.navigationController?.popToRootViewController(animated: true)
-        })
-    }) { [unowned self] (error) in
-        self.dismissLoadingIndicator()
-        self.showAlertView(error?.message ?? "")
     }
   }
 }
@@ -66,15 +60,18 @@ class ReasonListViewController: BaseViewController {
 extension ReasonListViewController {
   func getReasonList() {
     showLoadingIndicator()
-    APIs.getReasonList(type, completion: { [unowned self] (response, errMsg) in
-      self.dismissLoadingIndicator()
-      guard let list = response else {
-        self.showAlertView(errMsg ?? "")
-        return
-      }
-      self.reasonList.append(contentsOf: list)
-      self.tableView.reloadData()
-    })
+    API().getReasonList {[weak self] (result) in
+        self?.dismissLoadingIndicator()
+        switch result{
+        case .object(let obj):
+            guard let list = obj.data else {return}
+            self?.reasonList.append(contentsOf: list)
+            self?.tableView.reloadData()
+            
+        case .error(let error):
+            self?.showAlertView(error.getMessage())
+        }
+    }
   }
 }
 
@@ -98,4 +95,11 @@ extension ReasonListViewController: UITableViewDataSource, UITableViewDelegate {
     cell?.accessoryType = .checkmark
     selectedIndex = indexPath.row
   }
+}
+
+extension ReasonListViewController:DMSNavigationServiceDelegate{
+    func didSelectedBackOrMenu() {
+        self.navigationController?.popViewController(animated: true)
+
+    }
 }

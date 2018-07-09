@@ -518,6 +518,7 @@
                                                 <constraint firstItem="Sfh-Uk-kXF" firstAttribute="leading" secondItem="Nvh-jy-aDr" secondAttribute="leading" constant="15" id="xHe-Ch-jSP"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                         <connections>
                                             <outlet property="contentLabel" destination="oKn-Fx-4FO" id="2Ql-LX-zMN"/>
                                             <outlet property="iconImgView" destination="Gjx-GB-EvR" id="F9m-rC-hS5"/>
@@ -587,7 +588,6 @@
                         <outlet property="tableView" destination="Cbz-Qu-Ei1" id="wAy-Xh-kmW"/>
                         <outlet property="updateStatusButton" destination="fbg-gT-bC4" id="pQ1-5r-xV9"/>
                         <segue destination="9vQ-yW-Ino" kind="show" identifier="showMapView" id="IMh-bp-j7A"/>
-                        <segue destination="Z3i-vV-sUp" kind="show" identifier="showReasonList" id="ghO-yP-ECF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nmd-vq-TD7" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -597,7 +597,7 @@
         <!--Reason List View Controller-->
         <scene sceneID="5wE-Rd-hNH">
             <objects>
-                <viewController storyboardIdentifier="ReasonListViewController" id="Z3i-vV-sUp" customClass="ReasonListViewController" customModule="DMSDriver" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReasonListViewController" automaticallyAdjustsScrollViewInsets="NO" id="Z3i-vV-sUp" customClass="ReasonListViewController" customModule="DMSDriver" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="chk-Fj-01c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -625,7 +625,7 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gEO-1V-liI">
                                         <rect key="frame" x="0.0" y="0.0" width="355" height="50"/>
-                                        <color key="backgroundColor" red="0.94509803920000002" green="0.54117647059999996" blue="0.12549019610000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.0" green="0.61568627450000002" blue="0.96862745100000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                         <state key="normal" title="Submit">
                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1140,7 +1140,7 @@
                                         </constraints>
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No images have been added" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GMu-vK-sHD">
-                                        <rect key="frame" x="18" y="134" width="183.5" height="17"/>
+                                        <rect key="frame" x="18.5" y="134" width="183.5" height="17"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                         <color key="textColor" red="0.28235294117647058" green="0.36470588235294116" blue="0.4392156862745098" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>

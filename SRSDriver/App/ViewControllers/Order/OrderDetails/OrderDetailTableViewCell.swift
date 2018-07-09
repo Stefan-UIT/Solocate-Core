@@ -89,6 +89,8 @@ struct OrderDetailInforRow {
           name = "order_detail_delivery_address".localized
         case .description:
           name = "order_detail_description".localized
+        case .reason:
+          name = "Reason"
         }
   }
 }
@@ -110,6 +112,7 @@ enum OrderDetailType {
   case phone
   case address
   case description
+  case reason
 }
 
 enum OrderStatus: String {

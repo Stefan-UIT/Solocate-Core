@@ -10,6 +10,13 @@ import UIKit
 import ObjectMapper
 import CoreLocation
 
+enum StatusOrder: String {
+    case newStatus = "OP"
+    case inProcessStatus = "IP"
+    case deliveryStatus = "DV"
+    case cancelStatus = "CC"
+}
+
 class Order: BaseModel {
   var id = -1
   var deliveryZip = ""
@@ -40,6 +47,12 @@ class Order: BaseModel {
   var shop:String = ""
   var startTime = ""
   var endTime = ""
+  var reason_msg = ""
+  var status:StatusOrder{
+     get{
+        return StatusOrder(rawValue: statusCode) ?? .newStatus
+     }
+  }
 
     
     var location:CLLocationCoordinate2D {
@@ -50,16 +63,15 @@ class Order: BaseModel {
     
   var colorStatus:UIColor {
     get{
-            
-        switch statusCode {
-        case "OP":
+        switch status {
+        case .newStatus:
             return AppColor.newStatus;
-        case "IP":
+        case .inProcessStatus:
             return AppColor.inProcessStatus;
-        case "DV":
+        case .deliveryStatus:
             return AppColor.deliveryStatus;
-        default:
-            return AppColor.white;
+        case .cancelStatus:
+            return AppColor.redColor;
         }
      }
     }
@@ -100,6 +112,7 @@ class Order: BaseModel {
         shop  <- map["shop"]
         startTime  <- map["dlvy_start_time"]
         endTime  <- map["dlvy_end_time"]
+        reason_msg <- map["reason_msg"]
 
   }
     

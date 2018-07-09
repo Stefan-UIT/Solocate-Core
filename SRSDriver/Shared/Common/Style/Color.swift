@@ -13,6 +13,8 @@ struct AppColor {
     static let grayBorderColor      = UIColor(hex: "#B7BEC4")
 
     static let deliveryStatus       = UIColor.green
+    static let redColor      = UIColor.red
+
 
 
 
