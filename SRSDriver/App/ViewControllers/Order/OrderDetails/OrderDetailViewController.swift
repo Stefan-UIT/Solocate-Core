@@ -156,7 +156,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   }
   
   @IBAction func tapUpdateStatusButtonAction(_ sender: UIButton) {
-    handleUpdateStatus()
+    //handleUpdateStatus() //https://seldat.atlassian.net/browse/NNCT-175
+    self.handleFinishAction()
   }
     
   
