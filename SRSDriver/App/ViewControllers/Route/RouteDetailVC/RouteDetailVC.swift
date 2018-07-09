@@ -13,7 +13,6 @@ enum TabBarItem:String {
     case Packages = "Packages";
     case Map = "Map";
     case Messages = "Messages";
-
 }
 
 class RouteDetailVC: UITabBarController {
@@ -91,7 +90,7 @@ class RouteDetailVC: UITabBarController {
         mapVC.tabBarItem.image = #imageLiteral(resourceName: "ic_location")
         messageVC.tabBarItem.image = #imageLiteral(resourceName: "ic_message")
 
-        self.setViewControllers([orderVC,packageVC,mapVC,messageVC], animated: false)
+        self.setViewControllers([orderVC,packageVC,mapVC], animated: false)
     }
     
 
