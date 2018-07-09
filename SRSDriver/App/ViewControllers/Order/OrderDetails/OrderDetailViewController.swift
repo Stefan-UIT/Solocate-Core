@@ -69,6 +69,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         }
         updateStatusButton.isHidden = false
         orderInforRows.removeAll()
+        informationRows.removeAll()
         let orderId = OrderDetailInforRow(.orderId,"\(_orderDetail.id)")
         
         let status = OrderStatus(rawValue: _orderDetail.statusCode) ?? OrderStatus.open
