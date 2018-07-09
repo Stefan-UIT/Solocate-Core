@@ -13,6 +13,9 @@ class OrderItemTableViewCell: UITableViewCell {
   @IBOutlet weak var lblTitle: UILabel?
   @IBOutlet weak var lblSubtitle: UILabel?
   @IBOutlet weak var lblDate: UILabel?
+  @IBOutlet weak var lblStore: UILabel?
+  @IBOutlet weak var lblShop: UILabel?
+  @IBOutlet weak var lblExpectedTime: UILabel?
   @IBOutlet weak var btnStatus: UIButton?
   @IBOutlet weak var btnNumber: UIButton?
 
@@ -28,6 +31,10 @@ class OrderItemTableViewCell: UITableViewCell {
   func updateCell() {
       lblTitle?.text = "\(order.sequence) - \(order.orderReference)"
       lblSubtitle?.text = order.orderType
+      lblStore?.text = order.storeName
+      lblShop?.text = order.shop
+      lblExpectedTime?.text = "\(order.startTime) ~ \(order.endTime)"
+
       let status = OrderStatus(rawValue: order.statusCode) ?? OrderStatus.open
       btnStatus?.setTitle("\(status.statusName)", for: .normal)
       btnStatus?.borderWidth = 1.0;

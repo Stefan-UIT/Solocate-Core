@@ -17,7 +17,7 @@ class Order: BaseModel {
   var totalWeight = ""
   var floorSpace = ""
   var shopID = -1
-    var locationID = -1
+  var locationID = -1
   var storeName = ""
   var sequence = -1
   var pickupContactName = ""
@@ -37,6 +37,10 @@ class Order: BaseModel {
   var seq = -1
   var pallets = -1
   var cases = -1
+  var shop:String = ""
+  var startTime = ""
+  var endTime = ""
+
     
     var location:CLLocationCoordinate2D {
         get {
@@ -93,7 +97,12 @@ class Order: BaseModel {
         seq  <- map["seq"]
         pallets  <- map["pallets"]
         cases  <- map["cases"]
+        shop  <- map["shop"]
+        startTime  <- map["dlvy_start_time"]
+        endTime  <- map["dlvy_end_time"]
+
   }
+    
 }
 /*
  "id": 63,
@@ -142,8 +151,6 @@ class Order: BaseModel {
  */
 
 class OrderDetail: Order {
-  var startTime = ""
-  var endTime = ""
   var serviceTime = -1
   var deliveryContactName = ""
   var deliveryContactPhone = ""
@@ -186,8 +193,6 @@ class OrderDetail: Order {
     pictures <- map["url"]
     items <- map["details"]
     
-    startTime <- map["dlvy_start_time"]
-    endTime <- map["dlvy_end_time"]
     deliveryDate <- map["dlvy_date"];
     serviceTime <- map["service_time"]
     
