@@ -170,13 +170,13 @@ fileprivate extension LoginViewController {
 extension LoginViewController: ForgetPasswordViewDelegate {
     func forgetPasswordView(_ view: ForgetPasswordView, _ email: String) {
         view.removeFromSuperview()
-        APIs.forgetPassword(email) { [unowned self] (msg, error) in
-            if let msg = msg {
-                self.showAlertView(msg)
-            } else if let error = error {
-                self.showAlertView(error)
-            } else {
-                self.showAlertView("Something Wrong.")
+        API().forgotPassword(email) { (result) in
+            switch result{
+            case .object(_):
+                self.showAlertView("Please check email.")
+            case .error(let error):
+                self.showAlertView(error.getMessage())
+
             }
         }
     }

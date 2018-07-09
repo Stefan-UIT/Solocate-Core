@@ -134,13 +134,10 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DXr-EW-Tw7">
-                                <rect key="frame" x="126" y="534" width="123" height="30"/>
-                                <state key="normal" title="Forgot password?">
-                                    <color key="titleColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <rect key="frame" x="109" y="523" width="157" height="30"/>
+                                <state key="normal" title="Forgot your password?">
+                                    <color key="titleColor" red="0.98759037260000004" green="0.13012792419999999" blue="0.128249854" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="login_forgot_password"/>
-                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="tapForgetPasswordButtonAction:" destination="3T1-w1-Qsx" eventType="touchUpInside" id="O1J-p0-bCs"/>
                                 </connections>
@@ -175,7 +172,7 @@
                             <constraint firstItem="EAj-or-PjX" firstAttribute="trailing" secondItem="3A8-0o-UpW" secondAttribute="trailing" constant="30" id="alW-eM-Wl6"/>
                             <constraint firstItem="Utx-s5-Nuw" firstAttribute="leading" secondItem="sw9-Wi-EcK" secondAttribute="trailing" constant="8" id="i9Q-Cx-qki"/>
                             <constraint firstItem="vdd-rK-Qs9" firstAttribute="leading" secondItem="Q6p-bU-AY5" secondAttribute="leading" id="jVn-tU-YtJ"/>
-                            <constraint firstItem="DXr-EW-Tw7" firstAttribute="top" secondItem="3A8-0o-UpW" secondAttribute="bottom" constant="31" id="klb-wK-nP1"/>
+                            <constraint firstItem="DXr-EW-Tw7" firstAttribute="top" secondItem="3A8-0o-UpW" secondAttribute="bottom" constant="20" id="klb-wK-nP1"/>
                             <constraint firstItem="sw9-Wi-EcK" firstAttribute="centerY" secondItem="Utx-s5-Nuw" secondAttribute="centerY" id="mGM-re-I24"/>
                             <constraint firstItem="Q6p-bU-AY5" firstAttribute="centerY" secondItem="CDp-iu-yfc" secondAttribute="centerY" constant="-32" id="ruC-YK-sw9"/>
                             <constraint firstItem="vdd-rK-Qs9" firstAttribute="trailing" secondItem="Q6p-bU-AY5" secondAttribute="trailing" id="sI9-NG-j49"/>

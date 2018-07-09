@@ -38,6 +38,15 @@ extension BaseAPIService {
     }
     
     @discardableResult
+    func forgotPassword(_ email: String, callback: @escaping APICallback<ResponseDataModel<EmptyModel>>) -> APIRequest {
+        let params = ["email": email]
+        return request(method: .POST,
+                       path: E(Configs.ServicesConfigs(RESTConstants.FORGET_PASSWORD)),
+                       input: .json(params),
+                       callback: callback);
+    }
+    
+    @discardableResult
     func updateNotificationFCMToken(_ fcmToken:String,
                                     callback: @escaping APICallback<ResponseDataModel<EmptyModel>>) -> APIRequest {
         
