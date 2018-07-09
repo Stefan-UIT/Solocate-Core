@@ -20,8 +20,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bdk-MM-huX">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="Bdk-MM-huX">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                 <color key="sectionIndexBackgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
@@ -234,12 +234,12 @@
                         </subviews>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="Bdk-MM-huX" firstAttribute="leading" secondItem="wEh-bU-iJ0" secondAttribute="leading" id="GyK-iA-Iq0"/>
+                            <constraint firstItem="Bdk-MM-huX" firstAttribute="leading" secondItem="wEh-bU-iJ0" secondAttribute="leading" id="3OA-F1-7qk"/>
+                            <constraint firstItem="Bdk-MM-huX" firstAttribute="top" secondItem="PTu-Ox-OCn" secondAttribute="top" id="42d-CL-rJH"/>
+                            <constraint firstItem="wEh-bU-iJ0" firstAttribute="bottom" secondItem="Bdk-MM-huX" secondAttribute="bottom" id="8By-Ns-BoW"/>
                             <constraint firstItem="oPo-gn-VPd" firstAttribute="centerY" secondItem="PTu-Ox-OCn" secondAttribute="centerY" id="Lve-3M-uqA"/>
-                            <constraint firstItem="Bdk-MM-huX" firstAttribute="top" secondItem="wEh-bU-iJ0" secondAttribute="top" id="Udo-tp-EOg"/>
-                            <constraint firstItem="Bdk-MM-huX" firstAttribute="bottom" secondItem="wEh-bU-iJ0" secondAttribute="bottom" id="atR-lN-vz4"/>
+                            <constraint firstItem="Bdk-MM-huX" firstAttribute="trailing" secondItem="wEh-bU-iJ0" secondAttribute="trailing" id="OnN-dF-53l"/>
                             <constraint firstItem="oPo-gn-VPd" firstAttribute="centerX" secondItem="PTu-Ox-OCn" secondAttribute="centerX" id="mNa-qg-YNn"/>
-                            <constraint firstItem="Bdk-MM-huX" firstAttribute="trailing" secondItem="wEh-bU-iJ0" secondAttribute="trailing" id="oeV-ov-po3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wEh-bU-iJ0"/>
                     </view>
@@ -573,7 +573,7 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="3sD-7l-Phb" firstAttribute="bottom" secondItem="Cbz-Qu-Ei1" secondAttribute="bottom" id="Rfr-Ve-QAl"/>
                             <constraint firstItem="Cbz-Qu-Ei1" firstAttribute="trailing" secondItem="3sD-7l-Phb" secondAttribute="trailing" id="YG4-By-vvo"/>
