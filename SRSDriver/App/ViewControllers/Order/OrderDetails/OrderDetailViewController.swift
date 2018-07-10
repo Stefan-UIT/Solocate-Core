@@ -168,16 +168,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     self.handleFinishAction()
   }
     
-  
-  override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-    if segue.identifier == SegueIdentifier.showMapView,
-      let vc = segue.destination as? OrderDetailMapViewController,
-      let _orderDetail = orderDetail {
-      let orderLocation = CLLocationCoordinate2D(latitude: _orderDetail.lat.doubleValue, longitude: _orderDetail.lng.doubleValue)
-      vc.orderLocation = orderLocation
-    }
-  }
-    
     
     // MARK: - Function -
     func handleUpdateStatus() {
@@ -448,6 +438,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             let item = orderInforStatus[indexPath.row]
             if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
                 cell.orderDetailItem = item
+                cell.selectionStyle = .none
                 return cell
             }
         case .sectionOrderInfor:
@@ -463,6 +454,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             let item = informationRows[indexPath.row]
             if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
               cell.orderDetailItem = item
+              cell.selectionStyle = .none
 
               return cell
             }
@@ -472,13 +464,42 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             let des = E(orderDetail?.descriptionNote) + " " + E(orderDetail?.descriptionNoteExt)
             let description = OrderDetailInforRow(.description,des)
             cell.orderDetailItem = description
-            
+            cell.selectionStyle = .none
+
             return cell
           }
       }
    
     return UITableViewCell()
   }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let orderSection:OrderDetailSection = OrderDetailSection(rawValue: indexPath.section)!
+        let row = indexPath.row
+        switch orderSection {
+        case .sectionInformation:
+            if row == 1 {// Phone row
+                let item = informationRows[row]
+                let urlString = "tel://\(item.content)"
+                if let url = URL(string: urlString) {
+                    UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                }
+                break
+                
+            }else if (row == 2){ //Address row
+                let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
+                if let _orderDetail = orderDetail {
+                    let orderLocation = CLLocationCoordinate2D(latitude: _orderDetail.lat.doubleValue, longitude: _orderDetail.lng.doubleValue)
+                    vc.orderLocation = orderLocation
+                }
+                //self.present(vc, animated: true, completion: nil)
+                self.navigationController?.pushViewController( vc, animated: true)
+            }
+            
+        default:
+            break
+        }
+    }
 }
 
 //MARK: - Otherfuntion

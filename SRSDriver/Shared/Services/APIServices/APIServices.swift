@@ -9,6 +9,8 @@
 import UIKit
 import Alamofire
 import ObjectMapper
+import CoreLocation
+
 
 public typealias ResponseDictionary = [String: Any]
 public typealias ResponseArray = [Any]
@@ -175,6 +177,21 @@ extension BaseAPIService {
                    input: .dto(user),
                    callback: callback);
   }
+    
+    @discardableResult
+    func getDirection(fromLocation startLocation: CLLocationCoordinate2D,
+                      toLocation destinationLocation: CLLocationCoordinate2D,
+                      callback: @escaping APICallback<MapDirectionResponse>) -> APIRequest {
+        let origin = "\(startLocation.latitude),\(startLocation.longitude)"
+        let destination = "\(destinationLocation.latitude),\(destinationLocation.longitude)"
+        let path = "/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&key=\(Network.googleAPIKey)"
+        
+        return request( method: .GET,
+                        serverURL: E(Configs.mainConfigs[RESTConstants.BASE_URL_GOOGLE_MAP] as? String),
+                        path: path,
+                        input: .empty,
+                        callback: callback);
+    }
     
   
   /*

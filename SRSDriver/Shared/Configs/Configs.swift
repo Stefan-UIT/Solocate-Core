@@ -11,13 +11,13 @@ import Foundation
 
 class Configs: NSObject {
     
-  static func MainConfigs(_ key:String) -> String? {
-    if let bundle = Bundle.main.url(forResource: "MainConfigs", withExtension: "plist"),
-      let dic = NSDictionary(contentsOf: bundle) {
-      return dic[key] as? String
-    }
-    return nil
-  }
+    static let mainConfigs: [String : Any] = {
+        if let bundle = Bundle.main.url(forResource: "MainConfigs", withExtension: "plist"),
+            let dic = NSDictionary(contentsOf: bundle) {
+            return dic as! [String: Any]
+        }
+        return [String: String]()
+    }()
   
   static func ServicesConfigs(_ key:String) -> String? {
     if let bundle = Bundle.main.url(forResource: "ServicesConfigs", withExtension: "plist"),
@@ -28,7 +28,8 @@ class Configs: NSObject {
   }
   
     static let colorButton : UIColor = {
-        let colorHexString : String = Configs.MainConfigs(Configs.getConfigKey(.COLOR_BUTTON))!
+        let colorHexString : String = Configs.mainConfigs[Configs.getConfigKey(.COLOR_BUTTON)]! as! String
+        
         return UIColor(hex: colorHexString)
     }()
     

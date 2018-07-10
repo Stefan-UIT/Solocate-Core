@@ -111,17 +111,15 @@ class DirectionRoute: NSObject, Mappable {
   }
 }
 
-class MapDirectionResponse: NSObject, Mappable {
+class MapDirectionResponse: BaseModel {
   var routes: [DirectionRoute] = [DirectionRoute]()
   var status = ""
   convenience required init?(map: Map) {
     self.init()
   }
   
-  func mapping(map: Map) {
+  override func mapping(map: Map) {
     routes <- map["routes"]
     status <- map["status"]
   }
-  
-  
 }

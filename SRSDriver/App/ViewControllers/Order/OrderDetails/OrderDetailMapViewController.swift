@@ -20,9 +20,8 @@ class OrderDetailMapViewController: BaseViewController {
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    mapView.isMyLocationEnabled = true
-    tableView.rowHeight = UITableViewAutomaticDimension
-    tableView.estimatedRowHeight = 80.0
+    
+    updateUI()
     checkLocationStatus()
     guard let userLocation = LocationManager.shared.currentLocation,
       let _locattion = orderLocation else {
@@ -42,7 +41,26 @@ class OrderDetailMapViewController: BaseViewController {
     }
     
   }
-  
+    
+    override func updateNavigationBar() {
+        self.navigationService.delegate = self
+        self.navigationService.updateNavigationBar(.BackOnly, "Map")
+    }
+    
+    func updateUI() {
+        updateNavigationBar()
+        setupTableView()
+        setupMapView()
+    }
+    
+    func setupTableView()  {
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 80.0
+    }
+    
+    func setupMapView()  {
+        mapView.isMyLocationEnabled = true
+    }
 }
 
 extension OrderDetailMapViewController: UITableViewDataSource, UITableViewDelegate {
@@ -79,8 +97,6 @@ extension OrderDetailMapViewController: LocationManagerDelegate {
     }
     getDirection(from: userLocation.coordinate, toLocation: destinationLocation)
   }
-  
-  
 }
 
 extension OrderDetailMapViewController {
@@ -103,29 +119,38 @@ extension OrderDetailMapViewController {
     
     return radiansToDegrees(radians: radiansBearing)
   }
+    
   func getDirection(from fromLocation: CLLocationCoordinate2D, toLocation: CLLocationCoordinate2D) {
-    APIs.getDirection(fromLocation: fromLocation, toLocation: toLocation) { [unowned self] (routes) in
-      guard let _routes = routes else {return}
-      guard let firstRoute = _routes.first else {
-        return
-      }
-      self.mapView.clear()
+    
+    API().getDirection(fromLocation: fromLocation, toLocation: toLocation) { (result) in
+        switch result{
+        case .object(let obj):
+            let _routes = obj.routes
+            guard let firstRoute = _routes.first else {
+                return
+            }
+            self.mapView.clear()
+            //
+            let path = GMSPath(fromEncodedPath: firstRoute.polyline)
+            let polyLine = GMSPolyline.init(path: path)
+            polyLine.strokeWidth = Constants.ROUTE_WIDTH
+            polyLine.strokeColor = AppColor.mainColor
+            polyLine.map = self.mapView
+            let bounds = GMSCoordinateBounds(path: path!)
+            self.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
 
-      //
-      let path = GMSPath(fromEncodedPath: firstRoute.polyline)
-      let polyLine = GMSPolyline.init(path: path)
-      polyLine.strokeWidth = Constants.ROUTE_WIDTH
-      polyLine.strokeColor = AppColor.mainColor
-      polyLine.map = self.mapView
-      let bounds = GMSCoordinateBounds(path: path!)
-      self.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
-      
-      //
-      self.steps.removeAll()
-      guard let firstLeg = firstRoute.legs.first else {return}
-      self.steps.append(contentsOf: firstLeg.steps)
-      self.tableView.reloadData()
-    }
+            //
+            self.steps.removeAll()
+            guard let firstLeg = firstRoute.legs.first else {return}
+            self.steps.append(contentsOf: firstLeg.steps)
+            self.tableView.reloadData()
+            break
+        case .error(let error):
+            self.showAlertView(error.getMessage())
+            break
+
+        }
+     }
   }
   
   
@@ -142,4 +167,12 @@ extension OrderDetailMapViewController {
       }
     }
   }
+}
+
+extension OrderDetailMapViewController:DMSNavigationServiceDelegate{
+    
+    func didSelectedBackOrMenu() {
+        self.navigationController?.popViewController(animated: true)
+        //self.dismiss(animated: true, completion: nil)
+    }
 }

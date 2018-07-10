@@ -79,6 +79,7 @@ class RESTConstants: NSObject {
     
     static let BASE_URL = "BASE_URL"
     static let BASE_URL_DEV = "BASE_URL_DEV"
+    static let BASE_URL_GOOGLE_MAP = "BASE_URL_GOOGLE_MAP"
     static let LOGIN = "LOGIN"
     static let FORGET_PASSWORD = "FORGET_PASSWORD"
     static let LOGOUT = "LOGOUT"
@@ -141,10 +142,10 @@ class RESTConstants: NSObject {
         let type = DataManager.getEnviroment()
         switch type {
         case .DEMO:
-            return E(Configs.MainConfigs(RESTConstants.BASE_URL))
+            return Configs.mainConfigs[RESTConstants.BASE_URL] as? String
 
         case .DEV:
-            return E(Configs.MainConfigs(RESTConstants.BASE_URL_DEV))
+            return Configs.mainConfigs[RESTConstants.BASE_URL_DEV] as? String
         }
     }
 }
