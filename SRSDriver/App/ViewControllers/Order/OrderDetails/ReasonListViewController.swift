@@ -15,6 +15,8 @@ class ReasonListViewController: BaseViewController {
   var routeID: Int?
   var type: String = "1"
   var itemID: String?
+    
+  var didCancelSuccess:((_ success:Bool,_ data: OrderDetail) -> Void)?
   
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var finishButton: UIButton!
@@ -46,12 +48,13 @@ class ReasonListViewController: BaseViewController {
     orderDetail?.statusCode = "CC"
     orderDetail?.routeId = routeID!
     guard let order = orderDetail else{return}
-    API().updateOrderStatus(order, reason: reasonList[selectedIndex]) { (result) in
+    API().updateOrderStatus(order, reason: reasonList[selectedIndex]) {[weak self] (result) in
         switch result{
         case .object(_):
-            self.navigationController?.popViewController(animated: true)
+            self?.didCancelSuccess?(true, order)
+            self?.navigationController?.popViewController(animated: true)
         case .error(let error):
-            self.showAlertView(error.getMessage())
+            self?.showAlertView(error.getMessage())
         }
     }
   }

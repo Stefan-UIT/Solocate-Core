@@ -196,6 +196,10 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         vc.orderDetail = orderDetail
         vc.routeID = routeID
         vc.type = "1"
+        vc.didCancelSuccess =  { [weak self] (success, order) in
+            self?.didUpdateStatus?(order, false)
+        }
+        
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
