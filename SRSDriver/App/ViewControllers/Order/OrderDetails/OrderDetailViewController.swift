@@ -140,10 +140,17 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     func initVar()  {
-        arrTitleHeader = ["Order Status",
-                          "Order Information",
-                          "Information",
-                          "Description"]
+        let des = E(orderDetail?.descriptionNote) + E(orderDetail?.descriptionNoteExt)
+        if des.length > 0 {
+            arrTitleHeader = ["Order Status",
+                              "Order Information",
+                              "Information",
+                              "Description"]
+        }else {
+            arrTitleHeader = ["Order Status",
+                              "Order Information",
+                              "Information"]
+        }
     }
   
     override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {

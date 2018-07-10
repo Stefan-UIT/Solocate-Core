@@ -169,7 +169,7 @@ class OrderDetail: Order {
   var deliveryContactPhone = ""
   var deliveryCity = ""
   var deliveryState = ""
-  var descriptionNote = "No description."
+  var descriptionNote = ""
   var descriptionNoteExt = ""
   var sign = ""
   var notes = [Note]()
