@@ -143,7 +143,7 @@ extension BaseAPIService {
         
         var params = ["route_id": "\(order.routeId)"]
         if let _reason = reason {
-            params["reason_msg"] = _reason.reasonDescription
+            params["reason_msg"] = _reason.message != nil ? _reason.message :  _reason.reasonDescription
             params["reason_id"] = "\(_reason.id)"
         }
         return request(method: .PUT,

@@ -20,6 +20,9 @@ class ReasonListViewController: BaseViewController {
   
   @IBOutlet weak var tableView: UITableView!
   @IBOutlet weak var finishButton: UIButton!
+  @IBOutlet weak var tvMessange: UITextView?
+  @IBOutlet weak var lblPlaceholder: UILabel?
+
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -32,12 +35,18 @@ class ReasonListViewController: BaseViewController {
       let unableTitle = _orderDetail.status == .newStatus ? "order_detail_unable_start".localized : "order_detail_unable_finish".localized
             finishButton.setTitle(unableTitle, for: .normal)
     }
+    
+    setupTextView()
   }
     
   override func updateNavigationBar() {
     self.navigationService.delegate = self
     self.navigationService.updateNavigationBar(.BackOnly, "Select Reason")
   }
+    
+    func setupTextView()  {
+        tvMessange?.delegate = self
+    }
   
   @IBAction func submit(_ sender: UIButton) {
     guard selectedIndex >= 0 else {
@@ -48,7 +57,9 @@ class ReasonListViewController: BaseViewController {
     orderDetail?.statusCode = "CC"
     orderDetail?.routeId = routeID!
     guard let order = orderDetail else{return}
-    API().updateOrderStatus(order, reason: reasonList[selectedIndex]) {[weak self] (result) in
+    let reason = reasonList[selectedIndex]
+    reason.message = tvMessange?.text
+    API().updateOrderStatus(order, reason: reason) {[weak self] (result) in
         switch result{
         case .object(_):
             self?.didCancelSuccess?(true, order)
@@ -104,5 +115,11 @@ extension ReasonListViewController:DMSNavigationServiceDelegate{
     func didSelectedBackOrMenu() {
         self.navigationController?.popViewController(animated: true)
 
+    }
+}
+
+extension ReasonListViewController:UITextViewDelegate{
+    func textViewDidChange(_ textView: UITextView) {
+        lblPlaceholder?.isHidden = (textView.text.length > 0)
     }
 }

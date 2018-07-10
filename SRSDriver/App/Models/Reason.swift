@@ -13,6 +13,8 @@ class Reason: BaseModel {
   var name = ""
   var id = -1
   var reasonDescription = ""
+  var message:String?
+
   
   required convenience init?(map: Map) {
     self.init()
