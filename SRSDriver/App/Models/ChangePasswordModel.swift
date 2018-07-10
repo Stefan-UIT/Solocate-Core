@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class ChangePasswordModel: NSObject, Mappable {
+class ChangePasswordModel: BaseModel {
 
     var oldPassword = [String]()
     var newPassword = [String]()
@@ -18,7 +18,7 @@ class ChangePasswordModel: NSObject, Mappable {
         self.init()
     }
     
-    func mapping(map: Map) {
+    override func mapping(map: Map) {
         oldPassword <- map["old_password"]
         newPassword <- map["new_password"]
         rePassword <- map["repeat_new_password"]

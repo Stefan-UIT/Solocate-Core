@@ -49,6 +49,48 @@ extension BaseAPIService {
     }
     
     @discardableResult
+    func changePassword(_ para: [String: Any], callback: @escaping APICallback<ChangePasswordModel>) -> APIRequest {
+        return request(method: .POST,
+                       path: E(Configs.ServicesConfigs(RESTConstants.CHANGE_PASSWORD)),
+                       input: .json(para),
+                       callback: callback);
+    }
+    
+    static func changePassword( _ para : [String: Any], completion: @escaping ((_ successful: Bool, _ message: String?, _ model: ChangePasswordModel?) -> Void)) {
+        let request = RESTRequest(functionName: RESTConstants.ServicesConfigs[RESTConstants.CHANGE_PASSWORD] ?? ""
+            , method: .post, encoding: .default)
+        request.setParameters(para)
+        if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
+            request.setAuthorization(token)
+        }
+        request.setContentType("application/x-www-form-urlencoded")
+        request.baseInvoker { (resp, error) in
+            if let error = error {
+                completion(false, error.message, nil)
+                return
+            }
+            if let response = resp as? [String: Any] {
+                if let error = response["error"] as? [String: Any] {
+                    if let model = Mapper<ChangePasswordModel>().map(JSON: error) {
+                        completion(false, "Change password fail", model)
+                        return
+                    } else {
+                        completion(false, "Something wrong with data. Please check agian", nil)
+                        return
+                    }
+                } else if let data = response["data"] as? [String: Any] {
+                    if let success = data["success"] as? Bool {
+                        completion(success, "Change password successful", nil)
+                        return
+                    }
+                }
+            }
+            completion(false, "Something wrong with data. Please check agian", nil)
+        }
+    }
+    
+    
+    @discardableResult
     func updateNotificationFCMToken(_ fcmToken:String,
                                     callback: @escaping APICallback<ResponseDataModel<EmptyModel>>) -> APIRequest {
         

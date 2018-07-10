@@ -49,7 +49,7 @@
 	<key>CHECK_TOKEN</key>
 	<string>authentication/users/token</string>
 	<key>CHANGE_PASSWORD</key>
-	<string>/master-service/v1/users/change-password</string>
+	<string>/auth/v1/user/change-password</string>
 	<key>RESET_PASSWORD_URL</key>
 	<string>/#/reset-password</string>
 	<key>GET_ALERT_DETAIL</key>

@@ -84,15 +84,25 @@ class ChangePasswordView: BaseView {
         }
         
         let para = ["old_password": oldPassword,
-                    "password": newPassword,
-                    "password_confirmation": confirmPassword]
+                    "new_password": newPassword,
+                    "confirm_password": confirmPassword]
         
         SVProgressHUD.show()
         weak var weakSelf = self
-        APIs.changePassword(para) { (success, errorString, model) in
+        API().changePassword(para) {[weak self] (result) in
             SVProgressHUD.dismiss()
-            if weakSelf?.delegate != nil {
-                weakSelf?.delegate?.changePasswordView(self, success, errorString ?? "", model ?? nil)
+            switch result{
+            case .object(let obj):
+                if weakSelf?.delegate != nil {
+                    weakSelf?.delegate?.changePasswordView(self!, true, "Your password has been updated", obj)
+                }
+                break
+            case .error(let error):
+                if weakSelf?.delegate != nil {
+                    weakSelf?.delegate?.changePasswordView(self!, false, error.getMessage(), nil)
+                }
+                break
+                
             }
         }
     }
