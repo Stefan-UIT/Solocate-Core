@@ -107,7 +107,7 @@ extension RouteListVC:UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc:RouteDetailVC = .loadSB(SB: .Route)
         if let routes = listRoutes {
-            let route = routes[indexPath.section];
+            let route = routes[indexPath.row];
             vc.route = route;
         }
         self.navigationController?.pushViewController(vc, animated: true)
