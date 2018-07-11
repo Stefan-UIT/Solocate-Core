@@ -24,53 +24,171 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
-    UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")//disable autolayout error/warning
+        UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")//disable autolayout error/warning
 
-    // Override point for customization after application launch.
-    DMSAppConfiguration.enableConfiguration()
+        // Override point for customization after application launch.
+        DMSAppConfiguration.enableConfiguration()
     
-    GMSServices.provideAPIKey(Network.googleAPIKey)
-    SVProgressHUD.setDefaultMaskType(.clear)
-    UNUserNotificationCenter.current().delegate = self
+        GMSServices.provideAPIKey(Network.googleAPIKey)
+        SVProgressHUD.setDefaultMaskType(.clear)
+   
+        // Setup Push notifiaction
+        registerPushNotification()
     
-    let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-    UNUserNotificationCenter.current().requestAuthorization(
-      options: authOptions,
-      completionHandler: {_, _ in })
-    application.registerForRemoteNotifications()
+        //Setup Firebase
+        setupFirebase()
     
-    FirebaseApp.configure()
-    Messaging.messaging().delegate = self
-//    ThemeManager.applyTheme(.light)
+        //ThemeManager.applyTheme(.light)
+        if let bundle = Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist"),
+            let dic = NSDictionary(contentsOf: bundle) {
+            print("BUNDLE_ID - \(dic["BUNDLE_ID"] as! String)")
+        }
+        IQKeyboardManager.shared().isEnabled = true
+        checkLoginStatus()
     
-    if let bundle = Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist"),
-        let dic = NSDictionary(contentsOf: bundle) {
-        print("BUNDLE_ID - \(dic["BUNDLE_ID"] as! String)")
+        return true
     }
-    IQKeyboardManager.shared().isEnabled = true
-    checkLoginStatus()
-    
-    return true
-  }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         //connectToFcm()
-//        DMSLocationManager.startUpdatingDriverLocationIfNeeded()
+        // DMSLocationManager.startUpdatingDriverLocationIfNeeded()
+        refreshBadgeIconNumber()
     }
   
-  func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-    Messaging.messaging().apnsToken = deviceToken
+    //MARK: - PUSH NOTIFICATION
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        let tokenString = deviceToken.reduce("", {$0 + String(format: "%02X",    $1)})
+        print("DEVICE TOKEN: \( tokenString )")
+        
+        Messaging.messaging().apnsToken = deviceToken
+    }
+    
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Error Register Remote Notification:\(error)")
+    }
+}
+
+
+//MARK: - MessagingDelegate
+extension AppDelegate: MessagingDelegate {
+  func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
+    print("==>Did receive fcm token: \(fcmToken)")
+
+    if let _ = Caches().getTokenKeyLogin() {
+        
+        API().updateNotificationFCMToken(fcmToken) { (result) in
+            //
+        }
+        
+        Cache.shared.setObject(obj: fcmToken, forKey: Defaultkey.fcmToken)
+    }
   }
+  
+  func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
+    print("==>didReceive remote message: \(remoteMessage.appData)")
+  }
+}
+
+
+//MARK: - UNUserNotificationCenterDelegate
+extension AppDelegate: UNUserNotificationCenterDelegate {
+    
+    //Handle User tap notification messages while app is in the foreground.
+  func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+    print("==>Did Receive Response: \(response)")
+    if let userInfo = response.notification.request.content.userInfo as? [String: Any]
+    {
+        if let type = userInfo["type"] as? String {
+            let _type : NotificationType = NotificationType(rawValue: type)!
+            switch _type {
+            case .ALERT:
+                handleAlert(userInfo)
+                break
+            case .NEW_ROUTE:
+                handleNewRoute(userInfo)
+                break
+            }
+        }
+    }
+    completionHandler()
+
+  }
+  
+  //Receive displayed notifications for iOS 10 devices.
+  // Setup to show .alert,.badge,.sound  while app is in the foreground.
+  func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
+    let userInfo = notification.request.content.userInfo as? [String: Any]
+    print("===>Will Present Notification: \(userInfo ?? [:])")
+    
+    //With swizzling disabled you must let Messaging know about the message, for Analytics
+    //Messaging.messaging().appDidReceiveMessage(notification.request.content.userInfo)
+    
+    completionHandler([.alert,.badge,.sound])
+  }
+}
+
+
+//MARK: - AlertMessageViewDelegate
+extension AppDelegate: AlertMessageViewDelegate {
+    func alertMessageView(_ alertMessageView: AlertMessageView, _ alertID: String, _ content: String) {
+        alertMessageView.removeFromSuperview()
+        SVProgressHUD.show()
+        APIs.resolveAlert(alertID, content, { [weak self] (successful, model) in
+            SVProgressHUD.dismiss()
+            if successful {
+                if let message = model as? String {
+                    self?.showAlert(message)
+                }
+            } else {
+                self?.showAlert("Something wrong. Please contact with us. Thanks.")
+            }
+        }) { [weak self] (error) in
+            SVProgressHUD.dismiss()
+            print(error.message)
+            self?.showAlert(error.message)
+        }
+    }
+    
+    func showAlert(_ message: String) {
+        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let cancelAction = UIAlertAction(title: "Done", style: .cancel, handler: nil)
+        alert.addAction(cancelAction)
+        if let viewController = window?.rootViewController {
+            viewController.present(alert, animated: true, completion: nil)
+        }
+    }
+}
+
+
+//MARK : - OTHER_FUNTION
+extension AppDelegate {
     
     func checkLoginStatus() {
         rootNV = window?.rootViewController as? BaseNV
-
+        
         if Caches().hasLogin {
             loginSuccess()
         }else {
             reLogin()
         }
+    }
+    
+    func registerPushNotification()  {
+        UNUserNotificationCenter.current().delegate = self
+        let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+        UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: {_, _ in })
+        
+        UIApplication.shared.registerForRemoteNotifications()
+    }
+    
+    func setupFirebase()   {
+        //Use Firebase library to configure APIs
+        Messaging.messaging().shouldEstablishDirectChannel = true
+        FirebaseApp.configure()
+        Messaging.messaging().delegate = self
     }
     
     func reLogin() {
@@ -86,49 +204,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         mainVC = vc
         rootNV?.setViewControllers([vc], animated: false)
     }
-}
-
-extension AppDelegate: MessagingDelegate {
-  func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-    if let _ = Caches().getTokenKeyLogin() {
-        
-        API().updateNotificationFCMToken(fcmToken) { (result) in
-            //
-        }
-        
-        Cache.shared.setObject(obj: fcmToken, forKey: Defaultkey.fcmToken)
-        print("Did receive fcm token: \(fcmToken)")
-    }
-  }
-  
-  func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-    print("didReceive remote message")
-  }
-}
-
-extension AppDelegate: UNUserNotificationCenterDelegate {
-  func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-    print("didReceive \(response)")
-    if let userInfo = response.notification.request.content.userInfo as? [String: Any]
-    {
-        if let type = userInfo["type"] as? String {
-            let _type : NotificationType = NotificationType(rawValue: type)!
-            switch _type {
-            case .ALERT:
-                handleAlert(userInfo)
-                break
-            case .NEW_ROUTE:
-                handleNewRoute(userInfo)
-                break
-            }
-        }
-    }
-  }
-  
-  func userNotificationCenter(_ center: UNUserNotificationCenter, willPresent notification: UNNotification, withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void) {
-    completionHandler(.alert)
-  }
-  
+    
     func handleNewRoute(_ userInfo: [String: Any]) {
         if let routeID = userInfo["route_id"] as? String {
             print("PUSH_NOTIFICATION: routeID = \(routeID)")
@@ -180,35 +256,12 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
         alertMessageView.config(alertID, messageAlert)
         alertMessageView.showViewInWindow()
     }
-}
-
-
-extension AppDelegate: AlertMessageViewDelegate {
-    func alertMessageView(_ alertMessageView: AlertMessageView, _ alertID: String, _ content: String) {
-        alertMessageView.removeFromSuperview()
-        SVProgressHUD.show()
-        APIs.resolveAlert(alertID, content, { [weak self] (successful, model) in
-            SVProgressHUD.dismiss()
-            if successful {
-                if let message = model as? String {
-                    self?.showAlert(message)
-                }
-            } else {
-                self?.showAlert("Something wrong. Please contact with us. Thanks.")
-            }
-        }) { [weak self] (error) in
-            SVProgressHUD.dismiss()
-            print(error.message)
-            self?.showAlert(error.message)
-        }
-    }
     
-    func showAlert(_ message: String) {
-        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Done", style: .cancel, handler: nil)
-        alert.addAction(cancelAction)
-        if let viewController = window?.rootViewController {
-            viewController.present(alert, animated: true, completion: nil)
+    func refreshBadgeIconNumber()  {
+        UNUserNotificationCenter.current().getDeliveredNotifications { (notifications) in
+            DispatchQueue.main.async {
+                UIApplication.shared.applicationIconBadgeNumber = notifications.count
+            }
         }
     }
 }
