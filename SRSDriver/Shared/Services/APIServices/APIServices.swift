@@ -56,39 +56,6 @@ extension BaseAPIService {
                        callback: callback);
     }
     
-    static func changePassword( _ para : [String: Any], completion: @escaping ((_ successful: Bool, _ message: String?, _ model: ChangePasswordModel?) -> Void)) {
-        let request = RESTRequest(functionName: RESTConstants.ServicesConfigs[RESTConstants.CHANGE_PASSWORD] ?? ""
-            , method: .post, encoding: .default)
-        request.setParameters(para)
-        if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String {
-            request.setAuthorization(token)
-        }
-        request.setContentType("application/x-www-form-urlencoded")
-        request.baseInvoker { (resp, error) in
-            if let error = error {
-                completion(false, error.message, nil)
-                return
-            }
-            if let response = resp as? [String: Any] {
-                if let error = response["error"] as? [String: Any] {
-                    if let model = Mapper<ChangePasswordModel>().map(JSON: error) {
-                        completion(false, "Change password fail", model)
-                        return
-                    } else {
-                        completion(false, "Something wrong with data. Please check agian", nil)
-                        return
-                    }
-                } else if let data = response["data"] as? [String: Any] {
-                    if let success = data["success"] as? Bool {
-                        completion(success, "Change password successful", nil)
-                        return
-                    }
-                }
-            }
-            completion(false, "Something wrong with data. Please check agian", nil)
-        }
-    }
-    
     
     @discardableResult
     func updateNotificationFCMToken(_ fcmToken:String,
@@ -104,6 +71,8 @@ extension BaseAPIService {
                        callback: callback);
     }
     
+    
+    //MARK: - ORDER
     @discardableResult
     func getOrders(byDate date:String = Date().toString("yyyy-MM-dd"), callback: @escaping APICallback<Route>) -> APIRequest {
         let params = ["date": date]
@@ -113,6 +82,55 @@ extension BaseAPIService {
                        callback: callback);
     }
     
+    @discardableResult
+    func updateOrderStatus(_ order:OrderDetail,reason: Reason? = nil, callback: @escaping APICallback<Route>) -> APIRequest {
+        
+        let path = String(format:E(RESTConstants.ServicesConfigs[RESTConstants.UPDATE_ORDER_STATUS]), "\(order.id)", order.statusCode)
+        
+        var params = ["route_id": "\(order.routeId)"]
+        if let _reason = reason {
+            params["reason_msg"] = _reason.message != nil ? _reason.message :  _reason.reasonDescription
+            params["reason_id"] = "\(_reason.id)"
+        }
+        return request(method: .PUT,
+                       path: path,
+                       input: .json(params),
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func getReasonList(_ type: String = "1", callback: @escaping APICallback<ResponseDataListModel<Reason>>) -> APIRequest {
+        let path = String(format: Configs.ServicesConfigs(RESTConstants.GET_REASON_LIST) ?? "", type)
+        
+        return request(method: .GET,
+                       path: path,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    
+    @discardableResult
+    func getOrderDetail(orderId:String, callback: @escaping APICallback<OrderDetail>) -> APIRequest {
+        let uri = String(format:E(Configs.ServicesConfigs(RESTConstants.GET_ORDER_DETAIL)), orderId)
+        return request(method: .GET,
+                       path: uri,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func submitSignature(_ file:AttachFileModel,_ orderId:String, callback: @escaping APICallback<AttachFileModel>) -> APIRequest {
+        let uri = String(format:E(Configs.ServicesConfigs(RESTConstants.UPLOAD_SIGNATURE)), orderId)
+        let headers = ["Content-Type":"multipart/form-data; boundary=\(E(file.boundary))"];
+        
+        return request(method: .POST,
+                       headers:headers,
+                       path: uri,
+                       input: .dto(file),
+                       callback: callback);
+    }
+    
+    //MARK: - ROUTE
     @discardableResult
     func getRoutes(byDate date:String? = nil, callback: @escaping APICallback<ResponseDataListModel<Route>>) -> APIRequest {
         var newDate = date;
@@ -136,54 +154,7 @@ extension BaseAPIService {
     }
     
     
-    @discardableResult
-    func updateOrderStatus(_ order:OrderDetail,reason: Reason? = nil, callback: @escaping APICallback<Route>) -> APIRequest {
-        
-        let path = String(format:E(RESTConstants.ServicesConfigs[RESTConstants.UPDATE_ORDER_STATUS]), "\(order.id)", order.statusCode)
-        
-        var params = ["route_id": "\(order.routeId)"]
-        if let _reason = reason {
-            params["reason_msg"] = _reason.message != nil ? _reason.message :  _reason.reasonDescription
-            params["reason_id"] = "\(_reason.id)"
-        }
-        return request(method: .PUT,
-                       path: path,
-                       input: .json(params),
-                       callback: callback);
-    }
-    
-    @discardableResult
-    func getReasonList(_ type: String = "1", callback: @escaping APICallback<ResponseDataListModel<Reason>>) -> APIRequest {
-        let path = String(format: Configs.ServicesConfigs(RESTConstants.GET_REASON_LIST) ?? "", type)
-
-        return request(method: .GET,
-                       path: path,
-                       input: .empty,
-                       callback: callback);
-    }
-    
-    
-    @discardableResult
-    func getOrderDetail(orderId:String, callback: @escaping APICallback<OrderDetail>) -> APIRequest {
-        let uri = String(format:E(Configs.ServicesConfigs(RESTConstants.GET_ORDER_DETAIL)), orderId)
-        return request(method: .GET,
-                       path: uri,
-                       input: .empty,
-                       callback: callback);
-    }
-  
-    @discardableResult
-    func submitSignature(_ file:AttachFileModel,_ orderId:String, callback: @escaping APICallback<AttachFileModel>) -> APIRequest {
-        let uri = String(format:E(Configs.ServicesConfigs(RESTConstants.UPLOAD_SIGNATURE)), orderId)
-        let headers = ["Content-Type":"multipart/form-data; boundary=\(E(file.boundary))"];
-
-        return request(method: .POST,
-                   headers:headers,
-                   path: uri,
-                   input: .dto(file),
-                   callback: callback);
-    }
-    
+    //MARK: - TRACKING
     @discardableResult
     func updateDriverLocation(long :Double, lat:Double, callback: @escaping APICallback<Route>) -> APIRequest {
         let path = String(format:E(RESTConstants.ServicesConfigs[RESTConstants.UPDATE_DRIVER_LOCATION]))
@@ -203,6 +174,22 @@ extension BaseAPIService {
     }
     
     @discardableResult
+    func getDirection(fromLocation startLocation: CLLocationCoordinate2D,
+                      toLocation destinationLocation: CLLocationCoordinate2D,
+                      callback: @escaping APICallback<MapDirectionResponse>) -> APIRequest {
+        let origin = "\(startLocation.latitude),\(startLocation.longitude)"
+        let destination = "\(destinationLocation.latitude),\(destinationLocation.longitude)"
+        let path = "/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&key=\(Network.googleAPIKey)"
+        
+        return request( method: .GET,
+                        serverURL: E(Configs.mainConfigs[RESTConstants.BASE_URL_GOOGLE_MAP] as? String),
+                        path: path,
+                        input: .empty,
+                        callback: callback);
+    }
+    
+    // MARK: - PROFILE
+    @discardableResult
     func getUserProfile(callback: @escaping APICallback<ResponseDataModel<UserModel>>) -> APIRequest {
         let path = String(format:E(RESTConstants.ServicesConfigs[RESTConstants.GET_USER_PROFILE]))
         return request(method: .GET,
@@ -219,21 +206,6 @@ extension BaseAPIService {
                    input: .dto(user),
                    callback: callback);
   }
-    
-    @discardableResult
-    func getDirection(fromLocation startLocation: CLLocationCoordinate2D,
-                      toLocation destinationLocation: CLLocationCoordinate2D,
-                      callback: @escaping APICallback<MapDirectionResponse>) -> APIRequest {
-        let origin = "\(startLocation.latitude),\(startLocation.longitude)"
-        let destination = "\(destinationLocation.latitude),\(destinationLocation.longitude)"
-        let path = "/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&key=\(Network.googleAPIKey)"
-        
-        return request( method: .GET,
-                        serverURL: E(Configs.mainConfigs[RESTConstants.BASE_URL_GOOGLE_MAP] as? String),
-                        path: path,
-                        input: .empty,
-                        callback: callback);
-    }
     
   
   /*
