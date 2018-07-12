@@ -129,8 +129,7 @@ extension OrderDetailMapViewController {
             guard let firstRoute = _routes.first else {
                 return
             }
-            self.mapView.clear()
-            //
+
             let path = GMSPath(fromEncodedPath: firstRoute.polyline)
             let polyLine = GMSPolyline.init(path: path)
             polyLine.strokeWidth = Constants.ROUTE_WIDTH
