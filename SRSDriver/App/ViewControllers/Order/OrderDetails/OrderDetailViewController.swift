@@ -78,8 +78,10 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let statusItem = OrderDetailInforRow(.status,status.statusName)
         orderInforStatus.append(statusItem)
         if  _orderDetail.status == .cancelStatus {
-            let reason = OrderDetailInforRow(.reason, _orderDetail.reason_msg)
+            let reason = OrderDetailInforRow(.reason, E(_orderDetail.reason?.name))
+            let mess = OrderDetailInforRow(.message, E(_orderDetail.reason_msg))
             orderInforStatus.append(reason)
+            orderInforStatus.append(mess)
         }
         
         let orderId = OrderDetailInforRow(.orderId,"\(_orderDetail.id)")
