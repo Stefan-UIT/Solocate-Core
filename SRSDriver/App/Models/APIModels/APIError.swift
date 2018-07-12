@@ -50,6 +50,17 @@ fileprivate extension APIError {
                 message = mes
             }else if let mes = object["message"] as? ResponseDictionary{
                 message = mes["message"] as? String
+            }else if  let mesList = object["message"] as? ResponseArray{
+                var newMess = ""
+                for  mes in mesList{
+                    if let mtring = mes as? String{
+                        newMess = newMess.appending(mtring)
+                    }
+                }
+                
+                if newMess.length > 0{
+                    message = newMess
+                }
             }
         }
         

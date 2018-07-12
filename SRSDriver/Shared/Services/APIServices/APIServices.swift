@@ -130,6 +130,38 @@ extension BaseAPIService {
                        callback: callback);
     }
     
+    @discardableResult
+    func addNewOrderItem(_ orderID: String, barcode: String, qty: String, callback: @escaping APICallback<ResponseDataModel<EmptyModel>>) -> APIRequest {
+        let params = [
+            [
+                "barcode": barcode,
+                "qty": qty
+            ]
+        ]
+        let path = String(format: E(Configs.ServicesConfigs(RESTConstants.ADD_NEW_ORDER_ITEM)), orderID)
+        return request(method: .POST,
+                       path: path,
+                       input: .json(params),
+                       callback: callback);
+    }
+    
+    static func addNewOrderItem(_ orderID: String, barcode: String, qty: String, completion: @escaping ((_ errorMsg: String?) -> Void)) {
+        let params = [
+            [
+                "barcode": barcode,
+                "qty": qty
+            ]
+        ]
+        guard let baseURL = RESTConstants.getBASEURL(),
+            let addNewItem = RESTConstants.ServicesConfigs[RESTConstants.ADD_NEW_ORDER_ITEM] else {
+                return
+        }
+        let uri = String.init(format: baseURL+addNewItem, orderID)
+        APIs.invoke(params: params, uri: uri, completion: completion)
+    }
+    
+    
+    
     //MARK: - ROUTE
     @discardableResult
     func getRoutes(byDate date:String? = nil, callback: @escaping APICallback<ResponseDataListModel<Route>>) -> APIRequest {

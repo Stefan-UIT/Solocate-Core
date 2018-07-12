@@ -48,6 +48,8 @@ class ReasonListViewController: BaseViewController {
         tvMessange?.delegate = self
     }
   
+    
+  // MARK: - ACTION
   @IBAction func submit(_ sender: UIButton) {
     guard selectedIndex >= 0 else {
       showAlertView("reason_choose_at_least_reason".localized)

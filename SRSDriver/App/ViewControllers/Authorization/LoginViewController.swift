@@ -33,59 +33,42 @@ class LoginViewController: BaseViewController {
     super.viewWillAppear(animated)
     updateStatusEnviroment()
   }
-  
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    guard let keepLogin = Cache.shared.getObject(forKey: Defaultkey.keepLogin) as? Bool, keepLogin == true else {
-      return
-    }
-    if let tk = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String, tk.length > 0 {
-        showLoadingIndicator()
-        APIs.checkToken { (isValid, message) in
-            self.dismissLoadingIndicator()
-            if isValid {
-                self.performSegue(withIdentifier: SegueIdentifier.showHome, sender: nil)
-            }
+    
+  func test() {
+    userNameTextField.text = "nguyen.manh@seldatinc.com"
+    passwordTextField.text = "Seldat.123@"
+  }
+
+  func setupTextField() {
+    let isRemember = Caches().getObject(forKey: Defaultkey.keepLogin)
+    if let remember =  isRemember as? Bool {
+        if remember{
+            userNameTextField.text = Caches().userLogin?.email
+            passwordTextField.text = Caches().userLogin?.password
+        }else {
+            userNameTextField.text = nil
+            passwordTextField.text = nil
         }
     }
   }
     
-    func test() {
-        userNameTextField.text = "nguyen.manh@seldatinc.com"
-        passwordTextField.text = "Seldat.123@"
-    }
-
-    func setupTextField() {
-        let isRemember = Caches().getObject(forKey: Defaultkey.keepLogin)
-        if let remember =  isRemember as? Bool {
-            if remember{
-                userNameTextField.text = Caches().userLogin?.email
-                passwordTextField.text = Caches().userLogin?.password
-            }else {
-                userNameTextField.text = nil
-                passwordTextField.text = nil
-            }
-        }
-    }
-    
-    func setupRemeberButton() {
-        let imgName = keepLogin ? "check_selected" : "check_normal"
-        rememberButton.setImage(UIImage(named: imgName), for: .normal)
-        
-        Caches().setObject(obj: keepLogin, forKey: Defaultkey.keepLogin)
+   func setupRemeberButton() {
+     let imgName = keepLogin ? "check_selected" : "check_normal"
+      rememberButton.setImage(UIImage(named: imgName), for: .normal)
+      Caches().setObject(obj: keepLogin, forKey: Defaultkey.keepLogin)
     }
     
   
   func updateStatusEnviroment() {
-        let type = DataManager.getEnviroment()
-        switch type {
-        case .DEMO:
-            enviromentButton.setTitle("Demo", for: .normal)
-            break
-        case .DEV:
-            enviromentButton.setTitle("Developer", for: .normal)
-            break
-        }
+    let type = DataManager.getEnviroment()
+    switch type {
+    case .DEMO:
+        enviromentButton.setTitle("Demo", for: .normal)
+        break
+    case .DEV:
+        enviromentButton.setTitle("Developer", for: .normal)
+        break
+    }
   }
     
   func handleForgetPassword() {
@@ -94,6 +77,8 @@ class LoginViewController: BaseViewController {
     forgetPasswordView.showViewInView(superView: self.view)
   }
     
+    
+  //MARK: - ACTION
   @IBAction func didClickRemember(_ sender: UIButton) {
     keepLogin = !keepLogin
   }
@@ -119,15 +104,15 @@ class LoginViewController: BaseViewController {
    
     
  @IBAction func tapForgetPasswordButtonAction(_ sender: UIButton) {
-        handleForgetPassword()
-}
+    handleForgetPassword()
+ }
     
   
 @IBAction func tapEnviromentButtonAction(_ sender: UIButton) {
         DataManager.changeEnviroment()
         updateStatusEnviroment()
     }
-}
+ }
 
 
 //MARK: - APISERVICE
