@@ -3,12 +3,13 @@
 <plist version="1.0">
 <dict>
 	<key>BASE_URL</key>
-	<string>https://apigw.seldatdirect.com/dev/dms/99cents/api</string>
+	<string>https://apigw.seldatdirect.com/staging/sdms/api</string>
 	<key>BASE_URL_DEV</key>
-	<string>https://apigw.seldatdirect.com/dev/dms/99cents/api</string>
+	<string>https://apigw.seldatdirect.com/dev/sdms/api</string>
 	<key>BASE_URL_GOOGLE_MAP</key>
 	<string>https://maps.googleapis.com/maps/api</string>
 	<key>TrackingTimeInterval</key>
 	<integer>60</integer>
 </dict>
 </plist>
+
