@@ -31,17 +31,23 @@ class MapsViewController: UIViewController {
   }
   
   func drawPath(fromLocation from: CLLocationCoordinate2D, toLocation to: CLLocationCoordinate2D) {
-    APIs.getDirection(fromLocation: from, toLocation: to) { (routes) in
-      guard let _routes = routes else { return }
-      for route in _routes {
-        let path = GMSPath(fromEncodedPath: route.polyline)
-        let polyLine = GMSPolyline.init(path: path)
-        polyLine.strokeWidth = Constants.ROUTE_WIDTH
-        polyLine.strokeColor = AppColor.mainColor
-        polyLine.map = self.mapView
-        let bounds = GMSCoordinateBounds(path: path!)
-        self.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
-      }
+    self.showLoadingIndicator()
+    API().getDirection(fromLocation: from, toLocation: to) {[weak self] (result) in
+        self?.dismissLoadingIndicator()
+        switch result{
+        case .object(let obj):
+            for route in obj.routes {
+                let path = GMSPath(fromEncodedPath: route.polyline)
+                let polyLine = GMSPolyline.init(path: path)
+                polyLine.strokeWidth = Constants.ROUTE_WIDTH
+                polyLine.strokeColor = AppColor.mainColor
+                polyLine.map = self?.mapView
+                let bounds = GMSCoordinateBounds(path: path!)
+                self?.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
+            }
+        case .error(let error):
+            self?.showAlertView(error.getMessage())
+        }
     }
   }
     

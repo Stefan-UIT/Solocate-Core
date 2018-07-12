@@ -343,9 +343,11 @@ fileprivate extension BaseAPIService{
             
         case .tokenFail,
              .notAuthorized:
-          
+          let err = ERROR(dataResponse: dataResponse)
           DispatchQueue.main.async {
+            App().showAlert(err.getMessage())
             App().reLogin()
+            return
           }
           
         default:
