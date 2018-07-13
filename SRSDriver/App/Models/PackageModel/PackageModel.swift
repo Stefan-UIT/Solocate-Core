@@ -67,7 +67,7 @@ class PackageModel: BaseModel {
     }
     
     override func mapping(map: Map) {
-        delivery <- map["back_haul"]
+        delivery <- map["delivery"]
         back_haul <- map["back_haul"]
         package_on_truck <-  map["package_on_truck"]
     }

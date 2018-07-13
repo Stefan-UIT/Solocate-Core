@@ -121,11 +121,12 @@ private extension SlideMenuVC{
     API().logout { (result) in
       switch result{
       case .object(_):
-        App().reLogin()
+        break
       case .error(let error):
         self.showAlertView(error.getMessage())
       }
     }
+    App().reLogin()
   }
 }
 
