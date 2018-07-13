@@ -33,7 +33,7 @@ class PackagesViewController: BaseViewController {
   var dateStringFilter:String = Date().toString()
     
   fileprivate let titleHeaders = ["DELIVERY",
-                                  "BACKHAOL",
+                                  "BACKHAUL",
                                   "PACKAGE ON TRUCK"]
     
   fileprivate var dileveryDatas:[[String]] = []
