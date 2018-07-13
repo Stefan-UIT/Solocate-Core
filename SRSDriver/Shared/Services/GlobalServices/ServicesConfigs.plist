@@ -14,6 +14,8 @@
 	<string>/backend-api/v1/routes/get-routes-by-date</string>
 	<key>GET_ROUTES_BY_DATE</key>
 	<string>/backend-api/v1/routes/get-routes-by-date</string>
+	<key>GET_PACKAGES_IN_ROUTE</key>
+	<string>/backend-api/v1/routes/get-packages-by-driver?id=%@&amp;date=%@</string>
 	<key>GET_ORDER_DETAIL</key>
 	<string>/backend-api/v1/orders/%@</string>
 	<key>UPDATE_ORDER_STATUS</key>

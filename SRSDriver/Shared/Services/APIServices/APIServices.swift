@@ -185,6 +185,17 @@ extension BaseAPIService {
                        callback: callback);
     }
     
+    @discardableResult
+    func getPackagesInRoute(_ routeID:String,
+                            _ date:String ,
+                            callback: @escaping APICallback<ResponseDataModel<PackageModel>>) -> APIRequest {
+        let path = String(format:E(Configs.ServicesConfigs(RESTConstants.GET_PACKAGES_IN_ROUTE)), routeID, date)
+        return request(method: .GET,
+                       path: path,
+                       input: .empty,
+                       callback: callback);
+    }
+    
     
     //MARK: - TRACKING
     @discardableResult

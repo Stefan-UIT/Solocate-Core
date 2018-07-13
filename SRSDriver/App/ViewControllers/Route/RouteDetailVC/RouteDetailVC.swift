@@ -20,6 +20,7 @@ class RouteDetailVC: UITabBarController {
     let navigationService = DMSNavigationService()
     
     var route:Route?
+    var dateStringFilter:String = Date().toString()
     
     var selectedTabBarItem:TabBarItem = .Order{
         didSet{
@@ -70,6 +71,7 @@ class RouteDetailVC: UITabBarController {
         let packageVC:PackagesViewController = .loadSB(SB: .Packages)
         if let route = self.route {
             packageVC.route = route
+            packageVC.dateStringFilter = dateStringFilter
         }
         let mapVC:MapsViewController = .loadSB(SB: .Map)
         if let route = self.route {

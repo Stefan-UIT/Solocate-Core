@@ -109,6 +109,7 @@ extension RouteListVC:UITableViewDelegate {
         if let routes = listRoutes {
             let route = routes[indexPath.row];
             vc.route = route;
+            vc.dateStringFilter = dateStringFilter!
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }

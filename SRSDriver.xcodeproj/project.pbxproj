@@ -492,6 +492,12 @@
 		3B230D4220E09F5400C867C8 /* UserLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D3320E09F5400C867C8 /* UserLoginModel.swift */; };
 		3B230D4420E0EC8400C867C8 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D4320E0EC8400C867C8 /* Manager.swift */; };
 		3B27CB8E20E647A700B1918D /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B27CB8D20E647A700B1918D /* ImagePickerView.swift */; };
+		3B53C18920F8699300565CE6 /* PackageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B53C18720F8699100565CE6 /* PackageModel.swift */; };
+		3B53C18A20F8699500565CE6 /* PackageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B53C18720F8699100565CE6 /* PackageModel.swift */; };
+		3B53C18B20F8699600565CE6 /* PackageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B53C18720F8699100565CE6 /* PackageModel.swift */; };
+		3B53C18C20F8699700565CE6 /* PackageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B53C18720F8699100565CE6 /* PackageModel.swift */; };
+		3B53C18D20F8699800565CE6 /* PackageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B53C18720F8699100565CE6 /* PackageModel.swift */; };
+		3B53C18E20F8699800565CE6 /* PackageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B53C18720F8699100565CE6 /* PackageModel.swift */; };
 		3B721AF820E1E04600F58783 /* EmptyModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B721AF720E1E04600F58783 /* EmptyModel.swift */; };
 		3B721AFA20E1E29900F58783 /* ResponseDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B721AF920E1E29900F58783 /* ResponseDataModel.swift */; };
 		3B7942B820E3322E005AD12F /* Order.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B7942B720E3322E005AD12F /* Order.storyboard */; };
@@ -952,6 +958,7 @@
 		3B230D3320E09F5400C867C8 /* UserLoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLoginModel.swift; sourceTree = "<group>"; };
 		3B230D4320E0EC8400C867C8 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		3B27CB8D20E647A700B1918D /* ImagePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
+		3B53C18720F8699100565CE6 /* PackageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageModel.swift; sourceTree = "<group>"; };
 		3B721AF720E1E04600F58783 /* EmptyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyModel.swift; sourceTree = "<group>"; };
 		3B721AF920E1E29900F58783 /* ResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDataModel.swift; sourceTree = "<group>"; };
 		3B7942B720E3322E005AD12F /* Order.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Order.storyboard; sourceTree = "<group>"; };
@@ -1386,6 +1393,14 @@
 			path = ImagePickerView;
 			sourceTree = "<group>";
 		};
+		3B53C18620F8693B00565CE6 /* PackageModel */ = {
+			isa = PBXGroup;
+			children = (
+				3B53C18720F8699100565CE6 /* PackageModel.swift */,
+			);
+			path = PackageModel;
+			sourceTree = "<group>";
+		};
 		3B7942BF20E37172005AD12F /* NavigationService */ = {
 			isa = PBXGroup;
 			children = (
@@ -1616,6 +1631,7 @@
 		5A68A459205A5A2100CA9DB8 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3B53C18620F8693B00565CE6 /* PackageModel */,
 				3B230D2320E09D2800C867C8 /* APIModels */,
 				3B230D3020E09F5400C867C8 /* LoginModel */,
 				3B939DCF20E0983B00B90C77 /* AttachFileModel */,
@@ -2761,6 +2777,7 @@
 				0AB690F820A0099E0041E529 /* OrderItem.swift in Sources */,
 				0AB690F920A0099E0041E529 /* RouteMessagesViewController.swift in Sources */,
 				0AEBA57320AA8AB50053F2BF /* AlertDetailModel.swift in Sources */,
+				3B53C18C20F8699700565CE6 /* PackageModel.swift in Sources */,
 				3BB5BF7B20F70D690091FB86 /* Font.swift in Sources */,
 				0AB690FA20A0099E0041E529 /* BaseView.swift in Sources */,
 				3BB5BF9520F70D910091FB86 /* Manager.swift in Sources */,
@@ -2881,6 +2898,7 @@
 				0ADAF42820B3B95A00A88E14 /* Message.swift in Sources */,
 				0ADAF42920B3B95A00A88E14 /* OrderItem.swift in Sources */,
 				0ADAF42A20B3B95A00A88E14 /* AlertDetailModel.swift in Sources */,
+				3B53C18E20F8699800565CE6 /* PackageModel.swift in Sources */,
 				3BB5BF7C20F70D690091FB86 /* Font.swift in Sources */,
 				0ADAF42B20B3B95A00A88E14 /* RouteMessagesViewController.swift in Sources */,
 				3BB5BF9620F70D920091FB86 /* Manager.swift in Sources */,
@@ -3001,6 +3019,7 @@
 				0AE327E3208DC84C00EF1F4C /* Message.swift in Sources */,
 				0AE327E4208DC84C00EF1F4C /* OrderItem.swift in Sources */,
 				0AEBA57220AA8AB50053F2BF /* AlertDetailModel.swift in Sources */,
+				3B53C18B20F8699600565CE6 /* PackageModel.swift in Sources */,
 				3BB5BF7A20F70D680091FB86 /* Font.swift in Sources */,
 				0AE327E5208DC84C00EF1F4C /* RouteMessagesViewController.swift in Sources */,
 				3BB5BF9420F70D8F0091FB86 /* Manager.swift in Sources */,
@@ -3121,6 +3140,7 @@
 				2494A9622074926A005A2622 /* Message.swift in Sources */,
 				2494A9632074926A005A2622 /* OrderItem.swift in Sources */,
 				0AEBA57120AA8AB40053F2BF /* AlertDetailModel.swift in Sources */,
+				3B53C18920F8699300565CE6 /* PackageModel.swift in Sources */,
 				3BB5BF7920F70D670091FB86 /* Font.swift in Sources */,
 				2494A9642074926A005A2622 /* RouteMessagesViewController.swift in Sources */,
 				3BB5BF9320F70D8E0091FB86 /* Manager.swift in Sources */,
@@ -3241,6 +3261,7 @@
 				3BB5BEF020F70C010091FB86 /* RouteListVC.swift in Sources */,
 				3BB5BF1D20F70C750091FB86 /* AlertDetailModel.swift in Sources */,
 				3BB5BF0320F70C2E0091FB86 /* OrderItemsTableViewCell.swift in Sources */,
+				3B53C18D20F8699800565CE6 /* PackageModel.swift in Sources */,
 				3BB5BF2920F70C930091FB86 /* MessageAPI.swift in Sources */,
 				3BB5BF5820F70CF50091FB86 /* String.swift in Sources */,
 				3BB5BF9720F70D920091FB86 /* Manager.swift in Sources */,
@@ -3361,6 +3382,7 @@
 				0A465EC120A427C3009BFE69 /* CheckTokenModel.swift in Sources */,
 				245BBAA4207363EC00EE3E47 /* Message.swift in Sources */,
 				3B0F86C420E2370000E5092B /* RouteDetailVC.swift in Sources */,
+				3B53C18A20F8699500565CE6 /* PackageModel.swift in Sources */,
 				24D3876D2063513600BE51D9 /* OrderItem.swift in Sources */,
 				0AEBA57020AA89C90053F2BF /* AlertDetailModel.swift in Sources */,
 				246FA3522071EB7300C5E707 /* RouteMessagesViewController.swift in Sources */,

@@ -17,6 +17,4 @@ extension Date {
     }
     return dateFormat.string(from: self)
   }
-  
-  
 }

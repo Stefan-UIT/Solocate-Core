@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 
-class OrderItem: NSObject, Mappable {
+class OrderItem: BaseModel {
   var id = -1
   var name = ""
   var sku = ""
@@ -27,7 +27,7 @@ class OrderItem: NSObject, Mappable {
     self.init()
   }
   
-  func mapping(map: Map) {
+    override func mapping(map: Map) {
     
     name <- map["name"]
     sku <- map["sku"]

@@ -9,18 +9,15 @@
 import UIKit
 
 class PackageTableViewCell: UITableViewCell {
-  
-  @IBOutlet weak var nameLabel: UILabel!
-  @IBOutlet weak var totalLabel: UILabel!
-  @IBOutlet weak var barcodeLabel: UILabel!
-  
-  var item: OrderItem! {
-    didSet {
-      nameLabel.text = item.name
-      totalLabel.text = item.total > 0 ? "\(item.total)" : "-"
-      barcodeLabel.text = item.barcode
-    }
+    
+  @IBOutlet weak var lblKey: UILabel?
+  @IBOutlet weak var lblValue: UILabel?
+    
+  func configura(_ key:String,_ value:String)  {
+    lblKey?.text = key
+    lblValue?.text = value
   }
+  
   
   override func awakeFromNib() {
     super.awakeFromNib()

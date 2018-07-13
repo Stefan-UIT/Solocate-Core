@@ -9,46 +9,151 @@
 import UIKit
 
 class PackagesViewController: BaseViewController {
+    
+    enum SectionPackage:Int {
+        case dilevery = 0
+        case backHoul
+        case packageTruck
+    }
   
   @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak var lblNodata: UILabel?
+
   fileprivate let cellIdentifier = "PackageTableViewCell"
-  fileprivate let cellHeight: CGFloat = 80.0
-  
-  var route: Route? {
-    didSet {
-      guard let _ = route, tableView != nil else {
-        return
-      }
-      tableView.reloadData()
-    }
-  }
+  fileprivate let headerIdentifier = "PackageHeaderCell"
+
+  fileprivate let cellHeight: CGFloat = 40.0
+  fileprivate let headerHeight: CGFloat = 80.0
+  fileprivate let footerHeight: CGFloat = 20.0
+
+
+    
+  fileprivate var package: PackageModel = PackageModel()
+  var route: Route?
+  var dateStringFilter:String = Date().toString()
+    
+  fileprivate let titleHeaders = ["DELIVERY",
+                                  "BACKHAOL",
+                                  "PACKAGE ON TRUCK"]
+    
+  fileprivate var dileveryDatas:[[String]] = []
+  fileprivate var backHaulDatas:[[String]] = []
+  fileprivate var packageOnTruckDatas:[[String]] = []
+
+    
   override func viewDidLoad() {
     super.viewDidLoad()
-    title = "packages".localized
+    
+    setupData()
+    getPackages()
   }
-  
+    
+    func setupData() {
+        
+        dileveryDatas = [["Total cases","\(package.delivery.total_case)"],
+                         ["Case complete","\(package.delivery.case_complete)"],
+                         ["Case not complete","\(package.delivery.case_not_complete)"],
+                         ["Total pallets","\(package.delivery.total_pallet)"],
+                         ["Pallet complete","\(package.delivery.pallet_complete)"],
+                         ["Pallet not complete","\(package.delivery.pallet_not_complete)"]]
+        
+        backHaulDatas = [["Total cases","\(package.back_haul.total_case)"],
+                         ["Case complete","\(package.back_haul.case_complete)"],
+                         ["Case not complete","\(package.back_haul.case_not_complete)"],
+                         ["Total pallets","\(package.back_haul.total_pallet)"],
+                         ["Pallet complete","\(package.back_haul.pallet_complete)"],
+                         ["Pallet not complete","\(package.back_haul.pallet_not_complete)"]]
+        
+        packageOnTruckDatas = [["Total cases","\(package.package_on_truck.totalCase)"],
+                               ["Case complete","\(package.package_on_truck.totalPallet)"]]
+        
+    }
 }
 
 extension PackagesViewController: UITableViewDataSource, UITableViewDelegate {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if let _route = route {
-      return _route.currentItems.count
-    }
-    return 0
+  func numberOfSections(in tableView: UITableView) -> Int {
+    return titleHeaders.count
   }
+    
+  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    let sectionPK = SectionPackage(rawValue: section)
+    switch sectionPK! {
+    case .dilevery:
+        return dileveryDatas.count
+    case .backHoul:
+        return dileveryDatas.count
+    case .packageTruck:
+        return packageOnTruckDatas.count
+    }
+  }
+    
+  func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return headerHeight.scaleHeight()
+    
+    }
+ 
+  func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return footerHeight.scaleHeight()
+  }
+    
+  func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    let headerCell:PackageTableViewCell = tableView.dequeueReusableCell(withIdentifier: headerIdentifier) as! PackageTableViewCell
+        
+    headerCell.lblKey?.text = titleHeaders[section]
+    return headerCell
+  }
+    
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     guard
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? PackageTableViewCell
-        else { return UITableViewCell() }
-    if let _route = route {
-        cell.item = _route.currentItems[indexPath.row]
+        else {
+        return UITableViewCell()
     }
+    
+    let sectionPK = SectionPackage(rawValue: indexPath.section)
+    let row = indexPath.row
+
+    switch sectionPK! {
+    case .dilevery:
+        cell.configura(E(dileveryDatas[row].first), E(dileveryDatas[row].last))
+    case .backHoul:
+        cell.configura(E(backHaulDatas[row].first), E(backHaulDatas[row].last))
+    case .packageTruck:
+        cell.configura(E(packageOnTruckDatas[row].first), E(packageOnTruckDatas[row].last))
+    }
+
     return cell
   }
+    
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return cellHeight.scaleHeight()
   }
   
+}
+
+
+//MARK : - PackagesViewController
+extension PackagesViewController{
+    
+    func getPackages() {
+        guard let route = route else {return}
+        self.showLoadingIndicator()
+        API().getPackagesInRoute("\(route.id)", dateStringFilter) {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(let obj):
+                if let  packages =  obj.data {
+                    self?.package = packages
+                    self?.setupData()
+                    self?.tableView.reloadData()
+                }
+                break
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+                break
+            }
+        }
+    }
 }

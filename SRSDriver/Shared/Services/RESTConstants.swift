@@ -86,6 +86,7 @@ class RESTConstants: NSObject {
     static let GET_ORDERS = "GET_ORDERS"
     static let GET_ORDER_BY_DATE = "GET_ORDER_BY_DATE"
     static let GET_ROUTES_BY_DATE = "GET_ROUTES_BY_DATE"
+    static let GET_PACKAGES_IN_ROUTE = "GET_PACKAGES_IN_ROUTE"
     static let GET_ORDER_DETAIL = "GET_ORDER_DETAIL"
     static let UPDATE_ORDER_STATUS = "UPDATE_ORDER_STATUS"
     static let UPLOAD_SIGNATURE = "UPLOAD_SIGNATURE"
