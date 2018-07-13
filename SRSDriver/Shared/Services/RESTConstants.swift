@@ -79,6 +79,7 @@ class RESTConstants: NSObject {
     
     static let BASE_URL = "BASE_URL"
     static let BASE_URL_DEV = "BASE_URL_DEV"
+    static let BASE_URL_PRODUCT = "BASE_URL_PRODUCT"
     static let BASE_URL_GOOGLE_MAP = "BASE_URL_GOOGLE_MAP"
     static let LOGIN = "LOGIN"
     static let FORGET_PASSWORD = "FORGET_PASSWORD"
@@ -147,6 +148,9 @@ class RESTConstants: NSObject {
 
         case .DEV:
             return Configs.mainConfigs[RESTConstants.BASE_URL_DEV] as? String
+        case .PRODUCT:
+            return Configs.mainConfigs[RESTConstants.BASE_URL_PRODUCT] as? String
+
         }
     }
 }

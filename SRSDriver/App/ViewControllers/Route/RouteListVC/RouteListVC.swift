@@ -17,7 +17,7 @@ class RouteListVC: BaseViewController {
     @IBOutlet weak var tbvContent:UITableView?
     @IBOutlet weak var lblNoResult:UILabel?
     
-    var dateStringFilter:String?
+    var dateStringFilter:String = Date().toString("yyyy-MM-dd")
     
     var listRoutes:[Route]?{
         didSet{
@@ -109,7 +109,7 @@ extension RouteListVC:UITableViewDelegate {
         if let routes = listRoutes {
             let route = routes[indexPath.row];
             vc.route = route;
-            vc.dateStringFilter = dateStringFilter!
+            vc.dateStringFilter = dateStringFilter
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }

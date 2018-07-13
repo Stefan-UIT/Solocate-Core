@@ -11,6 +11,7 @@ import UIKit
 enum EnviromentType : Int {
     case DEMO = 0
     case DEV = 1
+    case PRODUCT = 2
 }
 
 class DataManager: NSObject {
@@ -30,6 +31,9 @@ class DataManager: NSObject {
         case .DEV:
             UserDefaults.standard.set(1, forKey: "ENVIROMENT")
             break
+        case .PRODUCT:
+            UserDefaults.standard.set(2, forKey: "ENVIROMENT")
+
         }
     }
     
@@ -42,6 +46,9 @@ class DataManager: NSObject {
         case .DEV:
             DataManager.setEnviroment(.DEMO)
             break
+        case .PRODUCT:
+            DataManager.setEnviroment(.PRODUCT)
+
         }
     }
 }

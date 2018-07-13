@@ -68,6 +68,8 @@ class LoginViewController: BaseViewController {
     case .DEV:
         enviromentButton.setTitle("Developer", for: .normal)
         break
+    case .PRODUCT:
+        enviromentButton.setTitle("Product", for: .normal)
     }
   }
     

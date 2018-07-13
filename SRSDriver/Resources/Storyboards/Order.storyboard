@@ -535,10 +535,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eYa-zT-QzS">
-                                                    <rect key="frame" x="15" y="0.0" width="345" height="102"/>
+                                                    <rect key="frame" x="15" y="10" width="345" height="92"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZC6-Rh-7Oa">
-                                                            <rect key="frame" x="15" y="0.0" width="315" height="102"/>
+                                                            <rect key="frame" x="15" y="0.0" width="315" height="92"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="14"/>
                                                             <color key="textColor" red="0.035294117647058823" green="0.15294117647058825" blue="0.25882352941176467" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -550,7 +550,7 @@
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="trailing" secondItem="ZC6-Rh-7Oa" secondAttribute="trailing" constant="15" id="C1f-cJ-HAn"/>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="55" id="ElS-8O-fLG"/>
+                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="65" id="ElS-8O-fLG"/>
                                                         <constraint firstItem="ZC6-Rh-7Oa" firstAttribute="top" secondItem="eYa-zT-QzS" secondAttribute="top" id="GHc-4j-4u8"/>
                                                         <constraint firstItem="ZC6-Rh-7Oa" firstAttribute="leading" secondItem="eYa-zT-QzS" secondAttribute="leading" constant="15" id="gJC-0j-RF3"/>
                                                         <constraint firstAttribute="bottom" secondItem="ZC6-Rh-7Oa" secondAttribute="bottom" id="qhs-Y4-2pJ"/>
@@ -562,7 +562,7 @@
                                                 <constraint firstAttribute="bottom" secondItem="eYa-zT-QzS" secondAttribute="bottom" constant="2" id="QRp-7E-yBL"/>
                                                 <constraint firstItem="eYa-zT-QzS" firstAttribute="leading" secondItem="mOo-4E-jd3" secondAttribute="leading" constant="15" id="Rro-kr-VNX"/>
                                                 <constraint firstAttribute="trailing" secondItem="eYa-zT-QzS" secondAttribute="trailing" constant="15" id="XdO-f1-KGI"/>
-                                                <constraint firstItem="eYa-zT-QzS" firstAttribute="top" secondItem="mOo-4E-jd3" secondAttribute="top" id="jcn-cH-4as"/>
+                                                <constraint firstItem="eYa-zT-QzS" firstAttribute="top" secondItem="mOo-4E-jd3" secondAttribute="top" constant="10" id="jcn-cH-4as"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>

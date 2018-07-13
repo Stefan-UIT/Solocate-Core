@@ -23,7 +23,7 @@ class PackagesViewController: BaseViewController {
   fileprivate let headerIdentifier = "PackageHeaderCell"
 
   fileprivate let cellHeight: CGFloat = 40.0
-  fileprivate let headerHeight: CGFloat = 80.0
+  fileprivate let headerHeight: CGFloat = 70.0
   fileprivate let footerHeight: CGFloat = 20.0
 
 
@@ -88,12 +88,16 @@ extension PackagesViewController: UITableViewDataSource, UITableViewDelegate {
   }
     
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return headerHeight.scaleHeight()
+    return headerHeight.scaleHeight()
     
     }
  
   func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return footerHeight.scaleHeight()
+    return footerHeight.scaleHeight()
+  }
+    
+  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    return cellHeight.scaleHeight()
   }
     
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -125,11 +129,7 @@ extension PackagesViewController: UITableViewDataSource, UITableViewDelegate {
 
     return cell
   }
-    
-  
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return cellHeight.scaleHeight()
-  }
+
   
 }
 

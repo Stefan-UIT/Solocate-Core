@@ -24,6 +24,9 @@ class ChangeInviromentTableViewCell: BaseTableViewCell {
         case.DEV:
             enviromentLabel.text = "Enviroment - Dev"
             break
+        case .PRODUCT:
+            enviromentLabel.text = "Enviroment - Product"
+
         }
     }
     

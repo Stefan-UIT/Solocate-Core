@@ -420,7 +420,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     }
    
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 55
+        return 65
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
