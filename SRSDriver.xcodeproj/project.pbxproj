@@ -467,6 +467,7 @@
 		3B0F86D720E2583400E5092B /* Font.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F86D420E2583400E5092B /* Font.swift */; };
 		3B0F86D820E2583400E5092B /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F86D520E2583400E5092B /* Color.swift */; };
 		3B12A22320F72D970018B8B8 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B12A22220F72D970018B8B8 /* Info.plist */; };
+		3B136F3A20FD937E009665CF /* Adhoc.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3B136F3920FD937E009665CF /* Adhoc.xcconfig */; };
 		3B1AF09F20E6195B0099C299 /* OrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B1AF09E20E6195B0099C299 /* OrderDetailVC.swift */; };
 		3B230D2820E09D2900C867C8 /* ListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D2420E09D2800C867C8 /* ListModel.swift */; };
 		3B230D2920E09D2900C867C8 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D2520E09D2800C867C8 /* APIError.swift */; };
@@ -807,12 +808,6 @@
 		3BB75FD920FC76840030B9E4 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FD520FC76830030B9E4 /* Services.swift */; };
 		3BB75FDA20FC76840030B9E4 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FD520FC76830030B9E4 /* Services.swift */; };
 		3BB75FDB20FC76840030B9E4 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FD520FC76830030B9E4 /* Services.swift */; };
-		3BB7601C20FCAC540030B9E4 /* Adhoc.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601720FCAC540030B9E4 /* Adhoc.xcconfig */; };
-		3BB7601D20FCAC540030B9E4 /* Adhoc.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601720FCAC540030B9E4 /* Adhoc.xcconfig */; };
-		3BB7601E20FCAC540030B9E4 /* Adhoc.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601720FCAC540030B9E4 /* Adhoc.xcconfig */; };
-		3BB7601F20FCAC540030B9E4 /* Adhoc.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601720FCAC540030B9E4 /* Adhoc.xcconfig */; };
-		3BB7602020FCAC540030B9E4 /* Adhoc.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601720FCAC540030B9E4 /* Adhoc.xcconfig */; };
-		3BB7602120FCAC540030B9E4 /* Adhoc.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601720FCAC540030B9E4 /* Adhoc.xcconfig */; };
 		3BB7602220FCAC540030B9E4 /* AppStore.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601820FCAC540030B9E4 /* AppStore.xcconfig */; };
 		3BB7602320FCAC540030B9E4 /* AppStore.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601820FCAC540030B9E4 /* AppStore.xcconfig */; };
 		3BB7602420FCAC540030B9E4 /* AppStore.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601820FCAC540030B9E4 /* AppStore.xcconfig */; };
@@ -969,6 +964,7 @@
 		0AF8BA6E2085D99D001321D1 /* BaseView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseView.swift; sourceTree = "<group>"; };
 		0AF8BA712085E3C5001321D1 /* LogoutTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LogoutTableViewCell.swift; sourceTree = "<group>"; };
 		0AF8BA722085E3C5001321D1 /* LogoutTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LogoutTableViewCell.xib; sourceTree = "<group>"; };
+		10295B2BA20E31EA46ED2243 /* Pods-DMSDriver_99Cents.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver_99Cents.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver_99Cents/Pods-DMSDriver_99Cents.adhoc.xcconfig"; sourceTree = "<group>"; };
 		242DC4B8207775F50047F19C /* PackagesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackagesViewController.swift; sourceTree = "<group>"; };
 		242DC4BB207779FC0047F19C /* PackageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageTableViewCell.swift; sourceTree = "<group>"; };
 		245BBAA12073616D00EE3E47 /* MessageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageAPI.swift; sourceTree = "<group>"; };
@@ -1010,6 +1006,7 @@
 		3B0F86D420E2583400E5092B /* Font.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Font.swift; sourceTree = "<group>"; };
 		3B0F86D520E2583400E5092B /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		3B12A22220F72D970018B8B8 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3B136F3920FD937E009665CF /* Adhoc.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Adhoc.xcconfig; sourceTree = "<group>"; };
 		3B1AF09E20E6195B0099C299 /* OrderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailVC.swift; sourceTree = "<group>"; };
 		3B230D2420E09D2800C867C8 /* ListModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ListModel.swift; sourceTree = "<group>"; };
 		3B230D2520E09D2800C867C8 /* APIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
@@ -1046,7 +1043,6 @@
 		3BB75FC820FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BuildConfiguration+Extension.swift"; sourceTree = "<group>"; };
 		3BB75FD520FC76830030B9E4 /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		3BB7601520FCA1E70030B9E4 /* DMSDriver_99Cents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DMSDriver_99Cents.entitlements; sourceTree = "<group>"; };
-		3BB7601720FCAC540030B9E4 /* Adhoc.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Adhoc.xcconfig; sourceTree = "<group>"; };
 		3BB7601820FCAC540030B9E4 /* AppStore.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = AppStore.xcconfig; sourceTree = "<group>"; };
 		3BB7601920FCAC540030B9E4 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		3BB7601A20FCAC540030B9E4 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -1113,18 +1109,23 @@
 		5ACCE8E1205BB30C00A1532D /* SignatureView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureView.swift; sourceTree = "<group>"; };
 		5ACCE8E3205BB31600A1532D /* SignatureView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SignatureView.xib; sourceTree = "<group>"; };
 		5ACCE8E5205BC16300A1532D /* UIImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImage.swift; sourceTree = "<group>"; };
+		5FA02E75F43F1A6E9E9E125C /* Pods-DMSDriver_Malee.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver_Malee.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver_Malee/Pods-DMSDriver_Malee.adhoc.xcconfig"; sourceTree = "<group>"; };
 		6A13953BFBDFE72E4E639CAF /* Pods-DMSDriver_Talron.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver_Talron.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver_Talron/Pods-DMSDriver_Talron.release.xcconfig"; sourceTree = "<group>"; };
 		785347CA1DE99AEFAD75ECF6 /* Pods_DMSDriver_Malee.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DMSDriver_Malee.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8353A4C75A879A0B19D97CA5 /* Pods-DMSDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.debug.xcconfig"; sourceTree = "<group>"; };
 		8886374AB8911A132724D7A2 /* Pods_DMSDriver__Taavura.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DMSDriver__Taavura.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		88A28DCECA2017AC8D5E18A5 /* Pods-DMSDriver_ Taavura.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver_ Taavura.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver_ Taavura/Pods-DMSDriver_ Taavura.adhoc.xcconfig"; sourceTree = "<group>"; };
 		A9E8109D8EE93D6B63E8AD3D /* Pods-DMSDriver_99Cents.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver_99Cents.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver_99Cents/Pods-DMSDriver_99Cents.debug.xcconfig"; sourceTree = "<group>"; };
 		B79B796DBB6F3424101EC745 /* Pods_DMSDriver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DMSDriver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BF9F53BF283BB852D95F54BE /* Pods-DMSDriver_ Taavura.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver_ Taavura.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver_ Taavura/Pods-DMSDriver_ Taavura.release.xcconfig"; sourceTree = "<group>"; };
 		C6D76BCA4F1CB8260E973BEE /* Pods-DMSDriver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.release.xcconfig"; sourceTree = "<group>"; };
+		CE29137F82B98964C62C557A /* Pods-DMSDriver.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.adhoc.xcconfig"; sourceTree = "<group>"; };
 		D48B9C7D5A100E6C973E5987 /* Pods-DMSDriver_Masof.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver_Masof.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver_Masof/Pods-DMSDriver_Masof.debug.xcconfig"; sourceTree = "<group>"; };
+		DCF387F1528DD0EB1D4FFEC4 /* Pods-DMSDriver_Talron.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver_Talron.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver_Talron/Pods-DMSDriver_Talron.adhoc.xcconfig"; sourceTree = "<group>"; };
 		E5DFF8F2CD4EA00FF521E92F /* Pods-DMSDriver_Masof.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver_Masof.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver_Masof/Pods-DMSDriver_Masof.release.xcconfig"; sourceTree = "<group>"; };
 		E6E554DE8A046B6848AC9AC0 /* Pods_DMSDriver_99Cents.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DMSDriver_99Cents.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EA4F890556A148FE0B2A15A2 /* Pods-DMSDriver_ Taavura.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver_ Taavura.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver_ Taavura/Pods-DMSDriver_ Taavura.debug.xcconfig"; sourceTree = "<group>"; };
+		FD3CA055D78736A2C0EDED62 /* Pods-DMSDriver_Masof.adhoc.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver_Masof.adhoc.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver_Masof/Pods-DMSDriver_Masof.adhoc.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1625,11 +1626,11 @@
 		3BB7601620FCAC540030B9E4 /* Configurations */ = {
 			isa = PBXGroup;
 			children = (
-				3BB7601720FCAC540030B9E4 /* Adhoc.xcconfig */,
 				3BB7601820FCAC540030B9E4 /* AppStore.xcconfig */,
 				3BB7601920FCAC540030B9E4 /* Debug.xcconfig */,
 				3BB7601A20FCAC540030B9E4 /* Release.xcconfig */,
 				3BB7601B20FCAC540030B9E4 /* Base.xcconfig */,
+				3B136F3920FD937E009665CF /* Adhoc.xcconfig */,
 			);
 			path = Configurations;
 			sourceTree = "<group>";
@@ -1939,6 +1940,12 @@
 				E5DFF8F2CD4EA00FF521E92F /* Pods-DMSDriver_Masof.release.xcconfig */,
 				4F25DD30DEEA59927C4BEB18 /* Pods-DMSDriver_Talron.debug.xcconfig */,
 				6A13953BFBDFE72E4E639CAF /* Pods-DMSDriver_Talron.release.xcconfig */,
+				CE29137F82B98964C62C557A /* Pods-DMSDriver.adhoc.xcconfig */,
+				88A28DCECA2017AC8D5E18A5 /* Pods-DMSDriver_ Taavura.adhoc.xcconfig */,
+				10295B2BA20E31EA46ED2243 /* Pods-DMSDriver_99Cents.adhoc.xcconfig */,
+				5FA02E75F43F1A6E9E9E125C /* Pods-DMSDriver_Malee.adhoc.xcconfig */,
+				FD3CA055D78736A2C0EDED62 /* Pods-DMSDriver_Masof.adhoc.xcconfig */,
+				DCF387F1528DD0EB1D4FFEC4 /* Pods-DMSDriver_Talron.adhoc.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -2091,7 +2098,7 @@
 					};
 					3BB5BE7D20F708A40091FB86 = {
 						CreatedOnToolsVersion = 9.4.1;
-						ProvisioningStyle = Automatic;
+						ProvisioningStyle = Manual;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2171,7 +2178,6 @@
 				3BB7602B20FCAC540030B9E4 /* Debug.xcconfig in Resources */,
 				0ADAF45320B3BDC500A88E14 /* MainConfigs.plist in Resources */,
 				0A465E9E20A3E850009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
-				3BB7601F20FCAC540030B9E4 /* Adhoc.xcconfig in Resources */,
 				3BB5BEB920F7099E0091FB86 /* Message.storyboard in Resources */,
 				3BB7602520FCAC540030B9E4 /* AppStore.xcconfig in Resources */,
 				0AB6910820A0099E0041E529 /* Main.storyboard in Resources */,
@@ -2209,7 +2215,6 @@
 				3BB7602C20FCAC540030B9E4 /* Debug.xcconfig in Resources */,
 				0ADAF44020B3B95A00A88E14 /* LeftMenuView.xib in Resources */,
 				0ADAF44120B3B95A00A88E14 /* ChangePasswordTableViewCell.xib in Resources */,
-				3BB7602020FCAC540030B9E4 /* Adhoc.xcconfig in Resources */,
 				3BB5BEBA20F7099E0091FB86 /* Message.storyboard in Resources */,
 				3BB7602620FCAC540030B9E4 /* AppStore.xcconfig in Resources */,
 				0ADAF44220B3B95A00A88E14 /* Main.storyboard in Resources */,
@@ -2235,7 +2240,6 @@
 				3BB5BEAE20F709930091FB86 /* Map.storyboard in Resources */,
 				3BB5BEB320F709980091FB86 /* Packages.storyboard in Resources */,
 				0AE327EE208DC84C00EF1F4C /* LaunchScreen.storyboard in Resources */,
-				3BB7601E20FCAC540030B9E4 /* Adhoc.xcconfig in Resources */,
 				0AE327F0208DC84C00EF1F4C /* Main.storyboard in Resources */,
 				0A465EB720A404CC009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
 				0A7FB46820918B9900F5058D /* Assets.xcassets.Talron.xcassets in Resources */,
@@ -2270,7 +2274,6 @@
 				3BB5BEAD20F709920091FB86 /* Map.storyboard in Resources */,
 				3BB5BEB220F709980091FB86 /* Packages.storyboard in Resources */,
 				2494A96E2074926A005A2622 /* LaunchScreen.storyboard in Resources */,
-				3BB7601D20FCAC540030B9E4 /* Adhoc.xcconfig in Resources */,
 				2494A9702074926A005A2622 /* Main.storyboard in Resources */,
 				0A465EB920A404CD009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
 				0A7FB46A20918C4000F5058D /* Assets.xcassets.Malee.xcassets in Resources */,
@@ -2302,13 +2305,13 @@
 				3BB7602D20FCAC540030B9E4 /* Debug.xcconfig in Resources */,
 				3BB5BEBC20F709A20091FB86 /* Profile.storyboard in Resources */,
 				3BB5BECA20F70BB40091FB86 /* ForgetPasswordView.xib in Resources */,
+				3B136F3A20FD937E009665CF /* Adhoc.xcconfig in Resources */,
 				3BB5BEBB20F7099F0091FB86 /* Message.storyboard in Resources */,
 				3BB5BF6020F70D0F0091FB86 /* Info.plist in Resources */,
 				3B12A22320F72D970018B8B8 /* Info.plist in Resources */,
 				3BB5BEBE20F709EC0091FB86 /* Assets.xcassets.99Cents.xcassets in Resources */,
 				3BB5BE9B20F709560091FB86 /* MainConfigs.plist in Resources */,
 				3BB5BEC120F70B960091FB86 /* ChangeInviromentTableViewCell.xib in Resources */,
-				3BB7602120FCAC540030B9E4 /* Adhoc.xcconfig in Resources */,
 				3BB5BEC820F70BAD0091FB86 /* ChangePasswordView.xib in Resources */,
 				3BB5BEBF20F70B860091FB86 /* LeftMenuView.xib in Resources */,
 				3BB5BF0020F70C240091FB86 /* OrderScanItemTableViewCell.xib in Resources */,
@@ -2356,7 +2359,6 @@
 				3BB7602820FCAC540030B9E4 /* Debug.xcconfig in Resources */,
 				3B7942B820E3322E005AD12F /* Order.storyboard in Resources */,
 				0ADAF45120B3BD7700A88E14 /* MainConfigs.plist in Resources */,
-				3BB7601C20FCAC540030B9E4 /* Adhoc.xcconfig in Resources */,
 				0A465E9820A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
 				3BB7602220FCAC540030B9E4 /* AppStore.xcconfig in Resources */,
 				5AA4CA4520590AD4003F8E6F /* Main.storyboard in Resources */,
@@ -3802,23 +3804,193 @@
 			};
 			name = Release;
 		};
-		3BB5BE9120F708A50091FB86 /* Debug */ = {
+		3B136F3220FD91DD009665CF /* Adhoc */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A9E8109D8EE93D6B63E8AD3D /* Pods-DMSDriver_99Cents.debug.xcconfig */;
+			baseConfigurationReference = 3B136F3920FD937E009665CF /* Adhoc.xcconfig */;
 			buildSettings = {
-				APP_BUNDLE_ID = com.seldatinc.99centsdriver;
-				APP_BUNDLE_VERSION = 11;
-				APP_NAME = "99Cents Driver";
-				APP_VERSION = 1;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Adhoc;
+		};
+		3B136F3320FD91DD009665CF /* Adhoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = CE29137F82B98964C62C557A /* Pods-DMSDriver.adhoc.xcconfig */;
+			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUILD_SCHEME = Debug;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = SRSDriver/SRSDriver.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = T7R2AKHVA7;
+				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_Core/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.DMSCore;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "1cadbf5c-5940-4232-9a70-f4e642241bf1";
+				PROVISIONING_PROFILE_SPECIFIER = "dev-99centsDriver";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Adhoc;
+		};
+		3B136F3420FD91DD009665CF /* Adhoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 5FA02E75F43F1A6E9E9E125C /* Pods-DMSDriver_Malee.adhoc.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SRSDriver/SRSDriver.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = T7R2AKHVA7;
+				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver_Malee.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMALEE";
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "8afaa817-54eb-493d-a844-3f0b1f94fde3";
+				PROVISIONING_PROFILE_SPECIFIER = "dev-SRSDriver";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Adhoc;
+		};
+		3B136F3520FD91DD009665CF /* Adhoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = DCF387F1528DD0EB1D4FFEC4 /* Pods-DMSDriver_Talron.adhoc.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = SRSDriver/SRSDriver.entitlements;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = T7R2AKHVA7;
+				INFOPLIST_FILE = DMSDriver_Talron.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -TALRON";
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "f9c1dad2-b76d-4d63-b933-37a39460ce66";
+				PROVISIONING_PROFILE_SPECIFIER = "dev-SRSDriver";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Adhoc;
+		};
+		3B136F3620FD91DD009665CF /* Adhoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FD3CA055D78736A2C0EDED62 /* Pods-DMSDriver_Masof.adhoc.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = SRSDriver/SRSDriver.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T7R2AKHVA7;
+				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_Masof/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMASOF";
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.SRSDriver;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Adhoc;
+		};
+		3B136F3720FD91DD009665CF /* Adhoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 88A28DCECA2017AC8D5E18A5 /* Pods-DMSDriver_ Taavura.adhoc.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_ENTITLEMENTS = SRSDriver/SRSDriver.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T7R2AKHVA7;
+				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_Taavura/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				OTHER_SWIFT_FLAGS = "$(inherited) \"-D\" \"COCOAPODS\" -DMS";
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.DMSDriver.Taavura;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Adhoc;
+		};
+		3B136F3820FD91DD009665CF /* Adhoc */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 10295B2BA20E31EA46ED2243 /* Pods-DMSDriver_99Cents.adhoc.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_ENTITLEMENTS = DMSDriver_99Cents.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = T7R2AKHVA7;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_99Cents/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
@@ -3827,7 +3999,31 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "";
-				SERVER = testing;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Adhoc;
+		};
+		3BB5BE9120F708A50091FB86 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A9E8109D8EE93D6B63E8AD3D /* Pods-DMSDriver_99Cents.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CODE_SIGN_ENTITLEMENTS = DMSDriver_99Cents.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = T7R2AKHVA7;
+				ENABLE_BITCODE = NO;
+				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_99Cents/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.99centsdriver;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "12d1fe39-335c-4a87-b59c-7bf65e836210";
+				PROVISIONING_PROFILE_SPECIFIER = "dev-99centsDriver";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3837,17 +4033,13 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3AF3E979A80EB88228A1D3CF /* Pods-DMSDriver_99Cents.release.xcconfig */;
 			buildSettings = {
-				APP_BUNDLE_ID = com.seldatinc.99centsdriver;
-				APP_BUNDLE_VERSION = 11;
-				APP_NAME = "99Cents Driver";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				BUILD_SCHEME = Release;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_ENTITLEMENTS = DMSDriver_99Cents.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_99Cents/Info.plist";
@@ -3856,9 +4048,8 @@
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.99centsdriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
-				SERVER = production;
+				PROVISIONING_PROFILE = "98e38828-6cec-4432-bd03-ba32b55a764e";
+				PROVISIONING_PROFILE_SPECIFIER = 99Cents_provinsion_release;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3866,6 +4057,7 @@
 		};
 		5AA4CA4C20590AD4003F8E6F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3BB7601920FCAC540030B9E4 /* Debug.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -3924,6 +4116,7 @@
 		};
 		5AA4CA4D20590AD4003F8E6F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3BB7601A20FCAC540030B9E4 /* Release.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
@@ -4028,6 +4221,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0AB6910D20A0099E0041E529 /* Debug */,
+				3B136F3620FD91DD009665CF /* Adhoc */,
 				0AB6910E20A0099E0041E529 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -4037,6 +4231,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0ADAF44620B3B95A00A88E14 /* Debug */,
+				3B136F3720FD91DD009665CF /* Adhoc */,
 				0ADAF44720B3B95A00A88E14 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -4046,6 +4241,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0AE327F6208DC84C00EF1F4C /* Debug */,
+				3B136F3520FD91DD009665CF /* Adhoc */,
 				0AE327F7208DC84C00EF1F4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -4055,6 +4251,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2494A9742074926A005A2622 /* Debug */,
+				3B136F3420FD91DD009665CF /* Adhoc */,
 				2494A9752074926A005A2622 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -4064,6 +4261,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3BB5BE9120F708A50091FB86 /* Debug */,
+				3B136F3820FD91DD009665CF /* Adhoc */,
 				3BB5BE9220F708A50091FB86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -4073,6 +4271,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5AA4CA4C20590AD4003F8E6F /* Debug */,
+				3B136F3220FD91DD009665CF /* Adhoc */,
 				5AA4CA4D20590AD4003F8E6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -4082,6 +4281,7 @@
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				5AA4CA4F20590AD4003F8E6F /* Debug */,
+				3B136F3320FD91DD009665CF /* Adhoc */,
 				5AA4CA5020590AD4003F8E6F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
