@@ -141,16 +141,19 @@ class RESTConstants: NSObject {
     }()
     
     class func getBASEURL() -> String? {
-        let type = DataManager.getEnviroment()
+        
+        if let debugServer = Debug.shared.useServer {
+            return debugServer;
+        }
+        
+        let type = SDBuildConf.buildScheme
         switch type {
-        case .DEMO:
-            return Configs.mainConfigs[RESTConstants.BASE_URL] as? String
-
-        case .DEV:
+        case .debug,
+             .adhoc:
             return Configs.mainConfigs[RESTConstants.BASE_URL_DEV] as? String
-        case .PRODUCT:
-            return Configs.mainConfigs[RESTConstants.BASE_URL_PRODUCT] as? String
 
+        case .release:
+            return Configs.mainConfigs[RESTConstants.BASE_URL_PRODUCT] as? String
         }
     }
 }

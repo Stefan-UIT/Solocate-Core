@@ -8,30 +8,38 @@
 
 import UIKit
 
+protocol SignatureViewDelegate:class {
+    func touchesMoved(_ sign: UIBezierPath?,_ signLayer:CAShapeLayer?)
+}
+
 class SignatureView: UIView {
+    
+ weak var delegate:SignatureViewDelegate?
 
   private var beginLocation: CGPoint! {
     didSet {
       sign = UIBezierPath()
-      sign.move(to: beginLocation)
+      sign?.move(to: beginLocation)
       signLayer = CAShapeLayer()
-      signLayer.path = sign.cgPath
-      signLayer.lineWidth = 2.0
-      signLayer.lineJoin = kCALineJoinRound
-      signLayer.fillColor = UIColor.clear.cgColor
-      signLayer.strokeColor = UIColor.black.cgColor
-      self.layer.addSublayer(signLayer)
+      signLayer?.path = sign?.cgPath
+      signLayer?.lineWidth = 2.0
+      signLayer?.lineJoin = kCALineJoinRound
+      signLayer?.fillColor = UIColor.clear.cgColor
+      signLayer?.strokeColor = UIColor.black.cgColor
+      if let _signLayer = signLayer {
+        self.layer.addSublayer(_signLayer)
+      }
     }
   }
   
-  var signLayer: CAShapeLayer!
+  var signLayer: CAShapeLayer?
   private var endingLocation: CGPoint! {
     didSet {
-      sign.addLine(to: endingLocation)
-      signLayer.path = sign.cgPath
+      sign?.addLine(to: endingLocation)
+      signLayer?.path = sign?.cgPath
     }
   }
-  var sign: UIBezierPath!
+  var sign: UIBezierPath?
 
   
   override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -40,8 +48,10 @@ class SignatureView: UIView {
       guard self.frame.contains(location), sign != nil else {
         return
       }
-      sign.addLine(to: CGPoint(x: location.x, y: location.y - self.frame.origin.y))
-      signLayer.path = sign.cgPath
+      sign?.addLine(to: CGPoint(x: location.x, y: location.y - self.frame.origin.y))
+      signLayer?.path = sign?.cgPath
+        
+      delegate?.touchesMoved(sign, signLayer)
     }
     
   }

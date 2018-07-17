@@ -782,6 +782,67 @@
 		3BB5BF9520F70D910091FB86 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D4320E0EC8400C867C8 /* Manager.swift */; };
 		3BB5BF9620F70D920091FB86 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D4320E0EC8400C867C8 /* Manager.swift */; };
 		3BB5BF9720F70D920091FB86 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D4320E0EC8400C867C8 /* Manager.swift */; };
+		3BB75FBE20FC59820030B9E4 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FBD20FC59820030B9E4 /* FirebaseService.swift */; };
+		3BB75FBF20FC59820030B9E4 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FBD20FC59820030B9E4 /* FirebaseService.swift */; };
+		3BB75FC020FC59820030B9E4 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FBD20FC59820030B9E4 /* FirebaseService.swift */; };
+		3BB75FC120FC59820030B9E4 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FBD20FC59820030B9E4 /* FirebaseService.swift */; };
+		3BB75FC220FC59820030B9E4 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FBD20FC59820030B9E4 /* FirebaseService.swift */; };
+		3BB75FC320FC59820030B9E4 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FBD20FC59820030B9E4 /* FirebaseService.swift */; };
+		3BB75FC520FC59D30030B9E4 /* GoogleService-Info-production.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BB75FC420FC59D30030B9E4 /* GoogleService-Info-production.plist */; };
+		3BB75FC920FC5A1D0030B9E4 /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FC720FC5A1D0030B9E4 /* BuildConfiguration.swift */; };
+		3BB75FCA20FC5A1D0030B9E4 /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FC720FC5A1D0030B9E4 /* BuildConfiguration.swift */; };
+		3BB75FCB20FC5A1D0030B9E4 /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FC720FC5A1D0030B9E4 /* BuildConfiguration.swift */; };
+		3BB75FCC20FC5A1D0030B9E4 /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FC720FC5A1D0030B9E4 /* BuildConfiguration.swift */; };
+		3BB75FCD20FC5A1D0030B9E4 /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FC720FC5A1D0030B9E4 /* BuildConfiguration.swift */; };
+		3BB75FCE20FC5A1D0030B9E4 /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FC720FC5A1D0030B9E4 /* BuildConfiguration.swift */; };
+		3BB75FCF20FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FC820FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift */; };
+		3BB75FD020FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FC820FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift */; };
+		3BB75FD120FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FC820FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift */; };
+		3BB75FD220FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FC820FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift */; };
+		3BB75FD320FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FC820FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift */; };
+		3BB75FD420FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FC820FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift */; };
+		3BB75FD620FC76840030B9E4 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FD520FC76830030B9E4 /* Services.swift */; };
+		3BB75FD720FC76840030B9E4 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FD520FC76830030B9E4 /* Services.swift */; };
+		3BB75FD820FC76840030B9E4 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FD520FC76830030B9E4 /* Services.swift */; };
+		3BB75FD920FC76840030B9E4 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FD520FC76830030B9E4 /* Services.swift */; };
+		3BB75FDA20FC76840030B9E4 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FD520FC76830030B9E4 /* Services.swift */; };
+		3BB75FDB20FC76840030B9E4 /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FD520FC76830030B9E4 /* Services.swift */; };
+		3BB7601C20FCAC540030B9E4 /* Adhoc.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601720FCAC540030B9E4 /* Adhoc.xcconfig */; };
+		3BB7601D20FCAC540030B9E4 /* Adhoc.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601720FCAC540030B9E4 /* Adhoc.xcconfig */; };
+		3BB7601E20FCAC540030B9E4 /* Adhoc.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601720FCAC540030B9E4 /* Adhoc.xcconfig */; };
+		3BB7601F20FCAC540030B9E4 /* Adhoc.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601720FCAC540030B9E4 /* Adhoc.xcconfig */; };
+		3BB7602020FCAC540030B9E4 /* Adhoc.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601720FCAC540030B9E4 /* Adhoc.xcconfig */; };
+		3BB7602120FCAC540030B9E4 /* Adhoc.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601720FCAC540030B9E4 /* Adhoc.xcconfig */; };
+		3BB7602220FCAC540030B9E4 /* AppStore.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601820FCAC540030B9E4 /* AppStore.xcconfig */; };
+		3BB7602320FCAC540030B9E4 /* AppStore.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601820FCAC540030B9E4 /* AppStore.xcconfig */; };
+		3BB7602420FCAC540030B9E4 /* AppStore.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601820FCAC540030B9E4 /* AppStore.xcconfig */; };
+		3BB7602520FCAC540030B9E4 /* AppStore.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601820FCAC540030B9E4 /* AppStore.xcconfig */; };
+		3BB7602620FCAC540030B9E4 /* AppStore.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601820FCAC540030B9E4 /* AppStore.xcconfig */; };
+		3BB7602720FCAC540030B9E4 /* AppStore.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601820FCAC540030B9E4 /* AppStore.xcconfig */; };
+		3BB7602820FCAC540030B9E4 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601920FCAC540030B9E4 /* Debug.xcconfig */; };
+		3BB7602920FCAC540030B9E4 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601920FCAC540030B9E4 /* Debug.xcconfig */; };
+		3BB7602A20FCAC540030B9E4 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601920FCAC540030B9E4 /* Debug.xcconfig */; };
+		3BB7602B20FCAC540030B9E4 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601920FCAC540030B9E4 /* Debug.xcconfig */; };
+		3BB7602C20FCAC540030B9E4 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601920FCAC540030B9E4 /* Debug.xcconfig */; };
+		3BB7602D20FCAC540030B9E4 /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601920FCAC540030B9E4 /* Debug.xcconfig */; };
+		3BB7602E20FCAC540030B9E4 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601A20FCAC540030B9E4 /* Release.xcconfig */; };
+		3BB7602F20FCAC540030B9E4 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601A20FCAC540030B9E4 /* Release.xcconfig */; };
+		3BB7603020FCAC540030B9E4 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601A20FCAC540030B9E4 /* Release.xcconfig */; };
+		3BB7603120FCAC540030B9E4 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601A20FCAC540030B9E4 /* Release.xcconfig */; };
+		3BB7603220FCAC540030B9E4 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601A20FCAC540030B9E4 /* Release.xcconfig */; };
+		3BB7603320FCAC540030B9E4 /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601A20FCAC540030B9E4 /* Release.xcconfig */; };
+		3BB7603420FCAC540030B9E4 /* Base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601B20FCAC540030B9E4 /* Base.xcconfig */; };
+		3BB7603520FCAC540030B9E4 /* Base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601B20FCAC540030B9E4 /* Base.xcconfig */; };
+		3BB7603620FCAC540030B9E4 /* Base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601B20FCAC540030B9E4 /* Base.xcconfig */; };
+		3BB7603720FCAC540030B9E4 /* Base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601B20FCAC540030B9E4 /* Base.xcconfig */; };
+		3BB7603820FCAC540030B9E4 /* Base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601B20FCAC540030B9E4 /* Base.xcconfig */; };
+		3BB7603920FCAC540030B9E4 /* Base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3BB7601B20FCAC540030B9E4 /* Base.xcconfig */; };
+		3BB7604120FCB1430030B9E4 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB7604020FCB1430030B9E4 /* Debug.swift */; };
+		3BB7604220FCB1430030B9E4 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB7604020FCB1430030B9E4 /* Debug.swift */; };
+		3BB7604320FCB1430030B9E4 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB7604020FCB1430030B9E4 /* Debug.swift */; };
+		3BB7604420FCB1430030B9E4 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB7604020FCB1430030B9E4 /* Debug.swift */; };
+		3BB7604520FCB1430030B9E4 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB7604020FCB1430030B9E4 /* Debug.swift */; };
+		3BB7604620FCB1430030B9E4 /* Debug.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB7604020FCB1430030B9E4 /* Debug.swift */; };
 		4D3F6EB201C5313B90BE7B03 /* Pods_DMSDriver__Taavura.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8886374AB8911A132724D7A2 /* Pods_DMSDriver__Taavura.framework */; };
 		5A1EDA1C20EC7BDA00A74677 /* SlideMenuVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A1EDA1B20EC7BDA00A74677 /* SlideMenuVC.swift */; };
 		5A499C9E20591D0400A1D944 /* NSString+SDString.m in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9220591D0400A1D944 /* NSString+SDString.m */; };
@@ -979,6 +1040,18 @@
 		3BB5BE9720F709560091FB86 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3BB5BE9820F709560091FB86 /* MainConfigs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MainConfigs.plist; sourceTree = "<group>"; };
 		3BB5BEBD20F709EC0091FB86 /* Assets.xcassets.99Cents.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets.99Cents.xcassets; sourceTree = "<group>"; };
+		3BB75FBD20FC59820030B9E4 /* FirebaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
+		3BB75FC420FC59D30030B9E4 /* GoogleService-Info-production.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-production.plist"; sourceTree = "<group>"; };
+		3BB75FC720FC5A1D0030B9E4 /* BuildConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildConfiguration.swift; sourceTree = "<group>"; };
+		3BB75FC820FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BuildConfiguration+Extension.swift"; sourceTree = "<group>"; };
+		3BB75FD520FC76830030B9E4 /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
+		3BB7601520FCA1E70030B9E4 /* DMSDriver_99Cents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DMSDriver_99Cents.entitlements; sourceTree = "<group>"; };
+		3BB7601720FCAC540030B9E4 /* Adhoc.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Adhoc.xcconfig; sourceTree = "<group>"; };
+		3BB7601820FCAC540030B9E4 /* AppStore.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = AppStore.xcconfig; sourceTree = "<group>"; };
+		3BB7601920FCAC540030B9E4 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
+		3BB7601A20FCAC540030B9E4 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
+		3BB7601B20FCAC540030B9E4 /* Base.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
+		3BB7604020FCB1430030B9E4 /* Debug.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Debug.swift; sourceTree = "<group>"; };
 		4716C3597F2E3EEAC8A8DF1F /* Pods_DMSDriver_Masof.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DMSDriver_Masof.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4F25DD30DEEA59927C4BEB18 /* Pods-DMSDriver_Talron.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver_Talron.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver_Talron/Pods-DMSDriver_Talron.debug.xcconfig"; sourceTree = "<group>"; };
 		5A1EDA1B20EC7BDA00A74677 /* SlideMenuVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SlideMenuVC.swift; sourceTree = "<group>"; };
@@ -1327,6 +1400,8 @@
 		3B0F86D120E2582400E5092B /* Common */ = {
 			isa = PBXGroup;
 			children = (
+				3BB7603F20FCB1430030B9E4 /* Debug */,
+				3BB75FC620FC5A1D0030B9E4 /* Build Configuration */,
 				3B27CB8C20E647A700B1918D /* ImagePickerView */,
 				3B7942C220E37265005AD12F /* DMSNavigationService */,
 				3B7942BF20E37172005AD12F /* NavigationService */,
@@ -1512,8 +1587,10 @@
 		3BB5BE7F20F708A40091FB86 /* DMSDriver_99Cents */ = {
 			isa = PBXGroup;
 			children = (
+				3BB7601620FCAC540030B9E4 /* Configurations */,
 				3B12A22220F72D970018B8B8 /* Info.plist */,
 				3BB5BE9320F709560091FB86 /* GoogleService-Info.plist */,
+				3BB75FC420FC59D30030B9E4 /* GoogleService-Info-production.plist */,
 				3BB5BE9820F709560091FB86 /* MainConfigs.plist */,
 				3BB5BE9420F709560091FB86 /* Localize */,
 			);
@@ -1526,6 +1603,43 @@
 				3BB5BE9520F709560091FB86 /* Localizable.strings */,
 			);
 			path = Localize;
+			sourceTree = "<group>";
+		};
+		3BB75FBC20FC59820030B9E4 /* FirebaseService */ = {
+			isa = PBXGroup;
+			children = (
+				3BB75FBD20FC59820030B9E4 /* FirebaseService.swift */,
+			);
+			path = FirebaseService;
+			sourceTree = "<group>";
+		};
+		3BB75FC620FC5A1D0030B9E4 /* Build Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				3BB75FC720FC5A1D0030B9E4 /* BuildConfiguration.swift */,
+				3BB75FC820FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift */,
+			);
+			path = "Build Configuration";
+			sourceTree = "<group>";
+		};
+		3BB7601620FCAC540030B9E4 /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				3BB7601720FCAC540030B9E4 /* Adhoc.xcconfig */,
+				3BB7601820FCAC540030B9E4 /* AppStore.xcconfig */,
+				3BB7601920FCAC540030B9E4 /* Debug.xcconfig */,
+				3BB7601A20FCAC540030B9E4 /* Release.xcconfig */,
+				3BB7601B20FCAC540030B9E4 /* Base.xcconfig */,
+			);
+			path = Configurations;
+			sourceTree = "<group>";
+		};
+		3BB7603F20FCB1430030B9E4 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				3BB7604020FCB1430030B9E4 /* Debug.swift */,
+			);
+			path = Debug;
 			sourceTree = "<group>";
 		};
 		5A1EDA1A20EC7B7F00A74677 /* SlideMenuVC */ = {
@@ -1691,6 +1805,8 @@
 		5A82E9BF205A038900F34351 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3BB75FD520FC76830030B9E4 /* Services.swift */,
+				3BB75FBC20FC59820030B9E4 /* FirebaseService */,
 				3B939DB520E0967700B90C77 /* APIServices */,
 				0A465EB120A3FF86009BFE69 /* GlobalServices */,
 				5A82E9C0205A038900F34351 /* RESTConstants.swift */,
@@ -1720,6 +1836,7 @@
 		5AA4CA3320590AD4003F8E6F = {
 			isa = PBXGroup;
 			children = (
+				3BB7601520FCA1E70030B9E4 /* DMSDriver_99Cents.entitlements */,
 				5AA4CA3E20590AD4003F8E6F /* SRSDriver */,
 				5AA4CA3D20590AD4003F8E6F /* Products */,
 				5E88CBE52394B31245C0615A /* Pods */,
@@ -1974,7 +2091,7 @@
 					};
 					3BB5BE7D20F708A40091FB86 = {
 						CreatedOnToolsVersion = 9.4.1;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2040,7 +2157,9 @@
 				0AB6910320A0099E0041E529 /* LogoutTableViewCell.xib in Resources */,
 				3BB5BEA520F709860091FB86 /* Login.storyboard in Resources */,
 				3BB5BEAF20F709930091FB86 /* Map.storyboard in Resources */,
+				3BB7603720FCAC540030B9E4 /* Base.xcconfig in Resources */,
 				0AB6910520A0099E0041E529 /* LaunchScreen.storyboard in Resources */,
+				3BB7603120FCAC540030B9E4 /* Release.xcconfig in Resources */,
 				0A465EB820A404CD009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
 				0AEBA57E20AA9E800053F2BF /* AlertMessageView.xib in Resources */,
 				3BB5BEA120F709800091FB86 /* Route.storyboard in Resources */,
@@ -2049,9 +2168,12 @@
 				0A27216220A599AC009E527F /* ForgetPasswordView.xib in Resources */,
 				0AB6910720A0099E0041E529 /* LeftMenuView.xib in Resources */,
 				3BB5BEAA20F7098E0091FB86 /* Order.storyboard in Resources */,
+				3BB7602B20FCAC540030B9E4 /* Debug.xcconfig in Resources */,
 				0ADAF45320B3BDC500A88E14 /* MainConfigs.plist in Resources */,
 				0A465E9E20A3E850009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
+				3BB7601F20FCAC540030B9E4 /* Adhoc.xcconfig in Resources */,
 				3BB5BEB920F7099E0091FB86 /* Message.storyboard in Resources */,
+				3BB7602520FCAC540030B9E4 /* AppStore.xcconfig in Resources */,
 				0AB6910820A0099E0041E529 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2073,7 +2195,9 @@
 				0ADAF44E20B3BD1500A88E14 /* MainConfigs.plist in Resources */,
 				3BB5BEA620F709860091FB86 /* Login.storyboard in Resources */,
 				3BB5BEB020F709940091FB86 /* Map.storyboard in Resources */,
+				3BB7603820FCAC540030B9E4 /* Base.xcconfig in Resources */,
 				0ADAF43920B3B95A00A88E14 /* LogoutTableViewCell.xib in Resources */,
+				3BB7603220FCAC540030B9E4 /* Release.xcconfig in Resources */,
 				0ADAF43A20B3B95A00A88E14 /* ChangeInviromentTableViewCell.xib in Resources */,
 				5A7D1B4C20ECC5A4003F1565 /* Profile.storyboard in Resources */,
 				3BB5BEA020F709800091FB86 /* Route.storyboard in Resources */,
@@ -2082,9 +2206,12 @@
 				0ADAF43E20B3B95A00A88E14 /* ServicesConfigs.plist in Resources */,
 				0ADAF43F20B3B95A00A88E14 /* ForgetPasswordView.xib in Resources */,
 				3BB5BEAB20F7098E0091FB86 /* Order.storyboard in Resources */,
+				3BB7602C20FCAC540030B9E4 /* Debug.xcconfig in Resources */,
 				0ADAF44020B3B95A00A88E14 /* LeftMenuView.xib in Resources */,
 				0ADAF44120B3B95A00A88E14 /* ChangePasswordTableViewCell.xib in Resources */,
+				3BB7602020FCAC540030B9E4 /* Adhoc.xcconfig in Resources */,
 				3BB5BEBA20F7099E0091FB86 /* Message.storyboard in Resources */,
+				3BB7602620FCAC540030B9E4 /* AppStore.xcconfig in Resources */,
 				0ADAF44220B3B95A00A88E14 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2095,16 +2222,20 @@
 			files = (
 				0AEBA57C20AA9E7F0053F2BF /* AlertMessageView.xib in Resources */,
 				3BB5BEA420F709850091FB86 /* Login.storyboard in Resources */,
+				3BB7603020FCAC540030B9E4 /* Release.xcconfig in Resources */,
 				0AE327E9208DC84C00EF1F4C /* OrderScanItemTableViewCell.xib in Resources */,
 				0A7FB464209180DF00F5058D /* LogoutTableViewCell.xib in Resources */,
 				0A465EA920A3EE1A009BFE69 /* ChangePasswordView.xib in Resources */,
 				0AE327EB208DC84C00EF1F4C /* Info.plist in Resources */,
+				3BB7602420FCAC540030B9E4 /* AppStore.xcconfig in Resources */,
 				3BB5BEB820F7099D0091FB86 /* Message.storyboard in Resources */,
+				3BB7602A20FCAC540030B9E4 /* Debug.xcconfig in Resources */,
 				0AE327EC208DC84C00EF1F4C /* SignatureView.xib in Resources */,
 				0AA44BEB20B3FB7F00A95147 /* ItemsSectionView.xib in Resources */,
 				3BB5BEAE20F709930091FB86 /* Map.storyboard in Resources */,
 				3BB5BEB320F709980091FB86 /* Packages.storyboard in Resources */,
 				0AE327EE208DC84C00EF1F4C /* LaunchScreen.storyboard in Resources */,
+				3BB7601E20FCAC540030B9E4 /* Adhoc.xcconfig in Resources */,
 				0AE327F0208DC84C00EF1F4C /* Main.storyboard in Resources */,
 				0A465EB720A404CC009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
 				0A7FB46820918B9900F5058D /* Assets.xcassets.Talron.xcassets in Resources */,
@@ -2116,6 +2247,7 @@
 				0A465E9D20A3E850009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
 				3BB5BE9F20F7097F0091FB86 /* Route.storyboard in Resources */,
 				0AE327FB208DC94700EF1F4C /* configs_talron.plist in Resources */,
+				3BB7603620FCAC540030B9E4 /* Base.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2125,16 +2257,20 @@
 			files = (
 				0AEBA57A20AA9E7F0053F2BF /* AlertMessageView.xib in Resources */,
 				3BB5BEA320F709850091FB86 /* Login.storyboard in Resources */,
+				3BB7602F20FCAC540030B9E4 /* Release.xcconfig in Resources */,
 				2494A9692074926A005A2622 /* OrderScanItemTableViewCell.xib in Resources */,
 				2494A96B2074926A005A2622 /* Info.plist in Resources */,
 				0A465EA820A3EE19009BFE69 /* ChangePasswordView.xib in Resources */,
 				2494A96C2074926A005A2622 /* SignatureView.xib in Resources */,
+				3BB7602320FCAC540030B9E4 /* AppStore.xcconfig in Resources */,
 				3BB5BEB720F7099D0091FB86 /* Message.storyboard in Resources */,
+				3BB7602920FCAC540030B9E4 /* Debug.xcconfig in Resources */,
 				0A7FB463209180DF00F5058D /* LogoutTableViewCell.xib in Resources */,
 				0AA44BE920B3FB7F00A95147 /* ItemsSectionView.xib in Resources */,
 				3BB5BEAD20F709920091FB86 /* Map.storyboard in Resources */,
 				3BB5BEB220F709980091FB86 /* Packages.storyboard in Resources */,
 				2494A96E2074926A005A2622 /* LaunchScreen.storyboard in Resources */,
+				3BB7601D20FCAC540030B9E4 /* Adhoc.xcconfig in Resources */,
 				2494A9702074926A005A2622 /* Main.storyboard in Resources */,
 				0A465EB920A404CD009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
 				0A7FB46A20918C4000F5058D /* Assets.xcassets.Malee.xcassets in Resources */,
@@ -2146,6 +2282,7 @@
 				0A465E9C20A3E84F009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
 				3BB5BE9E20F7097E0091FB86 /* Route.storyboard in Resources */,
 				2494A97B2074AD41005A2622 /* configs_malee.plist in Resources */,
+				3BB7603520FCAC540030B9E4 /* Base.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2160,7 +2297,9 @@
 				3BB5BEA720F709870091FB86 /* Login.storyboard in Resources */,
 				3BB5BECC20F70BBC0091FB86 /* AlertMessageView.xib in Resources */,
 				3BB5BEAC20F7098F0091FB86 /* Order.storyboard in Resources */,
+				3BB7603920FCAC540030B9E4 /* Base.xcconfig in Resources */,
 				3BB5BF6220F70D200091FB86 /* SignatureView.xib in Resources */,
+				3BB7602D20FCAC540030B9E4 /* Debug.xcconfig in Resources */,
 				3BB5BEBC20F709A20091FB86 /* Profile.storyboard in Resources */,
 				3BB5BECA20F70BB40091FB86 /* ForgetPasswordView.xib in Resources */,
 				3BB5BEBB20F7099F0091FB86 /* Message.storyboard in Resources */,
@@ -2169,6 +2308,7 @@
 				3BB5BEBE20F709EC0091FB86 /* Assets.xcassets.99Cents.xcassets in Resources */,
 				3BB5BE9B20F709560091FB86 /* MainConfigs.plist in Resources */,
 				3BB5BEC120F70B960091FB86 /* ChangeInviromentTableViewCell.xib in Resources */,
+				3BB7602120FCAC540030B9E4 /* Adhoc.xcconfig in Resources */,
 				3BB5BEC820F70BAD0091FB86 /* ChangePasswordView.xib in Resources */,
 				3BB5BEBF20F70B860091FB86 /* LeftMenuView.xib in Resources */,
 				3BB5BF0020F70C240091FB86 /* OrderScanItemTableViewCell.xib in Resources */,
@@ -2176,8 +2316,11 @@
 				3BB5BF6D20F70D4A0091FB86 /* ServicesConfigs.plist in Resources */,
 				3BB5BF1120F70C580091FB86 /* ItemsSectionView.xib in Resources */,
 				3BB5BE9D20F709770091FB86 /* LaunchScreen.storyboard in Resources */,
+				3BB7602720FCAC540030B9E4 /* AppStore.xcconfig in Resources */,
+				3BB7603320FCAC540030B9E4 /* Release.xcconfig in Resources */,
 				3BB5BEA220F709810091FB86 /* Route.storyboard in Resources */,
 				3BB5BE9C20F709720091FB86 /* Main.storyboard in Resources */,
+				3BB75FC520FC59D30030B9E4 /* GoogleService-Info-production.plist in Resources */,
 				3BB5BEC520F70BA30091FB86 /* LogoutTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2199,7 +2342,9 @@
 				3B0F86CB20E246E800E5092B /* Login.storyboard in Resources */,
 				3B7942BA20E33236005AD12F /* Map.storyboard in Resources */,
 				0A465EAE20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.xib in Resources */,
+				3BB7603420FCAC540030B9E4 /* Base.xcconfig in Resources */,
 				3BB5BE7920F6FF370091FB86 /* GoogleService-Info.plist in Resources */,
+				3BB7602E20FCAC540030B9E4 /* Release.xcconfig in Resources */,
 				0AEBA57820AA9E530053F2BF /* AlertMessageView.xib in Resources */,
 				5AA4CA4A20590AD4003F8E6F /* LaunchScreen.storyboard in Resources */,
 				3B0F86BD20E2337A00E5092B /* Route.storyboard in Resources */,
@@ -2208,9 +2353,12 @@
 				0ACCCB8F20AE7C5C006B4F6E /* ServicesConfigs.plist in Resources */,
 				0A27215C20A597C1009E527F /* ForgetPasswordView.xib in Resources */,
 				0AF8BA6B2085D82B001321D1 /* LeftMenuView.xib in Resources */,
+				3BB7602820FCAC540030B9E4 /* Debug.xcconfig in Resources */,
 				3B7942B820E3322E005AD12F /* Order.storyboard in Resources */,
 				0ADAF45120B3BD7700A88E14 /* MainConfigs.plist in Resources */,
+				3BB7601C20FCAC540030B9E4 /* Adhoc.xcconfig in Resources */,
 				0A465E9820A3E7BA009BFE69 /* ChangePasswordTableViewCell.xib in Resources */,
+				3BB7602220FCAC540030B9E4 /* AppStore.xcconfig in Resources */,
 				5AA4CA4520590AD4003F8E6F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2702,6 +2850,7 @@
 				3B230D3720E09F5400C867C8 /* UserModel.swift in Sources */,
 				0AB690CF20A0099E0041E529 /* OrderScanItemTableViewCell.swift in Sources */,
 				0AB690D020A0099E0041E529 /* RESTConstants.swift in Sources */,
+				3BB7604420FCB1430030B9E4 /* Debug.swift in Sources */,
 				0AA44BEC20B3FB7F00A95147 /* ItemsSectionView.swift in Sources */,
 				0AB690D120A0099E0041E529 /* RESTError.swift in Sources */,
 				0AB690D220A0099E0041E529 /* OrderListViewController.swift in Sources */,
@@ -2725,6 +2874,8 @@
 				0AB690DA20A0099E0041E529 /* Date.swift in Sources */,
 				0AB690DB20A0099E0041E529 /* OrderDetailContainerViewController.swift in Sources */,
 				3BB5BED420F70BCD0091FB86 /* SlideMenuVC.swift in Sources */,
+				3BB75FC120FC59820030B9E4 /* FirebaseService.swift in Sources */,
+				3BB75FD920FC76840030B9E4 /* Services.swift in Sources */,
 				0A360D5820AAD5E60015A64B /* ResultsRequestModel.swift in Sources */,
 				0AB690DD20A0099E0041E529 /* HCSStarRatingView.m in Sources */,
 				3BB5BF7720F70D640091FB86 /* Color.swift in Sources */,
@@ -2755,6 +2906,7 @@
 				0AB690EB20A0099E0041E529 /* PackagesViewController.swift in Sources */,
 				3BB5BF1420F70C630091FB86 /* ProfileVC.swift in Sources */,
 				0AB690EC20A0099E0041E529 /* String.swift in Sources */,
+				3BB75FCC20FC5A1D0030B9E4 /* BuildConfiguration.swift in Sources */,
 				3BB5BF8120F70D6F0091FB86 /* NSAtribitedString+Ext.swift in Sources */,
 				0A465E9B20A3E84D009BFE69 /* ChangePasswordTableViewCell.swift in Sources */,
 				0AB690ED20A0099E0041E529 /* GoogleDirectionResponse.swift in Sources */,
@@ -2771,6 +2923,7 @@
 				3BB5BEFD20F70C170091FB86 /* OrderDetailVC.swift in Sources */,
 				0AB690F420A0099E0041E529 /* Route.swift in Sources */,
 				0AB690F520A0099E0041E529 /* Constants.swift in Sources */,
+				3BB75FD220FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift in Sources */,
 				0AB690F620A0099E0041E529 /* RouteMessageTableViewCell.swift in Sources */,
 				0AB690F720A0099E0041E529 /* Message.swift in Sources */,
 				0A465EC420A428C2009BFE69 /* CheckTokenModel.swift in Sources */,
@@ -2823,6 +2976,7 @@
 				3B230D3820E09F5400C867C8 /* UserModel.swift in Sources */,
 				0ADAF3F720B3B95A00A88E14 /* Reason.swift in Sources */,
 				0ADAF3F820B3B95A00A88E14 /* PickupPlace.swift in Sources */,
+				3BB7604520FCB1430030B9E4 /* Debug.swift in Sources */,
 				0AA44BEE20B3FB8000A95147 /* ItemsSectionView.swift in Sources */,
 				0ADAF3F920B3B95A00A88E14 /* OrderScanItemTableViewCell.swift in Sources */,
 				0ADAF3FA20B3B95A00A88E14 /* RESTConstants.swift in Sources */,
@@ -2846,6 +3000,8 @@
 				0ADAF40320B3B95A00A88E14 /* PictureTableViewCell.swift in Sources */,
 				0ADAF40420B3B95A00A88E14 /* LeftMenuView.swift in Sources */,
 				3BB5BED520F70BCD0091FB86 /* SlideMenuVC.swift in Sources */,
+				3BB75FC220FC59820030B9E4 /* FirebaseService.swift in Sources */,
+				3BB75FDA20FC76840030B9E4 /* Services.swift in Sources */,
 				0ADAF40520B3B95A00A88E14 /* ResultsRequestModel.swift in Sources */,
 				0ADAF40620B3B95A00A88E14 /* Date.swift in Sources */,
 				3BB5BF7620F70D630091FB86 /* Color.swift in Sources */,
@@ -2876,6 +3032,7 @@
 				0ADAF41820B3B95A00A88E14 /* ForgetPasswordView.swift in Sources */,
 				3BB5BF1520F70C640091FB86 /* ProfileVC.swift in Sources */,
 				0ADAF41A20B3B95A00A88E14 /* PackagesViewController.swift in Sources */,
+				3BB75FCD20FC5A1D0030B9E4 /* BuildConfiguration.swift in Sources */,
 				3BB5BF8020F70D6E0091FB86 /* NSAtribitedString+Ext.swift in Sources */,
 				0ADAF41B20B3B95A00A88E14 /* ChangePasswordTableViewCell.swift in Sources */,
 				0ADAF41C20B3B95A00A88E14 /* String.swift in Sources */,
@@ -2892,6 +3049,7 @@
 				3BB5BEFE20F70C180091FB86 /* OrderDetailVC.swift in Sources */,
 				0ADAF42320B3B95A00A88E14 /* NSString+SDString.m in Sources */,
 				0ADAF42420B3B95A00A88E14 /* Route.swift in Sources */,
+				3BB75FD320FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift in Sources */,
 				0ADAF42520B3B95A00A88E14 /* Constants.swift in Sources */,
 				0ADAF42620B3B95A00A88E14 /* RouteMessageTableViewCell.swift in Sources */,
 				0ADAF42720B3B95A00A88E14 /* CheckTokenModel.swift in Sources */,
@@ -2944,6 +3102,7 @@
 				3B230D3620E09F5400C867C8 /* UserModel.swift in Sources */,
 				0AE327BB208DC84C00EF1F4C /* OrderScanItemTableViewCell.swift in Sources */,
 				0AE327BC208DC84C00EF1F4C /* RESTConstants.swift in Sources */,
+				3BB7604320FCB1430030B9E4 /* Debug.swift in Sources */,
 				0AA44BEA20B3FB7F00A95147 /* ItemsSectionView.swift in Sources */,
 				0AE327BD208DC84C00EF1F4C /* RESTError.swift in Sources */,
 				0AE327BE208DC84C00EF1F4C /* OrderListViewController.swift in Sources */,
@@ -2967,6 +3126,8 @@
 				0AE327C5208DC84C00EF1F4C /* Date.swift in Sources */,
 				0AE327C6208DC84C00EF1F4C /* OrderDetailContainerViewController.swift in Sources */,
 				3BB5BED320F70BCC0091FB86 /* SlideMenuVC.swift in Sources */,
+				3BB75FC020FC59820030B9E4 /* FirebaseService.swift in Sources */,
+				3BB75FD820FC76840030B9E4 /* Services.swift in Sources */,
 				0A360D5720AAD5E60015A64B /* ResultsRequestModel.swift in Sources */,
 				0AE327C8208DC84C00EF1F4C /* HCSStarRatingView.m in Sources */,
 				3BB5BF7520F70D630091FB86 /* Color.swift in Sources */,
@@ -2997,6 +3158,7 @@
 				0AE327D6208DC84C00EF1F4C /* PackagesViewController.swift in Sources */,
 				3BB5BF1320F70C630091FB86 /* ProfileVC.swift in Sources */,
 				0AE327D7208DC84C00EF1F4C /* LogoutTableViewCell.swift in Sources */,
+				3BB75FCB20FC5A1D0030B9E4 /* BuildConfiguration.swift in Sources */,
 				3BB5BF7F20F70D6E0091FB86 /* NSAtribitedString+Ext.swift in Sources */,
 				0A465E9A20A3E84D009BFE69 /* ChangePasswordTableViewCell.swift in Sources */,
 				0AE327D8208DC84C00EF1F4C /* String.swift in Sources */,
@@ -3013,6 +3175,7 @@
 				3BB5BEFC20F70C170091FB86 /* OrderDetailVC.swift in Sources */,
 				0AE327DF208DC84C00EF1F4C /* NSString+SDString.m in Sources */,
 				0AE327E0208DC84C00EF1F4C /* Route.swift in Sources */,
+				3BB75FD120FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift in Sources */,
 				0AE327E1208DC84C00EF1F4C /* Constants.swift in Sources */,
 				0AE327E2208DC84C00EF1F4C /* RouteMessageTableViewCell.swift in Sources */,
 				0A465EC320A428C1009BFE69 /* CheckTokenModel.swift in Sources */,
@@ -3065,6 +3228,7 @@
 				3B230D3520E09F5400C867C8 /* UserModel.swift in Sources */,
 				2494A93D2074926A005A2622 /* OrderScanItemTableViewCell.swift in Sources */,
 				2494A93E2074926A005A2622 /* RESTConstants.swift in Sources */,
+				3BB7604220FCB1430030B9E4 /* Debug.swift in Sources */,
 				0AA44BE820B3FB7F00A95147 /* ItemsSectionView.swift in Sources */,
 				2494A93F2074926A005A2622 /* RESTError.swift in Sources */,
 				2494A9402074926A005A2622 /* OrderListViewController.swift in Sources */,
@@ -3088,6 +3252,8 @@
 				2494A9462074926A005A2622 /* Date.swift in Sources */,
 				2494A9472074926A005A2622 /* OrderDetailContainerViewController.swift in Sources */,
 				3BB5BED220F70BCC0091FB86 /* SlideMenuVC.swift in Sources */,
+				3BB75FBF20FC59820030B9E4 /* FirebaseService.swift in Sources */,
+				3BB75FD720FC76840030B9E4 /* Services.swift in Sources */,
 				0A360D5620AAD5E60015A64B /* ResultsRequestModel.swift in Sources */,
 				2494A9492074926A005A2622 /* HCSStarRatingView.m in Sources */,
 				3BB5BF7420F70D620091FB86 /* Color.swift in Sources */,
@@ -3118,6 +3284,7 @@
 				242DC4BA207775F80047F19C /* PackagesViewController.swift in Sources */,
 				3BB5BF1220F70C620091FB86 /* ProfileVC.swift in Sources */,
 				0AF8BA752085E3C8001321D1 /* LogoutTableViewCell.swift in Sources */,
+				3BB75FCA20FC5A1D0030B9E4 /* BuildConfiguration.swift in Sources */,
 				3BB5BF7E20F70D6D0091FB86 /* NSAtribitedString+Ext.swift in Sources */,
 				0A465E9920A3E84C009BFE69 /* ChangePasswordTableViewCell.swift in Sources */,
 				2494A9572074926A005A2622 /* String.swift in Sources */,
@@ -3134,6 +3301,7 @@
 				3BB5BEFB20F70C160091FB86 /* OrderDetailVC.swift in Sources */,
 				2494A95E2074926A005A2622 /* NSString+SDString.m in Sources */,
 				2494A95F2074926A005A2622 /* Route.swift in Sources */,
+				3BB75FD020FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift in Sources */,
 				2494A9602074926A005A2622 /* Constants.swift in Sources */,
 				2494A9612074926A005A2622 /* RouteMessageTableViewCell.swift in Sources */,
 				0A465EC220A428C1009BFE69 /* CheckTokenModel.swift in Sources */,
@@ -3186,6 +3354,7 @@
 				3BB5BF6720F70D2E0091FB86 /* Cache.swift in Sources */,
 				3BB5BF2020F70C7C0091FB86 /* GoogleDirectionResponse.swift in Sources */,
 				3BB5BF2420F70C860091FB86 /* Note.swift in Sources */,
+				3BB7604620FCB1430030B9E4 /* Debug.swift in Sources */,
 				3BB5BF3220F70CA90091FB86 /* UserRole.swift in Sources */,
 				3BB5BF2320F70C830091FB86 /* Message.swift in Sources */,
 				3BB5BF6920F70D3D0091FB86 /* RESTResponse.swift in Sources */,
@@ -3209,6 +3378,8 @@
 				3BB5BF2120F70C7E0091FB86 /* OrderItem.swift in Sources */,
 				3BB5BEE420F70BE70091FB86 /* BaseNV.swift in Sources */,
 				3BB5BF4F20F70CDC0091FB86 /* UIView.swift in Sources */,
+				3BB75FC320FC59820030B9E4 /* FirebaseService.swift in Sources */,
+				3BB75FDB20FC76840030B9E4 /* Services.swift in Sources */,
 				3BB5BF4D20F70CD60091FB86 /* Date.swift in Sources */,
 				3BB5BEC720F70BAA0091FB86 /* ChangePasswordView.swift in Sources */,
 				3BB5BEE720F70BF10091FB86 /* MapsViewController.swift in Sources */,
@@ -3239,6 +3410,7 @@
 				3BB5BF5F20F70D0A0091FB86 /* Reachability.swift in Sources */,
 				3BB5BF0D20F70C490091FB86 /* OrderSignatureViewController.swift in Sources */,
 				3BB5BF3E20F70CB80091FB86 /* UploadFileResponse.swift in Sources */,
+				3BB75FCE20FC5A1D0030B9E4 /* BuildConfiguration.swift in Sources */,
 				3BB5BF0520F70C340091FB86 /* NoteTableViewCell.swift in Sources */,
 				3BB5BF0F20F70C4E0091FB86 /* OrderDetailContainerViewController.swift in Sources */,
 				3BB5BF6620F70D2B0091FB86 /* Constants.swift in Sources */,
@@ -3255,6 +3427,7 @@
 				3BB5BF4820F70CC10091FB86 /* ResponseDataModel.swift in Sources */,
 				3BB5BF5320F70CE60091FB86 /* UILabel.swift in Sources */,
 				3BB5BEEB20F70BFA0091FB86 /* PackageTableViewCell.swift in Sources */,
+				3BB75FD420FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift in Sources */,
 				3BB5BF2F20F70C9D0091FB86 /* BaseModel.swift in Sources */,
 				3BB5BF7320F70D5C0091FB86 /* AppConfiguration.swift in Sources */,
 				3BB5BF3320F70CAB0091FB86 /* UserModel.swift in Sources */,
@@ -3307,6 +3480,7 @@
 				0A465EA220A3EDFB009BFE69 /* ChangePasswordView.swift in Sources */,
 				3B230D3920E09F5400C867C8 /* UserRole.swift in Sources */,
 				0A465EAD20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.swift in Sources */,
+				3BB7604120FCB1430030B9E4 /* Debug.swift in Sources */,
 				0AB6912620A156ED0041E529 /* Configs.swift in Sources */,
 				5A499CBB2059277D00A1D944 /* BaseViewController.swift in Sources */,
 				24B3319820623C25001FAC49 /* Reason.swift in Sources */,
@@ -3330,6 +3504,8 @@
 				5A499CA020591D0400A1D944 /* UIButton.swift in Sources */,
 				24B3319620623B5A001FAC49 /* ReasonListViewController.swift in Sources */,
 				3B230D2820E09D2900C867C8 /* ListModel.swift in Sources */,
+				3BB75FBE20FC59820030B9E4 /* FirebaseService.swift in Sources */,
+				3BB75FD620FC76840030B9E4 /* Services.swift in Sources */,
 				3B230D2A20E09D2900C867C8 /* UploadFileResponse.swift in Sources */,
 				3B0F86CE20E24F0700E5092B /* MainVC.swift in Sources */,
 				5A499CA220591D0400A1D944 /* UIColor.swift in Sources */,
@@ -3360,6 +3536,7 @@
 				5A82E9C6205A038900F34351 /* RESTRequest.swift in Sources */,
 				5A499CA520591D0400A1D944 /* UITableView-Extensions.swift in Sources */,
 				0A27215A20A597B1009E527F /* ForgetPasswordView.swift in Sources */,
+				3BB75FC920FC5A1D0030B9E4 /* BuildConfiguration.swift in Sources */,
 				3B0F86D620E2583400E5092B /* NSAtribitedString+Ext.swift in Sources */,
 				242DC4B9207775F50047F19C /* PackagesViewController.swift in Sources */,
 				0A465E9720A3E7BA009BFE69 /* ChangePasswordTableViewCell.swift in Sources */,
@@ -3376,6 +3553,7 @@
 				3B230D4420E0EC8400C867C8 /* Manager.swift in Sources */,
 				5A499C9E20591D0400A1D944 /* NSString+SDString.m in Sources */,
 				5A1EDA1C20EC7BDA00A74677 /* SlideMenuVC.swift in Sources */,
+				3BB75FCF20FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift in Sources */,
 				5A68A45D205A5ECF00CA9DB8 /* Route.swift in Sources */,
 				5A499CB820591E4100A1D944 /* Constants.swift in Sources */,
 				246FA3542071EBA600C5E707 /* RouteMessageTableViewCell.swift in Sources */,
@@ -3628,11 +3806,18 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = A9E8109D8EE93D6B63E8AD3D /* Pods-DMSDriver_99Cents.debug.xcconfig */;
 			buildSettings = {
+				APP_BUNDLE_ID = com.seldatinc.99centsdriver;
+				APP_BUNDLE_VERSION = 11;
+				APP_NAME = "99Cents Driver";
+				APP_VERSION = 1;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUILD_SCHEME = Debug;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_ENTITLEMENTS = DMSDriver_99Cents.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_99Cents/Info.plist";
@@ -3640,8 +3825,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.99centsdriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "12d1fe39-335c-4a87-b59c-7bf65e836210";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-99centsDriver";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SERVER = testing;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3651,21 +3837,28 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3AF3E979A80EB88228A1D3CF /* Pods-DMSDriver_99Cents.release.xcconfig */;
 			buildSettings = {
+				APP_BUNDLE_ID = com.seldatinc.99centsdriver;
+				APP_BUNDLE_VERSION = 11;
+				APP_NAME = "99Cents Driver";
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUILD_SCHEME = Release;
 				CLANG_ENABLE_OBJC_WEAK = YES;
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_ENTITLEMENTS = DMSDriver_99Cents.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_99Cents/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.99centsdriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "cdbb108d-6254-42e7-8b7e-c42eb6a72471";
-				PROVISIONING_PROFILE_SPECIFIER = 99Cents_provinsion_release;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SERVER = production;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

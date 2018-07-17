@@ -22,10 +22,19 @@ class ReasonListViewController: BaseViewController {
   @IBOutlet weak var finishButton: UIButton!
   @IBOutlet weak var tvMessange: UITextView?
   @IBOutlet weak var lblPlaceholder: UILabel?
+    
+    
+  var validateSubmit:Bool = false{
+    didSet{
+        finishButton.isEnabled = validateSubmit
+        finishButton.alpha = validateSubmit ? 1 : 0.4
+    }
+  }
 
   
   override func viewDidLoad() {
     super.viewDidLoad()
+    validateSubmit = false
     updateUI()
     getReasonList()
   }
@@ -123,5 +132,6 @@ extension ReasonListViewController:DMSNavigationServiceDelegate{
 extension ReasonListViewController:UITextViewDelegate{
     func textViewDidChange(_ textView: UITextView) {
         lblPlaceholder?.isHidden = (textView.text.length > 0)
+        validateSubmit = (textView.text.length > 0)
     }
 }

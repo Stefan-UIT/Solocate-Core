@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>BUILD_SCHEME</key>
+	<string>${BUILD_SCHEME}</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
@@ -21,7 +23,7 @@
 	<key>CFBundleSignature</key>
 	<string>What will be shown?</string>
 	<key>CFBundleVersion</key>
-	<string>10</string>
+	<string>12</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
 	<key>NSCameraUsageDescription</key>
@@ -32,6 +34,8 @@
 	<string>This app needs your current location</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Post your image</string>
+	<key>SERVER</key>
+	<string>$(SERVER)</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>location</string>

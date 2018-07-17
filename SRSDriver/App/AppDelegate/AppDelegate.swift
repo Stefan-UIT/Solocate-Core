@@ -25,8 +25,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")//disable autolayout error/warning
+    
+        // app services
+        guard let buildConfiguration = BuildConfiguration(infoDictionary: Bundle.main.infoDictionary!) else {
+            fatalError("Invalid configuration. App stops.");
+        }
 
-        // Override point for customization after application launch.
+        Debug.setup(shared: Debug(buildConf: buildConfiguration))
+        Services.setupShared(buildConf: buildConfiguration)
+
+        print("\nAPPLICATION STARTED WITH: \n\tScheme-\(buildConfiguration.buildScheme.rawValue);\n\tServer-\(buildConfiguration.serverEnvironment.displayString())-\(buildConfiguration.serverUrlString()) \n")
+
         DMSAppConfiguration.enableConfiguration()
     
         GMSServices.provideAPIKey(Network.googleAPIKey)
@@ -36,13 +45,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         registerPushNotification()
     
         //Setup Firebase
-        setupFirebase()
-    
-        //ThemeManager.applyTheme(.light)
-        if let bundle = Bundle.main.url(forResource: "GoogleService-Info", withExtension: "plist"),
-            let dic = NSDictionary(contentsOf: bundle) {
-            print("BUNDLE_ID - \(dic["BUNDLE_ID"] as! String)")
-        }
+        SERVICES().firebase.setupFirebase()
+ 
         IQKeyboardManager.shared().isEnabled = true
         checkLoginStatus()
     
@@ -184,12 +188,6 @@ extension AppDelegate {
         UIApplication.shared.registerForRemoteNotifications()
     }
     
-    func setupFirebase()   {
-        //Use Firebase library to configure APIs
-        Messaging.messaging().shouldEstablishDirectChannel = true
-        FirebaseApp.configure()
-        Messaging.messaging().delegate = self
-    }
     
     func reLogin() {
         let vc: LoginViewController = .loadSB(SB: .Login)

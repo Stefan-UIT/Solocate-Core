@@ -44,9 +44,13 @@ class PackagesViewController: BaseViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     
-    setupData()
-    getPackages()
-  }
+        setupData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        getPackages()
+    }
     
     func setupData() {
         

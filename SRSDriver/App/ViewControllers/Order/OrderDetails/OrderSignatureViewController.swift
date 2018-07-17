@@ -16,10 +16,19 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
   @IBOutlet weak var signatureImgView: UIImageView!
   @IBOutlet weak var finishButton: UIButton!
   @IBOutlet weak var unableToFinishButton: UIButton!
+    
+    var validationSubmit:Bool = false{
+        didSet{
+            controlsContainerView.alpha = validationSubmit ? 1 : 0.4
+            controlsContainerView.isUserInteractionEnabled = validationSubmit
+
+        }
+    }
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    
+    validationSubmit = false
+    signatureView.delegate = self
     updateUI()
   }
   
@@ -27,7 +36,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
     guard let order = orderDetail else { return }
     
     if let signFile:AttachFileModel = order.signFile{
-      if E(signFile.link).length > RESTConstants.serverFile.length{
+      if let _ = signFile.name{
         controlsContainerView.isHidden = true
         signatureImgView.isHidden = false
         
@@ -52,8 +61,9 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
   }
   
   @IBAction func cancelDrawSignature(_ sender: UIButton) {
-    signatureView.sign.removeAllPoints()
-    signatureView.signLayer.path = nil
+    validationSubmit = false
+    signatureView.sign?.removeAllPoints()
+    signatureView.signLayer?.path = nil
     signatureView.layer.sublayers?.forEach({$0.removeFromSuperlayer()})
   }    
   
@@ -93,6 +103,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
       switch result{
       case .object(_):
         self?.controlsContainerView.isHidden = true
+        self?.signatureView.isUserInteractionEnabled = false
         self?.showAlertView("Successful")
 
         break
@@ -124,4 +135,12 @@ class BaseOrderDetailViewController: BaseViewController, IndicatorInfoProvider {
   func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
     return indicatorInfo
   }
+}
+
+
+//MARK: - SignatureViewDelegate
+extension OrderSignatureViewController:SignatureViewDelegate{
+    func touchesMoved(_ sign: UIBezierPath?, _ signLayer: CAShapeLayer?) {
+        self.validationSubmit = (sign != nil)
+    }
 }
