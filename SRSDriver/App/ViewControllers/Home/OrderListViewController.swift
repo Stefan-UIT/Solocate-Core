@@ -184,7 +184,6 @@ extension OrderListViewController : LeftMenuViewDelegate {
     }
     
     func handleChangeEnviroment() {
-        DataManager.changeEnviroment()
         handleLogOut()
     }
     

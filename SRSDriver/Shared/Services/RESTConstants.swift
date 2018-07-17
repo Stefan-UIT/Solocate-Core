@@ -22,14 +22,15 @@ typealias JSONData = [String: Any]
 typealias OnCompletion = (_ successful: Bool, _ data: Any?) -> Void
 typealias OnError = (_ error: RESTError?) -> Void
 
-enum RequestType : String {
-    case BASE_URL = "BASE_URL"
-    case BASE_URL_DEV = "BASE_URL_DEV"
+
+enum PATH_REQUEST_URL: String{
     case LOGIN = "LOGIN"
     case FORGET_PASSWORD = "FORGET_PASSWORD"
     case LOGOUT = "LOGOUT"
     case GET_ORDERS = "GET_ORDERS"
     case GET_ORDER_BY_DATE = "GET_ORDER_BY_DATE"
+    case GET_ROUTES_BY_DATE = "GET_ROUTES_BY_DATE"
+    case GET_PACKAGES_IN_ROUTE = "GET_PACKAGES_IN_ROUTE"
     case GET_ORDER_DETAIL = "GET_ORDER_DETAIL"
     case UPDATE_ORDER_STATUS = "UPDATE_ORDER_STATUS"
     case UPLOAD_SIGNATURE = "UPLOAD_SIGNATURE"
@@ -40,28 +41,26 @@ enum RequestType : String {
     case UPDATE_ORDER_ITEM_STATUS = "UPDATE_ORDER_ITEM_STATUS"
     case UPDATE_BARCODE_ORDER_ITEM = "UPDATE_BARCODE_ORDER_ITEM"
     case ADD_NEW_ORDER_ITEM = "ADD_NEW_ORDER_ITEM"
-    case UPDATE_NOTIFICATION_TOKEN = "UPDATE_NOTIFICATION_TOKEN"
+    case UPDATE_TOKEN_FCM = "UPDATE_TOKEN_FCM"
     case CREATE_NEW_MESSAGE = "CREATE_NEW_MESSAGE"
     case GET_COUNT_MESSAGE_NUMBER = "GET_COUNT_MESSAGE_NUMBER"
-    case GET_LIST_NOTIFICATIONS = "GET_LIST_NOTIFICATIONS"
     case GET_ROUTE_DETAIL = "GET_ROUTE_DETAIL"
     case READ_MESSAGE = "READ_MESSAGE"
     case CHECK_TOKEN = "CHECK_TOKEN"
     case CHANGE_PASSWORD = "CHANGE_PASSWORD"
+    case GET_LIST_NOTIFICATIONS = "GET_LIST_NOTIFICATIONS"
     case RESET_PASSWORD_URL = "RESET_PASSWORD_URL"
     case GET_ALERT_DETAIL = "GET_ALERT_DETAIL"
     case RESOLVE_ALERT = "RESOLVE_ALERT"
+    case GET_USERID_BY_TOKEN = "GET_USERID_BY_TOKEN"
+    case GET_USER_PROFILE = "GET_USER_PROFILE"
+    case UPDATE_USER_PROFILE = "UPDATE_USER_PROFILE"
+    case UPDATE_DRIVER_LOCATION = "UPDATE_DRIVER_LOCATION"
     
-    // Profile
-    case GET_USERID_BY_TOKEN        = "GET_USERID_BY_TOKEN"
-    case GET_USER_PROFILE        = "GET_USER_PROFILE"
-    
-    // Tracking
-    case UPDATE_DRIVER_LOCATION     = "UPDATE_DRIVER_LOCATION"
-    
+    var URL:String  {
+        return E(DMSAppConfiguration.pathUrls[self.rawValue])
+     }
 }
-
-
 
 
 class RESTConstants: NSObject {
@@ -150,10 +149,10 @@ class RESTConstants: NSObject {
         switch type {
         case .debug,
              .adhoc:
-            return Configs.mainConfigs[RESTConstants.BASE_URL_DEV] as? String
+            return DMSAppConfiguration.baseUrl_Dev
 
         case .release:
-            return Configs.mainConfigs[RESTConstants.BASE_URL_PRODUCT] as? String
+            return DMSAppConfiguration.baseUrl_Product
         }
     }
 }

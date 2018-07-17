@@ -26,7 +26,7 @@ extension BaseAPIService {
     @discardableResult
     func login(_ userLogin:UserLoginModel, callback: @escaping APICallback<UserModel>) -> APIRequest {
         return request(method: .POST,
-                   path: E(Configs.ServicesConfigs(RESTConstants.LOGIN)),
+                   path: PATH_REQUEST_URL.LOGIN.URL,
                    input: .dto(userLogin),
                    callback: callback);
     }
@@ -34,7 +34,7 @@ extension BaseAPIService {
     @discardableResult
     func logout(callback: @escaping APICallback<UserModel>) -> APIRequest {
         return request(method: .GET,
-                       path: E(Configs.ServicesConfigs(RESTConstants.LOGOUT)),
+                       path:PATH_REQUEST_URL.LOGOUT.URL,
                        input: .empty,
                        callback: callback);
     }
@@ -43,7 +43,7 @@ extension BaseAPIService {
     func forgotPassword(_ email: String, callback: @escaping APICallback<ResponseDataModel<EmptyModel>>) -> APIRequest {
         let params = ["email": email]
         return request(method: .POST,
-                       path: E(Configs.ServicesConfigs(RESTConstants.FORGET_PASSWORD)),
+                       path: PATH_REQUEST_URL.FORGET_PASSWORD.URL ,
                        input: .json(params),
                        callback: callback);
     }
@@ -51,7 +51,7 @@ extension BaseAPIService {
     @discardableResult
     func changePassword(_ para: [String: Any], callback: @escaping APICallback<ChangePasswordModel>) -> APIRequest {
         return request(method: .POST,
-                       path: E(Configs.ServicesConfigs(RESTConstants.CHANGE_PASSWORD)),
+                       path: PATH_REQUEST_URL.CHANGE_PASSWORD.URL,
                        input: .json(para),
                        callback: callback);
     }
@@ -66,7 +66,7 @@ extension BaseAPIService {
             "device": "2" // iOS : device = 2
         ]
         return request(method: .POST,
-                       path: E(Configs.ServicesConfigs(RESTConstants.UPDATE_TOKEN_FCM)),
+                       path: PATH_REQUEST_URL.UPDATE_TOKEN_FCM.URL,
                        input: .json(params),
                        callback: callback);
     }
@@ -77,7 +77,7 @@ extension BaseAPIService {
     func getOrders(byDate date:String = Date().toString("yyyy-MM-dd"), callback: @escaping APICallback<Route>) -> APIRequest {
         let params = ["date": date]
         return request(method: .PUT,
-                       path: E(Configs.ServicesConfigs(RESTConstants.GET_ORDER_BY_DATE)),
+                       path: PATH_REQUEST_URL.GET_ORDER_BY_DATE.URL,
                        input: .json(params),
                        callback: callback);
     }
@@ -85,7 +85,7 @@ extension BaseAPIService {
     @discardableResult
     func updateOrderStatus(_ order:OrderDetail,reason: Reason? = nil, callback: @escaping APICallback<Route>) -> APIRequest {
         
-        let path = String(format:E(RESTConstants.ServicesConfigs[RESTConstants.UPDATE_ORDER_STATUS]), "\(order.id)", order.statusCode)
+        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL, "\(order.id)", order.statusCode)
         
         var params = ["route_id": "\(order.routeId)"]
         if let _reason = reason {
@@ -100,7 +100,7 @@ extension BaseAPIService {
     
     @discardableResult
     func getReasonList(_ type: String = "1", callback: @escaping APICallback<ResponseDataListModel<Reason>>) -> APIRequest {
-        let path = String(format: Configs.ServicesConfigs(RESTConstants.GET_REASON_LIST) ?? "", type)
+        let path = String(format: PATH_REQUEST_URL.GET_REASON_LIST.URL , type)
         
         return request(method: .GET,
                        path: path,
@@ -111,7 +111,7 @@ extension BaseAPIService {
     
     @discardableResult
     func getOrderDetail(orderId:String, callback: @escaping APICallback<OrderDetail>) -> APIRequest {
-        let uri = String(format:E(Configs.ServicesConfigs(RESTConstants.GET_ORDER_DETAIL)), orderId)
+        let uri = String(format:PATH_REQUEST_URL.GET_ORDER_DETAIL.URL , orderId)
         return request(method: .GET,
                        path: uri,
                        input: .empty,
@@ -120,7 +120,7 @@ extension BaseAPIService {
     
     @discardableResult
     func submitSignature(_ file:AttachFileModel,_ orderId:String, callback: @escaping APICallback<AttachFileModel>) -> APIRequest {
-        let uri = String(format:E(Configs.ServicesConfigs(RESTConstants.UPLOAD_SIGNATURE)), orderId)
+        let uri = String(format:PATH_REQUEST_URL.UPLOAD_SIGNATURE.URL, orderId)
         let headers = ["Content-Type":"multipart/form-data; boundary=\(E(file.boundary))"];
         
         return request(method: .POST,
@@ -138,28 +138,12 @@ extension BaseAPIService {
                 "qty": qty
             ]
         ]
-        let path = String(format: E(Configs.ServicesConfigs(RESTConstants.ADD_NEW_ORDER_ITEM)), orderID)
+        let path = String(format: PATH_REQUEST_URL.ADD_NEW_ORDER_ITEM.URL, orderID)
         return request(method: .POST,
                        path: path,
                        input: .json(params),
                        callback: callback);
     }
-    
-    static func addNewOrderItem(_ orderID: String, barcode: String, qty: String, completion: @escaping ((_ errorMsg: String?) -> Void)) {
-        let params = [
-            [
-                "barcode": barcode,
-                "qty": qty
-            ]
-        ]
-        guard let baseURL = RESTConstants.getBASEURL(),
-            let addNewItem = RESTConstants.ServicesConfigs[RESTConstants.ADD_NEW_ORDER_ITEM] else {
-                return
-        }
-        let uri = String.init(format: baseURL+addNewItem, orderID)
-        APIs.invoke(params: params, uri: uri, completion: completion)
-    }
-    
     
     
     //MARK: - ROUTE
@@ -171,14 +155,14 @@ extension BaseAPIService {
         }
         let params = ["date": newDate]
         return request(method: .PUT,
-                       path: E(Configs.ServicesConfigs(RESTConstants.GET_ORDER_BY_DATE)),
+                       path:PATH_REQUEST_URL.GET_ROUTES_BY_DATE.URL,
                        input: .json(params),
                        callback: callback);
     }
     
     @discardableResult
     func getRouteDetail(route:String, callback: @escaping APICallback<Route>) -> APIRequest {
-        let path = String(format:E(Configs.ServicesConfigs(RESTConstants.GET_ROUTE_DETAIL)), route)
+        let path = String(format:PATH_REQUEST_URL.GET_ROUTE_DETAIL.URL, route)
         return request(method: .GET,
                        path: path,
                        input: .empty,
@@ -189,7 +173,7 @@ extension BaseAPIService {
     func getPackagesInRoute(_ routeID:String,
                             _ date:String ,
                             callback: @escaping APICallback<ResponseDataModel<PackageModel>>) -> APIRequest {
-        let path = String(format:E(Configs.ServicesConfigs(RESTConstants.GET_PACKAGES_IN_ROUTE)), routeID, date)
+        let path = String(format:PATH_REQUEST_URL.GET_PACKAGES_IN_ROUTE.URL, routeID, date)
         return request(method: .GET,
                        path: path,
                        input: .empty,
@@ -200,9 +184,7 @@ extension BaseAPIService {
     //MARK: - TRACKING
     @discardableResult
     func updateDriverLocation(long :Double, lat:Double, callback: @escaping APICallback<Route>) -> APIRequest {
-        let path = String(format:E(RESTConstants.ServicesConfigs[RESTConstants.UPDATE_DRIVER_LOCATION]))
         let driverID = Caches().user?.userID ?? -1
-        
         let timestamps = __int64_t(Date().timeIntervalSince1970)
         let params = [
             KEY_LONGITUDE: long,
@@ -212,7 +194,7 @@ extension BaseAPIService {
             ] as [String : Any]
         
         return request(method: .POST,
-                       path: path,
+                       path: PATH_REQUEST_URL.UPDATE_DRIVER_LOCATION.URL,
                        input: .json(params),
                        callback: callback);
     }
@@ -226,7 +208,7 @@ extension BaseAPIService {
         let path = "/directions/json?origin=\(origin)&destination=\(destination)&mode=driving&key=\(Network.googleAPIKey)"
         
         return request( method: .GET,
-                        serverURL: E(Configs.mainConfigs[RESTConstants.BASE_URL_GOOGLE_MAP] as? String),
+                        serverURL: DMSAppConfiguration.baseUrl_Google_Map,
                         path: path,
                         input: .empty,
                         callback: callback);
@@ -235,18 +217,16 @@ extension BaseAPIService {
     // MARK: - PROFILE
     @discardableResult
     func getUserProfile(callback: @escaping APICallback<ResponseDataModel<UserModel>>) -> APIRequest {
-        let path = String(format:E(RESTConstants.ServicesConfigs[RESTConstants.GET_USER_PROFILE]))
         return request(method: .GET,
-                       path: path,
+                       path: PATH_REQUEST_URL.GET_USER_PROFILE.URL,
                        input: .empty,
                        callback: callback);
     }
   
     @discardableResult
     func updateUserProfile(_ user:UserModel, callback: @escaping APICallback<ResponseDataModel<UserModel>>) -> APIRequest {
-        let path = String(format:E(RESTConstants.ServicesConfigs[RESTConstants.UPDATE_USER_PROFILE]))
         return request(method: .PUT,
-                   path: path,
+                   path: PATH_REQUEST_URL.UPDATE_USER_PROFILE.URL,
                    input: .dto(user),
                    callback: callback);
   }

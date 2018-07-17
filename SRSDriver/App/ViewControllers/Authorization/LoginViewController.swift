@@ -31,7 +31,6 @@ class LoginViewController: BaseViewController {
     
   override func viewWillAppear(_ animated: Bool) {
     super.viewWillAppear(animated)
-    updateStatusEnviroment()
   }
     
   func test() {
@@ -59,20 +58,6 @@ class LoginViewController: BaseViewController {
     }
     
   
-  func updateStatusEnviroment() {
-    let type = DataManager.getEnviroment()
-    switch type {
-    case .DEMO:
-        enviromentButton.setTitle("Demo", for: .normal)
-        break
-    case .DEV:
-        enviromentButton.setTitle("Developer", for: .normal)
-        break
-    case .PRODUCT:
-        enviromentButton.setTitle("Product", for: .normal)
-    }
-  }
-    
   func handleForgetPassword() {
     let forgetPasswordView : ForgetPasswordView = ForgetPasswordView()
     forgetPasswordView.delegate = self
@@ -105,16 +90,15 @@ class LoginViewController: BaseViewController {
   }
    
     
- @IBAction func tapForgetPasswordButtonAction(_ sender: UIButton) {
+  @IBAction func tapForgetPasswordButtonAction(_ sender: UIButton) {
     handleForgetPassword()
- }
+  }
     
   
-@IBAction func tapEnviromentButtonAction(_ sender: UIButton) {
-        DataManager.changeEnviroment()
-        updateStatusEnviroment()
-    }
- }
+  @IBAction func tapEnviromentButtonAction(_ sender: UIButton) {
+    
+  }
+}
 
 
 //MARK: - APISERVICE

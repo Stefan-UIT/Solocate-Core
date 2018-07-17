@@ -15,19 +15,6 @@ class ChangeInviromentTableViewCell: BaseTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
-        let type = DataManager.getEnviroment()
-        switch type {
-        case .DEMO:
-            enviromentLabel.text = "Enviroment - Demo"
-            break
-        case.DEV:
-            enviromentLabel.text = "Enviroment - Dev"
-            break
-        case .PRODUCT:
-            enviromentLabel.text = "Enviroment - Product"
-
-        }
     }
     
     override func loadData(_ data : Any) {

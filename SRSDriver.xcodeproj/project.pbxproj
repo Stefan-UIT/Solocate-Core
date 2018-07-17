@@ -148,28 +148,15 @@
 		0AB6910720A0099E0041E529 /* LeftMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0AF8BA6A2085D82B001321D1 /* LeftMenuView.xib */; };
 		0AB6910820A0099E0041E529 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4320590AD4003F8E6F /* Main.storyboard */; };
 		0AB6911C20A03DEC0041E529 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4620590AD4003F8E6F /* Assets.xcassets */; };
-		0AB6912120A154280041E529 /* UIButtonDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912020A154280041E529 /* UIButtonDesignable.swift */; };
-		0AB6912620A156ED0041E529 /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912520A156ED0041E529 /* Configs.swift */; };
-		0AB6912720A15D330041E529 /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912520A156ED0041E529 /* Configs.swift */; };
-		0AB6912820A15D390041E529 /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912520A156ED0041E529 /* Configs.swift */; };
-		0AB6912920A15D3A0041E529 /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912520A156ED0041E529 /* Configs.swift */; };
-		0AB6912D20A161980041E529 /* UIButtonDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912020A154280041E529 /* UIButtonDesignable.swift */; };
-		0AB6912E20A161990041E529 /* UIButtonDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912020A154280041E529 /* UIButtonDesignable.swift */; };
-		0AB6912F20A161990041E529 /* UIButtonDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912020A154280041E529 /* UIButtonDesignable.swift */; };
 		0ACCCB8F20AE7C5C006B4F6E /* ServicesConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ACCCB8E20AE7C5C006B4F6E /* ServicesConfigs.plist */; };
 		0ACCCB9020AE7C60006B4F6E /* ServicesConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ACCCB8E20AE7C5C006B4F6E /* ServicesConfigs.plist */; };
 		0ACCCB9120AE7C60006B4F6E /* ServicesConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ACCCB8E20AE7C5C006B4F6E /* ServicesConfigs.plist */; };
 		0ACCCB9220AE7C60006B4F6E /* ServicesConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ACCCB8E20AE7C5C006B4F6E /* ServicesConfigs.plist */; };
-		0ACCCBA320AE7EEA006B4F6E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCCBA220AE7EEA006B4F6E /* DataManager.swift */; };
-		0ACCCBA420AE7EEA006B4F6E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCCBA220AE7EEA006B4F6E /* DataManager.swift */; };
-		0ACCCBA520AE7EEA006B4F6E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCCBA220AE7EEA006B4F6E /* DataManager.swift */; };
-		0ACCCBA620AE7EEA006B4F6E /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCCBA220AE7EEA006B4F6E /* DataManager.swift */; };
 		0ADAF3DF20B3B95A00A88E14 /* OrderPictureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A450205A202F00CA9DB8 /* OrderPictureViewController.swift */; };
 		0ADAF3E020B3B95A00A88E14 /* OrderDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A44A205A200700CA9DB8 /* OrderDetailViewController.swift */; };
 		0ADAF3E120B3B95A00A88E14 /* OrderDetailMapTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24DCDCD52068E2FD00D3313F /* OrderDetailMapTableViewCell.swift */; };
 		0ADAF3E220B3B95A00A88E14 /* OrderSignatureViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A44C205A201A00CA9DB8 /* OrderSignatureViewController.swift */; };
 		0ADAF3E320B3B95A00A88E14 /* UIViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9D20591D0400A1D944 /* UIViewController.swift */; };
-		0ADAF3E420B3B95A00A88E14 /* UIButtonDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912020A154280041E529 /* UIButtonDesignable.swift */; };
 		0ADAF3E520B3B95A00A88E14 /* ChangePasswordModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EC520A43174009BFE69 /* ChangePasswordModel.swift */; };
 		0ADAF3E620B3B95A00A88E14 /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499C9C20591D0400A1D944 /* UIView.swift */; };
 		0ADAF3E720B3B95A00A88E14 /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACCE8D8205BA94A00A1532D /* NoteTableViewCell.swift */; };
@@ -186,14 +173,12 @@
 		0ADAF3F220B3B95A00A88E14 /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5ACCE8D0205B689000A1532D /* Array.swift */; };
 		0ADAF3F320B3B95A00A88E14 /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EA120A3EDFB009BFE69 /* ChangePasswordView.swift */; };
 		0ADAF3F420B3B95A00A88E14 /* ChangeInviromentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A465EAB20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.swift */; };
-		0ADAF3F520B3B95A00A88E14 /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912520A156ED0041E529 /* Configs.swift */; };
 		0ADAF3F620B3B95A00A88E14 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CBA2059277D00A1D944 /* BaseViewController.swift */; };
 		0ADAF3F720B3B95A00A88E14 /* Reason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24B3319720623C25001FAC49 /* Reason.swift */; };
 		0ADAF3F820B3B95A00A88E14 /* PickupPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A68A45E205A619300CA9DB8 /* PickupPlace.swift */; };
 		0ADAF3F920B3B95A00A88E14 /* OrderScanItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 24D3876A2063511F00BE51D9 /* OrderScanItemTableViewCell.swift */; };
 		0ADAF3FA20B3B95A00A88E14 /* RESTConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C0205A038900F34351 /* RESTConstants.swift */; };
 		0ADAF3FB20B3B95A00A88E14 /* RESTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C1205A038900F34351 /* RESTError.swift */; };
-		0ADAF3FC20B3B95A00A88E14 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCCBA220AE7EEA006B4F6E /* DataManager.swift */; };
 		0ADAF3FD20B3B95A00A88E14 /* OrderListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C9205A04EE00F34351 /* OrderListViewController.swift */; };
 		0ADAF3FE20B3B95A00A88E14 /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A499CB520591E4100A1D944 /* Cache.swift */; };
 		0ADAF3FF20B3B95A00A88E14 /* LogoutTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AF8BA712085E3C5001321D1 /* LogoutTableViewCell.swift */; };
@@ -741,11 +726,8 @@
 		3BB5BF6B20F70D420091FB86 /* RESTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C1205A038900F34351 /* RESTError.swift */; };
 		3BB5BF6C20F70D450091FB86 /* RESTConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A82E9C0205A038900F34351 /* RESTConstants.swift */; };
 		3BB5BF6D20F70D4A0091FB86 /* ServicesConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0ACCCB8E20AE7C5C006B4F6E /* ServicesConfigs.plist */; };
-		3BB5BF6E20F70D4C0091FB86 /* DataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0ACCCBA220AE7EEA006B4F6E /* DataManager.swift */; };
 		3BB5BF6F20F70D4F0091FB86 /* BaseAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B939DB720E0970600B90C77 /* BaseAPIService.swift */; };
 		3BB5BF7020F70D520091FB86 /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B939DB620E0970600B90C77 /* APIServices.swift */; };
-		3BB5BF7120F70D560091FB86 /* UIButtonDesignable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912020A154280041E529 /* UIButtonDesignable.swift */; };
-		3BB5BF7220F70D5A0091FB86 /* Configs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0AB6912520A156ED0041E529 /* Configs.swift */; };
 		3BB5BF7320F70D5C0091FB86 /* AppConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E3828EC20EB3B9B00415AF0 /* AppConfiguration.swift */; };
 		3BB5BF7420F70D620091FB86 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F86D520E2583400E5092B /* Color.swift */; };
 		3BB5BF7520F70D630091FB86 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0F86D520E2583400E5092B /* Color.swift */; };
@@ -944,10 +926,7 @@
 		0AA44BE620B3F9DB00A95147 /* ItemsSectionView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ItemsSectionView.xib; sourceTree = "<group>"; };
 		0AB6910F20A0099E0041E529 /* DMSDriver_Masof.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMSDriver_Masof.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0AB6911020A0099E0041E529 /* DMSDriver_Masof.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = DMSDriver_Masof.plist; path = "/Users/mrj/Desktop/SeldatInc/SRS/git-project/ios/DMSDriver_Masof.plist"; sourceTree = "<absolute>"; };
-		0AB6912020A154280041E529 /* UIButtonDesignable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonDesignable.swift; sourceTree = "<group>"; };
-		0AB6912520A156ED0041E529 /* Configs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configs.swift; sourceTree = "<group>"; };
 		0ACCCB8E20AE7C5C006B4F6E /* ServicesConfigs.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = ServicesConfigs.plist; sourceTree = "<group>"; };
-		0ACCCBA220AE7EEA006B4F6E /* DataManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DataManager.swift; sourceTree = "<group>"; };
 		0ADAF44820B3B95A00A88E14 /* DMSDriver_ Taavura.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DMSDriver_ Taavura.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0ADAF44C20B3BD1500A88E14 /* MainConfigs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MainConfigs.plist; sourceTree = "<group>"; };
 		0ADAF44D20B3BD1500A88E14 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -1212,7 +1191,6 @@
 		0A465EB120A3FF86009BFE69 /* GlobalServices */ = {
 			isa = PBXGroup;
 			children = (
-				0ACCCBA220AE7EEA006B4F6E /* DataManager.swift */,
 				0ACCCB8E20AE7C5C006B4F6E /* ServicesConfigs.plist */,
 			);
 			path = GlobalServices;
@@ -1265,18 +1243,9 @@
 			path = SectionView;
 			sourceTree = "<group>";
 		};
-		0AB6911F20A153F60041E529 /* Designables */ = {
-			isa = PBXGroup;
-			children = (
-				0AB6912020A154280041E529 /* UIButtonDesignable.swift */,
-			);
-			path = Designables;
-			sourceTree = "<group>";
-		};
 		0AB6912220A156B60041E529 /* Configs */ = {
 			isa = PBXGroup;
 			children = (
-				0AB6912520A156ED0041E529 /* Configs.swift */,
 				2E3828EC20EB3B9B00415AF0 /* AppConfiguration.swift */,
 			);
 			path = Configs;
@@ -1339,6 +1308,7 @@
 		246FA3552072277D00C5E707 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				0A465EB120A3FF86009BFE69 /* GlobalServices */,
 				3B939DB220E08E9300B90C77 /* BridgingHeaders */,
 				3BB5BE7F20F708A40091FB86 /* DMSDriver_99Cents */,
 				0A6623F320A9486700FEA932 /* DMSDriver_Core */,
@@ -1809,7 +1779,6 @@
 				3BB75FD520FC76830030B9E4 /* Services.swift */,
 				3BB75FBC20FC59820030B9E4 /* FirebaseService */,
 				3B939DB520E0967700B90C77 /* APIServices */,
-				0A465EB120A3FF86009BFE69 /* GlobalServices */,
 				5A82E9C0205A038900F34351 /* RESTConstants.swift */,
 				5A82E9C1205A038900F34351 /* RESTError.swift */,
 				5A82E9C2205A038900F34351 /* RESTRequest.swift */,
@@ -1907,7 +1876,6 @@
 				2E382A0E20EB69F200415AF0 /* LocationTracker */,
 				3B0F86D120E2582400E5092B /* Common */,
 				0AB6912220A156B60041E529 /* Configs */,
-				0AB6911F20A153F60041E529 /* Designables */,
 				5A82E9BF205A038900F34351 /* Services */,
 				5A499CB420591E4100A1D944 /* Helpers */,
 				5A499CAB20591D8300A1D944 /* Libs */,
@@ -2858,7 +2826,6 @@
 				0AB690D220A0099E0041E529 /* OrderListViewController.swift in Sources */,
 				0AB690D320A0099E0041E529 /* Cache.swift in Sources */,
 				3B939DC120E0970600B90C77 /* BaseAPIService.swift in Sources */,
-				0ACCCBA620AE7EEA006B4F6E /* DataManager.swift in Sources */,
 				0AB690D420A0099E0041E529 /* LogoutTableViewCell.swift in Sources */,
 				3B939DD420E0983B00B90C77 /* AttachFileModel.swift in Sources */,
 				0AB690D520A0099E0041E529 /* UIButton.swift in Sources */,
@@ -2903,7 +2870,6 @@
 				0AB690E720A0099E0041E529 /* Theme.swift in Sources */,
 				0AB690E820A0099E0041E529 /* RESTRequest.swift in Sources */,
 				0AB690E920A0099E0041E529 /* UITableView-Extensions.swift in Sources */,
-				0AB6912F20A161990041E529 /* UIButtonDesignable.swift in Sources */,
 				0A27215F20A599A7009E527F /* ForgetPasswordView.swift in Sources */,
 				0AB690EB20A0099E0041E529 /* PackagesViewController.swift in Sources */,
 				3BB5BF1420F70C630091FB86 /* ProfileVC.swift in Sources */,
@@ -2936,7 +2902,6 @@
 				3BB5BF7B20F70D690091FB86 /* Font.swift in Sources */,
 				0AB690FA20A0099E0041E529 /* BaseView.swift in Sources */,
 				3BB5BF9520F70D910091FB86 /* Manager.swift in Sources */,
-				0AB6912720A15D330041E529 /* Configs.swift in Sources */,
 				3BB5BECF20F70BC60091FB86 /* MainVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -2951,7 +2916,6 @@
 				0ADAF3E120B3B95A00A88E14 /* OrderDetailMapTableViewCell.swift in Sources */,
 				0ADAF3E220B3B95A00A88E14 /* OrderSignatureViewController.swift in Sources */,
 				0ADAF3E320B3B95A00A88E14 /* UIViewController.swift in Sources */,
-				0ADAF3E420B3B95A00A88E14 /* UIButtonDesignable.swift in Sources */,
 				0ADAF3E520B3B95A00A88E14 /* ChangePasswordModel.swift in Sources */,
 				0ADAF3E620B3B95A00A88E14 /* UIView.swift in Sources */,
 				0ADAF3E720B3B95A00A88E14 /* NoteTableViewCell.swift in Sources */,
@@ -2972,7 +2936,6 @@
 				0ADAF3F320B3B95A00A88E14 /* ChangePasswordView.swift in Sources */,
 				3BB5BEF520F70C070091FB86 /* RouteListCell.swift in Sources */,
 				0ADAF3F420B3B95A00A88E14 /* ChangeInviromentTableViewCell.swift in Sources */,
-				0ADAF3F520B3B95A00A88E14 /* Configs.swift in Sources */,
 				0ADAF3F620B3B95A00A88E14 /* BaseViewController.swift in Sources */,
 				3BB5BF8B20F70D800091FB86 /* DMSNavigationService.swift in Sources */,
 				3B230D3820E09F5400C867C8 /* UserModel.swift in Sources */,
@@ -2984,7 +2947,6 @@
 				0ADAF3FA20B3B95A00A88E14 /* RESTConstants.swift in Sources */,
 				0ADAF3FB20B3B95A00A88E14 /* RESTError.swift in Sources */,
 				3B939DC220E0970600B90C77 /* BaseAPIService.swift in Sources */,
-				0ADAF3FC20B3B95A00A88E14 /* DataManager.swift in Sources */,
 				0ADAF3FD20B3B95A00A88E14 /* OrderListViewController.swift in Sources */,
 				3B939DD520E0983B00B90C77 /* AttachFileModel.swift in Sources */,
 				0ADAF3FE20B3B95A00A88E14 /* Cache.swift in Sources */,
@@ -3110,7 +3072,6 @@
 				0AE327BE208DC84C00EF1F4C /* OrderListViewController.swift in Sources */,
 				0AE327BF208DC84C00EF1F4C /* Cache.swift in Sources */,
 				3B939DC020E0970600B90C77 /* BaseAPIService.swift in Sources */,
-				0ACCCBA520AE7EEA006B4F6E /* DataManager.swift in Sources */,
 				0AE327C0208DC84C00EF1F4C /* UIButton.swift in Sources */,
 				3B939DD320E0983B00B90C77 /* AttachFileModel.swift in Sources */,
 				0A7FB46220917EE800F5058D /* BaseView.swift in Sources */,
@@ -3155,7 +3116,6 @@
 				0AE327D2208DC84C00EF1F4C /* Theme.swift in Sources */,
 				0AE327D3208DC84C00EF1F4C /* RESTRequest.swift in Sources */,
 				0AE327D4208DC84C00EF1F4C /* UITableView-Extensions.swift in Sources */,
-				0AB6912E20A161990041E529 /* UIButtonDesignable.swift in Sources */,
 				0A27215E20A599A7009E527F /* ForgetPasswordView.swift in Sources */,
 				0AE327D6208DC84C00EF1F4C /* PackagesViewController.swift in Sources */,
 				3BB5BF1320F70C630091FB86 /* ProfileVC.swift in Sources */,
@@ -3188,7 +3148,6 @@
 				3BB5BF7A20F70D680091FB86 /* Font.swift in Sources */,
 				0AE327E5208DC84C00EF1F4C /* RouteMessagesViewController.swift in Sources */,
 				3BB5BF9420F70D8F0091FB86 /* Manager.swift in Sources */,
-				0AB6912920A15D3A0041E529 /* Configs.swift in Sources */,
 				3BB5BECE20F70BC60091FB86 /* MainVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3236,7 +3195,6 @@
 				2494A9402074926A005A2622 /* OrderListViewController.swift in Sources */,
 				2494A9412074926A005A2622 /* Cache.swift in Sources */,
 				3B939DBF20E0970600B90C77 /* BaseAPIService.swift in Sources */,
-				0ACCCBA420AE7EEA006B4F6E /* DataManager.swift in Sources */,
 				2494A9422074926A005A2622 /* UIButton.swift in Sources */,
 				3B939DD220E0983B00B90C77 /* AttachFileModel.swift in Sources */,
 				0A7FB46120917EE700F5058D /* BaseView.swift in Sources */,
@@ -3281,7 +3239,6 @@
 				2494A9532074926A005A2622 /* Theme.swift in Sources */,
 				2494A9542074926A005A2622 /* RESTRequest.swift in Sources */,
 				2494A9552074926A005A2622 /* UITableView-Extensions.swift in Sources */,
-				0AB6912D20A161980041E529 /* UIButtonDesignable.swift in Sources */,
 				0A27215D20A599A7009E527F /* ForgetPasswordView.swift in Sources */,
 				242DC4BA207775F80047F19C /* PackagesViewController.swift in Sources */,
 				3BB5BF1220F70C620091FB86 /* ProfileVC.swift in Sources */,
@@ -3314,7 +3271,6 @@
 				3BB5BF7920F70D670091FB86 /* Font.swift in Sources */,
 				2494A9642074926A005A2622 /* RouteMessagesViewController.swift in Sources */,
 				3BB5BF9320F70D8E0091FB86 /* Manager.swift in Sources */,
-				0AB6912820A15D390041E529 /* Configs.swift in Sources */,
 				3BB5BECD20F70BC50091FB86 /* MainVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3324,10 +3280,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BB5BEDB20F70BD40091FB86 /* SlideMenuCell.swift in Sources */,
-				3BB5BF7220F70D5A0091FB86 /* Configs.swift in Sources */,
 				3BB5BEF420F70C060091FB86 /* RouteListCell.swift in Sources */,
 				3BB5BF5E20F70D030091FB86 /* UIBarButtonItem + Style.swift in Sources */,
-				3BB5BF7120F70D560091FB86 /* UIButtonDesignable.swift in Sources */,
 				3BB5BF5620F70CF00091FB86 /* UICollectionView-Extensions.swift in Sources */,
 				3BB5BF6420F70D260091FB86 /* KeyConstants.swift in Sources */,
 				3BB5BF0420F70C310091FB86 /* OrderDetailMapTableViewCell.swift in Sources */,
@@ -3349,7 +3303,6 @@
 				3BB5BEE620F70BEF0091FB86 /* OrderItemTableViewCell.swift in Sources */,
 				3BB5BF7D20F70D6A0091FB86 /* Font.swift in Sources */,
 				3BB5BF6C20F70D450091FB86 /* RESTConstants.swift in Sources */,
-				3BB5BF6E20F70D4C0091FB86 /* DataManager.swift in Sources */,
 				3BB5BF6B20F70D420091FB86 /* RESTError.swift in Sources */,
 				3BB5BED620F70BCE0091FB86 /* SlideMenuVC.swift in Sources */,
 				3BB5BF5020F70CDE0091FB86 /* UITextView.swift in Sources */,
@@ -3461,7 +3414,6 @@
 				3B0F86C920E2456200E5092B /* BaseNV.swift in Sources */,
 				5A499CA920591D0400A1D944 /* UIViewController.swift in Sources */,
 				2E382A1620EB730900415AF0 /* KeyConstants.swift in Sources */,
-				0AB6912120A154280041E529 /* UIButtonDesignable.swift in Sources */,
 				5A7D1B5320ECD6E4003F1565 /* ProfileCell.swift in Sources */,
 				0A465EC620A43174009BFE69 /* ChangePasswordModel.swift in Sources */,
 				5A499CA820591D0400A1D944 /* UIView.swift in Sources */,
@@ -3483,7 +3435,6 @@
 				3B230D3920E09F5400C867C8 /* UserRole.swift in Sources */,
 				0A465EAD20A3FDE5009BFE69 /* ChangeInviromentTableViewCell.swift in Sources */,
 				3BB7604120FCB1430030B9E4 /* Debug.swift in Sources */,
-				0AB6912620A156ED0041E529 /* Configs.swift in Sources */,
 				5A499CBB2059277D00A1D944 /* BaseViewController.swift in Sources */,
 				24B3319820623C25001FAC49 /* Reason.swift in Sources */,
 				5A68A45F205A619300CA9DB8 /* PickupPlace.swift in Sources */,
@@ -3496,7 +3447,6 @@
 				5A82E9C5205A038900F34351 /* RESTError.swift in Sources */,
 				3B939DBE20E0970600B90C77 /* BaseAPIService.swift in Sources */,
 				3B0F86D020E256B400E5092B /* UIBarButtonItem + Style.swift in Sources */,
-				0ACCCBA320AE7EEA006B4F6E /* DataManager.swift in Sources */,
 				5A82E9CA205A04EE00F34351 /* OrderListViewController.swift in Sources */,
 				3B721AFA20E1E29900F58783 /* ResponseDataModel.swift in Sources */,
 				3B939DD120E0983B00B90C77 /* AttachFileModel.swift in Sources */,
