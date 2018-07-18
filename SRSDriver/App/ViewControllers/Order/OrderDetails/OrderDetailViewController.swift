@@ -134,7 +134,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         tableView.register(orderScanItemNib, forCellReuseIdentifier: orderScanItemCellIdentifier)
         tableView.estimatedRowHeight = cellHeight
         tableView.rowHeight = UITableViewAutomaticDimension
-        tableView.backgroundColor = AppColor.grayColor
     
         initVar()
         setupDataDetailInforRows()
@@ -426,7 +425,6 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let headerCell = tableView.dequeueReusableCell(withIdentifier: headerCellIdentifier) as? OrderDetailTableViewCell{
             headerCell.nameLabel?.text = arrTitleHeader[section];
-            headerCell.contentView.backgroundColor = AppColor.grayColor
 
             return headerCell;
         }
@@ -434,16 +432,15 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         return nil
     }
   
-  func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-    return 35
-  }
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 35
+    }
   
-  func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-    let view:UIView = UIView()
-    view.backgroundColor = AppColor.grayColor
-    view.tintColor = UIColor.blue
-    return view
-  }
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let view:UIView = UIView()
+        view.backgroundColor = UIColor.clear
+        return view
+    }
   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let orderSection:OrderDetailSection = OrderDetailSection(rawValue: indexPath.section)!

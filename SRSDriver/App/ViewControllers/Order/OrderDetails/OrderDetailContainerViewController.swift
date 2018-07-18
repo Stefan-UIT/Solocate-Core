@@ -12,6 +12,10 @@ import SVProgressHUD
 
 class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
 
+    
+    @IBOutlet weak  var conHSegmentedControl: NSLayoutConstraint?
+
+    
     var routeID: Int?
     var order:Order?
     

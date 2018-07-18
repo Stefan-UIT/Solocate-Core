@@ -12,7 +12,8 @@ class BaseNV: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        self.interactivePopGestureRecognizer?.delegate = self
         
     }
     
@@ -35,4 +36,10 @@ class BaseNV: UINavigationController {
         // Pass the selected object to the new view controller.
     }
     */
+}
+
+extension BaseNV:UIGestureRecognizerDelegate{
+    func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return true
+    }
 }

@@ -26,7 +26,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")//disable autolayout error/warning
     
-        // app services
+        //Load data in configfile (Main,Service configuration)
+        DMSAppConfiguration.enableConfiguration()
+    
+        // App services
         guard let buildConfiguration = BuildConfiguration(infoDictionary: Bundle.main.infoDictionary!) else {
             fatalError("Invalid configuration. App stops.");
         }
@@ -35,8 +38,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Services.setupShared(buildConf: buildConfiguration)
 
         print("\n==>APPLICATION STARTED WITH: \n\tScheme-\(buildConfiguration.buildScheme.rawValue);\n\tServer-\(buildConfiguration.serverEnvironment.displayString())-\(buildConfiguration.serverUrlString()) \n")
-
-        DMSAppConfiguration.enableConfiguration()
     
         GMSServices.provideAPIKey(Network.googleAPIKey)
         SVProgressHUD.setDefaultMaskType(.clear)

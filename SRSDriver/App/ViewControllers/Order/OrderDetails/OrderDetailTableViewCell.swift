@@ -30,7 +30,6 @@ class OrderDetailTableViewCell: UITableViewCell {
         iconImgView?.image = UIImage(named: "phone")
         iconImgView?.isHidden = false
       }
-        self.contentView.backgroundColor = AppColor.grayColor
     }
   }
   

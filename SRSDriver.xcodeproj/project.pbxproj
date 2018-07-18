@@ -476,7 +476,6 @@
 		3B230D4020E09F5400C867C8 /* UserLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D3320E09F5400C867C8 /* UserLoginModel.swift */; };
 		3B230D4120E09F5400C867C8 /* UserLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D3320E09F5400C867C8 /* UserLoginModel.swift */; };
 		3B230D4220E09F5400C867C8 /* UserLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D3320E09F5400C867C8 /* UserLoginModel.swift */; };
-		3B230D4420E0EC8400C867C8 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D4320E0EC8400C867C8 /* Manager.swift */; };
 		3B27CB8E20E647A700B1918D /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B27CB8D20E647A700B1918D /* ImagePickerView.swift */; };
 		3B53C18920F8699300565CE6 /* PackageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B53C18720F8699100565CE6 /* PackageModel.swift */; };
 		3B53C18A20F8699500565CE6 /* PackageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B53C18720F8699100565CE6 /* PackageModel.swift */; };
@@ -760,11 +759,6 @@
 		3BB5BF9020F70D860091FB86 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B27CB8D20E647A700B1918D /* ImagePickerView.swift */; };
 		3BB5BF9120F70D860091FB86 /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B27CB8D20E647A700B1918D /* ImagePickerView.swift */; };
 		3BB5BF9220F70D8A0091FB86 /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E382A0F20EB6A0000415AF0 /* LocationTracker.swift */; };
-		3BB5BF9320F70D8E0091FB86 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D4320E0EC8400C867C8 /* Manager.swift */; };
-		3BB5BF9420F70D8F0091FB86 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D4320E0EC8400C867C8 /* Manager.swift */; };
-		3BB5BF9520F70D910091FB86 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D4320E0EC8400C867C8 /* Manager.swift */; };
-		3BB5BF9620F70D920091FB86 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D4320E0EC8400C867C8 /* Manager.swift */; };
-		3BB5BF9720F70D920091FB86 /* Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D4320E0EC8400C867C8 /* Manager.swift */; };
 		3BB75FBE20FC59820030B9E4 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FBD20FC59820030B9E4 /* FirebaseService.swift */; };
 		3BB75FBF20FC59820030B9E4 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FBD20FC59820030B9E4 /* FirebaseService.swift */; };
 		3BB75FC020FC59820030B9E4 /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB75FBD20FC59820030B9E4 /* FirebaseService.swift */; };
@@ -993,11 +987,11 @@
 		3B230D3120E09F5400C867C8 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		3B230D3220E09F5400C867C8 /* UserRole.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
 		3B230D3320E09F5400C867C8 /* UserLoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLoginModel.swift; sourceTree = "<group>"; };
-		3B230D4320E0EC8400C867C8 /* Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Manager.swift; sourceTree = "<group>"; };
 		3B27CB8D20E647A700B1918D /* ImagePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		3B53C18720F8699100565CE6 /* PackageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageModel.swift; sourceTree = "<group>"; };
 		3B721AF720E1E04600F58783 /* EmptyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyModel.swift; sourceTree = "<group>"; };
 		3B721AF920E1E29900F58783 /* ResponseDataModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDataModel.swift; sourceTree = "<group>"; };
+		3B7913CE20FEE80A00CD0F4C /* DMSDriver_99Cents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DMSDriver_99Cents.entitlements; sourceTree = "<group>"; };
 		3B7942B720E3322E005AD12F /* Order.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Order.storyboard; sourceTree = "<group>"; };
 		3B7942B920E33236005AD12F /* Map.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Map.storyboard; sourceTree = "<group>"; };
 		3B7942BB20E33258005AD12F /* Packages.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Packages.storyboard; sourceTree = "<group>"; };
@@ -1021,7 +1015,6 @@
 		3BB75FC720FC5A1D0030B9E4 /* BuildConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildConfiguration.swift; sourceTree = "<group>"; };
 		3BB75FC820FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BuildConfiguration+Extension.swift"; sourceTree = "<group>"; };
 		3BB75FD520FC76830030B9E4 /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
-		3BB7601520FCA1E70030B9E4 /* DMSDriver_99Cents.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DMSDriver_99Cents.entitlements; sourceTree = "<group>"; };
 		3BB7601820FCAC540030B9E4 /* AppStore.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = AppStore.xcconfig; sourceTree = "<group>"; };
 		3BB7601920FCAC540030B9E4 /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
 		3BB7601A20FCAC540030B9E4 /* Release.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
@@ -1522,14 +1515,6 @@
 			path = ViewControllers;
 			sourceTree = "<group>";
 		};
-		3B939DB420E0966600B90C77 /* Managers */ = {
-			isa = PBXGroup;
-			children = (
-				3B230D4320E0EC8400C867C8 /* Manager.swift */,
-			);
-			path = Managers;
-			sourceTree = "<group>";
-		};
 		3B939DB520E0967700B90C77 /* APIServices */ = {
 			isa = PBXGroup;
 			children = (
@@ -1806,7 +1791,7 @@
 		5AA4CA3320590AD4003F8E6F = {
 			isa = PBXGroup;
 			children = (
-				3BB7601520FCA1E70030B9E4 /* DMSDriver_99Cents.entitlements */,
+				3B7913CE20FEE80A00CD0F4C /* DMSDriver_99Cents.entitlements */,
 				5AA4CA3E20590AD4003F8E6F /* SRSDriver */,
 				5AA4CA3D20590AD4003F8E6F /* Products */,
 				5E88CBE52394B31245C0615A /* Pods */,
@@ -1834,7 +1819,6 @@
 			children = (
 				24677EEF20732D8C00C41E4F /* SRSDriver.entitlements */,
 				246FA3552072277D00C5E707 /* Supporting Files */,
-				3B939DB420E0966600B90C77 /* Managers */,
 				5AA4CA5820590B69003F8E6F /* Shared */,
 				5AA4CA5120590B08003F8E6F /* App */,
 				3B939DAF20E08DBE00B90C77 /* Resources */,
@@ -2066,7 +2050,7 @@
 					};
 					3BB5BE7D20F708A40091FB86 = {
 						CreatedOnToolsVersion = 9.4.1;
-						ProvisioningStyle = Manual;
+						ProvisioningStyle = Automatic;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
 								enabled = 1;
@@ -2901,7 +2885,6 @@
 				3B53C18C20F8699700565CE6 /* PackageModel.swift in Sources */,
 				3BB5BF7B20F70D690091FB86 /* Font.swift in Sources */,
 				0AB690FA20A0099E0041E529 /* BaseView.swift in Sources */,
-				3BB5BF9520F70D910091FB86 /* Manager.swift in Sources */,
 				3BB5BECF20F70BC60091FB86 /* MainVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3023,7 +3006,6 @@
 				3B53C18E20F8699800565CE6 /* PackageModel.swift in Sources */,
 				3BB5BF7C20F70D690091FB86 /* Font.swift in Sources */,
 				0ADAF42B20B3B95A00A88E14 /* RouteMessagesViewController.swift in Sources */,
-				3BB5BF9620F70D920091FB86 /* Manager.swift in Sources */,
 				0ADAF42C20B3B95A00A88E14 /* BaseView.swift in Sources */,
 				3BB5BED020F70BC70091FB86 /* MainVC.swift in Sources */,
 			);
@@ -3147,7 +3129,6 @@
 				3B53C18B20F8699600565CE6 /* PackageModel.swift in Sources */,
 				3BB5BF7A20F70D680091FB86 /* Font.swift in Sources */,
 				0AE327E5208DC84C00EF1F4C /* RouteMessagesViewController.swift in Sources */,
-				3BB5BF9420F70D8F0091FB86 /* Manager.swift in Sources */,
 				3BB5BECE20F70BC60091FB86 /* MainVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3270,7 +3251,6 @@
 				3B53C18920F8699300565CE6 /* PackageModel.swift in Sources */,
 				3BB5BF7920F70D670091FB86 /* Font.swift in Sources */,
 				2494A9642074926A005A2622 /* RouteMessagesViewController.swift in Sources */,
-				3BB5BF9320F70D8E0091FB86 /* Manager.swift in Sources */,
 				3BB5BECD20F70BC50091FB86 /* MainVC.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -3392,7 +3372,6 @@
 				3B53C18D20F8699800565CE6 /* PackageModel.swift in Sources */,
 				3BB5BF2920F70C930091FB86 /* MessageAPI.swift in Sources */,
 				3BB5BF5820F70CF50091FB86 /* String.swift in Sources */,
-				3BB5BF9720F70D920091FB86 /* Manager.swift in Sources */,
 				3BB5BEE820F70BF30091FB86 /* RouteMessagesViewController.swift in Sources */,
 				3BB5BF3920F70CB40091FB86 /* APIError.swift in Sources */,
 			);
@@ -3502,7 +3481,6 @@
 				5A68A44F205A202400CA9DB8 /* OrderNotesViewController.swift in Sources */,
 				2E382A1020EB6A0000415AF0 /* LocationTracker.swift in Sources */,
 				3B939DCA20E097CB00B90C77 /* BaseModel.swift in Sources */,
-				3B230D4420E0EC8400C867C8 /* Manager.swift in Sources */,
 				5A499C9E20591D0400A1D944 /* NSString+SDString.m in Sources */,
 				5A1EDA1C20EC7BDA00A74677 /* SlideMenuVC.swift in Sources */,
 				3BB75FCF20FC5A1D0030B9E4 /* BuildConfiguration+Extension.swift in Sources */,
@@ -3939,9 +3917,9 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_ENTITLEMENTS = DMSDriver_99Cents.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
-				ENABLE_BITCODE = NO;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = T7R2AKHVA7;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_99Cents/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -3964,16 +3942,16 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_ENTITLEMENTS = DMSDriver_99Cents.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_99Cents/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.99centsdriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "12d1fe39-335c-4a87-b59c-7bf65e836210";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-99centsDriver";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3988,18 +3966,18 @@
 				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CODE_SIGN_ENTITLEMENTS = DMSDriver_99Cents.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
-				ENABLE_BITCODE = NO;
+				ENABLE_BITCODE = YES;
 				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_99Cents/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.99centsdriver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "98e38828-6cec-4432-bd03-ba32b55a764e";
-				PROVISIONING_PROFILE_SPECIFIER = 99Cents_provinsion_release;
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
