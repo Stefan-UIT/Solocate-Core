@@ -345,8 +345,8 @@ fileprivate extension BaseAPIService{
              .notAuthorized:
           let err = ERROR(dataResponse: dataResponse)
           DispatchQueue.main.async {
-            App().showAlert(err.getMessage())
             App().reLogin()
+            App().showAlert(err.getMessage())
             return
           }
           
