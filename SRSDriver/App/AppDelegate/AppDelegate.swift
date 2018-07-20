@@ -75,27 +75,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 }
 
 
-//MARK: - MessagingDelegate
-extension AppDelegate: MessagingDelegate {
-  func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
-    print("==>Did receive fcm token: \(fcmToken)")
-
-    if let _ = Caches().getTokenKeyLogin() {
-        
-        API().updateNotificationFCMToken(fcmToken) { (result) in
-            //
-        }
-        
-        Cache.shared.setObject(obj: fcmToken, forKey: Defaultkey.fcmToken)
-    }
-  }
-  
-  func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {
-    print("==>didReceive remote message: \(remoteMessage.appData)")
-  }
-}
-
-
 //MARK: - UNUserNotificationCenterDelegate
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
@@ -105,14 +84,15 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     if let userInfo = response.notification.request.content.userInfo as? [String: Any]
     {
         if let type = userInfo["type"] as? String {
-            let _type : NotificationType = NotificationType(rawValue: type)!
-            switch _type {
-            case .ALERT:
-                handleAlert(userInfo)
-                break
-            case .NEW_ROUTE:
-                handleNewRoute(userInfo)
-                break
+            if let _type : NotificationType = NotificationType(rawValue: type){
+                switch _type {
+                case .ALERT:
+                    handleAlert(userInfo)
+                    break
+                case .NEW_ROUTE:
+                    handleNewRoute(userInfo)
+                    break
+                }
             }
         }
     }
@@ -198,6 +178,9 @@ extension AppDelegate {
     
     func loginSuccess() {
         DMSLocationManager.startUpdatingDriverLocationIfNeeded()
+        if let tokenFcm = Caches().getObject(forKey: Defaultkey.fcmToken) as? String {
+            API().updateNotificationFCMToken(tokenFcm) { (_) in}
+        }
         
         let vc:MainVC = .loadSB(SB: .Main)
         mainVC = vc

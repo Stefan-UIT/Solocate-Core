@@ -48,9 +48,11 @@ extension FirebaseService: MessagingDelegate{
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
         print("==>Did receive FCM token: \(fcmToken)")
+        if Caches().hasLogin {
+            API().updateNotificationFCMToken(fcmToken) { (result) in }
+        }
         
-        // Update FCM token to service .
-        
+        Cache.shared.setObject(obj: fcmToken, forKey: Defaultkey.fcmToken)
     }
     
     func messaging(_ messaging: Messaging, didReceive remoteMessage: MessagingRemoteMessage) {

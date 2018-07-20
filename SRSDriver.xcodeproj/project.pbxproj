@@ -476,6 +476,7 @@
 		3B230D4020E09F5400C867C8 /* UserLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D3320E09F5400C867C8 /* UserLoginModel.swift */; };
 		3B230D4120E09F5400C867C8 /* UserLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D3320E09F5400C867C8 /* UserLoginModel.swift */; };
 		3B230D4220E09F5400C867C8 /* UserLoginModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B230D3320E09F5400C867C8 /* UserLoginModel.swift */; };
+		3B25943A2101DD69000BDA62 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B2594392101DD69000BDA62 /* GoogleService-Info.plist */; };
 		3B27CB8E20E647A700B1918D /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B27CB8D20E647A700B1918D /* ImagePickerView.swift */; };
 		3B53C18920F8699300565CE6 /* PackageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B53C18720F8699100565CE6 /* PackageModel.swift */; };
 		3B53C18A20F8699500565CE6 /* PackageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B53C18720F8699100565CE6 /* PackageModel.swift */; };
@@ -513,7 +514,6 @@
 		3B939DD420E0983B00B90C77 /* AttachFileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B939DD020E0983B00B90C77 /* AttachFileModel.swift */; };
 		3B939DD520E0983B00B90C77 /* AttachFileModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B939DD020E0983B00B90C77 /* AttachFileModel.swift */; };
 		3BB5BE7920F6FF370091FB86 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BB5BE7820F6FF370091FB86 /* GoogleService-Info.plist */; };
-		3BB5BE9920F709560091FB86 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BB5BE9320F709560091FB86 /* GoogleService-Info.plist */; };
 		3BB5BE9A20F709560091FB86 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3BB5BE9520F709560091FB86 /* Localizable.strings */; };
 		3BB5BE9B20F709560091FB86 /* MainConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3BB5BE9820F709560091FB86 /* MainConfigs.plist */; };
 		3BB5BE9C20F709720091FB86 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 5AA4CA4320590AD4003F8E6F /* Main.storyboard */; };
@@ -987,6 +987,7 @@
 		3B230D3120E09F5400C867C8 /* UserModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserModel.swift; sourceTree = "<group>"; };
 		3B230D3220E09F5400C867C8 /* UserRole.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserRole.swift; sourceTree = "<group>"; };
 		3B230D3320E09F5400C867C8 /* UserLoginModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserLoginModel.swift; sourceTree = "<group>"; };
+		3B2594392101DD69000BDA62 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B27CB8D20E647A700B1918D /* ImagePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		3B53C18720F8699100565CE6 /* PackageModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageModel.swift; sourceTree = "<group>"; };
 		3B721AF720E1E04600F58783 /* EmptyModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyModel.swift; sourceTree = "<group>"; };
@@ -1005,7 +1006,6 @@
 		3B939DD020E0983B00B90C77 /* AttachFileModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttachFileModel.swift; sourceTree = "<group>"; };
 		3BB5BE7820F6FF370091FB86 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3BB5BE7E20F708A40091FB86 /* DMSDriver_99Cents.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMSDriver_99Cents.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		3BB5BE9320F709560091FB86 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3BB5BE9620F709560091FB86 /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3BB5BE9720F709560091FB86 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3BB5BE9820F709560091FB86 /* MainConfigs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MainConfigs.plist; sourceTree = "<group>"; };
@@ -1543,9 +1543,9 @@
 		3BB5BE7F20F708A40091FB86 /* DMSDriver_99Cents */ = {
 			isa = PBXGroup;
 			children = (
+				3B2594392101DD69000BDA62 /* GoogleService-Info.plist */,
 				3BB7601620FCAC540030B9E4 /* Configurations */,
 				3B12A22220F72D970018B8B8 /* Info.plist */,
-				3BB5BE9320F709560091FB86 /* GoogleService-Info.plist */,
 				3BB75FC420FC59D30030B9E4 /* GoogleService-Info-production.plist */,
 				3BB5BE9820F709560091FB86 /* MainConfigs.plist */,
 				3BB5BE9420F709560091FB86 /* Localize */,
@@ -2245,7 +2245,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3BB5BE9920F709560091FB86 /* GoogleService-Info.plist in Resources */,
 				3BB5BEB620F7099A0091FB86 /* Packages.storyboard in Resources */,
 				3BB5BE9A20F709560091FB86 /* Localizable.strings in Resources */,
 				3BB5BEB120F709940091FB86 /* Map.storyboard in Resources */,
@@ -2277,6 +2276,7 @@
 				3BB5BE9C20F709720091FB86 /* Main.storyboard in Resources */,
 				3BB75FC520FC59D30030B9E4 /* GoogleService-Info-production.plist in Resources */,
 				3BB5BEC520F70BA30091FB86 /* LogoutTableViewCell.xib in Resources */,
+				3B25943A2101DD69000BDA62 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -3923,7 +3923,7 @@
 				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_99Cents/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.99centsdriver;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.99centsdriver.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "ac6bb555-329e-4a58-8724-63324978514c";
 				PROVISIONING_PROFILE_SPECIFIER = "adhoc-99CentsDriver";
@@ -3948,10 +3948,10 @@
 				INFOPLIST_FILE = "$(SRCROOT)/SRSDriver/Supporting Files/DMSDriver_99Cents/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.99centsdriver;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.99centsdriver.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "0a1dca5c-f271-411c-9fef-bf268da99027";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-99centsDriver";
+				PROVISIONING_PROFILE = "91c52a50-fdf9-4766-85a5-ecd929523a36";
+				PROVISIONING_PROFILE_SPECIFIER = "dev-99CentDriverDebug";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -3974,7 +3974,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.99centsdriver;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.99centsdriver.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "bdb5630b-d2fb-4901-aa6b-45f234307fac";
 				PROVISIONING_PROFILE_SPECIFIER = "dis-99CentDriver";
