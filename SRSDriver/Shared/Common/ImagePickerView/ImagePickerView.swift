@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Photos
 
 typealias ImagePickerViewCallback = (_ success:Bool, _ data: Any) -> Void
 
@@ -34,16 +35,34 @@ class ImagePickerView: UIImagePickerController {
         return imagePickerView!
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func showImageGallaryMultiPicker(atVC:UIViewController ,
+                                    callback:@escaping ImagePickerViewCallback){
+        
+        setCallback(callback);
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet);
+        
+        let actionGallery = UIAlertAction(title: "Album Gallery", style: .default) {[weak self] (action) in
+           self?.showAlertImagePickerMulti()
+        }
+        
+        let actionCamera = UIAlertAction(title: "Take photo", style: .default) { (action) in
+            //
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+            //
+        }
+        
+        alert.addAction(actionGallery);
+        alert.addAction(actionCamera);
+        alert.addAction(cancel);
+        
+        
+        atVC.present(alert, animated: true, completion: nil)
+        
     }
-    */
     
     func showImageGallarySinglePick(atVC:UIViewController ,
                                     buttomItem:UIView? = nil,
@@ -80,17 +99,75 @@ class ImagePickerView: UIImagePickerController {
 
     }
     
-    
-  fileprivate  func getAllGallery(vc:UIViewController)  {
-        self.allowsEditing = true;
-        self.delegate = self;
-        self.sourceType = .photoLibrary;
-        
-        vc.present(self, animated: true, completion: nil)
+   fileprivate func showAlertImagePickerMulti()  {
+        let alert = UIAlertController(style: .actionSheet)
+        alert.addPhotoLibraryPicker(
+            flow: .vertical,
+            paging: false,
+            selection: .multiple(action: { (assets) in
+                self.callback?(true,assets)
+            }))
+        alert.addAction(title: "Cancel", style: .cancel)
+        alert.show()
     }
     
-  fileprivate func setCallback(_ callback:@escaping ImagePickerViewCallback) {
+    fileprivate func showAlertImagePickerSignle()  {
+        let alert = UIAlertController(style: .actionSheet)
+        alert.addPhotoLibraryPicker(
+            flow: .horizontal,
+            paging: true,
+            selection: .single(action: { (asset) in
+                if let _asset = asset {
+                    let image = self.getAssetThumbnail(asset: _asset,
+                                                       size: ScreenSize.SCREEN_WIDTH)
+                    self.callback?(true,image)
+                }
+            }))
+        alert.addAction(title: "Cancel", style: .cancel)
+        alert.show()
+    }
+    
+    
+    fileprivate  func getAllGallery(vc:UIViewController)  {
+        
+        if #available(iOS 11, *) {
+            self.showAlertImagePickerSignle()
+            
+        }else{
+            self.allowsEditing = true;
+            self.delegate = self;
+            self.sourceType = .photoLibrary;
+            
+            vc.present(self, animated: true, completion: nil)
+        }
+    }
+    
+    fileprivate func setCallback(_ callback:@escaping ImagePickerViewCallback) {
         self.callback = callback;
+    }
+    
+    func getAssetThumbnail(asset: PHAsset, size: CGFloat) -> UIImage {
+        let retinaScale = UIScreen.main.scale
+        let retinaSquare = CGSize(width: size * retinaScale, height: size * retinaScale)
+            
+        let cropSizeLength = min(asset.pixelWidth, asset.pixelHeight)
+        let square = CGRect(x: 0, y: 0, width: CGFloat(cropSizeLength), height:  CGFloat(cropSizeLength))
+            
+        let cropRect = square.applying(CGAffineTransform(scaleX: 1.0/CGFloat(asset.pixelWidth), y: 1.0/CGFloat(asset.pixelHeight)))
+        
+        let manager = PHImageManager.default()
+        let options = PHImageRequestOptions()
+        var thumbnail = UIImage()
+        
+        options.isSynchronous = true
+        options.deliveryMode = .highQualityFormat
+        options.resizeMode = .exact
+        options.normalizedCropRect = cropRect
+        
+        manager.requestImage(for: asset, targetSize: retinaSquare, contentMode: .aspectFit, options: options, resultHandler: {(result, info)->Void in
+            thumbnail = result!
+        })
+        return thumbnail
     }
 }
 

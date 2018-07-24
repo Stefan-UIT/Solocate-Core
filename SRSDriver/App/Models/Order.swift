@@ -132,6 +132,22 @@ class ReasonOrderCC: Reason {
 
 
 class OrderDetail: Order {
+    
+    class UrlFileMoldel: BaseModel {
+        var sig: AttachFileModel?
+        var doc: [AttachFileModel]?
+        
+        required init?(map: Map) {
+            super.init()
+        }
+        
+        override func mapping(map: Map) {
+            sig <- map["sig"]
+            doc <- map["doc"]
+        }
+    }
+    
+    
   var serviceTime = -1
   var deliveryContactName = ""
   var deliveryContactPhone = ""
@@ -143,7 +159,7 @@ class OrderDetail: Order {
   var notes = [Note]()
   var items = [OrderItem]()
   var pictures = [Picture]()
-  var signFile:AttachFileModel?
+  var url:UrlFileMoldel?
   var reason:ReasonOrderCC?
   
   override init() {
@@ -178,7 +194,7 @@ class OrderDetail: Order {
     deliveryDate <- map["dlvy_date"];
     serviceTime <- map["service_time"]
     
-    signFile <- map["url"]
+    url <- map["url"]
     reason <- map["reason"]
   }
 }

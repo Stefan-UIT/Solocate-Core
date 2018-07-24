@@ -62,6 +62,7 @@ class BaseAPIService {
 
     fileprivate let sessionManager: SessionManager;
     fileprivate let responsedCallbackQueue: DispatchQueue;
+
     
     static func shared() -> BaseAPIService {
         if BaseAPIService.sharedAPI == nil {
@@ -153,17 +154,15 @@ class BaseAPIService {
         
         APILog("REQUEST", encoding.bodyStringValue);
 
-        let request: DataRequest;
-        
+        var request: DataRequest;
+
         request = sessionManager.request(url,
                                          method: alarmofireMethod,
                                          parameters: [:],
                                          encoding: encoding,
                                          headers: headers);
-
+        
         request.responseJSON(queue: responsedCallbackQueue, options: .allowFragments) { (dataResponse) in
-            
-            let result: APIOutput<RESULT, ERROR>;
             
             let logResult = dataResponse.data != nil ? String(data: dataResponse.data!, encoding: .utf8) : "<empty>";
             var logStatus : String;
@@ -177,141 +176,78 @@ class BaseAPIService {
             }
             
             APILog("RESPONSE-\(logStatus)", logResult);
-     
-            switch dataResponse.result {
-            case .success(let object):
-                result = self.handleResponse(dataResponse: dataResponse, object: object)
-                
-            case .failure(let error):
-                result = self.handleFailure(dataResponse: dataResponse, error: error)
-            }
             
-            DispatchQueue.main.async {
-                callback(result);
-            }
+            self.handleResponseJSON(dataResponse: dataResponse, callback: callback)
+            
         };
         
         return APIRequest(alarmofireDataRequest: request);
-    }
-    
-    
-    
-    func uploadMultipartFormData<RESULT:BaseModel, ERROR: APIError>(method: ParamsMethod,
-                                serverURL:String  = E(RESTConstants.getBASEURL()),
-                                headers:HTTPHeaders? = nil,
-                                path: String,
-                                input: [AttachFileModel],
-                                callback:@escaping GenericAPICallback<RESULT, ERROR>) {
         
-        __identifier += 1;
-        
-        let identifier = __identifier;
-        
-        let url = serverURL.appending(path);
-        
-        var alarmofireMethod: HTTPMethod;
-        switch method {
-        case .POST:
-            alarmofireMethod = .post;
-            break;
-        case .PUT:
-            alarmofireMethod = .put;
-            break;
-        case .PATCH:
-            alarmofireMethod = .patch;
-            break;
-        case .DELETE:
-            alarmofireMethod = .delete;
-            break;
-        default:
-            alarmofireMethod = .get;
-            break;
-        }
-        
-        func APILog(_ STATUS: String, _ MSG: String? = nil) {
-            print(">>> [API]  [\( String(format: "%04u", identifier) )] [\( method )] [\( path )] \( STATUS )");
-            if let msg = MSG { print("\( msg )\n\n"); }
-        }
-        
-        APILog("REQUEST");
-
-//        let headers = requestHeader(headers: headers) // Curently can't test with Sel2B server File
-
-        //test
-        let tempHeader = ["Authorization":"Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiIiLCJpYXQiOjE1MjgzNjY4MDUsImV4cCI6MTUyODQ1MzIwNSwibmFtZSI6IkRyaXZlciAxIDEiLCJqdGkiOjU1NH0.2rdhguvZ4K3bJZvO_AZKVQ9Vu4FfHQO5F3jrwDLfhHQ"]
-        
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
-            for file  in input {
-                multipartFormData.append(file.contentFile ?? Data(),
-                                         withName: "file[]",
-                                         fileName: E(file.name),
-                                         mimeType: E(file.mimeType))
-            }
-            
-        }, usingThreshold: SessionManager.multipartFormDataEncodingMemoryThreshold,
-           to: url, method: .post, headers: tempHeader) { (encodingResult) in
-            
-            switch encodingResult {
-            case .success(let upload, _, _):
-                upload.responseJSON(completionHandler: { (response) in
-                    print(response)
+        /*
+        switch input {
+        case .mutiFile(let files):
+            sessionManager.upload(multipartFormData: { (multipartFormData) in
+                for  i in 0..<files.count {
+                    let file = files[i]
+                    multipartFormData.append(file.contentFile ?? Data(),
+                                             withName: "file[\(i)]",
+                                             fileName: E(file.name),
+                                             mimeType: E(file.mimeType))
+                }
+            }, usingThreshold: SessionManager.multipartFormDataEncodingMemoryThreshold,
+               to: path,
+               method: .post,
+               headers: headers) { (encodingResult) in
+                
+                switch encodingResult {
+                case .success(let upload, _, _):
+                    upload.responseJSON(completionHandler: { (response) in
+                        print(response)
+                       self.handleResponseJSON(dataResponse: response, callback: callback)
+                    })
+                    
+                case .failure(let error):
+                    print(error)
+                    let err = APIError() as! ERROR
+                    err.message = error.localizedDescription
                     
                     var result: APIOutput<RESULT, ERROR>;
-
-                    switch response.result {
-                        case .success(let results):
-                            
-                            if let dic = results as? ResponseDictionary {
-                                let data: ResponseDictionary = dic["data"] as! ResponseDictionary
-                                let obj  = RESULT(JSON: data)!
-                    
-                                result = .object(obj)
-                                
-                            }else {
-                                
-                                print("Data response  invalid.")
-                                
-                                let obj = RESULT(JSON: [:])!
-                                result  = .object(obj)
-                            }
-                            
-                            break;
-                        
-                        case .failure(let error):
-                            
-                            let err = APIError() as! ERROR
-                            err.message = error.localizedDescription
-                        
-                            result = .error(err)
-                            
-                            break;
-                        
-                    }
+                    result = .error(err)
                     
                     DispatchQueue.main.async {
                         callback(result);
                     }
-                    
-                })
-            case .failure(let error) :
-                
-                print(error)
-                let err = APIError() as! ERROR
-                err.message = error.localizedDescription
-                
-                var result: APIOutput<RESULT, ERROR>;
-                result = .error(err)
-                
-                DispatchQueue.main.async {
-                    callback(result);
+                    break
                 }
             }
+                
+            return nil
+            
+        default:
+            
         }
+        */
     }
-}
+ }
 
 
 fileprivate extension BaseAPIService{
+    
+    func handleResponseJSON<RESULT:BaseModel,ERROR:APIError>(dataResponse: DataResponse<Any>,callback:@escaping GenericAPICallback<RESULT, ERROR>)  {
+        var result: APIOutput<RESULT, ERROR>;
+
+        switch dataResponse.result {
+        case .success(let object):
+            result = self.handleResponse(dataResponse: dataResponse, object: object)
+            
+        case .failure(let error):
+            result = self.handleFailure(dataResponse: dataResponse, error: error)
+        }
+        
+        DispatchQueue.main.async {
+            callback(result);
+        }
+    }
     
     func handleResponse<RESULT:BaseModel, ERROR: APIError>(dataResponse: DataResponse<Any>, object: Any) -> APIOutput<RESULT, ERROR> {
         
@@ -432,13 +368,11 @@ extension BaseAPIService {
         func getMutiDataFromFile(files:[AttachFileModel]) -> Data {
             let mutiData:NSMutableData = NSMutableData()
             
-            for file in files {
-                let data = file.getJsonObject(method: .POST)
-                if let data = data as? Data {
-                    mutiData.append(data);
-                }else {
-                    print("Data Invalid.")
-                }
+            for i in 0..<files.count {
+                let file = files[i]
+                let data = file.getDataObject("image_file[\(i)]")
+                
+                mutiData.append(data as Data);
             }
             
             return mutiData as Data;

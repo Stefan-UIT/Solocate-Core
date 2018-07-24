@@ -35,7 +35,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
   func updateUI() {
     guard let order = orderDetail else { return }
     
-    if let signFile:AttachFileModel = order.signFile{
+    if let signFile:AttachFileModel = order.url?.sig{
       if let _ = signFile.name{
         controlsContainerView.isHidden = true
         signatureImgView.isHidden = false

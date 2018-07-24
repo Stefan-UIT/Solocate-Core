@@ -145,6 +145,32 @@ extension BaseAPIService {
                        callback: callback);
     }
     
+    @discardableResult
+    func uploadImageToOrder(_ orderId:String,_ file:AttachFileModel, callback: @escaping APICallback<AttachFileModel>) -> APIRequest {
+        let path = String(format:PATH_REQUEST_URL.UPLOAD_FILES.URL, orderId)
+        let headers = ["Content-Type":"multipart/form-data; boundary=\(E(file.boundary))"];
+   
+        return request(method: .POST,
+                       headers:headers,
+                       path: path,
+                       input: .mutiFile([file]),
+                       callback: callback)
+ 
+    }
+    
+    @discardableResult
+    func uploadMultipleImageToOrder(_ orderId:String,_ files:[AttachFileModel], callback: @escaping APICallback<AttachFileModel>) -> APIRequest {
+        let path = String(format:PATH_REQUEST_URL.UPLOAD_FILES.URL, orderId)
+        let headers = ["Content-Type":"multipart/form-data; boundary=\(E(files.first?.boundary))"];
+        
+        return request(method: .POST,
+                       headers:headers,
+                       path: path,
+                       input: .mutiFile(files),
+                       callback: callback)
+        
+    }
+    
     
     //MARK: - ROUTE
     @discardableResult

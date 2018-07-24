@@ -12,151 +12,297 @@ import XLPagerTabStrip
 import SDWebImage
 
 class OrderPictureViewController: BaseOrderDetailViewController, UINavigationControllerDelegate {
-  
-  fileprivate let cellIdentifier = "PictureTableViewCell"
-  fileprivate var imgTitle = ""
-  fileprivate let cellHeight: CGFloat = 90.0
-  fileprivate let headerHeight: CGFloat = 40.0
-  
-  fileprivate var selectedPictures = Array<PictureObject>()
-  
-  @IBOutlet weak var tableView: UITableView!
-  @IBOutlet weak var actionButton: UIButton!
-  @IBOutlet weak var takePictureButton: UIButton!
-  @IBOutlet weak var headerView: UIView!
-  @IBOutlet weak var vNoImage: UIView?
-
-
-  
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
     
-    upateUI()
-  }
+    fileprivate let cellIdentifier = "PictureTableViewCell"
+    fileprivate var imgTitle = ""
+    fileprivate let cellHeight: CGFloat = 90.0
+    fileprivate let headerHeight: CGFloat = 40.0
+    
+    fileprivate var selectedPictures = Array<PictureObject>()
+    fileprivate var attachFiles = Array<AttachFileModel>()
+
+    
+    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var actionButton: UIButton!
+    @IBOutlet weak var btnShowImage: UIButton!
+    @IBOutlet weak var takePictureButton: UIButton!
+    @IBOutlet weak var headerView: UIView!
+    @IBOutlet weak var vNoImage: UIView?
+    
+    
+    
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        initData()
+        upateUI()
+    }
+    
+    func initData()  {
+        attachFiles = orderDetail?.url?.doc ?? []
+    }
     
     func upateUI() {
         if let _orderDetail = orderDetail {
-            actionButton.isHidden = _orderDetail.pictures.count > 0
-            if _orderDetail.pictures.count > 0 {
-                headerView.removeFromSuperview()
-            }
+            let isAlreadyUploadedPictures = _orderDetail.url?.doc?.count > 0
+            actionButton.isHidden = isAlreadyUploadedPictures
+            vNoImage?.isHidden = isAlreadyUploadedPictures
+            vNoImage?.isHidden = (_orderDetail.url?.doc?.count > 0)
+            btnShowImage.setTitle("Order ID - \(_orderDetail.id)(\(selectedPictures.count) items)", for: .normal)
         }
-        
-        vNoImage?.isHidden = (selectedPictures.count > 0)
-    }
-  
-  @IBAction func takePicture(_ sender: UIButton) {
-    ImagePickerView.shared().showImageGallarySinglePick(atVC: self) { [weak self] (success, data) in
-        if success{
-            
-            guard let img = data as? UIImage else {
-                return
-            }
-            self?.inputTitleFor(img)
-        }
-    }
-  }
-  
-  @IBAction func clearPhotos(_ sender: UIButton) {
-    selectedPictures.removeAll()
-    tableView.reloadData()
-  }
-  
-  @IBAction func uploadPhotos(_ sender: UIButton) {
-    //
-  }
-  
-  override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-    return IndicatorInfo(title: "order_detail_picture".localized)
-  }
-}
-
-extension OrderPictureViewController {
-  func inputTitleFor(_ image: UIImage) {
-    let alert = UIAlertController(title: "order_detail_input_img_title".localized, message: nil, preferredStyle: .alert)
-    let okAction = UIAlertAction(title: "ok".localized, style: .default) { [unowned self] (okAction) in
-      alert.dismiss(animated: true, completion: nil)
-      guard let textField = alert.textFields?.first,
-        textField.hasText,
-        let text = textField.text else {
-          return
-      }
-      self.imgTitle = text
-      let pic = PictureObject(name: text, image: image)
-      self.selectedPictures.insert(pic, at: 0)
-      self.tableView.reloadData()
-      self.upateUI();
-    }
-    let cancelAction = UIAlertAction(title: "cancel".localized, style: .default) { [unowned self] (action) in
-      alert.dismiss(animated: true, completion: nil)
-      let pic = PictureObject(name: "", image: image)
-      self.selectedPictures.insert(pic, at: 0)
-      self.tableView.reloadData()
-      self.upateUI();
     }
     
-    alert.addAction(cancelAction)
-    alert.addAction(okAction)
-    alert.addTextField { (textField) in
-      textField.placeholder = "order_detail_input_img_title_hint".localized
+    
+    @IBAction func takePicture(_ sender: UIButton) {
+        ImagePickerView.shared().showImageGallaryMultiPicker(atVC: self) { (success,data) in
+            if let _data = data as? [PHAsset] {
+                var arrAttachfile:[AttachFileModel] = []
+                
+                for i in 0..<_data.count{
+                    let image:UIImage = self.getAssetThumbnail(asset: _data[i], size: ScreenSize.SCREEN_HEIGHT)
+                    if let data = UIImageJPEGRepresentation(image, 1.0) {
+                        let file: AttachFileModel = AttachFileModel()
+                        file.name = E(_data[i].originalFilename)
+                        file.type = ".png"
+                        file.mimeType = "image/png"
+                        file.contentFile = data
+                        arrAttachfile.append(file)
+                        
+                    }else {
+                        print("encode failure")
+                    }
+                }
+                
+                if arrAttachfile.count > 0{
+                    self.uploadMultipleFile(files: arrAttachfile)
+                }
+            }
+        }
     }
-    present(alert, animated: true, completion: nil)
-  }
-  
-  @objc func didClearSelectedPhotot(_ sender: Any) {
-    tableView.reloadData()
-    imgTitle = "" // clear title
-  }
+    
+    @IBAction func clearPhotos(_ sender: UIButton) {
+        selectedPictures.removeAll()
+        tableView.reloadData()
+    }
+    
+    @IBAction func uploadPhotos(_ sender: UIButton) {
+        //
+    }
+    
+    override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "order_detail_picture".localized)
+    }
+}
+
+//MARK: API
+extension OrderPictureViewController {
+    
+    private func getOrderDetail() {
+        guard let _orderID = orderDetail?.id else { return }
+        showLoadingIndicator()
+        API().getOrderDetail(orderId: "\(_orderID)") {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            
+            switch result{
+            case .object(let object):
+                self?.orderDetail = object
+                self?.tableView.reloadData()
+                
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
+        }
+    }
+    
+    func uploadImage(_ image:UIImage, title:String) {
+        if let data = UIImageJPEGRepresentation(image, 1.0) {
+            
+            let signatureFile: AttachFileModel = AttachFileModel()
+            signatureFile.name = title
+            signatureFile.type = ".png"
+            signatureFile.mimeType = "image/png"
+            signatureFile.contentFile = data
+            
+            self.upateUI()
+            submitPicture(signatureFile)
+            
+        }else {
+            print("encode failure")
+        }
+    }
+    private func submitPicture(_ file: AttachFileModel) {
+        guard let order = orderDetail else { return }
+        let orderID = String(order.id)
+        showLoadingIndicator()
+        API().uploadImageToOrder(orderID, file) { [weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(_):
+                // self?.controlsContainerView.isHidden = true
+                self?.showAlertView("Uploaded Successful")
+                
+                break
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+                break
+                
+            }
+        }
+    }
+    
+    func uploadMultipleFile(files:[AttachFileModel]){
+        guard let order = orderDetail else { return }
+        let orderID = String(order.id)
+        showLoadingIndicator()
+        API().uploadMultipleImageToOrder(orderID, files) {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(_):
+                self?.getOrderDetail()
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
+        }
+    }
+        
+    
+    func inputTitleFor(_ image: UIImage) {
+        let alert = UIAlertController(title: "order_detail_input_img_title".localized, message: nil, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "ok".localized, style: .default) { [unowned self] (okAction) in
+            alert.dismiss(animated: true, completion: nil)
+            guard let textField = alert.textFields?.first,
+                textField.hasText,
+                let text = textField.text else {
+                    return
+            }
+            self.imgTitle = text
+            let pic = PictureObject(name: text, image: image)
+            self.selectedPictures.insert(pic, at: 0)
+            self.tableView.reloadData()
+            self.upateUI()
+            self.uploadImage(image, title: text)
+            
+        }
+        let cancelAction = UIAlertAction(title: "cancel".localized, style: .default) { [unowned self] (action) in
+            alert.dismiss(animated: true, completion: nil)
+            //      let pic = PictureObject(name: "", image: image)
+            //      self.selectedPictures.insert(pic, at: 0)
+            //      self.tableView.reloadData()
+            //      self.upateUI();
+        }
+        
+        alert.addAction(cancelAction)
+        alert.addAction(okAction)
+        alert.addTextField { (textField) in
+            textField.placeholder = "order_detail_input_img_title_hint".localized
+        }
+        present(alert, animated: true, completion: nil)
+    }
+    
+    @objc func didClearSelectedPhotot(_ sender: Any) {
+        tableView.reloadData()
+        imgTitle = "" // clear title
+    }
 }
 
 
 extension OrderPictureViewController: UITableViewDataSource, UITableViewDelegate {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    if let _orderDetail = orderDetail, _orderDetail.pictures.count > 0 {
-      return _orderDetail.pictures.count
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if attachFiles.count > 0 {
+            return attachFiles.count
+        }
+        return selectedPictures.count
     }
-    return selectedPictures.count
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? PictureTableViewCell {
-      if let _orderDetail = orderDetail, _orderDetail.pictures.count > 0 {
-        let picture =  _orderDetail.pictures[indexPath.row]
-        cell.nameLabel.text = picture.name
-        cell.imgView.sd_setImage(with: URL(string: picture.link),
-                                 placeholderImage: UIImage(named: "place_holder"),
-                                 options: .refreshCached, completed: nil)
-      }
-      else {
-        let asset = selectedPictures[indexPath.row]
-        cell.nameLabel.text = asset.name.length > 0 ? asset.name : "Untitle_\(indexPath.row)"
-        cell.imgView.image = asset.image
-      }
-      
-      return cell
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? PictureTableViewCell {
+            if let _ = orderDetail {
+                let picture =  attachFiles[indexPath.row]
+                cell.nameLabel.text = picture.name
+                cell.imgView.sd_setImage(with: URL(string: E(picture.link)),
+                                         placeholderImage: UIImage(named: "place_holder"),
+                                         options: .refreshCached, completed: nil)
+            }
+            else {
+                let asset = selectedPictures[indexPath.row]
+                cell.nameLabel.text = asset.name.length > 0 ? asset.name : "Untitle_\(indexPath.row)"
+                cell.imgView.image = asset.image
+            }
+            
+            return cell
+        }
+        return UITableViewCell()
     }
-    return UITableViewCell()
-  }
-  
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return  60
-  }
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    tableView.deselectRow(at: indexPath, animated: true)
-    if let cell = tableView.cellForRow(at: indexPath) as? PictureTableViewCell {
-     showImage(cell.imgView.image ?? UIImage(named: "place_holder")!)
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return  60
     }
-  }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        if let cell = tableView.cellForRow(at: indexPath) as? PictureTableViewCell {
+            showImage(cell.imgView.image ?? UIImage(named: "place_holder")!)
+        }
+    }
 }
 
 
 struct PictureObject {
-  var name: String
-  var image: UIImage
-  
-  mutating func changeName(_ newName: String)  {
-    self.name = newName
-  }
+    var name: String
+    var image: UIImage
+    
+    mutating func changeName(_ newName: String)  {
+        self.name = newName
+    }
+}
+
+
+//MARK: - OtherFuntion
+extension OrderPictureViewController{
+    func getAssetThumbnail(asset: PHAsset, size: CGFloat) -> UIImage {
+        let retinaScale = UIScreen.main.scale
+        let retinaSquare = CGSize(width: size * retinaScale, height: size * retinaScale)
+        
+        let cropSizeLength = min(asset.pixelWidth, asset.pixelHeight)
+        let square = CGRect(x: 0, y: 0, width: CGFloat(cropSizeLength), height:  CGFloat(cropSizeLength))
+        
+        let cropRect = square.applying(CGAffineTransform(scaleX: 1.0/CGFloat(asset.pixelWidth), y: 1.0/CGFloat(asset.pixelHeight)))
+        
+        let manager = PHImageManager.default()
+        let options = PHImageRequestOptions()
+        var thumbnail = UIImage()
+        
+        options.isSynchronous = true
+        options.deliveryMode = .highQualityFormat
+        options.resizeMode = .exact
+        options.normalizedCropRect = cropRect
+        
+        manager.requestImage(for: asset, targetSize: retinaSquare, contentMode: .aspectFit, options: options, resultHandler: {(result, info)->Void in
+            thumbnail = result!
+        })
+        return thumbnail
+    }
+}
+
+extension PHAsset {
+    
+    var originalFilename: String? {
+        
+        var fname:String?
+        
+        if #available(iOS 9.0, *) {
+            let resources = PHAssetResource.assetResources(for: self)
+            if let resource = resources.first {
+                fname = resource.originalFilename
+            }
+        }
+        
+        if fname == nil {
+            // this is an undocumented workaround that works as of iOS 9.1
+            fname = self.value(forKey: "filename") as? String
+        }
+        
+        return fname
+    }
 }

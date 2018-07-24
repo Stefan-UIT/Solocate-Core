@@ -30,7 +30,6 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
         super.viewDidLoad()
     
         setupNavigationBar()
-        updateUI()
         getOrderDetail()
     }
     
@@ -62,12 +61,12 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
         
         let child_2:OrderSignatureViewController = .loadSB(SB: .Order)
         //let child_3 = OrderNotesViewController.loadViewController(type: OrderNotesViewController.self)
-        //let child_4:OrderPictureViewController = .loadSB(SB:.Order)
+        let child_4:OrderPictureViewController = .loadSB(SB:.Order)
         
         if order?.statusCode.compare("DV") == ComparisonResult.orderedSame {
-            return [child_1,child_2]
+            return [child_1,child_2,child_4]
         }
-        return [child_1]
+        return [child_1,child_4]
     }
     
     private  func updateUI() {
@@ -95,7 +94,6 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
             switch result{
             case .object(let object):
                 self?.orderDetail = object
-                self?.updateUI()
                 for vc in (self?.viewControllers)! {
                     (vc as? BaseOrderDetailViewController)?.orderDetail = object
                     (vc as? BaseOrderDetailViewController)?.routeID = self?.routeID

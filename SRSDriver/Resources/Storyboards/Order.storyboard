@@ -1045,7 +1045,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iEc-Xa-4Yi" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="5590" y="-188"/>
+            <point key="canvasLocation" x="5598" y="-161"/>
         </scene>
         <!--Order Picture View Controller-->
         <scene sceneID="EeO-ts-sEJ">
@@ -1071,9 +1071,6 @@
                                                     <state key="normal" title="Route ID-51 (0 images)">
                                                         <color key="titleColor" red="0.035294117647058823" green="0.15294117647058825" blue="0.25882352941176467" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
-                                                    <connections>
-                                                        <action selector="clearPhotos:" destination="20t-UQ-9pn" eventType="touchUpInside" id="Zs0-yy-bJg"/>
-                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2da-hs-kDG">
                                                     <rect key="frame" x="295" y="0.0" width="40" height="52"/>
@@ -1216,6 +1213,7 @@
                     </view>
                     <connections>
                         <outlet property="actionButton" destination="BQA-dl-LtX" id="nyA-lN-g8C"/>
+                        <outlet property="btnShowImage" destination="YlK-IM-oJQ" id="tdI-P6-9bT"/>
                         <outlet property="headerView" destination="QcA-bS-6I4" id="ysf-bv-jG3"/>
                         <outlet property="tableView" destination="drG-lw-Imq" id="lfp-KM-z2N"/>
                         <outlet property="takePictureButton" destination="2da-hs-kDG" id="gLq-w5-sAt"/>

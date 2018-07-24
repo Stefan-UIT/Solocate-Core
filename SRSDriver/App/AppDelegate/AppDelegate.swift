@@ -81,6 +81,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     //Handle User tap notification messages while app is in the foreground.
   func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
     print("==>Did Receive Response: \(response)")
+    
+    // Handle Tap
+    /*
     if let userInfo = response.notification.request.content.userInfo as? [String: Any]
     {
         if let type = userInfo["type"] as? String {
@@ -95,7 +98,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                 }
             }
         }
+  
     }
+   */
     completionHandler()
 
   }

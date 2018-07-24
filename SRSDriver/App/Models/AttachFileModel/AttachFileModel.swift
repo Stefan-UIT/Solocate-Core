@@ -37,7 +37,7 @@ class AttachFileModel: BaseModel {
       
       //let contentType = "multipart/form-data; boundary=" + boundary
       
-      let fileParamConstant = "file"
+      let fileParamConstant = "image_file"
       let boundaryStart = "--\(boundary)\r\n"
       let boundaryEnd = "--\(boundary)--\r\n"
       let contentDispositionString = "Content-Disposition: form-data; name=\"\(fileParamConstant)\"; filename=\"\(E(name))\"\r\n"
@@ -57,10 +57,32 @@ class AttachFileModel: BaseModel {
       return requestBodyData;
 
     }else {
-      
+      //
     }
     
-    return dic;
+    return dic
   }
-  
+    
+    func getDataObject(_ fileParam:String) -> NSMutableData {
+        //let contentType = "multipart/form-data; boundary=" + boundary
+        
+        let fileParamConstant = fileParam
+        let boundaryStart = "--\(boundary)\r\n"
+        let boundaryEnd = "--\(boundary)--\r\n"
+        let contentDispositionString = "Content-Disposition: form-data; name=\"\(fileParamConstant)\"; filename=\"\(E(name))\"\r\n"
+        
+        let contentTypeString = "Content-Type: \(E(mimeType))\r\n\r\n"
+        
+        let requestBodyData : NSMutableData = NSMutableData()
+        
+        //value
+        requestBodyData.append(boundaryStart.data(using: String.Encoding.utf8)!)
+        requestBodyData.append(contentDispositionString.data(using: String.Encoding.utf8)!)
+        requestBodyData.append(contentTypeString.data(using: String.Encoding.utf8)!)
+        requestBodyData.append(contentFile!)
+        requestBodyData.append("\r\n".data(using: String.Encoding.utf8)!)
+        requestBodyData.append(boundaryEnd.data(using:  String.Encoding.utf8)!)
+        
+        return requestBodyData;
+  }
 }
