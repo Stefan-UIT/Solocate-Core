@@ -2,6 +2,7 @@ import Foundation
 import UIKit
 import Photos
 
+@available(iOS 11.0, *)
 extension UIAlertController {
     
     /// Add PhotoLibrary Picker
@@ -56,7 +57,6 @@ extension UIAlertController {
     }
 }
 
-@available(iOS 11.0, *)
 final class PhotoLibraryPickerViewController: UIViewController {
     
     public typealias SingleSelection = (PHAsset?) -> Swift.Void
@@ -91,7 +91,6 @@ final class PhotoLibraryPickerViewController: UIViewController {
     
     // MARK: Properties
     
-    @available(iOS 11.0, *)
     fileprivate lazy var collectionView: UICollectionView = { [unowned self] in
         $0.dataSource = self
         $0.delegate = self
@@ -99,7 +98,10 @@ final class PhotoLibraryPickerViewController: UIViewController {
         $0.showsVerticalScrollIndicator = false
         $0.showsHorizontalScrollIndicator = false
         $0.decelerationRate = UIScrollViewDecelerationRateFast
-        $0.contentInsetAdjustmentBehavior = .always
+        
+        if #available(iOS 11.0, *){
+            $0.contentInsetAdjustmentBehavior = .always
+        }
         $0.bounces = true
         $0.backgroundColor = .clear
         $0.maskToBounds = false
@@ -213,7 +215,6 @@ final class PhotoLibraryPickerViewController: UIViewController {
 
 // MARK: - CollectionViewDelegate
 
-@available(iOS 11.0, *)
 extension PhotoLibraryPickerViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -246,7 +247,6 @@ extension PhotoLibraryPickerViewController: UICollectionViewDelegate {
 
 // MARK: - CollectionViewDataSource
 
-@available(iOS 11.0, *)
 extension PhotoLibraryPickerViewController: UICollectionViewDataSource {
     
     func numberOfSections(in collectionView: UICollectionView) -> Int {
@@ -269,7 +269,6 @@ extension PhotoLibraryPickerViewController: UICollectionViewDataSource {
 
 // MARK: - CollectionViewDelegateFlowLayout
 
-@available(iOS 11.0, *)
 extension PhotoLibraryPickerViewController: UICollectionViewDelegateFlowLayout {
     
     public func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -99,7 +99,8 @@ class ImagePickerView: UIImagePickerController {
 
     }
     
-   fileprivate func showAlertImagePickerMulti()  {
+    @available(iOS 11.0, *)
+    fileprivate func showAlertImagePickerMulti()  {
         let alert = UIAlertController(style: .actionSheet)
         alert.addPhotoLibraryPicker(
             flow: .vertical,
@@ -111,6 +112,7 @@ class ImagePickerView: UIImagePickerController {
         alert.show()
     }
     
+    @available(iOS 11.0, *)
     fileprivate func showAlertImagePickerSignle()  {
         let alert = UIAlertController(style: .actionSheet)
         alert.addPhotoLibraryPicker(
