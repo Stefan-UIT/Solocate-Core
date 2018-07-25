@@ -182,51 +182,6 @@ class BaseAPIService {
         };
         
         return APIRequest(alarmofireDataRequest: request);
-        
-        /*
-        switch input {
-        case .mutiFile(let files):
-            sessionManager.upload(multipartFormData: { (multipartFormData) in
-                for  i in 0..<files.count {
-                    let file = files[i]
-                    multipartFormData.append(file.contentFile ?? Data(),
-                                             withName: "file[\(i)]",
-                                             fileName: E(file.name),
-                                             mimeType: E(file.mimeType))
-                }
-            }, usingThreshold: SessionManager.multipartFormDataEncodingMemoryThreshold,
-               to: path,
-               method: .post,
-               headers: headers) { (encodingResult) in
-                
-                switch encodingResult {
-                case .success(let upload, _, _):
-                    upload.responseJSON(completionHandler: { (response) in
-                        print(response)
-                       self.handleResponseJSON(dataResponse: response, callback: callback)
-                    })
-                    
-                case .failure(let error):
-                    print(error)
-                    let err = APIError() as! ERROR
-                    err.message = error.localizedDescription
-                    
-                    var result: APIOutput<RESULT, ERROR>;
-                    result = .error(err)
-                    
-                    DispatchQueue.main.async {
-                        callback(result);
-                    }
-                    break
-                }
-            }
-                
-            return nil
-            
-        default:
-            
-        }
-        */
     }
  }
 

@@ -44,11 +44,11 @@ class ImagePickerView: UIImagePickerController {
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet);
         
         let actionGallery = UIAlertAction(title: "Album Gallery", style: .default) {[weak self] (action) in
-           self?.showAlertImagePickerMulti()
+           self?.getAllGallery(vc: atVC, isMultiplePick: true)
         }
         
-        let actionCamera = UIAlertAction(title: "Take photo", style: .default) { (action) in
-            //
+        let actionCamera = UIAlertAction(title: "Take photo", style: .default) {[weak self] (action) in
+            self?.getCamera(vc:atVC )
         }
         
         let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
@@ -128,10 +128,14 @@ class ImagePickerView: UIImagePickerController {
     }
     
     
-    fileprivate  func getAllGallery(vc:UIViewController)  {
+    fileprivate  func getAllGallery(vc:UIViewController, isMultiplePick:Bool = false)  {
         
         if #available(iOS 11, *) {
-            self.showAlertImagePickerSignle()
+            if isMultiplePick {
+                self.showAlertImagePickerMulti()
+            }else{
+                self.showAlertImagePickerSignle()
+            }
             
         }else{
             self.allowsEditing = true;
@@ -140,6 +144,13 @@ class ImagePickerView: UIImagePickerController {
             
             vc.present(self, animated: true, completion: nil)
         }
+    }
+    
+    fileprivate  func getCamera(vc:UIViewController)  {
+        self.sourceType = .camera
+        self.allowsEditing = true
+        self.delegate = self
+        vc.present(self, animated: true, completion: nil)
     }
     
     fileprivate func setCallback(_ callback:@escaping ImagePickerViewCallback) {
@@ -180,7 +191,7 @@ extension ImagePickerView:UIImagePickerControllerDelegate,UINavigationController
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         print(info)
-        if  let image = info[UIImagePickerControllerEditedImage] {
+        if  let image = info[UIImagePickerControllerEditedImage]{
             picker.dismiss(animated: true) {
                 self.callback?(true,image)
             }

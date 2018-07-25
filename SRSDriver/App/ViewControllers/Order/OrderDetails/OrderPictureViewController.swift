@@ -63,7 +63,6 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
                     if let data = UIImageJPEGRepresentation(image, 0.85) {
                         let file: AttachFileModel = AttachFileModel()
                         file.name = E(_data[i].originalFilename)
-                        file.name = "ABC.png"
                         file.type = ".png"
                         file.mimeType = "image/png"
                         file.contentFile = data
@@ -76,6 +75,20 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
                 
                 if arrAttachfile.count > 0{
                     self.uploadMultipleFile(files: arrAttachfile)
+                }
+                
+            }else if let image = data as? UIImage {
+                if let data = UIImageJPEGRepresentation(image, 0.85) {
+                    let file: AttachFileModel = AttachFileModel()
+                    file.name = "IMG-\(Date())"
+                    file.type = ".png"
+                    file.mimeType = "image/png"
+                    file.contentFile = data
+                    
+                    self.uploadMultipleFile(files: [file])
+                    
+                }else {
+                    print("encode failure")
                 }
             }
         }
