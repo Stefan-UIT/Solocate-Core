@@ -36,7 +36,6 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
     guard let order = orderDetail else { return }
     
     if let signFile:AttachFileModel = order.url?.sig{
-      if let _ = signFile.name{
         controlsContainerView.isHidden = true
         signatureImgView.isHidden = false
         
@@ -44,10 +43,6 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
                                      placeholderImage: nil,
                                      options: .allowInvalidSSLCertificates,
                                      completed: nil)
-      }else {
-        controlsContainerView.isHidden = false
-        signatureImgView.isHidden = true
-      }
       
     }else {
       controlsContainerView.isHidden = false
