@@ -108,8 +108,7 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
   
   override func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int) {
     super.updateIndicator(for: viewController, fromIndex: fromIndex, toIndex: toIndex)
-//    guard let _orderDetail = orderDetail else {return}
-    containerView.isScrollEnabled = !(toIndex == 1)
+
   }
     
 }
