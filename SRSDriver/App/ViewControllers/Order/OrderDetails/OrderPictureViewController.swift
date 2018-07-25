@@ -46,10 +46,9 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
     func upateUI() {
         if let _orderDetail = orderDetail {
             let isAlreadyUploadedPictures = _orderDetail.url?.doc?.count > 0
-            actionButton.isHidden = isAlreadyUploadedPictures
             vNoImage?.isHidden = isAlreadyUploadedPictures
             vNoImage?.isHidden = (_orderDetail.url?.doc?.count > 0)
-            btnShowImage.setTitle("Order ID - \(_orderDetail.id)(\(selectedPictures.count) items)", for: .normal)
+            btnShowImage.setTitle("Order ID - \(_orderDetail.id)(\(attachFiles.count) items)", for: .normal)
         }
     }
     
@@ -61,9 +60,10 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
                 
                 for i in 0..<_data.count{
                     let image:UIImage = self.getAssetThumbnail(asset: _data[i], size: ScreenSize.SCREEN_HEIGHT)
-                    if let data = UIImageJPEGRepresentation(image, 1.0) {
+                    if let data = UIImageJPEGRepresentation(image, 0.85) {
                         let file: AttachFileModel = AttachFileModel()
                         file.name = E(_data[i].originalFilename)
+                        file.name = "ABC.png"
                         file.type = ".png"
                         file.mimeType = "image/png"
                         file.contentFile = data
@@ -107,6 +107,8 @@ extension OrderPictureViewController {
             switch result{
             case .object(let object):
                 self?.orderDetail = object
+                self?.initData()
+                self?.upateUI()
                 self?.tableView.reloadData()
                 
             case .error(let error):
@@ -220,14 +222,9 @@ extension OrderPictureViewController: UITableViewDataSource, UITableViewDelegate
             if let _ = orderDetail {
                 let picture =  attachFiles[indexPath.row]
                 cell.nameLabel.text = picture.name
-                cell.imgView.sd_setImage(with: URL(string: E(picture.link)),
+                cell.imgView.sd_setImage(with: URL(string: E(picture.url)),
                                          placeholderImage: UIImage(named: "place_holder"),
                                          options: .refreshCached, completed: nil)
-            }
-            else {
-                let asset = selectedPictures[indexPath.row]
-                cell.nameLabel.text = asset.name.length > 0 ? asset.name : "Untitle_\(indexPath.row)"
-                cell.imgView.image = asset.image
             }
             
             return cell

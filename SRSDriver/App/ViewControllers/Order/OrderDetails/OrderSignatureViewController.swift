@@ -40,7 +40,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
         controlsContainerView.isHidden = true
         signatureImgView.isHidden = false
         
-        signatureImgView.sd_setImage(with: URL(string: E(signFile.link)),
+        signatureImgView.sd_setImage(with: URL(string: E(signFile.url)),
                                      placeholderImage: nil,
                                      options: .allowInvalidSSLCertificates,
                                      completed: nil)

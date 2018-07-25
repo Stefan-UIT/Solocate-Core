@@ -18,7 +18,7 @@ class AttachFileModel: BaseModel {
   var id:String?
   var contentFile:Data?
   var type:String?
-  var link:String?
+  var url:String?
   
   required convenience init?(map: Map) {
     self.init()
@@ -27,7 +27,7 @@ class AttachFileModel: BaseModel {
   override func mapping(map: Map) {
     id <- map["id"]
     name <- map["name"]
-    link <- map["link"]
+    url <- map["url"]
   }
   
   
