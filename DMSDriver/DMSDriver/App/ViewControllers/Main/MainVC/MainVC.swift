@@ -44,8 +44,13 @@ class MainVC: BaseViewController {
       SideMenuManager.default.menuPresentMode = .viewSlideOut
       SideMenuManager.default.menuFadeStatusBar = false
       SideMenuManager.default.menuAnimationTransformScaleFactor = 0.95
+        
+        if Constants.isLeftToRight {
+            SideMenuManager.default.menuLeftNavigationController = slideMenuNC
+        }else {
+            SideMenuManager.default.menuRightNavigationController = slideMenuNC
+        }
       
-      SideMenuManager.default.menuLeftNavigationController = slideMenuNC
     }
     
     func pushRouteListVC() {

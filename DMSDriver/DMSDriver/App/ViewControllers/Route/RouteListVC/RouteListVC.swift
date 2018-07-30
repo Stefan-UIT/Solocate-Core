@@ -145,7 +145,11 @@ fileprivate extension RouteListVC{
 
 extension RouteListVC:DMSNavigationServiceDelegate{
     func didSelectedBackOrMenu() {
-      present(SideMenuManager.default.menuLeftNavigationController!, animated: true, completion: nil)
+        if Constants.isLeftToRight {
+            present(SideMenuManager.default.menuLeftNavigationController!, animated: true, completion: nil)
+        }else{
+            present(SideMenuManager.default.menuRightNavigationController!, animated: true, completion: nil)
+        }
     }
     
     func didSelectedRightButton() {
