@@ -18,9 +18,9 @@ enum MenuItemType : Int {
     case .PROFILE:
       return ""
     case .ROUTES:
-      return "ROUTES"
+        return "Routes".localized.uppercased()
     case .LOGOUT:
-      return "LOGOUT"
+      return "Logout".localized.uppercased()
     }
   }
   
