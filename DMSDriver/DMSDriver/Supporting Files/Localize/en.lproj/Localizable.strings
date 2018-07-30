@@ -24,11 +24,11 @@
 "error_field_required"="Required Field";
 "error_lost_network_connection"="No internet connection. Please check your network.";
 "deny"="Deny";
-"orders"="Orders";
+"Orders"="Orders";
 "items"="Items";
-"packages"="Packages";
-"map"="Map";
-"messages"="Messages";
+"Packages"="Packages";
+"Map"="Map";
+"Messages"="Messages";
 "done"="Done";
 
 //LOGIN_SCREEN
@@ -51,16 +51,20 @@
 "Routes" = "Routes";
 
 //LIST_ORDERS
-"orders_have_no_orders"="You have no order";
+"Orders List"="Orders List";
+"You have no order"="You have no order";
 "New"="New";
-"orders_in_progress"="In Progress";
-"orders_delivered"="Finished";
-"picked_up" = "Picked Up";
-"orders_missing_in_truck" = "Missing in Trunk";
-"orders_missing_at_pick_up" = "Missing at Pick-up";
-"orders_cancelled"="Cancelled";
+"In Progress"="In Progress";
+"Finished"="Finished";
+"Picked Up" = "Picked Up";
+"Missing in Trunk" = "Missing in Trunk";
+"Missing at Pick-up" = "Missing at Pick-up";
+"Cancelled"="Cancelled";
 
 "Total Order"="Total Order";
+"Store"="Store";
+"Warehouse"="Warehouse";
+"Expected time"="Expected time";
 
 //ODER_DETAIL
 "Delivery number"="Delivery number";
@@ -75,7 +79,7 @@
 "order_detail_phone"="Phone";
 "order_detail_delivery_address"="Address";
 "order_detail_description"="Description";
-"order_detail_order_type"="Type";
+"Type"="Type";
 "order_detail_unable_start"="Unable to Start";
 "order_detail_unable_finish"="Unable to Finish";
 "order_detail_add_note"="Add Note";

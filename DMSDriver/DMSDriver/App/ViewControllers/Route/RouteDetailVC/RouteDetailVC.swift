@@ -9,10 +9,14 @@
 import UIKit
 
 enum TabBarItem:String {
-    case Order = "Orders";
+    case Order = "Orders"
     case Packages = "Packages";
     case Map = "Map";
     case Messages = "Messages";
+    
+    func titleLocalized() -> String{
+        return self.rawValue.localized
+    }
 }
 
 class RouteDetailVC: UITabBarController {
@@ -39,20 +43,20 @@ class RouteDetailVC: UITabBarController {
     func setupNavigateBar() {
         navigationService.navigationItem = self.navigationItem
         navigationService.delegate = self;
-        navigationService.updateNavigationBar(.BackOnly, "Orders List")
+        navigationService.updateNavigationBar(.BackOnly, "Orders List".localized)
     }
     
     func updateNavigationBar()  {
         
         switch selectedTabBarItem {
         case .Order:
-            navigationService.updateNavigationBar(.BackOnly, "Orders List")
+            navigationService.updateNavigationBar(.BackOnly, "Orders List".localized)
         case .Packages:
-            navigationService.updateNavigationBar(.BackOnly, "Packages")
+            navigationService.updateNavigationBar(.BackOnly, "Packages".localized)
         case .Map:
-            navigationService.updateNavigationBar(.BackOnly, "Map")
+            navigationService.updateNavigationBar(.BackOnly, "Map".localized)
         case .Messages:
-            navigationService.updateNavigationBar(.BackOnly, "Messanges")
+            navigationService.updateNavigationBar(.BackOnly, "Messanges".localized)
 
         }
     }
@@ -82,10 +86,10 @@ class RouteDetailVC: UITabBarController {
             messageVC.route = route
         }
         
-        orderVC.tabBarItem.title = "Orders"
-        packageVC.tabBarItem.title = "Packages"
-        mapVC.tabBarItem.title = "Map"
-        messageVC.tabBarItem.title = "Messages"
+        orderVC.tabBarItem.title = "Orders".localized
+        packageVC.tabBarItem.title = "Packages".localized
+        mapVC.tabBarItem.title = "Map".localized
+        messageVC.tabBarItem.title = "Messages".localized
         
         orderVC.tabBarItem.image = #imageLiteral(resourceName: "ic_orderlist")
         packageVC.tabBarItem.image = #imageLiteral(resourceName: "ic_car")

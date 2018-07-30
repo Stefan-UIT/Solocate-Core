@@ -130,20 +130,19 @@ enum OrderStatus: String {
   var statusName: String {
     switch self {
     case .open:
-      return "orders_open".localized
+      return "New".localized
     case .inprogress:
-      return "orders_in_progress".localized
+      return "In Progress".localized
     case .delivered:
-      return "orders_delivered".localized
+      return "Finished".localized
     case .cancel:
-      return "orders_cancelled".localized
-        
+      return "Cancelled".localized
     case .pickedUp:
-        return "picked_up".localized
+        return "Picked Up".localized
     case .missingInTruck:
-        return "orders_missing_in_truck".localized
+        return "Missing in Trunk".localized
     case .missingAnPickUP:
-        return "orders_missing_at_pick_up".localized
+        return "Missing at Pick-up".localized
     }
   }
 }
