@@ -151,8 +151,7 @@ extension ProfileVC:UITableViewDataSource {
   
   func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
     let view = UIView()
-    view.backgroundColor = AppColor.grayColor
-    
+    view.backgroundColor = UIColor.clear
     return view
   }
   
