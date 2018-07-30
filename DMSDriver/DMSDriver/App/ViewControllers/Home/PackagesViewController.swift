@@ -32,9 +32,9 @@ class PackagesViewController: BaseViewController {
   var route: Route?
   var dateStringFilter:String = Date().toString()
     
-  fileprivate let titleHeaders = ["DELIVERY",
-                                  "BACKHAUL",
-                                  "PACKAGE ON TRUCK"]
+  fileprivate let titleHeaders = ["Delivery".localized.uppercased(),
+                                  "Backhaul".localized.uppercased(),
+                                  "Package On Truck".localized.uppercased()]
     
   fileprivate var dileveryDatas:[[String]] = []
   fileprivate var backHaulDatas:[[String]] = []
@@ -54,22 +54,22 @@ class PackagesViewController: BaseViewController {
     
     func setupData() {
         
-        dileveryDatas = [["Total cases","\(package.delivery.total_case)"],
-                         ["Case complete","\(package.delivery.case_complete)"],
-                         ["Case not complete","\(package.delivery.case_not_complete)"],
-                         ["Total pallets","\(package.delivery.total_pallet)"],
-                         ["Pallet complete","\(package.delivery.pallet_complete)"],
-                         ["Pallet not complete","\(package.delivery.pallet_not_complete)"]]
+        dileveryDatas = [["Total cases".localized,"\(package.delivery.total_case)"],
+                         ["Case complete".localized,"\(package.delivery.case_complete)"],
+                         ["Case not complete".localized,"\(package.delivery.case_not_complete)"],
+                         ["Total pallets".localized,"\(package.delivery.total_pallet)"],
+                         ["Pallet complete".localized,"\(package.delivery.pallet_complete)"],
+                         ["Pallet not complete".localized,"\(package.delivery.pallet_not_complete)"]]
         
-        backHaulDatas = [["Total cases","\(package.back_haul.total_case)"],
-                         ["Case complete","\(package.back_haul.case_complete)"],
-                         ["Case not complete","\(package.back_haul.case_not_complete)"],
-                         ["Total pallets","\(package.back_haul.total_pallet)"],
-                         ["Pallet complete","\(package.back_haul.pallet_complete)"],
-                         ["Pallet not complete","\(package.back_haul.pallet_not_complete)"]]
+        backHaulDatas = [["Total cases".localized,"\(package.back_haul.total_case)"],
+                         ["Case complete".localized,"\(package.back_haul.case_complete)"],
+                         ["Case not complete".localized,"\(package.back_haul.case_not_complete)"],
+                         ["Total pallets".localized,"\(package.back_haul.total_pallet)"],
+                         ["Pallet complete".localized,"\(package.back_haul.pallet_complete)"],
+                         ["Pallet not complete".localized,"\(package.back_haul.pallet_not_complete)"]]
         
-        packageOnTruckDatas = [["Total cases","\(package.package_on_truck.totalCase)"],
-                               ["Case complete","\(package.package_on_truck.totalPallet)"]]
+        packageOnTruckDatas = [["Total cases".localized,"\(package.package_on_truck.totalCase)"],
+                               ["Case complete".localized,"\(package.package_on_truck.totalPallet)"]]
         
     }
 }

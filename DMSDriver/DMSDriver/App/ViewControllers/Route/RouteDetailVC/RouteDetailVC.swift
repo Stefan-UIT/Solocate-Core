@@ -8,14 +8,23 @@
 
 import UIKit
 
-enum TabBarItem:String {
-    case Order = "Orders"
-    case Packages = "Packages";
-    case Map = "Map";
-    case Messages = "Messages";
+enum TabBarItem:Int {
+    case Order = 0
+    case Packages;
+    case Map;
+    case Messages;
     
-    func titleLocalized() -> String{
-        return self.rawValue.localized
+    func title() -> String {
+        switch self {
+        case .Order:
+            return "Orders List".localized
+        case .Packages:
+            return "Packages".localized
+        case .Map :
+            return "Map".localized
+        case .Messages:
+            return "Messanges".localized
+        }
     }
 }
 
@@ -43,22 +52,11 @@ class RouteDetailVC: UITabBarController {
     func setupNavigateBar() {
         navigationService.navigationItem = self.navigationItem
         navigationService.delegate = self;
-        navigationService.updateNavigationBar(.BackOnly, "Orders List".localized)
+        navigationService.updateNavigationBar(.BackOnly, TabBarItem.Order.title())
     }
     
     func updateNavigationBar()  {
-        
-        switch selectedTabBarItem {
-        case .Order:
-            navigationService.updateNavigationBar(.BackOnly, "Orders List".localized)
-        case .Packages:
-            navigationService.updateNavigationBar(.BackOnly, "Packages".localized)
-        case .Map:
-            navigationService.updateNavigationBar(.BackOnly, "Map".localized)
-        case .Messages:
-            navigationService.updateNavigationBar(.BackOnly, "Messanges".localized)
-
-        }
+        navigationService.updateNavigationBar(.BackOnly, selectedTabBarItem.title())
     }
 
     override func didReceiveMemoryWarning() {
@@ -96,6 +94,11 @@ class RouteDetailVC: UITabBarController {
         mapVC.tabBarItem.image = #imageLiteral(resourceName: "ic_location")
         messageVC.tabBarItem.image = #imageLiteral(resourceName: "ic_message")
 
+        orderVC.tabBarItem.tag = 0
+        packageVC.tabBarItem.tag = 1
+        mapVC.tabBarItem.tag = 2
+        messageVC.tabBarItem.tag = 3
+        
         self.setViewControllers([orderVC,packageVC,mapVC], animated: false)
     }
     
@@ -116,9 +119,8 @@ class RouteDetailVC: UITabBarController {
 extension RouteDetailVC:UITabBarControllerDelegate{
     
     override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        if let title = item.title {
-            selectedTabBarItem = TabBarItem(rawValue: title) ?? .Order
-        }
+        let tag = item.tag
+        selectedTabBarItem = TabBarItem(rawValue: tag) ?? .Order
     }
     
 }
