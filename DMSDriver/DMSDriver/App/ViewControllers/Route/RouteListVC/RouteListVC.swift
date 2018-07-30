@@ -91,7 +91,7 @@ extension RouteListVC: UITableViewDataSource{
           
            cell.lblTitle?.text = "Route ID-\(route.id)"
            cell.lblSubtitle?.text = E(route.date)
-           cell.btnStatus?.setTitle(route.route_name_sts, for: .normal)
+           cell.btnStatus?.setTitle(route.route_name_sts.localized, for: .normal)
            cell.btnColor?.backgroundColor = route.colorStatus
            cell.lblRouteNumber?.text = "\(route.route_number)";
            cell.lblTotal?.text = "\(route.totalOrders)"
