@@ -62,6 +62,9 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5B5-fI-S1C">
                                                             <rect key="frame" x="281" y="17" width="39" height="30"/>
                                                             <state key="normal" title="   Edit"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="edit"/>
+                                                            </userDefinedRuntimeAttributes>
                                                             <connections>
                                                                 <action selector="onbtnClickEditWithBtn:" destination="PvO-3c-Hhr" eventType="touchUpInside" id="Ncq-wN-G1H"/>
                                                             </connections>
@@ -186,6 +189,9 @@
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1oU-U5-lss">
                                                             <rect key="frame" x="197" y="17" width="123" height="30"/>
                                                             <state key="normal" title="Change password"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Change Password"/>
+                                                            </userDefinedRuntimeAttributes>
                                                             <connections>
                                                                 <action selector="onbtnClickChagePasswordWithBtn:" destination="3RR-dr-gaj" eventType="touchUpInside" id="nG8-F6-RYw"/>
                                                             </connections>

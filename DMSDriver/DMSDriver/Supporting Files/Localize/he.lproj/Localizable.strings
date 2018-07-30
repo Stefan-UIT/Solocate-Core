@@ -25,7 +25,7 @@
 "deny"="לְהַכּחִישׁ";
 "Orders"="הזמנות";
 "items"="פריטים";
-"Packages"="חבילות\n"; // DMS-Core
+"Packages"="חבילות";
 "Map"="מַפָּה";
 "Messages"="הודעות";
 "Message"="Message";//new
@@ -36,7 +36,7 @@
 //LOGIN_SCREEN
 "login_title"="התחברות";
 "login_username_hint"="שם משתמש";
-"login_password_hint"="סיסמה";
+"Password"="סיסמה";
 "login_forgot_password"="שכחת את הסיסמא";
 "error_invalid_password"="הסיסימא אינה תקפה";
 "error_incorrect_password"="סיסמא לא נכונה";
@@ -48,9 +48,24 @@
 
 //MENU
 "menu"="תַפרִיט";
-"change_password"="שנה סיסמא";
+"Change Password"="שנה סיסמא";
 "Logout"="להתנתק";
 "Routes" = "Routes";
+
+//PROFILE
+"First Name"="שם פרטי";
+"Last Name"="שם משפחה";
+"Gender"="Gender";
+"Title"="Title";
+"Birth Date"="Birth Date";
+"Public"="Public";//new
+"Private"="Private";//new
+"Profile"="Profile";//new
+"Your password has been updated"="Your password has been updated";//new
+"Old Password"="Old Password";//new
+"New Password"="New Password";//new
+"Confirm Password"="Confirm Password";//new
+
 
 
 //LIST_ORDERS
@@ -94,6 +109,7 @@
 "Contact Name"="שם איש קשר";
 "Phone"="טלפון";
 "Address"="כתובת";
+"Email"="דוא''ל";
 "Description"="תיאור";
 "Type"="סוּג";
 "Reason"="Reason";//new

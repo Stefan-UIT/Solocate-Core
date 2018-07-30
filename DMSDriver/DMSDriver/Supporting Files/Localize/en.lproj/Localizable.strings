@@ -37,7 +37,7 @@
 //LOGIN_SCREEN
 "login_title"="LOGIN";
 "login_username_hint"="User Name";
-"login_password_hint"="Password";
+"Password"="Password";
 "login_forgot_password"="Forgot your password?";
 "error_invalid_password"="Password Invalid";
 "error_incorrect_password"="Password Incorrect";
@@ -49,9 +49,23 @@
 
 // MENU
 "menu"="Menu";
-"change_password"="Change Password";
+"Change Password"="Change Password";
 "Logout"="Logout";
-"Routes" = "Routes";
+"Routes"="Routes";
+
+//PROFILE
+"First Name"="First Name";
+"Last Name"="Last name";
+"Gender"="Gender";
+"Title"="Title";
+"Birth Date"="Birth Date";
+"Public"="Public";
+"Private"="Private";
+"Profile"="Profile";
+"Your password has been updated"="Your password has been updated";
+"Old Password"="Old Password";
+"New Password"="New Password";
+"Confirm Password"="Confirm Password";
 
 //LIST_ORDERS
 "Orders List"="Orders List";
@@ -91,6 +105,7 @@
 "Cases"="Cases";
 "Contact Name"="Contact Name";
 "Phone"="Phone";
+"Email"="Email";
 "Address"="Address";
 "Description"="Description";
 "Type"="Type";

@@ -24,9 +24,9 @@ class ProfileVC: BaseViewController {
     var title:String {
         switch self {
         case .sectionPublic:
-        return "Public"
+        return "Public".localized
         case .sectionPrivate:
-        return "Private"
+        return "Private".localized
         }
       }
     }
@@ -67,7 +67,7 @@ class ProfileVC: BaseViewController {
   override func updateNavigationBar() {
     super.updateNavigationBar()
     self.navigationService.delegate = self
-    self.navigationService.updateNavigationBar(.Menu, "Profile")
+    self.navigationService.updateNavigationBar(.Menu, "Profile".localized)
   }
   
     func setupTableView() {
@@ -76,15 +76,12 @@ class ProfileVC: BaseViewController {
     }
   
     func initData() {
-      publicInforDatas = [["First Name",E(user?.firstName)],
-                          ["Last Name",E(user?.lastName)],
-                          ["Gender",""],
-                          ["Title",""],
-                          ["Birth Date",""],]
+      publicInforDatas = [["First Name".localized,E(user?.firstName)],
+                          ["Last Name".localized,E(user?.lastName)]]
     
-      privateInforDatas = [["Phone",E(user?.phone)],
-                           ["Email",E(user?.email)],
-                           ["Password","Change password"]]
+      privateInforDatas = [["Phone".localized,E(user?.phone)],
+                           ["Email".localized,E(user?.email)],
+                           ["Password".localized,"Change Password".localized]]
     }
     
 
@@ -143,10 +140,10 @@ extension ProfileVC:UITableViewDataSource {
     switch profileSection {
     case .sectionPublic:
       cellHeader.btnEdit?.setImage(!isEditPublicInfor ? #imageLiteral(resourceName: "ic_edit") : nil, for: .normal)
-      cellHeader.btnEdit?.setTitle(isEditPublicInfor ? "Done" : "  Edit", for: .normal)
+      cellHeader.btnEdit?.setTitle(isEditPublicInfor ? "done".localized : "  \("edit".localized)", for: .normal)
     case .sectionPrivate:
       cellHeader.btnEdit?.setImage(!isEditPrivateInfor ? #imageLiteral(resourceName: "ic_edit") : nil, for: .normal)
-      cellHeader.btnEdit?.setTitle(isEditPrivateInfor ? "Done" : "  Edit", for: .normal)
+      cellHeader.btnEdit?.setTitle(isEditPrivateInfor ? "done".localized : "  \("edit".localized)", for: .normal)
     }
     
     return cellHeader
@@ -359,7 +356,7 @@ extension ProfileVC{
         strongSelf.user = obj.data;
         strongSelf.initData()
         strongSelf.tbvContent?.reloadData()
-        strongSelf.showAlertView("Update Successfully.")
+        strongSelf.showAlertView("Updated Successful".localized)
 
         break
       case .error(let error):

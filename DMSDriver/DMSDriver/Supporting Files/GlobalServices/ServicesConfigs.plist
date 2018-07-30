@@ -49,7 +49,7 @@
 	<key>READ_MESSAGE</key>
 	<string>/backend-api/v1/messages/%@</string>
 	<key>CHECK_TOKEN</key>
-	<string>authentication/users/token</string>
+	<string>/authentication/users/token</string>
 	<key>CHANGE_PASSWORD</key>
 	<string>/auth/v1/user/change-password</string>
 	<key>RESET_PASSWORD_URL</key>
