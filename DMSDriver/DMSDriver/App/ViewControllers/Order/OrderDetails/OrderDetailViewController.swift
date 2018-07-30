@@ -142,19 +142,19 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     func initVar()  {
         let des = E(orderDetail?.descriptionNote) + E(orderDetail?.descriptionNoteExt)
         if des.length > 0 {
-            arrTitleHeader = ["Order Status",
-                              "Order Information",
-                              "Information",
-                              "Description"]
+            arrTitleHeader = ["Order Status".localized,
+                              "Order Information".localized,
+                              "Information".localized,
+                              "Description".localized]
         }else {
-            arrTitleHeader = ["Order Status",
-                              "Order Information",
-                              "Information"]
+            arrTitleHeader = ["Order Status".localized,
+                              "Order Information".localized,
+                              "Information".localized]
         }
     }
   
     override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "order_detail_title".localized)
+        return IndicatorInfo(title: "Detail".localized)
     }
     
   
@@ -186,7 +186,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
   
         
-        let finishActionTitle = _orderDetail.statusCode == "OP" ? "start".localized : "finish".localized
+        let finishActionTitle = _orderDetail.statusCode == "OP" ? "Start".localized : "Finish".localized
 
         let finishAction = UIAlertAction(title: finishActionTitle, style: .default) { (alertAction) in
             self.handleFinishAction()
@@ -355,7 +355,7 @@ extension OrderDetailViewController {
       self.present(scanVC, animated: true, completion: nil)
       
     }
-    let finish = UIAlertAction(title: "finish".localized, style: .default) { [unowned self] (finihs) in
+    let finish = UIAlertAction(title: "Finish".localized, style: .default) { [unowned self] (finihs) in
       self.updateItemStatus("DV", orderItem: item)
     }
     
@@ -533,12 +533,12 @@ fileprivate extension OrderDetailViewController{
 
         switch orderDetail?.statusCode {
         case "OP":
-            updateStatusButton.setTitle("Start", for: .normal)
-            btnUnable.setTitle("Unable To Start", for: .normal)
+            updateStatusButton.setTitle("Start".localized, for: .normal)
+            btnUnable.setTitle("Unable To Start".localized, for: .normal)
 
         case "IP":
-            updateStatusButton.setTitle("Finish", for: .normal)
-            btnUnable.setTitle("Unable To Finish", for: .normal)
+            updateStatusButton.setTitle("Finish".localized, for: .normal)
+            btnUnable.setTitle("Unable To Finish".localized, for: .normal)
 
         default:
             updateStatusButton.isHidden = true

@@ -62,37 +62,37 @@ struct OrderDetailInforRow {
         case .orderId:
           name = "Order Id"
         case .status:
-          name = "order_detail_status".localized
+          name = "Status".localized
         case .type:
-          name = "order_detail_order_type".localized
+          name = "Type".localized
         case.reference:
-          name = "order_detail_order_reference".localized
+          name = "Order Ref".localized
         case .deliveryDate:
-          name = "order_detail_expected_date".localized
+          name = "Expected Date".localized
         case .startTime:
-            name = "Window Start Time"
+            name = "Window Start Time".localized
         case .endTime:
-            name = "Window End Time"
+            name = "Window End Time".localized
         case .serviceTime:
-            name = "Service Time"
+            name = "Service Time".localized
         case .seq:
-            name = "SEQ"
+            name = "SEQ".localized
         case .pallets:
-            name = "Pallets"
+            name = "Pallets".localized
         case .cases:
-            name = "Cases"
+            name = "Cases".localized
         case .customerName:
-          name = "order_detail_contact_name".localized
+          name = "Contact Name".localized
         case .phone:
-          name = "order_detail_phone".localized
+          name = "Phone".localized
         case .address:
-          name = "order_detail_delivery_address".localized
+          name = "Address".localized
         case .description:
-          name = "order_detail_description".localized
+          name = "Description".localized
         case .reason:
-          name = "Reason"
+          name = "Reason".localized
         case .message:
-          name = "Message"
+          name = "Message".localized
         }
   }
 }

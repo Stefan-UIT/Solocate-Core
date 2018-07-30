@@ -28,7 +28,7 @@ public extension UITableView {
     
     public  func addRefreshControl(_ target: Any?, action: Selector) {
         let refreshControl = UIRefreshControl(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 40))
-        refreshControl.attributedTitle = NSAttributedString(string: "pull_to_refresh".localized)
+        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh".localized)
         refreshControl.addTarget(target, action: action, for: .valueChanged)
         self.refreshControl = refreshControl
     }

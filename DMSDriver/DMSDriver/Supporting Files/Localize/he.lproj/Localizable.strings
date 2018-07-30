@@ -15,8 +15,8 @@
 "submit"="שלח";
 "reject"="לִדחוֹת";
 "send"="לִשְׁלוֹחַ";
-"finish"="סִיוּם";
-"start"="הַתחָלָה";
+"Finish"="סִיוּם";
+"Start"="הַתחָלָה";
 "unknown"="לא ידוע";
 "clear"="ברור";
 "accept"="לְקַבֵּל";
@@ -27,8 +27,10 @@
 "items"="פריטים";
 "Packages"="חבילות\n"; // DMS-Core
 "Map"="מַפָּה";
-"messages"="הודעות";
+"Messages"="הודעות";
+"Message"="Message";//new
 "done"="בוצע";
+"Pull to refresh"="לחץ כדי לרענן";
 
 //LOGIN_SCREEN
 "login_title"="התחברות";
@@ -69,21 +71,33 @@
 
 
 //ODER_DETAIL
+"Order Detail"="Order Detail";//New
 "Delivery number"="מס' משלוח";
-"order_detail_title"="פרט";
+"Detail"="פרט";
+"Order Status"="Order Status";//new
+"Order Information"="Order Information";//new
+"Information"="Information";//new
+"Order Id"="Order Id";
 "order_detail_signature"="חֲתִימָה";
 "order_detail_notes"="הערות";
 "order_detail_picture"="תְמוּנָה";
-"order_detail_order_reference"="הזמנה Ref";
-"order_detail_status"="סטָטוּס";
-"order_detail_expected_date"="תאריך צפוי";
-"order_detail_contact_name"="שם איש קשר";
-"order_detail_phone"="טלפון";
-"order_detail_delivery_address"="כתובת";
-"order_detail_description"="תיאור";
+"Order Ref"="הזמנה Ref";
+"Status"="סטָטוּס";
+"Expected Date"="תאריך צפוי";
+"Window Start Time"="Window Start Time";//new
+"Window End Time"="Window End Time";//new
+"Service Time"="Service Time";//new
+"SEQ"="SEQ";//new
+"Pallets"="Pallets";//new
+"Cases"="Cases";//new
+"Contact Name"="שם איש קשר";
+"Phone"="טלפון";
+"Address"="כתובת";
+"Description"="תיאור";
 "Type"="סוּג";
-"order_detail_unable_start"="לא יכול להתחיל";
-"order_detail_unable_finish"="לא ניתן לסיים";
+"Reason"="Reason";//new
+"Unable To Start"="לא יכול להתחיל";
+"Unable To Finish"="לא ניתן לסיים";
 "order_detail_add_note"="להוסיף הערה";
 "order_detail_update_barcode"="עדכון ברקוד:% @?";
 "order_detail_add_order_item"="ברקוד:% @";
@@ -104,8 +118,9 @@
 "order_detail_barcode_notmatch"="ברקוד אינו תואם";
 
 //REASON_LIST
-"reason_list_title"="בחר סיבה";
-"reason_choose_at_least_reason"="בחר סיבה אחת לפחות";
+"Select Reason"="בחר סיבה";
+"Please select at least one reason"="בחר סיבה אחת לפחות";
+"Enter a message"="Enter a message";//new
 
 //MESSAGE_SCREEN
 "message_send_new_message"="שלח הודעה חדשה";

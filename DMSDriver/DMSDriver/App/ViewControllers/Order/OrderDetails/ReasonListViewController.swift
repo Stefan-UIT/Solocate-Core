@@ -41,7 +41,7 @@ class ReasonListViewController: BaseViewController {
     
   func updateUI()  {
     if let _orderDetail = orderDetail, type == "1" {
-      let unableTitle = _orderDetail.status == .newStatus ? "order_detail_unable_start".localized : "order_detail_unable_finish".localized
+      let unableTitle = _orderDetail.status == .newStatus ? "Unable To Start".localized : "Unable To Finish".localized
             finishButton.setTitle(unableTitle, for: .normal)
     }
     
@@ -50,18 +50,20 @@ class ReasonListViewController: BaseViewController {
     
   override func updateNavigationBar() {
     self.navigationService.delegate = self
-    self.navigationService.updateNavigationBar(.BackOnly, "Select Reason")
+    self.navigationService.updateNavigationBar(.BackOnly, "Select Reason".localized)
   }
     
     func setupTextView()  {
         tvMessange?.delegate = self
+        lblPlaceholder?.text = "Enter a message".localized
+    
     }
   
     
   // MARK: - ACTION
   @IBAction func submit(_ sender: UIButton) {
     guard selectedIndex >= 0 else {
-      showAlertView("reason_choose_at_least_reason".localized)
+      showAlertView("Please select at least one reason".localized)
       return
     }
 

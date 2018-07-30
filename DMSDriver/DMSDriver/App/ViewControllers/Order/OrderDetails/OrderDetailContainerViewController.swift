@@ -82,7 +82,7 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
         navigateService = DMSNavigationService()
         navigateService?.navigationItem = self.navigationItem
         navigateService?.delegate = self
-        navigateService?.updateNavigationBar(.BackOnly, "Order Detail")
+        navigateService?.updateNavigationBar(.BackOnly, "Order Detail".localized)
     }
   
     private func getOrderDetail() {

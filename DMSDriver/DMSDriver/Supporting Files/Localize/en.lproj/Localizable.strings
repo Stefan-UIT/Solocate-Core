@@ -16,8 +16,8 @@
 "submit"="Submit";
 "reject"="Reject";
 "send"="Send";
-"finish"="Finish";
-"start"="Start";
+"Finish"="Finish";
+"Start"="Start";
 "unknown"="UNKNOWN";
 "clear"="Clear";
 "accept"="Accept";
@@ -29,7 +29,9 @@
 "Packages"="Packages";
 "Map"="Map";
 "Messages"="Messages";
+"Message"="Message";
 "done"="Done";
+"Pull to refresh"="Pull to refresh";
 
 //LOGIN_SCREEN
 "login_title"="LOGIN";
@@ -67,21 +69,33 @@
 "Expected time"="Expected time";
 
 //ODER_DETAIL
+"Order Detail"="Order Detail";
 "Delivery number"="Delivery number";
-"order_detail_title"="Detail";
+"Detail"="Detail";
+"Order Status"="Order Status";
+"Order Information"="Order Information";
+"Information"="Information";
+"Order Id"="Order Id";
 "order_detail_signature"="Signature";
 "order_detail_notes"="Notes";
 "order_detail_picture"="Picture";
-"order_detail_order_reference"="Order Ref";
-"order_detail_status"="Status";
-"order_detail_expected_date"="Expected Date";
-"order_detail_contact_name"="Contact Name";
-"order_detail_phone"="Phone";
-"order_detail_delivery_address"="Address";
-"order_detail_description"="Description";
+"Order Ref"="Order Ref";
+"Status"="Status";
+"Expected Date"="Expected Date";
+"Window Start Time"="Window Start Time";
+"Window End Time"="Window End Time";
+"Service Time"="Service Time";
+"SEQ"="SEQ";
+"Pallets"="Pallets";
+"Cases"="Cases";
+"Contact Name"="Contact Name";
+"Phone"="Phone";
+"Address"="Address";
+"Description"="Description";
 "Type"="Type";
-"order_detail_unable_start"="Unable to Start";
-"order_detail_unable_finish"="Unable to Finish";
+"Reason"="Reason";
+"Unable To Start"="Unable To Start";
+"Unable To Finish"="Unable To Finish";
 "order_detail_add_note"="Add Note";
 "order_detail_update_barcode"="Update barcode: %@?";
 "order_detail_add_order_item"="Barcode: %@";
@@ -101,8 +115,9 @@
 "order_detail_total"="Total";
 "order_detail_barcode_notmatch"="Barcode does not match";
 //REASON_LIST
-"reason_list_title"="Select reason";
-"reason_choose_at_least_reason"="Please select at least one reason";
+"Select Reason"="Select Reason";
+"Please select at least one reason"="Please select at least one reason";
+"Enter a message"="Enter a message";
 
 //MESSAGE_SCREEN
 "message_send_new_message"="Send new message";
