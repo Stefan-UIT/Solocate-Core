@@ -60,6 +60,10 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
         }
         
         let child_2:OrderSignatureViewController = .loadSB(SB: .Order)
+        child_2.updateOrderDetail = { [weak self] in
+            self?.getOrderDetail()
+        }
+        
         //let child_3 = OrderNotesViewController.loadViewController(type: OrderNotesViewController.self)
         let child_4:OrderPictureViewController = .loadSB(SB:.Order)
         
@@ -73,9 +77,7 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
         self.segmentedControl.isHidden = !(E(order?.statusCode) == "DV")
         self.conHSegmentedControl?.constant =  E(order?.statusCode) == "DV" ? 60 : 0
         
-        self.containerView.isScrollEnabled = E(order?.statusCode) == "IP" ||
-                                              E(order?.statusCode) == "DV"
-      
+        containerView.isScrollEnabled = self.orderDetail?.url?.sig != nil
     }
     
     private func setupNavigationBar()  {
@@ -94,6 +96,7 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
             switch result{
             case .object(let object):
                 self?.orderDetail = object
+                self?.updateUI()
                 for vc in (self?.viewControllers)! {
                     (vc as? BaseOrderDetailViewController)?.orderDetail = object
                     (vc as? BaseOrderDetailViewController)?.routeID = self?.routeID
@@ -108,9 +111,19 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
   
   override func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int) {
     super.updateIndicator(for: viewController, fromIndex: fromIndex, toIndex: toIndex)
-
-  }
     
+    if let status = order?.status {
+        switch status {
+        case .deliveryStatus:
+            print("From Index: \(fromIndex)")
+            containerView.isScrollEnabled = !((self.orderDetail?.url?.sig == nil) &&
+                                            (fromIndex == 1)) // 1 is tap signature
+
+        default:
+            containerView.isScrollEnabled = true
+        }
+    }
+  }
 }
 
 extension OrderDetailContainerViewController:DMSNavigationServiceDelegate{

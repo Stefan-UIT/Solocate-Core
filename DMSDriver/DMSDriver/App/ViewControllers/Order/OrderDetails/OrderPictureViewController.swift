@@ -104,7 +104,7 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
     }
     
     override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "order_detail_picture".localized)
+        return IndicatorInfo(title: "Picture".localized)
     }
 }
 
@@ -155,7 +155,7 @@ extension OrderPictureViewController {
             switch result{
             case .object(_):
                 // self?.controlsContainerView.isHidden = true
-                self?.showAlertView("Uploaded Successful")
+                self?.showAlertView("Uploaded Successful".localized)
                 
                 break
             case .error(let error):
@@ -183,7 +183,7 @@ extension OrderPictureViewController {
         
     
     func inputTitleFor(_ image: UIImage) {
-        let alert = UIAlertController(title: "order_detail_input_img_title".localized, message: nil, preferredStyle: .alert)
+        let alert = UIAlertController(title: "Enter title".localized, message: nil, preferredStyle: .alert)
         let okAction = UIAlertAction(title: "ok".localized, style: .default) { [unowned self] (okAction) in
             alert.dismiss(animated: true, completion: nil)
             guard let textField = alert.textFields?.first,
@@ -210,7 +210,7 @@ extension OrderPictureViewController {
         alert.addAction(cancelAction)
         alert.addAction(okAction)
         alert.addTextField { (textField) in
-            textField.placeholder = "order_detail_input_img_title_hint".localized
+            textField.placeholder = "Enter title".localized
         }
         present(alert, animated: true, completion: nil)
     }

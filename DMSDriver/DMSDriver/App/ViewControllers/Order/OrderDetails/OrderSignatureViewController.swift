@@ -17,6 +17,8 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
   @IBOutlet weak var finishButton: UIButton!
   @IBOutlet weak var unableToFinishButton: UIButton!
     
+    var updateOrderDetail:(() -> Void)?
+    
     var validationSubmit:Bool = false{
         didSet{
             controlsContainerView.alpha = validationSubmit ? 1 : 0.4
@@ -52,7 +54,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
   
   
   override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-    return IndicatorInfo(title: "order_detail_signature".localized)
+    return IndicatorInfo(title: "Signature".localized)
   }
   
   @IBAction func cancelDrawSignature(_ sender: UIButton) {
@@ -99,7 +101,8 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
       case .object(_):
         self?.controlsContainerView.isHidden = true
         self?.signatureView.isUserInteractionEnabled = false
-        self?.showAlertView("Successful")
+        self?.updateOrderDetail?()
+        self?.showAlertView("Uploaded Successful".localized)
 
         break
       case .error(let error):
