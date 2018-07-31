@@ -482,7 +482,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
                                                         for: indexPath) as? OrderDetailTableViewCell {
                 cell.orderDetailItem = item
-                //cell.selectionStyle = !(item.type == .phone && item.type == .address) ? .none : .default
+                cell.selectionStyle = .none
                 return cell
             }
         
