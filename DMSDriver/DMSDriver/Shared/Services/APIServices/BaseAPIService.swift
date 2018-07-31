@@ -99,6 +99,8 @@ class BaseAPIService {
         if let hds = headers {
             newHeaders = hds
         }
+        
+        newHeaders["X-localization"] = Locale.current.languageCode
         // setToken
         if let token = Caches().getTokenKeyLogin() {
             newHeaders["Authorization"] = "Bearer \(token)"

@@ -177,7 +177,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             arrTitleHeader = ["Order Status".localized,
                               "Order Information".localized,
                               "Information".localized,
-                              "Comments".localized]
+                              "Instructions".localized]
         }else {
             arrTitleHeader = ["Order Status".localized,
                               "Order Information".localized,
