@@ -21,15 +21,15 @@ class OrderDetailTableViewCell: UITableViewCell {
       nameLabel?.text = orderDetailItem.name
       contentLabel?.text = orderDetailItem.content
       iconImgView?.isHidden = true
-      lineView?.isHidden = (orderDetailItem.type == .description)
-      if orderDetailItem.type == .address {
-        iconImgView?.image = UIImage(named: "map")
-        iconImgView?.isHidden = false
-      }
-      else if orderDetailItem.type == .phone {
-        iconImgView?.image = UIImage(named: "phone")
-        iconImgView?.isHidden = false
-      }
+//      lineView?.isHidden = (orderDetailItem.type == .description)
+//      if orderDetailItem.type == .address {
+//        iconImgView?.image = UIImage(named: "map")
+//        iconImgView?.isHidden = false
+//      }
+//      else if orderDetailItem.type == .phone {
+//        iconImgView?.image = UIImage(named: "phone")
+//        iconImgView?.isHidden = false
+//      }
     }
   }
   
@@ -47,7 +47,39 @@ class OrderDetailTableViewCell: UITableViewCell {
   
 }
 
-
+enum OrderDetailType {
+    case hour
+    case date
+    case certificateNumber
+    case clientName
+    case customerName
+    case type
+    case urgency
+    case doubleType
+    case packagesNumber
+    case cartonsNumber
+    case surfacesNumber
+    case afternoon
+    case vehicle
+    case fromtodayToTomorrow
+    case collectionFromCompany
+    case startingStreet
+    case startingCity
+    case transferToCompany
+    case destinationStreet
+    case destinationCity
+    case standby
+    case barcode
+    case collectCall
+    case status
+    case failureCause
+    case comments
+    case certificateNumber_client
+    case executionTime
+    case receiverName
+    case secondReceiverName
+    case message
+}
 
 struct OrderDetailInforRow {
   var type: OrderDetailType
@@ -59,92 +91,102 @@ struct OrderDetailInforRow {
         self.content = content
         
         switch type {
-        case .orderId:
-          name = "Order Id"
-        case .status:
-          name = "Status".localized
-        case .type:
-          name = "Type".localized
-        case.reference:
-          name = "Order Ref".localized
-        case .deliveryDate:
-          name = "Expected Date".localized
-        case .startTime:
-            name = "Window Start Time".localized
-        case .endTime:
-            name = "Window End Time".localized
-        case .serviceTime:
-            name = "Service Time".localized
-        case .seq:
-            name = "SEQ".localized
-        case .pallets:
-            name = "Pallets".localized
-        case .cases:
-            name = "Cases".localized
+        case .hour:
+          name = "Hour".localized
+        case .date:
+          name = "Date".localized
+        case .certificateNumber:
+          name = "Certificate number".localized
+        case .clientName:
+          name = "Client name".localized
         case .customerName:
-          name = "Contact Name".localized
-        case .phone:
-          name = "Phone".localized
-        case .address:
-          name = "Address".localized
-        case .description:
-          name = "Description".localized
-        case .reason:
-          name = "Reason".localized
+          name = "Customer name".localized
+        case .type:
+            name = "Type".localized
+        case .urgency:
+            name = "Urgency".localized
+        case .doubleType:
+            name = "Double type".localized
+        case .packagesNumber:
+            name = "Packages number".localized
+        case .cartonsNumber:
+            name = "Cartons number".localized
+        case .surfacesNumber:
+            name = "Surfaces number".localized
+        case .afternoon:
+            name = "Afternoon".localized
+        case .vehicle:
+            name = "Vehicle".localized
+        case .fromtodayToTomorrow:
+            name = "From today to tomorrow".localized
+        case .collectionFromCompany:
+            name = "Collection fromn company".localized
+        case .startingCity:
+            name = "Starting city".localized
+        case .transferToCompany:
+            name = "Transfer to company".localized
+        case .destinationStreet:
+            name = "Destination street".localized
+        case .destinationCity:
+            name = "Transfer to company".localized
+        case .standby:
+            name = "Standby".localized
+        case .barcode:
+            name = "Barcode".localized
+        case .collectCall:
+            name = "CollecCall".localized
+        case .status:
+            name = "Status".localized
+        case .failureCause:
+            name = "FailureCause".localized
+        case .comments:
+            name = "Comments".localized
+        case .certificateNumber_client:
+            name = "Certificate number (Client)".localized
+        case .executionTime:
+            name = "Execution time".localized
+        case .receiverName:
+            name = "Receiver name".localized
+        case .secondReceiverName:
+            name = "Second receiver name".localized
+        case .startingStreet:
+            name = "Starting street".localized
         case .message:
-          name = "Message".localized
+            name = "Message".localized
         }
-  }
+    }
 }
 
 
-enum OrderDetailType {
-  case orderId
-  case status
-  case type
-  case reference
-  case deliveryDate
-  case startTime
-  case endTime
-  case serviceTime
-  case seq
-  case pallets
-  case cases
-  case customerName
-  case phone
-  case address
-  case description
-  case reason
-  case message
-}
+
 
 enum OrderStatus: String {
-  case open = "OP"
-  case pickedUp = "PU"
-  case delivered = "DV"
-  case inprogress = "IP"
-  case missingInTruck = "MT"
-  case missingAnPickUP = "MP"
-  case cancel = "CC"
+    case open = "OP"
+    case pickedUp = "PU"
+    case delivered = "DV"
+    case inprogress = "IP"
+    case missingInTruck = "MT"
+    case missingAnPickUP = "MP"
+    case cancel = "CC"
   
-  var statusName: String {
-    switch self {
-    case .open:
-      return "New".localized
-    case .inprogress:
-      return "In Progress".localized
-    case .delivered:
-      return "Finished".localized
-    case .cancel:
-      return "Cancelled".localized
-    case .pickedUp:
-        return "Picked Up".localized
-    case .missingInTruck:
-        return "Missing in Trunk".localized
-    case .missingAnPickUP:
-        return "Missing at Pick-up".localized
+    var statusName: String {
+        switch self {
+        case .open:
+            return "New".localized
+        case .inprogress:
+            return "In Progress".localized
+        case .delivered:
+            return "Finished".localized
+        case .cancel:
+            return "Cancelled".localized
+        case .pickedUp:
+            return "Picked Up".localized
+        case .missingInTruck:
+            return "Missing in Trunk".localized
+        case .missingAnPickUP:
+            return "Missing at Pick-up".localized
+        }
     }
-  }
 }
 
 

@@ -76,49 +76,81 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         
         let status = OrderStatus(rawValue: _orderDetail.statusCode) ?? OrderStatus.open
         let statusItem = OrderDetailInforRow(.status,status.statusName)
+        let urgency = OrderDetailInforRow(.urgency ,"YES")
         orderInforStatus.append(statusItem)
+        orderInforStatus.append(urgency)
+
         if  _orderDetail.status == .cancelStatus {
-            let reason = OrderDetailInforRow(.reason, E(_orderDetail.reason?.name))
+            let reason = OrderDetailInforRow(.failureCause, E(_orderDetail.reason?.name))
             let mess = OrderDetailInforRow(.message, E(_orderDetail.reason_msg))
             orderInforStatus.append(reason)
             orderInforStatus.append(mess)
         }
         
-        let orderId = OrderDetailInforRow(.orderId,"\(_orderDetail.id)")
-        let type = OrderDetailInforRow(.type, _orderDetail.orderType)
-        let ref = OrderDetailInforRow(.reference , _orderDetail.orderReference)
-        
-        let startTime = OrderDetailInforRow(.startTime, _orderDetail.startTime)
-        let endTime = OrderDetailInforRow(.endTime , _orderDetail.endTime)
-        let serviceTime = OrderDetailInforRow(.serviceTime ,"\(_orderDetail.serviceTime)")
-        let seq = OrderDetailInforRow(.seq ,"\(_orderDetail.seq)")
-        let pallets = OrderDetailInforRow(.pallets ,"\(_orderDetail.pallets)")
-        let cases = OrderDetailInforRow(.cases ,"\(_orderDetail.cases)")
-        
+        let hour = OrderDetailInforRow(.hour, "Hour")
         let dateTime = _orderDetail.timeWindowName.length > 0 ? _orderDetail.deliveryDate + " - " + _orderDetail.timeWindowName : _orderDetail.deliveryDate
-        let delDate = OrderDetailInforRow(.deliveryDate,dateTime )
+        let date = OrderDetailInforRow(.date,dateTime)
+        let certifiacteNumber = OrderDetailInforRow(.certificateNumber , "Certificate number")
         
-        let customer = OrderDetailInforRow(.customerName,_orderDetail.deliveryContactName)
-        let phone = OrderDetailInforRow(.phone,_orderDetail.deliveryContactPhone)
-        
-        let address = OrderDetailInforRow(.address,_orderDetail.deliveryAdd + "\n\(_orderDetail.deliveryCity)")
+        let clientName = OrderDetailInforRow(.clientName,_orderDetail.deliveryContactName)
+        let customerName = OrderDetailInforRow(.customerName ,_orderDetail.deliveryContactName)
+        let type = OrderDetailInforRow(.type ,"\(_orderDetail.orderType)")
+        let doubleType = OrderDetailInforRow(.doubleType ,"Double type")
+        let packetNumber = OrderDetailInforRow(.packagesNumber ,"Packages number")
+        let cartonsNumber = OrderDetailInforRow(.cartonsNumber,"Cartons number")
+        let surfacesNumber = OrderDetailInforRow(.surfacesNumber,"Surfaces number")
+        let afternoon = OrderDetailInforRow(.afternoon,"Afternoon")
+        let vehical = OrderDetailInforRow(.afternoon,"Vehical")
+        let fromTodyToTomorrow = OrderDetailInforRow(.fromtodayToTomorrow,"From today to tomorrow")
+        let collectionFromCompany = OrderDetailInforRow(.collectionFromCompany,"Collection from company")
+        let startingStreet = OrderDetailInforRow(.startingStreet,"Starting street")
+        let startingCity = OrderDetailInforRow(.startingCity,"Starting city")
+        let transferToCompany = OrderDetailInforRow(.transferToCompany,"Transfer to company")
+        let distinationStreet = OrderDetailInforRow(.transferToCompany,"Distination street")
+        let distinationCity = OrderDetailInforRow(.transferToCompany,"Distination city")
+        let standby = OrderDetailInforRow(.standby,"Standby")
+        let barCode = OrderDetailInforRow(.barcode,"Barcide")
+        let collectCall = OrderDetailInforRow(.collectCall,"Collect call")
+        let certificateNumber_client = OrderDetailInforRow(.certificateNumber_client,"CertificateNumber_client")
+        let executionTime = OrderDetailInforRow(.executionTime,"Execution Time")
+        let receiverName = OrderDetailInforRow(.receiverName,"Receiver Name")
+        let secondReceiverName = OrderDetailInforRow(.secondReceiverName, "Second receiver name")
+
+        //let address = OrderDetailInforRow(.address,_orderDetail.deliveryAdd + "\n\(_orderDetail.deliveryCity)")
         
         shouldFilterOrderItemsList = _orderDetail.items.filter({$0.statusCode == "OP"}).count > 0
         
-        orderInforRows.append(orderId)
+        orderInforRows.append(hour)
+        orderInforRows.append(date)
+        orderInforRows.append(certifiacteNumber)
         orderInforRows.append(type)
-        orderInforRows.append(ref)
-        orderInforRows.append(startTime)
-        orderInforRows.append(endTime)
-        orderInforRows.append(serviceTime)
-        orderInforRows.append(seq)
-        orderInforRows.append(pallets)
-        orderInforRows.append(cases)
-        orderInforRows.append(delDate)
+        orderInforRows.append(clientName)
+        orderInforRows.append(doubleType)
+        orderInforRows.append(packetNumber)
+        orderInforRows.append(cartonsNumber)
+        orderInforRows.append(surfacesNumber)
+        orderInforRows.append(afternoon)
+        orderInforRows.append(vehical)
+        orderInforRows.append(fromTodyToTomorrow)
+        orderInforRows.append(collectionFromCompany)
+        orderInforRows.append(startingStreet)
+        orderInforRows.append(startingCity)
+        orderInforRows.append(transferToCompany)
+        orderInforRows.append(distinationStreet)
+        orderInforRows.append(distinationCity)
+        orderInforRows.append(standby)
+        orderInforRows.append(barCode)
+        orderInforRows.append(collectCall)
+        orderInforRows.append(certificateNumber_client)
+        orderInforRows.append(executionTime)
+        orderInforRows.append(receiverName)
+        orderInforRows.append(secondReceiverName)
+
       
-        informationRows.append(customer)
-        informationRows.append(phone)
-        informationRows.append(address)
+        informationRows.append(clientName)
+        informationRows.append(customerName)
+        //informationRows.append(phone)
+        //informationRows.append(address)
       
         updateStatusButton.isHidden = _orderDetail.status != .newStatus && _orderDetail.status != .inProcessStatus
     }
@@ -145,7 +177,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             arrTitleHeader = ["Order Status".localized,
                               "Order Information".localized,
                               "Information".localized,
-                              "Description".localized]
+                              "Comments".localized]
         }else {
             arrTitleHeader = ["Order Status".localized,
                               "Order Information".localized,
@@ -304,14 +336,7 @@ extension OrderDetailViewController {
   }
   
   func updateItemStatus(_ status: String, orderItem: OrderItem) {
-    APIs.updateOrderItemStatus("\(orderItem.id)", status: status, reason: nil) { [unowned self] (errMsg) in
-      if let msg = errMsg {
-        self.showAlertView(msg)
-      }
-      else {
-        self.updateOrderDetail?()
-      }
-    }
+   
   }
   
   func findObject(_ code: String, items: [OrderItem]) -> OrderItem? {
@@ -457,7 +482,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
                                                         for: indexPath) as? OrderDetailTableViewCell {
                 cell.orderDetailItem = item
-                cell.selectionStyle = !(item.type == .phone && item.type == .address) ? .none : .default
+                //cell.selectionStyle = !(item.type == .phone && item.type == .address) ? .none : .default
                 return cell
             }
         
@@ -473,7 +498,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
           if let cell = tableView.dequeueReusableCell(withIdentifier: addressCellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
             
             let des = E(orderDetail?.descriptionNote) + " " + E(orderDetail?.descriptionNoteExt)
-            let description = OrderDetailInforRow(.description,des)
+            let description = OrderDetailInforRow(.comments,des)
             cell.orderDetailItem = description
             cell.selectionStyle = .none
 

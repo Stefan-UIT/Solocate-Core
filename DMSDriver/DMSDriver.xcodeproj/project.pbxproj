@@ -112,7 +112,6 @@
 		3B66B8DD210B1149000BDFEF /* MessageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B86D210B1148000BDFEF /* MessageAPI.swift */; };
 		3B66B8DE210B1149000BDFEF /* Reason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B86E210B1148000BDFEF /* Reason.swift */; };
 		3B66B8DF210B1149000BDFEF /* AlertDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B86F210B1148000BDFEF /* AlertDetailModel.swift */; };
-		3B66B8E0210B1149000BDFEF /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B870210B1148000BDFEF /* APIs.swift */; };
 		3B66B8E1210B1149000BDFEF /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B871210B1148000BDFEF /* Order.swift */; };
 		3B66B8E2210B1149000BDFEF /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B872210B1148000BDFEF /* Message.swift */; };
 		3B66B8E3210B1149000BDFEF /* GoogleDirectionResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B873210B1148000BDFEF /* GoogleDirectionResponse.swift */; };
@@ -190,6 +189,7 @@
 		3B66B92C210B1149000BDFEF /* AlertMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B8DA210B1148000BDFEF /* AlertMessageView.xib */; };
 		3B66B92D210B1149000BDFEF /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B8DB210B1148000BDFEF /* AlertMessageView.swift */; };
 		3B66B932210B2BB8000BDFEF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B931210B2BB8000BDFEF /* GoogleService-Info.plist */; };
+		3B8732A3211052E9008C5C20 /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8732A2211052E9008C5C20 /* APIs.swift */; };
 		8C4E3206BD1C8C7A1DB996B4 /* Pods_DMSDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE839C0F4BB54E10866CDFD7 /* Pods_DMSDriver.framework */; };
 /* End PBXBuildFile section */
 
@@ -304,7 +304,6 @@
 		3B66B86D210B1148000BDFEF /* MessageAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageAPI.swift; sourceTree = "<group>"; };
 		3B66B86E210B1148000BDFEF /* Reason.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reason.swift; sourceTree = "<group>"; };
 		3B66B86F210B1148000BDFEF /* AlertDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertDetailModel.swift; sourceTree = "<group>"; };
-		3B66B870210B1148000BDFEF /* APIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIs.swift; sourceTree = "<group>"; };
 		3B66B871210B1148000BDFEF /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		3B66B872210B1148000BDFEF /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		3B66B873210B1148000BDFEF /* GoogleDirectionResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleDirectionResponse.swift; sourceTree = "<group>"; };
@@ -383,6 +382,7 @@
 		3B66B8DB210B1148000BDFEF /* AlertMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertMessageView.swift; sourceTree = "<group>"; };
 		3B66B930210B1D6A000BDFEF /* DMSDriver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DMSDriver.entitlements; sourceTree = "<group>"; };
 		3B66B931210B2BB8000BDFEF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3B8732A2211052E9008C5C20 /* APIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIs.swift; sourceTree = "<group>"; };
 		AE839C0F4BB54E10866CDFD7 /* Pods_DMSDriver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DMSDriver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE4028787D23A4B46FAF55CE /* Pods-DMSDriver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.release.xcconfig"; sourceTree = "<group>"; };
 		D04AB4AFE9044A5214F46376 /* Pods-DMSDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.debug.xcconfig"; sourceTree = "<group>"; };
@@ -915,25 +915,25 @@
 		3B66B86B210B1148000BDFEF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3B66B889210B1148000BDFEF /* AttachFileModel */,
+				3B66B882210B1148000BDFEF /* APIModels */,
+				3B66B87D210B1148000BDFEF /* LoginModel */,
+				3B66B878210B1148000BDFEF /* PackageModel */,
+				3B66B875210B1148000BDFEF /* BaseModel */,
+				3B8732A2211052E9008C5C20 /* APIs.swift */,
 				3B66B86C210B1148000BDFEF /* PickupPlace.swift */,
 				3B66B86D210B1148000BDFEF /* MessageAPI.swift */,
 				3B66B86E210B1148000BDFEF /* Reason.swift */,
 				3B66B86F210B1148000BDFEF /* AlertDetailModel.swift */,
-				3B66B870210B1148000BDFEF /* APIs.swift */,
 				3B66B871210B1148000BDFEF /* Order.swift */,
 				3B66B872210B1148000BDFEF /* Message.swift */,
 				3B66B873210B1148000BDFEF /* GoogleDirectionResponse.swift */,
 				3B66B874210B1148000BDFEF /* Note.swift */,
-				3B66B875210B1148000BDFEF /* BaseModel */,
 				3B66B877210B1148000BDFEF /* OrderItem.swift */,
-				3B66B878210B1148000BDFEF /* PackageModel */,
 				3B66B87A210B1148000BDFEF /* CheckTokenModel.swift */,
 				3B66B87B210B1148000BDFEF /* ResultsRequestModel.swift */,
 				3B66B87C210B1148000BDFEF /* ChangePasswordModel.swift */,
-				3B66B87D210B1148000BDFEF /* LoginModel */,
 				3B66B881210B1148000BDFEF /* OrderMarker.swift */,
-				3B66B882210B1148000BDFEF /* APIModels */,
-				3B66B889210B1148000BDFEF /* AttachFileModel */,
 				3B66B88B210B1148000BDFEF /* Route.swift */,
 			);
 			path = Models;
@@ -1451,7 +1451,6 @@
 				3B66B808210B113D000BDFEF /* UICollectionView-Extensions.swift in Sources */,
 				3B66B833210B113D000BDFEF /* Assets.swift in Sources */,
 				3B66B835210B113D000BDFEF /* PickerViewViewController.swift in Sources */,
-				3B66B8E0210B1149000BDFEF /* APIs.swift in Sources */,
 				3B66B908210B1149000BDFEF /* OrderDetailCollectionViewCell.swift in Sources */,
 				3B66B81B210B113D000BDFEF /* BuildConfiguration.swift in Sources */,
 				3B66B900210B1149000BDFEF /* OrderPictureViewController.swift in Sources */,
@@ -1500,6 +1499,7 @@
 				3B66B80C210B113D000BDFEF /* UIViewController.swift in Sources */,
 				3B66B8FF210B1149000BDFEF /* OrderDetailTableViewCell.swift in Sources */,
 				3B66B844210B113D000BDFEF /* KeyConstants.swift in Sources */,
+				3B8732A3211052E9008C5C20 /* APIs.swift in Sources */,
 				3B66B8DD210B1149000BDFEF /* MessageAPI.swift in Sources */,
 				3B66B822210B113D000BDFEF /* UIView+Extensions.swift in Sources */,
 				3B66B91C210B1149000BDFEF /* BaseTableViewCell.swift in Sources */,
