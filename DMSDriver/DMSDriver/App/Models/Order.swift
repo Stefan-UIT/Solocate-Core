@@ -18,6 +18,17 @@ enum StatusOrder: String {
 }
 
 class Order: BaseModel {
+    
+    //"ntf_to_coord": 1,
+    //"3rd_courier": "Staff SD",
+    //"est_execution": "Không biết là cái gì luôn",
+    //"expenses": "Không biết là cái gì luôn",
+    //"bcd": "Không biết là cái gì luôn",
+    //"sms_quantity": "Không biết là gì luôn",
+    //"rcvd_day": "07/30/2018 00:00:00",
+    //"coord_dt": "07/30/2018 10:00:00",
+    
+    
   var id = -1
   var deliveryZip = ""
   var totalVolume = ""
@@ -48,6 +59,45 @@ class Order: BaseModel {
   var startTime = ""
   var endTime = ""
   var reason_msg = ""
+    
+  var standby = 0
+  var client_name:String = ""
+  var custumer_name:String = ""
+  var instructions:String = ""
+  var details:String = ""
+  var urgent = 0
+  var surfaces:String = ""
+  var certificateNumber = ""
+  var coordinationPhone = ""
+  var basePrice:Double = 0
+  var receiveName:String = ""
+  var secoundReceiveName:String = ""
+  var totalPerCustomer:String = ""
+  var fromTodayToTomorrow:String = ""
+  var signedCertificate :String = ""
+  var collectionCall:String = ""
+  var comments = ""
+  var doubleType = 0
+  var packages = 0
+  var cartons = 0
+  var toAddressName = ""
+  var toAddressPhone = ""
+  var toAddressEmail = ""
+  var toAddressStreet = ""
+  var toAddressHouseNumber = ""
+  var toAddressEntrance = ""
+  var toAddressFloor = ""
+  var toAddressApartment = ""
+  var toAddressCity = ""
+  var toAddressAddr = ""
+  var toAddressFullAddress = ""
+  var orderTypeId = 0
+  var orderTypeName = ""
+  var order_status = ""
+  var created_at = ""
+    
+    
+    
   var status:StatusOrder{
      get{
         return StatusOrder(rawValue: statusCode) ?? .newStatus
@@ -113,6 +163,42 @@ class Order: BaseModel {
         startTime  <- map["dlvy_start_time"]
         endTime  <- map["dlvy_end_time"]
         reason_msg <- map["reason_msg"]
+        
+        standby <- map["standby"]
+        client_name <- map["client_name"]
+        custumer_name <- map["custumer_name"]
+        instructions <- map["instructions"]
+        details <- map["details"]
+        urgent <- map["urgent"]
+        surfaces <- map["surfaces"]
+        certificateNumber <- map["cert_num"]
+        coordinationPhone <- map["coord_phone"]
+        basePrice <- map["base_price"]
+        receiveName <- map["rcvr_name"]
+        secoundReceiveName <- map["second_rcvr_name"]
+        totalPerCustomer <- map["total_per_customer"]
+        fromTodayToTomorrow <- map["from_today_to_tomorrow"]
+        signedCertificate <- map["signed_cert"]
+        collectionCall <- map["collect_call"]
+        comments <-  map["cmnt"]
+        doubleType <- map["double_type"]
+        packages <- map["packages"]
+        cartons <- map["cartons"]
+        toAddressName <- map["to_address_name"]
+        toAddressPhone <- map["to_address_phone"]
+        toAddressEmail <- map["to_address_email"]
+        toAddressStreet <- map["to_address_street"]
+        toAddressHouseNumber <- map["to_address_house_num"]
+        toAddressEntrance <- map["to_address_entrance"]
+        toAddressFloor <- map["to_address_floor"]
+        toAddressApartment <- map["to_address_apartment"]
+        toAddressCity <- map["to_address_city"]
+        toAddressAddr <- map["to_address_addr"]
+        toAddressFullAddress <- map["to_address_full_addr"]
+        orderTypeId <- map["order_type_id"]
+        orderTypeId <- map["order_type_name"]
+        order_status <- map["order_status"]
+        created_at <- map["created_at"]
 
   }
     
@@ -147,6 +233,72 @@ class OrderDetail: Order {
         }
     }
     
+    class ToAddress: BaseModel {
+        var id: Int?
+        var order_id: Int?
+        var name:String?
+        var street:String?
+        var phone:String?
+        var house_num:String?
+        var entrance:String?
+        var floor:String?
+        var apartment:String?
+        var city:String?
+        var lattd:String?
+        var lngtd:String?
+        var addr:String?
+        var full_addr:String?
+
+        
+        required init?(map: Map) {
+            super.init()
+        }
+        
+        override func mapping(map: Map) {
+            id <- map["id"]
+            order_id <- map["order_id"]
+            name <- map["name"]
+            street <- map["street"]
+            phone <- map["phone"]
+            house_num <- map["house_num"]
+            entrance <- map["entrance"]
+            floor <- map["floor"]
+            apartment <- map["apartment"]
+            city <- map["city"]
+            lattd <- map["lattd"]
+            lngtd <- map["lngtd"]
+            addr <- map["addr"]
+            full_addr <- map["full_addr"]
+        }
+    }
+    
+    class Order_Detail: BaseModel {
+        var id: Int?
+        var order_id: Int?
+        var double_type:Int = 0
+        var packages:Int = 0
+        var cartons:Int = 0
+        var ac:Int = 0
+        var created_at:String?
+        var updated_at:String?
+        
+        
+        required init?(map: Map) {
+            super.init()
+        }
+        
+        override func mapping(map: Map) {
+            id <- map["id"]
+            order_id <- map["order_id"]
+            double_type <- map["double_type"]
+            packages <- map["packages"]
+            cartons <- map["cartons"]
+            ac <- map["ac"]
+            created_at <- map["created_at"]
+            updated_at <- map["updated_at"]
+        }
+    }
+    
     
   var serviceTime = -1
   var deliveryContactName = ""
@@ -161,6 +313,11 @@ class OrderDetail: Order {
   var pictures = [Picture]()
   var url:UrlFileMoldel?
   var reason:ReasonOrderCC?
+    
+  var toAddress:ToAddress?
+  var order_detail:Order_Detail?
+    
+    
   
   override init() {
     super.init()
@@ -196,6 +353,8 @@ class OrderDetail: Order {
     
     url <- map["url"]
     reason <- map["reason"]
+    toAddress <- map["to_address"]
+    order_detail <- map["order_detail"]
   }
 }
 

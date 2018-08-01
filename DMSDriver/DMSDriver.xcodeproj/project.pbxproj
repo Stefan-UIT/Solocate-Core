@@ -190,7 +190,6 @@
 		3B66B92D210B1149000BDFEF /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B8DB210B1148000BDFEF /* AlertMessageView.swift */; };
 		3B66B932210B2BB8000BDFEF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B931210B2BB8000BDFEF /* GoogleService-Info.plist */; };
 		3B8732A3211052E9008C5C20 /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8732A2211052E9008C5C20 /* APIs.swift */; };
-		3B87335E21106126008C5C20 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3B8732A821106100008C5C20 /* GoogleMaps.framework */; };
 		8C4E3206BD1C8C7A1DB996B4 /* Pods_DMSDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE839C0F4BB54E10866CDFD7 /* Pods_DMSDriver.framework */; };
 /* End PBXBuildFile section */
 
@@ -574,7 +573,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3B87335E21106126008C5C20 /* GoogleMaps.framework in Frameworks */,
 				8C4E3206BD1C8C7A1DB996B4 /* Pods_DMSDriver.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

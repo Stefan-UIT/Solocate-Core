@@ -32,6 +32,11 @@ class Route: BaseModel {
   var endDate = ""
   var startDate = ""
     
+  var start_time = ""
+  var end_time = ""
+  var driver_name = ""
+
+    
   var route_number = 0
   var route_name_sts = ""
     var colorStatus:UIColor {
@@ -76,6 +81,10 @@ class Route: BaseModel {
     route_number <- map["route_number"]
     route_name_sts <- map["route_name_sts"]
     warehouse <- map[KEY_WARE_HOUSE]
+    start_time <- map["start_time"]
+    driver_name <- map["driver_name"]
+    end_time <- map["end_time"]
+
   }
     
     func arrayOrderMarkersFromOrderList() -> [OrderMarker] {

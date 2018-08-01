@@ -80,40 +80,40 @@
                                                                 <constraint firstAttribute="bottom" secondItem="taw-Pm-FyP" secondAttribute="bottom" id="rrh-67-vYh"/>
                                                             </constraints>
                                                         </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Records from" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WkF-ly-pOu">
-                                                            <rect key="frame" x="15" y="55" width="84.5" height="16"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WkF-ly-pOu">
+                                                            <rect key="frame" x="15" y="55" width="30.5" height="16"/>
                                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                             <color key="textColor" red="0.28235294117647058" green="0.36470588235294116" blue="0.4392156862745098" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Records from"/>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Type"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hWu-P2-W5D">
-                                                            <rect key="frame" x="15" y="81" width="64" height="16"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Packages number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hWu-P2-W5D">
+                                                            <rect key="frame" x="15" y="81" width="113" height="16"/>
                                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                             <color key="textColor" red="0.28235294119999998" green="0.36470588240000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="From date"/>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Packages number"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="To date" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KeR-n0-wCC">
-                                                            <rect key="frame" x="15" y="107" width="46" height="16"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Store" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KeR-n0-wCC">
+                                                            <rect key="frame" x="15" y="107" width="33.5" height="16"/>
                                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                             <color key="textColor" red="0.28235294119999998" green="0.36470588240000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="To date"/>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Store"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Delivery number" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gB5-d5-8u0">
-                                                            <rect key="frame" x="15" y="133" width="102" height="16"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Warehouse" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gB5-d5-8u0">
+                                                            <rect key="frame" x="15" y="133" width="71.5" height="16"/>
                                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                             <color key="textColor" red="0.28235294119999998" green="0.36470588240000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Delivery number"/>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Warehouse"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pyS-MD-CoF">
@@ -255,11 +255,11 @@
                                             <outlet property="btnNumber" destination="NmT-HG-5vS" id="vAk-NH-ncw"/>
                                             <outlet property="btnStatus" destination="pyS-MD-CoF" id="L66-zy-7a6"/>
                                             <outlet property="lblDate" destination="eEb-Kf-Pve" id="i5u-4r-3od"/>
-                                            <outlet property="lblDeliverynumber" destination="l32-dF-nl6" id="BFh-Dy-j8P"/>
-                                            <outlet property="lblFromdate" destination="iT1-zP-Ex8" id="A9P-N3-cF2"/>
-                                            <outlet property="lblRecordsFrom" destination="upJ-Js-Mbl" id="Mqj-qv-fpT"/>
+                                            <outlet property="lblDeliverynumber" destination="iT1-zP-Ex8" id="qKC-Y9-OQV"/>
+                                            <outlet property="lblShop" destination="l32-dF-nl6" id="sRn-kF-okk"/>
+                                            <outlet property="lblStore" destination="r6T-sK-P0c" id="fNi-2o-kXs"/>
+                                            <outlet property="lblSubtitle" destination="upJ-Js-Mbl" id="Zem-ry-Op6"/>
                                             <outlet property="lblTitle" destination="Oeu-yu-w0z" id="nHY-GV-C6p"/>
-                                            <outlet property="lblTodate" destination="r6T-sK-P0c" id="lRV-qP-cj7"/>
                                             <outlet property="lblUrgency" destination="xnk-hL-1Hx" id="r7e-wH-jdM"/>
                                             <outlet property="vContent" destination="FQ2-Ga-2n9" id="saw-no-qLY"/>
                                         </connections>
@@ -771,7 +771,7 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="4yC-1z-3rJ">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <view key="tableHeaderView" contentMode="scaleToFill" id="K9i-fM-sKH" customClass="GMSMapView">
+                                <view key="tableHeaderView" contentMode="scaleToFill" id="K9i-fM-sKH">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="300"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

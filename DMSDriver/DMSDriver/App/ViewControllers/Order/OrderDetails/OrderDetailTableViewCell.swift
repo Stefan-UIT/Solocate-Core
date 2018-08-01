@@ -79,6 +79,9 @@ enum OrderDetailType {
     case receiverName
     case secondReceiverName
     case message
+    case address
+    case phone
+
 }
 
 struct OrderDetailInforRow {
@@ -91,6 +94,8 @@ struct OrderDetailInforRow {
         self.content = content
         
         switch type {
+        case .address:
+            name = "Address".localized
         case .hour:
           name = "Hour".localized
         case .date:
@@ -153,6 +158,9 @@ struct OrderDetailInforRow {
             name = "Starting street".localized
         case .message:
             name = "Message".localized
+        case .phone:
+            name = "Phone".localized
+
         }
     }
 }

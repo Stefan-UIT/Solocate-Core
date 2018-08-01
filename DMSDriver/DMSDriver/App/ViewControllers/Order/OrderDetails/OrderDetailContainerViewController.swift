@@ -29,6 +29,7 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
+        updateUI()
         setupNavigationBar()
         getOrderDetail()
     }
