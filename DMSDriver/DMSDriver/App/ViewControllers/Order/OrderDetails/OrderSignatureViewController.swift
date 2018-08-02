@@ -10,19 +10,19 @@ import UIKit
 import XLPagerTabStrip
 
 class OrderSignatureViewController: BaseOrderDetailViewController {
-    @IBOutlet weak var controlsContainerView: UIStackView!
+    @IBOutlet weak var controlsContainerView: UIStackView?
   
-    @IBOutlet weak var signatureView: SignatureView!
-    @IBOutlet weak var signatureImgView: UIImageView!
-    @IBOutlet weak var finishButton: UIButton!
-    @IBOutlet weak var unableToFinishButton: UIButton!
+    @IBOutlet weak var signatureView: SignatureView?
+    @IBOutlet weak var signatureImgView: UIImageView?
+    @IBOutlet weak var finishButton: UIButton?
+    @IBOutlet weak var unableToFinishButton: UIButton?
     
     var updateOrderDetail:(() -> Void)?
     
     var validationSubmit:Bool = false{
         didSet{
-            controlsContainerView.alpha = validationSubmit ? 1 : 0.4
-            controlsContainerView.isUserInteractionEnabled = validationSubmit
+            controlsContainerView?.alpha = validationSubmit ? 1 : 0.4
+            controlsContainerView?.isUserInteractionEnabled = validationSubmit
 
         }
     }
@@ -30,7 +30,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         validationSubmit = false
-        signatureView.delegate = self
+        signatureView?.delegate = self
         updateUI()
     }
     
@@ -44,17 +44,17 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
         guard let order = orderDetail else { return }
     
         if let signFile:AttachFileModel = order.url?.sig{
-            controlsContainerView.isHidden = true
-            signatureImgView.isHidden = false
+            controlsContainerView?.isHidden = true
+            signatureImgView?.isHidden = false
         
-            signatureImgView.sd_setImage(with: URL(string: E(signFile.url)),
+            signatureImgView?.sd_setImage(with: URL(string: E(signFile.url)),
                                      placeholderImage: nil,
                                      options: .allowInvalidSSLCertificates,
                                      completed: nil)
       
         }else {
-            controlsContainerView.isHidden = false
-            signatureImgView.isHidden = true
+            controlsContainerView?.isHidden = false
+            signatureImgView?.isHidden = true
         }
     }
   
@@ -65,20 +65,20 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
   
     @IBAction func cancelDrawSignature(_ sender: UIButton) {
         validationSubmit = false
-        signatureView.sign?.removeAllPoints()
-        signatureView.signLayer?.path = nil
-        signatureView.layer.sublayers?.forEach({$0.removeFromSuperlayer()})
+        signatureView?.sign?.removeAllPoints()
+        signatureView?.signLayer?.path = nil
+        signatureView?.layer.sublayers?.forEach({$0.removeFromSuperlayer()})
     }
   
     @IBAction func submitSignature(_ sender: UIButton) {
-        let rect = signatureView.frame
-        guard signatureView.signLayer != nil else {
+        let rect = signatureView?.frame ?? CGRect.zero
+        guard signatureView?.signLayer != nil else {
             return
         }
     
         UIGraphicsBeginImageContext(rect.size)
         guard let context = UIGraphicsGetCurrentContext() else { return}
-        signatureView.layer.render(in: context)
+        signatureView?.layer.render(in: context)
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         if let image = img, let data = UIImageJPEGRepresentation(image, 1.0) {
@@ -102,8 +102,8 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
-                self?.controlsContainerView.isHidden = true
-                self?.signatureView.isUserInteractionEnabled = false
+                self?.controlsContainerView?.isHidden = true
+                self?.signatureView?.isUserInteractionEnabled = false
                 self?.updateOrderDetail?()
                 self?.showAlertView("Uploaded Successful".localized)
 
