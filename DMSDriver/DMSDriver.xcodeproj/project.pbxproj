@@ -189,7 +189,6 @@
 		3B66B92C210B1149000BDFEF /* AlertMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B8DA210B1148000BDFEF /* AlertMessageView.xib */; };
 		3B66B92D210B1149000BDFEF /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B8DB210B1148000BDFEF /* AlertMessageView.swift */; };
 		3B66B932210B2BB8000BDFEF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B931210B2BB8000BDFEF /* GoogleService-Info.plist */; };
-		3B8732A3211052E9008C5C20 /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B8732A2211052E9008C5C20 /* APIs.swift */; };
 		8C4E3206BD1C8C7A1DB996B4 /* Pods_DMSDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE839C0F4BB54E10866CDFD7 /* Pods_DMSDriver.framework */; };
 /* End PBXBuildFile section */
 
@@ -392,7 +391,6 @@
 		3B66B8DB210B1148000BDFEF /* AlertMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertMessageView.swift; sourceTree = "<group>"; };
 		3B66B930210B1D6A000BDFEF /* DMSDriver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DMSDriver.entitlements; sourceTree = "<group>"; };
 		3B66B931210B2BB8000BDFEF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		3B8732A2211052E9008C5C20 /* APIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIs.swift; sourceTree = "<group>"; };
 		3B8732A721106100008C5C20 /* GoogleMapsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsCore.framework; sourceTree = "<group>"; };
 		3B8732A821106100008C5C20 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		3B8732A921106100008C5C20 /* CHANGELOG */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG; sourceTree = "<group>"; };
@@ -1101,7 +1099,6 @@
 				3B66B87D210B1148000BDFEF /* LoginModel */,
 				3B66B878210B1148000BDFEF /* PackageModel */,
 				3B66B875210B1148000BDFEF /* BaseModel */,
-				3B8732A2211052E9008C5C20 /* APIs.swift */,
 				3B66B86C210B1148000BDFEF /* PickupPlace.swift */,
 				3B66B86D210B1148000BDFEF /* MessageAPI.swift */,
 				3B66B86E210B1148000BDFEF /* Reason.swift */,
@@ -1953,7 +1950,6 @@
 				3B66B80C210B113D000BDFEF /* UIViewController.swift in Sources */,
 				3B66B8FF210B1149000BDFEF /* OrderDetailTableViewCell.swift in Sources */,
 				3B66B844210B113D000BDFEF /* KeyConstants.swift in Sources */,
-				3B8732A3211052E9008C5C20 /* APIs.swift in Sources */,
 				3B66B8DD210B1149000BDFEF /* MessageAPI.swift in Sources */,
 				3B66B822210B113D000BDFEF /* UIView+Extensions.swift in Sources */,
 				3B66B91C210B1149000BDFEF /* BaseTableViewCell.swift in Sources */,
@@ -2240,6 +2236,7 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					"$(CONFIGURATION_BUILD_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.dms.directmail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -2258,7 +2255,7 @@
 				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
@@ -2267,10 +2264,12 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+					"$(CONFIGURATION_BUILD_DIR)",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.dms.directmail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "0addee72-e2d2-4d79-a998-f872489f27b4";
+				PROVISIONING_PROFILE_SPECIFIER = dev_directmail;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

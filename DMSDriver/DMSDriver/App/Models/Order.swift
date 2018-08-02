@@ -145,8 +145,8 @@ class Order: BaseModel {
         
         pickupContactPhone <- map["pkup_ctt_phone"]
         pickupContactEmail <- map["pkup_ctt_email"]
-        lat               <- map["lat"]
-        lng               <- map["long"]
+        lat               <- map["to_address_lattd"]
+        lng               <- map["to_address_lngtd"]
         statusCode        <- map["order_sts"]
         statusName        <- map["order_stmainatus"]
         orderReference    <- map["order_ref"]

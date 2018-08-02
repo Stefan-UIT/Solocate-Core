@@ -29,7 +29,6 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        updateUI()
         setupNavigationBar()
         getOrderDetail()
     }
@@ -75,9 +74,6 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
     }
     
     private  func updateUI() {
-        self.segmentedControl.isHidden = !(E(order?.statusCode) == "DV")
-        self.conHSegmentedControl?.constant =  E(order?.statusCode) == "DV" ? 60 : 0
-        
         containerView.isScrollEnabled = self.orderDetail?.url?.sig != nil
     }
     

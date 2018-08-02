@@ -75,49 +75,66 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         informationRows.removeAll()
         
         let status = OrderStatus(rawValue: _orderDetail.statusCode) ?? OrderStatus.open
-        let statusItem = OrderDetailInforRow(.status,status.statusName)
+        let statusItem = OrderDetailInforRow(.status,
+                                             status.statusName)
         let urgency = OrderDetailInforRow(.urgency ,"YES")
         orderInforStatus.append(statusItem)
         orderInforStatus.append(urgency)
 
         if  _orderDetail.status == .cancelStatus {
-            let reason = OrderDetailInforRow(.failureCause, E(_orderDetail.reason?.name))
-            let mess = OrderDetailInforRow(.message, E(_orderDetail.reason_msg))
+            let reason = OrderDetailInforRow(.failureCause,
+                                             E(_orderDetail.reason?.name))
+            let mess = OrderDetailInforRow(.message,
+                                           E(_orderDetail.reason_msg))
             orderInforStatus.append(reason)
             orderInforStatus.append(mess)
         }
         
         let hour = OrderDetailInforRow(.hour, "\(_orderDetail.serviceTime)")
-        let dateTime = _orderDetail.timeWindowName.length > 0 ? _orderDetail.deliveryDate + " - " + _orderDetail.timeWindowName : _orderDetail.deliveryDate
-        let date = OrderDetailInforRow(.date,dateTime)
-        let certifiacteNumber = OrderDetailInforRow(.certificateNumber ,_orderDetail.certificateNumber)
+        let date = OrderDetailInforRow(.date,_orderDetail.deliveryDate)
+        let certifiacteNumber = OrderDetailInforRow(.certificateNumber ,
+                                                    _orderDetail.certificateNumber)
         
         let clientName = OrderDetailInforRow(.clientName,_orderDetail.client_name)
-        let customerName = OrderDetailInforRow(.customerName ,_orderDetail.custumer_name)
+        let customerName = OrderDetailInforRow(.customerName ,
+                                               _orderDetail.custumer_name)
         let type = OrderDetailInforRow(.type ,"\(_orderDetail.orderType)")
-        let doubleType = OrderDetailInforRow(.doubleType , "\(_orderDetail.order_detail?.double_type ?? 0)")
-        let packetNumber = OrderDetailInforRow(.packagesNumber ,"\(_orderDetail.order_detail?.packages ?? 0)")
-        let cartonsNumber = OrderDetailInforRow(.cartonsNumber,"\(_orderDetail.order_detail?.cartons ?? 0)")
-        let surfacesNumber = OrderDetailInforRow(.surfacesNumber,"\(_orderDetail.surfaces)")
+        let doubleType = OrderDetailInforRow(.doubleType,
+                                             "\(_orderDetail.order_detail?.double_type ?? 0)")
+        let packetNumber = OrderDetailInforRow(.packagesNumber ,
+                                               "\(_orderDetail.order_detail?.packages ?? 0)")
+        let cartonsNumber = OrderDetailInforRow(.cartonsNumber,
+                                                "\(_orderDetail.order_detail?.cartons ?? 0)")
+        let surfacesNumber = OrderDetailInforRow(.surfacesNumber,
+                                                 "\(_orderDetail.surfaces)")
         let afternoon = OrderDetailInforRow(.afternoon, "-")
         let vehical = OrderDetailInforRow(.vehicle,"-")
-        let fromTodyToTomorrow = OrderDetailInforRow(.fromtodayToTomorrow,_orderDetail.fromTodayToTomorrow)
+        let fromTodyToTomorrow = OrderDetailInforRow(.fromtodayToTomorrow,
+                                                     _orderDetail.fromTodayToTomorrow)
         let collectionFromCompany = OrderDetailInforRow(.collectionFromCompany,"-")
         let startingStreet = OrderDetailInforRow(.startingStreet,"-")
         let startingCity = OrderDetailInforRow(.startingCity,"-")
         let transferToCompany = OrderDetailInforRow(.transferToCompany,"-")
-        let distinationStreet = OrderDetailInforRow(.destinationStreet ,E(_orderDetail.toAddress?.street))
-        let distinationCity = OrderDetailInforRow(.destinationCity,E(_orderDetail.toAddress?.city))
-        let standby = OrderDetailInforRow(.standby, "\(_orderDetail.standby)")
+        let distinationStreet = OrderDetailInforRow(.destinationStreet ,
+                                                    E(_orderDetail.toAddress?.street))
+        let distinationCity = OrderDetailInforRow(.destinationCity,
+                                                  E(_orderDetail.toAddress?.city))
+        let standby = OrderDetailInforRow(.standby,
+                                          "\(_orderDetail.standby)")
         let barCode = OrderDetailInforRow(.barcode,"-")
-        let collectCall = OrderDetailInforRow(.collectCall,_orderDetail.collectionCall)
+        let collectCall = OrderDetailInforRow(.collectCall,
+                                              _orderDetail.collectionCall)
         let certificateNumber_client = OrderDetailInforRow(.certificateNumber_client,"-")
         let executionTime = OrderDetailInforRow(.executionTime,"-")
-        let receiverName = OrderDetailInforRow(.receiverName,_orderDetail.receiveName)
-        let secondReceiverName = OrderDetailInforRow(.secondReceiverName, _orderDetail.secoundReceiveName)
+        let receiverName = OrderDetailInforRow(.receiverName,
+                                               _orderDetail.receiveName)
+        let secondReceiverName = OrderDetailInforRow(.secondReceiverName,
+                                                     _orderDetail.secoundReceiveName)
 
-        let address = OrderDetailInforRow(.address, E(_orderDetail.toAddress?.full_addr))
-        let phone = OrderDetailInforRow(.phone,_orderDetail.deliveryContactPhone)
+        let address = OrderDetailInforRow(.address,
+                                          E(_orderDetail.toAddress?.full_addr))
+        let phone = OrderDetailInforRow(.phone,
+                                        _orderDetail.deliveryContactPhone)
         
         shouldFilterOrderItemsList = _orderDetail.items.filter({$0.statusCode == "OP"}).count > 0
         
@@ -152,7 +169,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         informationRows.append(phone)
         informationRows.append(address)
       
-        updateStatusButton.isHidden = _orderDetail.status != .newStatus && _orderDetail.status != .inProcessStatus
+        updateStatusButton.isHidden = _orderDetail.status != .newStatus &&
+                                      _orderDetail.status != .inProcessStatus
     }
   
     var didUpdateStatus:((_ orderDetail:OrderDetail, _ shouldMoveSigatureTab: Bool ) -> Void)?
@@ -172,17 +190,13 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     func initVar()  {
-        let des = E(orderDetail?.descriptionNote) + E(orderDetail?.descriptionNoteExt)
-        if des.length > 0 {
-            arrTitleHeader = ["Order Status".localized,
-                              "Order Information".localized,
-                              "Information".localized,
-                              "Instructions".localized]
-        }else {
-            arrTitleHeader = ["Order Status".localized,
-                              "Order Information".localized,
-                              "Information".localized]
-        }
+        let des = E(orderDetail?.instructions)
+        
+        arrTitleHeader = ["Order Status".localized,
+                          "Order Information".localized,
+                          "Information".localized,
+                          "Instructions".localized]
+        
     }
   
     override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -281,58 +295,11 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 extension OrderDetailViewController {
   
   func showAlertAddNewOrderItem(_ barcode: String) {
-    guard let order = orderDetail else {
-      return
-    }
-    let message = String.init(format: "order_detail_add_order_item".localized, barcode)
-    let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
-    alert.addTextField { (textField) in
-      textField.placeholder = "order_detail_quality".localized
-      textField.keyboardType = .numberPad
-    }
-    let okAction = UIAlertAction(title: "submit".localized, style: .default) { [unowned self] (action) in
-      guard let textField = alert.textFields?.first,
-        textField.hasText,
-        let qtyText = textField.text else {
-          return
-      }
-      self.showLoadingIndicator()
-      APIs.addNewOrderItem("\(order.id)", barcode: barcode, qty: qtyText, completion: { (errMsg) in
-        guard let msg = errMsg else {
-          self.updateOrderDetail?()
-          self.scannedString = ""
-          self.scannedObjectIndexs.removeAll()
-          return
-        }
-        self.showAlertView(msg)
-      })
-    }
-    let cancel = UIAlertAction(title: "cancel".localized, style: .default, handler: nil)
-    alert.addAction(cancel)
-    alert.addAction(okAction)
-    present(alert, animated: true, completion: nil)
+    //
   }
   
   func showAlertUpdateBarcode(_ barcode: String, item: OrderItem) {
-    let message = String.init(format: "order_detail_update_barcode".localized, barcode)
-    let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)
-    let okAction = UIAlertAction(title: "submit".localized, style: .default) { [unowned self] (action) in
-      self.showLoadingIndicator()
-      APIs.updateBarcode("\(item.id)", newBarcode: barcode, completion: { (errMsg) in
-        self.dismissLoadingIndicator()
-        guard let msg = errMsg else {
-          self.scannedString = ""
-          self.scannedObjectIndexs.removeAll()
-          self.updateOrderDetail?()
-          return
-        }
-        self.showAlertView(msg)
-      })
-    }
-    let cancel = UIAlertAction(title: "cancel".localized, style: .default, handler: nil)
-    alert.addAction(cancel)
-    alert.addAction(okAction)
-    present(alert, animated: true, completion: nil)
+    //
   }
   
   func updateItemStatus(_ status: String, orderItem: OrderItem) {
@@ -497,7 +464,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         case .sectionDescription:
           if let cell = tableView.dequeueReusableCell(withIdentifier: addressCellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
             
-            let des = E(orderDetail?.descriptionNote) + " " + E(orderDetail?.descriptionNoteExt)
+            let des = E(orderDetail?.instructions)
             let description = OrderDetailInforRow(.comments,des)
             cell.orderDetailItem = description
             cell.selectionStyle = .none
@@ -522,10 +489,11 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 }
                 break
                 
-            }else if (row == 2){ //Address row
+            }else if (row == 3){ //Address row
                 let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
                 if let _orderDetail = orderDetail {
-                    let orderLocation = CLLocationCoordinate2D(latitude: _orderDetail.lat.doubleValue, longitude: _orderDetail.lng.doubleValue)
+                    let orderLocation = CLLocationCoordinate2D(latitude: _orderDetail.toAddress?.lattd?.doubleValue ?? 0,
+                                                               longitude: _orderDetail.toAddress?.lngtd?.doubleValue ?? 0)
                     vc.orderLocation = orderLocation
                 }
                 //self.present(vc, animated: true, completion: nil)

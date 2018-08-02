@@ -10,12 +10,12 @@ import UIKit
 import XLPagerTabStrip
 
 class OrderSignatureViewController: BaseOrderDetailViewController {
-  @IBOutlet weak var controlsContainerView: UIStackView!
+    @IBOutlet weak var controlsContainerView: UIStackView!
   
-  @IBOutlet weak var signatureView: SignatureView!
-  @IBOutlet weak var signatureImgView: UIImageView!
-  @IBOutlet weak var finishButton: UIButton!
-  @IBOutlet weak var unableToFinishButton: UIButton!
+    @IBOutlet weak var signatureView: SignatureView!
+    @IBOutlet weak var signatureImgView: UIImageView!
+    @IBOutlet weak var finishButton: UIButton!
+    @IBOutlet weak var unableToFinishButton: UIButton!
     
     var updateOrderDetail:(() -> Void)?
     
@@ -27,91 +27,94 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
         }
     }
   
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    validationSubmit = false
-    signatureView.delegate = self
-    updateUI()
-  }
-  
-  func updateUI() {
-    guard let order = orderDetail else { return }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        validationSubmit = false
+        signatureView.delegate = self
+        updateUI()
+    }
     
-    if let signFile:AttachFileModel = order.url?.sig{
-        controlsContainerView.isHidden = true
-        signatureImgView.isHidden = false
+    override var orderDetail: OrderDetail?{
+        didSet{
+            updateUI()
+        }
+    }
+  
+    func updateUI() {
+        guard let order = orderDetail else { return }
+    
+        if let signFile:AttachFileModel = order.url?.sig{
+            controlsContainerView.isHidden = true
+            signatureImgView.isHidden = false
         
-        signatureImgView.sd_setImage(with: URL(string: E(signFile.url)),
+            signatureImgView.sd_setImage(with: URL(string: E(signFile.url)),
                                      placeholderImage: nil,
                                      options: .allowInvalidSSLCertificates,
                                      completed: nil)
       
-    }else {
-      controlsContainerView.isHidden = false
-      signatureImgView.isHidden = true
+        }else {
+            controlsContainerView.isHidden = false
+            signatureImgView.isHidden = true
+        }
     }
-  }
   
   
-  override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-    return IndicatorInfo(title: "Signature".localized)
-  }
-  
-  @IBAction func cancelDrawSignature(_ sender: UIButton) {
-    validationSubmit = false
-    signatureView.sign?.removeAllPoints()
-    signatureView.signLayer?.path = nil
-    signatureView.layer.sublayers?.forEach({$0.removeFromSuperlayer()})
-  }    
-  
-  @IBAction func submitSignature(_ sender: UIButton) {
-    let rect = signatureView.frame
-    guard signatureView.signLayer != nil else {
-      return
+    override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Signature".localized)
     }
+  
+    @IBAction func cancelDrawSignature(_ sender: UIButton) {
+        validationSubmit = false
+        signatureView.sign?.removeAllPoints()
+        signatureView.signLayer?.path = nil
+        signatureView.layer.sublayers?.forEach({$0.removeFromSuperlayer()})
+    }
+  
+    @IBAction func submitSignature(_ sender: UIButton) {
+        let rect = signatureView.frame
+        guard signatureView.signLayer != nil else {
+            return
+        }
     
-    UIGraphicsBeginImageContext(rect.size)
-    guard let context = UIGraphicsGetCurrentContext() else {
-      return
-    }
-    signatureView.layer.render(in: context)
-    let img = UIGraphicsGetImageFromCurrentImageContext()
-    UIGraphicsEndImageContext()
-    if let image = img, let data = UIImageJPEGRepresentation(image, 1.0) {
-
-      let signatureFile: AttachFileModel = AttachFileModel()
-      signatureFile.name = "Signature_\(orderDetail?.id ?? 0)"
-      signatureFile.type = ".png"
-      signatureFile.mimeType = "image/png"
-      signatureFile.contentFile = data
+        UIGraphicsBeginImageContext(rect.size)
+        guard let context = UIGraphicsGetCurrentContext() else { return}
+        signatureView.layer.render(in: context)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        if let image = img, let data = UIImageJPEGRepresentation(image, 1.0) {
+        let signatureFile: AttachFileModel = AttachFileModel()
+        signatureFile.name = "Signature_\(orderDetail?.id ?? 0)"
+        signatureFile.type = ".png"
+        signatureFile.mimeType = "image/png"
+        signatureFile.contentFile = data
       
-      submitSignature(signatureFile)
+        submitSignature(signatureFile)
       
-    }else {
-      print("encode failure")
-    }
+        }else {
+            print("encode failure")
+        }
   }
   
-  private func submitSignature(_ file: AttachFileModel) {
-    guard let order = orderDetail else { return }
-    showLoadingIndicator()		
-    API().submitSignature(file, "\(order.id)") {[weak self] (result) in
-      self?.dismissLoadingIndicator()
-      switch result{
-      case .object(_):
-        self?.controlsContainerView.isHidden = true
-        self?.signatureView.isUserInteractionEnabled = false
-        self?.updateOrderDetail?()
-        self?.showAlertView("Uploaded Successful".localized)
+    private func submitSignature(_ file: AttachFileModel) {
+        guard let order = orderDetail else { return }
+        showLoadingIndicator()
+        API().submitSignature(file, "\(order.id)") {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(_):
+                self?.controlsContainerView.isHidden = true
+                self?.signatureView.isUserInteractionEnabled = false
+                self?.updateOrderDetail?()
+                self?.showAlertView("Uploaded Successful".localized)
 
-        break
-      case .error(let error):
-        self?.showAlertView(error.getMessage())
-        break
+                break
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+                break
         
-      }
+            }
+        }
     }
-  }
 }
 
 

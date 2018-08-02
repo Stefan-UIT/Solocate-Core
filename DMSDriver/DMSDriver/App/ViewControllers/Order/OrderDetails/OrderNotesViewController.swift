@@ -32,39 +32,8 @@ class OrderNotesViewController: BaseOrderDetailViewController {
   
   
   @IBAction func addNote(_ sender: UIButton) {
-    guard  let _orderDetail = orderDetail else {
-      return
-    }
-    let alert = UIAlertController(title: "order_detail_add_note".localized, message: nil, preferredStyle: .alert)
-    alert.addTextField { (textField) in
-      textField.placeholder = "order_detail_add_note".localized
-    }
-    let submitAction = UIAlertAction(title: "send".localized, style: .default) { (action) in
-      alert.dismiss(animated: true, completion: nil)
-      guard let textField = alert.textFields?.first,
-        textField.hasText,
-        let noteText = textField.text else {
-        return
-      }
-      self.showLoadingIndicator()
-      APIs.addNote("\(_orderDetail.id)", content: noteText, completion: { [unowned self] (note, errorMsg) in
-        self.dismissLoadingIndicator()
-        if let err = errorMsg {
-          self.showAlertView(err)
-        }
-        else if let _note = note {
-          _orderDetail.notes.append(_note)
-          self.tableView.reloadData()
-        }
-      })
-      
-    }
-    let cancel = UIAlertAction(title: "cancel".localized, style: .default, handler: nil)
-    alert.addAction(cancel)
-    alert.addAction(submitAction)
-    present(alert, animated: true, completion: nil)
+    //
   }
-  
 }
 
 extension OrderNotesViewController: UITableViewDelegate, UITableViewDataSource {

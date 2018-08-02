@@ -51,19 +51,7 @@ class RouteMessagesViewController: BaseViewController {
   }
   
   func loadData() {
-    showLoadingIndicator()
-    APIs.getListAlertMessage({ [unowned self] (successful, list) in
-        self.dismissLoadingIndicator()
-        if successful {
-            if let _list = list as? [AlertDetailModel] {
-                self.listAlertMessage = _list
-                self.updateData()
-            }
-        }
-    }) { (error) in
-        self.dismissLoadingIndicator()
-        print(error.message)
-    }
+    //
   }
     
   func updateData() {
@@ -160,22 +148,7 @@ extension RouteMessagesViewController: UITableViewDataSource, UITableViewDelegat
 
 extension RouteMessagesViewController: AlertMessageViewDelegate {
     func alertMessageView(_ alertMessageView: AlertMessageView, _ alertID: String, _ content: String) {
-        alertMessageView.removeFromSuperview()
-        showLoadingIndicator()
-        APIs.resolveAlert(alertID, content, { [weak self] (successful, model) in
-            self?.dismissLoadingIndicator()
-            if successful {
-                if let message = model as? String {
-                    self?.showAlert(message)
-                }
-            } else {
-                self?.showAlert("Something wrong. Please contact with us. Thanks.")
-            }
-        }) { [weak self] (error) in
-            self?.dismissLoadingIndicator()
-            print(error.message)
-            self?.showAlert(error.message)
-        }
+        //
     }
     
     func showAlert(_ message: String) {

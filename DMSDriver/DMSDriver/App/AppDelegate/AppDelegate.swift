@@ -122,22 +122,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 //MARK: - AlertMessageViewDelegate
 extension AppDelegate: AlertMessageViewDelegate {
     func alertMessageView(_ alertMessageView: AlertMessageView, _ alertID: String, _ content: String) {
-        alertMessageView.removeFromSuperview()
-        SVProgressHUD.show()
-        APIs.resolveAlert(alertID, content, { [weak self] (successful, model) in
-            SVProgressHUD.dismiss()
-            if successful {
-                if let message = model as? String {
-                    self?.showAlert(message)
-                }
-            } else {
-                self?.showAlert("Something wrong. Please contact with us. Thanks.")
-            }
-        }) { [weak self] (error) in
-            SVProgressHUD.dismiss()
-            print(error.message)
-            self?.showAlert(error.message)
-        }
+        //
     }
     
     func showAlert(_ message: String) {
