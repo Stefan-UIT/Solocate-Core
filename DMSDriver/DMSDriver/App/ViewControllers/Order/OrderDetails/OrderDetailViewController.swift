@@ -96,7 +96,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 
         let date = OrderDetailInforRow(.date,_orderDetail.deliveryDate)
         let certifiacteNumber = OrderDetailInforRow(.certificateNumber ,
-                                                    _orderDetail.certificateNumber)
+                                                    "\(_orderDetail.certificateNumber)")
         
         let clientName = OrderDetailInforRow(.clientName,_orderDetail.client_name)
         let customerName = OrderDetailInforRow(.customerName ,
@@ -118,7 +118,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 
         let vehical = OrderDetailInforRow(.vehicle,"-")
         let fromTodyToTomorrow = OrderDetailInforRow(.fromtodayToTomorrow,
-                                                     _orderDetail.fromTodayToTomorrow)
+                                                     _orderDetail.fromTodayToTomorrow == "1" ? "YES".localized : "NO".localized)
         
         
         

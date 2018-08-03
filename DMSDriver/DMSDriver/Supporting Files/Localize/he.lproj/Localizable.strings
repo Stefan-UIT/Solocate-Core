@@ -10,13 +10,13 @@
 "cancel"="לְבַטֵל";
 "ok"="בסדר";
 "save"="להציל";
-"edit"="לַעֲרוֹך";
+"edit"="עריכה";
 "back"="חזור";
 "submit"="שלח";
 "reject"="לִדחוֹת";
 "send"="לִשְׁלוֹחַ";
 "Finish"="סִיוּם";
-"Start"="הַתחָלָה";
+"Start"="התחלה";
 "unknown"="לא ידוע";
 "clear"="ברור";
 "accept"="לְקַבֵּל";
@@ -26,7 +26,7 @@
 "Orders"="הזמנות";
 "items"="פריטים";
 "Packages"="חבילות";
-"Map"="מַפָּה";
+"Map"="מפה";
 "Messages"="הודעות";
 "Message"="Message";//new
 "Uploaded Successful"="Uploaded Successful";//new
@@ -37,7 +37,7 @@
 "login_title"="התחברות";
 "login_username_hint"="שם משתמש";
 "Password"="סיסמה";
-"login_forgot_password"="שכחת את הסיסמא";
+"login_forgot_password"= "שכחת את הסיסמה?";
 "error_invalid_password"="הסיסימא אינה תקפה";
 "error_incorrect_password"="סיסמא לא נכונה";
 "error_network"="אירעה בעיה לא ידועה. בבקשה נסה שוב.";
@@ -50,7 +50,8 @@
 "menu"="תַפרִיט";
 "Change Password"="שנה סיסמא";
 "Logout"="להתנתק";
-"Routes" = "Routes";
+"Routes" = "מסלולים";
+"Route" = "מסלול";
 
 //PROFILE
 "First Name"="שם פרטי";
@@ -58,22 +59,22 @@
 "Gender"="Gender";
 "Title"="Title";
 "Birth Date"="Birth Date";
-"Public"="Public";//new
-"Private"="Private";//new
-"Profile"="Profile";//new
+"Public"="ציבורי";
+"Private"="פרטי";
+"Profile"="פרופיל";//new
 "Your password has been updated"="Your password has been updated";//new
-"Old Password"="Old Password";//new
-"New Password"="New Password";//new
-"Confirm Password"="Confirm Password";//new
+"Old Password"="סיסמה ישנה";
+"New Password"="סיסמה חדשה";
+"Confirm Password"="אישור סיסמה חדשה";
 
 
 
 //LIST_ORDERS
-"Orders List"="Orders List";
+"Orders List"="רשימת הזמנות";
 "You have no order"="אין לך הזמנה";
 "New"="חָדָשׁ";
 "In Progress"="בתהליך";
-"Finished"="גָמוּר";
+"Finished"="חדש";
 "Picked Up" = "Picked Up";
 "Missing in Trunk" = "Missing in Trunk";
 "Missing at Pick-up" = "Missing at Pick-up";
@@ -86,30 +87,30 @@
 
 
 
-"Total Order"="Total Order"; //new
-"Store"="Store";//New
-"Warehouse"="Warehouse";//New
+"Total Order"= "סה''כ הזמנות";
+"Store"="חנות";
+"Warehouse"="מחסן";
 "Expected time"="Expected time";//New
 
 
 //ODER_DETAIL
-"Order Detail"="Order Detail";//New
+"Order Detail"="פרטי הזמנה";//New
 "Delivery number"="מס' משלוח";
-"Detail"="פרט";
+"Detail"="פירוט";
 "Order Status"="סטטוס משלוח";//new
-"Order Information"="Order Information";//new
-"Information"="Information";//new
-"Order Id"="Order Id";
-"Signature"="חֲתִימָה";
+"Order Information"="מידע על ההזמנה";
+"Information"="מידע";
+"Order Id"="מספר הזמנה";
+"Signature"="חתימה";
 "order_detail_notes"="הערות";
-"Picture"="תְמוּנָה";
+"Picture"="תמונה";
 "Order Ref"="הזמנה Ref";
 "Status"="סטָטוּס";
 "Expected Date"="תאריך צפוי";
 "Window Start Time"="Window Start Time";//new
 "Window End Time"="Window End Time";//new
 "Service Time"="Service Time";//new
-"SEQ"="SEQ";//new
+"SEQ"="מספר הזמנה";
 "Pallets"="Pallets";//new
 "Cases"="Cases";//new
 "Contact Name"="שם איש קשר";
@@ -118,7 +119,7 @@
 "Email"="דוא''ל";
 "Description"="תיאור";
 "Type"="סוּג";
-"Reason"="Reason";//new
+"Reason"="סיבת הכשל";
 "Unable To Start"="לא יכול להתחיל";
 "Unable To Finish"="לא ניתן לסיים";
 "order_detail_add_note"="להוסיף הערה";
@@ -140,12 +141,12 @@
 "order_detail_barcode_notmatch"="ברקוד אינו תואם";
 
 "Hour"="שעת קבלה";
-"Date"="תאריך";
+"Date"="סוג";
 "Certificate number"="מס' תעודת משלוח";
 "Client name"="שם לקוח";
 "Customer name"="שם מזמין";
 "Type"="סוג משלוח";
-"Urgency"="מידת דחיפות";
+"Urgency"="דחוף";
 "Double type"="סוג כפולה";
 "Packages number"="מספר חבילות";
 "Cartons number"="מספר קרטונים";
@@ -169,35 +170,11 @@
 "Execution time"="זמן ביצוע";
 "Receiver name"="שם מקבל";
 "Second receiver name"="שם מקבל שני";
-"Start time"="Start time";//new
-"End time"="End time";//new
-"Werehouse"="Werehouse";//new
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+"Start time"="שעת התחלה";
+"End time"="שעת סיום";
+"YES"="כן";
+"NO"="NO";
+"Instructions"= "הערות לדו''ח";
 
 
 
@@ -206,7 +183,7 @@
 //REASON_LIST
 "Select Reason"="בחר סיבה";
 "Please select at least one reason"="בחר סיבה אחת לפחות";
-"Enter a message"="Enter a message";//new
+"Enter a message"="סיבת הכשל";
 
 //MESSAGE_SCREEN
 "message_send_new_message"="שלח הודעה חדשה";
@@ -215,18 +192,20 @@
 //ROUTE_LIST_SCREEN
 "You have no route"="You have no route"; //new
 "Route Number"="Route number";//new
-"Route List"="Route List";//new
+"Routes List"="רשימת מסלולים";
 
 //PICTURE
+"Album Gallery"="בחירה מתוך הגלריה";
+"Take photo"="צלם תמונה";
 "No images have been added"="No images have been added";//new
 
 //PACKAGES
-"Delivery"="Delivery";//new
-"Backhaul"="Backhaul";//new
-"Package On Truck" = "Package On Truck";//new
-"Total cases"="Total cases";//new
-"Case complete"="Case complete";//new
-"Case not complete"="Case not complete";//new
-"Total pallets"="Total pallets";//new
-"Pallet complete"="Pallet complete";//new
-"Pallet not complete"="Pallet not complete";//new
+"Delivery"="משלוח";
+"Backhaul"="גרירה בחזרה";
+"Package On Truck" = "חבילות במשאית";
+"Total cases"="סה''כ מקרים";
+"Case complete"="מקרים שהושלמו";
+"Case not complete"="מקרים שלא הושלמו";
+"Total pallets"="סה''כ משטחים";
+"Pallet complete"="משטחים שהושלמו";
+"Pallet not complete"="משטחים שלא הושלמו";

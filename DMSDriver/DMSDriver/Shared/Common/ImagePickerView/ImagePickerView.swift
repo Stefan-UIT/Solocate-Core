@@ -43,15 +43,15 @@ class ImagePickerView: UIImagePickerController {
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet);
         
-        let actionGallery = UIAlertAction(title: "Album Gallery", style: .default) {[weak self] (action) in
+        let actionGallery = UIAlertAction(title: "Album Gallery".localized, style: .default) {[weak self] (action) in
            self?.getAllGallery(vc: atVC, isMultiplePick: true)
         }
         
-        let actionCamera = UIAlertAction(title: "Take photo", style: .default) {[weak self] (action) in
+        let actionCamera = UIAlertAction(title: "Take photo".localized, style: .default) {[weak self] (action) in
             self?.getCamera(vc:atVC )
         }
         
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel) { (action) in
+        let cancel = UIAlertAction(title: "cancel".localized, style: .cancel) { (action) in
             //
         }
         

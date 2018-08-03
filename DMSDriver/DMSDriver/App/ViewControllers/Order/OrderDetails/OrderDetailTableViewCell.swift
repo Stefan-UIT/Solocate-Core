@@ -151,7 +151,7 @@ struct OrderDetailInforRow {
         case .barcode:
             name = "Barcode".localized
         case .collectCall:
-            name = "CollecCall".localized
+            name = "Collect call".localized
         case .status:
             name = "Status".localized
         case .failureCause:

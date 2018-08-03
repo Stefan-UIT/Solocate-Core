@@ -38,7 +38,7 @@ class RouteListVC: BaseViewController {
     
     func setupNavigateBar() {
         self.navigationService.delegate = self
-        self.navigationService.updateNavigationBar(.Menu_Calenda, "Routes List")
+        self.navigationService.updateNavigationBar(.Menu_Calenda, "Routes List".localized)
     }
 
     override func didReceiveMemoryWarning() {
@@ -89,7 +89,7 @@ extension RouteListVC: UITableViewDataSource{
         if let routes = listRoutes {
             let route = routes[row]
           
-           cell.lblTitle?.text = "Route ID-\(route.id)"
+           cell.lblTitle?.text = "\("Route".localized)ID-\(route.id)"
            cell.lblSubtitle?.text = E(route.date)
            cell.btnStatus?.setTitle(route.route_name_sts.localized, for: .normal)
            cell.btnColor?.backgroundColor = route.colorStatus

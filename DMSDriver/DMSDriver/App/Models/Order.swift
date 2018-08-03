@@ -68,7 +68,7 @@ class Order: BaseModel {
   var details:String = ""
   var urgent = 0
   var surfaces:String = ""
-  var certificateNumber = ""
+  var certificateNumber = 0
   var coordinationPhone = ""
   var basePrice:Double = 0
   var receiveName:String = ""
