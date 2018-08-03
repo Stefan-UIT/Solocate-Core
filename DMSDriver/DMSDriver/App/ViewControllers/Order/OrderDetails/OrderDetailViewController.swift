@@ -90,7 +90,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             orderInforStatus.append(mess)
         }
         
-        let orderId = OrderDetailInforRow(.orderId,"\(_orderDetail.orderTypeId)")
+        let orderId = OrderDetailInforRow(.orderId,"\(_orderDetail.id)")
         let startTime = OrderDetailInforRow(.startTime, "\(_orderDetail.endTime)")
         let endTime = OrderDetailInforRow(.endTime, "\(_orderDetail.endTime)")
 
