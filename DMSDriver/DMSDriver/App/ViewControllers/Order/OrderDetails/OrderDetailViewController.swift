@@ -190,9 +190,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                                       _orderDetail.status != .inProcessStatus
     }
   
-    var didUpdateStatus:((_ orderDetail:OrderDetail, _ shouldMoveSigatureTab: Bool ) -> Void)?
-    var updateOrderDetail:(() -> Void)?
-  
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -207,8 +204,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     func initVar()  {
-        let des = E(orderDetail?.instructions)
-        
         arrTitleHeader = ["Order Status".localized,
                           "Order Information".localized,
                           "Information".localized,
@@ -222,43 +217,17 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
   
   
-  // MARK: ACTION
-  @IBAction func didClickFinish(_ sender: UIButton) {
-    guard let _orderDetail = orderDetail else {return}
-    let status = _orderDetail.status == .newStatus ? StatusOrder.inProcessStatus.rawValue : StatusOrder.deliveryStatus.rawValue
-    updateOrderStatus(status)
-  }
+    // MARK: ACTION
+    @IBAction func didClickFinish(_ sender: UIButton) {
+        handleFinishAction()
+    }
   
-  @IBAction func didClickUnableToStart(_ sender: UIButton) {
-    handleUnableToStartAction()
-  }
+    @IBAction func didClickUnableToStart(_ sender: UIButton) {
+        handleUnableToStartAction()
+    }
   
-  @IBAction func tapUpdateStatusButtonAction(_ sender: UIButton) {
-    //handleUpdateStatus() //https://seldat.atlassian.net/browse/NNCT-175
-    self.handleFinishAction()
-  }
-    
-    
-    // MARK: - Function -
-    func handleUpdateStatus() {
-        
-        guard let _orderDetail = orderDetail else { return }
-
-        let alert = UIAlertController(title: "", message: "Update Status Order", preferredStyle: .actionSheet)
-
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-  
-        
-        let finishActionTitle = _orderDetail.statusCode == "OP" ? "Start".localized : "Finish".localized
-
-        let finishAction = UIAlertAction(title: finishActionTitle, style: .default) { (alertAction) in
-            self.handleFinishAction()
-        }
-        
-        alert.addAction(cancelAction)
-        alert.addAction(finishAction)
-        
-        self.present(alert, animated: true, completion: nil)
+    @IBAction func tapUpdateStatusButtonAction(_ sender: UIButton) {
+        self.handleFinishAction()
     }
     
     func handleUnableToStartAction() {
@@ -267,7 +236,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         vc.routeID = routeID
         vc.type = "1"
         vc.didCancelSuccess =  { [weak self] (success, order) in
-            self?.didUpdateStatus?(order, false)
+            self?.didUpdateStatus?(order, nil)
         }
         
         self.navigationController?.pushViewController(vc, animated: true)
@@ -275,9 +244,31 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
     func handleFinishAction() {
         guard let _orderDetail = orderDetail else {return}
-        let status = _orderDetail.status == .newStatus ? "IP" : "DV"
-        updateOrderStatus(status)
+        let status:StatusOrder = _orderDetail.status
+        var statusNeedUpdate = status.rawValue
+        switch status{
+            case .newStatus:
+                statusNeedUpdate = StatusOrder.inProcessStatus.rawValue
+                updateOrderStatus(statusNeedUpdate)
+
+            case .inProcessStatus:
+                if _orderDetail.pod == 1 &&
+                    _orderDetail.url?.doc == nil{
+                    self.showAlertView("Please add pictures in picture tap, before finish this order") {[weak self] (action) in
+                        
+                        self?.didUpdateStatus?(_orderDetail, 2)
+                    }
+                    
+                }else {
+                    statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
+                    updateOrderStatus(statusNeedUpdate)
+                }
+                
+            default:
+                break
+         }
     }
+    
     
     func handleScanMatchBarCode() {
         guard let _orderDetail = orderDetail, _orderDetail.statusCode == "IP" else {return}
@@ -390,7 +381,7 @@ extension OrderDetailViewController {
             self?.setupDataDetailInforRows()
             self?.updateButtonStatus()
             self?.tableView.reloadData()
-            self?.didUpdateStatus?(_orderDetail, (status == "DV"))
+            self?.didUpdateStatus?(_orderDetail, (status == "DV") ? 1 : nil)
 
         case .error(let error):
             self?.showAlertView(error.getMessage())

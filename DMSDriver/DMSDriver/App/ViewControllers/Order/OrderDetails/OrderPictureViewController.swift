@@ -120,6 +120,7 @@ extension OrderPictureViewController {
             switch result{
             case .object(let object):
                 self?.orderDetail = object
+                self?.updateOrderDetail?()
                 self?.initData()
                 self?.upateUI()
                 self?.tableView.reloadData()

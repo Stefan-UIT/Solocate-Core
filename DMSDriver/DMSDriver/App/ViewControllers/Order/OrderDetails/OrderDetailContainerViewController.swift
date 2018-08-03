@@ -44,14 +44,12 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
     
     private  func setupViewControllerForPagerTab() -> [UIViewController] {
         let child_1:OrderDetailViewController = .loadSB(SB: .Order)
-        child_1.didUpdateStatus = { [weak self] (orderDetail, shouldMoveTab)  in
+        child_1.didUpdateStatus = { [weak self] (orderDetail, shouldMoveToTab)  in
             self?.getOrderDetail()
             self?.onUpdateOrderStatus?(orderDetail)
-
-            if shouldMoveTab {
-                self?.reloadPagerTabStripView()
-                self?.segmentedControl.selectedSegmentIndex = 1;
-                self?.moveToViewController(at: 1, animated: false) // move to signature tab
+            
+            if shouldMoveToTab != nil {
+                self?.moveToViewController(shouldMoveToTab: shouldMoveToTab!)
             }
         }
         
@@ -66,8 +64,16 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
         
         //let child_3 = OrderNotesViewController.loadViewController(type: OrderNotesViewController.self)
         let child_4:OrderPictureViewController = .loadSB(SB:.Order)
-        
+        child_4.updateOrderDetail = { [weak self] in
+            self?.getOrderDetail()
+        }
         return [child_1,child_2,child_4]
+    }
+    
+    private func moveToViewController(shouldMoveToTab:Int){
+        self.reloadPagerTabStripView()
+        self.segmentedControl.selectedSegmentIndex = shouldMoveToTab;
+        self.moveToViewController(at: shouldMoveToTab, animated: false)
     }
     
     private  func updateUI() {

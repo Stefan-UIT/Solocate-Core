@@ -16,9 +16,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
     @IBOutlet weak var signatureImgView: UIImageView?
     @IBOutlet weak var finishButton: UIButton?
     @IBOutlet weak var unableToFinishButton: UIButton?
-    
-    var updateOrderDetail:(() -> Void)?
-    
+        
     var validationSubmit:Bool = false{
         didSet{
             controlsContainerView?.alpha = validationSubmit ? 1 : 0.4
@@ -122,6 +120,9 @@ class BaseOrderDetailViewController: BaseViewController, IndicatorInfoProvider {
   var orderDetail: OrderDetail?
   var routeID: Int?
   var indicatorInfo = IndicatorInfo(title: "")
+    
+  var didUpdateStatus:((_ orderDetail:OrderDetail, _ shouldMoveToTab: Int?) -> Void)?
+  var updateOrderDetail:(() -> Void)?
   
   convenience init(_ title: String) {
     self.init()
