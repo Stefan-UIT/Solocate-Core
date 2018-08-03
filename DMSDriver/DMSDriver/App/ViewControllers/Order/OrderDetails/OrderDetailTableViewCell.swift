@@ -48,20 +48,24 @@ class OrderDetailTableViewCell: UITableViewCell {
 }
 
 enum OrderDetailType {
+    case orderId
     case hour
     case date
     case certificateNumber
-    case clientName
-    case customerName
-    case type
-    case urgency
+    case startTime
+    case endTime
+    case executionTime
     case doubleType
     case packagesNumber
     case cartonsNumber
     case surfacesNumber
-    case afternoon
     case vehicle
     case fromtodayToTomorrow
+    case clientName
+    case customerName
+    case type
+    case urgency
+    case afternoon
     case collectionFromCompany
     case startingStreet
     case startingCity
@@ -72,10 +76,10 @@ enum OrderDetailType {
     case barcode
     case collectCall
     case status
+    case SEQ
     case failureCause
     case comments
     case certificateNumber_client
-    case executionTime
     case receiverName
     case secondReceiverName
     case message
@@ -94,26 +98,34 @@ struct OrderDetailInforRow {
         self.content = content
         
         switch type {
+        case .orderId:
+            name = "Order Id".localized
+        case .type:
+            name = "Type".localized
+        case .packagesNumber:
+            name = "Packages number".localized
+        case .certificateNumber:
+            name = "Certificate number".localized
+        case .startTime:
+            name = "Start time".localized
+        case .endTime:
+            name = "End time".localized
+        case .executionTime:
+            name = "Execution time".localized
         case .address:
             name = "Address".localized
         case .hour:
           name = "Hour".localized
         case .date:
           name = "Date".localized
-        case .certificateNumber:
-          name = "Certificate number".localized
         case .clientName:
           name = "Client name".localized
         case .customerName:
           name = "Customer name".localized
-        case .type:
-            name = "Type".localized
         case .urgency:
             name = "Urgency".localized
         case .doubleType:
             name = "Double type".localized
-        case .packagesNumber:
-            name = "Packages number".localized
         case .cartonsNumber:
             name = "Cartons number".localized
         case .surfacesNumber:
@@ -148,8 +160,6 @@ struct OrderDetailInforRow {
             name = "Comments".localized
         case .certificateNumber_client:
             name = "Certificate number (Client)".localized
-        case .executionTime:
-            name = "Execution time".localized
         case .receiverName:
             name = "Receiver name".localized
         case .secondReceiverName:
@@ -160,7 +170,8 @@ struct OrderDetailInforRow {
             name = "Message".localized
         case .phone:
             name = "Phone".localized
-
+        case .SEQ:
+            name = "SEQ".localized
         }
     }
 }

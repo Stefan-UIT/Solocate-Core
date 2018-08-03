@@ -51,6 +51,7 @@ class Order: BaseModel {
   var timeWindowName = ""
   var orderType = ""
   var routeId = -1
+  var bcd = ""
     
   var seq = -1
   var pallets = -1
@@ -199,6 +200,7 @@ class Order: BaseModel {
         orderTypeId <- map["order_type_name"]
         order_status <- map["order_status"]
         created_at <- map["created_at"]
+        bcd <- map["bcd"]
 
   }
     

@@ -90,7 +90,10 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             orderInforStatus.append(mess)
         }
         
-        let hour = OrderDetailInforRow(.hour, "\(_orderDetail.serviceTime)")
+        let orderId = OrderDetailInforRow(.orderId,"\(_orderDetail.orderTypeId)")
+        let startTime = OrderDetailInforRow(.startTime, "\(_orderDetail.endTime)")
+        let endTime = OrderDetailInforRow(.endTime, "\(_orderDetail.endTime)")
+
         let date = OrderDetailInforRow(.date,_orderDetail.deliveryDate)
         let certifiacteNumber = OrderDetailInforRow(.certificateNumber ,
                                                     _orderDetail.certificateNumber)
@@ -102,30 +105,29 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let doubleType = OrderDetailInforRow(.doubleType,
                                              "\(_orderDetail.order_detail?.double_type ?? 0)")
         let packetNumber = OrderDetailInforRow(.packagesNumber ,
+                                               _orderDetail.orderReference)
+        let packetNumber2 = OrderDetailInforRow(.packagesNumber ,
                                                "\(_orderDetail.order_detail?.packages ?? 0)")
+
         let cartonsNumber = OrderDetailInforRow(.cartonsNumber,
                                                 "\(_orderDetail.order_detail?.cartons ?? 0)")
         let surfacesNumber = OrderDetailInforRow(.surfacesNumber,
                                                  "\(_orderDetail.surfaces)")
-        let afternoon = OrderDetailInforRow(.afternoon, "-")
+        let seq = OrderDetailInforRow(.SEQ,
+                                                 "\(_orderDetail.seq)")
+
         let vehical = OrderDetailInforRow(.vehicle,"-")
         let fromTodyToTomorrow = OrderDetailInforRow(.fromtodayToTomorrow,
                                                      _orderDetail.fromTodayToTomorrow)
-        let collectionFromCompany = OrderDetailInforRow(.collectionFromCompany,"-")
-        let startingStreet = OrderDetailInforRow(.startingStreet,"-")
-        let startingCity = OrderDetailInforRow(.startingCity,"-")
-        let transferToCompany = OrderDetailInforRow(.transferToCompany,"-")
-        let distinationStreet = OrderDetailInforRow(.destinationStreet ,
-                                                    E(_orderDetail.toAddress?.street))
+        
+        
+        
         let distinationCity = OrderDetailInforRow(.destinationCity,
                                                   E(_orderDetail.toAddress?.city))
-        let standby = OrderDetailInforRow(.standby,
-                                          "\(_orderDetail.standby)")
-        let barCode = OrderDetailInforRow(.barcode,"-")
+        let barCode = OrderDetailInforRow(.barcode, _orderDetail.bcd)
         let collectCall = OrderDetailInforRow(.collectCall,
                                               _orderDetail.collectionCall)
-        let certificateNumber_client = OrderDetailInforRow(.certificateNumber_client,"-")
-        let executionTime = OrderDetailInforRow(.executionTime,"-")
+        let executionTime = OrderDetailInforRow(.executionTime, "\(_orderDetail.standby)")
         let receiverName = OrderDetailInforRow(.receiverName,
                                                _orderDetail.receiveName)
         let secondReceiverName = OrderDetailInforRow(.secondReceiverName,
@@ -138,34 +140,49 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         
         shouldFilterOrderItemsList = _orderDetail.items.filter({$0.statusCode == "OP"}).count > 0
         
-        orderInforRows.append(hour)
-        orderInforRows.append(date)
-        orderInforRows.append(certifiacteNumber)
+        orderInforRows.append(orderId)
         orderInforRows.append(type)
-        orderInforRows.append(doubleType)
         orderInforRows.append(packetNumber)
+        orderInforRows.append(certifiacteNumber)
+        orderInforRows.append(startTime)
+        orderInforRows.append(endTime)
+        orderInforRows.append(executionTime)
+        orderInforRows.append(doubleType)
+        orderInforRows.append(packetNumber2)
         orderInforRows.append(cartonsNumber)
         orderInforRows.append(surfacesNumber)
-        orderInforRows.append(afternoon)
         orderInforRows.append(vehical)
         orderInforRows.append(fromTodyToTomorrow)
+        orderInforRows.append(barCode)
+        orderInforRows.append(collectCall)
+        orderInforRows.append(seq)
+        orderInforRows.append(date)
+        
+        /*
+         let hour = OrderDetailInforRow(.hour, "\(_orderDetail.serviceTime)")
+         let afternoon = OrderDetailInforRow(.afternoon, "-")
+         let collectionFromCompany = OrderDetailInforRow(.collectionFromCompany,"-")
+         let startingStreet = OrderDetailInforRow(.startingStreet,"-")
+         let startingCity = OrderDetailInforRow(.startingCity,"-")
+         let transferToCompany = OrderDetailInforRow(.transferToCompany,"-")
+         let distinationStreet = OrderDetailInforRow(.destinationStreet ,
+         E(_orderDetail.toAddress?.street))
+         let certificateNumber_client = OrderDetailInforRow(.certificateNumber_client,"-")
+         
+        orderInforRows.append(afternoon)
         orderInforRows.append(collectionFromCompany)
         orderInforRows.append(startingStreet)
         orderInforRows.append(startingCity)
         orderInforRows.append(transferToCompany)
         orderInforRows.append(distinationStreet)
-        orderInforRows.append(distinationCity)
-        orderInforRows.append(standby)
-        orderInforRows.append(barCode)
-        orderInforRows.append(collectCall)
         orderInforRows.append(certificateNumber_client)
-        orderInforRows.append(executionTime)
-        orderInforRows.append(receiverName)
-        orderInforRows.append(secondReceiverName)
-
+         */
       
         informationRows.append(clientName)
         informationRows.append(customerName)
+        informationRows.append(receiverName)
+        informationRows.append(secondReceiverName)
+        informationRows.append(distinationCity)
         informationRows.append(phone)
         informationRows.append(address)
       

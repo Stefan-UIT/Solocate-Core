@@ -37,10 +37,11 @@ class OrderItemTableViewCell: UITableViewCell {
       lblTitle?.text = "\(order.sequence) - \(order.orderReference)"
       lblSubtitle?.text = order.orderType
       lblDeliverynumber?.text = order.orderReference
-      lblStore?.text = order.storeName
-      lblShop?.text = order.shop
-      lblUrgency?.text =  order.urgent == 1 ? "YES" : "NO"
+      lblStore?.text =  order.storeName
+      //lblShop?.text = order.shop
+      lblUrgency?.isHidden = !(order.urgent == 1 )
       lblExpectedTime?.text = "\(order.startTime) ~ \(order.endTime)"
+      lblTodate?.text = order.deliveryDate;
 
       let status = OrderStatus(rawValue: order.statusCode) ?? OrderStatus.open
       btnStatus?.setTitle("\(status.statusName)", for: .normal)

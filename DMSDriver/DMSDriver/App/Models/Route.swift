@@ -82,8 +82,10 @@ class Route: BaseModel {
     route_name_sts <- map["route_name_sts"]
     warehouse <- map[KEY_WARE_HOUSE]
     start_time <- map["start_time"]
+    startDate <- map["start"]
     driver_name <- map["driver_name"]
     end_time <- map["end_time"]
+    endDate <- map["end"]
 
   }
     

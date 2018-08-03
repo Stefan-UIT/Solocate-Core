@@ -67,10 +67,7 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
         //let child_3 = OrderNotesViewController.loadViewController(type: OrderNotesViewController.self)
         let child_4:OrderPictureViewController = .loadSB(SB:.Order)
         
-        if order?.statusCode.compare("DV") == ComparisonResult.orderedSame {
-            return [child_1,child_2,child_4]
-        }
-        return [child_1,child_4]
+        return [child_1,child_2,child_4]
     }
     
     private  func updateUI() {
@@ -109,17 +106,9 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
   override func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int) {
     super.updateIndicator(for: viewController, fromIndex: fromIndex, toIndex: toIndex)
     
-    if let status = order?.status {
-        switch status {
-        case .deliveryStatus:
-            print("From Index: \(fromIndex)")
-            containerView.isScrollEnabled = !((self.orderDetail?.url?.sig == nil) &&
-                                            (fromIndex == 1)) // 1 is tap signature
+    containerView.isScrollEnabled = !((self.orderDetail?.url?.sig == nil) &&
+        (fromIndex == 1)) // 1 is tap signature
 
-        default:
-            containerView.isScrollEnabled = true
-        }
-    }
   }
 }
 

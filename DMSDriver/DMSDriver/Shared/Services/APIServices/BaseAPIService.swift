@@ -101,7 +101,7 @@ class BaseAPIService {
         }
         
         let localizationCode = Locale.current.languageCode == "he" ? "hb" : "en"
-        newHeaders["X-localization"] = localizationCode
+        newHeaders["x-localization"] = localizationCode
         // setToken
         if let token = Caches().getTokenKeyLogin() {
             newHeaders["Authorization"] = "Bearer \(token)"
