@@ -97,6 +97,7 @@ class Order: BaseModel {
   var order_status = ""
   var created_at = ""
   var pod = 0
+  var to_loc_id = -1
     
     
     
@@ -204,6 +205,7 @@ class Order: BaseModel {
         created_at <- map["created_at"]
         bcd <- map["bcd"]
         pod <- map["pod"]
+        to_loc_id <- map["to_loc_id"]
 
   }
     

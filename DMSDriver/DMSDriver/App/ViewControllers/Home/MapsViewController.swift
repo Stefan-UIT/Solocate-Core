@@ -29,7 +29,8 @@ class MapsViewController: UIViewController {
     tabBarController?.tabBar.isHidden = false
   }
   
-  func drawPath(fromLocation from: CLLocationCoordinate2D, toLocation to: CLLocationCoordinate2D) {
+  func drawPath(fromLocation from: CLLocationCoordinate2D,
+                toLocation to: CLLocationCoordinate2D) {
     self.showLoadingIndicator()
     API().getDirection(fromLocation: from, toLocation: to) {[weak self] (result) in
         self?.dismissLoadingIndicator()
@@ -72,16 +73,19 @@ class MapsViewController: UIViewController {
         
         // draw two stores together
         let distinctOrderList = _route.distinctArrayOrderList()
-        let sortedList = distinctOrderList.sorted(by: { (lhs, rhs) -> Bool in
+        var sortedList = distinctOrderList.sorted(by: { (lhs, rhs) -> Bool in
             return lhs.sequence <= rhs.sequence
         })
-
-        let subList = sortedList.chunked(by: 2)
-        for item in subList {
-            guard item.count > 1 else { return }
-            if let first = item.first, let last = item.last {
-                drawPath(fromLocation: first.location, toLocation: last.location)
+        
+        for (index, _) in sortedList.enumerated() {
+            let nextIndex = index + 1
+            if nextIndex >= sortedList.count {
+                return
             }
+            let beginStore = sortedList[index]
+            let nextstore = sortedList[nextIndex]
+            
+            drawPath(fromLocation:beginStore.location, toLocation:nextstore.location)
         }
     }
     
@@ -97,13 +101,15 @@ class MapsViewController: UIViewController {
         return labelOrder
     }
     
-    private func showMarkerWithOrder(_ order:Order) {
+    
+    private func showMarker(_ order:Order, sequence:Int) {
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: order.lat.doubleValue, longitude: order.lng.doubleValue))
         let labelOrder = labelMarkerWithText("\(order.sequence)")
         marker.title = "\(order.storeName)"
         marker.snippet = "\(order.deliveryAdd)"
         marker.map = mapView
         marker.iconView = labelOrder
+        marker.zIndex = 1
     }
     
     private func showMarkers() {
@@ -111,8 +117,9 @@ class MapsViewController: UIViewController {
         warehouseMarker.map = mapView
         
         let distinctArray = route!.distinctArrayOrderList()
-        for order in distinctArray {
-            showMarkerWithOrder(order)
+        for (index,order) in distinctArray.enumerated() {
+            let seq = index + 1
+            showMarker(order, sequence:seq)
         }
     }
 }

@@ -109,7 +109,7 @@ class Route: BaseModel {
                 }
             }
             if repeatedCount > 1 {
-                let array = addedArray.filter({$0.locationID == index.locationID})
+                let array = addedArray.filter({$0.to_loc_id == index.to_loc_id})
                 if array.count > 0 {
                     continue
                 }
