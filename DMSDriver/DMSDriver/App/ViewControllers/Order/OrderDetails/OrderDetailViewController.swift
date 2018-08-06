@@ -124,6 +124,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let phone = OrderDetailInforRow(.phone,
                                         _orderDetail.deliveryContactPhone)
         
+        let thirdCourier = OrderDetailInforRow(.thirdCourier,
+                                        _orderDetail.thirdCourier)
+        
         shouldFilterOrderItemsList = _orderDetail.items.filter({$0.statusCode == "OP"}).count > 0
         
         orderInforRows.append(orderId)
@@ -183,6 +186,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
          */
       
         informationRows.append(clientName)
+        informationRows.append(thirdCourier)
         informationRows.append(customerName)
         informationRows.append(receiverName)
         informationRows.append(distinationCity)
@@ -255,14 +259,15 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                 updateOrderStatus(statusNeedUpdate)
 
             case .inProcessStatus:
-                if _orderDetail.pod == 1 &&
+                if _orderDetail.isRequireImage() &&
                     _orderDetail.url?.doc == nil{
                     self.showAlertView("Please add pictures in picture tap, before finish this order") {[weak self] (action) in
                         
                         self?.didUpdateStatus?(_orderDetail, 2)
                     }
                     
-                }else if ( _orderDetail.url?.sig == nil) {
+                }else if (_orderDetail.isRequireSign() &&
+                          _orderDetail.url?.sig == nil) {
                     self.showAlertView("Please add signature in signature tap, before finish this order") {[weak self] (action) in
                         
                         self?.didUpdateStatus?(_orderDetail, 1)

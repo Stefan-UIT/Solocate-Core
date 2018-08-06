@@ -85,6 +85,7 @@ enum OrderDetailType {
     case message
     case address
     case phone
+    case thirdCourier
 
 }
 
@@ -172,6 +173,8 @@ struct OrderDetailInforRow {
             name = "Phone".localized
         case .SEQ:
             name = "SEQ".localized
+        case .thirdCourier:
+            name = "Third courier".localized
         }
     }
 }

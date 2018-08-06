@@ -58,6 +58,8 @@ class Order: BaseModel {
     var details:String = ""
     var urgent = 0
     var surfaces:String = ""
+    var thirdCourier:String = ""
+
     var certificateNumber = 0
     var coordinationPhone = ""
     var basePrice:Double = 0
@@ -87,6 +89,7 @@ class Order: BaseModel {
     var order_status = ""
     var created_at = ""
     var pod = 0
+    var sign = -1
     var to_loc_id = -1
     var order_type_name = ""
     var order_type_name_hb = ""
@@ -220,9 +223,17 @@ class Order: BaseModel {
         urgent_type_name_en <- map["urgent_type_name_en"]
         urgent_type_name_hb <- map["urgent_type_name_hb"]
         urgent_type_id <- map["urgent_type_id"]
-
+        sign <- map["sign"]
+        thirdCourier <- map["3rd_courier"]
   }
     
+    func isRequireSign() -> Bool  {
+        return sign == 1
+    }
+    
+    func isRequireImage() -> Bool  {
+        return pod == 1
+    }
 }
 
 class ReasonOrderCC: Reason {
@@ -328,7 +339,6 @@ class OrderDetail: Order {
   var deliveryState = ""
   var descriptionNote = ""
   var descriptionNoteExt = ""
-  var sign = ""
   var notes = [Note]()
   var items = [OrderItem]()
   var pictures = [Picture]()
