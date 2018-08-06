@@ -259,6 +259,12 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                         self?.didUpdateStatus?(_orderDetail, 2)
                     }
                     
+                }else if ( _orderDetail.url?.sig == nil) {
+                    self.showAlertView("Please add signature in signature tap, before finish this order") {[weak self] (action) in
+                        
+                        self?.didUpdateStatus?(_orderDetail, 1)
+                    }
+                    
                 }else {
                     statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
                     updateOrderStatus(statusNeedUpdate)
@@ -381,7 +387,7 @@ extension OrderDetailViewController {
             self?.setupDataDetailInforRows()
             self?.updateButtonStatus()
             self?.tableView.reloadData()
-            self?.didUpdateStatus?(_orderDetail, (status == "DV") ? 1 : nil)
+            self?.didUpdateStatus?(_orderDetail, (status == "DV" && _orderDetail.url?.sig == nil) ? 1 : nil)
 
         case .error(let error):
             self?.showAlertView(error.getMessage())
