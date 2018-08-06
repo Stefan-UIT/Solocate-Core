@@ -49,10 +49,29 @@ class Route: BaseModel {
                 return AppColor.inProcessStatus;
             case "DV":
                 return AppColor.deliveryStatus;
+            case "CC":
+                return AppColor.redColor;
             default:
                 return AppColor.white;
             }
+        }
+    }
+    
+    var nameStatus:String {
+        get{
             
+            switch status {
+            case "OP":
+                return "New".localized
+            case "IP":
+                return "In Progress".localized;
+            case "DV":
+                return "Finished".localized;
+            case "CC":
+                return "Cancelled".localized;
+            default:
+                return "Unknown";
+            }
         }
     }
 

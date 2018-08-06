@@ -95,9 +95,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let endTime = OrderDetailInforRow(.endTime, "\(_orderDetail.endTime)")
 
         let date = OrderDetailInforRow(.date,_orderDetail.deliveryDate)
-        let certifiacteNumber = OrderDetailInforRow(.certificateNumber ,
-                                                    "\(_orderDetail.certificateNumber)")
-        
         let clientName = OrderDetailInforRow(.clientName,_orderDetail.client_name)
         let customerName = OrderDetailInforRow(.customerName ,
                                                _orderDetail.custumer_name)
@@ -111,28 +108,17 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 
         let cartonsNumber = OrderDetailInforRow(.cartonsNumber,
                                                 "\(_orderDetail.order_detail?.cartons ?? 0)")
-        let surfacesNumber = OrderDetailInforRow(.surfacesNumber,
-                                                 "\(_orderDetail.surfaces)")
         let seq = OrderDetailInforRow(.SEQ,
                                                  "\(_orderDetail.seq)")
 
         let vehical = OrderDetailInforRow(.vehicle,"-")
-        let fromTodyToTomorrow = OrderDetailInforRow(.fromtodayToTomorrow,
-                                                     _orderDetail.fromTodayToTomorrow == "1" ? "YES".localized : "NO".localized)
-        
-        
-        
         let distinationCity = OrderDetailInforRow(.destinationCity,
                                                   E(_orderDetail.toAddress?.city))
-        let barCode = OrderDetailInforRow(.barcode, _orderDetail.bcd)
         let collectCall = OrderDetailInforRow(.collectCall,
                                               _orderDetail.collectionCall)
         let executionTime = OrderDetailInforRow(.executionTime, "\(_orderDetail.standby)")
         let receiverName = OrderDetailInforRow(.receiverName,
                                                _orderDetail.receiveName)
-        let secondReceiverName = OrderDetailInforRow(.secondReceiverName,
-                                                     _orderDetail.secoundReceiveName)
-
         let address = OrderDetailInforRow(.address,
                                           E(_orderDetail.toAddress?.full_addr))
         let phone = OrderDetailInforRow(.phone,
@@ -143,17 +129,13 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforRows.append(orderId)
         orderInforRows.append(type)
         orderInforRows.append(packetNumber)
-        orderInforRows.append(certifiacteNumber)
         orderInforRows.append(startTime)
         orderInforRows.append(endTime)
         orderInforRows.append(executionTime)
         orderInforRows.append(doubleType)
         orderInforRows.append(packetNumber2)
         orderInforRows.append(cartonsNumber)
-        orderInforRows.append(surfacesNumber)
         orderInforRows.append(vehical)
-        orderInforRows.append(fromTodyToTomorrow)
-        orderInforRows.append(barCode)
         orderInforRows.append(collectCall)
         orderInforRows.append(seq)
         orderInforRows.append(date)
@@ -168,6 +150,19 @@ class OrderDetailViewController: BaseOrderDetailViewController {
          let distinationStreet = OrderDetailInforRow(.destinationStreet ,
          E(_orderDetail.toAddress?.street))
          let certificateNumber_client = OrderDetailInforRow(.certificateNumber_client,"-")
+         let certifiacteNumber = OrderDetailInforRow(.certificateNumber ,
+         "\(_orderDetail.certificateNumber)")
+         let surfacesNumber = OrderDetailInforRow(.surfacesNumber,
+         "\(_orderDetail.surfaces)")
+         let secondReceiverName = OrderDetailInforRow(.secondReceiverName,
+         _orderDetail.secoundReceiveName)
+         let barCode = OrderDetailInforRow(.barcode, _orderDetail.bcd)
+
+         let fromTodyToTomorrow = OrderDetailInforRow(.fromtodayToTomorrow,
+         _orderDetail.fromTodayToTomorrow == "1" ? "YES".localized : "NO".localized)
+
+
+
          
         orderInforRows.append(afternoon)
         orderInforRows.append(collectionFromCompany)
@@ -176,12 +171,20 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforRows.append(transferToCompany)
         orderInforRows.append(distinationStreet)
         orderInforRows.append(certificateNumber_client)
+        orderInforRows.append(certifiacteNumber)
+        orderInforRows.append(surfacesNumber)
+        orderInforRows.append(barCode)
+        orderInforRows.append(fromTodyToTomorrow)
+
+
+        informationRows.append(secondReceiverName)
+
+
          */
       
         informationRows.append(clientName)
         informationRows.append(customerName)
         informationRows.append(receiverName)
-        informationRows.append(secondReceiverName)
         informationRows.append(distinationCity)
         informationRows.append(phone)
         informationRows.append(address)
