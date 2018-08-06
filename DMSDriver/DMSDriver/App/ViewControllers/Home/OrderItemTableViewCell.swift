@@ -35,11 +35,17 @@ class OrderItemTableViewCell: UITableViewCell {
     
   func updateCell() {
       lblTitle?.text = "\(order.sequence) - \(order.orderReference)"
-      lblSubtitle?.text = order.orderType
       lblDeliverynumber?.text = order.orderReference
       lblStore?.text =  order.storeName
-      //lblShop?.text = order.shop
-      lblUrgency?.isHidden = !(order.urgent == 1 )
+      if Locale.current.languageCode == "he" {
+        lblUrgency?.text = order.urgent_type_name_hb
+        lblSubtitle?.text = order.order_type_name_hb
+
+      }else {
+        lblUrgency?.text = order.urgent_type_name_en
+        lblSubtitle?.text = order.order_type_name
+      }
+      lblUrgency?.textColor = order.colorUrgent
       lblExpectedTime?.text = "\(order.startTime) ~ \(order.endTime)"
       lblTodate?.text = order.deliveryDate;
 

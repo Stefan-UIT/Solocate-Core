@@ -111,6 +111,9 @@ enum NotificationType : String {
     case NEW_ROUTE = "new_route"
 }
 
+func isHebewLang() -> Bool {
+    return Locale.current.languageCode == "he"
+}
 
 func ClassName(_ object: Any) -> String {
     return String(describing: type(of: object))

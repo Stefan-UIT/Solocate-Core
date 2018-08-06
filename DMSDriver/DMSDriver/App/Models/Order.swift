@@ -19,85 +19,94 @@ enum StatusOrder: String {
 
 class Order: BaseModel {
     
-    //"ntf_to_coord": 1,
-    //"3rd_courier": "Staff SD",
-    //"est_execution": "Không biết là cái gì luôn",
-    //"expenses": "Không biết là cái gì luôn",
-    //"bcd": "Không biết là cái gì luôn",
-    //"sms_quantity": "Không biết là gì luôn",
-    //"rcvd_day": "07/30/2018 00:00:00",
-    //"coord_dt": "07/30/2018 10:00:00",
+    var id = -1
+    var deliveryZip = ""
+    var totalVolume = ""
+    var totalWeight = ""
+    var floorSpace = ""
+    var shopID = -1
+    var locationID = -1
+    var storeName = ""
+    var sequence = -1
+    var pickupContactName = ""
+    var pickupContactPhone = ""
+    var pickupContactEmail  = ""
+    var lat = ""
+    var lng = ""
+    var statusCode = ""
+    var statusName = ""
+    var orderReference = ""
+    var deliveryDate = ""
+    var deliveryAdd = ""
+    var timeWindowName = ""
+    var orderType = ""
+    var routeId = -1
+    var bcd = ""
     
+    var seq = -1
+    var pallets = -1
+    var cases = -1
+    var shop:String = ""
+    var startTime = ""
+    var endTime = ""
+    var reason_msg = ""
     
-  var id = -1
-  var deliveryZip = ""
-  var totalVolume = ""
-  var totalWeight = ""
-  var floorSpace = ""
-  var shopID = -1
-  var locationID = -1
-  var storeName = ""
-  var sequence = -1
-  var pickupContactName = ""
-  var pickupContactPhone = ""
-  var pickupContactEmail  = ""
-  var lat = ""
-  var lng = ""
-  var statusCode = ""
-  var statusName = ""
-  var orderReference = ""
-  var deliveryDate = ""
-  var deliveryAdd = ""
-  var timeWindowName = ""
-  var orderType = ""
-  var routeId = -1
-  var bcd = ""
+    var standby = 0
+    var client_name:String = ""
+    var custumer_name:String = ""
+    var instructions:String = ""
+    var details:String = ""
+    var urgent = 0
+    var surfaces:String = ""
+    var certificateNumber = 0
+    var coordinationPhone = ""
+    var basePrice:Double = 0
+    var receiveName:String = ""
+    var secoundReceiveName:String = ""
+    var totalPerCustomer:String = ""
+    var fromTodayToTomorrow:String = ""
+    var signedCertificate :String = ""
+    var collectionCall:String = ""
+    var comments = ""
+    var doubleType = 0
+    var packages = 0
+    var cartons = 0
+    var toAddressName = ""
+    var toAddressPhone = ""
+    var toAddressEmail = ""
+    var toAddressStreet = ""
+    var toAddressHouseNumber = ""
+    var toAddressEntrance = ""
+    var toAddressFloor = ""
+    var toAddressApartment = ""
+    var toAddressCity = ""
+    var toAddressAddr = ""
+    var toAddressFullAddress = ""
+    var orderTypeId = 0
+    var orderTypeName = ""
+    var order_status = ""
+    var created_at = ""
+    var pod = 0
+    var to_loc_id = -1
+    var order_type_name = ""
+    var order_type_name_hb = ""
+    var urgent_type_name_en = ""
+    var urgent_type_name_hb = ""
+    var urgent_type_id = -1
     
-  var seq = -1
-  var pallets = -1
-  var cases = -1
-  var shop:String = ""
-  var startTime = ""
-  var endTime = ""
-  var reason_msg = ""
-    
-  var standby = 0
-  var client_name:String = ""
-  var custumer_name:String = ""
-  var instructions:String = ""
-  var details:String = ""
-  var urgent = 0
-  var surfaces:String = ""
-  var certificateNumber = 0
-  var coordinationPhone = ""
-  var basePrice:Double = 0
-  var receiveName:String = ""
-  var secoundReceiveName:String = ""
-  var totalPerCustomer:String = ""
-  var fromTodayToTomorrow:String = ""
-  var signedCertificate :String = ""
-  var collectionCall:String = ""
-  var comments = ""
-  var doubleType = 0
-  var packages = 0
-  var cartons = 0
-  var toAddressName = ""
-  var toAddressPhone = ""
-  var toAddressEmail = ""
-  var toAddressStreet = ""
-  var toAddressHouseNumber = ""
-  var toAddressEntrance = ""
-  var toAddressFloor = ""
-  var toAddressApartment = ""
-  var toAddressCity = ""
-  var toAddressAddr = ""
-  var toAddressFullAddress = ""
-  var orderTypeId = 0
-  var orderTypeName = ""
-  var order_status = ""
-  var created_at = ""
-  var pod = 0
-  var to_loc_id = -1
+
+    var colorUrgent:UIColor{
+        get{
+            switch urgent_type_id {
+            case 2:
+                return AppColor.medium
+            case 3:
+                return AppColor.high
+            default:
+                return AppColor.normal
+            }
+        }
+    }
     
     
     
@@ -206,6 +215,11 @@ class Order: BaseModel {
         bcd <- map["bcd"]
         pod <- map["pod"]
         to_loc_id <- map["to_loc_id"]
+        order_type_name <- map["order_type_name"]
+        order_type_name_hb <- map["order_type_name_hb"]
+        urgent_type_name_en <- map["urgent_type_name_en"]
+        urgent_type_name_hb <- map["urgent_type_name_hb"]
+        urgent_type_id <- map["urgent_type_id"]
 
   }
     

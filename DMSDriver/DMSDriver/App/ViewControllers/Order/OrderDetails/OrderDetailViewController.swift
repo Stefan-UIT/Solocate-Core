@@ -77,7 +77,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let status = OrderStatus(rawValue: _orderDetail.statusCode) ?? OrderStatus.open
         let statusItem = OrderDetailInforRow(.status,
                                              status.statusName)
-        let urgency = OrderDetailInforRow(.urgency ,"YES")
+        let urgency = OrderDetailInforRow(.urgency ,isHebewLang() ? _orderDetail.urgent_type_name_hb :  _orderDetail.urgent_type_name_en)
         orderInforStatus.append(statusItem)
         orderInforStatus.append(urgency)
 
@@ -98,7 +98,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let clientName = OrderDetailInforRow(.clientName,_orderDetail.client_name)
         let customerName = OrderDetailInforRow(.customerName ,
                                                _orderDetail.custumer_name)
-        let type = OrderDetailInforRow(.type ,"\(_orderDetail.orderType)")
+        let type = OrderDetailInforRow(.type , isHebewLang() ? _orderDetail.order_type_name_hb : _orderDetail.order_type_name)
         let doubleType = OrderDetailInforRow(.doubleType,
                                              "\(_orderDetail.order_detail?.double_type ?? 0)")
         let packetNumber = OrderDetailInforRow(.packagesNumber ,
