@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B2A23A321193C330000817C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B2A23A221193C320000817C /* GoogleService-Info.plist */; };
+		3B2A23A721195BA50000817C /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B2A23A621195BA50000817C /* GoogleService-Info-prod.plist */; };
 		3B66B759210B1051000BDFEF /* DMSDriver.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B757210B1051000BDFEF /* DMSDriver.xcdatamodeld */; };
 		3B66B801210B113D000BDFEF /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B767210B113C000BDFEF /* LocationTracker.swift */; };
 		3B66B802210B113D000BDFEF /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B769210B113C000BDFEF /* Date.swift */; };
@@ -94,7 +96,6 @@
 		3B66B854210B113D000BDFEF /* Release.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7DB210B113C000BDFEF /* Release.xcconfig */; };
 		3B66B855210B113D000BDFEF /* Base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7DC210B113C000BDFEF /* Base.xcconfig */; };
 		3B66B856210B113D000BDFEF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7DE210B113C000BDFEF /* Localizable.strings */; };
-		3B66B857210B113D000BDFEF /* GoogleService-Info-production.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7E4210B113C000BDFEF /* GoogleService-Info-production.plist */; };
 		3B66B858210B113D000BDFEF /* MainConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7E5210B113C000BDFEF /* MainConfigs.plist */; };
 		3B66B85A210B113D000BDFEF /* ServicesConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7EA210B113C000BDFEF /* ServicesConfigs.plist */; };
 		3B66B85B210B113D000BDFEF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7EB210B113C000BDFEF /* Info.plist */; };
@@ -188,7 +189,6 @@
 		3B66B92B210B1149000BDFEF /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B8D8210B1148000BDFEF /* ChangePasswordView.swift */; };
 		3B66B92C210B1149000BDFEF /* AlertMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B8DA210B1148000BDFEF /* AlertMessageView.xib */; };
 		3B66B92D210B1149000BDFEF /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B8DB210B1148000BDFEF /* AlertMessageView.swift */; };
-		3B66B932210B2BB8000BDFEF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B931210B2BB8000BDFEF /* GoogleService-Info.plist */; };
 		8C4E3206BD1C8C7A1DB996B4 /* Pods_DMSDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AE839C0F4BB54E10866CDFD7 /* Pods_DMSDriver.framework */; };
 /* End PBXBuildFile section */
 
@@ -203,6 +203,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B2A23A221193C320000817C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3B2A23A621195BA50000817C /* GoogleService-Info-prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-prod.plist"; sourceTree = "<group>"; };
 		3B66B74D210B1051000BDFEF /* DMSDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMSDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B66B758210B1051000BDFEF /* DMSDriver.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DMSDriver.xcdatamodel; sourceTree = "<group>"; };
 		3B66B767210B113C000BDFEF /* LocationTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTracker.swift; sourceTree = "<group>"; };
@@ -294,7 +296,6 @@
 		3B66B7DC210B113C000BDFEF /* Base.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Base.xcconfig; sourceTree = "<group>"; };
 		3B66B7DF210B113C000BDFEF /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3B66B7E0210B113C000BDFEF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		3B66B7E4210B113C000BDFEF /* GoogleService-Info-production.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-production.plist"; sourceTree = "<group>"; };
 		3B66B7E5210B113C000BDFEF /* MainConfigs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MainConfigs.plist; sourceTree = "<group>"; };
 		3B66B7EA210B113C000BDFEF /* ServicesConfigs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ServicesConfigs.plist; sourceTree = "<group>"; };
 		3B66B7EB210B113C000BDFEF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -390,7 +391,6 @@
 		3B66B8DA210B1148000BDFEF /* AlertMessageView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AlertMessageView.xib; sourceTree = "<group>"; };
 		3B66B8DB210B1148000BDFEF /* AlertMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertMessageView.swift; sourceTree = "<group>"; };
 		3B66B930210B1D6A000BDFEF /* DMSDriver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DMSDriver.entitlements; sourceTree = "<group>"; };
-		3B66B931210B2BB8000BDFEF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B8732A721106100008C5C20 /* GoogleMapsCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsCore.framework; sourceTree = "<group>"; };
 		3B8732A821106100008C5C20 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		3B8732A921106100008C5C20 /* CHANGELOG */ = {isa = PBXFileReference; lastKnownFileType = text; path = CHANGELOG; sourceTree = "<group>"; };
@@ -1009,8 +1009,8 @@
 		3B66B7E3210B113C000BDFEF /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				3B66B931210B2BB8000BDFEF /* GoogleService-Info.plist */,
-				3B66B7E4210B113C000BDFEF /* GoogleService-Info-production.plist */,
+				3B2A23A621195BA50000817C /* GoogleService-Info-prod.plist */,
+				3B2A23A221193C320000817C /* GoogleService-Info.plist */,
 				3B66B7E5210B113C000BDFEF /* MainConfigs.plist */,
 			);
 			path = Service;
@@ -1766,6 +1766,8 @@
 				3B66B85F210B113D000BDFEF /* Route.storyboard in Resources */,
 				3B66B85E210B113D000BDFEF /* Profile.storyboard in Resources */,
 				3B66B858210B113D000BDFEF /* MainConfigs.plist in Resources */,
+				3B2A23A721195BA50000817C /* GoogleService-Info-prod.plist in Resources */,
+				3B2A23A321193C330000817C /* GoogleService-Info.plist in Resources */,
 				3B66B864210B113D000BDFEF /* Order.storyboard in Resources */,
 				3B66B862210B113D000BDFEF /* Login.storyboard in Resources */,
 				3B66B856210B113D000BDFEF /* Localizable.strings in Resources */,
@@ -1783,8 +1785,6 @@
 				3B66B924210B1149000BDFEF /* ChangeInviromentTableViewCell.xib in Resources */,
 				3B66B8F7210B1149000BDFEF /* OrderScanItemTableViewCell.xib in Resources */,
 				3B66B921210B1149000BDFEF /* ChangePasswordTableViewCell.xib in Resources */,
-				3B66B857210B113D000BDFEF /* GoogleService-Info-production.plist in Resources */,
-				3B66B932210B2BB8000BDFEF /* GoogleService-Info.plist in Resources */,
 				3B66B92A210B1149000BDFEF /* ChangePasswordView.xib in Resources */,
 				3B66B85A210B113D000BDFEF /* ServicesConfigs.plist in Resources */,
 				3B66B867210B113D000BDFEF /* Assets.xcassets in Resources */,
@@ -2226,7 +2226,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2238,10 +2238,10 @@
 					"@executable_path/Frameworks",
 					"$(CONFIGURATION_BUILD_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.dms.directmail;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.directmail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "489f6137-e4a4-41b4-99c2-c878aa4ec49c";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-DirectMail";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2254,7 +2254,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2266,10 +2266,10 @@
 					"@executable_path/Frameworks",
 					"$(CONFIGURATION_BUILD_DIR)",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.dms.directmail;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.directmail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "489f6137-e4a4-41b4-99c2-c878aa4ec49c";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-DirectMail";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};

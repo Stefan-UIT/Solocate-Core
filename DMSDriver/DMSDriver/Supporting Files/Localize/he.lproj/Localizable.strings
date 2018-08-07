@@ -7,8 +7,8 @@
 "app_version"="1.0.0.0";
 
 //COMMON
-"cancel"="לְבַטֵל";
-"ok"="בסדר";
+"cancel"="ביטול";
+"ok"="סיום";
 "save"="להציל";
 "edit"="עריכה";
 "back"="חזור";
@@ -18,7 +18,7 @@
 "Finish"="סִיוּם";
 "Start"="התחלה";
 "unknown"="לא ידוע";
-"clear"="ברור";
+"clear"="נקה";
 "accept"="לְקַבֵּל";
 "error_field_required"="שדה נדרש";
 "error_lost_network_connection"="אין חיבור אינטרנט. בדוק את הרשת שלך.";
@@ -29,8 +29,8 @@
 "Map"="מפה";
 "Messages"="הודעות";
 "Message"="Message";//new
-"Uploaded Successful"="Uploaded Successful";//new
-"done"="בוצע";
+"Uploaded Successful"="החתימה הושלמה";
+"done"="אישור";
 "Pull to refresh"="לחץ כדי לרענן";
 
 //LOGIN_SCREEN
@@ -61,7 +61,7 @@
 "Birth Date"="Birth Date";
 "Public"="ציבורי";
 "Private"="פרטי";
-"Profile"="פרופיל";//new
+"Profile"="פרופיל";
 "Your password has been updated"="Your password has been updated";//new
 "Old Password"="סיסמה ישנה";
 "New Password"="סיסמה חדשה";
@@ -72,7 +72,7 @@
 //LIST_ORDERS
 "Orders List"="רשימת הזמנות";
 "You have no order"="אין לך הזמנה";
-"New"="חָדָשׁ";
+"New"="חדש";
 "In Progress"="בתהליך";
 "Finished"="חדש";
 "Picked Up" = "Picked Up";
@@ -110,7 +110,7 @@
 "Window Start Time"="Window Start Time";//new
 "Window End Time"="Window End Time";//new
 "Service Time"="Service Time";//new
-"SEQ"="מספר הזמנה";
+"SEQ"="SEQ";
 "Pallets"="Pallets";//new
 "Cases"="Cases";//new
 "Contact Name"="שם איש קשר";
@@ -141,7 +141,7 @@
 "order_detail_barcode_notmatch"="ברקוד אינו תואם";
 
 "Hour"="שעת קבלה";
-"Date"="סוג";
+"Date"="תאריך";
 "Certificate number"="מס' תעודת משלוח";
 "Client name"="שם לקוח";
 "Customer name"="שם מזמין";
@@ -174,7 +174,7 @@
 "End time"="שעת סיום";
 "YES"="כן";
 "NO"="NO";
-"Instructions"= "הערות לדו''ח";
+"Instructions"= "הוראות";
 "Third courier"= "שליח שלישי";
 
 
@@ -198,7 +198,7 @@
 //PICTURE
 "Album Gallery"="בחירה מתוך הגלריה";
 "Take photo"="צלם תמונה";
-"No images have been added"="No images have been added";//new
+"No images have been added"="לא נוספו תמונות";
 
 //PACKAGES
 "Delivery"="משלוח";
