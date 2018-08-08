@@ -13,12 +13,20 @@ class AttachFileModel: BaseModel {
   
   var mimeType:String? = "application/octet-stream"
   let boundary:String = "----WebKitFormBoundary7MA4YWxkTrZu0gW"
+  let serverS3 = "https://images1-focus-opensocial.googleusercontent.com/gadgets/proxy"
   
   var name:String?
   var id:String?
   var contentFile:Data?
   var type:String?
   var url:String?
+    
+  var urlS3:String{
+     get{
+        return "\(serverS3)?container=focus&resize_w=60&url=\(E(url))"
+      }
+  }
+    
   
   required convenience init?(map: Map) {
     self.init()

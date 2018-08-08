@@ -236,7 +236,7 @@ extension OrderPictureViewController: UITableViewDataSource, UITableViewDelegate
             if let _ = orderDetail {
                 let picture =  attachFiles[indexPath.row]
                 cell.nameLabel.text = picture.name
-                cell.imgView.sd_setImage(with: URL(string: E(picture.url)),
+                cell.imgView.sd_setImage(with: URL(string: E(picture.urlS3)),
                                          placeholderImage: UIImage(named: "place_holder"),
                                          options: .refreshCached, completed: nil)
             }
@@ -253,7 +253,8 @@ extension OrderPictureViewController: UITableViewDataSource, UITableViewDelegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         if let cell = tableView.cellForRow(at: indexPath) as? PictureTableViewCell {
-            showImage(cell.imgView.image ?? UIImage(named: "place_holder")!)
+            let picture =  attachFiles[indexPath.row]
+            showImage(linkUrl: E(picture.url), placeHolder: cell.imgView.image)
         }
     }
 }

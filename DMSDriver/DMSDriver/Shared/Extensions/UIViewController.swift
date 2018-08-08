@@ -31,23 +31,32 @@ extension UIViewController {
     present(alert, animated: true, completion: nil)
   }
   
-  func showImage(_ image: UIImage) {
-    guard let window = UIApplication.shared.keyWindow else {
-      return
+    func showImage(_ image: UIImage? = nil , linkUrl:String? = nil, placeHolder:UIImage? = nil) {
+        guard let window = UIApplication.shared.keyWindow else {
+            return
+        }
+        let imgView = UIImageView(frame: CGRect(origin: .zero, size: window.frame.size))
+        imgView.isUserInteractionEnabled = true
+        let button = UIButton(frame: CGRect(x: window.frame.size.width - 60.0, y: 40, width: 40, height: 40))
+        button.setImage(UIImage(named: "close"), for: .normal)
+        button.backgroundColor = .gray
+        button.layer.cornerRadius = 20
+        button.addTarget(self, action: #selector(self.dismissImageView(_:)), for: .touchUpInside)
+        imgView.addSubview(button)
+        imgView.contentMode = .scaleAspectFit
+        imgView.backgroundColor = .black
+        window.addSubview(imgView)
+        imgView.tag = 1001
+        
+        if let _imv = image {
+            imgView.image = _imv
+        }
+        
+        if let link = linkUrl {
+            imgView.setImage(withURL: link)
+            //imgView.setImageWithURL(url:link,placeHolderImage: placeHolder)
+        }
     }
-    let imgView = UIImageView(frame: CGRect(origin: .zero, size: window.frame.size))
-    imgView.isUserInteractionEnabled = true
-    let button = UIButton(frame: CGRect(x: window.frame.size.width - 60.0, y: 40, width: 40, height: 40))
-    button.setImage(UIImage(named: "close"), for: .normal)
-    button.backgroundColor = .gray
-    button.addTarget(self, action: #selector(self.dismissImageView(_:)), for: .touchUpInside)
-    imgView.addSubview(button)
-    imgView.contentMode = .scaleAspectFit
-    imgView.backgroundColor = .black
-    window.addSubview(imgView)
-    imgView.image = image
-    imgView.tag = 1001
-  }
   
   @objc private func dismissImageView(_ sender: UIButton) {
     if let window = UIApplication.shared.keyWindow,
