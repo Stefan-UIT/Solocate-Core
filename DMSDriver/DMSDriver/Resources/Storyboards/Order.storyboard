@@ -317,7 +317,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="60"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="kC3-vn-rGC">
-                                        <rect key="frame" x="15" y="15" width="345" height="31"/>
+                                        <rect key="frame" x="15" y="15" width="345" height="41"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <segments>
                                             <segment title="First"/>
@@ -337,7 +337,7 @@
                                     <constraint firstAttribute="height" constant="60" id="Kxs-9Y-zO8"/>
                                     <constraint firstAttribute="trailing" secondItem="kC3-vn-rGC" secondAttribute="trailing" constant="15" id="P45-QS-FGY"/>
                                     <constraint firstItem="kC3-vn-rGC" firstAttribute="top" secondItem="BvY-Aw-sz1" secondAttribute="top" constant="15" id="d0Y-cB-tVf"/>
-                                    <constraint firstAttribute="bottom" secondItem="kC3-vn-rGC" secondAttribute="bottom" constant="15" id="jme-Z6-p59"/>
+                                    <constraint firstAttribute="bottom" secondItem="kC3-vn-rGC" secondAttribute="bottom" constant="5" id="jme-Z6-p59"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cuY-w3-tE6">

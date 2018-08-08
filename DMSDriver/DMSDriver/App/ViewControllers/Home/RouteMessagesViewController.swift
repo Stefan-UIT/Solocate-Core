@@ -59,44 +59,9 @@ class RouteMessagesViewController: BaseViewController {
   }
     
   @IBAction func addMessage(_ sender: UIButton) {
-    guard  let _route = route else {
-      return
-    }
-    let alert = UIAlertController(title: "message_send_new_message".localized, message: nil, preferredStyle: .alert)
-    alert.addTextField { (textField) in
-      textField.placeholder = "message_add_message_hint".localized
-    }
-    let submitAction = UIAlertAction(title: "send".localized, style: .default) { (action) in
-      alert.dismiss(animated: true, completion: nil)
-      guard let textField = alert.textFields?.first,
-        textField.hasText,
-        let noteText = textField.text else {
-          return
-      }
-      self.showLoadingIndicator()
-      MessageAPI.addNewMessage("\(_route.id)", content: noteText, completion: { [weak self] (message, errMsg) in
-        self?.dismissLoadingIndicator()
-        if let err = errMsg {
-          self?.showAlertView(err)
-        }
-        else if let _message = message {
-          _route.messages.insert(_message, at: 0)
-//          if let item = self?.tabBarController?.tabBar.items?.last {
-//            let current = item.badgeValue?.integerValue ?? 0
-//            item.badgeValue = "\(current + 1)"
-//          }
-          self?.tableView.reloadData()
-        }
-      })
-    }
-    
-    let cancel = UIAlertAction(title: "cancel".localized, style: .default, handler: nil)
-    alert.addAction(cancel)
-    alert.addAction(submitAction)
-    
-    present(alert, animated: true, completion: nil)
+    //
   }
-    
+
   func handleAlert(_ alertID: String, _ messageAlert: String) {
 
         let alertMessageView : AlertMessageView = AlertMessageView()
@@ -106,13 +71,6 @@ class RouteMessagesViewController: BaseViewController {
   }
 }
 
-extension RouteMessagesViewController {
-  func readMessages(_ messages: [Message]) {
-    for msg in messages {
-      MessageAPI.readMessage("\(msg.id)")
-    }
-  }
-}
 
 extension RouteMessagesViewController: UITableViewDataSource, UITableViewDelegate {
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

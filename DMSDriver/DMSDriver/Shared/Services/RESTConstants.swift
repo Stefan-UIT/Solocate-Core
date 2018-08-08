@@ -20,7 +20,6 @@ import UIKit
 
 typealias JSONData = [String: Any]
 typealias OnCompletion = (_ successful: Bool, _ data: Any?) -> Void
-typealias OnError = (_ error: RESTError?) -> Void
 
 
 enum PATH_REQUEST_URL: String{

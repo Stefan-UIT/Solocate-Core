@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B13CBEF211A8FF400A93E18 /* ScrollMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B13CBEA211A8FF400A93E18 /* ScrollMenuView.swift */; };
+		3B13CBF0211A8FF400A93E18 /* ScrollMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B13CBEC211A8FF400A93E18 /* ScrollMenuCell.swift */; };
+		3B13CBF1211A8FF400A93E18 /* ScrollMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B13CBED211A8FF400A93E18 /* ScrollMenuCell.xib */; };
+		3B13CBF2211A8FF400A93E18 /* ScrollMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B13CBEE211A8FF400A93E18 /* ScrollMenuView.xib */; };
 		3B2A23A321193C330000817C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B2A23A221193C320000817C /* GoogleService-Info.plist */; };
 		3B2A23A721195BA50000817C /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B2A23A621195BA50000817C /* GoogleService-Info-prod.plist */; };
 		3B66B759210B1051000BDFEF /* DMSDriver.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B757210B1051000BDFEF /* DMSDriver.xcdatamodeld */; };
@@ -80,16 +84,11 @@
 		3B66B844210B113D000BDFEF /* KeyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7C6210B113C000BDFEF /* KeyConstants.swift */; };
 		3B66B845210B113D000BDFEF /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7C7210B113C000BDFEF /* Theme.swift */; };
 		3B66B846210B113D000BDFEF /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7C8210B113C000BDFEF /* LocationManager.swift */; };
-		3B66B847210B113D000BDFEF /* configs_malee.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7CA210B113C000BDFEF /* configs_malee.plist */; };
 		3B66B848210B113D000BDFEF /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7CB210B113C000BDFEF /* Services.swift */; };
 		3B66B849210B113D000BDFEF /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7CD210B113C000BDFEF /* FirebaseService.swift */; };
-		3B66B84A210B113D000BDFEF /* RESTRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7CE210B113C000BDFEF /* RESTRequest.swift */; };
 		3B66B84B210B113D000BDFEF /* RESTConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7CF210B113C000BDFEF /* RESTConstants.swift */; };
-		3B66B84C210B113D000BDFEF /* configs_talron.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7D0210B113C000BDFEF /* configs_talron.plist */; };
-		3B66B84D210B113D000BDFEF /* RESTResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7D1210B113C000BDFEF /* RESTResponse.swift */; };
 		3B66B84E210B113D000BDFEF /* APIServices.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7D3210B113C000BDFEF /* APIServices.swift */; };
 		3B66B84F210B113D000BDFEF /* BaseAPIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7D4210B113C000BDFEF /* BaseAPIService.swift */; };
-		3B66B850210B113D000BDFEF /* RESTError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7D5210B113C000BDFEF /* RESTError.swift */; };
 		3B66B851210B113D000BDFEF /* Adhoc.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7D8210B113C000BDFEF /* Adhoc.xcconfig */; };
 		3B66B852210B113D000BDFEF /* AppStore.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7D9210B113C000BDFEF /* AppStore.xcconfig */; };
 		3B66B853210B113D000BDFEF /* Debug.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7DA210B113C000BDFEF /* Debug.xcconfig */; };
@@ -110,7 +109,6 @@
 		3B66B864210B113D000BDFEF /* Order.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7FA210B113C000BDFEF /* Order.storyboard */; };
 		3B66B867210B113D000BDFEF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7FE210B113C000BDFEF /* Assets.xcassets */; };
 		3B66B8DC210B1149000BDFEF /* PickupPlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B86C210B1148000BDFEF /* PickupPlace.swift */; };
-		3B66B8DD210B1149000BDFEF /* MessageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B86D210B1148000BDFEF /* MessageAPI.swift */; };
 		3B66B8DE210B1149000BDFEF /* Reason.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B86E210B1148000BDFEF /* Reason.swift */; };
 		3B66B8DF210B1149000BDFEF /* AlertDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B86F210B1148000BDFEF /* AlertDetailModel.swift */; };
 		3B66B8E1210B1149000BDFEF /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B871210B1148000BDFEF /* Order.swift */; };
@@ -203,6 +201,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B13CBEA211A8FF400A93E18 /* ScrollMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollMenuView.swift; sourceTree = "<group>"; };
+		3B13CBEC211A8FF400A93E18 /* ScrollMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollMenuCell.swift; sourceTree = "<group>"; };
+		3B13CBED211A8FF400A93E18 /* ScrollMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollMenuCell.xib; sourceTree = "<group>"; };
+		3B13CBEE211A8FF400A93E18 /* ScrollMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollMenuView.xib; sourceTree = "<group>"; };
 		3B2A23A221193C320000817C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B2A23A621195BA50000817C /* GoogleService-Info-prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-prod.plist"; sourceTree = "<group>"; };
 		3B66B74D210B1051000BDFEF /* DMSDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMSDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -279,16 +281,11 @@
 		3B66B7C6210B113C000BDFEF /* KeyConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyConstants.swift; sourceTree = "<group>"; };
 		3B66B7C7210B113C000BDFEF /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		3B66B7C8210B113C000BDFEF /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
-		3B66B7CA210B113C000BDFEF /* configs_malee.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = configs_malee.plist; sourceTree = "<group>"; };
 		3B66B7CB210B113C000BDFEF /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		3B66B7CD210B113C000BDFEF /* FirebaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
-		3B66B7CE210B113C000BDFEF /* RESTRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTRequest.swift; sourceTree = "<group>"; };
 		3B66B7CF210B113C000BDFEF /* RESTConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTConstants.swift; sourceTree = "<group>"; };
-		3B66B7D0210B113C000BDFEF /* configs_talron.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = configs_talron.plist; sourceTree = "<group>"; };
-		3B66B7D1210B113C000BDFEF /* RESTResponse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTResponse.swift; sourceTree = "<group>"; };
 		3B66B7D3210B113C000BDFEF /* APIServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIServices.swift; sourceTree = "<group>"; };
 		3B66B7D4210B113C000BDFEF /* BaseAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPIService.swift; sourceTree = "<group>"; };
-		3B66B7D5210B113C000BDFEF /* RESTError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTError.swift; sourceTree = "<group>"; };
 		3B66B7D8210B113C000BDFEF /* Adhoc.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Adhoc.xcconfig; sourceTree = "<group>"; };
 		3B66B7D9210B113C000BDFEF /* AppStore.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = AppStore.xcconfig; sourceTree = "<group>"; };
 		3B66B7DA210B113C000BDFEF /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
@@ -311,7 +308,6 @@
 		3B66B7FA210B113C000BDFEF /* Order.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Order.storyboard; sourceTree = "<group>"; };
 		3B66B7FE210B113C000BDFEF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3B66B86C210B1148000BDFEF /* PickupPlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickupPlace.swift; sourceTree = "<group>"; };
-		3B66B86D210B1148000BDFEF /* MessageAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageAPI.swift; sourceTree = "<group>"; };
 		3B66B86E210B1148000BDFEF /* Reason.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reason.swift; sourceTree = "<group>"; };
 		3B66B86F210B1148000BDFEF /* AlertDetailModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertDetailModel.swift; sourceTree = "<group>"; };
 		3B66B871210B1148000BDFEF /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
@@ -594,6 +590,25 @@
 				CE4028787D23A4B46FAF55CE /* Pods-DMSDriver.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		3B13CBE9211A8FF400A93E18 /* ScrollMenuView */ = {
+			isa = PBXGroup;
+			children = (
+				3B13CBEE211A8FF400A93E18 /* ScrollMenuView.xib */,
+				3B13CBEA211A8FF400A93E18 /* ScrollMenuView.swift */,
+				3B13CBEB211A8FF400A93E18 /* Cell */,
+			);
+			path = ScrollMenuView;
+			sourceTree = "<group>";
+		};
+		3B13CBEB211A8FF400A93E18 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3B13CBEC211A8FF400A93E18 /* ScrollMenuCell.swift */,
+				3B13CBED211A8FF400A93E18 /* ScrollMenuCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		3B66B744210B1051000BDFEF = {
@@ -926,15 +941,10 @@
 		3B66B7C9210B113C000BDFEF /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				3B66B7CA210B113C000BDFEF /* configs_malee.plist */,
+				3B66B7CF210B113C000BDFEF /* RESTConstants.swift */,
 				3B66B7CB210B113C000BDFEF /* Services.swift */,
 				3B66B7CC210B113C000BDFEF /* FirebaseService */,
-				3B66B7CE210B113C000BDFEF /* RESTRequest.swift */,
-				3B66B7CF210B113C000BDFEF /* RESTConstants.swift */,
-				3B66B7D0210B113C000BDFEF /* configs_talron.plist */,
-				3B66B7D1210B113C000BDFEF /* RESTResponse.swift */,
 				3B66B7D2210B113C000BDFEF /* APIServices */,
-				3B66B7D5210B113C000BDFEF /* RESTError.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -950,6 +960,7 @@
 		3B66B7D2210B113C000BDFEF /* APIServices */ = {
 			isa = PBXGroup;
 			children = (
+				3B66B882210B1148000BDFEF /* APIModels */,
 				3B66B7D3210B113C000BDFEF /* APIServices.swift */,
 				3B66B7D4210B113C000BDFEF /* BaseAPIService.swift */,
 			);
@@ -1095,12 +1106,10 @@
 			isa = PBXGroup;
 			children = (
 				3B66B889210B1148000BDFEF /* AttachFileModel */,
-				3B66B882210B1148000BDFEF /* APIModels */,
 				3B66B87D210B1148000BDFEF /* LoginModel */,
 				3B66B878210B1148000BDFEF /* PackageModel */,
 				3B66B875210B1148000BDFEF /* BaseModel */,
 				3B66B86C210B1148000BDFEF /* PickupPlace.swift */,
-				3B66B86D210B1148000BDFEF /* MessageAPI.swift */,
 				3B66B86E210B1148000BDFEF /* Reason.swift */,
 				3B66B86F210B1148000BDFEF /* AlertDetailModel.swift */,
 				3B66B871210B1148000BDFEF /* Order.swift */,
@@ -1357,6 +1366,7 @@
 		3B66B8C8210B1148000BDFEF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3B13CBE9211A8FF400A93E18 /* ScrollMenuView */,
 				3B66B8C9210B1148000BDFEF /* LeftMenuView */,
 				3B66B8D3210B1148000BDFEF /* ForgetPasswordView */,
 				3B66B8D6210B1148000BDFEF /* ChangePasswordView */,
@@ -1368,9 +1378,9 @@
 		3B66B8C9210B1148000BDFEF /* LeftMenuView */ = {
 			isa = PBXGroup;
 			children = (
+				3B66B8D2210B1148000BDFEF /* LeftMenuView.xib */,
 				3B66B8CA210B1148000BDFEF /* LeftMenuView.swift */,
 				3B66B8CB210B1148000BDFEF /* LeftMenuCell */,
-				3B66B8D2210B1148000BDFEF /* LeftMenuView.xib */,
 			);
 			path = LeftMenuView;
 			sourceTree = "<group>";
@@ -1759,10 +1769,10 @@
 				3B66B854210B113D000BDFEF /* Release.xcconfig in Resources */,
 				3B66B813210B113D000BDFEF /* Info.plist in Resources */,
 				3B66B815210B113D000BDFEF /* SignatureView.xib in Resources */,
+				3B13CBF2211A8FF400A93E18 /* ScrollMenuView.xib in Resources */,
 				3B66B853210B113D000BDFEF /* Debug.xcconfig in Resources */,
 				3B66B929210B1149000BDFEF /* ForgetPasswordView.xib in Resources */,
 				3B66B863210B113D000BDFEF /* Message.storyboard in Resources */,
-				3B66B84C210B113D000BDFEF /* configs_talron.plist in Resources */,
 				3B66B85F210B113D000BDFEF /* Route.storyboard in Resources */,
 				3B66B85E210B113D000BDFEF /* Profile.storyboard in Resources */,
 				3B66B858210B113D000BDFEF /* MainConfigs.plist in Resources */,
@@ -1776,7 +1786,6 @@
 				3B66B85D210B113D000BDFEF /* Map.storyboard in Resources */,
 				3B66B860210B113D000BDFEF /* LaunchScreen.storyboard in Resources */,
 				3B66B925210B1149000BDFEF /* LogoutTableViewCell.xib in Resources */,
-				3B66B847210B113D000BDFEF /* configs_malee.plist in Resources */,
 				3B66B927210B1149000BDFEF /* LeftMenuView.xib in Resources */,
 				3B66B901210B1149000BDFEF /* ItemsSectionView.xib in Resources */,
 				3B66B92C210B1149000BDFEF /* AlertMessageView.xib in Resources */,
@@ -1784,6 +1793,7 @@
 				3B66B851210B113D000BDFEF /* Adhoc.xcconfig in Resources */,
 				3B66B924210B1149000BDFEF /* ChangeInviromentTableViewCell.xib in Resources */,
 				3B66B8F7210B1149000BDFEF /* OrderScanItemTableViewCell.xib in Resources */,
+				3B13CBF1211A8FF400A93E18 /* ScrollMenuCell.xib in Resources */,
 				3B66B921210B1149000BDFEF /* ChangePasswordTableViewCell.xib in Resources */,
 				3B66B92A210B1149000BDFEF /* ChangePasswordView.xib in Resources */,
 				3B66B85A210B113D000BDFEF /* ServicesConfigs.plist in Resources */,
@@ -1893,6 +1903,7 @@
 				3B66B90F210B1149000BDFEF /* MapsViewController.swift in Sources */,
 				3B66B8E8210B1149000BDFEF /* CheckTokenModel.swift in Sources */,
 				3B66B812210B113D000BDFEF /* HCSStarRatingView.m in Sources */,
+				3B13CBEF211A8FF400A93E18 /* ScrollMenuView.swift in Sources */,
 				3B66B81F210B113D000BDFEF /* UISegmentedControl+Extensions.swift in Sources */,
 				3B66B903210B1149000BDFEF /* OrderDetailContainerViewController.swift in Sources */,
 				3B66B8FE210B1149000BDFEF /* OrderDetailMapTableViewCell.swift in Sources */,
@@ -1907,7 +1918,6 @@
 				3B66B900210B1149000BDFEF /* OrderPictureViewController.swift in Sources */,
 				3B66B8EC210B1149000BDFEF /* UserModel.swift in Sources */,
 				3B66B818210B113D000BDFEF /* Font.swift in Sources */,
-				3B66B84D210B113D000BDFEF /* RESTResponse.swift in Sources */,
 				3B66B839210B113D000BDFEF /* ItemWithImage.swift in Sources */,
 				3B66B80E210B113D000BDFEF /* UIBarButtonItem + Style.swift in Sources */,
 				3B66B8EA210B1149000BDFEF /* ChangePasswordModel.swift in Sources */,
@@ -1950,7 +1960,6 @@
 				3B66B80C210B113D000BDFEF /* UIViewController.swift in Sources */,
 				3B66B8FF210B1149000BDFEF /* OrderDetailTableViewCell.swift in Sources */,
 				3B66B844210B113D000BDFEF /* KeyConstants.swift in Sources */,
-				3B66B8DD210B1149000BDFEF /* MessageAPI.swift in Sources */,
 				3B66B822210B113D000BDFEF /* UIView+Extensions.swift in Sources */,
 				3B66B91C210B1149000BDFEF /* BaseTableViewCell.swift in Sources */,
 				3B66B8FD210B1149000BDFEF /* OrderItemsTableViewCell.swift in Sources */,
@@ -1996,10 +2005,8 @@
 				3B66B90C210B1149000BDFEF /* OrderItemTableViewCell.swift in Sources */,
 				3B66B84E210B113D000BDFEF /* APIServices.swift in Sources */,
 				3B66B828210B113D000BDFEF /* UISearchBar+Extensions.swift in Sources */,
-				3B66B850210B113D000BDFEF /* RESTError.swift in Sources */,
 				3B66B811210B113D000BDFEF /* UITableView-Extensions.swift in Sources */,
 				3B66B8E2210B1149000BDFEF /* Message.swift in Sources */,
-				3B66B84A210B113D000BDFEF /* RESTRequest.swift in Sources */,
 				3B66B91A210B1149000BDFEF /* MainVC.swift in Sources */,
 				3B66B915210B1149000BDFEF /* ProfileVC.swift in Sources */,
 				3B66B81C210B113D000BDFEF /* BuildConfiguration+Extension.swift in Sources */,
@@ -2026,6 +2033,7 @@
 				3B66B8DE210B1149000BDFEF /* Reason.swift in Sources */,
 				3B66B920210B1149000BDFEF /* LeftMenuView.swift in Sources */,
 				3B66B909210B1149000BDFEF /* OrderNotesViewController.swift in Sources */,
+				3B13CBF0211A8FF400A93E18 /* ScrollMenuCell.swift in Sources */,
 				3B66B8E9210B1149000BDFEF /* ResultsRequestModel.swift in Sources */,
 				3B66B8F1210B1149000BDFEF /* APIError.swift in Sources */,
 			);
@@ -2226,7 +2234,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2240,8 +2248,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.directmail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "df0af2bc-3466-42a4-b985-286d146af817";
+				PROVISIONING_PROFILE_SPECIFIER = "dev-directmail-prod";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2253,8 +2261,8 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_IDENTITY = "iPhone Distribution";
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2268,8 +2276,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.directmail;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "b32ee4bb-7402-47d1-9a5e-4d7b2e9334db";
+				PROVISIONING_PROFILE_SPECIFIER = "dis-directmail-prod";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
