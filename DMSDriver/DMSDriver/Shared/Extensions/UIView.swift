@@ -189,6 +189,64 @@ public extension UIView {
 }
 
 extension UIView {
+    
+    func removeAllConstraints() {
+        removeConstraints(self.constraints);
+    }
+    
+    func removeAllConstraintsIncludesSubviews() {
+        removeAllConstraints();
+        
+        for subView in self.subviews {
+            subView.removeAllConstraintsIncludesSubviews();
+        }
+        
+    }
+    
+    func addConstaints(top: CGFloat? = nil,
+                       right: CGFloat? = nil,
+                       bottom: CGFloat? = nil,
+                       left: CGFloat? = nil,
+                       width: CGFloat? = nil,
+                       height: CGFloat? = nil) {
+        translatesAutoresizingMaskIntoConstraints = false
+        if top != nil { self.addConstaint(top: top!) }
+        if right != nil { self.addConstaint(right: right!) }
+        if bottom != nil { self.addConstaint(bottom: bottom!) }
+        if left != nil { self.addConstaint(left: left!) }
+        if width != nil { self.addConstaint(width: width!) }
+        if height != nil { self.addConstaint(heigh: height!) }
+        
+    }
+    
+    func addConstaint(top offset: CGFloat) {
+        guard superview != nil else { return }
+        topAnchor.constraint(equalTo: superview!.topAnchor, constant: offset).isActive = true
+    }
+    
+    func addConstaint(right offset: CGFloat) {
+        guard superview != nil else { return }
+        rightAnchor.constraint(equalTo: superview!.rightAnchor, constant: offset).isActive = true
+    }
+    
+    func addConstaint(left offset: CGFloat) {
+        guard superview != nil else { return }
+        leftAnchor.constraint(equalTo: superview!.leftAnchor, constant: offset).isActive = true
+    }
+    
+    func addConstaint(bottom offset: CGFloat) {
+        guard superview != nil else { return }
+        bottomAnchor.constraint(equalTo: superview!.bottomAnchor, constant: offset).isActive = true
+    }
+    
+    func addConstaint(width offset: CGFloat) {
+        guard superview != nil else { return }
+        widthAnchor.constraint(equalTo: superview!.widthAnchor, constant: offset).isActive = true
+    }
+    func addConstaint(heigh offset: CGFloat) {
+        guard superview != nil else { return }
+        heightAnchor.constraint(equalTo: superview!.heightAnchor, constant: offset).isActive = true
+    }
   
   class func loadNib<T: UIView>(viewType: T.Type) -> T {
     let className = String.className(aClass: viewType)

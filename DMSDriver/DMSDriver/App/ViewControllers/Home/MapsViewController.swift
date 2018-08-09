@@ -65,11 +65,13 @@ class MapsViewController: UIViewController {
             drawPath(fromLocation: pickupLocation, toLocation: toLocation)
         }
         
+        /*
         // draw from the last point to warehouse
         if _route.orderList.count > 1, let lastPoint = _route.orderList.last {
             let fromLocation = CLLocationCoordinate2D(latitude: lastPoint.lat.doubleValue, longitude: lastPoint.lng.doubleValue)
             drawPath(fromLocation: fromLocation, toLocation: pickupLocation)
         }
+        */
         
         // draw two stores together
         let distinctOrderList = _route.distinctArrayOrderList()

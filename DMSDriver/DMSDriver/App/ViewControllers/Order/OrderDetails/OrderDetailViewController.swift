@@ -286,7 +286,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
     func handleScanMatchBarCode() {
         guard let _orderDetail = orderDetail, _orderDetail.statusCode == "IP" else {return}
-        let scanVC = ScanBarCodeViewController.loadViewController(type: ScanBarCodeViewController.self)
+        let scanVC:ScanBarCodeViewController = .loadSB(SB: .Order)
         scanVC.didScan = { [weak self] (code) in
             self?.handleDidScanMatchBarCode(code)
         }
@@ -359,7 +359,7 @@ extension OrderDetailViewController {
       self.performSegue(withIdentifier: SegueIdentifier.showReasonList, sender: item)
     }
     let management = UIAlertAction(title: "order_detail_scan_barcode".localized, style: .default) { [unowned self] (management) in
-      let scanVC = ScanBarCodeViewController.loadViewController(type: ScanBarCodeViewController.self)
+      let scanVC:ScanBarCodeViewController = .loadSB(SB: SBName.Order)
       scanVC.didScan = {
         [unowned self] (code) in
         if code.length > 0 {

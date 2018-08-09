@@ -32,6 +32,14 @@ class RouteListVC: BaseViewController {
         getRoutes()
     }
     
+    override func reachabilityChangedNotification(_ notification: NSNotification) {
+        super.reachabilityChangedNotification(notification)
+        
+        if hasNetworkConnection  {
+            fetchData()
+        }
+    }
+    
     override func updateNavigationBar() {
         setupNavigateBar()
     }

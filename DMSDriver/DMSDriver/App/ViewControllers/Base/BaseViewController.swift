@@ -9,6 +9,11 @@
 import UIKit
 
 class BaseViewController: UIViewController {
+    
+  @IBOutlet weak var vInternetConnection:UIView?
+  @IBOutlet weak var lblInternetConnection:UILabel?
+  @IBOutlet weak var conHeightVInternetConnection:NSLayoutConstraint?
+
   
   private var isRoot = true
     
@@ -19,23 +24,16 @@ class BaseViewController: UIViewController {
     
   override func viewDidLoad() {
     super.viewDidLoad()
-    let noInternetLabel = UILabel(frame: CGRect(x: 0, y: 64.0, width: view.frame.width, height: 30.0))
-    noInternetLabel.textColor = .white
-    noInternetLabel.backgroundColor = UIColor(hex: "#383B43")
-    noInternetLabel.text = "error_lost_network_connection".localized
-    noInternetLabel.textAlignment = .center
-    noInternetLabel.tag = 10001
-    noInternetLabel.isHidden = true
-    view.insertSubview(noInternetLabel, at: 10001)
+    
     addNetworkObserver()
     
     navigationService.navigationItem = self.navigationItem
     updateNavigationBar()
   }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle{
-        return UIStatusBarStyle.lightContent
-    }
+  override var preferredStatusBarStyle: UIStatusBarStyle{
+    return UIStatusBarStyle.lightContent
+  }
     
   deinit {
     removeNetworkObserver()
@@ -47,50 +45,72 @@ class BaseViewController: UIViewController {
     printControllerName()
   }
     
-    func printControllerName() {
-        #if DEBUG
-            let name = String(describing: self)
-            print("Current Screen is \(name)")
-        #endif
-    }
+  func printControllerName() {
+    #if DEBUG
+      let name = String(describing: self)
+        print("Current Screen is \(name)")
+    #endif
+  }
   
   func addNetworkObserver() {
     do {
       try reachability.startNotifier()
     }
     catch let error {
-      print("Cannot start notify \(error.localizedDescription)")
+        #if DEBUG
+            print("Cannot start notify \(error.localizedDescription)")
+        #endif
     }
     // add observer for network reachability
-    NotificationCenter.default.addObserver(self, selector: #selector(self.reachabilityChangedNotification(_:)), name: NSNotification.Name(rawValue: "ReachabilityChangedNotification"), object: reachability)
+    NotificationCenter.default.addObserver(self,
+                    selector: #selector(self.reachabilityChangedNotification(_:)),
+                        name: NSNotification.Name(rawValue: "ReachabilityChangedNotification"),
+                      object: reachability)
   }
   
   @objc func reachabilityChangedNotification(_ notification: NSNotification) {
-    guard let notif = notification.object as? Reachability, notif.isReachable == true else {
+    guard let notif = notification.object as? Reachability,
+        notif.isReachable == true else {
       hasNetworkConnection = false
       print("No internet connection")
-      showNoInternetConnection()
-      return
-    }
+      DispatchQueue.main.async {[weak self] in
+        self?.showNoInternetConnection()
+      }
+       return
+     }
+    
     print("has network connection")
     hasNetworkConnection = true
-    hideNoInternetConnection()
+    DispatchQueue.main.async {[weak self] in
+        self?.hideNoInternetConnection()
+    }
   }
   
   func showNoInternetConnection() {
-    if let label = view.viewWithTag(10001) {
-      label.isHidden = false
+    lblInternetConnection?.textColor = .white
+    vInternetConnection?.backgroundColor = AppColor.redColor
+    lblInternetConnection?.text = "error_lost_network_connection".localized
+    lblInternetConnection?.textAlignment = .center
+    vInternetConnection?.isHidden = false
+    UIView.animate(withDuration: 0.5) {[weak self] in
+        self?.conHeightVInternetConnection?.constant = 30
+        self?.view.layoutIfNeeded()
     }
   }
   
   func hideNoInternetConnection() {
-    if let label = view.viewWithTag(10001) {
-        label.isHidden = true
-    }
+    self.conHeightVInternetConnection?.constant = 0
+    UIView.animate(withDuration: 0.5, animations: {[weak self] in
+        self?.vInternetConnection?.isHidden = true
+        self?.view.layoutIfNeeded()
+        
+    }) { (isFinish) in}
   }
   
   func removeNetworkObserver() {
-    NotificationCenter.default.removeObserver(self, name: NSNotification.Name(rawValue: "ReachabilityChangedNotification"), object: reachability)
+    NotificationCenter.default.removeObserver(self,
+                    name: NSNotification.Name(rawValue: "ReachabilityChangedNotification"),
+                  object: reachability)
   }
     
     func updateNavigationBar() {
@@ -118,14 +138,6 @@ class BaseViewController: UIViewController {
             }
         }
     }
-  
 }
 
-extension UIViewController {
-  class func loadViewController<T: UIViewController>(type: T.Type) -> T {
-    let className = String.className(aClass: type)
-    let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-    return mainStoryboard.instantiateViewController(withIdentifier: className) as! T
-  }
-}
 

@@ -123,7 +123,7 @@ class Route: BaseModel {
         for index in orderList {
             var repeatedCount = 0
             orderList.forEach{
-                if $0.locationID == index.locationID {
+                if $0.to_loc_id == index.to_loc_id {
                     repeatedCount += 1
                 }
             }
