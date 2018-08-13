@@ -100,14 +100,14 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                                                _orderDetail.custumer_name)
         let type = OrderDetailInforRow(.type , isHebewLang() ? _orderDetail.order_type_name_hb : _orderDetail.order_type_name)
         let doubleType = OrderDetailInforRow(.doubleType,
-                                             "\(_orderDetail.order_detail?.double_type ?? 0)")
+                                             "\(_orderDetail.doubleType)")
         let packetNumber = OrderDetailInforRow(.packagesNumber ,
                                                _orderDetail.orderReference)
         let packetNumber2 = OrderDetailInforRow(.packagesNumber ,
-                                               "\(_orderDetail.order_detail?.packages ?? 0)")
+                                               "\(_orderDetail.packages)")
 
         let cartonsNumber = OrderDetailInforRow(.cartonsNumber,
-                                                "\(_orderDetail.order_detail?.cartons ?? 0)")
+                                                "\(_orderDetail.cartons)")
         let seq = OrderDetailInforRow(.SEQ,
                                                  "\(_orderDetail.seq)")
 
@@ -122,7 +122,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let address = OrderDetailInforRow(.address,
                                           E(_orderDetail.toAddressFullAddress))
         let phone = OrderDetailInforRow(.phone,
-                                        _orderDetail.toAddressPhone)
+                                        _orderDetail.receiverPhone)
         
         let thirdCourier = OrderDetailInforRow(.thirdCourier,
                                         _orderDetail.thirdCourier)

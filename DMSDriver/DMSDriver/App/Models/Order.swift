@@ -75,6 +75,7 @@ class Order: BaseModel {
     var cartons = 0
     var toAddressName = ""
     var toAddressPhone = ""
+    var receiverPhone = ""
     var toAddressEmail = ""
     var toAddressStreet = ""
     var toAddressHouseNumber = ""
@@ -247,6 +248,7 @@ class Order: BaseModel {
         to_address_lattd <- map["to_address_lattd"]
         to_address_lngtd <- map["to_address_lngtd"]
         truck_name <- map["truck_name"]
+        receiverPhone <- map["rcvr_phone"]
   }
     
     func isRequireSign() -> Bool  {
