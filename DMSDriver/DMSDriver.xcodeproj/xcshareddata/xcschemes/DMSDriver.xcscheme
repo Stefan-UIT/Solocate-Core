@@ -65,12 +65,12 @@
          <EnvironmentVariable
             key = "SERVER"
             value = "https://apigw.seldatdirect.com/dev/dms/directmail/api"
-            isEnabled = "NO">
+            isEnabled = "YES">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "SERVER"
             value = "https://apigw.seldatdirect.com/live/dms/directmail/api"
-            isEnabled = "YES">
+            isEnabled = "NO">
          </EnvironmentVariable>
       </EnvironmentVariables>
       <AdditionalOptions>

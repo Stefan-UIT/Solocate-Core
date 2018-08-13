@@ -18,7 +18,7 @@ enum StatusOrder: String {
 }
 
 class Order: BaseModel {
-    
+
     var id = -1
     var deliveryZip = ""
     var totalVolume = ""
@@ -96,6 +96,12 @@ class Order: BaseModel {
     var urgent_type_name_en = ""
     var urgent_type_name_hb = ""
     var urgent_type_id = -1
+    var from_loc_id = -1
+    var location_name = ""
+    var location_full_addr = ""
+    
+    
+    
     
 
     var colorUrgent:UIColor{
@@ -148,6 +154,7 @@ class Order: BaseModel {
   }
   
     override func mapping(map: Map) {
+        
         id                <- map["order_id"]
         deliveryZip       <- map["dlvy_zip"]
         totalVolume       <- map["tot_vol"]
@@ -161,8 +168,8 @@ class Order: BaseModel {
         
         pickupContactPhone <- map["pkup_ctt_phone"]
         pickupContactEmail <- map["pkup_ctt_email"]
-        lat               <- map["to_address_lattd"]
-        lng               <- map["to_address_lngtd"]
+        lat               <- map["lattd"]
+        lng               <- map["lngtd"]
         statusCode        <- map["order_sts"]
         statusName        <- map["order_stmainatus"]
         orderReference    <- map["order_ref"]
