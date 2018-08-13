@@ -12,8 +12,39 @@ extension UIAlertController {
     ///   - action: an action for datePicker value change
     
     func addDatePicker(mode: UIDatePickerMode, date: Date?, minimumDate: Date? = nil, maximumDate: Date? = nil, action: DatePickerViewController.Action?) {
-        let datePicker = DatePickerViewController(mode: mode, date: date, minimumDate: minimumDate, maximumDate: maximumDate, action: action)
+        let datePicker = DatePickerViewController(mode: mode,
+                                                  date: date,
+                                                  useChangeValue:true,
+                                                  minimumDate: minimumDate,
+                                                  maximumDate: maximumDate,
+                                                  action: action)
         set(vc: datePicker, height: 217)
+    }
+    
+    class func showDatePicker(style: UIAlertControllerStyle,
+                        mode:UIDatePickerMode,
+                        useChangeValue:Bool = false,
+                        title:String,
+                        currentDate:Date?,
+                        minimumDate: Date? = nil,
+                        maximumDate: Date? = nil,
+                        action: DatePickerViewController.Action?)  {
+        let alert = UIAlertController(style: style, title:title)
+        let datePicker = DatePickerViewController(mode: mode,
+                                                  date: currentDate,
+                                                  useChangeValue: useChangeValue,
+                                                  minimumDate: minimumDate,
+                                                  maximumDate: maximumDate,
+                                                  action: action)
+        alert.set(vc: datePicker, height: 217)
+        
+        alert.addAction(title: "OK",
+                        color: AppColor.mainColor,
+                        style: .cancel,
+                        isEnabled: true) { (action) in
+                            datePicker.action?(datePicker.datePicker.date)
+        }
+        alert.show()
     }
 }
 
@@ -23,17 +54,28 @@ final class DatePickerViewController: UIViewController {
     
     fileprivate var action: Action?
     
+    fileprivate var useChangeValue: Bool = false
+
+    
     fileprivate lazy var datePicker: UIDatePicker = { [unowned self] in
-        $0.addTarget(self, action: #selector(DatePickerViewController.actionForDatePicker), for: .valueChanged)
+        if useChangeValue{
+            $0.addTarget(self, action: #selector(DatePickerViewController.actionForDatePicker), for: .valueChanged)
+        }
         return $0
     }(UIDatePicker())
     
-    required init(mode: UIDatePickerMode, date: Date? = nil, minimumDate: Date? = nil, maximumDate: Date? = nil, action: Action?) {
+    required init(mode: UIDatePickerMode,
+                  date: Date? = nil,
+                  useChangeValue:Bool,
+                  minimumDate: Date? = nil,
+                  maximumDate: Date? = nil,
+                  action: Action?) {
         super.init(nibName: nil, bundle: nil)
         datePicker.datePickerMode = mode
         datePicker.date = date ?? Date()
         datePicker.minimumDate = minimumDate
         datePicker.maximumDate = maximumDate
+        self.useChangeValue = useChangeValue
         self.action = action
     }
     

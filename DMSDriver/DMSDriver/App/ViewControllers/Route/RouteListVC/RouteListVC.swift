@@ -18,6 +18,8 @@ class RouteListVC: BaseViewController {
     @IBOutlet weak var lblNoResult:UILabel?
     
     var dateStringFilter:String = Date().toString("yyyy-MM-dd")
+    var dateFilter = Date()
+
     
     var listRoutes:[Route]?{
         didSet{
@@ -61,20 +63,6 @@ class RouteListVC: BaseViewController {
         self.tbvContent?.estimatedRowHeight = 100;
         
         self.tbvContent?.addRefreshControl(self, action: #selector(fetchData))
-    }
-  
-    
-    @IBAction func didChooseCalendar(_ sender: UIBarButtonItem) {
-        dateStringFilter = datePickerView.date.toString("yyyy-MM-dd")
-        getRoutes(byDate: dateStringFilter)
-        let height = Constants.toolbarHeight + Constants.pickerViewHeight;
-        pickerContainerView.transform = CGAffineTransform(translationX: 0, y: -height)
-        UIView.animate(withDuration: 0.25, animations: {
-            self.pickerContainerView.transform = CGAffineTransform(translationX: 0, y: -height)
-        }) { (isFinish) in
-            self.pickerContainerView.isHidden = true
-            self.pickerContainerView.transform = .identity
-        }
     }
 }
 
@@ -166,11 +154,15 @@ extension RouteListVC:DMSNavigationServiceDelegate{
     
     func didSelectedRightButton() {
         
-        pickerContainerView.isHidden = false
-        let height = Constants.toolbarHeight + Constants.pickerViewHeight;
-        pickerContainerView.transform = CGAffineTransform(translationX: 0, y: height)
-        UIView.animate(withDuration: 0.25) {
-            self.pickerContainerView.transform = .identity
+        UIAlertController.showDatePicker(style: .actionSheet,
+                                         mode: .date,
+                                         title: "Select date",
+                                         currentDate: dateFilter) {[weak self] (date) in
+                                            
+            self?.dateFilter = date
+            self?.dateStringFilter = date.toString("yyyy-MM-dd")
+            self?.getRoutes(byDate: self?.dateStringFilter)
+                                            
         }
     }
 }
