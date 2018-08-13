@@ -75,6 +75,7 @@ enum OrderDetailType {
     case standby
     case barcode
     case collectCall
+    case coordinationPhone
     case status
     case SEQ
     case failureCause
@@ -170,11 +171,13 @@ struct OrderDetailInforRow {
         case .message:
             name = "Message".localized
         case .phone:
-            name = "Phone".localized
+            name = "Receiver phone".localized
         case .SEQ:
             name = "SEQ".localized
         case .thirdCourier:
             name = "Third courier".localized
+        case .coordinationPhone:
+            name = "Coordination phone".localized
         }
     }
 }

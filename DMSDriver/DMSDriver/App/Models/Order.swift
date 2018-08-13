@@ -104,6 +104,8 @@ class Order: BaseModel {
     var from_address_lngtd = ""
     var to_address_lattd = ""
     var to_address_lngtd = ""
+    var truck_name = ""
+    
 
     
     
@@ -244,6 +246,7 @@ class Order: BaseModel {
         from_address_lngtd <- map["from_address_lngtd"]
         to_address_lattd <- map["to_address_lattd"]
         to_address_lngtd <- map["to_address_lngtd"]
+        truck_name <- map["truck_name"]
   }
     
     func isRequireSign() -> Bool  {

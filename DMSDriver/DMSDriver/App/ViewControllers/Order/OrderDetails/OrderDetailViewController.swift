@@ -111,11 +111,11 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let seq = OrderDetailInforRow(.SEQ,
                                                  "\(_orderDetail.seq)")
 
-        let vehical = OrderDetailInforRow(.vehicle,"-")
-        let distinationCity = OrderDetailInforRow(.destinationCity,
-                                                  E(_orderDetail.toAddress?.city))
+        let vehical = OrderDetailInforRow(.vehicle, _orderDetail.truck_name)
         let collectCall = OrderDetailInforRow(.collectCall,
                                               _orderDetail.collectionCall)
+        let coordinationPhone = OrderDetailInforRow(.coordinationPhone,
+                                          _orderDetail.coordinationPhone)
         let executionTime = OrderDetailInforRow(.executionTime, "\(_orderDetail.standby)")
         let receiverName = OrderDetailInforRow(.receiverName,
                                                _orderDetail.receiveName)
@@ -139,7 +139,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforRows.append(packetNumber2)
         orderInforRows.append(cartonsNumber)
         orderInforRows.append(vehical)
-        orderInforRows.append(collectCall)
         orderInforRows.append(seq)
         orderInforRows.append(date)
         
@@ -163,6 +162,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 
          let fromTodyToTomorrow = OrderDetailInforRow(.fromtodayToTomorrow,
          _orderDetail.fromTodayToTomorrow == "1" ? "YES".localized : "NO".localized)
+         
 
 
 
@@ -178,10 +178,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforRows.append(surfacesNumber)
         orderInforRows.append(barCode)
         orderInforRows.append(fromTodyToTomorrow)
-
-
+        informationRows.append(distinationCity)
         informationRows.append(secondReceiverName)
-
 
          */
       
@@ -189,8 +187,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         informationRows.append(thirdCourier)
         informationRows.append(customerName)
         informationRows.append(receiverName)
-        informationRows.append(distinationCity)
         informationRows.append(phone)
+        informationRows.append(collectCall)
+        informationRows.append(coordinationPhone)
         informationRows.append(address)
       
         updateStatusButton.isHidden = _orderDetail.status != .newStatus &&
