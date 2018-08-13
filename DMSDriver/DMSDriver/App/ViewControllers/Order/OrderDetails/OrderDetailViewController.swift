@@ -120,9 +120,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let receiverName = OrderDetailInforRow(.receiverName,
                                                _orderDetail.receiveName)
         let address = OrderDetailInforRow(.address,
-                                          E(_orderDetail.toAddress?.full_addr))
+                                          E(_orderDetail.toAddressFullAddress))
         let phone = OrderDetailInforRow(.phone,
-                                        _orderDetail.deliveryContactPhone)
+                                        _orderDetail.toAddressPhone)
         
         let thirdCourier = OrderDetailInforRow(.thirdCourier,
                                         _orderDetail.thirdCourier)
@@ -511,11 +511,11 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 }
                 break
                 
-            }else if (row == 3){ //Address row
+            }else if (row == informationRows.count - 1){ //Address row
                 let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
                 if let _orderDetail = orderDetail {
-                    let orderLocation = CLLocationCoordinate2D(latitude: _orderDetail.toAddress?.lattd?.doubleValue ?? 0,
-                                                               longitude: _orderDetail.toAddress?.lngtd?.doubleValue ?? 0)
+                    let orderLocation = CLLocationCoordinate2D(latitude: _orderDetail.to_address_lattd.doubleValue,
+                                                               longitude: _orderDetail.to_address_lngtd.doubleValue)
                     vc.orderLocation = orderLocation
                 }
                 //self.present(vc, animated: true, completion: nil)

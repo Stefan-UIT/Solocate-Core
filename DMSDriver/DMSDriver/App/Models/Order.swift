@@ -99,6 +99,13 @@ class Order: BaseModel {
     var from_loc_id = -1
     var location_name = ""
     var location_full_addr = ""
+    var from_address_full_addr = ""
+    var from_address_lattd = ""
+    var from_address_lngtd = ""
+    var to_address_lattd = ""
+    var to_address_lngtd = ""
+
+    
     
     
     
@@ -232,6 +239,11 @@ class Order: BaseModel {
         urgent_type_id <- map["urgent_type_id"]
         sign <- map["sign"]
         thirdCourier <- map["3rd_courier"]
+        from_address_full_addr <- map["from_address_full_addr"]
+        from_address_lattd <- map["from_address_lattd"]
+        from_address_lngtd <- map["from_address_lngtd"]
+        to_address_lattd <- map["to_address_lattd"]
+        to_address_lngtd <- map["to_address_lngtd"]
   }
     
     func isRequireSign() -> Bool  {
