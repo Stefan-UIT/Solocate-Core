@@ -45,6 +45,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   fileprivate let headerCellIdentifier = "OrderDetailHeaderCell"
   fileprivate let addressCellIdentifier =  "OrderDetailAddressCell"
   fileprivate let orderScanItemCellIdentifier = "OrderScanItemTableViewCell"
+  fileprivate let orderDropdownCellIdentifier = "OrderDetailDropdownCell"
   fileprivate var scanItems = [String]()
   fileprivate let itemsIndex = 8
   fileprivate var scannedObjectIndexs = [Int]()
@@ -90,6 +91,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             orderInforStatus.append(mess)
         }
         
+        let driver = OrderDetailInforRow(.driver,"\(_orderDetail.driverName)")
         let orderId = OrderDetailInforRow(.orderId,"\(_orderDetail.id)")
         let startTime = OrderDetailInforRow(.startTime, "\(_orderDetail.endTime)")
         let endTime = OrderDetailInforRow(.endTime, "\(_orderDetail.endTime)")
@@ -119,8 +121,20 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let executionTime = OrderDetailInforRow(.executionTime, "\(_orderDetail.standby)")
         let receiverName = OrderDetailInforRow(.receiverName,
                                                _orderDetail.receiveName)
-        let address = OrderDetailInforRow(.address,
-                                          E(_orderDetail.toAddressFullAddress))
+        
+        var fullAddress = ""
+        if let orderType = OrderType(rawValue: _orderDetail.orderTypeId){
+            switch orderType{
+            case .delivery:
+                fullAddress = E(_orderDetail.toAddressFullAddress)
+            case .pickup:
+                fullAddress = E(_orderDetail.from_address_full_addr)
+            case .deliveryAndPickup:
+                break
+            }
+        }
+     
+        let address = OrderDetailInforRow(.address,fullAddress)
         let phone = OrderDetailInforRow(.phone,
                                         _orderDetail.receiverPhone)
         
@@ -129,6 +143,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         
         shouldFilterOrderItemsList = _orderDetail.items.filter({$0.statusCode == "OP"}).count > 0
         
+        orderInforRows.append(driver)
         orderInforRows.append(orderId)
         orderInforRows.append(type)
         orderInforRows.append(packetNumber)
@@ -142,47 +157,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforRows.append(seq)
         orderInforRows.append(date)
         
-        /*
-         let hour = OrderDetailInforRow(.hour, "\(_orderDetail.serviceTime)")
-         let afternoon = OrderDetailInforRow(.afternoon, "-")
-         let collectionFromCompany = OrderDetailInforRow(.collectionFromCompany,"-")
-         let startingStreet = OrderDetailInforRow(.startingStreet,"-")
-         let startingCity = OrderDetailInforRow(.startingCity,"-")
-         let transferToCompany = OrderDetailInforRow(.transferToCompany,"-")
-         let distinationStreet = OrderDetailInforRow(.destinationStreet ,
-         E(_orderDetail.toAddress?.street))
-         let certificateNumber_client = OrderDetailInforRow(.certificateNumber_client,"-")
-         let certifiacteNumber = OrderDetailInforRow(.certificateNumber ,
-         "\(_orderDetail.certificateNumber)")
-         let surfacesNumber = OrderDetailInforRow(.surfacesNumber,
-         "\(_orderDetail.surfaces)")
-         let secondReceiverName = OrderDetailInforRow(.secondReceiverName,
-         _orderDetail.secoundReceiveName)
-         let barCode = OrderDetailInforRow(.barcode, _orderDetail.bcd)
-
-         let fromTodyToTomorrow = OrderDetailInforRow(.fromtodayToTomorrow,
-         _orderDetail.fromTodayToTomorrow == "1" ? "YES".localized : "NO".localized)
-         
-
-
-
-         
-        orderInforRows.append(afternoon)
-        orderInforRows.append(collectionFromCompany)
-        orderInforRows.append(startingStreet)
-        orderInforRows.append(startingCity)
-        orderInforRows.append(transferToCompany)
-        orderInforRows.append(distinationStreet)
-        orderInforRows.append(certificateNumber_client)
-        orderInforRows.append(certifiacteNumber)
-        orderInforRows.append(surfacesNumber)
-        orderInforRows.append(barCode)
-        orderInforRows.append(fromTodyToTomorrow)
-        informationRows.append(distinationCity)
-        informationRows.append(secondReceiverName)
-
-         */
-      
         informationRows.append(clientName)
         informationRows.append(thirdCourier)
         informationRows.append(customerName)
@@ -198,15 +172,21 @@ class OrderDetailViewController: BaseOrderDetailViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        let orderScanItemNib = UINib(nibName: orderScanItemCellIdentifier, bundle: nil)
+        updateUI()
+        initVar()
+        setupDataDetailInforRows()
+    }
+    
+    func updateUI()  {
         updateStatusButton.isHidden = true
+        setupTableView()
+    }
+    
+    func setupTableView() {
+        let orderScanItemNib = UINib(nibName: orderScanItemCellIdentifier, bundle: nil)
         tableView.register(orderScanItemNib, forCellReuseIdentifier: orderScanItemCellIdentifier)
         tableView.estimatedRowHeight = cellHeight
         tableView.rowHeight = UITableViewAutomaticDimension
-    
-        initVar()
-        setupDataDetailInforRows()
     }
     
     func initVar()  {
@@ -467,9 +447,15 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             }
         case .sectionOrderInfor:
             let item = orderInforRows[indexPath.row]
-            if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
+            
+            var identifier = cellIdentifier
+            if item.type == .driver {
+                identifier = orderDropdownCellIdentifier
+            }
+            if let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
                                                         for: indexPath) as? OrderDetailTableViewCell {
                 cell.orderDetailItem = item
+                cell.delegate = self
                 cell.selectionStyle = .none
                 return cell
             }
@@ -524,6 +510,12 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         default:
             break
         }
+    }
+}
+
+extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
+    func didSelectedDopdown(_ cell: OrderDetailTableViewCell, _ btn: UIButton) {
+        //
     }
 }
 

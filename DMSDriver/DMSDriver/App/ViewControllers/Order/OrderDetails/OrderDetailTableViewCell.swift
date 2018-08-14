@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol OrderDetailTableViewCellDelegate:class {
+    func didSelectedDopdown(_ cell:OrderDetailTableViewCell,_ btn:UIButton)
+}
+
 class OrderDetailTableViewCell: UITableViewCell {
   
   @IBOutlet weak var nameLabel: UILabel?
@@ -15,21 +19,12 @@ class OrderDetailTableViewCell: UITableViewCell {
   @IBOutlet weak var iconImgView: UIImageView?
   @IBOutlet weak var lineView: UIView?
 
-  
+  weak var delegate:OrderDetailTableViewCellDelegate?
   var orderDetailItem: OrderDetailInforRow! {
     didSet {
       nameLabel?.text = orderDetailItem.name
       contentLabel?.text = orderDetailItem.content
       iconImgView?.isHidden = true
-//      lineView?.isHidden = (orderDetailItem.type == .description)
-//      if orderDetailItem.type == .address {
-//        iconImgView?.image = UIImage(named: "map")
-//        iconImgView?.isHidden = false
-//      }
-//      else if orderDetailItem.type == .phone {
-//        iconImgView?.image = UIImage(named: "phone")
-//        iconImgView?.isHidden = false
-//      }
     }
   }
   
@@ -45,9 +40,14 @@ class OrderDetailTableViewCell: UITableViewCell {
     // Configure the view for the selected state
   }
   
+    
+    @IBAction func onbtnClickDropdown(btn:UIButton){
+        delegate?.didSelectedDopdown(self, btn)
+    }
 }
 
 enum OrderDetailType {
+    case driver
     case orderId
     case hour
     case date
@@ -100,6 +100,8 @@ struct OrderDetailInforRow {
         self.content = content
         
         switch type {
+        case .driver:
+            name = "Driver".localized
         case .orderId:
             name = "Order Id".localized
         case .type:

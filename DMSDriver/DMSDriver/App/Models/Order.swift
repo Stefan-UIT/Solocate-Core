@@ -17,6 +17,12 @@ enum StatusOrder: String {
     case cancelStatus = "CC"
 }
 
+enum OrderType:Int {
+    case delivery = 1
+    case pickup
+    case deliveryAndPickup
+}
+
 class Order: BaseModel {
 
     var id = -1
@@ -106,12 +112,10 @@ class Order: BaseModel {
     var to_address_lattd = ""
     var to_address_lngtd = ""
     var truck_name = ""
-    
 
-    
-    
-    
-    
+    //temp
+    var driverId = -1
+    var driverName = -1
     
 
     var colorUrgent:UIColor{
@@ -126,8 +130,7 @@ class Order: BaseModel {
             }
         }
     }
-    
-    
+
     
     
   var status:StatusOrder{
@@ -229,7 +232,7 @@ class Order: BaseModel {
         toAddressAddr <- map["to_address_addr"]
         toAddressFullAddress <- map["to_address_full_addr"]
         orderTypeId <- map["order_type_id"]
-        orderTypeId <- map["order_type_name"]
+        orderTypeName <- map["order_type_name"]
         order_status <- map["order_status"]
         created_at <- map["created_at"]
         bcd <- map["bcd"]

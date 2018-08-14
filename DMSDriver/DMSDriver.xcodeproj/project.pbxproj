@@ -13,6 +13,7 @@
 		3B13CBF2211A8FF400A93E18 /* ScrollMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B13CBEE211A8FF400A93E18 /* ScrollMenuView.xib */; };
 		3B2A23A321193C330000817C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B2A23A221193C320000817C /* GoogleService-Info.plist */; };
 		3B2A23A721195BA50000817C /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B2A23A621195BA50000817C /* GoogleService-Info-prod.plist */; };
+		3B6425DA2122BFD4001F5F14 /* OrderListClvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6425D92122BFD4001F5F14 /* OrderListClvCell.swift */; };
 		3B66B759210B1051000BDFEF /* DMSDriver.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B757210B1051000BDFEF /* DMSDriver.xcdatamodeld */; };
 		3B66B801210B113D000BDFEF /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B767210B113C000BDFEF /* LocationTracker.swift */; };
 		3B66B802210B113D000BDFEF /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B769210B113C000BDFEF /* Date.swift */; };
@@ -207,6 +208,7 @@
 		3B13CBEE211A8FF400A93E18 /* ScrollMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollMenuView.xib; sourceTree = "<group>"; };
 		3B2A23A221193C320000817C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B2A23A621195BA50000817C /* GoogleService-Info-prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-prod.plist"; sourceTree = "<group>"; };
+		3B6425D92122BFD4001F5F14 /* OrderListClvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListClvCell.swift; sourceTree = "<group>"; };
 		3B66B74D210B1051000BDFEF /* DMSDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMSDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B66B758210B1051000BDFEF /* DMSDriver.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DMSDriver.xcdatamodel; sourceTree = "<group>"; };
 		3B66B767210B113C000BDFEF /* LocationTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTracker.swift; sourceTree = "<group>"; };
@@ -607,6 +609,24 @@
 			children = (
 				3B13CBEC211A8FF400A93E18 /* ScrollMenuCell.swift */,
 				3B13CBED211A8FF400A93E18 /* ScrollMenuCell.xib */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		3B6425D62122BEE7001F5F14 /* OrderListVC */ = {
+			isa = PBXGroup;
+			children = (
+				3B6425D82122BFA3001F5F14 /* Cell */,
+				3B66B8AC210B1148000BDFEF /* OrderListViewController.swift */,
+			);
+			path = OrderListVC;
+			sourceTree = "<group>";
+		};
+		3B6425D82122BFA3001F5F14 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3B66B8A7210B1148000BDFEF /* OrderItemTableViewCell.swift */,
+				3B6425D92122BFD4001F5F14 /* OrderListClvCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1190,6 +1210,7 @@
 		3B66B88D210B1148000BDFEF /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				3B6425D62122BEE7001F5F14 /* OrderListVC */,
 				3B66B88E210B1148000BDFEF /* OrderDetails */,
 				3B66B8A3210B1148000BDFEF /* OrderDetailVC */,
 			);
@@ -1241,12 +1262,10 @@
 			isa = PBXGroup;
 			children = (
 				3B66B8A6210B1148000BDFEF /* RouteMessageTableViewCell.swift */,
-				3B66B8A7210B1148000BDFEF /* OrderItemTableViewCell.swift */,
 				3B66B8A8210B1148000BDFEF /* PackageTableViewCell.swift */,
 				3B66B8A9210B1148000BDFEF /* PackagesViewController.swift */,
 				3B66B8AA210B1148000BDFEF /* MapsViewController.swift */,
 				3B66B8AB210B1148000BDFEF /* RouteMessagesViewController.swift */,
-				3B66B8AC210B1148000BDFEF /* OrderListViewController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -1956,6 +1975,7 @@
 				3B66B80C210B113D000BDFEF /* UIViewController.swift in Sources */,
 				3B66B8FF210B1149000BDFEF /* OrderDetailTableViewCell.swift in Sources */,
 				3B66B844210B113D000BDFEF /* KeyConstants.swift in Sources */,
+				3B6425DA2122BFD4001F5F14 /* OrderListClvCell.swift in Sources */,
 				3B66B822210B113D000BDFEF /* UIView+Extensions.swift in Sources */,
 				3B66B91C210B1149000BDFEF /* BaseTableViewCell.swift in Sources */,
 				3B66B8FD210B1149000BDFEF /* OrderItemsTableViewCell.swift in Sources */,
