@@ -71,7 +71,6 @@ class OrderListViewController: BaseViewController {
     }
     
     func updateUI()  {
-        setupSegmentControl()
         setupCollectionView()
     }
     
@@ -94,10 +93,7 @@ extension OrderListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if Caches().user?.isDriver ?? false {
-            return 1
-        }
-        return segmentControl?.segmentTitles.count ?? 0
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

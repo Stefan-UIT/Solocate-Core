@@ -203,6 +203,16 @@ extension BaseAPIService {
     }
     
     @discardableResult
+    func getRoutesByCoordinator(callback: @escaping APICallback<ResponseDataModel<CoordinatorRouteModel>>) -> APIRequest {
+        return request(method: .GET,
+                       path:PATH_REQUEST_URL.GET_ROUTE_BY_COORDINATOR.URL,
+                       input: APIInput.empty ,
+                       callback: callback);
+    }
+    
+    
+    
+    @discardableResult
     func getRouteDetail(route:String, callback: @escaping APICallback<Route>) -> APIRequest {
         let path = String(format:PATH_REQUEST_URL.GET_ROUTE_DETAIL.URL, route)
         return request(method: .GET,

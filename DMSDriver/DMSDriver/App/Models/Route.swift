@@ -28,7 +28,7 @@ class Route: BaseModel {
   var pickupList = [PickupPlace]()
   var messages = [Message]()
   var currentItems = [OrderItem]()
-  var warehouse:WarehouseModel!
+  var warehouse:WarehouseModel?
   var endDate = ""
   var startDate = ""
     
@@ -84,7 +84,6 @@ class Route: BaseModel {
     id          <- map["route_id"]
     truckID     <- map["truck_id"]
     driverID    <- map["driver_id"]
-    totalOrders <- map["tot_orders"]
     totalDistance <- map["tot_dist"]
     totalZip    <- map["tot_zip"]
     totalVolume <- map["tot_vol"]
@@ -105,7 +104,13 @@ class Route: BaseModel {
     driver_name <- map["driver_name"]
     end_time <- map["end_time"]
     endDate <- map["end"]
-
+        
+    let tot_orders = map["tot_orders"].currentValue
+    if tot_orders == nil {
+        totalOrders <- map["total_order"]
+    }else{
+        totalOrders <- map["tot_orders"]
+    }
   }
     
     func arrayOrderMarkersFromOrderList() -> [OrderMarker] {

@@ -142,11 +142,12 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                                         _orderDetail.thirdCourier)
         
         shouldFilterOrderItemsList = _orderDetail.items.filter({$0.statusCode == "OP"}).count > 0
-        
+        /*
         if (Caches().user?.isAdmin ?? false ||
             Caches().user?.isCoordinator ?? false) {
             orderInforRows.append(driver)
         }
+         */
         orderInforRows.append(orderId)
         orderInforRows.append(type)
         orderInforRows.append(packetNumber)
@@ -452,9 +453,9 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             let item = orderInforRows[indexPath.row]
             
             var identifier = cellIdentifier
-            if item.type == .driver {
-                identifier = orderDropdownCellIdentifier
-            }
+//            if item.type == .driver {
+//                identifier = orderDropdownCellIdentifier
+//            }
             if let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
                                                         for: indexPath) as? OrderDetailTableViewCell {
                 cell.orderDetailItem = item

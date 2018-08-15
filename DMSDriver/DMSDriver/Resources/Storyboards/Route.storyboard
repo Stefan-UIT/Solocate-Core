@@ -42,8 +42,38 @@
                                     <constraint firstItem="mz9-ds-W3S" firstAttribute="centerX" secondItem="ofZ-Ov-zl1" secondAttribute="centerX" id="wUh-2A-hqf"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gxf-oY-c7F">
+                                <rect key="frame" x="0.0" y="20" width="375" height="60"/>
+                                <subviews>
+                                    <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tZX-WF-uh0">
+                                        <rect key="frame" x="15" y="12" width="345" height="41"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <segments>
+                                            <segment title="First"/>
+                                            <segment title="Second"/>
+                                        </segments>
+                                        <color key="tintColor" red="0.0" green="0.61568627450000002" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onbtnClickSegmentWithSegment:" destination="NVT-bo-x8o" eventType="valueChanged" id="qUb-7H-4Xf"/>
+                                        </connections>
+                                    </segmentedControl>
+                                </subviews>
+                                <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="tZX-WF-uh0" secondAttribute="bottom" constant="8" id="0Ax-Do-8nU"/>
+                                    <constraint firstItem="tZX-WF-uh0" firstAttribute="leading" secondItem="gxf-oY-c7F" secondAttribute="leading" constant="15" id="Fwc-Me-Khm"/>
+                                    <constraint firstItem="tZX-WF-uh0" firstAttribute="top" secondItem="gxf-oY-c7F" secondAttribute="top" constant="12" id="SiV-4q-5hm"/>
+                                    <constraint firstAttribute="trailing" secondItem="tZX-WF-uh0" secondAttribute="trailing" constant="15" id="d1b-gz-haN"/>
+                                    <constraint firstAttribute="height" constant="60" id="dmG-jF-cgj"/>
+                                </constraints>
+                            </view>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="KQA-xX-EPy">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="587"/>
                                 <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RouteListHeaderCell" rowHeight="62" id="juS-W3-doM" customClass="RouteListCell" customModule="DMSDriver" customModuleProvider="target">
@@ -279,10 +309,11 @@
                                                         <constraint firstItem="m8q-9I-9Da" firstAttribute="leading" secondItem="Xud-9l-l4v" secondAttribute="leading" id="4YT-bE-bES"/>
                                                         <constraint firstItem="T9g-Ee-Gbs" firstAttribute="leading" secondItem="l7d-RM-iiR" secondAttribute="leading" constant="15" id="5H0-wt-tXM"/>
                                                         <constraint firstItem="gzm-jb-SfC" firstAttribute="top" secondItem="T9g-Ee-Gbs" secondAttribute="bottom" constant="15" id="6Wk-i3-lOu"/>
+                                                        <constraint firstItem="T9g-Ee-Gbs" firstAttribute="top" secondItem="Nc6-2r-NmZ" secondAttribute="bottom" constant="15" id="6sY-kn-YN0"/>
                                                         <constraint firstItem="Nc6-2r-NmZ" firstAttribute="centerY" secondItem="M6B-oX-0Kl" secondAttribute="centerY" id="Az9-ne-6hH"/>
-                                                        <constraint firstItem="T9g-Ee-Gbs" firstAttribute="top" secondItem="Nc6-2r-NmZ" secondAttribute="bottom" constant="15" id="BDd-e0-glm"/>
                                                         <constraint firstItem="Z1F-7N-Y97" firstAttribute="leading" secondItem="urj-dp-853" secondAttribute="leading" id="EpH-AP-kXz"/>
                                                         <constraint firstItem="7QL-BU-ry1" firstAttribute="top" secondItem="urj-dp-853" secondAttribute="bottom" constant="10" id="HAc-4E-xEf"/>
+                                                        <constraint firstItem="T9g-Ee-Gbs" firstAttribute="top" secondItem="M6B-oX-0Kl" secondAttribute="bottom" constant="15" id="J8K-pO-5oM"/>
                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="40" id="JWn-qz-DmC"/>
                                                         <constraint firstItem="RZh-oP-t37" firstAttribute="leading" secondItem="FTJ-af-xJk" secondAttribute="trailing" constant="5" id="Jer-DU-ltw"/>
                                                         <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="gzm-jb-SfC" secondAttribute="bottom" constant="15" id="N5W-iK-JCa"/>
@@ -380,7 +411,7 @@
                                 </prototypes>
                             </tableView>
                             <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have no routes" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xpg-qv-SkC">
-                                <rect key="frame" x="136.5" y="334.5" width="102" height="18"/>
+                                <rect key="frame" x="136.5" y="364.5" width="102" height="18"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                 <color key="textColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
@@ -393,11 +424,14 @@
                         <constraints>
                             <constraint firstItem="Bhx-uf-sCd" firstAttribute="bottom" secondItem="KQA-xX-EPy" secondAttribute="bottom" id="3nq-P2-G9t"/>
                             <constraint firstItem="Bhx-uf-sCd" firstAttribute="trailing" secondItem="ofZ-Ov-zl1" secondAttribute="trailing" id="6Es-OZ-ifZ"/>
+                            <constraint firstItem="gxf-oY-c7F" firstAttribute="leading" secondItem="PUN-Vr-RpL" secondAttribute="leading" id="9a9-KE-Vn1"/>
+                            <constraint firstItem="gxf-oY-c7F" firstAttribute="top" secondItem="ofZ-Ov-zl1" secondAttribute="bottom" id="GQF-hY-c3p"/>
                             <constraint firstItem="xpg-qv-SkC" firstAttribute="centerY" secondItem="KQA-xX-EPy" secondAttribute="centerY" id="Jgv-Ki-UsO"/>
                             <constraint firstItem="xpg-qv-SkC" firstAttribute="centerX" secondItem="KQA-xX-EPy" secondAttribute="centerX" id="Ocf-iR-pfE"/>
+                            <constraint firstItem="KQA-xX-EPy" firstAttribute="top" secondItem="gxf-oY-c7F" secondAttribute="bottom" id="aDP-D4-gwv"/>
                             <constraint firstItem="KQA-xX-EPy" firstAttribute="leading" secondItem="Bhx-uf-sCd" secondAttribute="leading" id="bWP-DK-Cja"/>
+                            <constraint firstAttribute="trailing" secondItem="gxf-oY-c7F" secondAttribute="trailing" id="ecj-Hj-jND"/>
                             <constraint firstItem="ofZ-Ov-zl1" firstAttribute="top" secondItem="Bhx-uf-sCd" secondAttribute="top" id="haK-up-Sdw"/>
-                            <constraint firstItem="KQA-xX-EPy" firstAttribute="top" secondItem="ofZ-Ov-zl1" secondAttribute="bottom" id="jDm-gl-e8q"/>
                             <constraint firstItem="Bhx-uf-sCd" firstAttribute="trailing" secondItem="KQA-xX-EPy" secondAttribute="trailing" id="pmp-tz-clc"/>
                             <constraint firstItem="ofZ-Ov-zl1" firstAttribute="leading" secondItem="Bhx-uf-sCd" secondAttribute="leading" id="rKL-5l-THf"/>
                         </constraints>
@@ -405,8 +439,10 @@
                     </view>
                     <connections>
                         <outlet property="conHeightVInternetConnection" destination="rza-mT-3cR" id="tdu-wx-GiN"/>
+                        <outlet property="conHeightViewSegment" destination="dmG-jF-cgj" id="OV9-Ah-xpC"/>
                         <outlet property="lblInternetConnection" destination="mz9-ds-W3S" id="HmL-oB-wQV"/>
                         <outlet property="lblNoResult" destination="xpg-qv-SkC" id="55C-Wq-sJl"/>
+                        <outlet property="segmentControl" destination="tZX-WF-uh0" id="VaI-BV-DjL"/>
                         <outlet property="tbvContent" destination="KQA-xX-EPy" id="t5n-MH-shR"/>
                         <outlet property="vInternetConnection" destination="ofZ-Ov-zl1" id="hDK-9V-xSs"/>
                     </connections>

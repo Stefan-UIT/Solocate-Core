@@ -4,8 +4,9 @@ import UIKit
 enum MenuItemType : Int {
   
   case PROFILE = 0
-  case ROUTES = 1
-  case LOGOUT = 2
+  case ROUTES
+  case ASSIGN
+  case LOGOUT
   
   static let count: Int = {
     var max: Int = 0
@@ -19,6 +20,8 @@ enum MenuItemType : Int {
       return ""
     case .ROUTES:
         return "Routes".localized.uppercased()
+    case .ASSIGN:
+        return "Assign".localized.uppercased()
     case .LOGOUT:
       return "Logout".localized.uppercased()
     }
@@ -30,6 +33,8 @@ enum MenuItemType : Int {
       return #imageLiteral(resourceName: "ic_avartar")
     case .ROUTES:
       return #imageLiteral(resourceName: "ic_route")
+    case .ASSIGN:
+        return #imageLiteral(resourceName: "ic_orderlist")
     case .LOGOUT:
       return #imageLiteral(resourceName: "ic_logout")
     }
@@ -65,7 +70,11 @@ extension SlideMenuVC: UITableViewDataSource{
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return UITableViewAutomaticDimension
+    if Caches().user?.isCoordinator ?? false ||
+        Caches().user?.isAdmin ?? false {
+        return UITableViewAutomaticDimension
+    }
+    return 0 // row assign only for Coordinator,admin
   }
   
   func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -101,7 +110,10 @@ extension SlideMenuVC:UITableViewDelegate{
           break
         case .ROUTES:
           App().mainVC?.pushRouteListVC()
-          break
+        case .ASSIGN:
+            let vc:AssignOrderVC = .loadSB(SB: .Order)
+            App().mainVC?.rootNV?.pushViewController(vc, animated: false)
+
         case .LOGOUT:
           self.handleLogOut()
           break

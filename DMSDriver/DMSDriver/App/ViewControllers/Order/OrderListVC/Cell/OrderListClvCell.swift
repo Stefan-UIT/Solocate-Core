@@ -75,7 +75,7 @@ extension OrderListClvCell: UITableViewDelegate, UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderItemTableViewCell {
             
             let order = orderList[indexPath.row]
-            order.storeName = E(route?.warehouse.name)
+            order.storeName = E(route?.warehouse?.name)
             cell.order = order
             cell.btnNumber?.setTitle("\(indexPath.row + 1)", for: .normal)
             return cell

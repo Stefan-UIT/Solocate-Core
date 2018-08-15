@@ -59,7 +59,9 @@ class MapsViewController: UIViewController {
         showMarkers()
         
         // draw from warehouse to first point
-        let pickupLocation = CLLocationCoordinate2D(latitude: route!.warehouse.latitude, longitude: route!.warehouse.longitude)
+        
+        guard let wareHouse = route!.warehouse else { return}
+        let pickupLocation = CLLocationCoordinate2D(latitude: wareHouse.latitude, longitude: wareHouse.longitude)
         if let firstPoint = _route.orderList.first {
             let toLocation = CLLocationCoordinate2D(latitude: firstPoint.lat.doubleValue, longitude: firstPoint.lng.doubleValue)
             drawPath(fromLocation: pickupLocation, toLocation: toLocation)
@@ -115,7 +117,8 @@ class MapsViewController: UIViewController {
     }
     
     private func showMarkers() {
-        let warehouseMarker = route!.warehouse.toGMSMarker() // warehouse marker
+        guard let wareHouse = route!.warehouse else { return}
+        let warehouseMarker = wareHouse.toGMSMarker() // warehouse marker
         warehouseMarker.map = mapView
         
         let distinctArray = route!.distinctArrayOrderList()

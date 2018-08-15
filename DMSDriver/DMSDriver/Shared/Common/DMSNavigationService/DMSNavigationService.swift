@@ -132,7 +132,7 @@ extension DMSNavigationService {
         case BackOnly;
         case BackDone;
         case CancelSave;
-        case CanCelDone;
+        case CancelDone;
     }
     
     func updateNavigationBar(_ barStyle:BarStyle, _ title:String?) {
@@ -142,6 +142,7 @@ extension DMSNavigationService {
         }
         switch barStyle {
         case .Menu:
+            navigationItem?.rightBarButtonItems  = nil
             navigationItem?.leftBarButtonItem  = menuBarItem
             break;
         case .Menu_Calenda:
@@ -161,7 +162,7 @@ extension DMSNavigationService {
             navigationItem?.rightBarButtonItem = saveBarItem
             
             break;
-        case .CanCelDone:
+        case .CancelDone:
             break;
         }
     }

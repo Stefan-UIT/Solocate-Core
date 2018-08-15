@@ -9,19 +9,32 @@
 import UIKit
 import SideMenu
 
+enum TapFilterRouteList:Int {
+    case All = 0
+    case Assigned
+    case Mine
+}
+
 class RouteListVC: BaseViewController {
     
-    @IBOutlet weak var datePickerView: UIDatePicker!
-    @IBOutlet weak var pickerContainerView: UIView!
+    @IBOutlet weak var segmentControl: UISegmentedControl?
+    @IBOutlet weak var conHeightViewSegment: NSLayoutConstraint?
 
     @IBOutlet weak var tbvContent:UITableView?
     @IBOutlet weak var lblNoResult:UILabel?
     
     var dateStringFilter:String = Date().toString("yyyy-MM-dd")
     var dateFilter = Date()
-
     
-    var listRoutes:[Route]?{
+    var coordinatorRoute:CoordinatorRouteModel?
+
+    var tapDisplay:TapFilterRouteList = .All {
+        didSet{
+            reloadDataWithFilterMode(tapDisplay)
+        }
+    }
+    
+    var listRoutes:[Route] = []{
         didSet{
             tbvContent?.reloadData()
         }
@@ -29,9 +42,8 @@ class RouteListVC: BaseViewController {
   
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        setupTableView()
-        getRoutes()
+        updateUI()
+        fetchData()
     }
     
     override func reachabilityChangedNotification(_ notification: NSNotification) {
@@ -46,9 +58,36 @@ class RouteListVC: BaseViewController {
         setupNavigateBar()
     }
     
+    //MARK: - Intialize
+    func setupSegmentControl() {
+        segmentControl?.segmentTitles = ["All".localized,
+                                         "Assigned".localized,
+                                         "Mine".localized]
+        
+        if(Caches().user?.isCoordinator ?? false ||
+            Caches().user?.isAdmin ?? false) {
+            segmentControl?.selectedSegmentIndex = 0
+            conHeightViewSegment?.constant = 60
+            
+        }else{
+            conHeightViewSegment?.constant = 0
+        }
+    }
+    
+    func updateUI()  {
+        setupTableView()
+        setupSegmentControl()
+    }
+    
     func setupNavigateBar() {
         self.navigationService.delegate = self
-        self.navigationService.updateNavigationBar(.Menu_Calenda, "Routes List".localized)
+        if Caches().user?.isCoordinator ?? false ||
+            Caches().user?.isAdmin ?? false {
+            self.navigationService.updateNavigationBar(.Menu, "Routes List".localized)
+
+        }else{
+            self.navigationService.updateNavigationBar(.Menu_Calenda, "Routes List".localized)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -61,8 +100,43 @@ class RouteListVC: BaseViewController {
         self.tbvContent?.dataSource = self
         self.tbvContent?.rowHeight = UITableViewAutomaticDimension
         self.tbvContent?.estimatedRowHeight = 100;
-        
         self.tbvContent?.addRefreshControl(self, action: #selector(fetchData))
+    }
+    
+    func reloadDataWithFilterMode(_ filterMode: TapFilterRouteList) {
+        self.listRoutes.removeAll()
+        switch filterMode{
+        case .All:
+            var addedArray = [Route]()
+            if let coordinator:[Route] = coordinatorRoute?.coordinator{
+                addedArray.append(coordinator)
+            }
+            
+            if let driversdrivers = coordinatorRoute?.driversdrivers{
+                addedArray.append(driversdrivers)
+            }
+            self.listRoutes = addedArray
+            
+        case .Assigned:
+            if let driversdrivers = coordinatorRoute?.driversdrivers{
+                self.listRoutes = driversdrivers
+            }
+        case .Mine:
+            if let coordinator:[Route] = coordinatorRoute?.coordinator{
+                self.listRoutes = coordinator
+            }
+        }
+        
+        self.lblNoResult?.isHidden = (self.listRoutes.count > 0)
+        self.tbvContent?.reloadData()
+    }
+    
+    //MARK: - Action
+    @IBAction func onbtnClickSegment(segment:UISegmentedControl){
+        if let tapSelect = TapFilterRouteList(rawValue: segment.selectedSegmentIndex){
+            tapDisplay = tapSelect
+        }
+        //scrollToPageSelected(segment.selectedSegmentIndex)
     }
 }
 
@@ -74,7 +148,7 @@ extension RouteListVC: UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return listRoutes?.count ?? 0
+        return listRoutes.count
     }
   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -82,20 +156,17 @@ extension RouteListVC: UITableViewDataSource{
         let cell:RouteListCell = tableView.dequeueReusableCell(withIdentifier: "RouteListRowCell", for: indexPath) as! RouteListCell
         
         let row = indexPath.row
-        if let routes = listRoutes {
-            let route = routes[row]
-          
-           cell.lblTitle?.text = "\("Route".localized)ID-\(route.id)"
-           cell.lblSubtitle?.text = E(route.date)
-           cell.btnStatus?.setTitle(route.nameStatus, for: .normal)
-           cell.btnColor?.backgroundColor = route.colorStatus
-           cell.lblRouteNumber?.text = "\(route.route_number)";
-           cell.lblTotal?.text = "\(route.totalOrders)"
-           cell.lblWarehouse?.text = route.warehouse.name
-           cell.lblStartTime?.text = route.startDate
-           cell.lblEndTime?.text = route.endDate
-        }
+        let route = listRoutes[row]
         
+        cell.lblTitle?.text = "\("Route".localized)ID-\(route.id)"
+        cell.lblSubtitle?.text = E(route.date)
+        cell.btnStatus?.setTitle(route.nameStatus, for: .normal)
+        cell.btnColor?.backgroundColor = route.colorStatus
+        cell.lblRouteNumber?.text = "\(route.route_number)";
+        cell.lblTotal?.text = "\(route.totalOrders)"
+        cell.lblWarehouse?.text = route.warehouse?.name
+        cell.lblStartTime?.text = route.startDate
+        cell.lblEndTime?.text = route.endDate
         cell.selectionStyle = .none
         return cell
     }
@@ -106,11 +177,9 @@ extension RouteListVC: UITableViewDataSource{
 extension RouteListVC:UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let vc:RouteDetailVC = .loadSB(SB: .Route)
-        if let routes = listRoutes {
-            let route = routes[indexPath.row];
-            vc.route = route;
-            vc.dateStringFilter = dateStringFilter
-        }
+        let route = listRoutes[indexPath.row];
+        vc.route = route;
+        vc.dateStringFilter = dateStringFilter
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -120,7 +189,12 @@ extension RouteListVC:UITableViewDelegate {
 fileprivate extension RouteListVC{
     
     @objc func fetchData() {
-        getRoutes(byDate: dateStringFilter, isFetch: true)
+        if Caches().user?.isCoordinator ?? false ||
+            Caches().user?.isAdmin ?? false {
+            getRoutesByCoordinator()
+        }else {
+            getRoutes(byDate: dateStringFilter, isFetch: true)
+        }
     }
     
     func getRoutes(byDate date: String? = nil, isFetch:Bool = false) {
@@ -133,9 +207,31 @@ fileprivate extension RouteListVC{
             
             switch result{
             case .object(let obj):
-                self?.listRoutes = obj.data
-                self?.lblNoResult?.isHidden = (self?.listRoutes?.count ?? 0 > 0)
+                if let _obj = obj.data{
+                    self?.listRoutes = _obj
+                }
+                self?.lblNoResult?.isHidden = (self?.listRoutes.count > 0)
 
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
+        }
+    }
+    
+    func getRoutesByCoordinator(isFetch:Bool = false) {
+        if !isFetch {
+            showLoadingIndicator()
+        }
+        
+        API().getRoutesByCoordinator {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            self?.tbvContent?.endRefreshControl()
+            guard let strongSelf =  self else {return}
+            switch result{
+            case .object(let obj):
+                strongSelf.coordinatorRoute = obj.data
+                strongSelf.reloadDataWithFilterMode(strongSelf.tapDisplay)
+                
             case .error(let error):
                 self?.showAlertView(error.getMessage())
             }

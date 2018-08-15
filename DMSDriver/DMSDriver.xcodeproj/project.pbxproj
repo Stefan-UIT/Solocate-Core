@@ -193,6 +193,8 @@
 		3B9A37642123D5EF004D881C /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B9A37632123D5EF004D881C /* Common.storyboard */; };
 		3B9A37672123D6B9004D881C /* SelectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9A37662123D6B9004D881C /* SelectionModel.swift */; };
 		3B9A376A2123D992004D881C /* DriverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9A37692123D992004D881C /* DriverModel.swift */; };
+		3B9A376F21242FE8004D881C /* CoordinatorRouteModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9A376E21242FE8004D881C /* CoordinatorRouteModel.swift */; };
+		3B9A377221243A45004D881C /* AssignOrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9A377121243A45004D881C /* AssignOrderVC.swift */; };
 		793CBB7466E8BFD4AE564299 /* Pods_DMSDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A02E53A1DFA611D4E6D34FF1 /* Pods_DMSDriver.framework */; };
 /* End PBXBuildFile section */
 
@@ -569,6 +571,8 @@
 		3B9A37632123D5EF004D881C /* Common.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
 		3B9A37662123D6B9004D881C /* SelectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionModel.swift; sourceTree = "<group>"; };
 		3B9A37692123D992004D881C /* DriverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverModel.swift; sourceTree = "<group>"; };
+		3B9A376E21242FE8004D881C /* CoordinatorRouteModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorRouteModel.swift; sourceTree = "<group>"; };
+		3B9A377121243A45004D881C /* AssignOrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignOrderVC.swift; sourceTree = "<group>"; };
 		A02E53A1DFA611D4E6D34FF1 /* Pods_DMSDriver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DMSDriver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE4028787D23A4B46FAF55CE /* Pods-DMSDriver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.release.xcconfig"; sourceTree = "<group>"; };
 		D04AB4AFE9044A5214F46376 /* Pods-DMSDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1136,6 +1140,7 @@
 		3B66B86B210B1148000BDFEF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3B9A376C21242FBA004D881C /* CoordinatorRouteModel */,
 				3B9A37682123D96E004D881C /* DriverModel */,
 				3B9A37652123D6A4004D881C /* SelectionModel */,
 				3B66B889210B1148000BDFEF /* AttachFileModel */,
@@ -1223,6 +1228,7 @@
 		3B66B88D210B1148000BDFEF /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				3B9A377021243A2B004D881C /* AssignOrderVC */,
 				3B6425D62122BEE7001F5F14 /* OrderListVC */,
 				3B66B88E210B1148000BDFEF /* OrderDetails */,
 				3B66B8A3210B1148000BDFEF /* OrderDetailVC */,
@@ -1716,6 +1722,22 @@
 			path = DriverModel;
 			sourceTree = "<group>";
 		};
+		3B9A376C21242FBA004D881C /* CoordinatorRouteModel */ = {
+			isa = PBXGroup;
+			children = (
+				3B9A376E21242FE8004D881C /* CoordinatorRouteModel.swift */,
+			);
+			path = CoordinatorRouteModel;
+			sourceTree = "<group>";
+		};
+		3B9A377021243A2B004D881C /* AssignOrderVC */ = {
+			isa = PBXGroup;
+			children = (
+				3B9A377121243A45004D881C /* AssignOrderVC.swift */,
+			);
+			path = AssignOrderVC;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1964,6 +1986,7 @@
 				3B66B8F3210B1149000BDFEF /* UploadFileResponse.swift in Sources */,
 				3B66B843210B113D000BDFEF /* Cache.swift in Sources */,
 				3B66B831210B113D000BDFEF /* TwoTextFieldsViewController.swift in Sources */,
+				3B9A377221243A45004D881C /* AssignOrderVC.swift in Sources */,
 				3B66B90F210B1149000BDFEF /* MapsViewController.swift in Sources */,
 				3B66B8E8210B1149000BDFEF /* CheckTokenModel.swift in Sources */,
 				3B66B812210B113D000BDFEF /* HCSStarRatingView.m in Sources */,
@@ -1987,6 +2010,7 @@
 				3B66B8EA210B1149000BDFEF /* ChangePasswordModel.swift in Sources */,
 				3B66B906210B1149000BDFEF /* OrderSignatureViewController.swift in Sources */,
 				3B66B819210B113D000BDFEF /* Color.swift in Sources */,
+				3B9A376F21242FE8004D881C /* CoordinatorRouteModel.swift in Sources */,
 				3B66B8F0210B1149000BDFEF /* ListModel.swift in Sources */,
 				3B66B916210B1149000BDFEF /* ProfileCell.swift in Sources */,
 				3B66B823210B113D000BDFEF /* Date+Extension.swift in Sources */,
