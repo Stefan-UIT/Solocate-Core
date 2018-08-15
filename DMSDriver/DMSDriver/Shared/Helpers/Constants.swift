@@ -101,6 +101,7 @@ public enum SBName : String {
     case Map = "Map";
     case Message = "Message";
     case Profile = "Profile";
+    case Common = "Common";
 
 }
 

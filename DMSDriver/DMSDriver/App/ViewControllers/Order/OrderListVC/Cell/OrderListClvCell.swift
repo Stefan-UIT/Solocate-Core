@@ -29,6 +29,8 @@ class OrderListClvCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        updateUI()
     }
     
     func updateUI() {

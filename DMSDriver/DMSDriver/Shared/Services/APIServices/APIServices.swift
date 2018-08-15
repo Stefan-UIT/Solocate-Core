@@ -172,9 +172,17 @@ extension BaseAPIService {
     }
     
     @discardableResult
-    func getDriversByCoordinator(callback: @escaping APICallback<UserModel>) -> APIRequest {
+    func getDriversByCoordinator(callback: @escaping APICallback<ResponseDataListModel<DriverModel>>) -> APIRequest {
         return request(method: .GET,
                        path: PATH_REQUEST_URL.GET_DRIVER_BY_COORDINATOR.URL,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func getOrderByCoordinator(callback: @escaping APICallback<ResponseDataListModel<Order>>) -> APIRequest {
+        return request(method: .GET,
+                       path: PATH_REQUEST_URL.GET_ORDER_BY_COORDINATOR.URL,
                        input: .empty,
                        callback: callback);
     }

@@ -188,6 +188,11 @@
 		3B66B92B210B1149000BDFEF /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B8D8210B1148000BDFEF /* ChangePasswordView.swift */; };
 		3B66B92C210B1149000BDFEF /* AlertMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B8DA210B1148000BDFEF /* AlertMessageView.xib */; };
 		3B66B92D210B1149000BDFEF /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B8DB210B1148000BDFEF /* AlertMessageView.swift */; };
+		3B9A37612123D5C1004D881C /* PickerTypeListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9A375D2123D5C0004D881C /* PickerTypeListVC.swift */; };
+		3B9A37622123D5C1004D881C /* PickerTypeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9A375F2123D5C0004D881C /* PickerTypeListCell.swift */; };
+		3B9A37642123D5EF004D881C /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B9A37632123D5EF004D881C /* Common.storyboard */; };
+		3B9A37672123D6B9004D881C /* SelectionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9A37662123D6B9004D881C /* SelectionModel.swift */; };
+		3B9A376A2123D992004D881C /* DriverModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9A37692123D992004D881C /* DriverModel.swift */; };
 		793CBB7466E8BFD4AE564299 /* Pods_DMSDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A02E53A1DFA611D4E6D34FF1 /* Pods_DMSDriver.framework */; };
 /* End PBXBuildFile section */
 
@@ -559,6 +564,11 @@
 		3B87335621106101008C5C20 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		3B87335721106101008C5C20 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3B87335A21106101008C5C20 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsBase.framework; sourceTree = "<group>"; };
+		3B9A375D2123D5C0004D881C /* PickerTypeListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTypeListVC.swift; sourceTree = "<group>"; };
+		3B9A375F2123D5C0004D881C /* PickerTypeListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTypeListCell.swift; sourceTree = "<group>"; };
+		3B9A37632123D5EF004D881C /* Common.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
+		3B9A37662123D6B9004D881C /* SelectionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectionModel.swift; sourceTree = "<group>"; };
+		3B9A37692123D992004D881C /* DriverModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DriverModel.swift; sourceTree = "<group>"; };
 		A02E53A1DFA611D4E6D34FF1 /* Pods_DMSDriver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DMSDriver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE4028787D23A4B46FAF55CE /* Pods-DMSDriver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.release.xcconfig"; sourceTree = "<group>"; };
 		D04AB4AFE9044A5214F46376 /* Pods-DMSDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.debug.xcconfig"; sourceTree = "<group>"; };
@@ -1090,6 +1100,7 @@
 		3B66B7EF210B113C000BDFEF /* Storyboards */ = {
 			isa = PBXGroup;
 			children = (
+				3B9A37632123D5EF004D881C /* Common.storyboard */,
 				3B66B7F0210B113C000BDFEF /* Packages.storyboard */,
 				3B66B7F1210B113C000BDFEF /* Map.storyboard */,
 				3B66B7F2210B113C000BDFEF /* Profile.storyboard */,
@@ -1125,6 +1136,8 @@
 		3B66B86B210B1148000BDFEF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3B9A37682123D96E004D881C /* DriverModel */,
+				3B9A37652123D6A4004D881C /* SelectionModel */,
 				3B66B889210B1148000BDFEF /* AttachFileModel */,
 				3B66B87D210B1148000BDFEF /* LoginModel */,
 				3B66B878210B1148000BDFEF /* PackageModel */,
@@ -1220,6 +1233,7 @@
 		3B66B88E210B1148000BDFEF /* OrderDetails */ = {
 			isa = PBXGroup;
 			children = (
+				3B66B899210B1148000BDFEF /* SectionView */,
 				3B66B88F210B1148000BDFEF /* OrderScanItemTableViewCell.xib */,
 				3B66B890210B1148000BDFEF /* NoteTableViewCell.swift */,
 				3B66B891210B1148000BDFEF /* ScanBarCodeViewController.swift */,
@@ -1229,7 +1243,6 @@
 				3B66B896210B1148000BDFEF /* OrderDetailMapTableViewCell.swift */,
 				3B66B897210B1148000BDFEF /* OrderDetailTableViewCell.swift */,
 				3B66B898210B1148000BDFEF /* OrderPictureViewController.swift */,
-				3B66B899210B1148000BDFEF /* SectionView */,
 				3B66B89C210B1148000BDFEF /* OrderDetailContainerViewController.swift */,
 				3B66B89D210B1148000BDFEF /* OrderScanItemTableViewCell.swift */,
 				3B66B89E210B1148000BDFEF /* PictureTableViewCell.swift */,
@@ -1385,6 +1398,7 @@
 		3B66B8C8210B1148000BDFEF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3B9A375C2123D5C0004D881C /* PickerTypeListVC */,
 				3B13CBE9211A8FF400A93E18 /* ScrollMenuView */,
 				3B66B8C9210B1148000BDFEF /* LeftMenuView */,
 				3B66B8D3210B1148000BDFEF /* ForgetPasswordView */,
@@ -1669,6 +1683,39 @@
 			path = Frameworks;
 			sourceTree = "<group>";
 		};
+		3B9A375C2123D5C0004D881C /* PickerTypeListVC */ = {
+			isa = PBXGroup;
+			children = (
+				3B9A375D2123D5C0004D881C /* PickerTypeListVC.swift */,
+				3B9A375E2123D5C0004D881C /* Cell */,
+			);
+			path = PickerTypeListVC;
+			sourceTree = "<group>";
+		};
+		3B9A375E2123D5C0004D881C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3B9A375F2123D5C0004D881C /* PickerTypeListCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		3B9A37652123D6A4004D881C /* SelectionModel */ = {
+			isa = PBXGroup;
+			children = (
+				3B9A37662123D6B9004D881C /* SelectionModel.swift */,
+			);
+			path = SelectionModel;
+			sourceTree = "<group>";
+		};
+		3B9A37682123D96E004D881C /* DriverModel */ = {
+			isa = PBXGroup;
+			children = (
+				3B9A37692123D992004D881C /* DriverModel.swift */,
+			);
+			path = DriverModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1787,6 +1834,7 @@
 				3B66B861210B113D000BDFEF /* Main.storyboard in Resources */,
 				3B66B854210B113D000BDFEF /* Release.xcconfig in Resources */,
 				3B66B813210B113D000BDFEF /* Info.plist in Resources */,
+				3B9A37642123D5EF004D881C /* Common.storyboard in Resources */,
 				3B66B815210B113D000BDFEF /* SignatureView.xib in Resources */,
 				3B13CBF2211A8FF400A93E18 /* ScrollMenuView.xib in Resources */,
 				3B66B853210B113D000BDFEF /* Debug.xcconfig in Resources */,
@@ -1911,6 +1959,7 @@
 				3B66B82F210B113D000BDFEF /* AttributedTextBlock.swift in Sources */,
 				3B66B83D210B113D000BDFEF /* TextField.swift in Sources */,
 				3B66B918210B1149000BDFEF /* SlideMenuCell.swift in Sources */,
+				3B9A37612123D5C1004D881C /* PickerTypeListVC.swift in Sources */,
 				3B66B8E6210B1149000BDFEF /* OrderItem.swift in Sources */,
 				3B66B8F3210B1149000BDFEF /* UploadFileResponse.swift in Sources */,
 				3B66B843210B113D000BDFEF /* Cache.swift in Sources */,
@@ -2014,6 +2063,7 @@
 				3B66B8EF210B1149000BDFEF /* EmptyModel.swift in Sources */,
 				3B66B82E210B113D000BDFEF /* UITextField+Extensions.swift in Sources */,
 				3B66B836210B113D000BDFEF /* DatePickerViewController.swift in Sources */,
+				3B9A37622123D5C1004D881C /* PickerTypeListCell.swift in Sources */,
 				3B66B84F210B113D000BDFEF /* BaseAPIService.swift in Sources */,
 				3B66B8DF210B1149000BDFEF /* AlertDetailModel.swift in Sources */,
 				3B66B846210B113D000BDFEF /* LocationManager.swift in Sources */,
@@ -2039,6 +2089,7 @@
 				3B66B82B210B113D000BDFEF /* Optional+Extensions.swift in Sources */,
 				3B66B817210B113D000BDFEF /* NSAtribitedString+Ext.swift in Sources */,
 				3B66B838210B113D000BDFEF /* CurrencyCell.swift in Sources */,
+				3B9A37672123D6B9004D881C /* SelectionModel.swift in Sources */,
 				3B66B913210B1149000BDFEF /* RouteListVC.swift in Sources */,
 				3B66B928210B1149000BDFEF /* ForgetPasswordView.swift in Sources */,
 				3B66B827210B113D000BDFEF /* UIImage+Extensions.swift in Sources */,
@@ -2048,6 +2099,7 @@
 				3B66B81D210B113D000BDFEF /* NavigationService.swift in Sources */,
 				3B66B8DE210B1149000BDFEF /* Reason.swift in Sources */,
 				3B66B920210B1149000BDFEF /* LeftMenuView.swift in Sources */,
+				3B9A376A2123D992004D881C /* DriverModel.swift in Sources */,
 				3B66B909210B1149000BDFEF /* OrderNotesViewController.swift in Sources */,
 				3B13CBF0211A8FF400A93E18 /* ScrollMenuCell.swift in Sources */,
 				3B66B8E9210B1149000BDFEF /* ResultsRequestModel.swift in Sources */,

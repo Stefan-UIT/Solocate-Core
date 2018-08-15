@@ -19,9 +19,8 @@ class Cache: NSObject {
             if let dic = newValue?.getJSONString() {
                 setObject(obj: dic, forKey: Defaultkey.SF_USER)
             }else {
-                userDefaults.removeObject(forKey: Defaultkey.tokenKey)
                 userDefaults.removeObject(forKey: Defaultkey.SF_USER)
-
+                userDefaults.removeObject(forKey: Defaultkey.tokenKey)
             }
         }
         

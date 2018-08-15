@@ -54,9 +54,15 @@ class OrderListViewController: BaseViewController {
         segmentControl?.segmentTitles = ["All".localized,
                                          "Assigned".localized,
                                          "Mine".localized]
-        segmentControl?.selectedSegmentIndex = 0
-        conHeightViewSegment?.constant = 60 // if driver hidden Segment
         
+        if(Caches().user?.isCoordinator ?? false ||
+            Caches().user?.isAdmin ?? false) {
+            segmentControl?.selectedSegmentIndex = 0
+            conHeightViewSegment?.constant = 60
+            
+        }else{
+            conHeightViewSegment?.constant = 0
+        }
     }
     
     func setupCollectionView() {
@@ -88,8 +94,10 @@ extension OrderListViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return segmentControl?.segmentTitles.count ?? 0 // if driver return 1
-
+        if Caches().user?.isDriver ?? false {
+            return 1
+        }
+        return segmentControl?.segmentTitles.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -155,6 +163,20 @@ extension OrderListViewController{
             case .error(let error):
                 strongSelf.showAlertView(error.getMessage())
                 
+            }
+        }
+    }
+    
+    func getOrderByCoordinator() {
+        self.showLoadingIndicator()
+        SERVICES().API.getOrderByCoordinator {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(let obj):
+                break
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+                break
             }
         }
     }

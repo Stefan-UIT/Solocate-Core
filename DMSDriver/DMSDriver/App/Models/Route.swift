@@ -121,17 +121,9 @@ class Route: BaseModel {
         //temp function
         var addedArray = [Order]()
         for index in orderList {
-            var repeatedCount = 0
-            orderList.forEach{
-                if $0.to_loc_id == index.to_loc_id {
-                    repeatedCount += 1
-                }
-            }
-            if repeatedCount > 1 {
-                let array = addedArray.filter({$0.to_loc_id == index.to_loc_id})
-                if array.count > 0 {
-                    continue
-                }
+            let array = addedArray.filter({$0.lat == index.lat && $0.lng == index.lng})
+            if array.count > 0 {
+                continue
             }
             addedArray.append(index)
         }

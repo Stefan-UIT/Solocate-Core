@@ -143,7 +143,10 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         
         shouldFilterOrderItemsList = _orderDetail.items.filter({$0.statusCode == "OP"}).count > 0
         
-        orderInforRows.append(driver)
+        if (Caches().user?.isAdmin ?? false ||
+            Caches().user?.isCoordinator ?? false) {
+            orderInforRows.append(driver)
+        }
         orderInforRows.append(orderId)
         orderInforRows.append(type)
         orderInforRows.append(packetNumber)
@@ -515,7 +518,13 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
 
 extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
     func didSelectedDopdown(_ cell: OrderDetailTableViewCell, _ btn: UIButton) {
-        //
+    
+        PickerTypeListVC.showPickerTypeList(pickerType: .DriverSignlePick,
+                                            oldData: nil) { (success, data) in
+            if success{
+                //Call submit assign api
+            }
+        }
     }
 }
 
