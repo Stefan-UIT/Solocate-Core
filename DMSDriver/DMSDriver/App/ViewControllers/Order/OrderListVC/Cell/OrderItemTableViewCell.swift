@@ -34,7 +34,7 @@ class OrderItemTableViewCell: UITableViewCell {
   }
     
   func updateCell() {
-      lblTitle?.text = "\(order.sequence) - \(order.orderReference)"
+      lblTitle?.text = "\(order.orderReference)"
       lblDeliverynumber?.text = order.orderReference
       lblStore?.text =  order.storeName
       if Locale.current.languageCode == "he" {

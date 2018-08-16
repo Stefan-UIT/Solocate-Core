@@ -29,6 +29,7 @@ class OrderListViewController: BaseViewController {
 
     
     var route: Route?
+    var dateStringFilter = Date().toString()
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -101,6 +102,7 @@ extension OrderListViewController: UICollectionViewDataSource {
         cell.rootVC = self
         cell.route = route
         cell.tapDisplay = tapDisplay
+        cell.dateStringFilter = dateStringFilter
         return cell
     }
 }

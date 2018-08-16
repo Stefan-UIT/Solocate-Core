@@ -56,6 +56,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
   }
   
+    var dateStringFilter = Date().toString()
   
     override var orderDetail: OrderDetail? {
         didSet {
@@ -142,12 +143,11 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                                         _orderDetail.thirdCourier)
         
         shouldFilterOrderItemsList = _orderDetail.items.filter({$0.statusCode == "OP"}).count > 0
-        /*
+        
         if (Caches().user?.isAdmin ?? false ||
             Caches().user?.isCoordinator ?? false) {
             orderInforRows.append(driver)
         }
-         */
         orderInforRows.append(orderId)
         orderInforRows.append(type)
         orderInforRows.append(packetNumber)
@@ -451,11 +451,10 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             }
         case .sectionOrderInfor:
             let item = orderInforRows[indexPath.row]
-            
             var identifier = cellIdentifier
-//            if item.type == .driver {
-//                identifier = orderDropdownCellIdentifier
-//            }
+            if item.type == .driver {
+                identifier = orderDropdownCellIdentifier
+            }
             if let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
                                                         for: indexPath) as? OrderDetailTableViewCell {
                 cell.orderDetailItem = item
@@ -519,11 +518,17 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
 
 extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
     func didSelectedDopdown(_ cell: OrderDetailTableViewCell, _ btn: UIButton) {
-    
+        let driver = DriverModel(orderDetail?.driver_id,E(orderDetail?.driver_name),nil)
         PickerTypeListVC.showPickerTypeList(pickerType: .DriverSignlePick,
-                                            oldData: nil) { (success, data) in
+                                            oldData: [driver]) {[weak self] (success, data) in
             if success{
-                //Call submit assign api
+                if let drivers = data as? [DriverModel]{
+                    let requestAssignOrder = RequestAssignOrderModel()
+                    requestAssignOrder.date = self?.dateStringFilter
+                    requestAssignOrder.driver_id = drivers.first?.driver_id
+                    requestAssignOrder.order_ids = ["\(self?.orderDetail?.id ?? 0)"]
+                    self?.assignOrderToDriver(requestAssignOrder)
+                }
             }
         }
     }
@@ -561,5 +566,23 @@ fileprivate extension OrderDetailViewController{
             btnUnable.isHidden = true
         }
     }
+}
+
+//MARK: API
+extension OrderDetailViewController{
     
+    func assignOrderToDriver(_ requestAssignOrder:RequestAssignOrderModel)  {
+        self.showLoadingIndicator()
+        API().assignOrderToDriver(body: requestAssignOrder) {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(_):
+                self?.updateOrderDetail?()
+                self?.showAlertView("Assigned successfull.")
+                
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
+        }
+    }
 }

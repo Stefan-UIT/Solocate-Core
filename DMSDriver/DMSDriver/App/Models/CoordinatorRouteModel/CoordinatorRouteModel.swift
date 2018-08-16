@@ -12,7 +12,7 @@ import ObjectMapper
 class CoordinatorRouteModel: BaseModel {
     
     var coordinator:[Route]?
-    var driversdrivers:[Route]?
+    var drivers:[Route]?
     
     required init?(map: Map) {
         super.init()
@@ -20,6 +20,6 @@ class CoordinatorRouteModel: BaseModel {
     
     override func mapping(map: Map) {
         coordinator <- map["coordinator"]
-        driversdrivers <- map["driversdrivers"]
+        drivers <- map["drivers"]
     }
 }

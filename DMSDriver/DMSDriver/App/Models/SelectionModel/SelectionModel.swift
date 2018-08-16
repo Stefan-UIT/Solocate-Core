@@ -12,6 +12,9 @@ import ObjectMapper
 class SelectionModel: BaseModel {
     var isSelected:Bool = false
     
+    override init() {
+        //
+    }
     var strId:String {
         get{
             return "StrId"

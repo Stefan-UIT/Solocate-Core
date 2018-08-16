@@ -20,6 +20,13 @@ class DriverModel: SelectionModel {
     var driver_name = ""
     var role_name = ""
     
+    init(_ id:Int? ,_ name:String?,_ nameRole :String?) {
+        super.init()
+        driver_id = id ?? 0
+        driver_name = E(name)
+        role_name = E(nameRole)
+    }
+    
     required init?(map: Map) {
         super.init(map: map)
     }

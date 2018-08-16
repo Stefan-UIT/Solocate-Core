@@ -81,13 +81,7 @@ class RouteListVC: BaseViewController {
     
     func setupNavigateBar() {
         self.navigationService.delegate = self
-        if Caches().user?.isCoordinator ?? false ||
-            Caches().user?.isAdmin ?? false {
-            self.navigationService.updateNavigationBar(.Menu, "Routes List".localized)
-
-        }else{
-            self.navigationService.updateNavigationBar(.Menu_Calenda, "Routes List".localized)
-        }
+        self.navigationService.updateNavigationBar(.Menu_Calenda, "Routes List".localized)
     }
 
     override func didReceiveMemoryWarning() {
@@ -112,13 +106,13 @@ class RouteListVC: BaseViewController {
                 addedArray.append(coordinator)
             }
             
-            if let driversdrivers = coordinatorRoute?.driversdrivers{
+            if let driversdrivers = coordinatorRoute?.drivers{
                 addedArray.append(driversdrivers)
             }
             self.listRoutes = addedArray
             
         case .Assigned:
-            if let driversdrivers = coordinatorRoute?.driversdrivers{
+            if let driversdrivers = coordinatorRoute?.drivers{
                 self.listRoutes = driversdrivers
             }
         case .Mine:
@@ -188,12 +182,12 @@ extension RouteListVC:UITableViewDelegate {
 //MARK: - API
 fileprivate extension RouteListVC{
     
-    @objc func fetchData() {
+    @objc func fetchData(isFetch:Bool = true) {
         if Caches().user?.isCoordinator ?? false ||
             Caches().user?.isAdmin ?? false {
-            getRoutesByCoordinator()
+            getRoutesByCoordinator(isFetch: isFetch)
         }else {
-            getRoutes(byDate: dateStringFilter, isFetch: true)
+            getRoutes(byDate: dateStringFilter, isFetch: isFetch)
         }
     }
     
@@ -223,7 +217,7 @@ fileprivate extension RouteListVC{
             showLoadingIndicator()
         }
         
-        API().getRoutesByCoordinator {[weak self] (result) in
+        API().getRoutesByCoordinator(byDate: dateStringFilter) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.tbvContent?.endRefreshControl()
             guard let strongSelf =  self else {return}
@@ -257,8 +251,8 @@ extension RouteListVC:DMSNavigationServiceDelegate{
                                             
             self?.dateFilter = date
             self?.dateStringFilter = date.toString("yyyy-MM-dd")
-            self?.getRoutes(byDate: self?.dateStringFilter)
-                                            
+            self?.fetchData(isFetch: false)
+                                    
         }
     }
 }

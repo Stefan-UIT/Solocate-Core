@@ -23,6 +23,7 @@ class OrderListClvCell: UICollectionViewCell {
             filterDataWithTapDisplay()
         }
     }
+    var dateStringFilter = ""
     
     var route: Route?
     var rootVC: BaseViewController?
@@ -119,6 +120,7 @@ extension OrderListClvCell: UITableViewDelegate, UITableViewDataSource {
         if let order = route?.orderList[indexPath.row] {
             vc.order = order
             vc.routeID = route?.id
+            vc.dateStringFilter = dateStringFilter
         }
         self.rootVC?.navigationController?.pushViewController(vc, animated: true)
     }

@@ -69,6 +69,7 @@ class RouteDetailVC: UITabBarController {
         let orderVC:OrderListViewController = .loadSB(SB: .Order)
         if let route = self.route {
             orderVC.route = route
+            orderVC.dateStringFilter = dateStringFilter
         }
         let packageVC:PackagesViewController = .loadSB(SB: .Packages)
         if let route = self.route {

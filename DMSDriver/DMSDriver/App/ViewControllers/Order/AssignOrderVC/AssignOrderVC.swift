@@ -137,13 +137,22 @@ extension AssignOrderVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        let row = indexPath.row
         if isSelectAssign {
-            let row = indexPath.row
             dataDisplay[row].isSelect = !dataDisplay[row].isSelect
             self.tableView.reloadData()
             
         }else{
-            //
+            let vc:OrderDetailContainerViewController = .loadSB(SB: .Order)
+            vc.onUpdateOrderStatus = {(order)  in
+                //
+            }
+            
+            let order = dataDisplay[row]
+            vc.order = order
+            vc.routeID = order.routeId
+            vc.dateStringFilter = dateStringFilter
+            self.navigationController?.pushViewController(vc, animated: true)
         }
     }
 }

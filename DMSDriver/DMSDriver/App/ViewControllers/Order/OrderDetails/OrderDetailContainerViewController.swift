@@ -18,7 +18,7 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
     
     var routeID: Int?
     var order:Order?
-    
+    var dateStringFilter:String = Date().toString()
     
     var navigateService:DMSNavigationService?
     var onUpdateOrderStatus:((_ order: OrderDetail) -> Void)?
@@ -44,6 +44,7 @@ class OrderDetailContainerViewController: SegmentedPagerTabStripViewController {
     
     private  func setupViewControllerForPagerTab() -> [UIViewController] {
         let child_1:OrderDetailViewController = .loadSB(SB: .Order)
+        child_1.dateStringFilter = dateStringFilter
         child_1.didUpdateStatus = { [weak self] (orderDetail, shouldMoveToTab)  in
             self?.getOrderDetail()
             self?.onUpdateOrderStatus?(orderDetail)
