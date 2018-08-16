@@ -91,7 +91,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             orderInforStatus.append(mess)
         }
         
-        let driver = OrderDetailInforRow(.driver,"\(_orderDetail.driverName)")
+        let driver = OrderDetailInforRow(.driver,"\(_orderDetail.driver_name)")
         let orderId = OrderDetailInforRow(.orderId,"\(_orderDetail.id)")
         let startTime = OrderDetailInforRow(.startTime, "\(_orderDetail.endTime)")
         let endTime = OrderDetailInforRow(.endTime, "\(_orderDetail.endTime)")

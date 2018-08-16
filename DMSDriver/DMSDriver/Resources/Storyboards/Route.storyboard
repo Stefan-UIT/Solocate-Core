@@ -46,7 +46,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="60"/>
                                 <subviews>
                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="tZX-WF-uh0">
-                                        <rect key="frame" x="15" y="12" width="345" height="41"/>
+                                        <rect key="frame" x="15" y="13" width="345" height="39"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <segments>
                                             <segment title="First"/>
@@ -65,9 +65,9 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="tZX-WF-uh0" secondAttribute="bottom" constant="8" id="0Ax-Do-8nU"/>
+                                    <constraint firstAttribute="bottom" secondItem="tZX-WF-uh0" secondAttribute="bottom" constant="9" id="0Ax-Do-8nU"/>
                                     <constraint firstItem="tZX-WF-uh0" firstAttribute="leading" secondItem="gxf-oY-c7F" secondAttribute="leading" constant="15" id="Fwc-Me-Khm"/>
-                                    <constraint firstItem="tZX-WF-uh0" firstAttribute="top" secondItem="gxf-oY-c7F" secondAttribute="top" constant="12" id="SiV-4q-5hm"/>
+                                    <constraint firstItem="tZX-WF-uh0" firstAttribute="top" secondItem="gxf-oY-c7F" secondAttribute="top" constant="13" id="SiV-4q-5hm"/>
                                     <constraint firstAttribute="trailing" secondItem="tZX-WF-uh0" secondAttribute="trailing" constant="15" id="d1b-gz-haN"/>
                                     <constraint firstAttribute="height" constant="60" id="dmG-jF-cgj"/>
                                 </constraints>

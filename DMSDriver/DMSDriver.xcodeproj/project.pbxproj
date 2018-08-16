@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3B0C5F7A212536F00036F61A /* AssignOrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0C5F79212536F00036F61A /* AssignOrderCell.swift */; };
+		3B0C5F7D21256A5E0036F61A /* RequestAssignOrderModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0C5F7C21256A5E0036F61A /* RequestAssignOrderModel.swift */; };
 		3B13CBEF211A8FF400A93E18 /* ScrollMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B13CBEA211A8FF400A93E18 /* ScrollMenuView.swift */; };
 		3B13CBF0211A8FF400A93E18 /* ScrollMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B13CBEC211A8FF400A93E18 /* ScrollMenuCell.swift */; };
 		3B13CBF1211A8FF400A93E18 /* ScrollMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B13CBED211A8FF400A93E18 /* ScrollMenuCell.xib */; };
@@ -209,6 +211,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3B0C5F79212536F00036F61A /* AssignOrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignOrderCell.swift; sourceTree = "<group>"; };
+		3B0C5F7C21256A5E0036F61A /* RequestAssignOrderModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestAssignOrderModel.swift; sourceTree = "<group>"; };
 		3B13CBEA211A8FF400A93E18 /* ScrollMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollMenuView.swift; sourceTree = "<group>"; };
 		3B13CBEC211A8FF400A93E18 /* ScrollMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollMenuCell.swift; sourceTree = "<group>"; };
 		3B13CBED211A8FF400A93E18 /* ScrollMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollMenuCell.xib; sourceTree = "<group>"; };
@@ -606,6 +610,22 @@
 				CE4028787D23A4B46FAF55CE /* Pods-DMSDriver.release.xcconfig */,
 			);
 			name = Pods;
+			sourceTree = "<group>";
+		};
+		3B0C5F77212536C90036F61A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				3B0C5F79212536F00036F61A /* AssignOrderCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		3B0C5F7B21256A3E0036F61A /* RequestAssignOrderModel */ = {
+			isa = PBXGroup;
+			children = (
+				3B0C5F7C21256A5E0036F61A /* RequestAssignOrderModel.swift */,
+			);
+			path = RequestAssignOrderModel;
 			sourceTree = "<group>";
 		};
 		3B13CBE9211A8FF400A93E18 /* ScrollMenuView */ = {
@@ -1140,6 +1160,7 @@
 		3B66B86B210B1148000BDFEF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				3B0C5F7B21256A3E0036F61A /* RequestAssignOrderModel */,
 				3B9A376C21242FBA004D881C /* CoordinatorRouteModel */,
 				3B9A37682123D96E004D881C /* DriverModel */,
 				3B9A37652123D6A4004D881C /* SelectionModel */,
@@ -1733,6 +1754,7 @@
 		3B9A377021243A2B004D881C /* AssignOrderVC */ = {
 			isa = PBXGroup;
 			children = (
+				3B0C5F77212536C90036F61A /* Cell */,
 				3B9A377121243A45004D881C /* AssignOrderVC.swift */,
 			);
 			path = AssignOrderVC;
@@ -2048,6 +2070,7 @@
 				3B66B80C210B113D000BDFEF /* UIViewController.swift in Sources */,
 				3B66B8FF210B1149000BDFEF /* OrderDetailTableViewCell.swift in Sources */,
 				3B66B844210B113D000BDFEF /* KeyConstants.swift in Sources */,
+				3B0C5F7D21256A5E0036F61A /* RequestAssignOrderModel.swift in Sources */,
 				3B6425DA2122BFD4001F5F14 /* OrderListClvCell.swift in Sources */,
 				3B66B822210B113D000BDFEF /* UIView+Extensions.swift in Sources */,
 				3B66B91C210B1149000BDFEF /* BaseTableViewCell.swift in Sources */,
@@ -2062,6 +2085,7 @@
 				3B66B840210B113D000BDFEF /* Debug.swift in Sources */,
 				3B66B90E210B1149000BDFEF /* PackagesViewController.swift in Sources */,
 				3B66B848210B113D000BDFEF /* Services.swift in Sources */,
+				3B0C5F7A212536F00036F61A /* AssignOrderCell.swift in Sources */,
 				3B66B837210B113D000BDFEF /* ImagePickerViewController.swift in Sources */,
 				3B66B8EB210B1149000BDFEF /* UserRole.swift in Sources */,
 				3B66B911210B1149000BDFEF /* OrderListViewController.swift in Sources */,

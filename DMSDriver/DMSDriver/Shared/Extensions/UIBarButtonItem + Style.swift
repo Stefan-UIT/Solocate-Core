@@ -106,6 +106,20 @@ extension UIBarButtonItem {
         return item
     }
     
+    class func selectButton(target: Any, action: Selector) -> UIBarButtonItem {
+        let button = setUpButtonWithText(text: "Select", target: target, action: action)
+        let item = UIBarButtonItem(customView: button)
+        
+        return item
+    }
+    
+    class func assignButton(target: Any, action: Selector) -> UIBarButtonItem {
+        let button = setUpButtonWithText(text: "Assign", target: target, action: action)
+        let item = UIBarButtonItem(customView: button)
+        
+        return item
+    }
+    
     class func SaveButton(target: Any, action: Selector) -> UIBarButtonItem {
         let button = setUpButtonWithText(text: "Save", target: target, action: action)
         let item = UIBarButtonItem(customView: button)

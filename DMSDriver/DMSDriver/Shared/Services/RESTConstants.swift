@@ -58,6 +58,7 @@ enum PATH_REQUEST_URL: String{
     case UPDATE_USER_PROFILE = "UPDATE_USER_PROFILE"
     case UPDATE_DRIVER_LOCATION = "UPDATE_DRIVER_LOCATION"
     case GET_DRIVER_BY_COORDINATOR = "GET_DRIVER_BY_COORDINATOR"
+    case ASSIGN_ORDER = "ASSIGN_ORDER"
     
     var URL:String  {
         return E(DMSAppConfiguration.pathUrls[self.rawValue])

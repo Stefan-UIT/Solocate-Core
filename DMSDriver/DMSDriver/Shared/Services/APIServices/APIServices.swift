@@ -180,12 +180,25 @@ extension BaseAPIService {
     }
     
     @discardableResult
-    func getOrderByCoordinator(callback: @escaping APICallback<ResponseDataListModel<Order>>) -> APIRequest {
+    func getOrderByCoordinator(byDate date:String = Date().toString("yyyy-MM-dd"),
+                               callback: @escaping APICallback<ResponseDataListModel<Order>>) -> APIRequest {
+        let path = String(format: PATH_REQUEST_URL.GET_ORDER_BY_COORDINATOR.URL, date)
         return request(method: .GET,
-                       path: PATH_REQUEST_URL.GET_ORDER_BY_COORDINATOR.URL,
+                       path: path,
                        input: .empty,
                        callback: callback);
     }
+    
+    @discardableResult
+    func assignOrderToDriver(body:RequestAssignOrderModel,
+                               callback: @escaping APICallback<ResponseDataListModel<Order>>) -> APIRequest {
+        return request(method: .POST,
+                        path: PATH_REQUEST_URL.ASSIGN_ORDER.URL,
+                       input: .dto(body),
+                    callback: callback);
+    }
+    
+    
     
     
     //MARK: - ROUTE
@@ -203,9 +216,11 @@ extension BaseAPIService {
     }
     
     @discardableResult
-    func getRoutesByCoordinator(callback: @escaping APICallback<ResponseDataModel<CoordinatorRouteModel>>) -> APIRequest {
+    func getRoutesByCoordinator(byDate date:String = Date().toString("yyyy-MM-dd"),
+                                callback: @escaping APICallback<ResponseDataModel<CoordinatorRouteModel>>) -> APIRequest {
+        let path = String(format: PATH_REQUEST_URL.GET_ROUTE_BY_COORDINATOR.URL, date)
         return request(method: .GET,
-                       path:PATH_REQUEST_URL.GET_ROUTE_BY_COORDINATOR.URL,
+                       path:path,
                        input: APIInput.empty ,
                        callback: callback);
     }

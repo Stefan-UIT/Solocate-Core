@@ -112,10 +112,12 @@ class Order: BaseModel {
     var to_address_lattd = ""
     var to_address_lngtd = ""
     var truck_name = ""
+    var driver_name = ""
+    var driver_id = -1
+    var supervisor_Id = -1
+    var supervisor_name = ""
 
-    //temp
-    var driverId = -1
-    var driverName = -1
+    var isSelect = false
     
 
     var colorUrgent:UIColor{
@@ -185,7 +187,6 @@ class Order: BaseModel {
         lng               <- map["lngtd"]
         statusCode        <- map["order_sts"]
         statusName        <- map["order_stmainatus"]
-        orderReference    <- map["order_ref"]
         deliveryDate      <- map["dlvy_date"]
         deliveryAdd       <- map["delivery"]
         timeWindowName    <- map["TimeWindowName"]
@@ -196,10 +197,7 @@ class Order: BaseModel {
         pallets  <- map["pallets"]
         cases  <- map["cases"]
         shop  <- map["shop"]
-        startTime  <- map["dlvy_start_time"]
-        endTime  <- map["dlvy_end_time"]
         reason_msg <- map["reason_msg"]
-        
         standby <- map["standby"]
         client_name <- map["client_name"]
         custumer_name <- map["custumer_name"]
@@ -252,6 +250,37 @@ class Order: BaseModel {
         to_address_lngtd <- map["to_address_lngtd"]
         truck_name <- map["truck_name"]
         receiverPhone <- map["rcvr_phone"]
+        driver_name <- map["driver_name"]
+        driver_id <- map["driver_id"]
+        supervisor_Id <- map["sup_id"]
+        supervisor_name <- map["sup_name"]
+
+        if let _ = map["dlvy_date"].currentValue{
+            deliveryDate <- map["dlvy_date"];// Order assign
+        }else{
+            deliveryDate <- map["expected_date"];
+        }
+        
+        let ref = map["order_ref"].currentValue
+        if ref == nil {
+            orderReference    <- map["delivery_number"]
+        }else{
+            orderReference    <- map["order_ref"]// Order assign
+        }
+        
+        let start_time = map["dlvy_start_time"].currentValue
+        if start_time == nil {
+            startTime  <- map["start_time"] // Order assign
+        }else{
+            startTime  <- map["dlvy_start_time"]
+        }
+        
+        let end_time = map["dlvy_end_time"].currentValue
+        if end_time == nil {
+            endTime  <- map["end_time"] // Order assign
+        }else{
+            endTime  <- map["dlvy_end_time"]
+        }
   }
     
     func isRequireSign() -> Bool  {
@@ -405,8 +434,6 @@ class OrderDetail: Order {
     notes <- map["notes"]
     pictures <- map["url"]
     items <- map["details"]
-    
-    deliveryDate <- map["dlvy_date"];
     serviceTime <- map["service_time"]
     
     url <- map["url"]

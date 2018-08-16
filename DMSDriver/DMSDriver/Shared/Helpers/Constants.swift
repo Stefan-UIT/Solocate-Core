@@ -116,6 +116,10 @@ func isHebewLang() -> Bool {
     return Locale.current.languageCode == "he"
 }
 
+func isEmpty(_ val: String?) -> Bool {
+    return val == nil ? true : val!.isEmpty;
+}
+
 func ClassName(_ object: Any) -> String {
     return String(describing: type(of: object))
 }

@@ -69,8 +69,10 @@
 	<key>GET_DRIVER_BY_COORDINATOR</key>
 	<string>/backend-api/v1/users/get-driver-by-coordinator</string>
 	<key>GET_ORDER_BY_COORDINATOR</key>
-	<string>/backend-api/v1/orders/all-order-by-coordinator</string>
+	<string>/backend-api/v1/orders/all-order-by-coordinator?date=%@</string>
 	<key>GET_ROUTE_BY_COORDINATOR</key>
-	<string>/backend-api/v1/routes/all-route-by-coordinator</string>
+	<string>/backend-api/v1/routes/all-route-by-coordinator?date=%@</string>
+	<key>ASSIGN_ORDER</key>
+	<string>/backend-api/v1/orders/assign-order</string>
 </dict>
 </plist>

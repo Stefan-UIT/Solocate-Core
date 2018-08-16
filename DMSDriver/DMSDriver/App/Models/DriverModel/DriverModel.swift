@@ -16,7 +16,7 @@ class DriverModel: SelectionModel {
     "role_name": "Driver"
      */
     
-    var driver_id = ""
+    var driver_id = 0
     var driver_name = ""
     var role_name = ""
     
@@ -32,7 +32,7 @@ class DriverModel: SelectionModel {
     
     override var strId: String{
         get{
-            return driver_id
+            return "\(driver_id)"
         }
     }
 }

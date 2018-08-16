@@ -92,6 +92,14 @@ extension SlideMenuVC: UITableViewDataSource{
     let cell:SlideMenuCell = tableView.dequeueReusableCell(withIdentifier: indentifier, for: indexPath) as! SlideMenuCell
     
     cell.menuType = menutype
+    if menutype == currentItem {
+        cell.imvIcon?.tintColor = AppColor.mainColor
+        cell.lblTitle?.textColor = AppColor.mainColor
+    }else{
+        cell.imvIcon?.tintColor = AppColor.grayBorderColor
+        cell.lblTitle?.textColor = AppColor.grayBorderColor
+    }
+    
     cell.selectionStyle = .none;
     
     return cell
@@ -119,7 +127,7 @@ extension SlideMenuVC:UITableViewDelegate{
           break
         }
       }
-      
+      self.tbvContent?.reloadData()
       DispatchQueue.main.async {
         self.navigationController?.dismiss(animated: true, completion: nil)
       }

@@ -140,12 +140,12 @@ extension OrderListClvCell: UITableViewDelegate, UITableViewDataSource {
             orderList = route?.orderList ?? []
         case .Assigned:
             orderList = route?.orderList.filter({ (order) -> Bool in
-                return order.driverId != Caches().user?.userID
+                return order.driver_id != Caches().user?.userID
             }) ?? []
 
         case .Mine:
             orderList = route?.orderList.filter({ (order) -> Bool in
-                return order.driverId == Caches().user?.userID
+                return order.driver_id == Caches().user?.userID
             }) ?? []
         }
         noOrdersLabel?.isHidden = orderList.count > 0

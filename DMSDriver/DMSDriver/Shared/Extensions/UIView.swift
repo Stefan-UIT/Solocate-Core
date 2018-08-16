@@ -279,6 +279,13 @@ extension UIView {
     gradient.locations = locations
     self.layer.insertSublayer(gradient, at: 0)
   }
+    
+    public func setShadowDefault() {
+        self.clipsToBounds = false
+        self.layer.shadowColor = UIColor.gray.cgColor
+        self.layer.shadowOffset = CGSize(width: 0.1, height: 5.0)
+        self.layer.shadowOpacity = 0.2
+    }
 }
 
 extension CGFloat {
