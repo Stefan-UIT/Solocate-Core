@@ -30,6 +30,7 @@ class LocationTracker: NSObject {
     }
     
     @objc func requestUpdateDriverLocation() {
+        print("update location")
         if !Caches().hasLogin { // suddenly user logout
             invalidTimer()
             return

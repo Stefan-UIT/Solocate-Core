@@ -578,7 +578,9 @@ extension OrderDetailViewController{
             switch result{
             case .object(_):
                 self?.updateOrderDetail?()
-                self?.showAlertView("Assigned successfull.")
+                self?.showAlertView("Assigned successfull.".localized, completionHandler: { (ok) in
+                    App().mainVC?.pushRouteListVC()
+                })
                 
             case .error(let error):
                 self?.showAlertView(error.getMessage())

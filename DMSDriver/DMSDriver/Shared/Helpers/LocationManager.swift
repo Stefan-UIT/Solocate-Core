@@ -27,6 +27,8 @@ class LocationManager: NSObject {
     locManager.delegate = self
     locManager.desiredAccuracy=kCLLocationAccuracyBest
     locManager.distanceFilter = 15.0
+    locManager.pausesLocationUpdatesAutomatically = false
+
     if CLLocationManager.authorizationStatus() == .notDetermined || CLLocationManager.authorizationStatus() == .denied {
       locManager.requestAlwaysAuthorization()
       locManager.startUpdatingLocation()

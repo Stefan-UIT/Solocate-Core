@@ -23,6 +23,10 @@ class RouteListVC: BaseViewController {
     @IBOutlet weak var tbvContent:UITableView?
     @IBOutlet weak var lblNoResult:UILabel?
     
+    // MARK: - Variables
+    private var timer = Timer()
+    private var backgroundTaskIdentifier = UIBackgroundTaskIdentifier()
+
     var dateStringFilter:String = Date().toString("yyyy-MM-dd")
     var dateFilter = Date()
     
@@ -44,6 +48,35 @@ class RouteListVC: BaseViewController {
         super.viewDidLoad()
         updateUI()
         fetchData()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        autoRefetchRouteList()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        invalidTimer()
+    }
+    
+    func autoRefetchRouteList() {
+        invalidTimer()
+        
+        backgroundTaskIdentifier = UIApplication.shared.beginBackgroundTask(withName: "seldat.com.directmail.routelist", expirationHandler: {
+            //
+        })
+        
+        timer = Timer.scheduledTimer(timeInterval: TimeInterval(DMSAppConfiguration.reloadRouteTimeInterval),
+                                     target: self,
+                                     selector: #selector(fetchData),
+                                     userInfo: nil,
+                                     repeats: true)
+    }
+    
+    func invalidTimer() {
+        timer.invalidate()
+        UIApplication.shared.endBackgroundTask(self.backgroundTaskIdentifier)
     }
     
     override func reachabilityChangedNotification(_ notification: NSNotification) {

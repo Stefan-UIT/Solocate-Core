@@ -17,9 +17,9 @@ class AppConfiguration: NSObject {
     
     
     // MARK: - Variables
-    
-    // Tracking
     var trackingTimeInterval:Int = 0
+    var reloadRouteTimeInterval:Int = 0
+    
     var baseUrl:String = ""
     var baseUrl_Dev:String = ""
     var baseUrl_Staging:String = ""
@@ -43,6 +43,11 @@ class AppConfiguration: NSObject {
         if let trackingTimeInterval = config.object(forKey: "TrackingTimeInterval") as? Int {
             self.trackingTimeInterval = trackingTimeInterval
         }
+        
+        if let reloadRouteTimeInterval = config.object(forKey: "ReloadRouteTimeInterval") as? Int {
+            self.reloadRouteTimeInterval = reloadRouteTimeInterval
+        }
+        
         
         if let url = config.object(forKey: RESTConstants.BASE_URL) as? String {
             self.baseUrl = url

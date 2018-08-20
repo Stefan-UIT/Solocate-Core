@@ -55,6 +55,6 @@ class MainVC: BaseViewController {
     
     func pushRouteListVC() {
         let vc:RouteListVC = .loadSB(SB: .Route)
-        rootNV?.pushViewController(vc, animated: false)
+        rootNV?.setViewControllers([vc], animated: false)
     }
 }

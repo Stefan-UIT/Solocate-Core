@@ -117,13 +117,13 @@ extension SlideMenuVC:UITableViewDelegate{
         switch menuType {
         case .PROFILE:
           let vc:ProfileVC = .loadSB(SB: .Profile)
-          App().mainVC?.rootNV?.pushViewController(vc, animated: false)
+          App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
           break
         case .ROUTES:
           App().mainVC?.pushRouteListVC()
         case .ASSIGN:
             let vc:AssignOrderVC = .loadSB(SB: .Order)
-            App().mainVC?.rootNV?.pushViewController(vc, animated: false)
+            App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
 
         case .LOGOUT:
           self.handleLogOut()
