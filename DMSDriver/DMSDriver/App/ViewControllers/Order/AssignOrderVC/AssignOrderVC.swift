@@ -244,7 +244,8 @@ extension AssignOrderVC:UITextFieldDelegate{
         let newSearchString = strSearch?.components(separatedBy: "\n").first?.lowercased()
         if !isEmpty(newSearchString) {
             dataDisplay = orderList.filter({ (item) -> Bool in
-                let isExist = item.driver_name.lowercased().contains(newSearchString!)
+                let isExist = item.driver_name.lowercased().contains(newSearchString!) ||
+                              item.orderReference.lowercased().contains(newSearchString!)
                 return isExist
             })
         }else {

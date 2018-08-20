@@ -47,7 +47,7 @@ class RouteListVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-        fetchData()
+        getDataFromServer()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -214,18 +214,27 @@ extension RouteListVC:UITableViewDelegate {
 
 
 //MARK: - API
-fileprivate extension RouteListVC{
+ extension RouteListVC{
     
-    @objc func fetchData(isFetch:Bool = true) {
+    @objc func fetchData() {
         if Caches().user?.isCoordinator ?? false ||
             Caches().user?.isAdmin ?? false {
-            getRoutesByCoordinator(isFetch: isFetch)
+            getRoutesByCoordinator(isFetch: true)
         }else {
-            getRoutes(byDate: dateStringFilter, isFetch: isFetch)
+            getRoutes(byDate: dateStringFilter, isFetch: true)
         }
     }
     
-    func getRoutes(byDate date: String? = nil, isFetch:Bool = false) {
+    func getDataFromServer()  {
+        if Caches().user?.isCoordinator ?? false ||
+            Caches().user?.isAdmin ?? false {
+            getRoutesByCoordinator(isFetch: false)
+        }else {
+            getRoutes(byDate: dateStringFilter, isFetch: false)
+        }
+    }
+    
+    fileprivate func getRoutes(byDate date: String? = nil, isFetch:Bool = false) {
         if !isFetch {
             showLoadingIndicator()
         }
@@ -246,7 +255,7 @@ fileprivate extension RouteListVC{
         }
     }
     
-    func getRoutesByCoordinator(isFetch:Bool = false) {
+    fileprivate func getRoutesByCoordinator(isFetch:Bool = false) {
         if !isFetch {
             showLoadingIndicator()
         }
@@ -285,7 +294,7 @@ extension RouteListVC:DMSNavigationServiceDelegate{
                                             
             self?.dateFilter = date
             self?.dateStringFilter = date.toString("yyyy-MM-dd")
-            self?.fetchData(isFetch: false)
+            self?.getDataFromServer()
                                     
         }
     }

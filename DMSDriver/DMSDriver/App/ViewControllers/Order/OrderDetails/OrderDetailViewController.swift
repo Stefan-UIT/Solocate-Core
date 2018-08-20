@@ -145,7 +145,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         shouldFilterOrderItemsList = _orderDetail.items.filter({$0.statusCode == "OP"}).count > 0
         
         if (Caches().user?.isAdmin ?? false ||
-            Caches().user?.isCoordinator ?? false) {
+            Caches().user?.isCoordinator ?? false) &&
+            _orderDetail.status == StatusOrder.newStatus {
             orderInforRows.append(driver)
         }
         orderInforRows.append(orderId)
@@ -244,14 +245,14 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             case .inProcessStatus:
                 if _orderDetail.isRequireImage() &&
                     _orderDetail.url?.doc == nil{
-                    self.showAlertView("Please add pictures in picture tap, before finish this order") {[weak self] (action) in
+                    self.showAlertView("Please add pictures in picture tap, before finish this order".localized) {[weak self] (action) in
                         
                         self?.didUpdateStatus?(_orderDetail, 2)
                     }
                     
                 }else if (_orderDetail.isRequireSign() &&
                           _orderDetail.url?.sig == nil) {
-                    self.showAlertView("Please add signature in signature tap, before finish this order") {[weak self] (action) in
+                    self.showAlertView("Please add signature in signature tap, before finish this order".localized) {[weak self] (action) in
                         
                         self?.didUpdateStatus?(_orderDetail, 1)
                     }

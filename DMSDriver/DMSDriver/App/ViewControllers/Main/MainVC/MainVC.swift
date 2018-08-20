@@ -57,4 +57,13 @@ class MainVC: BaseViewController {
         let vc:RouteListVC = .loadSB(SB: .Route)
         rootNV?.setViewControllers([vc], animated: false)
     }
+    
+    func refetchDataRouteList()  {
+        rootNV?.viewControllers.forEach({ (viewController) in
+            if ((viewController as? RouteListVC) != nil) {
+                (viewController as? RouteListVC)?.getDataFromServer()
+                return
+            }
+        })
+    }
 }

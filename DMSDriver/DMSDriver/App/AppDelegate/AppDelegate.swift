@@ -83,24 +83,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     print("==>Did Receive Response: \(response)")
     
     // Handle Tap
-    /*
-    if let userInfo = response.notification.request.content.userInfo as? [String: Any]
-    {
-        if let type = userInfo["type"] as? String {
-            if let _type : NotificationType = NotificationType(rawValue: type){
-                switch _type {
-                case .ALERT:
-                    handleAlert(userInfo)
-                    break
-                case .NEW_ROUTE:
-                    handleNewRoute(userInfo)
-                    break
-                }
-            }
-        }
-  
-    }
-   */
     completionHandler()
 
   }
@@ -114,6 +96,8 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     //With swizzling disabled you must let Messaging know about the message, for Analytics
     //Messaging.messaging().appDidReceiveMessage(notification.request.content.userInfo)
     
+    //Currently only push remote route
+    App().mainVC?.refetchDataRouteList()
     completionHandler([.alert,.badge,.sound])
   }
 }
