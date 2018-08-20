@@ -17,6 +17,7 @@ class RouteListCell: UITableViewCell {
     @IBOutlet weak var lblStartTime:UILabel?
     @IBOutlet weak var lblEndTime:UILabel?
     @IBOutlet weak var lblWarehouse:UILabel?
+    @IBOutlet weak var lblDriver:UILabel?
 
     @IBOutlet weak var btnStatus:UIButton?
     @IBOutlet weak var btnColor:UIButton?

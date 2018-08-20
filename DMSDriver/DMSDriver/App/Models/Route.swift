@@ -35,10 +35,12 @@ class Route: BaseModel {
   var start_time = ""
   var end_time = ""
   var driver_name = ""
-
+  var shop_name = ""
     
   var route_number = 0
   var route_name_sts = ""
+    
+    
     var colorStatus:UIColor {
         get{
             
@@ -104,12 +106,17 @@ class Route: BaseModel {
     driver_name <- map["driver_name"]
     end_time <- map["end_time"]
     endDate <- map["end"]
+    shop_name <- map["shop_name"]
         
     let tot_orders = map["tot_orders"].currentValue
     if tot_orders == nil {
         totalOrders <- map["total_order"]
     }else{
         totalOrders <- map["tot_orders"]
+    }
+        
+    if isEmpty(shop_name) { 
+        shop_name = E(warehouse?.name)
     }
   }
     

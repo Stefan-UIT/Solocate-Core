@@ -56,14 +56,14 @@ class AssignOrderVC: BaseViewController {
     
     override func updateNavigationBar() {
         self.navigationService.delegate = self
-        self.navigationService.updateNavigationBar(.Menu_Select, "Assign")
+        self.navigationService.updateNavigationBar(.Menu_Select, "Orders assignment".localized)
     }
     
     func updateUI() {
         setupTableView()
         setupTextFieldSearch()
         noOrdersLabel?.isHidden = orderList.count > 0
-        lblShowDateFilter?.text = "Today"
+        lblShowDateFilter?.text = "Today".localized
         viewFilter?.setShadowDefault()
     }
     
@@ -81,7 +81,7 @@ class AssignOrderVC: BaseViewController {
     @IBAction func onbtnClickFilterDate(btn:UIButton){
         UIAlertController.showDatePicker(style: .actionSheet,
                                          mode: .date,
-                                         title: "Select date",
+                                         title: "Select date".localized,
                                          currentDate: nil) {[weak self] (date) in
                                             self?.dateFilter = date
                                             self?.dateStringFilter = date.toString("yyyy-MM-dd")
@@ -168,14 +168,14 @@ extension AssignOrderVC:DMSNavigationServiceDelegate{
     
     func didSelectedRightButton() {
         isSelectAssign = true
-        self.navigationService.updateNavigationBar(.CancelAssign, "Select Items")
+        self.navigationService.updateNavigationBar(.CancelAssign, "Select Items".localized)
         showFilterDate(false)
    
     }
     
     func didSelectedCancelButton(_ sender: UIBarButtonItem) {
         isSelectAssign = false
-        self.navigationService.updateNavigationBar(.Menu_Select, "Assign")
+        self.navigationService.updateNavigationBar(.Menu_Select, "Assign".localized)
         showFilterDate(true)
        
     }
@@ -207,7 +207,7 @@ extension AssignOrderVC:DMSNavigationServiceDelegate{
             return item.isSelect
         }
         if arrSelect.count == 0 {
-            self.showAlertView("Please select order.")
+            self.showAlertView("Please select order.".localized)
             
         }else {
             PickerTypeListVC.showPickerTypeList(pickerType: .DriverSignlePick) {[weak self] (success, data) in
@@ -292,7 +292,7 @@ extension AssignOrderVC{
                 self?.isSelectAssign = false
                 self?.updateNavigationBar()
                 self?.showFilterDate(true)
-                self?.showAlertView("Assigned successfull.")
+                self?.showAlertView("Assigned successfull.".localized)
                 
             case .error(let error):
                 self?.showAlertView(error.getMessage())

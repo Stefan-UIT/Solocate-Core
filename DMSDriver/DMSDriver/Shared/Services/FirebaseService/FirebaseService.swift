@@ -19,6 +19,10 @@ class FirebaseService:NSObject {
                 tokenType = .sandbox
                 plistPath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")!
                 
+            case .staging:
+                tokenType = .prod
+                plistPath = Bundle.main.path(forResource: "GoogleService-Info-staging", ofType: "plist")!
+                
             case .release:
                 tokenType = .prod
                 plistPath = Bundle.main.path(forResource: "GoogleService-Info-prod", ofType: "plist")!

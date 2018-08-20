@@ -11,17 +11,19 @@ import GoogleMaps
 
 class MapsViewController: UIViewController {
   @IBOutlet weak var mapView: GMSMapView!
+    
   var route: Route? {
     didSet {
       guard mapView != nil else {return}
       drawMap()
     }
   }
+    
   override func viewDidLoad() {
     super.viewDidLoad()
     mapView.isMyLocationEnabled = true
     mapView.delegate = self
-    drawMap()
+    getRouteDetail("\(route?.id ?? 0)")
   }
   
   override func viewWillAppear(_ animated: Bool) {
@@ -131,4 +133,28 @@ class MapsViewController: UIViewController {
 
 extension MapsViewController: GMSMapViewDelegate {
   
+}
+
+//MARK: - MapsViewController
+extension MapsViewController{
+    func getRouteDetail(_ routeID:String, isFetch:Bool = false) {
+        if !isFetch {
+            self.showLoadingIndicator()
+        }
+        API().getRouteDetail(route: routeID) {[weak self] (result) in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.dismissLoadingIndicator()
+            
+            switch result{
+            case .object(let obj):
+                strongSelf.route = obj
+                
+            case .error(let error):
+                strongSelf.showAlertView(error.getMessage())
+                
+            }
+        }
+    }
 }

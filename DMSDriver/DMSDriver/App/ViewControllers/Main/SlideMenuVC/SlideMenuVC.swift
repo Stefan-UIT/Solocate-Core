@@ -70,11 +70,14 @@ extension SlideMenuVC: UITableViewDataSource{
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    if Caches().user?.isCoordinator ?? false ||
-        Caches().user?.isAdmin ?? false {
-        return UITableViewAutomaticDimension
+    if let menutype:MenuItemType = MenuItemType(rawValue: indexPath.row) {
+        if !(Caches().user?.isCoordinator ?? false) &&
+            !(Caches().user?.isAdmin ?? false) &&
+            menutype ==  MenuItemType.ASSIGN{
+            return 0 // row assign only for Coordinator,admin
+        }
     }
-    return 0 // row assign only for Coordinator,admin
+    return UITableViewAutomaticDimension
   }
   
   func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -141,7 +144,7 @@ private extension SlideMenuVC{
     API().logout { (result) in
       switch result{
       case .object(_):
-        break
+        Caches().user = nil
       case .error(let error):
         self.showAlertView(error.getMessage())
       }

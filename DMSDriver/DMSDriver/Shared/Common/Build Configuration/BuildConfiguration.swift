@@ -6,6 +6,7 @@ enum BuildScheme: String {
     case debug = "debug"
     case adhoc = "adhoc"
     case release = "release"
+    case staging = "staging"
     
     init?(rawString: String) {
         self.init(rawValue: rawString.lowercased())
@@ -16,6 +17,7 @@ enum ServerEnvironment: String {
     case development = "development"
     case testing = "testing"
     case production = "production"
+    case staging = "staging"
     
     init?(rawString: String) {
         self.init(rawValue: rawString.lowercased())

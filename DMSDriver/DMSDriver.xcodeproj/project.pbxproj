@@ -15,6 +15,7 @@
 		3B13CBF2211A8FF400A93E18 /* ScrollMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B13CBEE211A8FF400A93E18 /* ScrollMenuView.xib */; };
 		3B2A23A321193C330000817C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B2A23A221193C320000817C /* GoogleService-Info.plist */; };
 		3B2A23A721195BA50000817C /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B2A23A621195BA50000817C /* GoogleService-Info-prod.plist */; };
+		3B57EDCB2126B4FB006DD64A /* GoogleService-Info-staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B57EDCA2126B4FB006DD64A /* GoogleService-Info-staging.plist */; };
 		3B6425DA2122BFD4001F5F14 /* OrderListClvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6425D92122BFD4001F5F14 /* OrderListClvCell.swift */; };
 		3B66B759210B1051000BDFEF /* DMSDriver.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B757210B1051000BDFEF /* DMSDriver.xcdatamodeld */; };
 		3B66B801210B113D000BDFEF /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B767210B113C000BDFEF /* LocationTracker.swift */; };
@@ -219,6 +220,8 @@
 		3B13CBEE211A8FF400A93E18 /* ScrollMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollMenuView.xib; sourceTree = "<group>"; };
 		3B2A23A221193C320000817C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B2A23A621195BA50000817C /* GoogleService-Info-prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-prod.plist"; sourceTree = "<group>"; };
+		3B57EDBE21266E5D006DD64A /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
+		3B57EDCA2126B4FB006DD64A /* GoogleService-Info-staging.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-staging.plist"; sourceTree = "<group>"; };
 		3B6425D92122BFD4001F5F14 /* OrderListClvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListClvCell.swift; sourceTree = "<group>"; };
 		3B66B74D210B1051000BDFEF /* DMSDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMSDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B66B758210B1051000BDFEF /* DMSDriver.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DMSDriver.xcdatamodel; sourceTree = "<group>"; };
@@ -580,6 +583,7 @@
 		A02E53A1DFA611D4E6D34FF1 /* Pods_DMSDriver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DMSDriver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CE4028787D23A4B46FAF55CE /* Pods-DMSDriver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.release.xcconfig"; sourceTree = "<group>"; };
 		D04AB4AFE9044A5214F46376 /* Pods-DMSDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.debug.xcconfig"; sourceTree = "<group>"; };
+		FF0A9549B7E1BA139DDBDF08 /* Pods-DMSDriver.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.staging.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.staging.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -608,6 +612,7 @@
 			children = (
 				D04AB4AFE9044A5214F46376 /* Pods-DMSDriver.debug.xcconfig */,
 				CE4028787D23A4B46FAF55CE /* Pods-DMSDriver.release.xcconfig */,
+				FF0A9549B7E1BA139DDBDF08 /* Pods-DMSDriver.staging.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -1044,6 +1049,7 @@
 				3B66B7DA210B113C000BDFEF /* Debug.xcconfig */,
 				3B66B7DB210B113C000BDFEF /* Release.xcconfig */,
 				3B66B7DC210B113C000BDFEF /* Base.xcconfig */,
+				3B57EDBE21266E5D006DD64A /* Staging.xcconfig */,
 			);
 			path = Configurations;
 			sourceTree = "<group>";
@@ -1074,6 +1080,7 @@
 		3B66B7E3210B113C000BDFEF /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				3B57EDCA2126B4FB006DD64A /* GoogleService-Info-staging.plist */,
 				3B2A23A621195BA50000817C /* GoogleService-Info-prod.plist */,
 				3B2A23A221193C320000817C /* GoogleService-Info.plist */,
 				3B66B7E5210B113C000BDFEF /* MainConfigs.plist */,
@@ -1900,6 +1907,7 @@
 				3B66B927210B1149000BDFEF /* LeftMenuView.xib in Resources */,
 				3B66B901210B1149000BDFEF /* ItemsSectionView.xib in Resources */,
 				3B66B92C210B1149000BDFEF /* AlertMessageView.xib in Resources */,
+				3B57EDCB2126B4FB006DD64A /* GoogleService-Info-staging.plist in Resources */,
 				3B66B852210B113D000BDFEF /* AppStore.xcconfig in Resources */,
 				3B66B851210B113D000BDFEF /* Adhoc.xcconfig in Resources */,
 				3B66B924210B1149000BDFEF /* ChangeInviromentTableViewCell.xib in Resources */,
@@ -2227,6 +2235,89 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		3B57EDBC21266E25006DD64A /* Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3B57EDBE21266E5D006DD64A /* Staging.xcconfig */;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Staging;
+		};
+		3B57EDBD21266E25006DD64A /* Staging */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF0A9549B7E1BA139DDBDF08 /* Pods-DMSDriver.staging.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = "";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
+				);
+				INFOPLIST_FILE = "$(SRCROOT)/DMSDriver/Supporting Files/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"$(CONFIGURATION_BUILD_DIR)",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.directmail.debug;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Staging;
+		};
 		3B66B760210B1052000BDFEF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 3B66B7DA210B113C000BDFEF /* Debug.xcconfig */;
@@ -2350,7 +2441,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2364,8 +2455,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.directmail.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "457eb844-07d8-44e6-8455-b653d91e1791";
+				PROVISIONING_PROFILE_SPECIFIER = "dev-directmail.debug";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2378,7 +2469,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -2392,8 +2483,8 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.directmail.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "";
+				PROVISIONING_PROFILE = "457eb844-07d8-44e6-8455-b653d91e1791";
+				PROVISIONING_PROFILE_SPECIFIER = "dev-directmail.debug";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -2407,6 +2498,7 @@
 			buildConfigurations = (
 				3B66B760210B1052000BDFEF /* Debug */,
 				3B66B761210B1052000BDFEF /* Release */,
+				3B57EDBC21266E25006DD64A /* Staging */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -2416,6 +2508,7 @@
 			buildConfigurations = (
 				3B66B763210B1052000BDFEF /* Debug */,
 				3B66B764210B1052000BDFEF /* Release */,
+				3B57EDBD21266E25006DD64A /* Staging */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

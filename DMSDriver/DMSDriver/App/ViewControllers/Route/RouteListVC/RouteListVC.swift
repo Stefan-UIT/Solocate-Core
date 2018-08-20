@@ -158,9 +158,10 @@ extension RouteListVC: UITableViewDataSource{
         cell.btnColor?.backgroundColor = route.colorStatus
         cell.lblRouteNumber?.text = "\(route.route_number)";
         cell.lblTotal?.text = "\(route.totalOrders)"
-        cell.lblWarehouse?.text = route.warehouse?.name
+        cell.lblWarehouse?.text = route.shop_name
         cell.lblStartTime?.text = route.startDate
         cell.lblEndTime?.text = route.endDate
+        cell.lblDriver?.text = route.driver_name
         cell.selectionStyle = .none
         return cell
     }

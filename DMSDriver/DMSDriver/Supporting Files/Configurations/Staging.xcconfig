@@ -1,0 +1,13 @@
+//
+//  Staging.xcconfig
+//  DMSDriver
+//
+//  Created by machnguyen_uit on 8/17/18.
+//  Copyright © 2018 machnguyen_uit. All rights reserved.
+//
+
+#include "Base.xcconfig"
+
+// User-Defined
+BUILD_SCHEME = Staging
+SERVER = staging

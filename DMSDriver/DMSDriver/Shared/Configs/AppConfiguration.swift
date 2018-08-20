@@ -22,11 +22,11 @@ class AppConfiguration: NSObject {
     var trackingTimeInterval:Int = 0
     var baseUrl:String = ""
     var baseUrl_Dev:String = ""
+    var baseUrl_Staging:String = ""
     var baseUrl_Product:String = ""
     var baseUrl_Google_Map:String = ""
     
     var pathUrls:[String: String] = [:]
-
 
     
     // MARK: - Utility Methods
@@ -46,6 +46,10 @@ class AppConfiguration: NSObject {
         
         if let url = config.object(forKey: RESTConstants.BASE_URL) as? String {
             self.baseUrl = url
+        }
+        
+        if let url = config.object(forKey: RESTConstants.BASE_URL_STAGING) as? String {
+            self.baseUrl_Staging = url
         }
         
         if let url = config.object(forKey: RESTConstants.BASE_URL_DEV) as? String {
