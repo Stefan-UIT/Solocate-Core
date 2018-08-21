@@ -83,10 +83,10 @@ class AssignOrderVC: BaseViewController {
                                          mode: .date,
                                          title: "Select date".localized,
                                          currentDate: nil) {[weak self] (date) in
-                                            self?.dateFilter = date
-                                            self?.dateStringFilter = date.toString("yyyy-MM-dd")
-                                            self?.lblShowDateFilter?.text = self?.dateStringFilter
-                                            self?.getListOrderAssign()
+            self?.dateFilter = date
+            self?.dateStringFilter = date.toString("yyyy-MM-dd")
+            self?.lblShowDateFilter?.text = self?.dateStringFilter
+            self?.getListOrderAssign()
                                             
         }
     }
@@ -103,7 +103,6 @@ extension AssignOrderVC {
         dateFormater.dateFormat = format
         
         return dateFormater.string(from: date)
-        
     }
 }
 
@@ -115,11 +114,13 @@ extension AssignOrderVC: UITableViewDelegate, UITableViewDataSource {
     }
     
     
-    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView,
+                   estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView,
+                   cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? AssignOrderCell {
             
             let order = dataDisplay[indexPath.row]
@@ -131,11 +132,13 @@ extension AssignOrderVC: UITableViewDelegate, UITableViewDataSource {
         return UITableViewCell()
     }
     
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(_ tableView: UITableView,
+                   heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+    func tableView(_ tableView: UITableView,
+                   didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let row = indexPath.row
         if isSelectAssign {
@@ -160,9 +163,11 @@ extension AssignOrderVC: UITableViewDelegate, UITableViewDataSource {
 extension AssignOrderVC:DMSNavigationServiceDelegate{
     func didSelectedBackOrMenu() {
         if Constants.isLeftToRight {
-            present(SideMenuManager.default.menuLeftNavigationController!, animated: true,completion: nil)
+            present(SideMenuManager.default.menuLeftNavigationController!,
+                    animated: true,completion: nil)
         }else{
-            present(SideMenuManager.default.menuRightNavigationController!, animated: true,completion: nil)
+            present(SideMenuManager.default.menuRightNavigationController!,
+                    animated: true,completion: nil)
         }
     }
     

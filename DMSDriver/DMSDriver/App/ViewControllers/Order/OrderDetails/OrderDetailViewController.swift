@@ -550,21 +550,24 @@ fileprivate extension OrderDetailViewController{
         btnUnable.backgroundColor = AppColor.grayColor
         btnUnable.borderWidth = 1;
         btnUnable.borderColor = AppColor.grayBorderColor
-        updateStatusButton.isHidden = false
-        btnUnable.isHidden = false
+        updateStatusButton.isHidden = true
+        btnUnable.isHidden = true
 
-        switch orderDetail?.statusCode {
-        case "OP":
-            updateStatusButton.setTitle("Start".localized, for: .normal)
-            btnUnable.setTitle("Unable To Start".localized, for: .normal)
-
-        case "IP":
-            updateStatusButton.setTitle("Finish".localized, for: .normal)
-            btnUnable.setTitle("Unable To Finish".localized, for: .normal)
-
-        default:
-            updateStatusButton.isHidden = true
-            btnUnable.isHidden = true
+        if orderDetail?.driver_id == Caches().user?.userID {
+            updateStatusButton.isHidden = false
+            btnUnable.isHidden = false
+            switch orderDetail?.statusCode {
+            case "OP":
+                updateStatusButton.setTitle("Start".localized, for: .normal)
+                btnUnable.setTitle("Unable To Start".localized, for: .normal)
+                
+            case "IP":
+                updateStatusButton.setTitle("Finish".localized, for: .normal)
+                btnUnable.setTitle("Unable To Finish".localized, for: .normal)
+                
+            default:
+                break
+            }
         }
     }
 }
@@ -580,7 +583,9 @@ extension OrderDetailViewController{
             case .object(_):
                 self?.updateOrderDetail?()
                 self?.showAlertView("Assigned successfull.".localized, completionHandler: { (ok) in
-                    App().mainVC?.pushRouteListVC()
+                    let vc:RouteListVC = .loadSB(SB: .Route)
+                    vc.dateStringFilter = E(self?.dateStringFilter)
+                    App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
                 })
                 
             case .error(let error):

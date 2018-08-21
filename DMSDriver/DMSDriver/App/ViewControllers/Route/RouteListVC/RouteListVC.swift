@@ -286,11 +286,14 @@ extension RouteListVC:DMSNavigationServiceDelegate{
     }
     
     func didSelectedRightButton() {
-        
+        let dateFormater =  DateFormatter()
+        dateFormater.dateFormat = "yyyy-MM-dd"
+
+        let currentDate = dateFormater.date(from: dateStringFilter)
         UIAlertController.showDatePicker(style: .actionSheet,
                                          mode: .date,
                                          title: "Select date",
-                                         currentDate: dateFilter) {[weak self] (date) in
+                                         currentDate: currentDate) {[weak self] (date) in
                                             
             self?.dateFilter = date
             self?.dateStringFilter = date.toString("yyyy-MM-dd")
