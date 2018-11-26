@@ -9,10 +9,20 @@
 import UIKit
 import ObjectMapper
 
-class CoordinatorRouteModel: BaseModel {
+class CoordinatorRoute: BaseModel {
     
+    var id = -1
+    var date:String?
     var coordinator:[Route]?
     var drivers:[Route]?
+
+    
+    
+    override init() {
+        super.init()
+        coordinator = []
+        drivers = []
+    }
     
     required init?(map: Map) {
         super.init()
@@ -22,4 +32,5 @@ class CoordinatorRouteModel: BaseModel {
         coordinator <- map["coordinator"]
         drivers <- map["drivers"]
     }
+    
 }

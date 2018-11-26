@@ -14,17 +14,20 @@ class OrderListClvCell: UICollectionViewCell {
     @IBOutlet weak var noOrdersLabel: UILabel?
     
     fileprivate let cellIdentifier = "OrderItemTableViewCell"
+    fileprivate let cellReducedIdentifier = "OrderItemCollapseTableViewCell"
+
     fileprivate let cellHeight: CGFloat = 150.0
     
     fileprivate var orderList:[Order] = []
     
-    var tapDisplay:TapFilterOrderList = .All {
+    var filterOrderList:TapFilterOrderList = .All {
         didSet{
-            filterDataWithTapDisplay()
+            self.filterDataWithTapDisplay()
         }
     }
-    var dateStringFilter = ""
     
+    var displayMode:DisplayMode = DisplayMode.Reduced
+    var dateStringFilter = ""
     var route: Route?
     var rootVC: BaseViewController?
 
@@ -36,7 +39,7 @@ class OrderListClvCell: UICollectionViewCell {
     
     func updateUI() {
         setupTableView()
-        if let orderList = self.route?.orderList {
+        if let orderList = self.route?.getOrderList() {
             noOrdersLabel?.isHidden = orderList.count > 0
         }
     }
@@ -73,7 +76,8 @@ extension OrderListClvCell: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderItemTableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: displayMode == .Reduced ? cellReducedIdentifier : cellIdentifier,
+                                                    for: indexPath) as? OrderItemTableViewCell {
             
             let order = orderList[indexPath.row]
             order.storeName = E(route?.warehouse?.name)
@@ -83,27 +87,7 @@ extension OrderListClvCell: UITableViewDelegate, UITableViewDataSource {
         }
         return UITableViewCell()
     }
-    
-    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
-    }
-    
-    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath) -> UITableViewCellEditingStyle {
-        return .none
-    }
-    
-    func tableView(_ tableView: UITableView, shouldIndentWhileEditingRowAt indexPath: IndexPath) -> Bool {
-        return false
-    }
-    
-    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
-        guard route != nil else { return }
-        let movedOrder = route?.orderList[sourceIndexPath.row]
-        route?.orderList.remove(at: sourceIndexPath.row)
-        route?.orderList.insert(movedOrder!, at: destinationIndexPath.row)
-        tableView.reloadData()
-    }
-    
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return UITableViewAutomaticDimension
     }
@@ -117,19 +101,19 @@ extension OrderListClvCell: UITableViewDelegate, UITableViewDataSource {
             self?.updateStatusOrder(order)
         }
         
-        if let order = route?.orderList[indexPath.row] {
-            vc.order = order
-            vc.routeID = route?.id
-            vc.dateStringFilter = dateStringFilter
-        }
+        let order = orderList[indexPath.row]
+        vc.order = order
+        vc.routeID = route?.id
+        vc.dateStringFilter = dateStringFilter
+
         self.rootVC?.navigationController?.pushViewController(vc, animated: true)
     }
     
     func updateStatusOrder(_ order:OrderDetail) {
-        if (route?.orderList.contains{$0.id == order.id}) ?? false {
-            if let _index = route?.orderList.index(where: {$0.id == order.id}){
-                route?.orderList[_index].statusCode = order.statusCode
-                route?.orderList[_index].statusName = order.statusName
+        if (orderList.contains{$0.id == order.id}) {
+            if let _index = orderList.index(where: {$0.id == order.id}){
+                orderList[_index].statusCode = order.statusCode
+                orderList[_index].statusName = order.statusName
             }
         }
         
@@ -137,18 +121,21 @@ extension OrderListClvCell: UITableViewDelegate, UITableViewDataSource {
     }
     
     func filterDataWithTapDisplay() {
-        switch tapDisplay {
+        switch filterOrderList {
         case .All:
-            orderList = route?.orderList ?? []
-        case .Assigned:
-            orderList = route?.orderList.filter({ (order) -> Bool in
-                return order.driver_id != Caches().user?.userID
-            }) ?? []
-
-        case .Mine:
-            orderList = route?.orderList.filter({ (order) -> Bool in
-                return order.driver_id == Caches().user?.userID
-            }) ?? []
+            orderList = route?.getOrderList() ?? []
+        case .New:
+            orderList = route?.orders(.newStatus) ?? []
+        case .InProgess:
+            orderList = route?.orders(.inProcessStatus) ?? []
+        case .Finished:
+            orderList = route?.orders(.deliveryStatus) ?? []
+        case .Cancelled:
+            orderList = route?.orders(.cancelStatus) ?? []
+        }
+        
+        orderList.sort { (ord1, ord2) -> Bool in
+            return ord1.seq < ord2.seq
         }
         noOrdersLabel?.isHidden = orderList.count > 0
         self.tableView.reloadData()
@@ -177,6 +164,9 @@ extension OrderListClvCell{
             case .object(let obj):
                 self?.route = obj
                 self?.filterDataWithTapDisplay()
+                
+                // Update route to DB local
+                CoreDataManager.updateRoute(obj)
             case .error(let error):
                 self?.rootVC?.showAlertView(error.getMessage())
                 

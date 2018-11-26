@@ -10,15 +10,15 @@ import UIKit
 
 class SlideMenuCell: UITableViewCell {
   
-  @IBOutlet weak var imvIcon:UIImageView?
-  @IBOutlet weak var lblTitle:UILabel?
-  @IBOutlet weak var lblSubtitle:UILabel?
+    @IBOutlet weak var imvIcon:UIImageView?
+    @IBOutlet weak var lblTitle:UILabel?
+    @IBOutlet weak var lblSubtitle:UILabel?
   
-  var menuType:MenuItemType!{
-    didSet{
-      updateUI()
+    var menuType:MenuItemType!{
+        didSet{
+            updateUI()
+        }
     }
-  }
 
 
     override func awakeFromNib() {
@@ -32,13 +32,13 @@ class SlideMenuCell: UITableViewCell {
         // Configure the view for the selected state
     }
   
-  func updateUI() {
-    imvIcon?.image = menuType.normalIcon()
-    lblTitle?.text = menuType.title()
-    
-    if menuType == .PROFILE{
-      lblTitle?.text = Cache.shared.user?.userName
-      lblSubtitle?.text = Cache.shared.userLogin?.email
+    func updateUI() {
+        imvIcon?.image = menuType.normalIcon()
+        lblTitle?.text = menuType.title()
+        
+        if menuType == .PROFILE{
+          lblTitle?.text = Cache.shared.user?.userInfo?.userName
+          lblSubtitle?.text = Cache.shared.userLogin?.email
+        }
     }
-  }
 }

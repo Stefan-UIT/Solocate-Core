@@ -16,7 +16,7 @@ class RequestAssignOrderModel: BaseModel {
     var date:String?
     
     override init() {
-        //
+        super.init()
     }
     
     required init?(map: Map) {

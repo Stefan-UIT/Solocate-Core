@@ -1,6 +1,8 @@
 # Uncomment the next line to define a global platform for your project
- platform :ios, '9.0'
- use_frameworks!
+
+platform :ios, '9.0'
+use_frameworks!
+
 target 'DMSDriver' do
 
   # Pods for DMSDriver
@@ -15,14 +17,9 @@ target 'DMSDriver' do
  	pod 'SDWebImage'
   	pod 'Firebase/Core'
  	pod 'Firebase/Messaging'
-    pod 'SideMenu'
+    pod 'SideMenu', '~> 4.0.0'
+    pod 'ReachabilitySwift', '~> 3'
+    pod 'Socket.IO-Client-Swift', '~> 13.3.0'
 
 end
 
-# Workaround for Cocoapods issue #7606
-post_install do |installer|
-    installer.pods_project.build_configurations.each do |config|
-        config.build_settings.delete('CODE_SIGNING_ALLOWED')
-        config.build_settings.delete('CODE_SIGNING_REQUIRED')
-    end
-end

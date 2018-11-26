@@ -12,8 +12,10 @@ import ObjectMapper
 class PackageModel: BaseModel {
     
     struct TruckPackage: Mappable {
-        var totalCase: Int = 0
-        var totalPallet: Int = 0
+        var totalDoubleType: Int = 0
+        var totalPackages: Int = 0
+        var totalCartons:Int = 0
+        
         
         init() {
             //
@@ -24,18 +26,25 @@ class PackageModel: BaseModel {
         }
         
         mutating func mapping(map: Map) {
-            totalCase <-  map["totalCase"];
-            totalPallet <-  map["totalPallet"];
+            totalDoubleType <-  map["totalDoubleType"];
+            totalPackages <-  map["totalPackages"];
+            totalCartons <- map["totalCartons"];
         }
     }
     
     struct PackageDetail: Mappable {
-        var total_case: Int = 0
-        var total_pallet: Int = 0
-        var case_complete: Int = 0
-        var pallet_complete: Int = 0
+        var total_double_type: Int = 0
+        var total_cartons: Int = 0
+        var total_packages: Int = 0
+        var double_type_complete: Int = 0
+        var packages_complete: Int = 0
+        var cartons_complete :Int = 0
+        var double_type_not_complete:Int = 0
+        var cartons_not_complete:Int = 0
+        var packages_not_complete:Int = 0
         var case_not_complete: Int = 0
         var pallet_not_complete: Int = 0
+        
         init() {
             //
         }
@@ -45,23 +54,29 @@ class PackageModel: BaseModel {
         }
         
         mutating func mapping(map: Map) {
-            total_case <-  map["total_case"];
-            total_pallet <-  map["total_pallet"];
-            case_complete <-  map["case_complete"];
-            pallet_complete <-  map["pallet_complete"];
-            case_not_complete <-  map["case_not_complete"];
-            pallet_not_complete <-  map["pallet_not_complete"];
+            total_double_type <-  map["total_double_type"];
+            total_cartons <-  map["total_cartons"];
+            total_packages <-  map["total_packages"];
+            double_type_complete <-  map["double_type_complete"];
+            packages_complete <-  map["packages_complete"];
+            cartons_complete <-  map["cartons_complete"];
+            double_type_not_complete <- map["double_type_not_complete"]
+            cartons_not_complete <- map["cartons_not_complete"]
+            packages_not_complete <- map["packages_not_complete"]
+            case_not_complete <- map["case_not_complete"]
+            pallet_not_complete <- map["pallet_not_complete"]
         }
     }
+   
     
     var delivery: PackageDetail = PackageDetail()
     var back_haul: PackageDetail = PackageDetail()
     var package_on_truck: TruckPackage = TruckPackage()
     
+
     override init() {
-        //
+        super.init()
     }
-    
     required init?(map: Map) {
         super.init()
     }

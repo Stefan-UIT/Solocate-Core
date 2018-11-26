@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>LOGIN</key>
-	<string>/auth/v1/login</string>
+	<string>api/auth/v1/login</string>
 	<key>FORGET_PASSWORD</key>
 	<string>/auth/v1/user/forgot-password</string>
 	<key>LOGOUT</key>
@@ -13,7 +13,7 @@
 	<key>GET_ORDER_BY_DATE</key>
 	<string>/backend-api/v1/routes/get-routes-by-date</string>
 	<key>GET_ROUTES_BY_DATE</key>
-	<string>/backend-api/v1/routes/get-routes-by-date</string>
+	<string>transaction/v1/routes/by-driver/%@?date=%@</string>
 	<key>GET_PACKAGES_IN_ROUTE</key>
 	<string>/backend-api/v1/routes/get-packages-by-driver?id=%@&amp;date=%@</string>
 	<key>GET_ORDER_DETAIL</key>
@@ -45,7 +45,7 @@
 	<key>GET_LIST_NOTIFICATIONS</key>
 	<string>/backend-api/v1/messages/list-message?page=1&amp;limit=100&amp;route_id=%@</string>
 	<key>GET_ROUTE_DETAIL</key>
-	<string>/backend-api/v1/routes/%@</string>
+	<string>transaction/v1/routes/%@</string>
 	<key>READ_MESSAGE</key>
 	<string>/backend-api/v1/messages/%@</string>
 	<key>CHECK_TOKEN</key>
@@ -74,5 +74,11 @@
 	<string>/backend-api/v1/routes/all-route-by-coordinator?date=%@</string>
 	<key>ASSIGN_ORDER</key>
 	<string>/backend-api/v1/orders/assign-order</string>
+	<key>GET_LIST_TASKS</key>
+	<string>/backend-api/v1/tasks/driver-task?from_delivery_date=%@&amp;to_delivery_date=%@</string>
+	<key>GET_TASK_DETAIL</key>
+	<string>/backend-api/v1/tasks/%@</string>
+	<key>UPDATE_STATUS_TASK</key>
+	<string>/backend-api/v1/tasks/%@/%@</string>
 </dict>
 </plist>

@@ -48,7 +48,6 @@ class ProfileVC: BaseViewController {
   
     private var textFieldEdit:UITextField?
     private var changePasswordView : ChangePasswordView!
-
   
 
     override func viewDidLoad() {
@@ -64,11 +63,11 @@ class ProfileVC: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
   
-  override func updateNavigationBar() {
-    super.updateNavigationBar()
-    self.navigationService.delegate = self
-    self.navigationService.updateNavigationBar(.Menu, "Profile".localized)
-  }
+    override func updateNavigationBar() {
+        super.updateNavigationBar()
+        App().navigationService.delegate = self
+        App().navigationService.updateNavigationBar(.Menu, "Profile".localized)
+    }
   
     func setupTableView() {
       tbvContent?.delegate = self
@@ -76,11 +75,11 @@ class ProfileVC: BaseViewController {
     }
   
     func initData() {
-      publicInforDatas = [["First Name".localized,E(user?.firstName)],
-                          ["Last Name".localized,E(user?.lastName)]]
+      publicInforDatas = [["First Name".localized,E(user?.userInfo?.firstName)],
+                          ["Last Name".localized,E(user?.userInfo?.lastName)]]
     
-      privateInforDatas = [["Phone".localized,E(user?.phone)],
-                           ["Email".localized,E(user?.email)],
+      privateInforDatas = [["Phone".localized,E(user?.userInfo?.phone)],
+                           ["Email".localized,E(user?.userInfo?.email)],
                            ["Password".localized,"Change Password".localized]]
     }
     
@@ -306,13 +305,13 @@ extension ProfileVC:UITextFieldDelegate{
   func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
     let tag = textField.tag;
     if tag == 0 {
-      user?.firstName = textField.text;
+      user?.userInfo?.firstName = textField.text;
     }else if tag == 1 {
-      user?.lastName = textField.text;
+      user?.userInfo?.lastName = textField.text;
     }else if tag ==  publicInforDatas.count {
-      user?.phone = textField.text
+      user?.userInfo?.phone = textField.text
     }else if (tag == publicInforDatas.count + 1){
-      user?.email = textField.text
+      user?.userInfo?.email = textField.text
     }
   }
 }
@@ -333,20 +332,26 @@ extension ProfileVC:DMSNavigationServiceDelegate{
 //MARK: - API
 extension ProfileVC{
   func getUserProfile() {
-    self.showLoadingIndicator()
-    API().getUserProfile {[weak self] (result) in
-      guard let strongSelf = self else{return}
-      strongSelf.dismissLoadingIndicator()
-      switch result{
-      case .object(let obj):
-        strongSelf.user = obj.data;
-        strongSelf.initData()
-        strongSelf.tbvContent?.reloadData()
-        break
-      case .error(let error):
-        strongSelf.showAlertView(error.getMessage())
-        break
-      }
+    if ReachabilityManager.isNetworkAvailable {
+        self.showLoadingIndicator()
+        API().getUserProfile {[weak self] (result) in
+            guard let strongSelf = self else{return}
+            strongSelf.dismissLoadingIndicator()
+            switch result{
+            case .object(let obj):
+                strongSelf.user = obj.data;
+                strongSelf.initData()
+                strongSelf.tbvContent?.reloadData()
+                break
+            case .error(let error):
+                strongSelf.showAlertView(error.getMessage())
+                break
+            }
+        }
+    }else {
+        user = Caches().user
+        initData()
+        tbvContent?.reloadData()
     }
   }
   

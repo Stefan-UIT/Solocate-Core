@@ -34,6 +34,10 @@
 "Pull to refresh"="Pull to refresh";
 "Uploaded Successful"="Uploaded Successful";
 "No data"="No data";
+"Session expired."="Session expired.";
+"Retry"="Retry";
+"You are in offline,some funtion may be restricted."="You are in offline,some funtion may be restricted.";
+
 
 //LOGIN_SCREEN
 "login_title"="LOGIN";
@@ -94,7 +98,8 @@
 "Assigned"="Assigned";//new
 "Mine"="Mine";//new
 "Driver"="Driver";
-
+"Pick driver"="Pick driver";
+"Filter orders by"="Filter orders by";
 
 //ODER_DETAIL
 "Order Detail"="Order Detail";
@@ -178,16 +183,27 @@
 "Werehouse"="Werehouse";
 "Third courier"= "Third courier";
 "Coordination phone"="Coordination phone";
+"Finish order"="Finish order";
+"Enter note for this order(optional)"="Enter note for this order(optional)";
+"Apartment"="Apartment";
+"Entrance"="Entrance";
+"Floor"="Floor";
+
 
 
 //ORDER_ASSIGNMENT
-"Orders assignment"="Orders assignment";//new
-"Today"="Today";//new
-"Select date"="Select date";//new
+"Orders assignment"="Orders assignment";
+"Today"="Today";
+"Select date"="Select date";
 "Select Items"="Select Items";
-"Assign"="Assign";//new
-"Please select order."="Please select order.";//new
+"Assign"="Assign";
+"Please select order."="Please select order.";
 "Assigned successfull."="Assigned successfull.";
+"Driver" = "Driver";
+"Drivers"="Drivers";
+"Coordinator"="Coordinator";
+"Assign to me"="Assign to me";
+
 
 
 
@@ -223,3 +239,27 @@
 "Total pallets"="Total pallets";
 "Pallet complete"="Pallet complete";
 "Pallet not complete"="Pallet not complete";
+"Pick Up" = "Pick Up";
+
+
+"Total double type"="Total double type";
+"Total cartons"="Total cartons";
+"Total packages"="Total packages";
+"Double type complete"="Double type complete";
+"Packages complete"="Packages complete";
+"Cartons complete"="Cartons complete";
+"Double type not complete"="Double type not complete";
+"Cartons not complete"="Cartons not complete";
+"Packages not complete"="Packages not complete";
+
+//TASK
+"Tasks List"="Tasks List";
+"Task Detail"="Task Detail";
+"No Tasks"="No Tasks";
+"Task Id"="Task Id";
+"TASK"="TASK";
+"Are you sure you want to finish this task?"="Are you sure you want to finish this task?";
+"Are you sure you want to cancel this task?"="Are you sure you want to cancel this task?";
+"Finish task successfully"="Finish task successfully";
+"Task Status"="Task Status";
+"Task Information"="Task Information";

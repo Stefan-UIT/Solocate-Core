@@ -8,14 +8,14 @@
 
 //COMMON
 "cancel"="ביטול";
-"ok"="סיום";
+"ok"="אישור";
 "save"="להציל";
 "edit"="עריכה";
 "back"="חזור";
 "submit"="שלח";
 "reject"="לִדחוֹת";
 "send"="לִשְׁלוֹחַ";
-"Finish"="סִיוּם";
+"Finish"="סיום";
 "Start"="התחלה";
 "unknown"="לא ידוע";
 "clear"="נקה";
@@ -28,12 +28,15 @@
 "Packages"="חבילות";
 "Map"="מפה";
 "Messages"="הודעות";
-"Message"="Message";//new
+"Message"="הודעה";
 "Uploaded Successful"="החתימה הושלמה";
 "done"="אישור";
 "Pull to refresh"="לחץ כדי לרענן";
-"No data"="No data";//new
-
+"No data"="אין מידע";
+"minutes"="דקות";
+"Session expired."="פג תוקף הפעילות באתר.";
+"Retry"="נסה שוב";
+"You are in offline,some funtion may be restricted."="החיבור לאינטרנט מנותק. חלק מהאפשרויות מוגבלות כרגע.";
 //LOGIN_SCREEN
 "login_title"="התחברות";
 "login_username_hint"="שם משתמש";
@@ -76,7 +79,7 @@
 "No order" = "שום סדר";
 "New"="חדש";
 "In Progress"="בתהליך";
-"Finished"="חדש";
+"Finished"="מוגמר";
 "Picked Up" = "Picked Up";
 "Missing in Trunk" = "Missing in Trunk";
 "Missing at Pick-up" = "Missing at Pick-up";
@@ -92,11 +95,12 @@
 "Store"="חנות";
 "Warehouse"="מחסן";
 "Expected time"="Expected time";//New
-"All"="All";//new
-"Assigned"="Assigned";//new
-"Mine"="Mine";//new
+"All"="הכל";
+"Assigned"="נהגים אחרים";
+"Mine"="שלי";
 "Driver"="נהג";
-
+"Pick driver"="שיוך ל-";
+"Filter orders by"="סינון הזמנות לפי";
 
 //ODER_DETAIL
 "Order Detail"="פרטי הזמנה";
@@ -153,7 +157,8 @@
 "Type"="סוג משלוח";
 "Urgency"="דחוף";
 "Double type"="סוג כפולה";
-"Packages number"="מספר חבילות";
+
+"Packages number"="מספר משלוח";
 "Cartons number"="מספר קרטונים";
 "Surfaces number"="מספר משטחים";
 "Afternoon"="אחה''צ";
@@ -182,16 +187,28 @@
 "Instructions"= "הוראות";
 "Third courier"= "שליח שלישי";
 "Coordination phone"="ת. טלפוני";
-
+"Receiver phone"="טלפון מקבל";
+"Finish order"="סיום הזמנה";
+"Enter note for this order(optional)"="הכנסת הודעה להזמנה זו (אופציונלי)";
+"Apartment"="דירה";
+"Entrance"="כניסה";
+"Floor"="קומה";
 
 //ORDER_ASSIGNMENT
-"Orders assignment"="Orders assignment";//new
-"Today"="Today";//new
-"Select date"="Select date";//new
-"Select Items"="Select Items";
-"Assign"="Assign";//new
-"Please select order."="Please select order.";//new
-"Assigned successfull."="Assigned successfull.";//new
+"Orders assignment"="שיוך משימות";
+"Today"="היום";
+"Select date"="בחר תאריך";
+"Select Items"="בחירת משימה";
+"Assign"="שיוך משימות";
+"Please select order."="נא לבחור הזמנה.";
+"Assigned successfull."="שיוך בוצע בהצלחה.";
+"Select"="בחירה";
+"Search..."="חיפוש...";
+"Coordinator"="רכז";
+"Coordinators"="רכזים";
+"Driver" = "נהג";
+"Drivers"="נהגים";
+"Assign to me"="שיוך אליי";
 
 
 
@@ -205,7 +222,8 @@
 "message_add_message_hint"="הקלד הודעה";
 
 //ROUTE_LIST_SCREEN
-"You have no route"="You have no route"; //new
+
+"You have no route"="אין לך מסלולים כרגע";
 "Route Number"="Route number";//new
 "Routes List"="רשימת מסלולים";
 
@@ -213,12 +231,12 @@
 "Album Gallery"="בחירה מתוך הגלריה";
 "Take photo"="צלם תמונה";
 "No images have been added"="לא נוספו תמונות";
-"Please add pictures in picture tap, before finish this order"="Please add pictures in picture tap, before finish this order";//new
-"Please add signature in signature tap, before finish this order"="Please add signature in signature tap, before finish this order";//new
+"Please add pictures in picture tap, before finish this order"="נדרשת תמונה כדי לסיים הזמנה זו";
+"Please add signature in signature tap, before finish this order"="נדרשת חתימה כדי לסיים הזמנה זו";
 
 //PACKAGES
 "Delivery"="משלוח";
-"Backhaul"="גרירה בחזרה";
+"Backhaul"="איסוף";
 "Package On Truck" = "חבילות במשאית";
 "Total cases"="סה''כ מקרים";
 "Case complete"="מקרים שהושלמו";
@@ -226,3 +244,26 @@
 "Total pallets"="סה''כ משטחים";
 "Pallet complete"="משטחים שהושלמו";
 "Pallet not complete"="משטחים שלא הושלמו";
+"Pick Up" = "איסוף";
+
+"Total double type"="סה''כ משטחים";
+"Total cartons"="סה''כ קרטונים";
+"Total packages"="סה''כ חבילות";
+"Double type complete"="משטחים שהושלמו";
+"Packages complete"="חבילות שהושלמו";
+"Cartons complete"="קרטונים שהושלמו";
+"Double type not complete"="משטחים שלא הושלמו";
+"Cartons not complete"="קרטונים שלא הושלמו";
+"Packages not complete"="חבילות שלא הושלמו";
+
+//TASK
+"Tasks List"="רשימת משימות";
+"Task Detail"="פרטי משימה";
+"No Tasks"="אין משימות";
+"TASK"="משימה";
+"Task Id"="מספר משימה";
+"Are you sure you want to finish this task?"="האם ברצונך לסיים את המשימה הזו?";
+"Are you sure you want to cancel this task?"="האם ברצונך לבטל את המשימה הזו?";
+"Finish task successfully"="סיום משימה בוצע בהצלחה";
+"Task Status"="סטטוס משימה";
+"Task Information"="מידע על המשימה";

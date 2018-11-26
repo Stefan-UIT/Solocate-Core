@@ -7,121 +7,118 @@
 //
 
 import UIKit
+import ReachabilitySwift
 
 class BaseViewController: UIViewController {
+  
+    private var isRoot = true
     
-  @IBOutlet weak var vInternetConnection:UIView?
-  @IBOutlet weak var lblInternetConnection:UILabel?
-  @IBOutlet weak var conHeightVInternetConnection:NSLayoutConstraint?
+    let reachability = Reachability()!
+    var hasNetworkConnection = true
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return UIStatusBarStyle.lightContent
+    }
 
-  
-  private var isRoot = true
-    
-  var navigationService = DMSNavigationService()
-  
-  let reachability = Reachability()!
-  var hasNetworkConnection = true
-    
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    addNetworkObserver()
-    
-    navigationService.navigationItem = self.navigationItem
-    updateNavigationBar()
-  }
-    
-  override var preferredStatusBarStyle: UIStatusBarStyle{
-    return UIStatusBarStyle.lightContent
-  }
-    
-  deinit {
-    removeNetworkObserver()
-  }
-
-  
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    printControllerName()
-  }
-    
-  func printControllerName() {
-    #if DEBUG
-      let name = String(describing: self)
-        print("Current Screen is \(name)")
-    #endif
-  }
-  
-  func addNetworkObserver() {
-    do {
-      try reachability.startNotifier()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateUI()
+        self.updateNavigationBar()
+        addNetworkObserver()
+        printControllerName()
     }
-    catch let error {
-        #if DEBUG
-            print("Cannot start notify \(error.localizedDescription)")
-        #endif
-    }
-    // add observer for network reachability
-    NotificationCenter.default.addObserver(self,
-                    selector: #selector(self.reachabilityChangedNotification(_:)),
-                        name: NSNotification.Name(rawValue: "ReachabilityChangedNotification"),
-                      object: reachability)
-  }
-  
-  @objc func reachabilityChangedNotification(_ notification: NSNotification) {
-    guard let notif = notification.object as? Reachability,
-        notif.isReachable == true else {
-      hasNetworkConnection = false
-      print("No internet connection")
-      DispatchQueue.main.async {[weak self] in
-        self?.showNoInternetConnection()
-      }
-       return
-     }
     
-    print("has network connection")
-    hasNetworkConnection = true
-    DispatchQueue.main.async {[weak self] in
-        self?.hideNoInternetConnection()
+    deinit {
+        removeNetworkObserver()
     }
-  }
-  
-  func showNoInternetConnection() {
-    lblInternetConnection?.textColor = .white
-    vInternetConnection?.backgroundColor = AppColor.redColor
-    lblInternetConnection?.text = "error_lost_network_connection".localized
-    lblInternetConnection?.textAlignment = .center
-    vInternetConnection?.isHidden = false
-    UIView.animate(withDuration: 0.5) {[weak self] in
-        self?.conHeightVInternetConnection?.constant = 30
-        self?.view.layoutIfNeeded()
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
-  }
-  
-  func hideNoInternetConnection() {
-    self.conHeightVInternetConnection?.constant = 0
-    UIView.animate(withDuration: 0.5, animations: {[weak self] in
-        self?.vInternetConnection?.isHidden = true
-        self?.view.layoutIfNeeded()
-        
-    }) { (isFinish) in}
-  }
-  
-  func removeNetworkObserver() {
-    NotificationCenter.default.removeObserver(self,
-                    name: NSNotification.Name(rawValue: "ReachabilityChangedNotification"),
-                  object: reachability)
-  }
+    
+    func updateUI() {
+        DispatchQueue.main.async {
+            if  ReachabilityManager.isNetworkAvailable {
+                App().mainVC?.hideNoInternetConnection()
+            }else{
+                App().mainVC?.showNoInternetConnection()
+            }
+        }
+    }
     
     func updateNavigationBar() {
         print("Please update navigation Bar in \(ClassName(self))")
-        
     }
+    
+    func printControllerName() {
+        #if DEBUG
+        let name = String(describing: self)
+        print("Current Screen is \(name)")
+        #endif
+    }
+    
+    
+    //MARK: - Reachability
+    func addNetworkObserver() {
+        // add observer for network reachability
+        NotificationCenter.default.addObserver(self,
+                    selector: #selector(self.reachabilityChangedNotification(_:)),
+                        name: NSNotification.Name(rawValue: "ReachabilityChangedNotification"),
+                      object: reachability)
+        
+        do {
+            try reachability.startNotifier()
+        }catch let error {
+            #if DEBUG
+            print("Cannot start notify \(error.localizedDescription)")
+            #endif
+        }
+    }
+  
+    @objc func reachabilityChangedNotification(_ notification: NSNotification) {
+        guard let notif = notification.object as? Reachability, notif.isReachable == true else {
+                hasNetworkConnection = false
+                print("No internet connection")
+                updateUI()
+                return
+        }
+    
+        print("has network connection")
+        hasNetworkConnection = true
+        updateUI()
+    }
+  
+    func removeNetworkObserver() {
+        NotificationCenter.default.removeObserver(self,
+                    name: NSNotification.Name(rawValue: "ReachabilityChangedNotification"),
+                  object: reachability)
+    }
+}
+
+//MARK: - UIPopoverPresentationControllerDelegate
+extension BaseViewController:UIPopoverPresentationControllerDelegate{
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
+    
+    func adaptivePresentationStyle(for controller: UIPresentationController, traitCollection: UITraitCollection) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.none
+    }
+}
+
+
+//MARK: - OtherFuntion
+extension BaseViewController{
     
     func onbtnClickBackOrMenu() {
         self.view.endEditing(true)
         if let navi = self.navigationController {
-
+            
             if (navi.viewControllers.count <= 1) {
                 if (navi.presentingViewController != nil) {
                     navi.dismiss(animated: true, completion: nil)
@@ -131,7 +128,7 @@ class BaseViewController: UIViewController {
             }else {
                 navi.popViewController(animated: true);
             }
-
+            
         }else {
             if (self.presentingViewController != nil) {
                 self.dismiss(animated: true, completion: nil);

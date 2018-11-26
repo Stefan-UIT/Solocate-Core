@@ -8,23 +8,30 @@
 
 import UIKit
 import ObjectMapper
+import CoreData
 
-class BaseModel: NSObject, Mappable  {
-  
-  required public convenience init?(map: Map) {
-    self.init()
-  }
+class BaseModel:NSObject, Mappable  {
     
-  func mapping(map: Map) {
-    //
-  }
-  
-  func getJSONString()-> [String: Any] {
-    let json = self.toJSON()
-    return json
-  }
-  
-  func getJsonObject(method: ParamsMethod)-> Any {
-    return self.getJSONString();
-  }
+    override init() {
+        //
+    }
+
+    
+    //MARK: - MAPPABLE
+    required init?(map: Map) {
+        super.init()
+    }
+    
+    func mapping(map: Map) {
+        //
+    }
+    
+    func getJSONString()-> [String: Any] {
+        let json = self.toJSON()
+        return json
+    }
+    
+    func getJsonObject(method: ParamsMethod)-> Any {
+        return self.getJSONString();
+    }
 }

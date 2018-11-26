@@ -23,8 +23,6 @@ class OrderItemTableViewCell: UITableViewCell {
   @IBOutlet weak var lblDate: UILabel?
   @IBOutlet weak var btnStatus: UIButton?
   @IBOutlet weak var btnNumber: UIButton?
-
-  
   @IBOutlet weak var vContent: UIView?
 
   var order: Order! {
@@ -34,6 +32,11 @@ class OrderItemTableViewCell: UITableViewCell {
   }
     
   func updateCell() {
+    
+      let displayDateTimeVN = DateFormatter.displayDateTimeVN
+      let startDate = DateFormatter.serverDateFormater.date(from: order.startTime)
+      let endDate = DateFormatter.serverDateFormater.date(from: order.endTime)
+    
       lblTitle?.text = "\(order.orderReference)"
       lblDeliverynumber?.text = order.orderReference
       lblStore?.text =  order.storeName
@@ -46,15 +49,17 @@ class OrderItemTableViewCell: UITableViewCell {
         lblSubtitle?.text = order.order_type_name
       }
       lblUrgency?.textColor = order.colorUrgent
-      lblExpectedTime?.text = "\(order.startTime) ~ \(order.endTime)"
-      lblTodate?.text = order.deliveryDate;
+      lblFromdate?.text = (startDate != nil) ? displayDateTimeVN.string(from: startDate!) : ""
+      lblTodate?.text = (endDate != nil) ? displayDateTimeVN.string(from: endDate!) : ""
 
       let status = OrderStatus(rawValue: order.statusCode) ?? OrderStatus.open
       btnStatus?.setTitle("\(status.statusName)", for: .normal)
+      btnStatus?.setTitleColor(order.colorStatus, for: .normal)
       btnStatus?.borderWidth = 1.0;
-      btnStatus?.borderColor = AppColor.grayColor;
-      lblDate?.text = order.deliveryDate
+      btnStatus?.layer.cornerRadius = 3.0;
+      btnStatus?.borderColor = order.colorStatus;
       vContent?.cornerRadius = 4.0;
+      vContent?.backgroundColor = order.backgroundCities
   }
   
   override func awakeFromNib() {

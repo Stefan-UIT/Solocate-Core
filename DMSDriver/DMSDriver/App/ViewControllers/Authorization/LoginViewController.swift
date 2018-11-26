@@ -10,10 +10,9 @@ import UIKit
 
 class LoginViewController: BaseViewController {
   
-  @IBOutlet weak var userNameTextField: UITextField!
-  @IBOutlet weak var passwordTextField: UITextField!
-  @IBOutlet weak var rememberButton: UIButton!
-  @IBOutlet weak var enviromentButton: UIButton!
+    @IBOutlet weak var userNameTextField: UITextField!
+    @IBOutlet weak var passwordTextField: UITextField!
+    @IBOutlet weak var rememberButton: UIButton!
     
     private var keepLogin = true {
         didSet {
@@ -21,26 +20,29 @@ class LoginViewController: BaseViewController {
         }
     }
     
-  override func viewDidLoad() {
-    super.viewDidLoad()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupTextField()
+        setupRemeberButton()
+    }
     
-    enviromentButton.isHidden = true
-    setupTextField()
-    setupRemeberButton()
-  }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        Socket.delegate = self
+    }
     
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-  }
+    override var preferredStatusBarStyle: UIStatusBarStyle{
+        return .default
+    }
     
-  func test() {
-    userNameTextField.text = "nguyen.manh@seldatinc.com"
-    passwordTextField.text = "Seldat.123@"
-  }
+    func test() {
+        userNameTextField.text = "nguyen.manh@seldatinc.com"
+        passwordTextField.text = "Seldat.123@"
+    }
 
-  func setupTextField() {
-    let isRemember = Caches().getObject(forKey: Defaultkey.keepLogin)
-    if let remember =  isRemember as? Bool {
+    func setupTextField() {
+        let isRemember = Caches().getObject(forKey: Defaultkey.keepLogin)
+        if let remember =  isRemember as? Bool {
         if remember{
             userNameTextField.text = Caches().userLogin?.email
             passwordTextField.text = Caches().userLogin?.password
@@ -58,46 +60,41 @@ class LoginViewController: BaseViewController {
     }
     
   
-  func handleForgetPassword() {
-    let forgetPasswordView : ForgetPasswordView = ForgetPasswordView()
-    forgetPasswordView.delegate = self
-    forgetPasswordView.showViewInView(superView: self.view)
-  }
-    
-    
-  //MARK: - ACTION
-  @IBAction func didClickRemember(_ sender: UIButton) {
-    keepLogin = !keepLogin
-  }
-  
-  override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-    super.touchesEnded(touches, with: event)
-    view.endEditing(true)
-  }
-  
-  
-  @IBAction func didClickLogin(_ sender: UIButton) {
-    guard userNameTextField.hasText, passwordTextField.hasText,
-      let email = userNameTextField.text,
-      let password = passwordTextField.text
-      else {
-        showAlertView("error_fill_info".localized)
-        return
+    func handleForgetPassword() {
+        let forgetPasswordView : ForgetPasswordView = ForgetPasswordView()
+        forgetPasswordView.delegate = self
+        forgetPasswordView.showViewInView(superView: self.view)
     }
     
-    let userLogin = UserLoginModel(email,password);
-    login(userLogin)
-  }
+    
+    //MARK: - ACTION
+    @IBAction func didClickRemember(_ sender: UIButton) {
+        keepLogin = !keepLogin
+    }
+  
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+        super.touchesEnded(touches, with: event)
+        view.endEditing(true)
+    }
+  
+  
+    @IBAction func didClickLogin(_ sender: UIButton) {
+        guard userNameTextField.hasText, passwordTextField.hasText,
+            let email = userNameTextField.text,
+            let password = passwordTextField.text
+            else {
+                showAlertView("error_fill_info".localized)
+                return
+        }
+    
+        let userLogin = UserLoginModel(email,password);
+        login(userLogin)
+    }
    
     
-  @IBAction func tapForgetPasswordButtonAction(_ sender: UIButton) {
-    handleForgetPassword()
-  }
-    
-  
-  @IBAction func tapEnviromentButtonAction(_ sender: UIButton) {
-    
-  }
+    @IBAction func tapForgetPasswordButtonAction(_ sender: UIButton) {
+        handleForgetPassword()
+    }
 }
 
 
@@ -108,25 +105,15 @@ fileprivate extension LoginViewController {
         showLoadingIndicator()
         API().login(userLogin) {[weak self] (result) in
             switch result {
-            case .object(let user):
-                Caches().user = user // need to set, cause need token to call getUserProfile
+            case .object(let obj):
+                Caches().user = obj.data
                 if self?.keepLogin  ?? false{
                     Caches().userLogin = userLogin;
                 }
-                API().getUserProfile(callback: { [weak self] (response) in
-                    self?.dismissLoadingIndicator()
-                    switch response {
-                    case .object(let obj):
-                        if let x = obj.data {
-                            user.userID = x.userID
-                            Caches().user = user
-                        } // just need to get userID atm.
-                        break
-                    case .error(_):
-                        break
-                    }
-                    App().loginSuccess()
-                })
+                App().loginSuccess()
+
+                // Fetch reasons save to local DB
+                //self?.getReasonList()
                 
             case .error(let error):
                 self?.dismissLoadingIndicator()
@@ -134,6 +121,50 @@ fileprivate extension LoginViewController {
                 
             }
         }
+    }
+    
+    func getReasonList() {
+        API().getReasonList {(result) in
+            switch result{
+            case .object(let obj):
+                guard let list = obj.data else {return}
+                CoreDataManager.updateListReason(list) // Update reason list to local DB
+            case .error(_):
+                break
+            }
+        }
+    }
+}
+
+extension LoginViewController:APISocketDelegate{
+    func didReceiveResultLogin(data: Any) {
+        let mess = getMessengeStatus(data: data).0
+        let status = getMessengeStatus(data: data).1
+        
+        if status == 1 {// Success
+            App().loginSuccess()
+            
+        }else{ //Users limited.
+            self.showAlertView(E(mess))
+            App().reLogin()
+        }
+    }
+    
+    func getMessengeStatus(data:Any) -> (String?,Int?) {
+        if let dic = (data as? ResponseDictionary){
+            let status = dic["status"] as? Int
+            let mess = dic["message"] as? String
+            return (mess,status)
+        
+        }else if let dicList = (data as? ResponseArray){
+            if let dic = dicList.first as? ResponseDictionary{
+                let status = dic["status"] as? Int
+                let mess = dic["message"] as? String
+                return (mess,status )
+            }
+        }
+        
+        return ("Data response is invalid.",-1)
     }
 }
 

@@ -33,9 +33,11 @@
 	<key>NSCameraUsageDescription</key>
 	<string>Using your camera to scan bar code</string>
 	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>This app needs your current location</string>
+	<string>To tracking orders, get navigation,traffic,and transit updates,and see info about places near you,choose Allways Allow</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>To tracking orders, get navigation,traffic,and transit updates,and see info about places near you,choose Allways Allow</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>This app needs your current location</string>
+	<string>To tracking orders, get navigation,traffic,and transit updates,and see info about places near you,choose Allways Allow</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Post your image</string>
 	<key>SERVER</key>
@@ -50,7 +52,7 @@
 	<key>UILaunchStoryboardName</key>
 	<string>LaunchScreen</string>
 	<key>UIMainStoryboardFile</key>
-	<string>Main</string>
+	<string>Login</string>
 	<key>UIRequiredDeviceCapabilities</key>
 	<array>
 		<string>armv7</string>

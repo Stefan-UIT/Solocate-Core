@@ -9,6 +9,20 @@
 import UIKit
 import ObjectMapper
 
+class CoordinatorDriverModel: SelectionModel {
+    var coordinators:[DriverModel]?
+    var drivers:[DriverModel]?
+
+    required init?(map: Map) {
+        super.init()
+    }
+    
+    override func mapping(map: Map) {
+        coordinators <- map["coordinator"]
+        drivers <- map["driver"]
+    }
+}
+
 class DriverModel: SelectionModel {
     /**
     "driver_id": 710,
@@ -27,8 +41,12 @@ class DriverModel: SelectionModel {
         role_name = E(nameRole)
     }
     
+    override init() {
+        super.init()
+    }
+    
     required init?(map: Map) {
-        super.init(map: map)
+      super.init()
     }
     
     override func mapping(map: Map) {

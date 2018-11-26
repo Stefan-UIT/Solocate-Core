@@ -1,4 +1,165 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <elements/>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CoreAttachFile" representedClassName="CoreAttachFile" syncable="YES" codeGenerationType="class">
+        <attribute name="boundary" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="contentFile" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="mimeType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="serverS3" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="url" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="listDoc" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreUrlFile" inverseName="doc" inverseEntity="CoreUrlFile" syncable="YES"/>
+        <relationship name="signature" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreUrlFile" inverseName="sig" inverseEntity="CoreUrlFile" syncable="YES"/>
+    </entity>
+    <entity name="CoreCoordinatorRoute" representedClassName="CoreCoordinatorRoute" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="coordinator" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreRoute" inverseName="listcd" inverseEntity="CoreRoute" syncable="YES"/>
+        <relationship name="drivers" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreRoute" inverseName="listdr" inverseEntity="CoreRoute" syncable="YES"/>
+    </entity>
+    <entity name="CoreOrder" representedClassName="CoreOrder" syncable="YES" codeGenerationType="class">
+        <attribute name="ac" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="bcd" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cartons" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="cases" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="client_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="collectionCall" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="created_at" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="custumer_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deliveryAdd" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deliveryCity" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deliveryContactName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deliveryContactPhone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deliveryDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deliveryState" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="descriptionNote" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="double_type" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="doubleType" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="driver_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="driver_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="endTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="from_address_full_addr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="from_address_lattd" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="from_address_lngtd" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="from_loc_id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="full_addr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="instructions" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lat" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lng" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="location_full_addr" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="location_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="locationID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="needUpdateToServer" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="order_status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order_type_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="order_type_name_hb" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="orderReference" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="orderType" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="orderTypeId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="orderTypeName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="packages" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="pallets" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="pickupContactEmail" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pickupContactName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pickupContactPhone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pod" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="reason_msg" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="receiveName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="receiverPhone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="routeId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="secoundReceiveName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="seq" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sequence" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="serviceTime" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="shop" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shopID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="sign" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="standby" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="startTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="statusCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="statusName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="storeName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="supervisor_Id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="supervisor_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timeWindowName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="to_address_lattd" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="to_address_lngtd" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="to_loc_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="toAddressFullAddress" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="truck_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="urgent" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="urgent_type_id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="urgent_type_name_en" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="urgent_type_name_hb" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreRoute" inverseName="orderList" inverseEntity="CoreRoute" syncable="YES"/>
+        <relationship name="reason" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreReason" inverseName="reasonCancel" inverseEntity="CoreReason" syncable="YES"/>
+        <relationship name="route_detail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreRoute" inverseName="order" inverseEntity="CoreRoute" syncable="YES"/>
+        <relationship name="url" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoreUrlFile" inverseName="order" inverseEntity="CoreUrlFile" syncable="YES"/>
+    </entity>
+    <entity name="CoreReason" representedClassName="CoreReason" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="reasonDescription" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="reasonCancel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreOrder" inverseName="reason" inverseEntity="CoreOrder" syncable="YES"/>
+    </entity>
+    <entity name="CoreRequest" representedClassName="CoreRequest" syncable="YES" codeGenerationType="class">
+        <attribute name="body" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="count" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="header" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="method" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="server" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timetamps" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+    </entity>
+    <entity name="CoreRoute" representedClassName="CoreRoute" syncable="YES" codeGenerationType="class">
+        <attribute name="date" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="driver_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="driverID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="end_time" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="endDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="nameStatus" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="route_name_sts" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="route_number" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="shop_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="start_time" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="startDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="totalOrders" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="truckID" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="listcd" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreCoordinatorRoute" inverseName="coordinator" inverseEntity="CoreCoordinatorRoute" syncable="YES"/>
+        <relationship name="listdr" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreCoordinatorRoute" inverseName="drivers" inverseEntity="CoreCoordinatorRoute" syncable="YES"/>
+        <relationship name="order" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoreOrder" inverseName="route_detail" inverseEntity="CoreOrder" syncable="YES"/>
+        <relationship name="orderList" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreOrder" inverseName="list" inverseEntity="CoreOrder" syncable="YES"/>
+        <relationship name="warehouse" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoreWarehouse" inverseName="route" inverseEntity="CoreWarehouse" syncable="YES"/>
+    </entity>
+    <entity name="CoreUrlFile" representedClassName="CoreUrlFile" syncable="YES" codeGenerationType="class">
+        <relationship name="doc" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreAttachFile" inverseName="listDoc" inverseEntity="CoreAttachFile" syncable="YES"/>
+        <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreOrder" inverseName="url" inverseEntity="CoreOrder" syncable="YES"/>
+        <relationship name="sig" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoreAttachFile" inverseName="signature" inverseEntity="CoreAttachFile" syncable="YES"/>
+    </entity>
+    <entity name="CoreWarehouse" representedClassName="CoreWarehouse" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="latLong" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="route" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoreRoute" inverseName="warehouse" inverseEntity="CoreRoute" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="CoreAttachFile" positionX="-360" positionY="153" width="128" height="195"/>
+        <element name="CoreCoordinatorRoute" positionX="-369" positionY="144" width="128" height="120"/>
+        <element name="CoreOrder" positionX="-54" positionY="-9" width="128" height="1215"/>
+        <element name="CoreReason" positionX="-351" positionY="162" width="128" height="120"/>
+        <element name="CoreRequest" positionX="-369" positionY="153" width="128" height="165"/>
+        <element name="CoreRoute" positionX="-326" positionY="225" width="128" height="360"/>
+        <element name="CoreUrlFile" positionX="-369" positionY="144" width="128" height="90"/>
+        <element name="CoreWarehouse" positionX="-578" positionY="243" width="128" height="135"/>
+    </elements>
 </model>

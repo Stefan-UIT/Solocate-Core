@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="pGL-1S-ObC">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -19,8 +19,30 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dW4-Ri-eAc">
+                                <rect key="frame" x="0.0" y="64" width="375" height="0.0"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No internet connection" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hH9-2S-gzi">
+                                        <rect key="frame" x="113.5" y="0.0" width="148" height="0.0"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="error_lost_network_connection"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="hH9-2S-gzi" secondAttribute="bottom" id="MgI-ds-t2V"/>
+                                    <constraint firstItem="hH9-2S-gzi" firstAttribute="top" secondItem="dW4-Ri-eAc" secondAttribute="top" id="X15-Ej-2jO"/>
+                                    <constraint firstAttribute="height" id="c39-zG-kDl"/>
+                                    <constraint firstItem="hH9-2S-gzi" firstAttribute="centerX" secondItem="dW4-Ri-eAc" secondAttribute="centerX" id="dlE-b5-FKW"/>
+                                    <constraint firstItem="hH9-2S-gzi" firstAttribute="centerY" secondItem="dW4-Ri-eAc" secondAttribute="centerY" id="oMW-0D-ucq"/>
+                                </constraints>
+                            </view>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5nL-T0-BQn">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="64" width="375" height="603"/>
                                 <connections>
                                     <segue destination="W3F-sb-yZa" kind="embed" identifier="Main_NV" id="dsp-UI-hpZ"/>
                                 </connections>
@@ -30,26 +52,40 @@
                         <constraints>
                             <constraint firstItem="Mw6-sv-LuP" firstAttribute="bottom" secondItem="5nL-T0-BQn" secondAttribute="bottom" id="2Oa-sU-swA"/>
                             <constraint firstItem="5nL-T0-BQn" firstAttribute="leading" secondItem="Mw6-sv-LuP" secondAttribute="leading" id="8Qp-SH-2ub"/>
+                            <constraint firstItem="5nL-T0-BQn" firstAttribute="top" secondItem="dW4-Ri-eAc" secondAttribute="bottom" id="HXB-xf-202"/>
+                            <constraint firstItem="dW4-Ri-eAc" firstAttribute="top" secondItem="Mw6-sv-LuP" secondAttribute="top" id="Ou1-HE-opg"/>
+                            <constraint firstItem="dW4-Ri-eAc" firstAttribute="leading" secondItem="Yvr-9P-bsG" secondAttribute="leading" id="PMh-Ox-VbW"/>
+                            <constraint firstAttribute="trailing" secondItem="dW4-Ri-eAc" secondAttribute="trailing" id="Xfy-wM-OpS"/>
                             <constraint firstItem="Mw6-sv-LuP" firstAttribute="trailing" secondItem="5nL-T0-BQn" secondAttribute="trailing" id="dzY-Wd-wxx"/>
-                            <constraint firstItem="5nL-T0-BQn" firstAttribute="top" secondItem="Yvr-9P-bsG" secondAttribute="top" id="eGk-Jl-0h3"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Mw6-sv-LuP"/>
                     </view>
+                    <navigationItem key="navigationItem" id="44L-fG-ykv"/>
+                    <connections>
+                        <outlet property="conHeightVInternetConnection" destination="c39-zG-kDl" id="syQ-qK-v2j"/>
+                        <outlet property="lblInternetConnection" destination="hH9-2S-gzi" id="klh-Nf-VAZ"/>
+                        <outlet property="vInternetConnection" destination="dW4-Ri-eAc" id="Wmk-4v-l59"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UZi-yH-ExB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-513" y="71"/>
+            <point key="canvasLocation" x="-514.39999999999998" y="70.614692653673174"/>
         </scene>
         <!--BaseNV-->
         <scene sceneID="aQe-sf-Mu0">
             <objects>
-                <navigationController autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" navigationBarHidden="YES" id="pGL-1S-ObC" customClass="BaseNV" customModule="DMSDriver" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BaseNV" autoresizesArchivedViewToFullSize="NO" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="pGL-1S-ObC" customClass="BaseNV" customModule="DMSDriver" customModuleProvider="target" sceneMemberID="viewController">
                     <extendedEdge key="edgesForExtendedLayout"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0N4-jV-8cK">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.1764705882352941" green="0.67450980392156867" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="8QQ-Cq-ni3" kind="relationship" relationship="rootViewController" id="RBs-wH-a1v"/>
+                    </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TYI-bD-xEt" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -199,9 +235,8 @@
         <!--BaseNV-->
         <scene sceneID="jIl-Vt-bas">
             <objects>
-                <navigationController id="W3F-sb-yZa" customClass="BaseNV" customModule="DMSDriver" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController navigationBarHidden="YES" id="W3F-sb-yZa" customClass="BaseNV" customModule="DMSDriver" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="HxL-Wy-CbT">
-                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="barTintColor" red="0.1764705882352941" green="0.67450980392156867" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>

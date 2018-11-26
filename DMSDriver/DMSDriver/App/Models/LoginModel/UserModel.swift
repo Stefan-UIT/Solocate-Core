@@ -9,50 +9,65 @@
 import UIKit
 import ObjectMapper
 
+
 class UserModel: BaseModel {
     
-    var userID: Int?
-    var email: String?
-    var firstName : String?
-    var lastName : String?
-    var mobile : String?
-    var phone : String?
+    class UserInfo: BaseModel {
+        
+        var id: Int = 0
+        var email: String?
+        var firstName : String?
+        var lastName : String?
+        var mobile : String?
+        var phone : String?
+        var userName: String?
+        var assign_coord = 0
+        
+        required init?(map: Map) {
+            super.init()
+        }
+        
+        override func mapping(map: Map) {
+            id <- map[KEY_USER_ID]
+            email <- map[KEY_EMAIL]
+            firstName <- map[KEY_FIRST_NAME]
+            lastName <- map[KEY_LAST_NAME]
+            mobile <- map[KEY_MOBILE]
+            phone <- map[KEY_PHONE]
+            assign_coord <- map[KEY_ASSIGN_COORD]
+            
+            let user_name = map["user_name"].currentValue
+            
+            if user_name == nil {
+                userName <- map["username"]
+            } else {
+                userName <- map["user_name"]
+            }
+        }
+    }
+    
+    
+    var roles:[UserRole]?
     var token : String?
-    var userName: String?
-    var role:[UserRole]?
+    var userInfo:UserInfo?
     
     required init?(map: Map) {
+        super.init()
     }
     
     override func mapping(map: Map) {
-        userID <- map[KEY_USER_ID]
-        email <- map[KEY_EMAIL]
-        firstName <- map[KEY_FIRST_NAME]
-        lastName <- map[KEY_LAST_NAME]
-        mobile <- map[KEY_MOBILE]
-        phone <- map[KEY_PHONE]
         token <- map[KEY_TOKEN]
-        
-        let user_role = map[KEY_USER_ROLE].currentValue
-        
-        if user_role == nil {
-            role <-  map["role"]
-        }else{
-            role <-  map["user_roles"]
-        }
-        
-        let user_name = map["user_name"].currentValue
-
-        if user_name == nil {
-            userName <- map["username"]
-        } else {
-            userName <- map["user_name"]
-        }
+        userInfo <- map[KEY_USER_INFO]
+        roles <-  map[KEY_ROLES]
+    }
+    
+    func isAssignCoord() -> Bool {
+        return userInfo?.assign_coord == 1
     }
     
     fileprivate (set) lazy var isAdmin:Bool =  {
         var isAdmin = false
-        for item in role ?? [] {
+        for item in roles ?? [] {
             if E(item.name) == "Admin"{
                 isAdmin = true
                 break
@@ -63,7 +78,7 @@ class UserModel: BaseModel {
     
     fileprivate (set) lazy var isDriver:Bool =  {
         var isDriver = false
-        for item in role ?? [] {
+        for item in roles ?? [] {
             if E(item.name) == "Driver"{
                 isDriver = true
                 break
@@ -74,7 +89,7 @@ class UserModel: BaseModel {
     
     fileprivate (set) lazy var isCoordinator:Bool =  {
         var isCoordinator = false
-        for item in role ?? [] {
+        for item in roles ?? [] {
             if E(item.name) == "Coordinator"{
                 isCoordinator = true
                 break
