@@ -244,8 +244,8 @@ extension RouteListVC: UITableViewDataSource{
         let route = listRoutes[row]
         let displayDateTimeVN = DateFormatter.displayDateTimeVN
         let displayDateVN = DateFormatter.displayDateVietNames
-        let startTime = DateFormatter.serverDateFormater.date(from: route.startDate)
-        let endTime = DateFormatter.serverDateFormater.date(from: route.endDate)
+        let startTime = DateFormatter.serverDateFormater.date(from: route.start_time)
+        let endTime = DateFormatter.serverDateFormater.date(from: route.end_time)
         let date = DateFormatter.displayDateUS.date(from: route.date)
         
         cell.lblTitle?.text = "\("Route".localized)ID-\(route.id)"
@@ -254,10 +254,10 @@ extension RouteListVC: UITableViewDataSource{
         cell.btnColor?.backgroundColor = route.colorStatus
         cell.lblRouteNumber?.text = "\(route.route_number)";
         cell.lblTotal?.text = "\(route.totalOrders)"
-        cell.lblWarehouse?.text = route.shop_name
+        cell.lblTruck?.text = route.truck?.name
+        cell.lblTanker?.text = route.tanker?.name
         cell.lblStartTime?.text = (startTime != nil) ? displayDateTimeVN.string(from: startTime!) : ""
         cell.lblEndTime?.text = (endTime != nil) ? displayDateTimeVN.string(from: endTime!) : ""
-        cell.lblDriver?.text = route.driver_name
         cell.selectionStyle = .none
         
         return cell
@@ -285,6 +285,34 @@ extension RouteListVC:UITableViewDelegate {
     }
     
     func getDataFromServer(_ isFetch:Bool = false)  {
+        
+        let route = Route()
+        let truck = Truck()
+        truck.id = 10
+        truck.name = "Truck 5"
+        
+        let tanker = Tanker()
+        tanker.id = 20
+        tanker.name = "Tanker 22"
+        
+        let status = Status()
+        status.id = 1
+        status.code = "OP"
+        status.name = "New"
+        
+        route.id = 12
+        route.truck = truck
+        route.tanker = tanker
+        route.status = status
+        route.totalOrders = 1
+        route.start_time = "2018-11-20 10:00:00"
+        route.end_time = "2018-11-20 10:00:00"
+        
+        
+        self.listRoutesOrigin = [route,route,route]
+        self.doSearchRoutes()
+        
+        /*
         let count = CoreDataManager.countRequestLocal()
         if count > 0 || apiCalling == true {
             return
@@ -298,6 +326,7 @@ extension RouteListVC:UITableViewDelegate {
             print("Date Filter ==> \(dateStringFilter)")
             self.getRoutes(byDate: self.dateStringFilter, isFetch: isFetch)
         }
+  */
     }
     
     fileprivate func getRoutes(byDate date: String? = nil, isFetch:Bool = false) {

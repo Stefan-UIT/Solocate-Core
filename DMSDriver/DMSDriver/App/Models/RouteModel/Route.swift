@@ -199,13 +199,7 @@ class Route: BaseModel {
         endDate <- map["end"]
         shop_name <- map["shop_name"]
         orders <- map["orders"]
-        
-        let tot_orders = map["tot_orders"].currentValue
-        if tot_orders == nil {
-            totalOrders <- map["total_order"]
-        }else{
-            totalOrders <- map["tot_orders"]
-        }
+        totalOrders <- map["orders_count"]
         
         if isEmpty(shop_name) {
             shop_name = E(warehouse?.name)

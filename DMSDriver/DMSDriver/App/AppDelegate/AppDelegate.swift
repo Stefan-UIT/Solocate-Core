@@ -234,7 +234,7 @@ extension AppDelegate {
     func reLogin() {
         let vc: LoginViewController = .loadSB(SB: .Login)
         window?.rootViewController = vc
-        Socket.logout(Caches().user?.userInfo?.id ?? 0, E(Caches().user?.roles?.first?.name))
+        //Socket.logout(Caches().user?.userInfo?.id ?? 0, E(Caches().user?.roles?.first?.name))
         CoreDataManager.clearAllDB()
         Caches().user = nil
         mainVC?.endAutoRefetchRouteList()
