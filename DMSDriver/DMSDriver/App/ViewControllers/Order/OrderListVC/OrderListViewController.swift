@@ -44,7 +44,6 @@ enum DisplayMode:Int {
 class OrderListViewController: BaseViewController {
   
     @IBOutlet weak var clvContent: UICollectionView?
-    @IBOutlet weak var segmentControl: UISegmentedControl?
     @IBOutlet weak var lblFilter: UILabel?
     
     var arrDropDownMenu:[String] = []
@@ -112,13 +111,6 @@ class OrderListViewController: BaseViewController {
     }
     
     //MARK: - Intialize
-    func setupSegmentControl() {
-        segmentControl?.segmentTitles = ["All".localized.appending(" (\(route?.orderList.count ?? 0))"),
-                                         "New".localized.appending(" (\(route?.orders(.newStatus).count ?? 0))"),
-                                         "In Progress".localized.appending(" (\(route?.orders(.inProcessStatus).count ?? 0))")]
-        segmentControl?.selectedSegmentIndex = tapFilterOrderList.rawValue
-    }
-    
     func updateLblFilter() {
         lblFilter?.text = arrDropDownMenu[tapFilterOrderList.rawValue]
     }
@@ -140,21 +132,10 @@ class OrderListViewController: BaseViewController {
         super.updateUI()
         DispatchQueue.main.async {[weak self] in
             self?.setupCollectionView()
-            self?.setupSegmentControl()
             self?.updateArrDropDownMenu()
             self?.updateLblFilter()
         }
     }
-    
-    
-    //MARK: -Action
-    @IBAction func onbtnClickSegment(segment:UISegmentedControl){
-        if let tapSelect = TapFilterOrderList(rawValue: segment.selectedSegmentIndex){
-            tapFilterOrderList = tapSelect
-        }
-        scrollToPageSelected(segment.selectedSegmentIndex)
-    }
-    
     
     //MARK: -Action
     @IBAction func onbtnClickFilterWithStatus(btn:UIButton){
@@ -214,7 +195,6 @@ extension OrderListViewController:UICollectionViewDelegateFlowLayout{
 extension OrderListViewController:UIScrollViewDelegate{
     func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
         let index = scrollView.contentOffset.x / ScreenSize.SCREEN_WIDTH
-        segmentControl?.selectedSegmentIndex = Int(index)
         if let tapSelect = TapFilterOrderList(rawValue: Int(index)){
             tapFilterOrderList = tapSelect
         }

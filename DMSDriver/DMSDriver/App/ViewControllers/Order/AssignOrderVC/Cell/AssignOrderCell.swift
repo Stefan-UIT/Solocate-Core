@@ -42,7 +42,7 @@ class AssignOrderCell: UITableViewCell {
         
         lblTitle?.text = "\(order.orderReference)"
         lblDeliverynumber?.text = order.orderReference
-        lblStore?.text =  order.storeName
+        lblStore?.text =  "-"
         lblNameDriver?.text = order.driver_name
         iconSelect?.isSelected = order.isSelect
         vContent?.alpha = (order.isSelect && isSelectAssign) ? 0.5 : 1

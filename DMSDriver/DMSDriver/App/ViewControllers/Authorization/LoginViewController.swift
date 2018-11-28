@@ -111,6 +111,18 @@ fileprivate extension LoginViewController {
                     Caches().userLogin = userLogin;
                 }
                 App().loginSuccess()
+                
+                SERVICES().API.getDrivingRule { (result) in
+                    guard let strongSelf = self else {return}
+                    strongSelf.dismissLoadingIndicator()
+                    switch result{
+                    case .object(let obj):
+                        Caches().drivingRule = obj
+ 
+                    case .error(let error):
+                        strongSelf.showAlertView(error.getMessage())
+                    }
+                }
 
                 // Fetch reasons save to local DB
                 //self?.getReasonList()

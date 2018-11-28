@@ -71,6 +71,12 @@ extension Date {
         dateComponents.second = -1;
         return Calendar.app.date(from: dateComponents)!;
     }
+    
+    func offsetFrom(date : Date) -> DateComponents {
+        let dayHourMinuteSecond: Set<Calendar.Component> = [.hour, .minute, .second]
+        let difference = Calendar.app.dateComponents(dayHourMinuteSecond, from: date, to: self);
+        return difference
+    }
 }
 
 //MARK: - Date for server

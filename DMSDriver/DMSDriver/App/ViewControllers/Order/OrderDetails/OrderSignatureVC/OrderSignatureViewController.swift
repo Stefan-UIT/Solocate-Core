@@ -162,7 +162,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
 
 class BaseOrderDetailViewController: BaseViewController, IndicatorInfoProvider {
   var orderDetail: OrderDetail?
-  var routeID: Int?
+  var route: Route?
   var indicatorInfo = IndicatorInfo(title: "")
     
   var checkConnetionInternet:((_ notification:NSNotification, _ hasConnectionInternet: Bool) -> Void)?

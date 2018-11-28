@@ -25,7 +25,7 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
     let reachability = Reachability()!
     
     var hasConectionNetwork = false
-    var routeID: Int?
+    var route: Route?
     var order:Order?
     var dateStringFilter:String = Date().toString()
     var onUpdateOrderStatus:((_ order: OrderDetail) -> Void)?
@@ -118,7 +118,7 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
                 
                 for vc in (self?.viewControllers)! {
                     (vc as? BaseOrderDetailViewController)?.orderDetail = self?.orderDetail
-                    (vc as? BaseOrderDetailViewController)?.routeID = self?.routeID
+                    (vc as? BaseOrderDetailViewController)?.route = self?.route
                 }
             })
         }
@@ -216,7 +216,7 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
                     
                     for vc in self?.viewControllers ?? [] {
                         (vc as? BaseOrderDetailViewController)?.orderDetail = object
-                        (vc as? BaseOrderDetailViewController)?.routeID = self?.routeID
+                        (vc as? BaseOrderDetailViewController)?.route = self?.route
                     }
                     
                 case .error(let error):
@@ -233,7 +233,7 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
                     strongSelf.updateUI()
                     for vc in (strongSelf.viewControllers) {
                         (vc as? BaseOrderDetailViewController)?.orderDetail = strongSelf.orderDetail
-                        (vc as? BaseOrderDetailViewController)?.routeID = strongSelf.routeID
+                        (vc as? BaseOrderDetailViewController)?.route = strongSelf.route
                     }
                 })
             }

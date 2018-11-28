@@ -104,7 +104,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             let reason = OrderDetailInforRow(.failureCause,
                                              E(_orderDetail.reason?.name))
             let mess = OrderDetailInforRow(.message,
-                                           E(_orderDetail.reason_msg))
+                                           _orderDetail.reason_msg ?? "-")
             orderInforStatus.append(reason)
             orderInforStatus.append(mess)
         }
@@ -115,56 +115,28 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let startTime = OrderDetailInforRow(.startTime, (startDate != nil) ? displayDateTimeVN.string(from: startDate!) : "")
         let endTime = OrderDetailInforRow(.endTime, (endDate != nil) ? displayDateTimeVN.string(from: endDate!) : "")
         let clientName = OrderDetailInforRow(.clientName,_orderDetail.client_name)
-        let customerName = OrderDetailInforRow(.customerName ,
-                                               _orderDetail.custumer_name)
+        let customerName = OrderDetailInforRow(.customerName,_orderDetail.custumer_name)
         let type = OrderDetailInforRow(.type , isHebewLang() ? _orderDetail.order_type_name_hb : _orderDetail.order_type_name)
-        let doubleType = OrderDetailInforRow(.doubleType,
-                                             "\(_orderDetail.doubleType)")
-        let packetNumber = OrderDetailInforRow(.packagesNumber ,
-                                               _orderDetail.orderReference)
-        let packetNumber2 = OrderDetailInforRow(.packagesNumber ,
-                                               "\(_orderDetail.packages)")
+        let doubleType = OrderDetailInforRow(.doubleType,"\(_orderDetail.doubleType)")
+        let packetNumber = OrderDetailInforRow(.packagesNumber , _orderDetail.orderReference)
+        let packetNumber2 = OrderDetailInforRow(.packagesNumber,"\(_orderDetail.packages)")
 
-        let cartonsNumber = OrderDetailInforRow(.cartonsNumber,
-                                                "\(_orderDetail.cartons)")
-        let seq = OrderDetailInforRow(.SEQ,
-                                                 "\(_orderDetail.seq)")
+        let cartonsNumber = OrderDetailInforRow(.cartonsNumber,"\(_orderDetail.cartons)")
+        let seq = OrderDetailInforRow(.SEQ,"\(_orderDetail.seq)")
 
         let vehical = OrderDetailInforRow(.vehicle, _orderDetail.truck_name)
-        let collectCall = OrderDetailInforRow(.collectCall,
-                                              _orderDetail.collectionCall)
-        let coordinationPhone = OrderDetailInforRow(.coordinationPhone,
-                                          _orderDetail.coordinationPhone)
-        let executionTime = OrderDetailInforRow(.executionTime,
-                                                "\(_orderDetail.standby)" + " " + "minutes".localized)
-        let receiverName = OrderDetailInforRow(.receiverName,
-                                               _orderDetail.receiveName)
+        let collectCall = OrderDetailInforRow(.collectCall,_orderDetail.collectionCall)
+        let coordinationPhone = OrderDetailInforRow(.coordinationPhone,_orderDetail.coordinationPhone)
+        let executionTime = OrderDetailInforRow(.executionTime,"\(_orderDetail.standby)" + " " + "minutes".localized)
+        let receiverName = OrderDetailInforRow(.receiverName,_orderDetail.receiveName)
         
-        let apartment = OrderDetailInforRow(.apartment,
-                                               E(_orderDetail.apartment))
-        let floor = OrderDetailInforRow(.floor,
-                                            E(_orderDetail.floor))
-        let entrance = OrderDetailInforRow(.entrance,
-                                            E(_orderDetail.entrance))
+        let apartment = OrderDetailInforRow(.apartment,E(_orderDetail.apartment))
+        let floor = OrderDetailInforRow(.floor,E(_orderDetail.floor))
+        let entrance = OrderDetailInforRow(.entrance,E(_orderDetail.entrance))
         var fullAddress = _orderDetail.full_addr
-        if fullAddress == nil {
-            if let orderType = OrderType(rawValue: _orderDetail.orderTypeId){
-                switch orderType{
-                case .delivery:
-                    fullAddress = E(_orderDetail.toAddressFullAddress)
-                case .pickup:
-                    fullAddress = E(_orderDetail.from_address_full_addr)
-                case .deliveryAndPickup:
-                    break
-                }
-            }
-        }
-    
         let address = OrderDetailInforRow(.address,E(fullAddress))
-        let phone = OrderDetailInforRow(.phone,
-                                        _orderDetail.receiverPhone)
+        let phone = OrderDetailInforRow(.phone,_orderDetail.receiverPhone)
         
-        shouldFilterOrderItemsList = _orderDetail.items.filter({$0.statusCode == "OP"}).count > 0
         
         if ((Caches().user?.isAdmin)! ||
             (Caches().user?.isCoordinator)!) &&
@@ -241,7 +213,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     func handleUnableToStartAction() {
         let vc:ReasonListViewController = .loadSB(SB: .Common)
         vc.orderDetail = orderDetail
-        if let routeID = routeID {
+        if let routeID = route?.id {
             vc.routeID = routeID
         }
         vc.displayMode = .displayModeOrder
@@ -303,12 +275,11 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 extension OrderDetailViewController {
   func updateOrderStatus(_ status: String) {
     guard let _orderDetail = orderDetail,
-          let _routeID = routeID else { return }
-    _orderDetail.routeId = _routeID;
+          let _routeID = route?.id else { return }
+    _orderDetail.route_id = _routeID;
     _orderDetail.statusCode = status
     
     if !hasNetworkConnection {
-        _orderDetail.needUpdateToServer = true
         CoreDataManager.updateOrderDetail(_orderDetail) // Save order detail to local DB
         self.setupDataDetailInforRows()
         self.updateButtonStatus()
@@ -326,6 +297,11 @@ extension OrderDetailViewController {
             self?.updateButtonStatus()
             self?.tableView?.reloadData()
             self?.didUpdateStatus?(_orderDetail, (status == "DV" && _orderDetail.url?.sig == nil) ? 1 : nil)
+            //Save Date Start route
+            if status == "IP" &&
+                self?.route?.isFirstStartOrder ?? false{
+                Caches().dateStartRoute = Date.now
+            }
             
         case .error(let error):
             self?.showAlertView(error.getMessage())
@@ -433,7 +409,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         case .sectionDescription:
           if let cell = tableView.dequeueReusableCell(withIdentifier: addressCellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
             
-            let des = E(orderDetail?.instructions)
+            let des = E(orderDetail?.note)
             let description = OrderDetailInforRow(.comments,des)
             cell.orderDetailItem = description
             cell.selectionStyle = .none

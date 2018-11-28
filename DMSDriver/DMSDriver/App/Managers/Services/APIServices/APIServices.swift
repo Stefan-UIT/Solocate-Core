@@ -48,40 +48,6 @@ extension BaseAPIService {
                        callback: callback)
     }
     
-    //MARK: USER
-    @discardableResult
-    func login(_ userLogin:UserLoginModel, callback: @escaping APICallback<ResponseDataModel<UserModel>>) -> APIRequest {
-        return request(method: .POST,
-                   path: PATH_REQUEST_URL.LOGIN.URL,
-                   input: .dto(userLogin),
-                   callback: callback);
-    }
-    
-    @discardableResult
-    func logout(callback: @escaping APICallback<UserModel>) -> APIRequest {
-        return request(method: .GET,
-                       path:PATH_REQUEST_URL.LOGOUT.URL,
-                       input: .empty,
-                       callback: callback);
-    }
-    
-    @discardableResult
-    func forgotPassword(_ email: String, callback: @escaping APICallback<ResponseDataModel<EmptyModel>>) -> APIRequest {
-        let params = ["email": email]
-        return request(method: .POST,
-                       path: PATH_REQUEST_URL.FORGET_PASSWORD.URL ,
-                       input: .json(params),
-                       callback: callback);
-    }
-    
-    @discardableResult
-    func changePassword(_ para: [String: Any], callback: @escaping APICallback<ChangePasswordModel>) -> APIRequest {
-        return request(method: .POST,
-                       path: PATH_REQUEST_URL.CHANGE_PASSWORD.URL,
-                       input: .json(para),
-                       callback: callback);
-    }
-    
     
     @discardableResult
     func updateNotificationFCMToken(_ fcmToken:String,
@@ -112,7 +78,7 @@ extension BaseAPIService {
     func updateOrderStatus(_ order:OrderDetail,reason: Reason? = nil, callback: @escaping APICallback<OrderDetail>) -> APIRequest? {
         
         let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL, "\(order.id)", order.statusCode)
-        var params = ["route_id": "\(order.routeId)"]
+        var params = ["route_id": "\(order.route_id)"]
         if let _reason = reason {
             params["reason_msg"] = _reason.message != nil ? _reason.message :  _reason.reasonDescription
             params["reason_id"] = "\(_reason.id)"
@@ -323,24 +289,7 @@ extension BaseAPIService {
                         input: .empty,
                         callback: callback);
     }
-    
-    // MARK: - PROFILE
-    @discardableResult
-    func getUserProfile(callback: @escaping APICallback<ResponseDataModel<UserModel>>) -> APIRequest {
-        return request(method: .GET,
-                       path: PATH_REQUEST_URL.GET_USER_PROFILE.URL,
-                       input: .empty,
-                       callback: callback);
-    }
-  
-    @discardableResult
-    func updateUserProfile(_ user:UserModel, callback: @escaping APICallback<ResponseDataModel<UserModel>>) -> APIRequest {
-        return request(method: .PUT,
-                   path: PATH_REQUEST_URL.UPDATE_USER_PROFILE.URL,
-                   input: .dto(user),
-                   callback: callback);
-    }
-    
+        
     
     //MARK : -TASK
     @discardableResult

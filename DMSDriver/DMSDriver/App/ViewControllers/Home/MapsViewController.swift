@@ -114,10 +114,10 @@ class MapsViewController: UIViewController {
     
     
     private func showMarker(_ order:Order, sequence:Int) {
-        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: order.lat.doubleValue, longitude: order.lng.doubleValue))
+        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: 0, longitude: 0))
         let labelOrder = labelMarkerWithText("\(sequence)")
-        marker.title = "\(order.storeName)"
-        marker.snippet = "\(order.deliveryAdd)"
+        marker.title = ""
+        marker.snippet = ""
         marker.map = mapView
         marker.iconView = labelOrder
         marker.zIndex = 1

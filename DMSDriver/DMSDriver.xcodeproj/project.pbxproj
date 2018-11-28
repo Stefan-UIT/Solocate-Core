@@ -20,6 +20,9 @@
 		3B13CBEF211A8FF400A93E18 /* ScrollMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B13CBEA211A8FF400A93E18 /* ScrollMenuView.swift */; };
 		3B13CBF0211A8FF400A93E18 /* ScrollMenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B13CBEC211A8FF400A93E18 /* ScrollMenuCell.swift */; };
 		3B13CBF1211A8FF400A93E18 /* ScrollMenuCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B13CBED211A8FF400A93E18 /* ScrollMenuCell.xib */; };
+		3B17EB5B21AD049C00CDF7D3 /* TimerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17EB5A21AD049C00CDF7D3 /* TimerVC.swift */; };
+		3B17EB5D21AD304F00CDF7D3 /* API+User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17EB5C21AD304F00CDF7D3 /* API+User.swift */; };
+		3B17EB6321AE4C1500CDF7D3 /* LocalPushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17EB6121AE4C1500CDF7D3 /* LocalPushNotification.swift */; };
 		3B1BFC2C2186FD6C00464DBA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B1BFC2E2186FD6C00464DBA /* InfoPlist.strings */; };
 		3B21A0022140E009003CBC14 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B21A0012140E008003CBC14 /* ReachabilityManager.swift */; };
 		3B2A23A321193C330000817C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B2A23A221193C320000817C /* GoogleService-Info.plist */; };
@@ -250,6 +253,9 @@
 		3B13CBEC211A8FF400A93E18 /* ScrollMenuCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollMenuCell.swift; sourceTree = "<group>"; };
 		3B13CBED211A8FF400A93E18 /* ScrollMenuCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollMenuCell.xib; sourceTree = "<group>"; };
 		3B156C7C21316676008915C9 /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
+		3B17EB5A21AD049C00CDF7D3 /* TimerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimerVC.swift; sourceTree = "<group>"; };
+		3B17EB5C21AD304F00CDF7D3 /* API+User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+User.swift"; sourceTree = "<group>"; };
+		3B17EB6121AE4C1500CDF7D3 /* LocalPushNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocalPushNotification.swift; sourceTree = "<group>"; };
 		3B1BFC2D2186FD6C00464DBA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3B1BFC2F2186FD6F00464DBA /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3B21A0012140E008003CBC14 /* ReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
@@ -858,6 +864,22 @@
 			path = CoreDataManager;
 			sourceTree = "<group>";
 		};
+		3B17EB5821AD048300CDF7D3 /* TimmerVC */ = {
+			isa = PBXGroup;
+			children = (
+				3B17EB5A21AD049C00CDF7D3 /* TimerVC.swift */,
+			);
+			path = TimmerVC;
+			sourceTree = "<group>";
+		};
+		3B17EB6021AE4C1500CDF7D3 /* LocalPushNotification */ = {
+			isa = PBXGroup;
+			children = (
+				3B17EB6121AE4C1500CDF7D3 /* LocalPushNotification.swift */,
+			);
+			path = LocalPushNotification;
+			sourceTree = "<group>";
+		};
 		3B219FFF2140DFC6003CBC14 /* ReachabilityManager */ = {
 			isa = PBXGroup;
 			children = (
@@ -976,6 +998,7 @@
 		3B66B765210B113C000BDFEF /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				3B17EB6021AE4C1500CDF7D3 /* LocalPushNotification */,
 				3B81263021759061005AD2B5 /* LocalDatabase */,
 				3BE8CAA7214F67AC00371B8B /* SocketIOManager */,
 				3B219FFF2140DFC6003CBC14 /* ReachabilityManager */,
@@ -1300,6 +1323,7 @@
 				3B66B7D3210B113C000BDFEF /* APIServices.swift */,
 				3B66B7D4210B113C000BDFEF /* BaseAPIService.swift */,
 				3B355ED821ABE078004A2879 /* API+Route.swift */,
+				3B17EB5C21AD304F00CDF7D3 /* API+User.swift */,
 			);
 			path = APIServices;
 			sourceTree = "<group>";
@@ -1568,6 +1592,7 @@
 		3B66B8AD210B1148000BDFEF /* Route */ = {
 			isa = PBXGroup;
 			children = (
+				3B17EB5821AD048300CDF7D3 /* TimmerVC */,
 				3B00D04E2151F9D700B0B062 /* RouteListVC */,
 				3B66B8AE210B1148000BDFEF /* RouteDetailVC */,
 			);
@@ -2388,7 +2413,9 @@
 				3B9A376F21242FE8004D881C /* CoordinatorRouteModel.swift in Sources */,
 				3B66B8F0210B1149000BDFEF /* ListModel.swift in Sources */,
 				3B83C27B217EC685003B6355 /* PopUpTbvVC.m in Sources */,
+				3B17EB6321AE4C1500CDF7D3 /* LocalPushNotification.swift in Sources */,
 				3B66B916210B1149000BDFEF /* ProfileCell.swift in Sources */,
+				3B17EB5D21AD304F00CDF7D3 /* API+User.swift in Sources */,
 				3BF838D5218976B30056C4F1 /* RouteListVC.swift in Sources */,
 				3B66B823210B113D000BDFEF /* Date+Extension.swift in Sources */,
 				3BEAB86B214260B40039CFBB /* CoreReason+Ext.swift in Sources */,
@@ -2501,6 +2528,7 @@
 				3B66B8FA210B1149000BDFEF /* OrderDetailViewController.swift in Sources */,
 				3B66B821210B113D000BDFEF /* UIViewController+Extensions.swift in Sources */,
 				3B66B82B210B113D000BDFEF /* Optional+Extensions.swift in Sources */,
+				3B17EB5B21AD049C00CDF7D3 /* TimerVC.swift in Sources */,
 				3B66B817210B113D000BDFEF /* NSAtribitedString+Ext.swift in Sources */,
 				3B66B838210B113D000BDFEF /* CurrencyCell.swift in Sources */,
 				3B9A37672123D6B9004D881C /* SelectionModel.swift in Sources */,

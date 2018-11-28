@@ -3,14 +3,23 @@
 import Foundation
 
 extension String {
-  static func className(aClass: AnyClass) -> String {
-    return NSStringFromClass(aClass).components(separatedBy: ".").last!
-  }
-  
-  func substring(from: Int) -> String {
-    let index = self.index(self.startIndex, offsetBy: from)
-    return self.substring(from: index)
-  }
+    static func className(aClass: AnyClass) -> String {
+        return NSStringFromClass(aClass).components(separatedBy: ".").last!
+    }
+
+    func substring(from: Int) -> String {
+        let index = self.index(self.startIndex, offsetBy: from)
+        return self.substring(from: index)
+    }
+    
+    func parseToJSON() -> [String:Any]?{
+        let data = self.data(using: .utf8)!
+        guard let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String:AnyObject] else{
+            return nil
+        }
+        
+        return json
+    }
   
   var length: Int {    
     return self.count

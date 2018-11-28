@@ -40,4 +40,37 @@ extension UIButton {
       self.clipsToBounds = true;
       self.layer.masksToBounds = true;
     }
+    
+    func setStyleStartTimer()  {
+        self.roundedButton()
+        self.backgroundColor = AppColor.mainColor
+        self.setTitleColor(AppColor.white, for: .normal)
+        self.setTitle("Start".localized, for: .normal)
+
+    }
+    
+    func setStylePauseTimer()  {
+        self.roundedButton()
+        self.backgroundColor = UIColor.gray
+        self.setTitleColor(AppColor.white, for: .normal)
+        self.setTitle("Pause".localized, for: .normal)
+
+    }
+    
+    func setStyleResumeTimer()  {
+        self.roundedButton()
+        self.backgroundColor = AppColor.grayColor
+        self.setTitleColor(AppColor.white, for: .normal)
+        self.setTitle("Resume".localized, for: .normal)
+        
+    }
+    
+    func setStyleCancelTimer()  {
+        self.roundedButton()
+        self.backgroundColor = UIColor.white
+        self.setTitleColor(AppColor.redColor, for: .normal)
+        self.layer.borderWidth = 1
+        self.layer.borderColor = AppColor.redColor.cgColor
+        self.setTitle("Cancel".localized, for: .normal)
+    }
 }

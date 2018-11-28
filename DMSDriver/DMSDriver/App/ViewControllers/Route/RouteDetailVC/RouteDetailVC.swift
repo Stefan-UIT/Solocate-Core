@@ -20,7 +20,7 @@ enum TabBarItem:Int {
         case .Order:
             return "Orders List".localized
         case .Packages:
-            return "Packages".localized
+            return "Timer".localized
         case .Map :
             return "Map".localized
         case .Messages:
@@ -37,6 +37,8 @@ class RouteDetailVC: UITabBarController {
     
     let orderVC:OrderListViewController = .loadSB(SB: .Order)
     let packageVC:PackagesViewController = .loadSB(SB: .Packages)
+    let timerVC:TimerVC = .loadSB(SB: .Packages)
+
     let mapVC:MapsViewController = .loadSB(SB: .Map)
 
     var displayMode:DisplayMode = DisplayMode.Reduced{
@@ -105,26 +107,27 @@ class RouteDetailVC: UITabBarController {
             orderVC.displayMode = displayMode
         }
         if let route = self.route {
-            packageVC.route = route
-            packageVC.dateStringFilter = dateStringFilter
+            timerVC.route = route
+            //packageVC.route = route
+            //packageVC.dateStringFilter = dateStringFilter
         }
         if let route = self.route {
             mapVC.route = route
         }
 
         orderVC.tabBarItem.title = "Orders".localized
-        packageVC.tabBarItem.title = "Packages".localized
+        timerVC.tabBarItem.title = "Timmer".localized
         mapVC.tabBarItem.title = "Map".localized
         
         orderVC.tabBarItem.image = #imageLiteral(resourceName: "ic_orderlist")
-        packageVC.tabBarItem.image = #imageLiteral(resourceName: "ic_car")
+        timerVC.tabBarItem.image = #imageLiteral(resourceName: "ic_alarm-clock")
         mapVC.tabBarItem.image = #imageLiteral(resourceName: "ic_location")
 
         orderVC.tabBarItem.tag = 0
-        packageVC.tabBarItem.tag = 1
+        timerVC.tabBarItem.tag = 1
         mapVC.tabBarItem.tag = 2
         
-        self.setViewControllers([orderVC,packageVC,mapVC], animated: false)
+        self.setViewControllers([orderVC,timerVC,mapVC], animated: false)
     }
 }
 

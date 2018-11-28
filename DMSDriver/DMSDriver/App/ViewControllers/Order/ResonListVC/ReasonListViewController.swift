@@ -130,13 +130,12 @@ extension ReasonListViewController {
     
     func cancelOrder() {
         orderDetail?.statusCode = "CC"
-        orderDetail?.routeId = routeID
+        orderDetail?.route_id = routeID
         guard let order = orderDetail else{return}
         let reason = reasonList[selectedIndex]
         reason.message = tvMessange?.text
         
         if  !hasNetworkConnection {
-            order.needUpdateToServer = true
             order.reason = reason
             CoreDataManager.updateOrderDetail(order) // Save to local DB
             self.didCancelSuccess?(true, order)

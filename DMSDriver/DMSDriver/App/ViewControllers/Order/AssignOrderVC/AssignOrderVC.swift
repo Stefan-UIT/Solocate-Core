@@ -181,7 +181,9 @@ extension AssignOrderVC: UITableViewDelegate, UITableViewDataSource {
             
             let order = dataDisplay[row]
             vc.order = order
-            vc.routeID = order.routeId
+            let route = Route()
+            route.id = order.route_id
+            vc.route = route
             vc.dateStringFilter = dateStringFilter
             self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -277,8 +279,7 @@ extension AssignOrderVC:UITextFieldDelegate{
         let newSearchString = strSearch?.components(separatedBy: "\n").first?.lowercased()
         if !isEmpty(newSearchString) {
             dataDisplay = orderList.filter({ (item) -> Bool in
-                let isExist = item.driver_name.lowercased().contains(newSearchString!) ||
-                              item.orderReference.lowercased().contains(newSearchString!)
+                let isExist = item.driver_name.lowercased().contains(newSearchString!)
                 return isExist
             })
         }else {

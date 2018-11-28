@@ -53,6 +53,41 @@ class Cache: NSObject {
         }
     }
     
+    var drivingRule:DrivingRule?{
+        set {
+            if let dic = newValue?.getJSONString() {
+                setObject(obj: dic, forKey: Defaultkey.SF_DRIVING_RULE)
+            }
+        }
+        
+        get {
+            
+            if let dic = getObject(forKey: Defaultkey.SF_DRIVING_RULE) as? ResponseDictionary{
+                let drivingRule = Mapper<DrivingRule>().map(JSON: dic)
+                return drivingRule
+            }
+            
+            return nil
+        }
+    }
+    
+    var dateStartRoute:Date? {
+        set {
+            if let date = newValue {
+                setObject(obj: date, forKey: Defaultkey.SF_SAVE_DATE_START_ROUTE)
+            }
+        }
+        
+        get {
+            
+            if let date = getObject(forKey: Defaultkey.SF_SAVE_DATE_START_ROUTE) as? Date{
+                return date
+            }
+            
+            return nil
+        }
+    }
+    
     
     func setObject(obj: Any, forKey key: String) {
         let data = NSKeyedArchiver.archivedData(withRootObject: obj)

@@ -9,6 +9,20 @@
 import UIKit
 import ObjectMapper
 
+class DrivingRule: BaseModel {
+    var message:String?
+    var data:Int?
+    
+    required init?(map: Map) {
+        super.init()
+    }
+    
+    override func mapping(map: Map) {
+        message <- map["message"]
+        data <- map["data"]
+    }
+}
+
 class UserRole: BaseModel {
   
     var id:Int?

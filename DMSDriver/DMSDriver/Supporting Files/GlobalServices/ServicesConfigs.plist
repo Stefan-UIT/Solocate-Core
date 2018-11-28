@@ -80,5 +80,7 @@
 	<string>backend-api/v1/tasks/%@</string>
 	<key>UPDATE_STATUS_TASK</key>
 	<string>backend-api/v1/tasks/%@/%@</string>
+	<key>GET_DRIVER_RULE</key>
+	<string>masterdata/v1/variables/get?key=driving_rule</string>
 </dict>
 </plist>

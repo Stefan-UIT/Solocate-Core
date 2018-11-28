@@ -119,6 +119,8 @@ struct Defaultkey {
   static let keepLogin = "keepLogin"
   static let SF_USER = "SF_USER"
   static let SF_REMEBER_LOGIN = "SF_REMEBER_LOGIN"
+  static let SF_DRIVING_RULE = "SF_DRIVING_RULE"
+  static let SF_SAVE_DATE_START_ROUTE = "SF_SAVE_DATE_START_ROUTE"
 
 }
 

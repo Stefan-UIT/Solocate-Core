@@ -56,7 +56,6 @@ class Route: BaseModel {
     var  tanker:Tanker?
     var  status:Status?
     var  tracking:[Tracking]?
-    var  orders:[Order]?
     var  totalOrders = -1
     var  truckFloorCap = ""
     var  date = ""
@@ -71,6 +70,33 @@ class Route: BaseModel {
     var  warehouse:WarehouseModel?
     var  orderList:[Order] = []
     
+    var isFirstStartOrder:Bool{
+        get{
+            var result = true
+            for item in orderList{
+                if item.status != .newStatus{
+                   result = false
+                    break
+                }
+            }
+            
+            return result
+        }
+    }
+    
+    func checkInprogess() -> Bool {
+        var result = false
+        for item in orderList{
+            if item.status == .inProcessStatus{
+                result = true
+                break
+            }
+        }
+        
+        return result
+        
+    }
+    
     func orders(_ _status:StatusOrder) -> [Order] {
         let arr = getOrderList().filter({ (order) -> Bool in
             return order.status == _status
@@ -84,7 +110,6 @@ class Route: BaseModel {
         }
         return Array(orderList)
     }
-    
     
     lazy var routeStatus:RouteStatus = {
         switch E(status?.code){
@@ -198,7 +223,7 @@ class Route: BaseModel {
         end_time <- map["end_time"]
         endDate <- map["end"]
         shop_name <- map["shop_name"]
-        orders <- map["orders"]
+        orderList <- map["orders"]
         totalOrders <- map["orders_count"]
         
         if isEmpty(shop_name) {
@@ -219,10 +244,10 @@ class Route: BaseModel {
         //temp function
         var  addedArray = [Order]()
         for index in orderList {
-            let array = addedArray.filter({$0.lat == index.lat && $0.lng == index.lng})
-            if array.count > 0 {
-                continue
-            }
+//            let array = addedArray.filter({$0.lat == index.lat && $0.lng == index.lng})
+//            if array.count > 0 {
+//                continue
+//            }
             addedArray.append(index)
         }
         
@@ -232,7 +257,7 @@ class Route: BaseModel {
     func getChunkedListLocation() -> [[CLLocationCoordinate2D]] {
         let orderList = distinctArrayOrderList()
         let sortedList = orderList.sorted(by: { (lhs, rhs) -> Bool in
-            return lhs.sequence <= rhs.sequence
+            return lhs.seq <= rhs.seq
         })
         let currentLocation = LocationManager.shared.currentLocation?.coordinate
         var listLocation:[CLLocationCoordinate2D] = (currentLocation != nil) ? [currentLocation!] : []

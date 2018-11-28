@@ -15,8 +15,6 @@ class OrderListClvCell: UICollectionViewCell {
     
     fileprivate let cellIdentifier = "OrderItemTableViewCell"
     fileprivate let cellReducedIdentifier = "OrderItemCollapseTableViewCell"
-
-    fileprivate let cellHeight: CGFloat = 150.0
     
     fileprivate var orderList:[Order] = []
     
@@ -33,7 +31,6 @@ class OrderListClvCell: UICollectionViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        
         updateUI()
     }
     
@@ -80,9 +77,7 @@ extension OrderListClvCell: UITableViewDelegate, UITableViewDataSource {
                                                     for: indexPath) as? OrderItemTableViewCell {
             
             let order = orderList[indexPath.row]
-            order.storeName = E(route?.warehouse?.name)
             cell.order = order
-            cell.btnNumber?.setTitle("\(indexPath.row + 1)", for: .normal)
             return cell
         }
         return UITableViewCell()
@@ -103,7 +98,7 @@ extension OrderListClvCell: UITableViewDelegate, UITableViewDataSource {
         
         let order = orderList[indexPath.row]
         vc.order = order
-        vc.routeID = route?.id
+        vc.route = route
         vc.dateStringFilter = dateStringFilter
 
         self.rootVC?.navigationController?.pushViewController(vc, animated: true)

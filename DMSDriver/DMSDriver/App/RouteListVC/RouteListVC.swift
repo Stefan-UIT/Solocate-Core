@@ -152,24 +152,6 @@ class RouteListVC: BaseViewController {
         }
     }
     
-    /*
-    func setupSegmentControl() {
-        segmentControl?.segmentTitles = ["All".localized,
-                                         "Assigned".localized,
-                                         "Mine".localized]
-        
-        if(Caches().user?.isCoordinator ?? false ||
-            Caches().user?.isAdmin ?? false) {
-            segmentControl?.selectedSegmentIndex = tapDisplay.rawValue
-            conHeightViewSegment?.constant = 60
-            viewSegment?.isHidden = false
-            
-        }else{
-            viewSegment?.isHidden = true
-            conHeightViewSegment?.constant = 0
-        }
-    }
-    */
     func setupNavigateBar() {
         App().navigationService.delegate = self
         App().navigationService.updateNavigationBar(.Menu_Calenda, "Routes List".localized)
@@ -305,8 +287,29 @@ extension RouteListVC:UITableViewDelegate {
         route.tanker = tanker
         route.status = status
         route.totalOrders = 1
-        route.start_time = "2018-11-20 10:00:00"
-        route.end_time = "2018-11-20 10:00:00"
+        route.start_time = "2018-11-28 10:00:00"
+        route.end_time = "2018-11-29 10:00:00"
+        
+        let order = Order()
+        order.seq = 1
+        order.status_id  = 1
+        let address = Address()
+        address.address = "72 Phan Đình Phùng, Phường 2, Phú Nhuận, Hồ Chí Minh, Vietnam"
+        address.lattd = 123124.31
+        address.lngtd = 123141.31
+        address.name = "Name"
+        address.phone = "Phone"
+        
+        order.from = address
+        order.to = address
+        
+        let nature = Order.Detail()
+        nature.nature_id = 1
+        nature.vol = 200
+        
+        order.details = [nature,nature]
+        
+        route.orderList = [order,order,order]
         
         
         self.listRoutesOrigin = [route,route,route]
@@ -326,7 +329,7 @@ extension RouteListVC:UITableViewDelegate {
             print("Date Filter ==> \(dateStringFilter)")
             self.getRoutes(byDate: self.dateStringFilter, isFetch: isFetch)
         }
-  */
+         */
     }
     
     fileprivate func getRoutes(byDate date: String? = nil, isFetch:Bool = false) {
