@@ -12,8 +12,9 @@ import CoreLocation
 
 enum OrderDetailSection:Int {
     case sectionOrderStatus = 0
-    case sectionOrderInfor
-    case sectionInformation
+    case sectionFrom
+    case sectionTo
+    case sectionNatureOfGoods
     case sectionDescription
   
     static let count: Int = {
@@ -33,24 +34,19 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 
 
     fileprivate var orderInforStatus = [OrderDetailInforRow]()
-    fileprivate var orderInforRows = [OrderDetailInforRow]()
-    fileprivate var informationRows = [OrderDetailInforRow]()
+    fileprivate var orderInforFrom = [OrderDetailInforRow]()
+    fileprivate var orderInforTo = [OrderDetailInforRow]()
+    fileprivate var orderInforNatureOfGoods = [OrderDetailInforRow]()
  
     fileprivate let cellIdentifier = "OrderDetailTableViewCell"
     fileprivate let headerCellIdentifier = "OrderDetailHeaderCell"
     fileprivate let addressCellIdentifier =  "OrderDetailAddressCell"
     fileprivate let orderScanItemCellIdentifier = "OrderScanItemTableViewCell"
     fileprivate let orderDropdownCellIdentifier = "OrderDetailDropdownCell"
+    fileprivate let orderDetailNatureOfGoodsCell = "OrderDetailNatureOfGoodsCell"
     fileprivate var scanItems = [String]()
     fileprivate var arrTitleHeader:[String] = []
-
-    fileprivate let itemsIndex = 8
-    fileprivate var scannedObjectIndexs = [Int]()
-    fileprivate var shouldFilterOrderItemsList = true
     
-    fileprivate let cellHeight: CGFloat = 70.0
-    fileprivate let orderItemsPaddingTop: CGFloat = 40.0
-    fileprivate let orderItemCellHeight: CGFloat = 130.0
     
     fileprivate var scannedString = "" {
         didSet {
@@ -88,83 +84,41 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         }
         updateStatusButton?.isHidden = false
         orderInforStatus.removeAll()
-        orderInforRows.removeAll()
-        informationRows.removeAll()
+        orderInforFrom.removeAll()
+        orderInforTo.removeAll()
+        orderInforNatureOfGoods.removeAll()
         
         let displayDateTimeVN = DateFormatter.displayDateTimeVN
         let startDate = DateFormatter.serverDateFormater.date(from: _orderDetail.startTime)
         let endDate = DateFormatter.serverDateFormater.date(from: _orderDetail.endTime)
-        let status = OrderStatus(rawValue: _orderDetail.statusCode) ?? OrderStatus.open
-        let statusItem = OrderDetailInforRow(.status,status.statusName)
-        let urgency = OrderDetailInforRow(.urgency ,isHebewLang() ? _orderDetail.urgent_type_name_hb :  _orderDetail.urgent_type_name_en)
+        let status = StatusOrder(rawValue: _orderDetail.statusCode) ?? StatusOrder.newStatus
+        let statusItem = OrderDetailInforRow("Status",status.statusName)
+        let urgency = OrderDetailInforRow("Urgency" ,isHebewLang() ? _orderDetail.urgent_type_name_hb :  _orderDetail.urgent_type_name_en)
         orderInforStatus.append(statusItem)
         orderInforStatus.append(urgency)
 
         if  _orderDetail.status == .cancelStatus {
-            let reason = OrderDetailInforRow(.failureCause,
-                                             E(_orderDetail.reason?.name))
-            let mess = OrderDetailInforRow(.message,
-                                           _orderDetail.reason_msg ?? "-")
+            let reason = OrderDetailInforRow("Failure cause",_orderDetail.reason?.name ?? "-")
+            let mess = OrderDetailInforRow("Message",_orderDetail.reason_msg ?? "-")
             orderInforStatus.append(reason)
             orderInforStatus.append(mess)
         }
         
-        let driver = OrderDetailInforRow(.driver,"\(_orderDetail.driver_name)")
-        let orderId = OrderDetailInforRow(.orderId,"\(_orderDetail.id)")
-        
-        let startTime = OrderDetailInforRow(.startTime, (startDate != nil) ? displayDateTimeVN.string(from: startDate!) : "")
-        let endTime = OrderDetailInforRow(.endTime, (endDate != nil) ? displayDateTimeVN.string(from: endDate!) : "")
-        let clientName = OrderDetailInforRow(.clientName,_orderDetail.client_name)
-        let customerName = OrderDetailInforRow(.customerName,_orderDetail.custumer_name)
-        let type = OrderDetailInforRow(.type , isHebewLang() ? _orderDetail.order_type_name_hb : _orderDetail.order_type_name)
-        let doubleType = OrderDetailInforRow(.doubleType,"\(_orderDetail.doubleType)")
-        let packetNumber = OrderDetailInforRow(.packagesNumber , _orderDetail.orderReference)
-        let packetNumber2 = OrderDetailInforRow(.packagesNumber,"\(_orderDetail.packages)")
+        let fromAddress = OrderDetailInforRow("From address", E(_orderDetail.from?.address))
+        let fromContactName = OrderDetailInforRow("Contact name",_orderDetail.from?.name ?? "-")
+        let fromContactPhone = OrderDetailInforRow("Contact phone",_orderDetail.from?.phone ?? "-")
 
-        let cartonsNumber = OrderDetailInforRow(.cartonsNumber,"\(_orderDetail.cartons)")
-        let seq = OrderDetailInforRow(.SEQ,"\(_orderDetail.seq)")
+        let toAddress = OrderDetailInforRow("To address", E(_orderDetail.to?.address))
+        let toContactName = OrderDetailInforRow("Contact name",_orderDetail.to?.name ?? "-")
+        let toContactPhone = OrderDetailInforRow("Contact phone",_orderDetail.to?.phone ?? "-")
 
-        let vehical = OrderDetailInforRow(.vehicle, _orderDetail.truck_name)
-        let collectCall = OrderDetailInforRow(.collectCall,_orderDetail.collectionCall)
-        let coordinationPhone = OrderDetailInforRow(.coordinationPhone,_orderDetail.coordinationPhone)
-        let executionTime = OrderDetailInforRow(.executionTime,"\(_orderDetail.standby)" + " " + "minutes".localized)
-        let receiverName = OrderDetailInforRow(.receiverName,_orderDetail.receiveName)
+        orderInforFrom.append(fromAddress)
+        orderInforFrom.append(fromContactName)
+        orderInforFrom.append(fromContactPhone)
         
-        let apartment = OrderDetailInforRow(.apartment,E(_orderDetail.apartment))
-        let floor = OrderDetailInforRow(.floor,E(_orderDetail.floor))
-        let entrance = OrderDetailInforRow(.entrance,E(_orderDetail.entrance))
-        var fullAddress = _orderDetail.full_addr
-        let address = OrderDetailInforRow(.address,E(fullAddress))
-        let phone = OrderDetailInforRow(.phone,_orderDetail.receiverPhone)
-        
-        
-        if ((Caches().user?.isAdmin)! ||
-            (Caches().user?.isCoordinator)!) &&
-            _orderDetail.status == StatusOrder.newStatus {
-            orderInforRows.append(driver)
-        }
-        orderInforRows.append(orderId)
-        orderInforRows.append(type)
-        orderInforRows.append(packetNumber)
-        orderInforRows.append(startTime)
-        orderInforRows.append(endTime)
-        orderInforRows.append(executionTime)
-        orderInforRows.append(doubleType)
-        orderInforRows.append(packetNumber2)
-        orderInforRows.append(cartonsNumber)
-        orderInforRows.append(vehical)
-        orderInforRows.append(seq)
-        
-        informationRows.append(clientName)
-        informationRows.append(customerName)
-        informationRows.append(receiverName)
-        informationRows.append(phone)
-        informationRows.append(collectCall)
-        informationRows.append(coordinationPhone)
-        informationRows.append(apartment)
-        informationRows.append(floor)
-        informationRows.append(entrance)
-        informationRows.append(address)
+        orderInforTo.append(toAddress)
+        orderInforTo.append(toContactName)
+        orderInforTo.append(toContactPhone)
     }
     
     override func updateUI()  {
@@ -179,15 +133,16 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     func setupTableView() {
         let orderScanItemNib = UINib(nibName: orderScanItemCellIdentifier, bundle: nil)
         tableView?.register(orderScanItemNib, forCellReuseIdentifier: orderScanItemCellIdentifier)
-        tableView?.estimatedRowHeight = cellHeight
+        tableView?.estimatedRowHeight = 100
         tableView?.rowHeight = UITableViewAutomaticDimension
     }
     
     func initVar()  {
-        arrTitleHeader = ["Order Status".localized,
-                          "Order Information".localized,
-                          "Information".localized,
-                          "Instructions".localized]
+        arrTitleHeader = ["ORDER STATUS".localized,
+                          "FROM".localized,
+                          "TO".localized,
+                          "NATURE OF GOODS".localized,
+                          "INSTRUCTIONS".localized]
         
         setupDataDetailInforRows()
     }
@@ -296,7 +251,7 @@ extension OrderDetailViewController {
             self?.setupDataDetailInforRows()
             self?.updateButtonStatus()
             self?.tableView?.reloadData()
-            self?.didUpdateStatus?(_orderDetail, (status == "DV" && _orderDetail.url?.sig == nil) ? 1 : nil)
+            self?.didUpdateStatus?(_orderDetail,(status == "DV" && _orderDetail.url?.sig == nil) ? 1 : nil)
             //Save Date Start route
             if status == "IP" &&
                 self?.route?.isFirstStartOrder ?? false{
@@ -317,14 +272,18 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section)!
+        guard let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section) else {
+            return 0
+        }
         switch orderSection {
         case .sectionOrderStatus:
             return orderInforStatus.count
-        case .sectionOrderInfor:
-            return orderInforRows.count
-        case .sectionInformation:
-            return informationRows.count
+        case .sectionFrom:
+            return orderInforFrom.count
+        case .sectionTo:
+            return orderInforTo.count
+        case .sectionNatureOfGoods:
+            return orderDetail?.details?.count ?? 0
         case .sectionDescription:
           return 1;
         }
@@ -377,40 +336,52 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 
                 return cell
             }
-        case .sectionOrderInfor:
-            let item = orderInforRows[indexPath.row]
-            var identifier = cellIdentifier
-            if item.type == .driver {
-                identifier = orderDropdownCellIdentifier
-            }
-            if let cell = tableView.dequeueReusableCell(withIdentifier: identifier,
+        case .sectionFrom:
+            let item = orderInforFrom[indexPath.row]
+            if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
                                                         for: indexPath) as? OrderDetailTableViewCell {
                 cell.orderDetailItem = item
                 cell.delegate = self
                 cell.selectionStyle = .none
                 
-                if indexPath.row == orderInforRows.count - 1{
+                if indexPath.row == orderInforFrom.count - 1{
                     cell.vContent?.roundCornersLRB()
                 }
                 return cell
             }
         
-        case .sectionInformation:
-            let item = informationRows[indexPath.row]
+        case .sectionTo:
+            let item = orderInforTo[indexPath.row]
             if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
               cell.orderDetailItem = item
               cell.selectionStyle = .none
 
-                if indexPath.row == informationRows.count - 1{
+                if indexPath.row == orderInforTo.count - 1{
                     cell.vContent?.roundCornersLRB()
                 }
               return cell
             }
+            
+        case .sectionNatureOfGoods:
+            if let cell = tableView.dequeueReusableCell(withIdentifier: orderDetailNatureOfGoodsCell,
+                                                        for: indexPath) as? OrderDetailTableViewCell {
+                cell.selectionStyle = .none
+                
+                let detail = orderDetail?.details?[indexPath.row]
+                cell.nameLabel?.text = detail?.nature?.name
+                cell.contentLabel?.text = "\(detail?.vol ?? 0)"
+                
+                if indexPath.row == (orderDetail?.details?.count ?? 0 ) - 1{
+                    cell.vContent?.roundCornersLRB()
+                }
+                return cell
+            }
+            
         case .sectionDescription:
           if let cell = tableView.dequeueReusableCell(withIdentifier: addressCellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
             
             let des = E(orderDetail?.note)
-            let description = OrderDetailInforRow(.comments,des)
+            let description = OrderDetailInforRow("Instructions",des)
             cell.orderDetailItem = description
             cell.selectionStyle = .none
             cell.vContent?.roundCornersLRB()
@@ -423,14 +394,14 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
   }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let orderSection:OrderDetailSection = OrderDetailSection(rawValue: indexPath.section)!
+        guard let orderSection = OrderDetailSection(rawValue:indexPath.section) else {
+            return
+        }
         let row = indexPath.row
         switch orderSection {
-        case .sectionInformation:
-            if row == informationRows.count - 2 ||
-                row == informationRows.count - 3 ||
-                row == informationRows.count - 4{// Phone row
-                let item = informationRows[row]
+        case .sectionFrom:
+            if row == orderInforFrom.count - 1 {// Phone row
+                let item = orderInforFrom[row]
             
                 if !isEmpty(item.content){
                     let urlString = "tel://\(item.content)"
@@ -439,7 +410,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                     }
                 }
                 
-            }else if (row == informationRows.count - 1){ //Address row
+            }else if (row == 0){ //Address row
                 let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
                 if let _orderDetail = orderDetail {
                     vc.orderLocation = _orderDetail.location

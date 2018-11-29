@@ -59,7 +59,7 @@ class AssignOrderCell: UITableViewCell {
         lblFromdate?.text = startDate != nil ? displayDateTimeVN.string(from: startDate!) : ""
         lblTodate?.text = endDate != nil ? displayDateTimeVN.string(from: endDate!) : ""
         
-        let status = OrderStatus(rawValue: order.statusCode) ?? OrderStatus.open
+        let status = StatusOrder(rawValue: order.statusCode) ?? StatusOrder.newStatus
         btnStatus?.setTitle("\(status.statusName)", for: .normal)
         btnStatus?.setTitleColor(order.colorStatus, for: .normal)
         btnStatus?.borderWidth = 1.0;

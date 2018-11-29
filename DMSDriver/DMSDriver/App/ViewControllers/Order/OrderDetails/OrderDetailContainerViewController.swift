@@ -155,7 +155,7 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
     
     private  func setupViewControllerForPagerTab() -> [UIViewController] {
         orderInfoDetailVC.dateStringFilter = dateStringFilter
-        orderInfoDetailVC.orderDetail = orderDetail
+        orderInfoDetailVC.orderDetail = order?.convertToOrderDetail()
         orderInfoDetailVC.didUpdateStatus = { [weak self] (orderDetail, shouldMoveToTab)  in
             self?.getOrderDetail(isFetch: true)
             self?.onUpdateOrderStatus?(orderDetail)

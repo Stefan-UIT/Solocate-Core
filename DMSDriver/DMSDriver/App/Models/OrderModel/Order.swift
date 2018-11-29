@@ -15,6 +15,19 @@ enum StatusOrder: String {
     case inProcessStatus = "IP"
     case deliveryStatus = "DV"
     case cancelStatus = "CC"
+    
+    var statusName: String {
+        switch self {
+        case .newStatus:
+            return "New".localized
+        case .inProcessStatus:
+            return "In Progress".localized
+        case .deliveryStatus:
+            return "Finished".localized
+        case .cancelStatus:
+            return "Cancelled".localized
+        }
+    }
 }
 
 enum OrderType:Int {
@@ -196,6 +209,10 @@ class Order: BaseModel {
         orderDetail.id  = id
         orderDetail.statusName   =  statusName
         orderDetail.seq = seq
+        orderDetail.from = from
+        orderDetail.to = to
+        orderDetail.details = details
+        orderDetail.status_id = status_id
         return orderDetail
     }
 }

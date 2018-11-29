@@ -111,22 +111,22 @@ class TaskDetailVC: BaseViewController {
         let dlvy_start_time = DateFormatter.serverDateFormater.date(from: E(_task.dlvy_start_time))
         let dlvy_end_time = DateFormatter.serverDateFormater.date(from: E(_task.dlvy_end_time))
         let status = TaskStatus(rawValue: E(_task.task_sts)) ?? TaskStatus.open
-        let statusItem = OrderDetailInforRow(.status,status.statusName)
-        let urgency = OrderDetailInforRow(.urgency ,isHebewLang() ? E(_task.urgent_type_name_hb) :  E(_task.urgent_type_name_en))
-        let reason = OrderDetailInforRow(.failureCause,E(_task.reason?.name))
-        let mess = OrderDetailInforRow(.message,E(_task.reason_msg))
-        let driver = OrderDetailInforRow(.driver,"\(E(_task.driver_name))")
-        let taskId = OrderDetailInforRow(.taskId,"\(_task.task_id ?? 0)")
-        let startTime = OrderDetailInforRow(.startTime, (dlvy_start_time != nil) ? displayHour.string(from: dlvy_start_time!) : "")
-        let endTime = OrderDetailInforRow(.endTime, (dlvy_end_time != nil) ? displayHour.string(from: dlvy_end_time!) : "")
-        let date = OrderDetailInforRow(.date,(deliveryDate != nil) ? displayDateVN.string(from: deliveryDate!) : "")
-        let clientName = OrderDetailInforRow(.clientName,E(_task.client_name))
-        let customerName = OrderDetailInforRow(.customerName ,E(_task.customer_name))
-        let collectCall = OrderDetailInforRow(.collectCall,E(_task.collect_call))
-        let coordinationPhone = OrderDetailInforRow(.coordinationPhone, E(_task.coord_phone))
-        let receiverName = OrderDetailInforRow(.receiverName,E(_task.rcvr_name))
-        let phone = OrderDetailInforRow(.phone, E(_task.rcvr_phone))
-        let address = OrderDetailInforRow(.address,E(_task.full_addr))
+        let statusItem = OrderDetailInforRow("Status",status.statusName)
+        let urgency = OrderDetailInforRow("Urgency" ,isHebewLang() ? E(_task.urgent_type_name_hb) :  E(_task.urgent_type_name_en))
+        let reason = OrderDetailInforRow("Failure cause",E(_task.reason?.name))
+        let mess = OrderDetailInforRow("Message",E(_task.reason_msg))
+        let driver = OrderDetailInforRow("Driver","\(E(_task.driver_name))")
+        let taskId = OrderDetailInforRow("TaskId","\(_task.task_id ?? 0)")
+        let startTime = OrderDetailInforRow("Start time", (dlvy_start_time != nil) ? displayHour.string(from: dlvy_start_time!) : "")
+        let endTime = OrderDetailInforRow("End time", (dlvy_end_time != nil) ? displayHour.string(from: dlvy_end_time!) : "")
+        let date = OrderDetailInforRow("Date",(deliveryDate != nil) ? displayDateVN.string(from: deliveryDate!) : "")
+        let clientName = OrderDetailInforRow("Client name",E(_task.client_name))
+        let customerName = OrderDetailInforRow("Customer name" ,E(_task.customer_name))
+        let collectCall = OrderDetailInforRow("Collectcall",E(_task.collect_call))
+        let coordinationPhone = OrderDetailInforRow("Coordination phone", E(_task.coord_phone))
+        let receiverName = OrderDetailInforRow("Receiver name",E(_task.rcvr_name))
+        let phone = OrderDetailInforRow("Phone", E(_task.rcvr_phone))
+        let address = OrderDetailInforRow("Address",E(_task.full_addr))
     
         orderInforStatus.append(statusItem)
         orderInforStatus.append(urgency)
@@ -237,7 +237,7 @@ extension TaskDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section)!
+       /* let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section)!
         switch orderSection {
         case .sectionOrderStatus:
             return orderInforStatus.count
@@ -248,6 +248,8 @@ extension TaskDetailVC: UITableViewDataSource, UITableViewDelegate {
         case .sectionDescription:
             return 1;
         }
+        */
+        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -282,6 +284,7 @@ extension TaskDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        /*
         let orderSection:OrderDetailSection = OrderDetailSection(rawValue: indexPath.section)!
         switch orderSection {
         case .sectionOrderStatus:
@@ -319,11 +322,13 @@ extension TaskDetailVC: UITableViewDataSource, UITableViewDelegate {
                 return cell
             }
         }
+         */
         
         return UITableViewCell()
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        /*
         let orderSection:OrderDetailSection = OrderDetailSection(rawValue: indexPath.section)!
         let row = indexPath.row
         switch orderSection {
@@ -352,6 +357,7 @@ extension TaskDetailVC: UITableViewDataSource, UITableViewDelegate {
         default:
             break
         }
+         */
     }
 }
 

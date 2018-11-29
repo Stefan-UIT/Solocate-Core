@@ -29,7 +29,7 @@ class OrderScanItemTableViewCell: UITableViewCell {
       /* Added by Hoang Trinh for Masof - End */
       quantityLabel.text = "\(orderItem.qty)"
       descriptionLabel.text = orderItem.desc
-      let status = OrderStatus(rawValue: orderItem.statusCode)!
+      let status = StatusOrder(rawValue: orderItem.statusCode)!
       statusLabel.text = "(\(status.statusName))"
       barcodeLabel.text = orderItem.barcode
     }

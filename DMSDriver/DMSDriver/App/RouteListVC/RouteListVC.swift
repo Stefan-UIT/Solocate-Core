@@ -220,7 +220,8 @@ extension RouteListVC: UITableViewDataSource{
   
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell:RouteListCell = tableView.dequeueReusableCell(withIdentifier: "RouteListRowCell", for: indexPath) as! RouteListCell
+        let cell:RouteListCell = tableView.dequeueReusableCell(withIdentifier: "RouteListRowCell",
+                                                               for: indexPath) as! RouteListCell
         
         let row = indexPath.row
         let route = listRoutes[row]
