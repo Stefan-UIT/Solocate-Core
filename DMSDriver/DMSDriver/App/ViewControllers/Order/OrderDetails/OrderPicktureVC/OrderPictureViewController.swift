@@ -54,6 +54,69 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
     
     
     @IBAction func takePicture(_ sender: UIButton) {
+        ImagePickerView.shared().showImageGallarySinglePick(atVC: self) { (success, data) in
+            if let _data = data as? [PHAsset] {
+                var arrAttachfile:[AttachFileModel] = []
+                
+                for i in 0..<_data.count{
+                    let image:UIImage = self.getAssetThumbnail(asset: _data[i], size: ScreenSize.SCREEN_HEIGHT)
+                    if let data = UIImageJPEGRepresentation(image, 0.85) {
+                        let file: AttachFileModel = AttachFileModel()
+                        file.name = E(_data[i].originalFilename)
+                        file.type = ".png"
+                        file.mimeType = "image/png"
+                        file.contentFile = data
+                        arrAttachfile.append(file)
+                        
+                    }else {
+                        print("encode failure")
+                    }
+                }
+                
+                if arrAttachfile.count > 0{
+                    if !self.hasNetworkConnection{
+                        if self.orderDetail?.url == nil{
+                            self.orderDetail?.url = UrlFileMoldel()
+                        }
+                        self.orderDetail?.url?.doc?.append(arrAttachfile)
+                        CoreDataManager.updateOrderDetail(self.orderDetail!)
+                        self.updateOrderDetail?()
+                        self.initData()
+                        self.upateUI()
+                        self.tableView.reloadData()
+                    }
+                    self.uploadMultipleFile(files: arrAttachfile)
+                }
+                
+            }else if let image = data as? UIImage {
+                if let data = UIImageJPEGRepresentation(image, 0.85) {
+                    let file: AttachFileModel = AttachFileModel()
+                    file.name = "Picture_\(Date().timeIntervalSince1970)"
+                    file.type = ".png"
+                    file.mimeType = "image/png"
+                    file.contentFile = data
+                    if !self.hasNetworkConnection{
+                        if self.orderDetail?.url == nil{
+                            self.orderDetail?.url = UrlFileMoldel()
+                        }
+                        self.orderDetail?.url?.doc?.append(file)
+                        CoreDataManager.updateOrderDetail(self.orderDetail!, { (success, coreRoute) in
+                            self.updateOrderDetail?()
+                        })
+                        self.initData()
+                        self.upateUI()
+                        self.tableView.reloadData()
+                    }
+                    self.uploadMultipleFile(files: [file])
+                    
+                    
+                }else {
+                    print("encode failure")
+                }
+            }
+        }
+        
+        /*
         ImagePickerView.shared().showCameraOnly(atVC: self) { (success, data) in
             if let _data = data as? [PHAsset] {
                 var arrAttachfile:[AttachFileModel] = []
@@ -115,6 +178,7 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
                 }
             }
         }
+         */
     }
     
     @IBAction func clearPhotos(_ sender: UIButton) {

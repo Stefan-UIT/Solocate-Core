@@ -40,6 +40,7 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
         if orderDetail == nil {
             orderDetail = order?.convertToOrderDetail()
         }
+        updateUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -173,10 +174,12 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
             self?.getOrderDetail(isFetch: true)
         }
         
+        orderSignatureVC.orderDetail = order?.convertToOrderDetail()
         orderSignatureVC.updateOrderDetail = { [weak self] in
             self?.getOrderDetail(isFetch: true)
         }
         
+        orderPicktureVC.orderDetail = order?.convertToOrderDetail()
         orderPicktureVC.updateOrderDetail = { [weak self] in
             self?.getOrderDetail(isFetch: true)
         }
