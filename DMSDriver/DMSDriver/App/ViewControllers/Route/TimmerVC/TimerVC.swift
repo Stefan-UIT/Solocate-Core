@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SideMenu
 
 class TimerVC: BaseViewController {
     
@@ -43,6 +44,16 @@ class TimerVC: BaseViewController {
     }
     
     
+    override func updateNavigationBar() {
+        setupNavigateBar()
+    }
+    
+    func setupNavigateBar() {
+        App().navigationService.delegate = self
+        App().navigationService.updateNavigationBar(.Menu, "Counter".localized)
+    }
+    
+    
     //MARK: - ACTION
     @IBAction func onbtnClickCancel(btn:UIButton){
         isCancel = true
@@ -51,7 +62,7 @@ class TimerVC: BaseViewController {
         Caches().dateStartRoute = nil
         invalidTimmer()
         updateButtonAction()
-        lblTimeRemaining?.text = "0 : 0 : 0"
+        resetCountDownTime()
     }
     
     @IBAction func onbtnClickStart(btn:UIButton){
@@ -78,6 +89,52 @@ class TimerVC: BaseViewController {
         
         updateButtonAction()
     }
+}
+
+
+//MARK: - DMSNavigationServiceDelegate
+extension TimerVC:DMSNavigationServiceDelegate{
+    func didSelectedBackOrMenu() {
+        if Constants.isLeftToRight {
+            if let  menuLeft = SideMenuManager.default.menuLeftNavigationController{
+                present(menuLeft, animated: true, completion: nil)
+            }
+        }else{
+            if let menuRight = SideMenuManager.default.menuRightNavigationController{
+                present(menuRight, animated: true, completion: nil)
+            }
+        }
+    }
+}
+
+
+//MARK: - API
+fileprivate extension TimerVC{
+    func getDrivingRule()  {
+        self.showLoadingIndicator()
+        SERVICES().API.getDrivingRule {[weak self] (result) in
+            guard let strongSelf = self else {return}
+            strongSelf.dismissLoadingIndicator()
+            switch result{
+            case .object(let obj):
+                strongSelf.drivingRule = obj
+                strongSelf.startTimer()
+                
+            case .error(let error):
+                strongSelf.showAlertView(error.getMessage())
+            }
+        }
+    }
+}
+
+// MARK: - OTHER FUNTIONS
+fileprivate extension TimerVC{
+    func resetCountDownTime()  {
+        let totalMinutes = drivingRule?.data ?? 0
+        let hour = Int(totalMinutes / 60)
+        let minute = totalMinutes % 60
+        lblTimeRemaining?.text = "\(hour) : \(minute) : 0"
+    }
     
     func updateButtonAction()  {
         btnCancel?.setStyleCancelTimer()
@@ -90,15 +147,12 @@ class TimerVC: BaseViewController {
             btnCancel?.alpha = 0.3
         }
         
-        if isCancel {
-            btnStart?.setStyleStartTimer()
-            
+        if isStarting {
+            btnStart?.setStylePauseTimer()
+        }else if isPause {
+            btnStart?.setStyleResumeTimer()
         }else {
-            if isStarting {
-                btnStart?.setStylePauseTimer()
-            }else if isPause {
-                btnStart?.setStyleResumeTimer()
-            }
+            btnStart?.setStyleStartTimer()
         }
     }
     
@@ -107,7 +161,7 @@ class TimerVC: BaseViewController {
         
         let totalMinutes = drivingRule?.data ?? 0
         var dateStartRoute = Caches().dateStartRoute
-    
+        
         let hour = Int(totalMinutes / 60)
         let minute = totalMinutes % 60
         
@@ -123,8 +177,10 @@ class TimerVC: BaseViewController {
             
             isStarting = false
             isPause = false
+            isCancel = false
             invalidTimmer()
-            lblTimeRemaining?.text = "0 : 0 : 0"
+            updateButtonAction()
+            resetCountDownTime()
             
             if route?.checkInprogess() == true {
                 LocalNotification.createPushNotification(Date.now,
@@ -132,7 +188,6 @@ class TimerVC: BaseViewController {
                                                          "You have finished working shifts",
                                                          [:])
             }
-            updateButtonAction()
             return
         }
         
@@ -158,25 +213,5 @@ class TimerVC: BaseViewController {
     func invalidTimmer()  {
         timmerTime?.invalidate()
         timmerTime = nil
-    }
-}
-
-
-//MARK: - API
-fileprivate extension TimerVC{
-    func getDrivingRule()  {
-        self.showLoadingIndicator()
-        SERVICES().API.getDrivingRule {[weak self] (result) in
-            guard let strongSelf = self else {return}
-            strongSelf.dismissLoadingIndicator()
-            switch result{
-            case .object(let obj):
-                strongSelf.drivingRule = obj
-                strongSelf.startTimer()
-                
-            case .error(let error):
-                strongSelf.showAlertView(error.getMessage())
-            }
-        }
     }
 }

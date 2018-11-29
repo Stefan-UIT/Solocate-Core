@@ -97,20 +97,10 @@ class RouteListVC: BaseViewController {
     }
     
     func getDataFromDBLocal(_ stringDate:String) {
-        if Caches().user?.isCoordinator ?? false ||
-            Caches().user?.isAdmin ?? false {
-            CoreDataManager.queryCoordinatorRoute(stringDate) { (success, data) in
-                self.coordinatorRoute = data
+        CoreDataManager.queryRoutes(stringDate) { (success, routes) in
+            if success{
+                self.listRoutesOrigin = routes
                 self.doSearchRoutes()
-
-            }
-
-        }else {
-            CoreDataManager.queryRoutes(stringDate) { (success, routes) in
-                if success{
-                    self.listRoutesOrigin = routes
-                    self.doSearchRoutes()
-                }
             }
         }
     }
@@ -322,15 +312,9 @@ extension RouteListVC:UITableViewDelegate {
             return
         }
         apiCalling = true
-        if Caches().user?.isCoordinator ?? false ||
-            Caches().user?.isAdmin ?? false {
-            self.getRoutesByCoordinator(isFetch: isFetch)
-            
-        }else {
-            print("Date Filter ==> \(dateStringFilter)")
-            self.getRoutes(byDate: self.dateStringFilter, isFetch: isFetch)
-        }
-         */
+         print("Date Filter ==> \(dateStringFilter)")
+         self.getRoutes(byDate: self.dateStringFilter, isFetch: isFetch)
+        */
     }
     
     fileprivate func getRoutes(byDate date: String? = nil, isFetch:Bool = false) {
@@ -366,39 +350,6 @@ extension RouteListVC:UITableViewDelegate {
                     }
                 }
                
-            case .error(let error):
-                self?.showAlertView(error.getMessage())
-            }
-        }
-    }
-    
-    fileprivate func getRoutesByCoordinator(isFetch:Bool = false) {
-        if !isFetch {
-            showLoadingIndicator()
-        }
-        
-        API().getRoutesByCoordinator(byDate: dateStringFilter) {[weak self] (result) in
-            self?.dismissLoadingIndicator()
-            self?.tbvContent?.endRefreshControl()
-            self?.apiCalling = false
-            switch result{
-            case .object(let obj):
-                // Dave data to DB local
-                if let data = obj.data,
-                    data.drivers?.count > 0 ||
-                    data.coordinator?.count > 0 {
-                    self?.coordinatorRoute = data
-                    data.date = self?.dateStringFilter
-                    CoreDataManager.saveCoordinatorRoute(data, { (success) in
-                        if success{
-                            //self?.getDataFromDBLocal(E(self?.dateStringFilter))
-                        }
-                    })
-                }else{
-                    self?.coordinatorRoute = nil
-                    CoreDataManager.deleteCoordinatorRoute(E(self?.dateStringFilter))
-                }
-                
             case .error(let error):
                 self?.showAlertView(error.getMessage())
             }

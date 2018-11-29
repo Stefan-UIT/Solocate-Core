@@ -5,6 +5,7 @@ enum MenuItemType : Int {
   
   case PROFILE = 0
   case ROUTES
+  case COUNTER
   case ASSIGN
   case TASK
   case LOGOUT
@@ -21,6 +22,8 @@ enum MenuItemType : Int {
       return ""
     case .ROUTES:
         return "Routes".localized.uppercased()
+    case .COUNTER:
+        return "Counter".localized.uppercased()
     case .ASSIGN:
         return "Orders assignment".localized.uppercased()
     case .TASK:
@@ -36,6 +39,8 @@ enum MenuItemType : Int {
       return #imageLiteral(resourceName: "ic_avartar")
     case .ROUTES:
       return #imageLiteral(resourceName: "ic_route")
+    case .COUNTER:
+        return UIImage(named: "ic_alarm-clock")
     case .ASSIGN:
         return #imageLiteral(resourceName: "ic_orderlist")
     case .TASK:
@@ -126,6 +131,12 @@ extension SlideMenuVC:UITableViewDelegate{
 
         case .ROUTES:
             App().mainVC?.pushRouteListVC()
+            
+        case .COUNTER:
+            let vc:TimerVC = .loadSB(SB: SBName.Packages)
+            App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
+
+            break
         case .ASSIGN:
             let vc:AssignOrderVC = .loadSB(SB: .Order)
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)

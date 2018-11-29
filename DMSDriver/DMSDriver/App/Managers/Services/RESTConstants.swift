@@ -109,7 +109,6 @@ class RESTConstants: NSObject {
     }()
     
     class func getBASEURL() -> String? {
-        
         if let debugServer = Debug.shared.useServer {
             return debugServer;
         }

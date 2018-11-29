@@ -26,7 +26,7 @@
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="rpc-xW-eWc" id="tem-BK-QwZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="10T-38-SrD">
@@ -88,7 +88,7 @@
                                         <rect key="frame" x="0.0" y="155.5" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mbZ-wR-yub" id="7xS-lm-mE6">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="99.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="100"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" alignment="top" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="r1r-4H-h6S">
@@ -203,7 +203,7 @@
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="40" translatesAutoresizingMaskIntoConstraints="NO" id="gcn-Zz-fyb">
                                                 <rect key="frame" x="10" y="55.5" width="320" height="89.5"/>
                                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="80"/>
-                                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <color key="textColor" red="0.1764705882352941" green="0.67450980392156867" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -224,7 +224,9 @@
                                                     <constraint firstAttribute="width" constant="80" id="COZ-qA-9Ym"/>
                                                     <constraint firstAttribute="width" secondItem="say-kF-UkY" secondAttribute="height" id="aUB-MP-bUg"/>
                                                 </constraints>
-                                                <state key="normal" title="Start"/>
+                                                <state key="normal" title="Start">
+                                                    <color key="titleColor" red="0.1764705882352941" green="0.67450980392156867" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="40"/>
@@ -240,7 +242,9 @@
                                                     <constraint firstAttribute="width" secondItem="qCT-c4-J0x" secondAttribute="height" id="TYU-Ko-4jh"/>
                                                     <constraint firstAttribute="width" constant="80" id="gqI-XB-dbn"/>
                                                 </constraints>
-                                                <state key="normal" title="Cancel"/>
+                                                <state key="normal" title="Cancel">
+                                                    <color key="titleColor" red="0.1764705882352941" green="0.67450980392156867" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                </state>
                                                 <userDefinedRuntimeAttributes>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="40"/>
@@ -261,7 +265,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.74681613869863017" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="0.74681613869863017" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstItem="MNE-oq-Z7u" firstAttribute="top" secondItem="RF1-J6-XKI" secondAttribute="bottom" constant="20" id="6J5-Qu-7h2"/>
                                     <constraint firstItem="MNE-oq-Z7u" firstAttribute="leading" secondItem="Jje-oE-iLt" secondAttribute="leading" constant="15" id="83G-Jy-gpK"/>

@@ -51,7 +51,7 @@ extension UIButton {
     
     func setStylePauseTimer()  {
         self.roundedButton()
-        self.backgroundColor = UIColor.gray
+        self.backgroundColor = UIColor(hex: 0xCFA345)
         self.setTitleColor(AppColor.white, for: .normal)
         self.setTitle("Pause".localized, for: .normal)
 
@@ -59,10 +59,9 @@ extension UIButton {
     
     func setStyleResumeTimer()  {
         self.roundedButton()
-        self.backgroundColor = AppColor.grayColor
-        self.setTitleColor(AppColor.white, for: .normal)
+        self.backgroundColor = UIColor(hex: 0x7AA064)
+        self.setTitleColor(UIColor(hex: 0x04F921), for: .normal)
         self.setTitle("Resume".localized, for: .normal)
-        
     }
     
     func setStyleCancelTimer()  {

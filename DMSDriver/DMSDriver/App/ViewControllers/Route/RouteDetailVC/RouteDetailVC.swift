@@ -37,8 +37,6 @@ class RouteDetailVC: UITabBarController {
     
     let orderVC:OrderListViewController = .loadSB(SB: .Order)
     let packageVC:PackagesViewController = .loadSB(SB: .Packages)
-    let timerVC:TimerVC = .loadSB(SB: .Packages)
-
     let mapVC:MapsViewController = .loadSB(SB: .Map)
 
     var displayMode:DisplayMode = DisplayMode.Reduced{
@@ -107,27 +105,26 @@ class RouteDetailVC: UITabBarController {
             orderVC.displayMode = displayMode
         }
         if let route = self.route {
-            timerVC.route = route
-            //packageVC.route = route
-            //packageVC.dateStringFilter = dateStringFilter
+            packageVC.route = route
+            packageVC.dateStringFilter = dateStringFilter
         }
         if let route = self.route {
             mapVC.route = route
         }
 
         orderVC.tabBarItem.title = "Orders".localized
-        timerVC.tabBarItem.title = "Timmer".localized
+        packageVC.tabBarItem.title = "Timmer".localized
         mapVC.tabBarItem.title = "Map".localized
         
         orderVC.tabBarItem.image = #imageLiteral(resourceName: "ic_orderlist")
-        timerVC.tabBarItem.image = #imageLiteral(resourceName: "ic_alarm-clock")
+        packageVC.tabBarItem.image = #imageLiteral(resourceName: "ic_car")
         mapVC.tabBarItem.image = #imageLiteral(resourceName: "ic_location")
 
         orderVC.tabBarItem.tag = 0
-        timerVC.tabBarItem.tag = 1
+        packageVC.tabBarItem.tag = 1
         mapVC.tabBarItem.tag = 2
         
-        self.setViewControllers([orderVC,timerVC,mapVC], animated: false)
+        self.setViewControllers([orderVC,packageVC,mapVC], animated: false)
     }
 }
 
