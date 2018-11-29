@@ -21,19 +21,18 @@ extension UIButton {
         }
     }
   
-  @IBInspectable var style: String {
-    get{
-      return ""
-    }
-    set {
-      
-      if newValue == "roundedButton" {
-        roundedButton()
-      }else{
+    @IBInspectable var style: String {
+        get{
+            return ""
+        }
+        set {
+            if newValue == "roundedButton" {
+                roundedButton()
+            }else{
         
-      }
+            }
+        }
     }
-  }
     
    func roundedButton() {
       self.layer.cornerRadius = self.frame.height/2
@@ -54,7 +53,6 @@ extension UIButton {
         self.backgroundColor = UIColor(hex: 0xCFA345)
         self.setTitleColor(AppColor.white, for: .normal)
         self.setTitle("Pause".localized, for: .normal)
-
     }
     
     func setStyleResumeTimer()  {

@@ -38,4 +38,16 @@ struct Font {
         
         return font!
     }
+    
+    static func arialBold(with size: Int) -> UIFont {
+        let font = UIFont(name: "Arial-BoldMT", size: CGFloat(size))
+        
+        return font!
+    }
+    
+    static func arialRegular(with size: Int) -> UIFont {
+        let font = UIFont(name: "Arial", size: CGFloat(size))
+        
+        return font!
+    }
 }

@@ -259,6 +259,7 @@ extension RouteListVC:UITableViewDelegate {
     
     func getDataFromServer(_ isFetch:Bool = false)  {
         
+        
         let route = Route()
         let truck = Truck()
         truck.id = 10
@@ -305,6 +306,7 @@ extension RouteListVC:UITableViewDelegate {
         
         self.listRoutesOrigin = [route,route,route]
         self.doSearchRoutes()
+  
         
         /*
         let count = CoreDataManager.countRequestLocal()
@@ -312,8 +314,8 @@ extension RouteListVC:UITableViewDelegate {
             return
         }
         apiCalling = true
-         print("Date Filter ==> \(dateStringFilter)")
-         self.getRoutes(byDate: self.dateStringFilter, isFetch: isFetch)
+        print("Date Filter ==> \(dateStringFilter)")
+        self.getRoutes(byDate: self.dateStringFilter, isFetch: isFetch)
         */
     }
     

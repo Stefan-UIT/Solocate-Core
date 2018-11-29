@@ -166,7 +166,7 @@ extension MapsViewController{
             
             switch result{
             case .object(let obj):
-                strongSelf.route = obj
+                strongSelf.route = obj.data
                 strongSelf.drawMap()
                 
             case .error(let error):

@@ -42,6 +42,22 @@ class Address: BaseModel {
     var lngtd:Double?
     var name:String?
     var phone:String?
+    
+    override init() {
+        super.init()
+    }
+    
+    required init?(map: Map) {
+        super.init()
+    }
+    
+    override func mapping(map: Map) {
+        address <- map["address"]
+        lattd <- map["lattd"]
+        lngtd <- map["lngtd"]
+        name <- map["name"]
+        phone <- map["phone"]
+    }
 }
 
 
@@ -53,6 +69,21 @@ class Order: BaseModel {
         var nature_id:Int?
         var vol:Double?
         var nature:Nature?
+        
+        override init() {
+            super.init()
+        }
+        
+        required init?(map: Map) {
+            super.init()
+        }
+        
+        override func mapping(map: Map) {
+            order_id <- map["order_id"]
+            nature_id <- map["nature_id"]
+            vol <- map["vol"]
+            nature <- map["nature"]
+        }
     }
 
     class Nature: BaseModel {
@@ -60,6 +91,17 @@ class Order: BaseModel {
         var name:String?
         var cd:String?
         var hazardous_mtrl:String?
+        
+        required init?(map: Map) {
+            super.init()
+        }
+        
+        override func mapping(map: Map) {
+            id <- map["id"]
+            name <- map["name"]
+            cd <- map["cd"]
+            hazardous_mtrl <- map["hazardous_mtrl"]
+        }
     }
 
     var id = -1

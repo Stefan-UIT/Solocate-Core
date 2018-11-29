@@ -227,13 +227,12 @@ extension OrderListViewController{
 
             switch result{
             case .object(let obj):
-                self?.route = obj
+                self?.route = obj.data
                 self?.updateUI()
                 self?.clvContent?.reloadData()
-                CoreDataManager.updateRoute(obj) // Update route to DB local
-//                CoreDataManager.updateRoute(obj, { (success, route) in
-//                    //self?.getDataFromLocalDB()
-//                })
+                
+                guard let data = obj.data else {return}
+                CoreDataManager.updateRoute(data) // Update route to DB local
                 
             case .error(let error):
                 strongSelf.showAlertView(error.getMessage())

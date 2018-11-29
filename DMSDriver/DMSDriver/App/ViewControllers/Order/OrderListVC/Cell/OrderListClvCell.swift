@@ -157,11 +157,11 @@ extension OrderListClvCell{
             
             switch result{
             case .object(let obj):
-                self?.route = obj
+                self?.route = obj.data
                 self?.filterDataWithTapDisplay()
                 
                 // Update route to DB local
-                CoreDataManager.updateRoute(obj)
+                CoreDataManager.updateRoute(obj.data!)
             case .error(let error):
                 self?.rootVC?.showAlertView(error.getMessage())
                 

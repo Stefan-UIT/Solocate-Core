@@ -20,7 +20,7 @@ enum TabBarItem:Int {
         case .Order:
             return "Orders List".localized
         case .Packages:
-            return "Timer".localized
+            return "Packgages".localized
         case .Map :
             return "Map".localized
         case .Messages:
@@ -113,7 +113,7 @@ class RouteDetailVC: UITabBarController {
         }
 
         orderVC.tabBarItem.title = "Orders".localized
-        packageVC.tabBarItem.title = "Timmer".localized
+        packageVC.tabBarItem.title = "Packages".localized
         mapVC.tabBarItem.title = "Map".localized
         
         orderVC.tabBarItem.image = #imageLiteral(resourceName: "ic_orderlist")

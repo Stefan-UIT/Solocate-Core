@@ -49,7 +49,7 @@ class OrderItemTableViewCell: UITableViewCell {
         */
         
         btnNumber?.setTitle("\(order.seq)", for: .normal)
-        lblTitle?.text = "\(order.seq)"
+        lblTitle?.text = "OrderID-\(order.id)"
         lblFromAddresss?.text = order.from?.address
         lblToAddress?.text = order.to?.address
         lblNatureOfGoods?.text = "\(order.details?.count ?? 0)"

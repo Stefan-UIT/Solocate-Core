@@ -70,6 +70,35 @@ class Route: BaseModel {
     var  warehouse:WarehouseModel?
     var  orderList:[Order] = []
     
+    convenience required init?(map: Map) {
+        self.init()
+    }
+    
+    override func mapping(map: Map) {
+        id          <- map["id"]
+        truckId     <- map["truck_id"]
+        driverId    <- map["driver_id"]
+        truckFloorCap <- map["truck_floor_cap"]
+        date        <- map["date"]
+        status      <- map["route_sts"]
+        orderList   <- (map["order_list"])
+        route_number <- map["route_number"]
+        route_name_sts <- map["route_name_sts"]
+        warehouse <- map[KEY_WARE_HOUSE]
+        start_time <- map["start_time"]
+        startDate <- map["start"]
+        driver_name <- map["driver_name"]
+        end_time <- map["end_time"]
+        endDate <- map["end"]
+        shop_name <- map["shop_name"]
+        orderList <- map["orders"]
+        totalOrders <- map["orders_count"]
+        
+        if isEmpty(shop_name) {
+            shop_name = E(warehouse?.name)
+        }
+    }
+    
     var isFirstStartOrder:Bool{
         get{
             var result = true
@@ -198,36 +227,6 @@ class Route: BaseModel {
             }else if (hasInprocessStatus || hasDV){
                 status?.code = "IP"
             }
-        }
-    }
-
-  
-    convenience required init?(map: Map) {
-        self.init()
-    }
-  
-    override func mapping(map: Map) {
-        id          <- map["route_id"]
-        truckId     <- map["truck_id"]
-        driverId    <- map["driver_id"]
-        truckFloorCap <- map["truck_floor_cap"]
-        date        <- map["date"]
-        status      <- map["route_sts"]
-        orderList   <- (map["order_list"])
-        route_number <- map["route_number"]
-        route_name_sts <- map["route_name_sts"]
-        warehouse <- map[KEY_WARE_HOUSE]
-        start_time <- map["start_time"]
-        startDate <- map["start"]
-        driver_name <- map["driver_name"]
-        end_time <- map["end_time"]
-        endDate <- map["end"]
-        shop_name <- map["shop_name"]
-        orderList <- map["orders"]
-        totalOrders <- map["orders_count"]
-        
-        if isEmpty(shop_name) {
-            shop_name = E(warehouse?.name)
         }
     }
     

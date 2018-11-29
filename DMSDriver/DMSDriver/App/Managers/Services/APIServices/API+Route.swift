@@ -39,7 +39,7 @@ extension BaseAPIService {
     
     
     @discardableResult
-    func getRouteDetail(route:String, callback: @escaping APICallback<Route>) -> APIRequest {
+    func getRouteDetail(route:String, callback: @escaping APICallback<ResponseDataModel<Route>>) -> APIRequest {
         let path = String(format:PATH_REQUEST_URL.GET_ROUTE_DETAIL.URL, route)
         return request(method: .GET,
                        path: path,
