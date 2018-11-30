@@ -74,6 +74,36 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         checkConnetionInternet?(notification, hasNetworkConnection)
     }
     
+    override func updateUI()  {
+        super.updateUI()
+        DispatchQueue.main.async {[weak self] in
+            self?.vAction?.isHidden = (self?.orderDetail == nil)
+            self?.updateButtonStatus()
+            self?.setupTableView()
+        }
+    }
+    
+    override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return IndicatorInfo(title: "Detail".localized)
+    }
+    
+    
+    //MARK: - Initialize
+    func setupTableView() {
+        tableView?.estimatedRowHeight = 100
+        tableView?.rowHeight = UITableViewAutomaticDimension
+    }
+    
+    func initVar()  {
+        arrTitleHeader = ["ORDER STATUS".localized,
+                          "FROM".localized,
+                          "TO".localized,
+                          "NATURE OF GOODS".localized,
+                          "INSTRUCTIONS".localized]
+        
+        setupDataDetailInforRows()
+    }
+    
     func setupDataDetailInforRows() {
         var _orderDetail:OrderDetail = OrderDetail()
         if orderDetail != nil {
@@ -93,7 +123,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let urgency = OrderDetailInforRow("Urgency" ,isHebewLang() ? _orderDetail.urgent_type_name_hb :  _orderDetail.urgent_type_name_en)
         orderInforStatus.append(statusItem)
         orderInforStatus.append(urgency)
-
+        
         if  _orderDetail.statusOrder == .cancelStatus {
             let reason = OrderDetailInforRow("Failure cause",_orderDetail.reason?.name ?? "-")
             let mess = OrderDetailInforRow("Message",_orderDetail.reason_msg ?? "-")
@@ -107,7 +137,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let toAddress = OrderDetailInforRow("To address", E(_orderDetail.to?.address))
         let toContactName = OrderDetailInforRow("Contact name",_orderDetail.to?.name ?? "-")
         let toContactPhone = OrderDetailInforRow("Contact phone",_orderDetail.to?.phone ?? "-")
-
+        
         orderInforFrom.append(fromAddress)
         orderInforFrom.append(fromContactName)
         orderInforFrom.append(fromContactPhone)
@@ -115,34 +145,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforTo.append(toAddress)
         orderInforTo.append(toContactName)
         orderInforTo.append(toContactPhone)
-    }
-    
-    override func updateUI()  {
-        super.updateUI()
-        DispatchQueue.main.async {[weak self] in
-            self?.vAction?.isHidden = (self?.orderDetail == nil)
-            self?.updateButtonStatus()
-            self?.setupTableView()
-        }
-    }
-    
-    func setupTableView() {
-        tableView?.estimatedRowHeight = 100
-        tableView?.rowHeight = UITableViewAutomaticDimension
-    }
-    
-    func initVar()  {
-        arrTitleHeader = ["ORDER STATUS".localized,
-                          "FROM".localized,
-                          "TO".localized,
-                          "NATURE OF GOODS".localized,
-                          "INSTRUCTIONS".localized]
-        
-        setupDataDetailInforRows()
-    }
-  
-    override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-        return IndicatorInfo(title: "Detail".localized)
     }
   
   
@@ -220,53 +222,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 }
 
 
-// MARK: - Private methods
-extension OrderDetailViewController {
-  func updateOrderStatus(_ status: String) {
-    guard let _orderDetail = orderDetail else {
-            return
-    }
-    let listStatus =  CoreDataManager.getListStatus()
-    for item in listStatus {
-        if item.code == status{
-            _orderDetail.status = item
-            break
-        }
-    }
-    
-    if !hasNetworkConnection {
-        CoreDataManager.updateOrderDetail(_orderDetail) // Save order detail to local DB
-        self.setupDataDetailInforRows()
-        self.updateButtonStatus()
-        self.tableView?.reloadData()
-    }
-    
-    if hasNetworkConnection {
-        showLoadingIndicator()
-    }
-    API().updateOrderStatus(_orderDetail) {[weak self] (result) in
-        self?.dismissLoadingIndicator()
-        switch result{
-        case .object(_):
-            self?.setupDataDetailInforRows()
-            self?.updateButtonStatus()
-            self?.tableView?.reloadData()
-            self?.didUpdateStatus?(_orderDetail,(status == "IP" &&
-                                   _orderDetail.url?.sig == nil &&
-                                   _orderDetail.isRequireSign()) ? 1 : nil)
-            //Save Date Start route
-            if status == "IP" &&
-                self?.route?.isFirstStartOrder ?? false{
-                Caches().dateStartRoute = Date.now
-            }
-            
-        case .error(let error):
-            self?.showAlertView(error.getMessage())
-        }
-    }
-  }
-}
-
+// MARK: - UITableView
 extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate {
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -392,8 +348,8 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
           }
       }
    
-    return UITableViewCell()
-  }
+        return UITableViewCell()
+    }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard let orderSection = OrderDetailSection(rawValue:indexPath.section) else {
@@ -427,6 +383,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     }
 }
 
+//MARK: - OrderDetailTableViewCellDelegate
 extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
     func didSelectedDopdown(_ cell: OrderDetailTableViewCell, _ btn: UIButton) {
         let driver = DriverModel(orderDetail?.driver_id,E(orderDetail?.driver_name),nil)
@@ -444,6 +401,7 @@ extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
         }
     }
 }
+
 
 //MARK: - Otherfuntion
 fileprivate extension OrderDetailViewController{
@@ -483,6 +441,49 @@ fileprivate extension OrderDetailViewController{
 
 //MARK: API
 extension OrderDetailViewController{
+    func updateOrderStatus(_ status: String) {
+        guard let _orderDetail = orderDetail else {
+            return
+        }
+        let listStatus =  CoreDataManager.getListStatus()
+        for item in listStatus {
+            if item.code == status{
+                _orderDetail.status = item
+                break
+            }
+        }
+        
+        if !hasNetworkConnection {
+            CoreDataManager.updateOrderDetail(_orderDetail) // Save order detail to local DB
+            self.setupDataDetailInforRows()
+            self.updateButtonStatus()
+            self.tableView?.reloadData()
+        }
+        
+        if hasNetworkConnection {
+            showLoadingIndicator()
+        }
+        API().updateOrderStatus(_orderDetail) {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(_):
+                self?.setupDataDetailInforRows()
+                self?.updateButtonStatus()
+                self?.tableView?.reloadData()
+                self?.didUpdateStatus?(_orderDetail,(status == "IP" &&
+                    _orderDetail.url?.sig == nil &&
+                    _orderDetail.isRequireSign()) ? 1 : nil)
+                //Save Date Start route
+                if status == "IP" &&
+                    self?.route?.isFirstStartOrder ?? false{
+                    Caches().dateStartRoute = Date.now
+                }
+                
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
+        }
+    }
     
     func assignOrderToDriver(_ requestAssignOrder:RequestAssignOrderModel)  {
         self.showLoadingIndicator()
