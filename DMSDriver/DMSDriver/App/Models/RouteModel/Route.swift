@@ -43,6 +43,10 @@ class Status: BaseModel {
     var name:String?
     var code:String?
     
+    override init() {
+        super.init()
+    }
+    
     required init?(map: Map) {
         super.init()
     }
@@ -127,7 +131,7 @@ class Route: BaseModel {
     var  tanker_id = -1
     var  status_id = -1
     var  auto_status = -1
-    var  driver:UserModel?
+    var  driver:UserModel.UserInfo?
     var  truck:Truck?
     var  tanker:Tanker?
     var  status:Status?
@@ -171,13 +175,16 @@ class Route: BaseModel {
         truck <- map["truck"]
         tracking <- map["tracking"]
         driver <- map["driver"]
+        orderList.forEach { (order) in
+            order.driver_id = driver?.id ?? 0
+        }
     }
     
     var isFirstStartOrder:Bool{
         get{
             var result = true
             for item in orderList{
-                if item.status != .newStatus{
+                if item.statusOrder != .newStatus{
                    result = false
                     break
                 }
@@ -190,7 +197,7 @@ class Route: BaseModel {
     func checkInprogess() -> Bool {
         var result = false
         for item in orderList{
-            if item.status == .inProcessStatus{
+            if item.statusOrder == .inProcessStatus{
                 result = true
                 break
             }
@@ -202,7 +209,7 @@ class Route: BaseModel {
     
     func orders(_ _status:StatusOrder) -> [Order] {
         let arr = getOrderList().filter({ (order) -> Bool in
-            return order.status == _status
+            return order.statusOrder == _status
         })
         return arr
     }
@@ -275,19 +282,19 @@ class Route: BaseModel {
         
             orderList.forEach { (order) in
                 
-                if order.status == .newStatus{
+                if order.statusOrder == .newStatus{
                     hasNew = true
                 }
                 
-                if order.status == .inProcessStatus{
+                if order.statusOrder == .inProcessStatus{
                     hasInprocessStatus = true
                 }
                 
-                if order.status == .deliveryStatus{
+                if order.statusOrder == .deliveryStatus{
                     hasDV = true
                 }
                 
-                if order.status == .cancelStatus{
+                if order.statusOrder == .cancelStatus{
                     hasCanceled = true
                 }
             }
@@ -327,6 +334,19 @@ class Route: BaseModel {
         return addedArray
     }
     
+    func getListLocations() -> [Address] {
+        var  array = [Address]()
+        orderList.forEach { (order) in
+            if let fromAddress = order.from {
+                array.append(fromAddress)
+            }
+            if let toAddress = order.to{
+                array.append(toAddress)
+            }
+        }
+        return array
+    }
+    
     func getChunkedListLocation() -> [[CLLocationCoordinate2D]] {
         let orderList = distinctArrayOrderList()
         let sortedList = orderList.sorted(by: { (lhs, rhs) -> Bool in
@@ -336,7 +356,7 @@ class Route: BaseModel {
         var listLocation:[CLLocationCoordinate2D] = (currentLocation != nil) ? [currentLocation!] : []
         
         for i in 0..<(orderList.count) {
-            listLocation.append(sortedList[i].location)
+            listLocation.append(sortedList[i].locations)
         }
         
         var listChunked = listLocation.chunked(by: 22)

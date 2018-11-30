@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14315.18" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CoreAttachFile" representedClassName="CoreAttachFile" syncable="YES" codeGenerationType="class">
         <attribute name="boundary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contentFile" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -139,6 +139,11 @@
         <relationship name="orderList" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreOrder" inverseName="list" inverseEntity="CoreOrder" syncable="YES"/>
         <relationship name="warehouse" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoreWarehouse" inverseName="route" inverseEntity="CoreWarehouse" syncable="YES"/>
     </entity>
+    <entity name="CoreStatus" representedClassName="CoreStatus" syncable="YES" codeGenerationType="class">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="CoreUrlFile" representedClassName="CoreUrlFile" syncable="YES" codeGenerationType="class">
         <relationship name="doc" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreAttachFile" inverseName="listDoc" inverseEntity="CoreAttachFile" syncable="YES"/>
         <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreOrder" inverseName="url" inverseEntity="CoreOrder" syncable="YES"/>
@@ -161,5 +166,6 @@
         <element name="CoreRoute" positionX="-326" positionY="225" width="128" height="360"/>
         <element name="CoreUrlFile" positionX="-369" positionY="144" width="128" height="90"/>
         <element name="CoreWarehouse" positionX="-578" positionY="243" width="128" height="135"/>
+        <element name="CoreStatus" positionX="-369" positionY="144" width="128" height="90"/>
     </elements>
 </model>

@@ -19,7 +19,7 @@
 	<key>GET_ORDER_DETAIL</key>
 	<string>backend-api/v1/orders/%@</string>
 	<key>UPDATE_ORDER_STATUS</key>
-	<string>backend-api/v1/orders/%@/%@</string>
+	<string>transaction/v1/orders/%@/%@</string>
 	<key>UPLOAD_SIGNATURE</key>
 	<string>backend-api/v1/orders/add-sign/%@</string>
 	<key>UPDATE_SEQUENCE</key>
@@ -84,5 +84,7 @@
 	<string>masterdata/v1/variables/get?key=driving_rule</string>
 	<key>START_ROUTE</key>
 	<string>transaction/v1/routes/process/%@/IP</string>
+	<key>GET_LIST_STATUS</key>
+	<string>masterdata/v1/order-statuses/list-active</string>
 </dict>
 </plist>

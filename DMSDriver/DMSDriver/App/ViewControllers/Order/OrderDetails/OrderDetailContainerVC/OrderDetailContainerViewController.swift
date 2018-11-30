@@ -202,7 +202,8 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
         App().navigationService.updateNavigationBar(.BackOnly, "Order Detail".localized)
     }
   
-    private func getOrderDetail(isFetch:Bool = false) {
+    private func getOrderDetail(isFetch:Bool = false) { // Currently have not api get orderDetail
+        /*
         if hasConectionNetwork &&
             ReachabilityManager.isCalling == false {
             guard let _orderID = order?.id else { return }
@@ -241,6 +242,7 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
                 })
             }
         }
+         */
     }
 }
 

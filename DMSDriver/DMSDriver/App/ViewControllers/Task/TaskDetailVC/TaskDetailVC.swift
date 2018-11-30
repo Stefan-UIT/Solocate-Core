@@ -39,7 +39,6 @@ class TaskDetailVC: BaseViewController {
     fileprivate let cellIdentifier = "OrderDetailTableViewCell"
     fileprivate let headerCellIdentifier = "OrderDetailHeaderCell"
     fileprivate let addressCellIdentifier =  "OrderDetailAddressCell"
-    fileprivate let orderScanItemCellIdentifier = "OrderScanItemTableViewCell"
     fileprivate let orderDropdownCellIdentifier = "OrderDetailDropdownCell"
     fileprivate var scanItems = [String]()
     fileprivate var arrTitleHeader:[String] = []
@@ -161,8 +160,6 @@ class TaskDetailVC: BaseViewController {
     }
     
     func setupTableView() {
-        let orderScanItemNib = UINib(nibName: orderScanItemCellIdentifier, bundle: nil)
-        tableView?.register(orderScanItemNib, forCellReuseIdentifier: orderScanItemCellIdentifier)
         tableView?.estimatedRowHeight = cellHeight
         tableView?.rowHeight = UITableViewAutomaticDimension
         tableView?.addRefreshControl(self, action: #selector(fetchData))

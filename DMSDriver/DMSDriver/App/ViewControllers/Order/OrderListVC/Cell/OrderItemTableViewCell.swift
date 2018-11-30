@@ -64,7 +64,7 @@ class OrderItemTableViewCell: UITableViewCell {
             lblSubtitle?.text = order.order_type_name
         }
         
-        let status = StatusOrder(rawValue: order.statusCode) ?? StatusOrder.newStatus
+        let status = StatusOrder(rawValue: E(order.status?.code)) ?? StatusOrder.newStatus
         btnStatus?.setTitle("\(status.statusName)", for: .normal)
         btnStatus?.setTitleColor(order.colorStatus, for: .normal)
         btnStatus?.borderWidth = 1.0;

@@ -335,6 +335,7 @@ extension RouteListVC:UITableViewDelegate {
             switch result{
             case .object(_ ):
                 self?.fetchData()
+                Caches().dateStartRoute = Date.now
                 
             case .error(let error):
                 self?.showAlertView(E(error.message))

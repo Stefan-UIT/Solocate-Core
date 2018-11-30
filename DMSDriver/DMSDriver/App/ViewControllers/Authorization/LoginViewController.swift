@@ -126,11 +126,24 @@ fileprivate extension LoginViewController {
 
                 // Fetch reasons save to local DB
                 //self?.getReasonList()
+                self?.getListStatus()
                 
             case .error(let error):
                 self?.dismissLoadingIndicator()
                 self?.showAlertView(error.getMessage())
                 
+            }
+        }
+    }
+    
+    func getListStatus()  {
+        SERVICES().API.getListStatus { (result) in
+            switch result{
+            case .object(let obj):
+                guard let list = obj.data?.data else {return}
+                CoreDataManager.updateListStatus(list)
+            case .error(_ ):
+                break
             }
         }
     }

@@ -109,6 +109,7 @@ class Order: BaseModel {
     var to:Address?
     var route_id:Int = 0
     var status_id:Int?
+    var status:Status?
     var seq:Int = 0
     var pod_req:Int?
     var sig_req:Int?
@@ -119,8 +120,6 @@ class Order: BaseModel {
     var endTime = ""
     var urgent_type_name_hb = ""
     var urgent_type_name_en = ""
-    var statusName = ""
-    var statusCode = ""
     var driver_id:Int = 0
     var driver_name = ""
     var client_name = ""
@@ -162,6 +161,7 @@ class Order: BaseModel {
         details <- map["details"]
         url <- map["url"]
         urgent_type_id <- map["urgent_type_id"]
+        status <- map["status"]
         
         if  let dataFrom = map["from"].currentValue as? String{
             from    = Address(JSON: dataFrom.parseToJSON() ?? [:])
@@ -176,6 +176,23 @@ class Order: BaseModel {
         }
     }
     
+    var statusCode :String{
+        set{
+        }
+        get{
+            return E(status?.code)
+            
+        }
+    }
+    
+    var statusName :String{
+        set{
+            
+        }
+        get{
+            return E(status?.name)
+        }
+    }
 
     var colorUrgent:UIColor{
         get{
@@ -190,9 +207,9 @@ class Order: BaseModel {
         }
     }
     
-    var status:StatusOrder{
+    var statusOrder:StatusOrder{
         get{
-            return StatusOrder(rawValue: statusCode) ?? .newStatus
+            return StatusOrder(rawValue: E(status?.code)) ?? .newStatus
         }
     }
 
@@ -223,9 +240,25 @@ class Order: BaseModel {
         }
     }
     
+    var locations:[CLLocationCoordinate2D] {
+        get {
+             var arr:[CLLocationCoordinate2D] = []
+             if let fromlattd = from?.lattd ,
+                let fromLngtd = from?.lngtd {
+                arr.append(CLLocationCoordinate2D(latitude:fromlattd, longitude: fromLngtd))
+             }
+            
+            if let tolattd = to?.lattd ,
+                let toLngtd = to?.lngtd {
+                arr.append(CLLocationCoordinate2D(latitude:tolattd, longitude: toLngtd))
+            }
+            return arr
+        }
+    }
+    
     var colorStatus:UIColor {
         get{
-            switch status {
+            switch statusOrder {
             case .newStatus:
                 return AppColor.newStatus;
             case .inProcessStatus:
@@ -249,12 +282,14 @@ class Order: BaseModel {
     func convertToOrderDetail() -> OrderDetail {
         let orderDetail = OrderDetail()
         orderDetail.id  = id
-        orderDetail.statusName   =  statusName
+        orderDetail.status   =  status
         orderDetail.seq = seq
         orderDetail.from = from
         orderDetail.to = to
         orderDetail.details = details
         orderDetail.status_id = status_id
+        orderDetail.driver_id = driver_id
+        orderDetail.route_id = route_id
         return orderDetail
     }
 }

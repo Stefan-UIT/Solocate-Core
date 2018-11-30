@@ -20,6 +20,7 @@ enum Entity:String {
     case AttachFile = "CoreAttachFile"
     case UrlFile = "CoreUrlFile"
     case Reason = "CoreReason"
+    case CoreStatus = "CoreStatus"
     case Request = "CoreRequest"
 
 }
@@ -625,6 +626,29 @@ class _CoreDataManager {
                 self.saveContext(context)
             }
         }
+    }
+    
+    func updateListStatus(_ list:[Status]) {
+        clearDatabase(entity: .CoreStatus)
+        self.persistentContainer.performBackgroundTask { (context) in
+            list.forEach { (status) in
+                let coreStatus = self.createRecordForEntity(Entity.CoreStatus.rawValue,
+                                                            inManagedObjectContext: context) as? CoreStatus
+                coreStatus?.setAttributeFrom(status)
+                self.saveContext(context)
+            }
+        }
+    }
+    
+    func getListStatus() -> [Status] {
+        var results:[Status] = []
+        let items = fetchRecordsForEntity(Entity.CoreStatus.rawValue,
+                                          inManagedObjectContext: self.persistentContainer.viewContext) as? [CoreStatus]
+        items?.forEach({ (core) in
+            results.append(core.convertToStatusModel())
+        })
+        
+        return results
     }
     
     func getListReason() -> [Reason] {

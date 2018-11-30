@@ -38,8 +38,6 @@ extension  CoreOrder{
         order.driver_name = E(driver_name)
         order.id =  Int(id)
         order.seq = Int(seq)
-        order.statusCode = E(statusCode)
-        order.statusName = E(statusName)
         order.urgent_type_id = Int(urgent_type_id)
         
         return order
@@ -51,8 +49,6 @@ extension  CoreOrder{
         order.driver_name = E(driver_name)
         order.id =  Int(id)
         order.seq = Int(seq)
-        order.statusCode = E(statusCode)
-        order.statusName = E(statusName)
         order.urgent_type_id = Int(urgent_type_id)
         order.reason = reason?.convertToReasonOrderCC()
         order.url = url?.convertToUrlFileMoldel()

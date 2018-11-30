@@ -113,10 +113,10 @@ class MapsViewController: UIViewController {
     }
     
     
-    private func showMarker(_ order:Order, sequence:Int) {
-        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: 0, longitude: 0))
+    private func showMarker(_ address:Address, sequence:Int) {
+        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: address.lattd ?? 0, longitude: address.lngtd ?? 0))
         let labelOrder = labelMarkerWithText("\(sequence)")
-        marker.title = ""
+        marker.title = address.name
         marker.snippet = ""
         marker.map = mapView
         marker.iconView = labelOrder
@@ -132,10 +132,10 @@ class MapsViewController: UIViewController {
             currentLocationMarker.map = mapView
         }
         
-        let distinctArray = route!.distinctArrayOrderList()
-        for (index,order) in distinctArray.enumerated() {
+        let distinctArray = route!.getListLocations()
+        for (index,adress) in distinctArray.enumerated() {
             let seq = index + 1
-            showMarker(order, sequence:seq)
+            showMarker(adress, sequence:seq)
         }
     }
     
