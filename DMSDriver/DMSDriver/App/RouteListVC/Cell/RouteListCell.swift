@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol RouteListCellDelegate:AnyObject {
+    func routeListCell(_ cell:RouteListCell, didSelectStartRoute button:UIButton)
+}
+
 class RouteListCell: UITableViewCell {
     
     @IBOutlet weak var lblTitle:UILabel?
@@ -21,8 +25,12 @@ class RouteListCell: UITableViewCell {
 
     @IBOutlet weak var btnStatus:UIButton?
     @IBOutlet weak var btnColor:UIButton?
+    @IBOutlet weak var csHeightActionView:NSLayoutConstraint?
+    @IBOutlet weak var vAction:UIView?
   
     @IBOutlet weak var vContent:UIView?
+    
+    weak var delegate:RouteListCellDelegate?
 
 
 
@@ -38,4 +46,7 @@ class RouteListCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    @IBAction func onbtnClickStartRoute(btn:UIButton){
+        delegate?.routeListCell(self, didSelectStartRoute: btn)
+    }
 }

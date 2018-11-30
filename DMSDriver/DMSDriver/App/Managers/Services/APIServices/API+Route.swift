@@ -15,7 +15,7 @@ import CoreData
 
 extension BaseAPIService {
     @discardableResult
-    func getRoutes(byDate date:String? = nil, callback: @escaping APICallback<ResponseDataListModel<Route>>) -> APIRequest {
+    func getRoutes(byDate date:String? = nil, callback: @escaping APICallback<ResponseDataModel<ResponseGetRouteList>>) -> APIRequest {
         var newDate = date;
         if newDate == nil {
             newDate = Date().toString("MM/dd/yyyy")
@@ -53,6 +53,16 @@ extension BaseAPIService {
                             callback: @escaping APICallback<ResponseDataModel<PackageModel>>) -> APIRequest {
         let path = String(format:PATH_REQUEST_URL.GET_PACKAGES_IN_ROUTE.URL, routeID, date)
         return request(method: .GET,
+                       path: path,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func startRoute(_ routeID:String,
+                    callback: @escaping APICallback<ResponseDataModel<PackageModel>>) -> APIRequest {
+        let path = String(format:PATH_REQUEST_URL.START_ROUTE.URL, routeID)
+        return request(method: .PUT,
                        path: path,
                        input: .empty,
                        callback: callback);

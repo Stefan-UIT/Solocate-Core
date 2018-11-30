@@ -68,6 +68,7 @@ enum PATH_REQUEST_URL: String{
     case GET_TASK_DETAIL = "GET_TASK_DETAIL"
     case UPDATE_STATUS_TASK = "UPDATE_STATUS_TASK"
     case GET_DRIVING_RULE = "GET_DRIVER_RULE"
+    case START_ROUTE = "START_ROUTE"
 
     
     var URL:String  {

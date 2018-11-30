@@ -190,7 +190,7 @@ class _CoreDataManager {
                 let coreRoute = self.queryCoreRouteById(route.id,context)
                 if coreRoute != nil{
                     //context.delete(coreRoute!)
-                    self.updateRouteOnCoreCooradinator(coreRoute!, route, context)
+                    //self.updateRouteOnCoreCooradinator(coreRoute!, route, context)
                 }else{
                     let _ = self.insertRoute(route, context)
                 }
@@ -316,40 +316,6 @@ class _CoreDataManager {
         })
     }
     
-    func updateRouteOnCoreCooradinator(_ coreRoute:CoreRoute,  _ route:Route, _ context: NSManagedObjectContext) {
-        if coreRoute.id == route.id {
-            coreRoute.setAttribiteFrom(route)
-            let predicate = NSPredicate(format: "id = \(route.warehouse?.id ?? 0)")
-            let coreWarehouses = self.fetchRecordsForEntity(Entity.Warehouse.rawValue,
-                                                            predicate:predicate ,
-                                                            inManagedObjectContext: context)
-            
-            if coreWarehouses.count > 0{
-                var coreWarehouse:CoreWarehouse? = coreWarehouses.first as? CoreWarehouse
-                if coreWarehouses.count <= 0 {
-                    coreWarehouse = self.createRecordForEntity(Entity.Warehouse.rawValue,
-                                                               inManagedObjectContext: context) as? CoreWarehouse
-                }
-                coreWarehouse?.setAttributiteFrom(route.warehouse)
-                coreRoute.warehouse = coreWarehouse
-            }
-            
-            (coreRoute.orderList?.allObjects as? [CoreOrder])?.forEach({ (core) in
-                context.delete(core)
-            })
-
-            route.orderList.forEach({ (order) in
-                if let coreOrder = self.createRecordForEntity(Entity.Order.rawValue,
-                                                              inManagedObjectContext: context) as? CoreOrder {
-                    coreOrder.setAttribiteFrom(order)
-                    coreRoute.addToOrderList(coreOrder)
-                }
-            })
-            
-            self.saveContext(context)
-        }
-    }
-    
     
     //MARK : - ROUTE
     func updateRoute(_ route:Route,_ callback:((Bool,Route) -> Void)? = nil) {
@@ -361,29 +327,6 @@ class _CoreDataManager {
             reaults?.forEach { (coreRoute) in
                 if coreRoute.id == route.id {
                     coreRoute.setAttribiteFrom(route)
-                    
-                    if let wHouse = route.warehouse {
-                        let predicate = NSPredicate(format: "id = \(route.id)")
-                        let coreWereHouse = (self.fetchRecordsForEntity(Entity.Warehouse.rawValue,
-                                                                   predicate: predicate,
-                                                                   inManagedObjectContext: context) as? [CoreWarehouse])?.last
-                        
-                        
-                        if let _coreWereHouse = coreWereHouse{
-                            _coreWereHouse.setAttributiteFrom(wHouse)
-                        }else{
-                            let wareHouseDB = NSEntityDescription.entity(forEntityName:Entity.Warehouse.rawValue,
-                                                                         in: context)
-                            let wareHouse:CoreWarehouse = CoreWarehouse(entity: wareHouseDB!,
-                                                                        insertInto: context)
-                            // Set List Attribute
-                            wareHouse.setAttributiteFrom(wHouse)
-                            coreRoute.warehouse = wareHouse
-                        }
-                        self.saveContext(context)
-                    }
-                    
-                    
                     route.orderList.forEach({ (order) in
                         order.driver_id = route.driverId
                         order.driver_name = route.driver_name
@@ -429,16 +372,6 @@ class _CoreDataManager {
         
         let coreRoute:CoreRoute = CoreRoute(entity: routeDB!,
                                             insertInto: context)
-        // Set List Attribute
-        coreRoute.setAttribiteFrom(route)
-    
-        if let wHouse = route.warehouse {
-            let wareHouse:CoreWarehouse = CoreWarehouse(entity: wareHouseDB!,
-                                                        insertInto: context)
-            // Set List Attribute
-            wareHouse.setAttributiteFrom(wHouse)
-            coreRoute.warehouse = wareHouse
-        }
        
         route.orderList.forEach({ (order) in
             let coreOrder:CoreOrder = CoreOrder(entity: orderDB!,

@@ -31,14 +31,6 @@ class RouteListVC: BaseViewController {
 
     var dateStringFilter:String = Date().toString("MM/dd/yyyy")
     var dateFilter = Date()
-    
-    var coordinatorRoute:CoordinatorRoute?{
-        didSet{
-            DispatchQueue.main.async {[weak self] in
-                self?.reloadDataWithFilterMode((self?.tapDisplay)!)
-            }
-        }
-    }
 
     var tapDisplay:TapFilterRouteList = .All {
         didSet{
@@ -161,6 +153,7 @@ class RouteListVC: BaseViewController {
     }
     
     func reloadDataWithFilterMode(_ filterMode: TapFilterRouteList) {
+        /*
         self.listRoutes.removeAll()
         listRoutesOrigin.removeAll()
         switch filterMode{
@@ -186,6 +179,7 @@ class RouteListVC: BaseViewController {
         }
         
         self.doSearchRoutes()
+         */
     }
     
     //MARK: - Action
@@ -212,7 +206,6 @@ extension RouteListVC: UITableViewDataSource{
         
         let cell:RouteListCell = tableView.dequeueReusableCell(withIdentifier: "RouteListRowCell",
                                                                for: indexPath) as! RouteListCell
-        
         let row = indexPath.row
         let route = listRoutes[row]
         let displayDateTimeVN = DateFormatter.displayDateTimeVN
@@ -232,6 +225,9 @@ extension RouteListVC: UITableViewDataSource{
         cell.lblStartTime?.text = (startTime != nil) ? displayDateTimeVN.string(from: startTime!) : ""
         cell.lblEndTime?.text = (endTime != nil) ? displayDateTimeVN.string(from: endTime!) : ""
         cell.selectionStyle = .none
+        cell.csHeightActionView?.constant = (route.routeStatus == .New) ? 45 : 0
+        cell.vAction?.isHidden = (route.routeStatus == .New) ? false :true
+        cell.delegate = self
         
         return cell
     }
@@ -248,6 +244,25 @@ extension RouteListVC:UITableViewDelegate {
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
+ 
+ //MARK: - RouteListCellDelegate
+ extension RouteListVC :RouteListCellDelegate{
+    func routeListCell(_ cell: RouteListCell, didSelectStartRoute button: UIButton) {
+        guard let indexPath = tbvContent?.indexPath(for: cell) else {
+            return
+        }
+        let route = listRoutes[indexPath.row]
+
+        App().showAlertView("Do you want to start this route?".localized,
+                            positiveTitle: "YES".localized,
+                            positiveAction: {[weak self] (hasOK) in
+                                self?.startRoute(route: route)
+                                
+        }, negativeTitle: "NO".localized) { (cancel) in
+            return
+        }
+    }
+ }
 
 
 //MARK: - API
@@ -258,65 +273,16 @@ extension RouteListVC:UITableViewDelegate {
     }
     
     func getDataFromServer(_ isFetch:Bool = false)  {
-        
-        
-        let route = Route()
-        let truck = Truck()
-        truck.id = 10
-        truck.name = "Truck 5"
-        
-        let tanker = Tanker()
-        tanker.id = 20
-        tanker.name = "Tanker 22"
-        
-        let status = Status()
-        status.id = 1
-        status.code = "OP"
-        status.name = "New"
-        
-        route.id = 12
-        route.truck = truck
-        route.tanker = tanker
-        route.status = status
-        route.totalOrders = 1
-        route.start_time = "2018-11-28 10:00:00"
-        route.end_time = "2018-11-29 10:00:00"
-        
-        let order = Order()
-        order.seq = 1
-        order.status_id  = 1
-        let address = Address()
-        address.address = "72 Phan Đình Phùng, Phường 2, Phú Nhuận, Hồ Chí Minh, Vietnam"
-        address.lattd = 123124.31
-        address.lngtd = 123141.31
-        address.name = "Name"
-        address.phone = "Phone"
-        
-        order.from = address
-        order.to = address
-        
-        let nature = Order.Detail()
-        nature.nature_id = 1
-        nature.vol = 200
-        
-        order.details = [nature,nature]
-        
-        route.orderList = [order,order,order]
-        
-        
-        self.listRoutesOrigin = [route,route,route]
-        self.doSearchRoutes()
-  
-        
         /*
         let count = CoreDataManager.countRequestLocal()
         if count > 0 || apiCalling == true {
             return
         }
         apiCalling = true
+         */
+        
         print("Date Filter ==> \(dateStringFilter)")
         self.getRoutes(byDate: self.dateStringFilter, isFetch: isFetch)
-        */
     }
     
     fileprivate func getRoutes(byDate date: String? = nil, isFetch:Bool = false) {
@@ -330,30 +296,48 @@ extension RouteListVC:UITableViewDelegate {
 
             switch result{
             case .object(let obj):
-                if let _obj = obj.data{
+                if let _obj = obj.data?.data{
+                    self?.listRoutesOrigin = _obj
+                    self?.doSearchRoutes()
+                    
+                    /*
                     if _obj.count > 0{
                         
                         self?.listRoutesOrigin = _obj
                         self?.doSearchRoutes()
                         CoreDataManager.saveRoutes(_obj,
-                                                   callback: {[weak self] (success, routes)  in
+                                                   callback: {(success, routes)  in
                             if success{
                                 print("Save route successfull")
                                 //self?.getDataFromDBLocal(E(self?.dateStringFilter))
                             }
                         })
                     }else{
-                        
                         self?.listRoutes = _obj
                         CoreDataManager.deleteRoutes(E(self?.dateStringFilter),
                                                      onCompletion: { (success) in
                             print("Delete route success!")
                         })
                     }
+                     */
                 }
                
             case .error(let error):
                 self?.showAlertView(error.getMessage())
+            }
+        }
+    }
+    
+    fileprivate func startRoute(route:Route) {
+        self.showLoadingIndicator()
+        SERVICES().API.startRoute("\(route.id)") {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(_ ):
+                self?.fetchData()
+                
+            case .error(let error):
+                self?.showAlertView(E(error.message))
             }
         }
     }
@@ -409,11 +393,15 @@ extension RouteListVC:DMSNavigationServiceDelegate{
  //MARK: - Other funtion
  extension RouteListVC{
     func doSearchRoutes() {
+        self.listRoutes = self.listRoutesOrigin
+
+        /*
         self.listRoutes = self.listRoutesOrigin.filter({ (route) -> Bool in
             route.updateStatusWhenOffline()
             return !(route.routeStatus == .Canceled ||
                     route.routeStatus == .Finished) //mobile: ẩn ruote finish cancelled đi
         })
+         */
     }
  }
  

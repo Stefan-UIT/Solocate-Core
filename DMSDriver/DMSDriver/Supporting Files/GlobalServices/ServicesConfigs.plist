@@ -82,5 +82,7 @@
 	<string>backend-api/v1/tasks/%@/%@</string>
 	<key>GET_DRIVER_RULE</key>
 	<string>masterdata/v1/variables/get?key=driving_rule</string>
+	<key>START_ROUTE</key>
+	<string>transaction/v1/routes/process/%@/IP</string>
 </dict>
 </plist>

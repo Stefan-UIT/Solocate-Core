@@ -13,17 +13,45 @@ import GoogleMaps
 class Truck: BaseModel {
     var id:Int?
     var name:String?
+    
+    required init?(map: Map) {
+        super.init()
+    }
+    
+    override func mapping(map: Map) {
+        id <- map["id"]
+        name <- map["name"]
+    }
 }
 
 class Tanker: BaseModel {
     var id:Int?
     var name:String?
+    
+    required init?(map: Map) {
+        super.init()
+    }
+    
+    override func mapping(map: Map) {
+        id <- map["id"]
+        name <- map["name"]
+    }
 }
 
 class Status: BaseModel {
     var id:Int?
     var name:String?
     var code:String?
+    
+    required init?(map: Map) {
+        super.init()
+    }
+    
+    override func mapping(map: Map) {
+        id <- map["id"]
+        name <- map["name"]
+        code <- map["code"]
+    }
 }
 
 class Tracking: BaseModel {
@@ -33,6 +61,54 @@ class Tracking: BaseModel {
     var info:String?
     var created_by:Int?
     var created_at:String?
+    
+    required init?(map: Map) {
+        super.init()
+    }
+    
+    override func mapping(map: Map) {
+        id <- map["id"]
+        route_id <- map["route_id"]
+        status_code <- map["status_code"]
+        info <- map["info"]
+        created_by <- map["created_by"]
+        created_at <- map["created_by"]
+
+    }
+}
+
+class ResponseGetRouteList: BaseModel {
+    
+    class Meta: BaseModel {
+        var current_page:Int = 1
+        var count:Int = 0
+        var per_page:Int = 1
+        var total:Int = 0
+        var total_pages = 0
+        
+        required init?(map: Map) {
+            super.init()
+        }
+        override func mapping(map: Map) {
+            current_page <- map["current_page"]
+            count <- map["count"]
+            per_page <- map["per_page"]
+            total <- map["total"]
+            total_pages <- map["total_pages"]
+        }
+    }
+    
+    var data:[Route]?
+    var meta:Meta?
+    
+    required init?(map: Map) {
+        super.init()
+    }
+    
+    override func mapping(map: Map) {
+        data <- map["data"]
+        meta <- map["meta"]
+    }
 }
 
 
@@ -67,7 +143,6 @@ class Route: BaseModel {
     var  shop_name = ""
     var  route_number = 0
     var  route_name_sts = ""
-    var  warehouse:WarehouseModel?
     var  orderList:[Order] = []
     
     convenience required init?(map: Map) {
@@ -80,11 +155,10 @@ class Route: BaseModel {
         driverId    <- map["driver_id"]
         truckFloorCap <- map["truck_floor_cap"]
         date        <- map["date"]
-        status      <- map["route_sts"]
+        status      <- map["status"]
         orderList   <- (map["order_list"])
         route_number <- map["route_number"]
         route_name_sts <- map["route_name_sts"]
-        warehouse <- map[KEY_WARE_HOUSE]
         start_time <- map["start_time"]
         startDate <- map["start"]
         driver_name <- map["driver_name"]
@@ -93,10 +167,10 @@ class Route: BaseModel {
         shop_name <- map["shop_name"]
         orderList <- map["orders"]
         totalOrders <- map["orders_count"]
-        
-        if isEmpty(shop_name) {
-            shop_name = E(warehouse?.name)
-        }
+        tanker <- map["tanker"]
+        truck <- map["truck"]
+        tracking <- map["tracking"]
+        driver <- map["driver"]
     }
     
     var isFirstStartOrder:Bool{

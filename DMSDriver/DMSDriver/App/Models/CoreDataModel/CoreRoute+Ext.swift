@@ -47,7 +47,6 @@ extension CoreRoute{
         route.status?.code = E(status)
         route.route_name_sts = E(route_name_sts)
         route.totalOrders = Int(totalOrders)
-        route.warehouse = warehouse?.convertToWarehouseModel()
 
         if  let orderList = orderList?.allObjects as? [CoreOrder] {
             orderList.forEach { (order) in
