@@ -337,6 +337,11 @@ extension RouteListVC:UITableViewDelegate {
                 self?.fetchData()
                 Caches().dateStartRoute = Date.now
                 
+                let totalMinutes = Caches().drivingRule?.data ?? 0
+                LocalNotification.createPushNotificationAfter(totalMinutes,
+                                                              "Reminder".localized,
+                                                              "Your task has been over.",
+                                                              "remider.timeout.drivingrole",  [:])
             case .error(let error):
                 self?.showAlertView(E(error.message))
             }

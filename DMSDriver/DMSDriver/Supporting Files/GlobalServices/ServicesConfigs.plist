@@ -21,13 +21,13 @@
 	<key>UPDATE_ORDER_STATUS</key>
 	<string>transaction/v1/orders/%@/%@</string>
 	<key>UPLOAD_SIGNATURE</key>
-	<string>backend-api/v1/orders/add-sign/%@</string>
+	<string>transaction/v1/orders/%@/%@</string>
 	<key>UPDATE_SEQUENCE</key>
 	<string>backend-api/v1/routes/update-sequence</string>
 	<key>UPLOAD_FILES</key>
 	<string>backend-api/v1/orders/add-picture/%@</string>
 	<key>GET_REASON_LIST</key>
-	<string>backend-api/v1/reason/%@</string>
+	<string>masterdata/v1/reason-fails/list-active</string>
 	<key>ADD_NOTE</key>
 	<string>backend-api/v1/orders/%@/notes</string>
 	<key>UPDATE_ORDER_ITEM_STATUS</key>

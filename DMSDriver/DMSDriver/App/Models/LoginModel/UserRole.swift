@@ -13,6 +13,10 @@ class DrivingRule: BaseModel {
     var message:String?
     var data:Int?
     
+    override init() {
+        super.init()
+    }
+    
     required init?(map: Map) {
         super.init()
     }

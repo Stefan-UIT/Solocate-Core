@@ -116,6 +116,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
             signatureFile.type = ".png"
             signatureFile.mimeType = "image/png"
             signatureFile.contentFile = data
+            signatureFile.param = "file_sig_req"
             
             if !hasNetworkConnection{
                 if orderDetail?.url == nil {
@@ -141,7 +142,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
         if hasNetworkConnection {
             showLoadingIndicator()
         }
-        API().submitSignature(file, "\(order.id)") {[weak self] (result) in
+        API().submitSignature(file,order) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):

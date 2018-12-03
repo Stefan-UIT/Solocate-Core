@@ -152,7 +152,7 @@ fileprivate extension LoginViewController {
         API().getReasonList {(result) in
             switch result{
             case .object(let obj):
-                guard let list = obj.data else {return}
+                guard let list = obj.data?.data else {return}
                 CoreDataManager.updateListReason(list) // Update reason list to local DB
             case .error(_):
                 break

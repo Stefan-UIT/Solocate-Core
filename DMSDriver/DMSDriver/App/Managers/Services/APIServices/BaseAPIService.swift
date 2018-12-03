@@ -186,6 +186,68 @@ class BaseAPIService {
         
         return APIRequest(alarmofireDataRequest: request);
     }
+    
+    
+    func requestWithFormDataType<RESULT:BaseModel, ERROR: APIError>(url: String,
+                     method:HTTPMethod,
+                     files: [AttachFileModel]?,
+                     parameters: [String : Any],
+                     callback:@escaping GenericAPICallback<RESULT, ERROR>){
+        let headers: HTTPHeaders = [
+            "Content-type": "multipart/form-data",
+            "Authorization": "Bearer \(E(Caches().getTokenKeyLogin()))"
+        ]
+        
+        func APILog(_ STATUS: String, _ MSG: String?) {
+            print(">>> [API]  [] [\( method )] [\( url)] \( STATUS )");
+            if let msg = MSG { print("\( msg )\n\n"); }
+        }
+        
+        //APILog("REQUEST", parameters);
+        
+        Alamofire.upload(multipartFormData: { (multipartFormData) in
+            for (key, value) in parameters {
+                multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
+            }
+            
+            for i in 0..<(files?.count ?? 0) {
+                if let file = files?[i]{
+                    multipartFormData.append(file.contentFile ?? Data(),
+                                             withName: E(file.param),
+                                             fileName: E(file.name), mimeType: "\(E(file.mimeType))")
+                }
+            }
+            
+        }, usingThreshold: UInt64.init(), to: url, method: method, headers: headers) { (result) in
+            switch result{
+            case .success(let upload, _, _):
+                upload.responseJSON { response in
+                    let logResult = response.data != nil ? String(data: response.data!, encoding: .utf8) : "<empty>";
+                    var logStatus : String;
+                    if let statusCode = response.response?.statusCode {
+                        logStatus = String(statusCode);
+                    }else if let anError = response.error {
+                        logStatus = "\(anError)";
+                    }else{
+                        logStatus = "Unexpected Error!";
+                    }
+                    
+                    APILog("RESPONSE-\(logStatus)", logResult);
+                    
+                    self.handleResponseJSON(dataResponse: response, callback: callback)
+                }
+                
+            case .failure(let error):
+                print("Error in upload: \(error.localizedDescription)")
+                let err = APIError()
+                err.message = error.localizedDescription;
+                
+                DispatchQueue.main.async {
+                    callback(.error(err as! ERROR))
+                }
+            }
+        }
+    }
  }
 
 

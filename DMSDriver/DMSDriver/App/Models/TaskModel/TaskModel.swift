@@ -102,7 +102,8 @@ class TaskModel: BaseModel {
                 return AppColor.inProcessStatus;
             case .deliveryStatus:
                 return AppColor.deliveryStatus;
-            case .cancelStatus:
+            case .cancelStatus,
+                 .cancelFinishStatus:
                 return AppColor.redColor;
             }
         }

@@ -20,13 +20,13 @@ extension BaseAPIService{
     }
     
     @discardableResult
-    func updateOrderStatus(_ order:OrderDetail,reason: Reason? = nil, callback: @escaping APICallback<OrderDetail>) -> APIRequest? {
+    func updateOrderStatus(_ order:OrderDetail,reason: Reason? = nil, callback: @escaping APICallback<ResponseDataModel<OrderDetail>>) -> APIRequest? {
         
         let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL,
                           "\(order.id)", "\(order.status?.id ?? 0)")
         var params = ["route_id": "\(order.route_id)"]
         if let _reason = reason {
-            params["reason_msg"] = _reason.message != nil ? _reason.message :  _reason.reasonDescription
+            params["message"] = _reason.message != nil ? _reason.message :  _reason.reasonDescription
             params["reason_id"] = "\(_reason.id)"
         }
         
@@ -52,11 +52,9 @@ extension BaseAPIService{
     }
     
     @discardableResult
-    func getReasonList(_ type: String = "1", callback: @escaping APICallback<ResponseDataListModel<Reason>>) -> APIRequest {
-        let path = String(format: PATH_REQUEST_URL.GET_REASON_LIST.URL , type)
-        
+    func getReasonList(callback: @escaping APICallback<ResponseDataModel<ResponseArrData<Reason>>>) -> APIRequest {
         return request(method: .GET,
-                       path: path,
+                       path:  PATH_REQUEST_URL.GET_REASON_LIST.URL,
                        input: .empty,
                        callback: callback);
     }
@@ -71,11 +69,19 @@ extension BaseAPIService{
                        callback: callback);
     }
     
-    @discardableResult
-    func submitSignature(_ file:AttachFileModel,_ orderId:String, callback: @escaping APICallback<AttachFileModel>) -> APIRequest? {
-        let uri = String(format:PATH_REQUEST_URL.UPLOAD_SIGNATURE.URL, orderId)
-        let headers = ["Content-Type":"multipart/form-data; boundary=\(E(file.boundary))"];
-        
+    func submitSignature(_ file:AttachFileModel,_ order:OrderDetail, callback: @escaping APICallback<AttachFileModel>) {
+        let path = String(format:PATH_REQUEST_URL.UPLOAD_SIGNATURE.URL, "\(order.id)","\(order.status?.id ?? 0)")
+        let url = E(RESTConstants.getBASEURL()).appending(path)
+
+        //let headers = ["Content-Type":"multipart/form-data; boundary=\(E(file.boundary))"];
+        let params = ["route_id": "\(order.route_id)"]
+        requestWithFormDataType(url: url,
+                                method: .post,
+                                files: [file],
+                                parameters: params,
+                                callback: callback)
+
+        /*
         if ReachabilityManager.isNetworkAvailable {
             return request(method: .POST,
                            headers:headers,
@@ -94,6 +100,7 @@ extension BaseAPIService{
             CoreDataManager.saveRequest(request)
             return nil
         }
+         */
     }
     
     @discardableResult

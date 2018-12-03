@@ -15,6 +15,7 @@ enum StatusOrder: String {
     case inProcessStatus = "IP"
     case deliveryStatus = "DV"
     case cancelStatus = "CC"
+    case cancelFinishStatus = "UF"
     
     var statusName: String {
         switch self {
@@ -24,7 +25,8 @@ enum StatusOrder: String {
             return "In Progress".localized
         case .deliveryStatus:
             return "Finished".localized
-        case .cancelStatus:
+        case .cancelStatus,
+             .cancelFinishStatus:
             return "Cancelled".localized
         }
     }
@@ -265,7 +267,8 @@ class Order: BaseModel {
                 return AppColor.inProcessStatus;
             case .deliveryStatus:
                 return AppColor.deliveryStatus;
-            case .cancelStatus:
+            case .cancelStatus,
+                 .cancelFinishStatus:
                 return AppColor.redColor;
             }
         }

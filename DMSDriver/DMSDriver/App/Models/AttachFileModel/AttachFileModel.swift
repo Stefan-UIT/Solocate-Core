@@ -20,6 +20,7 @@ class AttachFileModel: BaseModel {
     var contentFile:Data?
     var type:String?
     var url:String?
+    var param:String?
     
     var urlS3:String{
         get{
@@ -44,7 +45,7 @@ class AttachFileModel: BaseModel {
             
         //let contentType = "multipart/form-data; boundary=" + boundary
       
-        let fileParamConstant = "image_file"
+        let fileParamConstant = "file_sig_req"
         let boundaryStart = "--\(boundary)\r\n"
         let boundaryEnd = "--\(boundary)--\r\n"
         let contentDispositionString = "Content-Disposition: form-data; name=\"\(fileParamConstant)\"; filename=\"\(E(name))\"\r\n"

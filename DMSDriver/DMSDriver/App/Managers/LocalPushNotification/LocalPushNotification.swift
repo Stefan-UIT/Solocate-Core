@@ -16,9 +16,56 @@ class LocalPushNotification: NSObject {
     
     static let shareIntance = LocalPushNotification()
     
+    func createPushNotificationAfter(_ minutes: Int,
+                                     _ title:String,
+                                     _ descr:String,
+                                     _ identifier:String,
+                                     _ userInfo:ResponseDictionary) {
+        if #available(iOS 10.0, *) {
+            //iOS 10 or above version
+            let center =  UNUserNotificationCenter.current()
+            let content = UNMutableNotificationContent()
+            content.title = title
+            content.body = descr
+            
+            content.userInfo = ["data": userInfo]
+            content.sound = UNNotificationSound.default()
+            
+            
+            /*
+             //Calendar
+             let date = Date(timeIntervalSinceNow: 1)
+             let triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second,], from: date)
+             
+             let trigger2 = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
+             
+             */
+            
+            //Time interval
+            let trigger1 = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(minutes * 60), repeats: false)
+            let request = UNNotificationRequest(identifier:identifier,
+                content: content,
+                trigger: trigger1)
+            center.add(request)
+            
+        } else {
+            // ios 9
+            /*
+             let notification = UILocalNotification()
+             notification.fireDate = NSDate(timeIntervalSinceNow: 5) as Date
+             notification.alertTitle = E(notiModel.title)
+             notification.alertBody = E(notiModel.descr)
+             notification.alertAction = "be awesome!"
+             notification.soundName = UILocalNotificationDefaultSoundName
+             UIApplication.shared.scheduleLocalNotification(notification)
+             */
+        }
+    }
+    
     func createPushNotification(_ date:Date,
                                 _ title:String,
                                 _ descr:String,
+                                _ identifier:String? = nil,
                                 _ userInfo:ResponseDictionary) {
         if #available(iOS 10.0, *) {
             //iOS 10 or above version
@@ -29,9 +76,11 @@ class LocalPushNotification: NSObject {
             content.userInfo = ["data": userInfo]
             content.sound = UNNotificationSound.default()
              //Calendar
-             let triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second,], from: date)
+             let triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: date)
              let trigger2 = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)
-             let request = UNNotificationRequest(identifier:"\(ServerDateFormater.string(from: date))",
+            
+             let iden = identifier ?? "\(ServerDateFormater.string(from: date))"
+             let request = UNNotificationRequest(identifier:iden,
                 content: content,
                 trigger: trigger2)
             

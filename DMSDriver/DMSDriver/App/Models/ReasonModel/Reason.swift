@@ -21,8 +21,8 @@ class Reason: BaseModel {
     }
   
     override func mapping(map: Map) {
-        id <- map["reason_id"]
-        name <- map["rsn_fails_name"]
+        id <- map["id"]
+        name <- map["name"]
         reasonDescription <- map["des"]
         
         if isEmpty(reasonDescription){

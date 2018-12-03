@@ -92,7 +92,11 @@ class ReasonListViewController: BaseViewController {
         
         switch displayMode {
         case .displayModeOrder:
-            self.cancelOrder()
+            if orderDetail?.statusOrder == .newStatus{
+                self.cancelOrder(statusCode: "CC") // Unable start
+            }else{
+                self.cancelOrder(statusCode: "UF") // Unable finish
+            }
             
         case .displayModeTask:
             self.cancelTask(task!)
@@ -105,15 +109,15 @@ extension ReasonListViewController {
     func getReasonList() {
         if hasNetworkConnection {
             showLoadingIndicator()
-            API().getReasonList(displayMode.rawValue) {[weak self] (result) in
+            API().getReasonList {[weak self] (result) in
                 self?.dismissLoadingIndicator()
                 switch result{
                 case .object(let obj):
-                    guard let list = obj.data else {return}
+                    guard let list = obj.data?.data else {return}
                     self?.reasonList.append(contentsOf: list)
                     self?.tableView.reloadData()
                     
-                    CoreDataManager.updateListReason(list) // Update reason list to local DB
+                    //CoreDataManager.updateListReason(list) // Update reason list to local DB
                     
                 case .error(let error):
                     self?.showAlertView(error.getMessage())
@@ -128,23 +132,28 @@ extension ReasonListViewController {
         }
     }
     
-    func cancelOrder() {
-        orderDetail?.statusCode = "CC"
-        orderDetail?.route_id = routeID
+    func cancelOrder(statusCode:String) {
+        let listStatus =  CoreDataManager.getListStatus()
+        for item in listStatus {
+            if item.code == statusCode{
+                orderDetail?.status = item
+                break
+            }
+        }
         guard let order = orderDetail else{return}
         let reason = reasonList[selectedIndex]
         reason.message = tvMessange?.text
         
         if  !hasNetworkConnection {
             order.reason = reason
-            CoreDataManager.updateOrderDetail(order) // Save to local DB
+            //CoreDataManager.updateOrderDetail(order) // Save to local DB
             self.didCancelSuccess?(true, order)
             self.navigationController?.popViewController(animated: true)
         }
         
         API().updateOrderStatus(order, reason: reason) {[weak self] (result) in
             switch result{
-            case .object(_):
+            case .object(_ ):
                 self?.didCancelSuccess?(true, order)
                 self?.navigationController?.popViewController(animated: true)
             case .error(let error):

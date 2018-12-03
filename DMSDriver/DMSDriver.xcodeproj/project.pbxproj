@@ -27,7 +27,6 @@
 		3B17EB6321AE4C1500CDF7D3 /* LocalPushNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B17EB6121AE4C1500CDF7D3 /* LocalPushNotification.swift */; };
 		3B1BFC2C2186FD6C00464DBA /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B1BFC2E2186FD6C00464DBA /* InfoPlist.strings */; };
 		3B21A0022140E009003CBC14 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B21A0012140E008003CBC14 /* ReachabilityManager.swift */; };
-		3B2A23A321193C330000817C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B2A23A221193C320000817C /* GoogleService-Info.plist */; };
 		3B2A23A721195BA50000817C /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B2A23A621195BA50000817C /* GoogleService-Info-prod.plist */; };
 		3B355ED921ABE078004A2879 /* API+Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B355ED821ABE078004A2879 /* API+Route.swift */; };
 		3B57EDCB2126B4FB006DD64A /* GoogleService-Info-staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B57EDCA2126B4FB006DD64A /* GoogleService-Info-staging.plist */; };
@@ -197,6 +196,7 @@
 		3B66B92D210B1149000BDFEF /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B8DB210B1148000BDFEF /* AlertMessageView.swift */; };
 		3B83C27B217EC685003B6355 /* PopUpTbvVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B83C278217EC685003B6355 /* PopUpTbvVC.m */; };
 		3B83C280217EC7CC003B6355 /* PopupTbvCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B83C27F217EC7CC003B6355 /* PopupTbvCell.m */; };
+		3B95AD9021B4E76900CC539A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B95AD8F21B4E76900CC539A /* GoogleService-Info.plist */; };
 		3B9A37612123D5C1004D881C /* PickerTypeListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9A375D2123D5C0004D881C /* PickerTypeListVC.swift */; };
 		3B9A37622123D5C1004D881C /* PickerTypeListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B9A375F2123D5C0004D881C /* PickerTypeListCell.swift */; };
 		3B9A37642123D5EF004D881C /* Common.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B9A37632123D5EF004D881C /* Common.storyboard */; };
@@ -257,7 +257,6 @@
 		3B1BFC2D2186FD6C00464DBA /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3B1BFC2F2186FD6F00464DBA /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3B21A0012140E008003CBC14 /* ReachabilityManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReachabilityManager.swift; sourceTree = "<group>"; };
-		3B2A23A221193C320000817C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B2A23A621195BA50000817C /* GoogleService-Info-prod.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info-prod.plist"; sourceTree = "<group>"; };
 		3B355ED821ABE078004A2879 /* API+Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "API+Route.swift"; sourceTree = "<group>"; };
 		3B57EDBE21266E5D006DD64A /* Staging.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Staging.xcconfig; sourceTree = "<group>"; };
@@ -610,6 +609,7 @@
 		3B87335621106101008C5C20 /* Podfile */ = {isa = PBXFileReference; lastKnownFileType = text; path = Podfile; sourceTree = "<group>"; };
 		3B87335721106101008C5C20 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		3B87335A21106101008C5C20 /* GoogleMapsBase.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMapsBase.framework; sourceTree = "<group>"; };
+		3B95AD8F21B4E76900CC539A /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3B9A375D2123D5C0004D881C /* PickerTypeListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTypeListVC.swift; sourceTree = "<group>"; };
 		3B9A375F2123D5C0004D881C /* PickerTypeListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PickerTypeListCell.swift; sourceTree = "<group>"; };
 		3B9A37632123D5EF004D881C /* Common.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Common.storyboard; sourceTree = "<group>"; };
@@ -1375,9 +1375,9 @@
 		3B66B7E3210B113C000BDFEF /* Service */ = {
 			isa = PBXGroup;
 			children = (
+				3B95AD8F21B4E76900CC539A /* GoogleService-Info.plist */,
 				3B57EDCA2126B4FB006DD64A /* GoogleService-Info-staging.plist */,
 				3B2A23A621195BA50000817C /* GoogleService-Info-prod.plist */,
-				3B2A23A221193C320000817C /* GoogleService-Info.plist */,
 				3B66B7E5210B113C000BDFEF /* MainConfigs.plist */,
 			);
 			path = Service;
@@ -2255,7 +2255,6 @@
 				3B66B85E210B113D000BDFEF /* Profile.storyboard in Resources */,
 				3B66B858210B113D000BDFEF /* MainConfigs.plist in Resources */,
 				3B2A23A721195BA50000817C /* GoogleService-Info-prod.plist in Resources */,
-				3B2A23A321193C330000817C /* GoogleService-Info.plist in Resources */,
 				3B66B864210B113D000BDFEF /* Order.storyboard in Resources */,
 				3B66B862210B113D000BDFEF /* Login.storyboard in Resources */,
 				3BF838CF218957EA0056C4F1 /* ScrollMenuView.xib in Resources */,
@@ -2272,6 +2271,7 @@
 				3B1BFC2C2186FD6C00464DBA /* InfoPlist.strings in Resources */,
 				3B66B851210B113D000BDFEF /* Adhoc.xcconfig in Resources */,
 				3B66B924210B1149000BDFEF /* ChangeInviromentTableViewCell.xib in Resources */,
+				3B95AD9021B4E76900CC539A /* GoogleService-Info.plist in Resources */,
 				3B0035F8216C614D0032519D /* TextViewInput.xib in Resources */,
 				3B13CBF1211A8FF400A93E18 /* ScrollMenuCell.xib in Resources */,
 				3B66B921210B1149000BDFEF /* ChangePasswordTableViewCell.xib in Resources */,

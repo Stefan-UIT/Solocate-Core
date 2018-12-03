@@ -63,6 +63,7 @@ class TimerVC: BaseViewController {
         invalidTimmer()
         updateButtonAction()
         resetCountDownTime()
+        removePushNotifiactionDrivingRole()
     }
     
     @IBAction func onbtnClickStart(btn:UIButton){
@@ -73,6 +74,7 @@ class TimerVC: BaseViewController {
             Caches().dateStartRoute = Date.now
             startTimer()
             updateTime()
+            createPushNotificationDrivingRole()
             
         }else if !isPause {
             isPause = true
@@ -84,10 +86,29 @@ class TimerVC: BaseViewController {
             isCancel = false
             isPause = false
             isStarting = true
+            
+            if Caches().dateStartRoute == nil {
+                Caches().dateStartRoute = Date.now
+            }
+
             startTimer()
         }
         
         updateButtonAction()
+    }
+    
+    func removePushNotifiactionDrivingRole()  {
+        LocalNotification.removePendingNotifications(["remider.timeout.drivingrole"])
+    }
+    
+    func createPushNotificationDrivingRole() {
+        let totalMinutes = drivingRule?.data ?? 0
+
+        LocalNotification.createPushNotificationAfter(totalMinutes,
+                                                      "Reminder".localized,
+                                                      "Your task has been over.",
+                                                      "remider.timeout.drivingrole",  [:])
+
     }
 }
 
@@ -177,17 +198,18 @@ fileprivate extension TimerVC{
             
             isStarting = false
             isPause = false
-            isCancel = false
+            isCancel = true
             invalidTimmer()
             updateButtonAction()
             resetCountDownTime()
-            
+            /*
             if route?.checkInprogess() == true {
                 LocalNotification.createPushNotification(Date.now,
-                                                         "Reminder",
+                                                         "Reminder".localized,
                                                          "You have finished working shifts",
                                                          [:])
             }
+             */
             return
         }
         

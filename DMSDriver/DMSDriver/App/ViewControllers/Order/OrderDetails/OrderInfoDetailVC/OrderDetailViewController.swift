@@ -164,12 +164,12 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     func handleUnableToStartAction() {
         let vc:ReasonListViewController = .loadSB(SB: .Common)
         vc.orderDetail = orderDetail
-        if let routeID = route?.id {
-            vc.routeID = routeID
-        }
         vc.displayMode = .displayModeOrder
         vc.didCancelSuccess =  { [weak self] (success, order) in
             self?.orderDetail = order as? OrderDetail
+            self?.updateUI()
+            self?.setupDataDetailInforRows()
+            self?.tableView?.reloadData()
             self?.didUpdateStatus?((self?.orderDetail)!, nil)
         }
         
@@ -477,6 +477,11 @@ extension OrderDetailViewController{
                 if status == "IP" &&
                     self?.route?.isFirstStartOrder ?? false{
                     Caches().dateStartRoute = Date.now
+                    let totalMinutes = Caches().drivingRule?.data ?? 0
+                    LocalNotification.createPushNotificationAfter(totalMinutes,
+                                                                  "Reminder".localized,
+                                                                  "Your task has been over.",
+                                                                  "remider.timeout.drivingrole",  [:])
                 }
                 
             case .error(let error):
