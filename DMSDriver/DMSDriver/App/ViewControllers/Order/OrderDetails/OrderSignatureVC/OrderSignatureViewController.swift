@@ -14,8 +14,8 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
   
     @IBOutlet weak var signatureView: SignatureView?
     @IBOutlet weak var signatureImgView: UIImageView?
-    @IBOutlet weak var finishButton: UIButton?
-    @IBOutlet weak var unableToFinishButton: UIButton?
+    @IBOutlet weak var btnSubmit: UIButton?
+    @IBOutlet weak var btnClear: UIButton?
         
     var validationSubmit:Bool = false{
         didSet{
@@ -54,32 +54,8 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
     override func updateUI() {
         super.updateUI()
         DispatchQueue.main.async { [weak self] in
-            guard let order = self?.orderDetail else { return }
-            
-            if let signFile:AttachFileModel = order.url?.sig{
-                self?.controlsContainerView?.isHidden = true
-                self?.signatureImgView?.isHidden = false
-                
-                if self?.hasNetworkConnection ?? false{
-                    self?.signatureImgView?.sd_setImage(with: URL(string: E(signFile.url)),
-                                                  placeholderImage: nil,
-                                                  options: .allowInvalidSSLCertificates,
-                                                  completed: { (image, error, cacheType, url) in
-                        if error == nil{
-                            if let image = image,
-                                let data = UIImageJPEGRepresentation(image, 1.0) {
-                                signFile.contentFile = data
-                                CoreDataManager.updateOrderDetail(order)
-                            }
-                        }
-                    })
-                }else {
-                    self?.signatureImgView?.image = UIImage(data: signFile.contentFile ?? Data())
-                }
-            }else {
-                self?.controlsContainerView?.isHidden = false
-                self?.signatureImgView?.isHidden = true
-            }
+            self?.setupButtonAction()
+            self?.setupSignatureView()
         }
     }
   
@@ -135,8 +111,42 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
         }else {
             print("encode failure")
         }
-  }
+    }
+    
+    func setupButtonAction()  {
+        btnClear?.setTitle("Clear".localized.uppercased(), for: .normal)
+        btnSubmit?.setTitle("Submit".localized.uppercased(), for: .normal)
+    }
   
+    func setupSignatureView()  {
+        guard let order = self.orderDetail else { return }
+        guard let signFile:AttachFileModel = order.url?.sig else {
+            self.controlsContainerView?.isHidden = false
+            self.signatureImgView?.isHidden = true
+            return
+        }
+        
+        self.controlsContainerView?.isHidden = true
+        self.signatureImgView?.isHidden = false
+        
+        if (self.hasNetworkConnection) == false {
+            self.signatureImgView?.image = UIImage(data: signFile.contentFile ?? Data())
+            return
+        }
+        
+        self.signatureImgView?.sd_setImage(with: URL(string: E(signFile.url)),
+                                            placeholderImage: nil,
+                                            options: .allowInvalidSSLCertificates,
+                                            completed: { (image, error, cacheType, url) in
+            if error == nil{
+                if let image = image,
+                    let data = UIImageJPEGRepresentation(image, 1.0) {
+                    signFile.contentFile = data
+                    CoreDataManager.updateOrderDetail(order)
+                }
+            }
+        })
+    }
     private func submitSignature(_ file: AttachFileModel) {
         guard let order = orderDetail else { return }
         if hasNetworkConnection {

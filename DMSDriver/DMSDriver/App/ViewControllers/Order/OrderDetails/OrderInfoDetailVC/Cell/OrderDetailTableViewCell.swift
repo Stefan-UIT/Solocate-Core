@@ -16,10 +16,13 @@ protocol OrderDetailTableViewCellDelegate:class {
 struct OrderDetailInforRow {
     var title: String = ""
     var content: String = ""
+    var isHighlight = false
     
-    init(_ title:String , _ content:String) {
+    
+    init(_ title:String , _ content:String, _ isHighlight:Bool = false) {
         self.title = title
         self.content = content
+        self.isHighlight = isHighlight
     }
 }
 
@@ -38,6 +41,7 @@ class OrderDetailTableViewCell: UITableViewCell {
         didSet {
             nameLabel?.text = orderDetailItem.title
             contentLabel?.text = orderDetailItem.content
+            contentLabel?.textColor = orderDetailItem.isHighlight ? AppColor.mainColor : AppColor.black
         }
     }
 

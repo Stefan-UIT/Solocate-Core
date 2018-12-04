@@ -104,15 +104,20 @@ extension BaseAPIService {
     @discardableResult
     func updateDriverLocation(long :Double, lat:Double, callback: @escaping APICallback<Route>) -> APIRequest {
         let driverID = Caches().user?.userInfo?.id ?? -1
+        let driverName = Caches().user?.userInfo?.userName ?? ""
+
         let timestamps = __int64_t(Date().timeIntervalSince1970)
         let params = [
             KEY_LONGITUDE: long,
             KEY_LATITUDE : lat,
             KEY_TIMESTAMPS: timestamps,
-            KEY_DRIVER_ID: driverID
+            KEY_DRIVER_ID: driverID,
+            KEY_DRIVER_NAME:driverName,
+            KEY_ROUTES:[]
             ] as [String : Any]
         
         return request(method: .POST,
+                       serverURL:SERVER_URL(),
                        path: PATH_REQUEST_URL.UPDATE_DRIVER_LOCATION.URL,
                        input: .json(params),
                        callback: callback);

@@ -60,7 +60,7 @@ class ReasonListViewController: BaseViewController {
             switch self.displayMode{
             case .displayModeOrder:
                 if let _orderDetail = self.orderDetail {
-                    let unableTitle = _orderDetail.statusOrder == .newStatus ? "Unable To Start".localized : "Unable To Finish".localized
+                    let unableTitle = _orderDetail.statusOrder == .newStatus ? "Unable To Start".localized.uppercased() : "Unable To Finish".localized.uppercased()
                     self.finishButton.setTitle(unableTitle, for: .normal)
                 }
                 

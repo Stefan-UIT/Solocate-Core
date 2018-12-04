@@ -60,6 +60,21 @@ func BASE_URL_SOCKET() -> String{
     }
 }
 
+func SERVER_URL() -> String {
+    var serverURL = ""
+    let type = SDBuildConf.buildScheme
+    switch type {
+    case .debug,
+         .adhoc:
+        serverURL = "https://dms.gadot.dev.seldatdirect.com/"
+    case .staging:
+        serverURL = "https://dms.gadot.staging.seldatdirect.com/"
+    case .release:
+        serverURL = "https://dms.gadot.live.seldatdirect.com/"
+    }
+    return serverURL
+}
+
 // SOCKET KEY
 struct SocketConstants {
     static let SERVER_DEV = "http://dms.directmail.dev.seldatdirect.com"

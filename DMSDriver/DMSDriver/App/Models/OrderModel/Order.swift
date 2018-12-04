@@ -216,29 +216,16 @@ class Order: BaseModel {
     }
 
     
-    var location:CLLocationCoordinate2D {
+    var locationFrom:CLLocationCoordinate2D {
         get {
-            var longitude = 0.0
-            var latitude = 0.0
-            /*
-            if lat.length > 0 {
-                latitude = lat.doubleValue
-            }else if to_address_lattd.length > 0{
-                latitude = to_address_lattd.doubleValue
-            }else {
-                latitude = from_address_lattd.doubleValue
-            }
-            
-            if lng.length > 0 {
-                longitude = lng.doubleValue
-            }else if to_address_lngtd.length > 0{
-                longitude = to_address_lngtd.doubleValue
-            }else {
-                longitude = from_address_lngtd.doubleValue
-            }
-
-             */
-            return CLLocationCoordinate2D(latitude:latitude, longitude: longitude)
+            return CLLocationCoordinate2D(latitude:from?.lattd ?? 0, longitude: from?.lngtd ?? 0)
+        }
+    }
+    
+    
+    var locationTo:CLLocationCoordinate2D {
+        get {
+            return CLLocationCoordinate2D(latitude:to?.lattd ?? 0, longitude: to?.lngtd ?? 0)
         }
     }
     

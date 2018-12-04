@@ -11,35 +11,36 @@ import GoogleMaps
 
 class OrderDetailMapViewController: BaseViewController {
   
-  @IBOutlet weak var mapView: GMSMapView!
-  @IBOutlet weak var tableView: UITableView!
-  fileprivate var steps = [DirectionStep]()
+    @IBOutlet weak var vMapContent: UIView?
+    @IBOutlet weak var tableView: UITableView!
+    fileprivate var steps = [DirectionStep]()
+
+    fileprivate let cellIdentifier = "OrderDetailMapTableViewCell"
+    var orderLocation: CLLocationCoordinate2D?
+
+    var mapView:GMSMapView?
   
-  fileprivate let cellIdentifier = "OrderDetailMapTableViewCell"
-  var orderLocation: CLLocationCoordinate2D?
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    updateUI()
-    guard let userLocation = LocationManager.shared.currentLocation,
-      let _locattion = orderLocation else {
-        LocationManager.shared.delegate = self
-        LocationManager.shared.requestLocation()
-        return
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        updateUI()
+        guard let userLocation = LocationManager.shared.currentLocation,
+          let _locattion = orderLocation else {
+            LocationManager.shared.delegate = self
+            LocationManager.shared.requestLocation()
+            return
+        }
+        getDirection(from: userLocation.coordinate, toLocation: _locattion)
     }
-    getDirection(from: userLocation.coordinate, toLocation: _locattion)
-  }
   
-  override func viewDidAppear(_ animated: Bool) {
-    super.viewDidAppear(animated)
-    if let _locattion = orderLocation {
-      mapView.animate(toLocation: _locattion)
-      let marker = GMSMarker(position: _locattion)
-      marker.map = mapView
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if let _locattion = orderLocation {
+          mapView?.animate(toLocation: _locattion)
+          let marker = GMSMarker(position: _locattion)
+          marker.map = mapView
+        }
     }
-    
-  }
     
     override func updateNavigationBar() {
         App().navigationService.delegate = self
@@ -61,7 +62,16 @@ class OrderDetailMapViewController: BaseViewController {
     }
     
     func setupMapView()  {
-        mapView.isMyLocationEnabled = true
+        guard let userLocation = LocationManager.shared.currentLocation else {
+                LocationManager.shared.delegate = self
+                LocationManager.shared.requestLocation()
+                return
+        }
+        mapView = GMSMapView.map(withFrame: self.vMapContent?.frame ?? CGRect.zero, camera: GMSCameraPosition.camera(withLatitude:userLocation.coordinate.latitude, longitude: userLocation.coordinate.longitude, zoom: 3))
+        
+        mapView?.center = self.vMapContent?.center ?? CGPoint.zero
+        vMapContent?.addSubview(mapView!)
+        mapView?.isMyLocationEnabled = true
     }
 }
 
@@ -87,9 +97,8 @@ extension OrderDetailMapViewController: UITableViewDataSource, UITableViewDelega
     let step = steps[indexPath.row]
     let bearing = getBearingBetweenTwoPoints(point1: step.startLocation.toCoordinate(), point2: step.endLocation.toCoordinate())
     let cameraPosition = GMSCameraPosition(target: step.startLocation.toCoordinate(), zoom: 16.0, bearing: bearing, viewingAngle: 30.0)
-    mapView.animate(to: cameraPosition)
+    mapView?.animate(to: cameraPosition)
   }
-  
 }
 
 extension OrderDetailMapViewController: LocationManagerDelegate {
@@ -97,12 +106,12 @@ extension OrderDetailMapViewController: LocationManagerDelegate {
         //
     }
     
-  func didUpdateLocation(_ location: CLLocation?) {
-    guard let userLocation = location, let destinationLocation = orderLocation else {
-      return
+    func didUpdateLocation(_ location: CLLocation?) {
+        guard let userLocation = location, let destinationLocation = orderLocation else {
+          return
+        }
+        getDirection(from: userLocation.coordinate, toLocation: destinationLocation)
     }
-    getDirection(from: userLocation.coordinate, toLocation: destinationLocation)
-  }
 }
 
 extension OrderDetailMapViewController {
@@ -144,7 +153,7 @@ extension OrderDetailMapViewController {
             polyLine.strokeColor = AppColor.mainColor
             polyLine.map = self?.mapView
             let bounds = GMSCoordinateBounds(path: path!)
-            self?.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
+            self?.mapView?.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
 
             //
             self?.steps.removeAll()

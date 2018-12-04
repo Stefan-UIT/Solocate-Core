@@ -122,12 +122,12 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             orderInforStatus.append(mess)
         }
         
-        let fromAddress = OrderDetailInforRow("From address", E(_orderDetail.from?.address))
+        let fromAddress = OrderDetailInforRow("From address", E(_orderDetail.from?.address),true)
         let fromContactName = OrderDetailInforRow("Contact name",_orderDetail.from?.name ?? "-")
-        let fromContactPhone = OrderDetailInforRow("Contact phone",_orderDetail.from?.phone ?? "-")
-        let toAddress = OrderDetailInforRow("To address", E(_orderDetail.to?.address))
+        let fromContactPhone = OrderDetailInforRow("Contact phone",_orderDetail.from?.phone ?? "-",true)
+        let toAddress = OrderDetailInforRow("To address", E(_orderDetail.to?.address),true)
         let toContactName = OrderDetailInforRow("Contact name",_orderDetail.to?.name ?? "-")
-        let toContactPhone = OrderDetailInforRow("Contact phone",_orderDetail.to?.phone ?? "-")
+        let toContactPhone = OrderDetailInforRow("Contact phone",_orderDetail.to?.phone ?? "-", true)
         
         orderInforFrom.append(fromAddress)
         orderInforFrom.append(fromContactName)
@@ -362,7 +362,27 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             }else if (row == 0){ //Address row
                 let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
                 if let _orderDetail = orderDetail {
-                    vc.orderLocation = _orderDetail.location
+                    vc.orderLocation = _orderDetail.locationFrom
+                }
+                //self.present(vc, animated: true, completion: nil)
+                self.navigationController?.pushViewController( vc, animated: true)
+            }
+            
+        case .sectionTo:
+            if row == orderInforTo.count - 1 {// Phone row
+                let item = orderInforTo[row]
+                
+                if !isEmpty(item.content){
+                    let urlString = "tel://\(item.content)"
+                    if let url = URL(string: urlString) {
+                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
+                    }
+                }
+                
+            }else if (row == 0){ //Address row
+                let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
+                if let _orderDetail = orderDetail {
+                    vc.orderLocation = _orderDetail.locationTo
                 }
                 //self.present(vc, animated: true, completion: nil)
                 self.navigationController?.pushViewController( vc, animated: true)
@@ -406,22 +426,23 @@ fileprivate extension OrderDetailViewController{
     
     func updateButtonStatus() {
         updateStatusButton?.backgroundColor = AppColor.mainColor
-        btnUnable?.backgroundColor = AppColor.grayColor
+        btnUnable?.backgroundColor = AppColor.white
         btnUnable?.borderWidth = 1;
-        btnUnable?.borderColor = AppColor.grayBorderColor
+        btnUnable?.borderColor = AppColor.redColor
+        btnUnable?.setTitleColor(AppColor.mainColor, for: .normal)
         vAction?.isHidden = true
         let driverId = orderDetail?.driver_id
         if driverId == Caches().user?.userInfo?.id {
             switch orderDetail?.statusCode {
             case "OP":
                 vAction?.isHidden = false
-                updateStatusButton?.setTitle("Start".localized, for: .normal)
-                btnUnable?.setTitle("Unable To Start".localized, for: .normal)
+                updateStatusButton?.setTitle("Start".localized.uppercased(), for: .normal)
+                btnUnable?.setTitle("Unable To Start".localized.uppercased(), for: .normal)
                 
             case "IP":
                 vAction?.isHidden = false
-                updateStatusButton?.setTitle("Finish".localized, for: .normal)
-                btnUnable?.setTitle("Unable To Finish".localized, for: .normal)
+                updateStatusButton?.setTitle("Finish".localized.uppercased(), for: .normal)
+                btnUnable?.setTitle("Unable To Finish".localized.uppercased(), for: .normal)
                 
             default:
                 break

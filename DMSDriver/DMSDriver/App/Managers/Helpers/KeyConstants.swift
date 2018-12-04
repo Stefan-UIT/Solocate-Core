@@ -9,9 +9,11 @@
 import Foundation
 
 // Map & Location
-let KEY_LONGITUDE               = "lngtd"
-let KEY_LATITUDE                = "lattd"
+let KEY_LONGITUDE               = "longitude"
+let KEY_LATITUDE                = "latitude"
 let KEY_DRIVER_ID               = "driver_id"
+let KEY_ROUTES                  = "routes"
+let KEY_DRIVER_NAME             = "driver_name"
 let KEY_TIMESTAMPS              = "timestamps"
 
 // User Profile
