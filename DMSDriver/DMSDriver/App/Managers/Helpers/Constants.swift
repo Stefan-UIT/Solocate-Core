@@ -11,7 +11,7 @@ import UIKit
 
 /// Network constants
 struct Network {
-  static let googleAPIKey = "AIzaSyDXCigMmInLjLSiEoXRIBaS3teaFHiwtqs"
+    static let googleAPIKey = "AIzaSyCTvs-Mmwz477nWLUJ4KuoGwPi0TeXigHU"
   static let registerAccountURL      = "https://t4l.seldatdirect.com/#/home"
   
   static let success: Int = 200
