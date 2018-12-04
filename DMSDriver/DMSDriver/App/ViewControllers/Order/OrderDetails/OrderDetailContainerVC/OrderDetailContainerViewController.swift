@@ -101,7 +101,7 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
         
         print("has network connection")
         hasConectionNetwork = true
-        getOrderDetail()
+        //getOrderDetail()
         DispatchQueue.main.async {
             App().mainVC?.hideNoInternetConnection()
         }
@@ -158,7 +158,6 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
         orderInfoDetailVC.dateStringFilter = dateStringFilter
         orderInfoDetailVC.orderDetail = order?.convertToOrderDetail()
         orderInfoDetailVC.didUpdateStatus = { [weak self] (orderDetail, shouldMoveToTab)  in
-            self?.getOrderDetail(isFetch: true)
             self?.onUpdateOrderStatus?(orderDetail)
             
             if shouldMoveToTab != nil {
@@ -171,17 +170,17 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
         }
         
         orderInfoDetailVC.updateOrderDetail = { [weak self] in
-            self?.getOrderDetail(isFetch: true)
+            //self?.getOrderDetail(isFetch: true)
         }
         
         orderSignatureVC.orderDetail = order?.convertToOrderDetail()
         orderSignatureVC.updateOrderDetail = { [weak self] in
-            self?.getOrderDetail(isFetch: true)
+            //self?.getOrderDetail(isFetch: true)
         }
         
         orderPicktureVC.orderDetail = order?.convertToOrderDetail()
         orderPicktureVC.updateOrderDetail = { [weak self] in
-            self?.getOrderDetail(isFetch: true)
+            //self?.getOrderDetail(isFetch: true)
         }
         
         return [orderInfoDetailVC,orderSignatureVC,orderPicktureVC]
@@ -201,53 +200,9 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
         App().navigationService.delegate = self
         App().navigationService.updateNavigationBar(.BackOnly, "Order Detail".localized)
     }
-  
-    private func getOrderDetail(isFetch:Bool = false) { // Currently have not api get orderDetail
-        /*
-        if hasConectionNetwork &&
-            ReachabilityManager.isCalling == false {
-            guard let _orderID = order?.id else { return }
-            if !isFetch {
-                showLoadingIndicator()
-            }
-            API().getOrderDetail(orderId: "\(_orderID)") {[weak self] (result) in
-                self?.dismissLoadingIndicator()
-                switch result{
-                case .object(let object):
-                    self?.orderDetail = object
-                    self?.updateUI()
-                    CoreDataManager.updateOrderDetail(object) // update orderdetail to DB local
-                    
-                    for vc in self?.viewControllers ?? [] {
-                        (vc as? BaseOrderDetailViewController)?.orderDetail = object
-                        (vc as? BaseOrderDetailViewController)?.route = self?.route
-                    }
-                    
-                case .error(let error):
-                    self?.showAlertView(error.getMessage())
-                }
-            }
-            
-        }else {
-            //Get data from local DB
-            if let _order = self.order{
-                CoreDataManager.queryOrderDetail(_order.id, callback: {[weak self] (success,data) in
-                    guard let strongSelf = self else{return}
-                    strongSelf.orderDetail = data
-                    strongSelf.updateUI()
-                    for vc in (strongSelf.viewControllers) {
-                        (vc as? BaseOrderDetailViewController)?.orderDetail = strongSelf.orderDetail
-                        (vc as? BaseOrderDetailViewController)?.route = strongSelf.route
-                    }
-                })
-            }
-        }
-         */
-    }
 }
 
 extension OrderDetailContainerViewController:DMSNavigationServiceDelegate{
-    
     func didSelectedBackOrMenu() {
         self.navigationController?.popViewController(animated: true)
     }

@@ -306,7 +306,6 @@ class UrlFileMoldel: BaseModel {
     override init() {
         super.init()
         doc = []
-
     }
     
     required init?(map: Map) {

@@ -45,13 +45,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     fileprivate let orderDetailNatureOfGoodsCell = "OrderDetailNatureOfGoodsCell"
     fileprivate var scanItems = [String]()
     fileprivate var arrTitleHeader:[String] = []
-    
-    
-    fileprivate var scannedString = "" {
-        didSet {
-            tableView?.reloadData()
-        }
-    }
   
     var dateStringFilter = Date().toString()
   
@@ -60,7 +53,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             tableView?.reloadData()
         }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -86,7 +78,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Detail".localized)
     }
-    
     
     //MARK: - Initialize
     func setupTableView() {
@@ -441,6 +432,40 @@ fileprivate extension OrderDetailViewController{
 
 //MARK: API
 extension OrderDetailViewController{
+    private func getOrderDetail(isFetch:Bool = false) { // Currently have not api get orderDetail
+         if hasNetworkConnection &&
+            ReachabilityManager.isCalling == false {
+            guard let _orderID = orderDetail?.id else { return }
+             if !isFetch {
+                showLoadingIndicator()
+             }
+             API().getOrderDetail(orderId: "\(_orderID)") {[weak self] (result) in
+                 self?.dismissLoadingIndicator()
+                 switch result{
+                 case .object(let object):
+                     self?.orderDetail = object
+                     self?.updateUI()
+                     //CoreDataManager.updateOrderDetail(object) // update orderdetail to DB local
+    
+                 case .error(let error):
+                     self?.showAlertView(error.getMessage())
+                 }
+            }
+            
+         }else {
+            
+                //Get data from local DB
+            /*
+             if let _order = self.orderDetail{
+                 CoreDataManager.queryOrderDetail(_order.id, callback: {[weak self] (success,data) in
+                 guard let strongSelf = self else{return}
+                 strongSelf.orderDetail = data
+                 strongSelf.updateUI()
+                 })
+             }
+             */
+         }
+    }
     func updateOrderStatus(_ status: String) {
         guard let _orderDetail = orderDetail else {
             return

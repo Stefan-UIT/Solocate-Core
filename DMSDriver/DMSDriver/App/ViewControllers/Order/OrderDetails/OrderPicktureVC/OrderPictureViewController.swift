@@ -17,10 +17,8 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
     fileprivate var imgTitle = ""
     fileprivate let cellHeight: CGFloat = 90.0
     fileprivate let headerHeight: CGFloat = 40.0
-    
     fileprivate var selectedPictures = Array<PictureObject>()
     fileprivate var attachFiles = Array<AttachFileModel>()
-
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var actionButton: UIButton!
@@ -30,10 +28,8 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
     @IBOutlet weak var vNoImage: UIView?
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         initData()
         upateUI()
     }
@@ -133,14 +129,12 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
 }
 
 //MARK: API
-extension OrderPictureViewController {
-    
-    private func getOrderDetail() {
+fileprivate extension OrderPictureViewController {
+    func getOrderDetail() {
         guard let _orderID = orderDetail?.id else { return }
         showLoadingIndicator()
         API().getOrderDetail(orderId: "\(_orderID)") {[weak self] (result) in
             self?.dismissLoadingIndicator()
-            
             switch result{
             case .object(let object):
                 self?.orderDetail = object
@@ -171,6 +165,7 @@ extension OrderPictureViewController {
             print("encode failure")
         }
     }
+    
     private func submitPicture(_ file: AttachFileModel) {
         guard let order = orderDetail else { return }
         let orderID = String(order.id)
@@ -193,15 +188,23 @@ extension OrderPictureViewController {
     
     func uploadMultipleFile(files:[AttachFileModel]){
         guard let order = orderDetail else { return }
-        let orderID = String(order.id)
         if hasNetworkConnection {
             showLoadingIndicator()
         }
-        API().uploadMultipleImageToOrder(orderID, files) {[weak self] (result) in
+        API().uploadMultipleImageToOrder(files, order) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
-                self?.getOrderDetail()
+                if self?.orderDetail?.url == nil{
+                    self?.orderDetail?.url = UrlFileMoldel()
+                }
+                self?.orderDetail?.url?.doc?.append(files)
+                self?.updateOrderDetail?()
+                self?.initData()
+                self?.upateUI()
+                self?.tableView.reloadData()
+                
+                //self?.getOrderDetail()
             case .error(let error):
                 self?.showAlertView(error.getMessage())
             }

@@ -203,7 +203,18 @@ class BaseAPIService {
             if let msg = MSG { print("\( msg )\n\n"); }
         }
         
-        //APILog("REQUEST", parameters);
+        func parseJson(_ rawObject: Any) -> (data: Data, string: String)? {
+            
+            guard let jsonData = (try? JSONSerialization.data(withJSONObject: rawObject, options: .init(rawValue: 0))) else {
+                print("Couldn't parse [\(rawObject)] to JSON");
+                return nil;
+            }
+            
+            let jsonString = String(data: jsonData, encoding: .utf8)!;
+            return (data: jsonData, string: jsonString);
+        }
+        
+        APILog("REQUEST", parseJson(parameters)?.string);
         
         Alamofire.upload(multipartFormData: { (multipartFormData) in
             for (key, value) in parameters {
@@ -217,6 +228,8 @@ class BaseAPIService {
                                              fileName: E(file.name), mimeType: "\(E(file.mimeType))")
                 }
             }
+            
+            print("Uploading file ...")
             
         }, usingThreshold: UInt64.init(), to: url, method: method, headers: headers) { (result) in
             switch result{

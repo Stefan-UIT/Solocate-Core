@@ -69,8 +69,8 @@ extension BaseAPIService{
                        callback: callback);
     }
     
-    func submitSignature(_ file:AttachFileModel,_ order:OrderDetail, callback: @escaping APICallback<AttachFileModel>) {
-        let path = String(format:PATH_REQUEST_URL.UPLOAD_SIGNATURE.URL, "\(order.id)")
+    func submitSignature(_ file:AttachFileModel,_ order:OrderDetail, callback: @escaping APICallback<OrderDetail>) {
+        let path = String(format:PATH_REQUEST_URL.UPLOAD_SIGNATURE.URL, "\(order.id)","\(order.status?.id ?? 0)")
         let url = E(RESTConstants.getBASEURL()).appending(path)
 
         //let headers = ["Content-Type":"multipart/form-data; boundary=\(E(file.boundary))"];
@@ -103,6 +103,7 @@ extension BaseAPIService{
          */
     }
     
+    
     @discardableResult
     func addNewOrderItem(_ orderID: String, barcode: String, qty: String, callback: @escaping APICallback<ResponseDataModel<EmptyModel>>) -> APIRequest {
         let params = [
@@ -131,19 +132,20 @@ extension BaseAPIService{
         
     }
     
-    @discardableResult
-    func uploadMultipleImageToOrder(_ orderId:String,_ files:[AttachFileModel], callback: @escaping APICallback<AttachFileModel>) -> APIRequest? {
-        let path = String(format:PATH_REQUEST_URL.UPLOAD_FILES.URL, orderId)
-        let headers = ["Content-Type":"multipart/form-data; boundary=\(E(files.first?.boundary))"];
+    func uploadMultipleImageToOrder(_ files:[AttachFileModel],_ order:OrderDetail, callback: @escaping APICallback<OrderDetail>){
+        let path = String(format:PATH_REQUEST_URL.UPLOAD_SIGNATURE.URL, "\(order.id)","\(order.status?.id ?? 0)")
+        let url = E(RESTConstants.getBASEURL()).appending(path)
+        let params = ["route_id": "\(order.route_id)"]
         
         if ReachabilityManager.isNetworkAvailable {
-            return request(method: .POST,
-                           headers:headers,
-                           path: path,
-                           input: .mutiFile(files),
-                           callback: callback)
+      
+            requestWithFormDataType(url: url,
+                                    method: .post,
+                                    files: files,
+                                    parameters: params,
+                                    callback: callback)
         }else {
-            
+            /*
             let stringHeader = jsonToString(json: headers as AnyObject)
             let data = getMutiDataFromFile(files: files)
             let request =  RequestModel.init(ParamsMethod.POST.rawValue,
@@ -152,7 +154,7 @@ extension BaseAPIService{
                                              data,
                                              stringHeader)
             CoreDataManager.saveRequest(request)
-            return nil
+             */
         }
     }
 }

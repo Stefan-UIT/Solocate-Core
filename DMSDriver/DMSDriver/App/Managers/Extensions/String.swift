@@ -60,5 +60,4 @@ extension String {
     dateFormater.dateFormat = "yyyy-MM-dd hh:mm"
     return dateFormater.date(from: self)
   }    
-  
 }
