@@ -509,7 +509,7 @@ class _CoreDataManager {
     
     
     //MARK: - ORDER
-    func updateOrderDetail(_ orderDetail:OrderDetail, _ callback:((Bool,CoreOrder?) -> Void)? = nil)  {
+    func updateOrderDetail(_ orderDetail:Order, _ callback:((Bool,CoreOrder?) -> Void)? = nil)  {
         self.persistentContainer.performBackgroundTask { (context) in
             
             let fetchRequest:NSFetchRequest = CoreOrder.fetchRequest()
@@ -568,16 +568,16 @@ class _CoreDataManager {
         }
     }
     
-    func queryOrderDetail(_ id: Int, callback:@escaping(Bool,OrderDetail?) -> Void) {
+    func queryOrderDetail(_ id: Int, callback:@escaping(Bool,Order?) -> Void) {
         self.persistentContainer.performBackgroundTask { (context) in
             let fetchRequest:NSFetchRequest = CoreOrder.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "id = \(id)")
             
             var items: [CoreOrder] = []
-            var order:OrderDetail?
+            var order:Order?
             do {
                 items = try context.fetch(fetchRequest)
-                order = items.first?.converToOrderDetail()
+                order = items.first?.converToOrder()
             } catch {
                 print("Couldn't Fetch Data")
             }

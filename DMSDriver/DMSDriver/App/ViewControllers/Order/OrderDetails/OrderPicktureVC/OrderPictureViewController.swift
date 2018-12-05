@@ -76,7 +76,7 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
                         }
                         self.orderDetail?.url?.doc?.append(arrAttachfile)
                         CoreDataManager.updateOrderDetail(self.orderDetail!)
-                        self.updateOrderDetail?()
+                        self.updateOrderDetail?(self.orderDetail)
                         self.initData()
                         self.upateUI()
                         self.tableView.reloadData()
@@ -98,7 +98,7 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
                         }
                         self.orderDetail?.url?.doc?.append(file)
                         CoreDataManager.updateOrderDetail(self.orderDetail!, { (success, coreRoute) in
-                            self.updateOrderDetail?()
+                            self.updateOrderDetail?(self.orderDetail)
                         })
                         self.initData()
                         self.upateUI()
@@ -137,8 +137,8 @@ fileprivate extension OrderPictureViewController {
             self?.dismissLoadingIndicator()
             switch result{
             case .object(let object):
-                self?.orderDetail = object
-                self?.updateOrderDetail?()
+                self?.orderDetail = object.data
+                self?.updateOrderDetail?(self?.orderDetail)
                 self?.initData()
                 self?.upateUI()
                 self?.tableView.reloadData()
@@ -199,7 +199,7 @@ fileprivate extension OrderPictureViewController {
                     self?.orderDetail?.url = UrlFileMoldel()
                 }
                 self?.orderDetail?.url?.doc?.append(files)
-                self?.updateOrderDetail?()
+                self?.updateOrderDetail?(self?.orderDetail)
                 self?.initData()
                 self?.upateUI()
                 self?.tableView.reloadData()

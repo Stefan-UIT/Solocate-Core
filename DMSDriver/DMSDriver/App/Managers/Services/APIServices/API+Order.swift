@@ -20,7 +20,8 @@ extension BaseAPIService{
     }
     
     @discardableResult
-    func updateOrderStatus(_ order:OrderDetail,reason: Reason? = nil, callback: @escaping APICallback<ResponseDataModel<OrderDetail>>) -> APIRequest? {
+    func updateOrderStatus(_ order:Order,reason: Reason? = nil,
+                           callback: @escaping APICallback<ResponseDataModel<Order>>) -> APIRequest? {
         
         let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL,
                           "\(order.id)", "\(order.status?.id ?? 0)")
@@ -61,7 +62,7 @@ extension BaseAPIService{
     
     
     @discardableResult
-    func getOrderDetail(orderId:String, callback: @escaping APICallback<OrderDetail>) -> APIRequest {
+    func getOrderDetail(orderId:String, callback: @escaping APICallback<ResponseDataModel<Order>>) -> APIRequest {
         let uri = String(format:PATH_REQUEST_URL.GET_ORDER_DETAIL.URL , orderId)
         return request(method: .GET,
                        path: uri,
@@ -69,7 +70,7 @@ extension BaseAPIService{
                        callback: callback);
     }
     
-    func submitSignature(_ file:AttachFileModel,_ order:OrderDetail, callback: @escaping APICallback<OrderDetail>) {
+    func submitSignature(_ file:AttachFileModel,_ order:Order, callback: @escaping APICallback<Order>) {
         let path = String(format:PATH_REQUEST_URL.UPLOAD_SIGNATURE.URL, "\(order.id)","\(order.status?.id ?? 0)")
         let url = E(RESTConstants.getBASEURL()).appending(path)
 
@@ -132,7 +133,7 @@ extension BaseAPIService{
         
     }
     
-    func uploadMultipleImageToOrder(_ files:[AttachFileModel],_ order:OrderDetail, callback: @escaping APICallback<OrderDetail>){
+    func uploadMultipleImageToOrder(_ files:[AttachFileModel],_ order:Order, callback: @escaping APICallback<Order>){
         let path = String(format:PATH_REQUEST_URL.UPLOAD_SIGNATURE.URL, "\(order.id)","\(order.status?.id ?? 0)")
         let url = E(RESTConstants.getBASEURL()).appending(path)
         let params = ["route_id": "\(order.route_id)"]

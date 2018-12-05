@@ -11,8 +11,9 @@ import SideMenu
 
 enum TapFilterRouteList:Int {
     case All = 0
-    case Assigned
-    case Mine
+    case New
+    case InProgess
+    case Finished
 }
 
 class RouteListVC: BaseViewController {
@@ -52,16 +53,19 @@ class RouteListVC: BaseViewController {
         super.viewDidLoad()
         self.setupTableView()
         self.setupScrollMenuView()
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
+        
         if hasNetworkConnection {
-            enableAutoRefetchRouteList()
+            if DMSAppConfiguration.isUserAutoRefetchRouteList {
+                enableAutoRefetchRouteList()
+            }
             getDataFromServer()
         }else{
             getDataFromDBLocal(dateStringFilter)
         }
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -92,7 +96,7 @@ class RouteListVC: BaseViewController {
         CoreDataManager.queryRoutes(stringDate) { (success, routes) in
             if success{
                 self.listRoutesOrigin = routes
-                self.doSearchRoutes()
+                self.reloadDataWithFilterMode(self.tapDisplay)
             }
         }
     }
@@ -113,15 +117,19 @@ class RouteListVC: BaseViewController {
     
     //MARK: - Intialize
     func setupScrollMenuView() {
+        let new = MenuItem("New".localized)
+        let Inprogess = MenuItem("In Progess".localized)
+        let finished = MenuItem("Finished".localized)
         let all = MenuItem("All".localized)
-        let asigned = MenuItem("Assigned".localized)
-        let mine = MenuItem("Mine".localized)
-        
+
         menuScrollView?.backgroundCell = AppColor.white
         menuScrollView?.selectedBackground = AppColor.mainColor
         menuScrollView?.cornerRadiusCell = 5
-        menuScrollView?.dataSource = [all,asigned,mine]
+        menuScrollView?.dataSource = [all,new,Inprogess,finished]
         menuScrollView?.delegate = self
+        conHeightViewSegment?.constant = 45
+        menuScrollView?.isHidden = false
+        /*
         if(Caches().user?.isCoordinator ?? false ||
             Caches().user?.isAdmin ?? false) {
             menuScrollView?.indexSelect = tapDisplay.rawValue
@@ -132,6 +140,7 @@ class RouteListVC: BaseViewController {
             menuScrollView?.isHidden = true
             conHeightViewSegment?.constant = 0
         }
+         */
     }
     
     func setupNavigateBar() {
@@ -153,33 +162,16 @@ class RouteListVC: BaseViewController {
     }
     
     func reloadDataWithFilterMode(_ filterMode: TapFilterRouteList) {
-        /*
-        self.listRoutes.removeAll()
-        listRoutesOrigin.removeAll()
         switch filterMode{
+        case .New:
+            self.doSearchRoutes(statuses:[.New])
+        case .InProgess:
+            self.doSearchRoutes(statuses: [.InProgess])
+        case .Finished:
+            self.doSearchRoutes(statuses: [.Finished])
         case .All:
-            var addedArray = [Route]()
-            if let coordinator:[Route] = coordinatorRoute?.coordinator{
-                addedArray.append(coordinator)
-            }
-            
-            if let drivers = coordinatorRoute?.drivers{
-                addedArray.append(drivers)
-            }
-            self.listRoutesOrigin = addedArray
-            
-        case .Assigned:
-            if let drivers = coordinatorRoute?.drivers{
-                self.listRoutesOrigin = drivers
-            }
-        case .Mine:
-            if let coordinator:[Route] = coordinatorRoute?.coordinator{
-                self.listRoutesOrigin = coordinator
-            }
+            self.doSearchRoutes(statuses: [.New,.InProgess,.Finished,.Canceled])
         }
-        
-        self.doSearchRoutes()
-         */
     }
     
     //MARK: - Action
@@ -298,7 +290,8 @@ extension RouteListVC:UITableViewDelegate {
             case .object(let obj):
                 if let _obj = obj.data?.data{
                     self?.listRoutesOrigin = _obj
-                    self?.doSearchRoutes()
+                    guard let mode = self?.tapDisplay else {return}
+                    self?.reloadDataWithFilterMode(mode)
                     
                     /*
                     if _obj.count > 0{
@@ -341,7 +334,7 @@ extension RouteListVC:UITableViewDelegate {
                 LocalNotification.createPushNotificationAfter(totalMinutes,
                                                               "Reminder".localized,
                                                               "Your task has been over.",
-                                                              "remider.timeout.drivingrole",  [:])
+                                                              NotificationName.remiderTimeoutDrivingRole,  [:])
             case .error(let error):
                 self?.showAlertView(E(error.message))
             }
@@ -398,16 +391,11 @@ extension RouteListVC:DMSNavigationServiceDelegate{
  
  //MARK: - Other funtion
  extension RouteListVC{
-    func doSearchRoutes() {
-        self.listRoutes = self.listRoutesOrigin
-
-        /*
+    func doSearchRoutes(statuses:[Route.RouteStatus]) {
         self.listRoutes = self.listRoutesOrigin.filter({ (route) -> Bool in
-            route.updateStatusWhenOffline()
-            return !(route.routeStatus == .Canceled ||
-                    route.routeStatus == .Finished) //mobile: ẩn ruote finish cancelled đi
+            //route.updateStatusWhenOffline()
+            return statuses.contains(route.routeStatus)
         })
-         */
     }
  }
  

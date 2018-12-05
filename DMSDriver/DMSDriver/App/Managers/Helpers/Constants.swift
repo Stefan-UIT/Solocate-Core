@@ -140,7 +140,8 @@ struct Defaultkey {
 }
 
 struct NotificationName {
-  static let shouldUpdateMessageNumbers = "shouldUpdateMessageNumbers"  
+    static let shouldUpdateMessageNumbers = "shouldUpdateMessageNumbers"
+    static let remiderTimeoutDrivingRole =  "remider.timeout.drivingrole"
 }
 
 

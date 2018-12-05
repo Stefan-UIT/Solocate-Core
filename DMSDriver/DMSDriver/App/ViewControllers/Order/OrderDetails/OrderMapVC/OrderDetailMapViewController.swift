@@ -24,22 +24,11 @@ class OrderDetailMapViewController: BaseViewController {
         super.viewDidLoad()
 
         updateUI()
-        guard let userLocation = LocationManager.shared.currentLocation,
-          let _locattion = orderLocation else {
-            LocationManager.shared.delegate = self
-            LocationManager.shared.requestLocation()
-            return
-        }
-        getDirection(from: userLocation.coordinate, toLocation: _locattion)
+        drawRoute()
     }
   
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        if let _locattion = orderLocation {
-          mapView?.animate(toLocation: _locattion)
-          let marker = GMSMarker(position: _locattion)
-          marker.map = mapView
-        }
     }
     
     override func updateNavigationBar() {
@@ -50,9 +39,9 @@ class OrderDetailMapViewController: BaseViewController {
     override func updateUI() {
         super.updateUI()
         DispatchQueue.main.async {[weak self] in
+            self?.setupMapView()
             self?.updateNavigationBar()
             self?.setupTableView()
-            self?.setupMapView()
         }
     }
     
@@ -72,33 +61,49 @@ class OrderDetailMapViewController: BaseViewController {
         mapView?.center = self.vMapContent?.center ?? CGPoint.zero
         vMapContent?.addSubview(mapView!)
         mapView?.isMyLocationEnabled = true
+        
+        if let _locattion = orderLocation {
+            mapView?.animate(toLocation: _locattion)
+            let marker = GMSMarker(position: _locattion)
+            marker.map = mapView
+        }
+    }
+    
+    func drawRoute() {
+        guard let userLocation = LocationManager.shared.currentLocation,
+            let _locattion = orderLocation else {
+                LocationManager.shared.delegate = self
+                LocationManager.shared.requestLocation()
+                return
+        }
+        getDirection(from: userLocation.coordinate, toLocation: _locattion)
     }
 }
 
 extension OrderDetailMapViewController: UITableViewDataSource, UITableViewDelegate {
-  func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return steps.count
-  }
-  
-  func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-    if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderDetailMapTableViewCell {
-      cell.step = steps[indexPath.row]
-      return cell
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return steps.count
     }
-    return UITableViewCell()
-  }
-  
-  func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return UITableViewAutomaticDimension
-  }
-  
-  func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    tableView.scrollRectToVisible(CGRect(x: 0, y: 0, width: view.frame.width, height: 1.0), animated: true)
-    let step = steps[indexPath.row]
-    let bearing = getBearingBetweenTwoPoints(point1: step.startLocation.toCoordinate(), point2: step.endLocation.toCoordinate())
-    let cameraPosition = GMSCameraPosition(target: step.startLocation.toCoordinate(), zoom: 16.0, bearing: bearing, viewingAngle: 30.0)
-    mapView?.animate(to: cameraPosition)
-  }
+
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderDetailMapTableViewCell {
+          cell.step = steps[indexPath.row]
+          return cell
+        }
+        return UITableViewCell()
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableViewAutomaticDimension
+    }
+
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.scrollRectToVisible(CGRect(x: 0, y: 0, width: view.frame.width, height: 1.0), animated: true)
+        let step = steps[indexPath.row]
+        let bearing = getBearingBetweenTwoPoints(point1: step.startLocation.toCoordinate(), point2: step.endLocation.toCoordinate())
+        let cameraPosition = GMSCameraPosition(target: step.startLocation.toCoordinate(), zoom: 16.0, bearing: bearing, viewingAngle: 30.0)
+        mapView?.animate(to: cameraPosition)
+    }
 }
 
 extension OrderDetailMapViewController: LocationManagerDelegate {
@@ -136,7 +141,6 @@ extension OrderDetailMapViewController {
   }
     
   func getDirection(from fromLocation: CLLocationCoordinate2D, toLocation: CLLocationCoordinate2D) {
-    
     self.showLoadingIndicator()
     API().getDirection(fromLocation: fromLocation, toLocation: toLocation) {[weak self] (result) in
         self?.dismissLoadingIndicator()

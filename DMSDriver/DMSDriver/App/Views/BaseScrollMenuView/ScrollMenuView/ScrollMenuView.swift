@@ -24,8 +24,6 @@ class ScrollMenuView: UIView {
     var backgroundCell:UIColor = UIColor.white
     var selectedBackground:UIColor  = UIColor.blue
     var cornerRadiusCell:CGFloat?
-
-    
     
     var listItems:[MenuItem]?
   

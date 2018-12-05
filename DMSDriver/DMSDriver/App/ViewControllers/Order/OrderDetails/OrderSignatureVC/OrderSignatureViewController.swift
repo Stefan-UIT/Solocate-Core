@@ -28,14 +28,18 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
         super.viewDidLoad()
         validationSubmit = false
         signatureView?.delegate = self
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         updateUI()
     }
     
     override func reachabilityChangedNotification(_ notification: NSNotification) {
         super.reachabilityChangedNotification(notification)
-        
+        /*
         if hasNetworkConnection {
-            updateOrderDetail?()
+            updateOrderDetail?(orderDetail)
         }else {
             CoreDataManager.queryOrderDetail(orderDetail?.id ?? 0, callback:{[weak self] (success, data) in
                 self?.orderDetail = data
@@ -43,12 +47,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
 
             })
         }
-    }
-    
-    override var orderDetail: OrderDetail?{
-        didSet{
-            updateUI()
-        }
+         */
     }
   
     override func updateUI() {
@@ -94,13 +93,14 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
             signatureFile.contentFile = data
             signatureFile.param = "file_sig_req"
             
+            if orderDetail?.url == nil {
+                orderDetail?.url = UrlFileMoldel()
+            }
+            orderDetail?.url?.sig = signatureFile
+            
             if !hasNetworkConnection{
-                if orderDetail?.url == nil {
-                    orderDetail?.url = UrlFileMoldel()
-                }
-                orderDetail?.url?.sig = signatureFile
                 CoreDataManager.updateOrderDetail(orderDetail!) { (success, data) in
-                    self.updateOrderDetail?()
+                    self.updateOrderDetail?(self.orderDetail)
                 }
                 
                 updateUI()
@@ -147,6 +147,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
             }
         })
     }
+    
     private func submitSignature(_ file: AttachFileModel) {
         guard let order = orderDetail else { return }
         if hasNetworkConnection {
@@ -158,13 +159,12 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
             case .object(_):
                 self?.controlsContainerView?.isHidden = true
                 self?.signatureView?.isUserInteractionEnabled = false
-                self?.updateOrderDetail?()
+                self?.updateOrderDetail?(self?.orderDetail)
                 self?.showAlertView("Uploaded Successful".localized)
 
             case .error(let error):
                 self?.showAlertView(error.getMessage())
                 break
-        
             }
         }
     }
@@ -172,27 +172,28 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
 
 
 class BaseOrderDetailViewController: BaseViewController, IndicatorInfoProvider {
-  var orderDetail: OrderDetail?
-  var route: Route?
-  var indicatorInfo = IndicatorInfo(title: "")
-    
-  var checkConnetionInternet:((_ notification:NSNotification, _ hasConnectionInternet: Bool) -> Void)?
-  var didUpdateStatus:((_ orderDetail:OrderDetail, _ shouldMoveToTab: Int?) -> Void)?
-  var updateOrderDetail:(() -> Void)?
-  
-  convenience init(_ title: String) {
-    self.init()
-    indicatorInfo = IndicatorInfo(title: title)
-  }
-  
-  func setTitle(_ title: String) {
-    indicatorInfo = IndicatorInfo(title: title)
-  }
-  
-  
-  func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
-    return indicatorInfo
-  }
+    var orderDetail: Order?
+    var route: Route?
+    var rootVC:OrderDetailContainerViewController?
+    var indicatorInfo = IndicatorInfo(title: "")
+
+    var checkConnetionInternet:((_ notification:NSNotification, _ hasConnectionInternet: Bool) -> Void)?
+    var didUpdateStatus:((_ orderDetail:Order, _ shouldMoveToTab: Int?) -> Void)?
+    var updateOrderDetail:((_ order:Order?) -> Void)?
+
+    convenience init(_ title: String) {
+        self.init()
+        indicatorInfo = IndicatorInfo(title: title)
+    }
+
+    func setTitle(_ title: String) {
+        indicatorInfo = IndicatorInfo(title: title)
+    }
+
+
+    func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
+        return indicatorInfo
+    }
 }
 
 

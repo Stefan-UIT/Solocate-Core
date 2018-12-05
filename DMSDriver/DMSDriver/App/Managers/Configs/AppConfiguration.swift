@@ -19,6 +19,8 @@ class AppConfiguration: NSObject {
     // MARK: - Variables
     var trackingTimeInterval:Int = 0
     var reloadRouteTimeInterval:Int = 0
+    var isUserAutoRefetchRouteList = false
+    
     
     var baseUrl:String = ""
     var baseUrl_Dev:String = ""
@@ -46,6 +48,10 @@ class AppConfiguration: NSObject {
         
         if let reloadRouteTimeInterval = config.object(forKey: "ReloadRouteTimeInterval") as? Int {
             self.reloadRouteTimeInterval = reloadRouteTimeInterval
+        }
+        
+        if let autoRefetchRouteList = config.object(forKey:"AutoRefetchRouteList") as? Bool {
+            self.isUserAutoRefetchRouteList = autoRefetchRouteList
         }
         
         if let url = config.object(forKey: PATH_REQUEST_URL.BASE_URL.rawValue) as? String {

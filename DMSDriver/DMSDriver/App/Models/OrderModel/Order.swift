@@ -118,6 +118,7 @@ class Order: BaseModel {
     var note:String?
     var details:[Detail]?
 
+    var reason:Reason?
     var startTime = ""
     var endTime = ""
     var urgent_type_name_hb = ""
@@ -164,6 +165,7 @@ class Order: BaseModel {
         url <- map["url"]
         urgent_type_id <- map["urgent_type_id"]
         status <- map["status"]
+        driver_id <- map["driver_id"]
         
         if  let dataFrom = map["from"].currentValue as? String{
             from    = Address(JSON: dataFrom.parseToJSON() ?? [:])
@@ -268,20 +270,6 @@ class Order: BaseModel {
     func isRequireImage() -> Bool  {
         return pod_req == 1
     }
-    
-    func convertToOrderDetail() -> OrderDetail {
-        let orderDetail = OrderDetail()
-        orderDetail.id  = id
-        orderDetail.status   =  status
-        orderDetail.seq = seq
-        orderDetail.from = from
-        orderDetail.to = to
-        orderDetail.details = details
-        orderDetail.status_id = status_id
-        orderDetail.driver_id = driver_id
-        orderDetail.route_id = route_id
-        return orderDetail
-    }
 }
 
 //MARK: -UrlFileMoldel
@@ -302,122 +290,6 @@ class UrlFileMoldel: BaseModel {
     override func mapping(map: Map) {
         sig <- map["sig"]
         doc <- map["doc"]
-    }
-}
-
-
-//MARK: -ToAddress
-class ToAddress: BaseModel {
-    var id: Int?
-    var order_id: Int?
-    var name:String?
-    var street:String?
-    var phone:String?
-    var house_num:String?
-    var entrance:String?
-    var floor:String?
-    var apartment:String?
-    var city:String?
-    var lattd:String?
-    var lngtd:String?
-    var addr:String?
-    var full_addr:String?
-    
-    
-    required init?(map: Map) {
-        super.init()
-    }
-    
-    override func mapping(map: Map) {
-        id <- map["id"]
-        order_id <- map["order_id"]
-        name <- map["name"]
-        street <- map["street"]
-        phone <- map["phone"]
-        house_num <- map["house_num"]
-        entrance <- map["entrance"]
-        floor <- map["floor"]
-        apartment <- map["apartment"]
-        city <- map["city"]
-        lattd <- map["lattd"]
-        lngtd <- map["lngtd"]
-        addr <- map["addr"]
-        full_addr <- map["full_addr"]
-    }
-}
-
-//MARK: -Order_Detail
-class Order_Detail: BaseModel {
-    var id: Int?
-    var order_id: Int?
-    var double_type:Int = 0
-    var packages:Int = 0
-    var cartons:Int = 0
-    var ac:Int = 0
-    var created_at:String?
-    var updated_at:String?
-    
-    required init?(map: Map) {
-        super.init()
-    }
-    
-    override func mapping(map: Map) {
-        id <- map["id"]
-        order_id <- map["order_id"]
-        double_type <- map["double_type"]
-        packages <- map["packages"]
-        cartons <- map["cartons"]
-        ac <- map["ac"]
-        created_at <- map["created_at"]
-        updated_at <- map["updated_at"]
-    }
-}
-
-
-
-//MARK: -OrderDetail
-class OrderDetail: Order {
-    
-    var serviceTime = -1
-    var deliveryContactName = ""
-    var deliveryContactPhone = ""
-    var deliveryCity = ""
-    var deliveryState = ""
-    var descriptionNote = ""
-    var descriptionNoteExt = ""
-    var notes = [Note]()
-    var items = [OrderItem]()
-    var pictures = [Picture]()
-    var reason:Reason?
-    var toAddress:ToAddress?
-    var order_detail:Order_Detail?
-    var route_detail:Route?
-    
-  
-    override func mapping(map: Map) {
-        super.mapping(map: map)
-        id <- map["id"]
-        deliveryContactName <- map["ctt_name"]
-        if deliveryContactName.isEmpty {
-            deliveryContactName <- map["dlvy_ctt_name"]
-        }
-        deliveryContactPhone <- map["ctt_phone"]
-        if deliveryContactPhone.isEmpty {
-            deliveryContactPhone <- map["dlvy_ctt_phone"]
-        }
-        deliveryCity <- map["dlvy_city"]
-        deliveryState <- map["dlvy_state"]
-        descriptionNote <- map["note"]
-        descriptionNoteExt <- map["note_ext"]
-        notes <- map["notes"]
-        pictures <- map["url"]
-        items <- map["details"]
-        serviceTime <- map["service_time"]
-    
-        reason <- map["reason"]
-        toAddress <- map["to_address"]
-        order_detail <- map["order_detail"]
-        route_detail <- map["route_detail"]
     }
 }
 

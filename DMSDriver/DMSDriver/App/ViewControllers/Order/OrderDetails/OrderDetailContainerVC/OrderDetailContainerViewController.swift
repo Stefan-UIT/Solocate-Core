@@ -28,17 +28,23 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
     var route: Route?
     var order:Order?
     var dateStringFilter:String = Date().toString()
-    var onUpdateOrderStatus:((_ order: OrderDetail) -> Void)?
+    var onUpdateOrderStatus:((_ order: Order) -> Void)?
     
     
-    fileprivate var orderDetail: OrderDetail?
+    fileprivate var orderDetail: Order?{
+        didSet{
+            self.orderInfoDetailVC.orderDetail = orderDetail
+            self.orderSignatureVC.orderDetail = orderDetail
+            self.orderPicktureVC.orderDetail = orderDetail
+        }
+    }
   
     override func viewDidLoad() {
         settingConfigBarbutton()
         super.viewDidLoad()
         
         if orderDetail == nil {
-            orderDetail = order?.convertToOrderDetail()
+            orderDetail = order
         }
         updateUI()
     }
@@ -65,7 +71,6 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
                                         (fromIndex == 1)) // 1 is tap signature
         
     }
-    
     
     //MARK: - NetworkObserver
     func addNetworkObserver() {
@@ -107,7 +112,7 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
         }
     }
     
-    func queryOrderDetailLocal()  {
+    private func queryOrderDetailLocal()  {
         DispatchQueue.main.async {[weak self] in
             App().mainVC?.showNoInternetConnection()
             guard let _order = self?.order else{
@@ -125,7 +130,7 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
         }
     }
     
-    func settingConfigBarbutton()  {
+    private func settingConfigBarbutton()  {
         // change selected bar color
         settings.style.buttonBarBackgroundColor = .white
         settings.style.buttonBarItemBackgroundColor = .white
@@ -156,7 +161,8 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
     
     private  func setupViewControllerForPagerTab() -> [UIViewController] {
         orderInfoDetailVC.dateStringFilter = dateStringFilter
-        orderInfoDetailVC.orderDetail = order?.convertToOrderDetail()
+        orderInfoDetailVC.orderDetail = order
+        orderInfoDetailVC.rootVC = self
         orderInfoDetailVC.didUpdateStatus = { [weak self] (orderDetail, shouldMoveToTab)  in
             self?.onUpdateOrderStatus?(orderDetail)
             
@@ -169,18 +175,20 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
             self?.reachabilityChangedNotification(notification)
         }
         
-        orderInfoDetailVC.updateOrderDetail = { [weak self] in
-            //self?.getOrderDetail(isFetch: true)
+        orderInfoDetailVC.updateOrderDetail = {[weak self] (order) in
+            self?.orderDetail = order
         }
         
-        orderSignatureVC.orderDetail = order?.convertToOrderDetail()
-        orderSignatureVC.updateOrderDetail = { [weak self] in
-            //self?.getOrderDetail(isFetch: true)
+        orderSignatureVC.orderDetail = order
+        orderSignatureVC.rootVC = self
+        orderSignatureVC.updateOrderDetail = { [weak self] (order) in
+            self?.orderDetail = order
         }
         
-        orderPicktureVC.orderDetail = order?.convertToOrderDetail()
-        orderPicktureVC.updateOrderDetail = { [weak self] in
-            //self?.getOrderDetail(isFetch: true)
+        orderPicktureVC.orderDetail = order
+        orderPicktureVC.rootVC = self
+        orderPicktureVC.updateOrderDetail = { [weak self] (order) in
+            self?.orderDetail = order
         }
         
         return [orderInfoDetailVC,orderSignatureVC,orderPicktureVC]
@@ -192,7 +200,7 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
         self.moveToViewController(at: shouldMoveToTab, animated: false)
     }
     
-    private  func updateUI() {
+    private func updateUI() {
         containerView.isScrollEnabled = false
     }
     

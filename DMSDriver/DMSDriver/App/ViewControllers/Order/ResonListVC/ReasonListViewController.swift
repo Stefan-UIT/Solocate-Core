@@ -18,7 +18,7 @@ class ReasonListViewController: BaseViewController {
     
     fileprivate var reasonList:[Reason] = [Reason]()
     fileprivate var selectedIndex: Int = -1
-    var orderDetail: OrderDetail?
+    var orderDetail: Order?
     var task: TaskModel?
 
     var routeID: Int = -1

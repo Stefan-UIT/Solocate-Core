@@ -98,7 +98,7 @@ class TimerVC: BaseViewController {
     }
     
     func removePushNotifiactionDrivingRole()  {
-        LocalNotification.removePendingNotifications(["remider.timeout.drivingrole"])
+        LocalNotification.removePendingNotifications([NotificationName.remiderTimeoutDrivingRole])
     }
     
     func createPushNotificationDrivingRole() {

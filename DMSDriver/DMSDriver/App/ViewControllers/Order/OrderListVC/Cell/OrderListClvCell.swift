@@ -104,7 +104,7 @@ extension OrderListClvCell: UITableViewDelegate, UITableViewDataSource {
         self.rootVC?.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func updateStatusOrder(_ order:OrderDetail) {
+    func updateStatusOrder(_ order:Order) {
         if (orderList.contains{$0.id == order.id}) {
             if let _index = orderList.index(where: {$0.id == order.id}){
                 orderList[_index].statusCode = order.statusCode

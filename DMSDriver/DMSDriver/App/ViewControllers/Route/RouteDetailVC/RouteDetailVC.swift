@@ -39,7 +39,7 @@ class RouteDetailVC: UITabBarController {
     let packageVC:PackagesViewController = .loadSB(SB: .Packages)
     let mapVC:MapsViewController = .loadSB(SB: .Map)
 
-    var displayMode:DisplayMode = DisplayMode.Reduced{
+    var displayMode:DisplayMode = DisplayMode.Expanded{
         didSet{
             updateNavigationBar()
             reloadOrderListViewController()

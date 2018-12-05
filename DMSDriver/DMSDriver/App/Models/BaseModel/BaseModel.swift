@@ -1,6 +1,5 @@
 //
 //  BaseModal.swift
-//  Sel2B
 //
 //  Created by machnguyen_uit on 6/5/18.
 //  Copyright © 2018 SeldatInc. All rights reserved.
@@ -35,3 +34,4 @@ class BaseModel:NSObject, Mappable  {
         return self.getJSONString();
     }
 }
+

@@ -45,10 +45,10 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     fileprivate let orderDetailNatureOfGoodsCell = "OrderDetailNatureOfGoodsCell"
     fileprivate var scanItems = [String]()
     fileprivate var arrTitleHeader:[String] = []
-  
+    
     var dateStringFilter = Date().toString()
   
-    override var orderDetail: OrderDetail? {
+    override var orderDetail: Order? {
         didSet {
             tableView?.reloadData()
         }
@@ -58,6 +58,12 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         super.viewDidLoad()
         updateUI()
         initVar()
+        getOrderDetail()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateUI()
     }
     
     
@@ -96,7 +102,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     func setupDataDetailInforRows() {
-        var _orderDetail:OrderDetail = OrderDetail()
+        var _orderDetail:Order = Order()
         if orderDetail != nil {
             _orderDetail = orderDetail!
         }
@@ -157,7 +163,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         vc.orderDetail = orderDetail
         vc.displayMode = .displayModeOrder
         vc.didCancelSuccess =  { [weak self] (success, order) in
-            self?.orderDetail = order as? OrderDetail
+            self?.orderDetail = order as? Order
             self?.updateUI()
             self?.setupDataDetailInforRows()
             self?.tableView?.reloadData()
@@ -453,7 +459,7 @@ fileprivate extension OrderDetailViewController{
 
 //MARK: API
 extension OrderDetailViewController{
-    private func getOrderDetail(isFetch:Bool = false) { // Currently have not api get orderDetail
+    private func getOrderDetail(isFetch:Bool = false) {
          if hasNetworkConnection &&
             ReachabilityManager.isCalling == false {
             guard let _orderID = orderDetail?.id else { return }
@@ -464,7 +470,9 @@ extension OrderDetailViewController{
                  self?.dismissLoadingIndicator()
                  switch result{
                  case .object(let object):
-                     self?.orderDetail = object
+                     self?.orderDetail = object.data
+                     self?.rootVC?.order =  self?.orderDetail
+                     self?.initVar()
                      self?.updateUI()
                      //CoreDataManager.updateOrderDetail(object) // update orderdetail to DB local
     
@@ -542,7 +550,7 @@ extension OrderDetailViewController{
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
-                self?.updateOrderDetail?()
+                self?.updateOrderDetail?(self?.orderDetail)
                 self?.showAlertView("Assigned successfull.".localized,
                                     completionHandler: { (ok) in
                     let vc:RouteListVC = .loadSB(SB: .Route)
