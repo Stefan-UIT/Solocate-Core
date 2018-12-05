@@ -37,6 +37,15 @@ class ScrollMenuView: UIView {
         clvContent?.dataSource = self
         clvContent?.registerCellNibForClass(cellClass: ScrollMenuCell.self)
     }
+    
+    func totalWidth() -> CGFloat {
+        var  width:CGFloat = 0.0
+        listItems?.forEach({ (menuItem) in
+            width = width + getWithCellWith(menuItem.name)
+        })
+        
+        return width
+    }
 }
 
 extension ScrollMenuView:UICollectionViewDataSource,UICollectionViewDelegateFlowLayout{
@@ -49,8 +58,20 @@ extension ScrollMenuView:UICollectionViewDataSource,UICollectionViewDelegateFlow
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (collectionView.frame.size.width / CGFloat(listItems?.count ?? 0)),
-                     height: collectionView.frame.size.height)
+        
+        if totalWidth() <= collectionView.frame.size.width  {
+            return CGSize(width: (collectionView.frame.size.width / CGFloat(listItems?.count ?? 0)),
+                          height: collectionView.frame.size.height)
+        }else {
+            return CGSize(width:  getWithCellWith(E(listItems?[indexPath.row].name)),
+                          height: collectionView.frame.size.height)
+        }
+    }
+    
+    func getWithCellWith(_ text:String) -> CGFloat {
+        let size = text.sizeOfString(usingFont: Font.arialRegular(with: 14))
+        let width = size.width + 50
+        return width > 90 ? width : 90
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
