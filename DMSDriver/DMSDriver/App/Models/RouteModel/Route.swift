@@ -207,6 +207,18 @@ class Route: BaseModel {
         
     }
     
+    func checkFinished() -> Bool {
+        var result = true
+        for item in orderList{
+            if item.statusOrder != .deliveryStatus{
+                result = false
+                break
+            }
+        }
+        
+        return result
+    }
+    
     func orders(_ _status:StatusOrder) -> [Order] {
         let arr = getOrderList().filter({ (order) -> Bool in
             return order.statusOrder == _status

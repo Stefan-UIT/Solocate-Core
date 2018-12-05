@@ -495,13 +495,14 @@ extension OrderDetailViewController{
              */
          }
     }
-    func updateOrderStatus(_ status: String) {
+    
+    func updateOrderStatus(_ statusCode: String) {
         guard let _orderDetail = orderDetail else {
             return
         }
         let listStatus =  CoreDataManager.getListStatus()
         for item in listStatus {
-            if item.code == status{
+            if item.code == statusCode{
                 _orderDetail.status = item
                 break
             }
@@ -524,12 +525,12 @@ extension OrderDetailViewController{
                 self?.setupDataDetailInforRows()
                 self?.updateButtonStatus()
                 self?.tableView?.reloadData()
-                self?.didUpdateStatus?(_orderDetail,(status == "IP" &&
-                    _orderDetail.url?.sig == nil &&
-                    _orderDetail.isRequireSign()) ? 1 : nil)
-                //Save Date Start route
-                if status == "IP" &&
-                    self?.route?.isFirstStartOrder ?? false{
+                self?.didUpdateStatus?(_orderDetail,(statusCode == "IP" &&
+                                                    _orderDetail.url?.sig == nil &&
+                                                    _orderDetail.isRequireSign()) ? 1 : nil)
+                // Save Date Start route
+                if statusCode == StatusOrder.inProcessStatus.rawValue &&
+                    self?.route?.isFirstStartOrder ?? false {
                     Caches().dateStartRoute = Date.now
                     let totalMinutes = Caches().drivingRule?.data ?? 0
                     LocalNotification.createPushNotificationAfter(totalMinutes,
@@ -538,8 +539,25 @@ extension OrderDetailViewController{
                                                                   "remider.timeout.drivingrole",  [:])
                 }
                 
+                // Check to remove remider timeout driving role
+                if statusCode == StatusOrder.deliveryStatus.rawValue {
+                    self?.updateRoute()
+                    if (self?.route?.checkFinished() ??  false){
+                        LocalNotification.removePendingNotifications([NotificationName.remiderTimeoutDrivingRole])
+                    }
+                }
+                
             case .error(let error):
                 self?.showAlertView(error.getMessage())
+            }
+        }
+    }
+    
+    func updateRoute()  {
+        for i in 0..<(self.route?.orderList.count ?? 0) {
+            if self.route?.orderList[i].id == self.orderDetail?.id {
+                self.route?.orderList[i] = (self.orderDetail)!
+                break
             }
         }
     }
