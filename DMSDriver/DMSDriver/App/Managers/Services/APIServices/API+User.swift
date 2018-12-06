@@ -11,7 +11,7 @@ import Foundation
 
 extension BaseAPIService{
     @discardableResult
-    func getUserProfile(callback: @escaping APICallback<ResponseDataModel<UserModel>>) -> APIRequest {
+    func getUserProfile(callback: @escaping APICallback<ResponseDataModel<UserModel.UserInfo>>) -> APIRequest {
         return request(method: .GET,
                        path: PATH_REQUEST_URL.GET_USER_PROFILE.URL,
                        input: .empty,
@@ -19,7 +19,7 @@ extension BaseAPIService{
     }
     
     @discardableResult
-    func updateUserProfile(_ user:UserModel, callback: @escaping APICallback<ResponseDataModel<UserModel>>) -> APIRequest {
+    func updateUserProfile(_ user:UserModel.UserInfo, callback: @escaping APICallback<ResponseDataModel<UserModel.UserInfo>>) -> APIRequest {
         return request(method: .PUT,
                        path: PATH_REQUEST_URL.UPDATE_USER_PROFILE.URL,
                        input: .dto(user),

@@ -39,7 +39,7 @@ class ProfileVC: BaseViewController {
     private let  indentifierRowCell  = "ProfileEditCell"
     private let  indentifierChangePassCell  = "ProfileChagePassCell"
 
-    private var user:UserModel?
+    private var user:UserModel.UserInfo?
     private var publicInforDatas:[[String]] = []
     private var privateInforDatas:[[String]] = []
   
@@ -75,11 +75,11 @@ class ProfileVC: BaseViewController {
     }
   
     func initData() {
-      publicInforDatas = [["First Name".localized,E(user?.userInfo?.firstName)],
-                          ["Last Name".localized,E(user?.userInfo?.lastName)]]
+      publicInforDatas = [["First Name".localized,E(user?.firstName)],
+                          ["Last Name".localized,E(user?.lastName)]]
     
-      privateInforDatas = [["Phone".localized,E(user?.userInfo?.phone)],
-                           ["Email".localized,E(user?.userInfo?.email)],
+      privateInforDatas = [["Phone".localized,E(user?.phone)],
+                           ["Email".localized,E(user?.email)],
                            ["Password".localized,"Change Password".localized]]
     }
     
@@ -297,23 +297,29 @@ extension ProfileVC:UITableViewDelegate{
 
 //MARK: UITextFieldDelegate
 extension ProfileVC:UITextFieldDelegate{
-  func textFieldDidBeginEditing(_ textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
       textFieldEdit = textField
       //self.tbvContent?.reloadData()
-  }
-  
-  func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-    let tag = textField.tag;
-    if tag == 0 {
-      user?.userInfo?.firstName = textField.text;
-    }else if tag == 1 {
-      user?.userInfo?.lastName = textField.text;
-    }else if tag ==  publicInforDatas.count {
-      user?.userInfo?.phone = textField.text
-    }else if (tag == publicInforDatas.count + 1){
-      user?.userInfo?.email = textField.text
     }
-  }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text,
+            let textRange = Range(range, in: text) {
+            let updatedText = text.replacingCharacters(in: textRange,
+                                                       with: string)
+            let tag = textField.tag;
+            if tag == 0 {
+                user?.firstName = updatedText
+            }else if tag == 1 {
+                user?.lastName = updatedText
+            }else if tag ==  publicInforDatas.count {
+                user?.phone = updatedText
+            }else if (tag == publicInforDatas.count + 1){
+                user?.email = updatedText
+            }
+        }
+        return true
+    }
 }
 
 
@@ -349,13 +355,13 @@ extension ProfileVC{
             }
         }
     }else {
-        user = Caches().user
+        user = Caches().user?.userInfo
         initData()
         tbvContent?.reloadData()
     }
   }
   
-  func updateUserProfile(_ user:UserModel) {
+  func updateUserProfile(_ user:UserModel.UserInfo) {
     self.showLoadingIndicator()
     API().updateUserProfile(user) {[weak self] (result) in
       guard let strongSelf = self else{return}
