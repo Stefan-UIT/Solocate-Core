@@ -2706,6 +2706,7 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/DMSDriver/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2715,7 +2716,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "dev-dms-gadot";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/macintoshhd/PROJECT_SELDAT/dms-gadot/DMSDriver/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/macintoshhd/PROJECT_SELDAT/DMS/dms-gadot/DMSDriver/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2853,6 +2854,7 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/DMSDriver/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2862,7 +2864,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "dev-dms-gadot";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/macintoshhd/PROJECT_SELDAT/dms-gadot/DMSDriver/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/macintoshhd/PROJECT_SELDAT/DMS/dms-gadot/DMSDriver/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -2884,6 +2886,7 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/DMSDriver/Supporting Files/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2893,7 +2896,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "dev-dms-gadot";
-				SWIFT_OBJC_BRIDGING_HEADER = "/Users/macintoshhd/PROJECT_SELDAT/dms-gadot/DMSDriver/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "/Users/macintoshhd/PROJECT_SELDAT/DMS/dms-gadot/DMSDriver/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
