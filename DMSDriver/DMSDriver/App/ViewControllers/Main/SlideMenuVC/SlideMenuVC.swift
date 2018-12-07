@@ -81,10 +81,9 @@ extension SlideMenuVC: UITableViewDataSource{
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if let menutype:MenuItemType = MenuItemType(rawValue: indexPath.row) {
-        if !((Caches().user?.isCoordinator ?? false)) &&
-            !((Caches().user?.isAdmin ?? false)) &&
-            menutype ==  MenuItemType.ASSIGN{
-            return 0 // row assign only for Coordinator,admin
+        if menutype == .ASSIGN ||
+            menutype == MenuItemType.TASK {
+            return 0
         }
     }
     return UITableViewAutomaticDimension
