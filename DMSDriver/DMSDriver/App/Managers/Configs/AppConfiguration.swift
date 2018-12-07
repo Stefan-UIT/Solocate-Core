@@ -14,13 +14,10 @@ class AppConfiguration: NSObject {
     
     static let sharedInstance = AppConfiguration()
     
-    
-    
     // MARK: - Variables
     var trackingTimeInterval:Int = 0
     var reloadRouteTimeInterval:Int = 0
     var isUserAutoRefetchRouteList = false
-    
     
     var baseUrl:String = ""
     var baseUrl_Dev:String = ""

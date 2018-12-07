@@ -5,8 +5,6 @@
 #define KEYCHAIN_ACCESS_GROUP @"43432WKUU5"
 #define DOMAIN_DEFAULT        @"https://gitosolutions.com"
 // Test
-//#define TEST_USERNAME   @"tamchu1403@gmail.com"
-//#define TEST_PASSWORD   @"Aa123456?"
 
 #define SERVER_URL              @"/api"
 
