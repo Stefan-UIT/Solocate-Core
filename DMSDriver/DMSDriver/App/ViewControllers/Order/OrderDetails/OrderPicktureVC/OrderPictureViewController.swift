@@ -48,6 +48,12 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
         }
     }
     
+    func updateData(_ order:Order)  {
+        orderDetail = order
+        initData()
+        updateUI()
+    }
+    
     
     @IBAction func takePicture(_ sender: UIButton) {
         ImagePickerView.shared().showImageGallarySinglePick(atVC: self) { (success, data) in

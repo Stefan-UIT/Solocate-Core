@@ -62,6 +62,11 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
     override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return IndicatorInfo(title: "Signature".localized)
     }
+    
+    func updateData(_ order:Order?) {
+        orderDetail = order
+        updateUI()
+    }
   
     @IBAction func cancelDrawSignature(_ sender: UIButton) {
         validationSubmit = false

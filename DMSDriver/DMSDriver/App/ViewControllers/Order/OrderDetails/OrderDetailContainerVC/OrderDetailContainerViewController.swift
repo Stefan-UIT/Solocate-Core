@@ -165,6 +165,8 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
         orderInfoDetailVC.rootVC = self
         orderInfoDetailVC.didUpdateStatus = { [weak self] (orderDetail, shouldMoveToTab)  in
             self?.onUpdateOrderStatus?(orderDetail)
+            self?.orderPicktureVC.updateData(orderDetail)
+            self?.orderSignatureVC.updateData(orderDetail)
             
             if shouldMoveToTab != nil {
                 self?.moveToViewController(shouldMoveToTab: shouldMoveToTab!)
