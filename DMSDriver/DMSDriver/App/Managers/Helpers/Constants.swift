@@ -127,15 +127,21 @@ struct Platform {
 
 
 struct Defaultkey {
-  static let tokenKey = "token"
-  static let fcmToken = "fcmToken"
-  static let firstLaunch = "firstLaunch"
-  static let userStatus = "userStatus"
-  static let keepLogin = "keepLogin"
-  static let SF_USER = "SF_USER"
-  static let SF_REMEBER_LOGIN = "SF_REMEBER_LOGIN"
-  static let SF_DRIVING_RULE = "SF_DRIVING_RULE"
-  static let SF_SAVE_DATE_START_ROUTE = "SF_SAVE_DATE_START_ROUTE"
+    static let tokenKey = "token"
+    static let fcmToken = "fcmToken"
+    static let firstLaunch = "firstLaunch"
+    static let userStatus = "userStatus"
+    static let keepLogin = "keepLogin"
+    static let SF_USER = "SF_USER"
+    static let SF_REMEBER_LOGIN = "SF_REMEBER_LOGIN"
+    static let SF_DRIVING_RULE = "SF_DRIVING_RULE"
+    static let SF_SAVE_DATE_START_ROUTE = "SF_SAVE_DATE_START_ROUTE"
+
+    // TimerVC
+    static let starting = "starting"
+    static let pause = "pausepause"
+    static let cancel = "cancel"
+    static let timeRemaining = "timeRemaining"
 
 }
 

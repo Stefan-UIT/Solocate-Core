@@ -117,7 +117,10 @@ fileprivate extension LoginViewController {
                     strongSelf.dismissLoadingIndicator()
                     switch result{
                     case .object(let obj):
-                        Caches().drivingRule = obj
+                        
+                        let data = DrivingRule()
+                        data.data = 1
+                        Caches().drivingRule = data
  
                     case .error(let error):
                         strongSelf.showAlertView(error.getMessage())

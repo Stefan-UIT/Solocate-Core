@@ -88,7 +88,59 @@ class Cache: NSObject {
         }
     }
     
+    var isStartingRoute:Bool{
+        set{
+            setObject(obj: newValue, forKey: Defaultkey.starting)
+        }
+        
+        get{
+            if let data = getObject(forKey: Defaultkey.starting) as? Bool{
+                return data
+            }
+            return false
+        }
+    }
     
+    var isPauseRoute:Bool{
+        set{
+            setObject(obj: newValue, forKey: Defaultkey.pause)
+        }
+        
+        get{
+            if let data = getObject(forKey: Defaultkey.pause) as? Bool{
+                return data
+            }
+            return false
+        }
+    }
+    
+    var isCancelCounter:Bool{
+        set{
+            setObject(obj: newValue, forKey: Defaultkey.cancel)
+        }
+        
+        get{
+            if let data = getObject(forKey: Defaultkey.cancel) as? Bool{
+                return data
+            }
+            return false
+        }
+    }
+    
+    var timeRemaining:Int{
+        set{
+            setObject(obj: newValue, forKey: Defaultkey.timeRemaining)
+        }
+        
+        get{
+            if let data = getObject(forKey: Defaultkey.timeRemaining) as? Int{
+                return data
+            }
+            
+            return 0
+        }
+    }
+
     func setObject(obj: Any, forKey key: String) {
         let data = NSKeyedArchiver.archivedData(withRootObject: obj)
         userDefaults.set(data, forKey: key)

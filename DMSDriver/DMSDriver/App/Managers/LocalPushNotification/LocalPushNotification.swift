@@ -16,7 +16,7 @@ class LocalPushNotification: NSObject {
     
     static let shareIntance = LocalPushNotification()
     
-    func createPushNotificationAfter(_ minutes: Int,
+    func createPushNotificationAfter(_ second: Int,
                                      _ title:String,
                                      _ descr:String,
                                      _ identifier:String,
@@ -42,7 +42,7 @@ class LocalPushNotification: NSObject {
              */
             
             //Time interval
-            let trigger1 = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(minutes * 60), repeats: false)
+            let trigger1 = UNTimeIntervalNotificationTrigger(timeInterval: TimeInterval(second), repeats: false)
             let request = UNNotificationRequest(identifier:identifier,
                 content: content,
                 trigger: trigger1)

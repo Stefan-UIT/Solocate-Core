@@ -19,12 +19,7 @@ class TimerVC: BaseViewController {
     var timmerTime:Timer?
     var route:Route?
     var drivingRule:DrivingRule?
-    
-    var isStarting = false
-    var isPause = false
-    var isCancel = false
 
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,9 +51,9 @@ class TimerVC: BaseViewController {
     
     //MARK: - ACTION
     @IBAction func onbtnClickCancel(btn:UIButton){
-        isCancel = true
-        isPause = false
-        isStarting = false
+        Caches().isCancelCounter = true
+        Caches().isPauseRoute = false
+        Caches().isStartingRoute = false
         Caches().dateStartRoute = nil
         invalidTimmer()
         updateButtonAction()
@@ -67,31 +62,34 @@ class TimerVC: BaseViewController {
     }
     
     @IBAction func onbtnClickStart(btn:UIButton){
-        if isCancel {
-            isCancel = false
-            isPause = false
-            isStarting = true
+        if Caches().isCancelCounter {
+            Caches().isCancelCounter = false
+            Caches().isPauseRoute = false
+            Caches().isStartingRoute = true
             Caches().dateStartRoute = Date.now
+            Caches().timeRemaining = (drivingRule?.data ?? 0 ) * 60 //second
             startTimer()
             updateTime()
             createPushNotificationDrivingRole()
             
-        }else if !isPause {
-            isPause = true
-            isStarting = false
-            isCancel = false
+        }else if !Caches().isPauseRoute {
+            Caches().isPauseRoute = true
+            Caches().isStartingRoute = false
+            Caches().isCancelCounter = false
             invalidTimmer()
+            removePushNotifiactionDrivingRole()
             
         }else{
-            isCancel = false
-            isPause = false
-            isStarting = true
+            Caches().isPauseRoute = false
+            Caches().isStartingRoute = true
+            Caches().isCancelCounter = false
             
             if Caches().dateStartRoute == nil {
                 Caches().dateStartRoute = Date.now
             }
 
             startTimer()
+            createPushNotificationDrivingRole()
         }
         
         updateButtonAction()
@@ -102,13 +100,12 @@ class TimerVC: BaseViewController {
     }
     
     func createPushNotificationDrivingRole() {
-        let totalMinutes = drivingRule?.data ?? 0
-
-        LocalNotification.createPushNotificationAfter(totalMinutes,
-                                                      "Reminder".localized,
-                                                      "Your task has been over.",
-                                                      "remider.timeout.drivingrole",  [:])
-
+        if Caches().timeRemaining > 0 {
+            LocalNotification.createPushNotificationAfter(Caches().timeRemaining,
+                                                          "Reminder".localized,
+                                                          "Your task has been over.",
+                                                          "remider.timeout.drivingrole",  [:])
+        }
     }
 }
 
@@ -160,7 +157,7 @@ fileprivate extension TimerVC{
     func updateButtonAction()  {
         btnCancel?.setStyleCancelTimer()
         
-        if isStarting || isPause{
+        if Caches().isStartingRoute || Caches().isPauseRoute{
             btnCancel?.isEnabled = true
             btnCancel?.alpha = 1
         }else{
@@ -168,9 +165,9 @@ fileprivate extension TimerVC{
             btnCancel?.alpha = 0.3
         }
         
-        if isStarting {
+        if Caches().isStartingRoute {
             btnStart?.setStylePauseTimer()
-        }else if isPause {
+        }else if Caches().isPauseRoute {
             btnStart?.setStyleResumeTimer()
         }else {
             btnStart?.setStyleStartTimer()
@@ -191,14 +188,19 @@ fileprivate extension TimerVC{
         newDate?.minute = (dateStartRoute?.minute ?? 0) + minute
         
         let timeRemaining = newDate?.offsetFrom(date: Date.now)
+        let h = timeRemaining?.hour ?? 0
+        let m = timeRemaining?.minute ?? 0
+        let s = timeRemaining?.second ?? 0
+        
         if  timeRemaining?.second ?? 0 <= 0 &&
             timeRemaining?.hour ?? 0 <= 0 &&
             timeRemaining?.minute ?? 0 <= 0 &&
             timeRemaining?.day ?? 0 <= 0 {
             
-            isStarting = false
-            isPause = false
-            isCancel = true
+            Caches().isStartingRoute = false
+            Caches().isPauseRoute = false
+            Caches().isCancelCounter = true
+            Caches().timeRemaining = 0
             invalidTimmer()
             updateButtonAction()
             resetCountDownTime()
@@ -213,13 +215,10 @@ fileprivate extension TimerVC{
             return
         }
         
-        let h = timeRemaining?.hour
-        let m = timeRemaining?.minute
-        let s = timeRemaining?.second
-        
-        lblTimeRemaining?.text =  "\(h ?? 0) : \(m ?? 0) : \(s ?? 0)"
-        isStarting = true
-        isCancel = false
+        Caches().timeRemaining = (h * 60 * 60) + (m * 60) + s
+        lblTimeRemaining?.text =  "\(h) : \(m) : \(s)"
+        Caches().isStartingRoute = true
+        Caches().isCancelCounter = false
     }
     
     

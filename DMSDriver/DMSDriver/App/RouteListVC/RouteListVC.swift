@@ -331,7 +331,7 @@ extension RouteListVC:UITableViewDelegate {
                 Caches().dateStartRoute = Date.now
                 
                 let totalMinutes = Caches().drivingRule?.data ?? 0
-                LocalNotification.createPushNotificationAfter(totalMinutes,
+                LocalNotification.createPushNotificationAfter(totalMinutes * 60,
                                                               "Reminder".localized,
                                                               "Your task has been over.",
                                                               NotificationName.remiderTimeoutDrivingRole,  [:])

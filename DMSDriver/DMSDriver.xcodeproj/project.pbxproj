@@ -100,7 +100,6 @@
 		3B66B842210B113D000BDFEF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7C4210B113C000BDFEF /* Constants.swift */; };
 		3B66B843210B113D000BDFEF /* Cache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7C5210B113C000BDFEF /* Cache.swift */; };
 		3B66B844210B113D000BDFEF /* KeyConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7C6210B113C000BDFEF /* KeyConstants.swift */; };
-		3B66B845210B113D000BDFEF /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7C7210B113C000BDFEF /* Theme.swift */; };
 		3B66B846210B113D000BDFEF /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7C8210B113C000BDFEF /* LocationManager.swift */; };
 		3B66B848210B113D000BDFEF /* Services.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7CB210B113C000BDFEF /* Services.swift */; };
 		3B66B849210B113D000BDFEF /* FirebaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7CD210B113C000BDFEF /* FirebaseService.swift */; };
@@ -335,7 +334,6 @@
 		3B66B7C4210B113C000BDFEF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		3B66B7C5210B113C000BDFEF /* Cache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Cache.swift; sourceTree = "<group>"; };
 		3B66B7C6210B113C000BDFEF /* KeyConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeyConstants.swift; sourceTree = "<group>"; };
-		3B66B7C7210B113C000BDFEF /* Theme.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
 		3B66B7C8210B113C000BDFEF /* LocationManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		3B66B7CB210B113C000BDFEF /* Services.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Services.swift; sourceTree = "<group>"; };
 		3B66B7CD210B113C000BDFEF /* FirebaseService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseService.swift; sourceTree = "<group>"; };
@@ -1296,10 +1294,9 @@
 		3B66B7C3210B113C000BDFEF /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				3B66B7C6210B113C000BDFEF /* KeyConstants.swift */,
 				3B66B7C4210B113C000BDFEF /* Constants.swift */,
 				3B66B7C5210B113C000BDFEF /* Cache.swift */,
-				3B66B7C6210B113C000BDFEF /* KeyConstants.swift */,
-				3B66B7C7210B113C000BDFEF /* Theme.swift */,
 				3B66B7C8210B113C000BDFEF /* LocationManager.swift */,
 			);
 			path = Helpers;
@@ -2457,7 +2454,6 @@
 				3B66B8EE210B1149000BDFEF /* OrderMarker.swift in Sources */,
 				3B66B82A210B113D000BDFEF /* UIAlertController+Extensions.swift in Sources */,
 				3B66B807210B113D000BDFEF /* UITextField.swift in Sources */,
-				3B66B845210B113D000BDFEF /* Theme.swift in Sources */,
 				3B66B830210B113D000BDFEF /* TextViewController.swift in Sources */,
 				3B5D79242178346700EA49CC /* DateFormatter+Ext.swift in Sources */,
 				3B66B802210B113D000BDFEF /* Date.swift in Sources */,
