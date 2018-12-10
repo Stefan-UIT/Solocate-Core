@@ -102,7 +102,7 @@ extension BaseAPIService {
     
     //MARK: - TRACKING
     @discardableResult
-    func updateDriverLocation(long :Double, lat:Double, callback: @escaping APICallback<Route>) -> APIRequest {
+    func updateDriverLocation(long :Double, lat:Double,routeIds:[Int], callback: @escaping APICallback<Route>) -> APIRequest {
         let driverID = Caches().user?.userInfo?.id ?? -1
         let driverName = Caches().user?.userInfo?.userName ?? ""
 
@@ -113,7 +113,7 @@ extension BaseAPIService {
             KEY_TIMESTAMPS: timestamps,
             KEY_DRIVER_ID: driverID,
             KEY_DRIVER_NAME:driverName,
-            KEY_ROUTES:[]
+            KEY_ROUTES:routeIds
             ] as [String : Any]
         
         return request(method: .POST,

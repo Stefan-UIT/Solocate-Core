@@ -20,7 +20,7 @@ extension BaseAPIService {
         if newDate == nil {
             newDate = Date().toString("MM/dd/yyyy")
         }
-        let path = String(format: PATH_REQUEST_URL.GET_ROUTES_BY_DATE.URL,"\(Caches().user?.userInfo?.id ?? 0)", E(newDate))
+        let path = String(format: PATH_REQUEST_URL.GET_ROUTES_BY_DATE.URL, E(newDate))
         return request(method: .GET,
                        path:path,
                        input: APIInput.empty,
@@ -67,5 +67,13 @@ extension BaseAPIService {
                        input: .empty,
                        callback: callback);
     }
-
+    
+    @discardableResult
+    func getAllRouteInprogess(callback: @escaping APICallback<DataAny>) -> APIRequest {
+        return request(method: .GET,
+                       path: PATH_REQUEST_URL.GET_ALL_ROUTE_INPROGESS.URL,
+                       input: .empty,
+                       callback: callback);
+    }
+    
 }

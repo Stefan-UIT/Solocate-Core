@@ -9,6 +9,24 @@
 import UIKit
 import ObjectMapper
 
+class DataAny: BaseModel {
+    var message:String?
+    var data:Any?
+    
+    override init() {
+        super.init()
+    }
+    
+    required init?(map: Map) {
+        super.init()
+    }
+    
+    override func mapping(map: Map) {
+        message <- map["message"]
+        data <- map["data"]
+    }
+}
+
 class DrivingRule: BaseModel {
     var message:String?
     var data:Int?

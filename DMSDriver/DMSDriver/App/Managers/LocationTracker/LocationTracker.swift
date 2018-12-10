@@ -43,8 +43,19 @@ class LocationTracker: NSObject {
         
         let longitude = userLocation.coordinate.longitude
         let latitude = userLocation.coordinate.latitude
-        API().updateDriverLocation(long: longitude,
-                                   lat: latitude) {(result) in
+        
+        SERVICES().API.getAllRouteInprogess { (result) in
+            switch result{
+            case .object(let obj):
+                if let routeIds = obj.data as? Array<Int> {
+                    API().updateDriverLocation(long: longitude,
+                                               lat: latitude, routeIds: routeIds) {(result) in
+                    }
+                }
+               
+            case .error(_ ):
+                break
+            }
         }
     }
     

@@ -29,12 +29,12 @@
 		3B21A0022140E009003CBC14 /* ReachabilityManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B21A0012140E008003CBC14 /* ReachabilityManager.swift */; };
 		3B2A23A721195BA50000817C /* GoogleService-Info-prod.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B2A23A621195BA50000817C /* GoogleService-Info-prod.plist */; };
 		3B355ED921ABE078004A2879 /* API+Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B355ED821ABE078004A2879 /* API+Route.swift */; };
+		3B44C03721BE0B48008F070D /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B767210B113C000BDFEF /* LocationTracker.swift */; };
 		3B57EDCB2126B4FB006DD64A /* GoogleService-Info-staging.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B57EDCA2126B4FB006DD64A /* GoogleService-Info-staging.plist */; };
 		3B5D79242178346700EA49CC /* DateFormatter+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5D79222178346700EA49CC /* DateFormatter+Ext.swift */; };
 		3B5D7926217834B300EA49CC /* Date extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5D7925217834B300EA49CC /* Date extensions.swift */; };
 		3B6425DA2122BFD4001F5F14 /* OrderListClvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6425D92122BFD4001F5F14 /* OrderListClvCell.swift */; };
 		3B66B759210B1051000BDFEF /* DMSDriver.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B757210B1051000BDFEF /* DMSDriver.xcdatamodeld */; };
-		3B66B801210B113D000BDFEF /* LocationTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B767210B113C000BDFEF /* LocationTracker.swift */; };
 		3B66B802210B113D000BDFEF /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B769210B113C000BDFEF /* Date.swift */; };
 		3B66B803210B113D000BDFEF /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B76A210B113C000BDFEF /* UIView.swift */; };
 		3B66B804210B113D000BDFEF /* NSString+SDString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B76B210B113C000BDFEF /* NSString+SDString.m */; };
@@ -2503,6 +2503,7 @@
 				3B66B8EF210B1149000BDFEF /* EmptyModel.swift in Sources */,
 				3B66B82E210B113D000BDFEF /* UITextField+Extensions.swift in Sources */,
 				3B66B836210B113D000BDFEF /* DatePickerViewController.swift in Sources */,
+				3B44C03721BE0B48008F070D /* LocationTracker.swift in Sources */,
 				3B9A37622123D5C1004D881C /* PickerTypeListCell.swift in Sources */,
 				3BC053E42180179D001B7D89 /* ReasonListCell.swift in Sources */,
 				3B66B84F210B113D000BDFEF /* BaseAPIService.swift in Sources */,
@@ -2524,7 +2525,6 @@
 				3B66B83F210B113D000BDFEF /* DMSNavigationService.swift in Sources */,
 				3B66B8E5210B1149000BDFEF /* BaseModel.swift in Sources */,
 				3B66B8E4210B1149000BDFEF /* Note.swift in Sources */,
-				3B66B801210B113D000BDFEF /* LocationTracker.swift in Sources */,
 				3B66B8FA210B1149000BDFEF /* OrderDetailViewController.swift in Sources */,
 				3B66B821210B113D000BDFEF /* UIViewController+Extensions.swift in Sources */,
 				3B66B82B210B113D000BDFEF /* Optional+Extensions.swift in Sources */,
@@ -2706,7 +2706,7 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/DMSDriver/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2854,7 +2854,7 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/DMSDriver/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2886,7 +2886,7 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/DMSDriver/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

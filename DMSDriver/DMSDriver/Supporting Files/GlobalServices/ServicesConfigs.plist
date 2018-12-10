@@ -13,7 +13,7 @@
 	<key>GET_ORDER_BY_DATE</key>
 	<string>backend-api/v1/routes/get-routes-by-date</string>
 	<key>GET_ROUTES_BY_DATE</key>
-	<string>transaction/v1/routes/by-driver/%@?date=%@</string>
+	<string>transaction/v1/routes/by-driver?date=%@</string>
 	<key>GET_PACKAGES_IN_ROUTE</key>
 	<string>backend-api/v1/routes/get-packages-by-driver?id=%@&amp;date=%@</string>
 	<key>GET_ORDER_DETAIL</key>
@@ -86,5 +86,7 @@
 	<string>transaction/v1/routes/process/%@/IP</string>
 	<key>GET_LIST_STATUS</key>
 	<string>masterdata/v1/order-statuses/list-active</string>
+	<key>GET_ALL_ROUTE_INPROGESS</key>
+	<string>transaction/v1/routes/in-progress</string>
 </dict>
 </plist>
