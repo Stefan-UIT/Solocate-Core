@@ -183,6 +183,10 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                 updateOrderStatus(statusNeedUpdate)
 
             case .inProcessStatus:
+                statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
+                self.updateOrderStatus(statusNeedUpdate)
+            
+                /*
                 if _orderDetail.isRequireImage() &&
                     _orderDetail.url?.doc?.count ?? 0 <= 0{
                     self.showAlertView("Please add pictures in picture tap, before finish this order".localized) {[weak self] (action) in
@@ -201,7 +205,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                     statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
                     showInputNote(statusNeedUpdate)
                 }
-                
+                */
             default:
                 break
          }
