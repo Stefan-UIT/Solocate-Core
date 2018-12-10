@@ -119,7 +119,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let statusItem = OrderDetailInforRow("Status",status.statusName)
         let urgency = OrderDetailInforRow("Urgency" ,isHebewLang() ? _orderDetail.urgent_type_name_hb :  _orderDetail.urgent_type_name_en)
         orderInforStatus.append(statusItem)
-        orderInforStatus.append(urgency)
+        //orderInforStatus.append(urgency)
         
         if  _orderDetail.statusOrder == .cancelStatus {
             let reason = OrderDetailInforRow("Failure cause",_orderDetail.reason?.name ?? "-")
