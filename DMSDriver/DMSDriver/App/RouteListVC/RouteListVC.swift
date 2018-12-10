@@ -127,8 +127,11 @@ class RouteListVC: BaseViewController {
         menuScrollView?.cornerRadiusCell = 5
         menuScrollView?.dataSource = [all,new,Inprogess,finished]
         menuScrollView?.delegate = self
-        conHeightViewSegment?.constant = 45
         menuScrollView?.isHidden = false
+        
+        //https://seldat.atlassian.net/browse/GADOT-170
+        conHeightViewSegment?.constant = 0 // currenly use not this feature
+
         /*
         if(Caches().user?.isCoordinator ?? false ||
             Caches().user?.isAdmin ?? false) {

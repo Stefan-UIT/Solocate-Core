@@ -44,6 +44,7 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
             vNoImage?.isHidden = isAlreadyUploadedPictures
             vNoImage?.isHidden = (_orderDetail.url?.doc?.count > 0)
             btnShowImage.setTitle("\("Order Id".localized) - \(_orderDetail.id)(\(attachFiles.count) \("items".localized))", for: .normal)
+            actionButton.isHidden  = (_orderDetail.statusOrder == StatusOrder.deliveryStatus)
         }
     }
     

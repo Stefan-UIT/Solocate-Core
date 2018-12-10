@@ -57,8 +57,8 @@ class Address: BaseModel {
         address <- map["address"]
         lattd <- map["lattd"]
         lngtd <- map["lngtd"]
-        name <- map["name"]
-        phone <- map["phone"]
+        name <- map["ctt_name"]
+        phone <- map["ctt_phone"]
     }
 }
 

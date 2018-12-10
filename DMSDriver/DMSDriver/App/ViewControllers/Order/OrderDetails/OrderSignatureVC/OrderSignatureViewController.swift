@@ -121,8 +121,9 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
     func setupSignatureView()  {
         guard let order = self.orderDetail else { return }
         guard let signFile:AttachFileModel = order.url?.sig else {
-            self.controlsContainerView?.isHidden = false
-            self.signatureImgView?.isHidden = true
+            // Fix  for https://seldat.atlassian.net/browse/GADOT-176
+            self.controlsContainerView?.isHidden = (orderDetail?.statusOrder == StatusOrder.deliveryStatus)
+            self.signatureImgView?.isHidden = !(orderDetail?.statusOrder == StatusOrder.deliveryStatus)
             return
         }
         
