@@ -196,16 +196,8 @@ fileprivate extension OrderPictureViewController {
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
-                if self?.orderDetail?.url == nil{
-                    self?.orderDetail?.url = UrlFileMoldel()
-                }
-                self?.orderDetail?.url?.doc?.append(files)
-                self?.updateOrderDetail?(self?.orderDetail)
-                self?.initData()
-                self?.upateUI()
-                self?.tableView.reloadData()
+                self?.getOrderDetail()
                 
-                //self?.getOrderDetail()
             case .error(let error):
                 self?.showAlertView(error.getMessage())
             }
