@@ -204,6 +204,7 @@ fileprivate extension TimerVC{
             invalidTimmer()
             updateButtonAction()
             resetCountDownTime()
+            
             /*
             if route?.checkInprogess() == true {
                 LocalNotification.createPushNotification(Date.now,

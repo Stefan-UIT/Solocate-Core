@@ -247,7 +247,9 @@ extension RouteListVC:UITableViewDelegate {
             return
         }
         let route = listRoutes[indexPath.row]
-
+        self.startRoute(route: route)
+        
+        /*
         App().showAlertView("Do you want to start this route?".localized,
                             positiveTitle: "YES".localized,
                             positiveAction: {[weak self] (hasOK) in
@@ -256,6 +258,7 @@ extension RouteListVC:UITableViewDelegate {
         }, negativeTitle: "NO".localized) { (cancel) in
             return
         }
+         */
     }
  }
 
