@@ -114,7 +114,8 @@ class MapsViewController: UIViewController {
     
     
     private func showMarker(_ address:Address, sequence:Int) {
-        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: address.lattd ?? 0, longitude: address.lngtd ?? 0))
+        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: address.lattd?.doubleValue ?? 0,
+                                                                longitude: address.lngtd?.doubleValue ?? 0))
         let labelOrder = labelMarkerWithText("\(sequence)")
         marker.title = address.name
         marker.snippet = ""

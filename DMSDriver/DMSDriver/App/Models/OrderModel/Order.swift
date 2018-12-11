@@ -40,8 +40,8 @@ enum OrderType:Int {
 
 class Address: BaseModel {
     var address:String?
-    var lattd:Double?
-    var lngtd:Double?
+    var lattd:String?
+    var lngtd:String?
     var name:String?
     var phone:String?
     
@@ -220,27 +220,27 @@ class Order: BaseModel {
     
     var locationFrom:CLLocationCoordinate2D {
         get {
-            return CLLocationCoordinate2D(latitude:from?.lattd ?? 0, longitude: from?.lngtd ?? 0)
+            return CLLocationCoordinate2D(latitude:from?.lattd?.doubleValue ?? 0, longitude: from?.lngtd?.doubleValue ?? 0)
         }
     }
     
     
     var locationTo:CLLocationCoordinate2D {
         get {
-            return CLLocationCoordinate2D(latitude:to?.lattd ?? 0, longitude: to?.lngtd ?? 0)
+            return CLLocationCoordinate2D(latitude:to?.lattd?.doubleValue ?? 0, longitude: to?.lngtd?.doubleValue ?? 0)
         }
     }
     
     var locations:[CLLocationCoordinate2D] {
         get {
              var arr:[CLLocationCoordinate2D] = []
-             if let fromlattd = from?.lattd ,
-                let fromLngtd = from?.lngtd {
+             if let fromlattd = from?.lattd?.doubleValue ,
+                let fromLngtd = from?.lngtd?.doubleValue {
                 arr.append(CLLocationCoordinate2D(latitude:fromlattd, longitude: fromLngtd))
              }
             
-            if let tolattd = to?.lattd ,
-                let toLngtd = to?.lngtd {
+            if let tolattd = to?.lattd?.doubleValue ,
+                let toLngtd = to?.lngtd?.doubleValue {
                 arr.append(CLLocationCoordinate2D(latitude:tolattd, longitude: toLngtd))
             }
             return arr

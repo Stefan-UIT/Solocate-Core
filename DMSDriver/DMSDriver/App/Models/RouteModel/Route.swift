@@ -367,7 +367,7 @@ class Route: BaseModel {
         let currentLocation = LocationManager.shared.currentLocation?.coordinate
         var listLocation:[CLLocationCoordinate2D] = (currentLocation != nil) ? [currentLocation!] : []
         
-        for i in 0..<(orderList.count) {
+        for i in 0..<(sortedList.count) {
             listLocation.append(sortedList[i].locations)
         }
         
