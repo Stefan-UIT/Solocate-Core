@@ -21,8 +21,6 @@ class TimerVC: BaseViewController {
     var drivingRule:DrivingRule?
     var totalTimeRemaining:Int = 0
     var totalSecond = 0
-    var sums:[Int] = []
-
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,7 +68,6 @@ class TimerVC: BaseViewController {
             Caches().isPauseRoute = false
             Caches().isStartingRoute = true
             Caches().dateStartRoute = Date.now
-            Caches().timeRemaining = (drivingRule?.data ?? 0 ) * 60 //second
             totalSecond = (Caches().drivingRule?.data ?? 0) * 60
             Caches().datePauseRoute = nil
             startTimer()
@@ -111,8 +108,8 @@ class TimerVC: BaseViewController {
     }
     
     func createPushNotificationDrivingRole() {
-        if Caches().timeRemaining > 0 {
-            LocalNotification.createPushNotificationAfter(Caches().timeRemaining,
+        if totalSecond > 0 {
+            LocalNotification.createPushNotificationAfter(totalSecond,
                                                           "Reminder".localized,
                                                           "Your task has been over.",
                                                           "remider.timeout.drivingrole",  [:])
@@ -233,15 +230,14 @@ fileprivate extension TimerVC{
             Caches().isStartingRoute = false
             Caches().isPauseRoute = false
             Caches().isCancelCounter = true
-            Caches().timeRemaining = 0
             Caches().timePlaying = 0
+            totalSecond = (Caches().drivingRule?.data ?? 0) * 60
             Caches().datePauseRoute = nil
             invalidTimmer()
             updateButtonAction()
             resetCountDownTime()
             return
         }
-        Caches().timeRemaining = (hour * 60 * 60) + (minute * 60) + second
         lblTimeRemaining?.text =  "\(hour) : \(minute) : \(second)"
         Caches().isStartingRoute = true
         Caches().isCancelCounter = false

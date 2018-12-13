@@ -146,20 +146,6 @@ class Cache: NSObject {
         }
     }
     
-    var timeRemaining:Int{
-        set{
-            setObject(obj: newValue, forKey: Defaultkey.timeRemaining)
-        }
-        
-        get{
-            if let data = getObject(forKey: Defaultkey.timeRemaining) as? Int{
-                return data
-            }
-            
-            return 0
-        }
-    }
-    
     var timePlaying:Int{
         set{
             setObject(obj: newValue, forKey: Defaultkey.timePlaying)
