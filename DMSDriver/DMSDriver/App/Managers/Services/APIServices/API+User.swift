@@ -37,6 +37,7 @@ extension BaseAPIService{
     @discardableResult
     func logout(callback: @escaping APICallback<UserModel>) -> APIRequest {
         return request(method: .GET,
+                       serverURL: "http://192.168.137.1:90/gadot/",
                        path:PATH_REQUEST_URL.LOGOUT.URL,
                        input: .empty,
                        callback: callback);

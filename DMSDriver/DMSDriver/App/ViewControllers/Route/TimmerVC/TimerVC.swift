@@ -19,20 +19,20 @@ class TimerVC: BaseViewController {
     var timmerTime:Timer?
     var route:Route?
     var drivingRule:DrivingRule?
+    var totalTimeRemaining:Int = 0
+    var totalSecond = 0
+    var sums:[Int] = []
+
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //test
-        if Caches().dateStartRoute == nil {
-            Caches().dateStartRoute = Date.now
-        }
-        
         drivingRule = Caches().drivingRule
         if drivingRule == nil {
             getDrivingRule()
         }
+        totalSecond = (self.drivingRule?.data ?? 0) * 60  -  (Caches().timePlaying)
         updateTime()
         startTimer()
         updateButtonAction()
@@ -68,6 +68,8 @@ class TimerVC: BaseViewController {
             Caches().isStartingRoute = true
             Caches().dateStartRoute = Date.now
             Caches().timeRemaining = (drivingRule?.data ?? 0 ) * 60 //second
+            totalSecond = (Caches().drivingRule?.data ?? 0) * 60
+            Caches().datePauseRoute = nil
             startTimer()
             updateTime()
             createPushNotificationDrivingRole()
@@ -76,8 +78,13 @@ class TimerVC: BaseViewController {
             Caches().isPauseRoute = true
             Caches().isStartingRoute = false
             Caches().isCancelCounter = false
+            Caches().datePauseRoute = Date.now
             invalidTimmer()
             removePushNotifiactionDrivingRole()
+            
+            let timeBetweenDatePauseAndNow = Caches().datePauseRoute!.offsetFrom(date: Caches().dateStartRoute!, components: [.second])
+            let s = timeBetweenDatePauseAndNow.second ?? 0
+            Caches().timePlaying = Caches().timePlaying + s
             
         }else{
             Caches().isPauseRoute = false
@@ -87,7 +94,8 @@ class TimerVC: BaseViewController {
             if Caches().dateStartRoute == nil {
                 Caches().dateStartRoute = Date.now
             }
-
+            Caches().dateStartRoute = Date.now
+            totalSecond = (self.drivingRule?.data ?? 0) * 60  -  (Caches().timePlaying)
             startTimer()
             createPushNotificationDrivingRole()
         }
@@ -173,34 +181,21 @@ fileprivate extension TimerVC{
             btnStart?.setStyleStartTimer()
         }
     }
-    
-    
+
+
     @objc func updateTime() {
-        
-        let totalMinutes = drivingRule?.data ?? 0
-        var dateStartRoute = Caches().dateStartRoute
-        
-        let hour = Int(totalMinutes / 60)
-        let minute = totalMinutes % 60
-        
-        var newDate = dateStartRoute
-        newDate?.hour = (dateStartRoute?.hour ?? 0) + hour
-        newDate?.minute = (dateStartRoute?.minute ?? 0) + minute
-        
-        let timeRemaining = newDate?.offsetFrom(date: Date.now)
-        let h = timeRemaining?.hour ?? 0
-        let m = timeRemaining?.minute ?? 0
-        let s = timeRemaining?.second ?? 0
-        
-        if  timeRemaining?.second ?? 0 <= 0 &&
-            timeRemaining?.hour ?? 0 <= 0 &&
-            timeRemaining?.minute ?? 0 <= 0 &&
-            timeRemaining?.day ?? 0 <= 0 {
-            
+        totalSecond = totalSecond - 1
+        let hour = Int(totalSecond / 3600)
+        let minute = Int((totalSecond - (hour * 3600)) / 60)
+        let second = totalSecond - (minute * 60)
+
+        if  hour <= 0 && minute <= 0 && second <= 0{
             Caches().isStartingRoute = false
             Caches().isPauseRoute = false
             Caches().isCancelCounter = true
             Caches().timeRemaining = 0
+            Caches().datePauseRoute = nil
+            Caches().timePlaying = 0
             invalidTimmer()
             updateButtonAction()
             resetCountDownTime()
@@ -215,11 +210,11 @@ fileprivate extension TimerVC{
              */
             return
         }
-        
-        Caches().timeRemaining = (h * 60 * 60) + (m * 60) + s
-        lblTimeRemaining?.text =  "\(h) : \(m) : \(s)"
+        Caches().timeRemaining = (hour * 60 * 60) + (minute * 60) + second
+        lblTimeRemaining?.text =  "\(hour) : \(minute) : \(second)"
         Caches().isStartingRoute = true
         Caches().isCancelCounter = false
+        Caches().datePauseRoute = nil
     }
     
     

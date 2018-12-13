@@ -136,12 +136,15 @@ struct Defaultkey {
     static let SF_REMEBER_LOGIN = "SF_REMEBER_LOGIN"
     static let SF_DRIVING_RULE = "SF_DRIVING_RULE"
     static let SF_SAVE_DATE_START_ROUTE = "SF_SAVE_DATE_START_ROUTE"
+    static let SF_PAUSE_DATE_ROUTE = "SF_PAUSE_DATE_ROUTE"
+
 
     // TimerVC
     static let starting = "starting"
     static let pause = "pausepause"
     static let cancel = "cancel"
     static let timeRemaining = "timeRemaining"
+    static let timePlaying = "timePlaying"
 
 }
 

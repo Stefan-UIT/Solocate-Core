@@ -88,6 +88,25 @@ class Cache: NSObject {
         }
     }
     
+    var datePauseRoute:Date? {
+        set {
+            if let date = newValue {
+                setObject(obj: date, forKey: Defaultkey.SF_PAUSE_DATE_ROUTE)
+            }else {
+                userDefaults.removeObject(forKey: Defaultkey.SF_PAUSE_DATE_ROUTE)
+            }
+        }
+        
+        get {
+            
+            if let date = getObject(forKey: Defaultkey.SF_PAUSE_DATE_ROUTE) as? Date{
+                return date
+            }
+            
+            return nil
+        }
+    }
+    
     var isStartingRoute:Bool{
         set{
             setObject(obj: newValue, forKey: Defaultkey.starting)
@@ -134,6 +153,20 @@ class Cache: NSObject {
         
         get{
             if let data = getObject(forKey: Defaultkey.timeRemaining) as? Int{
+                return data
+            }
+            
+            return 0
+        }
+    }
+    
+    var timePlaying:Int{
+        set{
+            setObject(obj: newValue, forKey: Defaultkey.timePlaying)
+        }
+        
+        get{
+            if let data = getObject(forKey: Defaultkey.timePlaying) as? Int{
                 return data
             }
             

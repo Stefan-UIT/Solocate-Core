@@ -143,7 +143,7 @@ extension SlideMenuVC:UITableViewDelegate{
         case .LOGOUT:
             DispatchQueue.main.async {
                 self.navigationController?.dismiss(animated: false, completion: {
-                    App().reLogin()
+                    self.handleLogOut()
                 })
             }
         case .TASK:

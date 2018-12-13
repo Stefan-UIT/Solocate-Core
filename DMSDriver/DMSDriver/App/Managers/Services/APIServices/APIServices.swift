@@ -58,6 +58,7 @@ extension BaseAPIService {
             "device": "2" // iOS : device = 2
         ]
         return request(method: .POST,
+                       serverURL: "http://192.168.137.1:90/gadot/",
                        path: PATH_REQUEST_URL.UPDATE_TOKEN_FCM.URL,
                        input: .json(params),
                        callback: callback);

@@ -246,7 +246,6 @@ extension AppDelegate {
         window?.rootViewController = vc
         //Socket.logout(Caches().user?.userInfo?.id ?? 0, E(Caches().user?.roles?.first?.name))
         CoreDataManager.clearAllDB()
-        Caches().user = nil
         mainVC?.endAutoRefetchRouteList()
     }
     

@@ -73,7 +73,11 @@ extension Date {
     }
     
     func offsetFrom(date : Date) -> DateComponents {
-        let dayHourMinuteSecond: Set<Calendar.Component> = [.hour, .minute, .second]
+        return offsetFrom(date: date, components: [.day,.hour, .minute, .second])
+    }
+    
+    func offsetFrom(date : Date, components:Set<Calendar.Component> = [.year,.day,.hour, .minute, .second]) -> DateComponents {
+        let dayHourMinuteSecond: Set<Calendar.Component> = components
         let difference = Calendar.app.dateComponents(dayHourMinuteSecond, from: date, to: self);
         return difference
     }
