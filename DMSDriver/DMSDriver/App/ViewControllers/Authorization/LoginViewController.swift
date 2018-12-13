@@ -28,7 +28,6 @@ class LoginViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        Socket.delegate = self
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
@@ -112,6 +111,10 @@ fileprivate extension LoginViewController {
                 }
                 App().loginSuccess()
                 
+                SERVICES().socket.login(Caches().user?.userInfo?.id ?? 0,
+                                        E(Caches().user?.roles?.first?.name),
+                                        E(Caches().user?.token))
+                
                 SERVICES().API.getDrivingRule { (result) in
                     guard let strongSelf = self else {return}
                     strongSelf.dismissLoadingIndicator()
@@ -163,39 +166,6 @@ fileprivate extension LoginViewController {
         }
     }
 }
-
-extension LoginViewController:APISocketDelegate{
-    func didReceiveResultLogin(data: Any) {
-        let mess = getMessengeStatus(data: data).0
-        let status = getMessengeStatus(data: data).1
-        
-        if status == 1 {// Success
-            App().loginSuccess()
-            
-        }else{ //Users limited.
-            self.showAlertView(E(mess))
-            App().reLogin()
-        }
-    }
-    
-    func getMessengeStatus(data:Any) -> (String?,Int?) {
-        if let dic = (data as? ResponseDictionary){
-            let status = dic["status"] as? Int
-            let mess = dic["message"] as? String
-            return (mess,status)
-        
-        }else if let dicList = (data as? ResponseArray){
-            if let dic = dicList.first as? ResponseDictionary{
-                let status = dic["status"] as? Int
-                let mess = dic["message"] as? String
-                return (mess,status )
-            }
-        }
-        
-        return ("Data response is invalid.",-1)
-    }
-}
-
 
 extension LoginViewController: ForgetPasswordViewDelegate {
     func forgetPasswordView(_ view: ForgetPasswordView, _ email: String) {

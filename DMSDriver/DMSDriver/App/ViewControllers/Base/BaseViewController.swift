@@ -26,6 +26,8 @@ class BaseViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        SERVICES().socket.delegate = self
+        
         updateUI()
         self.updateNavigationBar()
         addNetworkObserver()
@@ -112,6 +114,30 @@ extension BaseViewController:UIPopoverPresentationControllerDelegate{
 }
 
 
+// MARK: - APISocketDelegate
+extension BaseViewController:APISocketDelegate{
+    func didReceiveError(data: String) {
+        if SocketConstants.messangeNeedRelogines.contains(data) {
+            App().reLogin()
+        }
+        self.showAlertView(data)
+    }
+    
+    func didReceiveResultLogin(data: Any) {
+        let mess = getMessengeStatus(data: data).0
+        let status = getMessengeStatus(data: data).1
+        
+        if status == 1 {// Success
+            App().loginSuccess()
+            
+        }else{ //Users limited.
+            self.showAlertView(E(mess))
+            App().reLogin()
+        }
+    }
+}
+
+
 //MARK: - OtherFuntion
 extension BaseViewController{
     
@@ -134,6 +160,23 @@ extension BaseViewController{
                 self.dismiss(animated: true, completion: nil);
             }
         }
+    }
+    
+    func getMessengeStatus(data:Any) -> (String?,Int?) {
+        if let dic = (data as? ResponseDictionary){
+            let status = dic["status"] as? Int
+            let mess = dic["message"] as? String
+            return (mess,status)
+            
+        }else if let dicList = (data as? ResponseArray){
+            if let dic = dicList.first as? ResponseDictionary{
+                let status = dic["status"] as? Int
+                let mess = dic["message"] as? String
+                return (mess,status )
+            }
+        }
+        
+        return ("Data response is invalid.",-1)
     }
 }
 

@@ -75,30 +75,6 @@ func SERVER_URL() -> String {
     return serverURL
 }
 
-// SOCKET KEY
-struct SocketConstants {
-    static let SERVER_DEV = "http://dms.directmail.dev.seldatdirect.com"
-    static let SERVER_PROD = "https://dms.directmail.seldatdirect.com"
-    static let SOCKET_LOGIN = "direct-mail-login"
-    static let SOCKET_LOGOUT = "direct-mail-logout"
-    static let SOCKET_RESULT_LOGIN = "result-login"
-    
-    static var PATH:String {
-        get {
-            let type = SDBuildConf.buildScheme
-            switch type {
-            case .debug,
-                 .adhoc:
-                return "/session/socket.io"
-            case .staging:
-                return "/session/socket.io/socket.io.js"
-            case .release:
-                return "/session/socket.io/socket.io.js"
-            }
-        }
-    }
-}
-
 // Window size
 struct ScreenSize {
   static let SCREEN_WIDTH         = UIScreen.main.bounds.size.width

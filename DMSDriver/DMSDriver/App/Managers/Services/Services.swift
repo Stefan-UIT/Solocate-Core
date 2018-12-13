@@ -17,6 +17,10 @@ class Services {
         return FirebaseService(buildConf: buildConf)
     }()
     
+    fileprivate(set) lazy var socket: SocketService = {
+        return SocketService.shared
+    }()
+    
     init(buildConf conf: BuildConfiguration) {
         buildConf = conf;
     }

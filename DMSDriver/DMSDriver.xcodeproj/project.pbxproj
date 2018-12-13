@@ -193,6 +193,8 @@
 		3B66B92B210B1149000BDFEF /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B8D8210B1148000BDFEF /* ChangePasswordView.swift */; };
 		3B66B92C210B1149000BDFEF /* AlertMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B8DA210B1148000BDFEF /* AlertMessageView.xib */; };
 		3B66B92D210B1149000BDFEF /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B8DB210B1148000BDFEF /* AlertMessageView.swift */; };
+		3B83851121C247B300ECB5C2 /* SocketManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B83851021C247B300ECB5C2 /* SocketManager.swift */; };
+		3B83851321C247D700ECB5C2 /* SocketConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B83851221C247D700ECB5C2 /* SocketConstants.swift */; };
 		3B83C27B217EC685003B6355 /* PopUpTbvVC.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B83C278217EC685003B6355 /* PopUpTbvVC.m */; };
 		3B83C280217EC7CC003B6355 /* PopupTbvCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B83C27F217EC7CC003B6355 /* PopupTbvCell.m */; };
 		3B95AD9021B4E76900CC539A /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B95AD8F21B4E76900CC539A /* GoogleService-Info.plist */; };
@@ -208,7 +210,7 @@
 		3BB9309021466DBA009F6DCC /* RequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BB9308F21466DBA009F6DCC /* RequestModel.swift */; };
 		3BC053E42180179D001B7D89 /* ReasonListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BC053E32180179D001B7D89 /* ReasonListCell.swift */; };
 		3BDCEBD621816C5300C57DD4 /* ReceiveNotificationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BDCEBD521816C5300C57DD4 /* ReceiveNotificationModel.swift */; };
-		3BE8CAAA214F67AC00371B8B /* APISocket.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8CAA8214F67AC00371B8B /* APISocket.swift */; };
+		3BE8CAAA214F67AC00371B8B /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8CAA8214F67AC00371B8B /* SocketService.swift */; };
 		3BEAB861214260200039CFBB /* CoreRoute+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEAB860214260200039CFBB /* CoreRoute+Ext.swift */; };
 		3BEAB863214260380039CFBB /* CoreOrder+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEAB862214260380039CFBB /* CoreOrder+Ext.swift */; };
 		3BEAB865214260590039CFBB /* CoreWarehouse+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEAB864214260590039CFBB /* CoreWarehouse+Ext.swift */; };
@@ -432,6 +434,8 @@
 		3B66B8DB210B1148000BDFEF /* AlertMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertMessageView.swift; sourceTree = "<group>"; };
 		3B66B930210B1D6A000BDFEF /* DMSDriver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DMSDriver.entitlements; sourceTree = "<group>"; };
 		3B67B6D9212BD35F0032F25C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		3B83851021C247B300ECB5C2 /* SocketManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketManager.swift; sourceTree = "<group>"; };
+		3B83851221C247D700ECB5C2 /* SocketConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocketConstants.swift; sourceTree = "<group>"; };
 		3B83C278217EC685003B6355 /* PopUpTbvVC.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PopUpTbvVC.m; sourceTree = "<group>"; };
 		3B83C279217EC685003B6355 /* PopUpTbvVC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PopUpTbvVC.h; sourceTree = "<group>"; };
 		3B83C27C217EC728003B6355 /* define.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = define.h; sourceTree = "<group>"; };
@@ -619,7 +623,7 @@
 		3BB9308F21466DBA009F6DCC /* RequestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestModel.swift; sourceTree = "<group>"; };
 		3BC053E32180179D001B7D89 /* ReasonListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReasonListCell.swift; sourceTree = "<group>"; };
 		3BDCEBD521816C5300C57DD4 /* ReceiveNotificationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiveNotificationModel.swift; sourceTree = "<group>"; };
-		3BE8CAA8214F67AC00371B8B /* APISocket.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APISocket.swift; sourceTree = "<group>"; };
+		3BE8CAA8214F67AC00371B8B /* SocketService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SocketService.swift; sourceTree = "<group>"; };
 		3BEAB860214260200039CFBB /* CoreRoute+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreRoute+Ext.swift"; sourceTree = "<group>"; };
 		3BEAB862214260380039CFBB /* CoreOrder+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreOrder+Ext.swift"; sourceTree = "<group>"; };
 		3BEAB864214260590039CFBB /* CoreWarehouse+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreWarehouse+Ext.swift"; sourceTree = "<group>"; };
@@ -1006,7 +1010,7 @@
 			children = (
 				3B17EB6021AE4C1500CDF7D3 /* LocalPushNotification */,
 				3B81263021759061005AD2B5 /* LocalDatabase */,
-				3BE8CAA7214F67AC00371B8B /* SocketIOManager */,
+				3BE8CAA7214F67AC00371B8B /* SocketIO */,
 				3B219FFF2140DFC6003CBC14 /* ReachabilityManager */,
 				3B66B766210B113C000BDFEF /* LocationTracker */,
 				3B66B768210B113C000BDFEF /* Extensions */,
@@ -2092,12 +2096,14 @@
 			path = ReceiveNotificationModel;
 			sourceTree = "<group>";
 		};
-		3BE8CAA7214F67AC00371B8B /* SocketIOManager */ = {
+		3BE8CAA7214F67AC00371B8B /* SocketIO */ = {
 			isa = PBXGroup;
 			children = (
-				3BE8CAA8214F67AC00371B8B /* APISocket.swift */,
+				3BE8CAA8214F67AC00371B8B /* SocketService.swift */,
+				3B83851021C247B300ECB5C2 /* SocketManager.swift */,
+				3B83851221C247D700ECB5C2 /* SocketConstants.swift */,
 			);
-			path = SocketIOManager;
+			path = SocketIO;
 			sourceTree = "<group>";
 		};
 		3BEAB85F21425FDB0039CFBB /* CoreDataModel */ = {
@@ -2383,6 +2389,7 @@
 				3B66B843210B113D000BDFEF /* Cache.swift in Sources */,
 				3B66B831210B113D000BDFEF /* TwoTextFieldsViewController.swift in Sources */,
 				3B01494E217D7D4B0097FEB6 /* TaskListClvCell.swift in Sources */,
+				3B83851321C247D700ECB5C2 /* SocketConstants.swift in Sources */,
 				3BB78227213554B4006D2398 /* CoreDataManager.swift in Sources */,
 				3B9A377221243A45004D881C /* AssignOrderVC.swift in Sources */,
 				3B66B90F210B1149000BDFEF /* MapsViewController.swift in Sources */,
@@ -2393,6 +2400,7 @@
 				3B66B8FE210B1149000BDFEF /* OrderDetailMapTableViewCell.swift in Sources */,
 				3B66B81E210B113D000BDFEF /* Array+Extensions.swift in Sources */,
 				3B66B8E3210B1149000BDFEF /* GoogleDirectionResponse.swift in Sources */,
+				3B83851121C247B300ECB5C2 /* SocketManager.swift in Sources */,
 				3B66B90D210B1149000BDFEF /* PackageTableViewCell.swift in Sources */,
 				3B66B808210B113D000BDFEF /* UICollectionView-Extensions.swift in Sources */,
 				3B66B833210B113D000BDFEF /* Assets.swift in Sources */,
@@ -2533,7 +2541,7 @@
 				3B014954217D7EA50097FEB6 /* TaskModel.swift in Sources */,
 				3B66B82D210B113D000BDFEF /* Locale+Extensions.swift in Sources */,
 				3B66B804210B113D000BDFEF /* NSString+SDString.m in Sources */,
-				3BE8CAAA214F67AC00371B8B /* APISocket.swift in Sources */,
+				3BE8CAAA214F67AC00371B8B /* SocketService.swift in Sources */,
 				3B66B8F2210B1149000BDFEF /* WarehouseModel.swift in Sources */,
 				3B66B81D210B113D000BDFEF /* NavigationService.swift in Sources */,
 				3B66B8DE210B1149000BDFEF /* Reason.swift in Sources */,
@@ -2696,7 +2704,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = T7R2AKHVA7;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
@@ -2711,7 +2719,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.dms.gadot.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-dms-gadot";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/macintoshhd/PROJECT_SELDAT/DMS/dms-gadot/DMSDriver/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 4.0;
@@ -2876,7 +2884,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = T7R2AKHVA7;
+				DEVELOPMENT_TEAM = "";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
@@ -2891,7 +2899,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.dms.gadot.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-dms-gadot";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/macintoshhd/PROJECT_SELDAT/DMS/dms-gadot/DMSDriver/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 4.0;

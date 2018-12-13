@@ -239,15 +239,6 @@ fileprivate extension TimerVC{
             invalidTimmer()
             updateButtonAction()
             resetCountDownTime()
-            
-            /*
-            if route?.checkInprogess() == true {
-                LocalNotification.createPushNotification(Date.now,
-                                                         "Reminder".localized,
-                                                         "You have finished working shifts",
-                                                         [:])
-            }
-             */
             return
         }
         Caches().timeRemaining = (hour * 60 * 60) + (minute * 60) + second

@@ -61,7 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //connectToFcm()
         // DMSLocationManager.startUpdatingDriverLocationIfNeeded()
         ReachabilityManager.startMonitoring()
-        APISocket.shared.establishConnection()
+        SERVICES().socket.connect(token: E(Caches().user?.token))
         refreshBadgeIconNumber()
     }
   
@@ -244,7 +244,8 @@ extension AppDelegate {
     func reLogin() {
         let vc: LoginViewController = .loadSB(SB: .Login)
         window?.rootViewController = vc
-        //Socket.logout(Caches().user?.userInfo?.id ?? 0, E(Caches().user?.roles?.first?.name))
+        SERVICES().socket.logout(Caches().user?.userInfo?.id ?? 0,
+                                 E(Caches().user?.roles?.first?.name))
         CoreDataManager.clearAllDB()
         mainVC?.endAutoRefetchRouteList()
     }
