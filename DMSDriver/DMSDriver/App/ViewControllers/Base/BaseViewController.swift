@@ -127,10 +127,7 @@ extension BaseViewController:APISocketDelegate{
         let mess = getMessengeStatus(data: data).0
         let status = getMessengeStatus(data: data).1
         
-        if status == 1 {// Success
-            App().loginSuccess()
-            
-        }else{ //Users limited.
+        if status != 1 {
             self.showAlertView(E(mess))
             App().reLogin()
         }

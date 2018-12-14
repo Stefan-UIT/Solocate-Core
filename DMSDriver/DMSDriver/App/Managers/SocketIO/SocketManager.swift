@@ -15,32 +15,39 @@ protocol APISocketDelegate {
     
 }
 
-// MARK: - EMIT
+//MARK: - EMIT
 extension SocketService {
-    func login(_ id:Int, _ role:String, _ token:String) {
-        let  data = ["id":id,"role":role,"token":token] as [String:Any]
-        print("==>\(SocketConstants.SOCKET_LOGIN):\(data)")
-        clientSocket.emit(SocketConstants.SOCKET_LOGIN, data)
+    // MARK: - LoginNamespace
+    func login(_ id:Int,_ username:String,_ role:String, _ token:String) {
+        let  data = ["id":id,"username":username,"role":role,"token":token] as [String:Any]
+        print("=====>\(SocketConstants.SOCKET_LOGIN):\(data)<==========")
+        loginNamespaceSocket?.emit(SocketConstants.SOCKET_LOGIN, data)
     }
     
     func logout(_ id:Int, _ role:String) {
         let  data = ["id":id,"role":role] as [String:Any]
-        print("===>\(SocketConstants.SOCKET_LOGOUT):\(data)")
-        clientSocket.emit(SocketConstants.SOCKET_LOGOUT, data)
+        print("======>\(SocketConstants.SOCKET_LOGOUT):\(data)<=======")
+        loginNamespaceSocket?.emit(SocketConstants.SOCKET_LOGOUT, data)
     }
 }
+
 
 
 //MARK: - Listening
 extension SocketService {
     
     func registerObserveEvent() {
-        self.clientSocket.on(SocketConstants.SOCKET_RESULT_LOGIN) {[weak self] (data, ack) in
+        self.loginNamespaceSocket?.on(SocketConstants.SOCKET_RESULT_LOGIN) {[weak self] (data, ack) in
             self?.resultLogin(data: data)
         }
         
-        self.clientSocket.on(SocketConstants.SOCKET_ERROR) {[weak self] (data, ack) in
+        self.loginNamespaceSocket?.on(SocketConstants.SOCKET_ERROR) {[weak self] (data, ack) in
             self?.handleError(data: data)
+        }
+        
+        self.clientSocket.on(SocketConstants.SOCKET_PACKET) { [weak self] (data, _) in
+            let packetData = data.first as? SocketPacket
+            packetData?.data
         }
     }
     
@@ -62,43 +69,3 @@ extension SocketService {
         }
     }
 }
-
-/*
-func establishConnection(token:String? = nil){
-    if(self.socket.status != .connected){
-        if let _token = token{
-            self.manager.config = SocketIOClientConfiguration(arrayLiteral: .forceNew(false),
-                                                              .reconnects(true),
-                                                              .secure(true),
-                                                              .path("/session/socket.io"),
-                                                              .compress,
-                                                              .connectParams(["token": _token]))
-        }else{
-            self.manager.config = SocketIOClientConfiguration(arrayLiteral: .forceNew(false),
-                                                              .reconnects(true),
-                                                              .secure(true),
-                                                              .path("/session/socket.io"),
-                                                              .compress)
-            
-        }
-        self.socket.connect()
-        
-        self.socket.on(clientEvent: .connect) { (data, ack) in
-            print("Socket Connected.")
-        }
-        
-        self.socket.on(clientEvent: .disconnect) { (data, ack) in
-            print("Socket Disconnected.")
-        }
-        
-        self.socket.on(clientEvent: .reconnect) { (data, ack) in
-            print("Socket Reconnected.")
-        }
-        self.socket.on(clientEvent: .error) { (data, ack) in
-            print("Socket Error: \(data)")
-        }
-        
-   
-    }
-}
- */

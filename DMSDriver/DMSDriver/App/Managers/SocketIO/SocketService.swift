@@ -9,17 +9,23 @@
 import UIKit
 import SocketIO
 
+enum NamespaceSocket:String {
+    case login = "/login"
+}
+
 
 class SocketService {
-    private let manager = SocketManager(socketURL: URL(string:BASE_URL_SOCKET())!)
-    static let shared = SocketService()
-    let clientSocket:SocketIOClient
+    static var shared = SocketService()
+    let manager = SocketManager(socketURL: URL(string:BASE_URL_SOCKET())!)
+    var clientSocket:SocketIOClient
+    var loginNamespaceSocket:SocketIOClient?
     var delegate:APISocketDelegate?
     
     let handleQueue = DispatchQueue(label: "socket_dispatch_queue")
     
     private init(){
         clientSocket = manager.defaultSocket
+        loginNamespaceSocket = manager.socket(forNamespace: NamespaceSocket.login.rawValue)
     }
     
     func setup() {
@@ -55,11 +61,16 @@ class SocketService {
                                                  .reconnectAttempts(SocketConfiguration.reconnectAttemp),
                                                  .reconnectWait(SocketConfiguration.reconnectWait))
         manager.config = config
-        manager.connect()
+        clientSocket.connect()
+        loginNamespaceSocket?.connect()
         setup()
     }
     
-    func disconnect() {
-        manager.disconnect()
+    func disconnect(namespace:NamespaceSocket? = nil) {
+        if namespace == nil {
+            manager.disconnectSocket(forNamespace: namespace!.rawValue)
+        }else{
+            manager.disconnect()
+        }
     }
 }

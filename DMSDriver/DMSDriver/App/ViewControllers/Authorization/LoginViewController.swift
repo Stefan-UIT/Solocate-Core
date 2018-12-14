@@ -112,6 +112,7 @@ fileprivate extension LoginViewController {
                 App().loginSuccess()
                 
                 SERVICES().socket.login(Caches().user?.userInfo?.id ?? 0,
+                                        E(Caches().user?.userInfo?.userName),
                                         E(Caches().user?.roles?.first?.name),
                                         E(Caches().user?.token))
                 

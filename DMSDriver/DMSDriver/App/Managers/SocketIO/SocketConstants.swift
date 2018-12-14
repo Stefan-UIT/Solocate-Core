@@ -26,6 +26,7 @@ struct SocketConstants {
     static let SOCKET_LOGOUT = "request-logout"
     static let SOCKET_RESULT_LOGIN = "result-login"
     static let SOCKET_ERROR = "error"
+    static let SOCKET_PACKET = "packet"
     
     static let messangeNeedRelogines = ["Token invalid.","Token did not supply."]
 
