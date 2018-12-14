@@ -20,7 +20,7 @@ extension SocketService {
     // MARK: - LoginNamespace
     func login(_ id:Int,_ username:String,_ role:String, _ token:String) {
         let  data = ["id":id,"username":username,"role":role,"token":token] as [String:Any]
-        print("=====>\(SocketConstants.SOCKET_LOGIN):\(data)<==========")
+        print("======>\(SocketConstants.SOCKET_LOGIN):\(data)<==========")
         loginNamespaceSocket?.emit(SocketConstants.SOCKET_LOGIN, data)
     }
     
@@ -45,19 +45,19 @@ extension SocketService {
             self?.handleError(data: data)
         }
         
-        self.clientSocket.on(SocketConstants.SOCKET_PACKET) { [weak self] (data, _) in
+        self.clientSocket.on(SocketConstants.SOCKET_PACKET) {(data, _) in
             let packetData = data.first as? SocketPacket
-            packetData?.data
+            print(packetData)
         }
     }
     
     func resultLogin(data:Any) {
-        print("==>Result login: \(data)")
+        print("========>Result login: \(data)<============")
         delegate?.didReceiveResultLogin(data: data)
     }
     
     func handleError(data: Any) {
-        print("==>Error socket: \(data)")
+        print("=======>Error socket: \(data)<========")
         if let result = data as? ResponseArray {
             var mess = ""
             result.forEach { (error) in

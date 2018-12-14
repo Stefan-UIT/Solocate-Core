@@ -7,7 +7,7 @@
 	<key>FORGET_PASSWORD</key>
 	<string>auth/v1/user/forgot-password</string>
 	<key>LOGOUT</key>
-	<string>auth/public/v1/user/logout</string>
+	<string>auth/v1/user/logout</string>
 	<key>GET_ORDERS</key>
 	<string>backend-api/driver/v1/orders</string>
 	<key>GET_ORDER_BY_DATE</key>
@@ -37,7 +37,7 @@
 	<key>ADD_NEW_ORDER_ITEM</key>
 	<string>backend-api/v1/mobile/orders/%@/items</string>
 	<key>UPDATE_TOKEN_FCM</key>
-	<string>notification/public/notify-tokens/update</string>
+	<string>notification/notify-tokens/update</string>
 	<key>CREATE_NEW_MESSAGE</key>
 	<string>backend-api/v1/messages</string>
 	<key>GET_COUNT_MESSAGE_NUMBER</key>

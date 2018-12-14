@@ -64,7 +64,7 @@ extension UIViewController {
       imgView.removeFromSuperview()
     }
   }
-  
+    
   func showLoadingIndicator() {
     SVProgressHUD.show()
   }

@@ -36,9 +36,6 @@ class OrderListClvCell: UICollectionViewCell {
     
     func updateUI() {
         setupTableView()
-        if let orderList = self.route?.getOrderList() {
-            noOrdersLabel?.isHidden = orderList.count > 0
-        }
     }
     
     func setupTableView() {

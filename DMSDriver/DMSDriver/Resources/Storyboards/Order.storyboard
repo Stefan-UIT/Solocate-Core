@@ -1905,10 +1905,10 @@
                                         <constraints>
                                             <constraint firstAttribute="bottom" secondItem="Yxw-En-fod" secondAttribute="bottom" id="7YG-DR-WQ2"/>
                                             <constraint firstItem="Yxw-En-fod" firstAttribute="leading" secondItem="Hiv-IK-jn0" secondAttribute="leading" id="8Ki-3p-82t"/>
-                                            <constraint firstItem="yzz-0m-u8Q" firstAttribute="centerX" secondItem="Yxw-En-fod" secondAttribute="centerX" id="SGY-Yr-UBi"/>
+                                            <constraint firstItem="yzz-0m-u8Q" firstAttribute="centerX" secondItem="Hiv-IK-jn0" secondAttribute="centerX" id="DsA-4O-5LK"/>
                                             <constraint firstAttribute="trailing" secondItem="Yxw-En-fod" secondAttribute="trailing" id="h0j-im-2In"/>
-                                            <constraint firstItem="yzz-0m-u8Q" firstAttribute="centerY" secondItem="Yxw-En-fod" secondAttribute="centerY" id="h1c-qC-X2R"/>
                                             <constraint firstItem="Yxw-En-fod" firstAttribute="top" secondItem="Hiv-IK-jn0" secondAttribute="top" id="rSh-W6-tAJ"/>
+                                            <constraint firstItem="yzz-0m-u8Q" firstAttribute="centerY" secondItem="Hiv-IK-jn0" secondAttribute="centerY" id="sMJ-bU-nyW"/>
                                         </constraints>
                                         <connections>
                                             <outlet property="noOrdersLabel" destination="yzz-0m-u8Q" id="vgt-3t-xFb"/>
@@ -1917,8 +1917,8 @@
                                     </collectionViewCell>
                                 </cells>
                             </collectionView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="d0B-vN-JkK">
-                                <rect key="frame" x="0.0" y="6" width="375" height="74"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="d0B-vN-JkK">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fqd-ye-JK5">
                                         <rect key="frame" x="220" y="14" width="140" height="32"/>

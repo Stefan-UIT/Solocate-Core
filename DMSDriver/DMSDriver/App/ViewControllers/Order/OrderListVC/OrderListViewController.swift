@@ -47,6 +47,9 @@ class OrderListViewController: BaseViewController {
     @IBOutlet weak var lblFilter: UILabel?
     
     var arrDropDownMenu:[String] = []
+    var route: Route?
+    var dateStringFilter = Date().toString()
+    var isLoading = true
     
     fileprivate var tapFilterOrderList : TapFilterOrderList = .All {
         didSet{
@@ -59,8 +62,6 @@ class OrderListViewController: BaseViewController {
             clvContent?.reloadData()
         }
     }
-    var route: Route?
-    var dateStringFilter = Date().toString()
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -167,7 +168,9 @@ extension OrderListViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OrderListClvCell", for: indexPath) as! OrderListClvCell
         cell.rootVC = self
         cell.route = route
-        cell.filterOrderList = tapFilterOrderList
+        if !isLoading {
+            cell.filterOrderList = tapFilterOrderList
+        }
         cell.displayMode = displayMode
         cell.dateStringFilter = dateStringFilter
         return cell
@@ -219,12 +222,13 @@ extension OrderListViewController{
         if !isFetch {
             self.showLoadingIndicator()
         }
+        isLoading = true
         API().getRouteDetail(route: routeID) {[weak self] (result) in
             guard let strongSelf = self else {
                 return
             }
             strongSelf.dismissLoadingIndicator()
-
+            strongSelf.isLoading = false
             switch result{
             case .object(let obj):
                 self?.route = obj.data
