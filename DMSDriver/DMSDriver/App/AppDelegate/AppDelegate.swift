@@ -61,8 +61,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //connectToFcm()
         // DMSLocationManager.startUpdatingDriverLocationIfNeeded()
         ReachabilityManager.startMonitoring()
-        SERVICES().socket.connect(token: E(Caches().user?.token))
         refreshBadgeIconNumber()
+        if Caches().hasLogin {
+            SERVICES().socket.connect(token: E(Caches().user?.token))
+        }
     }
   
     //MARK: - PUSH NOTIFICATION
@@ -259,6 +261,7 @@ extension AppDelegate {
     }
     
     func loginSuccess() {
+        SERVICES().socket.connect(token: E(Caches().user?.token))
         DMSLocationManager.startUpdatingDriverLocationIfNeeded()
         ReachabilityManager.startMonitoring()
         ReachabilityManager.updateAllRequestToServer()
