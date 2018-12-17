@@ -242,11 +242,19 @@ extension AppDelegate {
     
     
     func reLogin() {
+        invalidTimer()
         let vc: LoginViewController = .loadSB(SB: .Login)
         window?.rootViewController = vc
         SERVICES().socket.logout(Caches().user?.userInfo?.id ?? 0,
                                  E(Caches().user?.roles?.first?.name))
         CoreDataManager.clearAllDB()
+        Caches().drivingRule = nil
+        Caches().timePlaying = 0
+        Caches().isPauseRoute = false
+        Caches().isStartingRoute = false
+        Caches().isCancelCounter = true
+        Caches().dateStartRoute = nil
+        Caches().datePauseRoute = nil
         mainVC?.endAutoRefetchRouteList()
     }
     
@@ -285,5 +293,14 @@ extension AppDelegate {
                 UIApplication.shared.applicationIconBadgeNumber = notifications.count
             }
         }
+    }
+    
+    func invalidTimer()  {
+        App().mainVC?.rootNV?.viewControllers.forEach({ (vc) in
+            if let _vc = vc as? TimerVC {
+                _vc.invalidTimmer()
+                return
+            }
+        })
     }
 }

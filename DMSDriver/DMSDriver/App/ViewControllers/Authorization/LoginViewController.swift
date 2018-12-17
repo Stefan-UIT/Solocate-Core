@@ -103,6 +103,9 @@ fileprivate extension LoginViewController {
     func login(_ userLogin:UserLoginModel)  {
         showLoadingIndicator()
         API().login(userLogin) {[weak self] (result) in
+            guard let strongSelf = self else {return}
+            strongSelf.dismissLoadingIndicator()
+
             switch result {
             case .object(let obj):
                 Caches().user = obj.data
@@ -117,17 +120,16 @@ fileprivate extension LoginViewController {
                                         E(Caches().user?.token))
                 
                 SERVICES().API.getDrivingRule { (result) in
-                    guard let strongSelf = self else {return}
-                    strongSelf.dismissLoadingIndicator()
                     switch result{
                     case .object(let obj):
-                        
+                        /*
                         let data = DrivingRule()
                         data.data = 1
-                        Caches().drivingRule = data
+                         */
+                        Caches().drivingRule = obj
  
-                    case .error(let error):
-                        strongSelf.showAlertView(error.getMessage())
+                    case .error(_ ):
+                        break
                     }
                 }
 

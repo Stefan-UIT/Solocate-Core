@@ -135,7 +135,6 @@ extension SlideMenuVC:UITableViewDelegate{
             let vc:TimerVC = .loadSB(SB: SBName.Packages)
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
 
-            break
         case .ASSIGN:
             let vc:AssignOrderVC = .loadSB(SB: .Order)
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
@@ -149,7 +148,6 @@ extension SlideMenuVC:UITableViewDelegate{
         case .TASK:
             let vc:TaskListVC = .loadSB(SB: .Task)
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
-            break
         }
       }
       if (currentItem != .LOGOUT){
@@ -164,16 +162,16 @@ extension SlideMenuVC:UITableViewDelegate{
 
 //MARK: API
 private extension SlideMenuVC{
-  func handleLogOut() {
-    App().reLogin()
-    API().logout { (result) in
-      switch result{
-      case .object(_):
-        Caches().user = nil
-      case .error(let error):
-        self.showAlertView(error.getMessage())
-      }
+    func handleLogOut() {
+        App().reLogin()
+        API().logout { (result) in
+            switch result{
+            case .object(_):
+            Caches().user = nil
+            case .error(let error):
+            self.showAlertView(error.getMessage())
+            }
+        }
     }
-  }
 }
 

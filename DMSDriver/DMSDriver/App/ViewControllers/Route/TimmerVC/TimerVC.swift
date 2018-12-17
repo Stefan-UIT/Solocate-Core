@@ -33,11 +33,16 @@ class TimerVC: BaseViewController {
         setupTotalSecondRemaining()
         setupLblTimeRemaining()
 
-        if Caches().isPauseRoute {
-            invalidTimmer()
-        }else {
+        if Caches().isStartingRoute {
             startTimer()
+        }else {
+            invalidTimmer()
         }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        invalidTimmer()
     }
     
     override func updateNavigationBar() {
@@ -111,15 +116,15 @@ class TimerVC: BaseViewController {
         if totalSecond > 0 {
             LocalNotification.createPushNotificationAfter(totalSecond,
                                                           "Reminder".localized,
-                                                          "Your task has been over.",
-                                                          "remider.timeout.drivingrole",  [:])
+                                                          "Your task has been over.".localized,
+                                                          NotificationName.remiderTimeoutDrivingRole,  [:])
         }
     }
     
     func setupLblTimeRemaining() {
         let hour = Int(totalSecond / 3600)
         let minute = Int((totalSecond - (hour * 3600)) / 60)
-        let second = totalSecond - (minute * 60)
+        let second = totalSecond - ((minute * 60) + (hour * 3600))
         
         updateButtonAction()
         if  hour <= 0 && minute <= 0 && second <= 0{
@@ -138,9 +143,13 @@ class TimerVC: BaseViewController {
             
         }else{
             
+            if Caches().dateStartRoute == nil{
+                totalSecond = (drivingRule?.data ?? 0) * 60
+                return
+            }
+            
             let totalMinutes = drivingRule?.data ?? 0
             var dateStartRoute = Caches().dateStartRoute
-            
             let hour = Int(totalMinutes / 60)
             let minute = totalMinutes % 60
             
@@ -151,6 +160,11 @@ class TimerVC: BaseViewController {
             let timeRemaining = newDate?.offsetFrom(date: Date.now, components: [.second])
             totalSecond = timeRemaining?.second ?? 0
         }
+    }
+    
+    func invalidTimmer()  {
+        timmerTime?.invalidate()
+        timmerTime = nil
     }
 }
 
@@ -224,7 +238,7 @@ fileprivate extension TimerVC{
         totalSecond = totalSecond - 1
         let hour = Int(totalSecond / 3600)
         let minute = Int((totalSecond - (hour * 3600)) / 60)
-        let second = totalSecond - (minute * 60)
+        let second = totalSecond - ((minute * 60) + (hour * 3600))
 
         if  hour <= 0 && minute <= 0 && second <= 0{
             Caches().isStartingRoute = false
@@ -253,10 +267,5 @@ fileprivate extension TimerVC{
                                           selector: #selector(updateTime),
                                           userInfo: nil,
                                           repeats: true)
-    }
-    
-    func invalidTimmer()  {
-        timmerTime?.invalidate()
-        timmerTime = nil
     }
 }

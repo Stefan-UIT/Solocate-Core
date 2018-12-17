@@ -38,10 +38,6 @@ class BaseViewController: UIViewController {
         removeNetworkObserver()
     }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-    }
-    
     func updateUI() {
         DispatchQueue.main.async {
             if  ReachabilityManager.isNetworkAvailable {

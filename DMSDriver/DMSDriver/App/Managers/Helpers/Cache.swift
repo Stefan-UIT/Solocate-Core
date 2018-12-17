@@ -39,6 +39,8 @@ class Cache: NSObject {
         set {
             if let dic = newValue?.getJSONString() {
                 setObject(obj: dic, forKey: Defaultkey.SF_REMEBER_LOGIN)
+            }else {
+                userDefaults.removeObject(forKey: Defaultkey.SF_REMEBER_LOGIN)
             }
         }
         
@@ -57,6 +59,8 @@ class Cache: NSObject {
         set {
             if let dic = newValue?.getJSONString() {
                 setObject(obj: dic, forKey: Defaultkey.SF_DRIVING_RULE)
+            }else {
+                userDefaults.removeObject(forKey: Defaultkey.SF_DRIVING_RULE)
             }
         }
         
@@ -75,6 +79,8 @@ class Cache: NSObject {
         set {
             if let date = newValue {
                 setObject(obj: date, forKey: Defaultkey.SF_SAVE_DATE_START_ROUTE)
+            }else {
+                userDefaults.removeObject(forKey: Defaultkey.SF_SAVE_DATE_START_ROUTE)
             }
         }
         
