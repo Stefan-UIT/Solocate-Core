@@ -17,15 +17,13 @@ enum NamespaceSocket:String {
 class SocketService {
     static var shared = SocketService()
     let manager = SocketManager(socketURL: URL(string:BASE_URL_SOCKET())!)
-    var clientSocket:SocketIOClient
-    var loginNamespaceSocket:SocketIOClient?
+    var defaultSocket:SocketIOClient
     var delegate:APISocketDelegate?
     
     let handleQueue = DispatchQueue(label: "socket_dispatch_queue")
     
     private init(){
-        clientSocket = manager.defaultSocket
-        loginNamespaceSocket = manager.socket(forNamespace: NamespaceSocket.login.rawValue)
+        defaultSocket = manager.defaultSocket
     }
     
     func setup() {
@@ -34,19 +32,20 @@ class SocketService {
     }
     
     private func registerGenericEventHandler() {
-        clientSocket.on(clientEvent: .connect) { (data, ack) in
+        defaultSocket.on(clientEvent: .connect) {[weak self] (data, ack) in
             print("Socket Connected.")
+            self?.delegate?.didReceiveConnected(data: data)
         }
         
-        clientSocket.on(clientEvent: .disconnect) { (data, ack) in
+        defaultSocket.on(clientEvent: .disconnect) { (data, ack) in
             print("Socket Disconnected.")
         }
         
-        clientSocket.on(clientEvent: .reconnect) { (data, ack) in
+        defaultSocket.on(clientEvent: .reconnect) { (data, ack) in
             print("Socket Reconnected.")
         }
         
-        clientSocket.on(clientEvent: .error) { (data, ack) in
+        defaultSocket.on(clientEvent: .error) { (data, ack) in
             print("Socket Error: \(data)")
         }
     }
@@ -55,15 +54,26 @@ class SocketService {
         let config = SocketIOClientConfiguration(arrayLiteral: .connectParams([DataKey.token: token]),
                                                  .handleQueue(handleQueue),
                                                  .log(SocketConfiguration.log),
+                                                 .forceNew(SocketConfiguration.forceNew),
                                                  .secure(SocketConfiguration.secure),
                                                  .path(SocketConfiguration.path),
                                                  .reconnects(SocketConfiguration.reconnect),
                                                  .reconnectAttempts(SocketConfiguration.reconnectAttemp),
                                                  .reconnectWait(SocketConfiguration.reconnectWait))
         manager.config = config
-        clientSocket.connect()
-        loginNamespaceSocket?.connect()
+        
+        defaultSocket.off(clientEvent: .connect)
+        defaultSocket.connect()
         setup()
+    }
+    
+    func socketWithNamespace(_ namespace:NamespaceSocket) -> SocketIOClient {
+        return manager.socket(forNamespace: namespace.rawValue)
+    }
+    
+    func disconnect() {
+        manager.disconnectSocket(forNamespace: NamespaceSocket.login.rawValue)
+        manager.disconnect()
     }
     
     func disconnect(namespace:NamespaceSocket? = nil) {

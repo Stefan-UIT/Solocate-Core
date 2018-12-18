@@ -313,8 +313,8 @@ fileprivate extension BaseAPIService{
         case .tokenFail,
              .tokenExpried:
           DispatchQueue.main.async {
-//            App().reLogin()
-//            App().showAlert("Session expired.".localized)
+            App().reLogin()
+            App().showAlert("Session expired.".localized)
             return
           }
         case .notAuthorized:

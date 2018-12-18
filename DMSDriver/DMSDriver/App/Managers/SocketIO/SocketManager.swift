@@ -10,24 +10,51 @@ import Foundation
 import SocketIO
 
 protocol APISocketDelegate {
+    func didReceiveConnected(data: Any)
     func didReceiveResultLogin(data: Any)
     func didReceiveError(data: String)
-    
 }
 
-//MARK: - EMIT
+extension APISocketDelegate{
+    func didReceiveConnected(data: Any){}
+    func didReceiveResultLogin(data: Any){}
+    func didReceiveError(data: String){}
+}
+
+
+// MARK: - LoginNamespace
 extension SocketService {
-    // MARK: - LoginNamespace
     func login(_ id:Int,_ username:String,_ role:String, _ token:String) {
-        let  data = ["id":id,"username":username,"role":role,"token":token] as [String:Any]
-        print("======>\(SocketConstants.SOCKET_LOGIN):\(data)<==========")
-        loginNamespaceSocket?.emit(SocketConstants.SOCKET_LOGIN, data)
+        let loginNamespaceSocket = socketWithNamespace(.login)
+        loginNamespaceSocket.on(clientEvent: .connect) { (data, _) in
+            let  data = ["id":id,"username":username,"role":role,"token":token] as [String:Any]
+            loginNamespaceSocket.emit(SocketConstants.SOCKET_LOGIN, data)
+
+            print("Connected login namespace socket")
+            print("======>\(SocketConstants.SOCKET_LOGIN):\(data)<==========")
+        }
+        
+        loginNamespaceSocket.on(clientEvent: .error) { (data, _) in
+            print("Error Login Namespace Socket")
+        }
+        
+        loginNamespaceSocket.on(SocketConstants.SOCKET_RESULT_LOGIN) {[weak self] (data, ack) in
+            self?.resultLogin(data: data)
+        }
+        
+        loginNamespaceSocket.on(SocketConstants.SOCKET_ERROR) {[weak self] (data, ack) in
+            self?.handleError(data: data)
+        }
+        
+        loginNamespaceSocket.connect()
     }
     
     func logout(_ id:Int, _ role:String) {
-        let  data = ["id":id,"role":role] as [String:Any]
+        let loginNamespaceSocket = manager.socket(forNamespace: NamespaceSocket.login.rawValue)
+        let data = ["id":id,"role":role] as [String:Any]
+        loginNamespaceSocket.emit(SocketConstants.SOCKET_LOGOUT, data)
+
         print("======>\(SocketConstants.SOCKET_LOGOUT):\(data)<=======")
-        loginNamespaceSocket?.emit(SocketConstants.SOCKET_LOGOUT, data)
     }
 }
 
@@ -37,15 +64,7 @@ extension SocketService {
 extension SocketService {
     
     func registerObserveEvent() {
-        self.loginNamespaceSocket?.on(SocketConstants.SOCKET_RESULT_LOGIN) {[weak self] (data, ack) in
-            self?.resultLogin(data: data)
-        }
-        
-        self.loginNamespaceSocket?.on(SocketConstants.SOCKET_ERROR) {[weak self] (data, ack) in
-            self?.handleError(data: data)
-        }
-        
-        self.clientSocket.on(SocketConstants.SOCKET_PACKET) {(data, _) in
+        self.defaultSocket.on(SocketConstants.SOCKET_PACKET) {(data, _) in
             let packetData = data.first as? SocketPacket
             print(packetData)
         }

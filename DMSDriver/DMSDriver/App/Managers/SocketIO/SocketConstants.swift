@@ -10,6 +10,7 @@ import Foundation
 
 
 struct SocketConfiguration {
+    static let forceNew = false
     static let log = false
     static let secure = true
     static let reconnect = true

@@ -62,7 +62,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // DMSLocationManager.startUpdatingDriverLocationIfNeeded()
         ReachabilityManager.startMonitoring()
         refreshBadgeIconNumber()
-        if Caches().hasLogin {
+        if Caches().hasLogin &&
+            SERVICES().socket.defaultSocket.status != .connected{
             SERVICES().socket.connect(token: E(Caches().user?.token))
         }
     }
@@ -210,7 +211,6 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     }
 }
 
-
 //MARK : - OTHER_FUNTION
 extension AppDelegate {
     
@@ -247,8 +247,13 @@ extension AppDelegate {
         invalidTimer()
         let vc: LoginViewController = .loadSB(SB: .Login)
         window?.rootViewController = vc
-        SERVICES().socket.logout(Caches().user?.userInfo?.id ?? 0,
-                                 E(Caches().user?.roles?.first?.name))
+        
+        if SERVICES().socket.defaultSocket.status == .connected{
+           SERVICES().socket.logout(Caches().user?.userInfo?.id ?? 0,
+                                     E(Caches().user?.roles?.first?.name))
+        }
+        SERVICES().socket.disconnect()
+
         CoreDataManager.clearAllDB()
         Caches().drivingRule = nil
         Caches().timePlaying = 0
@@ -261,7 +266,9 @@ extension AppDelegate {
     }
     
     func loginSuccess() {
-        SERVICES().socket.connect(token: E(Caches().user?.token))
+        if SERVICES().socket.defaultSocket.status != .connected{
+            SERVICES().socket.connect(token: E(Caches().user?.token))
+        }
         DMSLocationManager.startUpdatingDriverLocationIfNeeded()
         ReachabilityManager.startMonitoring()
         ReachabilityManager.updateAllRequestToServer()

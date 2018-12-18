@@ -112,6 +112,13 @@ extension BaseViewController:UIPopoverPresentationControllerDelegate{
 
 // MARK: - APISocketDelegate
 extension BaseViewController:APISocketDelegate{
+    func didReceiveConnected(data: Any) {
+        SERVICES().socket.login(Caches().user?.userInfo?.id ?? 0,
+                                E(Caches().user?.userInfo?.userName),
+                                E(Caches().user?.roles?.first?.name),
+                                E(Caches().user?.token))
+    }
+    
     func didReceiveError(data: String) {
         if SocketConstants.messangeNeedRelogines.contains(data) {
             App().reLogin()
