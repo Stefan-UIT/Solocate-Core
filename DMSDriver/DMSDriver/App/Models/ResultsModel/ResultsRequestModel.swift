@@ -11,7 +11,7 @@ import ObjectMapper
 
 class ResultsRequestModel: NSObject, Mappable {
     var status: Bool?
-    var listAlertMessage: [AlertDetailModel]?
+    var listAlertMessage: [AlertModel]?
     
     required convenience init?(map: Map) {
         self.init()

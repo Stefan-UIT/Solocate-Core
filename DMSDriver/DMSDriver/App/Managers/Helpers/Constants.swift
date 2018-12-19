@@ -149,6 +149,7 @@ public enum SBName : String {
     case Task = "Task";
     case Profile = "Profile";
     case Common = "Common";
+    case Notification = "Notification";
 
 }
 

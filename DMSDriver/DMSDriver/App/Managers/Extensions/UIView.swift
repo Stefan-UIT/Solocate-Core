@@ -157,11 +157,7 @@ extension UIView {
 }
 
 // MARK: - Properties
-
 public extension UIView {
-    
-    
-    
     /// Size of view.
     public var size: CGSize {
         get {
@@ -193,6 +189,7 @@ public extension UIView {
         }
     }
 }
+
 
 
 extension UIView {
@@ -355,14 +352,14 @@ extension UIView {
         heightAnchor.constraint(equalTo: superview!.heightAnchor, constant: offset).isActive = true
     }
   
-  class func loadNib<T: UIView>(viewType: T.Type) -> T {
-    let className = String.className(aClass: viewType)
-    return Bundle(for: viewType).loadNibNamed(className, owner: nil, options: nil)!.first as! T
-  }
+    class func loadNib<T: UIView>(viewType: T.Type) -> T {
+        let className = String.className(aClass: viewType)
+        return Bundle(for: viewType).loadNibNamed(className, owner: nil, options: nil)!.first as! T
+    }
   
-  class func loadNib() -> Self {
-    return loadNib()
-  }
+    class func loadNib() -> Self {
+        return loadNib()
+    }
     
     class func load<T: UIView>(nib: String? = nil, owner: Any? = nil) -> T {
         return Bundle.main.loadNibNamed(_:nib != nil ? nib! : String(describing: T.self),
@@ -370,28 +367,28 @@ extension UIView {
                                         options: nil)?.first as! T;
     }
   
-  var parentViewController: UIViewController? {
-    var parentResponder: UIResponder? = self
-    while parentResponder != nil {
-      parentResponder = parentResponder!.next
-      if let viewController = parentResponder as? UIViewController {
-        return viewController
-      }
+    var parentViewController: UIViewController? {
+        var parentResponder: UIResponder? = self
+        while parentResponder != nil {
+          parentResponder = parentResponder!.next
+          if let viewController = parentResponder as? UIViewController {
+            return viewController
+          }
+        }
+        return nil
     }
-    return nil
-  }
   
-  func applyGradient(colours: [UIColor]) -> Void {
-    self.applyGradient(colours: colours, locations: nil)
-  }
+    func applyGradient(colours: [UIColor]) -> Void {
+        self.applyGradient(colours: colours, locations: nil)
+    }
   
-  func applyGradient(colours: [UIColor], locations: [NSNumber]?) -> Void {
-    let gradient: CAGradientLayer = CAGradientLayer()
-    gradient.frame = self.bounds
-    gradient.colors = colours.map { $0.cgColor }
-    gradient.locations = locations
-    self.layer.insertSublayer(gradient, at: 0)
-  }
+    func applyGradient(colours: [UIColor], locations: [NSNumber]?) -> Void {
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.frame = self.bounds
+        gradient.colors = colours.map { $0.cgColor }
+        gradient.locations = locations
+        self.layer.insertSublayer(gradient, at: 0)
+    }
     
     public func setShadowDefault() {
         self.clipsToBounds = false
@@ -401,8 +398,42 @@ extension UIView {
     }
 }
 
+extension UIView {
+    
+    @discardableResult
+    class func addViewNoItemWithTitle(_ title:String,intoParentView parentView:UIView) -> UIView{
+        removeViewNoItemAtParentView(parentView)
+        
+        let view = UIView(frame: CGRectMake(0, 0, parentView.frame.size.width/2, 70))
+        view.isUserInteractionEnabled = false
+        let imv = UIImageView(frame: CGRectMake(0, 5, view.frame.size.width, 25))
+        imv.image = UIImage(named: "ic-NoImageGray")
+        imv.contentMode = .scaleAspectFit
+        view.addSubview(imv)
+        
+        let lbl = UILabel(frame: CGRectMake(0, 45, view.frame.size.width, 20))
+        lbl.text = title
+        lbl.textAlignment = .center
+        lbl.textColor = AppColor.grayColor
+        view.addSubview(lbl)
+        view.center = parentView.center
+        view.tag = 1000
+        
+        parentView.addSubview(view)
+        
+        return view
+    }
+    
+    
+    class func removeViewNoItemAtParentView(_ parentView:UIView)  {
+        let view = parentView.viewWithTag(1000)
+        view?.removeFromSuperview()
+    }
+}
+
+
 extension CGFloat {
-  func scaleHeight() -> CGFloat {
-    return self*Constants.SCALE_VALUE_HEIGHT_DEVICE
-  }
+    func scaleHeight() -> CGFloat {
+        return self*Constants.SCALE_VALUE_HEIGHT_DEVICE
+    }
 }

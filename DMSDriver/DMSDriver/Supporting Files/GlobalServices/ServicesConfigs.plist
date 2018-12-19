@@ -54,10 +54,12 @@
 	<string>auth/v1/user/change-password</string>
 	<key>RESET_PASSWORD_URL</key>
 	<string>#/reset-password</string>
+	<key>GET_LIST_ALERT</key>
+	<string>masterdata/v1/alerts/driver-alerts</string>
 	<key>GET_ALERT_DETAIL</key>
-	<string>backend-api/v1/alert/my-list</string>
+	<string>masterdata/v1/alerts/%@</string>
 	<key>RESOLVE_ALERT</key>
-	<string>backend-api/v1/alert-management/%@?comment=%@</string>
+	<string>masterdata/v1/alerts/resolve/%@</string>
 	<key>UPDATE_DRIVER_LOCATION</key>
 	<string>gps-tracking/api/gps-drivers</string>
 	<key>GET_USERID_BY_TOKEN</key>

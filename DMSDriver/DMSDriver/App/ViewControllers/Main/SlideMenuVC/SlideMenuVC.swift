@@ -8,6 +8,7 @@ enum MenuItemType : Int {
   case COUNTER
   case ASSIGN
   case TASK
+  case ALERT
   case LOGOUT
   
   static let count: Int = {
@@ -28,6 +29,8 @@ enum MenuItemType : Int {
         return "Orders assignment".localized.uppercased()
     case .TASK:
         return "Tasks List".localized.uppercased()
+    case .ALERT:
+        return "Alerts".localized.uppercased()
     case .LOGOUT:
       return "Logout".localized.uppercased()
     }
@@ -45,6 +48,8 @@ enum MenuItemType : Int {
         return #imageLiteral(resourceName: "ic_orderlist")
     case .TASK:
         return #imageLiteral(resourceName: "Menu_Task")
+    case .ALERT:
+        return #imageLiteral(resourceName: "ic_route")
     case .LOGOUT:
       return #imageLiteral(resourceName: "ic_logout")
     }
@@ -120,44 +125,52 @@ extension SlideMenuVC: UITableViewDataSource{
 
 extension SlideMenuVC:UITableViewDelegate{
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if let menuType = MenuItemType(rawValue: indexPath.row){
-      if currentItem != menuType{
+    guard let menuType = MenuItemType(rawValue: indexPath.row) else {
+        return
+    }
+    
+    if currentItem != menuType{
         currentItem = menuType
         switch menuType {
         case .PROFILE:
             let vc:ProfileVC = .loadSB(SB: .Profile)
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
-
+            
         case .ROUTES:
             App().mainVC?.pushRouteListVC()
             
         case .COUNTER:
             let vc:TimerVC = .loadSB(SB: SBName.Packages)
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
-
+            
         case .ASSIGN:
             let vc:AssignOrderVC = .loadSB(SB: .Order)
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
-
+    
+        case .TASK:
+            let vc:TaskListVC = .loadSB(SB: .Task)
+            App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
+            
+        case .ALERT:
+            let vc:HistoryNotifyVC = .loadSB(SB: .Notification)
+            App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
+            
         case .LOGOUT:
             DispatchQueue.main.async {
                 self.navigationController?.dismiss(animated: false, completion: {
                     self.handleLogOut()
                 })
             }
-        case .TASK:
-            let vc:TaskListVC = .loadSB(SB: .Task)
-            App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
         }
-      }
-      if (currentItem != .LOGOUT){
+    }
+    
+    if (currentItem != .LOGOUT){
         DispatchQueue.main.async {
             self.navigationController?.dismiss(animated: true, completion: nil)
         }
-      }
-      self.tbvContent?.reloadData()
     }
-  }
+    self.tbvContent?.reloadData()
+    }
 }
 
 //MARK: API
