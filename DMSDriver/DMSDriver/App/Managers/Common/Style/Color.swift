@@ -4,7 +4,7 @@ import UIKit
 
 /// Common colors used throughout the app.
 struct AppColor {
-    static let mainColor            = UIColor(hex: "#4F6BF5")
+    static let mainColor            = UIColor(hex: "#2DACF9")
     static let grayColor            = UIColor(hex: "#E5E5E5")
     static let disableIconColor     = UIColor(hex: "#485D70")
     static let highLightColor       = UIColor(hex: "#b3e6ff")

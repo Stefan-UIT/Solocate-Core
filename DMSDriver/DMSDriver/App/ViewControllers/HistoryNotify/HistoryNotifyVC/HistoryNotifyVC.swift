@@ -95,6 +95,8 @@ extension HistoryNotifyVC:UITableViewDataSource, UITableViewDelegate{
             if self.data?.meta?.total == arrContent.count ||
                 filterModel?.page == 1 {
                 return 0
+            }else {
+                return 24
             }
         }
         return UITableViewAutomaticDimension
@@ -127,7 +129,8 @@ extension HistoryNotifyVC:UITableViewDataSource, UITableViewDelegate{
     //Loading More
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         if indexPath.row == arrContent.count { // row loadMore
-            if data?.meta?.total != arrContent.count{
+            if data?.meta?.total != arrContent.count &&
+                arrContent.count > 0{
                 fetchData(showLoading: true)
             }
         }

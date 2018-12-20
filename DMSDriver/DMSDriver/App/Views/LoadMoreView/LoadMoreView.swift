@@ -30,8 +30,7 @@ class LoadMoreView: UIView {
         let cell = UITableViewCell()
 
         let lbl = loadingMoreView()
-        lbl.frame = CGRectMake(0, 0, ScreenSize.SCREEN_WIDTH, 24)
-        
+        lbl.addConstaints(top: 0, right: 0, bottom: 0, left: 0)        
         cell.addSubview(lbl)
         return cell
     }

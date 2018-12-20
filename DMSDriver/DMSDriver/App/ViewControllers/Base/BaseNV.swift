@@ -12,9 +12,9 @@ class BaseNV: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.interactivePopGestureRecognizer?.delegate = self
-        
+        self.navigationBar.isTranslucent = false
+        self.navigationBar.barTintColor = AppColor.mainColor
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
