@@ -458,17 +458,51 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Yh-bj-VZd">
+                                <rect key="frame" x="0.0" y="592" width="375" height="60"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nJc-Kw-MTj">
+                                        <rect key="frame" x="20" y="10" width="335" height="45"/>
+                                        <color key="backgroundColor" red="0.0" green="0.61568627450000002" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
+                                        <state key="normal" title="RESOLVE">
+                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        </state>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="RESOLVE"/>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onbtnClickActionButtonWithBtn:" destination="f90-pe-eDV" eventType="touchUpInside" id="p85-nv-i2l"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="nJc-Kw-MTj" secondAttribute="trailing" constant="20" id="2Yk-WU-Utf"/>
+                                    <constraint firstAttribute="bottom" secondItem="nJc-Kw-MTj" secondAttribute="bottom" constant="5" id="3fT-AG-cyy"/>
+                                    <constraint firstItem="nJc-Kw-MTj" firstAttribute="leading" secondItem="7Yh-bj-VZd" secondAttribute="leading" constant="20" id="7US-EM-ssg"/>
+                                    <constraint firstAttribute="height" constant="60" id="QfN-t7-OSU"/>
+                                    <constraint firstItem="nJc-Kw-MTj" firstAttribute="top" secondItem="7Yh-bj-VZd" secondAttribute="top" constant="10" id="dFV-4g-5ie"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="Co7-aw-5ZP" firstAttribute="leading" secondItem="cFL-I8-Dpu" secondAttribute="leading" id="NoG-KQ-1hd"/>
+                            <constraint firstItem="7Yh-bj-VZd" firstAttribute="leading" secondItem="cFL-I8-Dpu" secondAttribute="leading" id="Pxy-tr-eOa"/>
                             <constraint firstAttribute="trailing" secondItem="Co7-aw-5ZP" secondAttribute="trailing" id="aQ5-Q1-yXe"/>
                             <constraint firstItem="cFL-I8-Dpu" firstAttribute="bottom" secondItem="Co7-aw-5ZP" secondAttribute="bottom" id="c3E-DI-1bG"/>
                             <constraint firstItem="Co7-aw-5ZP" firstAttribute="top" secondItem="o9o-Ng-ZwD" secondAttribute="top" id="t5P-AL-JJe"/>
+                            <constraint firstItem="cFL-I8-Dpu" firstAttribute="bottom" secondItem="7Yh-bj-VZd" secondAttribute="bottom" constant="15" id="uue-5u-CU7"/>
+                            <constraint firstItem="7Yh-bj-VZd" firstAttribute="trailing" secondItem="cFL-I8-Dpu" secondAttribute="trailing" id="ybQ-0a-xeA"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="cFL-I8-Dpu"/>
                     </view>
                     <connections>
+                        <outlet property="btnAction" destination="nJc-Kw-MTj" id="UwV-o7-nUa"/>
                         <outlet property="tableView" destination="Co7-aw-5ZP" id="AEX-Hz-5BB"/>
                     </connections>
                 </viewController>

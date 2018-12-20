@@ -58,6 +58,11 @@ extension String {
     var url: URL? {
         return URL(string: self)
     }
+    
+    func encodeURL() -> String {
+        return self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+
+    }
   
     var date: Date? {
         let dateFormater = DateFormatter()

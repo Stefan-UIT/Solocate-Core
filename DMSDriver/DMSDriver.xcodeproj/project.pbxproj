@@ -748,12 +748,12 @@
 			path = GoogleDirectionResponseModel;
 			sourceTree = "<group>";
 		};
-		3B00D04C2151F78F00B0B062 /* AlertDetailModel */ = {
+		3B00D04C2151F78F00B0B062 /* AlertModel */ = {
 			isa = PBXGroup;
 			children = (
 				3B66B86F210B1148000BDFEF /* AlertModel.swift */,
 			);
-			path = AlertDetailModel;
+			path = AlertModel;
 			sourceTree = "<group>";
 		};
 		3B00D04D2151F7DD00B0B062 /* NoteModel */ = {
@@ -1465,7 +1465,7 @@
 				3B014952217D7E8F0097FEB6 /* TaskModel */,
 				3B66B875210B1148000BDFEF /* BaseModel */,
 				3B00D04D2151F7DD00B0B062 /* NoteModel */,
-				3B00D04C2151F78F00B0B062 /* AlertDetailModel */,
+				3B00D04C2151F78F00B0B062 /* AlertModel */,
 				3B00D04B2151F77900B0B062 /* GoogleDirectionResponseModel */,
 				3B00D04A2151F76000B0B062 /* ResultsModel */,
 				3B00D0492151F74900B0B062 /* ChangePasswordModel */,

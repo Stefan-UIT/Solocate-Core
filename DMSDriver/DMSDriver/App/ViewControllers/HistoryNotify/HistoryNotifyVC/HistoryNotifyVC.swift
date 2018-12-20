@@ -20,10 +20,13 @@ class HistoryNotifyVC: BaseViewController {
     
     var arrContent:[AlertModel] = []
     var arrCoreNotifys:[ReceiveNotificationModel] = []
-
+    var filterModel:AlertFilterModel?
+    var dateStringFilter:String = Date.now.toString("dd/MM/yyyy")
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        initVar()
         setupTableView()
         getAllMyHistoryNotifications()
     }
@@ -31,6 +34,14 @@ class HistoryNotifyVC: BaseViewController {
     override func updateNavigationBar() {
         super.updateNavigationBar()
         setupNavigationService()
+    }
+    
+    func initVar()  {
+        if filterModel == nil {
+            filterModel = AlertFilterModel()
+            filterModel?.created_day_from = dateStringFilter
+            filterModel?.created_day_to = dateStringFilter
+        }
     }
     
     func setupNavigationService() {
@@ -116,6 +127,9 @@ extension HistoryNotifyVC:UITableViewDataSource, UITableViewDelegate{
         let alert = arrContent[indexPath.row]
         let vc:HistoryNotifyDetailVC = HistoryNotifyDetailVC.loadSB(SB: .Notification)
         vc.alertDetail = alert
+        vc.resolveAlertCallback = {[weak self](success,alerModel) in
+            self?.fetchData(showLoading: false)
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -150,6 +164,24 @@ extension HistoryNotifyVC:DMSNavigationServiceDelegate{
             }
         }
     }
+    
+    func didSelectedRightButton() {
+        let dateFormater =  DateFormatter()
+        dateFormater.dateFormat = "dd/MM/yyyy"
+        
+        let currentDate = dateFormater.date(from: dateStringFilter)
+        UIAlertController.showDatePicker(style: .actionSheet,
+                                         mode: .date,
+                                         title: "Select date".localized,
+                                         currentDate: currentDate) {[weak self] (date) in
+                                            self?.dateStringFilter = date.toString("dd/MM/yyyy")
+                                            self?.filterModel?.created_day_from = self?.dateStringFilter
+                                            self?.filterModel?.created_day_to = self?.dateStringFilter
+                                            self?.fetchData(showLoading: true)
+                                            
+                                            
+        }
+    }
 }
 
 
@@ -177,7 +209,10 @@ extension HistoryNotifyVC{
         if showLoading {
             self.showLoadingIndicator()
         }
-        SERVICES().API.getListAlerts {[weak self] (result) in
+        filterModel?.created_day_from = nil //test
+        filterModel?.created_day_to = nil
+
+        SERVICES().API.getListAlerts(alertFilter:filterModel) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.tbvContent?.endRefreshControl()
             switch result {

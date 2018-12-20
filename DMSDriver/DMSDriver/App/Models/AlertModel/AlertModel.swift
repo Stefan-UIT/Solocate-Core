@@ -95,6 +95,37 @@ class AlertModel: BaseModel {
         truckName <- map["truck_name"]
         tankerName <- map["tanker_name"]
         alertId <- map["alert_id"]
+        
+        if alertId == nil { // use for get alert detail (alertId is id)
+            alertId <- map["id"]
+        }
+    }
+}
 
+
+class AlertFilterModel: BaseModel {
+
+    var driver_name : String?
+    var sts : Int?
+    var created_day_from : String?
+    var created_day_to : String?
+    var sts_name : String?
+    var rule_id : String?
+    var route_id : String?
+    var created_day : String?
+
+    required convenience init?(map: Map) {
+        self.init()
+    }
+    
+    override func mapping(map: Map){
+        driver_name <- map["driver_name"]
+        sts <- map["sts"]
+        created_day_from <- map["created_day_from"]
+        created_day_to <- map["created_day_to"]
+        sts_name <- map["sts_name"]
+        rule_id <- map["rule_id"]
+        route_id <- map["route_id"]
+        created_day <- map["created_day"]
     }
 }

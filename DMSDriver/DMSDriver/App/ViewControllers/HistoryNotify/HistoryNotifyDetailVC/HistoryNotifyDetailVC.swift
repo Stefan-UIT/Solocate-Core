@@ -19,12 +19,13 @@ enum HistoryNotifyDetailSection:Int {
     }()
 }
 
+typealias HistoryNotifyDetailVCCallback = (Bool,AlertModel)-> Void
+
 class HistoryNotifyDetailVC: BaseViewController {
     
     //MARK: - OUTLET
     @IBOutlet weak var tableView: UITableView?
-    @IBOutlet weak var updateStatusButton: UIButton?
-    @IBOutlet weak var btnUnable: UIButton?
+    @IBOutlet weak var btnAction: UIButton?
     @IBOutlet weak var vAction: UIView?
     
     
@@ -39,16 +40,19 @@ class HistoryNotifyDetailVC: BaseViewController {
     
     
     var alertDetail = AlertModel()
+    var resolveAlertCallback:HistoryNotifyDetailVCCallback?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setupTableView()
+        initVar()
         getAlertDetail()
     }
     
     override func updateUI()  {
         super.updateUI()
-        ///
+        updateActionView()
     }
     
     override func updateNavigationBar() {
@@ -67,6 +71,11 @@ class HistoryNotifyDetailVC: BaseViewController {
     func setupNavigationService() {
         App().navigationService.delegate = self
         App().navigationService.updateNavigationBar(.BackOnly, "Alert Detail".localized)
+    }
+    
+    func updateActionView()  {
+        btnAction?.setTitle("Resolve".localized.uppercased(), for: .normal)
+        btnAction?.isHidden = (alertDetail.statusAlert == .resolved)
     }
     
     func initVar()  {
@@ -103,6 +112,21 @@ class HistoryNotifyDetailVC: BaseViewController {
         dataSectionInfo.append(date)
 
         dataSectionComment.append(comment)
+        tableView?.reloadData()
+    }
+    
+    
+    //MARK: - ACTION
+    @IBAction func onbtnClickActionButton(btn:UIButton){
+        PickerInputView.showInputViewWith(type: .PickerInputTextView,
+                                          atVC: self, title: "Resolve alert",
+                                          placeHolder: "Comment...") {[weak self] (success, content,_)  in
+                                            self?.alertDetail.comment = content
+                                            guard let alert = self?.alertDetail else {return}
+                                            self?.resolveAlert(alert: alert)
+                                            
+        }
+        
     }
 }
 
@@ -214,11 +238,26 @@ extension HistoryNotifyDetailVC{
                 self?.alertDetail = obj.data ?? AlertModel()
                 self?.initVar()
                 self?.updateUI()
-                self?.tableView?.reloadData()
                 
             case .error(let error):
                 self?.showAlertView(error.getMessage())
             }
+        }
+    }
+    
+    func resolveAlert(alert:AlertModel)  {
+        self.showLoadingIndicator()
+        SERVICES().API.resolveAlert(alertId: alert.alertId ?? 0,
+                                    comment: E(alert.comment)) {[weak self] (result) in
+                                        self?.dismissLoadingIndicator()
+                                        switch result{
+                                        case .object(_ ):
+                                            self?.resolveAlertCallback?(true,alert)
+                                            self?.getAlertDetail()
+                                            
+                                        case .error(let error):
+                                            self?.showAlertView(error.getMessage())
+                                        }
         }
     }
 }
