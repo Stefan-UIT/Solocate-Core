@@ -19,6 +19,8 @@ class HistoryNotifyVC: BaseViewController {
     @IBOutlet weak var btnClear:UIButton?
     
     var arrContent:[AlertModel] = []
+    var data:ResponseArrData<AlertModel>?
+    
     var arrCoreNotifys:[ReceiveNotificationModel] = []
     var filterModel:AlertFilterModel?
     var dateStringFilter:String = Date.now.toString("dd/MM/yyyy")
@@ -39,14 +41,13 @@ class HistoryNotifyVC: BaseViewController {
     func initVar()  {
         if filterModel == nil {
             filterModel = AlertFilterModel()
-            filterModel?.created_day_from = dateStringFilter
-            filterModel?.created_day_to = dateStringFilter
+            filterModel?.created_day = "desc"
         }
     }
     
     func setupNavigationService() {
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.Menu_Calenda, "Alerts".localized)
+        App().navigationService.updateNavigationBar(.Menu, "Alerts".localized)
     }
     
     func setupTableView() {
@@ -86,10 +87,16 @@ extension HistoryNotifyVC:UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrContent.count
+        return arrContent.count + 1 // 1 is row load more
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if (indexPath.row == arrContent.count){ // row load more
+            if self.data?.meta?.total == arrContent.count ||
+                filterModel?.page == 1 {
+                return 0
+            }
+        }
         return UITableViewAutomaticDimension
     }
     
@@ -98,6 +105,10 @@ extension HistoryNotifyVC:UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if indexPath.row == arrContent.count  { // load more cell
+            return LoadMoreView.loadingMoreCell()
+        }
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryNotifyCell", for: indexPath) as! HistoryNotifyCell
         let dto = arrContent[indexPath.row]
         let notifyDate = ServerDateFormater.date(from: E(dto.created_at))
@@ -111,6 +122,15 @@ extension HistoryNotifyVC:UITableViewDataSource, UITableViewDelegate{
         cell.delegate = self
 
         return cell
+    }
+    
+    //Loading More
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        if indexPath.row == arrContent.count { // row loadMore
+            if data?.meta?.total != arrContent.count{
+                fetchData(showLoading: true)
+            }
+        }
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -209,16 +229,16 @@ extension HistoryNotifyVC{
         if showLoading {
             self.showLoadingIndicator()
         }
-        filterModel?.created_day_from = nil //test
-        filterModel?.created_day_to = nil
 
-        SERVICES().API.getListAlerts(alertFilter:filterModel) {[weak self] (result) in
+        SERVICES().API.getListAlerts(alertFilter:filterModel!) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.tbvContent?.endRefreshControl()
             switch result {
             case .object(let obj):
                 self?.arrContent = obj.data?.data ?? []
+                self?.data = obj.data
                 self?.tbvContent?.reloadData()
+                self?.filterModel?.page = (self?.filterModel?.page ?? 0) + 1
                 
                 guard let tbv  = self?.tbvContent else {return}
                 if (self?.arrContent.count > 0){

@@ -190,6 +190,7 @@
 		3B66B92B210B1149000BDFEF /* ChangePasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B8D8210B1148000BDFEF /* ChangePasswordView.swift */; };
 		3B66B92C210B1149000BDFEF /* AlertMessageView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B8DA210B1148000BDFEF /* AlertMessageView.xib */; };
 		3B66B92D210B1149000BDFEF /* AlertMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B8DB210B1148000BDFEF /* AlertMessageView.swift */; };
+		3B75551621CB741700439FC2 /* LoadMoreView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B75551521CB741700439FC2 /* LoadMoreView.swift */; };
 		3B7695E921CA20A70032B142 /* HistoryNotifyCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7695E621CA20A70032B142 /* HistoryNotifyCell.swift */; };
 		3B7695EA21CA20A70032B142 /* HistoryNotifyVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B7695E721CA20A70032B142 /* HistoryNotifyVC.swift */; };
 		3B7695EC21CA20D70032B142 /* Notification.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B7695EB21CA20D70032B142 /* Notification.storyboard */; };
@@ -436,6 +437,7 @@
 		3B66B8DB210B1148000BDFEF /* AlertMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertMessageView.swift; sourceTree = "<group>"; };
 		3B66B930210B1D6A000BDFEF /* DMSDriver.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DMSDriver.entitlements; sourceTree = "<group>"; };
 		3B67B6D9212BD35F0032F25C /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		3B75551521CB741700439FC2 /* LoadMoreView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadMoreView.swift; sourceTree = "<group>"; };
 		3B7695E621CA20A70032B142 /* HistoryNotifyCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryNotifyCell.swift; sourceTree = "<group>"; };
 		3B7695E721CA20A70032B142 /* HistoryNotifyVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HistoryNotifyVC.swift; sourceTree = "<group>"; };
 		3B7695EB21CA20D70032B142 /* Notification.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Notification.storyboard; sourceTree = "<group>"; };
@@ -1702,6 +1704,7 @@
 		3B66B8C8210B1148000BDFEF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				3B75551421CB741700439FC2 /* LoadMoreView */,
 				3B7695EF21CA24980032B142 /* PickerInputView */,
 				3BF838D02189586E0056C4F1 /* BaseScrollMenuView */,
 				3B83C277217EC685003B6355 /* PopUpTbvVC */,
@@ -1762,6 +1765,14 @@
 				3B66B8DB210B1148000BDFEF /* AlertMessageView.swift */,
 			);
 			path = AlertMessageView;
+			sourceTree = "<group>";
+		};
+		3B75551421CB741700439FC2 /* LoadMoreView */ = {
+			isa = PBXGroup;
+			children = (
+				3B75551521CB741700439FC2 /* LoadMoreView.swift */,
+			);
+			path = LoadMoreView;
 			sourceTree = "<group>";
 		};
 		3B7695E421CA20A70032B142 /* HistoryNotify */ = {
@@ -2466,6 +2477,7 @@
 				3B83851321C247D700ECB5C2 /* SocketConstants.swift in Sources */,
 				3BB78227213554B4006D2398 /* CoreDataManager.swift in Sources */,
 				3B9A377221243A45004D881C /* AssignOrderVC.swift in Sources */,
+				3B75551621CB741700439FC2 /* LoadMoreView.swift in Sources */,
 				3B66B90F210B1149000BDFEF /* MapsViewController.swift in Sources */,
 				3B66B812210B113D000BDFEF /* HCSStarRatingView.m in Sources */,
 				3B13CBEF211A8FF400A93E18 /* ScrollMenuView.swift in Sources */,
@@ -2786,7 +2798,7 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/DMSDriver/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2934,7 +2946,7 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/DMSDriver/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -2966,7 +2978,7 @@
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
 				);
 				INFOPLIST_FILE = "$(SRCROOT)/DMSDriver/Supporting Files/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

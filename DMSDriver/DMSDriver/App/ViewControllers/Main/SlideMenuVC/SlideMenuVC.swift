@@ -39,7 +39,7 @@ enum MenuItemType : Int {
   func normalIcon() -> UIImage? {
     switch self {
     case .PROFILE:
-      return #imageLiteral(resourceName: "ic_avartar")
+      return #imageLiteral(resourceName: "ic-DefaultUser")
     case .ROUTES:
       return #imageLiteral(resourceName: "ic_route")
     case .COUNTER:

@@ -113,6 +113,8 @@ class AlertFilterModel: BaseModel {
     var rule_id : String?
     var route_id : String?
     var created_day : String?
+    
+    var page = 1
 
     required convenience init?(map: Map) {
         self.init()
