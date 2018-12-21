@@ -8,6 +8,7 @@
 
 import UIKit
 import ReachabilitySwift
+import FDFullscreenPopGesture
 
 class BaseViewController: UIViewController {
   

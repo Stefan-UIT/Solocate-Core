@@ -112,7 +112,7 @@ extension _ReachabilityManager{
                 }else{
                     self.isCalling = false
                     SVProgressHUD.dismiss()
-                    App().mainVC?.refetchDataRouteOrTaskList()
+                    App().mainVC?.refetchDataRouteOrTaskListOrHistoryNotify()
                 }
             }
         }

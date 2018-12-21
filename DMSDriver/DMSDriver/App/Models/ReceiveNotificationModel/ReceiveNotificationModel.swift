@@ -13,6 +13,7 @@ enum NotificationType:String {
     case TASK = "task"
     case ROUTE = "route"
     case ROUTE_LIST = "route_list"
+    case ALERT_RESOLVE = "ALERT"
 
 }
 
@@ -50,11 +51,7 @@ class ReceiveNotificationModel: BaseModel {
         var stringData:String = ""
         if object_data == nil { // handle object_data response a string Json
             stringData <- map["object_data"]
-            let data = stringData.data(using: .utf8)!
-            guard let json = (try? JSONSerialization.jsonObject(with: data, options: [])) as? [String:AnyObject] else{
-                return
-            }
-            object_data = DataObject(JSON: json)
+            object_data = DataObject(JSONString: stringData)
         }
     }
     

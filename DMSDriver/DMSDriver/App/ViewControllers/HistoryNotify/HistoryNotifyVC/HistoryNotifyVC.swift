@@ -238,8 +238,12 @@ extension HistoryNotifyVC{
             self?.tbvContent?.endRefreshControl()
             switch result {
             case .object(let obj):
-                self?.arrContent = obj.data?.data ?? []
                 self?.data = obj.data
+                if self?.arrContent.count > 0 {
+                    self?.arrContent.append(obj.data?.data ?? [])
+                }else {
+                    self?.arrContent = obj.data?.data ?? []
+                }
                 self?.tbvContent?.reloadData()
                 self?.filterModel?.page = (self?.filterModel?.page ?? 0) + 1
                 

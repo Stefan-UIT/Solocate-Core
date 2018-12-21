@@ -39,22 +39,22 @@ class MainVC: BaseViewController {
     }
   
     func setupSideMenu() {
-      
-      let slideMenu: SlideMenuVC = .loadSB(SB: .Main)
-      
-      let slideMenuNC = UISideMenuNavigationController(rootViewController: slideMenu)
-      
-      slideMenuNC.navigationBar.isHidden = true
-      SideMenuManager.default.menuPresentMode = .viewSlideOut
-      SideMenuManager.default.menuFadeStatusBar = false
-      SideMenuManager.default.menuAnimationTransformScaleFactor = 0.95
-        
+        let slideMenu: SlideMenuVC = .loadSB(SB: .Main)
+        let slideMenuNC = UISideMenuNavigationController(rootViewController: slideMenu)
+
+        slideMenuNC.navigationBar.isHidden = true
+        SideMenuManager.default.menuPresentMode = .viewSlideOut
+        SideMenuManager.default.menuFadeStatusBar = false
+        SideMenuManager.default.menuAnimationTransformScaleFactor = 0.95
+        if let viewR = rootNV?.view {
+            SideMenuManager.default.menuAddPanGestureToPresent(toView: viewR)
+        }
+
         if Constants.isLeftToRight {
             SideMenuManager.default.menuLeftNavigationController = slideMenuNC
         }else {
             SideMenuManager.default.menuRightNavigationController = slideMenuNC
         }
-      
     }
     
     func pushRouteListVC() {
@@ -62,7 +62,7 @@ class MainVC: BaseViewController {
         rootNV?.setViewControllers([vc], animated: false)
     }
     
-    func refetchDataRouteOrTaskList()  {
+    func refetchDataRouteOrTaskListOrHistoryNotify()  {
         rootNV?.viewControllers.forEach({ (viewController) in
             if ((viewController as? RouteListVC) != nil) {
                 (viewController as? RouteListVC)?.fetchData()
@@ -71,6 +71,9 @@ class MainVC: BaseViewController {
                 (viewController as? TaskListVC)?.getListTask(isFetch: true)
                 return
 
+            }else if (((viewController as? HistoryNotifyVC) != nil)){
+                (viewController as? HistoryNotifyVC)?.fetchData(showLoading: false)
+                return
             }
         })
     }

@@ -8,6 +8,7 @@
 
 import UIKit
 import SVProgressHUD
+import FDFullscreenPopGesture
 
 enum TapFilterOrderList:Int {
     case All = 0
@@ -67,6 +68,7 @@ class OrderListViewController: BaseViewController {
         super.viewDidLoad()
         updateArrDropDownMenu()
         updateUI()
+        self.fd_prefersNavigationBarHidden = true;
     }
 
   

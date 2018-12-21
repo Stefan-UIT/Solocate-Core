@@ -131,7 +131,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
     //Handle User tap notification messages while app is in the foreground.
-  func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
         // Handle Tap
         if let userInfo = response.notification.request.content.userInfo as? [String: Any]{
             print("==>Did Receive Response: \(userInfo)")
@@ -144,20 +144,32 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                     self.reloadOrPushScreenTaskDetailVC(task)
                     
                 case .ROUTE:
-                    
                     let route = Route()
                     route.id = noti.object_data?.object_id ?? -1
                     self.reloadOrPushScreenRouteDetail(route)
                     
                 case .ROUTE_LIST:
                     break
+                    
+                case .ALERT_RESOLVE:
+                    reloadOrPushScreenHistoryNotificationVC()
                 }
             }
         }
     
         completionHandler()
-  }
+    }
     
+    func reloadOrPushScreenHistoryNotificationVC() {
+        let lastVC = App().mainVC?.rootNV?.viewControllers.last
+        if lastVC is TaskDetailVC{
+            (lastVC as? HistoryNotifyVC)?.fetchData(showLoading: false)
+            
+        }else{
+            let vc:HistoryNotifyVC = .loadSB(SB: .Notification)
+            App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
+        }
+    }
     
     func reloadOrPushScreenTaskDetailVC(_ task: TaskModel) {
         let lastVC = App().mainVC?.rootNV?.viewControllers.last
@@ -189,7 +201,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     //With swizzling disabled you must let Messaging know about the message, for Analytics
     //Messaging.messaging().appDidReceiveMessage(notification.request.content.userInfo)
     
-    App().mainVC?.refetchDataRouteOrTaskList()
+    App().mainVC?.refetchDataRouteOrTaskListOrHistoryNotify()
     completionHandler([.alert,.badge,.sound])
   }
 }
