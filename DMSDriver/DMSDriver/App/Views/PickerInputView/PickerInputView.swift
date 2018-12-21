@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FDFullscreenPopGesture
 
 enum PickerInputViewType:Int {
     case PickerInputTextView = 0
@@ -257,6 +258,8 @@ extension PickerInputView{
         vc.placeHolderInputText = placeHolder
         vc.titleHeaderAttach = titleAttach
         vc.oldText = currentText
+        vc.fd_prefersNavigationBarHidden = true
+        vc.navigationController?.fd_viewControllerBasedNavigationBarAppearanceEnabled = false
         let nv = BaseNV.init(rootViewController: vc)
         nv.isNavigationBarHidden = true
         nv.view.backgroundColor = UIColor.black.withAlphaComponent(0.5);
