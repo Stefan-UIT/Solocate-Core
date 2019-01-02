@@ -52,7 +52,9 @@ class HistoryNotifyDetailVC: BaseViewController {
     
     override func updateUI()  {
         super.updateUI()
-        updateActionView()
+        DispatchQueue.main.async {[weak self] in
+            self?.updateActionView()
+        }
     }
     
     override func updateNavigationBar() {
@@ -79,8 +81,8 @@ class HistoryNotifyDetailVC: BaseViewController {
     }
     
     func initVar()  {
-        arrTitleHeader = ["INFORMATION".localized,
-                          "COMMENT".localized]
+        arrTitleHeader = ["Information".localized.uppercased(),
+                          "Comments".localized.uppercased()]
         
         setupDataDetailInforRows()
     }
@@ -119,8 +121,9 @@ class HistoryNotifyDetailVC: BaseViewController {
     //MARK: - ACTION
     @IBAction func onbtnClickActionButton(btn:UIButton){
         PickerInputView.showInputViewWith(type: .PickerInputTextView,
-                                          atVC: self, title: "Resolve alert",
-                                          placeHolder: "Comment...") {[weak self] (success, content,_)  in
+                                          atVC: self,
+                                          title: "Resolve alert".localized,
+                                          placeHolder: "Comment".localized) {[weak self] (success, content,_)  in
                                             self?.alertDetail.comment = content
                                             guard let alert = self?.alertDetail else {return}
                                             self?.resolveAlert(alert: alert)
