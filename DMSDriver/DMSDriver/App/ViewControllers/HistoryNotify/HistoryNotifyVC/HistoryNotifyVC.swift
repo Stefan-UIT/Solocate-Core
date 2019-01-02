@@ -25,6 +25,9 @@ class HistoryNotifyVC: BaseViewController {
     var filterModel:AlertFilterModel?
     var dateStringFilter:String = Date.now.toString("dd/MM/yyyy")
     
+    fileprivate let identifierLoadMoreCell = "LoadMoreCell"
+    fileprivate let identifierHistoryNotifyCell = "HistoryNotifyCell"
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,6 +57,8 @@ class HistoryNotifyVC: BaseViewController {
         tbvContent?.delegate = self
         tbvContent?.dataSource = self
         tbvContent?.addRefreshControl(self, action: #selector(onPullRefresh))
+        tbvContent?.register(UINib.init(nibName: ClassName(LoadMoreCell()), bundle: nil),
+                             forCellReuseIdentifier: identifierLoadMoreCell)
     }
     
     override func didReceiveMemoryWarning() {
@@ -62,7 +67,9 @@ class HistoryNotifyVC: BaseViewController {
     }
     
     @objc func onPullRefresh() {
-        getAllMyHistoryNotifications()
+        filterModel?.page = 1
+        data = nil
+        fetchData(showLoading: false)
     }
     
     @IBAction func onTapRemoveAllNotify(btn:UIButton){
@@ -87,7 +94,7 @@ extension HistoryNotifyVC:UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return arrContent.count + 1 // 1 is row load more
+        return arrContent.count + 1 // +1 is row load more
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -108,10 +115,13 @@ extension HistoryNotifyVC:UITableViewDataSource, UITableViewDelegate{
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if indexPath.row == arrContent.count  { // load more cell
-            return LoadMoreView.loadingMoreCell()
+            let cell = tableView.dequeueReusableCell(withIdentifier: identifierLoadMoreCell,
+                                                     for: indexPath)
+            return cell
         }
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HistoryNotifyCell", for: indexPath) as! HistoryNotifyCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: identifierHistoryNotifyCell,
+                                                 for: indexPath) as! HistoryNotifyCell
         let dto = arrContent[indexPath.row]
         let notifyDate = ServerDateFormater.date(from: E(dto.created_at))
         //cell.imvIcon?.image = dto.icon;
@@ -128,14 +138,15 @@ extension HistoryNotifyVC:UITableViewDataSource, UITableViewDelegate{
     
     //Loading More
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == arrContent.count { // row loadMore
-            if data?.meta?.total != arrContent.count &&
+        if indexPath.row == arrContent.count {
+            if data?.meta?.total > arrContent.count &&
                 arrContent.count > 0{
                 fetchData(showLoading: true)
             }
         }
     }
     
+    /*
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
@@ -145,6 +156,8 @@ extension HistoryNotifyVC:UITableViewDataSource, UITableViewDelegate{
             self.onPullRefresh()
         }
     }
+     */
+
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let alert = arrContent[indexPath.row]
@@ -239,11 +252,15 @@ extension HistoryNotifyVC{
             switch result {
             case .object(let obj):
                 self?.data = obj.data
-                if self?.arrContent.count > 0 {
-                    self?.arrContent.append(obj.data?.data ?? [])
-                }else {
+                if self?.filterModel?.page == 1 {
                     self?.arrContent = obj.data?.data ?? []
+                }else {
+                    self?.arrContent.append(obj.data?.data ?? [])
                 }
+                self?.arrContent.sort(by: { (item1, item2) -> Bool in
+                    return item2.status > item1.status
+                })
+                
                 self?.tbvContent?.reloadData()
                 self?.filterModel?.page = (self?.filterModel?.page ?? 0) + 1
                 

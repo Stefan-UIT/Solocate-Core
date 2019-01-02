@@ -123,8 +123,8 @@ extension BaseViewController:APISocketDelegate{
     func didReceiveError(data: String) {
         if SocketConstants.messangeNeedRelogines.contains(data) {
             App().reLogin()
+            self.showAlertView(data)
         }
-        self.showAlertView(data)
     }
     
     func didReceiveResultLogin(data: Any) {

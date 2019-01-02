@@ -51,6 +51,8 @@ class SocketService {
     }
     
     func connect(token: String) {
+        clearAllHandle()
+        
         let config = SocketIOClientConfiguration(arrayLiteral: .connectParams([DataKey.token: token]),
                                                  .handleQueue(handleQueue),
                                                  .log(SocketConfiguration.log),
@@ -61,8 +63,6 @@ class SocketService {
                                                  .reconnectAttempts(SocketConfiguration.reconnectAttemp),
                                                  .reconnectWait(SocketConfiguration.reconnectWait))
         manager.config = config
-        
-        defaultSocket.off(clientEvent: .connect)
         defaultSocket.connect()
         setup()
     }
@@ -71,7 +71,23 @@ class SocketService {
         return manager.socket(forNamespace: namespace.rawValue)
     }
     
+    func clearAllHandle() {
+        clearAllHandle(defaultSocket)
+        clearAllHandle(socketWithNamespace(.login))
+    }
+    
+    func clearAllHandle(_ socket:SocketIOClient) {
+        socket.off(clientEvent: .connect)
+        socket.off(clientEvent: .disconnect)
+        socket.off(clientEvent: .error)
+        socket.off(clientEvent: .reconnect)
+        socket.off(SocketConstants.SOCKET_RESULT_LOGIN)
+        socket.off(SocketConstants.SOCKET_ERROR)
+        socket.off(SocketConstants.SOCKET_PACKET)
+    }
+    
     func disconnect() {
+        clearAllHandle()
         manager.disconnectSocket(forNamespace: NamespaceSocket.login.rawValue)
         manager.disconnect()
     }

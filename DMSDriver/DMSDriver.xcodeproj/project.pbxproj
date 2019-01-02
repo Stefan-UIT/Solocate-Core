@@ -224,6 +224,8 @@
 		3BEAB8692142609C0039CFBB /* CoreUrlFile+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEAB8682142609C0039CFBB /* CoreUrlFile+Ext.swift */; };
 		3BEAB86B214260B40039CFBB /* CoreReason+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEAB86A214260B40039CFBB /* CoreReason+Ext.swift */; };
 		3BEAB86D214260CD0039CFBB /* CoreAttachFile+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BEAB86C214260CD0039CFBB /* CoreAttachFile+Ext.swift */; };
+		3BF026B921DCA8DD0029A652 /* LoadMoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF026B721DCA8DD0029A652 /* LoadMoreCell.swift */; };
+		3BF026BA21DCA8DD0029A652 /* LoadMoreCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BF026B821DCA8DD0029A652 /* LoadMoreCell.xib */; };
 		3BF838CF218957EA0056C4F1 /* ScrollMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BF838CE218957EA0056C4F1 /* ScrollMenuView.xib */; };
 		3BF838D22189589A0056C4F1 /* BaseScrollMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF838D12189589A0056C4F1 /* BaseScrollMenuView.swift */; };
 		3BF838D42189605A0056C4F1 /* Pods_DMSDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BF838D32189605A0056C4F1 /* Pods_DMSDriver.framework */; };
@@ -643,6 +645,8 @@
 		3BEAB8682142609C0039CFBB /* CoreUrlFile+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreUrlFile+Ext.swift"; sourceTree = "<group>"; };
 		3BEAB86A214260B40039CFBB /* CoreReason+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreReason+Ext.swift"; sourceTree = "<group>"; };
 		3BEAB86C214260CD0039CFBB /* CoreAttachFile+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreAttachFile+Ext.swift"; sourceTree = "<group>"; };
+		3BF026B721DCA8DD0029A652 /* LoadMoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadMoreCell.swift; sourceTree = "<group>"; };
+		3BF026B821DCA8DD0029A652 /* LoadMoreCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoadMoreCell.xib; sourceTree = "<group>"; };
 		3BF838CE218957EA0056C4F1 /* ScrollMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollMenuView.xib; sourceTree = "<group>"; };
 		3BF838D12189589A0056C4F1 /* BaseScrollMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScrollMenuView.swift; sourceTree = "<group>"; };
 		3BF838D32189605A0056C4F1 /* Pods_DMSDriver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_DMSDriver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -1771,6 +1775,8 @@
 			isa = PBXGroup;
 			children = (
 				3B75551521CB741700439FC2 /* LoadMoreView.swift */,
+				3BF026B721DCA8DD0029A652 /* LoadMoreCell.swift */,
+				3BF026B821DCA8DD0029A652 /* LoadMoreCell.xib */,
 			);
 			path = LoadMoreView;
 			sourceTree = "<group>";
@@ -2355,6 +2361,7 @@
 				3B66B852210B113D000BDFEF /* AppStore.xcconfig in Resources */,
 				3B1BFC2C2186FD6C00464DBA /* InfoPlist.strings in Resources */,
 				3B66B851210B113D000BDFEF /* Adhoc.xcconfig in Resources */,
+				3BF026BA21DCA8DD0029A652 /* LoadMoreCell.xib in Resources */,
 				3B66B924210B1149000BDFEF /* ChangeInviromentTableViewCell.xib in Resources */,
 				3B95AD9021B4E76900CC539A /* GoogleService-Info.plist in Resources */,
 				3B0035F8216C614D0032519D /* TextViewInput.xib in Resources */,
@@ -2598,6 +2605,7 @@
 				3B66B836210B113D000BDFEF /* DatePickerViewController.swift in Sources */,
 				3B44C03721BE0B48008F070D /* LocationTracker.swift in Sources */,
 				3B9A37622123D5C1004D881C /* PickerTypeListCell.swift in Sources */,
+				3BF026B921DCA8DD0029A652 /* LoadMoreCell.swift in Sources */,
 				3BC053E42180179D001B7D89 /* ReasonListCell.swift in Sources */,
 				3B66B84F210B113D000BDFEF /* BaseAPIService.swift in Sources */,
 				3B66B8DF210B1149000BDFEF /* AlertModel.swift in Sources */,
@@ -2809,7 +2817,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.dms.gadot.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-dms-gadot";
+				PROVISIONING_PROFILE_SPECIFIER = "staging-dms-gadot";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/macintoshhd/PROJECT_SELDAT/DMS/dms-gadot/DMSDriver/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 4.0;
@@ -2989,7 +2997,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.dms.gadot.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-dms-gadot";
+				PROVISIONING_PROFILE_SPECIFIER = "staging-dms-gadot";
 				SWIFT_OBJC_BRIDGING_HEADER = "/Users/macintoshhd/PROJECT_SELDAT/DMS/dms-gadot/DMSDriver/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 4.0;

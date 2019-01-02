@@ -47,7 +47,7 @@ class MainVC: BaseViewController {
         SideMenuManager.default.menuFadeStatusBar = false
         SideMenuManager.default.menuAnimationTransformScaleFactor = 0.95
         if let viewR = rootNV?.view {
-            SideMenuManager.default.menuAddPanGestureToPresent(toView: viewR)
+            //SideMenuManager.default.menuAddPanGestureToPresent(toView: viewR)
         }
 
         if Constants.isLeftToRight {

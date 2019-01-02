@@ -50,11 +50,11 @@ extension SocketService {
     }
     
     func logout(_ id:Int, _ role:String) {
-        let loginNamespaceSocket = manager.socket(forNamespace: NamespaceSocket.login.rawValue)
         let data = ["id":id,"role":role] as [String:Any]
-        loginNamespaceSocket.emit(SocketConstants.SOCKET_LOGOUT, data)
-
         print("======>\(SocketConstants.SOCKET_LOGOUT):\(data)<=======")
+
+        let loginNamespaceSocket = manager.socket(forNamespace: NamespaceSocket.login.rawValue)
+        loginNamespaceSocket.emit(SocketConstants.SOCKET_LOGOUT, data)
     }
 }
 

@@ -259,8 +259,8 @@ extension AppDelegate {
         invalidTimer()
         let vc: LoginViewController = .loadSB(SB: .Login)
         window?.rootViewController = vc
-        
-        if SERVICES().socket.defaultSocket.status == .connected{
+        let loginSocket = SERVICES().socket.socketWithNamespace(.login)
+        if loginSocket.status == .connected{
            SERVICES().socket.logout(Caches().user?.userInfo?.id ?? 0,
                                      E(Caches().user?.roles?.first?.name))
         }
@@ -281,6 +281,7 @@ extension AppDelegate {
         if SERVICES().socket.defaultSocket.status != .connected{
             SERVICES().socket.connect(token: E(Caches().user?.token))
         }
+        
         DMSLocationManager.startUpdatingDriverLocationIfNeeded()
         ReachabilityManager.startMonitoring()
         ReachabilityManager.updateAllRequestToServer()
