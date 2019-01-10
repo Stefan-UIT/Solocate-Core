@@ -68,6 +68,6 @@ extension UIButton {
         self.setTitleColor(AppColor.redColor, for: .normal)
         self.layer.borderWidth = 1
         self.layer.borderColor = AppColor.redColor.cgColor
-        self.setTitle("Cancel".localized, for: .normal)
+        self.setTitle("cancel".localized, for: .normal)
     }
 }

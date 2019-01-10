@@ -179,8 +179,8 @@ extension HistoryNotifyVC:HistoryNotifyCellDelegate{
         }
         let alert = arrContent[indexPath.row]
         PickerInputView.showInputViewWith(type: .PickerInputTextView,
-                                          atVC: self, title: "Resolve alert",
-                                          placeHolder: "Comment...") {[weak self] (success, content,_)  in
+                                          atVC: self, title: "Resolve alert".localized,
+                                          placeHolder: "Comment...".localized) {[weak self] (success, content,_)  in
                                             alert.comment = content
                                             self?.resolveAlert(alert: alert)
         }

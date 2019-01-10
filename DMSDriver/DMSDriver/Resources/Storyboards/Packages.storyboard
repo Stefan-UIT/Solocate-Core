@@ -218,6 +218,7 @@
                                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                         <real key="value" value="40"/>
                                                     </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="cancel"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="onbtnClickCancelWithBtn:" destination="Vco-Kw-Kvn" eventType="touchUpInside" id="QBg-Dm-GCm"/>

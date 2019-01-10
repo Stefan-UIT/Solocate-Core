@@ -103,6 +103,7 @@
 "Driver"="נהג";
 "Pick driver"="שיוך ל-";
 "Filter orders by"="סינון הזמנות לפי";
+"OrderID-%d"="מספר הזמנה-%d";
 
 //ODER_DETAIL
 "Order Detail"="פרטי הזמנה";
@@ -124,7 +125,7 @@
 "SEQ"="SEQ";
 "Pallets"="Pallets";//new
 "Cases"="Cases";//new
-"Contact Name"="שם איש קשר";
+"Contact name"="שם איש קשר";
 "Phone"="טלפון";
 "Address"="כתובת";
 "Email"="דוא''ל";
@@ -195,6 +196,14 @@
 "Apartment"="דירה";
 "Entrance"="כניסה";
 "Floor"="קומה";
+"Nature of goods"="מטען";
+"Contact phone"="טלפון איש קשר";
+"From address"="מכתובת";
+"To address"="עד כתובת";
+"From"="ממקום";
+"To"="למקום";
+"Name"="שם";
+"Volume"="כמות";
 
 //ORDER_ASSIGNMENT
 "Orders assignment"="שיוך משימות";
@@ -228,6 +237,11 @@
 "You have no route"="אין לך מסלולים כרגע";
 "Route Number"="Route number";//new
 "Routes List"="רשימת מסלולים";
+"Truck"="משאית";
+"Tanker"="מכלית";
+"RouteID-%d"="מספר מסלול-%d";
+"Route ID" ="מספר מסלול";
+
 
 //PICTURE
 "Album Gallery"="בחירה מתוך הגלריה";
@@ -270,15 +284,37 @@
 "Task Status"="סטטוס משימה";
 "Task Information"="מידע על המשימה";
 
-//TIMER
-"Reminder"="Reminder";//new
 
 //ALERT
-"Alerts"="Alerts";
-"Load more..."="Load more...";//new
-"Resolve"="Resolve";//new
-"Alert Detail"="Alert Detail";//new
-"Truck Name"="Truck Name";//new
-"Comment"="Comment";//new
-"Rule ID"="Rule ID";//new
-"Resolve alert"="Resolve alert";//new
+"Alerts"="התראות";
+"Load more..."="טען עוד..";
+"Resolve"="פתירה";
+"Alert Detail"="פרטי התראה";
+"Truck Name"="שם משאית";
+"Comment"="הערה";
+"Comment"="הערה...";
+"Rule ID"="מספר חוק";
+"Resolve alert"="פתירת התראה";
+"%d years ago"="לפני %d שנים";
+"%d months ago"="לפני %d חודשים";
+"%d weeks ago"="לפני %d שבועות";
+"%d days ago"="לפני %d ימים";
+"%d hours ago"="לפני %d שעות";
+"%d minutes ago"="לפני %  דקות";
+"just now"="עכשיו";
+"%d day ago"="לפני d% יום";
+"%d week ago"="לפני שבוע  %d";
+"%d month ago"="%d חודש";
+"%d year ago"="לפני %d שנה";
+
+//ALERT DETAIL
+"Driver Name"= "שם הנהג";
+"Tanker Name"="שם מכלית";
+
+
+//Counter
+"Reminder"="תזכורת";
+"Counter"="מונה";
+"Pause"="הפסקה";
+"Your task has been over."="המשימה שלך נגמרה.";
+"Resume"="קורות חיים";

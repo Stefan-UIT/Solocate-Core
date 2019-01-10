@@ -49,7 +49,7 @@ enum MenuItemType : Int {
     case .TASK:
         return #imageLiteral(resourceName: "Menu_Task")
     case .ALERT:
-        return #imageLiteral(resourceName: "ic_route")
+        return #imageLiteral(resourceName: "ic_notifyBlue")
     case .LOGOUT:
       return #imageLiteral(resourceName: "ic_logout")
     }

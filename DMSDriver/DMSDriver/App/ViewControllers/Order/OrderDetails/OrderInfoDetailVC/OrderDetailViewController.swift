@@ -92,11 +92,11 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     func initVar()  {
-        arrTitleHeader = ["ORDER STATUS".localized,
-                          "FROM".localized,
-                          "TO".localized,
-                          "NATURE OF GOODS".localized,
-                          "INSTRUCTIONS".localized]
+        arrTitleHeader = ["Order Status".localized.uppercased(),
+                          "From".localized.uppercased(),
+                          "To".localized.uppercased(),
+                          "Nature of goods".localized.uppercased(),
+                          "Instructions".localized.uppercased()]
         
         setupDataDetailInforRows()
     }
@@ -116,24 +116,24 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let startDate = DateFormatter.serverDateFormater.date(from: _orderDetail.startTime)
         let endDate = DateFormatter.serverDateFormater.date(from: _orderDetail.endTime)
         let status = StatusOrder(rawValue: _orderDetail.statusCode) ?? StatusOrder.newStatus
-        let statusItem = OrderDetailInforRow("Status",status.statusName)
-        let urgency = OrderDetailInforRow("Urgency" ,isHebewLang() ? _orderDetail.urgent_type_name_hb :  _orderDetail.urgent_type_name_en)
+        let statusItem = OrderDetailInforRow("Status".localized,status.statusName)
+        let urgency = OrderDetailInforRow("Urgency".localized ,isHebewLang() ? _orderDetail.urgent_type_name_hb :  _orderDetail.urgent_type_name_en)
         orderInforStatus.append(statusItem)
         //orderInforStatus.append(urgency)
         
         if  _orderDetail.statusOrder == .cancelStatus {
-            let reason = OrderDetailInforRow("Failure cause",_orderDetail.reason?.name ?? "-")
-            let mess = OrderDetailInforRow("Message",_orderDetail.reason_msg ?? "-")
+            let reason = OrderDetailInforRow("Failure cause".localized,_orderDetail.reason?.name ?? "-")
+            let mess = OrderDetailInforRow("Message".localized,_orderDetail.reason_msg ?? "-")
             orderInforStatus.append(reason)
             orderInforStatus.append(mess)
         }
         
-        let fromAddress = OrderDetailInforRow("From address", E(_orderDetail.from?.address),true)
-        let fromContactName = OrderDetailInforRow("Contact name",_orderDetail.from?.name ?? "-")
-        let fromContactPhone = OrderDetailInforRow("Contact phone",_orderDetail.from?.phone ?? "-",true)
-        let toAddress = OrderDetailInforRow("To address", E(_orderDetail.to?.address),true)
-        let toContactName = OrderDetailInforRow("Contact name",_orderDetail.to?.name ?? "-")
-        let toContactPhone = OrderDetailInforRow("Contact phone",_orderDetail.to?.phone ?? "-", true)
+        let fromAddress = OrderDetailInforRow("From address".localized, E(_orderDetail.from?.address),true)
+        let fromContactName = OrderDetailInforRow("Contact name".localized,_orderDetail.from?.name ?? "-")
+        let fromContactPhone = OrderDetailInforRow("Contact phone".localized,_orderDetail.from?.phone ?? "-",true)
+        let toAddress = OrderDetailInforRow("To address".localized, E(_orderDetail.to?.address),true)
+        let toContactName = OrderDetailInforRow("Contact name".localized,_orderDetail.to?.name ?? "-")
+        let toContactPhone = OrderDetailInforRow("Contact phone".localized,_orderDetail.to?.phone ?? "-", true)
         
         orderInforFrom.append(fromAddress)
         orderInforFrom.append(fromContactName)
@@ -340,7 +340,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
           if let cell = tableView.dequeueReusableCell(withIdentifier: addressCellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
             
             let des = E(orderDetail?.note)
-            let description = OrderDetailInforRow("Instructions",des)
+            let description = OrderDetailInforRow("Instructions".localized,des)
             cell.orderDetailItem = description
             cell.selectionStyle = .none
             cell.vContent?.roundCornersLRB()
@@ -438,7 +438,7 @@ fileprivate extension OrderDetailViewController{
         updateStatusButton?.backgroundColor = AppColor.mainColor
         btnUnable?.backgroundColor = AppColor.white
         btnUnable?.borderWidth = 1;
-        btnUnable?.borderColor = AppColor.redColor
+        btnUnable?.borderColor = AppColor.mainColor
         btnUnable?.setTitleColor(AppColor.mainColor, for: .normal)
         vAction?.isHidden = true
         let driverId = orderDetail?.driver_id
@@ -539,7 +539,7 @@ extension OrderDetailViewController{
                     let totalMinutes = Caches().drivingRule?.data ?? 0
                     LocalNotification.createPushNotificationAfter(totalMinutes * 60,
                                                                   "Reminder".localized,
-                                                                  "Your task has been over.",
+                                                                  "Your task has been over.".localized,
                                                                   "remider.timeout.drivingrole",  [:])
                 }
                 

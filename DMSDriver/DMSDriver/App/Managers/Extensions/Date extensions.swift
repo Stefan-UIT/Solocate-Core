@@ -122,13 +122,22 @@ extension Date {
     }
     
     func offsetLong(from date: Date) -> String {
-        if years(from: date)   > 0 { return years(from: date) > 1 ? "\(years(from: date)) years ago" : "\(years(from: date)) year ago" }
-        if months(from: date)  > 0 { return months(from: date) > 1 ? "\(months(from: date)) months ago" : "\(months(from: date)) month ago" }
-        if weeks(from: date)   > 0 { return weeks(from: date) > 1 ? "\(weeks(from: date)) weeks ago" : "\(weeks(from: date)) week ago"   }
-        if days(from: date)    > 0 { return days(from: date) > 1 ? "\(days(from: date)) days ago" : "\(days(from: date)) day ago" }
-        if hours(from: date)   > 0 { return hours(from: date) > 1 ? "\(hours(from: date)) hours ago" : "\(hours(from: date)) hour ago"   }
-        if minutes(from: date) > 0 { return minutes(from: date) > 1 ? "\(minutes(from: date)) minutes ago" : "\(minutes(from: date)) minute ago" }
-        if seconds(from: date) > 0 { return seconds(from: date) > 1 ? "\(seconds(from: date)) seconds ago" : "\(seconds(from: date)) second ago" }
+        
+        if years(from: date)   > 0 {
+            return years(from: date) > 1 ? String(format: "%d years ago".localized, years(from: date)) : String(format: "%d year ago", years(from: date))}
+        if months(from: date)  > 0 {
+            return months(from: date) > 1 ? String(format: "%d months ago".localized, months(from: date))  : String(format: "%d month ago", months(from: date)) }
+        if weeks(from: date)   > 0 {
+            return weeks(from: date) > 1 ? String(format: "%d weeks ago".localized, weeks(from: date)) : String(format: "%d week ago".localized, weeks(from: date))}
+        if days(from: date)    > 0 {
+            return days(from: date) > 1 ? String(format: "%d days ago".localized, days(from: date)) : String(format: "%d day ago", days(from: date))  }
+        if hours(from: date)   > 0 {
+            return hours(from: date) > 1 ? String(format: "%d hours ago".localized, hours(from: date)) : "an hour ago".localized}
+        if minutes(from: date) > 0 {
+            return minutes(from: date) > 1 ? String(format: "%d minutes ago".localized, minutes(from: date)) : "an minute ago".localized}
+        if seconds(from: date) > 0 {
+            return "just now".localized
+        }
         return ""
     }
     

@@ -100,7 +100,7 @@
 "Driver"="Driver";
 "Pick driver"="Pick driver";
 "Filter orders by"="Filter orders by";
-
+"OrderID-%d"="OrderID-%d";
 //ODER_DETAIL
 "Order Detail"="Order Detail";
 "Delivery number"="Delivery number";
@@ -188,6 +188,14 @@
 "Apartment"="Apartment";
 "Entrance"="Entrance";
 "Floor"="Floor";
+"Nature of goods"="Nature of Goods";
+"Contact phone"="Contact phone";
+"From address"="From address";
+"To address"="To address";
+"From"="From";
+"To"="To";
+"Name"="Name";
+"Volume"="Volume";
 
 
 
@@ -221,6 +229,12 @@
 "Route Number"="Route number";
 "Route List"="Route List";
 "Route" = "Route";
+"Truck" = "Truck";
+"Tanker" = "Tanker";
+"RouteID-%d"="RouteID-%d";
+"Route ID" ="Route ID";
+
+
 
 //PICTURE
 "Album Gallery"="Album Gallery";
@@ -264,10 +278,6 @@
 "Task Status"="Task Status";
 "Task Information"="Task Information";
 
-//TIMER
-"Reminder"="Reminder";
-
-
 //ALERT
 "Alerts"="Alerts";
 "Load more..."="Load more...";
@@ -277,5 +287,34 @@
 "Truck Name"="Truck Name";
 "Tanker Name"="Tanker Name";
 "Comment"="Comment";
+"Comment..."="Comment...";
 "Rule ID"="Rule ID";
 "Resolve alert"="Resolve alert";
+"%d years ago"="%d years ago";
+"%d months ago"="%d months ago";
+"%d weeks ago"="%d weeks ago";
+"%d days ago"="%d days ago";
+"%d hours ago"="%d hours ago";
+"%d minutes ago"="%d minutes ago";
+"%d seconds ago"="%d seconds ago";
+"just now"="just now";
+"an hour ago"="an hour ago";
+"an minute ago"="an minute ago";
+"%d day ago"="%d day ago";
+"%d week ago"="%d week ago";
+"%d month ago"="%d month ago";
+"%d year ago"="%d year ago";
+
+
+//ALERT DETAIL
+"Driver Name"= "Driver name";//new
+"Tanker Name"="שם מכלית";
+
+
+//Counter
+"Reminder"="Reminder";
+"Reminder"="Reminder";
+"Counter"="Counter";
+"Pause"="Pause";
+"Your task has been over."="Your task has been over.";
+"Resume"="Resume";

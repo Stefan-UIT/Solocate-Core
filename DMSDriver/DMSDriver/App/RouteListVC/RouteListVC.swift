@@ -209,7 +209,9 @@ extension RouteListVC: UITableViewDataSource{
         let endTime = DateFormatter.serverDateFormater.date(from: route.end_time)
         let date = DateFormatter.displayDateUS.date(from: route.date)
         
-        cell.lblTitle?.text = "\("Route".localized)ID-\(route.id)"
+        cell.lblTitle?.text =  String(format: "RouteID-%d".localized, route.id)
+        
+        
         cell.lblSubtitle?.text = (date != nil) ? displayDateVN.string(from: date!) : ""
         cell.btnStatus?.setTitle(route.nameStatus, for: .normal)
         cell.btnColor?.backgroundColor = route.colorStatus
@@ -339,7 +341,7 @@ extension RouteListVC:UITableViewDelegate {
                 let totalMinutes = Caches().drivingRule?.data ?? 0
                 LocalNotification.createPushNotificationAfter(totalMinutes * 60,
                                                               "Reminder".localized,
-                                                              "Your task has been over.",
+                                                              "Your task has been over.".localized,
                                                               NotificationName.remiderTimeoutDrivingRole,  [:])
             case .error(let error):
                 self?.showAlertView(E(error.message))
