@@ -18,7 +18,7 @@ class AppConfiguration: NSObject {
     var trackingTimeInterval:Int = 0
     var reloadRouteTimeInterval:Int = 0
     var isUserAutoRefetchRouteList = false
-    var distanceSubmitLocation:Int = 0
+    var distanceSubmitLocation:Double = 0
     
     
     var baseUrl:String = ""
@@ -53,7 +53,7 @@ class AppConfiguration: NSObject {
             self.isUserAutoRefetchRouteList = autoRefetchRouteList
         }
         
-        if let distanceSubmitLocation = config.object(forKey:"DistanceSubmitLocation") as? Int {
+        if let distanceSubmitLocation = config.object(forKey:"DistanceSubmitLocation") as? Double {
             self.distanceSubmitLocation = distanceSubmitLocation
         }
         
