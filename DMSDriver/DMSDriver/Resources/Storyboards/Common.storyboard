@@ -928,25 +928,25 @@
                                                 </constraints>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ctI-o4-lPi">
-                                                <rect key="frame" x="5" y="0.0" width="162.5" height="50"/>
+                                                <rect key="frame" x="5" y="0.0" width="162" height="50"/>
                                                 <fontDescription key="fontDescription" name="MyriadPro-Semibold" family="Myriad Pro" pointSize="17"/>
                                                 <state key="normal" title="Cancel"/>
                                                 <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Cancel"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="cancel"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
                                                     <action selector="onbtnClickCancelWithBtn:" destination="2FH-Vm-Dy1" eventType="touchUpInside" id="8jc-vh-7yZ"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" reversesTitleShadowWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YJK-sq-bxi" customClass="HButton" customModule="DMSDriver" customModuleProvider="target">
-                                                <rect key="frame" x="167.5" y="0.0" width="162.5" height="50"/>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="j3V-3D-hzw">
+                                                <rect key="frame" x="168" y="1" width="162" height="49"/>
                                                 <fontDescription key="fontDescription" name="MyriadPro-Semibold" family="Myriad Pro" pointSize="17"/>
                                                 <state key="normal" title="Submit"/>
                                                 <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Submit"/>
+                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="submit"/>
                                                 </userDefinedRuntimeAttributes>
                                                 <connections>
-                                                    <action selector="onbtnClickDoneWithBtn:" destination="2FH-Vm-Dy1" eventType="touchUpInside" id="qGg-2M-89b"/>
+                                                    <action selector="onbtnClickCancelWithBtn:" destination="2FH-Vm-Dy1" eventType="touchUpInside" id="AJO-Ay-Qow"/>
                                                 </connections>
                                             </button>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SmY-kA-nke">
@@ -960,20 +960,20 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="LbK-dl-zfF" secondAttribute="trailing" id="5fd-wG-IjQ"/>
+                                            <constraint firstItem="j3V-3D-hzw" firstAttribute="top" secondItem="LbK-dl-zfF" secondAttribute="bottom" id="Byz-2D-DgL"/>
                                             <constraint firstItem="SmY-kA-nke" firstAttribute="top" secondItem="ImT-6Z-VyN" secondAttribute="top" id="FZ7-NU-jgf"/>
                                             <constraint firstItem="LbK-dl-zfF" firstAttribute="top" secondItem="ImT-6Z-VyN" secondAttribute="top" id="IvP-cg-GlD"/>
                                             <constraint firstAttribute="bottom" secondItem="SmY-kA-nke" secondAttribute="bottom" id="L9q-MD-hIk"/>
-                                            <constraint firstAttribute="bottom" secondItem="YJK-sq-bxi" secondAttribute="bottom" constant="5" id="LaH-b9-hv5"/>
-                                            <constraint firstItem="YJK-sq-bxi" firstAttribute="width" secondItem="ctI-o4-lPi" secondAttribute="width" id="Mx4-zG-Kye"/>
                                             <constraint firstItem="LbK-dl-zfF" firstAttribute="leading" secondItem="ImT-6Z-VyN" secondAttribute="leading" id="SSo-ST-9aK"/>
                                             <constraint firstItem="ctI-o4-lPi" firstAttribute="top" secondItem="ImT-6Z-VyN" secondAttribute="top" id="URy-xb-fEs"/>
                                             <constraint firstItem="SmY-kA-nke" firstAttribute="centerX" secondItem="ImT-6Z-VyN" secondAttribute="centerX" id="WXd-LP-vI6"/>
-                                            <constraint firstAttribute="trailing" secondItem="YJK-sq-bxi" secondAttribute="trailing" constant="5" id="X1W-q9-OLz"/>
+                                            <constraint firstItem="j3V-3D-hzw" firstAttribute="width" secondItem="ctI-o4-lPi" secondAttribute="width" id="aaU-9a-2hA"/>
                                             <constraint firstItem="ctI-o4-lPi" firstAttribute="leading" secondItem="ImT-6Z-VyN" secondAttribute="leading" constant="5" id="avZ-kg-7HB"/>
+                                            <constraint firstItem="j3V-3D-hzw" firstAttribute="leading" secondItem="SmY-kA-nke" secondAttribute="trailing" id="c7H-Ho-fnT"/>
+                                            <constraint firstAttribute="trailing" secondItem="j3V-3D-hzw" secondAttribute="trailing" constant="5" id="f4c-sY-akV"/>
                                             <constraint firstAttribute="bottom" secondItem="ctI-o4-lPi" secondAttribute="bottom" constant="5" id="ffQ-vb-mr3"/>
                                             <constraint firstAttribute="height" constant="55" id="hYV-f3-0mU"/>
-                                            <constraint firstItem="YJK-sq-bxi" firstAttribute="leading" secondItem="ctI-o4-lPi" secondAttribute="trailing" id="je3-lr-lIc"/>
-                                            <constraint firstItem="YJK-sq-bxi" firstAttribute="top" secondItem="ImT-6Z-VyN" secondAttribute="top" id="qyO-6E-aVm"/>
+                                            <constraint firstAttribute="bottom" secondItem="j3V-3D-hzw" secondAttribute="bottom" constant="5" id="oM4-hF-zOd"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1008,7 +1008,6 @@
                     </view>
                     <connections>
                         <outlet property="btnCancel" destination="ctI-o4-lPi" id="Fbb-7y-0Hs"/>
-                        <outlet property="btnDone" destination="YJK-sq-bxi" id="CCK-6h-Fn5"/>
                         <outlet property="conHeightViewContent" destination="ykG-yX-r0v" id="Hdm-0G-8CX"/>
                         <outlet property="lblTitle" destination="1Lu-iQ-8H8" id="VrP-We-1c7"/>
                         <outlet property="tbvContent" destination="UxA-DD-NVM" id="0OR-Ej-opR"/>

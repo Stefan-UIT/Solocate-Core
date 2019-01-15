@@ -2,6 +2,7 @@
 
 import UIKit
 import ObjectMapper
+import CoreLocation
 
 class Cache: NSObject {
     static let shared = Cache()
@@ -69,6 +70,25 @@ class Cache: NSObject {
             if let dic = getObject(forKey: Defaultkey.SF_DRIVING_RULE) as? ResponseDictionary{
                 let drivingRule = Mapper<DrivingRule>().map(JSON: dic)
                 return drivingRule
+            }
+            
+            return nil
+        }
+    }
+    
+    var lastLocationSubmited:CLLocationCoordinate2D? {
+        set {
+            if let data = newValue {
+                setObject(obj: data, forKey: Defaultkey.SF_SAVE_LOCATION)
+            }else {
+                userDefaults.removeObject(forKey: Defaultkey.SF_SAVE_LOCATION)
+            }
+        }
+        
+        get {
+            
+            if let location = getObject(forKey: Defaultkey.SF_SAVE_LOCATION) as? CLLocationCoordinate2D{
+                return location
             }
             
             return nil

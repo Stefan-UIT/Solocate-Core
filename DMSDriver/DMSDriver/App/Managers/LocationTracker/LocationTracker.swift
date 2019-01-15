@@ -44,6 +44,17 @@ class LocationTracker: NSObject {
         let longitude = userLocation.coordinate.longitude
         let latitude = userLocation.coordinate.latitude
         
+        if let lastLocationSubmited = Caches().lastLocationSubmited {
+            let dist = distance(lat1: lastLocationSubmited.latitude,
+                                lon1: lastLocationSubmited.longitude,
+                                lat2: latitude,
+                                lon2: longitude, unit: "M")
+            
+            if dist < DMSAppConfiguration.distanceSubmitLocation {
+                return
+            }
+        }
+        
         SERVICES().API.getAllRouteInprogess { (result) in
             switch result{
             case .object(let obj):
@@ -52,7 +63,7 @@ class LocationTracker: NSObject {
                                                lat: latitude, routeIds: routeIds) {(result) in
                     }
                 }
-               
+                
             case .error(_ ):
                 break
             }
@@ -78,6 +89,32 @@ class LocationTracker: NSObject {
     
     deinit {
         invalidTimer()
+    }
+    
+    func distance(lat1:Double, lon1:Double, lat2:Double, lon2:Double, unit:String) -> Double {
+        let theta = lon1 - lon2
+        var dist = sin(deg2rad(lat1)) * sin(deg2rad(lat2)) + cos(deg2rad(lat1)) * cos(deg2rad(lat2)) * cos(deg2rad(theta))
+        dist = acos(dist)
+        dist = rad2deg(dist)
+        dist = dist * 60 * 1.1515 // "Miles"
+        if (unit == "K") { // "Kilometers"
+            dist = dist * 1.609344
+        }
+        else if (unit == "N") {//Nautical Miles
+            dist = dist * 0.8684
+        }
+        return dist
+    }
+    
+    func deg2rad(_ deg:Double) -> Double {
+        return deg * .pi / 180
+    }
+    
+    ///////////////////////////////////////////////////////////////////////
+    ///  This function converts radians to decimal degrees              ///
+    ///////////////////////////////////////////////////////////////////////
+    func rad2deg(_ rad:Double) -> Double {
+        return rad * 180.0 / .pi
     }
 }
 
