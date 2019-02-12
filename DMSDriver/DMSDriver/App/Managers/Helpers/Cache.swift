@@ -79,16 +79,19 @@ class Cache: NSObject {
     var lastLocationSubmited:CLLocationCoordinate2D? {
         set {
             if let data = newValue {
-                setObject(obj: data, forKey: Defaultkey.SF_SAVE_LOCATION)
+                let dicLocation = ["lat":data.latitude,"long":data.longitude]
+                setObject(obj:dicLocation, forKey: Defaultkey.SF_SAVE_LOCATION)
+                
             }else {
                 userDefaults.removeObject(forKey: Defaultkey.SF_SAVE_LOCATION)
             }
         }
         
         get {
-            
-            if let location = getObject(forKey: Defaultkey.SF_SAVE_LOCATION) as? CLLocationCoordinate2D{
-                return location
+            if let location = getObject(forKey: Defaultkey.SF_SAVE_LOCATION) as? Dictionary<String, Double>,
+                let lat = location["lat"],
+                let log = location["long"]{
+                return CLLocationCoordinate2D(latitude: lat, longitude: log)
             }
             
             return nil

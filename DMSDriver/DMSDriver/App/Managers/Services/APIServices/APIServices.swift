@@ -105,6 +105,7 @@ extension BaseAPIService {
     func updateDriverLocation(long :Double, lat:Double,routeIds:[Int], callback: @escaping APICallback<Route>) -> APIRequest {
         let driverID = Caches().user?.userInfo?.id ?? -1
         let driverName = Caches().user?.userInfo?.userName ?? ""
+        Caches().lastLocationSubmited = CLLocationCoordinate2D(latitude: lat, longitude: long)
 
         let timestamps = __int64_t(Date().timeIntervalSince1970)
         let params = [
