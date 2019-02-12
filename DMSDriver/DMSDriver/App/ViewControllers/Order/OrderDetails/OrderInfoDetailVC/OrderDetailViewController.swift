@@ -530,7 +530,7 @@ extension OrderDetailViewController{
                 self?.updateButtonStatus()
                 self?.tableView?.reloadData()
                 self?.didUpdateStatus?(_orderDetail,(statusCode == "IP" &&
-                                                    _orderDetail.url?.sig == nil &&
+                                                    _orderDetail.signature == nil &&
                                                     _orderDetail.isRequireSign()) ? 1 : nil)
                 // Save Date Start route
                 if statusCode == StatusOrder.inProcessStatus.rawValue &&

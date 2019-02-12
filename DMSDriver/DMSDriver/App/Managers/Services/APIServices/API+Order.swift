@@ -42,12 +42,14 @@ extension BaseAPIService{
                            callback: callback);
         }else{
             //Save request to local DB
+            /*
             let data = parseJson(params)
             let request =  RequestModel.init(ParamsMethod.PUT.rawValue,
                                              E(RESTConstants.getBASEURL()),
                                              path,
                                              data)
             CoreDataManager.saveRequest(request)
+             */
             return nil
         }
     }

@@ -67,7 +67,7 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
     
     override func updateIndicator(for viewController: PagerTabStripViewController, fromIndex: Int, toIndex: Int) {
         super.updateIndicator(for: viewController, fromIndex: fromIndex, toIndex: toIndex)
-        containerView.isScrollEnabled = !((self.orderDetail?.url?.sig == nil) &&
+        containerView.isScrollEnabled = !((self.orderDetail?.signature == nil) &&
                                         (fromIndex == 1)) // 1 is tap signature
         
     }

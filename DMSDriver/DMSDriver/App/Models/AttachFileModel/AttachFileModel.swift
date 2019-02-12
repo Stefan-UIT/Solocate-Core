@@ -21,6 +21,8 @@ class AttachFileModel: BaseModel {
     var type:String?
     var url:String?
     var param:String?
+    var typeFile:String?
+    var url_thumbnail:String?
     
     var urlS3:String{
         get{
@@ -36,6 +38,8 @@ class AttachFileModel: BaseModel {
         id <- map["id"]
         name <- map["name"]
         url <- map["url"]
+        typeFile <- map["type"]
+        url_thumbnail <- map["url_thumbnail"]
     }
   
   

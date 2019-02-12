@@ -35,14 +35,13 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
     }
     
     func initData()  {
-        attachFiles = orderDetail?.url?.doc ?? []
+        attachFiles = orderDetail?.pictures ?? []
     }
     
     func upateUI() {
         if let _orderDetail = orderDetail {
-            let isAlreadyUploadedPictures = _orderDetail.url?.doc?.count > 0
+            let isAlreadyUploadedPictures = _orderDetail.pictures?.count > 0
             vNoImage?.isHidden = isAlreadyUploadedPictures
-            vNoImage?.isHidden = (_orderDetail.url?.doc?.count > 0)
             btnShowImage.setTitle("\("Order Id".localized) - \(_orderDetail.id)(\(attachFiles.count) \("items".localized))", for: .normal)
             actionButton.isHidden  = (_orderDetail.statusOrder == StatusOrder.deliveryStatus)
         }
@@ -67,6 +66,7 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
                         file.name = E(_data[i].originalFilename)
                         file.type = ".png"
                         file.mimeType = "image/png"
+                        file.typeFile = "DOC"
                         file.contentFile = data
                         file.param = "file_pod_req[\(i)]"
                         arrAttachfile.append(file)
@@ -78,10 +78,10 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
                 
                 if arrAttachfile.count > 0{
                     if !self.hasNetworkConnection{
-                        if self.orderDetail?.url == nil{
-                            self.orderDetail?.url = UrlFileMoldel()
+                        if self.orderDetail?.files == nil{
+                            self.orderDetail?.files = []
                         }
-                        self.orderDetail?.url?.doc?.append(arrAttachfile)
+                        self.orderDetail?.files?.append(arrAttachfile)
                         CoreDataManager.updateOrderDetail(self.orderDetail!)
                         self.updateOrderDetail?(self.orderDetail)
                         self.initData()
@@ -99,11 +99,13 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
                     file.mimeType = "image/png"
                     file.contentFile = data
                     file.param = "file_pod_req[0]"
+                    file.typeFile = "DOC"
+                    
                     if !self.hasNetworkConnection{
-                        if self.orderDetail?.url == nil{
-                            self.orderDetail?.url = UrlFileMoldel()
+                        if self.orderDetail?.files == nil{
+                            self.orderDetail?.files = []
                         }
-                        self.orderDetail?.url?.doc?.append(file)
+                        self.orderDetail?.files?.append(file)
                         CoreDataManager.updateOrderDetail(self.orderDetail!, { (success, coreRoute) in
                             self.updateOrderDetail?(self.orderDetail)
                         })
@@ -153,23 +155,6 @@ fileprivate extension OrderPictureViewController {
             case .error(let error):
                 self?.showAlertView(error.getMessage())
             }
-        }
-    }
-    
-    func uploadImage(_ image:UIImage, title:String) {
-        if let data = UIImageJPEGRepresentation(image, 1.0) {
-            
-            let signatureFile: AttachFileModel = AttachFileModel()
-            signatureFile.name = title
-            signatureFile.type = ".png"
-            signatureFile.mimeType = "image/png"
-            signatureFile.contentFile = data
-            
-            self.upateUI()
-            submitPicture(signatureFile)
-            
-        }else {
-            print("encode failure")
         }
     }
     

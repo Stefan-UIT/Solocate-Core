@@ -79,7 +79,7 @@ class OrderListViewController: BaseViewController {
                 getRouteDetail("\(route.id)")
             }
         }else{
-            getDataFromLocalDB()
+            //getDataFromLocalDB()
         }
     }
   
@@ -95,7 +95,7 @@ class OrderListViewController: BaseViewController {
                 getRouteDetail("\(route.id)")
             }
         }else{
-            getDataFromLocalDB()
+            //getDataFromLocalDB()
         }
     }
     
@@ -236,10 +236,10 @@ extension OrderListViewController{
                 self?.route = obj.data
                 self?.updateUI()
                 self?.clvContent?.reloadData()
-                
+                /*
                 guard let data = obj.data else {return}
                 CoreDataManager.updateRoute(data) // Update route to DB local
-                
+                */
             case .error(let error):
                 strongSelf.showAlertView(error.getMessage())
                 

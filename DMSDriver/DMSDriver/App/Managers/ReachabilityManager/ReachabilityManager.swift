@@ -49,7 +49,7 @@ class _ReachabilityManager: NSObject {
         if isNetworkAvailable &&
             reachabilityStatus != curentReachabilityStatus {
             DMSLocationManager.startUpdatingDriverLocationIfNeeded()
-            updateAllRequestToServer()
+            //updateAllRequestToServer()
         }else{
             DMSLocationManager.invalidTimer()
         }

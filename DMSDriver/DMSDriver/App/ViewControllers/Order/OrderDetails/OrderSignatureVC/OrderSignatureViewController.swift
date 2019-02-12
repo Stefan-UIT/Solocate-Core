@@ -94,14 +94,15 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
             let signatureFile: AttachFileModel = AttachFileModel()
             signatureFile.name = "Signature_\(orderDetail?.id ?? 0)"
             signatureFile.type = ".png"
+            signatureFile.typeFile = "SIG"
             signatureFile.mimeType = "image/png"
             signatureFile.contentFile = data
             signatureFile.param = "file_sig_req"
             
-            if orderDetail?.url == nil {
-                orderDetail?.url = UrlFileMoldel()
+            if orderDetail?.files == nil {
+                orderDetail?.files = []
             }
-            orderDetail?.url?.sig = signatureFile
+            orderDetail?.files?.append(signatureFile)
             
             if !hasNetworkConnection{
                 CoreDataManager.updateOrderDetail(orderDetail!) { (success, data) in
@@ -125,7 +126,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
   
     func setupSignatureView()  {
         guard let order = self.orderDetail else { return }
-        guard let signFile:AttachFileModel = order.url?.sig else {
+        guard let signFile:AttachFileModel = order.signature else {
             // Fix  for https://seldat.atlassian.net/browse/GADOT-176
             self.controlsContainerView?.isHidden = (orderDetail?.statusOrder == StatusOrder.deliveryStatus)
             self.signatureImgView?.isHidden = !(orderDetail?.statusOrder == StatusOrder.deliveryStatus)

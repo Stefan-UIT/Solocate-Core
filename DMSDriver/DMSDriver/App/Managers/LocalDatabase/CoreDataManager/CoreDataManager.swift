@@ -381,16 +381,16 @@ class _CoreDataManager {
             // Set List Attribute
             coreOrder.setAttribiteFrom(order)
             coreOrder.driver_id = Int16(route.driverId)
-            if order.url != nil{
+            if order.files != nil{
                 let coreUrl:CoreUrlFile = CoreUrlFile(entity: urlDB!, insertInto: context)
-                if let sig = order.url?.sig {
+                if let sig = order.signature{
                     let coreSig = createRecordForEntity(Entity.AttachFile.rawValue,
                                                         inManagedObjectContext: context) as? CoreAttachFile
                     coreSig?.setAttributeFrom(sig)
                     coreUrl.sig = coreSig
                 }
                 
-                if let docs = order.url?.doc {
+                if let docs = order.pictures {
                     docs.forEach({ (doc) in
                         let coreDoc = createRecordForEntity(Entity.AttachFile.rawValue, inManagedObjectContext: context) as? CoreAttachFile
                         coreDoc?.setAttributeFrom(doc)
@@ -519,21 +519,21 @@ class _CoreDataManager {
             reaults?.forEach { (coreOrder) in
                 if coreOrder.id == orderDetail.id {
                     coreOrder.setAttribiteFrom(orderDetail)
-                    if let url = orderDetail.url{
+                    if let _ = orderDetail.files{
                         
                         coreOrder.url?.sig = nil
                         coreOrder.url?.doc = nil
                         
                         let coreUrl = self.createRecordForEntity(Entity.UrlFile.rawValue,
                                                             inManagedObjectContext: context) as? CoreUrlFile
-                        if let sig = url.sig {
+                        if let sig = orderDetail.signature {
                             self.deleteAttachFileById(sig.id, context: context)
                             let coreSig = self.createRecordForEntity(Entity.AttachFile.rawValue,inManagedObjectContext: context) as? CoreAttachFile
                             coreSig?.setAttributeFrom(sig)
                             coreUrl?.sig = coreSig
                         }
                         
-                        if let docs = url.doc {
+                        if let docs = orderDetail.pictures {
                             docs.forEach({ (doc) in
                                 var coreDoc :CoreAttachFile? = self.queryCoreAttachfileBy(doc.id, context: context)
                                 if coreDoc == nil || doc.id == 0{

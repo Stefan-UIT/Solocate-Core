@@ -59,8 +59,9 @@ class RouteListVC: BaseViewController {
                 enableAutoRefetchRouteList()
             }
             getDataFromServer()
+            
         }else{
-            getDataFromDBLocal(dateStringFilter)
+            //getDataFromDBLocal(dateStringFilter)
         }
     }
     
@@ -80,7 +81,7 @@ class RouteListVC: BaseViewController {
             
         }else{
             endAutoRefetchRouteList()
-            getDataFromDBLocal(dateStringFilter)
+            //getDataFromDBLocal(dateStringFilter)
         }
     }
     

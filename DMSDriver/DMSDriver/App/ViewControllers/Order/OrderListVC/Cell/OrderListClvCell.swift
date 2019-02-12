@@ -158,7 +158,7 @@ extension OrderListClvCell{
                 self?.filterDataWithTapDisplay()
                 
                 // Update route to DB local
-                CoreDataManager.updateRoute(obj.data!)
+                //CoreDataManager.updateRoute(obj.data!)
             case .error(let error):
                 self?.rootVC?.showAlertView(error.getMessage())
                 

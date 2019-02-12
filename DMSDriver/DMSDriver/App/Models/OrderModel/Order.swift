@@ -146,7 +146,9 @@ class Order: BaseModel {
     var receiverPhone = ""
     
     var urgent_type_id:Int = 0
-    var url:UrlFileMoldel?
+    //var url:UrlFileMoldel?
+    var files:[AttachFileModel]?
+
     var isSelect = false
     
     convenience required init?(map: Map) {
@@ -162,7 +164,7 @@ class Order: BaseModel {
         sig_req <- map["sig_req"]
         note <- map["note"]
         details <- map["details"]
-        url <- map["url"]
+        files <- map["files"]
         urgent_type_id <- map["urgent_type_id"]
         status <- map["status"]
         driver_id <- map["driver_id"]
@@ -177,6 +179,38 @@ class Order: BaseModel {
             to    = Address(JSON: dataTo.parseToJSON() ?? [:])
         }else{
             to    <- map["to"]
+        }
+    }
+    
+    
+    var signature:AttachFileModel?{
+        get{
+            for i in 0..<(files?.count ?? 0){
+                if files?[i].typeFile == "SIG"{
+                    return files?[i]
+                }
+            }
+            
+            return nil
+        }
+    }
+    
+    var pictures:[AttachFileModel]?{
+        get{
+            
+            var arr:[AttachFileModel]?
+            for i in 0..<(files?.count ?? 0){
+                if files?[i].typeFile != "SIG"{
+                    if arr == nil {
+                        arr = []
+                    }
+                    if let file = files?[i] {
+                        arr?.append(file)
+                    }
+                }
+            }
+            
+            return arr
         }
     }
     
