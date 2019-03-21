@@ -10,18 +10,23 @@ import UIKit
 
 class PackageTableViewCell: UITableViewCell {
     
-  @IBOutlet weak var lblKey: UILabel?
-  @IBOutlet weak var lblValue: UILabel?
+    @IBOutlet weak var lblKey: UILabel?
+    @IBOutlet weak var lblValue: UILabel?
+    @IBOutlet weak var vContent: UIView?
+
     
-  func configura(_ key:String,_ value:String)  {
-    lblKey?.text = key
-    lblValue?.text = value
-  }
+    func configura(_ key:String,_ value:String, _ isCornerRadiusButtom:Bool = false)  {
+        lblKey?.text = key
+        lblValue?.text = value
+        if isCornerRadiusButtom {
+            vContent?.roundCornersLRB()
+        }
+    }
   
   
   override func awakeFromNib() {
     super.awakeFromNib()
-    // Initialization code
+    self.selectionStyle = .none
   }
   
   override func setSelected(_ selected: Bool, animated: Bool) {

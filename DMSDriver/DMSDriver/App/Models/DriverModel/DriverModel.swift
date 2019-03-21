@@ -9,6 +9,54 @@
 import UIKit
 import ObjectMapper
 
+class CoordinatorDriverModel: SelectionModel {
+    var coordinators:[DriverModel]?
+    var drivers:[DriverModel]?
+
+    required init?(map: Map) {
+        super.init()
+    }
+    
+    override func mapping(map: Map) {
+        coordinators <- map["coordinator"]
+        drivers <- map["driver"]
+    }
+}
+
+class DriverShiftModel: BaseModel {
+    var id:String?
+    var created_at:String?
+    var updated_at:String?
+    var name:String?
+    var start_time:String?
+    var end_time:String?
+    var ac:String?
+    var created_by:Int?
+    var updated_by:Int?
+    
+    
+    
+    required init?(map: Map) {
+        super.init()
+    }
+    
+    override func mapping(map: Map) {
+        id <- map["id"]
+        created_at <- map["created_at"]
+        updated_at <- map["updated_at"]
+        name       <- map["name"]
+        start_time <- map["start_time"]
+        end_time   <- map["end_time"]
+        ac         <- map["ac"]
+        created_at <- map["created_at"]
+        updated_at <- map["updated_at"]
+        created_by <- map["created_by"]
+        updated_by <- map["updated_by"]
+    }
+    
+    
+}
+
 class DriverModel: SelectionModel {
     /**
     "driver_id": 710,
@@ -27,8 +75,12 @@ class DriverModel: SelectionModel {
         role_name = E(nameRole)
     }
     
+    override init() {
+        super.init()
+    }
+    
     required init?(map: Map) {
-        super.init(map: map)
+      super.init()
     }
     
     override func mapping(map: Map) {

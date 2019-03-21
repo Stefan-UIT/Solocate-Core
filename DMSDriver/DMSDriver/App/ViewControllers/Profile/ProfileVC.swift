@@ -39,7 +39,7 @@ class ProfileVC: BaseViewController {
     private let  indentifierRowCell  = "ProfileEditCell"
     private let  indentifierChangePassCell  = "ProfileChagePassCell"
 
-    private var user:UserModel?
+    private var user:UserModel.UserInfo?
     private var publicInforDatas:[[String]] = []
     private var privateInforDatas:[[String]] = []
   
@@ -48,7 +48,6 @@ class ProfileVC: BaseViewController {
   
     private var textFieldEdit:UITextField?
     private var changePasswordView : ChangePasswordView!
-
   
 
     override func viewDidLoad() {
@@ -64,11 +63,11 @@ class ProfileVC: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
   
-  override func updateNavigationBar() {
-    super.updateNavigationBar()
-    self.navigationService.delegate = self
-    self.navigationService.updateNavigationBar(.Menu, "Profile".localized)
-  }
+    override func updateNavigationBar() {
+        super.updateNavigationBar()
+        App().navigationService.delegate = self
+        App().navigationService.updateNavigationBar(.Menu, "Profile".localized)
+    }
   
     func setupTableView() {
       tbvContent?.delegate = self
@@ -298,23 +297,29 @@ extension ProfileVC:UITableViewDelegate{
 
 //MARK: UITextFieldDelegate
 extension ProfileVC:UITextFieldDelegate{
-  func textFieldDidBeginEditing(_ textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
       textFieldEdit = textField
       //self.tbvContent?.reloadData()
-  }
-  
-  func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-    let tag = textField.tag;
-    if tag == 0 {
-      user?.firstName = textField.text;
-    }else if tag == 1 {
-      user?.lastName = textField.text;
-    }else if tag ==  publicInforDatas.count {
-      user?.phone = textField.text
-    }else if (tag == publicInforDatas.count + 1){
-      user?.email = textField.text
     }
-  }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text,
+            let textRange = Range(range, in: text) {
+            let updatedText = text.replacingCharacters(in: textRange,
+                                                       with: string)
+            let tag = textField.tag;
+            if tag == 0 {
+                user?.firstName = updatedText
+            }else if tag == 1 {
+                user?.lastName = updatedText
+            }else if tag ==  publicInforDatas.count {
+                user?.phone = updatedText
+            }else if (tag == publicInforDatas.count + 1){
+                user?.email = updatedText
+            }
+        }
+        return true
+    }
 }
 
 
@@ -333,24 +338,30 @@ extension ProfileVC:DMSNavigationServiceDelegate{
 //MARK: - API
 extension ProfileVC{
   func getUserProfile() {
-    self.showLoadingIndicator()
-    API().getUserProfile {[weak self] (result) in
-      guard let strongSelf = self else{return}
-      strongSelf.dismissLoadingIndicator()
-      switch result{
-      case .object(let obj):
-        strongSelf.user = obj.data;
-        strongSelf.initData()
-        strongSelf.tbvContent?.reloadData()
-        break
-      case .error(let error):
-        strongSelf.showAlertView(error.getMessage())
-        break
-      }
+    if ReachabilityManager.isNetworkAvailable {
+        self.showLoadingIndicator()
+        API().getUserProfile {[weak self] (result) in
+            guard let strongSelf = self else{return}
+            strongSelf.dismissLoadingIndicator()
+            switch result{
+            case .object(let obj):
+                strongSelf.user = obj.data;
+                strongSelf.initData()
+                strongSelf.tbvContent?.reloadData()
+                break
+            case .error(let error):
+                strongSelf.showAlertView(error.getMessage())
+                break
+            }
+        }
+    }else {
+        user = Caches().user?.userInfo
+        initData()
+        tbvContent?.reloadData()
     }
   }
   
-  func updateUserProfile(_ user:UserModel) {
+  func updateUserProfile(_ user:UserModel.UserInfo) {
     self.showLoadingIndicator()
     API().updateUserProfile(user) {[weak self] (result) in
       guard let strongSelf = self else{return}

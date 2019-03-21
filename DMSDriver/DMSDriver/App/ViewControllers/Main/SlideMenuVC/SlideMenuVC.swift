@@ -5,7 +5,10 @@ enum MenuItemType : Int {
   
   case PROFILE = 0
   case ROUTES
+  case COUNTER
   case ASSIGN
+  case TASK
+  case ALERT
   case LOGOUT
   
   static let count: Int = {
@@ -20,8 +23,14 @@ enum MenuItemType : Int {
       return ""
     case .ROUTES:
         return "Routes".localized.uppercased()
+    case .COUNTER:
+        return "Counter".localized.uppercased()
     case .ASSIGN:
-        return "Assign".localized.uppercased()
+        return "Orders assignment".localized.uppercased()
+    case .TASK:
+        return "Tasks List".localized.uppercased()
+    case .ALERT:
+        return "Alerts".localized.uppercased()
     case .LOGOUT:
       return "Logout".localized.uppercased()
     }
@@ -30,11 +39,17 @@ enum MenuItemType : Int {
   func normalIcon() -> UIImage? {
     switch self {
     case .PROFILE:
-      return #imageLiteral(resourceName: "ic_avartar")
+      return #imageLiteral(resourceName: "ic-DefaultUser")
     case .ROUTES:
       return #imageLiteral(resourceName: "ic_route")
+    case .COUNTER:
+        return UIImage(named: "ic_alarm-clock")
     case .ASSIGN:
         return #imageLiteral(resourceName: "ic_orderlist")
+    case .TASK:
+        return #imageLiteral(resourceName: "Menu_Task")
+    case .ALERT:
+        return #imageLiteral(resourceName: "ic_notifyBlue")
     case .LOGOUT:
       return #imageLiteral(resourceName: "ic_logout")
     }
@@ -71,10 +86,9 @@ extension SlideMenuVC: UITableViewDataSource{
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if let menutype:MenuItemType = MenuItemType(rawValue: indexPath.row) {
-        if !(Caches().user?.isCoordinator ?? false) &&
-            !(Caches().user?.isAdmin ?? false) &&
-            menutype ==  MenuItemType.ASSIGN{
-            return 0 // row assign only for Coordinator,admin
+        if menutype == .ASSIGN ||
+            menutype == MenuItemType.TASK {
+            return 0
         }
     }
     return UITableViewAutomaticDimension
@@ -111,45 +125,66 @@ extension SlideMenuVC: UITableViewDataSource{
 
 extension SlideMenuVC:UITableViewDelegate{
   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    if let menuType = MenuItemType(rawValue: indexPath.row){
-      if currentItem != menuType{
+    guard let menuType = MenuItemType(rawValue: indexPath.row) else {
+        return
+    }
+    
+    if currentItem != menuType{
         currentItem = menuType
         switch menuType {
         case .PROFILE:
-          let vc:ProfileVC = .loadSB(SB: .Profile)
-          App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
-          break
+            let vc:ProfileVC = .loadSB(SB: .Profile)
+            App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
+            
         case .ROUTES:
-          App().mainVC?.pushRouteListVC()
+            App().mainVC?.pushRouteListVC()
+            
+        case .COUNTER:
+            let vc:TimerVC = .loadSB(SB: SBName.Packages)
+            App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
+            
         case .ASSIGN:
             let vc:AssignOrderVC = .loadSB(SB: .Order)
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
-
+    
+        case .TASK:
+            let vc:TaskListVC = .loadSB(SB: .Task)
+            App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
+            
+        case .ALERT:
+            let vc:HistoryNotifyVC = .loadSB(SB: .Notification)
+            App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
+            
         case .LOGOUT:
-          self.handleLogOut()
-          break
+            DispatchQueue.main.async {
+                self.navigationController?.dismiss(animated: false, completion: {
+                    self.handleLogOut()
+                })
+            }
         }
-      }
-      self.tbvContent?.reloadData()
-      DispatchQueue.main.async {
-        self.navigationController?.dismiss(animated: true, completion: nil)
-      }
     }
-  }
+    
+    if (currentItem != .LOGOUT){
+        DispatchQueue.main.async {
+            self.navigationController?.dismiss(animated: true, completion: nil)
+        }
+    }
+    self.tbvContent?.reloadData()
+    }
 }
 
 //MARK: API
 private extension SlideMenuVC{
-  func handleLogOut() {
-    API().logout { (result) in
-      switch result{
-      case .object(_):
-        Caches().user = nil
-      case .error(let error):
-        self.showAlertView(error.getMessage())
-      }
+    func handleLogOut() {
+        App().reLogin()
+        API().logout { (result) in
+            switch result{
+            case .object(_):
+            Caches().user = nil
+            case .error(let error):
+            self.showAlertView(error.getMessage())
+            }
+        }
     }
-    App().reLogin()
-  }
 }
 

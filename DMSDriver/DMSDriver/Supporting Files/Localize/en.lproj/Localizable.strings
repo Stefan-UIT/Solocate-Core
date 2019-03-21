@@ -34,6 +34,11 @@
 "Pull to refresh"="Pull to refresh";
 "Uploaded Successful"="Uploaded Successful";
 "No data"="No data";
+"Session expired."="Session expired.";
+"Retry"="Retry";
+"You are in offline,some funtion may be restricted."="You are in offline,some funtion may be restricted.";
+"Sorry, this account is not use as Driver account. Please contact your administrator for more information"="Sorry, this account is not use as Driver account. Please contact your administrator for more information";
+"Content cann't empty."="Content cann't empty.";
 
 //LOGIN_SCREEN
 "login_title"="LOGIN";
@@ -94,8 +99,9 @@
 "Assigned"="Assigned";//new
 "Mine"="Mine";//new
 "Driver"="Driver";
-
-
+"Pick driver"="Pick driver";
+"Filter orders by"="Filter orders by";
+"OrderID-%d"="OrderID-%d";
 //ODER_DETAIL
 "Order Detail"="Order Detail";
 "Delivery number"="Delivery number";
@@ -178,16 +184,35 @@
 "Werehouse"="Werehouse";
 "Third courier"= "Third courier";
 "Coordination phone"="Coordination phone";
+"Finish order"="Finish order";
+"Enter note for this order(optional)"="Enter note for this order(optional)";
+"Apartment"="Apartment";
+"Entrance"="Entrance";
+"Floor"="Floor";
+"Nature of goods"="Nature of Goods";
+"Contact phone"="Contact phone";
+"From address"="From address";
+"To address"="To address";
+"From"="From";
+"To"="To";
+"Name"="Name";
+"Volume"="Volume";
+
 
 
 //ORDER_ASSIGNMENT
-"Orders assignment"="Orders assignment";//new
-"Today"="Today";//new
-"Select date"="Select date";//new
+"Orders assignment"="Orders assignment";
+"Today"="Today";
+"Select date"="Select date";
 "Select Items"="Select Items";
-"Assign"="Assign";//new
-"Please select order."="Please select order.";//new
+"Assign"="Assign";
+"Please select order."="Please select order.";
 "Assigned successfull."="Assigned successfull.";
+"Driver" = "Driver";
+"Drivers"="Drivers";
+"Coordinator"="Coordinator";
+"Assign to me"="Assign to me";
+
 
 
 
@@ -205,6 +230,12 @@
 "Route Number"="Route number";
 "Route List"="Route List";
 "Route" = "Route";
+"Truck" = "Truck";
+"Tanker" = "Tanker";
+"RouteID-%d"="RouteID-%d";
+"Route ID" ="Route ID";
+
+
 
 //PICTURE
 "Album Gallery"="Album Gallery";
@@ -223,3 +254,68 @@
 "Total pallets"="Total pallets";
 "Pallet complete"="Pallet complete";
 "Pallet not complete"="Pallet not complete";
+"Pick Up" = "Pick Up";
+
+
+"Total double type"="Total double type";
+"Total cartons"="Total cartons";
+"Total packages"="Total packages";
+"Double type complete"="Double type complete";
+"Packages complete"="Packages complete";
+"Cartons complete"="Cartons complete";
+"Double type not complete"="Double type not complete";
+"Cartons not complete"="Cartons not complete";
+"Packages not complete"="Packages not complete";
+
+//TASK
+"Tasks List"="Tasks List";
+"Task Detail"="Task Detail";
+"No Tasks"="No Tasks";
+"Task Id"="Task Id";
+"TASK"="TASK";
+"Are you sure you want to finish this task?"="Are you sure you want to finish this task?";
+"Are you sure you want to cancel this task?"="Are you sure you want to cancel this task?";
+"Finish task successfully"="Finish task successfully";
+"Task Status"="Task Status";
+"Task Information"="Task Information";
+
+//ALERT
+"Alerts"="Alerts";
+"Load more..."="Load more...";
+"Resolve"="Resolve";
+"Alert Detail"="Alert Detail";
+"Driver Name"="Driver Name";
+"Truck Name"="Truck Name";
+"Tanker Name"="Tanker Name";
+"Comment"="Comment";
+"Comment..."="Comment...";
+"Rule ID"="Rule ID";
+"Resolve alert"="Resolve alert";
+"%d years ago"="%d years ago";
+"%d months ago"="%d months ago";
+"%d weeks ago"="%d weeks ago";
+"%d days ago"="%d days ago";
+"%d hours ago"="%d hours ago";
+"%d minutes ago"="%d minutes ago";
+"%d seconds ago"="%d seconds ago";
+"just now"="just now";
+"an hour ago"="an hour ago";
+"an minute ago"="an minute ago";
+"%d day ago"="%d day ago";
+"%d week ago"="%d week ago";
+"%d month ago"="%d month ago";
+"%d year ago"="%d year ago";
+
+
+//ALERT DETAIL
+"Driver Name"= "Driver name";//new
+"Tanker Name"="שם מכלית";
+
+
+//Counter
+"Reminder"="Reminder";
+"Reminder"="Reminder";
+"Counter"="Counter";
+"Pause"="Pause";
+"Your task has been over."="Your task has been over.";
+"Resume"="Resume";

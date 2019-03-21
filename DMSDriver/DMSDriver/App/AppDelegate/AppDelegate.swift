@@ -13,6 +13,7 @@ import SVProgressHUD
 import IQKeyboardManager
 import FirebaseCore
 import FirebaseMessaging
+import CoreData
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -20,7 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var window: UIWindow?
   var rootNV:BaseNV?
   var mainVC:MainVC?
-  
+  var navigationService = DMSNavigationService()
+
   
   func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
     
@@ -40,7 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("\n==>APPLICATION STARTED WITH: \n\tScheme-\(buildConfiguration.buildScheme.rawValue);\n\tServer-\(buildConfiguration.serverEnvironment.displayString())-\(buildConfiguration.serverUrlString()) \n")
     
         GMSServices.provideAPIKey(Network.googleAPIKey)
-        SVProgressHUD.setDefaultMaskType(.clear)
+        SVProgressHUD.setDefaultStyle(.dark)
    
         // Setup Push notifiaction
         registerPushNotification()
@@ -58,7 +60,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         //connectToFcm()
         // DMSLocationManager.startUpdatingDriverLocationIfNeeded()
+        ReachabilityManager.startMonitoring()
         refreshBadgeIconNumber()
+        if Caches().hasLogin &&
+            SERVICES().socket.defaultSocket.status != .connected{
+            SERVICES().socket.connect(token: E(Caches().user?.token))
+        }
     }
   
     //MARK: - PUSH NOTIFICATION
@@ -72,6 +79,51 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
         print("Error Register Remote Notification:\(error)")
     }
+    
+    // MARK: - Core Data stack
+    
+    lazy var persistentContainer: NSPersistentContainer = {
+        /*
+         The persistent container for the application. This implementation
+         creates and returns a container, having loaded the store for the
+         application to it. This property is optional since there are legitimate
+         error conditions that could cause the creation of the store to fail.
+         */
+        let container = NSPersistentContainer(name: "DMSDriver")
+        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
+            if let error = error as NSError? {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                
+                /*
+                 Typical reasons for an error here include:
+                 * The parent directory does not exist, cannot be created, or disallows writing.
+                 * The persistent store is not accessible, due to permissions or data protection when the device is locked.
+                 * The device is out of space.
+                 * The store could not be migrated to the current model version.
+                 Check the error message to determine what the actual problem was.
+                 */
+                fatalError("Unresolved error \(error), \(error.userInfo)")
+            }
+        })
+        return container
+    }()
+    
+    // MARK: - Core Data Saving support
+    
+    func saveContext () {
+        let context = persistentContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                // Replace this implementation with code to handle the error appropriately.
+                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
+                let nserror = error as NSError
+                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+        }
+    }
 }
 
 
@@ -79,13 +131,66 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 extension AppDelegate: UNUserNotificationCenterDelegate {
     
     //Handle User tap notification messages while app is in the foreground.
-  func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
-    print("==>Did Receive Response: \(response)")
+    func userNotificationCenter(_ center: UNUserNotificationCenter, didReceive response: UNNotificationResponse, withCompletionHandler completionHandler: @escaping () -> Void) {
+        // Handle Tap
+        if let userInfo = response.notification.request.content.userInfo as? [String: Any]{
+            print("==>Did Receive Response: \(userInfo)")
+            
+            if let noti = ReceiveNotificationModel(JSON: userInfo){
+                switch noti.notiType{
+                case .TASK:
+                    let task = TaskModel()
+                    task.task_id = noti.object_data?.object_id
+                    self.reloadOrPushScreenTaskDetailVC(task)
+                    
+                case .ROUTE:
+                    let route = Route()
+                    route.id = noti.object_data?.object_id ?? -1
+                    self.reloadOrPushScreenRouteDetail(route)
+                    
+                case .ROUTE_LIST:
+                    break
+                    
+                case .ALERT_RESOLVE:
+                    reloadOrPushScreenHistoryNotificationVC()
+                }
+            }
+        }
     
-    // Handle Tap
-    completionHandler()
-
-  }
+        completionHandler()
+    }
+    
+    func reloadOrPushScreenHistoryNotificationVC() {
+        let lastVC = App().mainVC?.rootNV?.viewControllers.last
+        if lastVC is TaskDetailVC{
+            (lastVC as? HistoryNotifyVC)?.fetchData(showLoading: false)
+            
+        }else{
+            let vc:HistoryNotifyVC = .loadSB(SB: .Notification)
+            App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
+        }
+    }
+    
+    func reloadOrPushScreenTaskDetailVC(_ task: TaskModel) {
+        let lastVC = App().mainVC?.rootNV?.viewControllers.last
+        if lastVC is TaskDetailVC{
+            (lastVC as? TaskDetailVC)?.fetchData()
+            
+        }else{
+            let vc: TaskDetailVC = .loadSB(SB: .Task)
+            vc.task = task
+            App().mainVC?.rootNV?.pushViewController(vc, animated: true)
+        }
+    }
+    
+    func reloadOrPushScreenRouteDetail(_ route: Route){
+        let vc:RouteDetailVC = .loadSB(SB: .Route)
+        vc.route = route;
+        vc.dateStringFilter = route.date
+        App().mainVC?.rootNV?.pushViewController(vc, animated: true)
+    }
+    
+    
   
   //Receive displayed notifications for iOS 10 devices.
   // Setup to show .alert,.badge,.sound  while app is in the foreground.
@@ -96,22 +201,21 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
     //With swizzling disabled you must let Messaging know about the message, for Analytics
     //Messaging.messaging().appDidReceiveMessage(notification.request.content.userInfo)
     
-    //Currently only push remote route
-    App().mainVC?.refetchDataRouteList()
+    App().mainVC?.refetchDataRouteOrTaskListOrHistoryNotify()
     completionHandler([.alert,.badge,.sound])
   }
 }
 
 
 //MARK: - AlertMessageViewDelegate
-extension AppDelegate: AlertMessageViewDelegate {
+ extension AppDelegate: AlertMessageViewDelegate {
     func alertMessageView(_ alertMessageView: AlertMessageView, _ alertID: String, _ content: String) {
         //
     }
     
     func showAlert(_ message: String) {
         let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Done", style: .cancel, handler: nil)
+        let cancelAction = UIAlertAction(title: "ok".localized, style: .cancel, handler: nil)
         alert.addAction(cancelAction)
         if let viewController = window?.rootViewController {
             viewController.present(alert, animated: true, completion: nil)
@@ -119,13 +223,10 @@ extension AppDelegate: AlertMessageViewDelegate {
     }
 }
 
-
 //MARK : - OTHER_FUNTION
 extension AppDelegate {
     
     func checkLoginStatus() {
-        rootNV = window?.rootViewController as? BaseNV
-        
         if Caches().hasLogin {
             loginSuccess()
         }else {
@@ -136,81 +237,77 @@ extension AppDelegate {
     func registerPushNotification()  {
         UNUserNotificationCenter.current().delegate = self
         let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-        UNUserNotificationCenter.current().requestAuthorization(
-            options: authOptions,
-            completionHandler: {_, _ in })
-        
+        UNUserNotificationCenter.current().requestAuthorization(options: authOptions) {
+            (granted, error) in
+            print("Permission granted: \(granted)")
+            
+            guard granted else { return }
+            self.getNotificationSettings()
+        }
         UIApplication.shared.registerForRemoteNotifications()
+    }
+    
+    func getNotificationSettings() {
+        UNUserNotificationCenter.current().getNotificationSettings { (settings) in
+            print("Notification settings: \(settings)")
+            guard settings.authorizationStatus == .authorized else { return }
+        }
     }
     
     
     func reLogin() {
+        invalidTimer()
         let vc: LoginViewController = .loadSB(SB: .Login)
-        rootNV?.setViewControllers([vc], animated: false)
-        Caches().user = nil
+        window?.rootViewController = vc
+        let loginSocket = SERVICES().socket.socketWithNamespace(.login)
+        if loginSocket.status == .connected{
+           SERVICES().socket.logout(Caches().user?.userInfo?.id ?? 0,
+                                     E(Caches().user?.roles?.first?.name))
+        }
+        SERVICES().socket.disconnect()
+
+        CoreDataManager.clearAllDB()
+        Caches().drivingRule = nil
+        Caches().timePlaying = 0
+        Caches().isPauseRoute = false
+        Caches().isStartingRoute = false
+        Caches().isCancelCounter = true
+        Caches().dateStartRoute = nil
+        Caches().datePauseRoute = nil
+        mainVC?.endAutoRefetchRouteList()
     }
     
     func loginSuccess() {
+        if SERVICES().socket.defaultSocket.status != .connected{
+            SERVICES().socket.connect(token: E(Caches().user?.token))
+        }
+        
         DMSLocationManager.startUpdatingDriverLocationIfNeeded()
+        ReachabilityManager.startMonitoring()
+        ReachabilityManager.updateAllRequestToServer()
         if let tokenFcm = Caches().getObject(forKey: Defaultkey.fcmToken) as? String {
             API().updateNotificationFCMToken(tokenFcm) { (_) in}
         }
-        
-        let vc:MainVC = .loadSB(SB: .Main)
-        mainVC = vc
-        rootNV?.setViewControllers([vc], animated: false)
+        let _rootNV:BaseNV = .loadSB(SB: .Main)
+        rootNV = _rootNV
+        mainVC = rootNV?.viewControllers.first as? MainVC
+        navigationService.navigationItem = App().mainVC?.navigationItem
+        window?.rootViewController = _rootNV
     }
-    
-    func handleNewRoute(_ userInfo: [String: Any]) {
-        if let routeID = userInfo["route_id"] as? String {
-            print("PUSH_NOTIFICATION: routeID = \(routeID)")
-            let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-            if let token = Cache.shared.getObject(forKey: Defaultkey.tokenKey) as? String, token.length > 0 {
-                // firstly, check stak
-                if let currentNavController = window?.rootViewController as? UINavigationController,
-                    let tabbar = currentNavController.topViewController as? UITabBarController {
-                    //          tabbar.selectedIndex = 0
-                    (tabbar.selectedViewController as? UINavigationController)?.popToRootViewController(animated: false)
-                    if let listNC = tabbar.viewControllers?.first as? UINavigationController,
-                        let listVC = listNC.viewControllers.first as? OrderListViewController {
-                        listVC.getRouteDetail(routeID)
-                    }
-                    if let type = userInfo["type"] as? String, type == "new message" {
-                        tabbar.selectedIndex = Constants.messageTabIndex
-                    }
-                    return
-                }
-                
-                let rootNavigationController = mainStoryboard.instantiateInitialViewController() as? UINavigationController
-                let tabbarVC = mainStoryboard.instantiateViewController(withIdentifier: "TabBarController") as? UITabBarController
-                if let listNavigationController = tabbarVC?.viewControllers?.first as? UINavigationController,
-                    let listVC = listNavigationController.topViewController as? OrderListViewController {
-                    listVC.getRouteDetail(routeID)
-                }
-                if let type = userInfo["type"] as? String, type == "new message" {
-                    tabbarVC?.selectedIndex = Constants.messageTabIndex
-                }
-                rootNavigationController?.pushViewController(tabbarVC!, animated: true)
-                window?.rootViewController = rootNavigationController
-            }
-            else {
-                // Launch app normally
-            }
+
+    func showAlertView(_ title:String? = nil, _ message: String? = nil,
+                       positiveTitle: String? = nil,
+                       positiveAction:((_ action: UIAlertAction) -> Void)? = nil,
+                       negativeTitle: String? = nil,
+                       negativeAction: ((_ action: UIAlertAction) -> Void)? = nil)  {
+        let alert = UIAlertController(title: E(title), message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: isEmpty(positiveTitle) ? "OK".localized : positiveTitle, style: .default, handler: positiveAction)
+        if negativeAction != nil {
+            let cancelAction = UIAlertAction(title: isEmpty(negativeTitle) ? "Cancel".localized : negativeTitle, style: .cancel, handler: negativeAction)
+            alert.addAction(cancelAction)
         }
-    }
-    
-    func handleAlert(_ userInfo: [String: Any]) {
-        guard let alertID = userInfo["alert_id"] as? String  else {
-            return
-        }
-        
-        guard let messageAlert = userInfo["title"] as? String  else {
-            return
-        }
-        let alertMessageView : AlertMessageView = AlertMessageView()
-        alertMessageView.delegate = self
-        alertMessageView.config(alertID, messageAlert)
-        alertMessageView.showViewInWindow()
+        alert.addAction(okAction)
+        App().mainVC?.present(alert, animated: true, completion: nil)
     }
     
     func refreshBadgeIconNumber()  {
@@ -219,5 +316,14 @@ extension AppDelegate {
                 UIApplication.shared.applicationIconBadgeNumber = notifications.count
             }
         }
+    }
+    
+    func invalidTimer()  {
+        App().mainVC?.rootNV?.viewControllers.forEach({ (vc) in
+            if let _vc = vc as? TimerVC {
+                _vc.invalidTimmer()
+                return
+            }
+        })
     }
 }

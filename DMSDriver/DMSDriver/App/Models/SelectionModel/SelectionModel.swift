@@ -12,16 +12,13 @@ import ObjectMapper
 class SelectionModel: BaseModel {
     var isSelected:Bool = false
     
-    override init() {
-        //
-    }
     var strId:String {
         get{
             return "StrId"
         }
     }
     
-    required init?(map: Map) {
-        super.init()
+    required convenience init?(map: Map) {
+        self.init()
     }
 }

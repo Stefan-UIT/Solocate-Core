@@ -10,48 +10,73 @@ import UIKit
 import GoogleMaps
 
 class MapsViewController: UIViewController {
-  @IBOutlet weak var mapView: GMSMapView!
     
-  var route: Route? {
-    didSet {
-      guard mapView != nil else {return}
-      drawMap()
+    @IBOutlet weak var mapView: GMSMapView!
+
+    var route: Route?
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupMapView()
+        getRouteDetail("\(route?.id ?? 0)")
     }
-  }
+  
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    }
     
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    mapView.isMyLocationEnabled = true
-    mapView.delegate = self
-    getRouteDetail("\(route?.id ?? 0)")
-  }
+    func setupMapView() {
+        mapView.isMyLocationEnabled = true
+        mapView.delegate = self
+    }
   
-  override func viewWillAppear(_ animated: Bool) {
-    super.viewWillAppear(animated)
-    tabBarController?.tabBar.isHidden = false
-  }
-  
-  func drawPath(fromLocation from: CLLocationCoordinate2D,
+    func drawPath(fromLocation from: CLLocationCoordinate2D,
                 toLocation to: CLLocationCoordinate2D) {
-    self.showLoadingIndicator()
-    API().getDirection(fromLocation: from, toLocation: to) {[weak self] (result) in
-        self?.dismissLoadingIndicator()
-        switch result{
-        case .object(let obj):
-            for route in obj.routes {
-                let path = GMSPath(fromEncodedPath: route.polyline)
-                let polyLine = GMSPolyline.init(path: path)
-                polyLine.strokeWidth = Constants.ROUTE_WIDTH
-                polyLine.strokeColor = AppColor.mainColor
-                polyLine.map = self?.mapView
-                let bounds = GMSCoordinateBounds(path: path!)
-                self?.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
+        self.showLoadingIndicator()
+        API().getDirection(fromLocation: from, toLocation: to) {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(let obj):
+                for route in obj.routes {
+                    let path = GMSPath(fromEncodedPath: route.polyline)
+                    let polyLine = GMSPolyline.init(path: path)
+                    polyLine.strokeWidth = Constants.ROUTE_WIDTH
+                    polyLine.strokeColor = AppColor.mainColor
+                    polyLine.map = self?.mapView
+                    let bounds = GMSCoordinateBounds(path: path!)
+                    self?.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
+                }
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
             }
-        case .error(let error):
-            self?.showAlertView(error.getMessage())
         }
     }
-  }
+    
+    func drawPath(fromLocation from: CLLocationCoordinate2D,
+                  toLocation to: CLLocationCoordinate2D,
+                  wayPoints:Array<CLLocationCoordinate2D>) {
+        self.showLoadingIndicator()
+        API().getDirection(origin: from,
+                           destination: to,
+                           waypoints: wayPoints) {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(let obj):
+                for route in obj.routes {
+                    let path = GMSPath(fromEncodedPath: route.polyline)
+                    let polyLine = GMSPolyline.init(path: path)
+                    polyLine.strokeWidth = Constants.ROUTE_WIDTH
+                    polyLine.strokeColor = AppColor.mainColor
+                    polyLine.map = self?.mapView
+                    let bounds = GMSCoordinateBounds(path: path!)
+                    self?.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
+                }
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
+        }
+    }
+    
     
     private func drawMap() {
         guard let _route = route else {
@@ -59,39 +84,19 @@ class MapsViewController: UIViewController {
         }
         mapView.clear()
         showMarkers()
-        
-        // draw from warehouse to first point
-        
-        guard let wareHouse = route!.warehouse else { return}
-        let pickupLocation = CLLocationCoordinate2D(latitude: wareHouse.latitude, longitude: wareHouse.longitude)
-        if let firstPoint = _route.orderList.first {
-            let toLocation = CLLocationCoordinate2D(latitude: firstPoint.lat.doubleValue, longitude: firstPoint.lng.doubleValue)
-            drawPath(fromLocation: pickupLocation, toLocation: toLocation)
-        }
-        
-        /*
-        // draw from the last point to warehouse
-        if _route.orderList.count > 1, let lastPoint = _route.orderList.last {
-            let fromLocation = CLLocationCoordinate2D(latitude: lastPoint.lat.doubleValue, longitude: lastPoint.lng.doubleValue)
-            drawPath(fromLocation: fromLocation, toLocation: pickupLocation)
-        }
-        */
-        
-        // draw two stores together
-        let distinctOrderList = _route.distinctArrayOrderList()
-        var sortedList = distinctOrderList.sorted(by: { (lhs, rhs) -> Bool in
-            return lhs.sequence <= rhs.sequence
-        })
-        
-        for (index, _) in sortedList.enumerated() {
-            let nextIndex = index + 1
-            if nextIndex >= sortedList.count {
-                return
+
+        _route.getChunkedListLocation().forEach { (listLocation) in
+            if let firstLocation = listLocation.first,
+                let lastLocation = listLocation.last  {
+                
+                let wayPoints = listLocation
+                let result = wayPoints.dropFirst()
+                let newResult = Array(result.dropLast())
+                
+                drawPath(fromLocation: firstLocation,
+                         toLocation: lastLocation,
+                         wayPoints: newResult)
             }
-            let beginStore = sortedList[index]
-            let nextstore = sortedList[nextIndex]
-            
-            drawPath(fromLocation:beginStore.location, toLocation:nextstore.location)
         }
     }
     
@@ -108,26 +113,39 @@ class MapsViewController: UIViewController {
     }
     
     
-    private func showMarker(_ order:Order, sequence:Int) {
-        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: order.lat.doubleValue, longitude: order.lng.doubleValue))
-        let labelOrder = labelMarkerWithText("\(order.sequence)")
-        marker.title = "\(order.storeName)"
-        marker.snippet = "\(order.deliveryAdd)"
+    private func showMarker(_ address:Address, sequence:Int) {
+        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: address.lattd?.doubleValue ?? 0,
+                                                                longitude: address.lngtd?.doubleValue ?? 0))
+        let labelOrder = labelMarkerWithText("\(sequence)")
+        marker.title = address.name
+        marker.snippet = ""
         marker.map = mapView
         marker.iconView = labelOrder
         marker.zIndex = 1
     }
     
     private func showMarkers() {
+        /*
         guard let wareHouse = route!.warehouse else { return}
         let warehouseMarker = wareHouse.toGMSMarker() // warehouse marker
-        warehouseMarker.map = mapView
-        
-        let distinctArray = route!.distinctArrayOrderList()
-        for (index,order) in distinctArray.enumerated() {
-            let seq = index + 1
-            showMarker(order, sequence:seq)
+        */
+        if let currentLocationMarker = getGMSMarker(){
+            currentLocationMarker.map = mapView
         }
+        
+        let distinctArray = route!.getListLocations()
+        for (index,adress) in distinctArray.enumerated() {
+            let seq = index + 1
+            showMarker(adress, sequence:seq)
+        }
+    }
+    
+    func getGMSMarker() -> GMSMarker? {
+        guard let currentLocation = LocationManager.shared.currentLocation?.coordinate else {
+            LocationManager.shared.requestLocation()
+            return nil
+        }
+        return GMSMarker(position: currentLocation)
     }
 }
 
@@ -149,7 +167,8 @@ extension MapsViewController{
             
             switch result{
             case .object(let obj):
-                strongSelf.route = obj
+                strongSelf.route = obj.data
+                strongSelf.drawMap()
                 
             case .error(let error):
                 strongSelf.showAlertView(error.getMessage())

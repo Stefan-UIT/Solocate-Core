@@ -21,8 +21,6 @@ class AssignOrderVC: BaseViewController {
     @IBOutlet weak var viewFilter: UIView?
 
 
-
-
     fileprivate let cellIdentifier = "OrderItemTableViewCell"
     fileprivate let cellHeight: CGFloat = 150.0
     fileprivate var orderList:[Order] = []
@@ -41,12 +39,19 @@ class AssignOrderVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        getListOrderAssign()
         updateUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        getListOrderAssign()
+        resetSelectOrderAssign()
+    }
+    
+    func resetSelectOrderAssign()  {
+        isSelectAssign = false
+        showFilterDate(true)
+        updateNavigationBar()
     }
     
     
@@ -55,16 +60,34 @@ class AssignOrderVC: BaseViewController {
     }
     
     override func updateNavigationBar() {
-        self.navigationService.delegate = self
-        self.navigationService.updateNavigationBar(.Menu_Select, "Orders assignment".localized)
+        super.updateNavigationBar()
+        App().navigationService.delegate = self
+        App().navigationService.updateNavigationBar(.Menu_Select, "Orders assignment".localized)
     }
     
-    func updateUI() {
-        setupTableView()
-        setupTextFieldSearch()
-        noOrdersLabel?.isHidden = orderList.count > 0
-        lblShowDateFilter?.text = "Today".localized
-        viewFilter?.setShadowDefault()
+    override func reachabilityChangedNotification(_ notification: NSNotification) {
+        super.reachabilityChangedNotification(notification)
+        if hasNetworkConnection {
+            fetchData()
+        }else{
+            
+            DispatchQueue.main.async {[weak self] in
+                self?.dataDisplay = []
+                self?.tableView.reloadData()
+            }
+        }
+    }
+    
+    override func updateUI() {
+        super.updateUI()
+        DispatchQueue.main.async {[weak self] in
+            self?.setupTableView()
+            self?.setupTextFieldSearch()
+            self?.noOrdersLabel?.isHidden = self?.orderList.count > 0
+            self?.lblShowDateFilter?.text = self?.dateStringFilter
+            self?.viewFilter?.setShadowDefault()
+        }
+        
     }
     
     func setupTableView() {
@@ -75,14 +98,19 @@ class AssignOrderVC: BaseViewController {
     
     func setupTextFieldSearch() {
         tfSearch?.delegate = self
+        tfSearch?.placeholder = "Search...".localized
     }
     
     // MARK: - Action
     @IBAction func onbtnClickFilterDate(btn:UIButton){
+        let dateFormater =  DateFormatter()
+        dateFormater.dateFormat = "yyyy-MM-dd"
+        
+        let currentDate = dateFormater.date(from: dateStringFilter)
         UIAlertController.showDatePicker(style: .actionSheet,
                                          mode: .date,
                                          title: "Select date".localized,
-                                         currentDate: nil) {[weak self] (date) in
+                                         currentDate: currentDate) {[weak self] (date) in
             self?.dateFilter = date
             self?.dateStringFilter = date.toString("yyyy-MM-dd")
             self?.lblShowDateFilter?.text = self?.dateStringFilter
@@ -153,7 +181,9 @@ extension AssignOrderVC: UITableViewDelegate, UITableViewDataSource {
             
             let order = dataDisplay[row]
             vc.order = order
-            vc.routeID = order.routeId
+            let route = Route()
+            route.id = order.route_id
+            vc.route = route
             vc.dateStringFilter = dateStringFilter
             self.navigationController?.pushViewController(vc, animated: true)
         }
@@ -173,14 +203,14 @@ extension AssignOrderVC:DMSNavigationServiceDelegate{
     
     func didSelectedRightButton() {
         isSelectAssign = true
-        self.navigationService.updateNavigationBar(.CancelAssign, "Select Items".localized)
+        App().navigationService.updateNavigationBar(.CancelAssign, "Select Items".localized)
         showFilterDate(false)
    
     }
     
     func didSelectedCancelButton(_ sender: UIBarButtonItem) {
         isSelectAssign = false
-        self.navigationService.updateNavigationBar(.Menu_Select, "Assign".localized)
+        App().navigationService.updateNavigationBar(.Menu_Select, "Assign".localized)
         showFilterDate(true)
        
     }
@@ -249,8 +279,7 @@ extension AssignOrderVC:UITextFieldDelegate{
         let newSearchString = strSearch?.components(separatedBy: "\n").first?.lowercased()
         if !isEmpty(newSearchString) {
             dataDisplay = orderList.filter({ (item) -> Bool in
-                let isExist = item.driver_name.lowercased().contains(newSearchString!) ||
-                              item.orderReference.lowercased().contains(newSearchString!)
+                let isExist = item.driver_name.lowercased().contains(newSearchString!)
                 return isExist
             })
         }else {

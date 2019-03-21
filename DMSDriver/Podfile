@@ -1,6 +1,8 @@
 # Uncomment the next line to define a global platform for your project
- platform :ios, '9.0'
- use_frameworks!
+
+platform :ios, '9.0'
+use_frameworks!
+
 target 'DMSDriver' do
 
   # Pods for DMSDriver
@@ -15,7 +17,10 @@ target 'DMSDriver' do
  	pod 'SDWebImage'
   	pod 'Firebase/Core'
  	pod 'Firebase/Messaging'
-    pod 'SideMenu'
+    pod 'SideMenu', '~> 4.0.0'
+    pod 'ReachabilitySwift', '~> 3'
+    pod 'Socket.IO-Client-Swift', '~> 13.3.0'
+    pod 'FDFullscreenPopGesture', '1.1'
 
 end
 

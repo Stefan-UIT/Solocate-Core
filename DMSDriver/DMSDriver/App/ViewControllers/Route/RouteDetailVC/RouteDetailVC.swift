@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 
 enum TabBarItem:Int {
     case Order = 0
@@ -19,7 +20,7 @@ enum TabBarItem:Int {
         case .Order:
             return "Orders List".localized
         case .Packages:
-            return "Packages".localized
+            return "Packgages".localized
         case .Map :
             return "Map".localized
         case .Messages:
@@ -29,11 +30,21 @@ enum TabBarItem:Int {
 }
 
 class RouteDetailVC: UITabBarController {
-
-    let navigationService = DMSNavigationService()
     
     var route:Route?
     var dateStringFilter:String = Date().toString()
+    let kBarHeight = 60
+    
+    let orderVC:OrderListViewController = .loadSB(SB: .Order)
+    let packageVC:PackagesViewController = .loadSB(SB: .Packages)
+    let mapVC:MapsViewController = .loadSB(SB: .Map)
+
+    var displayMode:DisplayMode = DisplayMode.Expanded{
+        didSet{
+            updateNavigationBar()
+            reloadOrderListViewController()
+        }
+    }
     
     var selectedTabBarItem:TabBarItem = .Order{
         didSet{
@@ -43,20 +54,38 @@ class RouteDetailVC: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         self.delegate = self;
-        setupNavigateBar()
         setupTabBarController()
     }
     
-    func setupNavigateBar() {
-        navigationService.navigationItem = self.navigationItem
-        navigationService.delegate = self;
-        navigationService.updateNavigationBar(.BackOnly, TabBarItem.Order.title())
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        updateNavigationBar()
     }
     
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        /*
+        var tabFrame = self.tabBar.frame
+        tabFrame.size.height = CGFloat(kBarHeight);
+        tabFrame.origin.y = self.view.frame.size.height - CGFloat(kBarHeight)
+        self.tabBar.frame = tabFrame;
+         */
+    }
+    
+    
     func updateNavigationBar()  {
-        navigationService.updateNavigationBar(.BackOnly, selectedTabBarItem.title())
+        App().navigationService.delegate = self;
+        
+        if selectedTabBarItem == .Order {
+            App().navigationService.updateNavigationBar(displayMode == .Reduced ? .backCompact : .backModule,
+                                                        selectedTabBarItem.title())
+
+        }else{
+            App().navigationService.updateNavigationBar(.BackOnly,
+                                                        selectedTabBarItem.title())
+
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -64,56 +93,39 @@ class RouteDetailVC: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
     
+    func reloadOrderListViewController() {
+        orderVC.displayMode = displayMode
+    }
+    
     func setupTabBarController() {
         self.tabBar.tintColor = AppColor.mainColor
-        let orderVC:OrderListViewController = .loadSB(SB: .Order)
         if let route = self.route {
             orderVC.route = route
             orderVC.dateStringFilter = dateStringFilter
+            orderVC.displayMode = displayMode
         }
-        let packageVC:PackagesViewController = .loadSB(SB: .Packages)
         if let route = self.route {
             packageVC.route = route
             packageVC.dateStringFilter = dateStringFilter
         }
-        let mapVC:MapsViewController = .loadSB(SB: .Map)
         if let route = self.route {
             mapVC.route = route
         }
-        let messageVC:RouteMessagesViewController = .loadSB(SB: .Message)
-        if let route = self.route {
-            messageVC.route = route
-        }
-        
+
         orderVC.tabBarItem.title = "Orders".localized
         packageVC.tabBarItem.title = "Packages".localized
         mapVC.tabBarItem.title = "Map".localized
-        messageVC.tabBarItem.title = "Messages".localized
         
         orderVC.tabBarItem.image = #imageLiteral(resourceName: "ic_orderlist")
         packageVC.tabBarItem.image = #imageLiteral(resourceName: "ic_car")
         mapVC.tabBarItem.image = #imageLiteral(resourceName: "ic_location")
-        messageVC.tabBarItem.image = #imageLiteral(resourceName: "ic_message")
 
         orderVC.tabBarItem.tag = 0
         packageVC.tabBarItem.tag = 1
         mapVC.tabBarItem.tag = 2
-        messageVC.tabBarItem.tag = 3
         
         self.setViewControllers([orderVC,packageVC,mapVC], animated: false)
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 //MARK: UITabBarControllerDelegate
@@ -130,7 +142,11 @@ extension RouteDetailVC:UITabBarControllerDelegate{
 //MARK: - DMSNavigationServiceDelegate
 extension RouteDetailVC:DMSNavigationServiceDelegate{
     func didSelectedRightButton() {
-        //
+        if displayMode == .Reduced {
+            displayMode = .Expanded
+        }else{
+            displayMode = .Reduced
+        }
     }
     
     func didSelectedBackOrMenu() {

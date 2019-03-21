@@ -7,14 +7,16 @@
 //
 
 import UIKit
+import FDFullscreenPopGesture
 
 class BaseNV: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         self.interactivePopGestureRecognizer?.delegate = self
-        
+        self.navigationBar.isTranslucent = false
+        self.navigationBar.barTintColor = AppColor.mainColor
+        self.fd_viewControllerBasedNavigationBarAppearanceEnabled  = false
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{

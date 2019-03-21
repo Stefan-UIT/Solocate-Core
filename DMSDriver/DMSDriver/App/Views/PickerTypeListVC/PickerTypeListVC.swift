@@ -11,16 +11,25 @@ class PickerTypeListVC: BaseViewController {
         case DriverMultiplePick
     }
     
+    enum DisplayModeAssignPick:Int {
+        case Coordinator = 0
+        case Driver = 1
+    }
+    
     
     @IBOutlet weak var tbvContent:UITableView?
     @IBOutlet weak var lblNodata:UILabel?
+    @IBOutlet weak var segmentControl:UISegmentedControl?
+    @IBOutlet weak var conHViewSegment:NSLayoutConstraint?
 
     
     fileprivate var callback:PickerTypeListCallBack?
     
-    fileprivate var titleHeader:String = "Driver"
+    fileprivate var titleHeader:String = "Driver".localized
     fileprivate var type:PickerTypeList = .DriverSignlePick
-    
+    fileprivate var displayModeAssign:DisplayModeAssignPick = .Coordinator
+
+    fileprivate var coordinatorDriver:CoordinatorDriverModel?
     fileprivate var dataDisplays:[SelectionModel] = []
     fileprivate var dataOrigins:[SelectionModel] = []
     
@@ -36,8 +45,24 @@ class PickerTypeListVC: BaseViewController {
     }
     
     override func updateNavigationBar() {
-        self.navigationService.updateNavigationBar(.BackDone, titleHeader)
-        self.navigationService.delegate = self
+        App().navigationService.updateNavigationBar(.BackDone, titleHeader)
+        App().navigationService.delegate = self
+    }
+    
+    
+    override func reachabilityChangedNotification(_ notification: NSNotification) {
+        super.reachabilityChangedNotification(notification)
+        if self.hasNetworkConnection {
+            fetchData()
+        }else{
+            
+            DispatchQueue.main.async {
+                self.dataOrigins = []
+                self.dataDisplays = []
+                self.conHViewSegment?.constant = 0
+                self.tbvContent?.reloadData()
+            }
+        }
     }
 
     
@@ -47,18 +72,42 @@ class PickerTypeListVC: BaseViewController {
         tbvContent?.addRefreshControl(self, action: #selector(fetchData))
     }
     
-    func updateUI()  {
-        setupTableView()
-        setupTitleHeader()
+    override func updateUI()  {
+        super.updateUI()
+        DispatchQueue.main.async {[weak self] in
+            self?.setupTableView()
+            self?.setupTitleHeader()
+            self?.setupViewSegmentControl()
+            self?.updateNavigationBar()
+        }
     }
     
     func setupTitleHeader()  {
         switch type {
         case .DriverSignlePick,
              .DriverMultiplePick:
-            titleHeader = "Pick driver"
+            titleHeader = "Pick driver".localized
         }
     }
+    
+    func setupViewSegmentControl()  {
+        segmentControl?.segmentTitles = ["Coordinators".localized,
+                                         "Drivers".localized]
+        conHViewSegment?.constant = 0
+        switch type {
+        case .DriverSignlePick,
+             .DriverMultiplePick:
+            if (Caches().user?.isAssignCoord())! {
+                conHViewSegment?.constant = 60
+                displayModeAssign = .Coordinator
+
+            }else{
+                displayModeAssign = .Driver
+            }
+        }
+        segmentControl?.selectedSegmentIndex = displayModeAssign.rawValue
+    }
+
     
     @objc func fetchData()  {
         switch type {
@@ -72,6 +121,11 @@ class PickerTypeListVC: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func didSelectSegment(_ sender: UISegmentedControl) {
+        displayModeAssign = DisplayModeAssignPick(rawValue:sender.selectedSegmentIndex)!
+        reloadUI()
     }
 }
 
@@ -118,7 +172,7 @@ extension PickerTypeListVC:UITableViewDataSource{
             
             if let dto:DriverModel = dataDisplays[row] as? DriverModel{
                 cell.lblTitle?.text = dto.driver_name
-                cell.lblSubtitle?.text = dto.role_name
+                cell.lblSubtitle?.text = dto.role_name.localized
                 cell.imgIcon?.image = dto.isSelected ? #imageLiteral(resourceName: "ic_selected") : #imageLiteral(resourceName: "ic_nonselected")
             }
         }
@@ -177,16 +231,36 @@ fileprivate extension PickerTypeListVC{
             self?.tbvContent?.endRefreshControl()
             switch result{
             case .object(let obj):
-                self?.dataOrigins = obj.data ?? []
-                self?.dataDisplays = obj.data ?? []
-                self?.lblNodata?.isHidden = self?.dataDisplays.count > 0
-                self?.checkOldData()
-                self?.tbvContent?.reloadData()
+
+                self?.coordinatorDriver = obj
+                self?.updateUI()
+                self?.reloadUI()
                 
             case .error(let error):
                 self?.showAlertView(error.getMessage())
             }
         }
+    }
+    
+    func reloadUI() {
+        switch self.displayModeAssign{
+        case .Coordinator:
+            self.dataOrigins = coordinatorDriver?.coordinators ?? []
+            self.dataDisplays = coordinatorDriver?.coordinators ?? []
+            
+        case .Driver:
+            self.dataOrigins = coordinatorDriver?.drivers ?? []
+            self.dataDisplays = coordinatorDriver?.drivers ?? []
+            let assignToMe = DriverModel()
+            assignToMe.driver_id = Caches().user?.userInfo?.id ?? 0
+            assignToMe.driver_name = "Assign to me".localized
+            assignToMe.role_name = "Coordinator".localized
+            self.dataDisplays.append(assignToMe)
+        }
+        
+        self.lblNodata?.isHidden = self.dataDisplays.count > 0
+        self.checkOldData()
+        self.tbvContent?.reloadData()
     }
     
     
