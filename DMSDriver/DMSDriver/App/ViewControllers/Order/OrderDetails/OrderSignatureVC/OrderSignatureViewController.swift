@@ -35,19 +35,8 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
         updateUI()
     }
     
-    override func reachabilityChangedNotification(_ notification: NSNotification) {
-        super.reachabilityChangedNotification(notification)
-        /*
-        if hasNetworkConnection {
-            updateOrderDetail?(orderDetail)
-        }else {
-            CoreDataManager.queryOrderDetail(orderDetail?.id ?? 0, callback:{[weak self] (success, data) in
-                self?.orderDetail = data
-                self?.updateUI()
-
-            })
-        }
-         */
+    override func reachabilityChangedNetwork(_ isAvailaibleNetwork: Bool) {
+        super.reachabilityChangedNetwork(isAvailaibleNetwork)
     }
   
     override func updateUI() {

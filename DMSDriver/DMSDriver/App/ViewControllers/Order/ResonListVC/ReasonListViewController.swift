@@ -48,12 +48,11 @@ class ReasonListViewController: BaseViewController {
         updateUI()
     }
     
-
-    override func reachabilityChangedNotification(_ notification: NSNotification) {
-        super.reachabilityChangedNotification(notification)
+    override func reachabilityChangedNetwork(_ isAvailaibleNetwork: Bool) {
+        super.reachabilityChangedNetwork(isAvailaibleNetwork)
         getReasonList()
     }
-    
+
     override func updateUI()  {
        super.updateUI()
         DispatchQueue.main.async {

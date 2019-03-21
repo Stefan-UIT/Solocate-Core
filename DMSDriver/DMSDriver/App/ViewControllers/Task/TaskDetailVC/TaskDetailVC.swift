@@ -77,10 +77,10 @@ class TaskDetailVC: BaseViewController {
         }
     }
     
-    
-    override func reachabilityChangedNotification(_ notification: NSNotification) {
-        super.reachabilityChangedNotification(notification)
-        //checkConnetionInternet?(notification, hasNetworkConnection)
+    override func reachabilityChangedNetwork(_ isAvailaibleNetwork: Bool) {
+        super.reachabilityChangedNetwork(isAvailaibleNetwork)
+        //checkConnetionInternet?(notification, isAvailaibleNetwork)
+
     }
     
     override func updateNavigationBar() {

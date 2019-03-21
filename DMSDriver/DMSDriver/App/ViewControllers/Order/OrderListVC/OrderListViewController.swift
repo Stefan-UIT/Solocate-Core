@@ -46,6 +46,8 @@ class OrderListViewController: BaseViewController {
   
     @IBOutlet weak var clvContent: UICollectionView?
     @IBOutlet weak var lblFilter: UILabel?
+    @IBOutlet weak var btnSwitchMode: UIButton?
+
     
     var arrDropDownMenu:[String] = []
     var route: Route?
@@ -58,7 +60,7 @@ class OrderListViewController: BaseViewController {
         }
     }
     
-    var displayMode:DisplayMode = DisplayMode.Reduced{
+    var displayMode:DisplayMode = DisplayMode.Expanded{
         didSet{
             clvContent?.reloadData()
         }
@@ -76,7 +78,7 @@ class OrderListViewController: BaseViewController {
         super.viewWillAppear(animated)
         if hasNetworkConnection {
             if let route = self.route {
-                getRouteDetail("\(route.id)")
+                //getRouteDetail("\(route.id)")
             }
         }else{
             //getDataFromLocalDB()
@@ -87,12 +89,11 @@ class OrderListViewController: BaseViewController {
         super.viewWillDisappear(animated)
     }
     
-    override func reachabilityChangedNotification(_ notification: NSNotification) {
-        super.reachabilityChangedNotification(notification)
-        
+    override func reachabilityChangedNetwork(_ isAvailaibleNetwork: Bool) {
+        super.reachabilityChangedNetwork(isAvailaibleNetwork)
         if hasNetworkConnection {
             if let route = self.route {
-                getRouteDetail("\(route.id)")
+                // getRouteDetail("\(route.id)")
             }
         }else{
             //getDataFromLocalDB()
@@ -141,16 +142,12 @@ class OrderListViewController: BaseViewController {
     }
     
     //MARK: -Action
-    @IBAction func onbtnClickFilterWithStatus(btn:UIButton){
-           PopUpTbvVC.showPopUpTbv(at: btn,
-                                withArrData: arrDropDownMenu,
-                                indexCheckmark: tapFilterOrderList.rawValue,
-                                atVC: self) { (title, index) in
-                                if let tapSelect = TapFilterOrderList(rawValue:index){
-                                    self.tapFilterOrderList = tapSelect
-                                    self.updateLblFilter()
-                                    //self.scrollToPageSelected(index)
-                                }
+    @IBAction func onbtnClickSwitchMode(btn:UIButton){
+        btn.isSelected = !btn.isSelected
+        if displayMode == .Expanded {
+            displayMode = .Reduced
+        }else{
+            displayMode = .Expanded
         }
     }
 }

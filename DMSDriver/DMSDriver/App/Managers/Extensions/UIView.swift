@@ -206,7 +206,7 @@ extension UIView {
     }
     
     func roundCornersLRT() {
-        self.roundedCorners([.layerMaxXMinYCorner, .layerMinXMinYCorner], 5)
+        self.roundedCorners([.layerMaxXMinYCorner, .layerMinXMinYCorner], 10)
         self.addBorders(edges: [.left, .right, .top], color: AppColor.grayBorderColor, width: 0.5)
     }
     
@@ -218,9 +218,11 @@ extension UIView {
         self.addBorders(edges: [.left, .right], color: AppColor.white, width: 0.5)
     }
     
-    func roundCornersLRB() {
-        self.roundedCorners([.layerMaxXMaxYCorner, .layerMinXMaxYCorner], 5)
-        self.addBorders(edges: [.left, .right, .bottom], color: AppColor.white, width: 0.5)
+    func roundCornersLRB(colorBorder:UIColor? = nil, widthBorder:CGFloat? = nil) {
+        self.roundedCorners([.layerMaxXMaxYCorner, .layerMinXMaxYCorner], 10)
+        self.addBorders(edges: [.left, .right, .bottom],
+                        color: (colorBorder != nil) ? colorBorder! : AppColor.white,
+                        width: (widthBorder != nil) ? widthBorder! : 0.5)
     }
     
     

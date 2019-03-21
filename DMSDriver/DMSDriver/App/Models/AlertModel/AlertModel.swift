@@ -57,6 +57,7 @@ class AlertModel: BaseModel {
     var ruleType:RuleType?
     var created_at:String?
     var alertId:Int?
+    var subject:String?
     
     var statusAlert:StatusAlert{
         get{
@@ -95,6 +96,7 @@ class AlertModel: BaseModel {
         truckName <- map["truck_name"]
         tankerName <- map["tanker_name"]
         alertId <- map["alert_id"]
+        subject <- map["subject"]
         
         if alertId == nil { // use for get alert detail (alertId is id)
             alertId <- map["id"]

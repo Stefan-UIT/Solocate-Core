@@ -40,6 +40,7 @@ extension Date {
         return Calendar.app.date(from: dateComponents);
     }
     
+    
     enum TimeInDay {
         case start;
         case end;
@@ -55,22 +56,349 @@ extension Date {
         }
     }
     
-    func startDay() -> Date {
-        var dateComponents = Calendar.app.dateComponents([.year, .month, .day], from: self);
+    static func getDate(fromDate:Date,daysAhead: Int, timeZone:TimeZone? = nil) -> Date {
+        var dateCom = DateComponents()
+        dateCom.day = daysAhead
+        
+        var  cal = Calendar.current
+        if timeZone != nil {
+            cal.timeZone = timeZone!
+        }
+        
+        let tDate = cal.date(byAdding: dateCom, to: fromDate)
+        return tDate ?? Date()
+    }
+    
+    func getDateWithDaysAhead(days:Int,timeZone:TimeZone ) -> Date {
+        return Date.getDate(fromDate: self, daysAhead: days, timeZone: timeZone)
+    }
+    
+    func yesterdayCurrentTimeZone() -> Date {
+        return Date().getDateWithDaysAhead(days: -1, timeZone: TimeZone.current)
+    }
+    
+    func yesterdayCompanyTimeZone() -> Date {
+        return Date().getDateWithDaysAhead(days: -1, timeZone: TimeZone.app)
+    }
+    
+    func yesterdayTimeZone(timeZone:TimeZone) -> Date {
+        return Date().getDateWithDaysAhead(days: -1, timeZone: timeZone)
+    }
+    
+    func getYesterdayStartEndDates(timeZone:TimeZone = TimeZone.current) -> (Date,Date) {
+        let yesterdate = yesterdayTimeZone(timeZone: timeZone)
+        let firstDate = yesterdate.startDay()
+        let endDate = yesterdate.endDay()
+        
+        return (firstDate,endDate)
+    }
+    
+    func getTodayStartEndDates(timeZone:TimeZone = .current) ->  (Date,Date) {
+        let startDate = self.startDay(timeZone: timeZone)
+        let endDate = self.endDay(timeZone: timeZone)
+        return (startDate,endDate)
+    }
+    
+    func tomorrowTimeZone(timeZone:TimeZone? = .current) -> Date {
+        return Date().getDateWithDaysAhead(days: +1, timeZone: timeZone!)
+    }
+
+    func getTomorrowStartEndDates(timeZone:TimeZone = .current) -> (Date,Date) {
+        let tomorrow = tomorrowTimeZone(timeZone: timeZone)
+        return (tomorrow.startDay(timeZone: timeZone), tomorrow.endDay(timeZone: timeZone))
+    }
+    
+    func getLastWeekStartEndDates(timeZone:TimeZone = .current) -> (Date,Date) {
+        let dateLastWeek = self.getDateWithDaysAhead(days: -7, timeZone: timeZone)
+        let firstDate = dateLastWeek.startDayOfThisWeek(timeZone: timeZone)
+        let enđDate = dateLastWeek.endDayOfThisWeek(timeZone: timeZone)
+        return (firstDate,enđDate)
+    }
+    
+    func getThisWeekStartEndDates(timeZone:TimeZone = .current) -> (Date,Date) {
+        let firstDate = self.startDayOfThisWeek(timeZone: timeZone)
+        let enđDate = self.endDayOfThisWeek(timeZone: timeZone)
+        return (firstDate,enđDate)
+    }
+    
+    func getNextWeekStartEndDates(timeZone:TimeZone = .current) -> (Date,Date) {
+        let dateNextWeek = getDateWithDaysAhead(days: +7, timeZone: timeZone)
+        let firstDate = dateNextWeek.startDayOfThisWeek(timeZone: timeZone)
+        let endDate = dateNextWeek.endDayOfThisWeek(timeZone: timeZone)
+        
+        return (firstDate,endDate)
+    }
+    
+    func getThisMonthStartEndDates(timeZone:TimeZone = .current) -> (Date,Date) {
+        let firstDate = self.firstDayOfMonth(timeZone: timeZone)
+        let endDate = self.lastDayOfMonth(timeZone: timeZone)
+        
+        return (firstDate,endDate)
+    }
+    
+    func getLastMonthStartEndDates(timeZone:TimeZone = .current) -> (Date,Date) {
+        let date = self.getLastMonthSameDate(timeZone: timeZone)
+        return date.getThisMonthStartEndDates(timeZone:timeZone)
+    }
+    
+    func getNextMonthStartEndDates(timeZone:TimeZone = .current) -> (Date,Date) {
+        let date = self.getNextMonthSameDate(timeZone: timeZone)
+        return date.getThisMonthStartEndDates(timeZone:timeZone)
+    }
+
+    
+    func startDay(timeZone:TimeZone = .current) -> Date {
+        let cal =  Calendar(identifier: .gregorian, timeZone: timeZone)
+        var dateComponents = cal.dateComponents([.year, .month, .day], from: self);
         dateComponents.hour = 0;
         dateComponents.minute = 0;
         dateComponents.second = 0;
-        return Calendar.app.date(from: dateComponents)!;
+        return cal.date(from: dateComponents)!;
     }
     
-    func endDay() -> Date {
-        var dateComponents = Calendar.app.dateComponents([.year, .month, .day], from: self);
+    func endDay(timeZone:TimeZone = .current) -> Date {
+        let cal =  Calendar(identifier: .gregorian, timeZone: timeZone)
+        var dateComponents = cal.dateComponents([.year, .month, .day], from: self);
         dateComponents.day = dateComponents.day! + 1;
         dateComponents.hour = 0;
         dateComponents.minute = 0;
         dateComponents.second = -1;
-        return Calendar.app.date(from: dateComponents)!;
+        return cal.date(from: dateComponents)!;
     }
+    
+    func startDayOfThisWeek(timeZone:TimeZone = .current) ->Date{
+        let cal =  Calendar(identifier: .iso8601, timeZone: timeZone)
+        var dateComponents = cal.dateComponents([.year, .month, .day,.hour,.minute,.second], from: self)
+        let day = dateComponents.day
+        let offset = dateComponents.weekday
+        
+        dateComponents.day = (day ?? 0) - (offset ?? 0)
+        dateComponents.hour = 0;
+        dateComponents.minute = 0;
+        dateComponents.second = 0;
+        
+        return cal.date(from: dateComponents)!;
+    }
+    
+    func endDayOfThisWeek(timeZone:TimeZone = .current) ->Date{
+        let cal =  Calendar(identifier: .iso8601, timeZone: timeZone)
+        var dateComponents = cal.dateComponents([.year, .month, .day,.hour,.minute,.second], from: self)
+        let day = dateComponents.day
+        let offset = dateComponents.weekday
+        
+        dateComponents.day = (day ?? 0) - (offset ?? 0) + 6 //start day + 6
+        dateComponents.hour = 23;
+        dateComponents.minute = 59;
+        dateComponents.second = 59;
+        
+        return cal.date(from: dateComponents)!;
+    }
+    
+    func firstDayOfMonth(timeZone:TimeZone = .current) -> Date {
+        let cal =  Calendar(identifier: .iso8601, timeZone: timeZone)
+        var dateComponents = cal.dateComponents([.year, .month, .day,.hour,.minute,.second], from: self)
+        
+        dateComponents.day = 1
+        dateComponents.hour = 0;
+        dateComponents.minute = 0;
+        dateComponents.second = 0;
+        
+        return cal.date(from: dateComponents)!;
+    }
+    
+    
+    func lastDayOfMonth(timeZone:TimeZone = .current) -> Date {
+        let cal =  Calendar(identifier: .iso8601, timeZone: timeZone)
+        var dateComponents = cal.dateComponents([.year, .month, .day,.hour,.minute,.second], from: self)
+    
+        var day = 31;
+        let month = dateComponents.month
+        if month == 2{
+            let year = dateComponents.year ?? 0
+            if year % 400 == 0 || (year % 4 == 0 && year % 100 == 0) {
+                day = 29
+            }else {
+                day = 28
+            }
+        } else if((month == 4) || (month == 6) || (month == 9) || (month == 11)) {
+            day = 30;
+        }
+
+        dateComponents.day = day
+        dateComponents.hour = 23
+        dateComponents.minute = 59
+        dateComponents.second = 59
+        
+        return cal.date(from: dateComponents)!;
+    }
+    
+    func getLastMonthSameDate(timeZone:TimeZone = .current) -> Date {
+        let cal =  Calendar(identifier: .iso8601, timeZone: timeZone)
+        var dateComponents = cal.dateComponents([.year, .month, .day], from: self)
+        
+        var year = dateComponents.year ?? 0
+        var month = dateComponents.month ?? 0
+        var day = dateComponents.day ?? 0
+        if(month == 1) {
+            year -= 1
+            month = 12;
+            
+        } else {
+            month -= 1
+        }
+        
+        self.adjustDay(day: &day, month: &month, year: &year)
+        
+        dateComponents.month = month
+        dateComponents.year = year
+        dateComponents.day = day
+
+        return cal.date(from: dateComponents)!;
+    }
+    
+    func getNextMonthSameDate(timeZone:TimeZone = .current) -> Date {
+        let cal =  Calendar(identifier: .iso8601, timeZone: timeZone)
+        var dateComponents = cal.dateComponents([.year, .month, .day], from: self)
+        
+        var year = dateComponents.year ?? 0
+        var month = dateComponents.month ?? 0
+        var day = dateComponents.day ?? 0
+        if(month == 12) {
+            year += 1
+            month = 1;
+            
+        } else {
+            month += 1
+        }
+        
+        self.adjustDay(day: &day, month: &month, year: &year)
+        
+        dateComponents.month = month
+        dateComponents.year = year
+        dateComponents.day = day
+        
+        return cal.date(from: dateComponents)!;
+    }
+    
+    func getLastYearSameDate() -> Date {
+        let cal =  Calendar(identifier: .iso8601)
+        var dateComponents = cal.dateComponents([.year, .month, .day], from: self)
+        let year = dateComponents.year ?? 0
+        dateComponents.year = year - 1
+        return cal.date(from: dateComponents)!;
+    }
+    
+    func getNextYearSameDate() -> Date {
+        let cal =  Calendar(identifier: .iso8601)
+        var dateComponents = cal.dateComponents([.year, .month, .day], from: self)
+        let year = dateComponents.year ?? 0
+        dateComponents.year = year + 1
+        return cal.date(from: dateComponents)!;
+    }
+    
+    func firstDayOfYear(timeZone:TimeZone = .current) -> Date {
+        let cal =  Calendar(identifier: .iso8601, timeZone: timeZone)
+        var dateComponents = cal.dateComponents([.year, .month, .day], from: self)
+        
+        dateComponents.day = 1
+        dateComponents.month = 1
+        dateComponents.year = dateComponents.year
+        
+        return cal.date(from: dateComponents)!;
+    }
+    
+    
+    func lastDayOfYear(timeZone:TimeZone = .current) -> Date {
+        let cal =  Calendar(identifier: .iso8601, timeZone: timeZone)
+        var dateComponents = cal.dateComponents([.year, .month, .day], from: self)
+        
+        dateComponents.day = 31
+        dateComponents.month = 12
+        dateComponents.year = dateComponents.year
+        
+        return cal.date(from: dateComponents)!.endDay(timeZone:timeZone);
+    }
+    
+    func firstDayOfYear(timeZone:TimeZone = .current, year:Int) -> Date {
+        let cal =  Calendar(identifier: .iso8601, timeZone: timeZone)
+        var dateComponents = cal.dateComponents([.year, .month, .day], from: self)
+        
+        dateComponents.day = 1
+        dateComponents.month = 1
+        dateComponents.year = year
+        
+        return cal.date(from: dateComponents)!;
+    }
+    
+    
+    func lastDayOfYear(timeZone:TimeZone = .current,year:Int) -> Date {
+        let cal =  Calendar(identifier: .iso8601, timeZone: timeZone)
+        var dateComponents = cal.dateComponents([.year, .month, .day], from: self)
+        
+        dateComponents.day = 31
+        dateComponents.month = 12
+        dateComponents.year = year
+        
+        return cal.date(from: dateComponents)!;
+    }
+    
+    func getThisYearStartEndDates(timeZone:TimeZone = .current) -> (Date,Date) {
+        let firstDate = firstDayOfYear(timeZone: timeZone)
+        let enđate = lastDayOfYear(timeZone: timeZone)
+        
+        return (firstDate,enđate)
+    }
+    
+    func getLastYearStartEndDates(timeZone:TimeZone = .current) -> (Date,Date) {
+        let date = Date().getLastYearSameDate()
+        return date.getThisYearStartEndDates(timeZone:timeZone)
+    }
+    
+    
+    func getNextYearStartEndDates(timeZone:TimeZone = .current) -> (Date,Date) {
+        let date = Date().getNextYearSameDate()
+        return date.getThisYearStartEndDates(timeZone:timeZone)
+    }
+
+    
+    func checkLeapYear(year:Int) -> Bool {
+        if(((year%4 == 0) && (year%100 != 0)) || (year%400 == 0)){
+            return true;
+        }
+        else{
+            return false;
+        }
+    }
+    
+    func adjustDay(day: inout Int, month: inout Int,year: inout Int)  {
+        let  md:[Int] = [ 0, // Zero
+            31, // Jan
+            28, // Feb
+            31, // Mar
+            30, // Apr
+            31, // May
+            30, // June
+            31, // july
+            31, // Aug
+            30, // Sep
+            31, // Oct
+            30, // Nov
+            31, // Dec
+            0 // Zero
+        ];
+        
+        var noDay = md[month]
+        if(month == 2) {
+            if(checkLeapYear(year: year)) {
+                noDay = 29;
+            }
+        }
+        
+        if(day > noDay) {
+            day = noDay;
+        }
+    }
+    
     
     func toString(_ format: String? = nil) -> String {
         let dateFormat = DateFormatter()
@@ -79,6 +407,12 @@ extension Date {
             dateFormat.dateFormat = _format
         }
         return dateFormat.string(from: self)
+    }
+    
+    func toString(_ date: String, _ formatInput: String, _ formatOutput: String) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = formatInput
+        return dateFormatter.date(from: date)?.toString(formatOutput) ?? ""
     }
     
     /// Returns the amount of years from another date
@@ -200,7 +534,7 @@ extension Date {
                 return nil;
         }
         
-        return date.day(for: timeInDay);
+        return date.day(for: timeInDay)
     }
     
     func toServerDateTime() -> (date: String, time: String) {

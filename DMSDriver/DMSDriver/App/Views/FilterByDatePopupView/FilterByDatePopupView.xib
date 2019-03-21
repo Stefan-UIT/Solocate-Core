@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FilterByDatePopupView" customModule="DMSDriver" customModuleProvider="target">
+            <connections>
+                <outlet property="tbvFilter" destination="95g-gw-4O5" id="Pas-ml-Hkc"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bl7-ne-puA" userLabel="vMain">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="89" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="95g-gw-4O5">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        </tableView>
+                    </subviews>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="95g-gw-4O5" firstAttribute="top" secondItem="bl7-ne-puA" secondAttribute="top" id="PSM-ue-3T8"/>
+                        <constraint firstItem="95g-gw-4O5" firstAttribute="leading" secondItem="bl7-ne-puA" secondAttribute="leading" id="bKP-zY-teO"/>
+                        <constraint firstAttribute="trailing" secondItem="95g-gw-4O5" secondAttribute="trailing" id="e6b-qr-8ru"/>
+                        <constraint firstAttribute="bottom" secondItem="95g-gw-4O5" secondAttribute="bottom" id="qnC-Ef-exs"/>
+                    </constraints>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="bl7-ne-puA" secondAttribute="bottom" id="7xv-Xc-cdT"/>
+                <constraint firstItem="bl7-ne-puA" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="dkK-V9-vrO"/>
+                <constraint firstItem="bl7-ne-puA" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="jqF-Ie-dKA"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bl7-ne-puA" secondAttribute="trailing" id="sMf-3p-OME"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+        </view>
+    </objects>
+</document>

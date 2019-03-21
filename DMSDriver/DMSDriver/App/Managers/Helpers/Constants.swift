@@ -33,7 +33,7 @@ struct Constants {
   static let NAVIGATION_BAR_HEIGHT: CGFloat = 64.0
   static let SCALE_VALUE_HEIGHT_DEVICE = (DeviceType.IS_IPAD ? 1.2 : (DeviceType.IS_IPHONE_6 ? 1.0 : (DeviceType.IS_IPHONE_6P ? 1.174 : 1.0))) as CGFloat
   
-  static let SCALE_VALUE_WIDTH_DEVICE  = (DeviceType.IS_IPAD ? 1.2 : (DeviceType.IS_IPHONE_6 ? 1.0 : (DeviceType.IS_IPHONE_6P ? 1.171 : 1.0))) as CGFloat
+  static let SCALE_VALUE_WIDTH_DEVICE  = (DeviceType.IS_IPAD ? 1.2 : (DeviceType.IS_IPHONE_6 ? 1.0 : (DeviceType.IS_IPHONE_6P ? 1.171 : 0.9))) as CGFloat
   
   static let FONT_SCALE_VALUE          = (DeviceType.IS_IPAD ? 1.2 : (DeviceType.IS_IPHONE_6P ? 1.1 : (DeviceType.IS_IPHONE_6 ? 1.00 : 0.9))) as CGFloat
   
@@ -150,6 +150,7 @@ public enum SBName : String {
     case Task = "Task";
     case Profile = "Profile";
     case Common = "Common";
+    case Dashboard = "Dashboard";
     case Notification = "Notification";
 
 }

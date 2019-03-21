@@ -14,7 +14,8 @@ class TaskListVC: BaseViewController {
     @IBOutlet weak var clvContent:UICollectionView?
     @IBOutlet weak var lblNoData: UILabel?
 
-    
+    var timeData:TimeDataItem?
+
     
     fileprivate let taskListIdebtifierCell = "TaskListClvCell"
     
@@ -38,9 +39,9 @@ class TaskListVC: BaseViewController {
         setupNavigateBar()
     }
     
-    override func reachabilityChangedNotification(_ notification: NSNotification) {
-        super.reachabilityChangedNotification(notification)
-        if hasNetworkConnection {
+    override func reachabilityChangedNetwork(_ isAvailaibleNetwork: Bool) {
+        super.reachabilityChangedNetwork(isAvailaibleNetwork)
+        if isAvailaibleNetwork {
             fetchData()
         }else{
             
@@ -54,7 +55,7 @@ class TaskListVC: BaseViewController {
     //MARK: - Intialize
     func setupNavigateBar() {
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.Menu_Calenda, "Tasks List".localized)
+        App().navigationService.updateNavigationBar(.Menu, "".localized)
     }
     
     func setupCollectionView() {
@@ -62,24 +63,32 @@ class TaskListVC: BaseViewController {
         clvContent?.dataSource = self
         clvContent?.addPullToRefetch(self, action: #selector(fetchData))
     }
+    
+    
+    //MARK: - ACTION
+    @IBAction func onbtnClickFilterByDate(btn:UIButton) {
+        let arrHide = [TimeItemType.TimeItemTypeLastYear.rawValue,
+                       TimeItemType.TimeItemTypeThisYear.rawValue,
+                       TimeItemType.TimeItemTypeNextYear.rawValue]
+        FilterByDatePopupView.showFilterListTimeAtView(view: btn,
+                                                       atViewContrller: self,
+                                                       timeData: timeData,
+                                                       needHides: arrHide as [NSNumber]) {[weak self] (success, timeData) in
+                                                 
+                                                        //
+        }
+    }
 }
 
 
 //MARK: - DMSNavigationServiceDelegate
 extension TaskListVC:DMSNavigationServiceDelegate{
     func didSelectedBackOrMenu() {
-        if Constants.isLeftToRight {
-            if let  menuLeft = SideMenuManager.default.menuLeftNavigationController{
-                present(menuLeft, animated: true, completion: nil)
-            }
-        }else{
-            if let menuRight = SideMenuManager.default.menuRightNavigationController{
-                present(menuRight, animated: true, completion: nil)
-            }
-        }
+        showSideMenu()
     }
     
-    func didSelectedRightButton() {
+    /*
+    func didSelectedLeftButton(_ sender: UIBarButtonItem) {
         let dateFormater =  DateFormatter()
         dateFormater.dateFormat = "MM/dd/yyyy"
         
@@ -100,6 +109,7 @@ extension TaskListVC:DMSNavigationServiceDelegate{
                                             }
         }
     }
+     */
 }
 
 

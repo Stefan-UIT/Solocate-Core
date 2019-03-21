@@ -1,0 +1,546 @@
+//
+//  FilterDataListVC.swift
+//  DMSDriver
+//
+//  Created by machnguyen_uit on 2/19/19.
+//  Copyright © 2019 machnguyen_uit. All rights reserved.
+//
+
+import UIKit
+
+enum FilterDataListSection:Int {
+    case SectionDate = 0
+    case SectionType
+    case SectionStatus
+    case SectionCustomer
+    case SectionCity
+    
+    static let count: Int = {
+        var max: Int = 0
+        while let _ = FilterDataListSection(rawValue: max) { max += 1 }
+        return max
+    }()
+}
+
+typealias FilterDataListCallback = (Bool, FilterDataModel)-> Void
+
+class FilterDataListVC: BaseViewController {
+    
+    //MARK: - IBOUTLET
+    @IBOutlet weak var btnClearAll:UIButton?
+    @IBOutlet weak var btnCancel:UIButton?
+    @IBOutlet weak var lblFilterBy:UILabel?
+    @IBOutlet weak var tbvContent:UITableView?
+    
+    
+    //MARK: - VARIABLE
+    fileprivate let identifierHeaderCell = "identifierHeaderCell"
+    fileprivate let identifierTypeRowCell = "identifierTypeRowCell"
+    fileprivate let identifierStatusCell = "identifierStatusCell"
+    fileprivate let identifierHeaderInsertCell = "identifierHeaderInsertCell"
+    fileprivate let identifierInsertRowCell = "FilterDataListInsertRowCell"
+
+
+    fileprivate var callback:FilterDataListCallback?
+    fileprivate var filterModel = FilterDataModel()
+    fileprivate var arrStatus:[String] = []
+    fileprivate var arrCustomer:[String] = []
+    fileprivate var arrCity:[String] = []
+    fileprivate var arrCustomerDisplay:[String] = []
+    fileprivate var arrCityDisplay:[String] = []
+
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupTableView()
+        setupData()
+    }
+    
+    func setupData()  {
+        arrStatus = ["New".localized,
+                     "In Progress".localized,
+                     "Finished".localized,
+                     "Cancelled".localized]
+        
+        arrCustomer = ["Nguyen Mach".localized,
+                     "Bao Phan".localized,
+                     "Hien Son".localized,
+                     "Xuan Huynh".localized]
+        
+        arrCity =    [ "Ho Chi Mịnh",
+                       "Binh Duong",
+                       "Soc Trang",
+                       "Bac Lieu"]
+        
+        arrCityDisplay = arrCity
+        arrCustomerDisplay = arrCustomer
+    }
+
+
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        // Get the new view controller using segue.destination.
+        // Pass the selected object to the new view controller.
+    }
+    */
+    
+    func setupTableView() {
+        tbvContent?.register(UINib(nibName: ClassName(FilterDataListHeaderCell()), bundle: nil), forHeaderFooterViewReuseIdentifier: identifierHeaderCell)
+        tbvContent?.register(UINib(nibName: ClassName(FilterDataListHeaderInsertCell()), bundle: nil), forHeaderFooterViewReuseIdentifier: identifierHeaderInsertCell)
+        tbvContent?.register(UINib(nibName: ClassName(FilterDataTypeRowCell()), bundle: nil),
+                             forCellReuseIdentifier: identifierTypeRowCell)
+        tbvContent?.register(UINib(nibName: ClassName(FilterDataListStatusCell()), bundle: nil),
+                             forCellReuseIdentifier:identifierStatusCell)
+        tbvContent?.register(UINib(nibName: ClassName(FilterDataListInsertRowCell()), bundle: nil),
+                             forCellReuseIdentifier: identifierInsertRowCell)
+        
+        tbvContent?.delegate = self
+        tbvContent?.dataSource = self
+    }
+    
+    //MARK: - ACTION
+    @IBAction func onbtnClickClearAll(btn:UIButton) {
+        filterModel = FilterDataModel()
+        tbvContent?.reloadData()
+    }
+    
+    @IBAction func onbtnClickCancel(btn:UIButton) {
+        self.dismiss(animated: false, completion: nil)
+    }
+}
+
+
+//MARK: - UITableView
+extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return FilterDataListSection.count
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if let sectionDisplay = FilterDataListSection(rawValue: section) {
+            switch sectionDisplay {
+            case .SectionDate:
+                return 0
+            case .SectionType:
+                if filterModel.selectingField == FilterDataModel.SelectingField.TypeField {
+                    return 1
+                }
+            case .SectionStatus:
+                if filterModel.selectingField == FilterDataModel.SelectingField.StatusField {
+                    return arrStatus.count
+                }
+            case .SectionCustomer:
+                if filterModel.selectingField == FilterDataModel.SelectingField.CustomerField {
+                    return 1
+                }
+                
+            case .SectionCity:
+                if filterModel.selectingField == FilterDataModel.SelectingField.CityField {
+                    return 1
+                }
+            }
+        }
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if let sectionDisplay = FilterDataListSection(rawValue: indexPath.section) {
+            switch sectionDisplay {
+            case .SectionCustomer,
+                 .SectionCity:
+                return 145 * Constants.SCALE_VALUE_WIDTH_DEVICE
+            default:
+                break
+            }
+        }
+        return 40 * Constants.SCALE_VALUE_WIDTH_DEVICE
+    }
+    
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 60 * Constants.SCALE_VALUE_WIDTH_DEVICE
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if let sectionDisplay = FilterDataListSection(rawValue: section) {
+            switch sectionDisplay {
+            case .SectionDate:
+                let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifierHeaderCell) as! FilterDataListHeaderCell
+                header.imvIcon?.isHidden = true
+                header.delegate = self
+                header.tag = section
+
+                if filterModel.date == nil {
+                    header.lblTitle?.text = "DATE"
+                    header.lblTitle?.textColor = AppColor.white
+                }else{
+                   let stringDate = DateFormatter.displayDateUS.string(from: filterModel.date!)
+                    header.lblTitle?.text = "DATE: " + stringDate
+                    header.lblTitle?.textColor = AppColor.mainColor
+                }
+                
+                return header
+                
+            case .SectionType:
+                let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifierHeaderCell) as! FilterDataListHeaderCell
+                header.imvIcon?.isHidden = true
+                header.delegate = self
+                header.tag = section
+                if filterModel.type == nil {
+                    header.lblTitle?.text = "TYPE"
+                    header.lblTitle?.textColor = AppColor.white
+                }else {
+                    var types = filterModel.type?.first
+                    if filterModel.type?.count > 1 {
+                        types = E(types) + E(filterModel.type?.last)
+                    }
+                    header.lblTitle?.textColor = AppColor.mainColor
+                    header.lblTitle?.text = "TYPE: " + E(types)
+                }
+                return header
+                
+            case .SectionStatus:
+                let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifierHeaderCell) as! FilterDataListHeaderCell
+                header.imvIcon?.isHidden = true
+                header.delegate = self
+                header.tag = section
+                
+                if filterModel.status == nil {
+                    header.lblTitle?.text = "STATUS"
+                    header.lblTitle?.textColor = AppColor.white
+                    
+                }else {
+                    header.lblTitle?.textColor = AppColor.mainColor
+                    header.lblTitle?.text = "STATUS: " + E(filterModel.status)
+                }
+                return header
+
+            case .SectionCustomer:
+                if filterModel.selectingField == FilterDataModel.SelectingField.CustomerField {
+                    let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifierHeaderInsertCell) as! FilterDataListHeaderInsertCell
+                    header.imvIcon?.isHidden = false
+                    header.setPlaceholder("INSERT CUSTOMER NAME")
+                    header.tag = section
+                    header.tfContent?.delegate = self
+                    header.tfContent?.tag = 99
+
+                    return header
+
+                }else {
+                    let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifierHeaderCell) as! FilterDataListHeaderCell
+                    header.imvIcon?.isHidden = false
+                    header.delegate = self
+                    header.tag = section
+                    
+                    if filterModel.customer == nil {
+                        header.lblTitle?.text = "CUSTOMER"
+                        header.lblTitle?.textColor = AppColor.white
+                    }else {
+                        header.lblTitle?.text = "CUSTOMER: " + E(filterModel.customer)
+                        header.lblTitle?.textColor = AppColor.mainColor
+                    }
+
+                    return header
+                }
+                
+            case .SectionCity:
+                if filterModel.selectingField == FilterDataModel.SelectingField.CityField {
+                    let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifierHeaderInsertCell) as! FilterDataListHeaderInsertCell
+                    header.imvIcon?.isHidden = false
+                    header.setPlaceholder("INSERT CITY")
+                    header.tag = section
+                    header.tfContent?.delegate = self
+                    header.tfContent?.tag = 100
+                    return header
+                    
+                }else {
+                    let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifierHeaderCell) as! FilterDataListHeaderCell
+                    header.imvIcon?.isHidden = false
+                    header.delegate = self
+                    header.tag = section
+                    if filterModel.city == nil {
+                        header.lblTitle?.text = "CITY"
+                        header.lblTitle?.textColor = AppColor.white
+                    }else {
+                        header.lblTitle?.text = "CITY: " + E(filterModel.city)
+                        header.lblTitle?.textColor = AppColor.mainColor
+                    }
+                    
+                    return header
+                }
+            }
+        }
+        
+        return UIView()
+    }
+    
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        if let sectionDisplay = FilterDataListSection(rawValue: section) {
+            switch sectionDisplay {
+            case .SectionCity:
+                return 95 * Constants.SCALE_VALUE_WIDTH_DEVICE
+            default:
+                break
+            }
+        }
+        
+        return 0
+    }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        if let sectionDisplay = FilterDataListSection(rawValue: section) {
+            switch sectionDisplay {
+            case .SectionCity:
+                let footerView:FilterDataListFooterView = FilterDataListFooterView.load(nib: ClassName(FilterDataListFooterView()), owner: nil)
+                footerView.delegate = self
+                return footerView
+            default:
+                break
+            }
+        }
+    
+        return nil
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let section = indexPath.section
+        let row = indexPath.row
+        
+        if let sectionDisplay = FilterDataListSection(rawValue: section) {
+            switch sectionDisplay {
+            case .SectionDate:
+                break
+            case .SectionType:
+                let cell = tableView.dequeueReusableCell(withIdentifier: identifierTypeRowCell) as! FilterDataTypeRowCell
+                cell.delegate = self
+                cell.selectionStyle = .none
+                return cell
+                
+            case .SectionStatus:
+                let cell = tableView.dequeueReusableCell(withIdentifier: identifierStatusCell) as! FilterDataListStatusCell
+                cell.btnStatus?.setTitle(arrStatus[row], for: .normal)
+                cell.btnStatus?.tag = indexPath.row
+                cell.delegate = self
+                cell.selectionStyle = .none
+
+                return cell
+                
+            case .SectionCustomer:
+                let cell = tableView.dequeueReusableCell(withIdentifier:identifierInsertRowCell ) as! FilterDataListInsertRowCell
+                cell.dataSource = arrCustomerDisplay
+                cell.selectionStyle = .none
+                cell.delegate = self
+
+                return cell
+                
+            case .SectionCity:
+                let cell = tableView.dequeueReusableCell(withIdentifier: identifierInsertRowCell) as! FilterDataListInsertRowCell
+                cell.dataSource = arrCityDisplay
+                cell.selectionStyle = .none
+                cell.delegate = self
+
+                return cell
+            }
+        }
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //
+    }
+}
+
+//MARK: - FilterDataListFooterViewDelegate
+extension FilterDataListVC:UITextFieldDelegate{
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text,
+            let textRange = Range(range, in: text) {
+            print("text:\(text)")
+            let searchText = text.replacingCharacters(in: textRange,
+                                                       with: string)
+            
+            if textField.tag == 99 { // Customer
+                
+                doSearchCustomer(searchText: searchText)
+                
+            }else if textField.tag == 100 {// City
+                
+                doSearchCity(searchText: searchText)
+            }
+        }
+        return true
+    }
+    
+    func doSearchCustomer(searchText:String){
+        let newSearchString = searchText.components(separatedBy: "\n").first?.lowercased()
+        if !isEmpty(newSearchString) {
+            arrCustomerDisplay = arrCustomer.filter({ (item) -> Bool in
+                let isExist = item.lowercased().contains(newSearchString!)
+                return isExist
+            })
+            
+        }else {
+            arrCustomerDisplay = arrCustomer
+        }
+        tbvContent?.reloadData()
+    }
+    
+    
+    func doSearchCity(searchText:String){
+        let newSearchString = searchText.components(separatedBy: "\n").first?.lowercased()
+        if !isEmpty(newSearchString) {
+            arrCityDisplay = arrCity.filter({ (item) -> Bool in
+                let isExist = item.lowercased().contains(newSearchString!)
+                return isExist
+            })
+            
+        }else {
+            arrCityDisplay = arrCity
+        }
+        
+        tbvContent?.reloadData()
+    }
+}
+
+//MARK: - FilterDataListInsertRowCellDelegate
+extension FilterDataListVC:FilterDataListInsertRowCellDelegate {
+    func filterDataListInsertRowCell(cell: FilterDataListInsertRowCell, didSelect indexPath: IndexPath) {
+        guard let indexPathAtFilterDataList = tbvContent?.indexPath(for: cell) else {
+            return
+        }
+        filterModel.selectingField = nil
+        let section = FilterDataListSection(rawValue: indexPathAtFilterDataList.section)
+        if section == FilterDataListSection.SectionCustomer {
+            
+            filterModel.customer = arrCustomerDisplay[indexPath.row]
+            
+        }else if (section == FilterDataListSection.SectionCity) {
+            
+            filterModel.city = arrCityDisplay[indexPath.row]
+        }
+        
+        tbvContent?.reloadData()
+    }
+}
+
+//MARK: - FilterDataListFooterViewDelegate
+extension FilterDataListVC:FilterDataTypeRowCellDelegate {
+    func filterDataTypeRowCell(cell: FilterDataTypeRowCell, didSelectType type: String) {
+        filterModel.selectingField = nil
+        if filterModel.type == nil {
+            filterModel.type = []
+            filterModel.type?.append(type)
+            
+        }else {
+            if !(filterModel.type?.contains(type) ?? false) {
+                filterModel.type?.append("," + type)
+            }
+        }
+        tbvContent?.reloadData()
+    }
+}
+
+
+//MARK: - FilterDataListStatusCellDelegate
+extension FilterDataListVC:FilterDataListStatusCellDelegate{
+    func filterDataListStatusCell(cell: FilterDataListStatusCell, didSelect status: String, index: Int) {
+        filterModel.selectingField = nil
+        filterModel.status = status
+        tbvContent?.reloadData()
+    }
+}
+
+
+//MARK: - FilterDataListFooterViewDelegate
+extension FilterDataListVC:FilterDataListFooterViewDelegate {
+    func filterDataListFooterView(view: FilterDataListFooterView, didSelectSearch: UIButton) {
+        self.dismiss(animated: false) {[weak self] in
+            guard let strongSelf = self else {return}
+            print("FilterModel: \(strongSelf.filterModel)")
+            strongSelf.callback?(true,strongSelf.filterModel)
+        }
+    }
+}
+
+
+//MARK: - FilterDataListHeaderCellDelegate
+extension FilterDataListVC:FilterDataListHeaderCellDelegate{
+    func filterDataListHeaderCell(cell: FilterDataListHeaderCell, didSelectHeader: UIButton) {
+        let section = cell.tag
+        filterModel.selectingField = FilterDataModel.SelectingField(rawValue: section)
+        guard let sectionDisplay = FilterDataListSection(rawValue: section) else {
+            return
+        }
+        switch sectionDisplay {
+        case .SectionDate:
+            doPickdate()
+        case .SectionType:
+            break
+        case .SectionStatus:
+            break
+        case .SectionCustomer:
+            break
+        case .SectionCity:
+            break
+
+        }
+        
+        let transition = CATransition()
+        transition.type = kCATransitionMoveIn
+        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        transition.fillMode = kCAFillModeForwards
+        transition.duration = 0.5
+        transition.subtype = kCATransitionFromTop
+        self.tbvContent?.layer.add(transition, forKey: "UITableViewReloadDataAnimationKey")
+        self.tbvContent?.reloadData()
+        
+        if sectionDisplay == .SectionCity {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                self.tbvContent?.selectRow(at: IndexPath(row: 0, section: FilterDataListSection.SectionCity.rawValue), animated: true, scrollPosition: .bottom)
+            }
+        }
+
+        
+        /*
+        UIView.transition(with: tbvContent!,
+                          duration: 0.35,
+                          options: .curveEaseInOut,
+                          animations: {
+                            self.tbvContent?.reloadData()
+        }, completion: nil)
+       */
+    }
+    
+    func doPickdate() {
+        let dateFormater =  DateFormatter()
+        dateFormater.dateFormat = "yyyy-MM-dd"
+        
+        let currentDate = dateFormater.date(from:filterModel.date?.toString() ??  Date.now.toString())
+        UIAlertController.showDatePicker(atViewController:self,
+                                         style: .actionSheet,
+                                         mode: .date,
+                                         title: "Select date".localized,
+                                         currentDate: currentDate) {[weak self] (date) in
+                                         self?.filterModel.date = date
+                                         self?.tbvContent?.reloadData()
+        }
+    }
+}
+
+
+//MARK: - Suport method
+extension FilterDataListVC {
+    
+    class func show(atViewController viewController:UIViewController, callback:@escaping FilterDataListCallback)  {
+        let vc:FilterDataListVC = FilterDataListVC.load(nib: "FilterDataListVC")
+        vc.callback = callback
+        
+        let nv:BaseNV = BaseNV()
+        nv.isNavigationBarHidden = true
+        nv.setViewControllers([vc], animated: false)
+        viewController.present(nv, animated: false, completion: nil)
+    }
+}

@@ -49,13 +49,12 @@ class PickerTypeListVC: BaseViewController {
         App().navigationService.delegate = self
     }
     
-    
-    override func reachabilityChangedNotification(_ notification: NSNotification) {
-        super.reachabilityChangedNotification(notification)
-        if self.hasNetworkConnection {
+    override func reachabilityChangedNetwork(_ isAvailaibleNetwork: Bool) {
+        super.reachabilityChangedNetwork(isAvailaibleNetwork)
+        if isAvailaibleNetwork {
             fetchData()
-        }else{
             
+        }else{
             DispatchQueue.main.async {
                 self.dataOrigins = []
                 self.dataDisplays = []
@@ -64,7 +63,7 @@ class PickerTypeListVC: BaseViewController {
             }
         }
     }
-
+ 
     
     func setupTableView() {
         tbvContent?.delegate = self

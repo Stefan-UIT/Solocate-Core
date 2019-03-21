@@ -17,10 +17,14 @@ target 'DMSDriver' do
  	pod 'SDWebImage'
   	pod 'Firebase/Core'
  	pod 'Firebase/Messaging'
-    pod 'SideMenu', '~> 4.0.0'
-    pod 'ReachabilitySwift', '~> 3'
-    pod 'Socket.IO-Client-Swift', '~> 13.3.0'
-    pod 'FDFullscreenPopGesture', '1.1'
+    	pod 'SideMenu', '~> 4.0.0'
+    	pod 'ReachabilitySwift', '~> 3'
+    	pod 'Socket.IO-Client-Swift', '~> 13.3.0'
+    	pod 'FDFullscreenPopGesture', '1.1'
+    	pod 'Hero','1.4.0'
+    	pod 'Charts'
+	pod 'Fabric'
+	pod 'Crashlytics'
 
 end
 

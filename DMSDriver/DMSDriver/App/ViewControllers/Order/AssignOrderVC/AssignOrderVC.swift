@@ -65,8 +65,8 @@ class AssignOrderVC: BaseViewController {
         App().navigationService.updateNavigationBar(.Menu_Select, "Orders assignment".localized)
     }
     
-    override func reachabilityChangedNotification(_ notification: NSNotification) {
-        super.reachabilityChangedNotification(notification)
+    override func reachabilityChangedNetwork(_ isAvailaibleNetwork: Bool) {
+        super.reachabilityChangedNetwork(isAvailaibleNetwork)
         if hasNetworkConnection {
             fetchData()
         }else{

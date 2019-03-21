@@ -21,7 +21,8 @@ extension UIAlertController {
         set(vc: datePicker, height: 217)
     }
     
-    class func showDatePicker(style: UIAlertControllerStyle,
+    class func showDatePicker(atViewController:UIViewController? = nil,
+                              style: UIAlertControllerStyle,
                         mode:UIDatePickerMode,
                         useChangeValue:Bool = false,
                         title:String,
@@ -44,7 +45,7 @@ extension UIAlertController {
                         isEnabled: true) { (action) in
                             datePicker.action?(datePicker.datePicker.date)
         }
-        alert.show()
+        alert.show(atViewController: atViewController)
     }
 }
 

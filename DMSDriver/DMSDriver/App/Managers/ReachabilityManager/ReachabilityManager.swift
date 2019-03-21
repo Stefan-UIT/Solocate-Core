@@ -5,7 +5,6 @@ import ReachabilitySwift
 import Alamofire
 import SVProgressHUD
 
-
 let ReachabilityManager = _ReachabilityManager.shared
 
 class _ReachabilityManager: NSObject {
@@ -20,6 +19,14 @@ class _ReachabilityManager: NSObject {
     // 3. Boolean to track network reachability
     var isNetworkAvailable : Bool {
         return reachabilityStatus != .notReachable
+    }
+    
+    var isReachableViaWiFi : Bool {
+        return reachabilityStatus == .reachableViaWiFi
+    }
+    
+    var isReachableViaWWAN : Bool {
+        return reachabilityStatus == .reachableViaWWAN
     }
     
     // 4. Tracks current NetworkStatus (notReachable, reachableViaWiFi, reachableViaWWAN)

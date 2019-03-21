@@ -10,6 +10,7 @@ import UIKit
 import ObjectMapper
 
 class Reason: BaseModel {
+    
     var name = ""
     var id = -1
     var reasonDescription = ""

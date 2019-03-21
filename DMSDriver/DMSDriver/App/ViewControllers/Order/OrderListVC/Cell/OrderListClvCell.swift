@@ -24,7 +24,11 @@ class OrderListClvCell: UICollectionViewCell {
         }
     }
     
-    var displayMode:DisplayMode = DisplayMode.Reduced
+    var displayMode:DisplayMode = DisplayMode.Expanded {
+        didSet{
+           tableView.reloadData()
+        }
+    }
     var dateStringFilter = ""
     var route: Route?
     var rootVC: BaseViewController?
@@ -32,6 +36,7 @@ class OrderListClvCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         updateUI()
+        tableView.backgroundColor = UIColor.clear
     }
     
     func updateUI() {
@@ -61,9 +66,8 @@ extension OrderListClvCell {
 //MARK: - UITableViewDelegate,UITableViewDataSource
 extension OrderListClvCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return orderList.count
+        return 10
     }
-    
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100
@@ -73,8 +77,8 @@ extension OrderListClvCell: UITableViewDelegate, UITableViewDataSource {
         if let cell = tableView.dequeueReusableCell(withIdentifier: displayMode == .Reduced ? cellReducedIdentifier : cellIdentifier,
                                                     for: indexPath) as? OrderItemTableViewCell {
             
-            let order = orderList[indexPath.row]
-            cell.order = order
+//            let order = orderList[indexPath.row]
+//            cell.order = order
             return cell
         }
         return UITableViewCell()
@@ -86,18 +90,7 @@ extension OrderListClvCell: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        
-        let vc:OrderDetailContainerViewController = .loadSB(SB: .Order)
-        
-        vc.onUpdateOrderStatus = {[weak self]  (order)  in
-            self?.updateStatusOrder(order)
-        }
-        
-        let order = orderList[indexPath.row]
-        vc.order = order
-        vc.route = route
-        vc.dateStringFilter = dateStringFilter
-
+        let vc:OrderDetailViewController = .loadSB(SB: .Order)
         self.rootVC?.navigationController?.pushViewController(vc, animated: true)
     }
     

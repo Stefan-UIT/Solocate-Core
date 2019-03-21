@@ -11,23 +11,38 @@ import GoogleMaps
 
 class MapsViewController: UIViewController {
     
-    @IBOutlet weak var mapView: GMSMapView!
+   var mapView: GMSMapView?
 
     var route: Route?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupMapView()
-        getRouteDetail("\(route?.id ?? 0)")
+        self.performSelector(onMainThread: #selector(setupMapView),
+                             with: nil,
+                             waitUntilDone: false)
+        
+        //getRouteDetail("\(route?.id ?? 0)")
     }
   
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    func setupMapView() {
-        mapView.isMyLocationEnabled = true
-        mapView.delegate = self
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    @objc func setupMapView() {
+        if mapView == nil {
+            // Create a map.
+            mapView = GMSMapView(frame: view.bounds)
+            mapView?.isMyLocationEnabled = true
+            mapView?.delegate = self
+            mapView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+            guard let map = mapView else {return}
+            view.addSubview(map)
+        }
     }
   
     func drawPath(fromLocation from: CLLocationCoordinate2D,
@@ -44,7 +59,7 @@ class MapsViewController: UIViewController {
                     polyLine.strokeColor = AppColor.mainColor
                     polyLine.map = self?.mapView
                     let bounds = GMSCoordinateBounds(path: path!)
-                    self?.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
+                    self?.mapView?.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
                 }
             case .error(let error):
                 self?.showAlertView(error.getMessage())
@@ -69,7 +84,7 @@ class MapsViewController: UIViewController {
                     polyLine.strokeColor = AppColor.mainColor
                     polyLine.map = self?.mapView
                     let bounds = GMSCoordinateBounds(path: path!)
-                    self?.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
+                    self?.mapView?.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
                 }
             case .error(let error):
                 self?.showAlertView(error.getMessage())
@@ -82,7 +97,7 @@ class MapsViewController: UIViewController {
         guard let _route = route else {
             return
         }
-        mapView.clear()
+        mapView?.clear()
         showMarkers()
 
         _route.getChunkedListLocation().forEach { (listLocation) in

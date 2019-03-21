@@ -149,6 +149,19 @@ class Route: BaseModel {
     var  route_name_sts = ""
     var  orderList:[Order] = []
     
+    var estStartTime = ""
+    var estEndTime = ""
+    var totalTimeEst = ""
+    var totalDistance = ""
+    
+    var totalStops:Int {
+        get{
+            return orderList.count
+        }
+    }
+    
+    
+    
     convenience required init?(map: Map) {
         self.init()
     }

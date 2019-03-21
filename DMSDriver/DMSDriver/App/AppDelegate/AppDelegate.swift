@@ -14,6 +14,8 @@ import IQKeyboardManager
 import FirebaseCore
 import FirebaseMessaging
 import CoreData
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -52,6 +54,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  
         IQKeyboardManager.shared().isEnabled = true
         checkLoginStatus()
+    
+        // Follow Crashlytics app by Fabric
+        Fabric.with([Crashlytics.self])
     
         return true
     }
@@ -225,6 +230,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 //MARK : - OTHER_FUNTION
 extension AppDelegate {
+    var statusBarView: UIView? {
+        return UIApplication.shared.value(forKey: "statusBar") as? UIView
+    }
     
     func checkLoginStatus() {
         if Caches().hasLogin {

@@ -126,7 +126,7 @@ extension HistoryNotifyVC:UITableViewDataSource, UITableViewDelegate{
         let notifyDate = ServerDateFormater.date(from: E(dto.created_at))
         //cell.imvIcon?.image = dto.icon;
         cell.lblTitle?.text = dto.ruleType?.name
-        cell.lblSubTitle?.text = dto.alert_msg;
+        cell.lblSubTitle?.text = dto.subject;
         cell.lblDate?.text = Date.now.offsetLong(from: notifyDate ?? Date())
         cell.btnResolve?.isHidden = (dto.statusAlert == .resolved)
         cell.setStyleButtonStatus(dto)
@@ -190,15 +190,7 @@ extension HistoryNotifyVC:HistoryNotifyCellDelegate{
 //MARK: - HHeaderDelegate
 extension HistoryNotifyVC:DMSNavigationServiceDelegate{
     func didSelectedBackOrMenu() {
-        if Constants.isLeftToRight {
-            if let  menuLeft = SideMenuManager.default.menuLeftNavigationController{
-                present(menuLeft, animated: true, completion: nil)
-            }
-        }else{
-            if let menuRight = SideMenuManager.default.menuRightNavigationController{
-                present(menuRight, animated: true, completion: nil)
-            }
-        }
+        showSideMenu()
     }
     
     func didSelectedRightButton() {
