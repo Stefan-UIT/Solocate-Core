@@ -86,12 +86,15 @@ import Crashlytics
         if let cell = tableView.dequeueReusableCell(withIdentifier: identifierRowCell) as? RouteTableViewCell {
             //let route = routes[indexPath.row]
             //cell.loadData(route)
+            cell.selectionStyle = .none
             return cell
         }
         return UITableViewCell()
     }
  }
  
+ 
+ //MARK: - UITableViewDelegate
  extension RouteListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 20
@@ -110,14 +113,33 @@ import Crashlytics
     }
  }
  
+ 
+ //MARK: - UIScrollViewDelegate
  extension RouteListVC:UIScrollViewDelegate{
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let contentOffsetY = scrollView.contentOffset.y
+        let heightViewHiDriver = viewHiDriver?.frame.size.height ?? 0
+        updateViewHiDriverFollowScrollView(scrollView: scrollView)
+        updateNavigationBar(isShowTitle: contentOffsetY > heightViewHiDriver)
+    }
+    
+    func updateViewHiDriverFollowScrollView(scrollView:UIScrollView)  {
         let contentOffsetY = scrollView.contentOffset.y
         print("Y: \(contentOffsetY)")
         lblNameDriver?.alpha = 1 / contentOffsetY
         lblDate?.alpha = 1 / contentOffsetY
         if contentOffsetY <= viewHiDriver?.frame.size.height ?? 0  {
             conTopViewHiDriver?.constant = -contentOffsetY
+        }
+    }
+    
+    func updateNavigationBar(isShowTitle:Bool)  {
+        if isShowTitle == false{
+            App().navigationService.updateNavigationBar(.Menu_Search, "")
+        }
+        else {
+            App().navigationService.updateNavigationBar(.Menu_Search, "List Routes")
+            
         }
     }
  }
