@@ -56,7 +56,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         checkLoginStatus()
     
         // Follow Crashlytics app by Fabric
-        Fabric.with([Crashlytics.self])
+        //Fabric.with([Crashlytics.self])
     
         return true
     }
