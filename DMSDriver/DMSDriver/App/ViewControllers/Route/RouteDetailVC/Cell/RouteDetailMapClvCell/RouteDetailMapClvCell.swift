@@ -17,13 +17,13 @@ class RouteDetailMapClvCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        setupMapView()
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        self.perform(#selector(setupMapView),on: Thread.main,with: nil,waitUntilDone: false)
+        
     }
-
 
     @objc func setupMapView() {
         if mapView == nil {

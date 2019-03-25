@@ -162,8 +162,8 @@ extension RouteDetailVC: UICollectionViewDataSource {
     }
     
     func cellMap(_ collectionView:UICollectionView,_ indexPath:IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifieMapCell, for: indexPath)
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifieMapCell, for: indexPath) as! RouteDetailMapClvCell
+       // cell.setupMapView()
         
         return cell
     }

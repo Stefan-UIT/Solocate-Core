@@ -138,7 +138,7 @@ import Crashlytics
             App().navigationService.updateNavigationBar(.Menu_Search, "")
         }
         else {
-            App().navigationService.updateNavigationBar(.Menu_Search, "List Routes")
+            App().navigationService.updateNavigationBar(.Menu_Search, "List Routes".localized.uppercased())
             
         }
     }
