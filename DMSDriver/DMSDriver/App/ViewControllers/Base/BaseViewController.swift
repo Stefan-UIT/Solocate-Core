@@ -115,7 +115,7 @@ extension BaseViewController {
         }
         
         obsKeyboardChangeFrame =
-            NotificationCenter.default.addObserver(forName: .UIKeyboardWillChangeFrame,
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillChangeFrameNotification,
                                                    object: nil,
                                                    queue: OperationQueue.main,
                                                    using: keyboardWillChangeFrame(noti:))
@@ -138,7 +138,7 @@ extension BaseViewController {
     func getKeyboardHeight(noti:Notification) -> CGFloat {
         
         let userInfo:NSDictionary = noti.userInfo! as NSDictionary
-        let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
         
@@ -148,7 +148,7 @@ extension BaseViewController {
     func getKeyboardFrameEnd(noti:Notification) -> CGRect {
         
         let userInfo:NSDictionary = noti.userInfo! as NSDictionary
-        let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         
         return keyboardRectangle;

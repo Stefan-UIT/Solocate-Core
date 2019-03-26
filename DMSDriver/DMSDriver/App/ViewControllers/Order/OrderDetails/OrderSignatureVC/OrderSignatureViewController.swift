@@ -79,7 +79,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        if let image = img, let data = UIImageJPEGRepresentation(image, 1.0) {
+        if let image = img, let data = image.jpegData(compressionQuality: 1.0) {
             let signatureFile: AttachFileModel = AttachFileModel()
             signatureFile.name = "Signature_\(orderDetail?.id ?? 0)"
             signatureFile.type = ".png"
@@ -136,7 +136,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
                                             completed: { (image, error, cacheType, url) in
             if error == nil{
                 if let image = image,
-                    let data = UIImageJPEGRepresentation(image, 1.0) {
+                    let data = image.jpegData(compressionQuality: 1.0) {
                     signFile.contentFile = data
                     CoreDataManager.updateOrderDetail(order)
                 }

@@ -37,7 +37,7 @@ class LeftMenuView: BaseView {
     tableView.register(UINib(nibName: getIndentifier(.CHANGE_INVIROMENT), bundle: nil), forCellReuseIdentifier: getIndentifier(.CHANGE_INVIROMENT))
     
     tableView.estimatedRowHeight = 50.0
-    tableView.rowHeight = UITableViewAutomaticDimension
+    tableView.rowHeight = UITableView.automaticDimension
   }
   
   override func showViewInView(superView: UIView, isHiddenStatusBar: Bool?) {

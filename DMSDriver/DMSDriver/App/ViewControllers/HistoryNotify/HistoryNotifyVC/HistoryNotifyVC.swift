@@ -106,7 +106,7 @@ extension HistoryNotifyVC:UITableViewDataSource, UITableViewDelegate{
                 return 24
             }
         }
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {

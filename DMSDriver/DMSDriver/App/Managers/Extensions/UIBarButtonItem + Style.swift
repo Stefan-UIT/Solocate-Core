@@ -164,7 +164,7 @@ extension UIBarButtonItem {
         
         let labelSize = title.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: 15),
                                            options: NSStringDrawingOptions.usesLineFragmentOrigin,
-                                           attributes: [NSAttributedStringKey.font: font],
+                                           attributes: [NSAttributedString.Key.font: font],
                                            context: nil).size
         let frame = CGRect(origin: CGPoint(), size: labelSize)
         

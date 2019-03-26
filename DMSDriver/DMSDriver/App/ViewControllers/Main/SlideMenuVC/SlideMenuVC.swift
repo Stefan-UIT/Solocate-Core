@@ -98,7 +98,7 @@ extension SlideMenuVC: UITableViewDataSource{
             return 0
         }
     }
-    return UITableViewAutomaticDimension
+    return UITableView.automaticDimension
   }
   
   func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {

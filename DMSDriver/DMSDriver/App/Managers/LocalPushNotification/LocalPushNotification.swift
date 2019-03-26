@@ -29,7 +29,7 @@ class LocalPushNotification: NSObject {
             content.body = descr
             
             content.userInfo = ["data": userInfo]
-            content.sound = UNNotificationSound.default()
+            content.sound = UNNotificationSound.default
             
             
             /*
@@ -74,7 +74,7 @@ class LocalPushNotification: NSObject {
             content.title = title
             content.body = descr
             content.userInfo = ["data": userInfo]
-            content.sound = UNNotificationSound.default()
+            content.sound = UNNotificationSound.default
              //Calendar
              let triggerDate = Calendar.current.dateComponents([.year,.month,.day,.hour,.minute,.second], from: date)
              let trigger2 = UNCalendarNotificationTrigger(dateMatching: triggerDate, repeats: false)

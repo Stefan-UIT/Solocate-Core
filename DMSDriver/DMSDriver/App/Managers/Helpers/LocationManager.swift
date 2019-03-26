@@ -42,7 +42,7 @@ class LocationManager: NSObject {
                                 positiveTitle: "Setting".localized,
                                 positiveAction: { (hasOK) in
                                 
-                UIApplication.shared.open(URL(string: UIApplicationOpenSettingsURLString)!,
+                                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
                                           options: [:],
                                           completionHandler: nil)
             })

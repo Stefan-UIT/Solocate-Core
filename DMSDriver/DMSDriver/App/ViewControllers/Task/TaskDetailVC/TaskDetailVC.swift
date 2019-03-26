@@ -161,7 +161,7 @@ class TaskDetailVC: BaseViewController {
     
     func setupTableView() {
         tableView?.estimatedRowHeight = cellHeight
-        tableView?.rowHeight = UITableViewAutomaticDimension
+        tableView?.rowHeight = UITableView.automaticDimension
         tableView?.addRefreshControl(self, action: #selector(fetchData))
     }
     
@@ -250,7 +250,7 @@ extension TaskDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {

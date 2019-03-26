@@ -13,16 +13,16 @@ class OrderDetailMapViewController: BaseViewController {
   
     @IBOutlet weak var vMapContent: UIView?
     @IBOutlet weak var tableView: UITableView!
+    
+    
     fileprivate var steps = [DirectionStep]()
-
     fileprivate let cellIdentifier = "OrderDetailMapTableViewCell"
+    
     var orderLocation: CLLocationCoordinate2D?
-
     var mapView:GMSMapView?
   
     override func viewDidLoad() {
         super.viewDidLoad()
-
         updateUI()
         drawRoute()
     }
@@ -46,7 +46,7 @@ class OrderDetailMapViewController: BaseViewController {
     }
     
     func setupTableView()  {
-        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.rowHeight = UITableView.automaticDimension
         tableView.estimatedRowHeight = 80.0
     }
     
@@ -94,7 +94,7 @@ extension OrderDetailMapViewController: UITableViewDataSource, UITableViewDelega
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
 
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

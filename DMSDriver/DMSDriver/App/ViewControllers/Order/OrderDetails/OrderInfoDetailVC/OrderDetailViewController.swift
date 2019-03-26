@@ -10,7 +10,6 @@ import UIKit
 import XLPagerTabStrip
 import CoreLocation
 import Photos
-import Hero
 
 enum OrderDetailSection:Int {
     case sectionMap = 0
@@ -95,7 +94,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         tableView?.delegate = self
         tableView?.dataSource = self
         tableView?.estimatedRowHeight = 100
-        tableView?.rowHeight = UITableViewAutomaticDimension
+        tableView?.rowHeight = UITableView.automaticDimension
     }
     
     func initVar()  {
@@ -214,7 +213,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     func showInputNote(_ statusNeedUpdate:String) {
-        let alert = UIAlertController(style: .alert, title: "Finish order".localized)
+        let alert = UIAlertController(title: "Finish order".localized,
+                                      message: nil, preferredStyle: .alert)
         alert.showTextViewInput(placeholder: "Enter note for this order(optional)".localized,
                                 nameAction: "Finish".localized,
                                 oldText: "") {[weak self] (success, string) in
@@ -251,7 +251,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -404,7 +404,6 @@ fileprivate extension OrderDetailViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: orderDetailMapCellIdentifier, for: indexPath) as! OrderDetailTableViewCell
         cell.delegate = self
         btnGo = cell.btnGo
-        btnGo?.hero.id = "batMan"
         return cell
     }
     
@@ -533,7 +532,7 @@ extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
                 
                 for i in 0..<_data.count{
                     let image:UIImage = self.getAssetThumbnail(asset: _data[i], size: ScreenSize.SCREEN_HEIGHT)
-                    if let data = UIImageJPEGRepresentation(image, 0.75) {
+                    if let data = image.jpegData(compressionQuality: 0.75) {
                         let file: AttachFileModel = AttachFileModel()
                         file.name = E(_data[i].originalFilename)
                         file.type = ".png"
@@ -552,7 +551,7 @@ extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
                 }
                 
             }else if let image = data as? UIImage {
-                if let data = UIImageJPEGRepresentation(image, 0.75) {
+                if let data = image.jpegData(compressionQuality: 0.75) {
                     let file: AttachFileModel = AttachFileModel()
                     file.name = "Picture_\(Date().timeIntervalSince1970)"
                     file.type = ".png"

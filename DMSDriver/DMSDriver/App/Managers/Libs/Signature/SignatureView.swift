@@ -24,7 +24,7 @@ class SignatureView: UIView {
           signLayer = CAShapeLayer()
           signLayer?.path = sign?.cgPath
           signLayer?.lineWidth = 2.0
-          signLayer?.lineJoin = kCALineJoinRound
+          signLayer?.lineJoin = CAShapeLayerLineJoin.round
           signLayer?.fillColor = UIColor.clear.cgColor
           signLayer?.strokeColor = UIColor.black.cgColor
           if let _signLayer = signLayer {
@@ -33,16 +33,15 @@ class SignatureView: UIView {
        }
     }
   
-      var signLayer: CAShapeLayer?
-      private var endingLocation: CGPoint! {
+    var signLayer: CAShapeLayer?
+    private var endingLocation: CGPoint! {
         didSet {
-          sign?.addLine(to: endingLocation)
-          signLayer?.path = sign?.cgPath
+            sign?.addLine(to: endingLocation)
+            signLayer?.path = sign?.cgPath
         }
-      }
-      var sign: UIBezierPath?
+    }
+    var sign: UIBezierPath?
 
-  
     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
             

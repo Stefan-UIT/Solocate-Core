@@ -204,7 +204,7 @@ extension ImagePickerView:UIImagePickerControllerDelegate,UINavigationController
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         
         print(info)
-        if  let image = info[UIImagePickerControllerEditedImage]{
+        if  let image = info[UIImagePickerController.InfoKey.editedImage.rawValue]{
             picker.dismiss(animated: true) {
                 self.callback?(true,image)
             }

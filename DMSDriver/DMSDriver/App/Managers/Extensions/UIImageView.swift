@@ -35,29 +35,23 @@ extension UIImageView {
         }
     }
     
-  func setImage(withURL imgPath: String) {
-    guard let url = URL(string: imgPath) else { return }
-    let indicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
-    indicator.hidesWhenStopped = true
-    indicator.startAnimating()
-    self.superview?.addSubview(indicator)
-    indicator.center = self.center
-    DispatchQueue.global().async {
-      let data = try? Data(contentsOf: url)
-      DispatchQueue.main.async {
-        indicator.stopAnimating()
-        indicator.removeFromSuperview()
-        guard let _data = data else {
-          return
+    func setImage(withURL imgPath: String) {
+        guard let url = URL(string: imgPath) else { return }
+        let indicator = UIActivityIndicatorView(style: .white)
+        indicator.hidesWhenStopped = true
+        indicator.startAnimating()
+        self.superview?.addSubview(indicator)
+        indicator.center = self.center
+        DispatchQueue.global().async {[weak self] in
+        let data = try? Data(contentsOf: url)
+        DispatchQueue.main.async {
+            indicator.stopAnimating()
+            indicator.removeFromSuperview()
+            guard let _data = data else {
+              return
+            }
+            self?.image = UIImage(data: _data)
+            }
         }
-        self.image = UIImage(data: _data)
-      }
     }
-    
-    
-    
-  }
-  
-  
-  
 }

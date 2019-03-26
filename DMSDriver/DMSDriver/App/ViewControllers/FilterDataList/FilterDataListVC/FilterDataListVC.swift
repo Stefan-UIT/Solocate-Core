@@ -489,11 +489,11 @@ extension FilterDataListVC:FilterDataListHeaderCellDelegate{
         }
         
         let transition = CATransition()
-        transition.type = kCATransitionMoveIn
-        transition.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        transition.fillMode = kCAFillModeForwards
+        transition.type = CATransitionType.moveIn
+        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+        transition.fillMode = CAMediaTimingFillMode.forwards
         transition.duration = 0.5
-        transition.subtype = kCATransitionFromTop
+        transition.subtype = CATransitionSubtype.fromTop
         self.tbvContent?.layer.add(transition, forKey: "UITableViewReloadDataAnimationKey")
         self.tbvContent?.reloadData()
         

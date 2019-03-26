@@ -62,7 +62,7 @@ class FilterByDatePopupView: UIViewController {
         tbvFilter?.register(UINib.init(nibName: ClassName(FilterByDatePopupCustomCell()),
                                        bundle: nil),
                             forCellReuseIdentifier:identifierPopupCustomCell)
-        tbvFilter?.rowHeight = UITableViewAutomaticDimension;
+        tbvFilter?.rowHeight = UITableView.automaticDimension;
 
     }
 

@@ -75,7 +75,7 @@
 		3B66B804210B113D000BDFEF /* NSString+SDString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B76B210B113C000BDFEF /* NSString+SDString.m */; };
 		3B66B805210B113D000BDFEF /* Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B76C210B113C000BDFEF /* Array.swift */; };
 		3B66B806210B113D000BDFEF /* UIColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B76D210B113C000BDFEF /* UIColor.swift */; };
-		3B66B807210B113D000BDFEF /* UITextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B76F210B113C000BDFEF /* UITextField.swift */; };
+		3B66B807210B113D000BDFEF /* UITextField+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B76F210B113C000BDFEF /* UITextField+Ext.swift */; };
 		3B66B808210B113D000BDFEF /* UICollectionView-Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B770210B113C000BDFEF /* UICollectionView-Extensions.swift */; };
 		3B66B809210B113D000BDFEF /* String.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B771210B113C000BDFEF /* String.swift */; };
 		3B66B80A210B113D000BDFEF /* UIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B772210B113C000BDFEF /* UIButton.swift */; };
@@ -112,7 +112,6 @@
 		3B66B82B210B113D000BDFEF /* Optional+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B79E210B113C000BDFEF /* Optional+Extensions.swift */; };
 		3B66B82C210B113D000BDFEF /* Common+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B79F210B113C000BDFEF /* Common+Extensions.swift */; };
 		3B66B82D210B113D000BDFEF /* Locale+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7A0210B113C000BDFEF /* Locale+Extensions.swift */; };
-		3B66B82E210B113D000BDFEF /* UITextField+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7A1210B113C000BDFEF /* UITextField+Extensions.swift */; };
 		3B66B82F210B113D000BDFEF /* AttributedTextBlock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7A4210B113C000BDFEF /* AttributedTextBlock.swift */; };
 		3B66B830210B113D000BDFEF /* TextViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7A5210B113C000BDFEF /* TextViewController.swift */; };
 		3B66B831210B113D000BDFEF /* TwoTextFieldsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7A8210B113C000BDFEF /* TwoTextFieldsViewController.swift */; };
@@ -365,7 +364,7 @@
 		3B66B76C210B113C000BDFEF /* Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Array.swift; sourceTree = "<group>"; };
 		3B66B76D210B113C000BDFEF /* UIColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColor.swift; sourceTree = "<group>"; };
 		3B66B76E210B113C000BDFEF /* NSString+SDString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+SDString.h"; sourceTree = "<group>"; };
-		3B66B76F210B113C000BDFEF /* UITextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UITextField.swift; sourceTree = "<group>"; };
+		3B66B76F210B113C000BDFEF /* UITextField+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Ext.swift"; sourceTree = "<group>"; };
 		3B66B770210B113C000BDFEF /* UICollectionView-Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UICollectionView-Extensions.swift"; sourceTree = "<group>"; };
 		3B66B771210B113C000BDFEF /* String.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = String.swift; sourceTree = "<group>"; };
 		3B66B772210B113C000BDFEF /* UIButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIButton.swift; sourceTree = "<group>"; };
@@ -404,7 +403,6 @@
 		3B66B79E210B113C000BDFEF /* Optional+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Optional+Extensions.swift"; sourceTree = "<group>"; };
 		3B66B79F210B113C000BDFEF /* Common+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Common+Extensions.swift"; sourceTree = "<group>"; };
 		3B66B7A0210B113C000BDFEF /* Locale+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Locale+Extensions.swift"; sourceTree = "<group>"; };
-		3B66B7A1210B113C000BDFEF /* UITextField+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UITextField+Extensions.swift"; sourceTree = "<group>"; };
 		3B66B7A4210B113C000BDFEF /* AttributedTextBlock.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributedTextBlock.swift; sourceTree = "<group>"; };
 		3B66B7A5210B113C000BDFEF /* TextViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewController.swift; sourceTree = "<group>"; };
 		3B66B7A8210B113C000BDFEF /* TwoTextFieldsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TwoTextFieldsViewController.swift; sourceTree = "<group>"; };
@@ -1331,11 +1329,11 @@
 				3B5D79222178346700EA49CC /* DateFormatter+Ext.swift */,
 				3B66B785210B113C000BDFEF /* NSAtribitedString+Ext.swift */,
 				3B66B76A210B113C000BDFEF /* UIView.swift */,
-				3B66B76B210B113C000BDFEF /* NSString+SDString.m */,
 				3B66B76C210B113C000BDFEF /* Array.swift */,
 				3B66B76D210B113C000BDFEF /* UIColor.swift */,
+				3B66B76B210B113C000BDFEF /* NSString+SDString.m */,
 				3B66B76E210B113C000BDFEF /* NSString+SDString.h */,
-				3B66B76F210B113C000BDFEF /* UITextField.swift */,
+				3B66B76F210B113C000BDFEF /* UITextField+Ext.swift */,
 				3B66B770210B113C000BDFEF /* UICollectionView-Extensions.swift */,
 				3B66B771210B113C000BDFEF /* String.swift */,
 				3B66B772210B113C000BDFEF /* UIButton.swift */,
@@ -1456,7 +1454,6 @@
 				3B66B79E210B113C000BDFEF /* Optional+Extensions.swift */,
 				3B66B79F210B113C000BDFEF /* Common+Extensions.swift */,
 				3B66B7A0210B113C000BDFEF /* Locale+Extensions.swift */,
-				3B66B7A1210B113C000BDFEF /* UITextField+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2783,12 +2780,11 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-frameworks.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/FDFullscreenPopGesture/FDFullscreenPopGesture.framework",
 				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
 				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
@@ -2808,7 +2804,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDFullscreenPopGesture.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
@@ -2824,7 +2819,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6D96038D865B1C712768AFF9 /* [CP] Copy Pods Resources */ = {
@@ -2833,7 +2828,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${SRCROOT}/Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-resources.sh",
+				"${PODS_ROOT}/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -2842,7 +2837,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		76E92A434B13EAEE47C1A624 /* [CP] Check Pods Manifest.lock */ = {
@@ -2975,7 +2970,7 @@
 				3B66B8F4210B1149000BDFEF /* ResponseDataModel.swift in Sources */,
 				3B66B8EE210B1149000BDFEF /* OrderMarker.swift in Sources */,
 				3B66B82A210B113D000BDFEF /* UIAlertController+Extensions.swift in Sources */,
-				3B66B807210B113D000BDFEF /* UITextField.swift in Sources */,
+				3B66B807210B113D000BDFEF /* UITextField+Ext.swift in Sources */,
 				3B66B830210B113D000BDFEF /* TextViewController.swift in Sources */,
 				3B5D79242178346700EA49CC /* DateFormatter+Ext.swift in Sources */,
 				3B66B80C210B113D000BDFEF /* UIViewController.swift in Sources */,
@@ -3024,7 +3019,6 @@
 				3B66B8F9210B1149000BDFEF /* ScanBarCodeViewController.swift in Sources */,
 				3B66B834210B113D000BDFEF /* PhotoLibraryPickerViewController.swift in Sources */,
 				3B66B8EF210B1149000BDFEF /* EmptyModel.swift in Sources */,
-				3B66B82E210B113D000BDFEF /* UITextField+Extensions.swift in Sources */,
 				3B66B836210B113D000BDFEF /* DatePickerViewController.swift in Sources */,
 				3B44C03721BE0B48008F070D /* LocationTracker.swift in Sources */,
 				3B9A37622123D5C1004D881C /* PickerTypeListCell.swift in Sources */,
@@ -3251,7 +3245,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "dev-dms-core-customization";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Staging;
@@ -3400,7 +3394,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "dev-dms-core-customization";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -3432,7 +3426,7 @@
 				PROVISIONING_PROFILE_SPECIFIER = "dev-dms-core-customization";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;

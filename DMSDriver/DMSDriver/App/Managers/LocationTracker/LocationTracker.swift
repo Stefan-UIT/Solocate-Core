@@ -17,7 +17,7 @@ class LocationTracker: NSObject {
     
     // MARK: - Variables
     private var timer = Timer()
-    private var backgroundTaskIdentifier = UIBackgroundTaskIdentifier()
+    private var backgroundTaskIdentifier = UIBackgroundTaskIdentifier.init(rawValue: 1)
     
     // MARK: - Utility Methods
     func startUpdatingDriverLocationIfNeeded() {
@@ -26,6 +26,7 @@ class LocationTracker: NSObject {
             invalidTimer()
             return
         }
+        
         scheduledTimerWithTimeInterval()
     }
     

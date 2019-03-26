@@ -22,7 +22,7 @@ extension String {
     }
     
     func sizeOfString(usingFont font: UIFont) -> CGSize {
-        let fontAttributes = [NSAttributedStringKey.font: font]
+        let fontAttributes = [NSAttributedString.Key.font: font]
         return self.size(withAttributes: fontAttributes)
     }
   

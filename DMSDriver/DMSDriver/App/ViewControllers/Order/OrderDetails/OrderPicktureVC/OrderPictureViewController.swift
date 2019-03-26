@@ -61,7 +61,7 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
                 
                 for i in 0..<_data.count{
                     let image:UIImage = self.getAssetThumbnail(asset: _data[i], size: ScreenSize.SCREEN_HEIGHT)
-                    if let data = UIImageJPEGRepresentation(image, 0.85) {
+                    if let data = image.jpegData(compressionQuality: 0.85) {
                         let file: AttachFileModel = AttachFileModel()
                         file.name = E(_data[i].originalFilename)
                         file.type = ".png"
@@ -92,7 +92,7 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
                 }
                 
             }else if let image = data as? UIImage {
-                if let data = UIImageJPEGRepresentation(image, 0.85) {
+                if let data = image.jpegData(compressionQuality: 0.85) {
                     let file: AttachFileModel = AttachFileModel()
                     file.name = "Picture_\(Date().timeIntervalSince1970)"
                     file.type = ".png"

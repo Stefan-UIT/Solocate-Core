@@ -5,21 +5,21 @@ import UIKit
 
 /// Convenience methods for creating NSAttributedStrings.
 extension NSAttributedString {
-    class func attributesDictionary(with color: UIColor, font: UIFont, alignment: NSTextAlignment? = nil, kerning: Float? = nil) -> [NSAttributedStringKey: Any] {
+    class func attributesDictionary(with color: UIColor, font: UIFont, alignment: NSTextAlignment? = nil, kerning: Float? = nil) -> [NSAttributedString.Key: Any] {
         
-        var attributes: [NSAttributedStringKey: Any] = [NSAttributedStringKey.font: font,
-                                                        NSAttributedStringKey.foregroundColor: color]
+        var attributes: [NSAttributedString.Key: Any] = [NSAttributedString.Key.font: font,
+                                                         NSAttributedString.Key.foregroundColor: color]
         
         if let alignment = alignment {
             let paragraphStyle = NSMutableParagraphStyle()
             paragraphStyle.alignment = alignment
             paragraphStyle.lineBreakMode = .byTruncatingTail
             
-            attributes[NSAttributedStringKey.paragraphStyle] = paragraphStyle
+            attributes[NSAttributedString.Key.paragraphStyle] = paragraphStyle
         }
         
         if let kerning = kerning {
-            attributes[NSAttributedStringKey.kern] = NSNumber(value: kerning)
+            attributes[NSAttributedString.Key.kern] = NSNumber(value: kerning)
         }
         
         return attributes

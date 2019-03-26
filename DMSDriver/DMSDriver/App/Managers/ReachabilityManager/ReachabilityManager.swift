@@ -11,7 +11,7 @@ class _ReachabilityManager: NSObject {
     
     static let shared = _ReachabilityManager()  // 2. Shared instance
     
-    private var backgroundTaskIdentifier = UIBackgroundTaskIdentifier()
+    private var backgroundTaskIdentifier = UIBackgroundTaskIdentifier(rawValue: 1)
     var isCalling:Bool = false
     @objc dynamic var temp:[CoreRequest]!
 
