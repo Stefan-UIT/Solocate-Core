@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2AB4A98A224B78C70019F196 /* RouteDetailLocationListClvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */; };
 		3B0035F7216C614D0032519D /* TextViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0035F4216C614D0032519D /* TextViewInput.swift */; };
 		3B0035F8216C614D0032519D /* TextViewInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0035F5216C614D0032519D /* TextViewInput.xib */; };
 		3B0035F9216C614D0032519D /* TextViewInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0035F6216C614D0032519D /* TextViewInputController.swift */; };
@@ -290,6 +291,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailLocationListClvCell.swift; sourceTree = "<group>"; };
 		3B0035F4216C614D0032519D /* TextViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewInput.swift; sourceTree = "<group>"; };
 		3B0035F5216C614D0032519D /* TextViewInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewInput.xib; sourceTree = "<group>"; };
 		3B0035F6216C614D0032519D /* TextViewInputController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewInputController.swift; sourceTree = "<group>"; };
@@ -772,6 +774,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		2AB4A984224B78720019F196 /* RouteDetailLocationListClvCell */ = {
+			isa = PBXGroup;
+			children = (
+				2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */,
+			);
+			path = RouteDetailLocationListClvCell;
+			sourceTree = "<group>";
+		};
 		2E482ACD4DD6945570D21CE8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -1210,6 +1220,7 @@
 		3B556BDB223A4C5900E6CED6 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				2AB4A984224B78720019F196 /* RouteDetailLocationListClvCell */,
 				3B556BDE223A4C8400E6CED6 /* RouteDetailOrderListClvCell */,
 				3B556BDD223A4C5E00E6CED6 /* RouteDetailMapClvCell */,
 			);
@@ -3017,6 +3028,7 @@
 				3B66B91B210B1149000BDFEF /* BaseViewController.swift in Sources */,
 				3B66B92D210B1149000BDFEF /* AlertMessageView.swift in Sources */,
 				3B66B8F9210B1149000BDFEF /* ScanBarCodeViewController.swift in Sources */,
+				2AB4A98A224B78C70019F196 /* RouteDetailLocationListClvCell.swift in Sources */,
 				3B66B834210B113D000BDFEF /* PhotoLibraryPickerViewController.swift in Sources */,
 				3B66B8EF210B1149000BDFEF /* EmptyModel.swift in Sources */,
 				3B66B836210B113D000BDFEF /* DatePickerViewController.swift in Sources */,

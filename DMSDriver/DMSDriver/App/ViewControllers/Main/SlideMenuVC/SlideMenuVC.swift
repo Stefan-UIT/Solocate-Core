@@ -124,6 +124,10 @@ extension SlideMenuVC: UITableViewDataSource{
         cell.lblTitle?.textColor = AppColor.grayBorderColor
     }
     
+    if menutype == .PROFILE {
+        cell.lblTitle?.textColor = AppColor.white
+    }
+    
     cell.selectionStyle = .none;
     
     return cell

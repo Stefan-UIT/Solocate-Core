@@ -30,9 +30,14 @@ enum TabBarItem:Int {
     }
 }
 
-enum RouteDetailDisplayMode:Int {
+enum RouteDetailDisplayMode:Int,CaseIterable {
     case DisplayModeMap = 0
     case DisplayModeStops
+    case DisplayModeLocations
+    
+    static var count: Int {
+        return RouteDetailDisplayMode.DisplayModeLocations.hashValue + 1
+    }
 }
 
 class RouteDetailVC: BaseViewController {
@@ -54,6 +59,8 @@ class RouteDetailVC: BaseViewController {
     //MARK: - VARIABLE
     private let identifierOrderListCell = "RouteDetailOrderListClvCell"
     private let identifieMapCell = "RouteDetailMapClvCell"
+    private let identifieLocationsCell = "RouteDetailLocationListClvCell"
+
     
     var route:Route?
     var dateStringFilter:String = Date().toString()
@@ -120,8 +127,10 @@ class RouteDetailVC: BaseViewController {
     }
 
     @objc func setupScrollMenuView() {
-        let mapMode = MenuItem("MAP".localized)
-        let orderMode = MenuItem("STOPS".localized)
+        let mapMode = MenuItem("Map".localized.uppercased())
+        let orderMode = MenuItem("Stops".localized.uppercased())
+        let locationMode = MenuItem("Locations".localized.uppercased())
+
         menuScrollView?.roundedCorners([.layerMaxXMinYCorner,
                                         .layerMinXMinYCorner,
                                         .layerMaxXMaxYCorner,
@@ -131,7 +140,7 @@ class RouteDetailVC: BaseViewController {
         menuScrollView?.cornerRadiusCell = 10
         menuScrollView?.delegate = self
         menuScrollView?.isHidden = false
-        menuScrollView?.dataSource = [mapMode,orderMode]
+        menuScrollView?.dataSource = [mapMode,orderMode,locationMode]
         menuScrollView?.reloadData()
     }
 }
@@ -144,7 +153,7 @@ extension RouteDetailVC: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
+        return RouteDetailDisplayMode.allCases.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -158,18 +167,30 @@ extension RouteDetailVC: UICollectionViewDataSource {
             
         case .DisplayModeStops:
             return cellOrderList(collectionView,indexPath)
+            
+        case .DisplayModeLocations:
+            return cellLocationsList(collectionView, indexPath)
         }
     }
     
     func cellMap(_ collectionView:UICollectionView,_ indexPath:IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifieMapCell, for: indexPath) as! RouteDetailMapClvCell
-       // cell.setupMapView()
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifieMapCell,
+                                                      for: indexPath) as! RouteDetailMapClvCell
         
         return cell
     }
     
     func cellOrderList(_ collectionView:UICollectionView,_ indexPath:IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifierOrderListCell, for: indexPath) as! RouteDetailOrderListClvCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifierOrderListCell,
+                                                      for: indexPath) as! RouteDetailOrderListClvCell
+        cell.rootVC = self
+        
+        return cell
+    }
+    
+    func cellLocationsList(_ collectionView:UICollectionView,_ indexPath:IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifieLocationsCell,
+                                                      for: indexPath) as! RouteDetailLocationListClvCell
         cell.rootVC = self
         
         return cell
@@ -191,6 +212,17 @@ extension RouteDetailVC:UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
+    }
+}
+
+
+//MARK: - UIScrollViewDelegate
+extension RouteDetailVC:UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let width = clvContent?.frame.size.width ?? 0
+        let offset =  scrollView.contentOffset
+        let index = Int(offset.x / width)
+        menuScrollView?.indexSelect = index
     }
 }
 
