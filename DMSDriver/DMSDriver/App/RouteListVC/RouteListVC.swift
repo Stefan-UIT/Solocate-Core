@@ -133,21 +133,25 @@ import Crashlytics
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffsetY = scrollView.contentOffset.y
         let heightViewHiDriver = viewHiDriver?.frame.size.height ?? 0
-        if contentOffsetY < 0 {
-            return
-        }
         updateViewHiDriverFollowScrollView(scrollView: scrollView)
         updateNavigationBar(isShowTitle: contentOffsetY > heightViewHiDriver)
     }
     
     func updateViewHiDriverFollowScrollView(scrollView:UIScrollView)  {
         let contentOffsetY = scrollView.contentOffset.y
-        print("Y: \(contentOffsetY)")
-        lblNameDriver?.alpha = 1 / contentOffsetY
-        lblDate?.alpha = 1 / contentOffsetY
-        if contentOffsetY <= viewHiDriver?.frame.size.height ?? 0  {
-            conTopViewHiDriver?.constant = -contentOffsetY
+        let heightViewHiDriver = viewHiDriver?.frame.size.height ?? 60
+        var max:CGFloat = 0
+        if contentOffsetY > 0 {
+            max = MAX(-contentOffsetY, -heightViewHiDriver)
+            lblNameDriver?.alpha = 1 / (contentOffsetY / 2)
+            lblDate?.alpha = 1 / (contentOffsetY / 2)
+        }else{
+            max = 0
+            lblNameDriver?.alpha = 1
+            lblDate?.alpha = 1
         }
+        conTopViewHiDriver?.constant = max
+        print("Y: \(contentOffsetY)")
     }
     
     func updateNavigationBar(isShowTitle:Bool)  {
