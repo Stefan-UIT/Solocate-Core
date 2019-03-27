@@ -55,8 +55,20 @@ class BaseAPIService {
         case invalidInput = 400
         case notAuthorized = 603
         case serverError = 721
-        case tokenFail = 401
-        case tokenExpried = 403
+        case tokenFail = 403
+        case tokenExpried = 401
+        
+        
+        var messange:String{
+            get{
+                switch self {
+                case .tokenExpried:
+                    return "Session expired.".localized
+                default:
+                    return ""
+                }
+            }
+        }
     }
     
     fileprivate static var sharedAPI:BaseAPIService?
@@ -165,7 +177,8 @@ class BaseAPIService {
                                          encoding: encoding,
                                          headers: headers);
         
-        request.responseJSON(options: .allowFragments) { (dataResponse) in
+        request.responseJSON(queue: responsedCallbackQueue,
+                             options: .allowFragments) { (dataResponse) in
             
             let logResult = dataResponse.data != nil ? String(data: dataResponse.data!, encoding: .utf8) : "<empty>";
             var logStatus : String;
@@ -267,22 +280,18 @@ class BaseAPIService {
 fileprivate extension BaseAPIService{
     
     func handleResponseJSON<RESULT:BaseModel,ERROR:APIError>(dataResponse: DataResponse<Any>,callback:@escaping GenericAPICallback<RESULT, ERROR>)  {
-        var result: APIOutput<RESULT, ERROR>;
-
         switch dataResponse.result {
         case .success(let object):
-            result = self.handleResponse(dataResponse: dataResponse, object: object)
+            self.handleResponse(dataResponse: dataResponse, object: object, callback: callback)
             
         case .failure(let error):
-            result = self.handleFailure(dataResponse: dataResponse, error: error)
-        }
-        
-        DispatchQueue.main.async {
-            callback(result);
+            self.handleFailure(dataResponse: dataResponse, error: error, callback: callback)
         }
     }
     
-    func handleResponse<RESULT:BaseModel, ERROR: APIError>(dataResponse: DataResponse<Any>, object: Any) -> APIOutput<RESULT, ERROR> {
+    func handleResponse<RESULT:BaseModel, ERROR: APIError>(dataResponse: DataResponse<Any>,
+                                                           object: Any,
+                                                           callback:@escaping GenericAPICallback<RESULT, ERROR>){
         
         let status: StatusCode = StatusCode(rawValue: (dataResponse.response?.statusCode)!) ?? .serverError
         switch status {
@@ -307,38 +316,38 @@ fileprivate extension BaseAPIService{
                     resultObject = responseData as! RESULT
                 }
                 
-                return .object(resultObject)
+                DispatchQueue.main.async {
+                    callback(.object(resultObject));
+                }
             }
             
         case .tokenFail,
-             .tokenExpried:
-          DispatchQueue.main.async {
-            App().reLogin()
-            App().showAlert("Session expired.".localized)
-            return
-          }
-        case .notAuthorized:
+             .tokenExpried,
+             .notAuthorized:
+            let err = ERROR(dataResponse: dataResponse)
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
+                App().reLogin()
+                App().showAlert(status.messange)
+                callback(.error(err));
+            }
+
+        default:
             let err = ERROR(dataResponse: dataResponse)
             DispatchQueue.main.async {
-                App().reLogin()
-                App().showAlert(err.getMessage())
-                return
+                callback(.error(err));
             }
-          
-        default:
-            break;
         }
-        
-        let err = ERROR(dataResponse: dataResponse)
-        return .error(err)
     }
     
     
-    func handleFailure<RESULT, ERROR: APIError>(dataResponse: DataResponse<Any>, error: Error) -> APIOutput<RESULT, ERROR>  {
+    func handleFailure<RESULT, ERROR: APIError>(dataResponse: DataResponse<Any>,
+                                                error: Error,
+                                                callback:@escaping GenericAPICallback<RESULT, ERROR>){
         let err = ERROR(dataResponse: dataResponse)
         err.message = error.localizedDescription;
-
-        return .error(err)
+        DispatchQueue.main.async {
+            callback(.error(err));
+        }
     }
 }
 

@@ -19,10 +19,12 @@ extension DateFormatter {
 
 let HourFormater = DateFormatter.hourFormater
 let ServerDateFormater = DateFormatter.serverDateFormater
+let ShortDateFormater = DateFormatter.shortDate
 
 
 //MARK: - DateFormatter Instance
 extension DateFormatter {
+    static let shortDate = DateFormatter(format: "MMM dd");
     static let displayDateForLogControl = DateFormatter(format: "MMM d yyyy, h:mm a");
     static let displayDateForOrder = DateFormatter(format: "EEE', 'MMM' 'dd', 'yyyy");
     static let displayDateVietNames = DateFormatter(format: "dd/MM/yyyy",timeZone: TimeZone(identifier: "UTC")!);
@@ -31,5 +33,4 @@ extension DateFormatter {
     static let hourFormater = DateFormatter(format: "HH:mm",timeZone: TimeZone(identifier: "UTC")!);
     static let displayDateTimeVN = DateFormatter(format: "dd/MM/yyyy HH:mm",timeZone: TimeZone(identifier: "UTC")!);
     
-
 }

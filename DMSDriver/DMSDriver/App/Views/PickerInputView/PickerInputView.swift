@@ -47,7 +47,6 @@ class PickerInputView: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         updateUI()
         setupTableView()
     }

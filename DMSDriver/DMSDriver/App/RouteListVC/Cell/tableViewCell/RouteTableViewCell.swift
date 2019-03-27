@@ -26,13 +26,14 @@ class RouteTableViewCell: UITableViewCell {
     }
     
     func loadData(_ route: Route) {
-        routeIDLabel.text = "\(route.id)"
+        let stringDate:String = Date().toString(route.date, "mm/dd/yyyy", "MMM dd")
+        routeIDLabel.text = "#\(route.id)"
         statusLabel.text = route.route_name_sts
-        startTimeLabel.text = route.estStartTime + " -"
-        endTimeLabel.text = route.estEndTime
-        expectedStartDateLabel.text = Date().toString(route.date, "mm/dd/yyyy", "MMM dd")
+        startTimeLabel.text = route.startDate + " - "
+        endTimeLabel.text = route.endDate
+        expectedStartDateLabel.text = stringDate.uppercased()
         durationLabel.text = route.totalTimeEst
         distanceLabel.text = route.totalDistance
-        stopsLabel.text = "\(route.totalStops) STOPS"
+        stopsLabel.text = "\(route.totalStops) STOPS".localized
     }
 }

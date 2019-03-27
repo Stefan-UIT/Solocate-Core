@@ -41,7 +41,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Debug.setup(shared: Debug(buildConf: buildConfiguration))
         Services.setupShared(buildConf: buildConfiguration)
 
-        print("\n==>APPLICATION STARTED WITH: \n\tScheme-\(buildConfiguration.buildScheme.rawValue);\n\tServer-\(buildConfiguration.serverEnvironment.displayString())-\(buildConfiguration.serverUrlString()) \n")
+        print(#"""
+            \n==>APPLICATION STARTED WITH:
+            \n\tScheme-\#(buildConfiguration.buildScheme.rawValue);
+            \n\tServer-\#(buildConfiguration.serverEnvironment.displayString())-\#(buildConfiguration.serverUrlString()) \n
+            """#)
     
         GMSServices.provideAPIKey(Network.googleAPIKey)
         SVProgressHUD.setDefaultStyle(.dark)

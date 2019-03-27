@@ -24,18 +24,19 @@ import Crashlytics
     private let identifierRowCell = "RouteTableViewCell"
     
     
-    var currentDateString: String = "2019-01-21"
+    var currentDateString = Date().toString("MM/dd/yyyy")
     var routes = [Route]()
     
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
+        initUI()
+        fakaData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //getRoutes(currentDateString)
+        //fetchData(isShowLoading: true)
     }
     
     override func updateNavigationBar() {
@@ -50,7 +51,20 @@ import Crashlytics
         tableView.register(UINib(nibName: ClassName(RouteTableViewCell()),
                                  bundle: nil),
                            forCellReuseIdentifier: identifierRowCell)
+        tableView.addRefreshControl(self, action: #selector(fetchData(isShowLoading:)))
        
+    }
+    
+    func initUI()  {
+        setupTableView()
+        let userName = Caches().user?.userInfo?.userName ?? ""
+        let date = #"Here is your plan for today - \#(ShortDateFormater.string(from: currentDateString.date ?? Date()))"#.localized
+        lblNameDriver?.text = "Hi \(userName)".localized
+        lblDate?.text = date
+    }
+    
+    @objc func fetchData(isShowLoading:Bool = true)  {
+        getRoutes(by: currentDateString, isShowLoading: isShowLoading)
     }
  }
  
@@ -71,7 +85,7 @@ import Crashlytics
  // MARK: UITableView
  extension RouteListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10 //routes.count
+        return routes.count
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -84,8 +98,8 @@ import Crashlytics
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: identifierRowCell) as? RouteTableViewCell {
-            //let route = routes[indexPath.row]
-            //cell.loadData(route)
+            let route = routes[indexPath.row]
+            cell.loadData(route)
             cell.selectionStyle = .none
             return cell
         }
@@ -119,6 +133,9 @@ import Crashlytics
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let contentOffsetY = scrollView.contentOffset.y
         let heightViewHiDriver = viewHiDriver?.frame.size.height ?? 0
+        if contentOffsetY < 0 {
+            return
+        }
         updateViewHiDriverFollowScrollView(scrollView: scrollView)
         updateNavigationBar(isShowTitle: contentOffsetY > heightViewHiDriver)
     }
@@ -146,25 +163,47 @@ import Crashlytics
  
  //MARK: - API
  fileprivate extension RouteListVC {
-    func getRoutes(_ date: String? = Date().toString()) {
-        showLoadingIndicator()
+    func getRoutes(by date: String? = Date().toString(), isShowLoading:Bool = true) {
+        if isShowLoading {
+            showLoadingIndicator()
+        }
         API().getRoutes(byDate: date) {[weak self] (result) in
             self?.dismissLoadingIndicator()
+            self?.tableView.endRefreshControl()
+            guard let strongSelf = self else {
+                return
+            }
             switch result{
             case .object(let obj):
                 if let data = obj.data {
-                    self?.routes = data.data ?? []
+                    strongSelf.routes = data.data ?? []
                    // DMSCurrentRoutes.routes = data
-                    self?.tableView.reloadData()
+                    strongSelf.lblNoResult?.isHidden = (strongSelf.routes.count > 0)
+                    strongSelf.tableView.reloadData()
                     
                 } else {
                     // TODO: Do something.
                 }
                 
             case .error(let error):
-                self?.showAlertView(error.getMessage())
+                strongSelf.showAlertView(error.getMessage())
             }
         }
+    }
+    
+    
+    func fakaData()  {
+        let route = Route()
+        route.id = 1234
+        route.totalTimeEst = "5 HOUR"
+        route.totalDistance = "25 KM"
+        route.route_name_sts = "New"
+        route.startDate = "05:50 AM"
+        route.endDate = "08:50 PM"
+        route.date = Date().toString()
+        
+        routes = [route,route,route,route,route,route,route]
+        tableView.reloadData()
     }
  }
 

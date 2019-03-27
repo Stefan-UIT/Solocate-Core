@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -26,11 +26,8 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wrU-Ls-XLa">
                                 <rect key="frame" x="0.0" y="20" width="375" height="85.5"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3k4-0Q-jR0">
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hi, Stive Skott" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="15" translatesAutoresizingMaskIntoConstraints="NO" id="3k4-0Q-jR0">
                                         <rect key="frame" x="30" y="10" width="315" height="35"/>
-                                        <string key="text">Hi, Stive Skott
-
-</string>
                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="30"/>
                                         <color key="textColor" red="0.3411764706" green="0.45098039220000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -1052,7 +1049,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="115" height="100"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="route_list_wait" translatesAutoresizingMaskIntoConstraints="NO" id="eEa-DU-FfF">
-                                                                <rect key="frame" x="50" y="28.5" width="15" height="20"/>
+                                                                <rect key="frame" x="50" y="28" width="15.5" height="20.5"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V0N-EF-1Uo">
                                                                 <rect key="frame" x="25" y="58.5" width="65.5" height="16.5"/>
@@ -1077,7 +1074,7 @@
                                                         <rect key="frame" x="115" y="0.0" width="115" height="100"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="route_list_km" translatesAutoresizingMaskIntoConstraints="NO" id="D0U-rg-Hhw">
-                                                                <rect key="frame" x="43.5" y="32.5" width="28" height="16"/>
+                                                                <rect key="frame" x="43.5" y="32" width="28.5" height="16.5"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pgy-b9-EnM">
                                                                 <rect key="frame" x="25" y="58.5" width="65.5" height="16.5"/>
@@ -1102,7 +1099,7 @@
                                                         <rect key="frame" x="230" y="0.0" width="115" height="100"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="route_list_location" translatesAutoresizingMaskIntoConstraints="NO" id="Ed2-Qw-dYC">
-                                                                <rect key="frame" x="49" y="26.5" width="17" height="22"/>
+                                                                <rect key="frame" x="49" y="26.5" width="17.5" height="22"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JvQ-se-bUD">
                                                                 <rect key="frame" x="25" y="58.5" width="65.5" height="16.5"/>
@@ -1365,10 +1362,10 @@
                                                         <rect key="frame" x="112.5" y="0.0" width="102" height="70.5"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="start_order_clock" translatesAutoresizingMaskIntoConstraints="NO" id="0bV-Eq-Gqt">
-                                                                <rect key="frame" x="40.5" y="10" width="21" height="21"/>
+                                                                <rect key="frame" x="40.5" y="10" width="21.5" height="21.5"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="10:00 - 14:00" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FRB-dS-zY9">
-                                                                <rect key="frame" x="4" y="41" width="94" height="19.5"/>
+                                                                <rect key="frame" x="4" y="41.5" width="94" height="19"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -1389,10 +1386,10 @@
                                                         <rect key="frame" x="224.5" y="0.0" width="102.5" height="70.5"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="start_order_wait" translatesAutoresizingMaskIntoConstraints="NO" id="s2k-fl-1Zo">
-                                                                <rect key="frame" x="44" y="10" width="15" height="20"/>
+                                                                <rect key="frame" x="43.5" y="10" width="15.5" height="20.5"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="25-30 min" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4uP-Bx-RFq">
-                                                                <rect key="frame" x="4" y="40" width="94.5" height="20.5"/>
+                                                                <rect key="frame" x="4" y="40.5" width="94.5" height="20"/>
                                                                 <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
                                                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                 <nil key="highlightedColor"/>
@@ -1663,7 +1660,7 @@
                                                                             <rect key="frame" x="0.0" y="28" width="375" height="210"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Jhb-Tr-yQE" id="HsP-0g-QQC">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="209.5"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <subviews>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gTD-2G-ckc">
@@ -2045,7 +2042,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="115" height="100"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="route_list_wait" translatesAutoresizingMaskIntoConstraints="NO" id="m7V-m2-7vt">
-                                                                <rect key="frame" x="50" y="28.5" width="15" height="20"/>
+                                                                <rect key="frame" x="50" y="28" width="15.5" height="20.5"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ljx-0V-Tbx">
                                                                 <rect key="frame" x="25" y="58.5" width="65.5" height="16.5"/>
@@ -2070,7 +2067,7 @@
                                                         <rect key="frame" x="115" y="0.0" width="115" height="100"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="route_list_km" translatesAutoresizingMaskIntoConstraints="NO" id="h2J-Jf-idT">
-                                                                <rect key="frame" x="43.5" y="32.5" width="28" height="16"/>
+                                                                <rect key="frame" x="43.5" y="32" width="28.5" height="16.5"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hxn-XG-y32">
                                                                 <rect key="frame" x="25" y="58.5" width="65.5" height="16.5"/>
@@ -2095,7 +2092,7 @@
                                                         <rect key="frame" x="230" y="0.0" width="115" height="100"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="route_list_location" translatesAutoresizingMaskIntoConstraints="NO" id="SHG-MF-His">
-                                                                <rect key="frame" x="49" y="26.5" width="17" height="22"/>
+                                                                <rect key="frame" x="49" y="26.5" width="17.5" height="22"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XpT-u9-Sif">
                                                                 <rect key="frame" x="25" y="58.5" width="65.5" height="16.5"/>
@@ -2232,7 +2229,7 @@
     </scenes>
     <resources>
         <image name="bars-solid" width="15.5" height="14"/>
-        <image name="calendar" width="64" height="64"/>
+        <image name="calendar" width="32" height="32"/>
         <image name="ellipsis-v-regular" width="4" height="16.5"/>
         <image name="ic_time" width="11" height="11"/>
         <image name="route_list_km" width="28.5" height="16.5"/>
