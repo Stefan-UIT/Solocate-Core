@@ -45,6 +45,12 @@ class RouteDetailVC: BaseViewController {
     //MARK: - IBOUTLET
     @IBOutlet weak var menuScrollView:BaseScrollMenuView?
     @IBOutlet weak var clvContent:UICollectionView?
+    @IBOutlet weak var lblEstimateHour:UILabel?
+    @IBOutlet weak var lblEstimateKilometer:UILabel?
+    @IBOutlet weak var lblTotalOrder:UILabel?
+    @IBOutlet weak var lblRoute:UILabel?
+    @IBOutlet weak var lblTime:UILabel?
+    @IBOutlet weak var lblStatus:UILabel?
 
     /*
     @IBOutlet weak var vContainerMap:UIView?
@@ -80,6 +86,7 @@ class RouteDetailVC: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        initUI()
         setupCollectionView()
         setupScrollMenuView()
     }
@@ -119,6 +126,19 @@ class RouteDetailVC: BaseViewController {
         }else {
             //
         }
+    }
+    
+    func initUI()  {
+        let startDate = HourFormater.string(from: route?.startDate.date ?? Date())
+        let endDate = HourFormater.string(from: route?.endDate.date ?? Date())
+        lblRoute?.text = "Route #\(route?.id ?? 0)".localized
+        lblTime?.text = "\(startDate) - \(endDate)"
+        lblStatus?.text = route?.route_name_sts
+        lblEstimateHour?.text = "\(E(route?.totalTimeEst)) Hours".localized.uppercased()
+        lblEstimateKilometer?.text = "\(E(route?.totalDistance)) KM"
+        lblTotalOrder?.text = "\(route?.totalStops ?? 0) Stops".localized.uppercased()
+        
+        lblStatus?.textColor = route?.colorStatus
     }
     
     func setupCollectionView() {

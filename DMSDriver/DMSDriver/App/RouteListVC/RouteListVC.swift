@@ -123,6 +123,7 @@ import Crashlytics
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         let vc:RouteDetailVC = RouteDetailVC.loadSB(SB: .Route)
+        vc.route = routes[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
  }
@@ -199,8 +200,8 @@ import Crashlytics
     func fakaData()  {
         let route = Route()
         route.id = 1234
-        route.totalTimeEst = "5 HOUR"
-        route.totalDistance = "25 KM"
+        route.totalTimeEst = "5"
+        route.totalDistance = "25"
         route.route_name_sts = "New"
         route.startDate = "05:50 AM"
         route.endDate = "08:50 PM"

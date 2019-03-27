@@ -32,8 +32,8 @@ class RouteTableViewCell: UITableViewCell {
         startTimeLabel.text = route.startDate + " - "
         endTimeLabel.text = route.endDate
         expectedStartDateLabel.text = stringDate.uppercased()
-        durationLabel.text = route.totalTimeEst
-        distanceLabel.text = route.totalDistance
-        stopsLabel.text = "\(route.totalStops) STOPS".localized
+        durationLabel.text = "\(route.totalTimeEst) Hours".localized.uppercased()
+        distanceLabel.text = "\(route.totalDistance) KM"
+        stopsLabel.text = "\(route.totalStops) Stops".localized
     }
 }

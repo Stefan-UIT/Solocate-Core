@@ -30,7 +30,7 @@ extension DateFormatter {
     static let displayDateVietNames = DateFormatter(format: "dd/MM/yyyy",timeZone: TimeZone(identifier: "UTC")!);
     static let displayDateUS = DateFormatter(format: "MM/dd/yyyy",timeZone: TimeZone(identifier: "UTC")!);
     static let serverDateFormater = DateFormatter(format: "yyyy/MM/dd HH:mm:ss", timeZone: TimeZone(identifier: "UTC")!);
-    static let hourFormater = DateFormatter(format: "HH:mm",timeZone: TimeZone(identifier: "UTC")!);
+    static let hourFormater = DateFormatter(format: "HH:mm a",timeZone: TimeZone(identifier: "UTC")!);
     static let displayDateTimeVN = DateFormatter(format: "dd/MM/yyyy HH:mm",timeZone: TimeZone(identifier: "UTC")!);
     
 }
