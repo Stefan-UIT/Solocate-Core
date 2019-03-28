@@ -52,7 +52,6 @@ class ProfileVC: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupTableView()
         initData()
         getUserProfile()
@@ -66,7 +65,9 @@ class ProfileVC: BaseViewController {
     override func updateNavigationBar() {
         super.updateNavigationBar()
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.Menu, "Profile".localized)
+        App().navigationService.updateNavigationBar(.Menu,
+                                                    "Profile".localized,
+                                                    AppColor.white, true)
     }
   
     func setupTableView() {
@@ -135,7 +136,8 @@ extension ProfileVC:UITableViewDataSource {
     cellHeader.lblTitle?.text = profileSection.title
     cellHeader.btnEdit?.tag = section
     cellHeader.delegate = self
-    
+    cellHeader.vContent?.roundedCorners([.layerMaxXMinYCorner, .layerMinXMinYCorner], 10)
+
     switch profileSection {
     case .sectionPublic:
       cellHeader.btnEdit?.setImage(!isEditPublicInfor ? #imageLiteral(resourceName: "ic_edit") : nil, for: .normal)
@@ -181,6 +183,16 @@ extension ProfileVC:UITableViewDataSource {
       }else {
         cell.lineEdit?.isHidden = true
       }
+      
+      if publicInforDatas.count - 1 == row {
+        cell.vContent?.roundedCorners([.layerMaxXMaxYCorner, .layerMinXMaxYCorner], 10)
+      }else {
+        cell.vContent?.roundedCorners([.layerMaxXMinYCorner,
+                             .layerMinXMinYCorner,
+                             .layerMaxXMaxYCorner,
+                             .layerMinXMaxYCorner], 0)
+      }
+
       cell.tfContent?.tag = row
       cell.tfContent?.isUserInteractionEnabled = self.isEditPublicInfor
 
@@ -189,13 +201,29 @@ extension ProfileVC:UITableViewDataSource {
       cell.tfContent?.text = privateInforDatas[row].last
       cell.tfContent?.tag = publicInforDatas.count + row
       
+      if privateInforDatas.count - 1 == row {
+        cell.vContent?.roundedCorners([.layerMaxXMaxYCorner, .layerMinXMaxYCorner], 10)
+        
+      }else {
+        
+        cell.vContent?.roundedCorners([.layerMaxXMaxYCorner,
+                                       .layerMaxXMinYCorner,
+                                       .layerMinXMaxYCorner,
+                                       .layerMinXMinYCorner], 0)
+        
+      }
+      
       if (self.isEditPrivateInfor) {
+        
          cell.lineEdit?.isHidden = false
+        
         if textFieldEdit == cell.tfContent {
           cell.lineEdit?.backgroundColor = AppColor.mainColor
-        }else {
+        }
+        else {
           cell.lineEdit?.backgroundColor = AppColor.grayColor
         }
+        
       }else {
         cell.lineEdit?.isHidden = true
       }
@@ -326,12 +354,7 @@ extension ProfileVC:UITextFieldDelegate{
 //MARK: -DMSNavigationServiceDelegate
 extension ProfileVC:DMSNavigationServiceDelegate{
   func didSelectedBackOrMenu() {
-    if Constants.isLeftToRight {
-        present(SideMenuManager.default.menuLeftNavigationController!, animated: true, completion: nil)
-    }else {
-        present(SideMenuManager.default.menuRightNavigationController!, animated: true, completion: nil)
-    }
-
+    showSideMenu()
   }
 }
 

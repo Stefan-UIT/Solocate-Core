@@ -21,6 +21,7 @@ class ProfileCell: UITableViewCell {
     @IBOutlet weak var imvAvartar:UIImageView?
     @IBOutlet weak var btnEdit:UIButton?
     @IBOutlet weak var lineEdit:UIView?
+    @IBOutlet weak var vContent:UIView?
 
   
     var delegate:ProfileCellDelegate?

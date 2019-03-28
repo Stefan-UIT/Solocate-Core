@@ -138,40 +138,44 @@ fileprivate extension LoginViewController {
 
             switch result {
             case .object(let obj):
+                /*
                 if obj.data?.isDriver == false {
                     self?.showAlertView("Sorry, this account is not use as Driver account. Please contact your administrator for more information".localized)
                     return
                 }
-                
+                */
                 Caches().user = obj.data
                 if self?.keepLogin  ?? false{
                     Caches().userLogin = userLogin;
                 }
                 
                 App().loginSuccess()
+                self?.getDrivingRule()
+                self?.getListStatus()
                 
-                SERVICES().API.getDrivingRule { (result) in
-                    switch result{
-                    case .object(let obj):
-                        /*
-                        let data = DrivingRule()
-                        data.data = 1
-                         */
-                        Caches().drivingRule = obj
- 
-                    case .error(_ ):
-                        break
-                    }
-                }
-
                 // Fetch reasons save to local DB
                 //self?.getReasonList()
-                self?.getListStatus()
                 
             case .error(let error):
                 self?.dismissLoadingIndicator()
                 self?.showAlertView(error.getMessage())
                 
+            }
+        }
+    }
+    
+    func getDrivingRule()  {
+        SERVICES().API.getDrivingRule { (result) in
+            switch result{
+            case .object(let obj):
+                /*
+                 let data = DrivingRule()
+                 data.data = 1
+                 */
+                Caches().drivingRule = obj
+                
+            case .error(_ ):
+                break
             }
         }
     }

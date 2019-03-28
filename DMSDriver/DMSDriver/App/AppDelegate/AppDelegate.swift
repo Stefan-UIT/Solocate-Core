@@ -42,9 +42,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Services.setupShared(buildConf: buildConfiguration)
 
         print(#"""
-            \n==>APPLICATION STARTED WITH:
-            \n\tScheme-\#(buildConfiguration.buildScheme.rawValue);
-            \n\tServer-\#(buildConfiguration.serverEnvironment.displayString())-\#(buildConfiguration.serverUrlString()) \n
+            ==>APPLICATION STARTED WITH:
+            Scheme-\#(buildConfiguration.buildScheme.rawValue);
+            Server-\#(buildConfiguration.serverEnvironment.displayString())-\#(buildConfiguration.serverUrlString()) \n
             """#)
     
         GMSServices.provideAPIKey(Network.googleAPIKey)
@@ -304,6 +304,7 @@ extension AppDelegate {
         rootNV = _rootNV
         mainVC = rootNV?.viewControllers.first as? MainVC
         navigationService.navigationItem = App().mainVC?.navigationItem
+        navigationService.navigationBar = App().mainVC?.navigationController?.navigationBar
         window?.rootViewController = _rootNV
     }
 
