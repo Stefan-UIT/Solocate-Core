@@ -179,7 +179,7 @@ extension TaskListVC{
         if !isFetch {
             self.showLoadingIndicator()
         }
-        API().getTaskList(dateStringFilter) {[weak self] (result) in
+        SERVICES().API.getTaskList(dateStringFilter) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.clvContent?.endRefreshControl()
             switch result{

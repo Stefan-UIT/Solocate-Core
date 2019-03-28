@@ -132,7 +132,7 @@ fileprivate extension LoginViewController {
     
     func login(_ userLogin:UserLoginModel)  {
         showLoadingIndicator()
-        API().login(userLogin) {[weak self] (result) in
+        SERVICES().API.login(userLogin) {[weak self] (result) in
             guard let strongSelf = self else {return}
             strongSelf.dismissLoadingIndicator()
 
@@ -193,7 +193,7 @@ fileprivate extension LoginViewController {
     }
     
     func getReasonList() {
-        API().getReasonList {(result) in
+        SERVICES().API.getReasonList {(result) in
             switch result{
             case .object(let obj):
                 guard let list = obj.data?.data else {return}
@@ -208,7 +208,7 @@ fileprivate extension LoginViewController {
 extension LoginViewController: ForgetPasswordViewDelegate {
     func forgetPasswordView(_ view: ForgetPasswordView, _ email: String) {
         view.removeFromSuperview()
-        API().forgotPassword(email) { (result) in
+        SERVICES().API.forgotPassword(email) { (result) in
             switch result{
             case .object(_):
                 self.showAlertView("Please check email.")

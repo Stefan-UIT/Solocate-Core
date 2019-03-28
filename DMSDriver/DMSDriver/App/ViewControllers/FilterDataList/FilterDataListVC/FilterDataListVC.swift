@@ -49,11 +49,13 @@ class FilterDataListVC: BaseViewController {
     fileprivate var arrCustomerDisplay:[String] = []
     fileprivate var arrCityDisplay:[String] = []
 
+    fileprivate var timeData:TimeDataItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
         setupData()
+        App().statusBarView?.backgroundColor = UIColor(hex: 0x2A2E43)
     }
     
     func setupData()  {
@@ -160,7 +162,16 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 60 * Constants.SCALE_VALUE_WIDTH_DEVICE
+        guard  let sectionDisplay = FilterDataListSection(rawValue: section)  else {
+            return 0
+        }
+        switch sectionDisplay {
+        case .SectionCustomer,
+             .SectionCity:
+            return 0 // Currently do not use filter with Customer and City
+        default:
+            return 60 * Constants.SCALE_VALUE_WIDTH_DEVICE
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -172,12 +183,17 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                 header.delegate = self
                 header.tag = section
 
-                if filterModel.date == nil {
+                if timeData == nil {
                     header.lblTitle?.text = "DATE"
                     header.lblTitle?.textColor = AppColor.white
                 }else{
-                   let stringDate = DateFormatter.displayDateUS.string(from: filterModel.date!)
-                    header.lblTitle?.text = "DATE: " + stringDate
+                    if timeData?.type == TimeItemType.TimeItemTypeCustom {
+                        header.lblTitle?.text = "DATE: \(E(timeData?.subtitle))"
+                    }
+                    else{
+                        header.lblTitle?.text = "DATE: \(E(timeData?.title))"
+                    }
+                    
                     header.lblTitle?.textColor = AppColor.mainColor
                 }
                 
@@ -191,7 +207,8 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                 if filterModel.type == nil {
                     header.lblTitle?.text = "TYPE"
                     header.lblTitle?.textColor = AppColor.white
-                }else {
+                }
+                else {
                     var types = filterModel.type?.first
                     if filterModel.type?.count > 1 {
                         types = E(types) + E(filterModel.type?.last)
@@ -468,7 +485,7 @@ extension FilterDataListVC:FilterDataListFooterViewDelegate {
 
 //MARK: - FilterDataListHeaderCellDelegate
 extension FilterDataListVC:FilterDataListHeaderCellDelegate{
-    func filterDataListHeaderCell(cell: FilterDataListHeaderCell, didSelectHeader: UIButton) {
+    func filterDataListHeaderCell(cell: FilterDataListHeaderCell, didSelectHeader btn: UIButton) {
         let section = cell.tag
         filterModel.selectingField = FilterDataModel.SelectingField(rawValue: section)
         guard let sectionDisplay = FilterDataListSection(rawValue: section) else {
@@ -476,7 +493,7 @@ extension FilterDataListVC:FilterDataListHeaderCellDelegate{
         }
         switch sectionDisplay {
         case .SectionDate:
-            doPickdate()
+            doPickdate(btn: btn)
         case .SectionType:
             break
         case .SectionStatus:
@@ -514,18 +531,18 @@ extension FilterDataListVC:FilterDataListHeaderCellDelegate{
        */
     }
     
-    func doPickdate() {
-        let dateFormater =  DateFormatter()
-        dateFormater.dateFormat = "yyyy-MM-dd"
-        
-        let currentDate = dateFormater.date(from:filterModel.date?.toString() ??  Date.now.toString())
-        UIAlertController.showDatePicker(atViewController:self,
-                                         style: .actionSheet,
-                                         mode: .date,
-                                         title: "Select date".localized,
-                                         currentDate: currentDate) {[weak self] (date) in
-                                         self?.filterModel.date = date
-                                         self?.tbvContent?.reloadData()
+    func doPickdate(btn:UIButton) {
+        let arrHide = [TimeItemType.TimeItemTypeLastYear.rawValue,
+                       TimeItemType.TimeItemTypeThisYear.rawValue,
+                       TimeItemType.TimeItemTypeNextYear.rawValue]
+        FilterByDatePopupView.showFilterListTimeAtView(view: btn,
+                                                       atViewContrller: self,
+                                                       timeData: timeData,
+                                                       needHides: arrHide as [NSNumber]) {[weak self] (success, timeData) in
+                                                        self?.timeData = timeData
+                                                        self?.filterModel.startDate = timeData.startDate
+                                                        self?.filterModel.endDate = timeData.endDate
+                                                        self?.tbvContent?.reloadData()
         }
     }
 }
@@ -534,9 +551,12 @@ extension FilterDataListVC:FilterDataListHeaderCellDelegate{
 //MARK: - Suport method
 extension FilterDataListVC {
     
-    class func show(atViewController viewController:UIViewController, callback:@escaping FilterDataListCallback)  {
+    class func show(atViewController viewController:UIViewController,
+                    currentTime:TimeDataItem?,
+                    callback:@escaping FilterDataListCallback)  {
         let vc:FilterDataListVC = FilterDataListVC.load(nib: "FilterDataListVC")
         vc.callback = callback
+        vc.timeData = currentTime
         
         let nv:BaseNV = BaseNV()
         nv.isNavigationBarHidden = true

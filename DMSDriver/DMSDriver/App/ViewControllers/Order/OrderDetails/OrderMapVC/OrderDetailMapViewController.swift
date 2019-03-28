@@ -142,7 +142,7 @@ extension OrderDetailMapViewController {
     
   func getDirection(from fromLocation: CLLocationCoordinate2D, toLocation: CLLocationCoordinate2D) {
     self.showLoadingIndicator()
-    API().getDirection(fromLocation: fromLocation, toLocation: toLocation) {[weak self] (result) in
+    SERVICES().API.getDirection(fromLocation: fromLocation, toLocation: toLocation) {[weak self] (result) in
         self?.dismissLoadingIndicator()
         switch result{
         case .object(let obj):

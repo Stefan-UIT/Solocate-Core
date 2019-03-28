@@ -192,7 +192,7 @@ extension SlideMenuVC:UITableViewDelegate{
 private extension SlideMenuVC{
     func handleLogOut() {
         App().reLogin()
-        API().logout { (result) in
+        SERVICES().API.logout { (result) in
             switch result{
             case .object(_):
             Caches().user = nil

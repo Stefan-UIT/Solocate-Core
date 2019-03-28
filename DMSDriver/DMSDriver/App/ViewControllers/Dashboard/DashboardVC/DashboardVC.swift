@@ -55,7 +55,7 @@ class DashboardVC: BaseViewController {
     override func updateNavigationBar() {
         super.updateNavigationBar()
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.Menu, "")
+        App().navigationService.updateNavigationBar(.Menu, "Dashboard".localized, AppColor.white, true)
     }
     
     func initVar()  {
@@ -304,7 +304,8 @@ extension DashboardVC:DMSNavigationServiceDelegate {
     }
     
     func didSelectedLeftButton(_ sender: UIBarButtonItem) {
-        FilterDataListVC.show(atViewController: self) { (success, data) in
+        FilterDataListVC.show(atViewController: self,
+                              currentTime: timeData) { (success, data) in
             //
         }
     }

@@ -142,7 +142,7 @@ fileprivate extension OrderPictureViewController {
     func getOrderDetail() {
         guard let _orderID = orderDetail?.id else { return }
         showLoadingIndicator()
-        API().getOrderDetail(orderId: "\(_orderID)") {[weak self] (result) in
+        SERVICES().API.getOrderDetail(orderId: "\(_orderID)") {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(let object):
@@ -162,7 +162,7 @@ fileprivate extension OrderPictureViewController {
         guard let order = orderDetail else { return }
         let orderID = String(order.id)
         showLoadingIndicator()
-        API().uploadImageToOrder(orderID, file) { [weak self] (result) in
+        SERVICES().API.uploadImageToOrder(orderID, file) { [weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
@@ -183,7 +183,7 @@ fileprivate extension OrderPictureViewController {
         if hasNetworkConnection {
             showLoadingIndicator()
         }
-        API().uploadMultipleImageToOrder(files, order) {[weak self] (result) in
+        SERVICES().API.uploadMultipleImageToOrder(files, order) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):

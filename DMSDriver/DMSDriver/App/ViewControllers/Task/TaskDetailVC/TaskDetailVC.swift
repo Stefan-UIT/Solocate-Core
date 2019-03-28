@@ -397,7 +397,7 @@ extension TaskDetailVC{
         if !isFetch {
             self.showLoadingIndicator()
         }
-        API().getTaskDetail(taskId) {[weak self] (result) in
+        SERVICES().API.getTaskDetail(taskId) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.tableView?.endRefreshControl()
             switch result{
@@ -413,7 +413,7 @@ extension TaskDetailVC{
     
     func updateTaskStatus(_ status:String) {
         self.showLoadingIndicator()
-        API().updateTaskStatusTask(task?.task_id ?? 0, status) {[weak self] (result) in
+        SERVICES().API.updateTaskStatusTask(task?.task_id ?? 0, status) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.tableView?.endRefreshControl()
             switch result{

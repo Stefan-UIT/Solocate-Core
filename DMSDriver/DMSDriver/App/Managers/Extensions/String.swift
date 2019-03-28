@@ -65,8 +65,6 @@ extension String {
     }
   
     var date: Date? {
-        let dateFormater = DateFormatter()
-        dateFormater.dateFormat = "yyyy-MM-dd hh:mm"
-        return dateFormater.date(from: self)
+        return ServerDateFormater.date(from: self)
     }
 }

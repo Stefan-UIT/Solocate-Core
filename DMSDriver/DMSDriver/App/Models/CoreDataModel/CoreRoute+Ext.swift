@@ -23,8 +23,6 @@ extension CoreRoute{
         date = route.date
         driverID = Int16(route.driverId)
         shop_name = route.shop_name
-        startDate = route.startDate
-        endDate = route.endDate
         status = route.status?.code
         nameStatus = route.nameStatus
         route_name_sts =  route.route_name_sts
@@ -42,7 +40,6 @@ extension CoreRoute{
         route.driverId = Int(driverID)
         route.end_time = E(end_time)
         route.shop_name = E(shop_name)
-        route.startDate = E(startDate)
         route.end_time = E(endDate)
         route.status?.code = E(status)
         route.route_name_sts = E(route_name_sts)

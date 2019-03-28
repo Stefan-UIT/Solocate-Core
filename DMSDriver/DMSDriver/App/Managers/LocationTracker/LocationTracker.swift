@@ -60,7 +60,7 @@ class LocationTracker: NSObject {
             switch result{
             case .object(let obj):
                 if let routeIds = obj.data as? Array<Int> {
-                    API().updateDriverLocation(long: longitude,
+                   SERVICES().API.updateDriverLocation(long: longitude,
                                                lat: latitude, routeIds: routeIds) {(result) in
                     }
                 }

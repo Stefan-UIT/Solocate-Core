@@ -149,7 +149,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
         if hasNetworkConnection {
             showLoadingIndicator()
         }
-        API().submitSignature(file,order) {[weak self] (result) in
+        SERVICES().API.submitSignature(file,order) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):

@@ -225,7 +225,7 @@ extension PickerTypeListVC:DMSNavigationServiceDelegate{
 fileprivate extension PickerTypeListVC{
     func getListDriver()  {
         self.showLoadingIndicator()
-        API().getDriversByCoordinator {[weak self] (result) in
+        SERVICES().API.getDriversByCoordinator {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.tbvContent?.endRefreshControl()
             switch result{

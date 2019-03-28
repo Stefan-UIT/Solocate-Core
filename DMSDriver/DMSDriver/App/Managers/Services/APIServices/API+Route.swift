@@ -15,12 +15,11 @@ import CoreData
 
 extension BaseAPIService {
     @discardableResult
-    func getRoutes(byDate date:String? = nil, callback: @escaping APICallback<ResponseDataModel<ResponseGetRouteList>>) -> APIRequest {
-        var newDate = date;
-        if newDate == nil {
-            newDate = Date().toString("MM/dd/yyyy")
-        }
-        let path = String(format: PATH_REQUEST_URL.GET_ROUTES_BY_DATE.URL, E(newDate))
+    func getRoutes(filterMode:FilterDataModel, callback: @escaping APICallback<ResponseDataListModel<Route>>) -> APIRequest {
+        let startDate = DateFormatter.filterDate.string(from: filterMode.startDate ?? Date())
+        let endDate = DateFormatter.filterDate.string(from: filterMode.endDate ?? Date())
+
+        let path = String(format: PATH_REQUEST_URL.GET_ROUTES_BY_DATE.URL,startDate,endDate)
         return request(method: .GET,
                        path:path,
                        input: APIInput.empty,

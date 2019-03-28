@@ -156,7 +156,7 @@ extension RouteDetailOrderListClvCell{
         if !isFetch {
             self.rootVC?.showLoadingIndicator()
         }
-        API().getRouteDetail(route: routeID) {[weak self] (result) in
+        SERVICES().API.getRouteDetail(route: routeID) {[weak self] (result) in
             self?.rootVC?.dismissLoadingIndicator()
             self?.tbvContent?.endRefreshControl()
             

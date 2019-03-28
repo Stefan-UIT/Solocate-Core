@@ -9,7 +9,7 @@
 import UIKit
 
 protocol FilterDataListHeaderCellDelegate:AnyObject {
-    func filterDataListHeaderCell(cell:FilterDataListHeaderCell, didSelectHeader:UIButton);
+    func filterDataListHeaderCell(cell:FilterDataListHeaderCell, didSelectHeader btn:UIButton);
 }
 
 class FilterDataListHeaderCell: UITableViewHeaderFooterView {

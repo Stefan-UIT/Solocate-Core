@@ -129,12 +129,12 @@ class RouteDetailVC: BaseViewController {
     }
     
     func initUI()  {
-        let startDate = HourFormater.string(from: route?.startDate.date ?? Date())
-        let endDate = HourFormater.string(from: route?.endDate.date ?? Date())
+        let startDate = HourFormater.string(from: route?.start_time.date ?? Date())
+        let endDate = HourFormater.string(from: route?.end_time.date ?? Date())
         lblRoute?.text = "Route #\(route?.id ?? 0)".localized
         lblTime?.text = "\(startDate) - \(endDate)"
         lblStatus?.text = route?.route_name_sts
-        lblEstimateHour?.text = "\(E(route?.totalTimeEst)) Hours".localized.uppercased()
+        lblEstimateHour?.text = "\(route?.totalTimeEst ?? 0) Hours".localized.uppercased()
         lblEstimateKilometer?.text = "\(E(route?.totalDistance)) KM"
         lblTotalOrder?.text = "\(route?.totalStops ?? 0) Stops".localized.uppercased()
         
@@ -270,8 +270,6 @@ extension RouteDetailVC:DMSNavigationServiceDelegate{
     }
     
     func didSelectedLeftButton(_ sender: UIBarButtonItem) {
-        FilterDataListVC.show(atViewController: self) { (success, data) in
-            //
-        }
+ 
     }
 }

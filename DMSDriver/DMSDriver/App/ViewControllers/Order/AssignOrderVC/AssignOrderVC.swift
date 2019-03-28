@@ -302,7 +302,7 @@ extension AssignOrderVC{
         if !isFetch {
             self.showLoadingIndicator()
         }
-        API().getOrderByCoordinator(byDate: dateStringFilter) {[weak self] (result) in
+        SERVICES().API.getOrderByCoordinator(byDate: dateStringFilter) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.tableView.endRefreshControl()
             switch result{
@@ -319,7 +319,7 @@ extension AssignOrderVC{
     
     func assignOrderToDriver(_ requestAssignOrder:RequestAssignOrderModel)  {
         self.showLoadingIndicator()
-        API().assignOrderToDriver(body: requestAssignOrder) {[weak self] (result) in
+        SERVICES().API.assignOrderToDriver(body: requestAssignOrder) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):

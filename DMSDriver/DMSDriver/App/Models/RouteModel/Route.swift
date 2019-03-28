@@ -139,8 +139,6 @@ class Route: BaseModel {
     var  totalOrders = -1
     var  truckFloorCap = ""
     var  date = ""
-    var  endDate = ""
-    var  startDate = ""
     var  start_time = ""
     var  end_time = ""
     var  driver_name = ""
@@ -148,10 +146,7 @@ class Route: BaseModel {
     var  route_number = 0
     var  route_name_sts = ""
     var  orderList:[Order] = []
-    
-    var estStartTime = ""
-    var estEndTime = ""
-    var totalTimeEst = ""
+    var totalTimeEst = 0
     var totalDistance = ""
     
     var totalStops:Int {
@@ -177,10 +172,8 @@ class Route: BaseModel {
         route_number <- map["route_number"]
         route_name_sts <- map["route_name_sts"]
         start_time <- map["start_time"]
-        startDate <- map["start"]
         driver_name <- map["driver_name"]
         end_time <- map["end_time"]
-        endDate <- map["end"]
         shop_name <- map["shop_name"]
         orderList <- map["orders"]
         totalOrders <- map["orders_count"]
@@ -188,6 +181,8 @@ class Route: BaseModel {
         truck <- map["truck"]
         tracking <- map["tracking"]
         driver <- map["driver"]
+        totalTimeEst <- map["est_dur"]
+        totalDistance <- map["est_dist"]
         orderList.forEach { (order) in
             order.driver_id = driver?.id ?? 0
         }

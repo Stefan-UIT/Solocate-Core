@@ -48,7 +48,7 @@ class MapsViewController: UIViewController {
     func drawPath(fromLocation from: CLLocationCoordinate2D,
                 toLocation to: CLLocationCoordinate2D) {
         self.showLoadingIndicator()
-        API().getDirection(fromLocation: from, toLocation: to) {[weak self] (result) in
+        SERVICES().API.getDirection(fromLocation: from, toLocation: to) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(let obj):
@@ -71,7 +71,7 @@ class MapsViewController: UIViewController {
                   toLocation to: CLLocationCoordinate2D,
                   wayPoints:Array<CLLocationCoordinate2D>) {
         self.showLoadingIndicator()
-        API().getDirection(origin: from,
+        SERVICES().API.getDirection(origin: from,
                            destination: to,
                            waypoints: wayPoints) {[weak self] (result) in
             self?.dismissLoadingIndicator()
@@ -174,7 +174,7 @@ extension MapsViewController{
         if !isFetch {
             self.showLoadingIndicator()
         }
-        API().getRouteDetail(route: routeID) {[weak self] (result) in
+        SERVICES().API.getRouteDetail(route: routeID) {[weak self] (result) in
             guard let strongSelf = self else {
                 return
             }

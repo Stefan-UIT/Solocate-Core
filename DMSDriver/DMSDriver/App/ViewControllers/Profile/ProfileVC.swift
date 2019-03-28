@@ -363,7 +363,7 @@ extension ProfileVC{
   func getUserProfile() {
     if ReachabilityManager.isNetworkAvailable {
         self.showLoadingIndicator()
-        API().getUserProfile {[weak self] (result) in
+        SERVICES().API.getUserProfile {[weak self] (result) in
             guard let strongSelf = self else{return}
             strongSelf.dismissLoadingIndicator()
             switch result{
@@ -386,7 +386,7 @@ extension ProfileVC{
   
   func updateUserProfile(_ user:UserModel.UserInfo) {
     self.showLoadingIndicator()
-    API().updateUserProfile(user) {[weak self] (result) in
+    SERVICES().API.updateUserProfile(user) {[weak self] (result) in
       guard let strongSelf = self else{return}
       strongSelf.dismissLoadingIndicator()
       switch result{

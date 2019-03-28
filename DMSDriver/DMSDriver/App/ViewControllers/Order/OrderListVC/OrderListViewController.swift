@@ -222,7 +222,7 @@ extension OrderListViewController{
             self.showLoadingIndicator()
         }
         isLoading = true
-        API().getRouteDetail(route: routeID) {[weak self] (result) in
+        SERVICES().API.getRouteDetail(route: routeID) {[weak self] (result) in
             guard let strongSelf = self else {
                 return
             }

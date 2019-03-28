@@ -641,7 +641,7 @@ extension OrderDetailViewController{
             if !isFetch {
                 showLoadingIndicator()
             }
-            API().getOrderDetail(orderId: "\(_orderID)") {[weak self] (result) in
+            SERVICES().API.getOrderDetail(orderId: "\(_orderID)") {[weak self] (result) in
                 self?.dismissLoadingIndicator()
                 switch result{
                 case .object(let object):
@@ -691,7 +691,7 @@ extension OrderDetailViewController{
     
     
     func updateOrderStatusImport(_ order:Order)  {
-        API().updateOrderStatus(order) {[weak self] (result) in
+        SERVICES().API.updateOrderStatus(order) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
@@ -711,7 +711,7 @@ extension OrderDetailViewController{
         if hasNetworkConnection {
             showLoadingIndicator()
         }
-        API().uploadMultipleImageToOrder(files, order) {[weak self] (result) in
+        SERVICES().API.uploadMultipleImageToOrder(files, order) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
@@ -734,7 +734,7 @@ extension OrderDetailViewController{
     
     func assignOrderToDriver(_ requestAssignOrder:RequestAssignOrderModel)  {
         self.showLoadingIndicator()
-        API().assignOrderToDriver(body: requestAssignOrder) {[weak self] (result) in
+        SERVICES().API.assignOrderToDriver(body: requestAssignOrder) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):

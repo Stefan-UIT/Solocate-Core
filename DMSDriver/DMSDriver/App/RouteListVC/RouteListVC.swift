@@ -22,14 +22,17 @@ import Crashlytics
 
     
     private let identifierRowCell = "RouteTableViewCell"
+    private let timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeThisWeek)
+
+
     
-    
-    var currentDateString = Date().toString("MM/dd/yyyy")
     var routes = [Route]()
-    
+    var filterModel = FilterDataModel()
+
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        initVar()
         initUI()
         fakaData()
     }
@@ -55,16 +58,21 @@ import Crashlytics
        
     }
     
+    func initVar()  {
+        filterModel.startDate = timeData.startDate
+        filterModel.endDate = timeData.endDate
+    }
+    
     func initUI()  {
         setupTableView()
         let userName = Caches().user?.userInfo?.userName ?? ""
-        let date = #"Here is your plan for today - \#(ShortDateFormater.string(from: currentDateString.date ?? Date()))"#.localized
+        let date = #"Here is your plan for today - \#(ShortDateFormater.string(from: timeData.startDate ?? Date()))"#.localized
         lblNameDriver?.text = "Hi \(userName)".localized
         lblDate?.text = date
     }
     
     @objc func fetchData(isShowLoading:Bool = true)  {
-        getRoutes(by: currentDateString, isShowLoading: isShowLoading)
+        getRoutes(filterMode: filterModel, isShowLoading: isShowLoading)
     }
  }
  
@@ -75,8 +83,13 @@ import Crashlytics
     }
     
     func didSelectedLeftButton(_ sender: UIBarButtonItem) {
-        FilterDataListVC.show(atViewController: self) { (success, data) in
-            //
+        FilterDataListVC.show(atViewController: self,currentTime: timeData) {[weak self] (success, data) in
+            guard let strongSelf = self else{
+                return
+            }
+            strongSelf.filterModel.startDate = data.startDate
+            strongSelf.filterModel.endDate = data.endDate
+            strongSelf.fetchData(isShowLoading: true)
         }
     }
  }
@@ -168,11 +181,12 @@ import Crashlytics
  
  //MARK: - API
  fileprivate extension RouteListVC {
-    func getRoutes(by date: String? = Date().toString(), isShowLoading:Bool = true) {
+    func getRoutes(filterMode:FilterDataModel, isShowLoading:Bool = true) {
         if isShowLoading {
             showLoadingIndicator()
         }
-        API().getRoutes(byDate: date) {[weak self] (result) in
+        
+        SERVICES().API.getRoutes(filterMode: filterMode) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.tableView.endRefreshControl()
             guard let strongSelf = self else {
@@ -181,8 +195,8 @@ import Crashlytics
             switch result{
             case .object(let obj):
                 if let data = obj.data {
-                    strongSelf.routes = data.data ?? []
-                   // DMSCurrentRoutes.routes = data
+                    strongSelf.routes = data
+                    // DMSCurrentRoutes.routes = data
                     strongSelf.lblNoResult?.isHidden = (strongSelf.routes.count > 0)
                     strongSelf.tableView.reloadData()
                     
@@ -200,11 +214,11 @@ import Crashlytics
     func fakaData()  {
         let route = Route()
         route.id = 1234
-        route.totalTimeEst = "5"
+        route.totalTimeEst = 5
         route.totalDistance = "25"
         route.route_name_sts = "New"
-        route.startDate = "05:50 AM"
-        route.endDate = "08:50 PM"
+        route.start_time = "05:50 AM"
+        route.end_time = "08:50 PM"
         route.date = Date().toString()
         
         routes = [route,route,route,route,route,route,route]

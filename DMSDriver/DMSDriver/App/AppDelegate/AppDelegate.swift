@@ -298,7 +298,7 @@ extension AppDelegate {
         ReachabilityManager.startMonitoring()
         ReachabilityManager.updateAllRequestToServer()
         if let tokenFcm = Caches().getObject(forKey: Defaultkey.fcmToken) as? String {
-            API().updateNotificationFCMToken(tokenFcm) { (_) in}
+            SERVICES().API.updateNotificationFCMToken(tokenFcm) { (_) in}
         }
         let _rootNV:BaseNV = .loadSB(SB: .Main)
         rootNV = _rootNV

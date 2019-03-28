@@ -13,7 +13,7 @@
 	<key>GET_ORDER_BY_DATE</key>
 	<string>backend-api/v1/routes/get-routes-by-date</string>
 	<key>GET_ROUTES_BY_DATE</key>
-	<string>transaction/v1/routes/by-driver?date=%@</string>
+	<string>transaction/v1/mobile/routes/by-driver?start_time=%@&amp;end_time=%@</string>
 	<key>GET_PACKAGES_IN_ROUTE</key>
 	<string>backend-api/v1/routes/get-packages-by-driver?id=%@&amp;date=%@</string>
 	<key>GET_ORDER_DETAIL</key>
@@ -45,7 +45,7 @@
 	<key>GET_LIST_NOTIFICATIONS</key>
 	<string>backend-api/v1/messages/list-message?page=1&amp;limit=100&amp;route_id=%@</string>
 	<key>GET_ROUTE_DETAIL</key>
-	<string>transaction/v1/routes/%@</string>
+	<string>transaction/v1/mobile/routes/%@</string>
 	<key>READ_MESSAGE</key>
 	<string>backend-api/v1/messages/%@</string>
 	<key>CHECK_TOKEN</key>

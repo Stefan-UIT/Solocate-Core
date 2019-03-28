@@ -187,10 +187,6 @@ func App() -> AppDelegate {
     return UIApplication.shared.delegate as! AppDelegate;
 }
 
-func API() ->BaseAPIService {
-    return BaseAPIService.shared()
-}
-
 func Caches() -> Cache {
     return Cache.shared
 }

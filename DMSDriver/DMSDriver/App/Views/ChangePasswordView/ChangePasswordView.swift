@@ -89,7 +89,7 @@ class ChangePasswordView: BaseView {
         
         SVProgressHUD.show()
         weak var weakSelf = self
-        API().changePassword(para) {[weak self] (result) in
+        SERVICES().API.changePassword(para) {[weak self] (result) in
             SVProgressHUD.dismiss()
             switch result{
             case .object(let obj):

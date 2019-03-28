@@ -108,7 +108,7 @@ extension ReasonListViewController {
     func getReasonList() {
         if hasNetworkConnection {
             showLoadingIndicator()
-            API().getReasonList {[weak self] (result) in
+            SERVICES().API.getReasonList {[weak self] (result) in
                 self?.dismissLoadingIndicator()
                 switch result{
                 case .object(let obj):
@@ -150,7 +150,7 @@ extension ReasonListViewController {
             self.navigationController?.popViewController(animated: true)
         }
         
-        API().updateOrderStatus(order, reason: reason) {[weak self] (result) in
+        SERVICES().API.updateOrderStatus(order, reason: reason) {[weak self] (result) in
             switch result{
             case .object(_ ):
                 self?.didCancelSuccess?(true, order)
@@ -165,7 +165,7 @@ extension ReasonListViewController {
         self.showLoadingIndicator()
         let reason = reasonList[selectedIndex]
         reason.message = tvMessange?.text
-        API().updateTaskStatusTask(task.task_id ?? 0, "CC",reason) {[weak self] (result) in
+        SERVICES().API.updateTaskStatusTask(task.task_id ?? 0, "CC",reason) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.tableView?.endRefreshControl()
             switch result{

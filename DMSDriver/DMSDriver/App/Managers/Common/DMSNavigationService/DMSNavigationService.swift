@@ -166,7 +166,7 @@ extension DMSNavigationService {
                              _ useLargeTitle:Bool = false) {
         if useLargeTitle == true {
             navigationBar?.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: AppColor.mainColor,
-                                                       NSAttributedString.Key.font: Font.helveticaBold(with: 25)]
+                                                       NSAttributedString.Key.font: Font.helveticaBold(with: 40)]
             navigationItem?.largeTitleDisplayMode = .automatic
             navigationItem?.title = E(title)
             App().statusBarView?.backgroundColor = AppColor.white

@@ -40,7 +40,7 @@ class RouteDetailMapClvCell: UICollectionViewCell {
     
     func drawPath(fromLocation from: CLLocationCoordinate2D,
                   toLocation to: CLLocationCoordinate2D) {
-        API().getDirection(fromLocation: from, toLocation: to) {[weak self] (result) in
+        SERVICES().API.getDirection(fromLocation: from, toLocation: to) {[weak self] (result) in
             switch result{
             case .object(let obj):
                 for route in obj.routes {
@@ -63,7 +63,7 @@ class RouteDetailMapClvCell: UICollectionViewCell {
                   toLocation to: CLLocationCoordinate2D,
                   wayPoints:Array<CLLocationCoordinate2D>) {
         //self.showLoadingIndicator()
-        API().getDirection(origin: from,
+        SERVICES().API.getDirection(origin: from,
                            destination: to,
                            waypoints: wayPoints) {[weak self] (result) in
                             //self?.dismissLoadingIndicator()
@@ -168,7 +168,7 @@ extension RouteDetailMapClvCell{
         if !isFetch {
            // self.showLoadingIndicator()
         }
-        API().getRouteDetail(route: routeID) {[weak self] (result) in
+        SERVICES().API.getRouteDetail(route: routeID) {[weak self] (result) in
             guard let strongSelf = self else {
                 return
             }
