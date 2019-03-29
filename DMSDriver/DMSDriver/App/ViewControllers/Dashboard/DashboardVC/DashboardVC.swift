@@ -302,12 +302,5 @@ extension DashboardVC:DMSNavigationServiceDelegate {
     func didSelectedBackOrMenu() {
         showSideMenu()
     }
-    
-    func didSelectedLeftButton(_ sender: UIBarButtonItem) {
-        FilterDataListVC.show(atViewController: self,
-                              currentTime: timeData) { (success, data) in
-            //
-        }
-    }
 }
 

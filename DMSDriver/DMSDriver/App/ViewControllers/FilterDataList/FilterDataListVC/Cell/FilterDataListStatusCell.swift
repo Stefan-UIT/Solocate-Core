@@ -34,14 +34,16 @@ class FilterDataListStatusCell: UITableViewCell {
         var status = ""
         switch btn.tag {
         case 0:
-            status = "New"
+            status = "OP"
         case 1:
-            status = "In Progress"
+            status = "IP"
         case 2:
-            status = "Finished"
+            status = "DV"
         case 3:
-            status = "Cancelled"
-            
+            status = "CC"
+        case 4:
+            status = "UF"
+
         default:
             break
         }

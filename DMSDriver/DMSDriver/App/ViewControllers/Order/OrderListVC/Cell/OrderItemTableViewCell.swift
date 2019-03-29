@@ -20,7 +20,9 @@ class OrderItemTableViewCell: UITableViewCell {
     @IBOutlet weak var lblExpectedTime: UILabel?
     @IBOutlet weak var lblRecordsFrom: UILabel?
     @IBOutlet weak var btnStatus: UIButton?
-    @IBOutlet weak var btnNumber: UIButton?
+    @IBOutlet weak var btnPropety: UIButton?
+    @IBOutlet weak var lblNumber: UILabel?
+    @IBOutlet weak var lblDate: UILabel?
     @IBOutlet weak var vContent: UIView?
 
     var order: Order! {
@@ -42,18 +44,17 @@ class OrderItemTableViewCell: UITableViewCell {
     }
     
     func updateCell() {
-        /*
-        let displayDateTimeVN = DateFormatter.displayDateTimeVN
-        let startDate = DateFormatter.serverDateFormater.date(from: order.startTime)
-        let endDate = DateFormatter.serverDateFormater.date(from: order.endTime)
-        */
+        let startDate = HourFormater.string(from: order.from?.start_time?.date ?? Date())
+        let endDate = HourFormater.string(from:  order.to?.end_time?.date ?? Date())
+        let dateDate = DateFormatter.shortDate.string(from:  order.from?.end_time?.date ?? Date())
         
-        btnNumber?.setTitle("\(order.seq)", for: .normal)
-        lblTitle?.text = String(format: "OrderID-%d".localized, order.id)
+        lblNumber?.text = "\(order.seq)."
+        lblTitle?.text = String(format: "#%d".localized, order.id)
         lblFromAddresss?.text = order.from?.address
         lblToAddress?.text = order.to?.address
-        lblNatureOfGoods?.text = "\(order.details?.count ?? 0)"
         lblUrgency?.textColor = order.colorUrgent
+        lblExpectedTime?.text = "\(startDate) - \(endDate)"
+        lblDate?.text = dateDate.uppercased()
 
         if Locale.current.languageCode == "he" {
             lblUrgency?.text = order.urgent_type_name_hb
@@ -70,6 +71,6 @@ class OrderItemTableViewCell: UITableViewCell {
         btnStatus?.borderWidth = 1.0;
         btnStatus?.layer.cornerRadius = 3.0;
         btnStatus?.borderColor = order.colorStatus;
-        vContent?.cornerRadius = 4.0;
+        vContent?.cornerRadius = 10;
     }
 }

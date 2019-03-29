@@ -31,12 +31,18 @@ class RouteDetailOrderListClvCell: UICollectionViewCell {
             tbvContent?.reloadData()
         }
     }
-    var dateStringFilter = ""
-    var route: Route?
+    
+    var route: Route? {
+        didSet{
+            filterDataWithTapDisplay()
+        }
+    }
     var rootVC: BaseViewController?
+    var dateStringFilter = ""
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        filterDataWithTapDisplay()
         updateUI()
         tbvContent?.backgroundColor = UIColor.clear
     }
@@ -80,7 +86,7 @@ extension RouteDetailOrderListClvCell {
 //MARK: - RouteDetailOrderListClvCell,UITableViewDataSource
 extension RouteDetailOrderListClvCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return orderList.count
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -91,8 +97,8 @@ extension RouteDetailOrderListClvCell: UITableViewDelegate, UITableViewDataSourc
         if let cell = tableView.dequeueReusableCell(withIdentifier: displayMode == .Reduced ? cellReducedIdentifier : cellIdentifier,
                                                     for: indexPath) as? OrderItemTableViewCell {
             
-            //            let order = orderList[indexPath.row]
-            //            cell.order = order
+            let order = orderList[indexPath.row]
+            cell.order = order
      
             return cell
         }

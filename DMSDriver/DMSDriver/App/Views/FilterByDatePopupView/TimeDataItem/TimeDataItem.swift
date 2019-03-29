@@ -234,9 +234,6 @@ class TimeData: NSObject {//You should get it from [TimeData getTimeDataItemType
                 let endDisplay = (end != nil) ? DateFormatter.displayDateUS.string(from: end!) : "?"
 
                 subTitle = "\(startDisplay) - \(endDisplay)"
-
-            default:
-                break;
             }
             
             let item = TimeDataItem(title: title,

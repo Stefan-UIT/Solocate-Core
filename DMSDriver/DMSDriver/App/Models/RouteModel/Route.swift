@@ -148,12 +148,7 @@ class Route: BaseModel {
     var  orderList:[Order] = []
     var totalTimeEst = 0
     var totalDistance = ""
-    
-    var totalStops:Int {
-        get{
-            return orderList.count
-        }
-    }
+    var locationList:[Address] = []
     
     
     
@@ -183,6 +178,7 @@ class Route: BaseModel {
         driver <- map["driver"]
         totalTimeEst <- map["est_dur"]
         totalDistance <- map["est_dist"]
+        locationList <- map["location_list"]
         orderList.forEach { (order) in
             order.driver_id = driver?.id ?? 0
         }

@@ -28,6 +28,9 @@ let KEY_LAST_NAME               = "last_name"
 let KEY_MOBILE                  = "mobile"
 let KEY_PHONE                   = "phone"
 let KEY_USER_ROLE               = "user_roles"
+let KEY_TIMEZONE_COMPANY        = "timezone"
+let KEY_USER_NAME               = "user_name"
+
 
 
 let KEY_WARE_HOUSE              = "ware_house"

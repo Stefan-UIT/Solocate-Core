@@ -89,6 +89,11 @@ class RouteDetailVC: BaseViewController {
         initUI()
         setupCollectionView()
         setupScrollMenuView()
+        
+        guard let routeId = route?.id else {
+            return
+        }
+        getRouteDetail("\(routeId)")
     }
     
     
@@ -133,10 +138,10 @@ class RouteDetailVC: BaseViewController {
         let endDate = HourFormater.string(from: route?.end_time.date ?? Date())
         lblRoute?.text = "Route #\(route?.id ?? 0)".localized
         lblTime?.text = "\(startDate) - \(endDate)"
-        lblStatus?.text = route?.route_name_sts
-        lblEstimateHour?.text = "\(route?.totalTimeEst ?? 0) Hours".localized.uppercased()
-        lblEstimateKilometer?.text = "\(E(route?.totalDistance)) KM"
-        lblTotalOrder?.text = "\(route?.totalStops ?? 0) Stops".localized.uppercased()
+        lblStatus?.text = route?.status?.name
+        lblEstimateHour?.text = CommonUtils.formatEstTime(seconds: Int64(route?.totalTimeEst ?? 0))
+        lblEstimateKilometer?.text = CommonUtils.formatEstKm(met: route?.totalDistance.doubleValue ?? 0)
+        lblTotalOrder?.text = "\(route?.totalOrders ?? 0) Stops".localized.uppercased()
         
         lblStatus?.textColor = route?.colorStatus
     }
@@ -196,7 +201,7 @@ extension RouteDetailVC: UICollectionViewDataSource {
     func cellMap(_ collectionView:UICollectionView,_ indexPath:IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifieMapCell,
                                                       for: indexPath) as! RouteDetailMapClvCell
-        
+        cell.route = route
         return cell
     }
     
@@ -204,7 +209,7 @@ extension RouteDetailVC: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifierOrderListCell,
                                                       for: indexPath) as! RouteDetailOrderListClvCell
         cell.rootVC = self
-        
+        cell.route = route
         return cell
     }
     
@@ -212,7 +217,7 @@ extension RouteDetailVC: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifieLocationsCell,
                                                       for: indexPath) as! RouteDetailLocationListClvCell
         cell.rootVC = self
-        
+        cell.route = route
         return cell
     }
 }
@@ -271,5 +276,39 @@ extension RouteDetailVC:DMSNavigationServiceDelegate{
     
     func didSelectedLeftButton(_ sender: UIBarButtonItem) {
  
+    }
+}
+
+//MARK: - API
+extension RouteDetailVC{
+    
+    @objc func fetchData()  {
+        if let route = self.route {
+            getRouteDetail("\(route.id)", showLoading: false)
+        }
+    }
+    
+    func getRouteDetail(_ routeID:String, showLoading:Bool = true) {
+        if showLoading {
+            self.showLoadingIndicator()
+        }
+        SERVICES().API.getRouteDetail(route: routeID) {[weak self] (result) in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.dismissLoadingIndicator()
+            switch result{
+            case .object(let obj):
+                self?.route = obj.data
+                self?.clvContent?.reloadData()
+                /*
+                 guard let data = obj.data else {return}
+                 CoreDataManager.updateRoute(data) // Update route to DB local
+                 */
+            case .error(let error):
+                strongSelf.showAlertView(error.getMessage())
+                
+            }
+        }
     }
 }

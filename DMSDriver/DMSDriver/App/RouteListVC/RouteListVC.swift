@@ -22,7 +22,7 @@ import Crashlytics
 
     
     private let identifierRowCell = "RouteTableViewCell"
-    private let timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeThisWeek)
+    private var timeData:TimeDataItem?
 
 
     
@@ -34,12 +34,12 @@ import Crashlytics
         super.viewDidLoad()
         initVar()
         initUI()
-        fakaData()
+        //fakaData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        //fetchData(isShowLoading: true)
+        fetchData(isShowLoading: true)
     }
     
     override func updateNavigationBar() {
@@ -59,14 +59,16 @@ import Crashlytics
     }
     
     func initVar()  {
-        filterModel.startDate = timeData.startDate
-        filterModel.endDate = timeData.endDate
+        if timeData == nil {
+            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeThisWeek)
+        }
+        filterModel.timeData = timeData
     }
     
     func initUI()  {
         setupTableView()
         let userName = Caches().user?.userInfo?.userName ?? ""
-        let date = #"Here is your plan for today - \#(ShortDateFormater.string(from: timeData.startDate ?? Date()))"#.localized
+        let date = #"Here is your plan for today - \#(ShortDateFormater.string(from: filterModel.timeData?.startDate ?? Date()))"#.localized
         lblNameDriver?.text = "Hi \(userName)".localized
         lblDate?.text = date
     }
@@ -83,12 +85,11 @@ import Crashlytics
     }
     
     func didSelectedLeftButton(_ sender: UIBarButtonItem) {
-        FilterDataListVC.show(atViewController: self,currentTime: timeData) {[weak self] (success, data) in
+        FilterDataListVC.show(atViewController: self,currentFilter: filterModel) {[weak self] (success, data) in
             guard let strongSelf = self else{
                 return
             }
-            strongSelf.filterModel.startDate = data.startDate
-            strongSelf.filterModel.endDate = data.endDate
+            strongSelf.filterModel = data
             strongSelf.fetchData(isShowLoading: true)
         }
     }

@@ -9,8 +9,10 @@ extension Locale {
 
 //MARK: - TimeZone
 extension TimeZone {
-    static let centralTexas: TimeZone = TimeZone(identifier: "UTC-06:00")!
-    static fileprivate(set) var app: TimeZone = .centralTexas;
+    static let centralTexas = TimeZone(identifier: "UTC-06:00")!
+    static let company = (TimeZone(identifier: E(Caches().user?.userInfo?.timeZoneCompany)) ?? TimeZone(identifier: "UTC"))!
+
+    static fileprivate(set) var app: TimeZone = .company;
 }
 
 //MARK: - Calendar
@@ -168,7 +170,7 @@ extension Date {
     
     func startDayOfThisWeek(timeZone:TimeZone = .current) ->Date{
         let cal =  Calendar(identifier: .iso8601, timeZone: timeZone)
-        var dateComponents = cal.dateComponents([.year, .month, .day,.hour,.minute,.second], from: self)
+        var dateComponents = cal.dateComponents([.year, .month,.day,.hour,.minute,.second,.weekday], from: self)
         let day = dateComponents.day
         let offset = dateComponents.weekday
         
@@ -182,7 +184,7 @@ extension Date {
     
     func endDayOfThisWeek(timeZone:TimeZone = .current) ->Date{
         let cal =  Calendar(identifier: .iso8601, timeZone: timeZone)
-        var dateComponents = cal.dateComponents([.year, .month, .day,.hour,.minute,.second], from: self)
+        var dateComponents = cal.dateComponents([.year, .month, .day,.hour,.minute,.second, .weekday], from: self)
         let day = dateComponents.day
         let offset = dateComponents.weekday
         

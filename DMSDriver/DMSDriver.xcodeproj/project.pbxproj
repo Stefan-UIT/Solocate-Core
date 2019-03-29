@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		2A8EFE95224C7855008AA1D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A8EFE94224C7855008AA1D3 /* GoogleService-Info.plist */; };
 		2AB4A98A224B78C70019F196 /* RouteDetailLocationListClvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */; };
+		2AC97C5B224DF7F600DD07AE /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC97C5A224DF7F600DD07AE /* CommonUtils.swift */; };
+		2AC97C5D224E009400DD07AE /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC97C5C224E009400DD07AE /* Double+Ext.swift */; };
 		3B0035F7216C614D0032519D /* TextViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0035F4216C614D0032519D /* TextViewInput.swift */; };
 		3B0035F8216C614D0032519D /* TextViewInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0035F5216C614D0032519D /* TextViewInput.xib */; };
 		3B0035F9216C614D0032519D /* TextViewInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0035F6216C614D0032519D /* TextViewInputController.swift */; };
@@ -293,6 +295,8 @@
 /* Begin PBXFileReference section */
 		2A8EFE94224C7855008AA1D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../../../Users/nguyenmach/Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailLocationListClvCell.swift; sourceTree = "<group>"; };
+		2AC97C5A224DF7F600DD07AE /* CommonUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
+		2AC97C5C224E009400DD07AE /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
 		3B0035F4216C614D0032519D /* TextViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewInput.swift; sourceTree = "<group>"; };
 		3B0035F5216C614D0032519D /* TextViewInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewInput.xib; sourceTree = "<group>"; };
 		3B0035F6216C614D0032519D /* TextViewInputController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewInputController.swift; sourceTree = "<group>"; };
@@ -780,6 +784,14 @@
 				2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */,
 			);
 			path = RouteDetailLocationListClvCell;
+			sourceTree = "<group>";
+		};
+		2AC97C58224DF77900DD07AE /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				2AC97C5A224DF7F600DD07AE /* CommonUtils.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		2E482ACD4DD6945570D21CE8 /* Pods */ = {
@@ -1310,6 +1322,7 @@
 		3B66B765210B113C000BDFEF /* Managers */ = {
 			isa = PBXGroup;
 			children = (
+				2AC97C58224DF77900DD07AE /* Utils */,
 				3B17EB6021AE4C1500CDF7D3 /* LocalPushNotification */,
 				3B81263021759061005AD2B5 /* LocalDatabase */,
 				3BE8CAA7214F67AC00371B8B /* SocketIO */,
@@ -1355,6 +1368,7 @@
 				3B66B777210B113C000BDFEF /* UILabel.swift */,
 				3B66B778210B113C000BDFEF /* UITextView.swift */,
 				3B66B779210B113C000BDFEF /* UITableView-Extensions.swift */,
+				2AC97C5C224E009400DD07AE /* Double+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2925,6 +2939,7 @@
 				3B66B818210B113D000BDFEF /* Font.swift in Sources */,
 				3B66B839210B113D000BDFEF /* ItemWithImage.swift in Sources */,
 				3B66B80E210B113D000BDFEF /* UIBarButtonItem + Style.swift in Sources */,
+				2AC97C5D224E009400DD07AE /* Double+Ext.swift in Sources */,
 				3B66B8EA210B1149000BDFEF /* ChangePasswordModel.swift in Sources */,
 				3B66B906210B1149000BDFEF /* OrderSignatureViewController.swift in Sources */,
 				3B1629CB221BE58C00E7A83C /* FilterDataListVC.swift in Sources */,
@@ -2984,6 +2999,7 @@
 				3B66B807210B113D000BDFEF /* UITextField+Ext.swift in Sources */,
 				3B66B830210B113D000BDFEF /* TextViewController.swift in Sources */,
 				3B5D79242178346700EA49CC /* DateFormatter+Ext.swift in Sources */,
+				2AC97C5B224DF7F600DD07AE /* CommonUtils.swift in Sources */,
 				3B66B80C210B113D000BDFEF /* UIViewController.swift in Sources */,
 				3B66B8FF210B1149000BDFEF /* OrderDetailTableViewCell.swift in Sources */,
 				3B66B844210B113D000BDFEF /* KeyConstants.swift in Sources */,

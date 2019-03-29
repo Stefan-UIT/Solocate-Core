@@ -62,7 +62,7 @@ extension RouteDetailLocationListClvCell {
 //MARK: - RouteDetailOrderListClvCell,UITableViewDataSource
 extension RouteDetailLocationListClvCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return route?.locationList.count ?? 0
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -72,8 +72,10 @@ extension RouteDetailLocationListClvCell: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellReducedIdentifier ,
                                                     for: indexPath) as? OrderItemTableViewCell {
+            let address = route?.locationList[indexPath.row]
             cell.selectionStyle = .none
-
+            cell.lblTitle?.text = address?.address
+            cell.lblNumber?.text = "\(address?.seq ?? 1)"
             return cell
         }
         return UITableViewCell()

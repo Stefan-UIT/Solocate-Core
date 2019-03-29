@@ -43,13 +43,11 @@ class FilterDataListVC: BaseViewController {
 
     fileprivate var callback:FilterDataListCallback?
     fileprivate var filterModel = FilterDataModel()
-    fileprivate var arrStatus:[String] = []
+    fileprivate var arrStatus:[Status] = []
     fileprivate var arrCustomer:[String] = []
     fileprivate var arrCity:[String] = []
     fileprivate var arrCustomerDisplay:[String] = []
     fileprivate var arrCityDisplay:[String] = []
-
-    fileprivate var timeData:TimeDataItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,11 +56,17 @@ class FilterDataListVC: BaseViewController {
         App().statusBarView?.backgroundColor = UIColor(hex: 0x2A2E43)
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        App().statusBarView?.backgroundColor = UIColor.white
+    }
+    
     func setupData()  {
-        arrStatus = ["New".localized,
-                     "In Progress".localized,
-                     "Finished".localized,
-                     "Cancelled".localized]
+        arrStatus = CoreDataManager.getListStatus()
+        
+        if arrStatus.count == 0 {
+            getListStatus()
+        }
         
         arrCustomer = ["Nguyen Mach".localized,
                      "Bao Phan".localized,
@@ -183,15 +187,15 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                 header.delegate = self
                 header.tag = section
 
-                if timeData == nil {
+                if filterModel.timeData == nil {
                     header.lblTitle?.text = "DATE"
                     header.lblTitle?.textColor = AppColor.white
                 }else{
-                    if timeData?.type == TimeItemType.TimeItemTypeCustom {
-                        header.lblTitle?.text = "DATE: \(E(timeData?.subtitle))"
+                    if filterModel.timeData?.type == TimeItemType.TimeItemTypeCustom {
+                        header.lblTitle?.text = "DATE: \(E(filterModel.timeData?.subtitle))"
                     }
                     else{
-                        header.lblTitle?.text = "DATE: \(E(timeData?.title))"
+                        header.lblTitle?.text = "DATE: \(E(filterModel.timeData?.title))"
                     }
                     
                     header.lblTitle?.textColor = AppColor.mainColor
@@ -230,7 +234,7 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                     
                 }else {
                     header.lblTitle?.textColor = AppColor.mainColor
-                    header.lblTitle?.text = "STATUS: " + E(filterModel.status)
+                    header.lblTitle?.text = "STATUS: " + E(filterModel.status?.name)
                 }
                 return header
 
@@ -338,7 +342,7 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                 
             case .SectionStatus:
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifierStatusCell) as! FilterDataListStatusCell
-                cell.btnStatus?.setTitle(arrStatus[row], for: .normal)
+                cell.btnStatus?.setTitle(arrStatus[row].name, for: .normal)
                 cell.btnStatus?.tag = indexPath.row
                 cell.delegate = self
                 cell.selectionStyle = .none
@@ -464,8 +468,9 @@ extension FilterDataListVC:FilterDataTypeRowCellDelegate {
 //MARK: - FilterDataListStatusCellDelegate
 extension FilterDataListVC:FilterDataListStatusCellDelegate{
     func filterDataListStatusCell(cell: FilterDataListStatusCell, didSelect status: String, index: Int) {
-        filterModel.selectingField = nil
+        let status = arrStatus[index]
         filterModel.status = status
+        filterModel.selectingField = nil
         tbvContent?.reloadData()
     }
 }
@@ -537,12 +542,25 @@ extension FilterDataListVC:FilterDataListHeaderCellDelegate{
                        TimeItemType.TimeItemTypeNextYear.rawValue]
         FilterByDatePopupView.showFilterListTimeAtView(view: btn,
                                                        atViewContrller: self,
-                                                       timeData: timeData,
+                                                       timeData: filterModel.timeData,
                                                        needHides: arrHide as [NSNumber]) {[weak self] (success, timeData) in
-                                                        self?.timeData = timeData
-                                                        self?.filterModel.startDate = timeData.startDate
-                                                        self?.filterModel.endDate = timeData.endDate
+                                                        self?.filterModel.timeData = timeData
                                                         self?.tbvContent?.reloadData()
+        }
+    }
+}
+
+extension FilterDataListVC {
+    func getListStatus()  {
+        SERVICES().API.getListStatus {[weak self] (result) in
+            switch result{
+            case .object(let obj):
+                guard let list = obj.data?.data else {return}
+                self?.arrStatus = list
+                CoreDataManager.updateListStatus(list)
+            case .error(_ ):
+                break
+            }
         }
     }
 }
@@ -552,11 +570,13 @@ extension FilterDataListVC:FilterDataListHeaderCellDelegate{
 extension FilterDataListVC {
     
     class func show(atViewController viewController:UIViewController,
-                    currentTime:TimeDataItem?,
+                    currentFilter:FilterDataModel?,
                     callback:@escaping FilterDataListCallback)  {
         let vc:FilterDataListVC = FilterDataListVC.load(nib: "FilterDataListVC")
         vc.callback = callback
-        vc.timeData = currentTime
+        if currentFilter != nil {
+            vc.filterModel = currentFilter!
+        }
         
         let nv:BaseNV = BaseNV()
         nv.isNavigationBarHidden = true

@@ -19,10 +19,9 @@ class FilterDataModel: BaseModel {
     }
     
     var date:Date?
-    var startDate:Date?
-    var endDate:Date?
+    var timeData:TimeDataItem?
     var type:[String]?
-    var status:String?
+    var status:Status?
     var customer:String?
     var city:String?
     

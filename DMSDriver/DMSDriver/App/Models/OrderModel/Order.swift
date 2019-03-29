@@ -44,6 +44,11 @@ class Address: BaseModel {
     var lngtd:String?
     var name:String?
     var phone:String?
+    var start_time:String?
+    var end_time:String?
+    var ctt_name:String?
+    var ctt_phone:String?
+    var seq = 1
     
     override init() {
         super.init()
@@ -59,6 +64,11 @@ class Address: BaseModel {
         lngtd <- map["lngtd"]
         name <- map["ctt_name"]
         phone <- map["ctt_phone"]
+        start_time <- map["start_time"]
+        end_time <- map["end_time"]
+        ctt_name <- map["ctt_name"]
+        ctt_phone <- map["ctt_phone"]
+        seq <- map["seq"]
     }
 }
 
