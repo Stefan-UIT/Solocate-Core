@@ -72,6 +72,7 @@ enum PATH_REQUEST_URL: String{
     case GET_LIST_STATUS = "GET_LIST_STATUS"
     case GET_ALL_ROUTE_INPROGESS = "GET_ALL_ROUTE_INPROGESS"
     case GET_LIST_ALERT = "GET_LIST_ALERT"
+    case DASHBOARD = "DASHBOARD"
 
     
     var URL:String  {

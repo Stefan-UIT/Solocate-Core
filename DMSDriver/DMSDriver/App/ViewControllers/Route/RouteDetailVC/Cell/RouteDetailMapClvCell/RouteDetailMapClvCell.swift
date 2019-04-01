@@ -13,7 +13,11 @@ import GoogleMaps
 class RouteDetailMapClvCell: UICollectionViewCell {
     var mapView: GMSMapView?
     
-    var route: Route?
+    var route: Route?{
+        didSet{
+            drawMap()
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -22,7 +26,7 @@ class RouteDetailMapClvCell: UICollectionViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         self.perform(#selector(setupMapView),on: Thread.main,with: nil,waitUntilDone: false)
-        
+        self.drawMap()
     }
 
     @objc func setupMapView() {
@@ -137,11 +141,11 @@ class RouteDetailMapClvCell: UICollectionViewCell {
          guard let wareHouse = route!.warehouse else { return}
          let warehouseMarker = wareHouse.toGMSMarker() // warehouse marker
          */
-        if let currentLocationMarker = getGMSMarker(){
-            currentLocationMarker.map = mapView
+        guard let _route = route else {
+            return
         }
         
-        let distinctArray = route!.getListLocations()
+        let distinctArray = _route.getListLocations()
         for (index,adress) in distinctArray.enumerated() {
             let seq = index + 1
             showMarker(adress, sequence:seq)

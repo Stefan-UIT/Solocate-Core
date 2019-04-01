@@ -15,6 +15,16 @@ import CoreData
 
 extension BaseAPIService {
     @discardableResult
+    func getDataDashboard(timeData:TimeDataItem, callback: @escaping APICallback<ResponseDataModel<ResponseDataDashboard>>) -> APIRequest {
+        let startDate = DateFormatter.filterDate.string(from: timeData.startDate ?? Date())
+        let endDate = DateFormatter.filterDate.string(from: timeData.endDate ?? Date())
+        let path = String(format: PATH_REQUEST_URL.DASHBOARD.URL,startDate,endDate)
+        return request(method: .GET,
+                       path:path,
+                       input: APIInput.empty,
+                       callback: callback);
+    }
+    @discardableResult
     func getRoutes(filterMode:FilterDataModel, callback: @escaping APICallback<ResponseDataListModel<Route>>) -> APIRequest {
         let startDate = DateFormatter.filterDate.string(from: filterMode.timeData?.startDate ?? Date())
         let endDate = DateFormatter.filterDate.string(from: filterMode.timeData?.endDate ?? Date())

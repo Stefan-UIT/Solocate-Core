@@ -351,6 +351,8 @@ class Route: BaseModel {
     }
     
     func getListLocations() -> [Address] {
+        return locationList
+        /*
         var  array = [Address]()
         orderList.forEach { (order) in
             if let fromAddress = order.from {
@@ -361,18 +363,21 @@ class Route: BaseModel {
             }
         }
         return array
+        */
     }
     
     func getChunkedListLocation() -> [[CLLocationCoordinate2D]] {
-        let orderList = distinctArrayOrderList()
-        let sortedList = orderList.sorted(by: { (lhs, rhs) -> Bool in
+        let locationList = getListLocations()
+        let sortedList = locationList.sorted(by: { (lhs, rhs) -> Bool in
             return lhs.seq <= rhs.seq
         })
         let currentLocation = LocationManager.shared.currentLocation?.coordinate
         var listLocation:[CLLocationCoordinate2D] = (currentLocation != nil) ? [currentLocation!] : []
         
         for i in 0..<(sortedList.count) {
-            listLocation.append(sortedList[i].locations)
+            let location = CLLocationCoordinate2D(latitude: sortedList[i].lattd?.doubleValue ?? 0,
+                                                  longitude: sortedList[i].lngtd?.doubleValue ?? 0)
+            listLocation.append(location)
         }
         
         var listChunked = listLocation.chunked(by: 22)

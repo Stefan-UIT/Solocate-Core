@@ -69,12 +69,13 @@ class HistoryNotifyDetailVC: BaseViewController {
         tableView?.estimatedRowHeight = 100
         tableView?.rowHeight = UITableView.automaticDimension
     }
-    
     func setupNavigationService() {
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.BackOnly, "Alert Detail".localized)
+        App().navigationService.updateNavigationBar(.Menu,
+                                                    "Alert Detail".localized,
+                                                    AppColor.white, true)
     }
-    
+   
     func updateActionView()  {
         btnAction?.setTitle("Resolve".localized.uppercased(), for: .normal)
         btnAction?.isHidden = (alertDetail.statusAlert == .resolved)
@@ -221,7 +222,7 @@ extension HistoryNotifyDetailVC: UITableViewDataSource, UITableViewDelegate {
 //MARK: - DMSNavigationServiceDelegate
 extension HistoryNotifyDetailVC:DMSNavigationServiceDelegate{
     func didSelectedBackOrMenu() {
-        self.navigationController?.popViewController(animated: true)
+        showSideMenu()
     }
 }
 

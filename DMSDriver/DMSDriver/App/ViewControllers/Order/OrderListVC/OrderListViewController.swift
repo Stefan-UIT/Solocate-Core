@@ -42,103 +42,60 @@ enum DisplayMode:Int {
     
 }
 
-class OrderListViewController: BaseViewController {
-  
-    @IBOutlet weak var clvContent: UICollectionView?
-    @IBOutlet weak var lblFilter: UILabel?
-    @IBOutlet weak var btnSwitchMode: UIButton?
 
+class OrderListViewController: BaseViewController {
     
-    var arrDropDownMenu:[String] = []
-    var route: Route?
-    var dateStringFilter = Date().toString()
-    var isLoading = true
+    @IBOutlet weak var tbvContent: UITableView?
+    @IBOutlet weak var noOrdersLabel: UILabel?
     
-    fileprivate var tapFilterOrderList : TapFilterOrderList = .All {
+    fileprivate let cellIdentifier = "OrderItemTableViewCell"
+    fileprivate let cellReducedIdentifier = "OrderItemCollapseTableViewCell"
+    
+    var orderList:[Order] = []
+    
+    var filterOrderList:TapFilterOrderList = .All {
         didSet{
-            clvContent?.reloadData()
+            self.filterDataWithTapDisplay()
         }
     }
     
-    var displayMode:DisplayMode = DisplayMode.Expanded{
+    var displayMode:DisplayMode = DisplayMode.Expanded {
         didSet{
-            clvContent?.reloadData()
+            tbvContent?.reloadData()
         }
     }
-  
+    
+    var route: Route? {
+        didSet{
+            filterDataWithTapDisplay()
+        }
+    }
+    var rootVC: BaseViewController?
+    var dateStringFilter = ""
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateArrDropDownMenu()
+        filterDataWithTapDisplay()
         updateUI()
-        self.fd_prefersNavigationBarHidden = true;
-    }
-
-  
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        if hasNetworkConnection {
-            if let route = self.route {
-                //getRouteDetail("\(route.id)")
-            }
-        }else{
-            //getDataFromLocalDB()
-        }
-    }
-  
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+        tbvContent?.backgroundColor = UIColor.clear
     }
     
-    override func reachabilityChangedNetwork(_ isAvailaibleNetwork: Bool) {
-        super.reachabilityChangedNetwork(isAvailaibleNetwork)
-        if hasNetworkConnection {
-            if let route = self.route {
-                // getRouteDetail("\(route.id)")
-            }
-        }else{
-            //getDataFromLocalDB()
-        }
+    override func updateNavigationBar() {
+        super.updateNavigationBar()
+        App().navigationService.delegate = self
+        App().navigationService.updateNavigationBar(.Menu, "List Orders".localized, AppColor.white, true)
     }
     
-    func getDataFromLocalDB()  {
-        if let route = self.route{
-            self.showLoadingIndicator()
-            CoreDataManager.queryRouteBy(route.id, {[weak self] (success, _route) in
-                self?.dismissLoadingIndicator()
-                if success{
-                    self?.route = _route
-                    self?.updateUI()
-                    self?.clvContent?.reloadData()
-                }
-            })
-        }
-    }
     
-    //MARK: - Intialize
-    func updateLblFilter() {
-        lblFilter?.text = arrDropDownMenu[tapFilterOrderList.rawValue]
-    }
-    
-    func updateArrDropDownMenu()  {
-        arrDropDownMenu = ["All".localized.appending(" (\(route?.orderList.count ?? 0))"),
-                           "New".localized.appending(" (\(route?.orders(.newStatus).count ?? 0))"),
-                           "In Progress".localized.appending(" (\(route?.orders(.inProcessStatus).count ?? 0))"),
-                           "Finished".localized.appending(" (\(route?.orders(.deliveryStatus).count ?? 0))"),
-                           "Cancelled".localized.appending(" (\(route?.orders(.cancelStatus).count ?? 0))")]
-    }
-    
-    func setupCollectionView() {
-        clvContent?.delegate = self
-        clvContent?.dataSource = self
-    }
-    
-    override func updateUI()  {
+    override func updateUI() {
         super.updateUI()
-        DispatchQueue.main.async {[weak self] in
-            self?.setupCollectionView()
-            self?.updateArrDropDownMenu()
-            self?.updateLblFilter()
-        }
+        setupTableView()
+    }
+    
+    func setupTableView() {
+        tbvContent?.delegate = self
+        tbvContent?.dataSource = self
+        tbvContent?.addRefreshControl(self, action: #selector(fetchData))
     }
     
     //MARK: -Action
@@ -152,54 +109,90 @@ class OrderListViewController: BaseViewController {
     }
 }
 
-//MARK: - UICollectionViewDataSource
-extension OrderListViewController: UICollectionViewDataSource {
-  
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 1;
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "OrderListClvCell", for: indexPath) as! OrderListClvCell
-        cell.rootVC = self
-        cell.route = route
-        if !isLoading {
-            cell.filterOrderList = tapFilterOrderList
-        }
-        cell.displayMode = displayMode
-        cell.dateStringFilter = dateStringFilter
-        return cell
+// MARK: - Private methods
+
+extension OrderListViewController {
+    func convertString(_ text: String, withFormat format: String = "yyyy-MM-dd") -> String {
+        let dateFormater = DateFormatter()
+        dateFormater.dateFormat = "MM/dd/yyyy"
+        let date = dateFormater.date(from: text) ?? Date()
+        dateFormater.dateFormat = format
+        
+        return dateFormater.string(from: date)
+        
     }
 }
 
-extension OrderListViewController:UICollectionViewDelegateFlowLayout{
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return collectionView.frame.size
+
+//MARK: - RouteDetailOrderListClvCell,UITableViewDataSource
+extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return orderList.count
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        return UIEdgeInsets.zero
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: displayMode == .Reduced ? cellReducedIdentifier : cellIdentifier,
+                                                    for: indexPath) as? OrderItemTableViewCell {
+            
+            let order = orderList[indexPath.row]
+            cell.order = order
+            
+            return cell
+        }
+        return UITableViewCell()
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let vc:OrderDetailViewController = .loadSB(SB: .Order)
+        self.rootVC?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func updateStatusOrder(_ order:Order) {
+        if (orderList.contains{$0.id == order.id}) {
+            if let _index = orderList.index(where: {$0.id == order.id}){
+                orderList[_index].statusCode = order.statusCode
+                orderList[_index].statusName = order.statusName
+            }
+        }
+        
+        self.tbvContent?.reloadData()
+    }
+    
+    func filterDataWithTapDisplay() {
+        switch filterOrderList {
+        case .All:
+            orderList = route?.getOrderList() ?? []
+        case .New:
+            orderList = route?.orders(.newStatus) ?? []
+        case .InProgess:
+            orderList = route?.orders(.inProcessStatus) ?? []
+        case .Finished:
+            orderList = route?.orders(.deliveryStatus) ?? []
+        case .Cancelled:
+            orderList = route?.orders(.cancelStatus) ?? []
+        }
+        
+        orderList.sort { (ord1, ord2) -> Bool in
+            return ord1.seq < ord2.seq
+        }
+        noOrdersLabel?.isHidden = orderList.count > 0
+        self.tbvContent?.reloadData()
     }
 }
 
-extension OrderListViewController:UIScrollViewDelegate{
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        let index = scrollView.contentOffset.x / ScreenSize.SCREEN_WIDTH
-        if let tapSelect = TapFilterOrderList(rawValue: Int(index)){
-            tapFilterOrderList = tapSelect
-        }
+//MARK: - DMSNavigationServiceDelegate
+extension OrderListViewController:DMSNavigationServiceDelegate {
+    func didSelectedBackOrMenu() {
+        showSideMenu()
     }
 }
 
@@ -213,47 +206,25 @@ extension OrderListViewController{
     }
     
     func getRouteDetail(_ routeID:String, isFetch:Bool = false) {
-        let count = CoreDataManager.countRequestLocal()
-        if count > 0 {
-            return
-        }
-        
         if !isFetch {
-            self.showLoadingIndicator()
+            self.rootVC?.showLoadingIndicator()
         }
-        isLoading = true
         SERVICES().API.getRouteDetail(route: routeID) {[weak self] (result) in
-            guard let strongSelf = self else {
-                return
-            }
-            strongSelf.dismissLoadingIndicator()
-            strongSelf.isLoading = false
+            self?.rootVC?.dismissLoadingIndicator()
+            self?.tbvContent?.endRefreshControl()
+            
             switch result{
             case .object(let obj):
                 self?.route = obj.data
-                self?.updateUI()
-                self?.clvContent?.reloadData()
-                /*
-                guard let data = obj.data else {return}
-                CoreDataManager.updateRoute(data) // Update route to DB local
-                */
+                self?.filterDataWithTapDisplay()
+                
+                // Update route to DB local
+            //CoreDataManager.updateRoute(obj.data!)
             case .error(let error):
-                strongSelf.showAlertView(error.getMessage())
+                self?.rootVC?.showAlertView(error.getMessage())
                 
             }
         }
     }
 }
-
-//MARK: -OtherFuntion
-extension OrderListViewController{
-    func scrollToPageSelected(_ index:Int) {
-        let width = self.view.frame.size.width
-        let pointX = CGFloat(index) * width
-        
-        clvContent?.contentOffset =  CGPoint(x: pointX, y: (clvContent?.contentOffset.y)!);
-    }
-}
-
-
 

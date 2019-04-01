@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A42555B2251F08E00D55FEA /* ResponseDataDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42555A2251F08E00D55FEA /* ResponseDataDashboard.swift */; };
 		2A8EFE95224C7855008AA1D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A8EFE94224C7855008AA1D3 /* GoogleService-Info.plist */; };
 		2AB4A98A224B78C70019F196 /* RouteDetailLocationListClvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */; };
 		2AC97C5B224DF7F600DD07AE /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC97C5A224DF7F600DD07AE /* CommonUtils.swift */; };
@@ -73,7 +74,6 @@
 		3B5D79242178346700EA49CC /* DateFormatter+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5D79222178346700EA49CC /* DateFormatter+Ext.swift */; };
 		3B5D7926217834B300EA49CC /* Date extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B5D7925217834B300EA49CC /* Date extensions.swift */; };
 		3B6193F9221FA981006651EA /* StartRouteOrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6193F8221FA981006651EA /* StartRouteOrderVC.swift */; };
-		3B6425DA2122BFD4001F5F14 /* OrderListClvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B6425D92122BFD4001F5F14 /* OrderListClvCell.swift */; };
 		3B66B759210B1051000BDFEF /* DMSDriver.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B757210B1051000BDFEF /* DMSDriver.xcdatamodeld */; };
 		3B66B803210B113D000BDFEF /* UIView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B76A210B113C000BDFEF /* UIView.swift */; };
 		3B66B804210B113D000BDFEF /* NSString+SDString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B76B210B113C000BDFEF /* NSString+SDString.m */; };
@@ -293,6 +293,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A42555A2251F08E00D55FEA /* ResponseDataDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDataDashboard.swift; sourceTree = "<group>"; };
 		2A8EFE94224C7855008AA1D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../../../Users/nguyenmach/Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailLocationListClvCell.swift; sourceTree = "<group>"; };
 		2AC97C5A224DF7F600DD07AE /* CommonUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
@@ -362,7 +363,6 @@
 		3B5D79222178346700EA49CC /* DateFormatter+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Ext.swift"; sourceTree = "<group>"; };
 		3B5D7925217834B300EA49CC /* Date extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date extensions.swift"; sourceTree = "<group>"; };
 		3B6193F8221FA981006651EA /* StartRouteOrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRouteOrderVC.swift; sourceTree = "<group>"; };
-		3B6425D92122BFD4001F5F14 /* OrderListClvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderListClvCell.swift; sourceTree = "<group>"; };
 		3B66B74D210B1051000BDFEF /* DMSDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMSDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B66B758210B1051000BDFEF /* DMSDriver.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DMSDriver.xcdatamodel; sourceTree = "<group>"; };
 		3B66B767210B113C000BDFEF /* LocationTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTracker.swift; sourceTree = "<group>"; };
@@ -776,6 +776,14 @@
 				A02E53A1DFA611D4E6D34FF1 /* Pods_DMSDriver.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2A4255582251F06400D55FEA /* ResponseDataDashboard */ = {
+			isa = PBXGroup;
+			children = (
+				2A42555A2251F08E00D55FEA /* ResponseDataDashboard.swift */,
+			);
+			path = ResponseDataDashboard;
 			sourceTree = "<group>";
 		};
 		2AB4A984224B78720019F196 /* RouteDetailLocationListClvCell */ = {
@@ -1284,7 +1292,6 @@
 			isa = PBXGroup;
 			children = (
 				3B66B8A7210B1148000BDFEF /* OrderItemTableViewCell.swift */,
-				3B6425D92122BFD4001F5F14 /* OrderListClvCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -1767,6 +1774,7 @@
 		3B66B86B210B1148000BDFEF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2A4255582251F06400D55FEA /* ResponseDataDashboard */,
 				3BDCEBD421816C0B00C57DD4 /* ReceiveNotificationModel */,
 				3B014952217D7E8F0097FEB6 /* TaskModel */,
 				3B66B875210B1148000BDFEF /* BaseModel */,
@@ -3004,7 +3012,6 @@
 				3B66B8FF210B1149000BDFEF /* OrderDetailTableViewCell.swift in Sources */,
 				3B66B844210B113D000BDFEF /* KeyConstants.swift in Sources */,
 				3B0C5F7D21256A5E0036F61A /* RequestAssignOrderModel.swift in Sources */,
-				3B6425DA2122BFD4001F5F14 /* OrderListClvCell.swift in Sources */,
 				3B66B822210B113D000BDFEF /* UIView+Extensions.swift in Sources */,
 				3B66B91C210B1149000BDFEF /* BaseTableViewCell.swift in Sources */,
 				3B66B92B210B1149000BDFEF /* ChangePasswordView.swift in Sources */,
@@ -3017,6 +3024,7 @@
 				3B66B83E210B113D000BDFEF /* Button.swift in Sources */,
 				3B66B80A210B113D000BDFEF /* UIButton.swift in Sources */,
 				3B66B840210B113D000BDFEF /* Debug.swift in Sources */,
+				2A42555B2251F08E00D55FEA /* ResponseDataDashboard.swift in Sources */,
 				3B66B90E210B1149000BDFEF /* PackagesViewController.swift in Sources */,
 				3B66B848210B113D000BDFEF /* Services.swift in Sources */,
 				3B0C5F7A212536F00036F61A /* AssignOrderCell.swift in Sources */,

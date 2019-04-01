@@ -14,8 +14,8 @@ enum DashboardDisplayCellType:Int {
     case INPROGESS_ROUTE
     case MY_TASK
     case NEW_ALERT
-    case LATE_ORDER
     case LATE_ROUTE
+    case LATE_ORDER
 }
 
 
@@ -27,10 +27,10 @@ class DashboardVC: BaseViewController {
     @IBOutlet weak var lblFilter:UILabel?
     @IBOutlet weak var lblFilterValue:UILabel?
 
-    let surveyData = ["New": 20, "In-progess": 30, "Finished": 5, "Cancelled": 45]
+    var surveyData = ["New": 20, "In-progess": 30, "Finished": 5, "Cancelled": 45]
     var arrListPage:[Array<Any>] = []
     var timeData:TimeDataItem?
-    
+    var dataDashboard:ResponseDataDashboard?
     
     fileprivate let identifierTitleCell  =  "TileClc"
     fileprivate let identifierHeaderCell  =  "TileHeaderClc"
@@ -49,6 +49,10 @@ class DashboardVC: BaseViewController {
         setupCollectionView()
         setup(pieChartView: pieChartView!)
         reloadDataDisplay()
+        guard let time = timeData else {
+            return
+        }
+        getDataDashboard(timeDataItem: time)
     }
     
     
@@ -67,6 +71,7 @@ class DashboardVC: BaseViewController {
         super.updateUI()
         lblFilter?.text = timeData?.title
         fillChart()
+        clvContent?.reloadData()
     }
 
     func setupCollectionView()  {
@@ -118,8 +123,17 @@ class DashboardVC: BaseViewController {
     
     func fillChart() {
         var dataEntries = [PieChartDataEntry]()
+        let newRoutes = dataDashboard?.filterBy(status: .New) ?? []
+        let inprogessRoutes = dataDashboard?.filterBy(status: .InProgess) ?? []
+        let finishedRoutes = dataDashboard?.filterBy(status: .Finished) ?? []
+        let cacelledRoutes = dataDashboard?.filterBy(status: .InProgess) ?? []
+        let total = newRoutes.count + inprogessRoutes.count + finishedRoutes.count + cacelledRoutes.count
+        surveyData =  ["New".localized: newRoutes.count,
+                       "In-progess".localized: inprogessRoutes.count,
+                       "Finished".localized: finishedRoutes.count,
+                       "Cancelled".localized: cacelledRoutes.count]
         for (text , val) in surveyData {
-            let percent = Double(val) / 100.0
+            let percent = Double(val) / Double(total)
             let entry = PieChartDataEntry(value: percent, label: text)
             dataEntries.append(entry)
         }
@@ -163,7 +177,7 @@ class DashboardVC: BaseViewController {
                                                        timeData: timeData,
                                                        needHides: arrHide as [NSNumber]) {[weak self] (success, timeData) in
                                                         self?.timeData = timeData
-                                                        self?.updateUI()
+                                                        self?.getDataDashboard(timeDataItem: timeData)
         }
     }
 }
@@ -214,22 +228,20 @@ extension DashboardVC:UICollectionViewDataSource,UICollectionViewDelegateFlowLay
         
         switch cellType! {
         case .NEW_ROUTE:
-            break
+            number = dataDashboard?.filterBy(status: .New).count ?? 0
         case .INPROGESS_ROUTE:
-            number = 2
+            number = dataDashboard?.filterBy(status: .InProgess).count ?? 0
             break
         case .MY_TASK:
-            number = 4
+            number = dataDashboard?.newTasks.count ?? 0
         case .NEW_ALERT:
-            number = 4
-
+            number = dataDashboard?.newAlerts.count ?? 0
             break
         case .LATE_ROUTE:
-            number = 2
-
+            number = dataDashboard?.lateRoutes.count ?? 0
             break
         case .LATE_ORDER:
-            number = 0
+            number = dataDashboard?.lateOrders.count ?? 0
             break
         }
         
@@ -272,26 +284,79 @@ extension DashboardVC:UICollectionViewDelegate{
             return
         }
         switch typeCell {
-        case .NEW_ROUTE,
-             .INPROGESS_ROUTE:
+        case .NEW_ROUTE:
+            let newRoutes = dataDashboard?.filterBy(status: .New)
+            if newRoutes?.count ?? 0 <= 0 {
+                return
+            }
             let vc:RouteListVC = RouteListVC.loadSB(SB: .Route)
+            vc.routes = newRoutes ?? []
+            vc.timeData = timeData
             self.navigationController?.pushViewController(vc, animated: true)
             
+        case .INPROGESS_ROUTE:
+            let inprogessRoutes = dataDashboard?.filterBy(status: .InProgess)
+            if inprogessRoutes?.count ?? 0 <= 0 {
+                return
+            }
+            let vc:RouteListVC = RouteListVC.loadSB(SB: .Route)
+            vc.routes = inprogessRoutes ?? []
+            vc.timeData = timeData
+            self.navigationController?.pushViewController(vc, animated: true)
+
         case .MY_TASK:
+            let myTasks = dataDashboard?.newTasks
+            if myTasks?.count ?? 0 <= 0 {
+                return
+            }
             let vc:TaskListVC = TaskListVC.loadSB(SB: .Task)
             self.navigationController?.pushViewController(vc, animated: true)
 
         case .NEW_ALERT:
+            let newAlerts = dataDashboard?.newAlerts
+            if newAlerts?.count ?? 0 <= 0 {
+                return
+            }
             let vc:HistoryNotifyVC = HistoryNotifyVC.loadSB(SB: .Notification)
+            vc.isFromDashboard = true
+            vc.arrContent = newAlerts ?? []
             self.navigationController?.pushViewController(vc, animated: true)
             
         case .LATE_ROUTE:
-            let vc:RouteDetailVC = RouteDetailVC.loadSB(SB: .Route)
+            let lateRoutes = dataDashboard?.lateRoutes
+            if lateRoutes?.count ?? 0 <= 0 {
+                return
+            }
+            let vc:RouteListVC = RouteListVC.loadSB(SB: .Route)
+            vc.routes = lateRoutes ?? []
+            vc.timeData = timeData
             self.navigationController?.pushViewController(vc, animated: true)
-            
+
         case .LATE_ORDER:
-            let vc:OrderListViewController = OrderListViewController.loadSB(SB: .Route)
+            let lateOrders = dataDashboard?.lateOrders
+//            if lateOrders?.count ?? 0 <= 0 {
+//                return
+//            }
+            let vc:OrderListViewController = OrderListViewController.loadSB(SB: .Order)
+            vc.orderList = lateOrders ?? []
             self.navigationController?.pushViewController(vc, animated: true)
+        }
+    }
+}
+
+extension DashboardVC{
+    func getDataDashboard(timeDataItem:TimeDataItem)  {
+        self.showLoadingIndicator()
+        SERVICES().API.getDataDashboard(timeData: timeDataItem) {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(let obj):
+                self?.dataDashboard = obj.data
+                self?.updateUI()
+
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
         }
     }
 }

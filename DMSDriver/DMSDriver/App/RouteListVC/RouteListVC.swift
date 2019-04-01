@@ -22,10 +22,7 @@ import Crashlytics
 
     
     private let identifierRowCell = "RouteTableViewCell"
-    private var timeData:TimeDataItem?
-
-
-    
+    var timeData:TimeDataItem?
     var routes = [Route]()
     var filterModel = FilterDataModel()
 
@@ -39,7 +36,9 @@ import Crashlytics
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        fetchData(isShowLoading: true)
+        if routes.count <= 0 {
+            fetchData(isShowLoading: true)
+        }
     }
     
     override func updateNavigationBar() {
@@ -61,8 +60,8 @@ import Crashlytics
     func initVar()  {
         if timeData == nil {
             timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeThisWeek)
+            filterModel.timeData = timeData
         }
-        filterModel.timeData = timeData
     }
     
     func initUI()  {

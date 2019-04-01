@@ -416,7 +416,7 @@ extension UIView {
         let lbl = UILabel(frame: CGRectMake(0, 45, view.frame.size.width, 20))
         lbl.text = title
         lbl.textAlignment = .center
-        lbl.textColor = AppColor.grayColor
+        lbl.textColor = AppColor.grayBorderColor
         view.addSubview(lbl)
         view.center = parentView.center
         view.tag = 1000

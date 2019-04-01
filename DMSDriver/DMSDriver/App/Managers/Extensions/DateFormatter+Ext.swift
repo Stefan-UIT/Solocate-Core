@@ -29,6 +29,7 @@ extension DateFormatter {
     static let displayDateForOrder = DateFormatter(format: "EEE', 'MMM' 'dd', 'yyyy");
     static let displayDateVietNames = DateFormatter(format: "dd/MM/yyyy");
     static let displayDateUS = DateFormatter(format: "MM/dd/yyyy");
+    static let displayDateTimeUS = DateFormatter(format: "MM/dd/yyyy HH:mm");
     static let hourFormater = DateFormatter(format: "HH:mm a");
     static let displayDateTimeVN = DateFormatter(format: "dd/MM/yyyy HH:mm");
     static let shortDate = DateFormatter(format: "MMM dd",timeZone: .company);
