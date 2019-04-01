@@ -70,6 +70,7 @@ class DashboardVC: BaseViewController {
     override func updateUI()  {
         super.updateUI()
         lblFilter?.text = timeData?.title
+        setup(pieChartView: pieChartView!)
         fillChart()
         clvContent?.reloadData()
     }
@@ -96,8 +97,14 @@ class DashboardVC: BaseViewController {
         paragraphStyle.lineBreakMode = .byTruncatingTail
         paragraphStyle.alignment = .center
         
-        let centerText = NSMutableAttributedString(string: "Route status")
+        let newRoutes = dataDashboard?.filterBy(status: .New) ?? []
+        let inprogessRoutes = dataDashboard?.filterBy(status: .InProgess) ?? []
+        let finishedRoutes = dataDashboard?.filterBy(status: .Finished) ?? []
+        let cacelledRoutes = dataDashboard?.filterBy(status: .InProgess) ?? []
+        let total = newRoutes.count + inprogessRoutes.count + finishedRoutes.count + cacelledRoutes.count
+        let centerText = NSMutableAttributedString(string: total == 0 ? "Data unavailable.".localized : "Route status".localized)
         centerText.setAttributes([.font : UIFont(name: "HelveticaNeue-Light", size: 13)!,
+                                  NSAttributedString.Key.strokeColor : total == 0 ? UIColor.red : UIColor.black,
                                   .paragraphStyle : paragraphStyle], range: NSRange(location: 0, length: centerText.length))
         chartView.centerAttributedText = centerText;
         

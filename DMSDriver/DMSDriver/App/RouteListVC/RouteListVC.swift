@@ -25,6 +25,8 @@ import Crashlytics
     var timeData:TimeDataItem?
     var routes = [Route]()
     var filterModel = FilterDataModel()
+    var isFromDashboard = false
+    
 
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -36,7 +38,7 @@ import Crashlytics
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if routes.count <= 0 {
+        if isFromDashboard == false {
             fetchData(isShowLoading: true)
         }
     }
@@ -53,8 +55,9 @@ import Crashlytics
         tableView.register(UINib(nibName: ClassName(RouteTableViewCell()),
                                  bundle: nil),
                            forCellReuseIdentifier: identifierRowCell)
-        tableView.addRefreshControl(self, action: #selector(fetchData(isShowLoading:)))
-       
+        if isFromDashboard == false {
+            tableView.addRefreshControl(self, action: #selector(fetchData(isShowLoading:)))
+        }       
     }
     
     func initVar()  {
