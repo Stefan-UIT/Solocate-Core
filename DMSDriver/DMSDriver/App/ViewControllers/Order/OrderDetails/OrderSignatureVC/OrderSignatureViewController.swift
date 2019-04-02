@@ -35,6 +35,14 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
         updateUI()
     }
     
+    override func updateNavigationBar() {
+        super.updateNavigationBar()
+        App().navigationService.delegate = self
+        App().navigationService.updateNavigationBar(.Menu,
+                                                    "Signature".localized,
+                                                    AppColor.white, true)
+    }
+    
     override func reachabilityChangedNetwork(_ isAvailaibleNetwork: Bool) {
         super.reachabilityChangedNetwork(isAvailaibleNetwork)
     }
@@ -189,6 +197,13 @@ class BaseOrderDetailViewController: BaseViewController, IndicatorInfoProvider {
 
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return indicatorInfo
+    }
+}
+
+//MARK: -DMSNavigationServiceDelegate
+extension OrderSignatureViewController:DMSNavigationServiceDelegate{
+    func didSelectedBackOrMenu() {
+        showSideMenu()
     }
 }
 

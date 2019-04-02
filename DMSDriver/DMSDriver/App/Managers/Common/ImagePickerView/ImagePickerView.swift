@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-typealias ImagePickerViewCallback = (_ success:Bool, _ data: Any) -> Void
+typealias ImagePickerViewCallback = (_ success:Bool, _ data: [AttachFileModel]) -> Void
 
 class ImagePickerView: UIImagePickerController {
     
@@ -112,8 +112,8 @@ class ImagePickerView: UIImagePickerController {
         alert.addPhotoLibraryPicker(
             flow: .vertical,
             paging: false,
-            selection: .multiple(action: { (assets) in
-                self.callback?(true,assets)
+            selection: .multiple(action: {[weak self] (assets) in
+                self?.handleComplationPickImage(data: assets)
             }))
         alert.addAction(title: "Cancel", style: .cancel)
         alert.show()
@@ -125,11 +125,11 @@ class ImagePickerView: UIImagePickerController {
         alert.addPhotoLibraryPicker(
             flow: .horizontal,
             paging: true,
-            selection: .single(action: { (asset) in
+            selection: .single(action: {[weak self] (asset) in
                 if let _asset = asset {
-                    let image = self.getAssetThumbnail(asset: _asset,
+                    let image = self?.getAssetThumbnail(asset: _asset,
                                                        size: ScreenSize.SCREEN_WIDTH)
-                    self.callback?(true,image)
+                    self?.handleComplationPickImage(data: image)
                 }
             }))
         alert.addAction(title: "Cancel", style: .cancel)
@@ -201,12 +201,52 @@ extension ImagePickerView:UIImagePickerControllerDelegate,UINavigationController
         self.dismiss(animated: false, completion: nil)
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         print(info)
-        if  let image = info[UIImagePickerController.InfoKey.editedImage.rawValue]{
+        if  let image = info[UIImagePickerController.InfoKey.editedImage]{
+            self.handleComplationPickImage(data: image)
             picker.dismiss(animated: true) {
-                self.callback?(true,image)
+                //self.callback?(true,image)
+            }
+        }
+    }
+    
+    func handleComplationPickImage(data:Any?) {
+        if let _data = data as? [PHAsset] {
+            var arrAttachfile:[AttachFileModel] = []
+            
+            for i in 0..<_data.count{
+                let image:UIImage = self.getAssetThumbnail(asset: _data[i], size: ScreenSize.SCREEN_HEIGHT)
+                if let data = image.jpegData(compressionQuality: 0.75) {
+                    let file: AttachFileModel = AttachFileModel()
+                    file.name = E(_data[i].originalFilename)
+                    file.type = ".png"
+                    file.mimeType = "image/png"
+                    file.contentFile = data
+                    file.param = "file_pod_req[\(i)]"
+                    arrAttachfile.append(file)
+                    
+                }else {
+                    print("encode failure")
+                }
+            }
+            
+            self.callback?(true,arrAttachfile)
+            
+        }else if let image = data as? UIImage {
+            if let data = image.jpegData(compressionQuality: 0.75) {
+                let file: AttachFileModel = AttachFileModel()
+                file.name = "Picture_\(Date().timeIntervalSince1970)"
+                file.type = ".png"
+                file.mimeType = "image/png"
+                file.contentFile = data
+                file.param = "file_pod_req[0]"
+                self.callback?(true,[file])
+                
+            }else {
+                self.callback?(false,[])
+                print("encode failure")
             }
         }
     }

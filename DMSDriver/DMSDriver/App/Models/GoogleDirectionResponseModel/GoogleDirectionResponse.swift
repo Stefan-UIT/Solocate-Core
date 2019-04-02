@@ -40,7 +40,7 @@ class DirectionStep: NSObject, Mappable {
 
 class ObjectKV: NSObject, Mappable {
   var text: String = ""
-  var value: Int = 0
+  var value: Double = 0
   
   convenience required init?(map: Map) {
     self.init()
@@ -48,7 +48,7 @@ class ObjectKV: NSObject, Mappable {
   
   func mapping(map: Map) {
     text <- map["text"]
-    value <- map["map"]
+    value <- map["value"]
   }
 }
 

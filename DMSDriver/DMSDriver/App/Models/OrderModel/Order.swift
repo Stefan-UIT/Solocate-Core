@@ -160,7 +160,30 @@ class Order: BaseModel {
     var files:[AttachFileModel]?
 
     var isSelect = false
+    var directionRoute:[DirectionRoute]? // use for save DirectionRoute
     
+    lazy var totalEstDuration:Int = {
+        var total = 0
+        directionRoute?.forEach({ (directionRoute) in
+            directionRoute.legs.forEach({ (leg) in
+                total += Int(leg.duration.value)
+            })
+        })
+        
+        return total
+    }()
+    
+    lazy var totalEstDistance:Double = {
+        var total:Double = 0
+        directionRoute?.forEach({ (directionRoute) in
+            directionRoute.legs.forEach({ (leg) in
+                total += leg.distance.value
+            })
+        })
+        
+        return Double(total)
+    }()
+
     convenience required init?(map: Map) {
         self.init()
     }
@@ -192,6 +215,22 @@ class Order: BaseModel {
         }
     }
     
+    func getChunkedListLocation() -> [[CLLocationCoordinate2D]] {
+        let currentLocation = LocationManager.shared.currentLocation?.coordinate
+        var listLocation:[CLLocationCoordinate2D] = (currentLocation != nil) ? [currentLocation!] : []
+        listLocation.append(locations)
+        
+        var listChunked = locations.chunked(by: 22)
+        if listChunked.count > 1 {
+            for i in 1..<listChunked.count{
+                if let first = listChunked[i].first {
+                    listChunked[i - 1].append(first)
+                }
+            }
+        }
+        
+        return listChunked
+    }
     
     var signature:AttachFileModel?{
         get{

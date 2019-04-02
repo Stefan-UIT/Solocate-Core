@@ -58,6 +58,11 @@ class OrderDetailTableViewCell: UITableViewCell {
         contentLabel?.numberOfLines = 0
     }
     
+    func setupMapView()  {
+        mapView?.isMyLocationEnabled = true
+        mapView?.delegate = self
+    }
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
         
@@ -74,7 +79,66 @@ class OrderDetailTableViewCell: UITableViewCell {
     @IBAction func onbtnClickGo(btn:UIButton){
         delegate?.didSelectGo(self, btn)
     }
+    
+    func drawRouteMap(order:Order?) {
+        setupMapView()
+        mapView?.clear()
+        showAllMarker(order: order)
+        if order?.directionRoute == nil {
+            drawDirections(order: order)
+        }else {
+            for route in order?.directionRoute ?? [] {
+                mapView?.drawPath(directionRoute: route)
+            }
+        }
+    }
 }
 
+// MARK: - PRIVATE FUNTIONS
+extension OrderDetailTableViewCell {
+    private func drawDirections(order:Order?)  {
+        order?.getChunkedListLocation().forEach { (listLocation) in
+            if let firstLocation = listLocation.first,
+                let lastLocation = listLocation.last  {
+                
+                let wayPoints = listLocation
+                let result = wayPoints.dropFirst()
+                let newResult = Array(result.dropLast())
+                
+                mapView?.drawPath(fromLocation: firstLocation,
+                                  toLocation: lastLocation,
+                                  wayPoints: newResult,
+                                  complation: { (success, directionRoutes) in
+                                    order?.directionRoute = directionRoutes
+                })
+            }
+        }
+    }
+    
+    private  func showAllMarker(order:Order?) {
+        if let from = order?.from,
+            let lat = from.lattd?.doubleValue,
+            let lng = from.lngtd?.doubleValue  {
+            let location = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+            mapView?.showMarker(type: .From,
+                                location: location,
+                                name: order?.from?.name,
+                                snippet:  order?.from?.ctt_phone)
+        }
+        
+        if let to = order?.to,
+            let lat = to.lattd?.doubleValue,
+            let lng = to.lngtd?.doubleValue  {
+            let location = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+            mapView?.showMarker(type: .To,
+                                location: location,
+                                name: order?.to?.name,
+                                snippet:  order?.from?.ctt_phone)
+        }
+    }
+}
 
-
+//MARK: - GMSMapViewDelegate
+extension OrderDetailTableViewCell: GMSMapViewDelegate {
+    
+}

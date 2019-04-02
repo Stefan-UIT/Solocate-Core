@@ -11,9 +11,13 @@ import XLPagerTabStrip
 import CoreLocation
 import Photos
 
+
 enum OrderDetailSection:Int {
     case sectionMap = 0
-    case sectionInforDetail
+    case sectionOrderInfo
+    case sectionFrom
+    case sectionTo
+    case sectionNatureOfGoods
     case sectionSignature
     case sectionPictures
     case sectionDescription
@@ -34,13 +38,17 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     @IBOutlet weak var vAction: UIView?
     
     fileprivate var orderInforDetail = [OrderDetailInforRow]()
+    fileprivate var orderInforFrom = [OrderDetailInforRow]()
+    fileprivate var orderInforTo = [OrderDetailInforRow]()
+    fileprivate var orderInforNatureOfGoods = [OrderDetailInforRow]()
     fileprivate let cellIdentifier = "OrderDetailTableViewCell"
     fileprivate let headerCellIdentifier = "OrderDetailHeaderCell"
     fileprivate let addressCellIdentifier =  "OrderDetailAddressCell"
     fileprivate let orderDropdownCellIdentifier = "OrderDetailDropdownCell"
     fileprivate let orderDetailMapCellIdentifier = "OrderDetailMapCell"
     fileprivate let orderPictureTableViewCell = "PictureTableViewCell"
-    fileprivate var scanItems = [String]()
+    fileprivate let orderDetailNatureOfGoodsCell = "OrderDetailNatureOfGoodsCell"
+
     fileprivate var arrTitleHeader:[String] = []
     
     var dateStringFilter = Date().toString()
@@ -99,62 +107,96 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
     func initVar()  {
         arrTitleHeader = ["",
-                          "ORDER INFO".localized,
-                          "SIGNATURE".localized,
-                          "PICTURE".localized]
+                          "Order info".localized.uppercased(),
+                          "From".localized.uppercased(),
+                          "To".localized.uppercased(),
+                          "Nature of goods".localized.uppercased(),
+                          "Signature".localized.uppercased(),
+                          "Picture".localized.uppercased()]
         setupDataDetailInforRows()
     }
     
     func setupDataDetailInforRows() {
         orderInforDetail.removeAll()
+        orderInforFrom.removeAll()
+        orderInforTo.removeAll()
+        orderInforNatureOfGoods.removeAll()
+
+        let displayDateTimeVN = DateFormatter.displayDateTimeVN
+        var startFromDate = ""
+        if let date = orderDetail?.from?.start_time?.date {
+            startFromDate = displayDateTimeVN.string(from: date)
+        }else {
+            startFromDate = "Invalid date."
+        }
         
-        //let displayDateTimeVN = DateFormatter.displayDateTimeVN
-        //let startDate = DateFormatter.serverDateFormater.date(from: _orderDetail.startTime)
-        //let endDate = DateFormatter.serverDateFormater.date(from: _orderDetail.endTime)
-        //        let urgency = OrderDetailInforRow("Urgency" ,isHebewLang() ? _orderDetail.urgent_type_name_hb :  _orderDetail.urgent_type_name_en)
-        let zone = OrderDetailInforRow("Zone", "-")
-        let containerNumber = OrderDetailInforRow("Container Number", "-")
-        let sealNumber = OrderDetailInforRow("Seal Number", "-")
-        let bLNumber = OrderDetailInforRow("BL Number","-")
-        let statusDate = OrderDetailInforRow("Status Date", "-")
-        let location = OrderDetailInforRow("Location", "-")
-        let LFD = OrderDetailInforRow("LFD (Last Free Day)","-")
-        let emptyContainerReturn = OrderDetailInforRow("Empty Container Return", "-")
-        //let terminalHold = OrderDetailInforRow("Terminal Hold", "-")
-        let containerSize = OrderDetailInforRow("Container Size","-")
-        let containerType = OrderDetailInforRow("Container Type","-")
-        let special = OrderDetailInforRow("Special", "-")
-        let titlePortAddress = OrderDetailInforRow("Port Address:", "")
-        let portAddressContent = OrderDetailInforRow("", "-",true)
+        var endFromDate = ""
+        if let date = orderDetail?.from?.end_time?.date {
+            endFromDate = displayDateTimeVN.string(from: date)
+        }else {
+            endFromDate = "Invalid date."
+        }
         
-        let titleAddress = OrderDetailInforRow("Delivery Address:", "")
-        let addressContent = OrderDetailInforRow("Delivery Address", orderDetail?.to?.address ?? "-",true)
+        var startToDate = ""
+        if let date = orderDetail?.to?.start_time?.date {
+            startToDate = displayDateTimeVN.string(from: date)
+        }else {
+            startToDate = "Invalid date."
+        }
         
-        // OrderInforDetail
+        var endToDate = ""
+        if let date = orderDetail?.to?.end_time?.date {
+            endToDate = displayDateTimeVN.string(from: date)
+        }else {
+            endToDate = "Invalid date."
+        }
+        
+        let status = StatusOrder(rawValue: orderDetail?.statusCode ?? "") ?? StatusOrder.newStatus
+        let statusItem = OrderDetailInforRow("Status".localized,status.statusName)
+        let customerItem = OrderDetailInforRow("Customer Name".localized.localized,
+                                             orderDetail?.custumer_name ?? "-")
+        let urgency = OrderDetailInforRow("Urgency".localized,
+                                          isHebewLang() ? orderDetail?.urgent_type_name_hb ?? "" :  orderDetail?.urgent_type_name_en ?? "")
+        let orderId = OrderDetailInforRow("Order Id".localized,"#\(orderDetail?.id ?? 0)")
+        let seq = OrderDetailInforRow("SEQ".localized,"\(orderDetail?.seq ?? 0)")
+        
+        orderInforDetail.append(orderId)
+        orderInforDetail.append(seq)
+        orderInforDetail.append(customerItem)
         //orderInforStatus.append(urgency)
         
-        //        if  _orderDetail.statusOrder == .cancelStatus {
-        //            let reason = OrderDetailInforRow("Failure cause",_orderDetail.reason?.name ?? "-")
-        //            let mess = OrderDetailInforRow("Message",_orderDetail.reason_msg ?? "-")
-        //            orderInforDetail.append(reason)
-        //            orderInforDetail.append(mess)
-        //        }
-        orderInforDetail.append(zone)
-        orderInforDetail.append(containerNumber)
-        orderInforDetail.append(sealNumber)
-        orderInforDetail.append(bLNumber)
-        orderInforDetail.append(containerSize)
-        orderInforDetail.append(containerType)
-        orderInforDetail.append(special)
-        orderInforDetail.append(statusDate)
-        orderInforDetail.append(location)
-        orderInforDetail.append(LFD)
-        orderInforDetail.append(emptyContainerReturn)
-        orderInforDetail.append(titlePortAddress)
-        orderInforDetail.append(portAddressContent)
-        orderInforDetail.append(titleAddress)
-        orderInforDetail.append(addressContent)
+        if  orderDetail?.statusOrder == .cancelStatus,
+            let _orderDetail = orderDetail{
+            let reason = OrderDetailInforRow("Failure cause".localized,_orderDetail.reason?.name ?? "-")
+            let mess = OrderDetailInforRow("Message".localized,_orderDetail.reason_msg ?? "-")
+            orderInforDetail.append(reason)
+            orderInforDetail.append(mess)
+        }
         
+        let fromAddress = OrderDetailInforRow("From address".localized, E(orderDetail?.from?.address),true)
+        let fromContactName = OrderDetailInforRow("Contact name".localized,orderDetail?.from?.name ?? "-")
+        let fromContactPhone = OrderDetailInforRow("Contact phone".localized,orderDetail?.from?.phone ?? "-",true)
+        let fromStartTime = OrderDetailInforRow("Start time".localized,startFromDate,false)
+        let fromEndtime = OrderDetailInforRow("End time".localized,endFromDate,false)
+
+        let toAddress = OrderDetailInforRow("To address".localized, E(orderDetail?.to?.address),true)
+        let toContactName = OrderDetailInforRow("Contact name".localized,orderDetail?.to?.name ?? "-")
+        let toContactPhone = OrderDetailInforRow("Contact phone".localized,orderDetail?.to?.phone ?? "-", true)
+        let toStartTime = OrderDetailInforRow("Start time".localized,startToDate,false)
+        let tomEndtime = OrderDetailInforRow("End time".localized,endToDate,false)
+
+        orderInforFrom.append(fromAddress)
+        orderInforFrom.append(fromContactName)
+        orderInforFrom.append(fromContactPhone)
+        orderInforFrom.append(fromStartTime)
+        orderInforFrom.append(fromEndtime)
+
+        orderInforTo.append(toAddress)
+        orderInforTo.append(toContactName)
+        orderInforTo.append(toContactPhone)
+        orderInforTo.append(toStartTime)
+        orderInforTo.append(tomEndtime)
+
         tableView?.reloadData()
     }
     
@@ -162,6 +204,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     // MARK: - ACTION
     @IBAction func tapUpdateStatusButtonAction(_ sender: UIButton) {
         let vc:StartRouteOrderVC = StartRouteOrderVC.loadSB(SB: .Route)
+        vc.order = orderDetail
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -239,8 +282,14 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         switch orderSection {
         case .sectionMap:
             return 1
-        case .sectionInforDetail:
+        case .sectionOrderInfo:
             return orderInforDetail.count
+        case .sectionFrom:
+            return orderInforFrom.count
+        case .sectionTo:
+            return orderInforTo.count
+        case .sectionNatureOfGoods:
+            return orderDetail?.details?.count ?? 0
         case .sectionSignature:
             return orderDetail?.signature != nil ? 1 : 0
         case .sectionPictures:
@@ -279,12 +328,12 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             headerCell.btnStatus?.isHidden = true
             let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section)!
             switch orderSection {
-            case .sectionInforDetail:
+            case .sectionOrderInfo:
                 headerCell.btnStatus?.isHidden = false
                 headerCell.btnStatus?.borderWidth = 1.0
-                headerCell.btnStatus?.borderColor = AppColor.redColor
-                headerCell.btnStatus?.setTitle("In progress", for: .normal)
-                headerCell.btnStatus?.setTitleColor(AppColor.redColor, for: .normal)
+                headerCell.btnStatus?.borderColor = orderDetail?.colorStatus
+                headerCell.btnStatus?.setTitle(orderDetail?.status?.name, for: .normal)
+                headerCell.btnStatus?.setTitleColor(orderDetail?.colorStatus, for: .normal)
                 
             case .sectionSignature:
                 var isAdd = false
@@ -324,8 +373,14 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         switch orderSection {
         case .sectionMap:
             return cellMap(tableView,indexPath)
-        case .sectionInforDetail:
+        case .sectionOrderInfo:
             return cellInfoDetail(tableView,indexPath)
+        case .sectionFrom:
+            return cellInfoFromSection(tableView,indexPath)
+        case .sectionTo:
+            return cellInfoToSection(tableView,indexPath)
+        case .sectionNatureOfGoods:
+            return cellNatureOfGood(tableView,indexPath)
         case .sectionSignature:
             return cellSignature(tableView, indexPath)
         case .sectionPictures:
@@ -341,14 +396,36 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         }
         let row = indexPath.row
         switch orderSection {
-        case .sectionInforDetail:
-            if row != orderInforDetail.count - 1 &&  // From address,To address
-                row != orderInforDetail.count - 3 {
+        case .sectionFrom:
+            if row != orderInforTo.count - 1 &&  // From address,To address
+                row != orderInforTo.count - 3 {
                 return
             }
             
             let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
-            if row != orderInforDetail.count - 1{
+            if row != orderInforTo.count - 1{
+                if let _orderDetail = orderDetail,
+                    let lng = _orderDetail.to?.lngtd,
+                    let lat = _orderDetail.to?.lattd  {
+                    let location = CLLocationCoordinate2D(latitude: lat.doubleValue ,
+                                                          longitude: lng.doubleValue)
+                    vc.orderLocation = location
+                }
+                
+            }else {
+                //
+            }
+            
+            //self.present(vc, animated: true, completion: nil)
+            self.navigationController?.pushViewController( vc, animated: true)
+            
+        case .sectionTo:
+            if row != orderInforTo.count - 1 {  // To address
+                return
+            }
+            
+            let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
+            if row != orderInforTo.count - 1{
                 if let _orderDetail = orderDetail,
                     let lng = _orderDetail.to?.lngtd,
                     let lat = _orderDetail.to?.lattd  {
@@ -404,30 +481,62 @@ fileprivate extension OrderDetailViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: orderDetailMapCellIdentifier, for: indexPath) as! OrderDetailTableViewCell
         cell.delegate = self
         btnGo = cell.btnGo
+        cell.nameLabel?.text = orderDetail?.to?.address
+        cell.drawRouteMap(order: orderDetail)
+        return cell
+    }
+    
+    func cellInfoFromSection(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
+        let item = orderInforTo[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
+                                                    for: indexPath) as! OrderDetailTableViewCell
+        cell.orderDetailItem = item
+        cell.delegate = self
+        cell.selectionStyle = .none
+        
+        if indexPath.row == orderInforFrom.count - 1{
+            cell.vContent?.roundCornersLRB()
+        }
+        return cell
+    }
+    
+    func cellInfoToSection(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
+        let item = orderInforTo[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! OrderDetailTableViewCell
+        cell.orderDetailItem = item
+        cell.selectionStyle = .none
+        
+        if indexPath.row == orderInforTo.count - 1{
+            cell.vContent?.roundCornersLRB()
+        }
+        return cell
+  
+    }
+    
+    func cellNatureOfGood(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
+        let cell = tableView.dequeueReusableCell(withIdentifier: orderDetailNatureOfGoodsCell,
+                                                    for: indexPath) as! OrderDetailTableViewCell
+        cell.selectionStyle = .none
+        
+        let detail = orderDetail?.details?[indexPath.row]
+        cell.nameLabel?.text = detail?.nature?.name
+        cell.contentLabel?.text = "\(detail?.vol ?? 0)"
+        
+        if indexPath.row == (orderDetail?.details?.count ?? 0 ) - 1{
+            cell.vContent?.roundCornersLRB()
+        }
         return cell
     }
     
     func cellInfoDetail(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
         let item = orderInforDetail[indexPath.row]
-        var identifier = cellIdentifier
-        if indexPath.row == orderInforDetail.count - 1 ||
-            indexPath.row == orderInforDetail.count - 3{
-            identifier = addressCellIdentifier
-        }
-        let cell = tableView.dequeueReusableCell(withIdentifier: identifier, for: indexPath) as! OrderDetailTableViewCell
+  
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! OrderDetailTableViewCell
         cell.orderDetailItem = item
         cell.selectionStyle = .none
         cell.vContent?.noRoundCornersLRT()
-        
-        if indexPath.row == orderInforDetail.count - 1 ||
-            indexPath.row == orderInforDetail.count - 3{
-            cell.iconImgView?.isHidden = false
-            if indexPath.row == orderInforDetail.count - 1 {
-                cell.vContent?.roundCornersLRB()
-            }
-            
-        }else {
-            cell.iconImgView?.isHidden = true
+        if indexPath.row == orderInforDetail.count - 1 {
+            cell.vContent?.roundCornersLRB()
         }
         return cell
     }
@@ -495,6 +604,7 @@ extension OrderDetailViewController:DMSNavigationServiceDelegate {
 extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
     func didSelectGo(_ cell: OrderDetailTableViewCell, _ btn: UIButton) {
         let vc:StartRouteOrderVC = StartRouteOrderVC.loadSB(SB: .Route)
+        vc.order  = orderDetail
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -517,54 +627,26 @@ extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
     }
     
     func doAddSignature()  {
-        let vc:OrderSignatureViewController = OrderSignatureViewController.loadSB(SB: .Order)
-        vc.orderDetail = orderDetail
-        vc.updateOrderDetail = {[weak self](order) in
-            self?.fetchData(showLoading: false)
-        }
-        self.navigationController?.pushViewController(vc, animated: true)
+        let viewController = SignatureViewController()
+        viewController.isFromOrderDetail = true
+        viewController.delegate = self
+        self.navigationController?.present(viewController, animated: true, completion: nil)
     }
     
     func doAddPictures() {
-        ImagePickerView.shared().showImageGallarySinglePick(atVC: self) { (success, data) in
-            if let _data = data as? [PHAsset] {
-                var arrAttachfile:[AttachFileModel] = []
-                
-                for i in 0..<_data.count{
-                    let image:UIImage = self.getAssetThumbnail(asset: _data[i], size: ScreenSize.SCREEN_HEIGHT)
-                    if let data = image.jpegData(compressionQuality: 0.75) {
-                        let file: AttachFileModel = AttachFileModel()
-                        file.name = E(_data[i].originalFilename)
-                        file.type = ".png"
-                        file.mimeType = "image/png"
-                        file.contentFile = data
-                        file.param = "file_pod_req[\(i)]"
-                        arrAttachfile.append(file)
-                        
-                    }else {
-                        print("encode failure")
-                    }
-                }
-                
-                if arrAttachfile.count > 0{
-                    self.uploadMultipleFile(files: arrAttachfile)
-                }
-                
-            }else if let image = data as? UIImage {
-                if let data = image.jpegData(compressionQuality: 0.75) {
-                    let file: AttachFileModel = AttachFileModel()
-                    file.name = "Picture_\(Date().timeIntervalSince1970)"
-                    file.type = ".png"
-                    file.mimeType = "image/png"
-                    file.contentFile = data
-                    file.param = "file_pod_req[0]"
-                    self.uploadMultipleFile(files: [file])
-                    
-                }else {
-                    print("encode failure")
-                }
+        ImagePickerView.shared().showImageGallarySinglePick(atVC: self) {[weak self] (success, data) in
+            if data.count > 0{
+                self?.uploadMultipleFile(files: data)
             }
         }
+    }
+}
+
+
+//MARK: - SignatureViewControllerDelegate
+extension OrderDetailViewController:SignatureViewControllerDelegate{
+    func signatureViewController(view: SignatureViewController, didCompletedSignature signature: AttachFileModel) {
+        submitSignature(signature)
     }
 }
 
@@ -702,6 +784,24 @@ extension OrderDetailViewController{
                 
             case .error(let error):
                 self?.showAlertView(error.getMessage())
+            }
+        }
+    }
+    
+    func submitSignature(_ file: AttachFileModel) {
+        guard let order = orderDetail else { return }
+        if hasNetworkConnection {
+            showLoadingIndicator()
+        }
+        SERVICES().API.submitSignature(file,order) {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(_):
+                self?.fetchData()
+                
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+                break
             }
         }
     }

@@ -12,6 +12,7 @@
 		2AB4A98A224B78C70019F196 /* RouteDetailLocationListClvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */; };
 		2AC97C5B224DF7F600DD07AE /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC97C5A224DF7F600DD07AE /* CommonUtils.swift */; };
 		2AC97C5D224E009400DD07AE /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC97C5C224E009400DD07AE /* Double+Ext.swift */; };
+		2ADE1D062253068100BE4092 /* GMSMapview+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE1D052253068100BE4092 /* GMSMapview+Ext.swift */; };
 		3B0035F7216C614D0032519D /* TextViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0035F4216C614D0032519D /* TextViewInput.swift */; };
 		3B0035F8216C614D0032519D /* TextViewInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0035F5216C614D0032519D /* TextViewInput.xib */; };
 		3B0035F9216C614D0032519D /* TextViewInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0035F6216C614D0032519D /* TextViewInputController.swift */; };
@@ -298,6 +299,7 @@
 		2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailLocationListClvCell.swift; sourceTree = "<group>"; };
 		2AC97C5A224DF7F600DD07AE /* CommonUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
 		2AC97C5C224E009400DD07AE /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
+		2ADE1D052253068100BE4092 /* GMSMapview+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GMSMapview+Ext.swift"; sourceTree = "<group>"; };
 		3B0035F4216C614D0032519D /* TextViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewInput.swift; sourceTree = "<group>"; };
 		3B0035F5216C614D0032519D /* TextViewInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewInput.xib; sourceTree = "<group>"; };
 		3B0035F6216C614D0032519D /* TextViewInputController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewInputController.swift; sourceTree = "<group>"; };
@@ -1376,6 +1378,7 @@
 				3B66B778210B113C000BDFEF /* UITextView.swift */,
 				3B66B779210B113C000BDFEF /* UITableView-Extensions.swift */,
 				2AC97C5C224E009400DD07AE /* Double+Ext.swift */,
+				2ADE1D052253068100BE4092 /* GMSMapview+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -2941,6 +2944,7 @@
 				3B0035F7216C614D0032519D /* TextViewInput.swift in Sources */,
 				3B014948217D75D00097FEB6 /* TaskListVC.swift in Sources */,
 				3B66B81B210B113D000BDFEF /* BuildConfiguration.swift in Sources */,
+				2ADE1D062253068100BE4092 /* GMSMapview+Ext.swift in Sources */,
 				3B21A0022140E009003CBC14 /* ReachabilityManager.swift in Sources */,
 				3B66B900210B1149000BDFEF /* OrderPictureViewController.swift in Sources */,
 				3B66B8EC210B1149000BDFEF /* UserModel.swift in Sources */,

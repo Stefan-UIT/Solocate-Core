@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol SignatureViewControllerDelegate:AnyObject {
+    func signatureViewController(view:SignatureViewController, didCompletedSignature signature:AttachFileModel);
+}
+
 class SignatureViewController: BaseViewController {
 
     @IBOutlet weak var signHereButton: UIButton!
@@ -17,6 +21,10 @@ class SignatureViewController: BaseViewController {
     @IBOutlet weak var signatureView: SignatureView!
     @IBOutlet weak var signatureImageView: UIImageView!
     
+    weak var delegate:SignatureViewControllerDelegate?
+    
+    var order:Order?
+    var isFromOrderDetail = false
     var validationSubmit:Bool = false{
         didSet{
             updateUI()
@@ -38,8 +46,8 @@ class SignatureViewController: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.fd_interactivePopDisabled = false
+        App().statusBarView?.backgroundColor = AppColor.white
     }
-
     
     // MARK: Function
      override func updateUI() {
@@ -49,15 +57,12 @@ class SignatureViewController: BaseViewController {
         btnClear?.isUserInteractionEnabled = validationSubmit
         navigationController?.navigationBar.barTintColor = AppColor.background
         App().statusBarView?.backgroundColor = AppColor.background
-    }
-    
-    private func handleSkipAction() {
-        let addNoteView = AddNoteView()
-        addNoteView.showViewInWindow()
-    }
-    
-    private func handleGoBackAction() {
-        navigationController?.popViewController(animated: true)
+        
+        if isFromOrderDetail {
+            skipButton.setTitle("Back".localized, for: .normal)
+        }else {
+            skipButton.setTitle("Skip".localized, for: .normal)
+        }
     }
 
     
@@ -75,20 +80,12 @@ class SignatureViewController: BaseViewController {
     }
     
     @IBAction func okButtonAction(_ sender: UIButton) {
-        let _ = signatureView.frame
-        guard signatureView.signLayer != nil else {
-            showAlertView("Signature is not empty.")
-            return
-        }
-        
-        let addNoteView = AddNoteView()
-        addNoteView.delegate = self
-        addNoteView.showViewInWindow()
-        
+        handleComplationSignature()
+        handleGoBackAction()
     }
 
     @IBAction func skipButtonAction(_ sender: UIButton) {
-        if sender.isSelected {
+        if isFromOrderDetail == true{
             handleGoBackAction()
         } else {
             handleSkipAction()
@@ -110,6 +107,50 @@ extension SignatureViewController: AddNoteViewDelegate {
     func addNoteView(_ view: AddNoteView, _ note: String) {
         view.removeFromSuperview()
         navigationController?.dismiss(animated: true, completion: nil)
+    }
+}
+
+fileprivate extension SignatureViewController {
+    func handleComplationSignature()  {
+        let rect = signatureView?.frame ?? CGRect.zero
+        guard signatureView.signLayer != nil else {
+            showAlertView("Signature is not empty.")
+            return
+        }
+        
+        UIGraphicsBeginImageContext(rect.size)
+        guard let context = UIGraphicsGetCurrentContext() else {
+            return
+        }
+        signatureView?.layer.render(in: context)
+        let img = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        guard  let image = img, let data = image.jpegData(compressionQuality: 1.0) else {
+            return
+        }
+        
+        let signatureFile: AttachFileModel = AttachFileModel()
+        signatureFile.name = "Signature_\(order?.id ?? 0)"
+        signatureFile.type = ".png"
+        signatureFile.typeFile = "SIG"
+        signatureFile.mimeType = "image/png"
+        signatureFile.contentFile = data
+        signatureFile.param = "file_sig_req"
+        delegate?.signatureViewController(view: self, didCompletedSignature: signatureFile)
+    }
+    
+    func handleSkipAction() {
+        let addNoteView = AddNoteView()
+        addNoteView.showViewInWindow()
+    }
+    
+    func handleGoBackAction() {
+        if navigationController != nil {
+            navigationController?.popViewController(animated: true)
+        }else {
+            self.dismiss(animated: true, completion: nil)
+        }
     }
 }
 

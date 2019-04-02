@@ -104,10 +104,9 @@ class DashboardVC: BaseViewController {
         let total = newRoutes.count + inprogessRoutes.count + finishedRoutes.count + cacelledRoutes.count
         let centerText = NSMutableAttributedString(string: total == 0 ? "Data unavailable.".localized : "Route status".localized)
         centerText.setAttributes([.font : UIFont(name: "HelveticaNeue-Light", size: 13)!,
-                                  NSAttributedString.Key.strokeColor : total == 0 ? UIColor.red : UIColor.black,
+                                  NSAttributedString.Key.foregroundColor : total == 0 ? UIColor.red : UIColor.black,
                                   .paragraphStyle : paragraphStyle], range: NSRange(location: 0, length: centerText.length))
         chartView.centerAttributedText = centerText;
-        
         chartView.drawHoleEnabled = true
         chartView.rotationAngle = 0
         chartView.rotationEnabled = true
@@ -297,6 +296,7 @@ extension DashboardVC:UICollectionViewDelegate{
                 return
             }
             let vc:RouteListVC = RouteListVC.loadSB(SB: .Route)
+            vc.isFromDashboard = true
             vc.routes = newRoutes ?? []
             vc.timeData = timeData
             self.navigationController?.pushViewController(vc, animated: true)
@@ -307,6 +307,7 @@ extension DashboardVC:UICollectionViewDelegate{
                 return
             }
             let vc:RouteListVC = RouteListVC.loadSB(SB: .Route)
+            vc.isFromDashboard = true
             vc.routes = inprogessRoutes ?? []
             vc.timeData = timeData
             self.navigationController?.pushViewController(vc, animated: true)
@@ -335,6 +336,7 @@ extension DashboardVC:UICollectionViewDelegate{
                 return
             }
             let vc:RouteListVC = RouteListVC.loadSB(SB: .Route)
+            vc.isFromDashboard = true
             vc.routes = lateRoutes ?? []
             vc.timeData = timeData
             self.navigationController?.pushViewController(vc, animated: true)
