@@ -341,8 +341,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 
             case .sectionSignature:
                 var isAdd = false
-                if orderDetail?.driver_id == Caches().user?.userInfo?.id &&
-                    (orderDetail?.signature == nil){
+                if (orderDetail?.signature == nil){
                     isAdd = true
                 }
                 

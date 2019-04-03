@@ -136,6 +136,24 @@ class StartRouteOrderVC: BaseViewController {
 
 // MARK: - API
 extension StartRouteOrderVC{
+    fileprivate func submitSignature(_ file: AttachFileModel) {
+        guard let order = order else { return }
+        if hasNetworkConnection {
+            showLoadingIndicator()
+        }
+        SERVICES().API.submitSignature(file,order) {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(_):
+                self?.updateStatusOrder(statusCode: StatusOrder.deliveryStatus.rawValue)
+                
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+                break
+            }
+        }
+    }
+    
     fileprivate func updateStatusOrder(statusCode: String) {
         guard let _orderDetail = order else {
             return
@@ -167,10 +185,12 @@ extension StartRouteOrderVC{
             }
         }
     }
-    
-    func handleStartOrFinishOrder() {
-        //self.showPictureViewController()
-        
+}
+
+
+// MARK: - PRIVATE FUNTIONS
+extension StartRouteOrderVC {
+    private func handleStartOrFinishOrder() {
         guard let _orderDetail = order else {return}
         let status:StatusOrder = _orderDetail.statusOrder
         var statusNeedUpdate = status.rawValue
@@ -179,23 +199,23 @@ extension StartRouteOrderVC{
             App().showAlertView("Do you want to start this order?",
                                 positiveTitle: "YES",
                                 positiveAction: {[weak self] (ok) in
-                                
-                                statusNeedUpdate = StatusOrder.inProcessStatus.rawValue
-                                self?.updateStatusOrder(statusCode: statusNeedUpdate)
-
+                                    
+                                    statusNeedUpdate = StatusOrder.inProcessStatus.rawValue
+                                    self?.updateStatusOrder(statusCode: statusNeedUpdate)
+                                    
             }, negativeTitle: "No".localized) { (cancel) in
                 //
             }
             
         case .inProcessStatus:
             if _orderDetail.isRequireImage(){
-                self.showAlertView("Picture is required".localized) {[weak self](action) in
+                self.showAlertView("Picture required".localized) {[weak self](action) in
                     self?.showPictureViewController()
                 }
                 
             }else if (_orderDetail.isRequireSign()) {
-                self.showAlertView("Signature is required".localized) {(action) in
-                    //self?.didUpdateStatus?(_orderDetail, nil)
+                self.showAlertView("Signature required".localized) {[weak self](action) in
+                    self?.showSignatureViewController()
                 }
                 
             }else {
@@ -216,11 +236,7 @@ extension StartRouteOrderVC{
             break
         }
     }
-}
-
-
-// MARK: - PRIVATE FUNTIONS
-extension StartRouteOrderVC {
+    
     private func showPictureViewController() {
         let viewController = PictureViewController()
         let navi = BaseNV(rootViewController: viewController)
@@ -232,6 +248,12 @@ extension StartRouteOrderVC {
             }
         }
         present(navi, animated: true, completion: nil)
+    }
+    
+    private func showSignatureViewController() {
+        let viewController = SignatureViewController()
+        viewController.delegate = self
+        self.navigationController?.present(viewController, animated: true, completion: nil)
     }
     
     private func drawDirections(order:Order?)  {
@@ -275,3 +297,12 @@ extension StartRouteOrderVC {
         }
     }
 }
+
+
+//MARK: - SignatureViewControllerDelegate
+extension StartRouteOrderVC:SignatureViewControllerDelegate{
+    func signatureViewController(view: SignatureViewController, didCompletedSignature signature: AttachFileModel) {
+        submitSignature(signature)
+    }
+}
+
