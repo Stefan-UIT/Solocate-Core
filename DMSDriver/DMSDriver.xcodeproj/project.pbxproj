@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2A1AA32522546D83004449AA /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1AA32422546D83004449AA /* UINavigationController+Ext.swift */; };
 		2A42555B2251F08E00D55FEA /* ResponseDataDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42555A2251F08E00D55FEA /* ResponseDataDashboard.swift */; };
 		2A8EFE95224C7855008AA1D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A8EFE94224C7855008AA1D3 /* GoogleService-Info.plist */; };
 		2AB4A98A224B78C70019F196 /* RouteDetailLocationListClvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */; };
@@ -294,6 +295,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2A1AA32422546D83004449AA /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		2A42555A2251F08E00D55FEA /* ResponseDataDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDataDashboard.swift; sourceTree = "<group>"; };
 		2A8EFE94224C7855008AA1D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../../../Users/nguyenmach/Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailLocationListClvCell.swift; sourceTree = "<group>"; };
@@ -1379,6 +1381,7 @@
 				3B66B779210B113C000BDFEF /* UITableView-Extensions.swift */,
 				2AC97C5C224E009400DD07AE /* Double+Ext.swift */,
 				2ADE1D052253068100BE4092 /* GMSMapview+Ext.swift */,
+				2A1AA32422546D83004449AA /* UINavigationController+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -3007,6 +3010,7 @@
 				3BF258232224FABB00A56B4E /* ApprovePictureViewController.swift in Sources */,
 				3B66B8F4210B1149000BDFEF /* ResponseDataModel.swift in Sources */,
 				3B66B8EE210B1149000BDFEF /* OrderMarker.swift in Sources */,
+				2A1AA32522546D83004449AA /* UINavigationController+Ext.swift in Sources */,
 				3B66B82A210B113D000BDFEF /* UIAlertController+Extensions.swift in Sources */,
 				3B66B807210B113D000BDFEF /* UITextField+Ext.swift in Sources */,
 				3B66B830210B113D000BDFEF /* TextViewController.swift in Sources */,

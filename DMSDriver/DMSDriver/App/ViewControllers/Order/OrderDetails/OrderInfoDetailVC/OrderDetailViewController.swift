@@ -80,7 +80,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     override func updateUI()  {
         super.updateUI()
         DispatchQueue.main.async {[weak self] in
-            self?.vAction?.isHidden = (self?.orderDetail == nil)
             self?.updateButtonStatus()
             self?.setupTableView()
         }
@@ -205,6 +204,11 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     @IBAction func tapUpdateStatusButtonAction(_ sender: UIButton) {
         let vc:StartRouteOrderVC = StartRouteOrderVC.loadSB(SB: .Route)
         vc.order = orderDetail
+        vc.callback = {[weak self](success, order) in
+            self?.orderDetail = order
+            self?.setupDataDetailInforRows()
+            self?.tableView?.reloadData()
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -457,6 +461,11 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
 //MARK:  - UIScrollViewDelegate
 extension OrderDetailViewController:UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if orderDetail?.statusOrder != StatusOrder.newStatus &&
+            orderDetail?.statusOrder != StatusOrder.inProcessStatus {
+            return
+        }
+        
         let offsetY = scrollView.contentOffset.y
         print("OffsetY :\(offsetY)")
         UIView.animate(withDuration: 0.7, animations: {
@@ -480,6 +489,8 @@ fileprivate extension OrderDetailViewController {
     func cellMap(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: orderDetailMapCellIdentifier, for: indexPath) as! OrderDetailTableViewCell
         cell.delegate = self
+        cell.btnGo?.isHidden = (orderDetail?.statusOrder != StatusOrder.newStatus &&
+                                orderDetail?.statusOrder != StatusOrder.inProcessStatus)
         btnGo = cell.btnGo
         cell.nameLabel?.text = orderDetail?.to?.address
         cell.drawRouteMap(order: orderDetail)
@@ -662,27 +673,9 @@ fileprivate extension OrderDetailViewController{
     
     func updateButtonStatus() {
         updateStatusButton?.backgroundColor = AppColor.buttonColor
-        vAction?.isHidden = true
-        /*
-        let driverId = orderDetail?.driver_id
-        if driverId == Caches().user?.userInfo?.id {
-            guard let statusOrder = orderDetail?.statusOrder else {return}
-            switch statusOrder {
-            case .newStatus:
-                vAction?.isHidden = false
-                updateStatusButton?.setTitle("Start".localized.uppercased(), for: .normal)
-                btnUnable?.setTitle("Unable To Start".localized.uppercased(), for: .normal)
-                
-            case .inProcessStatus:
-                vAction?.isHidden = false
-                updateStatusButton?.setTitle("Finish".localized.uppercased(), for: .normal)
-                btnUnable?.setTitle("Unable To Finish".localized.uppercased(), for: .normal)
-                
-            default:
-                break
-            }
-        }
-         */
+        vAction?.isHidden = (orderDetail?.statusOrder == StatusOrder.deliveryStatus ||
+                            orderDetail?.statusOrder == StatusOrder.cancelStatus ||
+                            orderDetail?.statusOrder == StatusOrder.cancelFinishStatus)
     }
     
     func getAssetThumbnail(asset: PHAsset, size: CGFloat) -> UIImage {

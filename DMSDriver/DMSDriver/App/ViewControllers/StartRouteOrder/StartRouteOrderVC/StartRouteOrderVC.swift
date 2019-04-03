@@ -9,11 +9,15 @@
 import UIKit
 import GoogleMaps
 
+typealias StartRouteOrderVCCallback = (Bool,Order?) -> Void
+
 class StartRouteOrderVC: BaseViewController {
     
     @IBOutlet weak var conBotActionView:NSLayoutConstraint?
     @IBOutlet weak var vAction :UIView?
     @IBOutlet weak var btnHidenViewAction :UIButton?
+    @IBOutlet weak var btnStart :UIButton?
+    @IBOutlet weak var btnCancel :UIButton?
     @IBOutlet weak var mapView :GMSMapView?
     @IBOutlet weak var lblAddress :UILabel?
     @IBOutlet weak var lblType :UILabel?
@@ -22,6 +26,8 @@ class StartRouteOrderVC: BaseViewController {
 
     
     var order:Order?
+    var callback:StartRouteOrderVCCallback?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,6 +55,24 @@ class StartRouteOrderVC: BaseViewController {
         lblDateTime?.text = "\(start) - \(end)"
         lblEstimeTime?.text = CommonUtils.formatEstTime(seconds: Int64(totalTime))
         lblType?.text = CommonUtils.formatEstKm(met: totalKm)
+        
+        updateButtonStatus()
+    }
+    
+    func updateButtonStatus() {
+        //let driverId = order?.driver_id
+        guard let statusOrder = order?.statusOrder else {
+            return
+        }
+        switch statusOrder {
+        case .newStatus:
+            btnStart?.setTitle("Start".localized.uppercased(), for: .normal)
+        case .inProcessStatus:
+            btnStart?.setTitle("Finish".localized.uppercased(), for: .normal)
+            
+        default:
+            break
+        }
     }
 
     func drawRouteMap(order:Order?) {
@@ -70,7 +94,6 @@ class StartRouteOrderVC: BaseViewController {
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return UIStatusBarStyle.lightContent
     }
-
 
 
     //MARK: - ACTION
@@ -101,10 +124,7 @@ class StartRouteOrderVC: BaseViewController {
     }
     
     @IBAction func onbtnClickStart(btn:UIButton) {
-        let viewController = PictureViewController()
-        let navi = BaseNV(rootViewController: viewController)
-        navi.statusBarStyle = .lightContent
-        present(navi, animated: true, completion: nil)
+        handleStartOrFinishOrder()
     }
     
     @IBAction func onbtnClickSkip(btn:UIButton) {
@@ -114,8 +134,106 @@ class StartRouteOrderVC: BaseViewController {
     }
 }
 
+// MARK: - API
+extension StartRouteOrderVC{
+    fileprivate func updateStatusOrder(statusCode: String) {
+        guard let _orderDetail = order else {
+            return
+        }
+        let listStatus =  CoreDataManager.getListStatus()
+        for item in listStatus {
+            if item.code == statusCode{
+                _orderDetail.status = item
+                break
+            }
+        }
+        
+        if hasNetworkConnection {
+            showLoadingIndicator()
+        }
+        
+        SERVICES().API.updateOrderStatus(_orderDetail) {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(_):
+                self?.updateUI()
+                self?.callback?(true,_orderDetail)
+                if _orderDetail.statusOrder == .deliveryStatus {
+                    self?.navigationController?.popViewController(animated: true)
+                }
+            case .error(let error):
+                self?.callback?(false,_orderDetail)
+                self?.showAlertView(error.getMessage())
+            }
+        }
+    }
+    
+    func handleStartOrFinishOrder() {
+        //self.showPictureViewController()
+        
+        guard let _orderDetail = order else {return}
+        let status:StatusOrder = _orderDetail.statusOrder
+        var statusNeedUpdate = status.rawValue
+        switch status{
+        case .newStatus:
+            App().showAlertView("Do you want to start this order?",
+                                positiveTitle: "YES",
+                                positiveAction: {[weak self] (ok) in
+                                
+                                statusNeedUpdate = StatusOrder.inProcessStatus.rawValue
+                                self?.updateStatusOrder(statusCode: statusNeedUpdate)
+
+            }, negativeTitle: "No".localized) { (cancel) in
+                //
+            }
+            
+        case .inProcessStatus:
+            if _orderDetail.isRequireImage(){
+                self.showAlertView("Picture is required".localized) {[weak self](action) in
+                    self?.showPictureViewController()
+                }
+                
+            }else if (_orderDetail.isRequireSign()) {
+                self.showAlertView("Signature is required".localized) {(action) in
+                    //self?.didUpdateStatus?(_orderDetail, nil)
+                }
+                
+            }else {
+                
+                App().showAlertView("Do you want to Finish this order?",
+                                    positiveTitle: "YES",
+                                    positiveAction: {[weak self] (ok) in
+                                        
+                                        statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
+                                        self?.updateStatusOrder(statusCode: statusNeedUpdate)
+                                        
+                }, negativeTitle: "No".localized) { (cancel) in
+                    //
+                }
+            }
+            
+        default:
+            break
+        }
+    }
+}
+
+
 // MARK: - PRIVATE FUNTIONS
 extension StartRouteOrderVC {
+    private func showPictureViewController() {
+        let viewController = PictureViewController()
+        let navi = BaseNV(rootViewController: viewController)
+        navi.statusBarStyle = .lightContent
+        viewController.order = order
+        viewController.callback = {[weak self](success,order) in
+            if success {
+                self?.callback?(true,order)
+            }
+        }
+        present(navi, animated: true, completion: nil)
+    }
+    
     private func drawDirections(order:Order?)  {
         order?.getChunkedListLocation().forEach { (listLocation) in
             if let firstLocation = listLocation.first,

@@ -50,7 +50,7 @@ class LocationTracker: NSObject {
                                 lon1: lastLocationSubmited.longitude,
                                 lat2: latitude,
                                 lon2: longitude, unit: "M")
-            
+
             if dist < DMSAppConfiguration.distanceSubmitLocation {
                 return
             }

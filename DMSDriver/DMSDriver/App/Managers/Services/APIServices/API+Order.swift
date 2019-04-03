@@ -20,7 +20,8 @@ extension BaseAPIService{
     }
     
     @discardableResult
-    func updateOrderStatus(_ order:Order,reason: Reason? = nil,
+    func updateOrderStatus(_ order:Order,
+                           reason: Reason? = nil,
                            callback: @escaping APICallback<ResponseDataModel<Order>>) -> APIRequest? {
         
         let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL,

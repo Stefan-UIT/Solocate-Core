@@ -9,6 +9,8 @@
 import UIKit
 import AVFoundation
 
+typealias PictureViewControllerCallback = (Bool,Order?) -> Void
+
 class PictureViewController: BaseViewController {
     
     // MARK: IBOutlet
@@ -20,6 +22,10 @@ class PictureViewController: BaseViewController {
     var videoPreviewLayer: AVCaptureVideoPreviewLayer?
     var capturePhotoOutput: AVCapturePhotoOutput?
     var navigationService = DMSNavigationService()
+    
+    var callback:PictureViewControllerCallback?
+    var order:Order?
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -79,6 +85,13 @@ class PictureViewController: BaseViewController {
     func goToApprovePictureViewController(_ image: UIImage) {
         let viewController = ApprovePictureViewController()
         viewController.imageToApprove = image
+        viewController.order = order
+        viewController.callback = {[weak self](success,order) in
+            if success == true {
+                self?.callback?(true,order)
+            }
+        }
+        
         navigationController?.pushViewController(viewController, animated: true)
     }
     
@@ -145,3 +158,5 @@ extension PictureViewController: AVCapturePhotoCaptureDelegate {
         }
     }
 }
+
+

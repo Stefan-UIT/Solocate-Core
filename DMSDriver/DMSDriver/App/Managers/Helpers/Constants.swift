@@ -66,9 +66,9 @@ func SERVER_URL() -> String {
     switch type {
     case .debug,
          .adhoc:
-        serverURL = "http://dms-customization.dev.seldatdirect.com"
+        serverURL = "http://dms-customization.dev.seldatdirect.com/"
     case .staging:
-        serverURL = "http://dms-customization.staging.seldatdirect.com"
+        serverURL = "http://dms-customization.staging.seldatdirect.com/"
     case .release:
         serverURL = "http://dms-customization.live.seldatdirect.com/"
     }

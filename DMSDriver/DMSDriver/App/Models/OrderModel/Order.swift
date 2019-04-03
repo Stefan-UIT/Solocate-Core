@@ -347,11 +347,11 @@ class Order: BaseModel {
     }
     
     func isRequireSign() -> Bool  {
-        return sig_req == 1
+        return sig_req == 1 && signature == nil
     }
     
     func isRequireImage() -> Bool  {
-        return pod_req == 1
+        return pod_req == 1 && pictures?.count ?? 0 <= 0
     }
 }
 
