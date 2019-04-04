@@ -22,6 +22,7 @@ class UserModel: BaseModel {
         var phone : String?
         var userName: String?
         var assign_coord = 0
+        var timeZoneCompany:String?
         
         required init?(map: Map) {
             super.init()
@@ -35,13 +36,13 @@ class UserModel: BaseModel {
             mobile <- map[KEY_MOBILE]
             phone <- map[KEY_PHONE]
             assign_coord <- map[KEY_ASSIGN_COORD]
-            
-            let user_name = map["user_name"].currentValue
+            timeZoneCompany <- map[KEY_TIMEZONE_COMPANY]
+            let user_name = map[KEY_USER_NAME].currentValue
             
             if user_name == nil {
                 userName <- map["username"]
             } else {
-                userName <- map["user_name"]
+                userName <- map[KEY_USER_NAME]
             }
         }
     }

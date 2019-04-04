@@ -77,10 +77,10 @@ class TaskDetailVC: BaseViewController {
         }
     }
     
-    
-    override func reachabilityChangedNotification(_ notification: NSNotification) {
-        super.reachabilityChangedNotification(notification)
-        //checkConnetionInternet?(notification, hasNetworkConnection)
+    override func reachabilityChangedNetwork(_ isAvailaibleNetwork: Bool) {
+        super.reachabilityChangedNetwork(isAvailaibleNetwork)
+        //checkConnetionInternet?(notification, isAvailaibleNetwork)
+
     }
     
     override func updateNavigationBar() {
@@ -161,7 +161,7 @@ class TaskDetailVC: BaseViewController {
     
     func setupTableView() {
         tableView?.estimatedRowHeight = cellHeight
-        tableView?.rowHeight = UITableViewAutomaticDimension
+        tableView?.rowHeight = UITableView.automaticDimension
         tableView?.addRefreshControl(self, action: #selector(fetchData))
     }
     
@@ -250,7 +250,7 @@ extension TaskDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -397,7 +397,7 @@ extension TaskDetailVC{
         if !isFetch {
             self.showLoadingIndicator()
         }
-        API().getTaskDetail(taskId) {[weak self] (result) in
+        SERVICES().API.getTaskDetail(taskId) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.tableView?.endRefreshControl()
             switch result{
@@ -413,7 +413,7 @@ extension TaskDetailVC{
     
     func updateTaskStatus(_ status:String) {
         self.showLoadingIndicator()
-        API().updateTaskStatusTask(task?.task_id ?? 0, status) {[weak self] (result) in
+        SERVICES().API.updateTaskStatusTask(task?.task_id ?? 0, status) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.tableView?.endRefreshControl()
             switch result{

@@ -10,7 +10,7 @@ import UIKit
 import ObjectMapper
 
 enum StatusAlert:Int {
-    case open = 1
+    case open = 0
     case resolved
 }
 
@@ -57,6 +57,7 @@ class AlertModel: BaseModel {
     var ruleType:RuleType?
     var created_at:String?
     var alertId:Int?
+    var subject:String?
     
     var statusAlert:StatusAlert{
         get{
@@ -90,11 +91,12 @@ class AlertModel: BaseModel {
         routeId <- map["route_id"]
         driverId <- map["driver_id"]
         driverName <- map["driver_name"]
-        ruleType <- map["rule_type"]
+        ruleType <- map["rule"]
         created_at <- map["created_at"]
         truckName <- map["truck_name"]
         tankerName <- map["tanker_name"]
         alertId <- map["alert_id"]
+        subject <- map["subject"]
         
         if alertId == nil { // use for get alert detail (alertId is id)
             alertId <- map["id"]

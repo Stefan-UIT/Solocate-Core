@@ -11,29 +11,44 @@ import GoogleMaps
 
 class MapsViewController: UIViewController {
     
-    @IBOutlet weak var mapView: GMSMapView!
+   var mapView: GMSMapView?
 
     var route: Route?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupMapView()
-        getRouteDetail("\(route?.id ?? 0)")
+        self.performSelector(onMainThread: #selector(setupMapView),
+                             with: nil,
+                             waitUntilDone: false)
+        
+        //getRouteDetail("\(route?.id ?? 0)")
     }
   
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     }
     
-    func setupMapView() {
-        mapView.isMyLocationEnabled = true
-        mapView.delegate = self
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+    }
+    
+    @objc func setupMapView() {
+        if mapView == nil {
+            // Create a map.
+            mapView = GMSMapView(frame: view.bounds)
+            mapView?.isMyLocationEnabled = true
+            mapView?.delegate = self
+            mapView?.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+
+            guard let map = mapView else {return}
+            view.addSubview(map)
+        }
     }
   
     func drawPath(fromLocation from: CLLocationCoordinate2D,
                 toLocation to: CLLocationCoordinate2D) {
         self.showLoadingIndicator()
-        API().getDirection(fromLocation: from, toLocation: to) {[weak self] (result) in
+        SERVICES().API.getDirection(fromLocation: from, toLocation: to) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(let obj):
@@ -44,7 +59,7 @@ class MapsViewController: UIViewController {
                     polyLine.strokeColor = AppColor.mainColor
                     polyLine.map = self?.mapView
                     let bounds = GMSCoordinateBounds(path: path!)
-                    self?.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
+                    self?.mapView?.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
                 }
             case .error(let error):
                 self?.showAlertView(error.getMessage())
@@ -56,7 +71,7 @@ class MapsViewController: UIViewController {
                   toLocation to: CLLocationCoordinate2D,
                   wayPoints:Array<CLLocationCoordinate2D>) {
         self.showLoadingIndicator()
-        API().getDirection(origin: from,
+        SERVICES().API.getDirection(origin: from,
                            destination: to,
                            waypoints: wayPoints) {[weak self] (result) in
             self?.dismissLoadingIndicator()
@@ -69,7 +84,7 @@ class MapsViewController: UIViewController {
                     polyLine.strokeColor = AppColor.mainColor
                     polyLine.map = self?.mapView
                     let bounds = GMSCoordinateBounds(path: path!)
-                    self?.mapView.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
+                    self?.mapView?.animate(with: GMSCameraUpdate.fit(bounds, withPadding: 100.0))
                 }
             case .error(let error):
                 self?.showAlertView(error.getMessage())
@@ -82,7 +97,7 @@ class MapsViewController: UIViewController {
         guard let _route = route else {
             return
         }
-        mapView.clear()
+        mapView?.clear()
         showMarkers()
 
         _route.getChunkedListLocation().forEach { (listLocation) in
@@ -159,7 +174,7 @@ extension MapsViewController{
         if !isFetch {
             self.showLoadingIndicator()
         }
-        API().getRouteDetail(route: routeID) {[weak self] (result) in
+        SERVICES().API.getRouteDetail(route: routeID) {[weak self] (result) in
             guard let strongSelf = self else {
                 return
             }

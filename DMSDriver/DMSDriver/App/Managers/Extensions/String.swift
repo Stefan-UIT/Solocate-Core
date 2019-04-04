@@ -22,7 +22,7 @@ extension String {
     }
     
     func sizeOfString(usingFont font: UIFont) -> CGSize {
-        let fontAttributes = [NSAttributedStringKey.font: font]
+        let fontAttributes = [NSAttributedString.Key.font: font]
         return self.size(withAttributes: fontAttributes)
     }
   
@@ -65,8 +65,6 @@ extension String {
     }
   
     var date: Date? {
-        let dateFormater = DateFormatter()
-        dateFormater.dateFormat = "yyyy-MM-dd hh:mm"
-        return dateFormater.date(from: self)
+        return ServerDateFormater.date(from: self)
     }
 }

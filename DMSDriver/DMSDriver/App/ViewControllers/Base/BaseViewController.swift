@@ -9,10 +9,13 @@
 import UIKit
 import ReachabilitySwift
 import FDFullscreenPopGesture
+import SideMenu
+import FirebaseAnalytics
 
 class BaseViewController: UIViewController {
   
     private var isRoot = true
+    private var obsKeyboardChangeFrame: NSObjectProtocol? = nil;
     
     let reachability = Reachability()!
     var hasNetworkConnection = true
@@ -22,7 +25,7 @@ class BaseViewController: UIViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
-        return UIStatusBarStyle.lightContent
+        return UIStatusBarStyle.default
     }
 
     override func viewWillAppear(_ animated: Bool) {
@@ -30,13 +33,13 @@ class BaseViewController: UIViewController {
         SERVICES().socket.delegate = self
         
         updateUI()
-        self.updateNavigationBar()
+        updateNavigationBar()
         addNetworkObserver()
         printControllerName()
     }
     
     deinit {
-        removeNetworkObserver()
+        
     }
     
     func updateUI() {
@@ -51,9 +54,14 @@ class BaseViewController: UIViewController {
     
     func updateNavigationBar() {
         print("Please update navigation Bar in \(ClassName(self))")
+        navigationController?.navigationBar.barTintColor = AppColor.white
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        //self.navigationController?.navigationBar.borderColor = AppColor.white
     }
     
     func printControllerName() {
+        Analytics.setScreenName(ClassName(self), screenClass: ClassName(self))
         #if DEBUG
         let name = String(describing: self)
         print("Current Screen is \(name)")
@@ -63,38 +71,87 @@ class BaseViewController: UIViewController {
     
     //MARK: - Reachability
     func addNetworkObserver() {
-        // add observer for network reachability
-        NotificationCenter.default.addObserver(self,
-                    selector: #selector(self.reachabilityChangedNotification(_:)),
-                        name: NSNotification.Name(rawValue: "ReachabilityChangedNotification"),
-                      object: reachability)
+        // Available connection to internet
+        ReachabilityManager.reachability.whenReachable = {[weak self] reachability in
+            print("has network connection")
+            self?.reachabilityChangedNetwork(true)
+        }
         
-        do {
-            try reachability.startNotifier()
-        }catch let error {
-            #if DEBUG
-            print("Cannot start notify \(error.localizedDescription)")
-            #endif
+        // Lost connection to internet
+        ReachabilityManager.reachability.whenUnreachable = {[weak self] reachability in
+            print("No internet connection")
+            self?.reachabilityChangedNetwork(false)
         }
     }
   
-    @objc func reachabilityChangedNotification(_ notification: NSNotification) {
-        guard let notif = notification.object as? Reachability, notif.isReachable == true else {
-                hasNetworkConnection = false
-                print("No internet connection")
-                updateUI()
-                return
-        }
-    
-        print("has network connection")
-        hasNetworkConnection = true
+    func reachabilityChangedNetwork(_ isAvailaibleNetwork: Bool) {
+        hasNetworkConnection = isAvailaibleNetwork
         updateUI()
     }
-  
-    func removeNetworkObserver() {
-        NotificationCenter.default.removeObserver(self,
-                    name: NSNotification.Name(rawValue: "ReachabilityChangedNotification"),
-                  object: reachability)
+    
+    
+    func keyboardWillChangeFrame(noti: Notification) {}
+    
+    func showSideMenu()  {
+        if Constants.isLeftToRight {
+            if let menuRight = SideMenuManager.default.menuRightNavigationController{
+                present(menuRight, animated: true, completion: nil)
+            }
+        }else{
+            if let  menuLeft = SideMenuManager.default.menuLeftNavigationController{
+                present(menuLeft, animated: true, completion: nil)
+            }
+        }
+    }
+}
+
+
+//MARK: - UIKeyboardWillChangeFrame
+extension BaseViewController {
+    final func registerForKeyboardNotifications() {
+        
+        guard obsKeyboardChangeFrame == nil else {
+            return;
+        }
+        
+        obsKeyboardChangeFrame =
+            NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillChangeFrameNotification,
+                                                   object: nil,
+                                                   queue: OperationQueue.main,
+                                                   using: keyboardWillChangeFrame(noti:))
+    }
+    
+    final func unregisterForKeyboardNotifications() {
+        
+        guard let obs = obsKeyboardChangeFrame else {
+            return;
+        }
+        
+        obsKeyboardChangeFrame = nil;
+        NotificationCenter.default.removeObserver(obs);
+    }
+    
+    @objc func dismissKeyboard(tapGesture: UITapGestureRecognizer?) {
+        self.view.endEditing(true);
+    }
+    
+    func getKeyboardHeight(noti:Notification) -> CGFloat {
+        
+        let userInfo:NSDictionary = noti.userInfo! as NSDictionary
+        let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        let keyboardHeight = keyboardRectangle.height
+        
+        return keyboardHeight;
+    }
+    
+    func getKeyboardFrameEnd(noti:Notification) -> CGRect {
+        
+        let userInfo:NSDictionary = noti.userInfo! as NSDictionary
+        let keyboardFrame:NSValue = userInfo.value(forKey: UIResponder.keyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.cgRectValue
+        
+        return keyboardRectangle;
     }
 }
 

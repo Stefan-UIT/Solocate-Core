@@ -61,7 +61,7 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
                 
                 for i in 0..<_data.count{
                     let image:UIImage = self.getAssetThumbnail(asset: _data[i], size: ScreenSize.SCREEN_HEIGHT)
-                    if let data = UIImageJPEGRepresentation(image, 0.85) {
+                    if let data = image.jpegData(compressionQuality: 0.85) {
                         let file: AttachFileModel = AttachFileModel()
                         file.name = E(_data[i].originalFilename)
                         file.type = ".png"
@@ -92,7 +92,7 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
                 }
                 
             }else if let image = data as? UIImage {
-                if let data = UIImageJPEGRepresentation(image, 0.85) {
+                if let data = image.jpegData(compressionQuality: 0.85) {
                     let file: AttachFileModel = AttachFileModel()
                     file.name = "Picture_\(Date().timeIntervalSince1970)"
                     file.type = ".png"
@@ -142,7 +142,7 @@ fileprivate extension OrderPictureViewController {
     func getOrderDetail() {
         guard let _orderID = orderDetail?.id else { return }
         showLoadingIndicator()
-        API().getOrderDetail(orderId: "\(_orderID)") {[weak self] (result) in
+        SERVICES().API.getOrderDetail(orderId: "\(_orderID)") {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(let object):
@@ -162,7 +162,7 @@ fileprivate extension OrderPictureViewController {
         guard let order = orderDetail else { return }
         let orderID = String(order.id)
         showLoadingIndicator()
-        API().uploadImageToOrder(orderID, file) { [weak self] (result) in
+        SERVICES().API.uploadImageToOrder(orderID, file) { [weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
@@ -183,7 +183,7 @@ fileprivate extension OrderPictureViewController {
         if hasNetworkConnection {
             showLoadingIndicator()
         }
-        API().uploadMultipleImageToOrder(files, order) {[weak self] (result) in
+        SERVICES().API.uploadMultipleImageToOrder(files, order) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):

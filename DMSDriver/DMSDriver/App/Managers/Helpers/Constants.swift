@@ -33,7 +33,7 @@ struct Constants {
   static let NAVIGATION_BAR_HEIGHT: CGFloat = 64.0
   static let SCALE_VALUE_HEIGHT_DEVICE = (DeviceType.IS_IPAD ? 1.2 : (DeviceType.IS_IPHONE_6 ? 1.0 : (DeviceType.IS_IPHONE_6P ? 1.174 : 1.0))) as CGFloat
   
-  static let SCALE_VALUE_WIDTH_DEVICE  = (DeviceType.IS_IPAD ? 1.2 : (DeviceType.IS_IPHONE_6 ? 1.0 : (DeviceType.IS_IPHONE_6P ? 1.171 : 1.0))) as CGFloat
+  static let SCALE_VALUE_WIDTH_DEVICE  = (DeviceType.IS_IPAD ? 1.2 : (DeviceType.IS_IPHONE_6 ? 1.0 : (DeviceType.IS_IPHONE_6P ? 1.171 : 0.9))) as CGFloat
   
   static let FONT_SCALE_VALUE          = (DeviceType.IS_IPAD ? 1.2 : (DeviceType.IS_IPHONE_6P ? 1.1 : (DeviceType.IS_IPHONE_6 ? 1.00 : 0.9))) as CGFloat
   
@@ -66,11 +66,11 @@ func SERVER_URL() -> String {
     switch type {
     case .debug,
          .adhoc:
-        serverURL = "https://dms.gadot.dev.seldatdirect.com/"
+        serverURL = "http://dms-customization.dev.seldatdirect.com/"
     case .staging:
-        serverURL = "https://dms.gadot.staging.seldatdirect.com/"
+        serverURL = "http://dms-customization.staging.seldatdirect.com/"
     case .release:
-        serverURL = "https://dms.gadot.live.seldatdirect.com/"
+        serverURL = "http://dms-customization.live.seldatdirect.com/"
     }
     return serverURL
 }
@@ -150,6 +150,7 @@ public enum SBName : String {
     case Task = "Task";
     case Profile = "Profile";
     case Common = "Common";
+    case Dashboard = "Dashboard";
     case Notification = "Notification";
 
 }
@@ -184,10 +185,6 @@ func ClassName(_ object: Any) -> String {
 
 func App() -> AppDelegate {
     return UIApplication.shared.delegate as! AppDelegate;
-}
-
-func API() ->BaseAPIService {
-    return BaseAPIService.shared()
 }
 
 func Caches() -> Cache {

@@ -47,7 +47,6 @@ class PickerInputView: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         updateUI()
         setupTableView()
     }
@@ -142,7 +141,7 @@ extension PickerInputView:UITableViewDataSource{
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {

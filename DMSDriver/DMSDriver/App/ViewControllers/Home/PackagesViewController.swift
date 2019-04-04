@@ -170,7 +170,7 @@ extension PackagesViewController{
     func getPackages() {
         guard let route = route else {return}
         self.showLoadingIndicator()
-        API().getPackagesInRoute("\(route.id)", dateStringFilter) {[weak self] (result) in
+        SERVICES().API.getPackagesInRoute("\(route.id)", dateStringFilter) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(let obj):

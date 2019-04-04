@@ -35,19 +35,16 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
         updateUI()
     }
     
-    override func reachabilityChangedNotification(_ notification: NSNotification) {
-        super.reachabilityChangedNotification(notification)
-        /*
-        if hasNetworkConnection {
-            updateOrderDetail?(orderDetail)
-        }else {
-            CoreDataManager.queryOrderDetail(orderDetail?.id ?? 0, callback:{[weak self] (success, data) in
-                self?.orderDetail = data
-                self?.updateUI()
-
-            })
-        }
-         */
+    override func updateNavigationBar() {
+        super.updateNavigationBar()
+        App().navigationService.delegate = self
+        App().navigationService.updateNavigationBar(.Menu,
+                                                    "Signature".localized,
+                                                    AppColor.white, true)
+    }
+    
+    override func reachabilityChangedNetwork(_ isAvailaibleNetwork: Bool) {
+        super.reachabilityChangedNetwork(isAvailaibleNetwork)
     }
   
     override func updateUI() {
@@ -90,7 +87,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
         let img = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        if let image = img, let data = UIImageJPEGRepresentation(image, 1.0) {
+        if let image = img, let data = image.jpegData(compressionQuality: 1.0) {
             let signatureFile: AttachFileModel = AttachFileModel()
             signatureFile.name = "Signature_\(orderDetail?.id ?? 0)"
             signatureFile.type = ".png"
@@ -147,7 +144,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
                                             completed: { (image, error, cacheType, url) in
             if error == nil{
                 if let image = image,
-                    let data = UIImageJPEGRepresentation(image, 1.0) {
+                    let data = image.jpegData(compressionQuality: 1.0) {
                     signFile.contentFile = data
                     CoreDataManager.updateOrderDetail(order)
                 }
@@ -160,7 +157,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
         if hasNetworkConnection {
             showLoadingIndicator()
         }
-        API().submitSignature(file,order) {[weak self] (result) in
+        SERVICES().API.submitSignature(file,order) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
@@ -200,6 +197,13 @@ class BaseOrderDetailViewController: BaseViewController, IndicatorInfoProvider {
 
     func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
         return indicatorInfo
+    }
+}
+
+//MARK: -DMSNavigationServiceDelegate
+extension OrderSignatureViewController:DMSNavigationServiceDelegate{
+    func didSelectedBackOrMenu() {
+        showSideMenu()
     }
 }
 

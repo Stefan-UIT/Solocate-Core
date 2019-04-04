@@ -11,7 +11,11 @@ extension UIAlertController {
     ///   - maximumDate: maximum date of date picker
     ///   - action: an action for datePicker value change
     
-    func addDatePicker(mode: UIDatePickerMode, date: Date?, minimumDate: Date? = nil, maximumDate: Date? = nil, action: DatePickerViewController.Action?) {
+    func addDatePicker(mode: UIDatePicker.Mode,
+                       date: Date?,
+                       minimumDate: Date? = nil,
+                       maximumDate: Date? = nil,
+                       action: DatePickerViewController.Action?) {
         let datePicker = DatePickerViewController(mode: mode,
                                                   date: date,
                                                   useChangeValue:true,
@@ -21,8 +25,9 @@ extension UIAlertController {
         set(vc: datePicker, height: 217)
     }
     
-    class func showDatePicker(style: UIAlertControllerStyle,
-                        mode:UIDatePickerMode,
+    class func showDatePicker(atViewController:UIViewController? = nil,
+                              style: UIAlertController.Style,
+                              mode:UIDatePicker.Mode,
                         useChangeValue:Bool = false,
                         title:String,
                         currentDate:Date?,
@@ -44,7 +49,7 @@ extension UIAlertController {
                         isEnabled: true) { (action) in
                             datePicker.action?(datePicker.datePicker.date)
         }
-        alert.show()
+        alert.show(atViewController: atViewController)
     }
 }
 
@@ -64,7 +69,7 @@ final class DatePickerViewController: UIViewController {
         return $0
     }(UIDatePicker())
     
-    required init(mode: UIDatePickerMode,
+    required init(mode: UIDatePicker.Mode,
                   date: Date? = nil,
                   useChangeValue:Bool,
                   minimumDate: Date? = nil,

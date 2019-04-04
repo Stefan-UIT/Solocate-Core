@@ -10,6 +10,8 @@ import Foundation
 import UIKit
 import SDWebImage
 
+fileprivate let imageCache = NSCache<NSString, UIImage>()
+
 extension UIImageView {
     func setImageWithURL(url:String?,
                          placeHolderImage:UIImage? = nil,
@@ -35,29 +37,34 @@ extension UIImageView {
         }
     }
     
-  func setImage(withURL imgPath: String) {
-    guard let url = URL(string: imgPath) else { return }
-    let indicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
-    indicator.hidesWhenStopped = true
-    indicator.startAnimating()
-    self.superview?.addSubview(indicator)
-    indicator.center = self.center
-    DispatchQueue.global().async {
-      let data = try? Data(contentsOf: url)
-      DispatchQueue.main.async {
-        indicator.stopAnimating()
-        indicator.removeFromSuperview()
-        guard let _data = data else {
-          return
+    func setImage(withURL imgPath: String) {
+        guard let url = URL(string: imgPath) else { return }
+        
+        if let cachImage = imageCache.object(forKey: url.absoluteString as NSString) {
+            
+            self.image = cachImage
+            
+        }else {
+            
+            let indicator = UIActivityIndicatorView(style: .white)
+            indicator.hidesWhenStopped = true
+            indicator.startAnimating()
+            self.superview?.addSubview(indicator)
+            indicator.center = self.center
+            DispatchQueue.global().async {[weak self] in
+                let data = try? Data(contentsOf: url)
+                DispatchQueue.main.async {
+                    indicator.stopAnimating()
+                    indicator.removeFromSuperview()
+                    guard let _data = data else {
+                        return
+                    }
+                    self?.image = UIImage(data: _data)
+                    if let img = UIImage(data: _data) {
+                        imageCache.setObject(img, forKey: url.absoluteString as NSString)
+                    }
+                }
+            }
         }
-        self.image = UIImage(data: _data)
-      }
     }
-    
-    
-    
-  }
-  
-  
-  
 }

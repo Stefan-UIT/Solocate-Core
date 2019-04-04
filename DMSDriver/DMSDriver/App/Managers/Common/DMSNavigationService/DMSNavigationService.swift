@@ -11,6 +11,7 @@ import UIKit
 @objc protocol DMSNavigationServiceDelegate {
     func didSelectedBackOrMenu()
     @objc optional func didSelectedRightButton()
+    @objc optional func didSelectedLeftButton(_ sender:UIBarButtonItem)
     @objc optional func didSelectedAssignButton(_ sender:UIBarButtonItem)
     @objc optional func didSelectedCancelButton(_ sender:UIBarButtonItem)
 
@@ -38,9 +39,13 @@ class DMSNavigationService: NSObject , NavigationService {
 
     fileprivate lazy var cancelBarItem = UIBarButtonItem.cancelButton(target: self,
                                                                       action: #selector(onNavigationCancel(_:)))
+    
     fileprivate lazy var calendarBarItem = UIBarButtonItem.barButtonItem(with: #imageLiteral(resourceName: "ic_calenda"),
                                                                          target: self,
-                                                                         action: #selector(onNavigationClickRightButton(_:)))
+                                                                         action: #selector(onNavigationClickLeftButton(_:)))
+    fileprivate lazy var searchBarItem = UIBarButtonItem.barButtonItem(with: #imageLiteral(resourceName: "search-solid"),
+                                                                         target: self,
+                                                                         action: #selector(onNavigationClickLeftButton(_:)))
     
     
     fileprivate(set) var leftBarButtonItemType: NavigationItemType?
@@ -51,6 +56,7 @@ class DMSNavigationService: NSObject , NavigationService {
     
     var delegate:DMSNavigationServiceDelegate?
     var navigationItem: UINavigationItem?
+    var navigationBar: UINavigationBar?
     var defaultTitle: String?
     var shouldShowOrderTrackingIndicator: Bool = false
     
@@ -141,6 +147,7 @@ fileprivate extension DMSNavigationService {
 extension DMSNavigationService {
     enum BarStyle {
         case Menu;
+        case Menu_Search;
         case Menu_Calenda;
         case Menu_Select;
         case Menu_Assign;
@@ -153,20 +160,37 @@ extension DMSNavigationService {
         case backModule;
     }
     
-    func updateNavigationBar(_ barStyle:BarStyle, _ title:String?) {
-        
-        if let title = title {
-            self.addTitleToNavigationBar(title: title)
+    func updateNavigationBar(_ barStyle:BarStyle,
+                             _ title:String?,
+                             _ backgrondBar:UIColor = UIColor.white,
+                             _ useLargeTitle:Bool = false) {
+        if useLargeTitle == true {
+            navigationBar?.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: AppColor.mainColor,
+                                                       NSAttributedString.Key.font: Font.helveticaBold(with: 40)]
+            navigationItem?.largeTitleDisplayMode = .automatic
+            navigationItem?.title = E(title)
+            App().statusBarView?.backgroundColor = AppColor.white
         }
+        else {
+            navigationItem?.largeTitleDisplayMode = .never
+            addTitleToNavigationBar(title: E(title) ,color: AppColor.mainColor)
+        }
+        
+        navigationBar?.barTintColor = backgrondBar
+        navigationItem?.hidesBackButton = true
         navigationItem?.leftBarButtonItem  = nil
         navigationItem?.rightBarButtonItems  = nil
         switch barStyle {
         case .Menu:
-            navigationItem?.leftBarButtonItem  = menuBarItem
+            navigationItem?.rightBarButtonItem  = menuBarItem
+            
+        case .Menu_Search:
+            navigationItem?.rightBarButtonItem  = menuBarItem
+            navigationItem?.leftBarButtonItem = searchBarItem
             
         case .Menu_Calenda:
-            navigationItem?.leftBarButtonItem  = menuBarItem
-            navigationItem?.rightBarButtonItem  = calendarBarItem
+            navigationItem?.rightBarButtonItem  = menuBarItem
+            navigationItem?.leftBarButtonItem  = calendarBarItem
             
         case .Menu_Select:
             navigationItem?.leftBarButtonItem  = menuBarItem
@@ -216,6 +240,10 @@ extension DMSNavigationService {
     
     @objc func onNavigationClickRightButton(_ sender: UIBarButtonItem) {
         delegate?.didSelectedRightButton!()
+    }
+    
+    @objc func onNavigationClickLeftButton(_ sender: UIBarButtonItem) {
+        delegate?.didSelectedLeftButton!(sender)
     }
     
     @objc func onNavigationSaveDone(_ sender: UIBarButtonItem) {

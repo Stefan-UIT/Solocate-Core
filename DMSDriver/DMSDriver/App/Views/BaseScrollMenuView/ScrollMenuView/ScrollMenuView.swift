@@ -32,6 +32,11 @@ class ScrollMenuView: UIView {
         setupUI()
     }
     
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        clvContent?.reloadData()
+    }
+    
     func setupUI() {
         clvContent?.delegate = self
         clvContent?.dataSource = self
@@ -58,7 +63,6 @@ extension ScrollMenuView:UICollectionViewDataSource,UICollectionViewDelegateFlow
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
         if totalWidth() <= collectionView.frame.size.width  {
             return CGSize(width: (collectionView.frame.size.width / CGFloat(listItems?.count ?? 0)),
                           height: collectionView.frame.size.height)

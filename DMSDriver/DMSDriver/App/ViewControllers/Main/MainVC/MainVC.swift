@@ -21,7 +21,7 @@ class MainVC: BaseViewController {
         super.viewDidLoad()
 
         setupSideMenu()
-        pushRouteListVC()
+        pushDashboardVC()
     }
 
     override func didReceiveMemoryWarning() {
@@ -43,18 +43,24 @@ class MainVC: BaseViewController {
         let slideMenuNC = UISideMenuNavigationController(rootViewController: slideMenu)
 
         slideMenuNC.navigationBar.isHidden = true
-        SideMenuManager.default.menuPresentMode = .viewSlideOut
+        SideMenuManager.default.menuPresentMode = .menuDissolveIn
         SideMenuManager.default.menuFadeStatusBar = false
-        SideMenuManager.default.menuAnimationTransformScaleFactor = 0.95
+        SideMenuManager.default.menuAnimationTransformScaleFactor = 1
+        SideMenuManager.default.menuWidth = ScreenSize.SCREEN_WIDTH - 50
         if let viewR = rootNV?.view {
-            //SideMenuManager.default.menuAddPanGestureToPresent(toView: viewR)
+            SideMenuManager.default.menuAddPanGestureToPresent(toView: viewR)
         }
 
         if Constants.isLeftToRight {
-            SideMenuManager.default.menuLeftNavigationController = slideMenuNC
-        }else {
             SideMenuManager.default.menuRightNavigationController = slideMenuNC
+        }else {
+            SideMenuManager.default.menuLeftNavigationController = slideMenuNC
         }
+    }
+    
+    func pushDashboardVC() {
+        let vc:DashboardVC = .loadSB(SB: .Dashboard)
+        rootNV?.setViewControllers([vc], animated: false)
     }
     
     func pushRouteListVC() {
@@ -65,7 +71,7 @@ class MainVC: BaseViewController {
     func refetchDataRouteOrTaskListOrHistoryNotify()  {
         rootNV?.viewControllers.forEach({ (viewController) in
             if ((viewController as? RouteListVC) != nil) {
-                (viewController as? RouteListVC)?.fetchData()
+                //(viewController as? RouteListVC)?.fetchData()
                 return
             }else if (((viewController as? TaskListVC) != nil)){
                 (viewController as? TaskListVC)?.getListTask(isFetch: true)
@@ -81,7 +87,7 @@ class MainVC: BaseViewController {
     func endAutoRefetchRouteList() {
         rootNV?.viewControllers.forEach({ (viewController) in
             if ((viewController as? RouteListVC) != nil) {
-                (viewController as? RouteListVC)?.endAutoRefetchRouteList()
+                //(viewController as? RouteListVC)?.endAutoRefetchRouteList()
                 return
             }
         })

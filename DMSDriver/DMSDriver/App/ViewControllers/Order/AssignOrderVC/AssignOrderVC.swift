@@ -65,8 +65,8 @@ class AssignOrderVC: BaseViewController {
         App().navigationService.updateNavigationBar(.Menu_Select, "Orders assignment".localized)
     }
     
-    override func reachabilityChangedNotification(_ notification: NSNotification) {
-        super.reachabilityChangedNotification(notification)
+    override func reachabilityChangedNetwork(_ isAvailaibleNetwork: Bool) {
+        super.reachabilityChangedNetwork(isAvailaibleNetwork)
         if hasNetworkConnection {
             fetchData()
         }else{
@@ -162,7 +162,7 @@ extension AssignOrderVC: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView,
                    heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView,
@@ -302,7 +302,7 @@ extension AssignOrderVC{
         if !isFetch {
             self.showLoadingIndicator()
         }
-        API().getOrderByCoordinator(byDate: dateStringFilter) {[weak self] (result) in
+        SERVICES().API.getOrderByCoordinator(byDate: dateStringFilter) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.tableView.endRefreshControl()
             switch result{
@@ -319,7 +319,7 @@ extension AssignOrderVC{
     
     func assignOrderToDriver(_ requestAssignOrder:RequestAssignOrderModel)  {
         self.showLoadingIndicator()
-        API().assignOrderToDriver(body: requestAssignOrder) {[weak self] (result) in
+        SERVICES().API.assignOrderToDriver(body: requestAssignOrder) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):

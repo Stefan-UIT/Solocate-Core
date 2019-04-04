@@ -14,6 +14,8 @@ import IQKeyboardManager
 import FirebaseCore
 import FirebaseMessaging
 import CoreData
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var navigationService = DMSNavigationService()
 
   
-  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
     
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")//disable autolayout error/warning
     
@@ -39,7 +41,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Debug.setup(shared: Debug(buildConf: buildConfiguration))
         Services.setupShared(buildConf: buildConfiguration)
 
-        print("\n==>APPLICATION STARTED WITH: \n\tScheme-\(buildConfiguration.buildScheme.rawValue);\n\tServer-\(buildConfiguration.serverEnvironment.displayString())-\(buildConfiguration.serverUrlString()) \n")
+        print(#"""
+            ==>APPLICATION STARTED WITH:
+            Scheme-\#(buildConfiguration.buildScheme.rawValue);
+            Server-\#(buildConfiguration.serverEnvironment.displayString())-\#(buildConfiguration.serverUrlString()) \n
+            """#)
     
         GMSServices.provideAPIKey(Network.googleAPIKey)
         SVProgressHUD.setDefaultStyle(.dark)
@@ -52,6 +58,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
  
         IQKeyboardManager.shared().isEnabled = true
         checkLoginStatus()
+    
+        // Follow Crashlytics app by Fabric
+        Fabric.with([Crashlytics.self])
     
         return true
     }
@@ -225,6 +234,9 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
 
 //MARK : - OTHER_FUNTION
 extension AppDelegate {
+    var statusBarView: UIView? {
+        return UIApplication.shared.value(forKey: "statusBar") as? UIView
+    }
     
     func checkLoginStatus() {
         if Caches().hasLogin {
@@ -286,12 +298,13 @@ extension AppDelegate {
         ReachabilityManager.startMonitoring()
         ReachabilityManager.updateAllRequestToServer()
         if let tokenFcm = Caches().getObject(forKey: Defaultkey.fcmToken) as? String {
-            API().updateNotificationFCMToken(tokenFcm) { (_) in}
+            SERVICES().API.updateNotificationFCMToken(tokenFcm) { (_) in}
         }
         let _rootNV:BaseNV = .loadSB(SB: .Main)
         rootNV = _rootNV
         mainVC = rootNV?.viewControllers.first as? MainVC
         navigationService.navigationItem = App().mainVC?.navigationItem
+        navigationService.navigationBar = App().mainVC?.navigationController?.navigationBar
         window?.rootViewController = _rootNV
     }
 

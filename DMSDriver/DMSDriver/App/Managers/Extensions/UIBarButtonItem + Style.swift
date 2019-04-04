@@ -100,7 +100,7 @@ extension UIBarButtonItem {
 
     class func menu(target: Any, action: Selector) -> UIBarButtonItem {
         let frame = CGRect(x: 0, y: 0, width: 24, height: 24)
-        let button = customButton(with: #imageLiteral(resourceName: "ic-Menu"),
+        let button = customButton(with: #imageLiteral(resourceName: "ellipsis-v-regular"),
                                   frame: frame,
                                   target: target,
                                   action: action)
@@ -164,7 +164,7 @@ extension UIBarButtonItem {
         
         let labelSize = title.boundingRect(with: CGSize(width: CGFloat.greatestFiniteMagnitude, height: 15),
                                            options: NSStringDrawingOptions.usesLineFragmentOrigin,
-                                           attributes: [NSAttributedStringKey.font: font],
+                                           attributes: [NSAttributedString.Key.font: font],
                                            context: nil).size
         let frame = CGRect(origin: CGPoint(), size: labelSize)
         

@@ -13,6 +13,8 @@ class LoginViewController: BaseViewController {
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var rememberButton: UIButton!
+    @IBOutlet weak var conBotViewLogin: NSLayoutConstraint?
+
     
     private var keepLogin = true {
         didSet {
@@ -28,10 +30,32 @@ class LoginViewController: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        self.registerForKeyboardNotifications()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+            super.viewWillDisappear(animated)
+        self.unregisterForKeyboardNotifications()
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
         return .default
+    }
+    
+    override func keyboardWillChangeFrame(noti: Notification) {
+        let frame = self.getKeyboardFrameEnd(noti: noti)
+        print("Keyboard Frame: \(frame)")
+        if frame.minY == ScreenSize.SCREEN_HEIGHT {
+            conBotViewLogin?.constant = 0
+        }else {
+            conBotViewLogin?.constant = -(frame.height / 2)
+        }
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            self.view.layoutIfNeeded()
+        }) { (success) in
+            //
+        }
     }
     
     func test() {
@@ -40,17 +64,23 @@ class LoginViewController: BaseViewController {
     }
 
     func setupTextField() {
+        userNameTextField.attributedPlaceholder = NSAttributedString(string: userNameTextField.placeholder ?? "",
+                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        
+        passwordTextField.attributedPlaceholder = NSAttributedString(string: passwordTextField.placeholder ?? "",
+                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+        
         let isRemember = Caches().getObject(forKey: Defaultkey.keepLogin)
         if let remember =  isRemember as? Bool {
-        if remember{
-            userNameTextField.text = Caches().userLogin?.email
-            passwordTextField.text = Caches().userLogin?.password
-        }else {
-            userNameTextField.text = nil
-            passwordTextField.text = nil
+            if remember{
+                userNameTextField.text = Caches().userLogin?.email
+                passwordTextField.text = Caches().userLogin?.password
+            }else {
+                userNameTextField.text = nil
+                passwordTextField.text = nil
+            }
         }
     }
-  }
     
    func setupRemeberButton() {
      let imgName = keepLogin ? "check_selected" : "check_normal"
@@ -102,46 +132,50 @@ fileprivate extension LoginViewController {
     
     func login(_ userLogin:UserLoginModel)  {
         showLoadingIndicator()
-        API().login(userLogin) {[weak self] (result) in
+        SERVICES().API.login(userLogin) {[weak self] (result) in
             guard let strongSelf = self else {return}
             strongSelf.dismissLoadingIndicator()
 
             switch result {
             case .object(let obj):
+                /*
                 if obj.data?.isDriver == false {
                     self?.showAlertView("Sorry, this account is not use as Driver account. Please contact your administrator for more information".localized)
                     return
                 }
-                
+                */
                 Caches().user = obj.data
                 if self?.keepLogin  ?? false{
                     Caches().userLogin = userLogin;
                 }
                 
                 App().loginSuccess()
+                self?.getDrivingRule()
+                self?.getListStatus()
                 
-                SERVICES().API.getDrivingRule { (result) in
-                    switch result{
-                    case .object(let obj):
-                        /*
-                        let data = DrivingRule()
-                        data.data = 1
-                         */
-                        Caches().drivingRule = obj
- 
-                    case .error(_ ):
-                        break
-                    }
-                }
-
                 // Fetch reasons save to local DB
                 //self?.getReasonList()
-                self?.getListStatus()
                 
             case .error(let error):
                 self?.dismissLoadingIndicator()
                 self?.showAlertView(error.getMessage())
                 
+            }
+        }
+    }
+    
+    func getDrivingRule()  {
+        SERVICES().API.getDrivingRule { (result) in
+            switch result{
+            case .object(let obj):
+                /*
+                 let data = DrivingRule()
+                 data.data = 1
+                 */
+                Caches().drivingRule = obj
+                
+            case .error(_ ):
+                break
             }
         }
     }
@@ -159,7 +193,7 @@ fileprivate extension LoginViewController {
     }
     
     func getReasonList() {
-        API().getReasonList {(result) in
+        SERVICES().API.getReasonList {(result) in
             switch result{
             case .object(let obj):
                 guard let list = obj.data?.data else {return}
@@ -174,7 +208,7 @@ fileprivate extension LoginViewController {
 extension LoginViewController: ForgetPasswordViewDelegate {
     func forgetPasswordView(_ view: ForgetPasswordView, _ email: String) {
         view.removeFromSuperview()
-        API().forgotPassword(email) { (result) in
+        SERVICES().API.forgotPassword(email) { (result) in
             switch result{
             case .object(_):
                 self.showAlertView("Please check email.")

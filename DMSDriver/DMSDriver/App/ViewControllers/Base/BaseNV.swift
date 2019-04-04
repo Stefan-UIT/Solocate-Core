@@ -10,6 +10,8 @@ import UIKit
 import FDFullscreenPopGesture
 
 class BaseNV: UINavigationController {
+    
+    var statusBarStyle:UIStatusBarStyle = .default
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,7 +22,7 @@ class BaseNV: UINavigationController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
-        return UIStatusBarStyle.lightContent
+        return statusBarStyle
     }
 
     override func didReceiveMemoryWarning() {

@@ -64,21 +64,36 @@
       <EnvironmentVariables>
          <EnvironmentVariable
             key = "SERVER"
-            value = "https://apigw.seldatdirect.com/dev/dms/gadot/api/"
-            isEnabled = "YES">
-         </EnvironmentVariable>
-         <EnvironmentVariable
-            key = "SERVER"
-            value = "https://apigw.seldatdirect.com/dev/dms/gadot/api/"
+            value = "https://apigw2.seldatdirect.com/dev/dms-customization/api/"
             isEnabled = "NO">
          </EnvironmentVariable>
          <EnvironmentVariable
             key = "SERVER"
-            value = "https://apigw.seldatdirect.com/dev/dms/gadot/api/"
+            value = "https://apigw2.seldatdirect.com/dev/dms-customization/api/"
+            isEnabled = "NO">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "SERVER"
+            value = "https://apigw2.seldatdirect.com/dev/dms-customization/api/"
+            isEnabled = "NO">
+         </EnvironmentVariable>
+         <EnvironmentVariable
+            key = "DYLD_PRINT_STATISTICS"
+            value = "1"
             isEnabled = "NO">
          </EnvironmentVariable>
       </EnvironmentVariables>
       <AdditionalOptions>
+         <AdditionalOption
+            key = "MallocStackLogging"
+            value = ""
+            isEnabled = "YES">
+         </AdditionalOption>
+         <AdditionalOption
+            key = "PrefersMallocStackLoggingLite"
+            value = ""
+            isEnabled = "YES">
+         </AdditionalOption>
       </AdditionalOptions>
    </LaunchAction>
    <ProfileAction

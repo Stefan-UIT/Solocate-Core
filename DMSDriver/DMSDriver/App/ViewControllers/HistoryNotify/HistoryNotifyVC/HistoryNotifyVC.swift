@@ -24,16 +24,19 @@ class HistoryNotifyVC: BaseViewController {
     var arrCoreNotifys:[ReceiveNotificationModel] = []
     var filterModel:AlertFilterModel?
     var dateStringFilter:String = Date.now.toString("dd/MM/yyyy")
-    
+    var isFromDashboard = false
+
     fileprivate let identifierLoadMoreCell = "LoadMoreCell"
     fileprivate let identifierHistoryNotifyCell = "HistoryNotifyCell"
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         initVar()
         setupTableView()
-        getAllMyHistoryNotifications()
+        if isFromDashboard == false {
+            getAllMyHistoryNotifications()
+        }
     }
     
     override func updateNavigationBar() {
@@ -47,10 +50,12 @@ class HistoryNotifyVC: BaseViewController {
             filterModel?.created_day = "desc"
         }
     }
-    
+  
     func setupNavigationService() {
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.Menu, "Alerts".localized)
+        App().navigationService.updateNavigationBar(.Menu,
+                                                    "Alerts".localized,
+                                                    AppColor.white, true)
     }
     
     func setupTableView() {
@@ -94,6 +99,9 @@ extension HistoryNotifyVC:UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFromDashboard == true {
+            return arrContent.count
+        }
         return arrContent.count + 1 // +1 is row load more
     }
     
@@ -106,7 +114,7 @@ extension HistoryNotifyVC:UITableViewDataSource, UITableViewDelegate{
                 return 24
             }
         }
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -114,7 +122,7 @@ extension HistoryNotifyVC:UITableViewDataSource, UITableViewDelegate{
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.row == arrContent.count  { // load more cell
+        if indexPath.row == arrContent.count && isFromDashboard == false { // load more cell
             let cell = tableView.dequeueReusableCell(withIdentifier: identifierLoadMoreCell,
                                                      for: indexPath)
             return cell
@@ -126,7 +134,7 @@ extension HistoryNotifyVC:UITableViewDataSource, UITableViewDelegate{
         let notifyDate = ServerDateFormater.date(from: E(dto.created_at))
         //cell.imvIcon?.image = dto.icon;
         cell.lblTitle?.text = dto.ruleType?.name
-        cell.lblSubTitle?.text = dto.alert_msg;
+        cell.lblSubTitle?.text = dto.subject;
         cell.lblDate?.text = Date.now.offsetLong(from: notifyDate ?? Date())
         cell.btnResolve?.isHidden = (dto.statusAlert == .resolved)
         cell.setStyleButtonStatus(dto)
@@ -138,7 +146,7 @@ extension HistoryNotifyVC:UITableViewDataSource, UITableViewDelegate{
     
     //Loading More
     func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == arrContent.count {
+        if indexPath.row == arrContent.count && isFromDashboard == false {
             if data?.meta?.total > arrContent.count &&
                 arrContent.count > 0{
                 fetchData(showLoading: true)
@@ -190,15 +198,7 @@ extension HistoryNotifyVC:HistoryNotifyCellDelegate{
 //MARK: - HHeaderDelegate
 extension HistoryNotifyVC:DMSNavigationServiceDelegate{
     func didSelectedBackOrMenu() {
-        if Constants.isLeftToRight {
-            if let  menuLeft = SideMenuManager.default.menuLeftNavigationController{
-                present(menuLeft, animated: true, completion: nil)
-            }
-        }else{
-            if let menuRight = SideMenuManager.default.menuRightNavigationController{
-                present(menuRight, animated: true, completion: nil)
-            }
-        }
+        showSideMenu()
     }
     
     func didSelectedRightButton() {

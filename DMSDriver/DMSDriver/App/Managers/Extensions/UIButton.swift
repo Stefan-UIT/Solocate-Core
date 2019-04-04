@@ -70,4 +70,12 @@ extension UIButton {
         self.layer.borderColor = AppColor.redColor.cgColor
         self.setTitle("cancel".localized, for: .normal)
     }
+    
+    func setStyleBlueSquare(title:String? = nil) {
+        self.layer.cornerRadius = 4.0
+        self.clipsToBounds = true
+        self.setTitle(title, for: .normal)
+        self.setTitleColor(UIColor.white, for: .normal)
+        self.backgroundColor = AppColor.mainColor
+    }
 }

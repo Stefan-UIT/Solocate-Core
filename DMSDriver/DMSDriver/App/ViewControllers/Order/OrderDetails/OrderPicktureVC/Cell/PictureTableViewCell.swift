@@ -9,19 +9,18 @@
 import UIKit
 
 class PictureTableViewCell: UITableViewCell {
-
-  @IBOutlet weak var imgView: UIImageView!
-  @IBOutlet weak var nameLabel: UILabel!
-  
-  override func awakeFromNib() {
+    
+    @IBOutlet weak var imgView: UIImageView!
+    @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var vContent:UIView?
+    override func awakeFromNib() {
         super.awakeFromNib()
         imgView.cornerRadius = 5.0;
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
 }

@@ -20,7 +20,8 @@ class BaseScrollMenuView: UIView {
     var backgroundCell:UIColor = UIColor.white
     var selectedBackground:UIColor  = UIColor.blue
     var cornerRadiusCell:CGFloat?
-
+    var dataSource:[MenuItem]?
+    var indexSelectDefault:Int = 0
     
     var indexSelect:Int = 0 {
         didSet{
@@ -28,48 +29,37 @@ class BaseScrollMenuView: UIView {
             scrollMenu?.clvContent?.reloadData()
         }
     }
-
-    var dataSource:[MenuItem]?{
-        didSet{
-            scrollMenu?.backgroundCell = backgroundCell
-            scrollMenu?.selectedBackground = selectedBackground
-            scrollMenu?.indexSelect = indexSelect
-            scrollMenu?.listItems = dataSource
-            scrollMenu?.clvContent?.reloadData()
-        }
+    
+    func reloadData(){
+        scrollMenu?.backgroundCell = backgroundCell
+        scrollMenu?.selectedBackground = selectedBackground
+        scrollMenu?.cornerRadiusCell = cornerRadiusCell
+        scrollMenu?.indexSelect = indexSelectDefault
+        scrollMenu?.listItems = dataSource
+        scrollMenu?.clvContent?.reloadData()
     }
-
-
-
+    
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-        setupScrollMenuView()
-    }
- 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        //setupScrollMenuView()
+        self.perform(#selector(setupScrollMenuView), on: Thread.main, with: nil, waitUntilDone: true)
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        setupScrollMenuView()
+        self.perform(#selector(setupScrollMenuView), on: Thread.main, with: nil, waitUntilDone: true)
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        //setupScrollMenuView()
+        self.perform(#selector(setupScrollMenuView), on: Thread.main, with: nil, waitUntilDone: true)
     }
     
     
-    func setupScrollMenuView() {
+    @objc func setupScrollMenuView() {
         if scrollMenu == nil {
             scrollMenu = ScrollMenuView.load(nib: "ScrollMenuView", owner: nil)
-            scrollMenu?.backgroundCell = backgroundCell
-            scrollMenu?.selectedBackground = selectedBackground
-            scrollMenu?.cornerRadiusCell = cornerRadiusCell
             scrollMenu?.delegate = self
             self.addSubview(scrollMenu!)
             scrollMenu?.addConstaints(top: 0, right: 0, bottom: 0, left: 0)

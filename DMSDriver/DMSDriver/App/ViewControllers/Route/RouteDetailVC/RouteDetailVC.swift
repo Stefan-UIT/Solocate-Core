@@ -8,6 +8,7 @@
 
 import UIKit
 import Foundation
+import SideMenu
 
 enum TabBarItem:Int {
     case Order = 0
@@ -29,20 +30,51 @@ enum TabBarItem:Int {
     }
 }
 
-class RouteDetailVC: UITabBarController {
+enum RouteDetailDisplayMode:Int,CaseIterable {
+    case DisplayModeMap = 0
+    case DisplayModeStops
+    case DisplayModeLocations
+    
+    static var count: Int {
+        return RouteDetailDisplayMode.DisplayModeLocations.hashValue + 1
+    }
+}
+
+class RouteDetailVC: BaseViewController {
+    
+    //MARK: - IBOUTLET
+    @IBOutlet weak var menuScrollView:BaseScrollMenuView?
+    @IBOutlet weak var clvContent:UICollectionView?
+    @IBOutlet weak var lblEstimateHour:UILabel?
+    @IBOutlet weak var lblEstimateKilometer:UILabel?
+    @IBOutlet weak var lblTotalOrder:UILabel?
+    @IBOutlet weak var lblRoute:UILabel?
+    @IBOutlet weak var lblTime:UILabel?
+    @IBOutlet weak var lblStatus:UILabel?
+
+    /*
+    @IBOutlet weak var vContainerMap:UIView?
+    @IBOutlet weak var vContainerOrders:UIView?
+     */
+
+    var scrollMenu:ScrollMenuView?
+    var mapVC:MapsViewController?
+    var orderListVC:OrderListViewController?
+
+
+    //MARK: - VARIABLE
+    private let identifierOrderListCell = "RouteDetailOrderListClvCell"
+    private let identifieMapCell = "RouteDetailMapClvCell"
+    private let identifieLocationsCell = "RouteDetailLocationListClvCell"
+
     
     var route:Route?
     var dateStringFilter:String = Date().toString()
-    let kBarHeight = 60
-    
-    let orderVC:OrderListViewController = .loadSB(SB: .Order)
-    let packageVC:PackagesViewController = .loadSB(SB: .Packages)
-    let mapVC:MapsViewController = .loadSB(SB: .Map)
 
-    var displayMode:DisplayMode = DisplayMode.Expanded{
+
+    var displayMode:RouteDetailDisplayMode = .DisplayModeMap{
         didSet{
-            updateNavigationBar()
-            reloadOrderListViewController()
+            updateUIWithMode(displayMode)
         }
     }
     
@@ -54,37 +86,35 @@ class RouteDetailVC: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.delegate = self;
-        setupTabBarController()
+        initUI()
+        setupCollectionView()
+        setupScrollMenuView()
+        
+        guard let routeId = route?.id else {
+            return
+        }
+        getRouteDetail("\(routeId)")
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         updateNavigationBar()
     }
-    
-    override func viewWillLayoutSubviews() {
-        super.viewWillLayoutSubviews()
-        /*
-        var tabFrame = self.tabBar.frame
-        tabFrame.size.height = CGFloat(kBarHeight);
-        tabFrame.origin.y = self.view.frame.size.height - CGFloat(kBarHeight)
-        self.tabBar.frame = tabFrame;
-         */
-    }
+
     
     
-    func updateNavigationBar()  {
+    override func updateNavigationBar()  {
+        super.updateNavigationBar()
         App().navigationService.delegate = self;
-        
-        if selectedTabBarItem == .Order {
-            App().navigationService.updateNavigationBar(displayMode == .Reduced ? .backCompact : .backModule,
-                                                        selectedTabBarItem.title())
-
-        }else{
-            App().navigationService.updateNavigationBar(.BackOnly,
-                                                        selectedTabBarItem.title())
-
+        if displayMode == .DisplayModeMap {
+            App().navigationService.updateNavigationBar(.Menu,"")
+        }else {
+            App().navigationService.updateNavigationBar(.Menu_Search,"")
         }
     }
 
@@ -93,63 +123,192 @@ class RouteDetailVC: UITabBarController {
         // Dispose of any resources that can be recreated.
     }
     
-    func reloadOrderListViewController() {
-        orderVC.displayMode = displayMode
+
+    func updateUIWithMode(_ displayMode:RouteDetailDisplayMode) {
+        updateNavigationBar()
+        if displayMode == .DisplayModeMap {
+            //
+        }else {
+            //
+        }
     }
     
-    func setupTabBarController() {
-        self.tabBar.tintColor = AppColor.mainColor
-        if let route = self.route {
-            orderVC.route = route
-            orderVC.dateStringFilter = dateStringFilter
-            orderVC.displayMode = displayMode
-        }
-        if let route = self.route {
-            packageVC.route = route
-            packageVC.dateStringFilter = dateStringFilter
-        }
-        if let route = self.route {
-            mapVC.route = route
-        }
-
-        orderVC.tabBarItem.title = "Orders".localized
-        packageVC.tabBarItem.title = "Packages".localized
-        mapVC.tabBarItem.title = "Map".localized
+    func initUI()  {
+        let startDate = HourFormater.string(from: route?.start_time.date ?? Date())
+        let endDate = HourFormater.string(from: route?.end_time.date ?? Date())
+        lblRoute?.text = "Route #\(route?.id ?? 0)".localized
+        lblTime?.text = "\(startDate) - \(endDate)"
+        lblStatus?.text = route?.status?.name
+        lblEstimateHour?.text = CommonUtils.formatEstTime(seconds: Int64(route?.totalTimeEst ?? 0))
+        lblEstimateKilometer?.text = CommonUtils.formatEstKm(met: route?.totalDistance.doubleValue ?? 0)
+        lblTotalOrder?.text = "\(route?.totalOrders ?? 0) Stops".localized.uppercased()
         
-        orderVC.tabBarItem.image = #imageLiteral(resourceName: "ic_orderlist")
-        packageVC.tabBarItem.image = #imageLiteral(resourceName: "ic_car")
-        mapVC.tabBarItem.image = #imageLiteral(resourceName: "ic_location")
+        lblStatus?.textColor = route?.colorStatus
+    }
+    
+    func setupCollectionView() {
+        clvContent?.delegate = self
+        clvContent?.dataSource = self
+    }
 
-        orderVC.tabBarItem.tag = 0
-        packageVC.tabBarItem.tag = 1
-        mapVC.tabBarItem.tag = 2
-        
-        self.setViewControllers([orderVC,packageVC,mapVC], animated: false)
+    @objc func setupScrollMenuView() {
+        let mapMode = MenuItem("Map".localized.uppercased())
+        let orderMode = MenuItem("Stops".localized.uppercased())
+        let locationMode = MenuItem("Locations".localized.uppercased())
+
+        menuScrollView?.roundedCorners([.layerMaxXMinYCorner,
+                                        .layerMinXMinYCorner,
+                                        .layerMaxXMaxYCorner,
+                                        .layerMinXMaxYCorner],10)
+        menuScrollView?.backgroundCell = AppColor.white
+        menuScrollView?.selectedBackground = AppColor.mainColor
+        menuScrollView?.cornerRadiusCell = 10
+        menuScrollView?.delegate = self
+        menuScrollView?.isHidden = false
+        menuScrollView?.dataSource = [mapMode,orderMode,locationMode]
+        menuScrollView?.reloadData()
     }
 }
 
-//MARK: UITabBarControllerDelegate
-extension RouteDetailVC:UITabBarControllerDelegate{
+//MARK: - UICollectionViewDataSource
+extension RouteDetailVC: UICollectionViewDataSource {
     
-    override func tabBar(_ tabBar: UITabBar, didSelect item: UITabBarItem) {
-        let tag = item.tag
-        selectedTabBarItem = TabBarItem(rawValue: tag) ?? .Order
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1;
     }
     
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return RouteDetailDisplayMode.allCases.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let displayMode = RouteDetailDisplayMode(rawValue: indexPath.row) else {
+            return UICollectionViewCell()
+        }
+        
+        switch displayMode {
+        case .DisplayModeMap:
+            return cellMap(collectionView,indexPath)
+            
+        case .DisplayModeStops:
+            return cellOrderList(collectionView,indexPath)
+            
+        case .DisplayModeLocations:
+            return cellLocationsList(collectionView, indexPath)
+        }
+    }
+    
+    func cellMap(_ collectionView:UICollectionView,_ indexPath:IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifieMapCell,
+                                                      for: indexPath) as! RouteDetailMapClvCell
+        cell.route = route
+        return cell
+    }
+    
+    func cellOrderList(_ collectionView:UICollectionView,_ indexPath:IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifierOrderListCell,
+                                                      for: indexPath) as! RouteDetailOrderListClvCell
+        cell.rootVC = self
+        cell.route = route
+        return cell
+    }
+    
+    func cellLocationsList(_ collectionView:UICollectionView,_ indexPath:IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifieLocationsCell,
+                                                      for: indexPath) as! RouteDetailLocationListClvCell
+        cell.rootVC = self
+        cell.route = route
+        return cell
+    }
+}
+
+extension RouteDetailVC:UICollectionViewDelegateFlowLayout{
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return collectionView.frame.size
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets.zero
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+}
+
+
+//MARK: - UIScrollViewDelegate
+extension RouteDetailVC:UIScrollViewDelegate {
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        let width = clvContent?.frame.size.width ?? 0
+        let offset =  scrollView.contentOffset
+        let index = Int(offset.x / width)
+        menuScrollView?.indexSelect = index
+    }
+}
+
+
+//MARK: - BaseScrollMenuViewDelegate
+extension RouteDetailVC:BaseScrollMenuViewDelegate{
+    func baseScrollMenuViewDidSelectAtIndexPath(_ view: BaseScrollMenuView, _ indexPath: IndexPath) {
+        displayMode = RouteDetailDisplayMode(rawValue: indexPath.row) ?? .DisplayModeMap
+        scrollToPageSelected(indexPath.row)
+    }
+    
+    func scrollToPageSelected(_ index:Int) {
+        let width = clvContent?.frame.size.width ?? 0
+        let pointX = CGFloat(index) * width
+        
+        clvContent?.contentOffset =  CGPoint(x: pointX, y: (clvContent?.contentOffset.y)!);
+    }
 }
 
 
 //MARK: - DMSNavigationServiceDelegate
 extension RouteDetailVC:DMSNavigationServiceDelegate{
-    func didSelectedRightButton() {
-        if displayMode == .Reduced {
-            displayMode = .Expanded
-        }else{
-            displayMode = .Reduced
+    func didSelectedBackOrMenu() {
+        showSideMenu()
+    }
+    
+    func didSelectedLeftButton(_ sender: UIBarButtonItem) {
+ 
+    }
+}
+
+//MARK: - API
+extension RouteDetailVC{
+    
+    @objc func fetchData()  {
+        if let route = self.route {
+            getRouteDetail("\(route.id)", showLoading: false)
         }
     }
     
-    func didSelectedBackOrMenu() {
-        self.navigationController?.popViewController(animated: true)
+    func getRouteDetail(_ routeID:String, showLoading:Bool = true) {
+        if showLoading {
+            self.showLoadingIndicator()
+        }
+        SERVICES().API.getRouteDetail(route: routeID) {[weak self] (result) in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.dismissLoadingIndicator()
+            switch result{
+            case .object(let obj):
+                self?.route = obj.data
+                self?.clvContent?.reloadData()
+                /*
+                 guard let data = obj.data else {return}
+                 CoreDataManager.updateRoute(data) // Update route to DB local
+                 */
+            case .error(let error):
+                strongSelf.showAlertView(error.getMessage())
+                
+            }
+        }
     }
 }

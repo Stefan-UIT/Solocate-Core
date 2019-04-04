@@ -67,7 +67,7 @@ final class TextViewInputViewController: UIViewController, TextViewInputDelegate
         case .attributedText(let text):
             textViewInput.tvContent?.attributedText = text.map { $0.text }.joined(separator: "\n")
         }
-        textViewInput.tvContent?.textContainerInset = UIEdgeInsetsMake(UI.hInset, UI.vInset, UI.hInset, UI.vInset)
+        textViewInput.tvContent?.textContainerInset = UIEdgeInsets(top: UI.hInset, left: UI.vInset, bottom: UI.hInset, right: UI.vInset)
         preferredContentSize.height = MAX(80,textViewInput.frame.height)
     }
     

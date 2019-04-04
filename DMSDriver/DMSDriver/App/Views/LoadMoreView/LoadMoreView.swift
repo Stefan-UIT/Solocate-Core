@@ -27,7 +27,7 @@ class LoadMoreView: UIView {
     }
 
     class func loadingMoreCell() -> UITableViewCell {
-        let cell = UITableViewCell(style: UITableViewCellStyle.default, reuseIdentifier: "loadMoreCell")
+        let cell = UITableViewCell(style: UITableViewCell.CellStyle.default, reuseIdentifier: "loadMoreCell")
 
         let lbl = loadingMoreView()
         //lbl.frame = CGRectMake(0, 0, ScreenSize.SCREEN_WIDTH, 24)

@@ -51,7 +51,7 @@ class TimerVC: BaseViewController {
     
     func setupNavigateBar() {
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.Menu, "Counter".localized)
+        App().navigationService.updateNavigationBar(.Menu, "".localized)
     }
     
     
@@ -172,15 +172,8 @@ class TimerVC: BaseViewController {
 //MARK: - DMSNavigationServiceDelegate
 extension TimerVC:DMSNavigationServiceDelegate{
     func didSelectedBackOrMenu() {
-        if Constants.isLeftToRight {
-            if let  menuLeft = SideMenuManager.default.menuLeftNavigationController{
-                present(menuLeft, animated: true, completion: nil)
-            }
-        }else{
-            if let menuRight = SideMenuManager.default.menuRightNavigationController{
-                present(menuRight, animated: true, completion: nil)
-            }
-        }
+        showSideMenu()
+
     }
 }
 

@@ -16,7 +16,7 @@ class ScrollMenuCell: UICollectionViewCell {
 
     fileprivate var background:UIColor?
     fileprivate var selectedBackground:UIColor?
-    fileprivate var cornerRadiusCell:CGFloat? = 5
+    fileprivate var cornerRadiusCell:CGFloat = 5
 
     fileprivate var isSelect:Bool = false;
     
@@ -37,7 +37,7 @@ class ScrollMenuCell: UICollectionViewCell {
    
     
     @objc func setupUI(){
-        vContent?.layer.cornerRadius = 5
+        vContent?.layer.cornerRadius = cornerRadiusCell
         vContent?.clipsToBounds = true
     }
     
@@ -48,6 +48,9 @@ class ScrollMenuCell: UICollectionViewCell {
         self.isSelect = isSelect
         self.item = item
         self.background = backgroundColor
+        if cornerRadius != nil {
+            self.cornerRadiusCell = cornerRadius!
+        }
         self.selectedBackground = selectedBackgroundColor
         updateUI()
     }

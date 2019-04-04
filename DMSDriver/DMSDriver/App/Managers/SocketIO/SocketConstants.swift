@@ -12,7 +12,7 @@ import Foundation
 struct SocketConfiguration {
     static let forceNew = false
     static let log = false
-    static let secure = true
+    static let secure = false
     static let reconnect = true
     static let reconnectAttemp = 5
     static let reconnectWait = 2
@@ -21,8 +21,8 @@ struct SocketConfiguration {
 
 // SOCKET KEY
 struct SocketConstants {
-    static let SERVER_DEV = "https://dms.gadot.dev.seldatdirect.com"
-    static let SERVER_PROD = "https://dms.gadot.seldatdirect.com"
+    static let SERVER_DEV = "http://dms-customization.dev.seldatdirect.com"
+    static let SERVER_PROD = "http://dms-customization.seldatdirect.com"
     static let SOCKET_LOGIN = "request-login"
     static let SOCKET_LOGOUT = "request-logout"
     static let SOCKET_RESULT_LOGIN = "result-login"

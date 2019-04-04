@@ -5,14 +5,13 @@ import ReachabilitySwift
 import Alamofire
 import SVProgressHUD
 
-
 let ReachabilityManager = _ReachabilityManager.shared
 
 class _ReachabilityManager: NSObject {
     
     static let shared = _ReachabilityManager()  // 2. Shared instance
     
-    private var backgroundTaskIdentifier = UIBackgroundTaskIdentifier()
+    private var backgroundTaskIdentifier = UIBackgroundTaskIdentifier(rawValue: 1)
     var isCalling:Bool = false
     @objc dynamic var temp:[CoreRequest]!
 
@@ -20,6 +19,14 @@ class _ReachabilityManager: NSObject {
     // 3. Boolean to track network reachability
     var isNetworkAvailable : Bool {
         return reachabilityStatus != .notReachable
+    }
+    
+    var isReachableViaWiFi : Bool {
+        return reachabilityStatus == .reachableViaWiFi
+    }
+    
+    var isReachableViaWWAN : Bool {
+        return reachabilityStatus == .reachableViaWWAN
     }
     
     // 4. Tracks current NetworkStatus (notReachable, reachableViaWiFi, reachableViaWWAN)

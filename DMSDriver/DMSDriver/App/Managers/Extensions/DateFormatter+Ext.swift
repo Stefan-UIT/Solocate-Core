@@ -13,23 +13,28 @@ extension DateFormatter {
     }
     
     convenience init(format: String) {
-        self.init(format: format, timeZone: .current);
+        self.init(format: format, timeZone: TimeZone.current);
     }
 }
 
+let Hour24Formater = DateFormatter.hour24Formater
 let HourFormater = DateFormatter.hourFormater
 let ServerDateFormater = DateFormatter.serverDateFormater
+let ShortDateFormater = DateFormatter.shortDate
 
 
 //MARK: - DateFormatter Instance
 extension DateFormatter {
+    static let filterDate = DateFormatter(format: "yyyy/MM/dd");
     static let displayDateForLogControl = DateFormatter(format: "MMM d yyyy, h:mm a");
     static let displayDateForOrder = DateFormatter(format: "EEE', 'MMM' 'dd', 'yyyy");
-    static let displayDateVietNames = DateFormatter(format: "dd/MM/yyyy",timeZone: TimeZone(identifier: "UTC")!);
-    static let displayDateUS = DateFormatter(format: "MM/dd/yyyy",timeZone: TimeZone(identifier: "UTC")!);
-    static let serverDateFormater = DateFormatter(format: "yyyy/MM/dd HH:mm:ss", timeZone: TimeZone(identifier: "UTC")!);
-    static let hourFormater = DateFormatter(format: "HH:mm",timeZone: TimeZone(identifier: "UTC")!);
-    static let displayDateTimeVN = DateFormatter(format: "dd/MM/yyyy HH:mm",timeZone: TimeZone(identifier: "UTC")!);
+    static let displayDateVietNames = DateFormatter(format: "dd/MM/yyyy");
+    static let displayDateUS = DateFormatter(format: "MM/dd/yyyy");
+    static let displayDateTimeUS = DateFormatter(format: "MM/dd/yyyy HH:mm");
+    static let hourFormater = DateFormatter(format: "H:mm a");
+    static let hour24Formater = DateFormatter(format: "HH:mm");
+    static let displayDateTimeVN = DateFormatter(format: "dd/MM/yyyy HH:mm");
+    static let shortDate = DateFormatter(format: "MMM dd",timeZone: .company);
+    static let serverDateFormater = DateFormatter(format: "yyyy/MM/dd HH:mm:ss", timeZone: .company);
     
-
 }

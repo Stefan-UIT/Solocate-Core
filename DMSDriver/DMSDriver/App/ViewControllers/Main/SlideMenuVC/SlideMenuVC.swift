@@ -4,6 +4,7 @@ import UIKit
 enum MenuItemType : Int {
   
   case PROFILE = 0
+  case DASHBOARD
   case ROUTES
   case COUNTER
   case ASSIGN
@@ -21,6 +22,8 @@ enum MenuItemType : Int {
     switch self {
     case .PROFILE:
       return ""
+    case .DASHBOARD:
+        return "Dashboard".localized.uppercased()
     case .ROUTES:
         return "Routes".localized.uppercased()
     case .COUNTER:
@@ -40,6 +43,8 @@ enum MenuItemType : Int {
     switch self {
     case .PROFILE:
       return #imageLiteral(resourceName: "ic-DefaultUser")
+    case .DASHBOARD:
+      return #imageLiteral(resourceName: "ic_route")
     case .ROUTES:
       return #imageLiteral(resourceName: "ic_route")
     case .COUNTER:
@@ -64,7 +69,7 @@ class SlideMenuVC: BaseViewController {
   fileprivate let profileIndentifierCell = "SlideMenuAvartarCell"
   fileprivate let rowIndentifierCell = "SlideMenuRowCell"
   
-  var currentItem:MenuItemType = .ROUTES
+  var currentItem:MenuItemType = .DASHBOARD
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -86,12 +91,14 @@ extension SlideMenuVC: UITableViewDataSource{
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     if let menutype:MenuItemType = MenuItemType(rawValue: indexPath.row) {
-        if menutype == .ASSIGN ||
-            menutype == MenuItemType.TASK {
+        if menutype == .LOGOUT {
+            return MAX(ScreenSize.SCREEN_HEIGHT - (CGFloat(((MenuItemType.count - 2) * 65)) + 200), 65)
+        }
+        if menutype == .ASSIGN {
             return 0
         }
     }
-    return UITableViewAutomaticDimension
+    return UITableView.automaticDimension
   }
   
   func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -117,6 +124,10 @@ extension SlideMenuVC: UITableViewDataSource{
         cell.lblTitle?.textColor = AppColor.grayBorderColor
     }
     
+    if menutype == .PROFILE {
+        cell.lblTitle?.textColor = AppColor.white
+    }
+    
     cell.selectionStyle = .none;
     
     return cell
@@ -134,6 +145,10 @@ extension SlideMenuVC:UITableViewDelegate{
         switch menuType {
         case .PROFILE:
             let vc:ProfileVC = .loadSB(SB: .Profile)
+            App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
+            
+        case .DASHBOARD:
+            let vc:DashboardVC = .loadSB(SB: .Dashboard)
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
             
         case .ROUTES:
@@ -177,7 +192,7 @@ extension SlideMenuVC:UITableViewDelegate{
 private extension SlideMenuVC{
     func handleLogOut() {
         App().reLogin()
-        API().logout { (result) in
+        SERVICES().API.logout { (result) in
             switch result{
             case .object(_):
             Caches().user = nil

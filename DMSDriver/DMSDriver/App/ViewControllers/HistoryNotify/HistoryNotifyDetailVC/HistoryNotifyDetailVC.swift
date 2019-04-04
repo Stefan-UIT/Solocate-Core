@@ -67,14 +67,15 @@ class HistoryNotifyDetailVC: BaseViewController {
         tableView?.delegate = self
         tableView?.dataSource = self
         tableView?.estimatedRowHeight = 100
-        tableView?.rowHeight = UITableViewAutomaticDimension
+        tableView?.rowHeight = UITableView.automaticDimension
     }
-    
     func setupNavigationService() {
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.BackOnly, "Alert Detail".localized)
+        App().navigationService.updateNavigationBar(.Menu,
+                                                    "Alert Detail".localized,
+                                                    AppColor.white, true)
     }
-    
+   
     func updateActionView()  {
         btnAction?.setTitle("Resolve".localized.uppercased(), for: .normal)
         btnAction?.isHidden = (alertDetail.statusAlert == .resolved)
@@ -153,7 +154,7 @@ extension HistoryNotifyDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -221,7 +222,7 @@ extension HistoryNotifyDetailVC: UITableViewDataSource, UITableViewDelegate {
 //MARK: - DMSNavigationServiceDelegate
 extension HistoryNotifyDetailVC:DMSNavigationServiceDelegate{
     func didSelectedBackOrMenu() {
-        self.navigationController?.popViewController(animated: true)
+        showSideMenu()
     }
 }
 

@@ -17,7 +17,7 @@ class LocationTracker: NSObject {
     
     // MARK: - Variables
     private var timer = Timer()
-    private var backgroundTaskIdentifier = UIBackgroundTaskIdentifier()
+    private var backgroundTaskIdentifier = UIBackgroundTaskIdentifier.init(rawValue: 1)
     
     // MARK: - Utility Methods
     func startUpdatingDriverLocationIfNeeded() {
@@ -26,6 +26,7 @@ class LocationTracker: NSObject {
             invalidTimer()
             return
         }
+        
         scheduledTimerWithTimeInterval()
     }
     
@@ -49,7 +50,7 @@ class LocationTracker: NSObject {
                                 lon1: lastLocationSubmited.longitude,
                                 lat2: latitude,
                                 lon2: longitude, unit: "M")
-            
+
             if dist < DMSAppConfiguration.distanceSubmitLocation {
                 return
             }
@@ -59,7 +60,7 @@ class LocationTracker: NSObject {
             switch result{
             case .object(let obj):
                 if let routeIds = obj.data as? Array<Int> {
-                    API().updateDriverLocation(long: longitude,
+                   SERVICES().API.updateDriverLocation(long: longitude,
                                                lat: latitude, routeIds: routeIds) {(result) in
                     }
                 }

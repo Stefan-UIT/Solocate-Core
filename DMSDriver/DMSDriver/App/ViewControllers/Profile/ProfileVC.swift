@@ -52,7 +52,6 @@ class ProfileVC: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupTableView()
         initData()
         getUserProfile()
@@ -66,7 +65,9 @@ class ProfileVC: BaseViewController {
     override func updateNavigationBar() {
         super.updateNavigationBar()
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.Menu, "Profile".localized)
+        App().navigationService.updateNavigationBar(.Menu,
+                                                    "Profile".localized,
+                                                    AppColor.white, true)
     }
   
     func setupTableView() {
@@ -113,7 +114,7 @@ extension ProfileVC:UITableViewDataSource {
   }
   
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-    return UITableViewAutomaticDimension
+    return UITableView.automaticDimension
   }
     
   func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -135,7 +136,8 @@ extension ProfileVC:UITableViewDataSource {
     cellHeader.lblTitle?.text = profileSection.title
     cellHeader.btnEdit?.tag = section
     cellHeader.delegate = self
-    
+    cellHeader.vContent?.roundedCorners([.layerMaxXMinYCorner, .layerMinXMinYCorner], 10)
+
     switch profileSection {
     case .sectionPublic:
       cellHeader.btnEdit?.setImage(!isEditPublicInfor ? #imageLiteral(resourceName: "ic_edit") : nil, for: .normal)
@@ -181,6 +183,16 @@ extension ProfileVC:UITableViewDataSource {
       }else {
         cell.lineEdit?.isHidden = true
       }
+      
+      if publicInforDatas.count - 1 == row {
+        cell.vContent?.roundedCorners([.layerMaxXMaxYCorner, .layerMinXMaxYCorner], 10)
+      }else {
+        cell.vContent?.roundedCorners([.layerMaxXMinYCorner,
+                             .layerMinXMinYCorner,
+                             .layerMaxXMaxYCorner,
+                             .layerMinXMaxYCorner], 0)
+      }
+
       cell.tfContent?.tag = row
       cell.tfContent?.isUserInteractionEnabled = self.isEditPublicInfor
 
@@ -189,13 +201,29 @@ extension ProfileVC:UITableViewDataSource {
       cell.tfContent?.text = privateInforDatas[row].last
       cell.tfContent?.tag = publicInforDatas.count + row
       
+      if privateInforDatas.count - 1 == row {
+        cell.vContent?.roundedCorners([.layerMaxXMaxYCorner, .layerMinXMaxYCorner], 10)
+        
+      }else {
+        
+        cell.vContent?.roundedCorners([.layerMaxXMaxYCorner,
+                                       .layerMaxXMinYCorner,
+                                       .layerMinXMaxYCorner,
+                                       .layerMinXMinYCorner], 0)
+        
+      }
+      
       if (self.isEditPrivateInfor) {
+        
          cell.lineEdit?.isHidden = false
+        
         if textFieldEdit == cell.tfContent {
           cell.lineEdit?.backgroundColor = AppColor.mainColor
-        }else {
+        }
+        else {
           cell.lineEdit?.backgroundColor = AppColor.grayColor
         }
+        
       }else {
         cell.lineEdit?.isHidden = true
       }
@@ -326,12 +354,7 @@ extension ProfileVC:UITextFieldDelegate{
 //MARK: -DMSNavigationServiceDelegate
 extension ProfileVC:DMSNavigationServiceDelegate{
   func didSelectedBackOrMenu() {
-    if Constants.isLeftToRight {
-        present(SideMenuManager.default.menuLeftNavigationController!, animated: true, completion: nil)
-    }else {
-        present(SideMenuManager.default.menuRightNavigationController!, animated: true, completion: nil)
-    }
-
+    showSideMenu()
   }
 }
 
@@ -340,7 +363,7 @@ extension ProfileVC{
   func getUserProfile() {
     if ReachabilityManager.isNetworkAvailable {
         self.showLoadingIndicator()
-        API().getUserProfile {[weak self] (result) in
+        SERVICES().API.getUserProfile {[weak self] (result) in
             guard let strongSelf = self else{return}
             strongSelf.dismissLoadingIndicator()
             switch result{
@@ -363,7 +386,7 @@ extension ProfileVC{
   
   func updateUserProfile(_ user:UserModel.UserInfo) {
     self.showLoadingIndicator()
-    API().updateUserProfile(user) {[weak self] (result) in
+    SERVICES().API.updateUserProfile(user) {[weak self] (result) in
       guard let strongSelf = self else{return}
       strongSelf.dismissLoadingIndicator()
       switch result{

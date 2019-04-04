@@ -139,8 +139,6 @@ class Route: BaseModel {
     var  totalOrders = -1
     var  truckFloorCap = ""
     var  date = ""
-    var  endDate = ""
-    var  startDate = ""
     var  start_time = ""
     var  end_time = ""
     var  driver_name = ""
@@ -148,6 +146,11 @@ class Route: BaseModel {
     var  route_number = 0
     var  route_name_sts = ""
     var  orderList:[Order] = []
+    var totalTimeEst = 0
+    var totalDistance = ""
+    var locationList:[Address] = []
+    
+    
     
     convenience required init?(map: Map) {
         self.init()
@@ -164,10 +167,8 @@ class Route: BaseModel {
         route_number <- map["route_number"]
         route_name_sts <- map["route_name_sts"]
         start_time <- map["start_time"]
-        startDate <- map["start"]
         driver_name <- map["driver_name"]
         end_time <- map["end_time"]
-        endDate <- map["end"]
         shop_name <- map["shop_name"]
         orderList <- map["orders"]
         totalOrders <- map["orders_count"]
@@ -175,6 +176,9 @@ class Route: BaseModel {
         truck <- map["truck"]
         tracking <- map["tracking"]
         driver <- map["driver"]
+        totalTimeEst <- map["est_dur"]
+        totalDistance <- map["est_dist"]
+        locationList <- map["location_list"]
         orderList.forEach { (order) in
             order.driver_id = driver?.id ?? 0
         }
@@ -347,6 +351,8 @@ class Route: BaseModel {
     }
     
     func getListLocations() -> [Address] {
+        return locationList
+        /*
         var  array = [Address]()
         orderList.forEach { (order) in
             if let fromAddress = order.from {
@@ -357,18 +363,21 @@ class Route: BaseModel {
             }
         }
         return array
+        */
     }
     
     func getChunkedListLocation() -> [[CLLocationCoordinate2D]] {
-        let orderList = distinctArrayOrderList()
-        let sortedList = orderList.sorted(by: { (lhs, rhs) -> Bool in
+        let locationList = getListLocations()
+        let sortedList = locationList.sorted(by: { (lhs, rhs) -> Bool in
             return lhs.seq <= rhs.seq
         })
         let currentLocation = LocationManager.shared.currentLocation?.coordinate
         var listLocation:[CLLocationCoordinate2D] = (currentLocation != nil) ? [currentLocation!] : []
         
         for i in 0..<(sortedList.count) {
-            listLocation.append(sortedList[i].locations)
+            let location = CLLocationCoordinate2D(latitude: sortedList[i].lattd?.doubleValue ?? 0,
+                                                  longitude: sortedList[i].lngtd?.doubleValue ?? 0)
+            listLocation.append(location)
         }
         
         var listChunked = listLocation.chunked(by: 22)

@@ -44,6 +44,11 @@ class Address: BaseModel {
     var lngtd:String?
     var name:String?
     var phone:String?
+    var start_time:String?
+    var end_time:String?
+    var ctt_name:String?
+    var ctt_phone:String?
+    var seq = 1
     
     override init() {
         super.init()
@@ -59,6 +64,11 @@ class Address: BaseModel {
         lngtd <- map["lngtd"]
         name <- map["ctt_name"]
         phone <- map["ctt_phone"]
+        start_time <- map["start_time"]
+        end_time <- map["end_time"]
+        ctt_name <- map["ctt_name"]
+        ctt_phone <- map["ctt_phone"]
+        seq <- map["seq"]
     }
 }
 
@@ -68,9 +78,11 @@ class Order: BaseModel {
 
     class Detail: BaseModel {
         var order_id:Int?
-        var nature_id:Int?
-        var vol:Double?
-        var nature:Nature?
+        var package_id:Int?
+        var qty:Double?
+        var remain_qty:Double?
+        var package:String?
+
         
         override init() {
             super.init()
@@ -82,9 +94,10 @@ class Order: BaseModel {
         
         override func mapping(map: Map) {
             order_id <- map["order_id"]
-            nature_id <- map["nature_id"]
-            vol <- map["vol"]
-            nature <- map["nature"]
+            package_id <- map["package_id"]
+            qty <- map["qty"]
+            remain_qty <- map["remain_qty"]
+            package <- map["package"]
         }
     }
 
@@ -117,7 +130,6 @@ class Order: BaseModel {
     var sig_req:Int?
     var note:String?
     var details:[Detail]?
-
     var reason:Reason?
     var startTime = ""
     var endTime = ""
@@ -150,7 +162,31 @@ class Order: BaseModel {
     var files:[AttachFileModel]?
 
     var isSelect = false
+    var directionRoute:[DirectionRoute]? // use for save DirectionRoute
+    var route:Route?
     
+    lazy var totalEstDuration:Int = {
+        var total = 0
+        directionRoute?.forEach({ (directionRoute) in
+            directionRoute.legs.forEach({ (leg) in
+                total += Int(leg.duration.value)
+            })
+        })
+        
+        return total
+    }()
+    
+    lazy var totalEstDistance:Double = {
+        var total:Double = 0
+        directionRoute?.forEach({ (directionRoute) in
+            directionRoute.legs.forEach({ (leg) in
+                total += leg.distance.value
+            })
+        })
+        
+        return Double(total)
+    }()
+
     convenience required init?(map: Map) {
         self.init()
     }
@@ -168,6 +204,7 @@ class Order: BaseModel {
         urgent_type_id <- map["urgent_type_id"]
         status <- map["status"]
         driver_id <- map["driver_id"]
+        route <- map["route"]
         
         if  let dataFrom = map["from"].currentValue as? String{
             from    = Address(JSON: dataFrom.parseToJSON() ?? [:])
@@ -182,6 +219,22 @@ class Order: BaseModel {
         }
     }
     
+    func getChunkedListLocation() -> [[CLLocationCoordinate2D]] {
+        let currentLocation = LocationManager.shared.currentLocation?.coordinate
+        var listLocation:[CLLocationCoordinate2D] = (currentLocation != nil) ? [currentLocation!] : []
+        listLocation.append(locations)
+        
+        var listChunked = locations.chunked(by: 22)
+        if listChunked.count > 1 {
+            for i in 1..<listChunked.count{
+                if let first = listChunked[i].first {
+                    listChunked[i - 1].append(first)
+                }
+            }
+        }
+        
+        return listChunked
+    }
     
     var signature:AttachFileModel?{
         get{
@@ -298,11 +351,17 @@ class Order: BaseModel {
     }
     
     func isRequireSign() -> Bool  {
-        return sig_req == 1
+        return sig_req == 1 && signature == nil
     }
     
     func isRequireImage() -> Bool  {
-        return pod_req == 1
+        return pod_req == 1 && pictures?.count ?? 0 <= 0
+    }
+    
+    func cloneObject() -> Order? {
+        let json = getJSONString()
+        let obj = Order(JSON: json)
+        return obj
     }
 }
 

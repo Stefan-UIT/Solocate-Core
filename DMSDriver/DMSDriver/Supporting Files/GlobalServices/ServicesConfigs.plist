@@ -13,15 +13,15 @@
 	<key>GET_ORDER_BY_DATE</key>
 	<string>backend-api/v1/routes/get-routes-by-date</string>
 	<key>GET_ROUTES_BY_DATE</key>
-	<string>transaction/v1/routes/by-driver?date=%@</string>
+	<string>transaction/v1/mobile/routes/by-driver?start_time=%@&amp;end_time=%@</string>
 	<key>GET_PACKAGES_IN_ROUTE</key>
 	<string>backend-api/v1/routes/get-packages-by-driver?id=%@&amp;date=%@</string>
 	<key>GET_ORDER_DETAIL</key>
 	<string>transaction/v1/orders/%@</string>
 	<key>UPDATE_ORDER_STATUS</key>
-	<string>transaction/v1/orders/%@/%@</string>
+	<string>transaction/v1/mobile/orders/%@/%@</string>
 	<key>UPLOAD_SIGNATURE</key>
-	<string>transaction/v1/orders/%@/%@</string>
+	<string>transaction/v1/mobile/orders/%@/%@</string>
 	<key>UPDATE_SEQUENCE</key>
 	<string>backend-api/v1/routes/update-sequence</string>
 	<key>UPLOAD_FILES</key>
@@ -45,7 +45,7 @@
 	<key>GET_LIST_NOTIFICATIONS</key>
 	<string>backend-api/v1/messages/list-message?page=1&amp;limit=100&amp;route_id=%@</string>
 	<key>GET_ROUTE_DETAIL</key>
-	<string>transaction/v1/routes/%@</string>
+	<string>transaction/v1/mobile/routes/%@</string>
 	<key>READ_MESSAGE</key>
 	<string>backend-api/v1/messages/%@</string>
 	<key>CHECK_TOKEN</key>
@@ -55,11 +55,11 @@
 	<key>RESET_PASSWORD_URL</key>
 	<string>#/reset-password</string>
 	<key>GET_LIST_ALERT</key>
-	<string>masterdata/v1/alerts/driver-alerts</string>
+	<string>masterdata/v1/mobile/alerts/driver-alerts</string>
 	<key>GET_ALERT_DETAIL</key>
-	<string>masterdata/v1/alerts/%@</string>
+	<string>masterdata/v1/mobile/alerts/%@</string>
 	<key>RESOLVE_ALERT</key>
-	<string>masterdata/v1/alerts/resolve/%@</string>
+	<string>masterdata/v1/mobile/alerts/resolve/%@</string>
 	<key>UPDATE_DRIVER_LOCATION</key>
 	<string>gps-tracking/api/gps-drivers</string>
 	<key>GET_USERID_BY_TOKEN</key>
@@ -77,9 +77,9 @@
 	<key>ASSIGN_ORDER</key>
 	<string>backend-api/v1/orders/assign-order</string>
 	<key>GET_LIST_TASKS</key>
-	<string>backend-api/v1/tasks/driver-task?from_delivery_date=%@&amp;to_delivery_date=%@</string>
+	<string>backend-api/v1/mobile/tasks/driver-task?from_delivery_date=%@&amp;to_delivery_date=%@</string>
 	<key>GET_TASK_DETAIL</key>
-	<string>backend-api/v1/tasks/%@</string>
+	<string>backend-api/v1/mobile/tasks/%@</string>
 	<key>UPDATE_STATUS_TASK</key>
 	<string>backend-api/v1/tasks/%@/%@</string>
 	<key>GET_DRIVER_RULE</key>
@@ -90,5 +90,7 @@
 	<string>masterdata/v1/order-statuses/list-active</string>
 	<key>GET_ALL_ROUTE_INPROGESS</key>
 	<string>transaction/v1/routes/in-progress</string>
+	<key>DASHBOARD</key>
+	<string>transaction/v1/mobile/dashboard/by-driver?start_time=%@&amp;end_time=%@</string>
 </dict>
 </plist>
