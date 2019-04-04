@@ -48,11 +48,17 @@ class ApprovePictureViewController: BaseViewController {
             let file: AttachFileModel = AttachFileModel()
             file.name = "Picture_\(Date().timeIntervalSince1970)"
             file.type = ".png"
+            file.typeFile = "SIG"
             file.mimeType = "image/png"
             file.contentFile = data
             file.param = "file_pod_req[0]"
 
-            uploadMultipleFile(files: [file])
+            if order?.isRequireSign() == false {
+                uploadMultipleFile(files: [file], isNeedFinishOrder: true)
+                
+            }else {
+                uploadMultipleFile(files: [file], isNeedFinishOrder: false)
+            }
 
         }else {
             print("encode failure")
@@ -70,16 +76,41 @@ extension ApprovePictureViewController:DMSNavigationServiceDelegate{
 
 //MARK: - API
 extension ApprovePictureViewController{
-    fileprivate func uploadMultipleFile(files:[AttachFileModel]){
-        guard let order = order else { return }
+    fileprivate func uploadMultipleFile(files:[AttachFileModel], isNeedFinishOrder:Bool = false){
+        guard let orderCopy = order?.cloneObject() else {
+            return
+        }
+        if isNeedFinishOrder {
+            let listStatus =  CoreDataManager.getListStatus()
+            for item in listStatus {
+                if item.code == StatusOrder.deliveryStatus.rawValue{
+                    orderCopy.status = item
+                    break
+                }
+            }
+        }
+       
         if hasNetworkConnection {
             showLoadingIndicator()
         }
-        SERVICES().API.uploadMultipleImageToOrder(files, order) {[weak self] (result) in
+        SERVICES().API.uploadMultipleImageToOrder(files, orderCopy) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
-                self?.handleFinishOrShowSignatureViewcontroller()
+                if isNeedFinishOrder {
+                    self?.showAlertView("Order:#\(orderCopy.id) has delevered successfully.".localized) {[weak self](action) in
+                        if orderCopy.files == nil{
+                            orderCopy.files = []
+                        }
+                        orderCopy.files?.append(files)
+                        self?.callback?(true,orderCopy)
+                        self?.dismiss(animated: true, completion: nil)
+                        App().mainVC?.rootNV?.popToController(OrderDetailViewController.self, animated: true)
+                    }
+               
+                }else {
+                    self?.showSignatureViewController()
+                }
      
             case .error(let error):
                 self?.showAlertView(error.getMessage())
@@ -116,16 +147,40 @@ extension ApprovePictureViewController{
         }
     }
     
-   fileprivate func submitSignature(_ file: AttachFileModel) {
-        guard let order = order else { return }
+    
+    fileprivate func submitSignature(file: AttachFileModel, isNeedFinishOrder:Bool = false)  {
+        guard let orderCopy = order?.cloneObject() else {
+            return
+        }
+        if isNeedFinishOrder {
+            let listStatus =  CoreDataManager.getListStatus()
+            for item in listStatus {
+                if item.code == StatusOrder.deliveryStatus.rawValue{
+                    orderCopy.status = item
+                    break
+                }
+            }
+        }
+       
         if hasNetworkConnection {
             showLoadingIndicator()
         }
-        SERVICES().API.submitSignature(file,order) {[weak self] (result) in
+        SERVICES().API.submitSignature(file,orderCopy) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
-                self?.updateStatusOrder(statusCode: StatusOrder.deliveryStatus.rawValue)
+                if isNeedFinishOrder  == false{
+                    return
+                }
+                self?.showAlertView("Order:#\(orderCopy.id) has delevered successfully.".localized) {[weak self](action) in
+                    if orderCopy.files == nil{
+                        orderCopy.files = []
+                    }
+                    orderCopy.files?.append(file)
+                    self?.callback?(true,orderCopy)
+                    self?.dismiss(animated: true, completion: nil)
+                    App().mainVC?.rootNV?.popToController(OrderDetailViewController.self, animated: true)
+                }
                 
             case .error(let error):
                 self?.showAlertView(error.getMessage())
@@ -158,7 +213,7 @@ extension ApprovePictureViewController{
 extension ApprovePictureViewController:SignatureViewControllerDelegate {
     func signatureViewController(view: SignatureViewController, didCompletedSignature signature: AttachFileModel?) {
         if let sig  = signature {
-            submitSignature(sig)
+            submitSignature(file: sig, isNeedFinishOrder: true)
         }
     }
 }
