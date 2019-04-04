@@ -15,7 +15,9 @@ class PictureViewController: BaseViewController {
     
     // MARK: IBOutlet
     @IBOutlet weak var previewView: UIView!
-    
+    @IBOutlet weak var btnSkip: UIButton?
+    @IBOutlet weak var btnBack: UIButton?
+
     
     // MARK: Vriables
     var captureSession: AVCaptureSession?
@@ -29,6 +31,7 @@ class PictureViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupUI()
         self.perform(#selector(setupCamera), with: nil, afterDelay: 0.01)
     }
     
@@ -56,6 +59,13 @@ class PictureViewController: BaseViewController {
     
     
     // MARK: Function
+    func setupUI()  {
+        btnSkip?.isHidden = order?.isRequireImage() == true
+        btnBack?.isHidden = false
+        btnSkip?.setTitle("Skip".localized, for: .normal)
+        btnBack?.setTitle("Back".localized, for: .normal)
+    }
+    
     @objc private func setupCamera() {
         guard let captureDevice = AVCaptureDevice.default(for: .video) else {
             return

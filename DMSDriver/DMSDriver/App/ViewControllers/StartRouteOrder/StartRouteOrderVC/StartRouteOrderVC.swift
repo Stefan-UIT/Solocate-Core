@@ -137,7 +137,7 @@ class StartRouteOrderVC: BaseViewController {
 // MARK: - API
 extension StartRouteOrderVC{
     fileprivate func submitSignatureAndFinishOrder(_ file: AttachFileModel) {
-        guard let order = order else { return }
+        guard let order = order?.cloneObject() else { return }
         let listStatus =  CoreDataManager.getListStatus()
         for item in listStatus {
             if item.code == StatusOrder.deliveryStatus.rawValue{

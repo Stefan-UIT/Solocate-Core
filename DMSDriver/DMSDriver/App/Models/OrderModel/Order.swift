@@ -78,9 +78,11 @@ class Order: BaseModel {
 
     class Detail: BaseModel {
         var order_id:Int?
-        var nature_id:Int?
-        var vol:Double?
-        var nature:Nature?
+        var package_id:Int?
+        var qty:Double?
+        var remain_qty:Double?
+        var package:String?
+
         
         override init() {
             super.init()
@@ -92,9 +94,10 @@ class Order: BaseModel {
         
         override func mapping(map: Map) {
             order_id <- map["order_id"]
-            nature_id <- map["nature_id"]
-            vol <- map["vol"]
-            nature <- map["nature"]
+            package_id <- map["package_id"]
+            qty <- map["qty"]
+            remain_qty <- map["remain_qty"]
+            package <- map["package"]
         }
     }
 
@@ -353,6 +356,12 @@ class Order: BaseModel {
     
     func isRequireImage() -> Bool  {
         return pod_req == 1 && pictures?.count ?? 0 <= 0
+    }
+    
+    func cloneObject() -> Order? {
+        let json = getJSONString()
+        let obj = Order(JSON: json)
+        return obj
     }
 }
 

@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -17,6 +17,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PictureViewController" customModule="DMSDriver" customModuleProvider="target">
             <connections>
+                <outlet property="btnSkip" destination="wH2-Lf-H4D" id="0pV-oD-D40"/>
                 <outlet property="previewView" destination="pP6-vU-ujd" id="AfL-FY-jml"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -83,32 +84,37 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pGK-Th-WCi">
                     <rect key="frame" x="60" y="592" width="255" height="60"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wH2-Lf-H4D">
-                            <rect key="frame" x="0.0" y="14.5" width="127.5" height="31"/>
-                            <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="16"/>
-                            <state key="normal" title="Skip"/>
-                            <connections>
-                                <action selector="skipButtonAction:" destination="-1" eventType="touchUpInside" id="2AC-x3-ViD"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2g-am-bA5">
-                            <rect key="frame" x="127.5" y="14.5" width="127.5" height="31"/>
-                            <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="16"/>
-                            <state key="normal" title="Go back"/>
-                            <connections>
-                                <action selector="goBackButtonAction:" destination="-1" eventType="touchUpInside" id="qwE-7F-syW"/>
-                            </connections>
-                        </button>
+                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gxQ-ks-OzO">
+                            <rect key="frame" x="0.0" y="0.0" width="255" height="60"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wH2-Lf-H4D">
+                                    <rect key="frame" x="0.0" y="0.0" width="127.5" height="60"/>
+                                    <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="16"/>
+                                    <state key="normal" title="Skip"/>
+                                    <connections>
+                                        <action selector="skipButtonAction:" destination="-1" eventType="touchUpInside" id="2AC-x3-ViD"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b2g-am-bA5">
+                                    <rect key="frame" x="127.5" y="0.0" width="127.5" height="60"/>
+                                    <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="16"/>
+                                    <state key="normal" title="Go back"/>
+                                    <connections>
+                                        <action selector="goBackButtonAction:" destination="-1" eventType="touchUpInside" id="qwE-7F-syW"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="wH2-Lf-H4D" firstAttribute="width" secondItem="b2g-am-bA5" secondAttribute="width" id="QFa-vQ-nQO"/>
+                            </constraints>
+                        </stackView>
                     </subviews>
                     <constraints>
                         <constraint firstAttribute="height" constant="60" id="Dj0-Tq-GWv"/>
-                        <constraint firstItem="wH2-Lf-H4D" firstAttribute="centerY" secondItem="pGK-Th-WCi" secondAttribute="centerY" id="JJV-gc-552"/>
-                        <constraint firstAttribute="trailing" secondItem="b2g-am-bA5" secondAttribute="trailing" id="Nho-LA-d3Y"/>
-                        <constraint firstItem="wH2-Lf-H4D" firstAttribute="leading" secondItem="pGK-Th-WCi" secondAttribute="leading" id="PVp-0D-sA7"/>
-                        <constraint firstItem="b2g-am-bA5" firstAttribute="leading" secondItem="wH2-Lf-H4D" secondAttribute="trailing" id="V3y-sK-85F"/>
-                        <constraint firstItem="b2g-am-bA5" firstAttribute="centerY" secondItem="wH2-Lf-H4D" secondAttribute="centerY" id="XaU-XO-3ZI"/>
-                        <constraint firstItem="wH2-Lf-H4D" firstAttribute="width" secondItem="b2g-am-bA5" secondAttribute="width" id="eab-ex-HEz"/>
-                        <constraint firstItem="b2g-am-bA5" firstAttribute="leading" secondItem="wH2-Lf-H4D" secondAttribute="trailing" id="haN-6t-p6i"/>
+                        <constraint firstAttribute="trailing" secondItem="gxQ-ks-OzO" secondAttribute="trailing" id="GIj-me-858"/>
+                        <constraint firstAttribute="bottom" secondItem="gxQ-ks-OzO" secondAttribute="bottom" id="RfE-Sa-ohg"/>
+                        <constraint firstItem="gxQ-ks-OzO" firstAttribute="top" secondItem="pGK-Th-WCi" secondAttribute="top" id="xUh-zl-cLl"/>
+                        <constraint firstItem="gxQ-ks-OzO" firstAttribute="leading" secondItem="pGK-Th-WCi" secondAttribute="leading" id="ymW-9o-q2f"/>
                     </constraints>
                 </view>
             </subviews>

@@ -349,7 +349,9 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 headerCell.btnEdit?.isHidden = !isAdd
             case .sectionPictures:
                 var isAdd = false
-                if orderDetail?.route?.driverId == Caches().user?.userInfo?.id{
+                if orderDetail?.route?.driverId == Caches().user?.userInfo?.id &&
+                        (orderDetail?.statusOrder == StatusOrder.newStatus ||
+                         orderDetail?.statusOrder == StatusOrder.inProcessStatus){
                     isAdd = true
                 }
                 headerCell.btnEdit?.isHidden = !isAdd
@@ -530,8 +532,8 @@ fileprivate extension OrderDetailViewController {
         cell.selectionStyle = .none
         
         let detail = orderDetail?.details?[indexPath.row]
-        cell.nameLabel?.text = detail?.nature?.name
-        cell.contentLabel?.text = "\(detail?.vol ?? 0)"
+        cell.nameLabel?.text = detail?.package
+        cell.contentLabel?.text = "\(detail?.qty ?? 0)"
         
         if indexPath.row == (orderDetail?.details?.count ?? 0 ) - 1{
             cell.vContent?.roundCornersLRB()
