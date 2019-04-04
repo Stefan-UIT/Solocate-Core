@@ -136,8 +136,15 @@ class StartRouteOrderVC: BaseViewController {
 
 // MARK: - API
 extension StartRouteOrderVC{
-    fileprivate func submitSignature(_ file: AttachFileModel) {
+    fileprivate func submitSignatureAndFinishOrder(_ file: AttachFileModel) {
         guard let order = order else { return }
+        let listStatus =  CoreDataManager.getListStatus()
+        for item in listStatus {
+            if item.code == StatusOrder.deliveryStatus.rawValue{
+                order.status = item
+                break
+            }
+        }
         if hasNetworkConnection {
             showLoadingIndicator()
         }
@@ -145,8 +152,15 @@ extension StartRouteOrderVC{
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
-                self?.updateStatusOrder(statusCode: StatusOrder.deliveryStatus.rawValue)
-                
+                self?.showAlertView("Order:#\(order.id) has delevered successfully.".localized) {[weak self](action) in
+                    if order.files == nil{
+                        order.files = []
+                    }
+                    order.files?.append(file)
+                    self?.callback?(true,order)
+                    self?.navigationController?.popViewController(animated: true)
+                }
+
             case .error(let error):
                 self?.showAlertView(error.getMessage())
                 break
@@ -253,6 +267,7 @@ extension StartRouteOrderVC {
     private func showSignatureViewController() {
         let viewController = SignatureViewController()
         viewController.delegate = self
+        viewController.order = order
         self.navigationController?.present(viewController, animated: true, completion: nil)
     }
     
@@ -301,8 +316,10 @@ extension StartRouteOrderVC {
 
 //MARK: - SignatureViewControllerDelegate
 extension StartRouteOrderVC:SignatureViewControllerDelegate{
-    func signatureViewController(view: SignatureViewController, didCompletedSignature signature: AttachFileModel) {
-        submitSignature(signature)
+    func signatureViewController(view: SignatureViewController, didCompletedSignature signature: AttachFileModel?) {
+        if let sig = signature {
+            submitSignatureAndFinishOrder(sig)
+        }
     }
 }
 

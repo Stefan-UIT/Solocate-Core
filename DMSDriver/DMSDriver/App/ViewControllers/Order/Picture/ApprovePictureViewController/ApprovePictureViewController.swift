@@ -156,7 +156,9 @@ extension ApprovePictureViewController{
 
 //MARK: - SignatureViewControllerDelegate
 extension ApprovePictureViewController:SignatureViewControllerDelegate {
-    func signatureViewController(view: SignatureViewController, didCompletedSignature signature: AttachFileModel) {
-        submitSignature(signature)
+    func signatureViewController(view: SignatureViewController, didCompletedSignature signature: AttachFileModel?) {
+        if let sig  = signature {
+            submitSignature(sig)
+        }
     }
 }

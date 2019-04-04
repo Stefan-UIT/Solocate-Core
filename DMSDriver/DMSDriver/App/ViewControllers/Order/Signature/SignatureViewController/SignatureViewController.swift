@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SignatureViewControllerDelegate:AnyObject {
-    func signatureViewController(view:SignatureViewController, didCompletedSignature signature:AttachFileModel);
+    func signatureViewController(view:SignatureViewController, didCompletedSignature signature:AttachFileModel?);
 }
 
 class SignatureViewController: BaseViewController {
@@ -58,7 +58,7 @@ class SignatureViewController: BaseViewController {
         navigationController?.navigationBar.barTintColor = AppColor.background
         App().statusBarView?.backgroundColor = AppColor.background
         
-        if isFromOrderDetail {
+        if isFromOrderDetail || order?.isRequireSign() == true {
             skipButton.setTitle("Back".localized, for: .normal)
         }else {
             skipButton.setTitle("Skip".localized, for: .normal)
@@ -85,7 +85,8 @@ class SignatureViewController: BaseViewController {
     }
 
     @IBAction func skipButtonAction(_ sender: UIButton) {
-        if isFromOrderDetail == true{
+        if isFromOrderDetail == true ||
+            order?.isRequireSign() == true {
             handleGoBackAction()
         } else {
             handleSkipAction()
@@ -141,8 +142,8 @@ fileprivate extension SignatureViewController {
     }
     
     func handleSkipAction() {
-        let addNoteView = AddNoteView()
-        addNoteView.showViewInWindow()
+        delegate?.signatureViewController(view: self, didCompletedSignature: nil)
+        handleGoBackAction()
     }
     
     func handleGoBackAction() {

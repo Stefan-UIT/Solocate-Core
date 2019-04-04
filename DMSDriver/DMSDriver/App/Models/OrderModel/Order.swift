@@ -127,7 +127,6 @@ class Order: BaseModel {
     var sig_req:Int?
     var note:String?
     var details:[Detail]?
-
     var reason:Reason?
     var startTime = ""
     var endTime = ""
@@ -161,6 +160,7 @@ class Order: BaseModel {
 
     var isSelect = false
     var directionRoute:[DirectionRoute]? // use for save DirectionRoute
+    var route:Route?
     
     lazy var totalEstDuration:Int = {
         var total = 0
@@ -201,6 +201,7 @@ class Order: BaseModel {
         urgent_type_id <- map["urgent_type_id"]
         status <- map["status"]
         driver_id <- map["driver_id"]
+        route <- map["route"]
         
         if  let dataFrom = map["from"].currentValue as? String{
             from    = Address(JSON: dataFrom.parseToJSON() ?? [:])

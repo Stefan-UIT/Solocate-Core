@@ -341,14 +341,15 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 
             case .sectionSignature:
                 var isAdd = false
-                if (orderDetail?.signature == nil){
+                if (orderDetail?.signature == nil &&
+                    orderDetail?.route?.driverId == Caches().user?.userInfo?.id){
                     isAdd = true
                 }
                 
                 headerCell.btnEdit?.isHidden = !isAdd
             case .sectionPictures:
                 var isAdd = false
-                if orderDetail?.driver_id == Caches().user?.userInfo?.id{
+                if orderDetail?.route?.driverId == Caches().user?.userInfo?.id{
                     isAdd = true
                 }
                 headerCell.btnEdit?.isHidden = !isAdd
@@ -655,8 +656,10 @@ extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
 
 //MARK: - SignatureViewControllerDelegate
 extension OrderDetailViewController:SignatureViewControllerDelegate{
-    func signatureViewController(view: SignatureViewController, didCompletedSignature signature: AttachFileModel) {
-        submitSignature(signature)
+    func signatureViewController(view: SignatureViewController, didCompletedSignature signature: AttachFileModel?) {
+        if let sig = signature {
+            submitSignature(sig)
+        }
     }
 }
 
