@@ -90,7 +90,7 @@ class DashboardVC: BaseViewController {
         chartView.legend.enabled = true // note pie Entry
         chartView.setExtraOffsets(left: 5, top: 10, right: 5, bottom: 5)
         
-        chartView.drawCenterTextEnabled = true
+        chartView.drawCenterTextEnabled = true // set center value text
         chartView.drawEntryLabelsEnabled = false
         
         let paragraphStyle = NSParagraphStyle.default.mutableCopy() as! NSMutableParagraphStyle
@@ -124,6 +124,7 @@ class DashboardVC: BaseViewController {
         l.form = .line
         l.formSize = 30
         l.formLineWidth = 12
+    
     }
 
     
@@ -132,35 +133,51 @@ class DashboardVC: BaseViewController {
         let newRoutes = dataDashboard?.filterBy(status: .New) ?? []
         let inprogessRoutes = dataDashboard?.filterBy(status: .InProgess) ?? []
         let finishedRoutes = dataDashboard?.filterBy(status: .Finished) ?? []
-        let cacelledRoutes = dataDashboard?.filterBy(status: .InProgess) ?? []
-        let total = newRoutes.count + inprogessRoutes.count + finishedRoutes.count + cacelledRoutes.count
+        let cacelledRoutes = dataDashboard?.filterBy(status: .Canceled) ?? []
+        //let total = newRoutes.count + inprogessRoutes.count + finishedRoutes.count + cacelledRoutes.count
         surveyData =  ["New".localized: newRoutes.count,
                        "In-progess".localized: inprogessRoutes.count,
                        "Finished".localized: finishedRoutes.count,
                        "Cancelled".localized: cacelledRoutes.count]
         for (text , val) in surveyData {
-            let percent = Double(val) / Double(total)
-            let entry = PieChartDataEntry(value: percent, label: text)
+            //let percent = (Double(val) / Double(total)).rounded(toPlaces: 3)
+            let entry = PieChartDataEntry(value: Double(val),label: text)
             dataEntries.append(entry)
         }
         let chartDataSet = PieChartDataSet(values: dataEntries, label: "")
+        chartDataSet.drawValuesEnabled = true
         chartDataSet.colors = ChartColorTemplates.material()
         chartDataSet.sliceSpace = 2
         chartDataSet.selectionShift = 5
         
         let chartData = PieChartData(dataSet: chartDataSet)
         let formatter = NumberFormatter()
-        formatter.numberStyle = .percent
+        formatter.numberStyle = .none
         formatter.maximumFractionDigits = 0
+        formatter.zeroSymbol = ""
         chartData.setValueFormatter(DefaultValueFormatter(formatter: formatter))
-        chartData.setValueFont(.systemFont(ofSize: 11, weight: .light))
+        chartData.setValueFont(.systemFont(ofSize: 15, weight: .light))
         chartData.setValueTextColor(.white)
         
         pieChartView?.data = chartData
-        
+
         pieChartView?.animate(xAxisDuration: 1.4, easingOption: .easeOutBack)
     }
     
+    func setCustomLegend(dataPoints: [String], values: [Double]) -> [LegendEntry] {
+        var customLegendEntries: [LegendEntry] = []
+        for i in 0..<dataPoints.count {
+            customLegendEntries.append(LegendEntry(label: dataPoints[i],
+                                                   form: .default,
+                                                   formSize: CGFloat.nan,
+                                                   formLineWidth: CGFloat.nan,
+                                                   formLineDashPhase: 0.0,
+                                                   formLineDashLengths: nil,
+                                                   formColor: ChartColorTemplates.material()[i]))
+        }
+        return customLegendEntries
+    }
+
     func reloadDataDisplay()  {
         arrListPage = []
         arrListPage.append(["ic-newRoute","New Routes","item","",DashboardDisplayCellType.NEW_ROUTE])
