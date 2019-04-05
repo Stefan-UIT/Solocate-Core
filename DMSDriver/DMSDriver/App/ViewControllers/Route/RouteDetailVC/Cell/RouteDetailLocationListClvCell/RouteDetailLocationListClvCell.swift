@@ -98,9 +98,11 @@ extension RouteDetailLocationListClvCell: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        /*
         tableView.deselectRow(at: indexPath, animated: true)
         let vc:OrderListViewController = .loadSB(SB: .Order)
         self.rootVC?.navigationController?.pushViewController(vc, animated: true)
+         */
     }
 }
 
