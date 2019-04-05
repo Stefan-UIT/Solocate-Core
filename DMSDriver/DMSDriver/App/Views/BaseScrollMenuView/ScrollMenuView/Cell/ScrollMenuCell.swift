@@ -37,8 +37,7 @@ class ScrollMenuCell: UICollectionViewCell {
    
     
     @objc func setupUI(){
-        vContent?.layer.cornerRadius = cornerRadiusCell
-        vContent?.clipsToBounds = true
+        vContent?.cornerRadius = cornerRadiusCell
     }
     
     func configura(item:MenuItem,
@@ -66,5 +65,6 @@ class ScrollMenuCell: UICollectionViewCell {
             lblTitle?.textColor = selectedBackground
             vContent?.backgroundColor = background
         }
+        vContent?.cornerRadius = cornerRadiusCell
     }
 }
