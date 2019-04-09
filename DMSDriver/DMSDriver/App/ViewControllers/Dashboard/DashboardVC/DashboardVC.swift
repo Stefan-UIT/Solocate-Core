@@ -53,6 +53,7 @@ class DashboardVC: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        App().mainVC?.menuVC?.currentItem = .DASHBOARD
         guard let time = timeData else {
             return
         }

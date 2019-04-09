@@ -14,8 +14,8 @@ protocol FilterDataTypeRowCellDelegate:AnyObject {
 
 class FilterDataTypeRowCell: UITableViewCell {
     
-    @IBOutlet weak var lblPickup:UIButton?
-    @IBOutlet weak var lblDelivery:UIButton?
+    @IBOutlet weak var btnPickup:UIButton?
+    @IBOutlet weak var btnDelivery:UIButton?
 
     weak var delegate:FilterDataTypeRowCellDelegate?
     
