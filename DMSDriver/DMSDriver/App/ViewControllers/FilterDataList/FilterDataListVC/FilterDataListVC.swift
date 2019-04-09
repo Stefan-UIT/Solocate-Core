@@ -48,6 +48,9 @@ class FilterDataListVC: BaseViewController {
     fileprivate var arrCity:[String] = []
     fileprivate var arrCustomerDisplay:[String] = []
     fileprivate var arrCityDisplay:[String] = []
+    fileprivate let PICKUP_TYPE = "Pickup"
+    fileprivate let DELIVERY_TYPE = "Delivery"
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -215,7 +218,7 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                 else {
                     var types = filterModel.type?.first
                     if filterModel.type?.count > 1 {
-                        types = E(types) + E(filterModel.type?.last)
+                        types = E(types) + "," + E(filterModel.type?.last)
                     }
                     header.lblTitle?.textColor = AppColor.mainColor
                     header.lblTitle?.text = "TYPE: " + E(types)
@@ -338,6 +341,18 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifierTypeRowCell) as! FilterDataTypeRowCell
                 cell.delegate = self
                 cell.selectionStyle = .none
+                cell.btnPickup?.backgroundColor = UIColor.gray
+                cell.btnDelivery?.backgroundColor = UIColor.gray
+
+                let arrType = filterModel.type ?? []
+                if arrType.contains(PICKUP_TYPE) {
+                    cell.btnPickup?.backgroundColor = AppColor.buttonColor
+                }
+                
+                if arrType.contains(DELIVERY_TYPE){
+                    cell.btnDelivery?.backgroundColor = AppColor.buttonColor
+                }
+                
                 return cell
                 
             case .SectionStatus:
@@ -346,6 +361,10 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                 cell.btnStatus?.tag = indexPath.row
                 cell.delegate = self
                 cell.selectionStyle = .none
+                cell.btnStatus?.backgroundColor = UIColor.gray
+                if filterModel.status?.id == arrStatus[row].id {
+                    cell.btnStatus?.backgroundColor = AppColor.buttonColor
+                }
 
                 return cell
                 
@@ -457,7 +476,7 @@ extension FilterDataListVC:FilterDataTypeRowCellDelegate {
             
         }else {
             if !(filterModel.type?.contains(type) ?? false) {
-                filterModel.type?.append("," + type)
+                filterModel.type?.append(type)
             }
         }
         tbvContent?.reloadData()
