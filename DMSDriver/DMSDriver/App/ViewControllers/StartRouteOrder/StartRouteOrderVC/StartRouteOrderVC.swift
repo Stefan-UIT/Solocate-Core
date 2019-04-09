@@ -170,7 +170,7 @@ extension StartRouteOrderVC{
     }
     
     fileprivate func updateStatusOrder(statusCode: String, cancelReason:Reason? = nil) {
-        guard let _orderDetail = order else {
+        guard let _orderDetail = order?.cloneObject() else {
             return
         }
         let listStatus =  CoreDataManager.getListStatus()
@@ -223,14 +223,14 @@ extension StartRouteOrderVC {
         var statusNeedUpdate = status.rawValue
         switch status{
         case .newStatus:
-            App().showAlertView("Do you want to start this order?",
-                                positiveTitle: "YES",
+            App().showAlertView("Do you want to start this order?".localized,
+                                positiveTitle: "YES".localized,
                                 positiveAction: {[weak self] (ok) in
                                     
                                     statusNeedUpdate = StatusOrder.inProcessStatus.rawValue
                                     self?.updateStatusOrder(statusCode: statusNeedUpdate)
                                     
-            }, negativeTitle: "No".localized) { (cancel) in
+            }, negativeTitle: "NO".localized) { (cancel) in
                 //
             }
             
@@ -247,14 +247,14 @@ extension StartRouteOrderVC {
                 
             }else {
                 
-                App().showAlertView("Do you want to Finish this order?",
-                                    positiveTitle: "YES",
+                App().showAlertView("Do you want to Finish this order?".localized,
+                                    positiveTitle: "YES".localized,
                                     positiveAction: {[weak self] (ok) in
                                         
                                         statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
                                         self?.updateStatusOrder(statusCode: statusNeedUpdate)
                                         
-                }, negativeTitle: "No".localized) { (cancel) in
+                }, negativeTitle: "NO".localized) { (cancel) in
                     //
                 }
             }
