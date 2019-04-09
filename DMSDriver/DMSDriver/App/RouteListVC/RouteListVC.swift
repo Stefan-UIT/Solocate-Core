@@ -49,7 +49,7 @@ import Crashlytics
         App().navigationService.updateNavigationBar(.Menu_Search, "")
     }
     
-    func setupTableView()  {
+    private func setupTableView()  {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.register(UINib(nibName: ClassName(RouteTableViewCell()),
@@ -60,14 +60,14 @@ import Crashlytics
         }       
     }
     
-    func initVar()  {
+    private func initVar()  {
         if timeData == nil {
             timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeThisWeek)
             filterModel.timeData = timeData
         }
     }
     
-    func initUI()  {
+    private func initUI()  {
         setupTableView()
         let userName = Caches().user?.userInfo?.userName ?? ""
         let date = #"Here is your plan for today - \#(ShortDateFormater.string(from: filterModel.timeData?.startDate ?? Date()))"#.localized
@@ -77,6 +77,16 @@ import Crashlytics
     
     @objc func fetchData(isShowLoading:Bool = true)  {
         getRoutes(filterMode: filterModel, isShowLoading: isShowLoading)
+    }
+    
+    func updateRouteList(routeNeedUpdate:Route) {
+        for (index,route) in self.routes.enumerated() {
+            if route.id == routeNeedUpdate.id {
+                self.routes[index] = routeNeedUpdate
+                break
+            }
+        }
+        tableView.reloadData()
     }
  }
  
@@ -212,7 +222,6 @@ import Crashlytics
             }
         }
     }
-    
     
     func fakaData()  {
         let route = Route()

@@ -29,15 +29,16 @@ class ReasonListViewController: BaseViewController {
     
   
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var finishButton: UIButton!
+    @IBOutlet weak var finishButton: UIButton?
     @IBOutlet weak var tvMessange: UITextView?
     @IBOutlet weak var lblPlaceholder: UILabel?
-    
+    @IBOutlet weak var btnBack: UIButton?
+
     
     var validateSubmit:Bool = false{
         didSet{
-            finishButton.isEnabled = validateSubmit
-            finishButton.alpha = validateSubmit ? 1 : 0.4
+            finishButton?.isEnabled = validateSubmit
+            finishButton?.alpha = validateSubmit ? 1 : 0.4
         }
     }
 
@@ -46,11 +47,11 @@ class ReasonListViewController: BaseViewController {
         super.viewDidLoad()
         validateSubmit = false
         updateUI()
+        getReasonList()
     }
     
     override func reachabilityChangedNetwork(_ isAvailaibleNetwork: Bool) {
         super.reachabilityChangedNetwork(isAvailaibleNetwork)
-        getReasonList()
     }
 
     override func updateUI()  {
@@ -60,11 +61,11 @@ class ReasonListViewController: BaseViewController {
             case .displayModeOrder:
                 if let _orderDetail = self.orderDetail {
                     let unableTitle = _orderDetail.statusOrder == .newStatus ? "Unable To Start".localized.uppercased() : "Unable To Finish".localized.uppercased()
-                    self.finishButton.setTitle(unableTitle, for: .normal)
+                    self.finishButton?.setTitle(unableTitle, for: .normal)
                 }
                 
             case .displayModeTask:
-                self.finishButton.setTitle("cancel".localized, for: .normal)
+                self.finishButton?.setTitle("cancel".localized, for: .normal)
             }
         
             self.setupTextView()
@@ -100,6 +101,10 @@ class ReasonListViewController: BaseViewController {
         case .displayModeTask:
             self.cancelTask(task!)
         }
+    }
+    
+    @IBAction func onbtnClickback(_ sender: UIButton) {
+        self.dismiss(animated: true, completion: nil)
     }
 }
 

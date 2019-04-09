@@ -113,7 +113,20 @@ extension RouteDetailOrderListClvCell: UITableViewDelegate, UITableViewDataSourc
         tableView.deselectRow(at: indexPath, animated: true)
         let vc:OrderDetailViewController = .loadSB(SB: .Order)
         vc.orderDetail = orderList[indexPath.row]
+        vc.updateOrderDetail = {[weak self](order) in
+            self?.fetchData()
+        }
         self.rootVC?.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    func reloadOrderListScreen(route:Route) {
+        let viewControllers = App().mainVC?.rootNV?.viewControllers ?? []
+        for (_,viewController) in viewControllers.enumerated() {
+            if let routeListVC = viewController as? RouteListVC {
+                routeListVC.updateRouteList(routeNeedUpdate: route)
+                break
+            }
+        }
     }
     
     func updateStatusOrder(_ order:Order) {
@@ -171,6 +184,8 @@ extension RouteDetailOrderListClvCell{
             case .object(let obj):
                 self?.route = obj.data
                 self?.filterDataWithTapDisplay()
+                guard let _route = obj.data else {return}
+                self?.reloadOrderListScreen(route: _route)
                 
                 // Update route to DB local
             //CoreDataManager.updateRoute(obj.data!)

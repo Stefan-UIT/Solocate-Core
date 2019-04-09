@@ -327,7 +327,7 @@ fileprivate extension BaseAPIService{
             let err = ERROR(dataResponse: dataResponse)
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 App().reLogin()
-                App().showAlert(status.messange)
+                App().showAlert(err.getMessage())
                 callback(.error(err));
             }
 

@@ -630,7 +630,24 @@
                                 <rect key="frame" x="15" y="612" width="345" height="45"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pKK-PP-xo0">
-                                        <rect key="frame" x="0.0" y="0.0" width="345" height="45"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="167.5" height="45"/>
+                                        <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="15"/>
+                                        <state key="normal" title="Back"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Back"/>
+                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                <real key="value" value="5"/>
+                                            </userDefinedRuntimeAttribute>
+                                            <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                <color key="value" red="0.1764705882352941" green="0.67450980392156867" blue="0.97647058823529409" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </userDefinedRuntimeAttribute>
+                                        </userDefinedRuntimeAttributes>
+                                        <connections>
+                                            <action selector="onbtnClickback:" destination="hhM-cX-ADv" eventType="touchUpInside" id="Ea5-Of-VkJ"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a7V-i7-4TM">
+                                        <rect key="frame" x="177.5" y="0.0" width="167.5" height="45"/>
                                         <color key="backgroundColor" red="0.1764705882" green="0.67450980390000004" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="15"/>
                                         <state key="normal" title="Submit">
@@ -643,7 +660,7 @@
                                             </userDefinedRuntimeAttribute>
                                         </userDefinedRuntimeAttributes>
                                         <connections>
-                                            <action selector="submit:" destination="hhM-cX-ADv" eventType="touchUpInside" id="yOB-NL-chu"/>
+                                            <action selector="submit:" destination="hhM-cX-ADv" eventType="touchUpInside" id="oPH-pg-Clv"/>
                                         </connections>
                                     </button>
                                 </subviews>
@@ -652,7 +669,7 @@
                                 </constraints>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.4392156862745098" green="0.4392156862745098" blue="0.4392156862745098" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="fQk-ck-ECs" firstAttribute="trailing" secondItem="w90-zw-2tw" secondAttribute="trailing" constant="15" id="9jX-zE-TmH"/>
                             <constraint firstItem="uin-bf-eio" firstAttribute="top" secondItem="dYN-FC-pUe" secondAttribute="bottom" constant="5" id="TF0-KZ-7TP"/>
@@ -673,7 +690,8 @@
                         <viewLayoutGuide key="safeArea" id="fQk-ck-ECs"/>
                     </view>
                     <connections>
-                        <outlet property="finishButton" destination="pKK-PP-xo0" id="gKj-63-UKv"/>
+                        <outlet property="btnBack" destination="pKK-PP-xo0" id="vnP-Ze-Efh"/>
+                        <outlet property="finishButton" destination="a7V-i7-4TM" id="ePK-di-snQ"/>
                         <outlet property="lblPlaceholder" destination="boV-wt-b5d" id="Twp-z6-Yck"/>
                         <outlet property="tableView" destination="dYN-FC-pUe" id="nwr-Mv-LTT"/>
                         <outlet property="tvMessange" destination="fdd-4X-U9O" id="GYV-QX-2Q5"/>

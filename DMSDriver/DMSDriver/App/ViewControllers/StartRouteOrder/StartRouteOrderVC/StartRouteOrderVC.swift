@@ -128,8 +128,9 @@ class StartRouteOrderVC: BaseViewController {
     }
     
     @IBAction func onbtnClickSkip(btn:UIButton) {
-        ReasonSkipView.show(inView: self.view) { (success, reaaon) in
-            //
+        ReasonSkipView.show(inView: self.view) {[weak self] (success, reason) in
+            guard let _reason = reason else {return}
+            self?.cancelOrder(reason: _reason)
         }
     }
 }
@@ -168,7 +169,7 @@ extension StartRouteOrderVC{
         }
     }
     
-    fileprivate func updateStatusOrder(statusCode: String) {
+    fileprivate func updateStatusOrder(statusCode: String, cancelReason:Reason? = nil) {
         guard let _orderDetail = order else {
             return
         }
@@ -184,19 +185,31 @@ extension StartRouteOrderVC{
             showLoadingIndicator()
         }
         
-        SERVICES().API.updateOrderStatus(_orderDetail) {[weak self] (result) in
+        SERVICES().API.updateOrderStatus(_orderDetail,reason: cancelReason) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
                 self?.updateUI()
                 self?.callback?(true,_orderDetail)
-                if _orderDetail.statusOrder == .deliveryStatus {
+                if _orderDetail.statusOrder == .deliveryStatus ||
+                    _orderDetail.statusOrder == .cancelStatus  ||
+                    _orderDetail.statusOrder == .cancelFinishStatus {
                     self?.navigationController?.popViewController(animated: true)
                 }
             case .error(let error):
                 self?.callback?(false,_orderDetail)
                 self?.showAlertView(error.getMessage())
             }
+        }
+    }
+    
+    fileprivate func cancelOrder(reason:Reason) {
+        if order?.statusOrder == .newStatus{
+            updateStatusOrder(statusCode: StatusOrder.cancelStatus.rawValue,
+                              cancelReason:reason)
+        }else{
+            updateStatusOrder(statusCode: StatusOrder.cancelFinishStatus.rawValue,
+                              cancelReason:reason)
         }
     }
 }

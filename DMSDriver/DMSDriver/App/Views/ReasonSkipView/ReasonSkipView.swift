@@ -14,7 +14,7 @@ class ReasonSkipView: BaseView {
     @IBOutlet weak var tableView: UITableView!
     
     
-    private var listReason = [String]()
+    private var listReason = [Reason]()
     private var callback:ReasonSkipViewCallback?
     private var reasonSelect:Reason?
     private var selectedIndex: Int = -1
@@ -25,12 +25,15 @@ class ReasonSkipView: BaseView {
         
         tableView.backgroundColor = .clear
         
+        getReasonList()
+        /*
         listReason = ["CUSTOMER NOT AVAILABLE",
                       "CUSTOMER IS NOT IN A DEFINED LOCATION",
                       "CUSTOMER CANCELED DELIVERY",
                       "CUSTOMER HAS DECLINED THE ITEM",
                       "THE CAR BROKE DOWN",
                       "OTHER"]
+         */
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -44,6 +47,7 @@ class ReasonSkipView: BaseView {
     }
     
     @IBAction func onbtnClickOK(btn:UIButton){
+        reasonSelect = listReason[selectedIndex]
         callback?(true,reasonSelect)
         removeFromSuperview()
     }
@@ -57,7 +61,7 @@ extension ReasonSkipView: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: "ReasonSkipTableViewCell") as? ReasonSkipTableViewCell {
             cell.selectionStyle = .none
-            cell.loadData(listReason[indexPath.row])
+            cell.loadData(listReason[indexPath.row].name.uppercased())
             if indexPath.row == selectedIndex {
                 cell.handleSelectedCell()
             }else {
@@ -80,6 +84,24 @@ extension ReasonSkipView: UITableViewDelegate {
     }
 }
 
+extension ReasonSkipView {
+    func getReasonList() {
+        self.showLoadingIndicator()
+        SERVICES().API.getReasonList {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(let obj):
+                guard let list = obj.data?.data else {return}
+                self?.listReason = list
+                self?.tableView.reloadData()
+                
+            case .error(let error):
+                //self?.showAlertView(error.getMessage())
+                break
+            }
+        }
+    }
+}
 
 extension ReasonSkipView{
     class func show(inView:UIView,callback:@escaping ReasonSkipViewCallback)  {
