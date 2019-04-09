@@ -32,6 +32,7 @@ class RouteTableViewCell: UITableViewCell {
 
         routeIDLabel.text = "#\(route.id)"
         statusLabel.text = route.status?.name
+        statusLabel.textColor = route.colorStatus
         startTimeLabel.text = startDate + " - "
         endTimeLabel.text = endDate
         expectedStartDateLabel.text = stringDate.uppercased()

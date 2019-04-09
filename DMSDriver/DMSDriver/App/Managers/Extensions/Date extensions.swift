@@ -2,6 +2,10 @@
 
 import Foundation
 
+let  DATE_IS_FUTURE = 1
+let  DATE_IS_TODAY  = 0
+let  DATE_IS_PAST   = -1
+
 //MARK: - Locale
 extension Locale {
     static let en_US_POSIX: Locale = Locale(identifier: "en_US_POSIX")
@@ -42,6 +46,80 @@ extension Date {
         return Calendar.app.date(from: dateComponents);
     }
     
+    func isComparedWithTime(date:Date) -> Int {
+        let mineComponents = Calendar.current.dateComponents([.day,.month,.year,.hour,.minute], from: self)
+        let otherComponents = Calendar.current.dateComponents([.day,.month,.year,.hour,.minute], from: date)
+        
+        let mineYear = mineComponents.year
+        let otherYear = otherComponents.year
+        
+        if mineYear == otherYear {
+            let mineMonth = mineComponents.month
+            let otherMonth = otherComponents.month
+            if mineMonth != otherMonth {
+                return ((mineMonth > otherMonth) ? DATE_IS_FUTURE : DATE_IS_PAST);
+            }
+            
+            let mineHour = mineComponents.hour
+            let otherHour = otherComponents.hour
+            
+            if (mineHour != otherHour) {
+               return ((mineHour > otherHour) ? DATE_IS_FUTURE : DATE_IS_PAST);
+            }
+            
+            let mineMinute = mineComponents.minute
+            let otherMinute = otherComponents.minute
+            
+            if (mineMinute == otherMinute) {
+                return DATE_IS_TODAY;
+            }else {
+                return ((mineMinute > otherMinute) ? DATE_IS_FUTURE : DATE_IS_PAST);
+            }
+        }else {
+            return ((mineYear > otherYear) ? DATE_IS_FUTURE : DATE_IS_PAST);
+        }
+    }
+    
+    
+    func isComparedWithDay(date:Date) -> Int {
+        let mineComponents = Calendar.current.dateComponents([.day,.month,.year,.hour,.minute], from: self)
+        let otherComponents = Calendar.current.dateComponents([.day,.month,.year,.hour,.minute], from: date)
+        
+        let mineYear = mineComponents.year
+        let otherYear = otherComponents.year
+        
+        if mineYear == otherYear {
+            let mineMonth = mineComponents.month
+            let otherMonth = otherComponents.month
+            if mineMonth != otherMonth {
+                return ((mineMonth > otherMonth) ? DATE_IS_FUTURE : DATE_IS_PAST);
+            }
+            
+            let mineDay = mineComponents.day
+            let otherDay = otherComponents.day
+            
+            if (mineDay != otherDay) {
+                return ((mineDay > otherDay) ? DATE_IS_FUTURE : DATE_IS_PAST);
+            }else {
+                return DATE_IS_TODAY
+            }
+ 
+        }else {
+            return ((mineYear > otherYear) ? DATE_IS_FUTURE : DATE_IS_PAST);
+        }
+    }
+    
+    
+    
+    func toDateTime(timeZone:TimeZone) -> Date? {
+        let calendar = Calendar.init(identifier: Calendar.Identifier.iso8601, timeZone: timeZone)
+        let comp = calendar.dateComponents([.year,.month,.day,.hour,.minute,.second], from: self)
+        let date = comp.date
+        
+        return date
+
+    }
+
     
     enum TimeInDay {
         case start;

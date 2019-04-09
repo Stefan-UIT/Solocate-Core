@@ -8,6 +8,16 @@
 
 /* Begin PBXBuildFile section */
 		2A1AA32522546D83004449AA /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1AA32422546D83004449AA /* UINavigationController+Ext.swift */; };
+		2A4204F9225760D400789837 /* PickerTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4204F7225760D400789837 /* PickerTimeVC.swift */; };
+		2A4204FA225760D400789837 /* PickerTimeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A4204F8225760D400789837 /* PickerTimeVC.xib */; };
+		2A4204FF22576A8E00789837 /* HeaderSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4204FD22576A8E00789837 /* HeaderSectionCell.swift */; };
+		2A42050022576A8E00789837 /* HeaderSectionCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A4204FE22576A8E00789837 /* HeaderSectionCell.xib */; };
+		2A42050322576ACA00789837 /* PickerTimeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42050122576ACA00789837 /* PickerTimeCell.swift */; };
+		2A42050422576ACA00789837 /* PickerTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A42050222576ACA00789837 /* PickerTimeCell.xib */; };
+		2A42050722576ADD00789837 /* FooterCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42050522576ADD00789837 /* FooterCell.swift */; };
+		2A42050822576ADD00789837 /* FooterCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A42050622576ADD00789837 /* FooterCell.xib */; };
+		2A42050B22576AF000789837 /* ContentCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42050922576AF000789837 /* ContentCell.swift */; };
+		2A42050C22576AF000789837 /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A42050A22576AF000789837 /* ContentCell.xib */; };
 		2A42555B2251F08E00D55FEA /* ResponseDataDashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A42555A2251F08E00D55FEA /* ResponseDataDashboard.swift */; };
 		2A8EFE95224C7855008AA1D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A8EFE94224C7855008AA1D3 /* GoogleService-Info.plist */; };
 		2AB4A98A224B78C70019F196 /* RouteDetailLocationListClvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */; };
@@ -296,6 +306,16 @@
 
 /* Begin PBXFileReference section */
 		2A1AA32422546D83004449AA /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
+		2A4204F7225760D400789837 /* PickerTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTimeVC.swift; sourceTree = "<group>"; };
+		2A4204F8225760D400789837 /* PickerTimeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickerTimeVC.xib; sourceTree = "<group>"; };
+		2A4204FD22576A8E00789837 /* HeaderSectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderSectionCell.swift; sourceTree = "<group>"; };
+		2A4204FE22576A8E00789837 /* HeaderSectionCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderSectionCell.xib; sourceTree = "<group>"; };
+		2A42050122576ACA00789837 /* PickerTimeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTimeCell.swift; sourceTree = "<group>"; };
+		2A42050222576ACA00789837 /* PickerTimeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickerTimeCell.xib; sourceTree = "<group>"; };
+		2A42050522576ADD00789837 /* FooterCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterCell.swift; sourceTree = "<group>"; };
+		2A42050622576ADD00789837 /* FooterCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FooterCell.xib; sourceTree = "<group>"; };
+		2A42050922576AF000789837 /* ContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
+		2A42050A22576AF000789837 /* ContentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
 		2A42555A2251F08E00D55FEA /* ResponseDataDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDataDashboard.swift; sourceTree = "<group>"; };
 		2A8EFE94224C7855008AA1D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../../../Users/nguyenmach/Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailLocationListClvCell.swift; sourceTree = "<group>"; };
@@ -780,6 +800,31 @@
 				A02E53A1DFA611D4E6D34FF1 /* Pods_DMSDriver.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2A4204F5225760A900789837 /* PickerTimeVC */ = {
+			isa = PBXGroup;
+			children = (
+				2A4204FB22576A5D00789837 /* Cell */,
+				2A4204F7225760D400789837 /* PickerTimeVC.swift */,
+				2A4204F8225760D400789837 /* PickerTimeVC.xib */,
+			);
+			path = PickerTimeVC;
+			sourceTree = "<group>";
+		};
+		2A4204FB22576A5D00789837 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				2A4204FD22576A8E00789837 /* HeaderSectionCell.swift */,
+				2A4204FE22576A8E00789837 /* HeaderSectionCell.xib */,
+				2A42050122576ACA00789837 /* PickerTimeCell.swift */,
+				2A42050222576ACA00789837 /* PickerTimeCell.xib */,
+				2A42050522576ADD00789837 /* FooterCell.swift */,
+				2A42050622576ADD00789837 /* FooterCell.xib */,
+				2A42050922576AF000789837 /* ContentCell.swift */,
+				2A42050A22576AF000789837 /* ContentCell.xib */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		2A4255582251F06400D55FEA /* ResponseDataDashboard */ = {
@@ -2028,6 +2073,7 @@
 		3B66B8C8210B1148000BDFEF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				2A4204F5225760A900789837 /* PickerTimeVC */,
 				3B454C4A222CCC3A0064F455 /* FilterByDatePopupView */,
 				3B80E3DF22279DDA005A2E75 /* AddNoteView */,
 				3B80E3D522279D1B005A2E75 /* ReasonSkipView */,
@@ -2733,6 +2779,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3B1629D5221BED0600E7A83C /* FilterDataTypeRowCell.xib in Resources */,
+				2A42050C22576AF000789837 /* ContentCell.xib in Resources */,
 				3B66B861210B113D000BDFEF /* Main.storyboard in Resources */,
 				3B66B854210B113D000BDFEF /* Release.xcconfig in Resources */,
 				3BF258292224FB5300A56B4E /* SignatureViewController.xib in Resources */,
@@ -2744,6 +2791,7 @@
 				3B80E3DB22279D1B005A2E75 /* ReasonSkipView.xib in Resources */,
 				3B66B863210B113D000BDFEF /* Task.storyboard in Resources */,
 				2A8EFE95224C7855008AA1D3 /* GoogleService-Info.plist in Resources */,
+				2A42050422576ACA00789837 /* PickerTimeCell.xib in Resources */,
 				3B66B85F210B113D000BDFEF /* Route.storyboard in Resources */,
 				3B66B85E210B113D000BDFEF /* Profile.storyboard in Resources */,
 				3B66B858210B113D000BDFEF /* MainConfigs.plist in Resources */,
@@ -2756,11 +2804,13 @@
 				3B66B862210B113D000BDFEF /* Login.storyboard in Resources */,
 				3BF838CF218957EA0056C4F1 /* ScrollMenuView.xib in Resources */,
 				3B1629DA221BEF6000E7A83C /* FilterDataListStatusCell.xib in Resources */,
+				2A42050022576A8E00789837 /* HeaderSectionCell.xib in Resources */,
 				3B66B856210B113D000BDFEF /* Localizable.strings in Resources */,
 				3B66B85C210B113D000BDFEF /* Packages.storyboard in Resources */,
 				3B66B85D210B113D000BDFEF /* Map.storyboard in Resources */,
 				3B80E3E222279DDA005A2E75 /* AddNoteView.xib in Resources */,
 				3B66B860210B113D000BDFEF /* LaunchScreen.storyboard in Resources */,
+				2A42050822576ADD00789837 /* FooterCell.xib in Resources */,
 				3BF258212224FABB00A56B4E /* PictureViewController.xib in Resources */,
 				3B66B925210B1149000BDFEF /* LogoutTableViewCell.xib in Resources */,
 				3B66B927210B1149000BDFEF /* LeftMenuView.xib in Resources */,
@@ -2789,6 +2839,7 @@
 				3B66B85A210B113D000BDFEF /* ServicesConfigs.plist in Resources */,
 				3B66B867210B113D000BDFEF /* Assets.xcassets in Resources */,
 				3B66B855210B113D000BDFEF /* Base.xcconfig in Resources */,
+				2A4204FA225760D400789837 /* PickerTimeVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -2907,6 +2958,7 @@
 				3B66B803210B113D000BDFEF /* UIView.swift in Sources */,
 				3B66B8E1210B1149000BDFEF /* Order.swift in Sources */,
 				3BB9308D21466776009F6DCC /* CoreRequest+Ext.swift in Sources */,
+				2A42050B22576AF000789837 /* ContentCell.swift in Sources */,
 				3B66B826210B113D000BDFEF /* UIColor+Extensions.swift in Sources */,
 				3B66B82F210B113D000BDFEF /* AttributedTextBlock.swift in Sources */,
 				3B0D52BD221D44A400610A9A /* FilterDataModel.swift in Sources */,
@@ -2925,6 +2977,7 @@
 				3B66B831210B113D000BDFEF /* TwoTextFieldsViewController.swift in Sources */,
 				3B01494E217D7D4B0097FEB6 /* TaskListClvCell.swift in Sources */,
 				3B83851321C247D700ECB5C2 /* SocketConstants.swift in Sources */,
+				2A4204F9225760D400789837 /* PickerTimeVC.swift in Sources */,
 				3BB78227213554B4006D2398 /* CoreDataManager.swift in Sources */,
 				3B9A377221243A45004D881C /* AssignOrderVC.swift in Sources */,
 				3B75551621CB741700439FC2 /* LoadMoreView.swift in Sources */,
@@ -3027,6 +3080,7 @@
 				3B66B805210B113D000BDFEF /* Array.swift in Sources */,
 				3BF258282224FB5300A56B4E /* SignatureViewController.swift in Sources */,
 				3B454C52222CCE700064F455 /* TimeDataItem.swift in Sources */,
+				2A42050322576ACA00789837 /* PickerTimeCell.swift in Sources */,
 				3B2B8B5A222E380600ACDDFE /* PopoverDelegate.swift in Sources */,
 				3B66B902210B1149000BDFEF /* ItemsSectionView.swift in Sources */,
 				3B66B83E210B113D000BDFEF /* Button.swift in Sources */,
@@ -3064,6 +3118,7 @@
 				3B66B834210B113D000BDFEF /* PhotoLibraryPickerViewController.swift in Sources */,
 				3B66B8EF210B1149000BDFEF /* EmptyModel.swift in Sources */,
 				3B66B836210B113D000BDFEF /* DatePickerViewController.swift in Sources */,
+				2A42050722576ADD00789837 /* FooterCell.swift in Sources */,
 				3B44C03721BE0B48008F070D /* LocationTracker.swift in Sources */,
 				3B9A37622123D5C1004D881C /* PickerTypeListCell.swift in Sources */,
 				3BF026B921DCA8DD0029A652 /* LoadMoreCell.swift in Sources */,
@@ -3121,6 +3176,7 @@
 				3B80E3DC22279D1B005A2E75 /* ReasonSkipView.swift in Sources */,
 				3B66B8E9210B1149000BDFEF /* ResultsRequestModel.swift in Sources */,
 				3B66B8F1210B1149000BDFEF /* APIError.swift in Sources */,
+				2A4204FF22576A8E00789837 /* HeaderSectionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

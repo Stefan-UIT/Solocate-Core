@@ -64,24 +64,27 @@ enum MenuItemType : Int {
 
 class SlideMenuVC: BaseViewController {
   
-  @IBOutlet weak var tbvContent:UITableView?
-  
-  fileprivate let profileIndentifierCell = "SlideMenuAvartarCell"
-  fileprivate let rowIndentifierCell = "SlideMenuRowCell"
-  
-  var currentItem:MenuItemType = .DASHBOARD
-  
-  override func viewDidLoad() {
-    super.viewDidLoad()
-    
-    setupTableView()
-  }
-  
-  func setupTableView() {
-    tbvContent?.delegate = self
-    tbvContent?.dataSource = self
-  }
+    @IBOutlet weak var tbvContent:UITableView?
 
+    fileprivate let profileIndentifierCell = "SlideMenuAvartarCell"
+    fileprivate let rowIndentifierCell = "SlideMenuRowCell"
+
+    var currentItem:MenuItemType = .DASHBOARD
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupTableView()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        tbvContent?.reloadData()
+    }
+  
+    func setupTableView() {
+        tbvContent?.delegate = self
+        tbvContent?.dataSource = self
+    }
 }
 
 extension SlideMenuVC: UITableViewDataSource{
