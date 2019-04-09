@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" restorationIdentifier="PickerTimeCell" selectionStyle="none" indentationWidth="10" reuseIdentifier="PickerTimeCell" rowHeight="97" id="QMo-IW-bUX" customClass="PickerTimeCell" customModule="DMSDriver" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="373" height="97"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="QMo-IW-bUX" id="WzE-4W-dyv">
+                <rect key="frame" x="0.0" y="0.0" width="373" height="96.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" useCurrentDate="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPb-Qc-M7A">
+                        <rect key="frame" x="0.0" y="0.0" width="373" height="96.5"/>
+                        <date key="date" timeIntervalSinceReferenceDate="505798776.83301699">
+                            <!--2017-01-11 03:39:36 +0000-->
+                        </date>
+                        <connections>
+                            <action selector="pickerDidchangeValueWithDatePicker:" destination="QMo-IW-bUX" eventType="valueChanged" id="kHZ-yN-wX5"/>
+                        </connections>
+                    </datePicker>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="YPb-Qc-M7A" firstAttribute="leading" secondItem="WzE-4W-dyv" secondAttribute="leading" id="AJJ-fp-Uy3"/>
+                    <constraint firstAttribute="trailing" secondItem="YPb-Qc-M7A" secondAttribute="trailing" id="Cnf-l9-eOr"/>
+                    <constraint firstItem="YPb-Qc-M7A" firstAttribute="top" secondItem="WzE-4W-dyv" secondAttribute="top" id="atI-8E-em1"/>
+                    <constraint firstAttribute="bottom" secondItem="YPb-Qc-M7A" secondAttribute="bottom" id="fWx-zT-B7O"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="datePicker" destination="YPb-Qc-M7A" id="GRy-uG-vfg"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

@@ -199,7 +199,33 @@ extension FilterByDatePopupView:UITableViewDataSource,UITableViewDelegate{
                 end = Date().getTodayStartEndDates().1
             }
             
-            //
+            PickerTimeVC.showPickerTime(fromDate: start!,
+                                        toDate: end!,
+                                        datePickerMode: .date,
+                                        fromVC: self) {[weak self] (hasOK, fromDate,toDate) in
+                                            if hasOK == true {
+                                                self?.timeData?.startDate = fromDate.startDay(timeZone: .current)
+                                                self?.timeData?.endDate = toDate.endDay(timeZone: .current)
+                                                self?.timeData?.title = "Custom".localized
+                                                self?.timeData?.type = .TimeItemTypeCustom
+                                                let start = DateFormatter.displayDateVietNames.string(from: fromDate)
+                                                let end = DateFormatter.displayDateVietNames.string(from: toDate)
+                                                self?.timeData?.subtitle = "\(start) - \(end)"
+
+                                                guard let time = self?.timeData else {
+                                                    return
+                                                }
+                                                if (self?.callback != nil){
+                                                    self?.callback?(true, time);
+                                                }
+                                                
+                                                // Update Default
+                                                TimeData.setTimeDataItemCustom(item: time)
+                                                TimeData.setTimeDataItemDefault(item: time)
+                                                self?.dismiss(animated: false, completion: nil)
+                                            }
+            }
+
             
         }else {
             guard let data = timeData else {return}

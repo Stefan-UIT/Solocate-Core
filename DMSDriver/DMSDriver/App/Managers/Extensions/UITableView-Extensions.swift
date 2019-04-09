@@ -11,11 +11,11 @@ extension Reusable {
 }
 
 public extension UITableView {
-    public func registerCellClass <CellClass: UITableViewCell> (cellClass: CellClass.Type) {
+     func registerCellClass <CellClass: UITableViewCell> (cellClass: CellClass.Type) {
         register(cellClass, forCellReuseIdentifier: cellClass.description())
     }
 
-    public func registerCellNibForClass(cellClass: AnyClass) {
+    func registerCellNibForClass(cellClass: AnyClass) {
         let classNameWithoutModule = cellClass
             .description()
             .components(separatedBy: ".")
@@ -26,18 +26,18 @@ public extension UITableView {
                 forCellReuseIdentifier: classNameWithoutModule)
     }
     
-    public  func addRefreshControl(_ target: Any?, action: Selector) {
+    func addRefreshControl(_ target: Any?, action: Selector) {
         let refreshControl = UIRefreshControl(frame: CGRect(x: 0, y: 0, width: self.frame.width, height: 40))
         refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh".localized)
         refreshControl.addTarget(target, action: action, for: .valueChanged)
         self.refreshControl = refreshControl
     }
     
-    public  func isRefreshing() -> Bool {
+    func isRefreshing() -> Bool {
         return self.refreshControl?.isRefreshing ?? false
     }
     
-    public  func endRefreshControl() {
+    func endRefreshControl() {
         self.refreshControl?.endRefreshing()
     }
 }

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HeaderSectionCell" id="ujU-Zz-IzF" customClass="HeaderSectionCell" customModule="DMSDriver" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="373" height="97"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ujU-Zz-IzF" id="cXL-Xr-bDL">
+                <rect key="frame" x="0.0" y="0.0" width="373" height="96.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G9g-Fq-L4o">
+                        <rect key="frame" x="0.0" y="0.0" width="373" height="96.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time In" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8XS-V4-2g4">
+                                <rect key="frame" x="158" y="38" width="57" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="Mvi-a4-JmP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="17"/>
+                                <color key="textColor" red="0.0" green="0.61568627450000002" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="0.0" alpha="0.099856954230000003" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8XS-V4-2g4" firstAttribute="centerY" secondItem="G9g-Fq-L4o" secondAttribute="centerY" id="MWQ-fL-lAM"/>
+                            <constraint firstItem="8XS-V4-2g4" firstAttribute="centerX" secondItem="G9g-Fq-L4o" secondAttribute="centerX" id="oH5-Iw-iBm"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="G9g-Fq-L4o" firstAttribute="leading" secondItem="cXL-Xr-bDL" secondAttribute="leading" id="2B3-Qg-3Iu"/>
+                    <constraint firstItem="G9g-Fq-L4o" firstAttribute="top" secondItem="cXL-Xr-bDL" secondAttribute="top" id="BMR-dU-2Wj"/>
+                    <constraint firstAttribute="bottom" secondItem="G9g-Fq-L4o" secondAttribute="bottom" id="lXQ-Oh-eM7"/>
+                    <constraint firstAttribute="trailing" secondItem="G9g-Fq-L4o" secondAttribute="trailing" id="v8w-d0-ITa"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="lblTitleHeader" destination="8XS-V4-2g4" id="CCM-AU-Z8Y"/>
+            </connections>
+        </tableViewCell>
+    </objects>
+</document>

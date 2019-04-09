@@ -139,6 +139,7 @@ class RouteDetailVC: BaseViewController {
         lblRoute?.text = "Route #\(route?.id ?? 0)".localized
         lblTime?.text = "\(startDate) - \(endDate)"
         lblStatus?.text = route?.status?.name
+        lblStatus?.textColor = route?.colorStatus
         lblEstimateHour?.text = CommonUtils.formatEstTime(seconds: Int64(route?.totalTimeEst ?? 0))
         lblEstimateKilometer?.text = CommonUtils.formatEstKm(met: route?.totalDistance.doubleValue ?? 0)
         lblTotalOrder?.text = "\(route?.totalOrders ?? 0) Stops".localized.uppercased()

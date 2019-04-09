@@ -16,6 +16,8 @@ class MainVC: BaseViewController {
     @IBOutlet weak var conHeightVInternetConnection:NSLayoutConstraint?
     
     var rootNV:BaseNV?
+    var menuVC:SlideMenuVC?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -41,7 +43,7 @@ class MainVC: BaseViewController {
     func setupSideMenu() {
         let slideMenu: SlideMenuVC = .loadSB(SB: .Main)
         let slideMenuNC = UISideMenuNavigationController(rootViewController: slideMenu)
-
+        menuVC = slideMenu
         slideMenuNC.navigationBar.isHidden = true
         SideMenuManager.default.menuPresentMode = .menuDissolveIn
         SideMenuManager.default.menuFadeStatusBar = false

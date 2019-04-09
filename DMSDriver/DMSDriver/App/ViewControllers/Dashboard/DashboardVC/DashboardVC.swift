@@ -55,7 +55,6 @@ class DashboardVC: BaseViewController {
         getDataDashboard(timeDataItem: time)
     }
     
-    
     override func updateNavigationBar() {
         super.updateNavigationBar()
         App().navigationService.delegate = self
@@ -70,6 +69,7 @@ class DashboardVC: BaseViewController {
     override func updateUI()  {
         super.updateUI()
         lblFilter?.text = timeData?.title
+        updateNavigationBar()
         setup(pieChartView: pieChartView!)
         fillChart()
         clvContent?.reloadData()
@@ -317,6 +317,7 @@ extension DashboardVC:UICollectionViewDelegate{
             vc.routes = newRoutes ?? []
             vc.timeData = timeData
             self.navigationController?.pushViewController(vc, animated: true)
+            App().mainVC?.menuVC?.currentItem = .ROUTES
             
         case .INPROGESS_ROUTE:
             let inprogessRoutes = dataDashboard?.filterBy(status: .InProgess)
@@ -328,6 +329,7 @@ extension DashboardVC:UICollectionViewDelegate{
             vc.routes = inprogessRoutes ?? []
             vc.timeData = timeData
             self.navigationController?.pushViewController(vc, animated: true)
+            App().mainVC?.menuVC?.currentItem = .ROUTES
 
         case .MY_TASK:
             let myTasks = dataDashboard?.newTasks
@@ -336,6 +338,7 @@ extension DashboardVC:UICollectionViewDelegate{
             }
             let vc:TaskListVC = TaskListVC.loadSB(SB: .Task)
             self.navigationController?.pushViewController(vc, animated: true)
+            App().mainVC?.menuVC?.currentItem = .TASK
 
         case .NEW_ALERT:
             let newAlerts = dataDashboard?.newAlerts
@@ -346,7 +349,8 @@ extension DashboardVC:UICollectionViewDelegate{
             vc.isFromDashboard = true
             vc.arrContent = newAlerts ?? []
             self.navigationController?.pushViewController(vc, animated: true)
-            
+            App().mainVC?.menuVC?.currentItem = .ALERT
+
         case .LATE_ROUTE:
             let lateRoutes = dataDashboard?.lateRoutes
             if lateRoutes?.count ?? 0 <= 0 {
@@ -357,12 +361,13 @@ extension DashboardVC:UICollectionViewDelegate{
             vc.routes = lateRoutes ?? []
             vc.timeData = timeData
             self.navigationController?.pushViewController(vc, animated: true)
+            App().mainVC?.menuVC?.currentItem = .ROUTES
 
         case .LATE_ORDER:
             let lateOrders = dataDashboard?.lateOrders
-//            if lateOrders?.count ?? 0 <= 0 {
-//                return
-//            }
+            if lateOrders?.count ?? 0 <= 0 {
+                return
+            }
             let vc:OrderListViewController = OrderListViewController.loadSB(SB: .Order)
             vc.orderList = lateOrders ?? []
             self.navigationController?.pushViewController(vc, animated: true)
