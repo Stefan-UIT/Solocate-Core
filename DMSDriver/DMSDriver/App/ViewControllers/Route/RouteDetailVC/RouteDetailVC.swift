@@ -124,7 +124,7 @@ class RouteDetailVC: BaseViewController {
     }
     
 
-    func updateUIWithMode(_ displayMode:RouteDetailDisplayMode) {
+    private func updateUIWithMode(_ displayMode:RouteDetailDisplayMode) {
         updateNavigationBar()
         if displayMode == .DisplayModeMap {
             //
@@ -133,7 +133,7 @@ class RouteDetailVC: BaseViewController {
         }
     }
     
-    func initUI()  {
+    private func initUI()  {
         let startDate = HourFormater.string(from: route?.start_time.date ?? Date())
         let endDate = HourFormater.string(from: route?.end_time.date ?? Date())
         lblRoute?.text = "Route #\(route?.id ?? 0)".localized
@@ -147,7 +147,7 @@ class RouteDetailVC: BaseViewController {
         lblStatus?.textColor = route?.colorStatus
     }
     
-    func setupCollectionView() {
+    private func setupCollectionView() {
         clvContent?.delegate = self
         clvContent?.dataSource = self
     }
@@ -168,6 +168,11 @@ class RouteDetailVC: BaseViewController {
         menuScrollView?.isHidden = false
         menuScrollView?.dataSource = [mapMode,orderMode,locationMode]
         menuScrollView?.reloadData()
+    }
+    
+    func updateRouteDetail(route:Route)  {
+        self.route = route
+        clvContent?.reloadData()
     }
 }
 

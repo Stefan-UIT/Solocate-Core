@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SVProgressHUD
 
 class BaseView: UIView {
     var keyboardHeight : CGFloat = 0.0
@@ -104,12 +105,21 @@ class BaseView: UIView {
         superView.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|-0-[view]", options: NSLayoutConstraint.FormatOptions(rawValue: 0), metrics: nil, views: ["view": self]));
     }
     
+    func showLoadingIndicator() {
+        SVProgressHUD.show()
+    }
+    
+    func dismissLoadingIndicator() {
+        SVProgressHUD.dismiss()
+    }
+    
     override func removeFromSuperview() {
         let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow
         statusBarWindow?.alpha = 1.0
         super.removeFromSuperview()
     }
 }
+
 extension BaseView {
     
     func instanceFromNib<T : UIView>() -> T? {

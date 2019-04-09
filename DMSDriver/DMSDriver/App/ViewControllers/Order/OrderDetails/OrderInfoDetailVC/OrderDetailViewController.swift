@@ -29,6 +29,7 @@ enum OrderDetailSection:Int {
     }()
 }
 
+typealias UpdateOrderDetailCallback = (Bool,Order) -> Void
 
 class OrderDetailViewController: BaseOrderDetailViewController {
     
@@ -164,7 +165,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforDetail.append(customerItem)
         //orderInforStatus.append(urgency)
         
-        if  orderDetail?.statusOrder == .cancelStatus,
+        if  (orderDetail?.statusOrder == .cancelStatus ||
+             orderDetail?.statusOrder == .cancelFinishStatus),
             let _orderDetail = orderDetail{
             let reason = OrderDetailInforRow("Failure cause".localized,_orderDetail.reason?.name ?? "-")
             let mess = OrderDetailInforRow("Message".localized,_orderDetail.reason_msg ?? "-")
@@ -208,6 +210,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             self?.orderDetail = order
             self?.setupDataDetailInforRows()
             self?.tableView?.reloadData()
+            self?.updateOrderDetail?(order)
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -506,7 +509,7 @@ fileprivate extension OrderDetailViewController {
         cell.orderDetailItem = item
         cell.delegate = self
         cell.selectionStyle = .none
-        
+        cell.vContent?.cornerRadius = 0
         if indexPath.row == orderInforFrom.count - 1{
             cell.vContent?.roundCornersLRB()
         }
@@ -518,7 +521,7 @@ fileprivate extension OrderDetailViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! OrderDetailTableViewCell
         cell.orderDetailItem = item
         cell.selectionStyle = .none
-        
+        cell.vContent?.cornerRadius = 0
         if indexPath.row == orderInforTo.count - 1{
             cell.vContent?.roundCornersLRB()
         }
@@ -534,7 +537,7 @@ fileprivate extension OrderDetailViewController {
         let detail = orderDetail?.details?[indexPath.row]
         cell.nameLabel?.text = detail?.package
         cell.contentLabel?.text = "\(detail?.qty ?? 0)"
-        
+        cell.vContent?.cornerRadius = 0
         if indexPath.row == (orderDetail?.details?.count ?? 0 ) - 1{
             cell.vContent?.roundCornersLRB()
         }
@@ -618,6 +621,12 @@ extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
     func didSelectGo(_ cell: OrderDetailTableViewCell, _ btn: UIButton) {
         let vc:StartRouteOrderVC = StartRouteOrderVC.loadSB(SB: .Route)
         vc.order  = orderDetail
+        vc.callback = {[weak self](success, order) in
+            self?.orderDetail = order
+            self?.setupDataDetailInforRows()
+            self?.tableView?.reloadData()
+            self?.updateOrderDetail?(order)
+        }
         self.navigationController?.pushViewController(vc, animated: true)
     }
     

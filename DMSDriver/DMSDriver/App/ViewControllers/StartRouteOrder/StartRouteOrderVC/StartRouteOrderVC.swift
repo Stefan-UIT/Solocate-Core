@@ -128,8 +128,9 @@ class StartRouteOrderVC: BaseViewController {
     }
     
     @IBAction func onbtnClickSkip(btn:UIButton) {
-        ReasonSkipView.show(inView: self.view) { (success, reaaon) in
-            //
+        ReasonSkipView.show(inView: self.view) {[weak self] (success, reason) in
+            guard let _reason = reason else {return}
+            self?.cancelOrder(reason: _reason)
         }
     }
 }
@@ -168,8 +169,8 @@ extension StartRouteOrderVC{
         }
     }
     
-    fileprivate func updateStatusOrder(statusCode: String) {
-        guard let _orderDetail = order else {
+    fileprivate func updateStatusOrder(statusCode: String, cancelReason:Reason? = nil) {
+        guard let _orderDetail = order?.cloneObject() else {
             return
         }
         let listStatus =  CoreDataManager.getListStatus()
@@ -184,19 +185,31 @@ extension StartRouteOrderVC{
             showLoadingIndicator()
         }
         
-        SERVICES().API.updateOrderStatus(_orderDetail) {[weak self] (result) in
+        SERVICES().API.updateOrderStatus(_orderDetail,reason: cancelReason) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
                 self?.updateUI()
                 self?.callback?(true,_orderDetail)
-                if _orderDetail.statusOrder == .deliveryStatus {
+                if _orderDetail.statusOrder == .deliveryStatus ||
+                    _orderDetail.statusOrder == .cancelStatus  ||
+                    _orderDetail.statusOrder == .cancelFinishStatus {
                     self?.navigationController?.popViewController(animated: true)
                 }
             case .error(let error):
                 self?.callback?(false,_orderDetail)
                 self?.showAlertView(error.getMessage())
             }
+        }
+    }
+    
+    fileprivate func cancelOrder(reason:Reason) {
+        if order?.statusOrder == .newStatus{
+            updateStatusOrder(statusCode: StatusOrder.cancelStatus.rawValue,
+                              cancelReason:reason)
+        }else{
+            updateStatusOrder(statusCode: StatusOrder.cancelFinishStatus.rawValue,
+                              cancelReason:reason)
         }
     }
 }
@@ -210,14 +223,14 @@ extension StartRouteOrderVC {
         var statusNeedUpdate = status.rawValue
         switch status{
         case .newStatus:
-            App().showAlertView("Do you want to start this order?",
-                                positiveTitle: "YES",
+            App().showAlertView("Do you want to start this order?".localized,
+                                positiveTitle: "YES".localized,
                                 positiveAction: {[weak self] (ok) in
                                     
                                     statusNeedUpdate = StatusOrder.inProcessStatus.rawValue
                                     self?.updateStatusOrder(statusCode: statusNeedUpdate)
                                     
-            }, negativeTitle: "No".localized) { (cancel) in
+            }, negativeTitle: "NO".localized) { (cancel) in
                 //
             }
             
@@ -234,14 +247,14 @@ extension StartRouteOrderVC {
                 
             }else {
                 
-                App().showAlertView("Do you want to Finish this order?",
-                                    positiveTitle: "YES",
+                App().showAlertView("Do you want to Finish this order?".localized,
+                                    positiveTitle: "YES".localized,
                                     positiveAction: {[weak self] (ok) in
                                         
                                         statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
                                         self?.updateStatusOrder(statusCode: statusNeedUpdate)
                                         
-                }, negativeTitle: "No".localized) { (cancel) in
+                }, negativeTitle: "NO".localized) { (cancel) in
                     //
                 }
             }

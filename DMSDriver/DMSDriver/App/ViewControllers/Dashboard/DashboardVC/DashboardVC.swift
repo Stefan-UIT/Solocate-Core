@@ -49,6 +49,10 @@ class DashboardVC: BaseViewController {
         setupCollectionView()
         setup(pieChartView: pieChartView!)
         reloadDataDisplay()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         guard let time = timeData else {
             return
         }
