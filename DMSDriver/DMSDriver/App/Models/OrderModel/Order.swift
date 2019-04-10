@@ -358,11 +358,13 @@ class Order: BaseModel {
         return pod_req == 1 && pictures?.count ?? 0 <= 0
     }
     
+    /*
     func cloneObject() -> Order? {
         let json = getJSONString()
         let obj = Order(JSON: json)
         return obj
     }
+     */
 }
 
 //MARK: -UrlFileMoldel

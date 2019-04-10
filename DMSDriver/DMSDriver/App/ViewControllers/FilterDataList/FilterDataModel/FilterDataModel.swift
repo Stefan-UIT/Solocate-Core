@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ObjectMapper
 
 class FilterDataModel: BaseModel {
     
@@ -27,4 +28,29 @@ class FilterDataModel: BaseModel {
     
     var selectingField:SelectingField?
     
+    override init() {
+        super.init()
+    }
+    
+    required init?(map: Map) {
+        super.init()
+    }
+    
+    override func mapping(map: Map) {
+        date <- map["date"]
+        timeData <- map["timeData"]
+        type <- map["type"]
+        status <- map["status"]
+        customer <- map["customer"]
+        city <- map["city"]
+        selectingField <- map["selectingField"]
+    }
+    
+    /*
+    func cloneObject() -> FilterDataModel? {
+        let json = getJSONString()
+        let obj = FilterDataModel(JSON: json)
+        return obj
+    }
+     */
 }

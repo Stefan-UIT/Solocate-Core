@@ -98,7 +98,7 @@ import Crashlytics
     
     func didSelectedLeftButton(_ sender: UIBarButtonItem) {
         FilterDataListVC.show(atViewController: self,currentFilter: filterModel) {[weak self] (success, data) in
-            guard let strongSelf = self else{
+            guard let strongSelf = self,success == true else{
                 return
             }
             strongSelf.filterModel = data
