@@ -39,8 +39,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Services.setupShared(buildConf: buildConfiguration)
         
         print(#"""
-            ==>APPLICATION STARTED WITH:
+            ====>APPLICATION STARTED WITH:
             Server-\#(buildConfiguration.serverEnvironment.displayString())-\#(buildConfiguration.serverUrlString())
+            <=====
             """#)
     
         GMSServices.provideAPIKey(Network.googleAPIKey)
