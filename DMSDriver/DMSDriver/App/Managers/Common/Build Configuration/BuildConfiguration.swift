@@ -1,17 +1,6 @@
 
 import Foundation
 
-// Represents the current build scheme
-enum BuildScheme: String {
-    case debug = "debug"
-    case adhoc = "adhoc"
-    case release = "release"
-    case staging = "staging"
-    
-    init?(rawString: String) {
-        self.init(rawValue: rawString.lowercased())
-    }
-}
 
 enum ServerEnvironment: String {
     case development = "development"
@@ -29,29 +18,43 @@ enum ServerEnvironment: String {
 }
 
 //MARK: - Commons
-/// Handles reading the Info.plist file to pull User-Defined attributes and determine configurations for different features
 struct BuildConfiguration {
-    fileprivate let infoDictionary: [String: Any]
-
-    let buildScheme: BuildScheme
     let serverEnvironment: ServerEnvironment
 
-    init?(infoDictionary: [String: Any]) {
-        self.infoDictionary = infoDictionary
-        
-        guard let buildSchemeString = infoDictionary["BUILD_SCHEME"] as? String,
-            let buildScheme = BuildScheme(rawString: buildSchemeString) else {
-                print("Build Configuration: No BUILD_SCHEME value.");
-                return nil;
-        }
-        self.buildScheme = buildScheme;
-        
-        guard let serverString = infoDictionary["SERVER"] as? String,
-            let serverEnvironment = ServerEnvironment(rawString: serverString) else {
-                print("Build Configuration: No SERVER value.");
-                return nil;
-        }
-        
+    init(serverEnvironment: ServerEnvironment) {
         self.serverEnvironment = serverEnvironment;
+        //Load data in configfile (Main service)
+        DMSAppConfiguration.enableConfiguration()
+    }
+}
+
+
+//MARK: - Windows
+extension BuildConfiguration {
+    
+    func serverUrlString() -> String {
+        switch serverEnvironment {
+        case .development:
+            return DMSAppConfiguration.baseUrl_Dev
+        case .staging:
+            return DMSAppConfiguration.baseUrl_Staging
+        case .testing:
+            return DMSAppConfiguration.baseUrl_Staging
+        case .production:
+            return DMSAppConfiguration.baseUrl_Product
+        }
+    }
+    
+    func baseImageUrlString() -> URL? {
+        switch serverEnvironment {
+        case .development:
+            return URL(string:DMSAppConfiguration.baseUrl_Dev)
+        case .staging:
+            return URL(string: DMSAppConfiguration.baseUrl_Staging)
+        case .testing:
+            return URL(string: DMSAppConfiguration.baseUrl_Staging)
+        case .production:
+            return URL(string: DMSAppConfiguration.baseUrl_Product)
+        }
     }
 }

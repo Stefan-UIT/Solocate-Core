@@ -24,7 +24,7 @@ extension BaseAPIService{
                            reason: Reason? = nil,
                            callback: @escaping APICallback<ResponseDataModel<Order>>) -> APIRequest? {
         
-        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL,
+        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER.URL,
                           "\(order.id)", "\(order.status?.id ?? 0)")
         var params = ["route_id": "\(order.route_id)"]
         if let _reason = reason {
@@ -74,7 +74,7 @@ extension BaseAPIService{
     }
     
     func submitSignature(_ file:AttachFileModel,_ order:Order, callback: @escaping APICallback<Order>) {
-        let path = String(format:PATH_REQUEST_URL.UPLOAD_SIGNATURE.URL, "\(order.id)","\(order.status?.id ?? 0)")
+        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER.URL, "\(order.id)","\(order.status?.id ?? 0)")
         let url = E(RESTConstants.getBASEURL()).appending(path)
 
         //let headers = ["Content-Type":"multipart/form-data; boundary=\(E(file.boundary))"];
@@ -137,7 +137,7 @@ extension BaseAPIService{
     }
     
     func uploadMultipleImageToOrder(_ files:[AttachFileModel],_ order:Order, callback: @escaping APICallback<Order>){
-        let path = String(format:PATH_REQUEST_URL.UPLOAD_SIGNATURE.URL, "\(order.id)","\(order.status?.id ?? 0)")
+        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER.URL, "\(order.id)","\(order.status?.id ?? 0)")
         let url = E(RESTConstants.getBASEURL()).appending(path)
         let params = ["route_id": "\(order.route_id)"]
         

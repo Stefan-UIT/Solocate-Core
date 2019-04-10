@@ -2,16 +2,14 @@
 import Foundation
 
 class Debug {
-    fileprivate let buildScheme: BuildScheme;
+    //fileprivate let buildScheme: BuildScheme;
     fileprivate let environment: [String: String];
     
     init(buildConf: BuildConfiguration) {
-        buildScheme = buildConf.buildScheme;
-        
-        if buildScheme == .debug {
-            environment = ProcessInfo.processInfo.environment;
-        }else{
-            environment = [:];
+        if buildConf.serverEnvironment == .development {
+            environment = ProcessInfo.processInfo.environment
+        }else {
+            environment = [:]
         }
     }
     

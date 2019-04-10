@@ -16,7 +16,7 @@ enum NamespaceSocket:String {
 
 class SocketService {
     static var shared = SocketService()
-    let manager = SocketManager(socketURL: URL(string:BASE_URL_SOCKET())!)
+    let manager = SocketManager(socketURL: URL(string:SocketConstants.BASE_URL_SOCKET)!)
     var defaultSocket:SocketIOClient
     var delegate:APISocketDelegate?
     
