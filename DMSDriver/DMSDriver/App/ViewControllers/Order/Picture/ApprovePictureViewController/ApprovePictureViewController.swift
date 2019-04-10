@@ -77,7 +77,7 @@ extension ApprovePictureViewController:DMSNavigationServiceDelegate{
 //MARK: - API
 extension ApprovePictureViewController{
     fileprivate func uploadMultipleFile(files:[AttachFileModel], isNeedFinishOrder:Bool = false){
-        guard let orderCopy = order?.cloneObject() else {
+        guard let orderCopy:Order = order?.cloneObject() else {
             return
         }
         if isNeedFinishOrder {
@@ -149,7 +149,7 @@ extension ApprovePictureViewController{
     
     
     fileprivate func submitSignature(file: AttachFileModel, isNeedFinishOrder:Bool = false)  {
-        guard let orderCopy = order?.cloneObject() else {
+        guard let orderCopy:Order = order?.cloneObject() else {
             return
         }
         if isNeedFinishOrder {

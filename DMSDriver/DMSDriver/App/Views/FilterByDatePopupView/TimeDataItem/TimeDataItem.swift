@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ObjectMapper
 
 enum TimeItemType:Int {
     case TimeItemTypeAll = 0
@@ -25,7 +26,7 @@ enum TimeItemType:Int {
     case TimeItemTypeCustom
 }
 
-class TimeDataItem: NSObject {//You should get it from [TimeData getTimeDataItemType:]
+class TimeDataItem: BaseModel {//You should get it from [TimeData getTimeDataItemType:]
     
     var title:String?
     var subtitle:String?
@@ -41,6 +42,19 @@ class TimeDataItem: NSObject {//You should get it from [TimeData getTimeDataItem
         self.type = type;
         self.startDate = start;
         self.endDate = end;
+    }
+    
+    required init?(map: Map) {
+        super.init()
+    }
+    
+    override func mapping(map: Map) {
+        title <- map["title"]
+        subtitle <- map["subtitle"]
+        startDate <- map["startDate"]
+        endDate <- map["endDate"]
+        reviewDate <- map["reviewDate"]
+        type <- map["type"]
     }
 }
 

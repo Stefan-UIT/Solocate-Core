@@ -33,5 +33,12 @@ class BaseModel:NSObject, Mappable  {
     func getJsonObject(method: ParamsMethod)-> Any {
         return self.getJSONString();
     }
+    
+    
+    func cloneObject<T:BaseModel>() -> T? {
+        let json = getJSONString()
+        let obj = T(JSON: json)
+        return obj
+    }
 }
 

@@ -499,7 +499,7 @@ extension FilterDataListVC:FilterDataListStatusCellDelegate{
 extension FilterDataListVC:FilterDataListFooterViewDelegate {
     func filterDataListFooterView(view: FilterDataListFooterView, didSelectSearch: UIButton) {
         self.dismiss(animated: false) {[weak self] in
-            guard let strongSelf = self else {return}
+            guard let strongSelf =   self else {return}
             print("FilterModel: \(strongSelf.filterModel)")
             strongSelf.callback?(true,strongSelf.filterModel)
         }
@@ -593,8 +593,8 @@ extension FilterDataListVC {
                     callback:@escaping FilterDataListCallback)  {
         let vc:FilterDataListVC = FilterDataListVC.load(nib: "FilterDataListVC")
         vc.callback = callback
-        if currentFilter != nil {
-            vc.filterModel = currentFilter!
+        if let copyObject:FilterDataModel = currentFilter?.cloneObject(){
+            vc.filterModel = copyObject
         }
         
         let nv:BaseNV = BaseNV()
