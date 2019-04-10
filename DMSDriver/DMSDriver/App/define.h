@@ -1,22 +1,6 @@
 // API Implementation
 
-
-
-#define KEYCHAIN_ACCESS_GROUP @"43432WKUU5"
-#define DOMAIN_DEFAULT        @"https://gitosolutions.com"
-// Test
-
 #define SERVER_URL              @"/api"
-
-#define URL_INSTALL_APP @"https://itunes.apple.com/us/app/"
-
-// https://itunes.apple.com/us/app/gito-professional-management/id1358563059?ls=1&mt=8
-// https://itunes.apple.com/us/app/gito-chat/id1359061744?ls=1&mt=8
-// https://itunes.apple.com/us/app/gito-test-case/id1358949931?ls=1&mt=8
-
-#define ID_INSTALL_POSTAPI @"id404249815?mt=8"
-#define ID_INSTALL_TESTCASE @"gito-test-case/id1358949931?ls=1&mt=8"
-#define ID_INSTALL_CHAT @"gito-chat/id1359061744?ls=1&mt=8"
 
 #define DESKTOP_USER_AGENT @"Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/66.0.3359.139 Safari/537.36"
 

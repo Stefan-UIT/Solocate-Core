@@ -47,33 +47,6 @@ struct Constants {
   static let ORDER_CELL_HEIGHT: CGFloat              = 150.0 * (DeviceType.IS_IPAD ? 1.2 : (DeviceType.IS_IPHONE_6 ? 1.174 : (DeviceType.IS_IPHONE_6P ? 1.295 : 1.0))) as CGFloat
 }
 
-func BASE_URL_SOCKET() -> String{
-    let type = SDBuildConf.buildScheme
-    switch type {
-    case .debug,
-         .adhoc:
-        return SocketConstants.SERVER_DEV
-    case .staging:
-        return SocketConstants.SERVER_PROD
-    case .release:
-        return SocketConstants.SERVER_PROD
-    }
-}
-
-func SERVER_URL() -> String {
-    var serverURL = ""
-    let type = SDBuildConf.buildScheme
-    switch type {
-    case .debug,
-         .adhoc:
-        serverURL = "http://dms-customization.dev.seldatdirect.com/"
-    case .staging:
-        serverURL = "http://dms-customization.staging.seldatdirect.com/"
-    case .release:
-        serverURL = "http://dms-customization.live.seldatdirect.com/"
-    }
-    return serverURL
-}
 
 // Window size
 struct ScreenSize {

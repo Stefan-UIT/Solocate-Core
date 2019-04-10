@@ -110,7 +110,6 @@
 		3B66B819210B113D000BDFEF /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B787210B113C000BDFEF /* Color.swift */; };
 		3B66B81A210B113D000BDFEF /* ImagePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B789210B113C000BDFEF /* ImagePickerView.swift */; };
 		3B66B81B210B113D000BDFEF /* BuildConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B78B210B113C000BDFEF /* BuildConfiguration.swift */; };
-		3B66B81C210B113D000BDFEF /* BuildConfiguration+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B78C210B113C000BDFEF /* BuildConfiguration+Extension.swift */; };
 		3B66B81D210B113D000BDFEF /* NavigationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B78E210B113C000BDFEF /* NavigationService.swift */; };
 		3B66B81E210B113D000BDFEF /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B791210B113C000BDFEF /* Array+Extensions.swift */; };
 		3B66B81F210B113D000BDFEF /* UISegmentedControl+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B792210B113C000BDFEF /* UISegmentedControl+Extensions.swift */; };
@@ -163,7 +162,6 @@
 		3B66B855210B113D000BDFEF /* Base.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7DC210B113C000BDFEF /* Base.xcconfig */; };
 		3B66B856210B113D000BDFEF /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7DE210B113C000BDFEF /* Localizable.strings */; };
 		3B66B858210B113D000BDFEF /* MainConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7E5210B113C000BDFEF /* MainConfigs.plist */; };
-		3B66B85A210B113D000BDFEF /* ServicesConfigs.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7EA210B113C000BDFEF /* ServicesConfigs.plist */; };
 		3B66B85C210B113D000BDFEF /* Packages.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7F0210B113C000BDFEF /* Packages.storyboard */; };
 		3B66B85D210B113D000BDFEF /* Map.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7F1210B113C000BDFEF /* Map.storyboard */; };
 		3B66B85E210B113D000BDFEF /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7F2210B113C000BDFEF /* Profile.storyboard */; };
@@ -416,7 +414,6 @@
 		3B66B787210B113C000BDFEF /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		3B66B789210B113C000BDFEF /* ImagePickerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImagePickerView.swift; sourceTree = "<group>"; };
 		3B66B78B210B113C000BDFEF /* BuildConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BuildConfiguration.swift; sourceTree = "<group>"; };
-		3B66B78C210B113C000BDFEF /* BuildConfiguration+Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "BuildConfiguration+Extension.swift"; sourceTree = "<group>"; };
 		3B66B78E210B113C000BDFEF /* NavigationService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavigationService.swift; sourceTree = "<group>"; };
 		3B66B791210B113C000BDFEF /* Array+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 		3B66B792210B113C000BDFEF /* UISegmentedControl+Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+Extensions.swift"; sourceTree = "<group>"; };
@@ -470,7 +467,6 @@
 		3B66B7DF210B113C000BDFEF /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3B66B7E0210B113C000BDFEF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3B66B7E5210B113C000BDFEF /* MainConfigs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MainConfigs.plist; sourceTree = "<group>"; };
-		3B66B7EA210B113C000BDFEF /* ServicesConfigs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = ServicesConfigs.plist; sourceTree = "<group>"; };
 		3B66B7EB210B113C000BDFEF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B66B7ED210B113C000BDFEF /* DMSDriver-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DMSDriver-Bridging-Header.h"; sourceTree = "<group>"; };
 		3B66B7F0210B113C000BDFEF /* Packages.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Packages.storyboard; sourceTree = "<group>"; };
@@ -1494,7 +1490,6 @@
 			isa = PBXGroup;
 			children = (
 				3B66B78B210B113C000BDFEF /* BuildConfiguration.swift */,
-				3B66B78C210B113C000BDFEF /* BuildConfiguration+Extension.swift */,
 			);
 			path = "Build Configuration";
 			sourceTree = "<group>";
@@ -1717,7 +1712,6 @@
 				3B66B7D7210B113C000BDFEF /* Configurations */,
 				3B66B7DD210B113C000BDFEF /* Localize */,
 				3B66B7E3210B113C000BDFEF /* Service */,
-				3B66B7E9210B113C000BDFEF /* GlobalServices */,
 				3B66B7EB210B113C000BDFEF /* Info.plist */,
 				3B66B7EC210B113C000BDFEF /* BridgingHeaders */,
 			);
@@ -1755,14 +1749,6 @@
 				3B66B7E5210B113C000BDFEF /* MainConfigs.plist */,
 			);
 			path = Service;
-			sourceTree = "<group>";
-		};
-		3B66B7E9210B113C000BDFEF /* GlobalServices */ = {
-			isa = PBXGroup;
-			children = (
-				3B66B7EA210B113C000BDFEF /* ServicesConfigs.plist */,
-			);
-			path = GlobalServices;
 			sourceTree = "<group>";
 		};
 		3B66B7EC210B113C000BDFEF /* BridgingHeaders */ = {
@@ -2836,7 +2822,6 @@
 				3B1629D1221BEA8200E7A83C /* FilterDataListHeaderCell.xib in Resources */,
 				3BF258222224FABB00A56B4E /* ApprovePictureViewController.xib in Resources */,
 				3B4778EF221E4ED1005639E4 /* FilterDataListInsertContentCell.xib in Resources */,
-				3B66B85A210B113D000BDFEF /* ServicesConfigs.plist in Resources */,
 				3B66B867210B113D000BDFEF /* Assets.xcassets in Resources */,
 				3B66B855210B113D000BDFEF /* Base.xcconfig in Resources */,
 				2A4204FA225760D400789837 /* PickerTimeVC.xib in Resources */,
@@ -3135,7 +3120,6 @@
 				3B66B8E2210B1149000BDFEF /* Message.swift in Sources */,
 				3B66B91A210B1149000BDFEF /* MainVC.swift in Sources */,
 				3B66B915210B1149000BDFEF /* ProfileVC.swift in Sources */,
-				3B66B81C210B113D000BDFEF /* BuildConfiguration+Extension.swift in Sources */,
 				3B1629D4221BED0600E7A83C /* FilterDataTypeRowCell.swift in Sources */,
 				3B66B8E7210B1149000BDFEF /* PackageModel.swift in Sources */,
 				3B66B83A210B113D000BDFEF /* Label.swift in Sources */,

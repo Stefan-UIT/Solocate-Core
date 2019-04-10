@@ -19,21 +19,16 @@ class AppConfiguration: NSObject {
     var reloadRouteTimeInterval:Int = 0
     var isUserAutoRefetchRouteList = false
     var distanceSubmitLocation:Double = 0
-    
-    
     var baseUrl:String = ""
     var baseUrl_Dev:String = ""
     var baseUrl_Staging:String = ""
     var baseUrl_Product:String = ""
     var baseUrl_Google_Map:String = ""
     
-    var pathUrls:[String: String] = [:]
-
     
     // MARK: - Utility Methods
     func enableConfiguration() {
         loadCustomConfiguration()
-        loadCustomServicesConfigs()
     }
     
     private func loadCustomConfiguration() {
@@ -57,45 +52,29 @@ class AppConfiguration: NSObject {
             self.distanceSubmitLocation = distanceSubmitLocation
         }
         
-        
-        if let url = config.object(forKey: PATH_REQUEST_URL.BASE_URL.rawValue) as? String {
+        if let url = config.object(forKey: "BASE_URL") as? String {
             self.baseUrl = url
         }
         
-        if let url = config.object(forKey: PATH_REQUEST_URL.BASE_URL_STAGING.rawValue) as? String {
+        if let url = config.object(forKey: "BASE_URL_STAGING") as? String {
             self.baseUrl_Staging = url
         }
         
-        if let url = config.object(forKey: PATH_REQUEST_URL.BASE_URL_DEV.rawValue) as? String {
+        if let url = config.object(forKey: "BASE_URL_DEV") as? String {
             self.baseUrl_Dev = url
         }
         
-        if let url = config.object(forKey: PATH_REQUEST_URL.BASE_URL_PRODUCT.rawValue) as? String {
+        if let url = config.object(forKey: "BASE_URL_PRODUCT") as? String {
             self.baseUrl_Product = url
         }
         
-        if let url = config.object(forKey: PATH_REQUEST_URL.BASE_URL_GOOGLE_MAP.rawValue) as? String {
+        if let url = config.object(forKey: "BASE_URL_GOOGLE_MAP") as? String {
             self.baseUrl_Google_Map = url
         }
     }
     
-    private func loadCustomServicesConfigs() {
-        guard let config = readServicesConfigs() else {
-            return
-        }
-       
-        self.pathUrls = config as! [String : String]
-    }
-    
     private func readConfigurationFile() -> NSDictionary? {
         guard let path = Bundle.main.path(forResource: "MainConfigs", ofType: "plist") else {
-            return nil
-        }
-        return NSDictionary(contentsOfFile: path)
-    }
-    
-    private func readServicesConfigs() -> NSDictionary? {
-        guard let path = Bundle.main.path(forResource: "ServicesConfigs", ofType: "plist") else {
             return nil
         }
         return NSDictionary(contentsOfFile: path)

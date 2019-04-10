@@ -14,16 +14,17 @@ class FirebaseService:NSObject {
         var plistPath: String;
         
         if let confBuild = conf  {
-            switch confBuild.buildScheme {
-            case .debug, .adhoc:
+            switch confBuild.serverEnvironment {
+            case .development:
                 tokenType = .sandbox
                 plistPath = Bundle.main.path(forResource: "GoogleService-Info", ofType: "plist")!
                 
-            case .staging:
+            case .staging,
+                 .testing:
                 tokenType = .prod
                 plistPath = Bundle.main.path(forResource: "GoogleService-Info-staging", ofType: "plist")!
                 
-            case .release:
+            case .production:
                 tokenType = .prod
                 plistPath = Bundle.main.path(forResource: "GoogleService-Info-prod", ofType: "plist")!
             }

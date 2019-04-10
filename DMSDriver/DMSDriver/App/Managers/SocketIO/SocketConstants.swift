@@ -34,15 +34,21 @@ struct SocketConstants {
     
     static var PATH:String {
         get {
-            let type = SDBuildConf.buildScheme
+            return "/session/socket.io"
+        }
+    }
+    
+    static var BASE_URL_SOCKET:String {
+        get{
+            let type = SDBuildConf.serverEnvironment
             switch type {
-            case .debug,
-                 .adhoc:
-                return "/session/socket.io"
-            case .staging:
-                return "/session/socket.io/socket.io.js"
-            case .release:
-                return "/session/socket.io/socket.io.js"
+            case .development:
+                return SocketConstants.SERVER_DEV
+            case .staging,
+                 .testing:
+                return SocketConstants.SERVER_PROD
+            case .production:
+                return SocketConstants.SERVER_PROD
             }
         }
     }
