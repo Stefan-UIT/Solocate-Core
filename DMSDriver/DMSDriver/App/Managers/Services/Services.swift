@@ -9,10 +9,6 @@ class Services {
         return BaseAPIService.shared()
     }()
     
-//    fileprivate(set) lazy var push: PushNotificationService = {
-//        return PushNotificationService_()
-//    }()
-    
     fileprivate(set) lazy var firebase: FirebaseService = {
         return FirebaseService(buildConf: buildConf)
     }()

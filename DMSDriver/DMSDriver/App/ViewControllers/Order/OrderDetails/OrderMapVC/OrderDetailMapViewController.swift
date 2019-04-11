@@ -33,7 +33,11 @@ class OrderDetailMapViewController: BaseViewController {
     
     override func updateNavigationBar() {
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.BackOnly, "Map")
+        //App().navigationService.updateNavigationBar(.BackOnly, "Map")
+        App().navigationService.updateNavigationBar(.Menu,
+                                                    "Map".localized,
+                                                    AppColor.white, true)
+
     }
     
     override func updateUI() {

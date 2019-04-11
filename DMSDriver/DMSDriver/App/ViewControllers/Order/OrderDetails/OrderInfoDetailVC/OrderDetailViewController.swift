@@ -406,13 +406,38 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         let row = indexPath.row
         switch orderSection {
         case .sectionFrom:
-            if row != orderInforTo.count - 1 &&  // From address,To address
+            if row != 0 &&  // From address, Contact phone
+                row != orderInforFrom.count - 3 {
+                return
+            }
+            
+            if row == 0{ //From address
+                let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
+
+                if let _orderDetail = orderDetail,
+                    let lng = _orderDetail.to?.lngtd,
+                    let lat = _orderDetail.to?.lattd  {
+                    let location = CLLocationCoordinate2D(latitude: lat.doubleValue ,
+                                                          longitude: lng.doubleValue)
+                    vc.orderLocation = location
+                }
+                
+                self.navigationController?.pushViewController( vc, animated: true)
+
+            }else {
+                let item = orderInforFrom[row]
+                callPhone(phone: item.content)
+            }
+            
+        case .sectionTo:
+            if row != 0 &&  // To address, Contact phone
                 row != orderInforTo.count - 3 {
                 return
             }
             
-            let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
-            if row != orderInforTo.count - 1{
+            if row == 0{
+                let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
+
                 if let _orderDetail = orderDetail,
                     let lng = _orderDetail.to?.lngtd,
                     let lat = _orderDetail.to?.lattd  {
@@ -420,35 +445,12 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                                                           longitude: lng.doubleValue)
                     vc.orderLocation = location
                 }
+                self.navigationController?.pushViewController( vc, animated: true)
                 
             }else {
-                //
+                let item = orderInforTo[row]
+                callPhone(phone: item.content)
             }
-            
-            //self.present(vc, animated: true, completion: nil)
-            self.navigationController?.pushViewController( vc, animated: true)
-            
-        case .sectionTo:
-            if row != orderInforTo.count - 1 {  // To address
-                return
-            }
-            
-            let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
-            if row != orderInforTo.count - 1{
-                if let _orderDetail = orderDetail,
-                    let lng = _orderDetail.to?.lngtd,
-                    let lat = _orderDetail.to?.lattd  {
-                    let location = CLLocationCoordinate2D(latitude: lat.doubleValue ,
-                                                          longitude: lng.doubleValue)
-                    vc.orderLocation = location
-                }
-                
-            }else {
-                //
-            }
-            
-            //self.present(vc, animated: true, completion: nil)
-            self.navigationController?.pushViewController( vc, animated: true)
             
         case .sectionSignature:
             self.showImage(nil, linkUrl: orderDetail?.signature?.url, placeHolder: nil)
@@ -677,6 +679,17 @@ extension OrderDetailViewController:SignatureViewControllerDelegate{
 
 //MARK: - Otherfuntion
 fileprivate extension OrderDetailViewController{
+    func callPhone(phone:String) {
+        if !isEmpty(phone){
+            let urlString = "tel://\(phone)"
+            if let url = URL(string: urlString) {
+                UIApplication.shared.open(url, options: [:], completionHandler: nil)
+            }
+        }else {
+            print("Phone number is invalid.")
+        }
+    }
+    
     func scrollToBottom(){
         DispatchQueue.main.async {[weak self] in
             let indexPath = IndexPath(row: 0, section: OrderDetailSection.sectionDescription.rawValue)
