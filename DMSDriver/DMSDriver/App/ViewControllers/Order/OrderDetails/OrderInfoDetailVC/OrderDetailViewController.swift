@@ -37,7 +37,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     @IBOutlet weak var updateStatusButton: UIButton?
     @IBOutlet weak var btnUnable: UIButton?
     @IBOutlet weak var vAction: UIView?
-    
+    @IBOutlet weak var lblOrderId: UILabel?
+    @IBOutlet weak var lblDateTime: UILabel?
+
     fileprivate var orderInforDetail = [OrderDetailInforRow]()
     fileprivate var orderInforFrom = [OrderDetailInforRow]()
     fileprivate var orderInforTo = [OrderDetailInforRow]()
@@ -81,6 +83,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     override func updateUI()  {
         super.updateUI()
         DispatchQueue.main.async {[weak self] in
+            self?.initUI()
             self?.updateButtonStatus()
             self?.setupTableView()
         }
@@ -98,14 +101,14 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     //MARK: - Initialize
-    func setupTableView() {
+    private func setupTableView() {
         tableView?.delegate = self
         tableView?.dataSource = self
         tableView?.estimatedRowHeight = 100
         tableView?.rowHeight = UITableView.automaticDimension
     }
     
-    func initVar()  {
+    private func initVar()  {
         arrTitleHeader = ["",
                           "Order info".localized.uppercased(),
                           "From".localized.uppercased(),
@@ -116,7 +119,20 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         setupDataDetailInforRows()
     }
     
-    func setupDataDetailInforRows() {
+    private func initUI()  {
+        lblOrderId?.text = "Delivery #\(orderDetail?.id ?? 0)"
+        guard  let start = orderDetail?.to?.start_time?.date,
+               let end = orderDetail?.to?.end_time?.date else{
+            lblDateTime?.text = "Start/End time is invalid."
+            return
+        }
+        let timeStart = DateFormatter.hour24Formater.string(from: start)
+        let timeEnd = DateFormatter.hour24Formater.string(from: end)
+        let date = DateFormatter.shortDate.string(from: end)
+        lblDateTime?.text = "\(timeStart) - \(timeEnd) \(date)"
+    }
+    
+    private func setupDataDetailInforRows() {
         orderInforDetail.removeAll()
         orderInforFrom.removeAll()
         orderInforTo.removeAll()
@@ -213,64 +229,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             self?.updateOrderDetail?(order)
         }
         self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func handleUnableToStartAction() {
-        let vc:ReasonListViewController = .loadSB(SB: .Common)
-        vc.orderDetail = orderDetail
-        vc.didCancelSuccess =  { [weak self] (success, order) in
-            //self?.fetchData(showLoading: false)
-            self?.orderDetail = order as? Order
-            self?.updateUI()
-            self?.setupDataDetailInforRows()
-            self?.tableView?.reloadData()
-            self?.didUpdateStatus?((self?.orderDetail)!, nil)
-        }
-        
-        self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    func handleFinishAction() {
-        guard let _orderDetail = orderDetail else {return}
-        let status:StatusOrder = _orderDetail.statusOrder
-        var statusNeedUpdate = status.rawValue
-        switch status{
-        case .newStatus:
-            statusNeedUpdate = StatusOrder.inProcessStatus.rawValue
-            updateOrderStatus(statusNeedUpdate)
-            
-        case .inProcessStatus:
-            if _orderDetail.isRequireImage() &&
-                _orderDetail.pictures?.count ?? 0 <= 0{
-                self.showAlertView("Picture required".localized) {(action) in
-                    //self?.didUpdateStatus?(_orderDetail, nil)
-                }
-                
-            }else if (_orderDetail.isRequireSign() &&
-                _orderDetail.signature == nil) {
-                self.showAlertView("Signature required".localized) {(action) in
-                    //self?.didUpdateStatus?(_orderDetail, nil)
-                }
-                
-            }else {
-                statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
-                self.updateOrderStatus(statusNeedUpdate)
-            }
-            
-        default:
-            break
-        }
-    }
-    
-    func showInputNote(_ statusNeedUpdate:String) {
-        let alert = UIAlertController(title: "Finish order".localized,
-                                      message: nil, preferredStyle: .alert)
-        alert.showTextViewInput(placeholder: "Enter note for this order(optional)".localized,
-                                nameAction: "Finish".localized,
-                                oldText: "") {[weak self] (success, string) in
-                                    //self?.orderDetail?.note = string
-                                    self?.updateOrderStatus(statusNeedUpdate)
-        }
     }
 }
 
@@ -679,7 +637,65 @@ extension OrderDetailViewController:SignatureViewControllerDelegate{
 
 //MARK: - Otherfuntion
 fileprivate extension OrderDetailViewController{
-    func callPhone(phone:String) {
+    private func handleUnableToStartAction() {
+        let vc:ReasonListViewController = .loadSB(SB: .Common)
+        vc.orderDetail = orderDetail
+        vc.didCancelSuccess =  { [weak self] (success, order) in
+            //self?.fetchData(showLoading: false)
+            self?.orderDetail = order as? Order
+            self?.updateUI()
+            self?.setupDataDetailInforRows()
+            self?.tableView?.reloadData()
+            self?.didUpdateStatus?((self?.orderDetail)!, nil)
+        }
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func handleFinishAction() {
+        guard let _orderDetail = orderDetail else {return}
+        let status:StatusOrder = _orderDetail.statusOrder
+        var statusNeedUpdate = status.rawValue
+        switch status{
+        case .newStatus:
+            statusNeedUpdate = StatusOrder.inProcessStatus.rawValue
+            updateOrderStatus(statusNeedUpdate)
+            
+        case .inProcessStatus:
+            if _orderDetail.isRequireImage() &&
+                _orderDetail.pictures?.count ?? 0 <= 0{
+                self.showAlertView("Picture required".localized) {(action) in
+                    //self?.didUpdateStatus?(_orderDetail, nil)
+                }
+                
+            }else if (_orderDetail.isRequireSign() &&
+                _orderDetail.signature == nil) {
+                self.showAlertView("Signature required".localized) {(action) in
+                    //self?.didUpdateStatus?(_orderDetail, nil)
+                }
+                
+            }else {
+                statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
+                self.updateOrderStatus(statusNeedUpdate)
+            }
+            
+        default:
+            break
+        }
+    }
+    
+    private func showInputNote(_ statusNeedUpdate:String) {
+        let alert = UIAlertController(title: "Finish order".localized,
+                                      message: nil, preferredStyle: .alert)
+        alert.showTextViewInput(placeholder: "Enter note for this order(optional)".localized,
+                                nameAction: "Finish".localized,
+                                oldText: "") {[weak self] (success, string) in
+                                    //self?.orderDetail?.note = string
+                                    self?.updateOrderStatus(statusNeedUpdate)
+        }
+    }
+    
+    private func callPhone(phone:String) {
         if !isEmpty(phone){
             let urlString = "tel://\(phone)"
             if let url = URL(string: urlString) {
@@ -690,21 +706,21 @@ fileprivate extension OrderDetailViewController{
         }
     }
     
-    func scrollToBottom(){
+    private func scrollToBottom(){
         DispatchQueue.main.async {[weak self] in
             let indexPath = IndexPath(row: 0, section: OrderDetailSection.sectionDescription.rawValue)
             self?.tableView?.scrollToRow(at: indexPath, at: .bottom, animated: true)
         }
     }
     
-    func updateButtonStatus() {
+    private func updateButtonStatus() {
         updateStatusButton?.backgroundColor = AppColor.buttonColor
         vAction?.isHidden = (orderDetail?.statusOrder == StatusOrder.deliveryStatus ||
                             orderDetail?.statusOrder == StatusOrder.cancelStatus ||
                             orderDetail?.statusOrder == StatusOrder.cancelFinishStatus)
     }
     
-    func getAssetThumbnail(asset: PHAsset, size: CGFloat) -> UIImage {
+    private func getAssetThumbnail(asset: PHAsset, size: CGFloat) -> UIImage {
         let retinaScale = UIScreen.main.scale
         let retinaSquare = CGSize(width: size * retinaScale, height: size * retinaScale)
         

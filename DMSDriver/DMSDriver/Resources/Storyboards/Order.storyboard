@@ -1763,6 +1763,8 @@
                         <viewLayoutGuide key="safeArea" id="6w1-QI-8Cl"/>
                     </view>
                     <connections>
+                        <outlet property="lblDateTime" destination="5HY-SE-gS6" id="QmK-DB-0Fv"/>
+                        <outlet property="lblOrderId" destination="fvt-JK-czg" id="Vkq-qJ-jKP"/>
                         <outlet property="tableView" destination="4rp-Ib-0KY" id="XcR-gs-Nx8"/>
                         <outlet property="updateStatusButton" destination="pbX-10-KuK" id="BcF-c3-Vye"/>
                         <outlet property="vAction" destination="0vT-dI-kdl" id="8vI-pF-Lbe"/>
