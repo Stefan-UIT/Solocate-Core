@@ -96,8 +96,7 @@ class RESTConstants: NSObject {
         switch type {
         case .development:
             serverURL = "http://dms-customization.dev.seldatdirect.com/"
-        case .staging,
-             .testing:
+        case .staging:
             serverURL = "http://dms-customization.staging.seldatdirect.com/"
         case .production:
             serverURL = "http://dms-customization.live.seldatdirect.com/"

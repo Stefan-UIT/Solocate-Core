@@ -74,7 +74,7 @@ class TimeData: NSObject {//You should get it from [TimeData getTimeDataItemType
         TimeData.shared.timeDataItemDefaultCustom = item
     }
 
-    func getTimeDataItemDefault() -> TimeDataItem? {
+    class func getTimeDataItemDefault() -> TimeDataItem? {
         let timeData = TimeData.shared.timeDataItemDefault
         return timeData
     }

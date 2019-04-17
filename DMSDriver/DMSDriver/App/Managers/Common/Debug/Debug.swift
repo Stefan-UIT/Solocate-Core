@@ -5,16 +5,21 @@ class Debug {
     //fileprivate let buildScheme: BuildScheme;
     fileprivate let environment: [String: String];
     
-    init(buildConf: BuildConfiguration) {
-        if buildConf.serverEnvironment == .development {
-            environment = ProcessInfo.processInfo.environment
-        }else {
-            environment = [:]
-        }
-    }
-    
-    lazy var useServer: String? = self.environmentString(for: "SERVER")
+    var serverEnvironment:ServerEnvironment?
+    var useServer: String?
     lazy var disableLoggingForAPI = self.environmentBool(for: "DISABLE_API_LOG")
+    
+    init(useServer:String? = nil) {
+        #if DEVELOPMENT
+            environment = ProcessInfo.processInfo.environment
+            self.useServer = useServer
+            if  useServer == nil {
+                self.useServer = self.environmentString(for: "SERVER")
+            }
+        #else
+            environment = [:]
+        #endif
+    }
 }
 
 //MARK: - instances

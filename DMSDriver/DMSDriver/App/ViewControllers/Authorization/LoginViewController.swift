@@ -14,7 +14,31 @@ class LoginViewController: BaseViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var rememberButton: UIButton!
     @IBOutlet weak var conBotViewLogin: NSLayoutConstraint?
+    @IBOutlet weak var vEvironment: UIView?
+    @IBOutlet weak var segEvironmentControl:UISegmentedControl?
 
+    private let DEVELOMENT = 0
+    private let DEMO = 1
+    private let LIVE = 2
+    
+    enum ChooseEvironment:Int {
+        case Development = 0
+        case Demo
+        case Live
+        
+        var nane:String {
+            get {
+                switch self  {
+                case .Development:
+                    return "Dev"
+                case .Demo:
+                    return "Demo"
+                case .Live:
+                    return "Live"
+                }
+            }
+        }
+    }
     
     private var keepLogin = true {
         didSet {
@@ -25,6 +49,7 @@ class LoginViewController: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTextField()
+        setupViewEvironment()
         setupRemeberButton()
         App().statusBarView?.backgroundColor = AppColor.backgroundLogin
     }
@@ -60,12 +85,22 @@ class LoginViewController: BaseViewController {
         }
     }
     
-    func test() {
+    private func test() {
         userNameTextField.text = "nguyen.manh@seldatinc.com"
         passwordTextField.text = "Seldat.123@"
     }
+    
+    private func setupViewEvironment() {
+        #if PRODUCTION
+            vEvironment?.isHidden = true
+        #else
+            vEvironment?.isHidden = !DMSAppConfiguration.isUseChooseEnvironment
+            segEvironmentControl?.segmentTitles = ["DEV","DEMO","LIVE"]
+            segEvironmentControl?.selectedSegmentIndex = 0
+        #endif
+    }
 
-    func setupTextField() {
+    private func setupTextField() {
         userNameTextField.attributedPlaceholder = NSAttributedString(string: userNameTextField.placeholder ?? "",
                                                                      attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
         
@@ -84,7 +119,7 @@ class LoginViewController: BaseViewController {
         }
     }
     
-   func setupRemeberButton() {
+   private func setupRemeberButton() {
      let imgName = keepLogin ? "check_selected" : "check_normal"
       rememberButton.setImage(UIImage(named: imgName), for: .normal)
       Caches().setObject(obj: keepLogin, forKey: Defaultkey.keepLogin)
@@ -125,6 +160,28 @@ class LoginViewController: BaseViewController {
     
     @IBAction func tapForgetPasswordButtonAction(_ sender: UIButton) {
         handleForgetPassword()
+    }
+    
+    @IBAction func onChangeSegmentControl(_ sender: UISegmentedControl) {
+        guard let evironment = ChooseEvironment(rawValue: sender.selectedSegmentIndex) else {
+            return
+        }
+
+        switch evironment {
+        case .Development:
+            Debug.setup(shared: Debug(useServer: DMSAppConfiguration.baseUrl_Dev))
+        case .Demo:
+            Debug.setup(shared: Debug(useServer: DMSAppConfiguration.baseUrl_Staging))
+        case .Live:
+            Debug.setup(shared: Debug(useServer: DMSAppConfiguration.baseUrl_Product))
+        }
+        
+        print("chosen evironment:\(evironment.nane)")
+        print(#"""
+            ====>APPLICATION STARTED WITH:
+            Server-\#(SDBuildConf.serverEnvironment.displayString())-\#(SDBuildConf.serverUrlString())
+            <=====
+            """#)
     }
 }
 

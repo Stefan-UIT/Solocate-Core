@@ -2,16 +2,14 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>BASE_URL</key>
-	<string>https://apigw2.seldatdirect.com/dev/dms-customization/api/</string>
 	<key>BASE_URL_DEV</key>
 	<string>https://apigw2.seldatdirect.com/dev/dms-customization/api/</string>
 	<key>BASE_URL_STAGING</key>
-	<string>https://apigw2.seldatdirect.com/dev/dms-customization/api/</string>
+	<string>https://apigw2.seldatdirect.com/demo/dms-customization/api/</string>
+	<key>BASE_URL_PRODUCT</key>
+	<string>https://apigw2.seldatdirect.com/live/dms-customization/api/</string>
 	<key>BASE_URL_GOOGLE_MAP</key>
 	<string>https://maps.googleapis.com/maps/api</string>
-	<key>BASE_URL_PRODUCT</key>
-	<string>https://apigw2.seldatdirect.com/dev/dms-customization/api/</string>
 	<key>TrackingTimeInterval</key>
 	<integer>60</integer>
 	<key>ReloadRouteTimeInterval</key>
@@ -20,5 +18,7 @@
 	<false/>
 	<key>DistanceSubmitLocation</key>
 	<integer>50</integer>
+	<key>UseChooseEnvironment</key>
+	<true/>
 </dict>
 </plist>
