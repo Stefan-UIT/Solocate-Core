@@ -19,6 +19,8 @@ class AppConfiguration: NSObject {
     var reloadRouteTimeInterval:Int = 0
     var isUserAutoRefetchRouteList = false
     var distanceSubmitLocation:Double = 0
+    var isUseChooseEnvironment = false
+    
     var baseUrl:String = ""
     var baseUrl_Dev:String = ""
     var baseUrl_Staging:String = ""
@@ -50,6 +52,10 @@ class AppConfiguration: NSObject {
         
         if let distanceSubmitLocation = config.object(forKey:"DistanceSubmitLocation") as? Double {
             self.distanceSubmitLocation = distanceSubmitLocation
+        }
+        
+        if let useChooseEnvironment = config.object(forKey:"UseChooseEnvironment") as? Bool {
+            self.isUseChooseEnvironment = useChooseEnvironment
         }
         
         if let url = config.object(forKey: "BASE_URL") as? String {

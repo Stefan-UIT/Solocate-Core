@@ -31,17 +31,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")//disable autolayout error/warning
     
-        // Config server environment at here ex: .production,.development ...
-        let buildConfiguration = BuildConfiguration(serverEnvironment: .development)
-        
-        Debug.setup(shared: Debug(buildConf: buildConfiguration)) // Use for Debug Only
+        let buildConfiguration = BuildConfiguration()
+        // Debug server environment at here ex: .production,.development ...
+        // Debug.setup(shared: Debug(useServer: DMSAppConfiguration.baseUrl_Dev)) // Use for Debug Only
 
         //App service
         Services.setupShared(buildConf: buildConfiguration)
         
         print(#"""
             ====>APPLICATION STARTED WITH:
-            Server-\#(buildConfiguration.serverEnvironment.displayString())-\#(buildConfiguration.serverUrlString())
+            TagetBuild: \#(buildConfiguration.tagetBuild.rawValue)
+            Server: \#(buildConfiguration.serverUrlString())
             <=====
             """#)
     

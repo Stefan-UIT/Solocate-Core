@@ -123,7 +123,7 @@ class BaseAPIService {
     }
     
     func request<RESULT:BaseModel, ERROR: APIError>(method: ParamsMethod,
-                 serverURL: String  = E(RESTConstants.getBASEURL()),
+                 serverURL: String  = E(SDBuildConf.serverUrlString()),
                  headers:HTTPHeaders? = nil,
                  path: String,
                  input: APIInput,
@@ -167,8 +167,11 @@ class BaseAPIService {
                                     bodyData: encoding.bodyDataValue,
                                     bodyString: encoding.bodyStringValue)
         
-        APILog("REQUEST", encoding.bodyStringValue);
-
+        if Debug.shared?.disableLoggingForAPI == false {
+            DispatchQueue.global().async {
+                APILog("REQUEST", encoding.bodyStringValue);
+            }
+        }
         var request: DataRequest;
 
         request = sessionManager.request(url,
@@ -178,22 +181,25 @@ class BaseAPIService {
                                          headers: headers);
         
         request.responseJSON(queue: responsedCallbackQueue,
-                             options: .allowFragments) { (dataResponse) in
+                             options: .allowFragments) {[weak self] (dataResponse) in
             
-            let logResult = dataResponse.data != nil ? String(data: dataResponse.data!, encoding: .utf8) : "<empty>";
-            var logStatus : String;
+                                if Debug.shared?.disableLoggingForAPI == false {
+                                    DispatchQueue.global().async {
+                                        let logResult = dataResponse.data != nil ? String(data: dataResponse.data!, encoding: .utf8) : "<empty>";
+                                        var logStatus : String;
+                                        if let statusCode = dataResponse.response?.statusCode {
+                                            logStatus = String(statusCode);
+                                        }else if let anError = dataResponse.error {
+                                            logStatus = "\(anError)";
+                                        }else{
+                                            logStatus = "Unexpected Error!";
+                                        }
+                                        
+                                        APILog("RESPONSE-\(logStatus)", logResult);
+                                    }
+                                }
             
-            if let statusCode = dataResponse.response?.statusCode {
-                logStatus = String(statusCode);
-            }else if let anError = dataResponse.error {
-                logStatus = "\(anError)";
-            }else{
-                logStatus = "Unexpected Error!";
-            }
-            
-            APILog("RESPONSE-\(logStatus)", logResult);
-            
-            self.handleResponseJSON(dataResponse: dataResponse, callback: callback)
+                                self?.handleResponseJSON(dataResponse: dataResponse, callback: callback)
             
         };
         
@@ -229,7 +235,7 @@ class BaseAPIService {
         
         APILog("REQUEST", parseJson(parameters)?.string);
         
-        Alamofire.upload(multipartFormData: { (multipartFormData) in
+        Alamofire.upload(multipartFormData: {(multipartFormData) in
             for (key, value) in parameters {
                 multipartFormData.append("\(value)".data(using: String.Encoding.utf8)!, withName: key as String)
             }
@@ -244,23 +250,25 @@ class BaseAPIService {
             
             print("Uploading file ...")
             
-        }, usingThreshold: UInt64.init(), to: url, method: method, headers: headers) { (result) in
+        }, usingThreshold: UInt64.init(), to: url, method: method, headers: headers) {[weak self] (result) in
             switch result{
             case .success(let upload, _, _):
                 upload.responseJSON { response in
-                    let logResult = response.data != nil ? String(data: response.data!, encoding: .utf8) : "<empty>";
-                    var logStatus : String;
-                    if let statusCode = response.response?.statusCode {
-                        logStatus = String(statusCode);
-                    }else if let anError = response.error {
-                        logStatus = "\(anError)";
-                    }else{
-                        logStatus = "Unexpected Error!";
+                    if Debug.shared?.disableLoggingForAPI == false {
+                        let logResult = response.data != nil ? String(data: response.data!, encoding: .utf8) : "<empty>";
+                        var logStatus : String;
+                        if let statusCode = response.response?.statusCode {
+                            logStatus = String(statusCode);
+                        }else if let anError = response.error {
+                            logStatus = "\(anError)";
+                        }else{
+                            logStatus = "Unexpected Error!";
+                        }
+                        
+                        APILog("RESPONSE-\(logStatus)", logResult);
                     }
                     
-                    APILog("RESPONSE-\(logStatus)", logResult);
-                    
-                    self.handleResponseJSON(dataResponse: response, callback: callback)
+                    self?.handleResponseJSON(dataResponse: response, callback: callback)
                 }
                 
             case .failure(let error):
@@ -352,7 +360,6 @@ fileprivate extension BaseAPIService{
 }
 
 //MARK: - Encoding
-
 extension BaseAPIService {
     
     struct APIEncoding: ParameterEncoding {

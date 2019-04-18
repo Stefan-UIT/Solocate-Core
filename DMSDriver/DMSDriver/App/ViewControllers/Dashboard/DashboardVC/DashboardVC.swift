@@ -67,8 +67,12 @@ class DashboardVC: BaseViewController {
     }
     
     func initVar()  {
-        timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeThisWeek)
-        TimeData.setTimeDataItemDefault(item: timeData!)
+        if let _timeData = TimeData.getTimeDataItemDefault() {
+            timeData = _timeData
+        }else {
+            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeThisWeek)
+            TimeData.setTimeDataItemDefault(item: timeData!)
+        }
     }
     
     override func updateUI()  {
@@ -129,7 +133,6 @@ class DashboardVC: BaseViewController {
         l.form = .line
         l.formSize = 30
         l.formLineWidth = 12
-    
     }
 
     

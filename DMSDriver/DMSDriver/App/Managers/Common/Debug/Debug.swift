@@ -5,22 +5,27 @@ class Debug {
     //fileprivate let buildScheme: BuildScheme;
     fileprivate let environment: [String: String];
     
-    init(buildConf: BuildConfiguration) {
-        if buildConf.serverEnvironment == .development {
-            environment = ProcessInfo.processInfo.environment
-        }else {
+    var serverEnvironment:ServerEnvironment?
+    var useServer: String?
+    lazy var disableLoggingForAPI = self.environmentBool(for: "DISABLE_API_LOG")
+    
+    init(useServer:String? = nil) {
+        if SDBuildConf.tagetBuild == .Production {
             environment = [:]
+        }else {
+            environment = ProcessInfo.processInfo.environment
+            self.useServer = useServer
+            if  useServer == nil {
+                self.useServer = self.environmentString(for: "SERVER")
+            }
         }
     }
-    
-    lazy var useServer: String? = self.environmentString(for: "SERVER")
-    lazy var disableLoggingForAPI = self.environmentBool(for: "DISABLE_API_LOG")
 }
 
 //MARK: - instances
 
 extension Debug{
-    fileprivate(set) static var shared: Debug!;
+    fileprivate(set) static var shared: Debug?
     
     static func setup(shared: Debug) {
         self.shared = shared;

@@ -44,8 +44,7 @@ struct SocketConstants {
             switch type {
             case .development:
                 return SocketConstants.SERVER_DEV
-            case .staging,
-                 .testing:
+            case .staging:
                 return SocketConstants.SERVER_PROD
             case .production:
                 return SocketConstants.SERVER_PROD

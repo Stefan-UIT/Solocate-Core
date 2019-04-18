@@ -86,18 +86,13 @@ class RESTConstants: NSObject {
         return [String: String]()
     }()
     
-    class func getBASEURL() -> String? {
-        return SDBuildConf.serverUrlString()
-    }
-    
     class func SERVER_TRACKING_URL() -> String {
         var serverURL = ""
         let type = SDBuildConf.serverEnvironment
         switch type {
         case .development:
             serverURL = "http://dms-customization.dev.seldatdirect.com/"
-        case .staging,
-             .testing:
+        case .staging:
             serverURL = "http://dms-customization.staging.seldatdirect.com/"
         case .production:
             serverURL = "http://dms-customization.live.seldatdirect.com/"
