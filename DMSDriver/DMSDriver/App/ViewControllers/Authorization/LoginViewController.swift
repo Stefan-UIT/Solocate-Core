@@ -91,13 +91,13 @@ class LoginViewController: BaseViewController {
     }
     
     private func setupViewEvironment() {
-        #if PRODUCTION
+        if SDBuildConf.tagetBuild == .Production {
             vEvironment?.isHidden = true
-        #else
+        }else {
             vEvironment?.isHidden = !DMSAppConfiguration.isUseChooseEnvironment
             segEvironmentControl?.segmentTitles = ["DEV","DEMO","LIVE"]
             segEvironmentControl?.selectedSegmentIndex = 0
-        #endif
+        }
     }
 
     private func setupTextField() {
@@ -179,7 +179,8 @@ class LoginViewController: BaseViewController {
         print("chosen evironment:\(evironment.nane)")
         print(#"""
             ====>APPLICATION STARTED WITH:
-            Server-\#(SDBuildConf.serverEnvironment.displayString())-\#(SDBuildConf.serverUrlString())
+            TagetBuild: \#(SDBuildConf.tagetBuild.rawValue)
+            Server: \#(SDBuildConf.serverUrlString())
             <=====
             """#)
     }

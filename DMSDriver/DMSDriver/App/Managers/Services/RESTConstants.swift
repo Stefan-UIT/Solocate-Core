@@ -86,10 +86,6 @@ class RESTConstants: NSObject {
         return [String: String]()
     }()
     
-    class func getBASEURL() -> String? {
-        return SDBuildConf.serverUrlString()
-    }
-    
     class func SERVER_TRACKING_URL() -> String {
         var serverURL = ""
         let type = SDBuildConf.serverEnvironment

@@ -1,6 +1,11 @@
 
 import Foundation
 
+enum TagetBuild:String {
+    case Development = "Development"
+    case Production = "Production"
+}
+
 
 enum ServerEnvironment: String {
     case development = "development"
@@ -26,12 +31,17 @@ enum ServerEnvironment: String {
 //MARK: - Commons
 struct BuildConfiguration {
     let serverEnvironment: ServerEnvironment
+    let tagetBuild:TagetBuild
 
-    init(environment:ServerEnvironment) {
+    init() {
         #if DEVELOPMENT  // check taget
-            self.serverEnvironment = environment
+            tagetBuild = .Development
+            self.serverEnvironment = .development
+
         #else
+            tagetBuild = .Production
             self.serverEnvironment = .production
+        
         #endif
         //Load data in configfile (Main service)
         DMSAppConfiguration.enableConfiguration()
@@ -43,7 +53,7 @@ struct BuildConfiguration {
 extension BuildConfiguration {
     
     func serverUrlString() -> String {
-        if let server = Debug.shared.useServer {
+        if let server = Debug.shared?.useServer {
             return server
         }
         

@@ -10,22 +10,22 @@ class Debug {
     lazy var disableLoggingForAPI = self.environmentBool(for: "DISABLE_API_LOG")
     
     init(useServer:String? = nil) {
-        #if DEVELOPMENT
+        if SDBuildConf.tagetBuild == .Production {
+            environment = [:]
+        }else {
             environment = ProcessInfo.processInfo.environment
             self.useServer = useServer
             if  useServer == nil {
                 self.useServer = self.environmentString(for: "SERVER")
             }
-        #else
-            environment = [:]
-        #endif
+        }
     }
 }
 
 //MARK: - instances
 
 extension Debug{
-    fileprivate(set) static var shared: Debug!;
+    fileprivate(set) static var shared: Debug?
     
     static func setup(shared: Debug) {
         self.shared = shared;
