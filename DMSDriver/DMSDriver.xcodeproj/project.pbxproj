@@ -240,7 +240,6 @@
 		2A443B0922648C5A00CB6508 /* ResultsRequestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B87B210B1148000BDFEF /* ResultsRequestModel.swift */; };
 		2A443B0A22648C5A00CB6508 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B885210B1148000BDFEF /* APIError.swift */; };
 		2A443B0B22648C5A00CB6508 /* HeaderSectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4204FD22576A8E00789837 /* HeaderSectionCell.swift */; };
-		2A443B0D22648C5A00CB6508 /* Pods_DMSDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BF838D32189605A0056C4F1 /* Pods_DMSDriver.framework */; };
 		2A443B0F22648C5A00CB6508 /* FilterDataTypeRowCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B1629D3221BED0600E7A83C /* FilterDataTypeRowCell.xib */; };
 		2A443B1022648C5A00CB6508 /* ContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A42050A22576AF000789837 /* ContentCell.xib */; };
 		2A443B1122648C5A00CB6508 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7F6210B113C000BDFEF /* Main.storyboard */; };
@@ -251,7 +250,6 @@
 		2A443B1622648C5A00CB6508 /* ForgetPasswordView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B8D5210B1148000BDFEF /* ForgetPasswordView.xib */; };
 		2A443B1722648C5A00CB6508 /* ReasonSkipView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B80E3D622279D1B005A2E75 /* ReasonSkipView.xib */; };
 		2A443B1822648C5A00CB6508 /* Task.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7F9210B113C000BDFEF /* Task.storyboard */; };
-		2A443B1922648C5A00CB6508 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A8EFE94224C7855008AA1D3 /* GoogleService-Info.plist */; };
 		2A443B1A22648C5A00CB6508 /* PickerTimeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A42050222576ACA00789837 /* PickerTimeCell.xib */; };
 		2A443B1B22648C5A00CB6508 /* Route.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7F3210B113C000BDFEF /* Route.storyboard */; };
 		2A443B1C22648C5A00CB6508 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7F2210B113C000BDFEF /* Profile.storyboard */; };
@@ -297,7 +295,6 @@
 		2A443B4422648C5A00CB6508 /* FilterDataListInsertContentCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B4778ED221E4ED1005639E4 /* FilterDataListInsertContentCell.xib */; };
 		2A443B4522648C5A00CB6508 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3B66B7FE210B113C000BDFEF /* Assets.xcassets */; };
 		2A443B4622648C5A00CB6508 /* PickerTimeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A4204F8225760D400789837 /* PickerTimeVC.xib */; };
-		2A8EFE95224C7855008AA1D3 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2A8EFE94224C7855008AA1D3 /* GoogleService-Info.plist */; };
 		2AB4A98A224B78C70019F196 /* RouteDetailLocationListClvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */; };
 		2AC97C5B224DF7F600DD07AE /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC97C5A224DF7F600DD07AE /* CommonUtils.swift */; };
 		2AC97C5D224E009400DD07AE /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC97C5C224E009400DD07AE /* Double+Ext.swift */; };
@@ -563,6 +560,10 @@
 		3BF838D22189589A0056C4F1 /* BaseScrollMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF838D12189589A0056C4F1 /* BaseScrollMenuView.swift */; };
 		3BF838D42189605A0056C4F1 /* Pods_DMSDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BF838D32189605A0056C4F1 /* Pods_DMSDriver.framework */; };
 		3BF838D5218976B30056C4F1 /* RouteListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B00D04F2151F9D700B0B062 /* RouteListVC.swift */; };
+		5D83588B0C093E48EC49DC8C /* Pods_DMSDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BF838D32189605A0056C4F1 /* Pods_DMSDriver.framework */; };
+		834223F1A31A42AC42016114 /* Pods_DMSDriver_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1AC34514E8CE5CA706A2A5D /* Pods_DMSDriver_Dev.framework */; };
+		C73D9D55226DA17900452A0C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C73D9D54226DA17900452A0C /* GoogleService-Info.plist */; };
+		C73D9D56226DA17900452A0C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C73D9D54226DA17900452A0C /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -590,7 +591,6 @@
 		2A42555A2251F08E00D55FEA /* ResponseDataDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDataDashboard.swift; sourceTree = "<group>"; };
 		2A443B4E22648C5A00CB6508 /* DMSDriver-Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DMSDriver-Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A443B4F22648C5B00CB6508 /* DMSDriver-Dev-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "DMSDriver-Dev-Info.plist"; path = "/Volumes/NguyenMach/PROJECT-SELDAT/DMS-PROJECT/ios-driver/DMSDriver/DMSDriver-Dev-Info.plist"; sourceTree = "<absolute>"; };
-		2A8EFE94224C7855008AA1D3 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../../../../Users/nguyenmach/Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailLocationListClvCell.swift; sourceTree = "<group>"; };
 		2AC97C5A224DF7F600DD07AE /* CommonUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
 		2AC97C5C224E009400DD07AE /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
@@ -1039,9 +1039,13 @@
 		3BF838CE218957EA0056C4F1 /* ScrollMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollMenuView.xib; sourceTree = "<group>"; };
 		3BF838D12189589A0056C4F1 /* BaseScrollMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScrollMenuView.swift; sourceTree = "<group>"; };
 		3BF838D32189605A0056C4F1 /* Pods_DMSDriver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_DMSDriver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6406D038FB02DBF80C11EACD /* Pods-DMSDriver-Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver-Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev.release.xcconfig"; sourceTree = "<group>"; };
+		7AAB4633DDF72A60B133B3E5 /* Pods-DMSDriver-Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver-Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev.debug.xcconfig"; sourceTree = "<group>"; };
+		9B8D9F73312991A219DA0D95 /* Pods-DMSDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.debug.xcconfig"; sourceTree = "<group>"; };
 		A02E53A1DFA611D4E6D34FF1 /* Pods_DMSDriver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DMSDriver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		CE4028787D23A4B46FAF55CE /* Pods-DMSDriver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.release.xcconfig"; sourceTree = "<group>"; };
-		D04AB4AFE9044A5214F46376 /* Pods-DMSDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.debug.xcconfig"; sourceTree = "<group>"; };
+		C73D9D54226DA17900452A0C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		E1AC34514E8CE5CA706A2A5D /* Pods_DMSDriver_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DMSDriver_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDC03CE773ADC70211B30346 /* Pods-DMSDriver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.release.xcconfig"; sourceTree = "<group>"; };
 		FF0A9549B7E1BA139DDBDF08 /* Pods-DMSDriver.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.staging.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.staging.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -1050,7 +1054,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2A443B0D22648C5A00CB6508 /* Pods_DMSDriver.framework in Frameworks */,
+				834223F1A31A42AC42016114 /* Pods_DMSDriver_Dev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1059,6 +1063,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3BF838D42189605A0056C4F1 /* Pods_DMSDriver.framework in Frameworks */,
+				5D83588B0C093E48EC49DC8C /* Pods_DMSDriver.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1071,6 +1076,7 @@
 				3BF838D32189605A0056C4F1 /* Pods_DMSDriver.framework */,
 				3B8732A421106100008C5C20 /* GoogleMaps */,
 				A02E53A1DFA611D4E6D34FF1 /* Pods_DMSDriver.framework */,
+				E1AC34514E8CE5CA706A2A5D /* Pods_DMSDriver_Dev.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1127,9 +1133,11 @@
 		2E482ACD4DD6945570D21CE8 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				D04AB4AFE9044A5214F46376 /* Pods-DMSDriver.debug.xcconfig */,
-				CE4028787D23A4B46FAF55CE /* Pods-DMSDriver.release.xcconfig */,
 				FF0A9549B7E1BA139DDBDF08 /* Pods-DMSDriver.staging.xcconfig */,
+				9B8D9F73312991A219DA0D95 /* Pods-DMSDriver.debug.xcconfig */,
+				FDC03CE773ADC70211B30346 /* Pods-DMSDriver.release.xcconfig */,
+				7AAB4633DDF72A60B133B3E5 /* Pods-DMSDriver-Dev.debug.xcconfig */,
+				6406D038FB02DBF80C11EACD /* Pods-DMSDriver-Dev.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -2008,7 +2016,7 @@
 		3B66B7E3210B113C000BDFEF /* Service */ = {
 			isa = PBXGroup;
 			children = (
-				2A8EFE94224C7855008AA1D3 /* GoogleService-Info.plist */,
+				C73D9D54226DA17900452A0C /* GoogleService-Info.plist */,
 				3B57EDCA2126B4FB006DD64A /* GoogleService-Info-staging.plist */,
 				3B2A23A621195BA50000817C /* GoogleService-Info-prod.plist */,
 				3B66B7E5210B113C000BDFEF /* MainConfigs.plist */,
@@ -2919,13 +2927,13 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2A443B4A22648C5A00CB6508 /* Build configuration list for PBXNativeTarget "DMSDriver-Dev" */;
 			buildPhases = (
-				2A443A2D22648C5A00CB6508 /* [CP] Check Pods Manifest.lock */,
+				FA95DBFCD982B3026B3D6EAC /* [CP] Check Pods Manifest.lock */,
 				2A443A2E22648C5A00CB6508 /* Sources */,
 				2A443B0C22648C5A00CB6508 /* Frameworks */,
 				2A443B0E22648C5A00CB6508 /* Resources */,
-				2A443B4722648C5A00CB6508 /* [CP] Embed Pods Frameworks */,
-				2A443B4822648C5A00CB6508 /* [CP] Copy Pods Resources */,
 				2A443B4922648C5A00CB6508 /* ShellScript */,
+				DEC64F7B2964B6CE5D5CF254 /* [CP] Embed Pods Frameworks */,
+				8B913ED9C98B791F2B7CF692 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -3061,7 +3069,6 @@
 				2A443B1622648C5A00CB6508 /* ForgetPasswordView.xib in Resources */,
 				2A443B1722648C5A00CB6508 /* ReasonSkipView.xib in Resources */,
 				2A443B1822648C5A00CB6508 /* Task.storyboard in Resources */,
-				2A443B1922648C5A00CB6508 /* GoogleService-Info.plist in Resources */,
 				2A443B1A22648C5A00CB6508 /* PickerTimeCell.xib in Resources */,
 				2A443B1B22648C5A00CB6508 /* Route.storyboard in Resources */,
 				2A443B1C22648C5A00CB6508 /* Profile.storyboard in Resources */,
@@ -3093,6 +3100,7 @@
 				2A443B3622648C5A00CB6508 /* LoadMoreCell.xib in Resources */,
 				2A443B3722648C5A00CB6508 /* FilterDataListFooterView.xib in Resources */,
 				2A443B3822648C5A00CB6508 /* ChangeInviromentTableViewCell.xib in Resources */,
+				C73D9D55226DA17900452A0C /* GoogleService-Info.plist in Resources */,
 				2A443B3922648C5A00CB6508 /* TextViewInput.xib in Resources */,
 				2A443B3A22648C5A00CB6508 /* FilterDataListHeaderInsertCell.xib in Resources */,
 				2A443B3B22648C5A00CB6508 /* Notification.storyboard in Resources */,
@@ -3124,7 +3132,6 @@
 				3B66B929210B1149000BDFEF /* ForgetPasswordView.xib in Resources */,
 				3B80E3DB22279D1B005A2E75 /* ReasonSkipView.xib in Resources */,
 				3B66B863210B113D000BDFEF /* Task.storyboard in Resources */,
-				2A8EFE95224C7855008AA1D3 /* GoogleService-Info.plist in Resources */,
 				2A42050422576ACA00789837 /* PickerTimeCell.xib in Resources */,
 				3B66B85F210B113D000BDFEF /* Route.storyboard in Resources */,
 				3B66B85E210B113D000BDFEF /* Profile.storyboard in Resources */,
@@ -3156,6 +3163,7 @@
 				3BF026BA21DCA8DD0029A652 /* LoadMoreCell.xib in Resources */,
 				3B1629E7221C084300E7A83C /* FilterDataListFooterView.xib in Resources */,
 				3B66B924210B1149000BDFEF /* ChangeInviromentTableViewCell.xib in Resources */,
+				C73D9D56226DA17900452A0C /* GoogleService-Info.plist in Resources */,
 				3B0035F8216C614D0032519D /* TextViewInput.xib in Resources */,
 				3B1629DF221BF07800E7A83C /* FilterDataListHeaderInsertCell.xib in Resources */,
 				3B7695EC21CA20D70032B142 /* Notification.storyboard in Resources */,
@@ -3176,90 +3184,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2A443A2D22648C5A00CB6508 /* [CP] Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
-				"${PODS_ROOT}/Manifest.lock",
-			);
-			name = "[CP] Check Pods Manifest.lock";
-			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DMSDriver-checkManifestLockResult.txt",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2A443B4722648C5A00CB6508 /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
-				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
-				"${BUILT_PRODUCTS_DIR}/FDFullscreenPopGesture/FDFullscreenPopGesture.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
-				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
-				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
-				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/ReachabilitySwift.framework",
-				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
-				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
-				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
-				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
-				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
-				"${BUILT_PRODUCTS_DIR}/TLPhotoPicker/TLPhotoPicker.framework",
-				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
-				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDFullscreenPopGesture.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReachabilitySwift.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TLPhotoPicker.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		2A443B4822648C5A00CB6508 /* [CP] Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-resources.sh",
-				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
-			);
-			name = "[CP] Copy Pods Resources";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		2A443B4922648C5A00CB6508 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -3302,7 +3226,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-frameworks.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
 				"${BUILT_PRODUCTS_DIR}/FDFullscreenPopGesture/FDFullscreenPopGesture.framework",
@@ -3341,7 +3265,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-frameworks.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6D96038D865B1C712768AFF9 /* [CP] Copy Pods Resources */ = {
@@ -3350,7 +3274,7 @@
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-resources.sh",
+				"${SRCROOT}/Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-resources.sh",
 				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
@@ -3359,7 +3283,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-resources.sh\"\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		76E92A434B13EAEE47C1A624 /* [CP] Check Pods Manifest.lock */ = {
@@ -3374,6 +3298,102 @@
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 				"$(DERIVED_FILE_DIR)/Pods-DMSDriver-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8B913ED9C98B791F2B7CF692 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev-resources.sh",
+				"${PODS_ROOT}/GoogleMaps/Maps/Frameworks/GoogleMaps.framework/Resources/GoogleMaps.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/GoogleMaps.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DEC64F7B2964B6CE5D5CF254 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/Charts/Charts.framework",
+				"${BUILT_PRODUCTS_DIR}/FDFullscreenPopGesture/FDFullscreenPopGesture.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
+				"${BUILT_PRODUCTS_DIR}/IQKeyboardManager/IQKeyboardManager.framework",
+				"${BUILT_PRODUCTS_DIR}/ObjectMapper/ObjectMapper.framework",
+				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/ReachabilitySwift.framework",
+				"${BUILT_PRODUCTS_DIR}/SDWebImage/SDWebImage.framework",
+				"${BUILT_PRODUCTS_DIR}/SVProgressHUD/SVProgressHUD.framework",
+				"${BUILT_PRODUCTS_DIR}/SideMenu/SideMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/Socket.IO-Client-Swift/SocketIO.framework",
+				"${BUILT_PRODUCTS_DIR}/Starscream/Starscream.framework",
+				"${BUILT_PRODUCTS_DIR}/TLPhotoPicker/TLPhotoPicker.framework",
+				"${BUILT_PRODUCTS_DIR}/XLPagerTabStrip/XLPagerTabStrip.framework",
+				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Charts.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/FDFullscreenPopGesture.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/IQKeyboardManager.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ObjectMapper.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ReachabilitySwift.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SDWebImage.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SVProgressHUD.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SideMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SocketIO.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Starscream.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TLPhotoPicker.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/XLPagerTabStrip.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA95DBFCD982B3026B3D6EAC /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-DMSDriver-Dev-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3923,7 +3943,7 @@
 /* Begin XCBuildConfiguration section */
 		2A443B4B22648C5A00CB6508 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D04AB4AFE9044A5214F46376 /* Pods-DMSDriver.debug.xcconfig */;
+			baseConfigurationReference = 7AAB4633DDF72A60B133B3E5 /* Pods-DMSDriver-Dev.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;
@@ -3944,7 +3964,7 @@
 					"$(CONFIGURATION_BUILD_DIR)",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DDEVELOPMENT";
-				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.dms.core.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.dms.core;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "dev-dms-core-customization";
@@ -3957,7 +3977,7 @@
 		};
 		2A443B4C22648C5A00CB6508 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CE4028787D23A4B46FAF55CE /* Pods-DMSDriver.release.xcconfig */;
+			baseConfigurationReference = 6406D038FB02DBF80C11EACD /* Pods-DMSDriver-Dev.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;
@@ -3977,7 +3997,7 @@
 					"$(CONFIGURATION_BUILD_DIR)",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DDEVELOPMENT";
-				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.dms.core.dev;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.dms.core;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "dev-dms-core-customization";
@@ -4104,7 +4124,7 @@
 		};
 		3B66B763210B1052000BDFEF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = D04AB4AFE9044A5214F46376 /* Pods-DMSDriver.debug.xcconfig */;
+			baseConfigurationReference = 9B8D9F73312991A219DA0D95 /* Pods-DMSDriver.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;
@@ -4138,7 +4158,7 @@
 		};
 		3B66B764210B1052000BDFEF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = CE4028787D23A4B46FAF55CE /* Pods-DMSDriver.release.xcconfig */;
+			baseConfigurationReference = FDC03CE773ADC70211B30346 /* Pods-DMSDriver.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;
