@@ -3,10 +3,8 @@
 platform :ios, '9.0'
 use_frameworks!
 
-target 'DMSDriver' do
-
-  # Pods for DMSDriver
-
+def shared_pods
+    # Pods for DMSDriver
     pod 'GoogleMaps'
     pod 'ObjectMapper'
     pod 'Alamofire'
@@ -24,7 +22,14 @@ target 'DMSDriver' do
     pod 'Charts'
     pod 'Fabric'
     pod 'Crashlytics'
+end
 
+target 'DMSDriver' do
+    shared_pods
+end
+
+target 'DMSDriver-' do
+    shared_pods
 end
 
 # Workaround for Cocoapods issue #7606
