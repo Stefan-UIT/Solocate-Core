@@ -224,7 +224,7 @@ class Order: BaseModel {
         var listLocation:[CLLocationCoordinate2D] = (currentLocation != nil) ? [currentLocation!] : []
         listLocation.append(locations)
         
-        var listChunked = locations.chunked(by: 22)
+        var listChunked = listLocation.chunked(by: 22)
         if listChunked.count > 1 {
             for i in 1..<listChunked.count{
                 if let first = listChunked[i].first {

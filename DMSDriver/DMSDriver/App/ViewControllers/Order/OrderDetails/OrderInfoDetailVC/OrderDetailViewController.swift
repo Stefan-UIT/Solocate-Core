@@ -371,10 +371,10 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             
             if row == 0{ //From address
                 let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
-
+                vc.orderDetail = orderDetail
                 if let _orderDetail = orderDetail,
-                    let lng = _orderDetail.to?.lngtd,
-                    let lat = _orderDetail.to?.lattd  {
+                    let lng = _orderDetail.from?.lngtd,
+                    let lat = _orderDetail.from?.lattd  {
                     let location = CLLocationCoordinate2D(latitude: lat.doubleValue ,
                                                           longitude: lng.doubleValue)
                     vc.orderLocation = location
@@ -395,6 +395,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             
             if row == 0{
                 let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
+                vc.orderDetail = orderDetail
 
                 if let _orderDetail = orderDetail,
                     let lng = _orderDetail.to?.lngtd,
@@ -463,7 +464,7 @@ fileprivate extension OrderDetailViewController {
     }
     
     func cellInfoFromSection(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
-        let item = orderInforTo[indexPath.row]
+        let item = orderInforFrom[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
                                                     for: indexPath) as! OrderDetailTableViewCell
         cell.orderDetailItem = item

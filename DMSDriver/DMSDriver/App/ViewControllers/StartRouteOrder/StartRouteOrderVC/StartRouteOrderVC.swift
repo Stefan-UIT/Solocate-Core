@@ -308,7 +308,7 @@ extension StartRouteOrderVC {
             let lat = from.lattd?.doubleValue,
             let lng = from.lngtd?.doubleValue  {
             let location = CLLocationCoordinate2D(latitude: lat, longitude: lng)
-            mapView?.showMarker(type: .From,
+            mapView?.showMarker(type: .Pickup,
                                 location: location,
                                 name: order?.from?.name,
                                 snippet:  order?.from?.ctt_phone)
@@ -318,7 +318,7 @@ extension StartRouteOrderVC {
             let lat = to.lattd?.doubleValue,
             let lng = to.lngtd?.doubleValue  {
             let location = CLLocationCoordinate2D(latitude: lat, longitude: lng)
-            mapView?.showMarker(type: .To,
+            mapView?.showMarker(type: .Delivery,
                                 location: location,
                                 name: order?.to?.name,
                                 snippet:  order?.from?.ctt_phone)
