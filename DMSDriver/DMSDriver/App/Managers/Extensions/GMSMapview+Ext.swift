@@ -13,6 +13,8 @@ enum MarkerType {
     case Normal
     case From
     case To
+    case Pickup
+    case Delivery
     case Port
 }
 
@@ -32,11 +34,17 @@ extension GMSMapView {
         
         switch type {
         case .From:
-            let labelOrder = labelMarkerWithText("FROM", .From)
+            let labelOrder = labelMarkerWithText("From".localized.uppercased(), .From)
             marker.iconView = labelOrder
             
         case .To:
-            let labelOrder = labelMarkerWithText("TO",.To)
+            let labelOrder = labelMarkerWithText("To".localized.uppercased(),.To)
+            marker.iconView = labelOrder
+        case .Pickup:
+            let labelOrder = labelMarkerWithText("Pick Up".localized.uppercased(),.Pickup)
+            marker.iconView = labelOrder
+        case .Delivery:
+            let labelOrder = labelMarkerWithText("Delivery".localized.uppercased(),.Delivery)
             marker.iconView = labelOrder
             
         case .Port:
@@ -85,6 +93,7 @@ extension GMSMapView {
     private func labelMarkerWithText(_ text:String,_ type:MarkerType) -> UILabel {
         let labelOrder = UILabel(frame: CGRect(x: 0, y: 0, width: 30, height: 30))
         labelOrder.text = text
+        labelOrder.font = Font.helveticaRegular(with: 14)
         labelOrder.textAlignment = .center
         labelOrder.textColor = .white
         labelOrder.clipsToBounds = true
@@ -94,12 +103,22 @@ extension GMSMapView {
         case .From:
             labelOrder.backgroundColor = AppColor.orangeColor
             labelOrder.frame = CGRectMake(0, 0, 60, 30)
-            labelOrder.cornerRadius = 4
+            labelOrder.cornerRadius = 5
 
         case .To:
             labelOrder.backgroundColor = AppColor.mainColor
             labelOrder.frame = CGRectMake(0, 0, 60, 30)
-            labelOrder.cornerRadius = 4
+            labelOrder.cornerRadius = 5
+            
+        case .Pickup:
+            labelOrder.backgroundColor = AppColor.orangeColor
+            labelOrder.frame = CGRectMake(0, 0, 80, 30)
+            labelOrder.cornerRadius = 5
+            
+        case .Delivery:
+            labelOrder.backgroundColor = AppColor.mainColor
+            labelOrder.frame = CGRectMake(0, 0, 80, 30)
+            labelOrder.cornerRadius = 5
 
         default:
             break

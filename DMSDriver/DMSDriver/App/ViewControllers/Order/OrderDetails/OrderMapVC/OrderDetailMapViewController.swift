@@ -19,6 +19,7 @@ class OrderDetailMapViewController: BaseViewController {
     fileprivate let cellIdentifier = "OrderDetailMapTableViewCell"
     
     var orderLocation: CLLocationCoordinate2D?
+    var orderDetail: Order?
     var mapView:GMSMapView?
   
     override func viewDidLoad() {
@@ -68,8 +69,33 @@ class OrderDetailMapViewController: BaseViewController {
         
         if let _locattion = orderLocation {
             mapView?.animate(toLocation: _locattion)
+            showAllMarker(order: orderDetail)
+            /*
             let marker = GMSMarker(position: _locattion)
             marker.map = mapView
+             */
+        }
+    }
+    
+    private  func showAllMarker(order:Order?) {
+        if let from = order?.from,
+            let lat = from.lattd?.doubleValue,
+            let lng = from.lngtd?.doubleValue  {
+            let location = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+            mapView?.showMarker(type: .Pickup,
+                                location: location,
+                                name: order?.from?.name,
+                                snippet:  order?.from?.ctt_phone)
+        }
+        
+        if let to = order?.to,
+            let lat = to.lattd?.doubleValue,
+            let lng = to.lngtd?.doubleValue  {
+            let location = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+            mapView?.showMarker(type: .Delivery,
+                                location: location,
+                                name: order?.to?.name,
+                                snippet:  order?.from?.ctt_phone)
         }
     }
     

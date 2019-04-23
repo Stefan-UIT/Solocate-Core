@@ -564,6 +564,8 @@
 		834223F1A31A42AC42016114 /* Pods_DMSDriver_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1AC34514E8CE5CA706A2A5D /* Pods_DMSDriver_Dev.framework */; };
 		C73D9D55226DA17900452A0C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C73D9D54226DA17900452A0C /* GoogleService-Info.plist */; };
 		C73D9D56226DA17900452A0C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C73D9D54226DA17900452A0C /* GoogleService-Info.plist */; };
+		C73D9D64226DD01500452A0C /* AppDelegate+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73D9D63226DD01500452A0C /* AppDelegate+Ext.swift */; };
+		C73D9D66226DD01900452A0C /* AppDelegate+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73D9D63226DD01500452A0C /* AppDelegate+Ext.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -1044,6 +1046,7 @@
 		9B8D9F73312991A219DA0D95 /* Pods-DMSDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.debug.xcconfig"; sourceTree = "<group>"; };
 		A02E53A1DFA611D4E6D34FF1 /* Pods_DMSDriver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DMSDriver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C73D9D54226DA17900452A0C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		C73D9D63226DD01500452A0C /* AppDelegate+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Ext.swift"; sourceTree = "<group>"; };
 		E1AC34514E8CE5CA706A2A5D /* Pods_DMSDriver_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DMSDriver_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDC03CE773ADC70211B30346 /* Pods-DMSDriver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.release.xcconfig"; sourceTree = "<group>"; };
 		FF0A9549B7E1BA139DDBDF08 /* Pods-DMSDriver.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.staging.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.staging.xcconfig"; sourceTree = "<group>"; };
@@ -2325,6 +2328,7 @@
 			isa = PBXGroup;
 			children = (
 				3B66B8C7210B1148000BDFEF /* AppDelegate.swift */,
+				C73D9D63226DD01500452A0C /* AppDelegate+Ext.swift */,
 			);
 			path = AppDelegate;
 			sourceTree = "<group>";
@@ -3523,6 +3527,7 @@
 				2A443AA022648C5A00CB6508 /* CommonUtils.swift in Sources */,
 				2A443AA122648C5A00CB6508 /* UIViewController.swift in Sources */,
 				2A443AA222648C5A00CB6508 /* OrderDetailTableViewCell.swift in Sources */,
+				C73D9D66226DD01900452A0C /* AppDelegate+Ext.swift in Sources */,
 				2A443AA322648C5A00CB6508 /* KeyConstants.swift in Sources */,
 				2A443AA422648C5A00CB6508 /* RequestAssignOrderModel.swift in Sources */,
 				2A443AA522648C5A00CB6508 /* UIView+Extensions.swift in Sources */,
@@ -3751,6 +3756,7 @@
 				2AC97C5B224DF7F600DD07AE /* CommonUtils.swift in Sources */,
 				3B66B80C210B113D000BDFEF /* UIViewController.swift in Sources */,
 				3B66B8FF210B1149000BDFEF /* OrderDetailTableViewCell.swift in Sources */,
+				C73D9D64226DD01500452A0C /* AppDelegate+Ext.swift in Sources */,
 				3B66B844210B113D000BDFEF /* KeyConstants.swift in Sources */,
 				3B0C5F7D21256A5E0036F61A /* RequestAssignOrderModel.swift in Sources */,
 				3B66B822210B113D000BDFEF /* UIView+Extensions.swift in Sources */,
