@@ -175,9 +175,13 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                                           isHebewLang() ? orderDetail?.urgent_type_name_hb ?? "" :  orderDetail?.urgent_type_name_en ?? "")
         let orderId = OrderDetailInforRow("Order Id".localized,"#\(orderDetail?.id ?? 0)")
         let seq = OrderDetailInforRow("SEQ".localized,"\(orderDetail?.seq ?? 0)")
-        
+        let barCode = OrderDetailInforRow("Barcode".localized,"\(orderDetail?.barCode ?? "")")
+        let backageRefId = OrderDetailInforRow("Package Ref ID".localized,"\(orderDetail?.packageRefId ?? "")")
+
         orderInforDetail.append(orderId)
         orderInforDetail.append(seq)
+        orderInforDetail.append(barCode)
+        orderInforDetail.append(backageRefId)
         orderInforDetail.append(customerItem)
         //orderInforStatus.append(urgency)
         

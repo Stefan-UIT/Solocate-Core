@@ -156,6 +156,8 @@ class Order: BaseModel {
     var entrance = ""
     var full_addr = ""
     var receiverPhone = ""
+    var barCode = ""
+    var packageRefId = ""
     
     var urgent_type_id:Int = 0
     //var url:UrlFileMoldel?
@@ -205,6 +207,8 @@ class Order: BaseModel {
         status <- map["status"]
         driver_id <- map["driver_id"]
         route <- map["route"]
+        barCode <- map["barCode"]
+        packageRefId <- map["packageRefId"]
         
         if  let dataFrom = map["from"].currentValue as? String{
             from    = Address(JSON: dataFrom.parseToJSON() ?? [:])
