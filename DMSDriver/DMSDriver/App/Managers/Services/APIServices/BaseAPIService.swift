@@ -167,11 +167,12 @@ class BaseAPIService {
                                     bodyData: encoding.bodyDataValue,
                                     bodyString: encoding.bodyStringValue)
         
-        if Debug.shared?.disableLoggingForAPI == false {
+        if (Debug.shared?.disableLoggingForAPI == false) {
             DispatchQueue.global().async {
                 APILog("REQUEST", encoding.bodyStringValue);
             }
         }
+        
         var request: DataRequest;
 
         request = sessionManager.request(url,
