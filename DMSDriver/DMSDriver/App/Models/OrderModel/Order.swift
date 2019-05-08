@@ -49,6 +49,7 @@ class Address: BaseModel {
     var ctt_name:String?
     var ctt_phone:String?
     var seq = 1
+    var loc_name:String?
     
     override init() {
         super.init()
@@ -69,6 +70,7 @@ class Address: BaseModel {
         ctt_name <- map["ctt_name"]
         ctt_phone <- map["ctt_phone"]
         seq <- map["seq"]
+        loc_name <- map["loc_name"]
     }
 }
 
@@ -82,7 +84,8 @@ class Order: BaseModel {
         var qty:Double?
         var remain_qty:Double?
         var package:String?
-
+        var barCode:String?
+        var packageRefId:Int?
         
         override init() {
             super.init()
@@ -98,6 +101,8 @@ class Order: BaseModel {
             qty <- map["qty"]
             remain_qty <- map["remain_qty"]
             package <- map["package"]
+            barCode <- map["barcode"]
+            packageRefId <- map["pkg_ref_id"]
         }
     }
 
@@ -156,8 +161,6 @@ class Order: BaseModel {
     var entrance = ""
     var full_addr = ""
     var receiverPhone = ""
-    var barCode = ""
-    var packageRefId = ""
     
     var urgent_type_id:Int = 0
     //var url:UrlFileMoldel?
@@ -207,8 +210,6 @@ class Order: BaseModel {
         status <- map["status"]
         driver_id <- map["driver_id"]
         route <- map["route"]
-        barCode <- map["barCode"]
-        packageRefId <- map["packageRefId"]
         
         if  let dataFrom = map["from"].currentValue as? String{
             from    = Address(JSON: dataFrom.parseToJSON() ?? [:])
