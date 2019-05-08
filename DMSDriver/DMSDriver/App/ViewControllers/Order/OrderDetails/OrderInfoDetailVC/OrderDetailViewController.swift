@@ -111,8 +111,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     private func initVar()  {
         arrTitleHeader = ["",
                           "Order info".localized.uppercased(),
-                          "From".localized.uppercased(),
-                          "To".localized.uppercased(),
+                          "Pickup".localized.uppercased(),
+                          "Delivery".localized.uppercased(),
                           "Nature of goods".localized.uppercased(),
                           "Signature".localized.uppercased(),
                           "Picture".localized.uppercased()]
@@ -194,13 +194,13 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             orderInforDetail.append(mess)
         }
         
-        let fromAddress = OrderDetailInforRow("From address".localized, E(orderDetail?.from?.address),true)
+        let fromAddress = OrderDetailInforRow("Address".localized, E(orderDetail?.from?.address),true)
         let fromContactName = OrderDetailInforRow("Contact name".localized,orderDetail?.from?.name ?? "-")
         let fromContactPhone = OrderDetailInforRow("Contact phone".localized,orderDetail?.from?.phone ?? "-",true)
         let fromStartTime = OrderDetailInforRow("Start time".localized,startFromDate,false)
         let fromEndtime = OrderDetailInforRow("End time".localized,endFromDate,false)
 
-        let toAddress = OrderDetailInforRow("To address".localized, E(orderDetail?.to?.address),true)
+        let toAddress = OrderDetailInforRow("Adress".localized, E(orderDetail?.to?.address),true)
         let toContactName = OrderDetailInforRow("Contact name".localized,orderDetail?.to?.name ?? "-")
         let toContactPhone = OrderDetailInforRow("Contact phone".localized,orderDetail?.to?.phone ?? "-", true)
         let toStartTime = OrderDetailInforRow("Start time".localized,startToDate,false)
