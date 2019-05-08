@@ -14,7 +14,7 @@ class RouteDetailLocationListClvCell: UICollectionViewCell {
     @IBOutlet weak var tbvContent: UITableView?
     @IBOutlet weak var noOrdersLabel: UILabel?
     
-    fileprivate let cellIdentifier = "OrderItemTableViewCell"
+    fileprivate let cellIdentifier = "LocationListTbvCell"
 
     fileprivate var locationsList:[Order] = []
     
@@ -69,32 +69,19 @@ extension RouteDetailLocationListClvCell: UITableViewDelegate, UITableViewDataSo
         return 100
     }
     
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier ,
-                                                    for: indexPath) as? OrderItemTableViewCell {
+                                                    for: indexPath) as? LocationListTbvCell {
             let address = route?.locationList[indexPath.row]
-            var startDate = ""
-            if let date = address?.start_time?.date {
-                startDate =  DateFormatter.displayDateTimeVN.string(from:date)
-            }
+            cell.address = address
             
-            var endDate = ""
-            if let date = address?.end_time?.date {
-                endDate =  DateFormatter.displayDateTimeVN.string(from:date)
-            }
-            
-            cell.selectionStyle = .none
-            cell.lblTitle?.text = address?.address
-            cell.lblSubtitle?.text = "\(address?.ctt_name ?? "") | \(address?.ctt_phone ?? "")"
-            cell.lblNumber?.text = "\(address?.seq ?? 1)"
-            cell.lblExpectedTime?.text = "\(startDate) - \(endDate)"
             return cell
         }
         return UITableViewCell()
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

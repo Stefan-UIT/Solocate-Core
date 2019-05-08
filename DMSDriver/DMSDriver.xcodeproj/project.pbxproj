@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		193BDBC22282E4BC005D716B /* LocationListTbvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193BDBC12282E4BC005D716B /* LocationListTbvCell.swift */; };
+		193BDBC32282E4BF005D716B /* LocationListTbvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193BDBC12282E4BC005D716B /* LocationListTbvCell.swift */; };
 		2A1AA32522546D83004449AA /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1AA32422546D83004449AA /* UINavigationController+Ext.swift */; };
 		2A4204F9225760D400789837 /* PickerTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4204F7225760D400789837 /* PickerTimeVC.swift */; };
 		2A4204FA225760D400789837 /* PickerTimeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A4204F8225760D400789837 /* PickerTimeVC.xib */; };
@@ -579,6 +581,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		193BDBC12282E4BC005D716B /* LocationListTbvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListTbvCell.swift; sourceTree = "<group>"; };
 		2A1AA32422546D83004449AA /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		2A4204F7225760D400789837 /* PickerTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTimeVC.swift; sourceTree = "<group>"; };
 		2A4204F8225760D400789837 /* PickerTimeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickerTimeVC.xib; sourceTree = "<group>"; };
@@ -1084,6 +1087,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		193BDBBF2282E475005D716B /* LocationListTbvCell */ = {
+			isa = PBXGroup;
+			children = (
+				193BDBC12282E4BC005D716B /* LocationListTbvCell.swift */,
+			);
+			path = LocationListTbvCell;
+			sourceTree = "<group>";
+		};
 		2A4204F5225760A900789837 /* PickerTimeVC */ = {
 			isa = PBXGroup;
 			children = (
@@ -1120,6 +1131,7 @@
 		2AB4A984224B78720019F196 /* RouteDetailLocationListClvCell */ = {
 			isa = PBXGroup;
 			children = (
+				193BDBBF2282E475005D716B /* LocationListTbvCell */,
 				2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */,
 			);
 			path = RouteDetailLocationListClvCell;
@@ -3496,6 +3508,7 @@
 				2A443AC822648C5A00CB6508 /* SegmentedControl.swift in Sources */,
 				2A443AC922648C5A00CB6508 /* RouteListHeaderTableView.swift in Sources */,
 				2A443ACA22648C5A00CB6508 /* BaseScrollMenuView.swift in Sources */,
+				193BDBC32282E4BF005D716B /* LocationListTbvCell.swift in Sources */,
 				2A443ACB22648C5A00CB6508 /* BaseViewController.swift in Sources */,
 				2A443ACC22648C5A00CB6508 /* AlertMessageView.swift in Sources */,
 				2A443ACD22648C5A00CB6508 /* ScanBarCodeViewController.swift in Sources */,
@@ -3725,6 +3738,7 @@
 				3B66B83B210B113D000BDFEF /* SegmentedControl.swift in Sources */,
 				3B4BBF7D2214085800EA7485 /* RouteListHeaderTableView.swift in Sources */,
 				3BF838D22189589A0056C4F1 /* BaseScrollMenuView.swift in Sources */,
+				193BDBC22282E4BC005D716B /* LocationListTbvCell.swift in Sources */,
 				3B66B91B210B1149000BDFEF /* BaseViewController.swift in Sources */,
 				3B66B92D210B1149000BDFEF /* AlertMessageView.swift in Sources */,
 				3B66B8F9210B1149000BDFEF /* ScanBarCodeViewController.swift in Sources */,

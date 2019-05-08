@@ -175,8 +175,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                                           isHebewLang() ? orderDetail?.urgent_type_name_hb ?? "" :  orderDetail?.urgent_type_name_en ?? "")
         let orderId = OrderDetailInforRow("Order Id".localized,"#\(orderDetail?.id ?? 0)")
         let seq = OrderDetailInforRow("SEQ".localized,"\(orderDetail?.seq ?? 0)")
-        let barCode = OrderDetailInforRow("Barcode".localized,"\(orderDetail?.barCode ?? "")")
-        let backageRefId = OrderDetailInforRow("Package Ref ID".localized,"\(orderDetail?.packageRefId ?? "")")
+        let barCode = OrderDetailInforRow("Barcode".localized,"\(orderDetail?.details?.first?.barCode ?? "")")
+        let paRefId = ((orderDetail?.details?.first?.packageRefId) != nil) ? "\((orderDetail?.details?.first?.packageRefId)!)" : ""
+        let backageRefId = OrderDetailInforRow("Package Ref ID".localized,paRefId)
 
         orderInforDetail.append(orderId)
         orderInforDetail.append(seq)
@@ -194,6 +195,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             orderInforDetail.append(mess)
         }
         
+        let fromLocationName = OrderDetailInforRow("Location name".localized, E(orderDetail?.from?.loc_name),false)
         let fromAddress = OrderDetailInforRow("Address".localized, E(orderDetail?.from?.address),true)
         let fromContactName = OrderDetailInforRow("Contact name".localized,orderDetail?.from?.name ?? "-")
         let fromContactPhone = OrderDetailInforRow("Contact phone".localized,orderDetail?.from?.phone ?? "-",true)
@@ -205,13 +207,16 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let toContactPhone = OrderDetailInforRow("Contact phone".localized,orderDetail?.to?.phone ?? "-", true)
         let toStartTime = OrderDetailInforRow("Start time".localized,startToDate,false)
         let tomEndtime = OrderDetailInforRow("End time".localized,endToDate,false)
+        let toLocationName = OrderDetailInforRow("Location name".localized, E(orderDetail?.to?.loc_name),false)
 
+        orderInforFrom.append(fromLocationName)
         orderInforFrom.append(fromAddress)
         orderInforFrom.append(fromContactName)
         orderInforFrom.append(fromContactPhone)
         orderInforFrom.append(fromStartTime)
         orderInforFrom.append(fromEndtime)
 
+        orderInforTo.append(toLocationName)
         orderInforTo.append(toAddress)
         orderInforTo.append(toContactName)
         orderInforTo.append(toContactPhone)
