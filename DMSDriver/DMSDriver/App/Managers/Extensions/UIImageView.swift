@@ -18,17 +18,16 @@ extension UIImageView {
                          complateDownload:((UIImage?,Error?)-> Void)? = nil)  {
         
         if let _url = url {
-            let manager = SDWebImageManager.shared()
-            manager.imageDownloader?.setValue("Bearer \(E(Caches().getTokenKeyLogin()))",
+            SDWebImageDownloader.shared.setValue("Bearer \(E(Caches().getTokenKeyLogin()))",
                 forHTTPHeaderField: "Authorization")
-            
+
             self.sd_setImage(with: URL(string: _url),
                              placeholderImage: placeHolderImage,
                              options: [.allowInvalidSSLCertificates ,
                                        .continueInBackground,
                                        .retryFailed,
                                        .refreshCached,
-                                       .cacheMemoryOnly],
+                                       .fromCacheOnly],
                              progress: nil) {(image, error, cacheType, url) in
                                 complateDownload?(image,error)
             }

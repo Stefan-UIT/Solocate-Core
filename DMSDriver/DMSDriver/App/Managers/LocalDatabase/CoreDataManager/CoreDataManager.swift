@@ -108,7 +108,7 @@ class _CoreDataManager {
     }
     
     func clearDatabase( entity:Entity ) {
-        self.persistentContainer.performBackgroundTask { (context) in
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity.rawValue )
             let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
             
@@ -117,15 +117,15 @@ class _CoreDataManager {
             } catch let error as NSError {
                 debugPrint(error)
             }
-            self.saveContext(context)
+            self?.saveContext(context)
         }
     }
     
     
     //MARK: - REQUEST
     func saveRequest(_ request:RequestModel ) {
-        self.persistentContainer.performBackgroundTask { (context) in
-            let coreRequest = self.createRecordForEntity(Entity.Request.rawValue ,
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
+            let coreRequest = self?.createRecordForEntity(Entity.Request.rawValue ,
                                                     inManagedObjectContext: context) as? CoreRequest
             
             coreRequest?.server = request.server
@@ -136,15 +136,15 @@ class _CoreDataManager {
             coreRequest?.timetamps = request.timetamps ?? Date().timeIntervalSince1970
             coreRequest?.userId = Int64(Caches().user?.userInfo?.id ?? 0)
             
-            self.saveContext(context)
+            self?.saveContext(context)
         }
         
     }
     
     func getAllRequest(_ userId:Int, callback:@escaping (Bool,[RequestModel]) -> Void){
-        self.persistentContainer.performBackgroundTask { (context) in
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
             let predicate = NSPredicate(format: "userId = \(userId)")
-            let listCoreRequest = self.fetchRecordsForEntity(Entity.Request.rawValue,
+            let listCoreRequest = self?.fetchRecordsForEntity(Entity.Request.rawValue,
                                                         predicate: predicate,
                                                         inManagedObjectContext: context) as? [CoreRequest]
             
@@ -164,9 +164,9 @@ class _CoreDataManager {
     }
     
     func countRequest(_ userId:Int, callback:@escaping (Bool,Int) -> Void){
-        self.persistentContainer.performBackgroundTask { (context) in
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
             let predicate = NSPredicate(format: "userId = \(userId)")
-            let listCoreRequest = self.fetchRecordsForEntity(Entity.Request.rawValue,
+            let listCoreRequest = self?.fetchRecordsForEntity(Entity.Request.rawValue,
                                                              predicate: predicate,
                                                              inManagedObjectContext: context) as? [CoreRequest]
             DispatchQueue.main.async {
@@ -186,14 +186,14 @@ class _CoreDataManager {
     
     //MARK: - ROUTE
     func saveRoutes(_ routes:[Route], callback:((Bool,[Route]) -> Void)? = nil) {
-        self.persistentContainer.performBackgroundTask { (context) in
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
             routes.forEach { (route) in
-                let coreRoute = self.queryCoreRouteById(route.id,context)
+                let coreRoute = self?.queryCoreRouteById(route.id,context)
                 if coreRoute != nil{
                     //context.delete(coreRoute!)
                     //self.updateRouteOnCoreCooradinator(coreRoute!, route, context)
                 }else{
-                    let _ = self.insertRoute(route, context)
+                    let _ = self?.insertRoute(route, context)
                 }
             }
             DispatchQueue.main.async {
@@ -203,9 +203,9 @@ class _CoreDataManager {
     }
     
     func addRoutesToEntity(_ routes:[Route], _ entity:Entity)  {
-        self.persistentContainer.performBackgroundTask { (context) in
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
             routes.forEach { (route) in
-                let _ = self.insertRoute(route, context)
+                let _ = self?.insertRoute(route, context)
             }
         }
     }
@@ -213,12 +213,12 @@ class _CoreDataManager {
     func saveCoordinatorRoute(_ coordinatorRoute: CoordinatorRoute,
                               _ onConplate:@escaping (Bool)->Void)  {
         
-        self.persistentContainer.performBackgroundTask { (context) in
-            let coreCoordinatorRoutes = self.fetchRecordsForEntity(Entity.CoordinatorRoute.rawValue,
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
+            let coreCoordinatorRoutes = self?.fetchRecordsForEntity(Entity.CoordinatorRoute.rawValue,
                                                                    inManagedObjectContext: context) as? [CoreCoordinatorRoute]
             
             if coreCoordinatorRoutes?.count ?? 0 <= 0 { // new
-                self.insertCoordinatorRoute(coordinatorRoute, context: context)
+                self?.insertCoordinatorRoute(coordinatorRoute, context: context)
                 
             }else{
                 
@@ -234,10 +234,10 @@ class _CoreDataManager {
 //                        self.insertCoordinatorRoute(coordinatorRoute, context: context)
 //                    })
 //
-                    self.updateCoreCoordinatorRoute(coreCoordinatorRoute!, coordinatorRoute, context)
+                    self?.updateCoreCoordinatorRoute(coreCoordinatorRoute!, coordinatorRoute, context)
                     
                 }else{
-                    self.insertCoordinatorRoute(coordinatorRoute, context: context)
+                    self?.insertCoordinatorRoute(coordinatorRoute, context: context)
                     
                 }
             }
@@ -290,8 +290,8 @@ class _CoreDataManager {
     }
     
     func queryCoordinatorRoute(_ stringDate:String, callback:@escaping (Bool,CoordinatorRoute) -> Void){
-        self.persistentContainer.performBackgroundTask { (context) in
-            let coordinatorRoutes = self.fetchRecordsForEntity(Entity.CoordinatorRoute.rawValue, inManagedObjectContext: context)
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
+            let coordinatorRoutes = self?.fetchRecordsForEntity(Entity.CoordinatorRoute.rawValue, inManagedObjectContext: context)
             let _result = (coordinatorRoutes as? [CoreCoordinatorRoute])?.filter({ (coordinatorRoute) -> Bool in
                 return coordinatorRoute.date == stringDate
             }).last
@@ -320,9 +320,9 @@ class _CoreDataManager {
     
     //MARK : - ROUTE
     func updateRoute(_ route:Route,_ callback:((Bool,Route) -> Void)? = nil) {
-        self.persistentContainer.performBackgroundTask { (context) in
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
             let predicate = NSPredicate(format: "id = \(route.id)")
-            let reaults = self.fetchRecordsForEntity(Entity.Route.rawValue,
+            let reaults = self?.fetchRecordsForEntity(Entity.Route.rawValue,
                                                 predicate:predicate,
                                                 inManagedObjectContext: context) as? [CoreRoute]
             reaults?.forEach { (coreRoute) in
@@ -333,7 +333,7 @@ class _CoreDataManager {
                         order.driver_name = route.driver_name
                         
                         let predicate = NSPredicate(format: "id = \(order.id)")
-                        let coreOrder = (self.fetchRecordsForEntity(Entity.Order.rawValue,
+                        let coreOrder = (self?.fetchRecordsForEntity(Entity.Order.rawValue,
                                                                predicate: predicate ,
                                                                inManagedObjectContext: context) as? [CoreOrder])?.last
                         
@@ -350,7 +350,7 @@ class _CoreDataManager {
                             coreOdr.driver_id = Int16(route.driverId)
                             coreRoute.addToOrderList(coreOdr)
                         }
-                        self.saveContext(context)
+                        self?.saveContext(context)
                     })
                 }
             }
@@ -470,14 +470,14 @@ class _CoreDataManager {
     }
     
     func queryRoutes(_ stringDate:String? = nil,callback:@escaping (Bool,[Route])-> Void){
-        self.persistentContainer.performBackgroundTask { (context) in
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
             var routes:[Route] = []
-            var items = self.fetchRecordsForEntity(Entity.Route.rawValue,
+            var items = self?.fetchRecordsForEntity(Entity.Route.rawValue,
                                               inManagedObjectContext: context) as? [CoreRoute]
             if let _date = stringDate {
                 items = items?.filter({ (coreRoute) -> Bool in
-                    let date = self.dateFormatter1.date(from:E(coreRoute.date))
-                    return self.dateFormatter2.string(from: date!) == _date
+                    let date = self?.dateFormatter1.date(from:E(coreRoute.date))
+                    return self?.dateFormatter2.string(from: date!) == _date
                 })
             }
             
@@ -510,7 +510,7 @@ class _CoreDataManager {
     
     //MARK: - ORDER
     func updateOrderDetail(_ orderDetail:Order, _ callback:((Bool,CoreOrder?) -> Void)? = nil)  {
-        self.persistentContainer.performBackgroundTask { (context) in
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
             
             let fetchRequest:NSFetchRequest = CoreOrder.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "id = \(orderDetail.id)")
@@ -524,20 +524,20 @@ class _CoreDataManager {
                         coreOrder.url?.sig = nil
                         coreOrder.url?.doc = nil
                         
-                        let coreUrl = self.createRecordForEntity(Entity.UrlFile.rawValue,
+                        let coreUrl = self?.createRecordForEntity(Entity.UrlFile.rawValue,
                                                             inManagedObjectContext: context) as? CoreUrlFile
                         if let sig = orderDetail.signature {
-                            self.deleteAttachFileById(sig.id, context: context)
-                            let coreSig = self.createRecordForEntity(Entity.AttachFile.rawValue,inManagedObjectContext: context) as? CoreAttachFile
+                            self?.deleteAttachFileById(sig.id, context: context)
+                            let coreSig = self?.createRecordForEntity(Entity.AttachFile.rawValue,inManagedObjectContext: context) as? CoreAttachFile
                             coreSig?.setAttributeFrom(sig)
                             coreUrl?.sig = coreSig
                         }
                         
                         if let docs = orderDetail.pictures {
                             docs.forEach({ (doc) in
-                                var coreDoc :CoreAttachFile? = self.queryCoreAttachfileBy(doc.id, context: context)
+                                var coreDoc :CoreAttachFile? = self?.queryCoreAttachfileBy(doc.id, context: context)
                                 if coreDoc == nil || doc.id == 0{
-                                    coreDoc  = (self.createRecordForEntity(Entity.AttachFile.rawValue,
+                                    coreDoc  = (self?.createRecordForEntity(Entity.AttachFile.rawValue,
                                                                       inManagedObjectContext: context) as! CoreAttachFile)
                                 }
                                 coreDoc?.setAttributeFrom(doc)
@@ -548,10 +548,10 @@ class _CoreDataManager {
                     }
                     
                     var recordReason: CoreReason? = nil
-                    let lists = self.fetchRecordsForEntity(Entity.Reason.rawValue, inManagedObjectContext: context)
-                    if let listRecord = lists.first {
+                    let lists = self?.fetchRecordsForEntity(Entity.Reason.rawValue, inManagedObjectContext: context)
+                    if let listRecord = lists?.first {
                         recordReason = listRecord as? CoreReason
-                    } else if let listRecord = self.createRecordForEntity(Entity.Reason.rawValue,
+                    } else if let listRecord = self?.createRecordForEntity(Entity.Reason.rawValue,
                                                                      inManagedObjectContext: context) {
                         recordReason = listRecord as? CoreReason
                     }
@@ -559,7 +559,7 @@ class _CoreDataManager {
                     recordReason?.setAttributeFrom(orderDetail.reason)
                     coreOrder.reason = recordReason
                     
-                    self.saveContext(context)
+                    self?.saveContext(context)
                 }
             }
             DispatchQueue.main.async {
@@ -569,7 +569,7 @@ class _CoreDataManager {
     }
     
     func queryOrderDetail(_ id: Int, callback:@escaping(Bool,Order?) -> Void) {
-        self.persistentContainer.performBackgroundTask { (context) in
+        self.persistentContainer.performBackgroundTask {(context) in
             let fetchRequest:NSFetchRequest = CoreOrder.fetchRequest()
             fetchRequest.predicate = NSPredicate(format: "id = \(id)")
             
@@ -618,24 +618,24 @@ class _CoreDataManager {
     
     func updateListReason(_ list:[Reason]) {
         clearDatabase(entity: .Reason)
-        self.persistentContainer.performBackgroundTask { (context) in
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
             list.forEach { (reason) in
-                let coreReason = self.createRecordForEntity(Entity.Reason.rawValue,
+                let coreReason = self?.createRecordForEntity(Entity.Reason.rawValue,
                                                        inManagedObjectContext: context) as? CoreReason
                 coreReason?.setAttributeFrom(reason)
-                self.saveContext(context)
+                self?.saveContext(context)
             }
         }
     }
     
     func updateListStatus(_ list:[Status]) {
         clearDatabase(entity: .CoreStatus)
-        self.persistentContainer.performBackgroundTask { (context) in
+        self.persistentContainer.performBackgroundTask {[weak self]  (context) in
             list.forEach { (status) in
-                let coreStatus = self.createRecordForEntity(Entity.CoreStatus.rawValue,
+                let coreStatus = self?.createRecordForEntity(Entity.CoreStatus.rawValue,
                                                             inManagedObjectContext: context) as? CoreStatus
                 coreStatus?.setAttributeFrom(status)
-                self.saveContext(context)
+                self?.saveContext(context)
             }
         }
     }

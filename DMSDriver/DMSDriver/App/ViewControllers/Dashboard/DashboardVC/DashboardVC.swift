@@ -152,7 +152,7 @@ class DashboardVC: BaseViewController {
             let entry = PieChartDataEntry(value: Double(val),label: text)
             dataEntries.append(entry)
         }
-        let chartDataSet = PieChartDataSet(values: dataEntries, label: "")
+        let chartDataSet = PieChartDataSet(entries: dataEntries, label: "")
         chartDataSet.drawValuesEnabled = true
         chartDataSet.colors = ChartColorTemplates.material()
         chartDataSet.sliceSpace = 2
