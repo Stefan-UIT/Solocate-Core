@@ -24,10 +24,8 @@ extension UIImageView {
             self.sd_setImage(with: URL(string: _url),
                              placeholderImage: placeHolderImage,
                              options: [.allowInvalidSSLCertificates ,
-                                       .continueInBackground,
                                        .retryFailed,
-                                       .refreshCached,
-                                       .fromCacheOnly],
+                                       .refreshCached],
                              progress: nil) {(image, error, cacheType, url) in
                                 complateDownload?(image,error)
             }
@@ -36,7 +34,7 @@ extension UIImageView {
         }
     }
     
-    func setImage(withURL imgPath: String) {
+    func setImage(withURL imgPath: String, placeholderImage:UIImage? = nil) {
         guard let url = URL(string: imgPath) else { return }
         
         if let cachImage = imageCache.object(forKey: url.absoluteString as NSString) {
@@ -45,6 +43,7 @@ extension UIImageView {
             
         }else {
             
+            self.image = placeholderImage
             let indicator = UIActivityIndicatorView(style: .white)
             indicator.hidesWhenStopped = true
             indicator.startAnimating()

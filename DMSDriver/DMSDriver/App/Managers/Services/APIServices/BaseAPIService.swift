@@ -167,7 +167,7 @@ class BaseAPIService {
                                     bodyData: encoding.bodyDataValue,
                                     bodyString: encoding.bodyStringValue)
         
-        if (Debug.shared?.disableLoggingForAPI == false) {
+        if (Debug.shared.disableLoggingForAPI == false) {
             DispatchQueue.global().async {
                 APILog("REQUEST", encoding.bodyStringValue);
             }
@@ -184,7 +184,7 @@ class BaseAPIService {
         request.responseJSON(queue: responsedCallbackQueue,
                              options: .allowFragments) {[weak self] (dataResponse) in
             
-                                if Debug.shared?.disableLoggingForAPI == false {
+                                if Debug.shared.disableLoggingForAPI == false {
                                     DispatchQueue.global().async {
                                         let logResult = dataResponse.data != nil ? String(data: dataResponse.data!, encoding: .utf8) : "<empty>";
                                         var logStatus : String;
@@ -255,7 +255,7 @@ class BaseAPIService {
             switch result{
             case .success(let upload, _, _):
                 upload.responseJSON { response in
-                    if Debug.shared?.disableLoggingForAPI == false {
+                    if Debug.shared.disableLoggingForAPI == false {
                         let logResult = response.data != nil ? String(data: response.data!, encoding: .utf8) : "<empty>";
                         var logStatus : String;
                         if let statusCode = response.response?.statusCode {
@@ -426,7 +426,7 @@ extension BaseAPIService {
             
             for i in 0..<files.count {
                 let file = files[i]
-                let data = file.getDataObject("image_file[\(i)]")
+                let data = file.getDataObject()
                 
                 mutiData.append(data as Data);
             }

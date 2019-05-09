@@ -25,7 +25,7 @@ class Debug {
 //MARK: - instances
 
 extension Debug{
-    fileprivate(set) static var shared: Debug?
+    fileprivate(set) static var shared = Debug()
     
     static func setup(shared: Debug) {
         self.shared = shared;

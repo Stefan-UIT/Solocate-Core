@@ -22,27 +22,42 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="rQc-GK-HeV">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="131.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                     <subviews>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_nonAvartar" translatesAutoresizingMaskIntoConstraints="NO" id="J0A-to-sDu">
-                                            <rect key="frame" x="124.5" y="3" width="126" height="126"/>
+                                            <rect key="frame" x="124.5" y="11.5" width="126" height="126"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" secondItem="J0A-to-sDu" secondAttribute="height" id="17Q-4M-Khu"/>
                                                 <constraint firstAttribute="width" constant="126" id="BdA-ou-Sf2"/>
                                             </constraints>
+                                            <userDefinedRuntimeAttributes>
+                                                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                    <real key="value" value="63"/>
+                                                </userDefinedRuntimeAttribute>
+                                            </userDefinedRuntimeAttributes>
                                         </imageView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Fvn-Z5-dh6">
+                                            <rect key="frame" x="124.5" y="11.5" width="126" height="126"/>
+                                            <connections>
+                                                <action selector="onbtnClickChangeAvatarWithBtn:" destination="qXG-D5-Tbp" eventType="touchUpInside" id="WCc-p0-mOx"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstItem="J0A-to-sDu" firstAttribute="centerX" secondItem="rQc-GK-HeV" secondAttribute="centerX" id="0a3-8u-HzD"/>
+                                        <constraint firstItem="Fvn-Z5-dh6" firstAttribute="top" secondItem="J0A-to-sDu" secondAttribute="top" id="JLv-CB-hxV"/>
+                                        <constraint firstItem="Fvn-Z5-dh6" firstAttribute="leading" secondItem="J0A-to-sDu" secondAttribute="leading" id="Qwr-Jo-jfl"/>
+                                        <constraint firstItem="Fvn-Z5-dh6" firstAttribute="trailing" secondItem="J0A-to-sDu" secondAttribute="trailing" id="e1n-fi-dVp"/>
                                         <constraint firstItem="J0A-to-sDu" firstAttribute="centerY" secondItem="rQc-GK-HeV" secondAttribute="centerY" id="fTg-3z-G4g"/>
-                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="126" id="sif-Up-N5U"/>
+                                        <constraint firstItem="Fvn-Z5-dh6" firstAttribute="bottom" secondItem="J0A-to-sDu" secondAttribute="bottom" id="kw6-tI-Oog"/>
+                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="130" id="sif-Up-N5U"/>
                                     </constraints>
                                 </view>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileHeadetCell" rowHeight="64" id="PvO-3c-Hhr" customClass="ProfileCell" customModule="DMSDriver" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="187" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="204.5" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PvO-3c-Hhr" id="zLL-cM-co5">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
@@ -102,7 +117,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileEditCell" rowHeight="77" id="s8z-6Q-DOq" customClass="ProfileCell" customModule="DMSDriver" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="251" width="375" height="77"/>
+                                        <rect key="frame" x="0.0" y="268.5" width="375" height="77"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="s8z-6Q-DOq" id="jGL-lf-WDR">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="77"/>
@@ -176,7 +191,7 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="ProfileChagePassCell" rowHeight="64" id="3RR-dr-gaj" customClass="ProfileCell" customModule="DMSDriver" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="328" width="375" height="64"/>
+                                        <rect key="frame" x="0.0" y="345.5" width="375" height="64"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3RR-dr-gaj" id="pq7-AZ-Nmg">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>

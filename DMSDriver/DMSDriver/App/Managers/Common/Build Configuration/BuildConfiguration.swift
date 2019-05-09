@@ -53,7 +53,7 @@ struct BuildConfiguration {
 extension BuildConfiguration {
     
     func serverUrlString() -> String {
-        if let server = Debug.shared?.useServer {
+        if let server = Debug.shared.useServer {
             return server
         }
         

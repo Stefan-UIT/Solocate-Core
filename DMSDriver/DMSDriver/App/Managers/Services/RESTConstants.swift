@@ -26,6 +26,7 @@ enum PATH_REQUEST_URL: String{
     case UPDATE_ORDER = "transaction/v1/mobile/orders/%@/%@"
     case UPDATE_SEQUENCE = "backend-api/v1/routes/update-sequence"
     case UPLOAD_FILES = "transaction/v1/orders/%@/%@"
+    case CHANGE_AVARTAR = "auth/v1/user/change-avatar/%@"
     case GET_REASON_LIST = "masterdata/v1/reason-fails/list-active"
     case ADD_NOTE = "backend-api/v1/orders/%@/notes"
     case UPDATE_ORDER_ITEM_STATUS = "backend-api/v1/orders/update-status-items/%@/%@"
