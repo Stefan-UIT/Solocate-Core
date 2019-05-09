@@ -75,10 +75,10 @@ class AttachFileModel: BaseModel {
     return dic
   }
     
-    func getDataObject(_ fileParam:String) -> NSMutableData {
+    func getDataObject(_ fileParam:String? = nil) -> NSMutableData {
         //let contentType = "multipart/form-data; boundary=" + boundary
         
-        let fileParamConstant = fileParam
+        let fileParamConstant = (fileParam != nil) ? fileParam! : E(param)
         let boundaryStart = "--\(boundary)\r\n"
         let boundaryEnd = "--\(boundary)--\r\n"
         let contentDispositionString = "Content-Disposition: form-data; name=\"\(fileParamConstant)\"; filename=\"\(E(name))\"\r\n"

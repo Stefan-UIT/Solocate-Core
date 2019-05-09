@@ -52,8 +52,9 @@ class ProfileVC: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
         initData()
+        setupImageView()
+        setupTableView()
         getUserProfile()
     }
 
@@ -76,14 +77,29 @@ class ProfileVC: BaseViewController {
     }
   
     func initData() {
-      publicInforDatas = [["First Name".localized,E(user?.firstName)],
+        if user == nil {
+            user = Caches().user?.userInfo
+        }
+        publicInforDatas = [["First Name".localized,E(user?.firstName)],
                           ["Last Name".localized,E(user?.lastName)]]
-    
-      privateInforDatas = [["Phone".localized,E(user?.phone)],
+
+        privateInforDatas = [["Phone".localized,E(user?.phone)],
                            ["Email".localized,E(user?.email)],
                            ["Password".localized,"Change Password".localized]]
     }
     
+    
+    func setupImageView() {
+        /*
+        imvAvartar?.setImageWithURL(url: user?.avatar_thumb,
+                                    placeHolderImage: #imageLiteral(resourceName: "ic_nonAvartar"),
+                                    complateDownload: { (image, error) in
+            //
+        })
+        */
+        
+        imvAvartar?.setImage(withURL: E(user?.avatar_thumb), placeholderImage: #imageLiteral(resourceName: "ic_nonAvartar"))
+    }
 
     /*
     // MARK: - Navigation
@@ -94,6 +110,24 @@ class ProfileVC: BaseViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    // MARK: - ACTION
+    @IBAction func onbtnClickChangeAvatar(btn:UIButton) {
+        doChangeAvatar()
+    }
+    
+    func doChangeAvatar() {
+        ImagePickerView.shared().showImageGallarySinglePick(atVC: self) {[weak self] (success, data) in
+            if data.count > 0{
+               guard let avartar = data.first , let _user = self?.user else{
+                    return
+                }
+                avartar.param = "avatar"
+
+                self?.changeAvatar(avartar: avartar, user: _user)
+            }
+        }
+    }
 }
 
 
@@ -370,6 +404,7 @@ extension ProfileVC{
             case .object(let obj):
                 strongSelf.user = obj.data;
                 strongSelf.initData()
+                strongSelf.setupImageView()
                 strongSelf.tbvContent?.reloadData()
                 break
             case .error(let error):
@@ -395,11 +430,32 @@ extension ProfileVC{
         strongSelf.initData()
         strongSelf.tbvContent?.reloadData()
         strongSelf.showAlertView("Updated Successful".localized)
+        let user = Caches().user
+        user?.userInfo = obj.data
+        Caches().user = user
 
-        break
       case .error(let error):
         strongSelf.showAlertView(error.getMessage())
       }
     }
   }
+    
+    func changeAvatar(avartar:AttachFileModel, user:UserModel.UserInfo)  {
+        self.showLoadingIndicator()
+        SERVICES().API.changeAvatarUser("\(user.id)", avartar) {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result {
+            case .object(let obj):
+                self?.user = obj.data
+                self?.setupImageView()
+                let user = Caches().user
+                user?.userInfo = obj.data
+                Caches().user = user
+                
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+                break
+            }
+        }
+    }
 }

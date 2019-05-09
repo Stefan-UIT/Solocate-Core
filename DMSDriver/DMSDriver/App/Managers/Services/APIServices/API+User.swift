@@ -66,4 +66,17 @@ extension BaseAPIService{
                        input: .empty,
                        callback: callback);
     }
+    
+    @discardableResult
+    func changeAvatarUser(_ userId:String,_ avatar:AttachFileModel, callback: @escaping APICallback<ResponseDataModel<UserModel.UserInfo>>) -> APIRequest {
+        let path = String(format:PATH_REQUEST_URL.CHANGE_AVARTAR.URL, userId)
+        let headers = ["Content-Type":"multipart/form-data; boundary=\(E(avatar.boundary))"];
+        
+        return request(method: .POST,
+                       headers:headers,
+                       path: path,
+                       input: .mutiFile([avatar]),
+                       callback: callback)
+        
+    }
 }

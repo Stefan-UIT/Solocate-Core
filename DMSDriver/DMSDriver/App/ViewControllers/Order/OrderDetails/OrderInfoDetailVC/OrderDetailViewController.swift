@@ -202,7 +202,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let fromStartTime = OrderDetailInforRow("Start time".localized,startFromDate,false)
         let fromEndtime = OrderDetailInforRow("End time".localized,endFromDate,false)
 
-        let toAddress = OrderDetailInforRow("Adress".localized, E(orderDetail?.to?.address),true)
+        let toAddress = OrderDetailInforRow("Address".localized, E(orderDetail?.to?.address),true)
         let toContactName = OrderDetailInforRow("Contact name".localized,orderDetail?.to?.name ?? "-")
         let toContactPhone = OrderDetailInforRow("Contact phone".localized,orderDetail?.to?.phone ?? "-", true)
         let toStartTime = OrderDetailInforRow("Start time".localized,startToDate,false)

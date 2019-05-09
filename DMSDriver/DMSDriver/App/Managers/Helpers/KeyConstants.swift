@@ -29,6 +29,8 @@ let KEY_MOBILE                  = "mobile"
 let KEY_PHONE                   = "phone"
 let KEY_USER_ROLE               = "user_roles"
 let KEY_TIMEZONE_COMPANY        = "timezone"
+let KEY_AVARTAR_NATIVE          = "avatar_native"
+let KEY_AVARTAR_THUMB           = "avatar_thumb"
 let KEY_USER_NAME               = "user_name"
 
 
