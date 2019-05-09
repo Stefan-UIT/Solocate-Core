@@ -129,8 +129,8 @@ class RouteDetailMapClvCell: UICollectionViewCell {
         let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: address.lattd?.doubleValue ?? 0,
                                                                 longitude: address.lngtd?.doubleValue ?? 0))
         let labelOrder = labelMarkerWithText("\(sequence)")
-        marker.title = address.name
-        marker.snippet = ""
+        marker.title = "Deliver: PACK1, PACK2, PACK3"
+        marker.snippet = "Pickup: PACK4"
         marker.map = mapView
         marker.iconView = labelOrder
         marker.zIndex = 1

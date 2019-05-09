@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		193BDBC22282E4BC005D716B /* LocationListTbvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193BDBC12282E4BC005D716B /* LocationListTbvCell.swift */; };
 		193BDBC32282E4BF005D716B /* LocationListTbvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193BDBC12282E4BC005D716B /* LocationListTbvCell.swift */; };
+		199F489222843D6D00DB6F7F /* GroupLocatonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199F489122843D6D00DB6F7F /* GroupLocatonModel.swift */; };
+		199F489322843D6D00DB6F7F /* GroupLocatonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199F489122843D6D00DB6F7F /* GroupLocatonModel.swift */; };
 		2A1AA32522546D83004449AA /* UINavigationController+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A1AA32422546D83004449AA /* UINavigationController+Ext.swift */; };
 		2A4204F9225760D400789837 /* PickerTimeVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2A4204F7225760D400789837 /* PickerTimeVC.swift */; };
 		2A4204FA225760D400789837 /* PickerTimeVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2A4204F8225760D400789837 /* PickerTimeVC.xib */; };
@@ -582,6 +584,7 @@
 
 /* Begin PBXFileReference section */
 		193BDBC12282E4BC005D716B /* LocationListTbvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListTbvCell.swift; sourceTree = "<group>"; };
+		199F489122843D6D00DB6F7F /* GroupLocatonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupLocatonModel.swift; sourceTree = "<group>"; };
 		2A1AA32422546D83004449AA /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
 		2A4204F7225760D400789837 /* PickerTimeVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerTimeVC.swift; sourceTree = "<group>"; };
 		2A4204F8225760D400789837 /* PickerTimeVC.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PickerTimeVC.xib; sourceTree = "<group>"; };
@@ -1093,6 +1096,14 @@
 				193BDBC12282E4BC005D716B /* LocationListTbvCell.swift */,
 			);
 			path = LocationListTbvCell;
+			sourceTree = "<group>";
+		};
+		199F488F22843D2B00DB6F7F /* GroupLocatonModel */ = {
+			isa = PBXGroup;
+			children = (
+				199F489122843D6D00DB6F7F /* GroupLocatonModel.swift */,
+			);
+			path = GroupLocatonModel;
 			sourceTree = "<group>";
 		};
 		2A4204F5225760A900789837 /* PickerTimeVC */ = {
@@ -2099,6 +2110,7 @@
 		3B66B86B210B1148000BDFEF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				199F488F22843D2B00DB6F7F /* GroupLocatonModel */,
 				2A4255582251F06400D55FEA /* ResponseDataDashboard */,
 				3BDCEBD421816C0B00C57DD4 /* ReceiveNotificationModel */,
 				3B014952217D7E8F0097FEB6 /* TaskModel */,
@@ -3479,6 +3491,7 @@
 				2A443AAB22648C5A00CB6508 /* TimeDataItem.swift in Sources */,
 				2A443AAC22648C5A00CB6508 /* PickerTimeCell.swift in Sources */,
 				2A443AAD22648C5A00CB6508 /* PopoverDelegate.swift in Sources */,
+				199F489222843D6D00DB6F7F /* GroupLocatonModel.swift in Sources */,
 				2A443AAE22648C5A00CB6508 /* ItemsSectionView.swift in Sources */,
 				2A443AAF22648C5A00CB6508 /* Button.swift in Sources */,
 				2A443AB022648C5A00CB6508 /* UIButton.swift in Sources */,
@@ -3709,6 +3722,7 @@
 				3B454C52222CCE700064F455 /* TimeDataItem.swift in Sources */,
 				2A42050322576ACA00789837 /* PickerTimeCell.swift in Sources */,
 				3B2B8B5A222E380600ACDDFE /* PopoverDelegate.swift in Sources */,
+				199F489322843D6D00DB6F7F /* GroupLocatonModel.swift in Sources */,
 				3B66B902210B1149000BDFEF /* ItemsSectionView.swift in Sources */,
 				3B66B83E210B113D000BDFEF /* Button.swift in Sources */,
 				3B66B80A210B113D000BDFEF /* UIButton.swift in Sources */,

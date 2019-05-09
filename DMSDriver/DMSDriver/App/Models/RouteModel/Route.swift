@@ -366,6 +366,10 @@ class Route: BaseModel {
         */
     }
     
+    func groupingLocationList() -> [] {
+        <#function body#>
+    }
+    
     func getChunkedListLocation() -> [[CLLocationCoordinate2D]] {
         let locationList = getListLocations()
         let sortedList = locationList.sorted(by: { (lhs, rhs) -> Bool in
