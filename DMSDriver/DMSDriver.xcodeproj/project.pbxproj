@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		19007579228522CD00A08E3B /* Route+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19007578228522CD00A08E3B /* Route+Ext.swift */; };
+		191D38EE228528480062B69B /* svdgvsdg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D38ED228528480062B69B /* svdgvsdg.swift */; };
 		193BDBC22282E4BC005D716B /* LocationListTbvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193BDBC12282E4BC005D716B /* LocationListTbvCell.swift */; };
 		193BDBC32282E4BF005D716B /* LocationListTbvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193BDBC12282E4BC005D716B /* LocationListTbvCell.swift */; };
 		199F489222843D6D00DB6F7F /* GroupLocatonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199F489122843D6D00DB6F7F /* GroupLocatonModel.swift */; };
@@ -583,6 +585,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		19007578228522CD00A08E3B /* Route+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Route+Ext.swift"; sourceTree = "<group>"; };
+		191D38ED228528480062B69B /* svdgvsdg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = svdgvsdg.swift; sourceTree = "<group>"; };
 		193BDBC12282E4BC005D716B /* LocationListTbvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListTbvCell.swift; sourceTree = "<group>"; };
 		199F489122843D6D00DB6F7F /* GroupLocatonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupLocatonModel.swift; sourceTree = "<group>"; };
 		2A1AA32422546D83004449AA /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
@@ -1182,6 +1186,8 @@
 			isa = PBXGroup;
 			children = (
 				3B66B88B210B1148000BDFEF /* Route.swift */,
+				19007578228522CD00A08E3B /* Route+Ext.swift */,
+				191D38ED228528480062B69B /* svdgvsdg.swift */,
 			);
 			path = RouteModel;
 			sourceTree = "<group>";
@@ -3597,6 +3603,7 @@
 				3B66B803210B113D000BDFEF /* UIView.swift in Sources */,
 				3B66B8E1210B1149000BDFEF /* Order.swift in Sources */,
 				3BB9308D21466776009F6DCC /* CoreRequest+Ext.swift in Sources */,
+				191D38EE228528480062B69B /* svdgvsdg.swift in Sources */,
 				2A42050B22576AF000789837 /* ContentCell.swift in Sources */,
 				3B66B826210B113D000BDFEF /* UIColor+Extensions.swift in Sources */,
 				3B66B82F210B113D000BDFEF /* AttributedTextBlock.swift in Sources */,
@@ -3689,6 +3696,7 @@
 				3B66B824210B113D000BDFEF /* String+Extensions.swift in Sources */,
 				3B66B814210B113D000BDFEF /* SignatureView.swift in Sources */,
 				3B355ED921ABE078004A2879 /* API+Route.swift in Sources */,
+				19007579228522CD00A08E3B /* Route+Ext.swift in Sources */,
 				3B66B806210B113D000BDFEF /* UIColor.swift in Sources */,
 				3B1629D0221BEA8200E7A83C /* FilterDataListHeaderCell.swift in Sources */,
 				3BEAB867214260740039CFBB /* CoreCoordinatorRoute+Ext.swift in Sources */,
