@@ -35,6 +35,8 @@ class OrderDetailTableViewCell: UITableViewCell {
     
     @IBOutlet weak var nameLabel: UILabel?
     @IBOutlet weak var contentLabel: UILabel?
+    @IBOutlet weak var lblBarcode: UILabel?
+    @IBOutlet weak var lblPackgage: UILabel?
     @IBOutlet weak var iconImgView: UIImageView?
     @IBOutlet weak var lineView: UIView?
     @IBOutlet weak var vContent: UIView?

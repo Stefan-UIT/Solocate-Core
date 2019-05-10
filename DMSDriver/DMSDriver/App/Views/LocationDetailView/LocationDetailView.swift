@@ -99,7 +99,7 @@ extension LocationDetailView:UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == LocationViewSection.Location.rawValue {
-            return 150
+            return 140
         }
         return 45
     }
