@@ -8,7 +8,13 @@
 
 /* Begin PBXBuildFile section */
 		19007579228522CD00A08E3B /* Route+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19007578228522CD00A08E3B /* Route+Ext.swift */; };
-		191D38EE228528480062B69B /* svdgvsdg.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D38ED228528480062B69B /* svdgvsdg.swift */; };
+		191D38F0228529D80062B69B /* Route+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19007578228522CD00A08E3B /* Route+Ext.swift */; };
+		191D38F3228554430062B69B /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D38F2228554430062B69B /* LocationDetailView.swift */; };
+		191D38F4228554430062B69B /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D38F2228554430062B69B /* LocationDetailView.swift */; };
+		191D38F6228554650062B69B /* LocationDetailView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191D38F5228554650062B69B /* LocationDetailView.storyboard */; };
+		191D38F7228554650062B69B /* LocationDetailView.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 191D38F5228554650062B69B /* LocationDetailView.storyboard */; };
+		191D38FA2285592E0062B69B /* LocationDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D38F92285592E0062B69B /* LocationDetailViewCell.swift */; };
+		191D38FB2285592E0062B69B /* LocationDetailViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D38F92285592E0062B69B /* LocationDetailViewCell.swift */; };
 		193BDBC22282E4BC005D716B /* LocationListTbvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193BDBC12282E4BC005D716B /* LocationListTbvCell.swift */; };
 		193BDBC32282E4BF005D716B /* LocationListTbvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 193BDBC12282E4BC005D716B /* LocationListTbvCell.swift */; };
 		199F489222843D6D00DB6F7F /* GroupLocatonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 199F489122843D6D00DB6F7F /* GroupLocatonModel.swift */; };
@@ -586,7 +592,9 @@
 
 /* Begin PBXFileReference section */
 		19007578228522CD00A08E3B /* Route+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Route+Ext.swift"; sourceTree = "<group>"; };
-		191D38ED228528480062B69B /* svdgvsdg.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = svdgvsdg.swift; sourceTree = "<group>"; };
+		191D38F2228554430062B69B /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
+		191D38F5228554650062B69B /* LocationDetailView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationDetailView.storyboard; sourceTree = "<group>"; };
+		191D38F92285592E0062B69B /* LocationDetailViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailViewCell.swift; sourceTree = "<group>"; };
 		193BDBC12282E4BC005D716B /* LocationListTbvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationListTbvCell.swift; sourceTree = "<group>"; };
 		199F489122843D6D00DB6F7F /* GroupLocatonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GroupLocatonModel.swift; sourceTree = "<group>"; };
 		2A1AA32422546D83004449AA /* UINavigationController+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+Ext.swift"; sourceTree = "<group>"; };
@@ -1094,6 +1102,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		191D38F1228553FB0062B69B /* LocationDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				191D38F8228559070062B69B /* Cell */,
+				191D38F2228554430062B69B /* LocationDetailView.swift */,
+				191D38F5228554650062B69B /* LocationDetailView.storyboard */,
+			);
+			path = LocationDetailView;
+			sourceTree = "<group>";
+		};
+		191D38F8228559070062B69B /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				191D38F92285592E0062B69B /* LocationDetailViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
 		193BDBBF2282E475005D716B /* LocationListTbvCell */ = {
 			isa = PBXGroup;
 			children = (
@@ -1187,7 +1213,6 @@
 			children = (
 				3B66B88B210B1148000BDFEF /* Route.swift */,
 				19007578228522CD00A08E3B /* Route+Ext.swift */,
-				191D38ED228528480062B69B /* svdgvsdg.swift */,
 			);
 			path = RouteModel;
 			sourceTree = "<group>";
@@ -1780,7 +1805,6 @@
 				3B66B788210B113C000BDFEF /* ImagePickerView */,
 				3B66B78A210B113C000BDFEF /* Build Configuration */,
 				3B66B78D210B113C000BDFEF /* NavigationService */,
-				3B66B78F210B113C000BDFEF /* AlertPickerView */,
 				3B66B7BD210B113C000BDFEF /* DMSNavigationService */,
 				3B66B7BF210B113C000BDFEF /* Debug */,
 			);
@@ -2366,6 +2390,8 @@
 		3B66B8C8210B1148000BDFEF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				191D38F1228553FB0062B69B /* LocationDetailView */,
+				3B66B78F210B113C000BDFEF /* AlertPickerView */,
 				2A4204F5225760A900789837 /* PickerTimeVC */,
 				3B454C4A222CCC3A0064F455 /* FilterByDatePopupView */,
 				3B80E3DF22279DDA005A2E75 /* AddNoteView */,
@@ -3114,6 +3140,7 @@
 				2A443B2222648C5A00CB6508 /* FilterByDatePopupCustomCell.xib in Resources */,
 				2A443B2322648C5A00CB6508 /* Order.storyboard in Resources */,
 				2A443B2422648C5A00CB6508 /* Login.storyboard in Resources */,
+				191D38F6228554650062B69B /* LocationDetailView.storyboard in Resources */,
 				2A443B2522648C5A00CB6508 /* ScrollMenuView.xib in Resources */,
 				2A443B2622648C5A00CB6508 /* FilterDataListStatusCell.xib in Resources */,
 				2A443B2722648C5A00CB6508 /* HeaderSectionCell.xib in Resources */,
@@ -3177,6 +3204,7 @@
 				3B2B8B56222E135B00ACDDFE /* FilterByDatePopupCustomCell.xib in Resources */,
 				3B66B864210B113D000BDFEF /* Order.storyboard in Resources */,
 				3B66B862210B113D000BDFEF /* Login.storyboard in Resources */,
+				191D38F7228554650062B69B /* LocationDetailView.storyboard in Resources */,
 				3BF838CF218957EA0056C4F1 /* ScrollMenuView.xib in Resources */,
 				3B1629DA221BEF6000E7A83C /* FilterDataListStatusCell.xib in Resources */,
 				2A42050022576A8E00789837 /* HeaderSectionCell.xib in Resources */,
@@ -3441,6 +3469,7 @@
 				2A443A7422648C5A00CB6508 /* CoreWarehouse+Ext.swift in Sources */,
 				2A443A7522648C5A00CB6508 /* HistoryNotifyCell.swift in Sources */,
 				2A443A7622648C5A00CB6508 /* RequestModel.swift in Sources */,
+				191D38FA2285592E0062B69B /* LocationDetailViewCell.swift in Sources */,
 				2A443A7722648C5A00CB6508 /* RouteListCell.swift in Sources */,
 				2A443A7822648C5A00CB6508 /* UIImageView.swift in Sources */,
 				2A443A7922648C5A00CB6508 /* ChangeInviromentTableViewCell.swift in Sources */,
@@ -3464,6 +3493,7 @@
 				2A443A8B22648C5A00CB6508 /* String+Extensions.swift in Sources */,
 				2A443A8C22648C5A00CB6508 /* SignatureView.swift in Sources */,
 				2A443A8D22648C5A00CB6508 /* API+Route.swift in Sources */,
+				191D38F0228529D80062B69B /* Route+Ext.swift in Sources */,
 				2A443A8E22648C5A00CB6508 /* UIColor.swift in Sources */,
 				2A443A8F22648C5A00CB6508 /* FilterDataListHeaderCell.swift in Sources */,
 				2A443A9022648C5A00CB6508 /* CoreCoordinatorRoute+Ext.swift in Sources */,
@@ -3556,6 +3586,7 @@
 				2A443AE422648C5A00CB6508 /* PackageModel.swift in Sources */,
 				2A443AE522648C5A00CB6508 /* Label.swift in Sources */,
 				2A443AE622648C5A00CB6508 /* DashboardClvCell.swift in Sources */,
+				191D38F3228554430062B69B /* LocationDetailView.swift in Sources */,
 				2A443AE722648C5A00CB6508 /* Date extensions.swift in Sources */,
 				2A443AE822648C5A00CB6508 /* SlideMenuVC.swift in Sources */,
 				2A443AE922648C5A00CB6508 /* DMSNavigationService.swift in Sources */,
@@ -3603,7 +3634,6 @@
 				3B66B803210B113D000BDFEF /* UIView.swift in Sources */,
 				3B66B8E1210B1149000BDFEF /* Order.swift in Sources */,
 				3BB9308D21466776009F6DCC /* CoreRequest+Ext.swift in Sources */,
-				191D38EE228528480062B69B /* svdgvsdg.swift in Sources */,
 				2A42050B22576AF000789837 /* ContentCell.swift in Sources */,
 				3B66B826210B113D000BDFEF /* UIColor+Extensions.swift in Sources */,
 				3B66B82F210B113D000BDFEF /* AttributedTextBlock.swift in Sources */,
@@ -3673,6 +3703,7 @@
 				3BEAB865214260590039CFBB /* CoreWarehouse+Ext.swift in Sources */,
 				3B7695E921CA20A70032B142 /* HistoryNotifyCell.swift in Sources */,
 				3BB9309021466DBA009F6DCC /* RequestModel.swift in Sources */,
+				191D38FB2285592E0062B69B /* LocationDetailViewCell.swift in Sources */,
 				3B00D0532151F9D700B0B062 /* RouteListCell.swift in Sources */,
 				3B66B80D210B113D000BDFEF /* UIImageView.swift in Sources */,
 				3B66B926210B1149000BDFEF /* ChangeInviromentTableViewCell.swift in Sources */,
@@ -3789,6 +3820,7 @@
 				3B66B8E7210B1149000BDFEF /* PackageModel.swift in Sources */,
 				3B66B83A210B113D000BDFEF /* Label.swift in Sources */,
 				3B36D8C5222934E200220BAE /* DashboardClvCell.swift in Sources */,
+				191D38F4228554430062B69B /* LocationDetailView.swift in Sources */,
 				3B5D7926217834B300EA49CC /* Date extensions.swift in Sources */,
 				3B66B919210B1149000BDFEF /* SlideMenuVC.swift in Sources */,
 				3B66B83F210B113D000BDFEF /* DMSNavigationService.swift in Sources */,

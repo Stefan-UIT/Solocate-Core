@@ -7,10 +7,24 @@
 //
 
 import UIKit
+import ObjectMapper
 
 class GroupLocatonModel: BaseModel {
     var address:Address?
     var orders:[Order]?
+    
+    override init() {
+        super.init()
+        orders = []
+    }
+    
+    required init?(map: Map) {
+       super.init()
+    }
+    
+    override func mapping(map: Map) {
+        //
+    }
     
     func getDeliverPackages() -> [Order.Detail] {
         var result:[Order.Detail] = []
@@ -33,6 +47,14 @@ class GroupLocatonModel: BaseModel {
             }
         })
         
+        return result
+    }
+    
+    func getListIdOrder() -> [Int] {
+        var result:[Int] = []
+        orders?.forEach({ (order) in
+            result.append(order.id)
+        })
         return result
     }
 }

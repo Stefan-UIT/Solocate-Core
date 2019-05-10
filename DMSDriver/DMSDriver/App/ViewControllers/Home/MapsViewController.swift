@@ -128,11 +128,11 @@ class MapsViewController: UIViewController {
     }
     
     
-    private func showMarker(_ address:Address, sequence:Int) {
-        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: address.lattd?.doubleValue ?? 0,
-                                                                longitude: address.lngtd?.doubleValue ?? 0))
+    private func showMarker(_ location:GroupLocatonModel, sequence:Int) {
+        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.address?.lattd?.doubleValue ?? 0,
+                                                                longitude: location.address?.lngtd?.doubleValue ?? 0))
         let labelOrder = labelMarkerWithText("\(sequence)")
-        marker.title = address.name
+        marker.title = location.address?.name
         marker.snippet = ""
         marker.map = mapView
         marker.iconView = labelOrder

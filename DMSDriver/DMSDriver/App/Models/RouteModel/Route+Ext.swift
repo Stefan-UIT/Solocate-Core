@@ -113,8 +113,8 @@ extension Route {
         return addedArray
     }
     
-    func getListLocations() -> [Address] {
-        return locationList
+    func getListLocations() -> [GroupLocatonModel] {
+        return groupingLocationList()
         /*
          var  array = [Address]()
          orderList.forEach { (order) in
@@ -129,23 +129,60 @@ extension Route {
          */
     }
     
-//    func groupingLocationList() -> [GroupLocatonModel] {
-//        var result:[GroupLocatonModel] = []
-//
-//        return result
-//    }
+    func groupingLocationList() -> [GroupLocatonModel] {
+        var result:[GroupLocatonModel] = []
+        for (_ ,order) in orderList.enumerated() {
+            var isAddFrom = true
+            var isAddTo = true
+
+            for (index ,location) in result.enumerated() {
+                if  location.address?.address == order.from?.address {
+                    isAddFrom = false
+                }
+                
+                if  location.address?.address == order.to?.address {
+                    isAddTo = false
+                }
+                
+                if  (location.address?.address == order.from?.address ||
+                    location.address?.address == order.to?.address) &&
+                    !location.getListIdOrder().contains(order.id) {
+                    
+                    result[index].orders?.append(order)
+                }
+            }
+            
+            if isAddFrom == true {
+                let location = GroupLocatonModel()
+                location.address = order.from
+                location.orders?.append(order)
+                
+                result.append(location)
+            }
+            
+            if isAddTo == true {
+                let location = GroupLocatonModel()
+                location.address = order.to
+                location.orders?.append(order)
+                
+                result.append(location)
+            }
+        }
+
+        return result
+    }
     
     func getChunkedListLocation() -> [[CLLocationCoordinate2D]] {
         let locationList = getListLocations()
         let sortedList = locationList.sorted(by: { (lhs, rhs) -> Bool in
-            return lhs.seq <= rhs.seq
+            return lhs.address?.seq ?? 0 <= rhs.address?.seq ?? 0
         })
         let currentLocation = LocationManager.shared.currentLocation?.coordinate
         var listLocation:[CLLocationCoordinate2D] = (currentLocation != nil) ? [currentLocation!] : []
         
         for i in 0..<(sortedList.count) {
-            let location = CLLocationCoordinate2D(latitude: sortedList[i].lattd?.doubleValue ?? 0,
-                                                  longitude: sortedList[i].lngtd?.doubleValue ?? 0)
+            let location = CLLocationCoordinate2D(latitude: sortedList[i].address?.lattd?.doubleValue ?? 0,
+                                                  longitude: sortedList[i].address?.lngtd?.doubleValue ?? 0)
             listLocation.append(location)
         }
         

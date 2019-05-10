@@ -125,6 +125,7 @@ public enum SBName : String {
     case Common = "Common";
     case Dashboard = "Dashboard";
     case Notification = "Notification";
+    case LocationDetailView = "LocationDetailView"
 
 }
 
