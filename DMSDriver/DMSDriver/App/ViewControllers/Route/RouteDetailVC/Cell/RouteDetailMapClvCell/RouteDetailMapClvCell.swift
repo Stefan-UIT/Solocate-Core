@@ -11,10 +11,14 @@ import GoogleMaps
 
 
 class RouteDetailMapClvCell: UICollectionViewCell {
+    
+    private var groupLocationList:[GroupLocatonModel] = []
+    
     var mapView: GMSMapView?
     
     var route: Route?{
         didSet{
+            initData()
             drawMap()
         }
     }
@@ -27,6 +31,10 @@ class RouteDetailMapClvCell: UICollectionViewCell {
         super.layoutSubviews()
         self.perform(#selector(setupMapView),on: Thread.main,with: nil,waitUntilDone: false)
         self.drawMap()
+    }
+    
+    func initData() {
+        groupLocationList = route?.groupingLocationList() ?? []
     }
 
     @objc func setupMapView() {
@@ -125,15 +133,16 @@ class RouteDetailMapClvCell: UICollectionViewCell {
     }
     
     
-    private func showMarker(_ address:Address, sequence:Int) {
-        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: address.lattd?.doubleValue ?? 0,
-                                                                longitude: address.lngtd?.doubleValue ?? 0))
+    private func showMarker(_ location:GroupLocatonModel, sequence:Int) {
+        let marker = GMSMarker(position: CLLocationCoordinate2D(latitude: location.address?.lattd?.doubleValue ?? 0,
+                                                                longitude: location.address?.lngtd?.doubleValue ?? 0))
         let labelOrder = labelMarkerWithText("\(sequence)")
-        marker.title = address.name
-        marker.snippet = ""
+        marker.title = "Deliver: PACK1, PACK2, PACK3"
+        marker.snippet = "Pickup: PACK4"
         marker.map = mapView
         marker.iconView = labelOrder
         marker.zIndex = 1
+        marker.userData = location
     }
     
     private func showMarkers() {
@@ -145,10 +154,10 @@ class RouteDetailMapClvCell: UICollectionViewCell {
             return
         }
         
-        let distinctArray = _route.getListLocations()
-        for (index,adress) in distinctArray.enumerated() {
+        //let distinctArray = _route.getListLocations()
+        for (index,location) in groupLocationList.enumerated() {
             let seq = index + 1
-            showMarker(adress, sequence:seq)
+            showMarker(location, sequence:seq)
         }
     }
     
@@ -162,8 +171,16 @@ class RouteDetailMapClvCell: UICollectionViewCell {
 }
 
 
+//MARK: - GMSMapViewDelegate
 extension RouteDetailMapClvCell: GMSMapViewDelegate {
-    
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        guard let location = marker.userData as? GroupLocatonModel else {
+            return false
+        }
+        LocationDetailView.showLocationViewDetail(at: App().mainVC, location: location)
+
+        return true
+    }
 }
 
 //MARK: - MapsViewController

@@ -17,15 +17,25 @@ class RouteDetailLocationListClvCell: UICollectionViewCell {
     fileprivate let cellIdentifier = "LocationListTbvCell"
 
     fileprivate var locationsList:[Order] = []
-    
+    private var groupLocationList:[GroupLocatonModel] = []
+
     var dateStringFilter = ""
-    var route: Route?
     var rootVC: BaseViewController?
+    var route: Route? {
+        didSet {
+            initData()
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        initData()
         updateUI()
         tbvContent?.backgroundColor = UIColor.clear
+    }
+    
+    func initData() {
+        groupLocationList = route?.groupingLocationList() ?? []
     }
     
     func updateUI() {
@@ -38,7 +48,7 @@ class RouteDetailLocationListClvCell: UICollectionViewCell {
         tbvContent?.addRefreshControl(self, action: #selector(fetchData))
     }
     
-    //MARK: -Action
+    //MARK: - Action
     @IBAction func onbtnClickSwitchMode(btn:UIButton){
         btn.isSelected = !btn.isSelected
     }
@@ -62,7 +72,7 @@ extension RouteDetailLocationListClvCell {
 //MARK: - RouteDetailOrderListClvCell,UITableViewDataSource
 extension RouteDetailLocationListClvCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return route?.locationList.count ?? 0
+        return groupLocationList.count
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -76,8 +86,8 @@ extension RouteDetailLocationListClvCell: UITableViewDelegate, UITableViewDataSo
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier ,
                                                     for: indexPath) as? LocationListTbvCell {
-            let address = route?.locationList[indexPath.row]
-            cell.address = address
+            let location = groupLocationList[indexPath.row]
+            cell.location = location
             
             return cell
         }
@@ -85,11 +95,9 @@ extension RouteDetailLocationListClvCell: UITableViewDelegate, UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        /*
-        tableView.deselectRow(at: indexPath, animated: true)
-        let vc:OrderListViewController = .loadSB(SB: .Order)
-        self.rootVC?.navigationController?.pushViewController(vc, animated: true)
-         */
+        let location = groupLocationList[indexPath.row]
+
+        LocationDetailView.showLocationViewDetail(at: App().mainVC, location: location)
     }
 }
 
@@ -115,8 +123,8 @@ extension RouteDetailLocationListClvCell{
             case .object(let obj):
                 self?.route = obj.data
                 
-                // Update route to DB local
-            //CoreDataManager.updateRoute(obj.data!)
+            // Update route to DB local
+            // CoreDataManager.updateRoute(obj.data!)
             case .error(let error):
                 self?.rootVC?.showAlertView(error.getMessage())
                 

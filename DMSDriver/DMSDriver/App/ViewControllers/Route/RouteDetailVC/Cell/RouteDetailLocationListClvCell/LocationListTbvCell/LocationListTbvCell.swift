@@ -23,7 +23,7 @@ class LocationListTbvCell: UITableViewCell {
     @IBOutlet weak var lblDate: UILabel?
     @IBOutlet weak var vContent: UIView?
     
-    var address: Address! {
+    var location: GroupLocatonModel! {
         didSet {
             updateCell()
         }
@@ -43,20 +43,20 @@ class LocationListTbvCell: UITableViewCell {
     
     func updateCell() {
         var startDate = ""
-        if let date = address?.start_time?.date {
+        if let date = location.address?.start_time?.date {
             startDate =  DateFormatter.displayDateTimeVN.string(from:date)
         }
         
         var endDate = ""
-        if let date = address?.end_time?.date {
+        if let date = location.address?.end_time?.date {
             endDate =  DateFormatter.displayDateTimeVN.string(from:date)
         }
         
         selectionStyle = .none
-        lblTitle?.text = address?.address
-        lblSubtitle?.text = "\(address?.ctt_name ?? "") | \(address?.ctt_phone ?? "")"
-        lblNumber?.text = "\(address?.seq ?? 1)"
+        lblTitle?.text = location.address?.address
+        lblSubtitle?.text = "\(location.address?.ctt_name ?? "") | \(location.address?.ctt_phone ?? "")"
+        lblNumber?.text = "\(location.address?.seq ?? 1)"
         lblExpectedTime?.text = "\(startDate) - \(endDate)"
-        lblLocationName?.text = "Location name: \(address.loc_name ?? "")"
+        lblLocationName?.text = "Location name: \(location.address?.loc_name ?? "")"
     }
 }
