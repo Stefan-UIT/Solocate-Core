@@ -12,9 +12,10 @@ struct AppColor {
     static let highLightColor       = UIColor(hex: "#b3e6ff")
     static let newStatus            = UIColor(hex: "#F18A20")
     static let inProcessStatus      = UIColor(hex: "#009DF7")
+    static let pickedUpStatus       = UIColor(hex: "#28D467")
     static let grayBorderColor      = UIColor(hex: "#353A50")
     static let titleHeader          = UIColor(hex: "#092742")
-    static let background          = UIColor(hex: "#2A2E43")
+    static let background           = UIColor(hex: "#2A2E43")
 
     
     static let medium               = UIColor(hex: "#E6A23C")

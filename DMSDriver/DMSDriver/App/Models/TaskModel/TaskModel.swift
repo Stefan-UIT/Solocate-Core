@@ -100,6 +100,8 @@ class TaskModel: BaseModel {
                 return AppColor.newStatus;
             case .inProcessStatus:
                 return AppColor.inProcessStatus;
+            case .pickupStatus:
+                return AppColor.pickedUpStatus
             case .deliveryStatus:
                 return AppColor.deliveryStatus;
             case .cancelStatus,

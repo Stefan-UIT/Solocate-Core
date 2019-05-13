@@ -10,19 +10,24 @@ import UIKit
 import ObjectMapper
 import CoreLocation
 
+	
+
 enum StatusOrder: String {
     case newStatus = "OP"
     case inProcessStatus = "IP"
     case deliveryStatus = "DV"
     case cancelStatus = "CC"
     case cancelFinishStatus = "UF"
+    case pickupStatus = "PU"
     
     var statusName: String {
         switch self {
         case .newStatus:
             return "New".localized
         case .inProcessStatus:
-            return "In Progress".localized
+            return "Started".localized
+        case .pickupStatus:
+            return "Picked Up"
         case .deliveryStatus:
             return "Finished".localized
         case .cancelStatus,
@@ -346,6 +351,8 @@ class Order: BaseModel {
                 return AppColor.newStatus;
             case .inProcessStatus:
                 return AppColor.inProcessStatus;
+            case .pickupStatus:
+                return AppColor.pickedUpStatus;
             case .deliveryStatus:
                 return AppColor.deliveryStatus;
             case .cancelStatus,
