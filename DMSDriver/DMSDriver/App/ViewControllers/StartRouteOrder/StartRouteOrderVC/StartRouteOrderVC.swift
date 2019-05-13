@@ -68,6 +68,8 @@ class StartRouteOrderVC: BaseViewController {
         case .newStatus:
             btnStart?.setTitle("Start".localized.uppercased(), for: .normal)
         case .inProcessStatus:
+            btnStart?.setTitle("Pickup".localized.uppercased(), for: .normal)
+        case .pickupStatus:
             btnStart?.setTitle("Finish".localized.uppercased(), for: .normal)
             
         default:
@@ -189,6 +191,7 @@ extension StartRouteOrderVC{
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
+                self?.order = _orderDetail
                 self?.updateUI()
                 self?.callback?(true,_orderDetail)
                 if _orderDetail.statusOrder == .deliveryStatus ||
@@ -235,6 +238,18 @@ extension StartRouteOrderVC {
             }
             
         case .inProcessStatus:
+            App().showAlertView("Do you want to pickup this order?".localized,
+                                positiveTitle: "YES".localized,
+                                positiveAction: {[weak self] (ok) in
+                                    
+                                    statusNeedUpdate = StatusOrder.pickupStatus.rawValue
+                                    self?.updateStatusOrder(statusCode: statusNeedUpdate)
+                                    
+            }, negativeTitle: "NO".localized) { (cancel) in
+                //
+            }
+            
+        case .pickupStatus:
             if _orderDetail.isRequireImage(){
                 self.showAlertView("Picture required".localized) {[weak self](action) in
                     self?.showPictureViewController()
