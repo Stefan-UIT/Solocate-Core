@@ -113,7 +113,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                           "Order info".localized.uppercased(),
                           "Pickup".localized.uppercased(),
                           "Delivery".localized.uppercased(),
-                          "Nature of goods".localized.uppercased(),
+                          "Packgages".localized.uppercased(),
                           "Signature".localized.uppercased(),
                           "Picture".localized.uppercased()]
         setupDataDetailInforRows()
@@ -175,14 +175,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                                           isHebewLang() ? orderDetail?.urgent_type_name_hb ?? "" :  orderDetail?.urgent_type_name_en ?? "")
         let orderId = OrderDetailInforRow("Order Id".localized,"#\(orderDetail?.id ?? 0)")
         let seq = OrderDetailInforRow("SEQ".localized,"\(orderDetail?.seq ?? 0)")
-        let barCode = OrderDetailInforRow("Barcode".localized,"\(orderDetail?.details?.first?.barCode ?? "")")
-        let paRefId = ((orderDetail?.details?.first?.packageRefId) != nil) ? "\((orderDetail?.details?.first?.packageRefId)!)" : ""
-        let backageRefId = OrderDetailInforRow("Package Ref ID".localized,paRefId)
 
         orderInforDetail.append(orderId)
         orderInforDetail.append(seq)
-        orderInforDetail.append(barCode)
-        orderInforDetail.append(backageRefId)
         orderInforDetail.append(customerItem)
         //orderInforStatus.append(urgency)
         
@@ -505,8 +500,12 @@ fileprivate extension OrderDetailViewController {
         cell.selectionStyle = .none
         
         let detail = orderDetail?.details?[indexPath.row]
+        let barCode = detail?.barCode ?? ""
+        let paRefId = ((detail?.packageRefId) != nil) ? "\((detail?.packageRefId)!)" : ""
         cell.nameLabel?.text = detail?.package
         cell.contentLabel?.text = "\(detail?.qty ?? 0)"
+        cell.lblBarcode?.text = barCode
+        cell.lblPackgage?.text = paRefId
         cell.vContent?.cornerRadius = 0
         if indexPath.row == (orderDetail?.details?.count ?? 0 ) - 1{
             cell.vContent?.roundCornersLRB()
