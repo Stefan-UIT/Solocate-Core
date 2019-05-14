@@ -183,7 +183,9 @@ class BaseAPIService {
         
         request.responseJSON(queue: responsedCallbackQueue,
                              options: .allowFragments) {[weak self] (dataResponse) in
-            
+                                
+                                self?.handleResponseJSON(dataResponse: dataResponse, callback: callback)
+
                                 if Debug.shared.disableLoggingForAPI == false {
                                     DispatchQueue.global().async {
                                         let logResult = dataResponse.data != nil ? String(data: dataResponse.data!, encoding: .utf8) : "<empty>";
@@ -199,9 +201,7 @@ class BaseAPIService {
                                         APILog("RESPONSE-\(logStatus)", logResult);
                                     }
                                 }
-            
-                                self?.handleResponseJSON(dataResponse: dataResponse, callback: callback)
-            
+                        
         };
         
         return APIRequest(alarmofireDataRequest: request);
@@ -234,7 +234,11 @@ class BaseAPIService {
             return (data: jsonData, string: jsonString);
         }
         
-        APILog("REQUEST", parseJson(parameters)?.string);
+        if Debug.shared.disableLoggingForAPI == false {
+            DispatchQueue.global().async {
+                APILog("REQUEST", parseJson(parameters)?.string);
+            }
+        }
         
         Alamofire.upload(multipartFormData: {(multipartFormData) in
             for (key, value) in parameters {
@@ -255,6 +259,9 @@ class BaseAPIService {
             switch result{
             case .success(let upload, _, _):
                 upload.responseJSON { response in
+                    
+                    self?.handleResponseJSON(dataResponse: response, callback: callback)
+
                     if Debug.shared.disableLoggingForAPI == false {
                         let logResult = response.data != nil ? String(data: response.data!, encoding: .utf8) : "<empty>";
                         var logStatus : String;
@@ -268,8 +275,6 @@ class BaseAPIService {
                         
                         APILog("RESPONSE-\(logStatus)", logResult);
                     }
-                    
-                    self?.handleResponseJSON(dataResponse: response, callback: callback)
                 }
                 
             case .failure(let error):

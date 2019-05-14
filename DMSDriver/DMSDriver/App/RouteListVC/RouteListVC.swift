@@ -178,7 +178,6 @@ import Crashlytics
             lblDate?.alpha = 1
         }
         conTopViewHiDriver?.constant = max
-        print("Y: \(contentOffsetY)")
     }
     
     func updateNavigationBar(isShowTitle:Bool)  {

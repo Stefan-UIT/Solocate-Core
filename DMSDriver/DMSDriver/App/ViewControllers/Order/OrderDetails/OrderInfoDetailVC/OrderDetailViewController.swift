@@ -53,20 +53,14 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     fileprivate let orderDetailNatureOfGoodsCell = "OrderDetailNatureOfGoodsCell"
 
     fileprivate var arrTitleHeader:[String] = []
+    fileprivate let heightHeader:CGFloat = 65
     
     var dateStringFilter = Date().toString()
     var btnGo: UIButton?
-
-    override var orderDetail: Order? {
-        didSet {
-            tableView?.reloadData()
-        }
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI()
-        initVar()
+        initUI()
         fetchData(showLoading: true)
     }
     
@@ -82,11 +76,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
     override func updateUI()  {
         super.updateUI()
-        DispatchQueue.main.async {[weak self] in
-            self?.initUI()
-            self?.updateButtonStatus()
-            self?.setupTableView()
-        }
+        self.updateButtonStatus()
     }
     
     
@@ -120,6 +110,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     private func initUI()  {
+        self.setupTableView()
         lblOrderId?.text = "Delivery #\(orderDetail?.id ?? 0)"
         guard  let start = orderDetail?.to?.start_time?.date,
                let end = orderDetail?.to?.end_time?.date else{
@@ -284,7 +275,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         case .sectionMap:
             return 0
         default:
-            return 65
+            return heightHeader
         }
     }
     
@@ -323,7 +314,12 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             default:
                 break
             }
-            return headerCell;
+            
+            let headerView = UIView()
+            headerView.addSubview(headerCell)
+            headerCell.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: heightHeader)
+
+            return headerView;
         }
         
         return nil
@@ -502,8 +498,8 @@ fileprivate extension OrderDetailViewController {
         let detail = orderDetail?.details?[indexPath.row]
         let barCode = detail?.barCode ?? ""
         let paRefId = ((detail?.packageRefId) != nil) ? "\((detail?.packageRefId)!)" : ""
-        cell.nameLabel?.text = detail?.package
-        cell.contentLabel?.text = "\(detail?.qty ?? 0)"
+        cell.nameLabel?.text = detail?.package?.name
+        cell.contentLabel?.text = "\(detail?.qty ?? 0) \(detail?.unit?.name ?? "")"
         cell.lblBarcode?.text = barCode
         cell.lblPackgage?.text = paRefId
         cell.vContent?.cornerRadius = 0
