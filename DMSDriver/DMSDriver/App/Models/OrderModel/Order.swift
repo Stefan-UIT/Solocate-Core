@@ -84,11 +84,48 @@ class Address: BaseModel {
 class Order: BaseModel {
 
     class Detail: BaseModel {
+        
+        struct Package:Mappable {
+            var id:Int?
+            var name:String?
+            var cd:String?
+            
+            
+            init?(map: Map) {
+                //
+            }
+            
+            mutating func mapping(map: Map) {
+                id <- map["id"]
+                name <- map["name"]
+                cd <- map["cd"]
+            }
+        }
+        
+        struct Unit:Mappable {
+            var id:Int?
+            var name:String?
+            var cd:String?
+            
+            
+            init?(map: Map) {
+                //
+            }
+            
+            mutating func mapping(map: Map) {
+                id <- map["id"]
+                name <- map["name"]
+                cd <- map["cd"]
+            }
+        }
+        
+        
         var order_id:Int?
         var package_id:Int?
         var qty:Double?
         var remain_qty:Double?
-        var package:String?
+        var package:Package?
+        var unit:Unit?
         var barCode:String?
         var packageRefId:Int?
         
@@ -108,6 +145,7 @@ class Order: BaseModel {
             package <- map["package"]
             barCode <- map["barcode"]
             packageRefId <- map["pkg_ref_id"]
+            unit <- map["unit"]
         }
     }
 

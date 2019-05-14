@@ -164,14 +164,14 @@ extension LocationDetailView:UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: packageIdentifierCell, for: indexPath) as! LocationDetailViewCell
             let deliver = delivers[row]
             
-            cell.lblSubTitle?.text = "Package: \(deliver.package ?? "\(row + 1)")"
+            cell.lblSubTitle?.text = (deliver.package?.name != nil) ? deliver.package?.name : "Package: \(row + 1)"
 
             return cell
         case .Pickup:
             let cell = tableView.dequeueReusableCell(withIdentifier: packageIdentifierCell, for: indexPath) as! LocationDetailViewCell
             let pickup = pickups[row]
             
-            cell.lblSubTitle?.text = "Package: \(pickup.package ?? "\(row + 1)")"
+            cell.lblSubTitle?.text = (pickup.package?.name != nil) ? pickup.package?.name : "Package: \(row + 1)"
             
             return cell
         }
