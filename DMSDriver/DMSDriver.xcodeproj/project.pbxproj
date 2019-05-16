@@ -7,6 +7,18 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		185FC761228D0D5C00B085BC /* LoadUnloadOrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185FC760228D0D5C00B085BC /* LoadUnloadOrderVC.swift */; };
+		185FC762228D0D5C00B085BC /* LoadUnloadOrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185FC760228D0D5C00B085BC /* LoadUnloadOrderVC.swift */; };
+		185FC764228D0D7C00B085BC /* LoadUnloadOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185FC763228D0D7C00B085BC /* LoadUnloadOrder.storyboard */; };
+		185FC765228D0D7C00B085BC /* LoadUnloadOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185FC763228D0D7C00B085BC /* LoadUnloadOrder.storyboard */; };
+		185FC768228D104B00B085BC /* LoadUnLoadListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185FC767228D104B00B085BC /* LoadUnLoadListCell.swift */; };
+		185FC769228D104B00B085BC /* LoadUnLoadListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185FC767228D104B00B085BC /* LoadUnLoadListCell.swift */; };
+		185FC772228D303100B085BC /* BaseSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185FC76D228D303100B085BC /* BaseSearchView.swift */; };
+		185FC773228D303100B085BC /* BaseSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185FC76D228D303100B085BC /* BaseSearchView.swift */; };
+		185FC774228D303100B085BC /* HSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185FC76F228D303100B085BC /* HSearchView.swift */; };
+		185FC775228D303100B085BC /* HSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185FC76F228D303100B085BC /* HSearchView.swift */; };
+		185FC776228D303100B085BC /* HSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185FC770228D303100B085BC /* HSearchView.xib */; };
+		185FC777228D303100B085BC /* HSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 185FC770228D303100B085BC /* HSearchView.xib */; };
 		19007579228522CD00A08E3B /* Route+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19007578228522CD00A08E3B /* Route+Ext.swift */; };
 		191D38F0228529D80062B69B /* Route+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19007578228522CD00A08E3B /* Route+Ext.swift */; };
 		191D38F3228554430062B69B /* LocationDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191D38F2228554430062B69B /* LocationDetailView.swift */; };
@@ -591,6 +603,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		185FC760228D0D5C00B085BC /* LoadUnloadOrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUnloadOrderVC.swift; sourceTree = "<group>"; };
+		185FC763228D0D7C00B085BC /* LoadUnloadOrder.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LoadUnloadOrder.storyboard; sourceTree = "<group>"; };
+		185FC767228D104B00B085BC /* LoadUnLoadListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadUnLoadListCell.swift; sourceTree = "<group>"; };
+		185FC76D228D303100B085BC /* BaseSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseSearchView.swift; sourceTree = "<group>"; };
+		185FC76F228D303100B085BC /* HSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HSearchView.swift; sourceTree = "<group>"; };
+		185FC770228D303100B085BC /* HSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HSearchView.xib; sourceTree = "<group>"; };
 		19007578228522CD00A08E3B /* Route+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Route+Ext.swift"; sourceTree = "<group>"; };
 		191D38F2228554430062B69B /* LocationDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDetailView.swift; sourceTree = "<group>"; };
 		191D38F5228554650062B69B /* LocationDetailView.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = LocationDetailView.storyboard; sourceTree = "<group>"; };
@@ -1100,6 +1118,42 @@
 				E1AC34514E8CE5CA706A2A5D /* Pods_DMSDriver_Dev.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		185FC75A228D0D0400B085BC /* LoadUnloadOrderVC */ = {
+			isa = PBXGroup;
+			children = (
+				185FC766228D102400B085BC /* Cell */,
+				185FC760228D0D5C00B085BC /* LoadUnloadOrderVC.swift */,
+				185FC763228D0D7C00B085BC /* LoadUnloadOrder.storyboard */,
+			);
+			path = LoadUnloadOrderVC;
+			sourceTree = "<group>";
+		};
+		185FC766228D102400B085BC /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				185FC767228D104B00B085BC /* LoadUnLoadListCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		185FC76C228D303100B085BC /* BaseSearchView */ = {
+			isa = PBXGroup;
+			children = (
+				185FC76D228D303100B085BC /* BaseSearchView.swift */,
+				185FC76E228D303100B085BC /* HSearchView */,
+			);
+			path = BaseSearchView;
+			sourceTree = "<group>";
+		};
+		185FC76E228D303100B085BC /* HSearchView */ = {
+			isa = PBXGroup;
+			children = (
+				185FC76F228D303100B085BC /* HSearchView.swift */,
+				185FC770228D303100B085BC /* HSearchView.xib */,
+			);
+			path = HSearchView;
 			sourceTree = "<group>";
 		};
 		191D38F1228553FB0062B69B /* LocationDetailView */ = {
@@ -2237,6 +2291,7 @@
 		3B66B88D210B1148000BDFEF /* Order */ = {
 			isa = PBXGroup;
 			children = (
+				185FC75A228D0D0400B085BC /* LoadUnloadOrderVC */,
 				3BF258242224FB2C00A56B4E /* Signature */,
 				3BF258182224FA6100A56B4E /* Picture */,
 				3B0724C421B1133600CDB05B /* ScanBarCodeVC */,
@@ -2390,6 +2445,7 @@
 		3B66B8C8210B1148000BDFEF /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				185FC76C228D303100B085BC /* BaseSearchView */,
 				191D38F1228553FB0062B69B /* LocationDetailView */,
 				3B66B78F210B113C000BDFEF /* AlertPickerView */,
 				2A4204F5225760A900789837 /* PickerTimeVC */,
@@ -3136,6 +3192,7 @@
 				2A443B1E22648C5A00CB6508 /* GoogleService-Info-prod.plist in Resources */,
 				2A443B1F22648C5A00CB6508 /* ReasonSkipTableViewCell.xib in Resources */,
 				2A443B2022648C5A00CB6508 /* RouteTableViewCell.xib in Resources */,
+				185FC776228D303100B085BC /* HSearchView.xib in Resources */,
 				2A443B2122648C5A00CB6508 /* FilterByDatePopupView.xib in Resources */,
 				2A443B2222648C5A00CB6508 /* FilterByDatePopupCustomCell.xib in Resources */,
 				2A443B2322648C5A00CB6508 /* Order.storyboard in Resources */,
@@ -3143,6 +3200,7 @@
 				191D38F6228554650062B69B /* LocationDetailView.storyboard in Resources */,
 				2A443B2522648C5A00CB6508 /* ScrollMenuView.xib in Resources */,
 				2A443B2622648C5A00CB6508 /* FilterDataListStatusCell.xib in Resources */,
+				185FC764228D0D7C00B085BC /* LoadUnloadOrder.storyboard in Resources */,
 				2A443B2722648C5A00CB6508 /* HeaderSectionCell.xib in Resources */,
 				2A443B2822648C5A00CB6508 /* Localizable.strings in Resources */,
 				2A443B2922648C5A00CB6508 /* Packages.storyboard in Resources */,
@@ -3200,6 +3258,7 @@
 				3B2A23A721195BA50000817C /* GoogleService-Info-prod.plist in Resources */,
 				3B80E3DD22279D1B005A2E75 /* ReasonSkipTableViewCell.xib in Resources */,
 				3B4BBF812214086300EA7485 /* RouteTableViewCell.xib in Resources */,
+				185FC777228D303100B085BC /* HSearchView.xib in Resources */,
 				3B454C4F222CCD260064F455 /* FilterByDatePopupView.xib in Resources */,
 				3B2B8B56222E135B00ACDDFE /* FilterByDatePopupCustomCell.xib in Resources */,
 				3B66B864210B113D000BDFEF /* Order.storyboard in Resources */,
@@ -3207,6 +3266,7 @@
 				191D38F7228554650062B69B /* LocationDetailView.storyboard in Resources */,
 				3BF838CF218957EA0056C4F1 /* ScrollMenuView.xib in Resources */,
 				3B1629DA221BEF6000E7A83C /* FilterDataListStatusCell.xib in Resources */,
+				185FC765228D0D7C00B085BC /* LoadUnloadOrder.storyboard in Resources */,
 				2A42050022576A8E00789837 /* HeaderSectionCell.xib in Resources */,
 				3B66B856210B113D000BDFEF /* Localizable.strings in Resources */,
 				3B66B85C210B113D000BDFEF /* Packages.storyboard in Resources */,
@@ -3404,6 +3464,7 @@
 				2A443A3322648C5A00CB6508 /* UIColor+Extensions.swift in Sources */,
 				2A443A3422648C5A00CB6508 /* AttributedTextBlock.swift in Sources */,
 				2A443A3522648C5A00CB6508 /* FilterDataModel.swift in Sources */,
+				185FC768228D104B00B085BC /* LoadUnLoadListCell.swift in Sources */,
 				2A443A3622648C5A00CB6508 /* DashboardVC.swift in Sources */,
 				2A443A3722648C5A00CB6508 /* TextField.swift in Sources */,
 				2A443A3822648C5A00CB6508 /* ReasonSkipTableViewCell.swift in Sources */,
@@ -3427,6 +3488,7 @@
 				2A443A4A22648C5A00CB6508 /* HCSStarRatingView.m in Sources */,
 				2A443A4B22648C5A00CB6508 /* ScrollMenuView.swift in Sources */,
 				2A443A4C22648C5A00CB6508 /* UISegmentedControl+Extensions.swift in Sources */,
+				185FC761228D0D5C00B085BC /* LoadUnloadOrderVC.swift in Sources */,
 				2A443A4D22648C5A00CB6508 /* OrderDetailContainerViewController.swift in Sources */,
 				2A443A4E22648C5A00CB6508 /* OrderDetailMapTableViewCell.swift in Sources */,
 				2A443A4F22648C5A00CB6508 /* Array+Extensions.swift in Sources */,
@@ -3498,6 +3560,7 @@
 				2A443A8F22648C5A00CB6508 /* FilterDataListHeaderCell.swift in Sources */,
 				2A443A9022648C5A00CB6508 /* CoreCoordinatorRoute+Ext.swift in Sources */,
 				2A443A9122648C5A00CB6508 /* TaskDetailVC.swift in Sources */,
+				185FC772228D303100B085BC /* BaseSearchView.swift in Sources */,
 				2A443A9222648C5A00CB6508 /* FilterDataListFooterView.swift in Sources */,
 				2A443A9322648C5A00CB6508 /* UILabel.swift in Sources */,
 				2A443A9422648C5A00CB6508 /* FirebaseService.swift in Sources */,
@@ -3506,6 +3569,7 @@
 				2A443A9722648C5A00CB6508 /* DMSDriver.xcdatamodeld in Sources */,
 				2A443A9822648C5A00CB6508 /* ApprovePictureViewController.swift in Sources */,
 				2A443A9922648C5A00CB6508 /* ResponseDataModel.swift in Sources */,
+				185FC774228D303100B085BC /* HSearchView.swift in Sources */,
 				2A443A9A22648C5A00CB6508 /* OrderMarker.swift in Sources */,
 				2A443A9B22648C5A00CB6508 /* UINavigationController+Ext.swift in Sources */,
 				2A443A9C22648C5A00CB6508 /* UIAlertController+Extensions.swift in Sources */,
@@ -3638,6 +3702,7 @@
 				3B66B826210B113D000BDFEF /* UIColor+Extensions.swift in Sources */,
 				3B66B82F210B113D000BDFEF /* AttributedTextBlock.swift in Sources */,
 				3B0D52BD221D44A400610A9A /* FilterDataModel.swift in Sources */,
+				185FC769228D104B00B085BC /* LoadUnLoadListCell.swift in Sources */,
 				3B36D8BE2228E5D200220BAE /* DashboardVC.swift in Sources */,
 				3B66B83D210B113D000BDFEF /* TextField.swift in Sources */,
 				3B80E3DE22279D1B005A2E75 /* ReasonSkipTableViewCell.swift in Sources */,
@@ -3661,6 +3726,7 @@
 				3B66B812210B113D000BDFEF /* HCSStarRatingView.m in Sources */,
 				3B13CBEF211A8FF400A93E18 /* ScrollMenuView.swift in Sources */,
 				3B66B81F210B113D000BDFEF /* UISegmentedControl+Extensions.swift in Sources */,
+				185FC762228D0D5C00B085BC /* LoadUnloadOrderVC.swift in Sources */,
 				3B66B903210B1149000BDFEF /* OrderDetailContainerViewController.swift in Sources */,
 				3B66B8FE210B1149000BDFEF /* OrderDetailMapTableViewCell.swift in Sources */,
 				3B66B81E210B113D000BDFEF /* Array+Extensions.swift in Sources */,
@@ -3732,6 +3798,7 @@
 				3B1629D0221BEA8200E7A83C /* FilterDataListHeaderCell.swift in Sources */,
 				3BEAB867214260740039CFBB /* CoreCoordinatorRoute+Ext.swift in Sources */,
 				3B014951217D7E010097FEB6 /* TaskDetailVC.swift in Sources */,
+				185FC773228D303100B085BC /* BaseSearchView.swift in Sources */,
 				3B1629E5221C082B00E7A83C /* FilterDataListFooterView.swift in Sources */,
 				3B66B80F210B113D000BDFEF /* UILabel.swift in Sources */,
 				3B66B849210B113D000BDFEF /* FirebaseService.swift in Sources */,
@@ -3740,6 +3807,7 @@
 				3B66B759210B1051000BDFEF /* DMSDriver.xcdatamodeld in Sources */,
 				3BF258232224FABB00A56B4E /* ApprovePictureViewController.swift in Sources */,
 				3B66B8F4210B1149000BDFEF /* ResponseDataModel.swift in Sources */,
+				185FC775228D303100B085BC /* HSearchView.swift in Sources */,
 				3B66B8EE210B1149000BDFEF /* OrderMarker.swift in Sources */,
 				2A1AA32522546D83004449AA /* UINavigationController+Ext.swift in Sources */,
 				3B66B82A210B113D000BDFEF /* UIAlertController+Extensions.swift in Sources */,

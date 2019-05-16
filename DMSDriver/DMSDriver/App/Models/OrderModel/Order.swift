@@ -85,6 +85,25 @@ class Order: BaseModel {
 
     class Detail: BaseModel {
         
+        enum DetailStatus {
+            case NotLoad
+            case Loaded
+            case Unload
+            
+            var name:String{
+                get{
+                    switch self {
+                    case .NotLoad:
+                        return "Not Load".localized
+                    case .Loaded:
+                        return "Loaded".localized
+                    case .Unload:
+                        return "Unloaded".localized
+                    }
+                }
+            }
+        }
+        
         struct Package:Mappable {
             var id:Int?
             var name:String?
@@ -119,7 +138,6 @@ class Order: BaseModel {
             }
         }
         
-        
         var order_id:Int?
         var package_id:Int?
         var qty:Double?
@@ -128,6 +146,8 @@ class Order: BaseModel {
         var unit:Unit?
         var barCode:String?
         var packageRefId:Int?
+        var status:DetailStatus = .NotLoad
+        
         
         override init() {
             super.init()
@@ -147,6 +167,8 @@ class Order: BaseModel {
             packageRefId <- map["pkg_ref_id"]
             unit <- map["unit"]
         }
+        
+        
     }
 
     class Nature: BaseModel {
@@ -172,7 +194,6 @@ class Order: BaseModel {
     var to:Address?
     var route_id:Int = 0
     var status_id:Int?
-    var status:Status?
     var seq:Int = 0
     var pod_req:Int?
     var sig_req:Int?
@@ -212,6 +233,12 @@ class Order: BaseModel {
     var isSelect = false
     var directionRoute:[DirectionRoute]? // use for save DirectionRoute
     var route:Route?
+    
+    var status:Status? {
+        didSet {
+            updateStatusDetailOrder()
+        }
+    }
     
     lazy var totalEstDuration:Int = {
         var total = 0
@@ -264,6 +291,23 @@ class Order: BaseModel {
             to    = Address(JSON: dataTo.parseToJSON() ?? [:])
         }else{
             to    <- map["to"]
+        }
+        
+       updateStatusDetailOrder()
+    }
+    
+    func updateStatusDetailOrder()  {
+        for item in details ?? [] {
+            if statusOrder == .newStatus ||
+                statusOrder == .inProcessStatus {
+                item.status = .NotLoad
+                
+            }else if (statusOrder == .pickupStatus) {
+                item.status = .Loaded
+            }else if (statusOrder == .deliveryStatus) {
+                item.status = .Unload
+
+            }
         }
     }
     
@@ -401,11 +445,30 @@ class Order: BaseModel {
     }
     
     func isRequireSign() -> Bool  {
-        return sig_req == 1 && signature == nil
+        return false  //sig_req == 1 && signature == nil
     }
     
     func isRequireImage() -> Bool  {
-        return pod_req == 1 && pictures?.count ?? 0 <= 0
+        return false //pod_req == 1 && pictures?.count ?? 0 <= 0
+    }
+    
+    func validUpdateStatusOrder() -> Bool {
+        var valid = true
+        for item in details ?? []  {
+            if statusOrder == StatusOrder.inProcessStatus {
+                if item.status != .Loaded {
+                    valid = false
+                    break
+                }
+            }else if statusOrder == StatusOrder.pickupStatus {
+                if item.status != .Unload {
+                    valid = false
+                    break
+                }
+            }
+        }
+        
+        return valid
     }
     
     /*

@@ -431,6 +431,15 @@ extension UIView {
         let view = parentView.viewWithTag(1000)
         view?.removeFromSuperview()
     }
+    
+    func addSubview(_ subView: UIView, edge: UIEdgeInsets) {
+        let frame = CGRect(x: 0, y: 0, width: 100, height: 50)
+        let margin = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        let content = frame.inset(by: margin)
+        subView.frame = content
+        addSubview(subView);
+    }
+    
 }
 
 
