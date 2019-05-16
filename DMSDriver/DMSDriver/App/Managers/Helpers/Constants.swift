@@ -125,8 +125,8 @@ public enum SBName : String {
     case Common = "Common";
     case Dashboard = "Dashboard";
     case Notification = "Notification";
-    case LocationDetailView = "LocationDetailView"
-
+    case LocationDetailView = "LocationDetailView";
+    case LoadUnloadOrder = "LoadUnloadOrder";
 }
 
 func MAX<T>(_ x: T, _ y: T) -> T where T : Comparable {

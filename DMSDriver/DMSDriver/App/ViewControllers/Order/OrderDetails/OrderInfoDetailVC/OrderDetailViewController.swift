@@ -219,9 +219,12 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         vc.order = orderDetail
         vc.callback = {[weak self](success, order) in
             self?.orderDetail = order
+            self?.fetchData(showLoading: false)
+            /*
             self?.setupDataDetailInforRows()
             self?.tableView?.reloadData()
             self?.updateOrderDetail?(order)
+             */
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -307,7 +310,8 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 var isAdd = false
                 if orderDetail?.route?.driverId == Caches().user?.userInfo?.id &&
                         (orderDetail?.statusOrder == StatusOrder.newStatus ||
-                         orderDetail?.statusOrder == StatusOrder.inProcessStatus){
+                         orderDetail?.statusOrder == StatusOrder.inProcessStatus ||
+                         orderDetail?.statusOrder == StatusOrder.pickupStatus){
                     isAdd = true
                 }
                 headerCell.btnEdit?.isHidden = !isAdd
@@ -588,9 +592,12 @@ extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
         vc.order  = orderDetail
         vc.callback = {[weak self](success, order) in
             self?.orderDetail = order
+            self?.fetchData(showLoading: false)
+            /*
             self?.setupDataDetailInforRows()
             self?.tableView?.reloadData()
             self?.updateOrderDetail?(order)
+             */
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }

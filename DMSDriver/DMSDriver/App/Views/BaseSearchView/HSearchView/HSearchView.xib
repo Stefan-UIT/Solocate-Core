@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB" customClass="HSearchView" customModule="DMSDriver" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="436" height="105"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kqX-TB-tPR">
+                    <rect key="frame" x="0.0" y="0.0" width="436" height="105"/>
+                    <subviews>
+                        <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Search" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="u2Z-Do-KOp">
+                            <rect key="frame" x="10" y="5" width="371" height="95"/>
+                            <nil key="textColor"/>
+                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                            <textInputTraits key="textInputTraits"/>
+                        </textField>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xti-sj-tIV">
+                            <rect key="frame" x="391" y="36.5" width="35" height="32"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="35" id="czK-kg-0ja"/>
+                            </constraints>
+                            <state key="normal" image="ic_searchBlue"/>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="u2Z-Do-KOp" firstAttribute="top" secondItem="kqX-TB-tPR" secondAttribute="top" constant="5" id="9yd-bP-cbF"/>
+                        <constraint firstItem="Xti-sj-tIV" firstAttribute="centerY" secondItem="kqX-TB-tPR" secondAttribute="centerY" id="BTr-Nu-Mw0"/>
+                        <constraint firstAttribute="trailing" secondItem="Xti-sj-tIV" secondAttribute="trailing" constant="10" id="Mq7-yl-nCd"/>
+                        <constraint firstItem="u2Z-Do-KOp" firstAttribute="centerY" secondItem="kqX-TB-tPR" secondAttribute="centerY" id="bDe-RF-FBL"/>
+                        <constraint firstItem="u2Z-Do-KOp" firstAttribute="leading" secondItem="kqX-TB-tPR" secondAttribute="leading" constant="10" id="fcm-vf-CTT"/>
+                        <constraint firstItem="Xti-sj-tIV" firstAttribute="leading" secondItem="u2Z-Do-KOp" secondAttribute="trailing" constant="10" id="xgf-Cv-A8M"/>
+                        <constraint firstAttribute="bottom" secondItem="u2Z-Do-KOp" secondAttribute="bottom" constant="5" id="yNY-R6-38G"/>
+                    </constraints>
+                    <viewLayoutGuide key="safeArea" id="6u2-MZ-8V9"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="20"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="0.0"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="kqX-TB-tPR" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="60t-Iw-tia"/>
+                <constraint firstItem="kqX-TB-tPR" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="cpx-6g-wiL"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="kqX-TB-tPR" secondAttribute="trailing" id="mFE-Rw-ixG"/>
+                <constraint firstAttribute="bottom" secondItem="kqX-TB-tPR" secondAttribute="bottom" id="xUn-28-7hu"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <userDefinedRuntimeAttributes>
+                <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                    <real key="value" value="20"/>
+                </userDefinedRuntimeAttribute>
+            </userDefinedRuntimeAttributes>
+            <connections>
+                <outlet property="tfSearch" destination="u2Z-Do-KOp" id="IoB-aa-GBI"/>
+            </connections>
+            <point key="canvasLocation" x="278.39999999999998" y="1316.4917541229386"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="ic_searchBlue" width="32" height="32"/>
+    </resources>
+</document>

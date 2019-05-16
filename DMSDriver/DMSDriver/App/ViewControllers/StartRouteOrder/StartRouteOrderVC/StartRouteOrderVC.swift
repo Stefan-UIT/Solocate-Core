@@ -68,9 +68,9 @@ class StartRouteOrderVC: BaseViewController {
         case .newStatus:
             btnStart?.setTitle("Start".localized.uppercased(), for: .normal)
         case .inProcessStatus:
-            btnStart?.setTitle("Pickup".localized.uppercased(), for: .normal)
+            btnStart?.setTitle("Van Load".localized.uppercased(), for: .normal)
         case .pickupStatus:
-            btnStart?.setTitle("Finish".localized.uppercased(), for: .normal)
+            btnStart?.setTitle("Deliver".localized.uppercased(), for: .normal)
             
         default:
             break
@@ -238,6 +238,14 @@ extension StartRouteOrderVC {
             }
             
         case .inProcessStatus:
+            let vc:LoadUnloadOrderVC = LoadUnloadOrderVC.loadSB(SB: .LoadUnloadOrder)
+            vc.order = order
+            vc.callback = {[weak self] (hasUpdate,order) in
+                self?.order = order
+                self?.updateButtonStatus()
+            }
+            self.navigationController?.pushViewController(vc, animated: true)
+            /*
             App().showAlertView("Do you want to pickup this order?".localized,
                                 positiveTitle: "YES".localized,
                                 positiveAction: {[weak self] (ok) in
@@ -248,32 +256,48 @@ extension StartRouteOrderVC {
             }, negativeTitle: "NO".localized) { (cancel) in
                 //
             }
-            
+            */
         case .pickupStatus:
-            if _orderDetail.isRequireImage(){
-                self.showAlertView("Picture required".localized) {[weak self](action) in
-                    self?.showPictureViewController()
+            if _orderDetail.validUpdateStatusOrder() == true { // Finish order
+                if _orderDetail.isRequireImage(){
+                    self.showAlertView("Picture required".localized) {[weak self](action) in
+                        self?.showPictureViewController()
+                    }
+                    
+                }else if (_orderDetail.isRequireSign()) {
+                    self.showAlertView("Signature required".localized) {[weak self](action) in
+                        self?.showSignatureViewController()
+                    }
+                    
+                }else {
+                    
+                    App().showAlertView("Do you want to Finish this order?".localized,
+                                        positiveTitle: "YES".localized,
+                                        positiveAction: {[weak self] (ok) in
+                                            
+                                            statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
+                                            self?.updateStatusOrder(statusCode: statusNeedUpdate)
+                                            
+                    }, negativeTitle: "NO".localized) { (cancel) in
+                        //
+                    }
                 }
                 
-            }else if (_orderDetail.isRequireSign()) {
-                self.showAlertView("Signature required".localized) {[weak self](action) in
-                    self?.showSignatureViewController()
+            }else { // Unload order detail
+              
+                let vc:LoadUnloadOrderVC = LoadUnloadOrderVC.loadSB(SB: .LoadUnloadOrder)
+                vc.order = order
+                vc.callback = {[weak self] (hasUpdate,order) in
+                    if hasUpdate {
+                        self?.order = order
+                        self?.updateButtonStatus()
+                        self?.callback?(true,order)
+                        self?.navigationController?.popViewController(animated: false)
+                    }
                 }
-                
-            }else {
-                
-                App().showAlertView("Do you want to Finish this order?".localized,
-                                    positiveTitle: "YES".localized,
-                                    positiveAction: {[weak self] (ok) in
-                                        
-                                        statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
-                                        self?.updateStatusOrder(statusCode: statusNeedUpdate)
-                                        
-                }, negativeTitle: "NO".localized) { (cancel) in
-                    //
-                }
+                self.navigationController?.pushViewController(vc, animated: true)
             }
-            
+
         default:
             break
         }
