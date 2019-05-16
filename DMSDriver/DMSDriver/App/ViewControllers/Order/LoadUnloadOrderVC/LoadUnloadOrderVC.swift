@@ -71,9 +71,60 @@ class LoadUnloadOrderVC: BaseViewController {
     @IBAction func onbtnClickScanBarCode(btn:UIButton){
         let vc:ScanBarCodeViewController =  ScanBarCodeViewController.loadSB(SB: .Order)
         vc.didScan = {[weak self](code) in
+            
+            for item in self?.order?.details ?? [] {
+                
+                if item.barCode == code {
+                    
+                    if self?.order?.statusOrder == StatusOrder.inProcessStatus {
+                        item.status = .Loaded
+                    }else if self?.order?.statusOrder == StatusOrder.pickupStatus {
+                        item.status = .Unload
+                    }
+                    break
+                }
+            }
+            
+            self?.initData()
+            self?.tbvContent?.reloadData()
+            
+            if self?.validUpdateStatusOrder() == true {
+                
+                if self?.order?.statusOrder == StatusOrder.inProcessStatus {
+                    self?.updateStatusOrder(statusCode: StatusOrder.pickupStatus.rawValue)
+                    
+                }else {
+                    
+                    if self?.order?.isRequireSign() == false && self?.order?.isRequireImage() == false {
+                        
+                        self?.updateStatusOrder(statusCode: StatusOrder.deliveryStatus.rawValue)
+                        
+                    }else {
+                       
+                        if self?.order?.isRequireImage() ?? false{
+                            self?.showAlertView("You need add least a picture to finish this order".localized) {[weak self](action) in
+                                self?.showPictureViewController()
+                            }
+                            
+                        }else if (self?.order?.isRequireSign() ?? false) {
+                            self?.showAlertView("You need add Customer's signature to finish this order".localized) {[weak self](action) in
+                                self?.showSignatureViewController()
+                            }
+                            
+                        }else {
+                            
+                            let statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
+                            self?.updateStatusOrder(statusCode: statusNeedUpdate)
+                        }
+                    }
+                }
+            }
+            
+            /*
             self?.searchView?.vSearch?.tfSearch?.text = code
             self?.strSearch = code
             self?.doSearch(strSearch: code)
+             */
         }
         self.navigationController?.present(vc, animated: true, completion: nil)
     }
