@@ -72,10 +72,9 @@ class LoadUnloadOrderVC: BaseViewController {
         let vc:ScanBarCodeViewController =  ScanBarCodeViewController.loadSB(SB: .Order)
         vc.didScan = {[weak self](code) in
             
+            //update order detail status
             for item in self?.order?.details ?? [] {
-                
                 if item.barCode == code {
-                    
                     if self?.order?.statusOrder == StatusOrder.inProcessStatus {
                         item.status = .Loaded
                     }else if self?.order?.statusOrder == StatusOrder.pickupStatus {
@@ -85,47 +84,43 @@ class LoadUnloadOrderVC: BaseViewController {
                 }
             }
             
-            self?.initData()
-            self?.tbvContent?.reloadData()
+            self?.initData() //reload UI
             
-            if self?.validUpdateStatusOrder() == true {
+            //Auto update status order to server
+            guard self?.validUpdateStatusOrder() == true else {
+                return
+            }
+            
+            if self?.order?.statusOrder == StatusOrder.inProcessStatus {
+                self?.updateStatusOrder(statusCode: StatusOrder.pickupStatus.rawValue)
                 
-                if self?.order?.statusOrder == StatusOrder.inProcessStatus {
-                    self?.updateStatusOrder(statusCode: StatusOrder.pickupStatus.rawValue)
+            }else {
+                
+                if self?.order?.isRequireSign() == false && self?.order?.isRequireImage() == false {
+                    
+                    self?.updateStatusOrder(statusCode: StatusOrder.deliveryStatus.rawValue)
                     
                 }else {
                     
-                    if self?.order?.isRequireSign() == false && self?.order?.isRequireImage() == false {
+                    if self?.order?.isRequireImage() ?? false{
+                        self?.showAlertView("You need add least a picture to finish this order".localized) {[weak self](action) in
+                            self?.showPictureViewController()
+                        }
                         
-                        self?.updateStatusOrder(statusCode: StatusOrder.deliveryStatus.rawValue)
+                    }else if (self?.order?.isRequireSign() ?? false) {
+                        self?.showAlertView("You need add Customer's signature to finish this order".localized) {[weak self](action) in
+                            self?.showSignatureViewController()
+                        }
                         
                     }else {
-                       
-                        if self?.order?.isRequireImage() ?? false{
-                            self?.showAlertView("You need add least a picture to finish this order".localized) {[weak self](action) in
-                                self?.showPictureViewController()
-                            }
-                            
-                        }else if (self?.order?.isRequireSign() ?? false) {
-                            self?.showAlertView("You need add Customer's signature to finish this order".localized) {[weak self](action) in
-                                self?.showSignatureViewController()
-                            }
-                            
-                        }else {
-                            
-                            let statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
-                            self?.updateStatusOrder(statusCode: statusNeedUpdate)
-                        }
+                        
+                        let statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
+                        self?.updateStatusOrder(statusCode: statusNeedUpdate)
                     }
                 }
             }
-            
-            /*
-            self?.searchView?.vSearch?.tfSearch?.text = code
-            self?.strSearch = code
-            self?.doSearch(strSearch: code)
-             */
         }
+        
         self.navigationController?.present(vc, animated: true, completion: nil)
     }
 }
@@ -216,10 +211,6 @@ extension LoadUnloadOrderVC:LoadUnLoadListCellDelegate{
                     updateStatusOrder(statusCode: StatusOrder.deliveryStatus.rawValue)
                     
                 }else {
-                    /*
-                    self.callback?(true,order)
-                    self.navigationController?.popViewController(animated: true)
-                    */
             
                      if order.isRequireImage(){
                         self.showAlertView("You need add least a picture to finish this order".localized) {[weak self](action) in
@@ -352,7 +343,12 @@ extension LoadUnloadOrderVC {
                 self?.order = _orderDetail
                 self?.order?.updateStatusDetailOrder()
                 self?.callback?(true,_orderDetail)
-                self?.navigationController?.popViewController(animated: true)
+                
+                if _orderDetail.statusOrder == StatusOrder.deliveryStatus {
+                    App().mainVC?.rootNV?.popToController(OrderDetailViewController.self, animated: false)
+                }else {
+                    self?.navigationController?.popViewController(animated: true)
+                }
 
             case .error(let error):
                 //self?.callback?(false,_orderDetail)
