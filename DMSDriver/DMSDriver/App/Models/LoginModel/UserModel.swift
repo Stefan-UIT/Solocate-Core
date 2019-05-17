@@ -74,7 +74,7 @@ class UserModel: BaseModel {
     fileprivate (set) lazy var isAdmin:Bool =  {
         var isAdmin = false
         for item in roles ?? [] {
-            if E(item.name) == "Admin"{
+            if E(item.cd) == "A"{
                 isAdmin = true
                 break
             }
@@ -85,7 +85,7 @@ class UserModel: BaseModel {
     fileprivate (set) lazy var isDriver:Bool =  {
         var isDriver = false
         for item in roles ?? [] {
-            if E(item.name) == "Driver"{
+            if E(item.cd) == "D"{
                 isDriver = true
                 break
             }
@@ -97,6 +97,28 @@ class UserModel: BaseModel {
         var isCoordinator = false
         for item in roles ?? [] {
             if E(item.name) == "Coordinator"{
+                isCoordinator = true
+                break
+            }
+        }
+        return isCoordinator
+    }()
+    
+    fileprivate (set) lazy var isSupperAdmin:Bool =  {
+        var isCoordinator = false
+        for item in roles ?? [] {
+            if E(item.cd) == "SA"{
+                isCoordinator = true
+                break
+            }
+        }
+        return isCoordinator
+    }()
+    
+    fileprivate (set) lazy var isCustomerBCO:Bool =  {
+        var isCoordinator = false
+        for item in roles ?? [] {
+            if E(item.cd) == "BCO"{
                 isCoordinator = true
                 break
             }

@@ -198,12 +198,12 @@ fileprivate extension LoginViewController {
 
             switch result {
             case .object(let obj):
-                /*
+                
                 if obj.data?.isDriver == false {
                     self?.showAlertView("Sorry, this account is not use as Driver account. Please contact your administrator for more information".localized)
                     return
                 }
-                */
+ 
                 Caches().user = obj.data
                 if self?.keepLogin  ?? false{
                     Caches().userLogin = userLogin;
