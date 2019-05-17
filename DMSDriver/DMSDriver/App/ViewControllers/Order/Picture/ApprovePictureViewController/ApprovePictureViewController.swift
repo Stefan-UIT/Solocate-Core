@@ -28,6 +28,11 @@ class ApprovePictureViewController: BaseViewController {
         super.viewWillAppear(animated)
         imageView.image = imageToApprove
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        App().statusBarView?.backgroundColor = AppColor.white
+    }
 
     override func updateNavigationBar() {
         super.updateNavigationBar()
