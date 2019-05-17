@@ -49,7 +49,8 @@ class UserRole: BaseModel {
   
     var id:Int?
     var name:String?
-  
+    var cd:String?
+
     required  init?(map: Map) {
         super.init()
     }
@@ -57,5 +58,6 @@ class UserRole: BaseModel {
     override func mapping(map: Map) {
         id <- map["id"]
         name <- map["name"]
+        cd <- map["cd"]
     }
 }
