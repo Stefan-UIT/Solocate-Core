@@ -38,18 +38,22 @@ class DirectionStep: NSObject, Mappable {
   
 }
 
-class ObjectKV: NSObject, Mappable {
-  var text: String = ""
-  var value: Double = 0
+class ObjectKV: BaseModel {
+    var text: String = ""
+    var value: Double = 0
+    
+    override init() {
+        super.init()
+    }
+
+    required init?(map: Map) {
+        super.init()
+    }
   
-  convenience required init?(map: Map) {
-    self.init()
-  }
-  
-  func mapping(map: Map) {
-    text <- map["text"]
-    value <- map["value"]
-  }
+    override func mapping(map: Map) {
+        text <- map["text"]
+        value <- map["value"]
+    }
 }
 
 class DirectionLeg: NSObject, Mappable {
@@ -73,51 +77,56 @@ class DirectionLeg: NSObject, Mappable {
   
 }
 
-class GoogleCoordinate: NSObject, Mappable {
-  var lat: Double = 0.0
-  var lng: Double = 0.0
-  
-  convenience required init?(map: Map) {
-    self.init()
-  }
-  
-  func mapping(map: Map) {
-    lat <- map["lat"]
-    lng <- map["lng"]
-  }
-  
-  func toCoordinate() -> CLLocationCoordinate2D {
-    return CLLocationCoordinate2D(latitude: lat, longitude: lng)
-  }
+class GoogleCoordinate: BaseModel {
+    var lat: Double = 0.0
+    var lng: Double = 0.0
+    
+    override init() {
+        super.init()
+    }
+
+    required init?(map: Map) {
+        super.init()
+    }
+
+    override func mapping(map: Map) {
+        lat <- map["lat"]
+        lng <- map["lng"]
+    }
+
+    func toCoordinate() -> CLLocationCoordinate2D {
+        return CLLocationCoordinate2D(latitude: lat, longitude: lng)
+    }
   
 }
 
-class DirectionRoute: NSObject, Mappable {
-  var polyline: String = ""
-  var boundsNortheast = GoogleCoordinate()
-  var boundsSouthest = GoogleCoordinate()
-  var legs = [DirectionLeg]()
+class DirectionRoute: BaseModel {
+    
+    var polyline: String = ""
+    var boundsNortheast = GoogleCoordinate()
+    var boundsSouthest = GoogleCoordinate()
+    var legs = [DirectionLeg]()
+
+
+    required init?(map: Map) {
+        super.init()
+    }
   
-  
-  convenience required init?(map: Map) {
-    self.init()
-  }
-  
-  func mapping(map: Map) {
-    polyline <- map["overview_polyline.points"]
-    boundsSouthest <- map["bounds.southwest"]
-    boundsNortheast <- map["bounds.northeast"]
-    legs <- map["legs"]
-  }
+    override func mapping(map: Map) {
+        polyline <- map["overview_polyline.points"]
+        boundsSouthest <- map["bounds.southwest"]
+        boundsNortheast <- map["bounds.northeast"]
+        legs <- map["legs"]
+    }
 }
 
 class MapDirectionResponse: BaseModel {
-  var routes: [DirectionRoute] = [DirectionRoute]()
-  var status = ""
-  convenience required init?(map: Map) {
-    self.init()
-  }
-  
+    var routes: [DirectionRoute] = [DirectionRoute]()
+    var status = ""
+    convenience required init?(map: Map) {
+        self.init()
+    }
+
   override func mapping(map: Map) {
     routes <- map["routes"]
     status <- map["status"]

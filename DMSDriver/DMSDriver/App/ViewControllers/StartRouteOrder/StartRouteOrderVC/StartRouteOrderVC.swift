@@ -241,9 +241,16 @@ extension StartRouteOrderVC {
             let vc:LoadUnloadOrderVC = LoadUnloadOrderVC.loadSB(SB: .LoadUnloadOrder)
             vc.order = order
             vc.callback = {[weak self] (hasUpdate,order) in
-                self?.order = order
-                self?.updateButtonStatus()
+                if hasUpdate {
+                    self?.order = order
+                    self?.updateButtonStatus()
+                    self?.callback?(true,order)
+                    if order?.statusOrder == StatusOrder.deliveryStatus {
+                        self?.navigationController?.popViewController(animated: false)
+                    }
+                }
             }
+            
             self.navigationController?.pushViewController(vc, animated: true)
             /*
             App().showAlertView("Do you want to pickup this order?".localized,
