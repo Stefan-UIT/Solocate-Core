@@ -299,19 +299,22 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 headerCell.btnStatus?.setTitleColor(orderDetail?.colorStatus, for: .normal)
                 
             case .sectionSignature:
-                var isAdd = false
-                if (orderDetail?.signature == nil &&
-                    orderDetail?.route?.driverId == Caches().user?.userInfo?.id){
-                    isAdd = true
-                }
-                
+//                var isAdd = false
+//                if (orderDetail?.signature == nil &&
+//                    orderDetail?.route?.driverId == Caches().user?.userInfo?.id){
+                let isAdd = orderDetail?.signature == nil
                 headerCell.btnEdit?.isHidden = !isAdd
             case .sectionPictures:
                 var isAdd = false
-                if orderDetail?.route?.driverId == Caches().user?.userInfo?.id &&
-                        (orderDetail?.statusOrder == StatusOrder.newStatus ||
-                         orderDetail?.statusOrder == StatusOrder.inProcessStatus ||
-                         orderDetail?.statusOrder == StatusOrder.pickupStatus){
+//                if orderDetail?.route?.driverId == Caches().user?.userInfo?.id &&
+//                        (orderDetail?.statusOrder == StatusOrder.newStatus ||
+//                         orderDetail?.statusOrder == StatusOrder.inProcessStatus ||
+//                         orderDetail?.statusOrder == StatusOrder.pickupStatus){
+//                    isAdd = true
+//                }
+                if (orderDetail?.statusOrder == StatusOrder.newStatus ||
+                        orderDetail?.statusOrder == StatusOrder.inProcessStatus ||
+                        orderDetail?.statusOrder == StatusOrder.pickupStatus){
                     isAdd = true
                 }
                 headerCell.btnEdit?.isHidden = !isAdd
