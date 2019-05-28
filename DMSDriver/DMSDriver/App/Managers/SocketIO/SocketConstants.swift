@@ -21,7 +21,7 @@ struct SocketConfiguration {
 
 // SOCKET KEY
 struct SocketConstants {
-    static let SERVER_DEV = "http://dms-customization.dev.seldatdirect.com"
+    static let SERVER_DEV = "http://solocate-a1.dev.seldatdirect.com"
     static let SERVER_PROD = "http://dms-customization.seldatdirect.com"
     static let SOCKET_LOGIN = "request-login"
     static let SOCKET_LOGOUT = "request-logout"
