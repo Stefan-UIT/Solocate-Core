@@ -18,19 +18,23 @@ class LoginViewController: BaseViewController {
     @IBOutlet weak var segEvironmentControl:UISegmentedControl?
 
     private let DEVELOMENT = 0
-    private let DEMO = 1
-    private let LIVE = 2
+    private let QC = 1
+    private let DEMO = 2
+    private let LIVE = 3
     
     enum ChooseEvironment:Int {
         case Development = 0
+        case QC
         case Demo
         case Live
         
-        var nane:String {
+        var name:String {
             get {
                 switch self  {
                 case .Development:
                     return "Dev"
+                case .QC:
+                    return "QC"
                 case .Demo:
                     return "Demo"
                 case .Live:
@@ -95,7 +99,9 @@ class LoginViewController: BaseViewController {
             vEvironment?.isHidden = true
         }else {
             vEvironment?.isHidden = !DMSAppConfiguration.isUseChooseEnvironment
-            segEvironmentControl?.segmentTitles = ["DEV","DEMO","LIVE"]
+            segEvironmentControl?.segmentTitles = [ChooseEvironment.Development.name,
+                                                   ChooseEvironment.QC.name,
+                                                   ChooseEvironment.Demo.name]
             segEvironmentControl?.selectedSegmentIndex = 0
         }
     }
@@ -170,13 +176,15 @@ class LoginViewController: BaseViewController {
         switch evironment {
         case .Development:
             Debug.setup(shared: Debug(useServer: DMSAppConfiguration.baseUrl_Dev))
+        case .QC:
+            Debug.setup(shared: Debug(useServer: DMSAppConfiguration.baseUrl_QC))
         case .Demo:
-            Debug.setup(shared: Debug(useServer: DMSAppConfiguration.baseUrl_Staging))
+            Debug.setup(shared: Debug(useServer: DMSAppConfiguration.baseUrl_Demo))
         case .Live:
             Debug.setup(shared: Debug(useServer: DMSAppConfiguration.baseUrl_Product))
         }
         
-        print("chosen evironment:\(evironment.nane)")
+        print("chosen evironment:\(evironment.name)")
         print(#"""
             ====>APPLICATION STARTED WITH:
             TagetBuild: \#(SDBuildConf.tagetBuild.rawValue)

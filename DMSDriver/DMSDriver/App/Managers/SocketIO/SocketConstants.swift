@@ -22,6 +22,8 @@ struct SocketConfiguration {
 // SOCKET KEY
 struct SocketConstants {
     static let SERVER_DEV = "http://solocate-a1.dev.seldatdirect.com"
+    static let SERVER_QC = "http://solocate-a1.qc.seldatdirect.com"
+    static let SERVER_DEMO = "http://solocate-a1.demo.seldatdirect.com"
     static let SERVER_PROD = "http://dms-customization.seldatdirect.com"
     static let SOCKET_LOGIN = "request-login"
     static let SOCKET_LOGOUT = "request-logout"
@@ -44,8 +46,10 @@ struct SocketConstants {
             switch type {
             case .development:
                 return SocketConstants.SERVER_DEV
-            case .staging:
-                return SocketConstants.SERVER_PROD
+            case .qc:
+                return SocketConstants.SERVER_QC
+            case .demo:
+                return SocketConstants.SERVER_DEMO
             case .production:
                 return SocketConstants.SERVER_PROD
             }

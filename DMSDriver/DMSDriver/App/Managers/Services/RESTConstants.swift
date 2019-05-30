@@ -92,9 +92,11 @@ class RESTConstants: NSObject {
         let type = SDBuildConf.serverEnvironment
         switch type {
         case .development:
-            serverURL = "http://dms-customization.dev.seldatdirect.com/"
-        case .staging:
-            serverURL = "http://dms-customization.staging.seldatdirect.com/"
+            serverURL = "http://solocate-a1.dev.seldatdirect.com/"
+        case .qc:
+            serverURL = "http://solocate-a1.qc.seldatdirect.com/"
+        case .demo:
+            serverURL = "http://solocate-a1.demo.seldatdirect.com/"
         case .production:
             serverURL = "http://dms-customization.live.seldatdirect.com/"
         }

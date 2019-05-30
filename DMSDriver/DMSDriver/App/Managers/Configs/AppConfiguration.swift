@@ -23,6 +23,8 @@ class AppConfiguration: NSObject {
     
     var baseUrl:String = ""
     var baseUrl_Dev:String = ""
+    var baseUrl_QC:String = ""
+    var baseUrl_Demo:String = ""
     var baseUrl_Staging:String = ""
     var baseUrl_Product:String = ""
     var baseUrl_Google_Map:String = ""
@@ -68,6 +70,14 @@ class AppConfiguration: NSObject {
         
         if let url = config.object(forKey: "BASE_URL_DEV") as? String {
             self.baseUrl_Dev = url
+        }
+        
+        if let url = config.object(forKey: "BASE_URL_QC") as? String {
+            self.baseUrl_QC = url
+        }
+        
+        if let url = config.object(forKey: "BASE_URL_DEMO") as? String {
+            self.baseUrl_Demo = url
         }
         
         if let url = config.object(forKey: "BASE_URL_PRODUCT") as? String {
