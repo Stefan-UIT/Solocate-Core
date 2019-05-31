@@ -19,15 +19,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_solocate" translatesAutoresizingMaskIntoConstraints="NO" id="T8u-rf-z5i">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="16" y="36" width="343" height="615"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="T8u-rf-z5i" secondAttribute="bottom" id="6vr-Rs-0Fm"/>
-                            <constraint firstItem="T8u-rf-z5i" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="DYX-wc-Qfq"/>
-                            <constraint firstItem="T8u-rf-z5i" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Mic-cL-U7P"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="T8u-rf-z5i" secondAttribute="trailing" id="jwh-vD-FVF"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="T8u-rf-z5i" secondAttribute="bottom" constant="16" id="6vr-Rs-0Fm"/>
+                            <constraint firstItem="T8u-rf-z5i" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="DYX-wc-Qfq"/>
+                            <constraint firstItem="T8u-rf-z5i" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="Mic-cL-U7P"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="T8u-rf-z5i" secondAttribute="trailing" constant="16" id="jwh-vD-FVF"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
