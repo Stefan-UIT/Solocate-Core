@@ -568,7 +568,7 @@
                                                             <rect key="frame" x="0.0" y="28" width="375" height="210"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5pQ-Hl-aBS" id="EyV-0r-RcE">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="209.5"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cgw-CI-weJ">
@@ -619,13 +619,14 @@
                                                                                         </constraints>
                                                                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                                                                        <state key="normal" title="Hight">
+                                                                                        <state key="normal" title="High">
                                                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         </state>
                                                                                         <userDefinedRuntimeAttributes>
                                                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                                 <real key="value" value="5"/>
                                                                                             </userDefinedRuntimeAttribute>
+                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="High"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </button>
                                                                                 </subviews>
@@ -724,7 +725,7 @@
                                                             <rect key="frame" x="0.0" y="238" width="375" height="93"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nDF-U5-UGR" id="zdw-2R-XL3">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="92.5"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cgs-61-HkZ">
@@ -775,13 +776,14 @@
                                                                                         </constraints>
                                                                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                                                                        <state key="normal" title="Hight">
+                                                                                        <state key="normal" title="High">
                                                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                         </state>
                                                                                         <userDefinedRuntimeAttributes>
                                                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                                 <real key="value" value="5"/>
                                                                                             </userDefinedRuntimeAttribute>
+                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="High"/>
                                                                                         </userDefinedRuntimeAttributes>
                                                                                     </button>
                                                                                 </subviews>
@@ -1722,13 +1724,14 @@
                                                                                                         </constraints>
                                                                                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                                                                                        <state key="normal" title="Hight">
+                                                                                                        <state key="normal" title="High">
                                                                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         </state>
                                                                                                         <userDefinedRuntimeAttributes>
                                                                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                                                 <real key="value" value="5"/>
                                                                                                             </userDefinedRuntimeAttribute>
+                                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="High"/>
                                                                                                         </userDefinedRuntimeAttributes>
                                                                                                     </button>
                                                                                                 </subviews>
@@ -1932,13 +1935,14 @@
                                                                                                         </constraints>
                                                                                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                                                         <inset key="imageEdgeInsets" minX="0.0" minY="0.0" maxX="10" maxY="0.0"/>
-                                                                                                        <state key="normal" title="Hight">
+                                                                                                        <state key="normal" title="High">
                                                                                                             <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         </state>
                                                                                                         <userDefinedRuntimeAttributes>
                                                                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                                                 <real key="value" value="5"/>
                                                                                                             </userDefinedRuntimeAttribute>
+                                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="High"/>
                                                                                                         </userDefinedRuntimeAttributes>
                                                                                                     </button>
                                                                                                 </subviews>
@@ -2071,7 +2075,7 @@
                                                                             <rect key="frame" x="0.0" y="58" width="365" height="149"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L7A-oe-BXz" id="YAt-dw-SR5">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="149"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="148.5"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <subviews>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Tw-RT-soR">
@@ -2273,7 +2277,7 @@
                                                                             <rect key="frame" x="0.0" y="58" width="375" height="93"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uSK-Kk-734" id="yvk-bY-imH">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="92.5"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <subviews>
                                                                                     <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aq6-uh-p7V">
