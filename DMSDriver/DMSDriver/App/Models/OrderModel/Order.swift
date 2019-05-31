@@ -440,6 +440,8 @@ class Order: BaseModel {
             case .cancelStatus,
                  .cancelFinishStatus:
                 return AppColor.redColor;
+            default:
+                return AppColor.newStatus;
             }
         }
     }

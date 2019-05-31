@@ -107,6 +107,8 @@ class TaskModel: BaseModel {
             case .cancelStatus,
                  .cancelFinishStatus:
                 return AppColor.redColor;
+            default:
+                return AppColor.newStatus;
             }
         }
     }
