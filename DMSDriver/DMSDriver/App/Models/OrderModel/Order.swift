@@ -168,7 +168,15 @@ class Order: BaseModel {
             unit <- map["unit"]
         }
         
-        
+//        func jsonDetailUpdateStatus() -> [String:Any] {
+//            return [
+//                "order_id" : order_id,
+//                "package_id" :
+//                KEY_ITEM_ID : id,
+//                KEY_ORDER_LOC_ITEM_ID : orderLocItemID,
+//                KEY_ACT_QTY: actualQuantity
+//            ]
+//        }
     }
 
     class Nature: BaseModel {
