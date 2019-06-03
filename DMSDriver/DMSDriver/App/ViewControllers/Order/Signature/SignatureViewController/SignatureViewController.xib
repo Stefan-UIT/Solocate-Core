@@ -22,6 +22,7 @@
             <connections>
                 <outlet property="btnClear" destination="1Tj-eK-kGO" id="5te-KB-vl1"/>
                 <outlet property="btnOK" destination="NVj-CL-nXL" id="3jh-6z-6E9"/>
+                <outlet property="nameTextField" destination="FWm-zu-CpB" id="Dbf-7A-lfR"/>
                 <outlet property="signHereButton" destination="Oe9-Vl-Acu" id="W38-68-nF1"/>
                 <outlet property="signatureImageView" destination="l3g-um-M8n" id="a4w-v1-CgK"/>
                 <outlet property="signatureView" destination="T8M-7c-2NR" id="mJz-8D-Z7Q"/>
@@ -135,17 +136,32 @@
                         <action selector="onbtnClickClear:" destination="-1" eventType="touchUpInside" id="J6B-Mb-Gwm"/>
                     </connections>
                 </button>
+                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Please enter your name.." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="FWm-zu-CpB">
+                    <rect key="frame" x="30" y="504" width="315" height="30"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="30" id="qgQ-md-1Rz"/>
+                    </constraints>
+                    <nil key="textColor"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="string" keyPath="placeholderKey" value="Please enter your name.."/>
+                    </userDefinedRuntimeAttributes>
+                </textField>
             </subviews>
             <color key="backgroundColor" red="0.1647058824" green="0.18039215689999999" blue="0.26274509800000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstItem="p98-6J-SZ3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="30" id="1LU-Ry-20N"/>
                 <constraint firstItem="NVj-CL-nXL" firstAttribute="trailing" secondItem="p98-6J-SZ3" secondAttribute="trailing" id="6We-3S-ZQN"/>
                 <constraint firstItem="lo4-f2-Hj7" firstAttribute="top" secondItem="NVj-CL-nXL" secondAttribute="bottom" constant="20" id="6w0-7P-vmV"/>
+                <constraint firstItem="FWm-zu-CpB" firstAttribute="top" secondItem="p98-6J-SZ3" secondAttribute="bottom" constant="16" id="Cy6-Hb-BC6"/>
+                <constraint firstItem="NVj-CL-nXL" firstAttribute="top" secondItem="FWm-zu-CpB" secondAttribute="bottom" constant="14" id="Da5-yS-Eg0"/>
                 <constraint firstItem="p98-6J-SZ3" firstAttribute="top" secondItem="Qqg-BD-Ig6" secondAttribute="bottom" constant="30" id="Eyf-LO-PVO"/>
+                <constraint firstItem="FWm-zu-CpB" firstAttribute="trailing" secondItem="Oe9-Vl-Acu" secondAttribute="trailing" id="IV7-Xb-0tz"/>
                 <constraint firstItem="1Tj-eK-kGO" firstAttribute="centerY" secondItem="NVj-CL-nXL" secondAttribute="centerY" id="J9P-UD-l4x"/>
+                <constraint firstItem="FWm-zu-CpB" firstAttribute="leading" secondItem="Oe9-Vl-Acu" secondAttribute="leading" id="MGy-Tq-V9B"/>
                 <constraint firstItem="lo4-f2-Hj7" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="SBt-8R-xGD"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="lo4-f2-Hj7" secondAttribute="bottom" constant="25" id="VTl-CM-sJc"/>
-                <constraint firstItem="NVj-CL-nXL" firstAttribute="top" secondItem="p98-6J-SZ3" secondAttribute="bottom" constant="60" id="Vru-CI-6X1"/>
                 <constraint firstItem="NVj-CL-nXL" firstAttribute="leading" secondItem="1Tj-eK-kGO" secondAttribute="trailing" constant="10" id="bkb-TD-u1M"/>
                 <constraint firstItem="Qqg-BD-Ig6" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="20" id="d7x-Vj-Fgu"/>
                 <constraint firstItem="Qqg-BD-Ig6" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="eFt-5D-QBQ"/>

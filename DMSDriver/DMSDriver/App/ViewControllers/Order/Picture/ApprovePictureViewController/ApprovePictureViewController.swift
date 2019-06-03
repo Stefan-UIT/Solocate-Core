@@ -153,7 +153,7 @@ extension ApprovePictureViewController{
     }
     
     
-    fileprivate func submitSignature(file: AttachFileModel, isNeedFinishOrder:Bool = false)  {
+    fileprivate func submitSignature(file: AttachFileModel, isNeedFinishOrder:Bool = false, name:String)  {
         guard let orderCopy:Order = order?.cloneObject() else {
             return
         }
@@ -170,7 +170,7 @@ extension ApprovePictureViewController{
         if hasNetworkConnection {
             showLoadingIndicator()
         }
-        SERVICES().API.submitSignature(file,orderCopy) {[weak self] (result) in
+        SERVICES().API.submitSignature(file,orderCopy,name) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
@@ -216,9 +216,9 @@ extension ApprovePictureViewController{
 
 //MARK: - SignatureViewControllerDelegate
 extension ApprovePictureViewController:SignatureViewControllerDelegate {
-    func signatureViewController(view: SignatureViewController, didCompletedSignature signature: AttachFileModel?) {
+    func signatureViewController(view: SignatureViewController, didCompletedSignature signature: AttachFileModel?, signName:String?) {
         if let sig  = signature {
-            submitSignature(file: sig, isNeedFinishOrder: true)
+            submitSignature(file: sig, isNeedFinishOrder: true, name: signName ?? "" )
         }
     }
 }

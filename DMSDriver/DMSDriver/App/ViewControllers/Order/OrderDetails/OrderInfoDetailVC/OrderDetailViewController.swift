@@ -642,9 +642,9 @@ extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
 
 //MARK: - SignatureViewControllerDelegate
 extension OrderDetailViewController:SignatureViewControllerDelegate{
-    func signatureViewController(view: SignatureViewController, didCompletedSignature signature: AttachFileModel?) {
+    func signatureViewController(view: SignatureViewController, didCompletedSignature signature: AttachFileModel?, signName:String?) {
         if let sig = signature {
-            submitSignature(sig)
+            submitSignature(sig, signName ?? "")
         }
     }
 }
@@ -850,12 +850,12 @@ extension OrderDetailViewController{
         }
     }
     
-    func submitSignature(_ file: AttachFileModel) {
+    func submitSignature(_ file: AttachFileModel,_ name:String) {
         guard let order = orderDetail else { return }
         if hasNetworkConnection {
             showLoadingIndicator()
         }
-        SERVICES().API.submitSignature(file,order) {[weak self] (result) in
+        SERVICES().API.submitSignature(file,order,name) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
