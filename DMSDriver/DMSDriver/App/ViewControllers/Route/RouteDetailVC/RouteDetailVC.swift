@@ -174,6 +174,12 @@ class RouteDetailVC: BaseViewController {
         self.route = route
         clvContent?.reloadData()
     }
+    
+    @IBAction func onNoteManagementTouchUp(_ sender: UIButton) {
+        let vc:NoteManagementViewController = .loadSB(SB: .Common)
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
 //MARK: - UICollectionViewDataSource
