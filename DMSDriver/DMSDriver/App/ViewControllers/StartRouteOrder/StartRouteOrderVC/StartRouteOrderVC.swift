@@ -139,7 +139,7 @@ class StartRouteOrderVC: BaseViewController {
 
 // MARK: - API
 extension StartRouteOrderVC{
-    fileprivate func submitSignatureAndFinishOrder(_ file: AttachFileModel) {
+    fileprivate func submitSignatureAndFinishOrder(_ file: AttachFileModel,_ name:String) {
         guard let order:Order = order?.cloneObject() else { return }
         let listStatus =  CoreDataManager.getListStatus()
         for item in listStatus {
@@ -151,7 +151,7 @@ extension StartRouteOrderVC{
         if hasNetworkConnection {
             showLoadingIndicator()
         }
-        SERVICES().API.submitSignature(file,order) {[weak self] (result) in
+        SERVICES().API.submitSignature(file,order,name) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
@@ -375,9 +375,9 @@ extension StartRouteOrderVC {
 
 //MARK: - SignatureViewControllerDelegate
 extension StartRouteOrderVC:SignatureViewControllerDelegate{
-    func signatureViewController(view: SignatureViewController, didCompletedSignature signature: AttachFileModel?) {
+    func signatureViewController(view: SignatureViewController, didCompletedSignature signature: AttachFileModel?, signName:String?) {
         if let sig = signature {
-            submitSignatureAndFinishOrder(sig)
+            submitSignatureAndFinishOrder(sig, signName ?? "")
         }
     }
 }

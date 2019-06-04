@@ -299,19 +299,22 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 headerCell.btnStatus?.setTitleColor(orderDetail?.colorStatus, for: .normal)
                 
             case .sectionSignature:
-                var isAdd = false
-                if (orderDetail?.signature == nil &&
-                    orderDetail?.route?.driverId == Caches().user?.userInfo?.id){
-                    isAdd = true
-                }
-                
+//                var isAdd = false
+//                if (orderDetail?.signature == nil &&
+//                    orderDetail?.route?.driverId == Caches().user?.userInfo?.id){
+                let isAdd = orderDetail?.signature == nil
                 headerCell.btnEdit?.isHidden = !isAdd
             case .sectionPictures:
                 var isAdd = false
-                if orderDetail?.route?.driverId == Caches().user?.userInfo?.id &&
-                        (orderDetail?.statusOrder == StatusOrder.newStatus ||
-                         orderDetail?.statusOrder == StatusOrder.inProcessStatus ||
-                         orderDetail?.statusOrder == StatusOrder.pickupStatus){
+//                if orderDetail?.route?.driverId == Caches().user?.userInfo?.id &&
+//                        (orderDetail?.statusOrder == StatusOrder.newStatus ||
+//                         orderDetail?.statusOrder == StatusOrder.inProcessStatus ||
+//                         orderDetail?.statusOrder == StatusOrder.pickupStatus){
+//                    isAdd = true
+//                }
+                if (orderDetail?.statusOrder == StatusOrder.newStatus ||
+                        orderDetail?.statusOrder == StatusOrder.inProcessStatus ||
+                        orderDetail?.statusOrder == StatusOrder.pickupStatus){
                     isAdd = true
                 }
                 headerCell.btnEdit?.isHidden = !isAdd
@@ -639,9 +642,9 @@ extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
 
 //MARK: - SignatureViewControllerDelegate
 extension OrderDetailViewController:SignatureViewControllerDelegate{
-    func signatureViewController(view: SignatureViewController, didCompletedSignature signature: AttachFileModel?) {
+    func signatureViewController(view: SignatureViewController, didCompletedSignature signature: AttachFileModel?, signName:String?) {
         if let sig = signature {
-            submitSignature(sig)
+            submitSignature(sig, signName ?? "")
         }
     }
 }
@@ -726,10 +729,22 @@ fileprivate extension OrderDetailViewController{
     }
     
     private func updateButtonStatus() {
-        updateStatusButton?.backgroundColor = AppColor.buttonColor
-        vAction?.isHidden = (orderDetail?.statusOrder == StatusOrder.deliveryStatus ||
-                            orderDetail?.statusOrder == StatusOrder.cancelStatus ||
-                            orderDetail?.statusOrder == StatusOrder.cancelFinishStatus)
+        switch orderDetail?.statusOrder.rawValue {
+        case StatusOrder.pickupStatus.rawValue:
+            updateStatusButton?.setTitle("Deliver".localized.uppercased(), for: .normal)
+            updateStatusButton?.backgroundColor = orderDetail?.colorStatus
+        case StatusOrder.inProcessStatus.rawValue:
+            updateStatusButton?.setTitle("Pickup".localized.uppercased(), for: .normal)
+            updateStatusButton?.backgroundColor = orderDetail?.colorStatus
+        default:
+            updateStatusButton?.setTitle("Let's Start".localized.uppercased(), for: .normal)
+            updateStatusButton?.backgroundColor = AppColor.buttonColor
+        }
+        let isHidden = (orderDetail?.statusOrder == StatusOrder.deliveryStatus ||
+            orderDetail?.statusOrder == StatusOrder.cancelStatus ||
+            orderDetail?.statusOrder == StatusOrder.cancelFinishStatus)
+        updateStatusButton?.isHidden = isHidden
+        vAction?.isHidden = isHidden
     }
     
     private func getAssetThumbnail(asset: PHAsset, size: CGFloat) -> UIImage {
@@ -835,12 +850,12 @@ extension OrderDetailViewController{
         }
     }
     
-    func submitSignature(_ file: AttachFileModel) {
+    func submitSignature(_ file: AttachFileModel,_ name:String) {
         guard let order = orderDetail else { return }
         if hasNetworkConnection {
             showLoadingIndicator()
         }
-        SERVICES().API.submitSignature(file,order) {[weak self] (result) in
+        SERVICES().API.submitSignature(file,order,name) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):

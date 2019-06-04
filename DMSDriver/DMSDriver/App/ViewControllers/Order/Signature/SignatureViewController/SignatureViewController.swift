@@ -9,7 +9,7 @@
 import UIKit
 
 protocol SignatureViewControllerDelegate:AnyObject {
-    func signatureViewController(view:SignatureViewController, didCompletedSignature signature:AttachFileModel?);
+    func signatureViewController(view:SignatureViewController, didCompletedSignature signature:AttachFileModel?, signName:String?);
 }
 
 class SignatureViewController: BaseViewController {
@@ -21,6 +21,7 @@ class SignatureViewController: BaseViewController {
     @IBOutlet weak var signatureView: SignatureView!
     @IBOutlet weak var signatureImageView: UIImageView!
     
+    @IBOutlet weak var nameTextField: UITextField!
     weak var delegate:SignatureViewControllerDelegate?
     
     var order:Order?
@@ -31,11 +32,14 @@ class SignatureViewController: BaseViewController {
         }
     }
     
+    var signName:String?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         validationSubmit = false
         signatureView?.delegate = self
         self.fd_interactivePopDisabled = true
+        self.nameTextField.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -138,11 +142,13 @@ fileprivate extension SignatureViewController {
         signatureFile.mimeType = "image/png"
         signatureFile.contentFile = data
         signatureFile.param = "file_sig_req"
-        delegate?.signatureViewController(view: self, didCompletedSignature: signatureFile)
+        
+        
+        delegate?.signatureViewController(view: self, didCompletedSignature: signatureFile, signName: signName)
     }
     
     func handleSkipAction() {
-        delegate?.signatureViewController(view: self, didCompletedSignature: nil)
+        delegate?.signatureViewController(view: self, didCompletedSignature: nil, signName: nil)
         handleGoBackAction()
     }
     
@@ -151,6 +157,15 @@ fileprivate extension SignatureViewController {
             navigationController?.popViewController(animated: true)
         }else {
             self.dismiss(animated: true, completion: nil)
+        }
+    }
+    
+}
+
+extension SignatureViewController:UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == nameTextField {
+            signName = textField.text
         }
     }
 }

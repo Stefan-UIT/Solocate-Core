@@ -26,7 +26,7 @@ extension BaseAPIService{
         
         let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER.URL,
                           "\(order.id)", "\(order.status?.id ?? 0)")
-        var params = ["route_id": "\(order.route_id)"]
+        var params:[String:Any] = ["route_id": "\(order.route_id)"]
         if let _reason = reason {
             params["message"] = _reason.message != nil ? _reason.message :  _reason.reasonDescription
             params["reason_id"] = "\(_reason.id)"
@@ -34,6 +34,11 @@ extension BaseAPIService{
         
         if !isEmpty(order.note){
             params["note"] = E(order.note)
+        }
+        
+        if let details = order.details {
+            let detailsParam = details.map({$0.jsonDetailUpdateORderStatus()})
+            params["details"] = detailsParam
         }
         
         if ReachabilityManager.isNetworkAvailable{
@@ -73,12 +78,15 @@ extension BaseAPIService{
                        callback: callback);
     }
     
-    func submitSignature(_ file:AttachFileModel,_ order:Order, callback: @escaping APICallback<Order>) {
+    func submitSignature(_ file:AttachFileModel,_ order:Order, _ name:String, callback: @escaping APICallback<Order>) {
         let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER.URL, "\(order.id)","\(order.status?.id ?? 0)")
         let url = E(SDBuildConf.serverUrlString()).appending(path)
 
         //let headers = ["Content-Type":"multipart/form-data; boundary=\(E(file.boundary))"];
-        let params = ["route_id": "\(order.route_id)"]
+        let params = [
+            "route_id": "\(order.route_id)",
+            "sig_name":name
+        ]
         requestWithFormDataType(url: url,
                                 method: .post,
                                 files: [file],

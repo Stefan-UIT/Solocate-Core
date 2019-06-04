@@ -137,10 +137,11 @@ class Order: BaseModel {
                 cd <- map["cd"]
             }
         }
-        
+        var id:Int?
         var order_id:Int?
         var package_id:Int?
         var qty:Double?
+        var actualQty:Double?
         var remain_qty:Double?
         var package:Package?
         var unit:Unit?
@@ -158,9 +159,14 @@ class Order: BaseModel {
         }
         
         override func mapping(map: Map) {
+            id <- map["id"]
             order_id <- map["order_id"]
             package_id <- map["package_id"]
             qty <- map["qty"]
+            actualQty <- map["act_dlvy"]
+            if actualQty == nil {
+                actualQty = qty
+            }
             remain_qty <- map["remain_qty"]
             package <- map["package"]
             barCode <- map["barcode"]
@@ -168,7 +174,13 @@ class Order: BaseModel {
             unit <- map["unit"]
         }
         
-        
+        func jsonDetailUpdateORderStatus() -> [String:Any] {
+            return [
+                "id" : id ?? 0,
+                "qty" : qty ?? 0,
+                "act_dlvy" : actualQty ?? 0,
+            ]
+        }
     }
 
     class Nature: BaseModel {
@@ -340,6 +352,8 @@ class Order: BaseModel {
         }
     }
     
+    var signName:String?
+    
     var pictures:[AttachFileModel]?{
         get{
             
@@ -440,6 +454,8 @@ class Order: BaseModel {
             case .cancelStatus,
                  .cancelFinishStatus:
                 return AppColor.redColor;
+            default:
+                return AppColor.newStatus;
             }
         }
     }

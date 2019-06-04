@@ -20,7 +20,8 @@ class LoadUnLoadListCell: UITableViewCell {
     @IBOutlet weak var lblPackageRefId:UILabel?
     @IBOutlet weak var vContent:UIView?
     @IBOutlet weak var btnLoadUnload:UIButton?
-
+    @IBOutlet weak var actualQtyTextField: UITextField!
+    
     weak var delegate:LoadUnLoadListCellDelegate?
     
 
@@ -29,6 +30,7 @@ class LoadUnLoadListCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        actualQtyTextField.delegate = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -43,7 +45,7 @@ class LoadUnLoadListCell: UITableViewCell {
         lblQty?.text = #"\#(orderDetail.qty ?? 0)"#
         lblBarCode?.text = orderDetail.barCode
         lblPackageRefId?.text = #"\#( orderDetail.packageRefId ?? 0)"#
-        
+        actualQtyTextField.text = (orderDetail.actualQty != nil) ? "\(orderDetail.actualQty!)" : lblQty?.text
         btnLoadUnload?.setStyleBlueSquare()
         btnLoadUnload?.setTitle(orderDetail.status.name, for: .normal)
         /*
@@ -61,5 +63,15 @@ class LoadUnLoadListCell: UITableViewCell {
     //MARK : - Action
     @IBAction func onbtnClickLoadUnload(btn:UIButton){
         delegate?.didSelectedLoadUnload(cell: self, orderDetail: orderDetail)
+    }
+}
+
+extension LoadUnLoadListCell:UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == actualQtyTextField, let text = textField.text {
+            let validText = (text.isEmpty) ? "0" : text
+            let quantity = Double(validText)
+            orderDetail?.actualQty = quantity
+        }
     }
 }

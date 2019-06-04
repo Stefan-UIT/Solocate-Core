@@ -142,7 +142,7 @@ class RouteDetailVC: BaseViewController {
         lblStatus?.textColor = route?.colorStatus
         lblEstimateHour?.text = CommonUtils.formatEstTime(seconds: Int64(route?.totalTimeEst ?? 0))
         lblEstimateKilometer?.text = CommonUtils.formatEstKm(met: route?.totalDistance.doubleValue ?? 0)
-        lblTotalOrder?.text = "\(route?.totalOrders ?? 0) Stops".localized.uppercased()
+        lblTotalOrder?.text = "\(route?.totalOrders ?? 0) Orders".localized.uppercased()
         
         lblStatus?.textColor = route?.colorStatus
     }
@@ -154,7 +154,7 @@ class RouteDetailVC: BaseViewController {
 
     @objc func setupScrollMenuView() {
         let mapMode = MenuItem("Map".localized.uppercased())
-        let orderMode = MenuItem("Stops".localized.uppercased())
+        let orderMode = MenuItem("Orders".localized.uppercased())
         let locationMode = MenuItem("Locations".localized.uppercased())
 
         menuScrollView?.roundedCorners([.layerMaxXMinYCorner,
