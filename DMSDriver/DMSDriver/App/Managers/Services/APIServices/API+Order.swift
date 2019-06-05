@@ -169,4 +169,19 @@ extension BaseAPIService{
              */
         }
     }
+    
+    func updateNoteToRoute(_ routeID:Int, message:String, files:[AttachFileModel]?, callback: @escaping APICallback<Order>){
+        let path = PATH_REQUEST_URL.UPDATE_ROUTE_NOTE.URL
+        let url = E(SDBuildConf.serverUrlString()).appending(path)
+        let params:[String:Any] = ["route_id": routeID, "content":message]
+        
+        if ReachabilityManager.isNetworkAvailable {
+            
+            requestWithFormDataType(url: url,
+                                    method: .post,
+                                    files: files,
+                                    parameters: params,
+                                    callback: callback)
+        }
+    }
 }

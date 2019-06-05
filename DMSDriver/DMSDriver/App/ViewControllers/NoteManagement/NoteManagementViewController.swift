@@ -15,16 +15,18 @@ class NoteManagementViewController: BaseViewController {
     @IBOutlet weak var lblPlaceholder: UILabel?
     
     @IBOutlet weak var finishButton: UIButton!
+    @IBOutlet weak var hintLabel: UILabel!
     var validateSubmit:Bool = false{
         didSet{
             finishButton?.isEnabled = validateSubmit
             finishButton?.alpha = validateSubmit ? 1 : 0.4
         }
     }
+    var attachedFiles:[AttachFileModel]?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.hintLabel.isHidden = true
         // Do any additional setup after loading the view.
     }
     
@@ -34,9 +36,20 @@ class NoteManagementViewController: BaseViewController {
         App().navigationService.updateNavigationBar(.BackOnly, "Note Management".localized, AppColor.white, true)
     }
     
+    func handleShowingHintLabel() {
+        let numberOfAttachedFiles = self.attachedFiles?.count ?? 0
+        if numberOfAttachedFiles > 0 {
+            self.hintLabel.isHidden = false
+            self.hintLabel.text = "(\(numberOfAttachedFiles) selected images"
+        } else {
+            self.hintLabel.isHidden = true
+        }
+    }
+    
     // MARK: - ACTION
     @IBAction func submit(_ sender: UIButton) {
-        
+        let message = self.noteTextView?.text ?? ""
+        submitNoteToRoute(426, message: message, files: self.attachedFiles)
     }
     
     @IBAction func onbtnClickback(_ sender: UIButton) {
@@ -45,10 +58,30 @@ class NoteManagementViewController: BaseViewController {
 
     @IBAction func onAddButtonTouchUp(_ sender: UIButton) {
         ImagePickerView.shared().showImageGallaryMultiPicker(atVC: self) {[weak self] (success, data) in
-//            if data.count > 0{
-//                self?.uploadMultipleFile(files: data)
-//            }
+            self?.attachedFiles = (data.count > 0) ? data : nil
+            self?.handleShowingHintLabel()
         }
+    }
+}
+
+extension NoteManagementViewController {
+    func submitNoteToRoute(_ routeID:Int, message:String, files:[AttachFileModel]?){
+        if hasNetworkConnection {
+            showLoadingIndicator()
+        }
+        
+        SERVICES().API.updateNoteToRoute(routeID, message: message, files: files) { [weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(_):
+//                self?.fetchData()
+                return
+                
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
+        }
+        
     }
 }
 
