@@ -35,6 +35,26 @@ enum StatusOrder: String {
             return "Cancelled".localized
         }
     }
+    
+    var color:UIColor {
+        get {
+            switch self {
+            case .newStatus:
+                return AppColor.newStatus;
+            case .inProcessStatus:
+                return AppColor.inProcessStatus;
+            case .pickupStatus:
+                return AppColor.pickedUpStatus;
+            case .deliveryStatus:
+                return AppColor.deliveryStatus;
+            case .cancelStatus,
+                 .cancelFinishStatus:
+                return AppColor.redColor;
+            default:
+                return AppColor.newStatus;
+            }
+        }
+    }
 }
 
 enum OrderType:Int {
@@ -442,21 +462,7 @@ class Order: BaseModel {
     
     var colorStatus:UIColor {
         get{
-            switch statusOrder {
-            case .newStatus:
-                return AppColor.newStatus;
-            case .inProcessStatus:
-                return AppColor.inProcessStatus;
-            case .pickupStatus:
-                return AppColor.pickedUpStatus;
-            case .deliveryStatus:
-                return AppColor.deliveryStatus;
-            case .cancelStatus,
-                 .cancelFinishStatus:
-                return AppColor.redColor;
-            default:
-                return AppColor.newStatus;
-            }
+            return statusOrder.color
         }
     }
     

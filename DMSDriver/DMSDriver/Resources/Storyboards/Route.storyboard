@@ -1051,7 +1051,7 @@
                                                         <rect key="frame" x="0.0" y="0.0" width="115" height="100"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="route_list_wait" translatesAutoresizingMaskIntoConstraints="NO" id="eEa-DU-FfF">
-                                                                <rect key="frame" x="49.5" y="32.5" width="16" height="16"/>
+                                                                <rect key="frame" x="50" y="28" width="15.5" height="20.5"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="V0N-EF-1Uo">
                                                                 <rect key="frame" x="25" y="58.5" width="65.5" height="16.5"/>
@@ -1076,7 +1076,7 @@
                                                         <rect key="frame" x="115" y="0.0" width="115" height="100"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="route_list_km" translatesAutoresizingMaskIntoConstraints="NO" id="D0U-rg-Hhw">
-                                                                <rect key="frame" x="49.5" y="32.5" width="16" height="16"/>
+                                                                <rect key="frame" x="43.5" y="32" width="28.5" height="16.5"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pgy-b9-EnM">
                                                                 <rect key="frame" x="25" y="58.5" width="65.5" height="16.5"/>
@@ -1101,7 +1101,7 @@
                                                         <rect key="frame" x="230" y="0.0" width="115" height="100"/>
                                                         <subviews>
                                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="route_list_location" translatesAutoresizingMaskIntoConstraints="NO" id="Ed2-Qw-dYC">
-                                                                <rect key="frame" x="49.5" y="32.5" width="16" height="16"/>
+                                                                <rect key="frame" x="49" y="26.5" width="17.5" height="22"/>
                                                             </imageView>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JvQ-se-bUD">
                                                                 <rect key="frame" x="25" y="58.5" width="65.5" height="16.5"/>
@@ -2277,7 +2277,7 @@
                                                                             <rect key="frame" x="0.0" y="58" width="375" height="93"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uSK-Kk-734" id="yvk-bY-imH">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="92.5"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <subviews>
                                                                                     <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aq6-uh-p7V">
@@ -2608,22 +2608,32 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MCe-rL-rnz">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MCe-rL-rnz">
                                 <rect key="frame" x="183.5" y="598" width="167.5" height="45"/>
                                 <color key="backgroundColor" red="0.1764705882" green="0.67450980390000004" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="167.5" id="5xP-Ro-Lug"/>
+                                    <constraint firstAttribute="width" constant="90" id="5xP-Ro-Lug"/>
                                     <constraint firstAttribute="height" constant="45" id="ksl-Lz-GEr"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="15"/>
-                                <state key="normal" title="Note Management">
+                                <state key="normal" title="Add Note">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Note Management"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Add Note"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="20" height="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.80000000000000004"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadowShouldRasterize" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="onNoteManagementTouchUp:" destination="D22-kb-CLf" eventType="touchUpInside" id="DLU-BT-ykv"/>

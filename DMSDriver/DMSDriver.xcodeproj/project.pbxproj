@@ -325,6 +325,8 @@
 		2ADE1D062253068100BE4092 /* GMSMapview+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE1D052253068100BE4092 /* GMSMapview+Ext.swift */; };
 		2E55A3DF22A6523D006F9944 /* NoteManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */; };
 		2E55A3E022A6523D006F9944 /* NoteManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */; };
+		2E9E08A622A8FDA4005E420C /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */; };
+		2E9E08A722A8FDA4005E420C /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */; };
 		3B0035F7216C614D0032519D /* TextViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0035F4216C614D0032519D /* TextViewInput.swift */; };
 		3B0035F8216C614D0032519D /* TextViewInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0035F5216C614D0032519D /* TextViewInput.xib */; };
 		3B0035F9216C614D0032519D /* TextViewInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0035F6216C614D0032519D /* TextViewInputController.swift */; };
@@ -636,6 +638,7 @@
 		2AC97C5C224E009400DD07AE /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
 		2ADE1D052253068100BE4092 /* GMSMapview+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GMSMapview+Ext.swift"; sourceTree = "<group>"; };
 		2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteManagementViewController.swift; sourceTree = "<group>"; };
+		2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		3B0035F4216C614D0032519D /* TextViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewInput.swift; sourceTree = "<group>"; };
 		3B0035F5216C614D0032519D /* TextViewInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewInput.xib; sourceTree = "<group>"; };
 		3B0035F6216C614D0032519D /* TextViewInputController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewInputController.swift; sourceTree = "<group>"; };
@@ -1258,9 +1261,18 @@
 		2E55A3DC22A65229006F9944 /* NoteManagement */ = {
 			isa = PBXGroup;
 			children = (
+				2E9E08A322A8FD4E005E420C /* Cell */,
 				2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */,
 			);
 			path = NoteManagement;
+			sourceTree = "<group>";
+		};
+		2E9E08A322A8FD4E005E420C /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */,
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		3B0035F3216C614D0032519D /* TextView */ = {
@@ -3526,6 +3538,7 @@
 				2A443A6322648C5A00CB6508 /* Double+Ext.swift in Sources */,
 				2A443A6422648C5A00CB6508 /* ChangePasswordModel.swift in Sources */,
 				2A443A6522648C5A00CB6508 /* OrderSignatureViewController.swift in Sources */,
+				2E9E08A622A8FDA4005E420C /* NoteTableViewCell.swift in Sources */,
 				2A443A6622648C5A00CB6508 /* FilterDataListVC.swift in Sources */,
 				2A443A6722648C5A00CB6508 /* Color.swift in Sources */,
 				2A443A6822648C5A00CB6508 /* CoordinatorRouteModel.swift in Sources */,
@@ -3765,6 +3778,7 @@
 				2AC97C5D224E009400DD07AE /* Double+Ext.swift in Sources */,
 				3B66B8EA210B1149000BDFEF /* ChangePasswordModel.swift in Sources */,
 				3B66B906210B1149000BDFEF /* OrderSignatureViewController.swift in Sources */,
+				2E9E08A722A8FDA4005E420C /* NoteTableViewCell.swift in Sources */,
 				3B1629CB221BE58C00E7A83C /* FilterDataListVC.swift in Sources */,
 				3B66B819210B113D000BDFEF /* Color.swift in Sources */,
 				3B9A376F21242FE8004D881C /* CoordinatorRouteModel.swift in Sources */,

@@ -9,6 +9,8 @@
 import UIKit
 
 class NoteManagementViewController: BaseViewController {
+    
+    let CELL_IDENTIFIER = "NoteTableViewCell"
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var noteTextView: UITextView?
@@ -22,11 +24,21 @@ class NoteManagementViewController: BaseViewController {
             finishButton?.alpha = validateSubmit ? 1 : 0.4
         }
     }
+    var route:Route?
+    var order:Order?
+    var notes = [Note]()
+    
     var attachedFiles:[AttachFileModel]?
+    var isRouteNoteManagement:Bool {
+        get {
+            return (route != nil)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.hintLabel.isHidden = true
+        validateSubmit = false
         // Do any additional setup after loading the view.
     }
     
@@ -40,7 +52,7 @@ class NoteManagementViewController: BaseViewController {
         let numberOfAttachedFiles = self.attachedFiles?.count ?? 0
         if numberOfAttachedFiles > 0 {
             self.hintLabel.isHidden = false
-            self.hintLabel.text = "(\(numberOfAttachedFiles) selected images"
+            self.hintLabel.text = "(\(numberOfAttachedFiles) selected images)"
         } else {
             self.hintLabel.isHidden = true
         }
@@ -49,7 +61,10 @@ class NoteManagementViewController: BaseViewController {
     // MARK: - ACTION
     @IBAction func submit(_ sender: UIButton) {
         let message = self.noteTextView?.text ?? ""
-        submitNoteToRoute(426, message: message, files: self.attachedFiles)
+        if isRouteNoteManagement {
+            submitNoteToRoute(route!.id, message: message, files: self.attachedFiles)
+        }
+        
     }
     
     @IBAction func onbtnClickback(_ sender: UIButton) {
@@ -65,16 +80,33 @@ class NoteManagementViewController: BaseViewController {
 }
 
 extension NoteManagementViewController {
+    func clearData() {
+        self.attachedFiles = nil
+        self.handleShowingHintLabel()
+        self.noteTextView?.text = ""
+    }
+    
+    func updateAttachFilesParamsProperty() {
+        guard let files = attachedFiles else { return }
+        for i in 0..<files.count {
+            files[i].param = "files[\(i)]"
+        }
+    }
+    
     func submitNoteToRoute(_ routeID:Int, message:String, files:[AttachFileModel]?){
         if hasNetworkConnection {
             showLoadingIndicator()
         }
         
+        updateAttachFilesParamsProperty()
         SERVICES().API.updateNoteToRoute(routeID, message: message, files: files) { [weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
 //                self?.fetchData()
+                self?.clearData()
+                self?.validateSubmit = false
+                self?.showAlertView("Updated Successful".localized)
                 return
                 
             case .error(let error):
@@ -95,5 +127,29 @@ extension NoteManagementViewController:UITextViewDelegate{
     func textViewDidChange(_ textView: UITextView) {
         lblPlaceholder?.isHidden = (textView.text.length > 0)
         validateSubmit = (textView.text.length > 0)
+    }
+}
+
+extension NoteManagementViewController:UITableViewDelegate,UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return notes.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER, for: indexPath) as? NoteTableViewCell {
+            let note = notes[indexPath.row]
+            cell.configureCell(note: note)
+            
+            return cell
+        }
+        return UITableViewCell()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 120.0
     }
 }
