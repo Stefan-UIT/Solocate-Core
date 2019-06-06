@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import ImageSlideshow
+import SDWebImage
 
 class NoteManagementViewController: BaseViewController {
     
@@ -18,6 +20,7 @@ class NoteManagementViewController: BaseViewController {
     
     @IBOutlet weak var finishButton: UIButton!
     @IBOutlet weak var hintLabel: UILabel!
+    var slideshow = ImageSlideshow()
     var validateSubmit:Bool = false{
         didSet{
             finishButton?.isEnabled = validateSubmit
@@ -147,6 +150,39 @@ extension NoteManagementViewController:UITableViewDelegate,UITableViewDataSource
             return cell
         }
         return UITableViewCell()
+    }
+    
+    func showSlideImages(files:[AttachFileModel]) {
+        slideshow.slideshowInterval = 5.0
+        slideshow.pageIndicatorPosition = .init(horizontal: .center, vertical: .under)
+        slideshow.contentScaleMode = UIView.ContentMode.scaleAspectFill
+        slideshow.circular = false
+        
+        let pageControl = UIPageControl()
+        pageControl.currentPageIndicatorTintColor = UIColor.lightGray
+        pageControl.pageIndicatorTintColor = UIColor.black
+        slideshow.pageIndicator = pageControl
+        
+        // optional way to show activity indicator during image load (skipping the line will show no activity indicator)
+        slideshow.activityIndicator = DefaultActivityIndicator()
+//        slideshow.delegate = self
+        
+        // can be used with other sample sources as `afNetworkingSource`, `alamofireSource` or `sdWebImageSource` or `kingfisherSource`
+        slideshow.setImageInputs(files)
+        
+        let fullScreenController = slideshow.presentFullScreenController(from: self)
+        // set the activity indicator for full screen controller (skipping the line will show no activity indicator)
+        fullScreenController.slideshow.activityIndicator = DefaultActivityIndicator(style: .white, color: nil)
+
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        let files = notes[indexPath.row].files
+        if files.count > 0 {
+            showSlideImages(files: files)
+        }
+        
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {

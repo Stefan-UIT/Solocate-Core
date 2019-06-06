@@ -22,7 +22,7 @@ def shared_pods
     pod 'Charts'
     pod 'Fabric'
     pod 'Crashlytics'
-    pod 'ImageSlideshow', '~> 1.8'
+    pod 'ImageSlideshow'
 end
 
 target 'DMSDriver' do

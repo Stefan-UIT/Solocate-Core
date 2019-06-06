@@ -8,8 +8,10 @@
 
 import UIKit
 import ObjectMapper
+import ImageSlideshow
+import SDWebImage
 
-class AttachFileModel: BaseModel {
+class AttachFileModel: BaseModel, InputSource {
   
     var mimeType:String? = "application/octet-stream"
     let boundary:String = "----WebKitFormBoundary7MA4YWxkTrZu0gW"
@@ -97,4 +99,11 @@ class AttachFileModel: BaseModel {
         
         return requestBodyData;
   }
+    
+    public func load(to imageView: UIImageView, with callback: @escaping (UIImage?) -> Void) {
+        let url = URL(string: self.url!)
+        imageView.sd_setImage(with: url) { (image, error, type, url) in
+            callback(image)
+        }
+    }
 }
