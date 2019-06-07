@@ -106,7 +106,7 @@ extension NoteManagementViewController {
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
-//                self?.fetchData()
+                self?.fetchData()
                 self?.clearData()
                 self?.validateSubmit = false
                 self?.showAlertView("Updated Successful".localized)
@@ -116,9 +116,30 @@ extension NoteManagementViewController {
                 self?.showAlertView(error.getMessage())
             }
         }
-        
+    }
+    
+    @objc func fetchData()  {
+        if let route = self.route {
+            getRouteDetail("\(route.id)")
+        }
+    }
+    
+    func getRouteDetail(_ routeID:String) {
+        self.showLoadingIndicator()
+        SERVICES().API.getRouteDetail(route: routeID) {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(let obj):
+                self?.route = obj.data
+                self?.notes = (self?.route?.notes)!
+                self?.tableView.reloadData()
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
+        }
     }
 }
+
 
 extension NoteManagementViewController:DMSNavigationServiceDelegate {
     func didSelectedBackOrMenu() {
@@ -186,6 +207,12 @@ extension NoteManagementViewController:UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120.0
+        return UITableView.automaticDimension
     }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100.0
+    }
+    
+    
 }
