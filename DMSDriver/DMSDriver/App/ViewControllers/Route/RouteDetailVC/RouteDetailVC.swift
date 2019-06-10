@@ -114,7 +114,7 @@ class RouteDetailVC: BaseViewController {
         if displayMode == .DisplayModeMap {
             App().navigationService.updateNavigationBar(.Menu,"")
         }else {
-            App().navigationService.updateNavigationBar(.Menu_Search,"")
+            App().navigationService.updateNavigationBar(.Filter_Menu,"")
         }
     }
 
