@@ -38,6 +38,6 @@ class RouteTableViewCell: UITableViewCell {
         expectedStartDateLabel.text = stringDate.uppercased()
         durationLabel.text = CommonUtils.formatEstTime(seconds: Int64(route.totalTimeEst))
         distanceLabel.text = CommonUtils.formatEstKm(met: route.totalDistance.doubleValue)
-        stopsLabel.text = "\(route.totalOrders) Stops".localized.uppercased()
+        stopsLabel.text = (route.totalOrders > 1) ? "\(route.totalOrders) Orders".localized.uppercased() : "\(route.totalOrders) Order".localized.uppercased()
     }
 }
