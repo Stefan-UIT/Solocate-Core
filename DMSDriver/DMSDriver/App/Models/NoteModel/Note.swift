@@ -34,7 +34,7 @@ class Note: NSObject, Mappable {
     id <- map["id"]
     files <- map["files"]
     user <- map["users"]
-    status <- map["status_route"]
+    status <- map["status"]
   }
 }
 

@@ -230,6 +230,7 @@ class Order: BaseModel {
     var pod_req:Int?
     var sig_req:Int?
     var note:String?
+    var notes:[Note] = []
     var details:[Detail]?
     var reason:Reason?
     var startTime = ""
@@ -306,6 +307,7 @@ class Order: BaseModel {
         pod_req <- map["pod_req"]
         sig_req <- map["sig_req"]
         note <- map["note"]
+        notes <- map["notes"]
         details <- map["details"]
         files <- map["files"]
         urgent_type_id <- map["urgent_type_id"]

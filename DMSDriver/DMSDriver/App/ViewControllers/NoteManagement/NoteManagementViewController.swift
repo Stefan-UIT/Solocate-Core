@@ -48,7 +48,8 @@ class NoteManagementViewController: BaseViewController {
     override func updateNavigationBar()  {
         super.updateNavigationBar()
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.BackOnly, "Note Management".localized, AppColor.white, true)
+        let title = (isRouteNoteManagement) ? "Route #\(route!.id)" : "Order #\(order!.id)"
+        App().navigationService.updateNavigationBar(.BackOnly, title.localized, AppColor.white, true)
     }
     
     func handleShowingHintLabel() {
@@ -66,6 +67,8 @@ class NoteManagementViewController: BaseViewController {
         let message = self.noteTextView?.text ?? ""
         if isRouteNoteManagement {
             submitNoteToRoute(route!.id, message: message, files: self.attachedFiles)
+        } else {
+            submitNoteToOrder(order!.id, message: message, files: self.attachedFiles)
         }
         
     }
@@ -96,17 +99,18 @@ extension NoteManagementViewController {
         }
     }
     
-    func submitNoteToRoute(_ routeID:Int, message:String, files:[AttachFileModel]?){
+    
+    func submitNoteToOrder(_ orderID:Int, message:String, files:[AttachFileModel]?){
         if hasNetworkConnection {
             showLoadingIndicator()
         }
         
         updateAttachFilesParamsProperty()
-        SERVICES().API.updateNoteToRoute(routeID, message: message, files: files) { [weak self] (result) in
+        SERVICES().API.updateNoteToOrder(orderID, message: message, files: files) { [weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
-                self?.fetchData()
+                self?.fetchOrderData()
                 self?.clearData()
                 self?.validateSubmit = false
                 self?.showAlertView("Updated Successful".localized)
@@ -118,9 +122,37 @@ extension NoteManagementViewController {
         }
     }
     
-    @objc func fetchData()  {
+    func submitNoteToRoute(_ routeID:Int, message:String, files:[AttachFileModel]?){
+        if hasNetworkConnection {
+            showLoadingIndicator()
+        }
+        
+        updateAttachFilesParamsProperty()
+        SERVICES().API.updateNoteToRoute(routeID, message: message, files: files) { [weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(_):
+                self?.fetchRouteData()
+                self?.clearData()
+                self?.validateSubmit = false
+                self?.showAlertView("Updated Successful".localized)
+                return
+                
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
+        }
+    }
+    
+    func fetchRouteData()  {
         if let route = self.route {
             getRouteDetail("\(route.id)")
+        }
+    }
+    
+    func fetchOrderData()  {
+        if let order = self.order {
+            getOrderDetail(order.id)
         }
     }
     
@@ -133,6 +165,23 @@ extension NoteManagementViewController {
                 self?.route = obj.data
                 self?.notes = (self?.route?.notes)!
                 self?.tableView.reloadData()
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
+        }
+    }
+    
+    func getOrderDetail(_ orderID:Int) {
+        showLoadingIndicator()
+        
+        SERVICES().API.getOrderDetail(orderId: "\(orderID)") {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(let object):
+                self?.order = object.data
+                self?.notes = (self?.order?.notes)!
+                self?.tableView.reloadData()
+                
             case .error(let error):
                 self?.showAlertView(error.getMessage())
             }
@@ -212,7 +261,5 @@ extension NoteManagementViewController:UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return 100.0
-    }
-    
-    
+    } 
 }
