@@ -142,7 +142,8 @@ class RouteDetailVC: BaseViewController {
         lblStatus?.textColor = route?.colorStatus
         lblEstimateHour?.text = CommonUtils.formatEstTime(seconds: Int64(route?.totalTimeEst ?? 0))
         lblEstimateKilometer?.text = CommonUtils.formatEstKm(met: route?.totalDistance.doubleValue ?? 0)
-        lblTotalOrder?.text = "\(route?.totalOrders ?? 0) Orders".localized.uppercased()
+        let totalOrders = route?.totalOrders ?? 0
+        lblTotalOrder?.text = (totalOrders > 1) ? "\(totalOrders) Orders".localized.uppercased() : "\(totalOrders) Order".localized.uppercased()
         
         lblStatus?.textColor = route?.colorStatus
     }
