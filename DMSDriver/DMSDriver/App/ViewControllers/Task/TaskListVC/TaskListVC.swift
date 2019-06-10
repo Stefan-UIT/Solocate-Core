@@ -14,6 +14,7 @@ class TaskListVC: BaseViewController {
     @IBOutlet weak var clvContent:UICollectionView?
     @IBOutlet weak var lblNoData: UILabel?
 
+    @IBOutlet weak var filterLabel: UILabel!
     var timeData:TimeDataItem?
 
     
@@ -27,17 +28,26 @@ class TaskListVC: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        initVar()
+        updateUI()
         setupCollectionView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getListTask()
+        self.getListTask(timeDataItem: self.timeData!, isFetch: true)
     }
     
     override func updateNavigationBar() {
         setupNavigateBar()
     }
+    
+    override func updateUI()  {
+        super.updateUI()
+        filterLabel?.text = timeData?.title
+        clvContent?.reloadData()
+    }
+    
     
     override func reachabilityChangedNetwork(_ isAvailaibleNetwork: Bool) {
         super.reachabilityChangedNetwork(isAvailaibleNetwork)
@@ -49,6 +59,15 @@ class TaskListVC: BaseViewController {
                 self?.taskList = []
                 self?.clvContent?.reloadData()
             }
+        }
+    }
+    
+    func initVar()  {
+        if let _timeData = TimeData.getTimeDataItemDefault() {
+            timeData = _timeData
+        }else {
+            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeThisWeek)
+            TimeData.setTimeDataItemDefault(item: timeData!)
         }
     }
     
@@ -74,8 +93,8 @@ class TaskListVC: BaseViewController {
                                                        atViewContrller: self,
                                                        timeData: timeData,
                                                        needHides: arrHide as [NSNumber]) {[weak self] (success, timeData) in
-                                                 
-                                                        //
+                                                        self?.timeData = timeData
+                                                        self?.getListTask(timeDataItem: timeData, isFetch: true)
         }
     }
 }
@@ -172,14 +191,14 @@ extension TaskListVC:UICollectionViewDelegate{
 extension TaskListVC{
     
     @objc func fetchData()  {
-        getListTask(isFetch: true)
+        getListTask(timeDataItem:timeData! ,isFetch: true)
     }
     
-    func getListTask(isFetch:Bool = false) {
+    func getListTask(timeDataItem:TimeDataItem,isFetch:Bool = false) {
         if !isFetch {
             self.showLoadingIndicator()
         }
-        SERVICES().API.getTaskList(dateStringFilter) {[weak self] (result) in
+        SERVICES().API.getTaskList(self.timeData!) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.clvContent?.endRefreshControl()
             switch result{
@@ -190,7 +209,7 @@ extension TaskListVC{
                 })
                 
                 self?.lblNoData?.isHidden = obj.data?.count > 0
-                self?.clvContent?.reloadData()
+                self?.updateUI()
                 
             case .error(let error):
                 self?.showAlertView(error.getMessage())

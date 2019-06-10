@@ -76,7 +76,8 @@ class MainVC: BaseViewController {
                 //(viewController as? RouteListVC)?.fetchData()
                 return
             }else if (((viewController as? TaskListVC) != nil)){
-                (viewController as? TaskListVC)?.getListTask(isFetch: true)
+                let vc = viewController as? TaskListVC
+                vc?.getListTask(timeDataItem: (vc?.timeData)!, isFetch: true)
                 return
 
             }else if (((viewController as? HistoryNotifyVC) != nil)){
