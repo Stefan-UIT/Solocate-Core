@@ -46,6 +46,8 @@ class DMSNavigationService: NSObject , NavigationService {
     fileprivate lazy var searchBarItem = UIBarButtonItem.barButtonItem(with: #imageLiteral(resourceName: "search-solid"),
                                                                          target: self,
                                                                          action: #selector(onNavigationClickLeftButton(_:)))
+    fileprivate lazy var filterBarItem = UIBarButtonItem.filterButton(target: self,
+                                                                      action: #selector(onNavigationClickLeftButton(_:)))
     
     
     fileprivate(set) var leftBarButtonItemType: NavigationItemType?
@@ -148,6 +150,7 @@ extension DMSNavigationService {
     enum BarStyle {
         case Menu;
         case Menu_Search;
+        case Filter_Menu;
         case Menu_Calenda;
         case Menu_Select;
         case Menu_Assign;
@@ -187,6 +190,10 @@ extension DMSNavigationService {
         case .Menu_Search:
             navigationItem?.rightBarButtonItem  = menuBarItem
             navigationItem?.leftBarButtonItem = searchBarItem
+            
+        case .Filter_Menu:
+            navigationItem?.rightBarButtonItem  = menuBarItem
+            navigationItem?.leftBarButtonItem = filterBarItem
             
         case .Menu_Calenda:
             navigationItem?.rightBarButtonItem  = menuBarItem
