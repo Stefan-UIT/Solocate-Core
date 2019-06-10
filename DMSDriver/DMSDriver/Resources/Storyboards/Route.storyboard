@@ -568,7 +568,7 @@
                                                             <rect key="frame" x="0.0" y="28" width="375" height="210"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5pQ-Hl-aBS" id="EyV-0r-RcE">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="209.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cgw-CI-weJ">
@@ -725,7 +725,7 @@
                                                             <rect key="frame" x="0.0" y="238" width="375" height="93"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nDF-U5-UGR" id="zdw-2R-XL3">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="92.5"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cgs-61-HkZ">
@@ -2075,7 +2075,7 @@
                                                                             <rect key="frame" x="0.0" y="58" width="365" height="149"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L7A-oe-BXz" id="YAt-dw-SR5">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="148.5"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="149"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <subviews>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Tw-RT-soR">
@@ -2598,7 +2598,7 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="diagonalMode" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fri-cW-2FK">
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fri-cW-2FK">
                                 <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
                                 <color key="backgroundColor" red="0.1761970263" green="0.83050543070000005" blue="0.41389059449999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
@@ -2607,6 +2607,37 @@
                                 <state key="normal" title="LET START">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MCe-rL-rnz">
+                                <rect key="frame" x="261" y="598" width="90" height="45"/>
+                                <color key="backgroundColor" red="0.1764705882" green="0.67450980390000004" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="90" id="5xP-Ro-Lug"/>
+                                    <constraint firstAttribute="height" constant="45" id="ksl-Lz-GEr"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="15"/>
+                                <state key="normal" title="Add Note">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Add Note"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="5"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="20" height="20"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="0.80000000000000004"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="shadowShouldRasterize" value="NO"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="onNoteManagementTouchUp:" destination="D22-kb-CLf" eventType="touchUpInside" id="DLU-BT-ykv"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -2619,6 +2650,8 @@
                             <constraint firstItem="fri-cW-2FK" firstAttribute="leading" secondItem="r2Y-eJ-xnl" secondAttribute="leading" id="I4c-Xa-FTR"/>
                             <constraint firstItem="E6F-ap-rRY" firstAttribute="top" secondItem="r2Y-eJ-xnl" secondAttribute="top" id="Mk9-et-E2c"/>
                             <constraint firstItem="E6F-ap-rRY" firstAttribute="leading" secondItem="zeN-C9-SX0" secondAttribute="leading" id="YOR-k8-tOn"/>
+                            <constraint firstItem="r2Y-eJ-xnl" firstAttribute="trailing" secondItem="MCe-rL-rnz" secondAttribute="trailing" constant="24" id="brQ-Mk-40w"/>
+                            <constraint firstItem="r2Y-eJ-xnl" firstAttribute="bottom" secondItem="MCe-rL-rnz" secondAttribute="bottom" constant="24" id="dEg-nL-hDO"/>
                             <constraint firstItem="Bxg-uR-DIN" firstAttribute="leading" secondItem="r2Y-eJ-xnl" secondAttribute="leading" constant="15" id="eua-wN-OWC"/>
                             <constraint firstItem="Bxg-uR-DIN" firstAttribute="top" secondItem="E6F-ap-rRY" secondAttribute="bottom" constant="-5" id="nrq-7x-AK3"/>
                         </constraints>

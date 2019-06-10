@@ -155,6 +155,7 @@ class Route: BaseModel {
     var totalTimeEst = 0
     var totalDistance = ""
     var locationList:[Address] = []
+    var notes:[Note] = []
     
     
     
@@ -185,6 +186,7 @@ class Route: BaseModel {
         totalTimeEst <- map["est_dur"]
         totalDistance <- map["est_dist"]
         locationList <- map["location_list"]
+        notes <- map["notes"]
         orderList.forEach { (order) in
             order.driver_id = driver?.id ?? 0
         }

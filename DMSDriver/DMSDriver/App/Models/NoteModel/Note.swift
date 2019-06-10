@@ -13,6 +13,13 @@ class Note: NSObject, Mappable {
   var author = ""
   var createdAt = ""
   var content = ""
+    
+    var updatedBy = ""
+    var statusName = ""
+    var id = 0
+    var files = [AttachFileModel]()
+    var user:UserModel.UserInfo!
+    var status:Status!
   
   required convenience init?(map: Map) {
     self.init()
@@ -22,6 +29,12 @@ class Note: NSObject, Mappable {
     author <- map["author"]
     createdAt <- map["created_at"]
     content <- map["content"]
+    updatedBy <- map["updated_by"]
+    statusName <- map["status_name"]
+    id <- map["id"]
+    files <- map["files"]
+    user <- map["users"]
+    status <- map["status"]
   }
 }
 

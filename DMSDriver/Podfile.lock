@@ -69,6 +69,9 @@ PODS:
     - GoogleUtilities/Logger
   - GoogleUtilities/UserDefaults (5.8.0):
     - GoogleUtilities/Logger
+  - ImageSlideshow (1.7.0):
+    - ImageSlideshow/Core (= 1.7.0)
+  - ImageSlideshow/Core (1.7.0)
   - IQKeyboardManager (6.2.1)
   - nanopb (0.3.901):
     - nanopb/decode (= 0.3.901)
@@ -98,6 +101,7 @@ DEPENDENCIES:
   - Firebase/Core
   - Firebase/Messaging
   - GoogleMaps
+  - ImageSlideshow
   - IQKeyboardManager
   - ObjectMapper
   - ReachabilitySwift (~> 3)
@@ -124,6 +128,7 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleMaps
     - GoogleUtilities
+    - ImageSlideshow
     - IQKeyboardManager
     - nanopb
     - ObjectMapper
@@ -152,6 +157,7 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: ffe513e90551844a739e7bcbb1d2aca1c28a4338
   GoogleMaps: 5c13302e6fe6bb6e686b267196586b91cd594225
   GoogleUtilities: 04fce34bcd5620c1ee76fb79172105c74a4df335
+  ImageSlideshow: f8eec5e37a980f60923b585ff23b0e140fd24018
   IQKeyboardManager: 964638372b4a61892cc74fdfa6fd26de8c9464a2
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
   ObjectMapper: 0d4402610f4e468903ae64629eec4784531e5c51
@@ -165,6 +171,6 @@ SPEC CHECKSUMS:
   TLPhotoPicker: 05463d0aea62633f4066acf219f3952ab8b1d488
   XLPagerTabStrip: 22d4c58200d7c105e0e407ab6bfd01a5d85014be
 
-PODFILE CHECKSUM: 6029715cbe91e19a6d40b41e2a665a6e4b8b5a22
+PODFILE CHECKSUM: 5e326fb8ff43fb40d78e574ed127e9ca03260d48
 
-COCOAPODS: 1.7.0.beta.3
+COCOAPODS: 1.7.0

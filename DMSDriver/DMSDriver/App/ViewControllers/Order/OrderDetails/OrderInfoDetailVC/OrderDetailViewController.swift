@@ -20,6 +20,7 @@ enum OrderDetailSection:Int {
     case sectionNatureOfGoods
     case sectionSignature
     case sectionPictures
+    case sectionAddNote
     case sectionDescription
     
     static let count: Int = {
@@ -105,7 +106,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                           "Delivery".localized.uppercased(),
                           "Packgages".localized.uppercased(),
                           "Signature".localized.uppercased(),
-                          "Picture".localized.uppercased()]
+                          "Picture".localized.uppercased(),
+                          "Add Note".localized.uppercased()
+        ]
         setupDataDetailInforRows()
     }
     
@@ -257,6 +260,8 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             return orderDetail?.signature != nil ? 1 : 0
         case .sectionPictures:
             return orderDetail?.pictures?.count ?? 0
+        case .sectionAddNote:
+            return 0;
         case .sectionDescription:
             return 0;
         }
@@ -318,6 +323,8 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                     isAdd = true
                 }
                 headerCell.btnEdit?.isHidden = !isAdd
+            case .sectionAddNote:
+                headerCell.btnEdit?.isHidden = false
             default:
                 break
             }
@@ -361,6 +368,8 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             return cellPicture(tableView,indexPath)
         case .sectionDescription:
            return cellDiscription(tableView,indexPath)
+        default:
+            return UITableViewCell()
         }
     }
     
@@ -618,9 +627,18 @@ extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
             doAddPictures()
         case .sectionSignature:
             doAddSignature()
+        case .sectionAddNote:
+            redirectToAddNoteVC()
         default:
             break
         }
+    }
+    
+    func redirectToAddNoteVC() {
+        let vc:NoteManagementViewController = .loadSB(SB: .Common)
+        vc.order = orderDetail
+        vc.notes = orderDetail?.notes ?? []
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     func doAddSignature()  {

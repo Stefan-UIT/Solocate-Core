@@ -58,6 +58,8 @@ enum PATH_REQUEST_URL: String{
     case GET_ALL_ROUTE_INPROGESS = "transaction/v1/routes/in-progress"
     case GET_LIST_ALERT = "masterdata/v1/mobile/alerts/driver-alerts"
     case DASHBOARD = "transaction/v1/mobile/dashboard/by-driver?start_time=%@&end_time=%@"
+    case UPDATE_ROUTE_NOTE = "transaction/v1/routes/notes"
+    case UPDATE_ORDER_NOTE = "transaction/v1/orders/notes"
 
     
     var URL:String  {
