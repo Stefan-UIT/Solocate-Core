@@ -174,7 +174,7 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
         }
         switch sectionDisplay {
         case .SectionCustomer,
-             .SectionCity:
+             .SectionCity, .SectionType:
             return 0 // Currently do not use filter with Customer and City
         default:
             return 60 * Constants.SCALE_VALUE_WIDTH_DEVICE

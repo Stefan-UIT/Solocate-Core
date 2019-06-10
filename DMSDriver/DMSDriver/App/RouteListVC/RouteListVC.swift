@@ -46,7 +46,7 @@ import Crashlytics
     override func updateNavigationBar() {
         super.updateNavigationBar()
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.Menu_Search, "")
+        App().navigationService.updateNavigationBar(.Filter_Menu, "")
     }
     
     private func setupTableView()  {
@@ -182,10 +182,10 @@ import Crashlytics
     
     func updateNavigationBar(isShowTitle:Bool)  {
         if isShowTitle == false{
-            App().navigationService.updateNavigationBar(.Menu_Search, "")
+            App().navigationService.updateNavigationBar(.Filter_Menu, "")
         }
         else {
-            App().navigationService.updateNavigationBar(.Menu_Search, "List Routes".localized.uppercased())
+            App().navigationService.updateNavigationBar(.Filter_Menu, "List Routes".localized.uppercased())
             
         }
     }

@@ -122,6 +122,13 @@ extension UIBarButtonItem {
         return item
     }
     
+    class func filterButton(target: Any, action: Selector) -> UIBarButtonItem {
+        let button = filterButtonWithText(text: "Filter".localized, target: target, action: action)
+        let item = UIBarButtonItem(customView: button)
+        
+        return item
+    }
+    
     class func cancelButton(target: Any, action: Selector) -> UIBarButtonItem {
         let button = setUpButtonWithText(text: "cancel".localized, target: target, action: action)
         let item = UIBarButtonItem(customView: button)
@@ -155,6 +162,33 @@ extension UIBarButtonItem {
         let item = UIBarButtonItem(customView: button)
         
         return item
+    }
+    
+    fileprivate class func filterButtonWithText(text:String, target:Any,action: Selector) -> UIButton{
+        let title = text
+        let font = Font.helveticaRegular(with: 16)
+
+        let frame = CGRect(origin: CGPoint(), size: CGSize(width: 70, height: 20))
+        
+        
+        let normalTitle = NSAttributedString.attributedString(with: title,
+                                                              color: AppColor.pickedUpStatus,
+                                                              font: font,
+                                                              alignment: .right)
+        let highlightedTitle = NSAttributedString.attributedString(with: title,
+                                                                   color: AppColor.pickedUpStatus,
+                                                                   font: font,
+                                                                   alignment: .right)
+        
+        let button = customButton(with: normalTitle,
+                                  highlightedTitle: highlightedTitle,
+                                  frame: frame,
+                                  target: target,
+                                  action: action)
+        button.borderWidth = 2.0
+        button.borderColor = AppColor.pickedUpStatus
+        
+        return button;
     }
     
     
