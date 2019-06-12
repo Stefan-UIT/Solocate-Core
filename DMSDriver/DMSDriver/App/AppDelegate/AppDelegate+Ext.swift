@@ -22,7 +22,7 @@ extension AppDelegate: UNUserNotificationCenterDelegate {
                 switch noti.notiType{
                 case .TASK:
                     let task = TaskModel()
-                    task.task_id = noti.object_data?.object_id
+                    task.id = noti.object_data?.object_id ?? 0
                     self.reloadOrPushScreenTaskDetailVC(task)
                     
                 case .ROUTE:

@@ -203,12 +203,12 @@ extension TaskListVC{
             self?.clvContent?.endRefreshControl()
             switch result{
             case .object(let obj):
-                self?.taskList = obj.data ?? []
+                self?.taskList = obj.data?.data ?? []
                 self?.taskList.sort(by: { (task1, task2) -> Bool in
-                    return task1.task_id < task2.task_id
+                    return task1.id < task2.id
                 })
                 
-                self?.lblNoData?.isHidden = obj.data?.count > 0
+                self?.lblNoData?.isHidden = self?.taskList.count > 0
                 self?.updateUI()
                 
             case .error(let error):

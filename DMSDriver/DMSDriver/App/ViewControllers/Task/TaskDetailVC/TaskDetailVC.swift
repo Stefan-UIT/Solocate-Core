@@ -73,7 +73,7 @@ class TaskDetailVC: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let _task = task {
-            self.getTaskDetail(_task.task_id ?? 0)
+            self.getTaskDetail(_task.id)
         }
     }
     
@@ -109,43 +109,43 @@ class TaskDetailVC: BaseViewController {
         let deliveryDate = DateFormatter.displayDateUS.date(from: E(_task.dlvy_date))
         let dlvy_start_time = DateFormatter.serverDateFormater.date(from: E(_task.dlvy_start_time))
         let dlvy_end_time = DateFormatter.serverDateFormater.date(from: E(_task.dlvy_end_time))
-        let status = TaskStatus(rawValue: E(_task.task_sts)) ?? TaskStatus.open
+        let status = TaskStatus(rawValue: E(_task.status.code)) ?? TaskStatus.open
         let statusItem = OrderDetailInforRow("Status",status.statusName)
-        let urgency = OrderDetailInforRow("Urgency" ,isHebewLang() ? E(_task.urgent_type_name_hb) :  E(_task.urgent_type_name_en))
-        let reason = OrderDetailInforRow("Failure cause",E(_task.reason?.name))
-        let mess = OrderDetailInforRow("Message",E(_task.reason_msg))
-        let driver = OrderDetailInforRow("Driver","\(E(_task.driver_name))")
-        let taskId = OrderDetailInforRow("TaskId","\(_task.task_id ?? 0)")
-        let startTime = OrderDetailInforRow("Start time", (dlvy_start_time != nil) ? displayHour.string(from: dlvy_start_time!) : "")
-        let endTime = OrderDetailInforRow("End time", (dlvy_end_time != nil) ? displayHour.string(from: dlvy_end_time!) : "")
-        let date = OrderDetailInforRow("Date",(deliveryDate != nil) ? displayDateVN.string(from: deliveryDate!) : "")
-        let clientName = OrderDetailInforRow("Client name",E(_task.client_name))
-        let customerName = OrderDetailInforRow("Customer name" ,E(_task.customer_name))
-        let collectCall = OrderDetailInforRow("Collectcall",E(_task.collect_call))
-        let coordinationPhone = OrderDetailInforRow("Coordination phone", E(_task.coord_phone))
-        let receiverName = OrderDetailInforRow("Receiver name",E(_task.rcvr_name))
-        let phone = OrderDetailInforRow("Phone", E(_task.rcvr_phone))
-        let address = OrderDetailInforRow("Address",E(_task.full_addr))
+        let urgency = OrderDetailInforRow("Urgency" , _task.urgency.name ?? "")
+//        let reason = OrderDetailInforRow("Failure cause",E(_task.reason?.name))
+//        let mess = OrderDetailInforRow("Message",E(_task.reason_msg))
+        let driver = OrderDetailInforRow("Driver","\(E(_task.assignee.userName))")
+        let taskId = OrderDetailInforRow("TaskId","\(_task.id)")
+//        let startTime = OrderDetailInforRow("Start time", (dlvy_start_time != nil) ? displayHour.string(from: dlvy_start_time!) : "")
+//        let endTime = OrderDetailInforRow("End time", (dlvy_end_time != nil) ? displayHour.string(from: dlvy_end_time!) : "")
+//        let date = OrderDetailInforRow("Date",(deliveryDate != nil) ? displayDateVN.string(from: deliveryDate!) : "")
+//        let clientName = OrderDetailInforRow("Client name",E(_task.client_name))
+//        let customerName = OrderDetailInforRow("Customer name" ,E(_task.customer_name))
+//        let collectCall = OrderDetailInforRow("Collectcall",E(_task.collect_call))
+//        let coordinationPhone = OrderDetailInforRow("Coordination phone", E(_task.coord_phone))
+//        let receiverName = OrderDetailInforRow("Receiver name",E(_task.rcvr_name))
+//        let phone = OrderDetailInforRow("Phone", E(_task.rcvr_phone))
+        let address = OrderDetailInforRow("Address",E(_task.address.address))
     
         orderInforStatus.append(statusItem)
         orderInforStatus.append(urgency)
-        if  status == TaskStatus.cancel {
-            orderInforStatus.append(reason)
-            orderInforStatus.append(mess)
-        }
+//        if  status == TaskStatus.cancel {
+//            orderInforStatus.append(reason)
+//            orderInforStatus.append(mess)
+//        }
         
         orderInforRows.append(driver)
         orderInforRows.append(taskId)
-        orderInforRows.append(startTime)
-        orderInforRows.append(endTime)
-        orderInforRows.append(date)
+//        orderInforRows.append(startTime)
+//        orderInforRows.append(endTime)
+//        orderInforRows.append(date)
         
-        informationRows.append(clientName)
-        informationRows.append(customerName)
-        informationRows.append(receiverName)
-        informationRows.append(phone)
-        informationRows.append(collectCall)
-        informationRows.append(coordinationPhone)
+//        informationRows.append(clientName)
+//        informationRows.append(customerName)
+//        informationRows.append(receiverName)
+//        informationRows.append(phone)
+//        informationRows.append(collectCall)
+//        informationRows.append(coordinationPhone)
         informationRows.append(address)
     }
     
@@ -377,7 +377,7 @@ fileprivate extension TaskDetailVC{
         vAction?.isHidden = true
         updateStatusButton?.setTitle("Finish".localized.uppercased(), for: .normal)
         btnUnable?.setTitle("cancel".localized.uppercased(), for: .normal)
-        guard  let statusTask = TaskStatus(rawValue: E(task?.task_sts)) else {
+        guard  let statusTask = TaskStatus(rawValue: E(task?.status.code)) else {
             return
         }
         vAction?.isHidden = (statusTask == .delivered ||
@@ -390,7 +390,7 @@ fileprivate extension TaskDetailVC{
 extension TaskDetailVC{
     
     @objc func fetchData()  {
-        getTaskDetail(task?.task_id ?? 0, true)
+        getTaskDetail(task?.id ?? 0, true)
     }
     
     func getTaskDetail(_ taskId: Int, _ isFetch:Bool = false) {
@@ -413,7 +413,7 @@ extension TaskDetailVC{
     
     func updateTaskStatus(_ status:String) {
         self.showLoadingIndicator()
-        SERVICES().API.updateTaskStatusTask(task?.task_id ?? 0, status) {[weak self] (result) in
+        SERVICES().API.updateTaskStatusTask(task?.id ?? 0, status) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.tableView?.endRefreshControl()
             switch result{
