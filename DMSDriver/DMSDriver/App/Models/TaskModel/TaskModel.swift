@@ -126,7 +126,7 @@ class TaskModel: BaseModel {
 //        driver_name <- map["driver_name"]
 //        client_name <- map["client_name"]
         customer_name <- map["customer_name"]
-        instructions <- map["instructions"]
+        instructions <- map["instruction"]
 //        urgent_type_code <- map["urgent_type_code"]
 //        courier_3rd <- map["courier_3rd"]
 //        coord_phone <- map["coord_phone"]

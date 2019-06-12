@@ -61,7 +61,7 @@ class BasicModel: BaseModel {
     override func mapping(map: Map) {
         id <- map["id"]
         name <- map["name"]
-        code <- map["code"]
+        code <- map["cd"]
     }
 }
 

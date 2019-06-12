@@ -95,7 +95,7 @@ class TaskDetailVC: BaseViewController {
     
     
     func setupDataDetailInforRows() {
-        var _task:TaskModel = TaskModel()
+        var _task:TaskModel!
         if task != nil {
             _task = task!
         }
@@ -402,8 +402,7 @@ extension TaskDetailVC{
             self?.tableView?.endRefreshControl()
             switch result{
             case .object(let obj):
-                self?.task = obj
-                self?.updateButtonStatus()
+                self?.task = obj.data
                 
             case .error(let error):
                 self?.showAlertView(error.getMessage())

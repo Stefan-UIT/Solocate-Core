@@ -181,7 +181,7 @@ extension BaseAPIService {
     
     @discardableResult
     func getTaskDetail(_ taskId:Int,
-                     callback: @escaping APICallback<TaskModel>) -> APIRequest {
+                     callback: @escaping APICallback<ResponseDataModel<TaskModel>>) -> APIRequest {
         let path = String(format:PATH_REQUEST_URL.GET_TASK_DETAIL.URL, "\(taskId)")
         return request(method: .GET,
                        path: path,
