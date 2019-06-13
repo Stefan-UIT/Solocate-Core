@@ -135,7 +135,7 @@ class TaskDetailVC: BaseViewController {
 //            taskInforStatus.append(mess)
 //        }
         
-        taskInforRows.append(taskId)
+//        taskInforRows.append(taskId)
         taskInforRows.append(taskName)
         taskInforRows.append(address)
         taskInforRows.append(driver)
@@ -184,7 +184,8 @@ class TaskDetailVC: BaseViewController {
     }
     
     @IBAction func didClickUnableToStart(_ sender: UIButton) {
-        handleUnableToStartAction()
+//        handleUnableToStartAction()
+        handleCancelAction()
     }
     
     func handleUnableToStartAction() {
@@ -199,14 +200,27 @@ class TaskDetailVC: BaseViewController {
     }
     
     func handleFinishAction() {
-        App().showAlertView("Are you sure you want to finish this task?".localized,
-                            positiveTitle: "Finish".localized,
-                            positiveAction: { (hasOK) in
-                                
-                        self.updateTaskStatus("DV")
-        }, negativeTitle: "cancel".localized) { (hasCancel) in
-            //
-        }
+//        App().showAlertView("Are you sure you want to finish this task?".localized,
+//                            positiveTitle: "Finish".localized,
+//                            positiveAction: { (hasOK) in
+//
+//                        self.updateTaskStatus("3")
+//        }, negativeTitle: "cancel".localized) { (hasCancel) in
+//            //
+//        }
+        self.updateTaskStatus("3")
+    }
+    
+    func handleCancelAction() {
+//        App().showAlertView("Are you sure you want to cancel this task?".localized,
+//                            positiveTitle: "Confirm".localized,
+//                            positiveAction: { (hasOK) in
+//
+//                                self.updateTaskStatus("4")
+//        }, negativeTitle: "cancel".localized) { (hasCancel) in
+//            //
+//        }
+        self.updateTaskStatus("4")
     }
     
     func showInputNote(_ statusNeedUpdate:String) {
