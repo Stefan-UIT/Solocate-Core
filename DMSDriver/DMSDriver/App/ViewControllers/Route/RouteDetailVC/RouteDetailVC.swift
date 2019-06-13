@@ -103,19 +103,20 @@ class RouteDetailVC: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        updateNavigationBar()
+//        updateNavigationBar()
     }
 
     
     
     override func updateNavigationBar()  {
         super.updateNavigationBar()
-        App().navigationService.delegate = self;
-        if displayMode == .DisplayModeMap {
-            App().navigationService.updateNavigationBar(.Menu,"")
-        }else {
-            App().navigationService.updateNavigationBar(.Filter_Menu,"")
-        }
+        App().navigationService.updateNavigationBar(.Menu,"")
+//        App().navigationService.delegate = self;
+//        if displayMode == .DisplayModeMap {
+//            App().navigationService.updateNavigationBar(.Menu,"")
+//        }else {
+//            App().navigationService.updateNavigationBar(.Filter_Menu,"")
+//        }
     }
 
     override func didReceiveMemoryWarning() {

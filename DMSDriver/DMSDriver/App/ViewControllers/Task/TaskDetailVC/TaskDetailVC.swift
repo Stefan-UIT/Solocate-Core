@@ -13,10 +13,10 @@ import CoreLocation
 class TaskDetailVC: BaseViewController {
     
     enum TaskDetailSection:Int {
-        case sectionOrderStatus = 0
-        case sectionOrderInfor
-        case sectionInformation
-        case sectionDescription
+        case StatusSection = 0
+        case DetailSection
+        case InstructionSection
+//        case DescriptionSection
         
         static let count: Int = {
             var max: Int = 0
@@ -32,9 +32,9 @@ class TaskDetailVC: BaseViewController {
     @IBOutlet weak var vAction: UIView?
     
     
-    fileprivate var orderInforStatus = [OrderDetailInforRow]()
-    fileprivate var orderInforRows = [OrderDetailInforRow]()
-    fileprivate var informationRows = [OrderDetailInforRow]()
+    fileprivate var taskInforStatus = [OrderDetailInforRow]()
+    fileprivate var taskInforRows = [OrderDetailInforRow]()
+    fileprivate var taskInstruction = [OrderDetailInforRow]()
     
     fileprivate let cellIdentifier = "OrderDetailTableViewCell"
     fileprivate let headerCellIdentifier = "OrderDetailHeaderCell"
@@ -73,7 +73,7 @@ class TaskDetailVC: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if let _task = task {
-            self.getTaskDetail(_task.task_id ?? 0)
+            self.getTaskDetail(_task.id)
         }
     }
     
@@ -95,58 +95,63 @@ class TaskDetailVC: BaseViewController {
     
     
     func setupDataDetailInforRows() {
-        var _task:TaskModel = TaskModel()
+        var _task:TaskModel!
         if task != nil {
             _task = task!
         }
         updateStatusButton?.isHidden = false
-        orderInforStatus.removeAll()
-        orderInforRows.removeAll()
-        informationRows.removeAll()
+        taskInforStatus.removeAll()
+        taskInforRows.removeAll()
+        taskInstruction.removeAll()
         
         let displayDateVN = DateFormatter.displayDateVietNames
         let displayHour = DateFormatter.hourFormater
         let deliveryDate = DateFormatter.displayDateUS.date(from: E(_task.dlvy_date))
         let dlvy_start_time = DateFormatter.serverDateFormater.date(from: E(_task.dlvy_start_time))
         let dlvy_end_time = DateFormatter.serverDateFormater.date(from: E(_task.dlvy_end_time))
-        let status = TaskStatus(rawValue: E(_task.task_sts)) ?? TaskStatus.open
+        let status = TaskStatus(rawValue: E(_task.status.code)) ?? TaskStatus.open
         let statusItem = OrderDetailInforRow("Status",status.statusName)
-        let urgency = OrderDetailInforRow("Urgency" ,isHebewLang() ? E(_task.urgent_type_name_hb) :  E(_task.urgent_type_name_en))
-        let reason = OrderDetailInforRow("Failure cause",E(_task.reason?.name))
-        let mess = OrderDetailInforRow("Message",E(_task.reason_msg))
-        let driver = OrderDetailInforRow("Driver","\(E(_task.driver_name))")
-        let taskId = OrderDetailInforRow("TaskId","\(_task.task_id ?? 0)")
+        let urgency = OrderDetailInforRow("Urgency" , _task.urgency.name ?? "")
+//        let reason = OrderDetailInforRow("Failure cause",E(_task.reason?.name))
+//        let mess = OrderDetailInforRow("Message",E(_task.reason_msg))
+        let taskName = OrderDetailInforRow("Name","\(E(_task.name))")
+        let driver = OrderDetailInforRow("Driver","\(E(_task.assignee.userName))")
+        let taskId = OrderDetailInforRow("TaskId","\(_task.id)")
         let startTime = OrderDetailInforRow("Start time", (dlvy_start_time != nil) ? displayHour.string(from: dlvy_start_time!) : "")
         let endTime = OrderDetailInforRow("End time", (dlvy_end_time != nil) ? displayHour.string(from: dlvy_end_time!) : "")
-        let date = OrderDetailInforRow("Date",(deliveryDate != nil) ? displayDateVN.string(from: deliveryDate!) : "")
-        let clientName = OrderDetailInforRow("Client name",E(_task.client_name))
-        let customerName = OrderDetailInforRow("Customer name" ,E(_task.customer_name))
-        let collectCall = OrderDetailInforRow("Collectcall",E(_task.collect_call))
-        let coordinationPhone = OrderDetailInforRow("Coordination phone", E(_task.coord_phone))
-        let receiverName = OrderDetailInforRow("Receiver name",E(_task.rcvr_name))
-        let phone = OrderDetailInforRow("Phone", E(_task.rcvr_phone))
-        let address = OrderDetailInforRow("Address",E(_task.full_addr))
+//        let date = OrderDetailInforRow("Date",(deliveryDate != nil) ? displayDateVN.string(from: deliveryDate!) : "")
+//        let clientName = OrderDetailInforRow("Client name",E(_task.client_name))
+//        let customerName = OrderDetailInforRow("Customer name" ,E(_task.customer_name))
+//        let collectCall = OrderDetailInforRow("Collectcall",E(_task.collect_call))
+//        let coordinationPhone = OrderDetailInforRow("Coordination phone", E(_task.coord_phone))
+//        let receiverName = OrderDetailInforRow("Receiver name",E(_task.rcvr_name))
+//        let phone = OrderDetailInforRow("Phone", E(_task.rcvr_phone))
+        let address = OrderDetailInforRow("Address",E(_task.address.address))
     
-        orderInforStatus.append(statusItem)
-        orderInforStatus.append(urgency)
-        if  status == TaskStatus.cancel {
-            orderInforStatus.append(reason)
-            orderInforStatus.append(mess)
-        }
+        taskInforStatus.append(statusItem)
+        taskInforStatus.append(urgency)
+//        if  status == TaskStatus.cancel {
+//            taskInforStatus.append(reason)
+//            taskInforStatus.append(mess)
+//        }
         
-        orderInforRows.append(driver)
-        orderInforRows.append(taskId)
-        orderInforRows.append(startTime)
-        orderInforRows.append(endTime)
-        orderInforRows.append(date)
+//        taskInforRows.append(taskId)
+        taskInforRows.append(taskName)
+        taskInforRows.append(address)
+        taskInforRows.append(driver)
+        taskInforRows.append(startTime)
+        taskInforRows.append(endTime)
+//        taskInforRows.append(date)
         
-        informationRows.append(clientName)
-        informationRows.append(customerName)
-        informationRows.append(receiverName)
-        informationRows.append(phone)
-        informationRows.append(collectCall)
-        informationRows.append(coordinationPhone)
-        informationRows.append(address)
+//        informationRows.append(clientName)
+//        informationRows.append(customerName)
+//        informationRows.append(receiverName)
+//        informationRows.append(phone)
+//        informationRows.append(collectCall)
+//        informationRows.append(coordinationPhone)
+        
+        let instruction = OrderDetailInforRow("Instruction",E(_task.instructions))
+        taskInstruction.append(instruction)
     }
     
     
@@ -168,7 +173,7 @@ class TaskDetailVC: BaseViewController {
     func initVar()  {
         arrTitleHeader = ["Task Status".localized,
                           "Task Information".localized,
-                          "Information".localized,
+//                          "Information".localized,
                           "Instructions".localized]
         
     }
@@ -179,7 +184,8 @@ class TaskDetailVC: BaseViewController {
     }
     
     @IBAction func didClickUnableToStart(_ sender: UIButton) {
-        handleUnableToStartAction()
+//        handleUnableToStartAction()
+        handleCancelAction()
     }
     
     func handleUnableToStartAction() {
@@ -194,14 +200,27 @@ class TaskDetailVC: BaseViewController {
     }
     
     func handleFinishAction() {
-        App().showAlertView("Are you sure you want to finish this task?".localized,
-                            positiveTitle: "Finish".localized,
-                            positiveAction: { (hasOK) in
-                                
-                        self.updateTaskStatus("DV")
-        }, negativeTitle: "cancel".localized) { (hasCancel) in
-            //
-        }
+//        App().showAlertView("Are you sure you want to finish this task?".localized,
+//                            positiveTitle: "Finish".localized,
+//                            positiveAction: { (hasOK) in
+//
+//                        self.updateTaskStatus("3")
+//        }, negativeTitle: "cancel".localized) { (hasCancel) in
+//            //
+//        }
+        self.updateTaskStatus("3")
+    }
+    
+    func handleCancelAction() {
+//        App().showAlertView("Are you sure you want to cancel this task?".localized,
+//                            positiveTitle: "Confirm".localized,
+//                            positiveAction: { (hasOK) in
+//
+//                                self.updateTaskStatus("4")
+//        }, negativeTitle: "cancel".localized) { (hasCancel) in
+//            //
+//        }
+        self.updateTaskStatus("4")
     }
     
     func showInputNote(_ statusNeedUpdate:String) {
@@ -234,19 +253,15 @@ extension TaskDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-       /* let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section)!
-        switch orderSection {
-        case .sectionOrderStatus:
-            return orderInforStatus.count
-        case .sectionOrderInfor:
-            return orderInforRows.count
-        case .sectionInformation:
-            return informationRows.count
-        case .sectionDescription:
-            return 1;
+        let section:TaskDetailSection = TaskDetailSection(rawValue: section)!
+        switch section {
+        case .StatusSection:
+            return taskInforStatus.count
+        case .DetailSection:
+            return taskInforRows.count
+        case .InstructionSection:
+            return taskInstruction.count;
         }
-        */
-        return 0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -281,47 +296,40 @@ extension TaskDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        /*
-        let orderSection:OrderDetailSection = OrderDetailSection(rawValue: indexPath.section)!
-        switch orderSection {
-        case .sectionOrderStatus:
-            let item = orderInforStatus[indexPath.row]
-            if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
-                cell.orderDetailItem = item
-                cell.selectionStyle = .none
-                return cell
-            }
-        case .sectionOrderInfor:
-            let item = orderInforRows[indexPath.row]
-            if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier,
-                                                        for: indexPath) as? OrderDetailTableViewCell {
-                cell.orderDetailItem = item
-                cell.selectionStyle = .none
-                return cell
-            }
-            
-        case .sectionInformation:
-            let item = informationRows[indexPath.row]
-            if let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
-                cell.orderDetailItem = item
-                cell.selectionStyle = .none
-                
-                return cell
-            }
-        case .sectionDescription:
-            if let cell = tableView.dequeueReusableCell(withIdentifier: addressCellIdentifier, for: indexPath) as? OrderDetailTableViewCell {
-                
-                let des = E(task?.instructions)
-                let description = OrderDetailInforRow(.comments,des)
-                cell.orderDetailItem = description
-                cell.selectionStyle = .none
-                
-                return cell
-            }
+        let section:TaskDetailSection = TaskDetailSection(rawValue: indexPath.section)!
+        switch section {
+        case .StatusSection:
+            return cell(items: taskInforStatus, tableView, indexPath)
+        case .DetailSection:
+            return cell(items: taskInforRows, tableView, indexPath)
+        case .InstructionSection:
+            return cellDiscription(tableView, indexPath)
         }
-         */
         
-        return UITableViewCell()
+//        return UITableViewCell()
+    }
+    
+    func cell(items:[OrderDetailInforRow],_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
+        let item = items[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! OrderDetailTableViewCell
+        cell.orderDetailItem = item
+        cell.selectionStyle = .none
+        cell.vContent?.cornerRadius = 0
+        if indexPath.row == items.count - 1{
+            cell.vContent?.roundCornersLRB()
+        }
+        return cell
+
+    }
+    
+    func cellDiscription(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: addressCellIdentifier, for: indexPath) as! OrderDetailTableViewCell
+        let description = taskInstruction[0]
+        cell.orderDetailItem = description
+        cell.selectionStyle = .none
+        cell.vContent?.roundCornersLRB()
+        
+        return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -377,7 +385,7 @@ fileprivate extension TaskDetailVC{
         vAction?.isHidden = true
         updateStatusButton?.setTitle("Finish".localized.uppercased(), for: .normal)
         btnUnable?.setTitle("cancel".localized.uppercased(), for: .normal)
-        guard  let statusTask = TaskStatus(rawValue: E(task?.task_sts)) else {
+        guard  let statusTask = TaskStatus(rawValue: E(task?.status.code)) else {
             return
         }
         vAction?.isHidden = (statusTask == .delivered ||
@@ -390,7 +398,7 @@ fileprivate extension TaskDetailVC{
 extension TaskDetailVC{
     
     @objc func fetchData()  {
-        getTaskDetail(task?.task_id ?? 0, true)
+        getTaskDetail(task?.id ?? 0, true)
     }
     
     func getTaskDetail(_ taskId: Int, _ isFetch:Bool = false) {
@@ -402,8 +410,7 @@ extension TaskDetailVC{
             self?.tableView?.endRefreshControl()
             switch result{
             case .object(let obj):
-                self?.task = obj
-                self?.updateButtonStatus()
+                self?.task = obj.data
                 
             case .error(let error):
                 self?.showAlertView(error.getMessage())
@@ -413,7 +420,7 @@ extension TaskDetailVC{
     
     func updateTaskStatus(_ status:String) {
         self.showLoadingIndicator()
-        SERVICES().API.updateTaskStatusTask(task?.task_id ?? 0, status) {[weak self] (result) in
+        SERVICES().API.updateTaskStatusTask(task?.id ?? 0, status) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.tableView?.endRefreshControl()
             switch result{

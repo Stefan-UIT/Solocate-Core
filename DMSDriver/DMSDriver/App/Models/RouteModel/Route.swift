@@ -41,7 +41,11 @@ class Tanker: BaseModel {
 }
 
 //MARK: - Status
-class Status: BaseModel {
+class Status: BasicModel { }
+class Urgency: BasicModel { }
+
+//MARK: - Status
+class BasicModel: BaseModel {
     var id:Int?
     var name:String?
     var code:String?
@@ -57,7 +61,7 @@ class Status: BaseModel {
     override func mapping(map: Map) {
         id <- map["id"]
         name <- map["name"]
-        code <- map["code"]
+        code <- map["cd"]
     }
 }
 

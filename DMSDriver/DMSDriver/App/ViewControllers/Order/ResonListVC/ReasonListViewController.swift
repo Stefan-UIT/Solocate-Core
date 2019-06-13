@@ -170,7 +170,7 @@ extension ReasonListViewController {
         self.showLoadingIndicator()
         let reason = reasonList[selectedIndex]
         reason.message = tvMessange?.text
-        SERVICES().API.updateTaskStatusTask(task.task_id ?? 0, "CC",reason) {[weak self] (result) in
+        SERVICES().API.updateTaskStatusTask(task.id, "CC",reason) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.tableView?.endRefreshControl()
             switch result{

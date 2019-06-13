@@ -169,7 +169,7 @@ extension BaseAPIService {
     //MARK : -TASK
     @discardableResult
     func getTaskList(_ timeData:TimeDataItem,
-                     callback: @escaping APICallback<ResponseDataListModel<TaskModel>>) -> APIRequest {
+                     callback: @escaping APICallback<ResponseDataModel<ResponseDataListModel<TaskModel>>>) -> APIRequest {
         let startDate = DateFormatter.filterDate.string(from: timeData.startDate ?? Date())
         let endDate = DateFormatter.filterDate.string(from: timeData.endDate ?? Date())
         let path = String(format:PATH_REQUEST_URL.GET_LIST_TASKS.URL, startDate, endDate)
@@ -181,7 +181,7 @@ extension BaseAPIService {
     
     @discardableResult
     func getTaskDetail(_ taskId:Int,
-                     callback: @escaping APICallback<TaskModel>) -> APIRequest {
+                     callback: @escaping APICallback<ResponseDataModel<TaskModel>>) -> APIRequest {
         let path = String(format:PATH_REQUEST_URL.GET_TASK_DETAIL.URL, "\(taskId)")
         return request(method: .GET,
                        path: path,
@@ -206,6 +206,7 @@ extension BaseAPIService {
                        input: params.keys.count > 0 ? .json(params) : .empty,
                        callback: callback);
     }
+    
     
   
     //MARK: -  Help Method

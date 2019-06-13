@@ -35,15 +35,16 @@ class TaskListClvCell: UICollectionViewCell {
         let startTime = DateFormatter.serverDateFormater.date(from: E(task?.dlvy_start_time))
         let endTime = DateFormatter.serverDateFormater.date(from: E(task?.dlvy_end_time))
         let deliveryDate = DateFormatter.displayDateUS.date(from: E(task?.dlvy_date))
-        let status = TaskStatus(rawValue: E(task?.task_sts)) ?? TaskStatus.open
+        let status = TaskStatus(rawValue: E(task?.status.code)) ?? TaskStatus.open
 
-        lblTitle?.text = "\("\("TASK".localized) - \(task?.task_id ?? 0)")"
+        lblTitle?.text = "\("\("TASK".localized) - \(task?.id ?? 0)")"
         lblSubtitle?.text = task?.instructions
-        if Locale.current.languageCode == "he" {
-            lblUrgency?.text = task?.urgent_type_name_hb
-        }else {
-            lblUrgency?.text = task?.urgent_type_name_en
-        }
+//        if Locale.current.languageCode == "he" {
+//            lblUrgency?.text = task?.urgent_type_name_hb
+//        }else {
+//            lblUrgency?.text = task?.urgent_type_name_en
+//        }
+        lblUrgency?.text = E(task?.urgency.name)
         lblUrgency?.textColor = task?.colorUrgent
         btnStatus?.setTitle("\(status.statusName)", for: .normal)
         btnStatus?.borderWidth = 1.0;
