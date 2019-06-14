@@ -215,6 +215,7 @@ extension NoteManagementViewController:UITableViewDelegate,UITableViewDataSource
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER, for: indexPath) as? NoteTableViewCell {
             let note = notes[indexPath.row]
+            cell.note = note
             cell.configureCell(note: note)
             
             return cell
