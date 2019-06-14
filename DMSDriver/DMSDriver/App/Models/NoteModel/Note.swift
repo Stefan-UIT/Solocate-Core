@@ -33,7 +33,7 @@ class Note: NSObject, Mappable {
     statusName <- map["status_name"]
     id <- map["id"]
     files <- map["files"]
-    user <- map["users"]
+    user <- map["user"]
     status <- map["status"]
   }
 }
