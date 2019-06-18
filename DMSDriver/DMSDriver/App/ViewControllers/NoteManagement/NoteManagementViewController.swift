@@ -15,23 +15,12 @@ class NoteManagementViewController: BaseViewController {
     let CELL_IDENTIFIER = "NoteTableViewCell"
 
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var noteTextView: UITextView?
-    @IBOutlet weak var lblPlaceholder: UILabel?
-    
-    @IBOutlet weak var finishButton: UIButton!
-    @IBOutlet weak var hintLabel: UILabel!
     var slideshow = ImageSlideshow()
-    var validateSubmit:Bool = false{
-        didSet{
-            finishButton?.isEnabled = validateSubmit
-            finishButton?.alpha = validateSubmit ? 1 : 0.4
-        }
-    }
+    
     var route:Route?
     var order:Order?
     var notes = [Note]()
     
-    var attachedFiles:[AttachFileModel]?
     var isRouteNoteManagement:Bool {
         get {
             return (route != nil)
@@ -40,8 +29,6 @@ class NoteManagementViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hintLabel.isHidden = true
-        validateSubmit = false
         // Do any additional setup after loading the view.
     }
     
@@ -52,97 +39,27 @@ class NoteManagementViewController: BaseViewController {
         App().navigationService.updateNavigationBar(.BackOnly, title.localized, AppColor.white, true)
     }
     
-    func handleShowingHintLabel() {
-        let numberOfAttachedFiles = self.attachedFiles?.count ?? 0
-        if numberOfAttachedFiles > 0 {
-            self.hintLabel.isHidden = false
-            self.hintLabel.text = "(\(numberOfAttachedFiles) selected images)"
-        } else {
-            self.hintLabel.isHidden = true
-        }
+    func redirectToAddNoteVC() {
+        let vc:AddNoteViewController = .loadSB(SB: .Common)
+//        vc.order = orderDetail
+//        vc.notes = orderDetail?.notes ?? []
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     // MARK: - ACTION
-    @IBAction func submit(_ sender: UIButton) {
-        let message = self.noteTextView?.text ?? ""
-        if isRouteNoteManagement {
-            submitNoteToRoute(route!.id, message: message, files: self.attachedFiles)
-        } else {
-            submitNoteToOrder(order!.id, message: message, files: self.attachedFiles)
-        }
+    
+    
+    @IBAction func onAddNoteTouchUp(_ sender: UIButton) {
+        redirectToAddNoteVC()
         
     }
     
     @IBAction func onbtnClickback(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
-
-    @IBAction func onAddButtonTouchUp(_ sender: UIButton) {
-        ImagePickerView.shared().showImageGallaryMultiPicker(atVC: self) {[weak self] (success, data) in
-            self?.attachedFiles = (data.count > 0) ? data : nil
-            self?.handleShowingHintLabel()
-        }
-    }
 }
 
 extension NoteManagementViewController {
-    func clearData() {
-        self.attachedFiles = nil
-        self.handleShowingHintLabel()
-        self.noteTextView?.text = ""
-    }
-    
-    func updateAttachFilesParamsProperty() {
-        guard let files = attachedFiles else { return }
-        for i in 0..<files.count {
-            files[i].param = "files[\(i)]"
-        }
-    }
-    
-    
-    func submitNoteToOrder(_ orderID:Int, message:String, files:[AttachFileModel]?){
-        if hasNetworkConnection {
-            showLoadingIndicator()
-        }
-        
-        updateAttachFilesParamsProperty()
-        SERVICES().API.updateNoteToOrder(orderID, message: message, files: files) { [weak self] (result) in
-            self?.dismissLoadingIndicator()
-            switch result{
-            case .object(_):
-                self?.fetchOrderData()
-                self?.clearData()
-                self?.validateSubmit = false
-                self?.showAlertView("Updated Successful".localized)
-                return
-                
-            case .error(let error):
-                self?.showAlertView(error.getMessage())
-            }
-        }
-    }
-    
-    func submitNoteToRoute(_ routeID:Int, message:String, files:[AttachFileModel]?){
-        if hasNetworkConnection {
-            showLoadingIndicator()
-        }
-        
-        updateAttachFilesParamsProperty()
-        SERVICES().API.updateNoteToRoute(routeID, message: message, files: files) { [weak self] (result) in
-            self?.dismissLoadingIndicator()
-            switch result{
-            case .object(_):
-                self?.fetchRouteData()
-                self?.clearData()
-                self?.validateSubmit = false
-                self?.showAlertView("Updated Successful".localized)
-                return
-                
-            case .error(let error):
-                self?.showAlertView(error.getMessage())
-            }
-        }
-    }
     
     func fetchRouteData()  {
         if let route = self.route {
@@ -196,12 +113,6 @@ extension NoteManagementViewController:DMSNavigationServiceDelegate {
     }
 }
 
-extension NoteManagementViewController:UITextViewDelegate{
-    func textViewDidChange(_ textView: UITextView) {
-        lblPlaceholder?.isHidden = (textView.text.length > 0)
-        validateSubmit = (textView.text.length > 0)
-    }
-}
 
 extension NoteManagementViewController:UITableViewDelegate,UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
