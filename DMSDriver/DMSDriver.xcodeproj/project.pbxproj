@@ -325,6 +325,10 @@
 		2ADE1D062253068100BE4092 /* GMSMapview+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE1D052253068100BE4092 /* GMSMapview+Ext.swift */; };
 		2E55A3DF22A6523D006F9944 /* NoteManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */; };
 		2E55A3E022A6523D006F9944 /* NoteManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */; };
+		2E57C67A22B8E3CD0064A787 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57C67922B8E3CD0064A787 /* AddNoteViewController.swift */; };
+		2E57C67B22B8E3CD0064A787 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57C67922B8E3CD0064A787 /* AddNoteViewController.swift */; };
+		2E714CDB22B3A44900348B67 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E714CDA22B3A44900348B67 /* ImageCollectionViewCell.swift */; };
+		2E714CDC22B3A44900348B67 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E714CDA22B3A44900348B67 /* ImageCollectionViewCell.swift */; };
 		2E9E08A622A8FDA4005E420C /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */; };
 		2E9E08A722A8FDA4005E420C /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */; };
 		3B0035F7216C614D0032519D /* TextViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0035F4216C614D0032519D /* TextViewInput.swift */; };
@@ -638,6 +642,8 @@
 		2AC97C5C224E009400DD07AE /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
 		2ADE1D052253068100BE4092 /* GMSMapview+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GMSMapview+Ext.swift"; sourceTree = "<group>"; };
 		2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteManagementViewController.swift; sourceTree = "<group>"; };
+		2E57C67922B8E3CD0064A787 /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
+		2E714CDA22B3A44900348B67 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		3B0035F4216C614D0032519D /* TextViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewInput.swift; sourceTree = "<group>"; };
 		3B0035F5216C614D0032519D /* TextViewInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewInput.xib; sourceTree = "<group>"; };
@@ -1263,6 +1269,7 @@
 			children = (
 				2E9E08A322A8FD4E005E420C /* Cell */,
 				2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */,
+				2E57C67922B8E3CD0064A787 /* AddNoteViewController.swift */,
 			);
 			path = NoteManagement;
 			sourceTree = "<group>";
@@ -1271,6 +1278,7 @@
 			isa = PBXGroup;
 			children = (
 				2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */,
+				2E714CDA22B3A44900348B67 /* ImageCollectionViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -3509,6 +3517,7 @@
 				2A443A4722648C5A00CB6508 /* AssignOrderVC.swift in Sources */,
 				2A443A4822648C5A00CB6508 /* LoadMoreView.swift in Sources */,
 				2A443A4922648C5A00CB6508 /* MapsViewController.swift in Sources */,
+				2E57C67A22B8E3CD0064A787 /* AddNoteViewController.swift in Sources */,
 				2A443A4A22648C5A00CB6508 /* HCSStarRatingView.m in Sources */,
 				2A443A4B22648C5A00CB6508 /* ScrollMenuView.swift in Sources */,
 				2A443A4C22648C5A00CB6508 /* UISegmentedControl+Extensions.swift in Sources */,
@@ -3613,6 +3622,7 @@
 				2A443AA822648C5A00CB6508 /* Common+Extensions.swift in Sources */,
 				2A443AA922648C5A00CB6508 /* Array.swift in Sources */,
 				2A443AAA22648C5A00CB6508 /* SignatureViewController.swift in Sources */,
+				2E714CDB22B3A44900348B67 /* ImageCollectionViewCell.swift in Sources */,
 				2A443AAB22648C5A00CB6508 /* TimeDataItem.swift in Sources */,
 				2A443AAC22648C5A00CB6508 /* PickerTimeCell.swift in Sources */,
 				2A443AAD22648C5A00CB6508 /* PopoverDelegate.swift in Sources */,
@@ -3749,6 +3759,7 @@
 				3B9A377221243A45004D881C /* AssignOrderVC.swift in Sources */,
 				3B75551621CB741700439FC2 /* LoadMoreView.swift in Sources */,
 				3B66B90F210B1149000BDFEF /* MapsViewController.swift in Sources */,
+				2E57C67B22B8E3CD0064A787 /* AddNoteViewController.swift in Sources */,
 				3B66B812210B113D000BDFEF /* HCSStarRatingView.m in Sources */,
 				3B13CBEF211A8FF400A93E18 /* ScrollMenuView.swift in Sources */,
 				3B66B81F210B113D000BDFEF /* UISegmentedControl+Extensions.swift in Sources */,
@@ -3853,6 +3864,7 @@
 				3B66B82C210B113D000BDFEF /* Common+Extensions.swift in Sources */,
 				3B66B805210B113D000BDFEF /* Array.swift in Sources */,
 				3BF258282224FB5300A56B4E /* SignatureViewController.swift in Sources */,
+				2E714CDC22B3A44900348B67 /* ImageCollectionViewCell.swift in Sources */,
 				3B454C52222CCE700064F455 /* TimeDataItem.swift in Sources */,
 				2A42050322576ACA00789837 /* PickerTimeCell.swift in Sources */,
 				3B2B8B5A222E380600ACDDFE /* PopoverDelegate.swift in Sources */,

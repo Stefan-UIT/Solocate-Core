@@ -110,6 +110,19 @@ extension UIBarButtonItem {
         return item
     }
     
+    class func attachedFiles(target: Any, action: Selector) -> UIBarButtonItem {
+        let frame = CGRect(x: 0, y: 0, width: 24, height: 24)
+        let image = UIImage(named: "ic_attachment")
+        let button = customButton(with: image!,
+                                  frame: frame,
+                                  target: target,
+                                  action: action)
+        
+        let item = UIBarButtonItem(customView: button)
+        
+        return item
+    }
+    
     class func barButtonItem(with image:UIImage, target: Any, action: Selector) -> UIBarButtonItem {
         let frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         let button = customButton(with: image,

@@ -14,24 +14,15 @@ class NoteManagementViewController: BaseViewController {
     
     let CELL_IDENTIFIER = "NoteTableViewCell"
 
+    @IBOutlet weak var noDataLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var noteTextView: UITextView?
-    @IBOutlet weak var lblPlaceholder: UILabel?
-    
-    @IBOutlet weak var finishButton: UIButton!
-    @IBOutlet weak var hintLabel: UILabel!
     var slideshow = ImageSlideshow()
-    var validateSubmit:Bool = false{
-        didSet{
-            finishButton?.isEnabled = validateSubmit
-            finishButton?.alpha = validateSubmit ? 1 : 0.4
-        }
-    }
+    
+    @IBOutlet weak var noteButton: UIButton!
     var route:Route?
     var order:Order?
     var notes = [Note]()
     
-    var attachedFiles:[AttachFileModel]?
     var isRouteNoteManagement:Bool {
         get {
             return (route != nil)
@@ -40,9 +31,17 @@ class NoteManagementViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.hintLabel.isHidden = true
-        validateSubmit = false
         // Do any additional setup after loading the view.
+        reloadUI()
+//        noteButton.backgroundColor = UIColor(red: 171/255, green: 178/255, blue: 186/255, alpha: 1.0)
+        // Shadow and Radius
+        noteButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        noteButton.layer.shadowOffset = CGSize(width: 0.0, height: 3.0)
+        noteButton.layer.shadowOpacity = 1.0
+        noteButton.layer.shadowRadius = 20.0
+        noteButton.layer.masksToBounds = false
+//        noteButton.layer.cornerRadius = 4.0
+
     }
     
     override func updateNavigationBar()  {
@@ -52,47 +51,36 @@ class NoteManagementViewController: BaseViewController {
         App().navigationService.updateNavigationBar(.BackOnly, title.localized, AppColor.white, true)
     }
     
-    func handleShowingHintLabel() {
-        let numberOfAttachedFiles = self.attachedFiles?.count ?? 0
-        if numberOfAttachedFiles > 0 {
-            self.hintLabel.isHidden = false
-            self.hintLabel.text = "(\(numberOfAttachedFiles) selected images)"
-        } else {
-            self.hintLabel.isHidden = true
-        }
+    func reloadUI() {
+        let isHasData = notes.count > 0
+        noDataLabel.isHidden = isHasData
+        tableView.isHidden = !isHasData
+    }
+    
+    func redirectToAddNoteVC() {
+        let vc:AddNoteViewController = .loadSB(SB: .Common)
+//        vc.order = orderDetail
+//        vc.notes = orderDetail?.notes ?? []
+        vc.delegate = self
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     // MARK: - ACTION
-    @IBAction func submit(_ sender: UIButton) {
-        let message = self.noteTextView?.text ?? ""
-        if isRouteNoteManagement {
-            submitNoteToRoute(route!.id, message: message, files: self.attachedFiles)
-        } else {
-            submitNoteToOrder(order!.id, message: message, files: self.attachedFiles)
-        }
+    
+    
+    @IBAction func onAddNoteTouchUp(_ sender: UIButton) {
+        redirectToAddNoteVC()
         
     }
     
     @IBAction func onbtnClickback(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
-
-    @IBAction func onAddButtonTouchUp(_ sender: UIButton) {
-        ImagePickerView.shared().showImageGallaryMultiPicker(atVC: self) {[weak self] (success, data) in
-            self?.attachedFiles = (data.count > 0) ? data : nil
-            self?.handleShowingHintLabel()
-        }
-    }
 }
 
 extension NoteManagementViewController {
-    func clearData() {
-        self.attachedFiles = nil
-        self.handleShowingHintLabel()
-        self.noteTextView?.text = ""
-    }
     
-    func updateAttachFilesParamsProperty() {
+    func updateAttachFilesParamsProperty(attachedFiles:[AttachFileModel]?) {
         guard let files = attachedFiles else { return }
         for i in 0..<files.count {
             files[i].param = "files[\(i)]"
@@ -105,14 +93,12 @@ extension NoteManagementViewController {
             showLoadingIndicator()
         }
         
-        updateAttachFilesParamsProperty()
+        updateAttachFilesParamsProperty(attachedFiles: files)
         SERVICES().API.updateNoteToOrder(orderID, message: message, files: files) { [weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
                 self?.fetchOrderData()
-                self?.clearData()
-                self?.validateSubmit = false
                 self?.showAlertView("Updated Successful".localized)
                 return
                 
@@ -127,14 +113,12 @@ extension NoteManagementViewController {
             showLoadingIndicator()
         }
         
-        updateAttachFilesParamsProperty()
+        updateAttachFilesParamsProperty(attachedFiles: files)
         SERVICES().API.updateNoteToRoute(routeID, message: message, files: files) { [weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
                 self?.fetchRouteData()
-                self?.clearData()
-                self?.validateSubmit = false
                 self?.showAlertView("Updated Successful".localized)
                 return
                 
@@ -143,6 +127,7 @@ extension NoteManagementViewController {
             }
         }
     }
+
     
     func fetchRouteData()  {
         if let route = self.route {
@@ -164,6 +149,7 @@ extension NoteManagementViewController {
             case .object(let obj):
                 self?.route = obj.data
                 self?.notes = (self?.route?.notes)!
+                self?.reloadUI()
                 self?.tableView.reloadData()
             case .error(let error):
                 self?.showAlertView(error.getMessage())
@@ -180,11 +166,22 @@ extension NoteManagementViewController {
             case .object(let object):
                 self?.order = object.data
                 self?.notes = (self?.order?.notes)!
+                self?.reloadUI()
                 self?.tableView.reloadData()
                 
             case .error(let error):
                 self?.showAlertView(error.getMessage())
             }
+        }
+    }
+}
+
+extension NoteManagementViewController:AddNoteViewControllerDelegate {
+    func didSubmitNote(_ note: String, images: [AttachFileModel]?) {
+        if isRouteNoteManagement {
+            self.submitNoteToRoute(route!.id, message: note, files: images)
+        } else {
+            self.submitNoteToOrder(order!.id, message: note, files: images)
         }
     }
 }
@@ -196,12 +193,6 @@ extension NoteManagementViewController:DMSNavigationServiceDelegate {
     }
 }
 
-extension NoteManagementViewController:UITextViewDelegate{
-    func textViewDidChange(_ textView: UITextView) {
-        lblPlaceholder?.isHidden = (textView.text.length > 0)
-        validateSubmit = (textView.text.length > 0)
-    }
-}
 
 extension NoteManagementViewController:UITableViewDelegate,UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -214,7 +205,9 @@ extension NoteManagementViewController:UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: CELL_IDENTIFIER, for: indexPath) as? NoteTableViewCell {
+            cell.delegate = self
             let note = notes[indexPath.row]
+            cell.note = note
             cell.configureCell(note: note)
             
             return cell
@@ -248,11 +241,11 @@ extension NoteManagementViewController:UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        let files = notes[indexPath.row].files
-        if files.count > 0 {
-            showSlideImages(files: files)
-        }
-        
+//        let files = notes[indexPath.row].files
+//        if files.count > 0 {
+//            showSlideImages(files: files)
+//        }
+//
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -260,6 +253,15 @@ extension NoteManagementViewController:UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100.0
+        return 80.0
     } 
+}
+
+extension NoteManagementViewController:NoteTableViewCellDelegate {
+    func didTouchOnCollectionView(_ note: Note) {
+        let files = note.files
+        if files.count > 0 {
+            showSlideImages(files: files)
+        }
+    }
 }

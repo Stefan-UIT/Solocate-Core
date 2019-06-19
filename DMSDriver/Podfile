@@ -23,6 +23,8 @@ def shared_pods
     pod 'Fabric'
     pod 'Crashlytics'
     pod 'ImageSlideshow'
+    pod 'UITextView+Placeholder'
+
 end
 
 target 'DMSDriver' do
