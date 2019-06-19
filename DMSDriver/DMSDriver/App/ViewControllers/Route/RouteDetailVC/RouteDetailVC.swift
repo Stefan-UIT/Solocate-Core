@@ -52,6 +52,7 @@ class RouteDetailVC: BaseViewController {
     @IBOutlet weak var lblTime:UILabel?
     @IBOutlet weak var lblStatus:UILabel?
 
+    @IBOutlet weak var addNoteButton: UIButton!
     /*
     @IBOutlet weak var vContainerMap:UIView?
     @IBOutlet weak var vContainerOrders:UIView?
@@ -94,6 +95,14 @@ class RouteDetailVC: BaseViewController {
             return
         }
         getRouteDetail("\(routeId)")
+    }
+    
+    func layoutAddNoteButton() {
+        addNoteButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        addNoteButton.layer.shadowOffset = CGSize(width: 0, height: 3)
+        addNoteButton.layer.shadowOpacity = 1.0
+        addNoteButton.layer.shadowRadius = 10
+        addNoteButton.layer.masksToBounds = false
     }
     
     
@@ -147,6 +156,8 @@ class RouteDetailVC: BaseViewController {
         lblTotalOrder?.text = (totalOrders > 1) ? "\(totalOrders) Orders".localized.uppercased() : "\(totalOrders) Order".localized.uppercased()
         
         lblStatus?.textColor = route?.colorStatus
+        
+        layoutAddNoteButton()
     }
     
     private func setupCollectionView() {

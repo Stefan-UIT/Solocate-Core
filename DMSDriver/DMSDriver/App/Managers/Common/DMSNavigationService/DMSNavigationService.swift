@@ -24,6 +24,8 @@ class DMSNavigationService: NSObject , NavigationService {
                                                             action: #selector(onNavigationBack(_:)))
     fileprivate lazy var menuBarItem = UIBarButtonItem.menu(target: self,
                                                             action: #selector(onNavigationMenu(_:)))
+    fileprivate lazy var attachedFileBarItem = UIBarButtonItem.attachedFiles(target: self,
+                                                            action: #selector(onNavigationClickRightButton(_:)))
     fileprivate lazy var compactBarItem = UIBarButtonItem.compact(target: self,
                                                                   action: #selector(onNavigationClickRightButton(_:)))
     fileprivate lazy var moduleBarItem = UIBarButtonItem.module(target: self,
@@ -161,6 +163,7 @@ extension DMSNavigationService {
         case CancelDone;
         case backCompact;
         case backModule;
+        case Back_AttachedFiles;
     }
     
     func updateNavigationBar(_ barStyle:BarStyle,
@@ -231,6 +234,10 @@ extension DMSNavigationService {
          case .backModule:
             navigationItem?.leftBarButtonItem = backBarItem
             navigationItem?.rightBarButtonItem  = moduleBarItem
+            
+        case .Back_AttachedFiles:
+            navigationItem?.leftBarButtonItem = backBarItem
+            navigationItem?.rightBarButtonItem  = attachedFileBarItem
             
         case .CancelDone:
             break;

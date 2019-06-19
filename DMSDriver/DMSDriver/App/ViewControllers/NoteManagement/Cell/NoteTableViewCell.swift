@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol NoteTableViewCellDelegate: class {
+    func didTouchOnCollectionView(_ note:Note)
+}
+
 class NoteTableViewCell: UITableViewCell {
 
     @IBOutlet weak var statusButton: UIButton!
@@ -18,8 +22,8 @@ class NoteTableViewCell: UITableViewCell {
     @IBOutlet weak var attachedFilesButton: Button!
     @IBOutlet weak var collectionView: UICollectionView!
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
-    
     @IBOutlet weak var collectionViewBottomSpace: NSLayoutConstraint!
+    weak var delegate: NoteTableViewCellDelegate?
     private let itemsPerRow: CGFloat = 3
     private let sectionInsets = UIEdgeInsets(top: 50.0,
                                              left: 20.0,
@@ -53,7 +57,7 @@ class NoteTableViewCell: UITableViewCell {
     
     func handleShowingCollectionViewImages() {
         let isHasFiles = note.files.count > 0
-        self.collectionViewHeightConstraint.constant = (isHasFiles) ? 80.0 : 0.0
+        self.collectionViewHeightConstraint.constant = (isHasFiles) ? 75.0 : 0.0
         self.collectionViewBottomSpace.constant = (isHasFiles) ? 16.0 : 0.0
     }
     
@@ -137,6 +141,11 @@ extension NoteTableViewCell:UICollectionViewDataSource,UICollectionViewDelegateF
                                     options: .refreshCached, completed: nil)
         
         return cell!
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        collectionView.deselectItem(at: indexPath, animated: false)
+        delegate?.didTouchOnCollectionView(note)
     }
     
     

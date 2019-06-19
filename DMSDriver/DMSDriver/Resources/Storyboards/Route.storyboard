@@ -2674,6 +2674,7 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
+                        <outlet property="addNoteButton" destination="MCe-rL-rnz" id="Y6G-A7-7jK"/>
                         <outlet property="clvContent" destination="A12-ve-XLB" id="KHz-o9-a3j"/>
                         <outlet property="lblEstimateHour" destination="j1g-GQ-v2m" id="hCx-eT-uAf"/>
                         <outlet property="lblEstimateKilometer" destination="xSo-DC-fxP" id="z99-pq-pg0"/>
