@@ -38,8 +38,24 @@ struct BuildConfiguration {
 
     init() {
         #if DEVELOPMENT  // check taget
+        let number = UserDefaults.standard.integer(forKey: "ENVIRONMENT")
+        guard let environment = ChooseEvironment(rawValue: number)  else {
             tagetBuild = .Development
             self.serverEnvironment = .development
+            return
+        }
+        tagetBuild = .Development
+        switch environment {
+        case .QC:
+            self.serverEnvironment = .qc
+            break
+        case .Demo:
+            self.serverEnvironment = .demo
+            break
+        default:
+            self.serverEnvironment = .development
+            break
+        }
 
         #else
             tagetBuild = .Production

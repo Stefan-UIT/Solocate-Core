@@ -8,6 +8,28 @@
 
 import UIKit
 
+enum ChooseEvironment:Int {
+    case Development = 0
+    case QC
+    case Demo
+    case Live
+    
+    var name:String {
+        get {
+            switch self  {
+            case .Development:
+                return "Dev"
+            case .QC:
+                return "QC"
+            case .Demo:
+                return "Demo"
+            case .Live:
+                return "Live"
+            }
+        }
+    }
+}
+
 class LoginViewController: BaseViewController {
   
     @IBOutlet weak var userNameTextField: UITextField!
@@ -21,28 +43,6 @@ class LoginViewController: BaseViewController {
     private let QC = 1
     private let DEMO = 2
     private let LIVE = 3
-    
-    enum ChooseEvironment:Int {
-        case Development = 0
-        case QC
-        case Demo
-        case Live
-        
-        var name:String {
-            get {
-                switch self  {
-                case .Development:
-                    return "Dev"
-                case .QC:
-                    return "QC"
-                case .Demo:
-                    return "Demo"
-                case .Live:
-                    return "Live"
-                }
-            }
-        }
-    }
     
     private var keepLogin = true {
         didSet {
@@ -169,11 +169,10 @@ class LoginViewController: BaseViewController {
     }
     
     @IBAction func onChangeSegmentControl(_ sender: UISegmentedControl) {
-        guard let evironment = ChooseEvironment(rawValue: sender.selectedSegmentIndex) else {
+        guard let environment = ChooseEvironment(rawValue: sender.selectedSegmentIndex) else {
             return
         }
-
-        switch evironment {
+        switch environment {
         case .Development:
             Debug.setup(shared: Debug(useServer: DMSAppConfiguration.baseUrl_Dev))
         case .QC:
@@ -184,7 +183,9 @@ class LoginViewController: BaseViewController {
             Debug.setup(shared: Debug(useServer: DMSAppConfiguration.baseUrl_Product))
         }
         
-        print("chosen evironment:\(evironment.name)")
+        UserDefaults.standard.set(environment.rawValue, forKey: "ENVIRONMENT")
+        
+        print("chosen evironment:\(environment.name)")
         print(#"""
             ====>APPLICATION STARTED WITH:
             TagetBuild: \#(SDBuildConf.tagetBuild.rawValue)

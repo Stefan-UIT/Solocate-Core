@@ -47,6 +47,9 @@ class ReasonSkipView: BaseView {
     }
     
     @IBAction func onbtnClickOK(btn:UIButton){
+        guard selectedIndex >= 0 else {
+            return
+        }
         reasonSelect = listReason[selectedIndex]
         callback?(true,reasonSelect)
         removeFromSuperview()
