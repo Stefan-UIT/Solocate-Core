@@ -36,7 +36,7 @@ class HistoryNotifyDetailVC: BaseViewController {
 
     fileprivate var arrTitleHeader:[String] = []
     fileprivate var dataSectionInfo = [NotifylInforRow]()
-    fileprivate var dataSectioncomment[NotifylInforRow]()
+    fileprivate var dataSectioncomment = [NotifylInforRow]()
     
     
     var alertDetail = AlertModel()
@@ -83,14 +83,14 @@ class HistoryNotifyDetailVC: BaseViewController {
     
     func initVar()  {
         arrTitleHeader = ["Information".localized.uppercased(),
-                          "commentlocalized.uppercased()]
+                          "comment".localized.uppercased()]
         
         setupDataDetailInforRows()
     }
     
     func setupDataDetailInforRows() {
         dataSectionInfo.removeAll()
-        dataSectioncommentmoveAll()
+        dataSectioncomment.removeAll()
         
         let displayDateTimeVN = DateFormatter.displayDateTimeVN
         let stringDate = DateFormatter.serverDateFormater.date(from: E(alertDetail.created_at))
@@ -103,7 +103,7 @@ class HistoryNotifyDetailVC: BaseViewController {
         let truckName = NotifylInforRow("truck-name".localized,alertDetail.truckName ?? "-")
         let tankerName = NotifylInforRow("tanker-name".localized,alertDetail.tankerName ?? "-")
         let type = NotifylInforRow("Type".localized, alertDetail.ruleType?.name ?? "-")
-        let comment = NotifylInforRow("commentocalized,alertDetail.comment ?? "-")
+        let comment = NotifylInforRow("comment".localized,alertDetail.comment ?? "-")
         
         dataSectionInfo.append(status)
         dataSectionInfo.append(ruleId)
@@ -114,7 +114,7 @@ class HistoryNotifyDetailVC: BaseViewController {
         dataSectionInfo.append(type)
         dataSectionInfo.append(date)
 
-        dataSectioncommentpend(comment)
+        dataSectioncomment.append(comment)
         tableView?.reloadData()
     }
     
@@ -124,7 +124,7 @@ class HistoryNotifyDetailVC: BaseViewController {
         PickerInputView.showInputViewWith(type: .PickerInputTextView,
                                           atVC: self,
                                           title: "resolve-alert".localized,
-                                          placeHolder: "commentocalized) {[weak self] (success, content,_)  in
+                                          placeHolder: "comment".localized) {[weak self] (success, content,_)  in
                                             self?.alertDetail.comment = content
                                             guard let alert = self?.alertDetail else {return}
                                             self?.resolveAlert(alert: alert)
@@ -149,7 +149,7 @@ extension HistoryNotifyDetailVC: UITableViewDataSource, UITableViewDelegate {
         case .sectionInfo:
             return dataSectionInfo.count
         case .sectionComment:
-            return dataSectioncommentunt
+            return dataSectioncomment.count
         }
     }
     
@@ -202,13 +202,13 @@ extension HistoryNotifyDetailVC: UITableViewDataSource, UITableViewDelegate {
                 return cell
             }
         case .sectionComment:
-            let item = dataSectioncommentdexPath.row]
+            let item = dataSectioncomment[indexPath.row]
             if let cell = tableView.dequeueReusableCell(withIdentifier: discriptionCellIdentifier,
                                                         for: indexPath) as? HistoryNotifyDetailCell {
                 cell.contentLabel?.text = item.content
                 cell.selectionStyle = .none
                 
-                if indexPath.row == dataSectioncommentunt - 1{
+                if indexPath.row == dataSectioncomment.count - 1{
                     cell.vContent?.roundCornersLRB()
                 }
                 return cell
