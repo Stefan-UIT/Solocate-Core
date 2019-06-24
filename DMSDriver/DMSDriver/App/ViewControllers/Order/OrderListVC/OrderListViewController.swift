@@ -25,7 +25,7 @@ enum TapFilterOrderList:Int {
         case .New:
             return "New".localized
         case .InProgess:
-            return "In Progress".localized
+            return "in-progress".localized
         case .Finished:
             return "Finished".localized
         case .Cancelled:

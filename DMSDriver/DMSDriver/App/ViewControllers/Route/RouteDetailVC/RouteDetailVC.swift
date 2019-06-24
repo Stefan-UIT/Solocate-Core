@@ -19,7 +19,7 @@ enum TabBarItem:Int {
     func title() -> String {
         switch self {
         case .Order:
-            return "Orders List".localized
+            return "orders-list".localized
         case .Packages:
             return "Packgages".localized
         case .Map :

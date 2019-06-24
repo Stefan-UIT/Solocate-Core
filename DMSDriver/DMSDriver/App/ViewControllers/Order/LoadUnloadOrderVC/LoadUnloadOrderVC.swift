@@ -300,7 +300,7 @@ extension LoadUnloadOrderVC:BaseSearchViewDelegate{
             dataDisplay = dataOrigin
         }
         if dataDisplay.count <= 0 {
-            UIView.addViewNoItemWithTitle("No data".localized, intoParentView: self.view)
+            UIView.addViewNoItemWithTitle("no-data".localized, intoParentView: self.view)
         }else {
             UIView.removeViewNoItemAtParentView(self.view!)
         }

@@ -114,7 +114,7 @@ extension TaskListVC:DMSNavigationServiceDelegate{
         let currentDate = dateFormater.date(from: dateStringFilter)
         UIAlertController.showDatePicker(style: .actionSheet,
                                          mode: .date,
-                                         title: "Select date".localized,
+                                         title: "select-date".localized,
                                          currentDate: currentDate) {[weak self] (date) in
                                             
                                             self?.dateFilter = date

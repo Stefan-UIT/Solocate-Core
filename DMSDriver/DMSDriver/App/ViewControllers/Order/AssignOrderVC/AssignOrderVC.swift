@@ -62,7 +62,7 @@ class AssignOrderVC: BaseViewController {
     override func updateNavigationBar() {
         super.updateNavigationBar()
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.Menu_Select, "Orders assignment".localized)
+        App().navigationService.updateNavigationBar(.Menu_Select, "orders-assignment".localized)
     }
     
     override func reachabilityChangedNetwork(_ isAvailaibleNetwork: Bool) {
@@ -109,7 +109,7 @@ class AssignOrderVC: BaseViewController {
         let currentDate = dateFormater.date(from: dateStringFilter)
         UIAlertController.showDatePicker(style: .actionSheet,
                                          mode: .date,
-                                         title: "Select date".localized,
+                                         title: "select-date".localized,
                                          currentDate: currentDate) {[weak self] (date) in
             self?.dateFilter = date
             self?.dateStringFilter = date.toString("yyyy-MM-dd")
@@ -203,7 +203,7 @@ extension AssignOrderVC:DMSNavigationServiceDelegate{
     
     func didSelectedRightButton() {
         isSelectAssign = true
-        App().navigationService.updateNavigationBar(.CancelAssign, "Select Items".localized)
+        App().navigationService.updateNavigationBar(.CancelAssign, "select-items".localized)
         showFilterDate(false)
    
     }
@@ -242,7 +242,7 @@ extension AssignOrderVC:DMSNavigationServiceDelegate{
             return item.isSelect
         }
         if arrSelect.count == 0 {
-            self.showAlertView("Please select order.".localized)
+            self.showAlertView("please-select-order".localized)
             
         }else {
             PickerTypeListVC.showPickerTypeList(pickerType: .DriverSignlePick) {[weak self] (success, data) in
@@ -327,7 +327,7 @@ extension AssignOrderVC{
                 self?.isSelectAssign = false
                 self?.updateNavigationBar()
                 self?.showFilterDate(true)
-                self?.showAlertView("Assigned successfull.".localized)
+                self?.showAlertView("assigned-successfull".localized)
                 
             case .error(let error):
                 self?.showAlertView(error.getMessage())

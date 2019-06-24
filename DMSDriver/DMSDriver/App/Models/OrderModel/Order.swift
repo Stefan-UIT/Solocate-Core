@@ -27,7 +27,7 @@ enum StatusOrder: String {
         case .inProcessStatus:
             return "Started".localized
         case .pickupStatus:
-            return "Picked Up"
+            return "picked-up"
         case .deliveryStatus:
             return "Finished".localized
         case .cancelStatus,

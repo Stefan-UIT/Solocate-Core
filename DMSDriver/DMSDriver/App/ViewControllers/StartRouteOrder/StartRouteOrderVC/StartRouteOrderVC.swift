@@ -68,7 +68,7 @@ class StartRouteOrderVC: BaseViewController {
         case .newStatus:
             btnStart?.setTitle("Start".localized.uppercased(), for: .normal)
         case .inProcessStatus:
-            btnStart?.setTitle("Van Load".localized.uppercased(), for: .normal)
+            btnStart?.setTitle("van-load".localized.uppercased(), for: .normal)
         case .pickupStatus:
             btnStart?.setTitle("Deliver".localized.uppercased(), for: .normal)
             
@@ -226,7 +226,7 @@ extension StartRouteOrderVC {
         var statusNeedUpdate = status.rawValue
         switch status{
         case .newStatus:
-            App().showAlertView("Do you want to start this order?".localized,
+            App().showAlertView("do-you-want-to-start-this-order?".localized,
                                 positiveTitle: "YES".localized,
                                 positiveAction: {[weak self] (ok) in
                                     
@@ -253,7 +253,7 @@ extension StartRouteOrderVC {
             
             self.navigationController?.pushViewController(vc, animated: true)
             /*
-            App().showAlertView("Do you want to pickup this order?".localized,
+            App().showAlertView("do-you-want-to-pickup-this-order?".localized,
                                 positiveTitle: "YES".localized,
                                 positiveAction: {[weak self] (ok) in
                                     
@@ -265,7 +265,7 @@ extension StartRouteOrderVC {
             }
             */
         case .pickupStatus:
-            if _orderDetail.validUpdateStatusOrder() == true { // Finish order
+            if _orderDetail.validUpdateStatusOrder() == true { // finish-order
                 if _orderDetail.isRequireImage(){
                     self.showAlertView("Picture required".localized) {[weak self](action) in
                         self?.showPictureViewController()
@@ -278,7 +278,7 @@ extension StartRouteOrderVC {
                     
                 }else {
                     
-                    App().showAlertView("Do you want to Finish this order?".localized,
+                    App().showAlertView("do-you-want-to-finish-this-order?".localized,
                                         positiveTitle: "YES".localized,
                                         positiveAction: {[weak self] (ok) in
                                             

@@ -164,7 +164,7 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
                 self?.controlsContainerView?.isHidden = true
                 self?.signatureView?.isUserInteractionEnabled = false
                 self?.updateOrderDetail?(self?.orderDetail)
-                self?.showAlertView("Uploaded Successful".localized)
+                self?.showAlertView("uploaded-successful".localized)
 
             case .error(let error):
                 self?.showAlertView(error.getMessage())

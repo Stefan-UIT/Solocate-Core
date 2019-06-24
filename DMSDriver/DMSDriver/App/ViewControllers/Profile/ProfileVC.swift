@@ -80,12 +80,12 @@ class ProfileVC: BaseViewController {
         if user == nil {
             user = Caches().user?.userInfo
         }
-        publicInforDatas = [["First Name".localized,E(user?.firstName)],
-                          ["Last Name".localized,E(user?.lastName)]]
+        publicInforDatas = [["first-name".localized,E(user?.firstName)],
+                          ["last-name".localized,E(user?.lastName)]]
 
         privateInforDatas = [["Phone".localized,E(user?.phone)],
                            ["Email".localized,E(user?.email)],
-                           ["Password".localized,"Change Password".localized]]
+                           ["Password".localized,"change-password".localized]]
     }
     
     

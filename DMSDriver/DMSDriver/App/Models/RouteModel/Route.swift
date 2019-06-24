@@ -270,7 +270,7 @@ class Route: BaseModel {
             case "OP":
                 return "New".localized
             case "IP":
-                return "In Progress".localized;
+                return "in-progress".localized;
             case "DV":
                 return "Finished".localized;
             case "CC":

@@ -117,7 +117,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         lblOrderId?.text = "Delivery #\(orderDetail?.id ?? 0)"
         guard  let start = orderDetail?.to?.start_time?.date,
                let end = orderDetail?.to?.end_time?.date else{
-            lblDateTime?.text = "Start/End time is invalid."
+            lblDateTime?.text = "Start/end-time is invalid."
             return
         }
         let timeStart = DateFormatter.hour24Formater.string(from: start)
@@ -167,7 +167,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                                              orderDetail?.custumer_name ?? "-")
         let urgency = OrderDetailInforRow("Urgency".localized,
                                           isHebewLang() ? orderDetail?.urgent_type_name_hb ?? "" :  orderDetail?.urgent_type_name_en ?? "")
-        let orderId = OrderDetailInforRow("Order Id".localized,"#\(orderDetail?.id ?? 0)")
+        let orderId = OrderDetailInforRow("order-id".localized,"#\(orderDetail?.id ?? 0)")
         let seq = OrderDetailInforRow("SEQ".localized,"\(orderDetail?.seq ?? 0)")
 
         orderInforDetail.append(orderId)
@@ -178,7 +178,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         if  (orderDetail?.statusOrder == .cancelStatus ||
              orderDetail?.statusOrder == .cancelFinishStatus),
             let _orderDetail = orderDetail{
-            let reason = OrderDetailInforRow("Failure cause".localized,_orderDetail.reason?.name ?? "-")
+            let reason = OrderDetailInforRow("failure-cause".localized,_orderDetail.reason?.name ?? "-")
             let mess = OrderDetailInforRow("Message".localized,_orderDetail.reason_msg ?? "-")
             orderInforDetail.append(reason)
             orderInforDetail.append(mess)
@@ -187,15 +187,15 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let fromLocationName = OrderDetailInforRow("Location name".localized, E(orderDetail?.from?.loc_name),false)
         let fromAddress = OrderDetailInforRow("Address".localized, E(orderDetail?.from?.address),true)
         let fromContactName = OrderDetailInforRow("Contact name".localized,orderDetail?.from?.name ?? "-")
-        let fromContactPhone = OrderDetailInforRow("Contact phone".localized,orderDetail?.from?.phone ?? "-",true)
-        let fromStartTime = OrderDetailInforRow("Start time".localized,startFromDate,false)
-        let fromEndtime = OrderDetailInforRow("End time".localized,endFromDate,false)
+        let fromContactPhone = OrderDetailInforRow("contact-phone".localized,orderDetail?.from?.phone ?? "-",true)
+        let fromStartTime = OrderDetailInforRow("start-time".localized,startFromDate,false)
+        let fromEndtime = OrderDetailInforRow("end-time".localized,endFromDate,false)
 
         let toAddress = OrderDetailInforRow("Address".localized, E(orderDetail?.to?.address),true)
         let toContactName = OrderDetailInforRow("Contact name".localized,orderDetail?.to?.name ?? "-")
-        let toContactPhone = OrderDetailInforRow("Contact phone".localized,orderDetail?.to?.phone ?? "-", true)
-        let toStartTime = OrderDetailInforRow("Start time".localized,startToDate,false)
-        let tomEndtime = OrderDetailInforRow("End time".localized,endToDate,false)
+        let toContactPhone = OrderDetailInforRow("contact-phone".localized,orderDetail?.to?.phone ?? "-", true)
+        let toStartTime = OrderDetailInforRow("start-time".localized,startToDate,false)
+        let tomEndtime = OrderDetailInforRow("end-time".localized,endToDate,false)
         let toLocationName = OrderDetailInforRow("Location name".localized, E(orderDetail?.to?.loc_name),false)
 
         orderInforFrom.append(fromLocationName)
@@ -380,12 +380,12 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         let row = indexPath.row
         switch orderSection {
         case .sectionFrom:
-            if row != 0 &&  // From address, Contact phone
+            if row != 0 &&  // from-address, contact-phone
                 row != orderInforFrom.count - 3 {
                 return
             }
             
-            if row == 0{ //From address
+            if row == 0{ //from-address
                 let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
                 vc.orderDetail = orderDetail
                 if let _orderDetail = orderDetail,
@@ -404,7 +404,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             }
             
         case .sectionTo:
-            if row != 0 &&  // To address, Contact phone
+            if row != 0 &&  // to-address, contact-phone
                 row != orderInforTo.count - 3 {
                 return
             }
@@ -718,7 +718,7 @@ fileprivate extension OrderDetailViewController{
     }
     
     private func showInputNote(_ statusNeedUpdate:String) {
-        let alert = UIAlertController(title: "Finish order".localized,
+        let alert = UIAlertController(title: "finish-order".localized,
                                       message: nil, preferredStyle: .alert)
         alert.showTextViewInput(placeholder: "Enter note for this order(optional)".localized,
                                 nameAction: "Finish".localized,
@@ -919,7 +919,7 @@ extension OrderDetailViewController{
             switch result{
             case .object(_):
                 self?.updateOrderDetail?(self?.orderDetail)
-                self?.showAlertView("Assigned successfull.".localized,
+                self?.showAlertView("assigned-successfull".localized,
                                     completionHandler: { (ok) in
                                         /*
                                         let vc:JobListVC = .loadSB(SB: .Job)

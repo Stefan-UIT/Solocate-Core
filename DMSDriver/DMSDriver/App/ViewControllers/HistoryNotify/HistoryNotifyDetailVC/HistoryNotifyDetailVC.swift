@@ -36,7 +36,7 @@ class HistoryNotifyDetailVC: BaseViewController {
 
     fileprivate var arrTitleHeader:[String] = []
     fileprivate var dataSectionInfo = [NotifylInforRow]()
-    fileprivate var dataSectionComment = [NotifylInforRow]()
+    fileprivate var dataSectioncomment[NotifylInforRow]()
     
     
     var alertDetail = AlertModel()
@@ -72,7 +72,7 @@ class HistoryNotifyDetailVC: BaseViewController {
     func setupNavigationService() {
         App().navigationService.delegate = self
         App().navigationService.updateNavigationBar(.Menu,
-                                                    "Alert Detail".localized,
+                                                    "alert-detail".localized,
                                                     AppColor.white, true)
     }
    
@@ -83,27 +83,27 @@ class HistoryNotifyDetailVC: BaseViewController {
     
     func initVar()  {
         arrTitleHeader = ["Information".localized.uppercased(),
-                          "Comments".localized.uppercased()]
+                          "commentlocalized.uppercased()]
         
         setupDataDetailInforRows()
     }
     
     func setupDataDetailInforRows() {
         dataSectionInfo.removeAll()
-        dataSectionComment.removeAll()
+        dataSectioncommentmoveAll()
         
         let displayDateTimeVN = DateFormatter.displayDateTimeVN
         let stringDate = DateFormatter.serverDateFormater.date(from: E(alertDetail.created_at))
     
         let date = NotifylInforRow("Date".localized,E(displayDateTimeVN.string(from: stringDate ?? Date())))
         let status = NotifylInforRow("Status".localized,E(alertDetail.statusName))
-        let ruleId = NotifylInforRow("Rule ID".localized, "\(alertDetail.ruleType?.id ?? 0)")
-        let routeId = NotifylInforRow("Route ID".localized, "\(alertDetail.routeId ?? 0)")
-        let driverName = NotifylInforRow("Driver Name".localized,alertDetail.driverName ?? "-")
-        let truckName = NotifylInforRow("Truck Name".localized,alertDetail.truckName ?? "-")
-        let tankerName = NotifylInforRow("Tanker Name".localized,alertDetail.tankerName ?? "-")
+        let ruleId = NotifylInforRow("rule-id".localized, "\(alertDetail.ruleType?.id ?? 0)")
+        let routeId = NotifylInforRow("route-id".localized, "\(alertDetail.routeId ?? 0)")
+        let driverName = NotifylInforRow("driver-name".localized,alertDetail.driverName ?? "-")
+        let truckName = NotifylInforRow("truck-name".localized,alertDetail.truckName ?? "-")
+        let tankerName = NotifylInforRow("tanker-name".localized,alertDetail.tankerName ?? "-")
         let type = NotifylInforRow("Type".localized, alertDetail.ruleType?.name ?? "-")
-        let comment = NotifylInforRow("Comment".localized,alertDetail.comment ?? "-")
+        let comment = NotifylInforRow("commentocalized,alertDetail.comment ?? "-")
         
         dataSectionInfo.append(status)
         dataSectionInfo.append(ruleId)
@@ -114,7 +114,7 @@ class HistoryNotifyDetailVC: BaseViewController {
         dataSectionInfo.append(type)
         dataSectionInfo.append(date)
 
-        dataSectionComment.append(comment)
+        dataSectioncommentpend(comment)
         tableView?.reloadData()
     }
     
@@ -123,8 +123,8 @@ class HistoryNotifyDetailVC: BaseViewController {
     @IBAction func onbtnClickActionButton(btn:UIButton){
         PickerInputView.showInputViewWith(type: .PickerInputTextView,
                                           atVC: self,
-                                          title: "Resolve alert".localized,
-                                          placeHolder: "Comment".localized) {[weak self] (success, content,_)  in
+                                          title: "resolve-alert".localized,
+                                          placeHolder: "commentocalized) {[weak self] (success, content,_)  in
                                             self?.alertDetail.comment = content
                                             guard let alert = self?.alertDetail else {return}
                                             self?.resolveAlert(alert: alert)
@@ -149,7 +149,7 @@ extension HistoryNotifyDetailVC: UITableViewDataSource, UITableViewDelegate {
         case .sectionInfo:
             return dataSectionInfo.count
         case .sectionComment:
-            return dataSectionComment.count
+            return dataSectioncommentunt
         }
     }
     
@@ -202,13 +202,13 @@ extension HistoryNotifyDetailVC: UITableViewDataSource, UITableViewDelegate {
                 return cell
             }
         case .sectionComment:
-            let item = dataSectionComment[indexPath.row]
+            let item = dataSectioncommentdexPath.row]
             if let cell = tableView.dequeueReusableCell(withIdentifier: discriptionCellIdentifier,
                                                         for: indexPath) as? HistoryNotifyDetailCell {
                 cell.contentLabel?.text = item.content
                 cell.selectionStyle = .none
                 
-                if indexPath.row == dataSectionComment.count - 1{
+                if indexPath.row == dataSectioncommentunt - 1{
                     cell.vContent?.roundCornersLRB()
                 }
                 return cell

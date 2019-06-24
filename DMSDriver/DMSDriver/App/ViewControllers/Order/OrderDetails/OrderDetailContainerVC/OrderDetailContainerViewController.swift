@@ -208,7 +208,7 @@ class OrderDetailContainerViewController: ButtonBarPagerTabStripViewController {
     
     private func setupNavigationBar()  {
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.BackOnly, "Order Detail".localized)
+        App().navigationService.updateNavigationBar(.BackOnly, "order-detail".localized)
     }
 }
 

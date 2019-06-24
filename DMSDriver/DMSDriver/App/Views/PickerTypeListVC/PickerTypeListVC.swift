@@ -85,7 +85,7 @@ class PickerTypeListVC: BaseViewController {
         switch type {
         case .DriverSignlePick,
              .DriverMultiplePick:
-            titleHeader = "Pick driver".localized
+            titleHeader = "pick-driver".localized
         }
     }
     
@@ -252,7 +252,7 @@ fileprivate extension PickerTypeListVC{
             self.dataDisplays = coordinatorDriver?.drivers ?? []
             let assignToMe = DriverModel()
             assignToMe.driver_id = Caches().user?.userInfo?.id ?? 0
-            assignToMe.driver_name = "Assign to me".localized
+            assignToMe.driver_name = "assign-to-me".localized
             assignToMe.role_name = "Coordinator".localized
             self.dataDisplays.append(assignToMe)
         }
