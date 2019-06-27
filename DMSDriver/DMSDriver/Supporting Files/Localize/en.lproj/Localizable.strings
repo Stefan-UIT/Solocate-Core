@@ -151,8 +151,8 @@
 "order_detail_total"="Total";
 "order_detail_barcode_notmatch"="Barcode does not match";
 "orderd-has-delevered-successfully"="orderd-has-delevered-successfully";
-"do-you-want-to-start-this-order?"="do-you-want-to-start-this-order?";
-"do-you-want-to-finish-this-order?" = "do-you-want-to-finish-this-order?";
+"do-you-want-to-start-this-order"="do-you-want-to-start-this-order";
+"do-you-want-to-finish-this-order" = "do-you-want-to-finish-this-order";
 "Hour"="Hour";
 "Date"="Date";
 "certificate-number"="certificate-number";
@@ -179,8 +179,8 @@
 "collect-call"="collect-call";
 "Status"="Status";
 "failure-cause"="failure-cause";
-"comment" = "comment";
-"certificate-number (Client)"="certificate-number (Client)";
+"Comments"="Comments";
+"certificate-number-client"="certificate-number-client";
 "execution-time"="execution-time";
 "receiver-name"="receiver-name";
 "second-receiver-name"="second-receiver-name";
@@ -190,7 +190,7 @@
 "third-courier"= "third-courier";
 "coordination-phone"="coordination-phone";
 "finish-order"="finish-order";
-"Enter note for this order(optional)"="Enter note for this order(optional)";
+"enter-note-for-this-orderoptional"="enter-note-for-this-orderoptional";
 "Apartment"="Apartment";
 "Entrance"="Entrance";
 "Floor"="Floor";
@@ -203,7 +203,7 @@
 "Name"="Name";
 "Volume"="Volume";
 "Pickup"="Pickup";
-"do-you-want-to-pickup-this-order?"= "do-you-want-to-pickup-this-order?";
+"do-you-want-to-pickup-this-order"= "do-you-want-to-pickup-this-order";
 "van-load"="van-load";
 "Deliver"="Deliver";
 
@@ -274,10 +274,10 @@
 "total-double-type"="total-double-type";
 "total-cartons"="total-cartons";
 "total-packages"="total-packages";
-"double-type complete"="double-type complete";
+"double-type-complete"="double-type-complete";
 "packages-complete"="packages-complete";
 "cartons-complete"="cartons-complete";
-"double-type not complete"="double-type not complete";
+"double-type-not-complete"="double-type-not-complete";
 "cartons-not-complete"="cartons-not-complete";
 "packages-not-complete"="packages-not-complete";
 
@@ -287,8 +287,8 @@
 "no-tasks"="no-tasks";
 "task-id"="task-id";
 "TASK"="TASK";
-"are-you-sure-you-want-to-finish-this-task?"="are-you-sure-you-want-to-finish-this-task?";
-"are-you-sure-you-want-to-cancel-this-task?"="are-you-sure-you-want-to-cancel-this-task?";
+"are-you-sure-you-want-to-finish-this-task"="are-you-sure-you-want-to-finish-this-task";
+"are-you-sure-you-want-to-cancel-this-task"="are-you-sure-you-want-to-cancel-this-task";
 "finish-task-successfully"="finish-task-successfully";
 "task-status"="task-status";
 "task-information"="task-information";
@@ -301,7 +301,7 @@
 "driver-name"="driver-name";
 "truck-name"="truck-name";
 "tanker-name"="tanker-name";
-"commentComment";
+"Comment"="Comment";
 "comment"="comment";
 "rule-id"="rule-id";
 "resolve-alert"="resolve-alert";

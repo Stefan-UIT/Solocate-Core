@@ -720,7 +720,7 @@ fileprivate extension OrderDetailViewController{
     private func showInputNote(_ statusNeedUpdate:String) {
         let alert = UIAlertController(title: "finish-order".localized,
                                       message: nil, preferredStyle: .alert)
-        alert.showTextViewInput(placeholder: "Enter note for this order(optional)".localized,
+        alert.showTextViewInput(placeholder: "enter-note-for-this-orderoptional".localized,
                                 nameAction: "Finish".localized,
                                 oldText: "") {[weak self] (success, string) in
                                     //self?.orderDetail?.note = string

@@ -226,7 +226,7 @@ extension StartRouteOrderVC {
         var statusNeedUpdate = status.rawValue
         switch status{
         case .newStatus:
-            App().showAlertView("do-you-want-to-start-this-order?".localized,
+            App().showAlertView("do-you-want-to-start-this-order".localized,
                                 positiveTitle: "YES".localized,
                                 positiveAction: {[weak self] (ok) in
                                     
@@ -253,7 +253,7 @@ extension StartRouteOrderVC {
             
             self.navigationController?.pushViewController(vc, animated: true)
             /*
-            App().showAlertView("do-you-want-to-pickup-this-order?".localized,
+            App().showAlertView("do-you-want-to-pickup-this-order".localized,
                                 positiveTitle: "YES".localized,
                                 positiveAction: {[weak self] (ok) in
                                     
@@ -278,7 +278,7 @@ extension StartRouteOrderVC {
                     
                 }else {
                     
-                    App().showAlertView("do-you-want-to-finish-this-order?".localized,
+                    App().showAlertView("do-you-want-to-finish-this-order".localized,
                                         positiveTitle: "YES".localized,
                                         positiveAction: {[weak self] (ok) in
                                             

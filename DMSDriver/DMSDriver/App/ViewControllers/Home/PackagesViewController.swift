@@ -56,20 +56,20 @@ class PackagesViewController: BaseViewController {
         dileveryDatas = [["total-double-type".localized,"\(package.delivery.total_double_type)"],
                          ["total-cartons".localized,"\(package.delivery.total_cartons)"],
                          ["total-packages".localized,"\(package.delivery.total_packages)"],
-                         ["double-type complete".localized,"\(package.delivery.double_type_complete)"],
+                         ["double-type-complete".localized,"\(package.delivery.double_type_complete)"],
                          ["packages-complete".localized,"\(package.delivery.packages_complete)"],
                          ["cartons-complete".localized,"\(package.delivery.cartons_complete)"],
-                         ["double-type not complete".localized,"\(package.delivery.double_type_not_complete)"],
+                         ["double-type-not-complete".localized,"\(package.delivery.double_type_not_complete)"],
                          ["cartons-not-complete".localized,"\(package.delivery.cartons_not_complete)"],
                          ["packages-not-complete".localized,"\(package.delivery.packages_not_complete)"]]
         
         backHaulDatas = [["total-double-type".localized,"\(package.back_haul.total_double_type)"],
                          ["total-cartons".localized,"\(package.back_haul.total_cartons)"],
                          ["total-packages".localized,"\(package.back_haul.total_packages)"],
-                         ["double-type complete".localized,"\(package.back_haul.double_type_complete)"],
+                         ["double-type-complete".localized,"\(package.back_haul.double_type_complete)"],
                          ["packages-complete".localized,"\(package.back_haul.packages_complete)"],
                          ["cartons-complete".localized,"\(package.back_haul.cartons_complete)"],
-                         ["double-type not complete".localized,"\(package.back_haul.double_type_not_complete)"],
+                         ["double-type-not-complete".localized,"\(package.back_haul.double_type_not_complete)"],
                          ["cartons-not-complete".localized,"\(package.back_haul.cartons_not_complete)"],
                          ["packages-not-complete".localized,"\(package.back_haul.packages_not_complete)"]]
         

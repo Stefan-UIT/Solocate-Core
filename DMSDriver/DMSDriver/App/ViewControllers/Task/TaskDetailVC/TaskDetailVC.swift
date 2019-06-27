@@ -200,7 +200,7 @@ class TaskDetailVC: BaseViewController {
     }
     
     func handleFinishAction() {
-//        App().showAlertView("are-you-sure-you-want-to-finish-this-task?".localized,
+//        App().showAlertView("are-you-sure-you-want-to-finish-this-task".localized,
 //                            positiveTitle: "Finish".localized,
 //                            positiveAction: { (hasOK) in
 //
@@ -212,7 +212,7 @@ class TaskDetailVC: BaseViewController {
     }
     
     func handleCancelAction() {
-//        App().showAlertView("are-you-sure-you-want-to-cancel-this-task?".localized,
+//        App().showAlertView("are-you-sure-you-want-to-cancel-this-task".localized,
 //                            positiveTitle: "Confirm".localized,
 //                            positiveAction: { (hasOK) in
 //
