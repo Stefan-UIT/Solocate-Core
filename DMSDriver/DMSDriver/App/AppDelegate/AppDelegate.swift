@@ -16,6 +16,7 @@ import FirebaseMessaging
 import CoreData
 import Fabric
 import Crashlytics
+ import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,7 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var rootNV:BaseNV?
   var mainVC:MainVC?
   var navigationService = DMSNavigationService()
-
+    lazy var bundlePath: URL = {
+        let documents = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!)
+        print("\n     DIRECTORY: \(documents.absoluteString)\n")
+        let bundlePath = documents.appendingPathComponent("Localize", isDirectory: true)
+        return bundlePath
+    }()
   
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -59,8 +65,66 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
         // Follow Crashlytics app by Fabric
         Fabric.with([Crashlytics.self])
-    
+        createMultiLanguageFile()
         return true
+    }
+    
+    func createMultiLanguageFile() {
+        let manager = FileManager.default
+        
+        SERVICES().API.getLanguagesList { (result) in
+            switch result{
+            case .object(let obj):
+                var languages:[LanguageModel]!
+                languages = obj.data ?? []
+                
+                for lang in languages {
+                    self.fakeFilePath(language: lang)
+                    let destination = self.bundlePath.appendingPathComponent("\(lang.locale).lproj", isDirectory: true)
+                    if manager.fileExists(atPath: destination.path) == false {
+                        do {
+                            try manager.createDirectory(at: destination, withIntermediateDirectories: true, attributes: nil)
+                        } catch {
+                            print(error)
+                        }
+                    }
+                    self.downloadFileFrom(name:lang.locale, path: lang.path, saveTo: destination)
+                }
+            case .error(let error):
+                print(error.description)
+            }
+        }
+        
+    }
+    
+    func fakeFilePath(language:LanguageModel) {
+        language.path = (language.locale == "en") ? "https://seldat-dev-public.s3.amazonaws.com/solocate-a1/develop/language/dms/ios/en.strings" : "https://seldat-dev-public.s3.amazonaws.com/solocate-a1/develop/language/dms/ios/he.strings"
+    }
+    
+    func downloadFileFrom(name:String, path:String, saveTo destination:URL) {
+        let des: DownloadRequest.DownloadFileDestination = { _, _ in
+            let fileURL = destination.appendingPathComponent("Localizable.strings")
+            return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
+        }
+        
+        Alamofire.download(path, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil, to: des).response { (response) in
+            print("Download successful! \(response)")
+            
+        }
+    }
+    
+    func hebrewLanguage() -> LanguageModel {
+        let json:[String:Any] = ["id": 3,
+                                 "name": "ios",
+                                 "system": "DMS",
+                                 "locale": "he",
+                                 "path": "https://seldat-dev-public.s3.amazonaws.com/solocate-a1/develop/language/dms/ios/he.strings",
+                                 "format": "json",
+                                 "ac": 1,
+                                 "language": "hebrew"
+        ]
+        
+        return LanguageModel(JSON: json)!
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {

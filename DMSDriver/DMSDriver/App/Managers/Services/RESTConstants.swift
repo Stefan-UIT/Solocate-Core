@@ -60,7 +60,7 @@ enum PATH_REQUEST_URL: String{
     case DASHBOARD = "transaction/v1/mobile/dashboard/by-driver?start_time=%@&end_time=%@"
     case UPDATE_ROUTE_NOTE = "transaction/v1/routes/notes"
     case UPDATE_ORDER_NOTE = "transaction/v1/orders/notes"
-
+    case GET_LIST_LANGUAGE  = "language/v1/namespaces/list-support?name=%@&system=%@"
     
     var URL:String  {
         return rawValue
