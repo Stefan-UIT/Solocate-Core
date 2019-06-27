@@ -333,6 +333,10 @@
 		2E96D05722C4C81300DA29C5 /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96D05422C4C81300DA29C5 /* LanguageModel.swift */; };
 		2E96D05922C4C8D000DA29C5 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96D05822C4C8D000DA29C5 /* FileManager.swift */; };
 		2E96D05A22C4C8D000DA29C5 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96D05822C4C8D000DA29C5 /* FileManager.swift */; };
+		2E96D05C22C4CEF500DA29C5 /* Loading.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E96D05B22C4CEF400DA29C5 /* Loading.storyboard */; };
+		2E96D05D22C4CEF500DA29C5 /* Loading.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E96D05B22C4CEF400DA29C5 /* Loading.storyboard */; };
+		2E96D06022C4CFED00DA29C5 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96D05F22C4CFED00DA29C5 /* LoadingViewController.swift */; };
+		2E96D06122C4CFED00DA29C5 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96D05F22C4CFED00DA29C5 /* LoadingViewController.swift */; };
 		2E9E08A622A8FDA4005E420C /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */; };
 		2E9E08A722A8FDA4005E420C /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */; };
 		3B0035F7216C614D0032519D /* TextViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0035F4216C614D0032519D /* TextViewInput.swift */; };
@@ -650,6 +654,8 @@
 		2E714CDA22B3A44900348B67 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
 		2E96D05422C4C81300DA29C5 /* LanguageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageModel.swift; sourceTree = "<group>"; };
 		2E96D05822C4C8D000DA29C5 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
+		2E96D05B22C4CEF400DA29C5 /* Loading.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Loading.storyboard; sourceTree = "<group>"; };
+		2E96D05F22C4CFED00DA29C5 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		3B0035F4216C614D0032519D /* TextViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewInput.swift; sourceTree = "<group>"; };
 		3B0035F5216C614D0032519D /* TextViewInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewInput.xib; sourceTree = "<group>"; };
@@ -1286,6 +1292,14 @@
 				2E96D05422C4C81300DA29C5 /* LanguageModel.swift */,
 			);
 			path = LanguageModel;
+			sourceTree = "<group>";
+		};
+		2E96D05E22C4CFD700DA29C5 /* Loading */ = {
+			isa = PBXGroup;
+			children = (
+				2E96D05F22C4CFED00DA29C5 /* LoadingViewController.swift */,
+			);
+			path = Loading;
 			sourceTree = "<group>";
 		};
 		2E9E08A322A8FD4E005E420C /* Cell */ = {
@@ -2212,6 +2226,7 @@
 				3B66B7F8210B113C000BDFEF /* Login.storyboard */,
 				3B66B7F9210B113C000BDFEF /* Task.storyboard */,
 				3B66B7FA210B113C000BDFEF /* Order.storyboard */,
+				2E96D05B22C4CEF400DA29C5 /* Loading.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -2319,6 +2334,7 @@
 		3B66B88C210B1148000BDFEF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2E96D05E22C4CFD700DA29C5 /* Loading */,
 				2E55A3DC22A65229006F9944 /* NoteManagement */,
 				3B36D8BB2228E5A200220BAE /* Dashboard */,
 				3B6193F5221FA956006651EA /* StartRouteOrder */,
@@ -3226,6 +3242,7 @@
 				2A443B0F22648C5A00CB6508 /* FilterDataTypeRowCell.xib in Resources */,
 				2A443B1022648C5A00CB6508 /* ContentCell.xib in Resources */,
 				2A443B1122648C5A00CB6508 /* Main.storyboard in Resources */,
+				2E96D05C22C4CEF500DA29C5 /* Loading.storyboard in Resources */,
 				2A443B1222648C5A00CB6508 /* SignatureViewController.xib in Resources */,
 				2A443B1322648C5A00CB6508 /* Common.storyboard in Resources */,
 				2A443B1422648C5A00CB6508 /* FilterByDatePopupCell.xib in Resources */,
@@ -3292,6 +3309,7 @@
 				3B1629D5221BED0600E7A83C /* FilterDataTypeRowCell.xib in Resources */,
 				2A42050C22576AF000789837 /* ContentCell.xib in Resources */,
 				3B66B861210B113D000BDFEF /* Main.storyboard in Resources */,
+				2E96D05D22C4CEF500DA29C5 /* Loading.storyboard in Resources */,
 				3BF258292224FB5300A56B4E /* SignatureViewController.xib in Resources */,
 				3B9A37642123D5EF004D881C /* Common.storyboard in Resources */,
 				3B2B8B52222E131200ACDDFE /* FilterByDatePopupCell.xib in Resources */,
@@ -3694,6 +3712,7 @@
 				2A443ADA22648C5A00CB6508 /* OneTextFieldViewController.swift in Sources */,
 				2A443ADB22648C5A00CB6508 /* OrderItemTableViewCell.swift in Sources */,
 				2A443ADC22648C5A00CB6508 /* APIServices.swift in Sources */,
+				2E96D06022C4CFED00DA29C5 /* LoadingViewController.swift in Sources */,
 				2A443ADD22648C5A00CB6508 /* HistoryNotifyVC.swift in Sources */,
 				2A443ADE22648C5A00CB6508 /* UISearchBar+Extensions.swift in Sources */,
 				2A443ADF22648C5A00CB6508 /* UITableView-Extensions.swift in Sources */,
@@ -3938,6 +3957,7 @@
 				3B66B832210B113D000BDFEF /* OneTextFieldViewController.swift in Sources */,
 				3B66B90C210B1149000BDFEF /* OrderItemTableViewCell.swift in Sources */,
 				3B66B84E210B113D000BDFEF /* APIServices.swift in Sources */,
+				2E96D06122C4CFED00DA29C5 /* LoadingViewController.swift in Sources */,
 				3B7695EA21CA20A70032B142 /* HistoryNotifyVC.swift in Sources */,
 				3B66B828210B113D000BDFEF /* UISearchBar+Extensions.swift in Sources */,
 				3B66B811210B113D000BDFEF /* UITableView-Extensions.swift in Sources */,

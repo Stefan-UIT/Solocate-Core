@@ -61,11 +61,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SERVICES().firebase.setupFirebase()
  
         IQKeyboardManager.shared().isEnabled = true
-        checkLoginStatus()
     
         // Follow Crashlytics app by Fabric
         Fabric.with([Crashlytics.self])
-        createMultiLanguageFile()
+        
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 10.0, execute: {
+            self.checkLoginStatus()
+        })
         return true
     }
     
