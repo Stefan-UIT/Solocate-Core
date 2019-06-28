@@ -44,8 +44,8 @@ extension String {
     }
   
     var localized: String {
-//        let localBundle = Bundle(url: App().bundlePath)!
-        return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
+        let localBundle = Bundle(url: App().bundlePath)!
+        return NSLocalizedString(self, tableName: nil, bundle: localBundle, value: "", comment: "")
     }
   
     var doubleValue: Double {

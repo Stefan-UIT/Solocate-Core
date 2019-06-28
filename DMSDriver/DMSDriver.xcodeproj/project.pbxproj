@@ -795,8 +795,6 @@
 		3B66B7CF210B113C000BDFEF /* RESTConstants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RESTConstants.swift; sourceTree = "<group>"; };
 		3B66B7D3210B113C000BDFEF /* APIServices.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIServices.swift; sourceTree = "<group>"; };
 		3B66B7D4210B113C000BDFEF /* BaseAPIService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseAPIService.swift; sourceTree = "<group>"; };
-		3B66B7DF210B113C000BDFEF /* he */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = he; path = he.lproj/Localizable.strings; sourceTree = "<group>"; };
-		3B66B7E0210B113C000BDFEF /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		3B66B7E5210B113C000BDFEF /* MainConfigs.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = MainConfigs.plist; sourceTree = "<group>"; };
 		3B66B7EB210B113C000BDFEF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3B66B7ED210B113C000BDFEF /* DMSDriver-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DMSDriver-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -4024,8 +4022,6 @@
 		3B66B7DE210B113C000BDFEF /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				3B66B7DF210B113C000BDFEF /* he */,
-				3B66B7E0210B113C000BDFEF /* en */,
 				3B67B6D9212BD35F0032F25C /* pt-BR */,
 			);
 			name = Localizable.strings;
