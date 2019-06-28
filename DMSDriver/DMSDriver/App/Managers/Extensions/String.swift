@@ -68,4 +68,8 @@ extension String {
     var date: Date? {
         return ServerDateFormater.date(from: self)
     }
+    
+    func replaceDoubleQuoteIfNeeded() -> String {
+        return self.replacingOccurrences(of: "\"", with: "\\\"")
+    }
 }

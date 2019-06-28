@@ -45,7 +45,7 @@ class LoadingViewController: UIViewController {
         let downloadGroup = DispatchGroup()
         
         for lang in self.languages {
-            self.fakeFilePath(language: lang)
+//            self.fakeFilePath(language: lang)
             let destination = App().bundlePath.appendingPathComponent("\(lang.locale).lproj", isDirectory: true)
             if manager.fileExists(atPath: destination.path) == false {
                 do {
@@ -76,9 +76,31 @@ class LoadingViewController: UIViewController {
             return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
         }
         
-        Alamofire.download(path, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil, to: des).responseData(completionHandler: { (result) in
-            print("Download successful! \(result.result)")
-            completion()
+        Alamofire.request(path, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: { (dataResponse) in
+            switch dataResponse.result {
+            case .success(let object):
+                if let dict = object as? [String:String] {
+                    self.convertToStringsFile(dict: dict, saveTo: destination)
+                }
+                completion()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         })
+        
+//        Alamofire.download(path, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil, to: des).responseData(completionHandler: { (result) in
+//            print("Download successful! \(result.result)")
+//            completion()
+//        })
     }
+    
+    func convertToStringsFile(dict:[String:String], saveTo destination:URL) {
+        let res = dict.reduce("", { $0 + "\"\($1.key)\" = \"\(($1.value).replaceDoubleQuoteIfNeeded())\";\n" })
+        let filePath = destination.appendingPathComponent("Localizable.strings")
+        let data = res.data(using: .utf32)
+        FileManager.default.createFile(atPath: filePath.path, contents: data, attributes: nil)
+    }
+    
 }
+
+//      ($1.key)\" = \"\($1.value)\";\n
