@@ -106,20 +106,20 @@ class TimeData: NSObject {//You should get it from [TimeData getTimeDataItemType
     }
     
     class func arrItemTitle() -> [String] {
-        return ["All Time",
-                "Today",
-                "Yesterday",
-                "Tomorrow",
-                "This Week",
-                "Last Week",
-                "Next Week",
-                "This Month",
-                "Last Month",
-                "Next Month",
-                "This Year",
-                "Last Year",
-                "Next Year",
-                "Custom"];
+        return ["all-time".localized,
+                "today".localized,
+                "yesterday".localized,
+                "tomorrow".localized,
+                "this-week".localized,
+                "last-week".localized,
+                "next-week".localized,
+                "this-month".localized,
+                "last-month".localized,
+                "next-month".localized,
+                "this-year".localized,
+                "last-year".localized,
+                "next-year".localized,
+                "custom".localized];
     }
     
    class func getTimeDataItemCustom() -> TimeDataItem? {
@@ -131,7 +131,7 @@ class TimeData: NSObject {//You should get it from [TimeData getTimeDataItemType
             
             let subTitle = "\(DateFormatter.displayDateUS.string(from: start)) - \(DateFormatter.displayDateUS.string(from: end))"
             
-            let item = TimeDataItem(title: "Custom",
+            let item = TimeDataItem(title: "custom".localized,
                                     subtitle: subTitle,
                                     type: .TimeItemTypeCustom,
                                     start: start,
@@ -160,7 +160,7 @@ class TimeData: NSObject {//You should get it from [TimeData getTimeDataItemType
             case .TimeItemTypeAll:
                 start = Date.init(timeIntervalSince1970: 0)
                 end = Date().addingTimeInterval(31536000)
-                subTitle = "All Time"
+                subTitle = "all-time".localized
                 
             case .TimeItemTypeYesterday:
                 let arr = Date().getYesterdayStartEndDates(timeZone: TimeZone.current)

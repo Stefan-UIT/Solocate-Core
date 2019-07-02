@@ -45,7 +45,6 @@ class LoadingViewController: UIViewController {
         let downloadGroup = DispatchGroup()
         
         for lang in self.languages {
-//            self.fakeFilePath(language: lang)
             let destination = App().bundlePath.appendingPathComponent("\(lang.locale).lproj", isDirectory: true)
             if manager.fileExists(atPath: destination.path) == false {
                 do {
@@ -65,16 +64,8 @@ class LoadingViewController: UIViewController {
         }
     }
     
-    func fakeFilePath(language:LanguageModel) {
-        language.path = (language.locale == "en") ? "https://seldat-dev-public.s3.amazonaws.com/solocate-a1/develop/language/dms/ios/en.strings" : "https://seldat-dev-public.s3.amazonaws.com/solocate-a1/develop/language/dms/ios/he.strings"
-    }
-    
     func downloadFileFrom(name:String, path:String, saveTo destination:URL, withCompletionHandler
         completion:@escaping DownloadedFilesCompletion) {
-        let des: DownloadRequest.DownloadFileDestination = { _, _ in
-            let fileURL = destination.appendingPathComponent("Localizable.strings")
-            return (fileURL, [.removePreviousFile, .createIntermediateDirectories])
-        }
         
         Alamofire.request(path, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil).responseJSON(completionHandler: { (dataResponse) in
             switch dataResponse.result {
@@ -87,11 +78,6 @@ class LoadingViewController: UIViewController {
                 print(error.localizedDescription)
             }
         })
-        
-//        Alamofire.download(path, method: .get, parameters: nil, encoding: JSONEncoding.default, headers: nil, to: des).responseData(completionHandler: { (result) in
-//            print("Download successful! \(result.result)")
-//            completion()
-//        })
     }
     
     func convertToStringsFile(dict:[String:String], saveTo destination:URL) {
@@ -102,5 +88,3 @@ class LoadingViewController: UIViewController {
     }
     
 }
-
-//      ($1.key)\" = \"\($1.value)\";\n

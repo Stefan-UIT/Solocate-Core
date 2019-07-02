@@ -23,7 +23,7 @@ enum MenuItemType : Int {
     case .PROFILE:
       return ""
     case .DASHBOARD:
-        return "Dashboard".localized.uppercased()
+        return "dashboard".localized.uppercased()
     case .ROUTES:
         return "Routes".localized.uppercased()
     case .COUNTER:

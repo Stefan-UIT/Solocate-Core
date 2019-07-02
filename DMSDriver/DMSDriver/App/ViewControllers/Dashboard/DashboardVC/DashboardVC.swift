@@ -63,7 +63,7 @@ class DashboardVC: BaseViewController {
     override func updateNavigationBar() {
         super.updateNavigationBar()
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.Menu, "Dashboard".localized, AppColor.white, true)
+        App().navigationService.updateNavigationBar(.Menu, "dashboard".localized, AppColor.white, true)
     }
     
     func initVar()  {
@@ -111,7 +111,7 @@ class DashboardVC: BaseViewController {
         let finishedRoutes = dataDashboard?.filterBy(status: .Finished) ?? []
         let cacelledRoutes = dataDashboard?.filterBy(status: .InProgess) ?? []
         let total = newRoutes.count + inprogessRoutes.count + finishedRoutes.count + cacelledRoutes.count
-        let centerText = NSMutableAttributedString(string: total == 0 ? "Data unavailable.".localized : "Route status".localized)
+        let centerText = NSMutableAttributedString(string: total == 0 ? "no-data".localized : "route-status".localized)
         centerText.setAttributes([.font : UIFont(name: "HelveticaNeue-Light", size: 13)!,
                                   NSAttributedString.Key.foregroundColor : total == 0 ? UIColor.red : UIColor.black,
                                   .paragraphStyle : paragraphStyle], range: NSRange(location: 0, length: centerText.length))
@@ -144,7 +144,7 @@ class DashboardVC: BaseViewController {
         let cacelledRoutes = dataDashboard?.filterBy(status: .Canceled) ?? []
         //let total = newRoutes.count + inprogessRoutes.count + finishedRoutes.count + cacelledRoutes.count
         surveyData =  ["New".localized: newRoutes.count,
-                       "In-progess".localized: inprogessRoutes.count,
+                       "in-progress".localized: inprogessRoutes.count,
                        "Finished".localized: finishedRoutes.count,
                        "Cancelled".localized: cacelledRoutes.count]
         for (text , val) in surveyData {
@@ -188,12 +188,12 @@ class DashboardVC: BaseViewController {
 
     func reloadDataDisplay()  {
         arrListPage = []
-        arrListPage.append(["ic-newRoute","New Routes","item","",DashboardDisplayCellType.NEW_ROUTE])
-        arrListPage.append(["ic-inprogessRoute","In-progess Routes","item","",DashboardDisplayCellType.INPROGESS_ROUTE])
-        arrListPage.append(["ic-mytask","My Tasks","tasks","",DashboardDisplayCellType.MY_TASK])
-        arrListPage.append(["ic-newAlert","New Alerts","item","",DashboardDisplayCellType.NEW_ALERT])
-        arrListPage.append(["ic-lateRoute","Late Routes ","route","",DashboardDisplayCellType.LATE_ROUTE])
-        arrListPage.append(["ic-lateOrders","Late Orders  ","order","",DashboardDisplayCellType.LATE_ORDER])
+        arrListPage.append(["ic-newRoute","new-routes".localized,"item","",DashboardDisplayCellType.NEW_ROUTE])
+        arrListPage.append(["ic-inprogessRoute","in-progress-routes".localized,"item","",DashboardDisplayCellType.INPROGESS_ROUTE])
+        arrListPage.append(["ic-mytask","my-tasks".localized,"tasks","",DashboardDisplayCellType.MY_TASK])
+        arrListPage.append(["ic-newAlert","new-alerts".localized,"item","",DashboardDisplayCellType.NEW_ALERT])
+        arrListPage.append(["ic-lateRoute","late-routes".localized,"route","",DashboardDisplayCellType.LATE_ROUTE])
+        arrListPage.append(["ic-lateOrders","late-orders".localized,"order","",DashboardDisplayCellType.LATE_ORDER])
         
         clvContent?.reloadData()
     }
