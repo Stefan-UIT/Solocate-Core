@@ -72,7 +72,7 @@ import Crashlytics
         let userName = Caches().user?.userInfo?.userName ?? ""
 //        let date = #"Here is your plan for today - \#(ShortDateFormater.string(from: filterModel.timeData?.startDate ?? Date()))"#.localized
         let date = "here-is-your-plan".localized
-        lblNameDriver?.text = " i".localized + "\(userName)"
+        lblNameDriver?.text = "hi".localized + " \(userName)"
         lblDate?.text = date
     }
     

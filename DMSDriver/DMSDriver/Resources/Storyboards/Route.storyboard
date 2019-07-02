@@ -568,7 +568,7 @@
                                                             <rect key="frame" x="0.0" y="28" width="375" height="210"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="5pQ-Hl-aBS" id="EyV-0r-RcE">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="210"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="209.5"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cgw-CI-weJ">
@@ -725,7 +725,7 @@
                                                             <rect key="frame" x="0.0" y="238" width="375" height="93"/>
                                                             <autoresizingMask key="autoresizingMask"/>
                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="nDF-U5-UGR" id="zdw-2R-XL3">
-                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
+                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="92.5"/>
                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                 <subviews>
                                                                     <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cgs-61-HkZ">
@@ -1666,7 +1666,7 @@
                                                                             <rect key="frame" x="0.0" y="28" width="365" height="149"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CrC-rX-xgx" id="W9Z-4b-N85">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="149"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="148.5"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <subviews>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qd2-k2-wm4">
@@ -2075,7 +2075,7 @@
                                                                             <rect key="frame" x="0.0" y="58" width="365" height="149"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L7A-oe-BXz" id="YAt-dw-SR5">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="149"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="148.5"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <subviews>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Tw-RT-soR">
@@ -2620,7 +2620,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Add Note"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="add-note"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
