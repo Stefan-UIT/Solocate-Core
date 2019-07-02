@@ -146,7 +146,7 @@ class RouteDetailVC: BaseViewController {
     private func initUI()  {
         let startDate = HourFormater.string(from: route?.start_time.date ?? Date())
         let endDate = HourFormater.string(from: route?.end_time.date ?? Date())
-        lblRoute?.text = "Route #\(route?.id ?? 0)".localized
+        lblRoute?.text = "Route".localized + " #\(route?.id ?? 0)"
         lblTime?.text = "\(startDate) - \(endDate)"
         lblStatus?.text = route?.status?.name
         lblStatus?.textColor = route?.colorStatus
@@ -168,7 +168,7 @@ class RouteDetailVC: BaseViewController {
     @objc func setupScrollMenuView() {
         let mapMode = MenuItem("Map".localized.uppercased())
         let orderMode = MenuItem("Orders".localized.uppercased())
-        let locationMode = MenuItem("Locations".localized.uppercased())
+        let locationMode = MenuItem("locations".localized.uppercased())
 
         menuScrollView?.roundedCorners([.layerMaxXMinYCorner,
                                         .layerMinXMinYCorner,

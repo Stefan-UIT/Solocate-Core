@@ -39,7 +39,7 @@ class AddNoteViewController: BaseViewController {
     override func updateNavigationBar()  {
         super.updateNavigationBar()
         App().navigationService.delegate = self
-        let title = "Add Note".localized
+        let title = "add-note".localized
         App().navigationService.updateNavigationBar(.Back_AttachedFiles, title.localized, AppColor.white, true)
     }
     
@@ -47,7 +47,7 @@ class AddNoteViewController: BaseViewController {
         let numberOfAttachedFiles = self.attachedFiles?.count ?? 0
         if numberOfAttachedFiles > 0 {
             self.hintLabel.isHidden = false
-            self.hintLabel.text = "(\(numberOfAttachedFiles) selected images)"
+            self.hintLabel.text = "(\(numberOfAttachedFiles) " + "selected-images".localized + " )"
         } else {
             self.hintLabel.isHidden = true
         }

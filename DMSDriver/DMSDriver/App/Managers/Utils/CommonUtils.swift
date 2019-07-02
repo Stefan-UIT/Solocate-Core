@@ -14,11 +14,12 @@ class CommonUtils {
         
         var formatedHours = ""
         if hours > 0 {
-            formatedHours = "\(hours) H "
+            formatedHours = "\(hours) " + "h".localized + " "
         }
         
         if minutes > 0 {
-            formatedHours += "\(minutes) MIN"
+            let string = (minutes > 1) ? ("\(minutes) " + "mins".localized.uppercased()) : ("\(minutes)" + "min".localized.uppercased())
+            formatedHours += string
         }
         return formatedHours
     }
@@ -41,9 +42,9 @@ class CommonUtils {
         let km:Double = totalMet / 1000.0
         
         if totalMet > 1 {
-            return "\(km.rounded(toPlaces: 1)) KM"
+            return "\(km.rounded(toPlaces: 1)) " + "km".localized
         }
-        return  "\(m) M"
+        return  "\(m) " + "m".localized
     }
     
     static func getTwoFirstLetter(string:String) -> String {

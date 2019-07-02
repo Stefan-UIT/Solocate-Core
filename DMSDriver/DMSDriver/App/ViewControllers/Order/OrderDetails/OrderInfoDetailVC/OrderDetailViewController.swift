@@ -107,7 +107,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                           "Packgages".localized.uppercased(),
                           "Signature".localized.uppercased(),
                           "Picture".localized.uppercased(),
-                          "Add Note".localized.uppercased()
+                          "add-note".localized.uppercased()
         ]
         setupDataDetailInforRows()
     }
