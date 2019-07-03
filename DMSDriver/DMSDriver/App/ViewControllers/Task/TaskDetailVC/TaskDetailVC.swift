@@ -150,7 +150,7 @@ class TaskDetailVC: BaseViewController {
 //        informationRows.append(collectCall)
 //        informationRows.append(coordinationPhone)
         
-        let instruction = OrderDetailInforRow("Instruction ".localized,E(_task.instructions))
+        let instruction = OrderDetailInforRow("Instructions".localized,E(_task.instructions))
         taskInstruction.append(instruction)
     }
     
