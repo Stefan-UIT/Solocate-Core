@@ -62,8 +62,8 @@ class PictureViewController: BaseViewController {
     func setupUI()  {
         btnSkip?.isHidden = order?.isRequireImage() == true
         btnBack?.isHidden = false
-        btnSkip?.setTitle("Skip".localized, for: .normal)
-        btnBack?.setTitle("Back".localized, for: .normal)
+        btnSkip?.setTitle("skip".localized, for: .normal)
+        btnBack?.setTitle("back".localized, for: .normal)
     }
     
     @objc private func setupCamera() {

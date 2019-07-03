@@ -73,7 +73,7 @@
                                                             <color key="textColor" red="0.28235294119999998" green="0.36470588240000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Package"/>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="package"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Barcode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LXD-6S-jwQ">
@@ -82,7 +82,7 @@
                                                             <color key="textColor" red="0.28235294119999998" green="0.36470588240000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Barcode"/>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="barcode"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Package ref ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5Hu-Vh-4ww">
@@ -91,7 +91,7 @@
                                                             <color key="textColor" red="0.28235294119999998" green="0.36470588240000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Package ref ID"/>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="package-ref-id"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Qty" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hx8-bo-W2b">
@@ -100,7 +100,7 @@
                                                             <color key="textColor" red="0.28235294119999998" green="0.36470588240000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Qty"/>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="quantity"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eF2-zE-kZh">
@@ -154,6 +154,9 @@
                                                             </constraints>
                                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                             <state key="normal" title="van-load"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="van-load"/>
+                                                            </userDefinedRuntimeAttributes>
                                                             <connections>
                                                                 <action selector="onbtnClickLoadUnloadWithBtn:" destination="83f-Uv-ppw" eventType="touchUpInside" id="D71-bQ-KQx"/>
                                                             </connections>
@@ -164,7 +167,7 @@
                                                             <color key="textColor" red="0.28235294119999998" green="0.36470588240000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Actual Qty"/>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="actual-qty"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="SpJ-eG-nJ1">

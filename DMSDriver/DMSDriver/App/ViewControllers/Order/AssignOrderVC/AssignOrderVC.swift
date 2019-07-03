@@ -98,7 +98,7 @@ class AssignOrderVC: BaseViewController {
     
     func setupTextFieldSearch() {
         tfSearch?.delegate = self
-        tfSearch?.placeholder = "Search...".localized
+        tfSearch?.placeholder = "Search".localized
     }
     
     // MARK: - Action

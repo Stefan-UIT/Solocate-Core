@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import UITextView_Placeholder
 
 protocol AddNoteViewControllerDelegate: class {
     func didSubmitNote(_ note:String, images:[AttachFileModel]?)
@@ -29,6 +30,7 @@ class AddNoteViewController: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        noteTextView.placeholder = "write-here".localized
         self.hintLabel.isHidden = true
         validateSubmit = false
         noteTextView.delegate = self

@@ -148,12 +148,12 @@ class RouteDetailVC: BaseViewController {
         let endDate = HourFormater.string(from: route?.end_time.date ?? Date())
         lblRoute?.text = "Route".localized + " #\(route?.id ?? 0)"
         lblTime?.text = "\(startDate) - \(endDate)"
-        lblStatus?.text = route?.status?.name
+        lblStatus?.text = route?.status?.name?.localized
         lblStatus?.textColor = route?.colorStatus
         lblEstimateHour?.text = CommonUtils.formatEstTime(seconds: Int64(route?.totalTimeEst ?? 0))
         lblEstimateKilometer?.text = CommonUtils.formatEstKm(met: route?.totalDistance.doubleValue ?? 0)
         let totalOrders = route?.totalOrders ?? 0
-        lblTotalOrder?.text = (totalOrders > 1) ? "\(totalOrders) Orders".localized.uppercased() : "\(totalOrders) Order".localized.uppercased()
+        lblTotalOrder?.text = (totalOrders > 1) ? ("\(totalOrders) " + "orders".localized.uppercased()) : ("\(totalOrders) " + "order".localized.uppercased())
         
         lblStatus?.textColor = route?.colorStatus
         

@@ -44,7 +44,7 @@ class TaskListClvCell: UICollectionViewCell {
 //        }else {
 //            lblUrgency?.text = task?.urgent_type_name_en
 //        }
-        lblUrgency?.text = E(task?.urgency.name)
+        lblUrgency?.text = E(task?.urgency.name).localized
         lblUrgency?.textColor = task?.colorUrgent
         btnStatus?.setTitle("\(status.statusName)", for: .normal)
         btnStatus?.borderWidth = 1.0;

@@ -63,9 +63,9 @@ class SignatureViewController: BaseViewController {
         App().statusBarView?.backgroundColor = AppColor.background
         
         if isFromOrderDetail || order?.isRequireSign() == true {
-            skipButton.setTitle("Back".localized, for: .normal)
+            skipButton.setTitle("back".localized, for: .normal)
         }else {
-            skipButton.setTitle("Skip".localized, for: .normal)
+            skipButton.setTitle("skip".localized, for: .normal)
         }
     }
 

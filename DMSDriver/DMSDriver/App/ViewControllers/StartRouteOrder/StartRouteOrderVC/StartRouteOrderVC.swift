@@ -155,7 +155,7 @@ extension StartRouteOrderVC{
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
-                self?.showAlertView("Order:#\(order.id) has delevered successfully.".localized) {[weak self](action) in
+                self?.showAlertView("order-has-delivered-successfully".localized) {[weak self](action) in
                     if order.files == nil{
                         order.files = []
                     }
@@ -267,12 +267,12 @@ extension StartRouteOrderVC {
         case .pickupStatus:
             if _orderDetail.validUpdateStatusOrder() == true { // finish-order
                 if _orderDetail.isRequireImage(){
-                    self.showAlertView("Picture required".localized) {[weak self](action) in
+                    self.showAlertView("picture-required".localized) {[weak self](action) in
                         self?.showPictureViewController()
                     }
                     
                 }else if (_orderDetail.isRequireSign()) {
-                    self.showAlertView("Signature required".localized) {[weak self](action) in
+                    self.showAlertView("signature-required".localized) {[weak self](action) in
                         self?.showSignatureViewController()
                     }
                     

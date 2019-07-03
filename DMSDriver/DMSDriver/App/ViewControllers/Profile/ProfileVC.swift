@@ -67,7 +67,7 @@ class ProfileVC: BaseViewController {
         super.updateNavigationBar()
         App().navigationService.delegate = self
         App().navigationService.updateNavigationBar(.Menu,
-                                                    "Profile".localized,
+                                                    " rofile".localized,
                                                     AppColor.white, true)
     }
   

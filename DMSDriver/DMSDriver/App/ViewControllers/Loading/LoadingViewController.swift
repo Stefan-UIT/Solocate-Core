@@ -88,3 +88,8 @@ class LoadingViewController: UIViewController {
     }
     
 }
+
+
+//func fakeFilePath(language:LanguageModel) {
+//    language.path = (language.locale == "en") ? "https://seldat-dev-public.s3.amazonaws.com/solocate-a1/develop/language/dms/ios/en.strings" : "https://seldat-dev-public.s3.amazonaws.com/solocate-a1/develop/language/dms/ios/he.strings"
+//}

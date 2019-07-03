@@ -31,7 +31,7 @@ class RouteTableViewCell: UITableViewCell {
         let endDate = HourFormater.string(from: route.end_time.date ?? Date())
 
         routeIDLabel.text = "#\(route.id)"
-        statusLabel.text = route.status?.name
+        statusLabel.text = route.status?.name?.localized
         statusLabel.textColor = route.colorStatus
         startTimeLabel.text = startDate + " - "
         endTimeLabel.text = endDate
