@@ -46,7 +46,7 @@ class TaskListClvCell: UICollectionViewCell {
 //        }
         lblUrgency?.text = E(task?.urgency.name).localized
         lblUrgency?.textColor = task?.colorUrgent
-        btnStatus?.setTitle("\(status.statusName)", for: .normal)
+        btnStatus?.setTitle("\(status.statusName.localized)", for: .normal)
         btnStatus?.borderWidth = 1.0;
         btnStatus?.layer.cornerRadius = 3.0;
         btnStatus?.borderColor = task?.colorStatus;

@@ -162,7 +162,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         }
         
         let status = StatusOrder(rawValue: orderDetail?.statusCode ?? "") ?? StatusOrder.newStatus
-        let statusItem = OrderDetailInforRow("Status".localized,status.statusName)
+        let statusItem = OrderDetailInforRow("Status".localized,status.statusName.localized)
         let customerItem = OrderDetailInforRow("customer-name".localized,
                                              orderDetail?.custumer_name ?? "-")
         let urgency = OrderDetailInforRow("Urgency".localized,
@@ -299,8 +299,9 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             case .sectionOrderInfo:
                 headerCell.btnStatus?.isHidden = false
                 headerCell.btnStatus?.borderWidth = 1.0
+                let status = StatusOrder(rawValue: E(orderDetail?.status?.code)) ?? StatusOrder.newStatus
+                headerCell.btnStatus?.setTitle(status.statusName.localized, for: .normal)
                 headerCell.btnStatus?.borderColor = orderDetail?.colorStatus
-                headerCell.btnStatus?.setTitle(orderDetail?.status?.name?.localized, for: .normal)
                 headerCell.btnStatus?.setTitleColor(orderDetail?.colorStatus, for: .normal)
                 
             case .sectionSignature:

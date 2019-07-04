@@ -96,7 +96,7 @@ class HistoryNotifyDetailVC: BaseViewController {
         let stringDate = DateFormatter.serverDateFormater.date(from: E(alertDetail.created_at))
     
         let date = NotifylInforRow("Date".localized,E(displayDateTimeVN.string(from: stringDate ?? Date())))
-        let status = NotifylInforRow("Status".localized,E(alertDetail.statusName))
+        let status = NotifylInforRow("Status".localized,E(alertDetail.statusName?.localized))
         let ruleId = NotifylInforRow("rule-id".localized, "\(alertDetail.ruleType?.id ?? 0)")
         let routeId = NotifylInforRow("route-id".localized, "\(alertDetail.routeId ?? 0)")
         let driverName = NotifylInforRow("driver-name".localized,alertDetail.driverName ?? "-")

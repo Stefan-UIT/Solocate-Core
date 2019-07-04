@@ -67,7 +67,7 @@ class ProfileVC: BaseViewController {
         super.updateNavigationBar()
         App().navigationService.delegate = self
         App().navigationService.updateNavigationBar(.Menu,
-                                                    " rofile".localized,
+                                                    "profile".localized,
                                                     AppColor.white, true)
     }
   
@@ -429,7 +429,7 @@ extension ProfileVC{
         strongSelf.user = obj.data;
         strongSelf.initData()
         strongSelf.tbvContent?.reloadData()
-        strongSelf.showAlertView("Updated Successful".localized)
+        strongSelf.showAlertView("updated-successful".localized)
         let user = Caches().user
         user?.userInfo = obj.data
         Caches().user = user

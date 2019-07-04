@@ -110,7 +110,7 @@ class TaskDetailVC: BaseViewController {
         let dlvy_start_time = DateFormatter.serverDateFormater.date(from: E(_task.dlvy_start_time))
         let dlvy_end_time = DateFormatter.serverDateFormater.date(from: E(_task.dlvy_end_time))
         let status = TaskStatus(rawValue: E(_task.status.code)) ?? TaskStatus.open
-        let statusItem = OrderDetailInforRow("Status".localized,status.statusName)
+        let statusItem = OrderDetailInforRow("Status".localized,status.statusName.localized)
         let urgency = OrderDetailInforRow("Urgency".localized , _task.urgency.name ?? "")
 //        let reason = OrderDetailInforRow("failure-cause",E(_task.reason?.name))
 //        let mess = OrderDetailInforRow("Message",E(_task.reason_msg))
