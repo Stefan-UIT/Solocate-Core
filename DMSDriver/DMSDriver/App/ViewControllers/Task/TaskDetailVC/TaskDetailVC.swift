@@ -90,7 +90,7 @@ class TaskDetailVC: BaseViewController {
     //MARK: - Intialize
     func setupNavigateBar() {
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.BackOnly, "Task Detail".localized)
+        App().navigationService.updateNavigationBar(.BackOnly, "task-detail".localized)
     }
     
     
@@ -110,23 +110,23 @@ class TaskDetailVC: BaseViewController {
         let dlvy_start_time = DateFormatter.serverDateFormater.date(from: E(_task.dlvy_start_time))
         let dlvy_end_time = DateFormatter.serverDateFormater.date(from: E(_task.dlvy_end_time))
         let status = TaskStatus(rawValue: E(_task.status.code)) ?? TaskStatus.open
-        let statusItem = OrderDetailInforRow("Status",status.statusName)
-        let urgency = OrderDetailInforRow("Urgency" , _task.urgency.name ?? "")
-//        let reason = OrderDetailInforRow("Failure cause",E(_task.reason?.name))
+        let statusItem = OrderDetailInforRow("Status".localized,status.statusName.localized)
+        let urgency = OrderDetailInforRow("Urgency".localized , _task.urgency.name ?? "")
+//        let reason = OrderDetailInforRow("failure-cause",E(_task.reason?.name))
 //        let mess = OrderDetailInforRow("Message",E(_task.reason_msg))
-        let taskName = OrderDetailInforRow("Name","\(E(_task.name))")
-        let driver = OrderDetailInforRow("Driver","\(E(_task.assignee.userName))")
-        let taskId = OrderDetailInforRow("TaskId","\(_task.id)")
-        let startTime = OrderDetailInforRow("Start time", (dlvy_start_time != nil) ? displayHour.string(from: dlvy_start_time!) : "")
-        let endTime = OrderDetailInforRow("End time", (dlvy_end_time != nil) ? displayHour.string(from: dlvy_end_time!) : "")
+        let taskName = OrderDetailInforRow("Name".localized,"\(E(_task.name))")
+        let driver = OrderDetailInforRow("Driver".localized,"\(E(_task.assignee.userName))")
+
+        let startTime = OrderDetailInforRow("start-time".localized, (dlvy_start_time != nil) ? displayHour.string(from: dlvy_start_time!) : "")
+        let endTime = OrderDetailInforRow("end-time".localized, (dlvy_end_time != nil) ? displayHour.string(from: dlvy_end_time!) : "")
 //        let date = OrderDetailInforRow("Date",(deliveryDate != nil) ? displayDateVN.string(from: deliveryDate!) : "")
-//        let clientName = OrderDetailInforRow("Client name",E(_task.client_name))
-//        let customerName = OrderDetailInforRow("Customer name" ,E(_task.customer_name))
+//        let clientName = OrderDetailInforRow("client-name",E(_task.client_name))
+//        let customerName = OrderDetailInforRow("customer-name" ,E(_task.customer_name))
 //        let collectCall = OrderDetailInforRow("Collectcall",E(_task.collect_call))
-//        let coordinationPhone = OrderDetailInforRow("Coordination phone", E(_task.coord_phone))
-//        let receiverName = OrderDetailInforRow("Receiver name",E(_task.rcvr_name))
+//        let coordinationPhone = OrderDetailInforRow("coordination-phone", E(_task.coord_phone))
+//        let receiverName = OrderDetailInforRow("receiver-name",E(_task.rcvr_name))
 //        let phone = OrderDetailInforRow("Phone", E(_task.rcvr_phone))
-        let address = OrderDetailInforRow("Address",E(_task.address.address))
+        let address = OrderDetailInforRow("Address".localized,E(_task.address.address))
     
         taskInforStatus.append(statusItem)
         taskInforStatus.append(urgency)
@@ -150,7 +150,7 @@ class TaskDetailVC: BaseViewController {
 //        informationRows.append(collectCall)
 //        informationRows.append(coordinationPhone)
         
-        let instruction = OrderDetailInforRow("Instruction",E(_task.instructions))
+        let instruction = OrderDetailInforRow("Instructions".localized,E(_task.instructions))
         taskInstruction.append(instruction)
     }
     
@@ -171,8 +171,8 @@ class TaskDetailVC: BaseViewController {
     }
     
     func initVar()  {
-        arrTitleHeader = ["Task Status".localized,
-                          "Task Information".localized,
+        arrTitleHeader = ["task-status".localized,
+                          "task-information".localized,
 //                          "Information".localized,
                           "Instructions".localized]
         
@@ -200,7 +200,7 @@ class TaskDetailVC: BaseViewController {
     }
     
     func handleFinishAction() {
-//        App().showAlertView("Are you sure you want to finish this task?".localized,
+//        App().showAlertView("are-you-sure-you-want-to-finish-this-task".localized,
 //                            positiveTitle: "Finish".localized,
 //                            positiveAction: { (hasOK) in
 //
@@ -212,7 +212,7 @@ class TaskDetailVC: BaseViewController {
     }
     
     func handleCancelAction() {
-//        App().showAlertView("Are you sure you want to cancel this task?".localized,
+//        App().showAlertView("are-you-sure-you-want-to-cancel-this-task".localized,
 //                            positiveTitle: "Confirm".localized,
 //                            positiveAction: { (hasOK) in
 //

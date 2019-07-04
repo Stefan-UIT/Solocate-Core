@@ -16,6 +16,7 @@ import FirebaseMessaging
 import CoreData
 import Fabric
 import Crashlytics
+ import Alamofire
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -24,7 +25,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   var rootNV:BaseNV?
   var mainVC:MainVC?
   var navigationService = DMSNavigationService()
-
+    lazy var bundlePath: URL = {
+        let documents = URL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!)
+        print("\n     DIRECTORY: \(documents.absoluteString)\n")
+        let bundlePath = documents.appendingPathComponent("Localize", isDirectory: true)
+        return bundlePath
+    }()
   
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
@@ -55,11 +61,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         SERVICES().firebase.setupFirebase()
  
         IQKeyboardManager.shared().isEnabled = true
-        checkLoginStatus()
     
         // Follow Crashlytics app by Fabric
         Fabric.with([Crashlytics.self])
-    
+        
         return true
     }
     

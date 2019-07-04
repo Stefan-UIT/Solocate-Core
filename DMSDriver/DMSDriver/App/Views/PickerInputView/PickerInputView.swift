@@ -91,7 +91,7 @@ class PickerInputView: BaseViewController {
     //MARK: - ACTION
     @IBAction func onbtnClickDone(btn:UIButton) {
         if isEmpty(self.tvContent?.text) {
-            showAlertView("Content cann't empty.".localized)
+            showAlertView("content-cannt-empty".localized)
             return
         }
         

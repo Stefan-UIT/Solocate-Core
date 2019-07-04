@@ -43,11 +43,11 @@ class ImagePickerView: UIImagePickerController {
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet);
         
-        let actionGallery = UIAlertAction(title: "Album Gallery".localized, style: .default) {[weak self] (action) in
+        let actionGallery = UIAlertAction(title: "album-gallery".localized, style: .default) {[weak self] (action) in
            self?.getAllGallery(vc: atVC, isMultiplePick: true)
         }
         
-        let actionCamera = UIAlertAction(title: "Take photo".localized, style: .default) {[weak self] (action) in
+        let actionCamera = UIAlertAction(title: "take-photo".localized, style: .default) {[weak self] (action) in
             self?.getCamera(vc:atVC )
         }
         
@@ -79,15 +79,15 @@ class ImagePickerView: UIImagePickerController {
         
         let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet);
         
-        let actionGallery = UIAlertAction(title: "Album Gallery".localized, style: .default) {[weak self] (action) in
+        let actionGallery = UIAlertAction(title: "album-gallery".localized, style: .default) {[weak self] (action) in
             self?.getAllGallery(vc: atVC)
         }
         
-        let actionCamera = UIAlertAction(title: "Take photo".localized, style: .default) { (action) in
+        let actionCamera = UIAlertAction(title: "take-photo".localized, style: .default) { (action) in
             self.getCamera(vc:atVC)
         }
         
-        let cancel = UIAlertAction(title: "Cancel".localized, style: .cancel) { (action) in
+        let cancel = UIAlertAction(title: "cancel".localized, style: .cancel) { (action) in
             //
         }
         
@@ -115,7 +115,7 @@ class ImagePickerView: UIImagePickerController {
             selection: .multiple(action: {[weak self] (assets) in
                 self?.handleComplationPickImage(data: assets)
             }))
-        alert.addAction(title: "Cancel", style: .cancel)
+        alert.addAction(title: "cancel".localized, style: .cancel)
         alert.show()
     }
     
@@ -132,7 +132,7 @@ class ImagePickerView: UIImagePickerController {
                     self?.handleComplationPickImage(data: image)
                 }
             }))
-        alert.addAction(title: "Cancel", style: .cancel)
+        alert.addAction(title: "cancel".localized, style: .cancel)
         alert.show()
     }
     

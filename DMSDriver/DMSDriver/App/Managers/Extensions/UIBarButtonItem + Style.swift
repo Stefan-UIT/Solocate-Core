@@ -136,7 +136,7 @@ extension UIBarButtonItem {
     }
     
     class func filterButton(target: Any, action: Selector) -> UIBarButtonItem {
-        let button = filterButtonWithText(text: "Filter".localized, target: target, action: action)
+        let button = filterButtonWithText(text: "filter".localized, target: target, action: action)
         let item = UIBarButtonItem(customView: button)
         
         return item

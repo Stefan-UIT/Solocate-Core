@@ -207,6 +207,15 @@ extension BaseAPIService {
                        callback: callback);
     }
     
+    @discardableResult
+    func getLanguagesList(
+        callback: @escaping APICallback<ResponseDataListModel<LanguageModel>>) -> APIRequest {
+        let path = String(format:PATH_REQUEST_URL.GET_LIST_LANGUAGE.URL, "ios", "DMS")
+        return request(method: .GET,
+                       path: path,
+                       input: .empty,
+                       callback: callback);
+    }
     
   
     //MARK: -  Help Method

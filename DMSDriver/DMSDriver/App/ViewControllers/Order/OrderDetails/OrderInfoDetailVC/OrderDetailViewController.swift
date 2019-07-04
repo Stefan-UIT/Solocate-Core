@@ -101,23 +101,23 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
     private func initVar()  {
         arrTitleHeader = ["",
-                          "Order info".localized.uppercased(),
-                          "Pickup".localized.uppercased(),
+                          "order-info".localized.uppercased(),
+                          "pickup".localized.uppercased(),
                           "Delivery".localized.uppercased(),
-                          "Packgages".localized.uppercased(),
+                          "packgages".localized.uppercased(),
                           "Signature".localized.uppercased(),
                           "Picture".localized.uppercased(),
-                          "Add Note".localized.uppercased()
+                          "add-note".localized.uppercased()
         ]
         setupDataDetailInforRows()
     }
     
     private func initUI()  {
         self.setupTableView()
-        lblOrderId?.text = "Delivery #\(orderDetail?.id ?? 0)"
+        lblOrderId?.text = "Delivery".localized + " #\(orderDetail?.id ?? 0)"
         guard  let start = orderDetail?.to?.start_time?.date,
                let end = orderDetail?.to?.end_time?.date else{
-            lblDateTime?.text = "Start/End time is invalid."
+            lblDateTime?.text = "Start/End-time is invalid".localized
             return
         }
         let timeStart = DateFormatter.hour24Formater.string(from: start)
@@ -137,37 +137,37 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         if let date = orderDetail?.from?.start_time?.date {
             startFromDate = displayDateTimeVN.string(from: date)
         }else {
-            startFromDate = "Invalid date."
+            startFromDate = "invalid-date".localized
         }
         
         var endFromDate = ""
         if let date = orderDetail?.from?.end_time?.date {
             endFromDate = displayDateTimeVN.string(from: date)
         }else {
-            endFromDate = "Invalid date."
+            endFromDate = "invalid-date".localized
         }
         
         var startToDate = ""
         if let date = orderDetail?.to?.start_time?.date {
             startToDate = displayDateTimeVN.string(from: date)
         }else {
-            startToDate = "Invalid date."
+            startToDate = "invalid-date".localized
         }
         
         var endToDate = ""
         if let date = orderDetail?.to?.end_time?.date {
             endToDate = displayDateTimeVN.string(from: date)
         }else {
-            endToDate = "Invalid date."
+            endToDate = "invalid-date".localized
         }
         
         let status = StatusOrder(rawValue: orderDetail?.statusCode ?? "") ?? StatusOrder.newStatus
-        let statusItem = OrderDetailInforRow("Status".localized,status.statusName)
-        let customerItem = OrderDetailInforRow("Customer Name".localized.localized,
+        let statusItem = OrderDetailInforRow("Status".localized,status.statusName.localized)
+        let customerItem = OrderDetailInforRow("customer-name".localized,
                                              orderDetail?.custumer_name ?? "-")
         let urgency = OrderDetailInforRow("Urgency".localized,
                                           isHebewLang() ? orderDetail?.urgent_type_name_hb ?? "" :  orderDetail?.urgent_type_name_en ?? "")
-        let orderId = OrderDetailInforRow("Order Id".localized,"#\(orderDetail?.id ?? 0)")
+        let orderId = OrderDetailInforRow("order-id".localized,"#\(orderDetail?.id ?? 0)")
         let seq = OrderDetailInforRow("SEQ".localized,"\(orderDetail?.seq ?? 0)")
 
         orderInforDetail.append(orderId)
@@ -178,25 +178,25 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         if  (orderDetail?.statusOrder == .cancelStatus ||
              orderDetail?.statusOrder == .cancelFinishStatus),
             let _orderDetail = orderDetail{
-            let reason = OrderDetailInforRow("Failure cause".localized,_orderDetail.reason?.name ?? "-")
+            let reason = OrderDetailInforRow("failure-cause".localized,_orderDetail.reason?.name ?? "-")
             let mess = OrderDetailInforRow("Message".localized,_orderDetail.reason_msg ?? "-")
             orderInforDetail.append(reason)
             orderInforDetail.append(mess)
         }
         
-        let fromLocationName = OrderDetailInforRow("Location name".localized, E(orderDetail?.from?.loc_name),false)
+        let fromLocationName = OrderDetailInforRow("location-name".localized, E(orderDetail?.from?.loc_name),false)
         let fromAddress = OrderDetailInforRow("Address".localized, E(orderDetail?.from?.address),true)
-        let fromContactName = OrderDetailInforRow("Contact name".localized,orderDetail?.from?.name ?? "-")
-        let fromContactPhone = OrderDetailInforRow("Contact phone".localized,orderDetail?.from?.phone ?? "-",true)
-        let fromStartTime = OrderDetailInforRow("Start time".localized,startFromDate,false)
-        let fromEndtime = OrderDetailInforRow("End time".localized,endFromDate,false)
+        let fromContactName = OrderDetailInforRow("contact-name".localized,orderDetail?.from?.name ?? "-")
+        let fromContactPhone = OrderDetailInforRow("contact-phone".localized,orderDetail?.from?.phone ?? "-",true)
+        let fromStartTime = OrderDetailInforRow("start-time".localized,startFromDate,false)
+        let fromEndtime = OrderDetailInforRow("end-time".localized,endFromDate,false)
 
         let toAddress = OrderDetailInforRow("Address".localized, E(orderDetail?.to?.address),true)
-        let toContactName = OrderDetailInforRow("Contact name".localized,orderDetail?.to?.name ?? "-")
-        let toContactPhone = OrderDetailInforRow("Contact phone".localized,orderDetail?.to?.phone ?? "-", true)
-        let toStartTime = OrderDetailInforRow("Start time".localized,startToDate,false)
-        let tomEndtime = OrderDetailInforRow("End time".localized,endToDate,false)
-        let toLocationName = OrderDetailInforRow("Location name".localized, E(orderDetail?.to?.loc_name),false)
+        let toContactName = OrderDetailInforRow("contact-name".localized,orderDetail?.to?.name ?? "-")
+        let toContactPhone = OrderDetailInforRow("contact-phone".localized,orderDetail?.to?.phone ?? "-", true)
+        let toStartTime = OrderDetailInforRow("start-time".localized,startToDate,false)
+        let tomEndtime = OrderDetailInforRow("end-time".localized,endToDate,false)
+        let toLocationName = OrderDetailInforRow("location-name".localized, E(orderDetail?.to?.loc_name),false)
 
         orderInforFrom.append(fromLocationName)
         orderInforFrom.append(fromAddress)
@@ -299,8 +299,9 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             case .sectionOrderInfo:
                 headerCell.btnStatus?.isHidden = false
                 headerCell.btnStatus?.borderWidth = 1.0
+                let status = StatusOrder(rawValue: E(orderDetail?.status?.code)) ?? StatusOrder.newStatus
+                headerCell.btnStatus?.setTitle(status.statusName.localized, for: .normal)
                 headerCell.btnStatus?.borderColor = orderDetail?.colorStatus
-                headerCell.btnStatus?.setTitle(orderDetail?.status?.name, for: .normal)
                 headerCell.btnStatus?.setTitleColor(orderDetail?.colorStatus, for: .normal)
                 
             case .sectionSignature:
@@ -380,12 +381,12 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         let row = indexPath.row
         switch orderSection {
         case .sectionFrom:
-            if row != 0 &&  // From address, Contact phone
+            if row != 0 &&  // from-address, contact-phone
                 row != orderInforFrom.count - 3 {
                 return
             }
             
-            if row == 0{ //From address
+            if row == 0{ //from-address
                 let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
                 vc.orderDetail = orderDetail
                 if let _orderDetail = orderDetail,
@@ -404,7 +405,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             }
             
         case .sectionTo:
-            if row != 0 &&  // To address, Contact phone
+            if row != 0 &&  // to-address, contact-phone
                 row != orderInforTo.count - 3 {
                 return
             }
@@ -581,7 +582,7 @@ fileprivate extension OrderDetailViewController {
     
     func cellDiscription(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: addressCellIdentifier, for: indexPath) as! OrderDetailTableViewCell
-        let description = OrderDetailInforRow("Instructions","-")
+        let description = OrderDetailInforRow("Instructions".localized,"-")
         cell.orderDetailItem = description
         cell.selectionStyle = .none
         cell.vContent?.roundCornersLRB()
@@ -697,13 +698,13 @@ fileprivate extension OrderDetailViewController{
         case .inProcessStatus:
             if _orderDetail.isRequireImage() &&
                 _orderDetail.pictures?.count ?? 0 <= 0{
-                self.showAlertView("Picture required".localized) {(action) in
+                self.showAlertView("picture-required".localized) {(action) in
                     //self?.didUpdateStatus?(_orderDetail, nil)
                 }
                 
             }else if (_orderDetail.isRequireSign() &&
                 _orderDetail.signature == nil) {
-                self.showAlertView("Signature required".localized) {(action) in
+                self.showAlertView("signature-required".localized) {(action) in
                     //self?.didUpdateStatus?(_orderDetail, nil)
                 }
                 
@@ -718,9 +719,9 @@ fileprivate extension OrderDetailViewController{
     }
     
     private func showInputNote(_ statusNeedUpdate:String) {
-        let alert = UIAlertController(title: "Finish order".localized,
+        let alert = UIAlertController(title: "finish-order".localized,
                                       message: nil, preferredStyle: .alert)
-        alert.showTextViewInput(placeholder: "Enter note for this order(optional)".localized,
+        alert.showTextViewInput(placeholder: "enter-note-for-this-orderoptional".localized,
                                 nameAction: "Finish".localized,
                                 oldText: "") {[weak self] (success, string) in
                                     //self?.orderDetail?.note = string
@@ -735,7 +736,7 @@ fileprivate extension OrderDetailViewController{
                 UIApplication.shared.open(url, options: [:], completionHandler: nil)
             }
         }else {
-            print("Phone number is invalid.")
+            print("phone-number-is-invalid".localized)
         }
     }
     
@@ -755,7 +756,7 @@ fileprivate extension OrderDetailViewController{
             updateStatusButton?.setTitle("Pickup".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = orderDetail?.colorStatus
         default:
-            updateStatusButton?.setTitle("Let's Start".localized.uppercased(), for: .normal)
+            updateStatusButton?.setTitle("let-s-start".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = AppColor.buttonColor
         }
         let isHidden = (orderDetail?.statusOrder == StatusOrder.deliveryStatus ||
@@ -919,7 +920,7 @@ extension OrderDetailViewController{
             switch result{
             case .object(_):
                 self?.updateOrderDetail?(self?.orderDetail)
-                self?.showAlertView("Assigned successfull.".localized,
+                self?.showAlertView("assigned-successfull".localized,
                                     completionHandler: { (ok) in
                                         /*
                                         let vc:JobListVC = .loadSB(SB: .Job)

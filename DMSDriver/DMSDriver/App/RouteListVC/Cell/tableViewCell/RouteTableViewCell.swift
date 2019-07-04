@@ -31,13 +31,13 @@ class RouteTableViewCell: UITableViewCell {
         let endDate = HourFormater.string(from: route.end_time.date ?? Date())
 
         routeIDLabel.text = "#\(route.id)"
-        statusLabel.text = route.status?.name
+        statusLabel.text = route.status?.name?.localized
         statusLabel.textColor = route.colorStatus
         startTimeLabel.text = startDate + " - "
         endTimeLabel.text = endDate
         expectedStartDateLabel.text = stringDate.uppercased()
         durationLabel.text = CommonUtils.formatEstTime(seconds: Int64(route.totalTimeEst))
         distanceLabel.text = CommonUtils.formatEstKm(met: route.totalDistance.doubleValue)
-        stopsLabel.text = (route.totalOrders > 1) ? "\(route.totalOrders) Orders".localized.uppercased() : "\(route.totalOrders) Order".localized.uppercased()
+        stopsLabel.text = (route.totalOrders > 1) ? ("\(route.totalOrders) " + "orders".localized.uppercased()) : ("\(route.totalOrders) " + "order".localized.uppercased())
     }
 }

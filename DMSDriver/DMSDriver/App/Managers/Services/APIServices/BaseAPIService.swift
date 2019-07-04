@@ -63,7 +63,7 @@ class BaseAPIService {
             get{
                 switch self {
                 case .tokenExpried:
-                    return "Session expired.".localized
+                    return "session-expired".localized
                 default:
                     return ""
                 }

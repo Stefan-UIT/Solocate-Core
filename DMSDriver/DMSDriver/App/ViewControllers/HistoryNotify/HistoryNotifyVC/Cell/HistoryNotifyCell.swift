@@ -35,7 +35,7 @@ class HistoryNotifyCell: UITableViewCell {
         btnStatus?.borderWidth = 1
         btnStatus?.borderColor =  alert.colorStatus
         btnStatus?.setTitleColor(alert.colorStatus, for: .normal)
-        btnStatus?.setTitle(alert.statusName, for: .normal)
+        btnStatus?.setTitle(alert.statusName?.localized, for: .normal)
     }
     
     //MARK: - ACTION

@@ -47,7 +47,7 @@ class NoteManagementViewController: BaseViewController {
     override func updateNavigationBar()  {
         super.updateNavigationBar()
         App().navigationService.delegate = self
-        let title = (isRouteNoteManagement) ? "Route #\(route!.id)" : "Order #\(order!.id)"
+        let title = (isRouteNoteManagement) ? ("Route".localized + " #\(route!.id)") : ("order".localized + " #\(order!.id)")
         App().navigationService.updateNavigationBar(.BackOnly, title.localized, AppColor.white, true)
     }
     
@@ -99,7 +99,7 @@ extension NoteManagementViewController {
             switch result{
             case .object(_):
                 self?.fetchOrderData()
-                self?.showAlertView("Updated Successful".localized)
+                self?.showAlertView("updated-successful".localized)
                 return
                 
             case .error(let error):
@@ -119,7 +119,7 @@ extension NoteManagementViewController {
             switch result{
             case .object(_):
                 self?.fetchRouteData()
-                self?.showAlertView("Updated Successful".localized)
+                self?.showAlertView("updated-successful".localized)
                 return
                 
             case .error(let error):

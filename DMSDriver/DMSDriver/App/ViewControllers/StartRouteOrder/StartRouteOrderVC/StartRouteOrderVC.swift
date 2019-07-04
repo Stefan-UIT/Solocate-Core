@@ -68,7 +68,7 @@ class StartRouteOrderVC: BaseViewController {
         case .newStatus:
             btnStart?.setTitle("Start".localized.uppercased(), for: .normal)
         case .inProcessStatus:
-            btnStart?.setTitle("Van Load".localized.uppercased(), for: .normal)
+            btnStart?.setTitle("van-load".localized.uppercased(), for: .normal)
         case .pickupStatus:
             btnStart?.setTitle("Deliver".localized.uppercased(), for: .normal)
             
@@ -155,7 +155,7 @@ extension StartRouteOrderVC{
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
-                self?.showAlertView("Order:#\(order.id) has delevered successfully.".localized) {[weak self](action) in
+                self?.showAlertView("order-has-delivered-successfully".localized) {[weak self](action) in
                     if order.files == nil{
                         order.files = []
                     }
@@ -226,7 +226,7 @@ extension StartRouteOrderVC {
         var statusNeedUpdate = status.rawValue
         switch status{
         case .newStatus:
-            App().showAlertView("Do you want to start this order?".localized,
+            App().showAlertView("do-you-want-to-start-this-order".localized,
                                 positiveTitle: "YES".localized,
                                 positiveAction: {[weak self] (ok) in
                                     
@@ -253,7 +253,7 @@ extension StartRouteOrderVC {
             
             self.navigationController?.pushViewController(vc, animated: true)
             /*
-            App().showAlertView("Do you want to pickup this order?".localized,
+            App().showAlertView("do-you-want-to-pickup-this-order".localized,
                                 positiveTitle: "YES".localized,
                                 positiveAction: {[weak self] (ok) in
                                     
@@ -265,20 +265,20 @@ extension StartRouteOrderVC {
             }
             */
         case .pickupStatus:
-            if _orderDetail.validUpdateStatusOrder() == true { // Finish order
+            if _orderDetail.validUpdateStatusOrder() == true { // finish-order
                 if _orderDetail.isRequireImage(){
-                    self.showAlertView("Picture required".localized) {[weak self](action) in
+                    self.showAlertView("picture-required".localized) {[weak self](action) in
                         self?.showPictureViewController()
                     }
                     
                 }else if (_orderDetail.isRequireSign()) {
-                    self.showAlertView("Signature required".localized) {[weak self](action) in
+                    self.showAlertView("signature-required".localized) {[weak self](action) in
                         self?.showSignatureViewController()
                     }
                     
                 }else {
                     
-                    App().showAlertView("Do you want to Finish this order?".localized,
+                    App().showAlertView("do-you-want-to-finish-this-order".localized,
                                         positiveTitle: "YES".localized,
                                         positiveAction: {[weak self] (ok) in
                                             

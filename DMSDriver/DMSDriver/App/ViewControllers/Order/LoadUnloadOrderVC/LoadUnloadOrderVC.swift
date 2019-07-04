@@ -44,7 +44,7 @@ class LoadUnloadOrderVC: BaseViewController {
     override func updateNavigationBar() {
         App().navigationService.delegate = self
         App().navigationService.updateNavigationBar(.Menu,
-                                                    "Packakes List".localized,
+                                                    "packages-list".localized,
                                                     AppColor.white, true)
     }
     
@@ -103,12 +103,12 @@ class LoadUnloadOrderVC: BaseViewController {
                 }else {
                     
                     if self?.order?.isRequireImage() ?? false{
-                        self?.showAlertView("You need add least a picture to finish this order".localized) {[weak self](action) in
+                        self?.showAlertView("you-need-add-least-a-picture-to-finish-this-order".localized) {[weak self](action) in
                             self?.showPictureViewController()
                         }
                         
                     }else if (self?.order?.isRequireSign() ?? false) {
-                        self?.showAlertView("You need add Customer's signature to finish this order".localized) {[weak self](action) in
+                        self?.showAlertView("you-need-add-customer-s-signature-to-finish-this-order".localized) {[weak self](action) in
                             self?.showSignatureViewController()
                         }
                         
@@ -213,12 +213,12 @@ extension LoadUnloadOrderVC:LoadUnLoadListCellDelegate{
                 }else {
             
                      if order.isRequireImage(){
-                        self.showAlertView("You need add least a picture to finish this order".localized) {[weak self](action) in
+                        self.showAlertView("you-need-add-least-a-picture-to-finish-this-order".localized) {[weak self](action) in
                             self?.showPictureViewController()
                         }
                      
                     }else if (order.isRequireSign()) {
-                        self.showAlertView("You need add Customer's signature to finish this order".localized) {[weak self](action) in
+                        self.showAlertView("you-need-add-customer-s-signature-to-finish-this-order".localized) {[weak self](action) in
                             self?.showSignatureViewController()
                         }
                      
@@ -300,7 +300,7 @@ extension LoadUnloadOrderVC:BaseSearchViewDelegate{
             dataDisplay = dataOrigin
         }
         if dataDisplay.count <= 0 {
-            UIView.addViewNoItemWithTitle("No data".localized, intoParentView: self.view)
+            UIView.addViewNoItemWithTitle("no-data".localized, intoParentView: self.view)
         }else {
             UIView.removeViewNoItemAtParentView(self.view!)
         }
@@ -373,7 +373,7 @@ extension LoadUnloadOrderVC {
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
-                self?.showAlertView("Order:#\(order.id) has delevered successfully.".localized) {[weak self](action) in
+                self?.showAlertView("order-has-delivered-successfully".localized) {[weak self](action) in
                     if order.files == nil{
                         order.files = []
                     }

@@ -41,7 +41,7 @@ extension GMSMapView {
             let labelOrder = labelMarkerWithText("To".localized.uppercased(),.To)
             marker.iconView = labelOrder
         case .Pickup:
-            let labelOrder = labelMarkerWithText("Pick Up".localized.uppercased(),.Pickup)
+            let labelOrder = labelMarkerWithText("pick-up".localized.uppercased(),.Pickup)
             marker.iconView = labelOrder
         case .Delivery:
             let labelOrder = labelMarkerWithText("Delivery".localized.uppercased(),.Delivery)

@@ -94,7 +94,7 @@ class ChangePasswordView: BaseView {
             switch result{
             case .object(let obj):
                 if weakSelf?.delegate != nil {
-                    weakSelf?.delegate?.changePasswordView(self!, true, "Your password has been updated".localized, obj)
+                    weakSelf?.delegate?.changePasswordView(self!, true, "your-password-has-been-updated".localized, obj)
                 }
                 break
             case .error(let error):

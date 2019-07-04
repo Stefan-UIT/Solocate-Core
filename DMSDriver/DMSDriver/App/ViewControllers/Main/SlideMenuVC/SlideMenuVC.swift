@@ -23,15 +23,15 @@ enum MenuItemType : Int {
     case .PROFILE:
       return ""
     case .DASHBOARD:
-        return "Dashboard".localized.uppercased()
+        return "dashboard".localized.uppercased()
     case .ROUTES:
         return "Routes".localized.uppercased()
     case .COUNTER:
         return "Counter".localized.uppercased()
     case .ASSIGN:
-        return "Orders assignment".localized.uppercased()
+        return "orders-assignment".localized.uppercased()
     case .TASK:
-        return "Tasks List".localized.uppercased()
+        return "tasks-list".localized.uppercased()
     case .ALERT:
         return "Alerts".localized.uppercased()
     case .LOGOUT:

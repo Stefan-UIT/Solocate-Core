@@ -237,7 +237,7 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                     
                 }else {
                     header.lblTitle?.textColor = AppColor.mainColor
-                    header.lblTitle?.text = "STATUS: " + E(filterModel.status?.name)
+                    header.lblTitle?.text = "STATUS: " + E(filterModel.status?.name?.localized)
                 }
                 return header
 

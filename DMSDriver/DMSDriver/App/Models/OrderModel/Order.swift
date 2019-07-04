@@ -27,7 +27,7 @@ enum StatusOrder: String {
         case .inProcessStatus:
             return "Started".localized
         case .pickupStatus:
-            return "Picked Up"
+            return "picked-up".localized
         case .deliveryStatus:
             return "Finished".localized
         case .cancelStatus,
@@ -114,11 +114,11 @@ class Order: BaseModel {
                 get{
                     switch self {
                     case .NotLoad:
-                        return "Not Load".localized
+                        return "not-load".localized
                     case .Loaded:
-                        return "Loaded".localized
+                        return "loaded".localized
                     case .Unload:
-                        return "Unloaded".localized
+                        return "unloaded".localized
                     }
                 }
             }
@@ -409,7 +409,7 @@ class Order: BaseModel {
             
         }
         get{
-            return E(status?.name)
+            return E(status?.name).localized
         }
     }
 

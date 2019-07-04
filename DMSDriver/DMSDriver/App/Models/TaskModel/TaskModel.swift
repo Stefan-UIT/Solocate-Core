@@ -24,17 +24,17 @@ enum TaskStatus: String {
         case .open:
             return "New".localized
         case .inprogress:
-            return "In Progress".localized
+            return "in-progress".localized
         case .delivered:
             return "Finished".localized
         case .cancel:
             return "Cancelled".localized
         case .pickedUp:
-            return "Picked Up".localized
+            return "picked-up".localized
         case .missingInTruck:
-            return "Missing in Trunk".localized
+            return "missing-in-trunk".localized
         case .missingAnPickUP:
-            return "Missing at Pick-up".localized
+            return "missing-at-pick-up".localized
         }
     }
 }

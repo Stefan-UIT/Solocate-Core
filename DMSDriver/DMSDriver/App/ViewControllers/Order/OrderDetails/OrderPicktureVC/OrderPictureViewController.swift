@@ -42,7 +42,7 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
         if let _orderDetail = orderDetail {
             let isAlreadyUploadedPictures = _orderDetail.pictures?.count > 0
             vNoImage?.isHidden = isAlreadyUploadedPictures
-            btnShowImage.setTitle("\("Order Id".localized) - \(_orderDetail.id)(\(attachFiles.count) \("items".localized))", for: .normal)
+            btnShowImage.setTitle("\("order-id".localized) - \(_orderDetail.id)(\(attachFiles.count) \("items".localized))", for: .normal)
             actionButton.isHidden  = (_orderDetail.statusOrder == StatusOrder.deliveryStatus)
         }
     }
@@ -167,7 +167,7 @@ fileprivate extension OrderPictureViewController {
             switch result{
             case .object(_):
                 // self?.controlsContainerView.isHidden = true
-                self?.showAlertView("Uploaded Successful".localized)
+                self?.showAlertView("uploaded-successful".localized)
                 
                 break
             case .error(let error):

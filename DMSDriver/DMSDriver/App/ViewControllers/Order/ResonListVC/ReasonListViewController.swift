@@ -60,7 +60,7 @@ class ReasonListViewController: BaseViewController {
             switch self.displayMode{
             case .displayModeOrder:
                 if let _orderDetail = self.orderDetail {
-                    let unableTitle = _orderDetail.statusOrder == .newStatus ? "Unable To Start".localized.uppercased() : "Unable To Finish".localized.uppercased()
+                    let unableTitle = _orderDetail.statusOrder == .newStatus ? "unable-to-start".localized.uppercased() : "unable-to-finish".localized.uppercased()
                     self.finishButton?.setTitle(unableTitle, for: .normal)
                 }
                 
@@ -74,19 +74,19 @@ class ReasonListViewController: BaseViewController {
     
     override func updateNavigationBar() {
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.BackOnly, "Select Reason".localized)
+        App().navigationService.updateNavigationBar(.BackOnly, "select-reason".localized)
     }
     
     func setupTextView()  {
         tvMessange?.delegate = self
-        lblPlaceholder?.text = "Enter a message".localized
+        lblPlaceholder?.text = "enter-a-message".localized
     }
   
     
     // MARK: - ACTION
     @IBAction func submit(_ sender: UIButton) {
         guard selectedIndex >= 0 else {
-            showAlertView("Please select at least one reason".localized)
+            showAlertView("please-select-at-least-one-reason".localized)
             return
         }
         

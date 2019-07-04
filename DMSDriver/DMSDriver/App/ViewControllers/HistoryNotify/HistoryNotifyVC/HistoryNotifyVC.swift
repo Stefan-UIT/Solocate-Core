@@ -187,8 +187,8 @@ extension HistoryNotifyVC:HistoryNotifyCellDelegate{
         }
         let alert = arrContent[indexPath.row]
         PickerInputView.showInputViewWith(type: .PickerInputTextView,
-                                          atVC: self, title: "Resolve alert".localized,
-                                          placeHolder: "Comment...".localized) {[weak self] (success, content,_)  in
+                                          atVC: self, title: "resolve-alert".localized,
+                                          placeHolder: "comment".localized) {[weak self] (success, content,_)  in
                                             alert.comment = content
                                             self?.resolveAlert(alert: alert)
         }
@@ -208,7 +208,7 @@ extension HistoryNotifyVC:DMSNavigationServiceDelegate{
         let currentDate = dateFormater.date(from: dateStringFilter)
         UIAlertController.showDatePicker(style: .actionSheet,
                                          mode: .date,
-                                         title: "Select date".localized,
+                                         title: "select-date".localized,
                                          currentDate: currentDate) {[weak self] (date) in
                                             self?.dateStringFilter = date.toString("dd/MM/yyyy")
                                             self?.filterModel?.created_day_from = self?.dateStringFilter
@@ -268,7 +268,7 @@ extension HistoryNotifyVC{
                 if (self?.arrContent.count > 0){
                     UIView.removeViewNoItemAtParentView(tbv)
                 }else {
-                    UIView.addViewNoItemWithTitle("No data".localized,
+                    UIView.addViewNoItemWithTitle("no-data".localized,
                                                   intoParentView: tbv)
                 }
             case .error(let error):

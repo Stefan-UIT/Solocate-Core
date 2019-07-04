@@ -116,7 +116,7 @@ class TimerVC: BaseViewController {
         if totalSecond > 0 {
             LocalNotification.createPushNotificationAfter(totalSecond,
                                                           "Reminder".localized,
-                                                          "Your task has been over.".localized,
+                                                          "your-task-has-been-over".localized,
                                                           NotificationName.remiderTimeoutDrivingRole,  [:])
         }
     }

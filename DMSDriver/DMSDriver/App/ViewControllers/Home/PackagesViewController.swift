@@ -33,8 +33,8 @@ class PackagesViewController: BaseViewController {
   var dateStringFilter:String = Date().toString()
     
   fileprivate let titleHeaders = ["Delivery".localized.uppercased(),
-                                  "Pick Up".localized.uppercased(),
-                                  "Package On Truck".localized.uppercased()]
+                                  "pick-up".localized.uppercased(),
+                                  "package-on-truck".localized.uppercased()]
     
   fileprivate var dileveryDatas:[[String]] = []
   fileprivate var backHaulDatas:[[String]] = []
@@ -53,30 +53,30 @@ class PackagesViewController: BaseViewController {
     
     func setupData() {
 
-        dileveryDatas = [["Total double type".localized,"\(package.delivery.total_double_type)"],
-                         ["Total cartons".localized,"\(package.delivery.total_cartons)"],
-                         ["Total packages".localized,"\(package.delivery.total_packages)"],
-                         ["Double type complete".localized,"\(package.delivery.double_type_complete)"],
-                         ["Packages complete".localized,"\(package.delivery.packages_complete)"],
-                         ["Cartons complete".localized,"\(package.delivery.cartons_complete)"],
-                         ["Double type not complete".localized,"\(package.delivery.double_type_not_complete)"],
-                         ["Cartons not complete".localized,"\(package.delivery.cartons_not_complete)"],
-                         ["Packages not complete".localized,"\(package.delivery.packages_not_complete)"]]
+        dileveryDatas = [["total-double-type".localized,"\(package.delivery.total_double_type)"],
+                         ["total-cartons".localized,"\(package.delivery.total_cartons)"],
+                         ["total-packages".localized,"\(package.delivery.total_packages)"],
+                         ["double-type-complete".localized,"\(package.delivery.double_type_complete)"],
+                         ["packages-complete".localized,"\(package.delivery.packages_complete)"],
+                         ["cartons-complete".localized,"\(package.delivery.cartons_complete)"],
+                         ["double-type-not-complete".localized,"\(package.delivery.double_type_not_complete)"],
+                         ["cartons-not-complete".localized,"\(package.delivery.cartons_not_complete)"],
+                         ["packages-not-complete".localized,"\(package.delivery.packages_not_complete)"]]
         
-        backHaulDatas = [["Total double type".localized,"\(package.back_haul.total_double_type)"],
-                         ["Total cartons".localized,"\(package.back_haul.total_cartons)"],
-                         ["Total packages".localized,"\(package.back_haul.total_packages)"],
-                         ["Double type complete".localized,"\(package.back_haul.double_type_complete)"],
-                         ["Packages complete".localized,"\(package.back_haul.packages_complete)"],
-                         ["Cartons complete".localized,"\(package.back_haul.cartons_complete)"],
-                         ["Double type not complete".localized,"\(package.back_haul.double_type_not_complete)"],
-                         ["Cartons not complete".localized,"\(package.back_haul.cartons_not_complete)"],
-                         ["Packages not complete".localized,"\(package.back_haul.packages_not_complete)"]]
+        backHaulDatas = [["total-double-type".localized,"\(package.back_haul.total_double_type)"],
+                         ["total-cartons".localized,"\(package.back_haul.total_cartons)"],
+                         ["total-packages".localized,"\(package.back_haul.total_packages)"],
+                         ["double-type-complete".localized,"\(package.back_haul.double_type_complete)"],
+                         ["packages-complete".localized,"\(package.back_haul.packages_complete)"],
+                         ["cartons-complete".localized,"\(package.back_haul.cartons_complete)"],
+                         ["double-type-not-complete".localized,"\(package.back_haul.double_type_not_complete)"],
+                         ["cartons-not-complete".localized,"\(package.back_haul.cartons_not_complete)"],
+                         ["packages-not-complete".localized,"\(package.back_haul.packages_not_complete)"]]
         
         
-        packageOnTruckDatas = [["Total double type".localized,"\(package.package_on_truck.totalDoubleType)"],
-                               ["Total cartons".localized,"\(package.package_on_truck.totalCartons)"],
-                               ["Total packages".localized,"\(package.package_on_truck.totalPackages)"]]
+        packageOnTruckDatas = [["total-double-type".localized,"\(package.package_on_truck.totalDoubleType)"],
+                               ["total-cartons".localized,"\(package.package_on_truck.totalCartons)"],
+                               ["total-packages".localized,"\(package.package_on_truck.totalPackages)"]]
         
     }
 }

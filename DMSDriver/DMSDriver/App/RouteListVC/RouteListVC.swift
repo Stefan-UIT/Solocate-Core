@@ -70,8 +70,9 @@ import Crashlytics
     private func initUI()  {
         setupTableView()
         let userName = Caches().user?.userInfo?.userName ?? ""
-        let date = #"Here is your plan for today - \#(ShortDateFormater.string(from: filterModel.timeData?.startDate ?? Date()))"#.localized
-        lblNameDriver?.text = "Hi \(userName)".localized
+//        let date = #"Here is your plan for today - \#(ShortDateFormater.string(from: filterModel.timeData?.startDate ?? Date()))"#.localized
+        let date = "here-is-your-plan".localized
+        lblNameDriver?.text = "hi".localized + " \(userName)"
         lblDate?.text = date
     }
     

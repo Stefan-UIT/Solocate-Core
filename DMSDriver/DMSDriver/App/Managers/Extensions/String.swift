@@ -44,7 +44,8 @@ extension String {
     }
   
     var localized: String {
-        return NSLocalizedString(self, tableName: nil, bundle: Bundle.main, value: "", comment: "")
+        let localBundle = Bundle(url: App().bundlePath)!
+        return NSLocalizedString(self, tableName: nil, bundle: localBundle, value: "", comment: "")
     }
   
     var doubleValue: Double {
@@ -66,5 +67,9 @@ extension String {
   
     var date: Date? {
         return ServerDateFormater.date(from: self)
+    }
+    
+    func replaceDoubleQuoteIfNeeded() -> String {
+        return self.replacingOccurrences(of: "\"", with: "\\\"")
     }
 }

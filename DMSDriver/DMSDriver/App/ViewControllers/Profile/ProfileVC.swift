@@ -67,7 +67,7 @@ class ProfileVC: BaseViewController {
         super.updateNavigationBar()
         App().navigationService.delegate = self
         App().navigationService.updateNavigationBar(.Menu,
-                                                    "Profile".localized,
+                                                    "profile".localized,
                                                     AppColor.white, true)
     }
   
@@ -80,12 +80,12 @@ class ProfileVC: BaseViewController {
         if user == nil {
             user = Caches().user?.userInfo
         }
-        publicInforDatas = [["First Name".localized,E(user?.firstName)],
-                          ["Last Name".localized,E(user?.lastName)]]
+        publicInforDatas = [["first-name".localized,E(user?.firstName)],
+                          ["last-name".localized,E(user?.lastName)]]
 
         privateInforDatas = [["Phone".localized,E(user?.phone)],
                            ["Email".localized,E(user?.email)],
-                           ["Password".localized,"Change Password".localized]]
+                           ["Password".localized,"change-password".localized]]
     }
     
     
@@ -429,7 +429,7 @@ extension ProfileVC{
         strongSelf.user = obj.data;
         strongSelf.initData()
         strongSelf.tbvContent?.reloadData()
-        strongSelf.showAlertView("Updated Successful".localized)
+        strongSelf.showAlertView("updated-successful".localized)
         let user = Caches().user
         user?.userInfo = obj.data
         Caches().user = user

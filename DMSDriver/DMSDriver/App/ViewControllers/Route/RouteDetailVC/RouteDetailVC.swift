@@ -19,7 +19,7 @@ enum TabBarItem:Int {
     func title() -> String {
         switch self {
         case .Order:
-            return "Orders List".localized
+            return "orders-list".localized
         case .Packages:
             return "Packgages".localized
         case .Map :
@@ -146,14 +146,14 @@ class RouteDetailVC: BaseViewController {
     private func initUI()  {
         let startDate = HourFormater.string(from: route?.start_time.date ?? Date())
         let endDate = HourFormater.string(from: route?.end_time.date ?? Date())
-        lblRoute?.text = "Route #\(route?.id ?? 0)".localized
+        lblRoute?.text = "Route".localized + " #\(route?.id ?? 0)"
         lblTime?.text = "\(startDate) - \(endDate)"
-        lblStatus?.text = route?.status?.name
+        lblStatus?.text = route?.status?.name?.localized
         lblStatus?.textColor = route?.colorStatus
         lblEstimateHour?.text = CommonUtils.formatEstTime(seconds: Int64(route?.totalTimeEst ?? 0))
         lblEstimateKilometer?.text = CommonUtils.formatEstKm(met: route?.totalDistance.doubleValue ?? 0)
         let totalOrders = route?.totalOrders ?? 0
-        lblTotalOrder?.text = (totalOrders > 1) ? "\(totalOrders) Orders".localized.uppercased() : "\(totalOrders) Order".localized.uppercased()
+        lblTotalOrder?.text = (totalOrders > 1) ? ("\(totalOrders) " + "orders".localized.uppercased()) : ("\(totalOrders) " + "order".localized.uppercased())
         
         lblStatus?.textColor = route?.colorStatus
         
@@ -168,7 +168,7 @@ class RouteDetailVC: BaseViewController {
     @objc func setupScrollMenuView() {
         let mapMode = MenuItem("Map".localized.uppercased())
         let orderMode = MenuItem("Orders".localized.uppercased())
-        let locationMode = MenuItem("Locations".localized.uppercased())
+        let locationMode = MenuItem("locations".localized.uppercased())
 
         menuScrollView?.roundedCorners([.layerMaxXMinYCorner,
                                         .layerMinXMinYCorner,

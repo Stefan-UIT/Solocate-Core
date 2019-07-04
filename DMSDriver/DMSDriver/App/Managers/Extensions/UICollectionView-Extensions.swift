@@ -20,7 +20,7 @@ public extension UICollectionView {
     func addPullToRefetch(_ target: UIViewController, action: Selector)  {
         let refreshControl:UIRefreshControl = UIRefreshControl()
         refreshControl.tintColor =  UIColor.gray
-        refreshControl.attributedTitle = NSAttributedString(string: "Pull to refresh".localized)
+        refreshControl.attributedTitle = NSAttributedString(string: "pull-to-refresh".localized)
         refreshControl.addTarget(target, action: action, for: UIControl.Event.valueChanged)
         //self.addSubview(refreshControl)
         self.refreshControl = refreshControl

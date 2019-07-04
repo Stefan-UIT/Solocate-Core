@@ -79,7 +79,7 @@ class NoteTableViewCell: UITableViewCell {
 //        statusButton.borderColor = statusOrder?.color
 //        statusButton.setTitle(statusOrder?.statusName, for: .normal)
 //        statusButton.setTitleColor(statusOrder?.color, for: .normal)
-        statusButton.setTitle(statusOrder?.statusName, for: .normal)
+        statusButton.setTitle(statusOrder?.statusName.localized, for: .normal)
         statusButton.backgroundColor = statusOrder?.color
         statusButton.borderColor = statusOrder?.color
         statusButton.setTitleColor(.white, for: .normal)

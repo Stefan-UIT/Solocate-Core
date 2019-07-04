@@ -72,7 +72,7 @@ class HistoryNotifyDetailVC: BaseViewController {
     func setupNavigationService() {
         App().navigationService.delegate = self
         App().navigationService.updateNavigationBar(.Menu,
-                                                    "Alert Detail".localized,
+                                                    "alert-detail".localized,
                                                     AppColor.white, true)
     }
    
@@ -96,12 +96,12 @@ class HistoryNotifyDetailVC: BaseViewController {
         let stringDate = DateFormatter.serverDateFormater.date(from: E(alertDetail.created_at))
     
         let date = NotifylInforRow("Date".localized,E(displayDateTimeVN.string(from: stringDate ?? Date())))
-        let status = NotifylInforRow("Status".localized,E(alertDetail.statusName))
-        let ruleId = NotifylInforRow("Rule ID".localized, "\(alertDetail.ruleType?.id ?? 0)")
-        let routeId = NotifylInforRow("Route ID".localized, "\(alertDetail.routeId ?? 0)")
-        let driverName = NotifylInforRow("Driver Name".localized,alertDetail.driverName ?? "-")
-        let truckName = NotifylInforRow("Truck Name".localized,alertDetail.truckName ?? "-")
-        let tankerName = NotifylInforRow("Tanker Name".localized,alertDetail.tankerName ?? "-")
+        let status = NotifylInforRow("Status".localized,E(alertDetail.statusName?.localized))
+        let ruleId = NotifylInforRow("rule-id".localized, "\(alertDetail.ruleType?.id ?? 0)")
+        let routeId = NotifylInforRow("route-id".localized, "\(alertDetail.routeId ?? 0)")
+        let driverName = NotifylInforRow("driver-name".localized,alertDetail.driverName ?? "-")
+        let truckName = NotifylInforRow("truck-name".localized,alertDetail.truckName ?? "-")
+        let tankerName = NotifylInforRow("tanker-name".localized,alertDetail.tankerName ?? "-")
         let type = NotifylInforRow("Type".localized, alertDetail.ruleType?.name ?? "-")
         let comment = NotifylInforRow("Comment".localized,alertDetail.comment ?? "-")
         
@@ -123,7 +123,7 @@ class HistoryNotifyDetailVC: BaseViewController {
     @IBAction func onbtnClickActionButton(btn:UIButton){
         PickerInputView.showInputViewWith(type: .PickerInputTextView,
                                           atVC: self,
-                                          title: "Resolve alert".localized,
+                                          title: "resolve-alert".localized,
                                           placeHolder: "Comment".localized) {[weak self] (success, content,_)  in
                                             self?.alertDetail.comment = content
                                             guard let alert = self?.alertDetail else {return}

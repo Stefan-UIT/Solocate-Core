@@ -102,7 +102,7 @@ class MainVC: BaseViewController {
         lblInternetConnection?.textColor = .white
         vInternetConnection?.backgroundColor = AppColor.mainColor
         vInternetConnection?.setShadowDefault()
-        lblInternetConnection?.text = "You are in offline,some funtion may be restricted.".localized
+        lblInternetConnection?.text = "you-are-in-offlinesome-funtion-may-be-restricted".localized
         lblInternetConnection?.textAlignment = .center
         vInternetConnection?.isHidden = false
         UIView.animate(withDuration: 0.5) {[weak self] in

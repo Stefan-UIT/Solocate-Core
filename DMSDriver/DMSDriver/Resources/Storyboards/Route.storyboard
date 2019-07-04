@@ -221,13 +221,13 @@
                                                                 <constraint firstAttribute="height" constant="1" id="ypH-ST-qv9"/>
                                                             </constraints>
                                                         </view>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Total Order" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z1F-7N-Y97">
-                                                            <rect key="frame" x="15" y="52" width="69.5" height="16"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="total-order" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Z1F-7N-Y97">
+                                                            <rect key="frame" x="15" y="52" width="64" height="16"/>
                                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                             <color key="textColor" red="0.28235294117647058" green="0.36470588235294116" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                             <nil key="highlightedColor"/>
                                                             <userDefinedRuntimeAttributes>
-                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Total Order"/>
+                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="total-order"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HFW-lI-Zp3">
@@ -267,13 +267,13 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gzm-jb-SfC">
                                                             <rect key="frame" x="15" y="147" width="325" height="18"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Start time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7Y-hN-duU">
-                                                                    <rect key="frame" x="0.0" y="1" width="60" height="16"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="start-time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O7Y-hN-duU">
+                                                                    <rect key="frame" x="0.0" y="1" width="58.5" height="16"/>
                                                                     <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                     <color key="textColor" red="0.28235294119999998" green="0.36470588240000001" blue="0.43921568630000002" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Start time"/>
+                                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="start-time"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="m8q-9I-9Da">
@@ -295,13 +295,13 @@
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uzf-4V-vMd">
                                                             <rect key="frame" x="15" y="180" width="325" height="18"/>
                                                             <subviews>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="End time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkt-T1-qez">
-                                                                    <rect key="frame" x="0.0" y="1" width="55.5" height="16"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="end-time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nkt-T1-qez">
+                                                                    <rect key="frame" x="0.0" y="1" width="54.5" height="16"/>
                                                                     <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                     <color key="textColor" red="0.28235294117647058" green="0.36470588235294116" blue="0.4392156862745098" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                     <userDefinedRuntimeAttributes>
-                                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="End time"/>
+                                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="end-time"/>
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BdA-il-htn">
@@ -476,7 +476,7 @@
                                 <color key="textColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <nil key="highlightedColor"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="You have no route"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="you-have-no-route"/>
                                 </userDefinedRuntimeAttributes>
                             </label>
                         </subviews>
@@ -844,13 +844,13 @@
                                                         <outlet property="delegate" destination="lJ5-ZH-roP" id="cye-BJ-b97"/>
                                                     </connections>
                                                 </tableView>
-                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No order" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5nO-6Z-3tw">
+                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="no-order" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5nO-6Z-3tw">
                                                     <rect key="frame" x="157.5" y="314" width="60" height="18"/>
                                                     <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
                                                     <color key="textColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <nil key="highlightedColor"/>
                                                     <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="No order"/>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="no-order"/>
                                                     </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
@@ -1666,7 +1666,7 @@
                                                                             <rect key="frame" x="0.0" y="28" width="365" height="149"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="CrC-rX-xgx" id="W9Z-4b-N85">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="148.5"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="149"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <subviews>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Qd2-k2-wm4">
@@ -1731,7 +1731,7 @@
                                                                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                                                 <real key="value" value="5"/>
                                                                                                             </userDefinedRuntimeAttribute>
-                                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="High"/>
+                                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="high"/>
                                                                                                         </userDefinedRuntimeAttributes>
                                                                                                     </button>
                                                                                                 </subviews>
@@ -1880,7 +1880,7 @@
                                                                             <rect key="frame" x="0.0" y="177" width="365" height="93"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UVq-zK-yBm" id="jGb-c3-qok">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="92.5"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="93"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <subviews>
                                                                                     <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wj9-nS-UN4">
@@ -1942,7 +1942,7 @@
                                                                                                             <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                                                                                                 <real key="value" value="5"/>
                                                                                                             </userDefinedRuntimeAttribute>
-                                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="High"/>
+                                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="high"/>
                                                                                                         </userDefinedRuntimeAttributes>
                                                                                                     </button>
                                                                                                 </subviews>
@@ -2075,7 +2075,7 @@
                                                                             <rect key="frame" x="0.0" y="58" width="365" height="149"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="L7A-oe-BXz" id="YAt-dw-SR5">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="148.5"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="149"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <subviews>
                                                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Tw-RT-soR">
@@ -2620,7 +2620,7 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Add Note"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="add-note"/>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
