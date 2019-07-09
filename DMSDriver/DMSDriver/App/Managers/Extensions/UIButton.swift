@@ -17,7 +17,9 @@ extension UIButton {
         get {
             return ""
         } set {
-            self.setTitle(NSLocalizedString(newValue, comment: ""), for: .normal)
+            let localBundle = Bundle(url: App().bundlePath)!
+            let text = NSLocalizedString(newValue, tableName: nil, bundle: localBundle, value: "", comment: "")
+            self.setTitle(text, for: .normal)
         }
     }
   

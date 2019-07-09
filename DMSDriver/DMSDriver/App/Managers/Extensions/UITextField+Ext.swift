@@ -23,7 +23,9 @@ extension UITextField {
         get {
           return ""
         } set {
-          self.placeholder = NSLocalizedString(newValue, comment: "")
+            let localBundle = Bundle(url: App().bundlePath)!
+            let text = NSLocalizedString(newValue, tableName: nil, bundle: localBundle, value: "", comment: "")
+          self.placeholder = text
         }
     }
 }

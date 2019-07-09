@@ -68,7 +68,9 @@ extension UIBarButtonItem {
     get {
       return ""
     } set {
-      self.title = NSLocalizedString(newValue, comment: "")
+        let localBundle = Bundle(url: App().bundlePath)!
+        let text = NSLocalizedString(newValue, tableName: nil, bundle: localBundle, value: "", comment: "")
+      self.title = text
     }
   }
 }
@@ -78,7 +80,9 @@ extension UITabBarItem {
     get {
       return ""
     } set {
-      self.title = NSLocalizedString(newValue, comment: "")
+        let localBundle = Bundle(url: App().bundlePath)!
+        let text = NSLocalizedString(newValue, tableName: nil, bundle: localBundle, value: "", comment: "")
+      self.title = text
     }
   }
 }
