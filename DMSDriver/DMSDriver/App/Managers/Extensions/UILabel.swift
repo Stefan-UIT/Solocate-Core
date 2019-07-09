@@ -17,7 +17,9 @@ extension UILabel {
         get {
           return ""
         } set {
-          self.text = NSLocalizedString(newValue, comment: "")
+            let localBundle = Bundle(url: App().bundlePath)!
+            let text = NSLocalizedString(newValue, tableName: nil, bundle: localBundle, value: "", comment: "")
+          self.text = text
         }
     }
     
