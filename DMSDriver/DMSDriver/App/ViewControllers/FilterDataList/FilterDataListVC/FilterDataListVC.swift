@@ -191,14 +191,14 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                 header.tag = section
 
                 if filterModel.timeData == nil {
-                    header.lblTitle?.text = "DATE"
+                    header.lblTitle?.text = "Date".localized.uppercased()
                     header.lblTitle?.textColor = AppColor.white
                 }else{
                     if filterModel.timeData?.type == TimeItemType.TimeItemTypeCustom {
-                        header.lblTitle?.text = "DATE: \(E(filterModel.timeData?.subtitle))"
+                        header.lblTitle?.text = "Date".localized.uppercased() + ": \(E(filterModel.timeData?.subtitle))"
                     }
                     else{
-                        header.lblTitle?.text = "DATE: \(E(filterModel.timeData?.title))"
+                        header.lblTitle?.text = "Date".localized.uppercased() + ": \(E(filterModel.timeData?.title))"
                     }
                     
                     header.lblTitle?.textColor = AppColor.mainColor
@@ -212,7 +212,7 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                 header.delegate = self
                 header.tag = section
                 if filterModel.type == nil {
-                    header.lblTitle?.text = "TYPE"
+                    header.lblTitle?.text = "Type".localized.uppercased()
                     header.lblTitle?.textColor = AppColor.white
                 }
                 else {
@@ -221,7 +221,7 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                         types = E(types) + "," + E(filterModel.type?.last)
                     }
                     header.lblTitle?.textColor = AppColor.mainColor
-                    header.lblTitle?.text = "TYPE: " + E(types)
+                    header.lblTitle?.text = "Type".localized.uppercased() + ": " + E(types)
                 }
                 return header
                 
@@ -232,12 +232,12 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                 header.tag = section
                 
                 if filterModel.status == nil {
-                    header.lblTitle?.text = "STATUS"
+                    header.lblTitle?.text = "Status".localized.uppercased()
                     header.lblTitle?.textColor = AppColor.white
                     
                 }else {
                     header.lblTitle?.textColor = AppColor.mainColor
-                    header.lblTitle?.text = "STATUS: " + E(filterModel.status?.name?.localized)
+                    header.lblTitle?.text = "Status".localized.uppercased() + ": " + E(filterModel.status?.name?.localized)
                 }
                 return header
 
@@ -245,7 +245,7 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                 if filterModel.selectingField == FilterDataModel.SelectingField.CustomerField {
                     let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifierHeaderInsertCell) as! FilterDataListHeaderInsertCell
                     header.imvIcon?.isHidden = false
-                    header.setPlaceholder("INSERT CUSTOMER NAME")
+                    header.setPlaceholder("insert-customer-name".localized)
                     header.tag = section
                     header.tfContent?.delegate = self
                     header.tfContent?.tag = 99
@@ -259,10 +259,10 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                     header.tag = section
                     
                     if filterModel.customer == nil {
-                        header.lblTitle?.text = "CUSTOMER"
+                        header.lblTitle?.text = "customer".localized.uppercased()
                         header.lblTitle?.textColor = AppColor.white
                     }else {
-                        header.lblTitle?.text = "CUSTOMER: " + E(filterModel.customer)
+                        header.lblTitle?.text = "customer".localized.uppercased() + ": " + E(filterModel.customer)
                         header.lblTitle?.textColor = AppColor.mainColor
                     }
 
@@ -273,7 +273,7 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                 if filterModel.selectingField == FilterDataModel.SelectingField.CityField {
                     let header = tableView.dequeueReusableHeaderFooterView(withIdentifier: identifierHeaderInsertCell) as! FilterDataListHeaderInsertCell
                     header.imvIcon?.isHidden = false
-                    header.setPlaceholder("INSERT CITY")
+                    header.setPlaceholder("insert-city".localized)
                     header.tag = section
                     header.tfContent?.delegate = self
                     header.tfContent?.tag = 100
@@ -285,10 +285,10 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                     header.delegate = self
                     header.tag = section
                     if filterModel.city == nil {
-                        header.lblTitle?.text = "CITY"
+                        header.lblTitle?.text = "city".localized.uppercased()
                         header.lblTitle?.textColor = AppColor.white
                     }else {
-                        header.lblTitle?.text = "CITY: " + E(filterModel.city)
+                        header.lblTitle?.text = "city".localized.uppercased() + ": " + E(filterModel.city)
                         header.lblTitle?.textColor = AppColor.mainColor
                     }
                     

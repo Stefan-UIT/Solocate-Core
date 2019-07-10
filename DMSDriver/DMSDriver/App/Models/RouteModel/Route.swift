@@ -41,25 +41,7 @@ class Tanker: BaseModel {
 }
 
 //MARK: - Status
-class Status: BaseModel {
-    var id:Int?
-    var name:String?
-    var code:String?
-    
-    override init() {
-        super.init()
-    }
-    
-    required init?(map: Map) {
-        super.init()
-    }
-    
-    override func mapping(map: Map) {
-        id <- map["id"]
-        name <- map["name"]
-        code <- map["code"]
-    }
-}
+class Status: BasicModel { }
 class Urgency: BasicModel { }
 
 //MARK: - Status
@@ -79,7 +61,10 @@ class BasicModel: BaseModel {
     override func mapping(map: Map) {
         id <- map["id"]
         name <- map["name"]
-        code <- map["cd"]
+        code <- map["code"]
+        if code == nil {
+            code <- map["cd"]
+        }
     }
 }
 

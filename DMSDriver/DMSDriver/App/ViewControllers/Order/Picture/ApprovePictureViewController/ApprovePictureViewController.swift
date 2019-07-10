@@ -40,7 +40,7 @@ class ApprovePictureViewController: BaseViewController {
         navigationService.navigationItem = self.navigationItem
         navigationService.navigationBar = self.navigationController?.navigationBar
         navigationService.delegate = self
-        navigationService.updateNavigationBar(.Menu,nil,AppColor.background)
+        navigationService.updateNavigationBar(.Menu,"",AppColor.background)
     }
     
     // MARK: Action

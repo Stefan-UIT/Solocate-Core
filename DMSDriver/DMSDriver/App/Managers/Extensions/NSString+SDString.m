@@ -27,7 +27,14 @@
 }
 
 - (NSString *)localized {
-  return NSLocalizedString(self, "");
+    NSArray *searchPaths = NSSearchPathForDirectoriesInDomains(NSDocumentDirectory, NSUserDomainMask, YES);
+    NSString *documentPath = [searchPaths objectAtIndex:0];
+    NSURL *documents = [NSURL fileURLWithPath:documentPath];
+    NSURL *url = [documents URLByAppendingPathComponent:@"Localize" isDirectory:true];
+    NSBundle *localBundle = [NSBundle bundleWithURL:url];
+    
+    return NSLocalizedStringFromTableInBundle(self, nil, localBundle, "");
+//  return NSLocalizedString(self, "");
 }
 
 
