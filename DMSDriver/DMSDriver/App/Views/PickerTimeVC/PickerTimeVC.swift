@@ -270,7 +270,7 @@ extension PickerTimeVC:UITableViewDataSource,UITableViewDelegate {
             if (indexPath.section == 0) {
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifierHeaderSectionCell, for: indexPath) as! HeaderSectionCell
-                cell.lblTitleHeader?.text = !(strTitle?.isEmpty ?? true)  ? strTitle! : "dime".localized
+                cell.lblTitleHeader?.text = !(strTitle?.isEmpty ?? true)  ? strTitle! : "time".localized
                 cell.lblTimePick?.text = strHeaderFrom;
                 //cell.delegate = self;
                 

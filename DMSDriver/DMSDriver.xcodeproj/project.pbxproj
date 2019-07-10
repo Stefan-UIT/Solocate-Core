@@ -246,7 +246,6 @@
 		2A443AF722648C5A00CB6508 /* TaskModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B014953217D7EA50097FEB6 /* TaskModel.swift */; };
 		2A443AF822648C5A00CB6508 /* RouteDetailOrderListClvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B556BDF223A4CED00E6CED6 /* RouteDetailOrderListClvCell.swift */; };
 		2A443AF922648C5A00CB6508 /* Locale+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B7A0210B113C000BDFEF /* Locale+Extensions.swift */; };
-		2A443AFA22648C5A00CB6508 /* NSString+SDString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B76B210B113C000BDFEF /* NSString+SDString.m */; };
 		2A443AFB22648C5A00CB6508 /* SocketService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BE8CAA8214F67AC00371B8B /* SocketService.swift */; };
 		2A443AFC22648C5A00CB6508 /* WarehouseModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B886210B1148000BDFEF /* WarehouseModel.swift */; };
 		2A443AFD22648C5A00CB6508 /* NavigationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B78E210B113C000BDFEF /* NavigationService.swift */; };
@@ -329,6 +328,7 @@
 		2E57C67B22B8E3CD0064A787 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57C67922B8E3CD0064A787 /* AddNoteViewController.swift */; };
 		2E714CDB22B3A44900348B67 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E714CDA22B3A44900348B67 /* ImageCollectionViewCell.swift */; };
 		2E714CDC22B3A44900348B67 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E714CDA22B3A44900348B67 /* ImageCollectionViewCell.swift */; };
+		2E8AA24A22D5D4A3008FC3A5 /* NSString+SDString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B76B210B113C000BDFEF /* NSString+SDString.m */; };
 		2E96D05622C4C81300DA29C5 /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96D05422C4C81300DA29C5 /* LanguageModel.swift */; };
 		2E96D05722C4C81300DA29C5 /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96D05422C4C81300DA29C5 /* LanguageModel.swift */; };
 		2E96D05922C4C8D000DA29C5 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96D05822C4C8D000DA29C5 /* FileManager.swift */; };
@@ -3714,6 +3714,7 @@
 				2A443ADD22648C5A00CB6508 /* HistoryNotifyVC.swift in Sources */,
 				2A443ADE22648C5A00CB6508 /* UISearchBar+Extensions.swift in Sources */,
 				2A443ADF22648C5A00CB6508 /* UITableView-Extensions.swift in Sources */,
+				2E8AA24A22D5D4A3008FC3A5 /* NSString+SDString.m in Sources */,
 				2A443AE022648C5A00CB6508 /* Message.swift in Sources */,
 				2A443AE122648C5A00CB6508 /* MainVC.swift in Sources */,
 				2A443AE222648C5A00CB6508 /* ProfileVC.swift in Sources */,
@@ -3741,7 +3742,6 @@
 				2A443AF722648C5A00CB6508 /* TaskModel.swift in Sources */,
 				2A443AF822648C5A00CB6508 /* RouteDetailOrderListClvCell.swift in Sources */,
 				2A443AF922648C5A00CB6508 /* Locale+Extensions.swift in Sources */,
-				2A443AFA22648C5A00CB6508 /* NSString+SDString.m in Sources */,
 				2A443AFB22648C5A00CB6508 /* SocketService.swift in Sources */,
 				2A443AFC22648C5A00CB6508 /* WarehouseModel.swift in Sources */,
 				2A443AFD22648C5A00CB6508 /* NavigationService.swift in Sources */,
