@@ -57,6 +57,7 @@ class LocationListTbvCell: UITableViewCell {
         lblSubtitle?.text = "\(location.address?.ctt_name ?? "") | \(location.address?.ctt_phone ?? "")"
         lblNumber?.text = "\(location.address?.seq ?? 1)"
         lblExpectedTime?.text = "\(startDate) - \(endDate)"
-        lblLocationName?.text = "Location name: \(location.address?.loc_name ?? "")"
+        lblLocationName?.text = "location-name".localized + ": \(location.address?.loc_name ?? "")"
+
     }
 }

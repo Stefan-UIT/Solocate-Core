@@ -270,7 +270,7 @@ extension PickerTimeVC:UITableViewDataSource,UITableViewDelegate {
             if (indexPath.section == 0) {
                 
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifierHeaderSectionCell, for: indexPath) as! HeaderSectionCell
-                cell.lblTitleHeader?.text = !(strTitle?.isEmpty ?? true)  ? strTitle! : "Time".localized
+                cell.lblTitleHeader?.text = !(strTitle?.isEmpty ?? true)  ? strTitle! : "dime".localized
                 cell.lblTimePick?.text = strHeaderFrom;
                 //cell.delegate = self;
                 
@@ -281,8 +281,8 @@ extension PickerTimeVC:UITableViewDataSource,UITableViewDelegate {
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifierFooterCell, for: indexPath) as! FooterCell
                 //cell.delegate = self;
                 
-                cell.btnDone?.setTitle("Done".localized, for: .normal)
-                cell.btnCancel?.setTitle("Cancel".localized, for: .normal)
+                cell.btnDone?.setTitle("done".localized, for: .normal)
+                cell.btnCancel?.setTitle("cancel".localized, for: .normal)
                 
                 return cell
                 
@@ -300,9 +300,10 @@ extension PickerTimeVC:UITableViewDataSource,UITableViewDelegate {
             if (indexPath.section == 0 || indexPath.section == 2) {
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifierHeaderSectionCell, for: indexPath) as! HeaderSectionCell
                 if (indexPath.section == 0) {
-                    cell.lblTitleHeader?.text = "From Time".localized
+                    cell.lblTitleHeader?.text = "from-time".localized
                 } else {
-                    cell.lblTitleHeader?.text = "To Time".localized
+                    cell.lblTitleHeader?.text = "to-time".localized
+
                 }
                 //cell.delegate = self;
                 return cell
@@ -311,8 +312,8 @@ extension PickerTimeVC:UITableViewDataSource,UITableViewDelegate {
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifierFooterCell, for: indexPath) as! FooterCell
                 cell.delegate = self;
                 
-                cell.btnDone?.setTitle("Done".localized, for: .normal)
-                cell.btnCancel?.setTitle("Cancel".localized, for: .normal)
+                cell.btnDone?.setTitle("done".localized, for: .normal)
+                cell.btnCancel?.setTitle("cancel".localized, for: .normal)
                 
                 return cell
                 
@@ -358,8 +359,8 @@ extension PickerTimeVC:UITableViewDataSource,UITableViewDelegate {
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifierFooterCell, for: indexPath) as! FooterCell
                 cell.delegate = self;
                 
-                cell.btnDone?.setTitle("Done".localized, for: .normal)
-                cell.btnCancel?.setTitle("Cancel".localized, for: .normal)
+                cell.btnDone?.setTitle("done".localized, for: .normal)
+                cell.btnCancel?.setTitle("cancel".localized, for: .normal)
                 
                 return cell
             }

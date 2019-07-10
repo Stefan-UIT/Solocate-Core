@@ -21,7 +21,7 @@ class LocationDetailView: UIViewController {
     private let packageIdentifierCell = "LocationDetailPackageCell"
     private let addressIdentifierCell = "LocationDetailAddressCell"
 
-    private let titleHeader = ["Location".localized.uppercased(),
+    private let titleHeader = ["location".localized.uppercased(),
                                "Deliver".localized.uppercased(),
                                "Pickup".localized.uppercased()]
     
@@ -157,21 +157,24 @@ extension LocationDetailView:UITableViewDataSource{
             cell.lblTitle?.text = location?.address?.address
             cell.lblSubTitle?.text = "\(location?.address?.ctt_name ?? "") | \(location?.address?.ctt_phone ?? "")"
             cell.lblExpectedTime?.text = "\(startDate) - \(endDate)"
-            cell.lblLocationName?.text = "Location name: \(location?.address?.loc_name ?? "")"
+            cell.lblLocationName?.text = "location-name".localized + ": \(location?.address?.loc_name ?? "")"
+
             return cell
             
         case .Deliver:
             let cell = tableView.dequeueReusableCell(withIdentifier: packageIdentifierCell, for: indexPath) as! LocationDetailViewCell
             let deliver = delivers[row]
             
-            cell.lblSubTitle?.text = (deliver.package?.name != nil) ? deliver.package?.name : "Package: \(row + 1)"
+            cell.lblSubTitle?.text = (deliver.package?.name != nil) ? deliver.package?.name : "package".localized + ": \(row + 1)"
+
 
             return cell
         case .Pickup:
             let cell = tableView.dequeueReusableCell(withIdentifier: packageIdentifierCell, for: indexPath) as! LocationDetailViewCell
             let pickup = pickups[row]
             
-            cell.lblSubTitle?.text = (pickup.package?.name != nil) ? pickup.package?.name : "Package: \(row + 1)"
+            cell.lblSubTitle?.text = (pickup.package?.name != nil) ? pickup.package?.name : "package".localized + ": \(row + 1)"
+
             
             return cell
         }
