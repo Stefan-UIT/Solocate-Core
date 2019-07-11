@@ -109,10 +109,10 @@ class LoginViewController: BaseViewController {
 
     private func setupTextField() {
         userNameTextField.attributedPlaceholder = NSAttributedString(string: userNameTextField.placeholder ?? "",
-                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
         passwordTextField.attributedPlaceholder = NSAttributedString(string: passwordTextField.placeholder ?? "",
-                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
         let isRemember = Caches().getObject(forKey: Defaultkey.keepLogin)
         if let remember =  isRemember as? Bool {
