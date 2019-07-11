@@ -656,6 +656,7 @@
 		2E96D05822C4C8D000DA29C5 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		2E96D05B22C4CEF400DA29C5 /* Loading.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Loading.storyboard; sourceTree = "<group>"; };
 		2E96D05F22C4CFED00DA29C5 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		2E98332D22D6F17200386992 /* DMSDriver-Dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "DMSDriver-Dev.entitlements"; sourceTree = "<group>"; };
 		2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		3B0035F4216C614D0032519D /* TextViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewInput.swift; sourceTree = "<group>"; };
 		3B0035F5216C614D0032519D /* TextViewInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewInput.xib; sourceTree = "<group>"; };
@@ -1797,6 +1798,7 @@
 		3B66B744210B1051000BDFEF = {
 			isa = PBXGroup;
 			children = (
+				2E98332D22D6F17200386992 /* DMSDriver-Dev.entitlements */,
 				3B66B74F210B1051000BDFEF /* DMSDriver */,
 				3B66B74E210B1051000BDFEF /* Products */,
 				2E482ACD4DD6945570D21CE8 /* Pods */,
@@ -3153,6 +3155,13 @@
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = machnguyen_uit;
 				TargetAttributes = {
+					2A443A2C22648C5A00CB6508 = {
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
 					3B66B74C210B1051000BDFEF = {
 						CreatedOnToolsVersion = 9.4.1;
 						SystemCapabilities = {
@@ -4092,7 +4101,7 @@
 			baseConfigurationReference = 7AAB4633DDF72A60B133B3E5 /* Pods-DMSDriver-Dev.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "DMSDriver-Dev.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -4110,10 +4119,10 @@
 					"$(CONFIGURATION_BUILD_DIR)",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DDEVELOPMENT";
-				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.dms.core;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.ashdod.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-dms-core-customization";
+				PROVISIONING_PROFILE_SPECIFIER = Ashdod_Debug_Development;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 5.0;
@@ -4126,7 +4135,7 @@
 			baseConfigurationReference = 6406D038FB02DBF80C11EACD /* Pods-DMSDriver-Dev.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "DMSDriver-Dev.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
@@ -4143,7 +4152,7 @@
 					"$(CONFIGURATION_BUILD_DIR)",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DDEVELOPMENT";
-				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.dms.core;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.ashdod.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "dev-dms-core-customization";

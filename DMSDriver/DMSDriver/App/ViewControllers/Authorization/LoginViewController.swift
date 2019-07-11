@@ -99,9 +99,10 @@ class LoginViewController: BaseViewController {
             vEvironment?.isHidden = true
         }else {
             vEvironment?.isHidden = !DMSAppConfiguration.isUseChooseEnvironment
-            segEvironmentControl?.segmentTitles = [ChooseEvironment.Development.name,
-                                                   ChooseEvironment.QC.name,
-                                                   ChooseEvironment.Demo.name]
+//            segEvironmentControl?.segmentTitles = [ChooseEvironment.Development.name,
+//                                                   ChooseEvironment.QC.name,
+//                                                   ChooseEvironment.Demo.name]
+            segEvironmentControl?.segmentTitles = [ChooseEvironment.Development.name]
             segEvironmentControl?.selectedSegmentIndex = 0
         }
     }
