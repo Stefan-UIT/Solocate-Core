@@ -55,7 +55,7 @@ class LoginViewController: BaseViewController {
         setupTextField()
         setupViewEvironment()
         setupRemeberButton()
-        App().statusBarView?.backgroundColor = AppColor.backgroundLogin
+//        App().statusBarView?.backgroundColor = AppColor.backgroundLogin
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,9 +69,9 @@ class LoginViewController: BaseViewController {
         App().statusBarView?.backgroundColor = AppColor.white
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle{
-        return .lightContent
-    }
+//    override var preferredStatusBarStyle: UIStatusBarStyle{
+//        return .lightContent
+//    }
     
     override func keyboardWillChangeFrame(noti: Notification) {
         let frame = self.getKeyboardFrameEnd(noti: noti)
