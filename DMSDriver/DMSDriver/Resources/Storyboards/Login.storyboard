@@ -30,13 +30,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="au1-ZQ-VK5">
-                                                <rect key="frame" x="40" y="122" width="295" height="423"/>
+                                                <rect key="frame" x="40" y="177.5" width="295" height="312"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ashdod_logo" translatesAutoresizingMaskIntoConstraints="NO" id="5no-5h-GKx">
-                                                        <rect key="frame" x="87.5" y="0.0" width="120" height="120"/>
+                                                        <rect key="frame" x="139.5" y="0.0" width="16" height="16"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nk2-zT-JBD">
-                                                        <rect key="frame" x="0.0" y="147" width="295" height="98"/>
+                                                        <rect key="frame" x="0.0" y="43" width="295" height="98"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Let-Fn-BtS">
                                                                 <rect key="frame" x="0.0" y="0.0" width="295" height="44"/>
@@ -125,7 +125,7 @@
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZD-KY-mMp">
-                                                        <rect key="frame" x="0.0" y="272" width="295" height="24"/>
+                                                        <rect key="frame" x="0.0" y="168" width="295" height="17"/>
                                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
                                                         <state key="normal" title="Remember Me" image="check_normal">
                                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -139,7 +139,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JwE-2P-DeR">
-                                                        <rect key="frame" x="0.0" y="323" width="295" height="44"/>
+                                                        <rect key="frame" x="0.0" y="212" width="295" height="44"/>
                                                         <color key="backgroundColor" red="0.30196078431372547" green="0.80784313725490198" blue="0.48627450980392156" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="tsu-rV-SiF"/>
@@ -159,7 +159,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8HT-Vh-BAx">
-                                                        <rect key="frame" x="90.5" y="394" width="114" height="29"/>
+                                                        <rect key="frame" x="90.5" y="283" width="114" height="29"/>
                                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
                                                         <state key="normal" title="Forgot password?">
                                                             <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -181,7 +181,7 @@
                                                 </constraints>
                                             </stackView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_bg" translatesAutoresizingMaskIntoConstraints="NO" id="eXu-jL-9OY">
-                                                <rect key="frame" x="0.0" y="508" width="375.00000000000023" height="159"/>
+                                                <rect key="frame" x="0.0" y="508" width="375" height="159"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="eXu-jL-9OY" secondAttribute="height" multiplier="125:53" id="HvX-yk-Kwr"/>
                                                 </constraints>
