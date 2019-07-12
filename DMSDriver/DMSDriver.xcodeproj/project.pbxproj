@@ -643,7 +643,7 @@
 		2A42050922576AF000789837 /* ContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
 		2A42050A22576AF000789837 /* ContentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
 		2A42555A2251F08E00D55FEA /* ResponseDataDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDataDashboard.swift; sourceTree = "<group>"; };
-		2A443B4E22648C5A00CB6508 /* DMSDriver-Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "DMSDriver-Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A443B4E22648C5A00CB6508 /* Ashdod Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ashdod Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2A443B4F22648C5B00CB6508 /* DMSDriver-Dev-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "DMSDriver-Dev-Info.plist"; path = "/Volumes/NguyenMach/PROJECT-SELDAT/DMS-PROJECT/ios-driver/DMSDriver/DMSDriver-Dev-Info.plist"; sourceTree = "<absolute>"; };
 		2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailLocationListClvCell.swift; sourceTree = "<group>"; };
 		2AC97C5A224DF7F600DD07AE /* CommonUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
@@ -656,6 +656,7 @@
 		2E96D05822C4C8D000DA29C5 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		2E96D05B22C4CEF400DA29C5 /* Loading.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Loading.storyboard; sourceTree = "<group>"; };
 		2E96D05F22C4CFED00DA29C5 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		2E98332D22D6F17200386992 /* DMSDriver-Dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "DMSDriver-Dev.entitlements"; sourceTree = "<group>"; };
 		2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
 		3B0035F4216C614D0032519D /* TextViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewInput.swift; sourceTree = "<group>"; };
 		3B0035F5216C614D0032519D /* TextViewInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewInput.xib; sourceTree = "<group>"; };
@@ -721,7 +722,7 @@
 		3B5D79222178346700EA49CC /* DateFormatter+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Ext.swift"; sourceTree = "<group>"; };
 		3B5D7925217834B300EA49CC /* Date extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date extensions.swift"; sourceTree = "<group>"; };
 		3B6193F8221FA981006651EA /* StartRouteOrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRouteOrderVC.swift; sourceTree = "<group>"; };
-		3B66B74D210B1051000BDFEF /* DMSDriver.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DMSDriver.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B66B74D210B1051000BDFEF /* Ashdod Live.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Ashdod Live.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B66B758210B1051000BDFEF /* DMSDriver.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DMSDriver.xcdatamodel; sourceTree = "<group>"; };
 		3B66B767210B113C000BDFEF /* LocationTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTracker.swift; sourceTree = "<group>"; };
 		3B66B76A210B113C000BDFEF /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -1797,6 +1798,7 @@
 		3B66B744210B1051000BDFEF = {
 			isa = PBXGroup;
 			children = (
+				2E98332D22D6F17200386992 /* DMSDriver-Dev.entitlements */,
 				3B66B74F210B1051000BDFEF /* DMSDriver */,
 				3B66B74E210B1051000BDFEF /* Products */,
 				2E482ACD4DD6945570D21CE8 /* Pods */,
@@ -1807,8 +1809,8 @@
 		3B66B74E210B1051000BDFEF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3B66B74D210B1051000BDFEF /* DMSDriver.app */,
-				2A443B4E22648C5A00CB6508 /* DMSDriver-Dev.app */,
+				3B66B74D210B1051000BDFEF /* Ashdod Live.app */,
+				2A443B4E22648C5A00CB6508 /* Ashdod Dev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3101,9 +3103,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2A443A2C22648C5A00CB6508 /* DMSDriver-Dev */ = {
+		2A443A2C22648C5A00CB6508 /* Ashdod Dev */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2A443B4A22648C5A00CB6508 /* Build configuration list for PBXNativeTarget "DMSDriver-Dev" */;
+			buildConfigurationList = 2A443B4A22648C5A00CB6508 /* Build configuration list for PBXNativeTarget "Ashdod Dev" */;
 			buildPhases = (
 				FA95DBFCD982B3026B3D6EAC /* [CP] Check Pods Manifest.lock */,
 				2A443A2E22648C5A00CB6508 /* Sources */,
@@ -3117,14 +3119,14 @@
 			);
 			dependencies = (
 			);
-			name = "DMSDriver-Dev";
+			name = "Ashdod Dev";
 			productName = DMSDriver;
-			productReference = 2A443B4E22648C5A00CB6508 /* DMSDriver-Dev.app */;
+			productReference = 2A443B4E22648C5A00CB6508 /* Ashdod Dev.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3B66B74C210B1051000BDFEF /* DMSDriver */ = {
+		3B66B74C210B1051000BDFEF /* Ashdod Live */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3B66B762210B1052000BDFEF /* Build configuration list for PBXNativeTarget "DMSDriver" */;
+			buildConfigurationList = 3B66B762210B1052000BDFEF /* Build configuration list for PBXNativeTarget "Ashdod Live" */;
 			buildPhases = (
 				76E92A434B13EAEE47C1A624 /* [CP] Check Pods Manifest.lock */,
 				3B66B749210B1051000BDFEF /* Sources */,
@@ -3138,9 +3140,9 @@
 			);
 			dependencies = (
 			);
-			name = DMSDriver;
+			name = "Ashdod Live";
 			productName = DMSDriver;
-			productReference = 3B66B74D210B1051000BDFEF /* DMSDriver.app */;
+			productReference = 3B66B74D210B1051000BDFEF /* Ashdod Live.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -3153,6 +3155,13 @@
 				LastUpgradeCheck = 0940;
 				ORGANIZATIONNAME = machnguyen_uit;
 				TargetAttributes = {
+					2A443A2C22648C5A00CB6508 = {
+						SystemCapabilities = {
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
+					};
 					3B66B74C210B1051000BDFEF = {
 						CreatedOnToolsVersion = 9.4.1;
 						SystemCapabilities = {
@@ -3216,8 +3225,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				2A443A2C22648C5A00CB6508 /* DMSDriver-Dev */,
-				3B66B74C210B1051000BDFEF /* DMSDriver */,
+				2A443A2C22648C5A00CB6508 /* Ashdod Dev */,
+				3B66B74C210B1051000BDFEF /* Ashdod Live */,
 			);
 		};
 /* End PBXProject section */
@@ -4092,7 +4101,7 @@
 			baseConfigurationReference = 7AAB4633DDF72A60B133B3E5 /* Pods-DMSDriver-Dev.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "DMSDriver-Dev.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -4110,10 +4119,10 @@
 					"$(CONFIGURATION_BUILD_DIR)",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DDEVELOPMENT";
-				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.dms.core;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.ashdod.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "dev-dms-core-customization";
+				PROVISIONING_PROFILE_SPECIFIER = Ashdod_Debug_Development;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 5.0;
@@ -4126,7 +4135,7 @@
 			baseConfigurationReference = 6406D038FB02DBF80C11EACD /* Pods-DMSDriver-Dev.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "DMSDriver-Dev.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
 				DEFINES_MODULE = YES;
@@ -4143,7 +4152,7 @@
 					"$(CONFIGURATION_BUILD_DIR)",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DDEVELOPMENT";
-				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.dms.core;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.ashdod.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "dev-dms-core-customization";
@@ -4338,7 +4347,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2A443B4A22648C5A00CB6508 /* Build configuration list for PBXNativeTarget "DMSDriver-Dev" */ = {
+		2A443B4A22648C5A00CB6508 /* Build configuration list for PBXNativeTarget "Ashdod Dev" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2A443B4B22648C5A00CB6508 /* Debug */,
@@ -4356,7 +4365,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3B66B762210B1052000BDFEF /* Build configuration list for PBXNativeTarget "DMSDriver" */ = {
+		3B66B762210B1052000BDFEF /* Build configuration list for PBXNativeTarget "Ashdod Live" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3B66B763210B1052000BDFEF /* Debug */,

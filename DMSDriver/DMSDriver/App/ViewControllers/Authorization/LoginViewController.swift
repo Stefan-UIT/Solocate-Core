@@ -55,7 +55,7 @@ class LoginViewController: BaseViewController {
         setupTextField()
         setupViewEvironment()
         setupRemeberButton()
-        App().statusBarView?.backgroundColor = AppColor.backgroundLogin
+//        App().statusBarView?.backgroundColor = AppColor.backgroundLogin
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -69,9 +69,9 @@ class LoginViewController: BaseViewController {
         App().statusBarView?.backgroundColor = AppColor.white
     }
     
-    override var preferredStatusBarStyle: UIStatusBarStyle{
-        return .lightContent
-    }
+//    override var preferredStatusBarStyle: UIStatusBarStyle{
+//        return .lightContent
+//    }
     
     override func keyboardWillChangeFrame(noti: Notification) {
         let frame = self.getKeyboardFrameEnd(noti: noti)
@@ -99,19 +99,20 @@ class LoginViewController: BaseViewController {
             vEvironment?.isHidden = true
         }else {
             vEvironment?.isHidden = !DMSAppConfiguration.isUseChooseEnvironment
-            segEvironmentControl?.segmentTitles = [ChooseEvironment.Development.name,
-                                                   ChooseEvironment.QC.name,
-                                                   ChooseEvironment.Demo.name]
+//            segEvironmentControl?.segmentTitles = [ChooseEvironment.Development.name,
+//                                                   ChooseEvironment.QC.name,
+//                                                   ChooseEvironment.Demo.name]
+            segEvironmentControl?.segmentTitles = [ChooseEvironment.Development.name]
             segEvironmentControl?.selectedSegmentIndex = 0
         }
     }
 
     private func setupTextField() {
         userNameTextField.attributedPlaceholder = NSAttributedString(string: userNameTextField.placeholder ?? "",
-                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
         passwordTextField.attributedPlaceholder = NSAttributedString(string: passwordTextField.placeholder ?? "",
-                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.white])
+                                                                     attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray])
         
         let isRemember = Caches().getObject(forKey: Defaultkey.keepLogin)
         if let remember =  isRemember as? Bool {
