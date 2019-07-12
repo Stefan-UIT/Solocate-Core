@@ -52,7 +52,11 @@ enum StatusOrder: String {
     case cancelStatus = "CC"
     case cancelFinishStatus = "UF"
     case pickupStatus = "PU"
-    
+    case Loaded = "LO"
+    case WarehouseClarification = "WH"
+    case PartialLoaded = "PL"
+    case PartialDelivered = "PD"
+
     var statusName: String {
         switch self {
         case .newStatus:
@@ -66,6 +70,14 @@ enum StatusOrder: String {
         case .cancelStatus,
              .cancelFinishStatus:
             return "Cancelled".localized
+        case .Loaded:
+            return "loaded".localized
+        case .PartialLoaded:
+            return "partial-loaded".localized
+        case .PartialDelivered:
+            return "partial-delivered".localized
+        case .WarehouseClarification:
+            return "warehouse-clarification".localized
         }
     }
     
@@ -93,7 +105,6 @@ enum StatusOrder: String {
 enum OrderType:Int {
     case delivery = 1
     case pickup
-a
 }
 
 class Address: BaseModel {
