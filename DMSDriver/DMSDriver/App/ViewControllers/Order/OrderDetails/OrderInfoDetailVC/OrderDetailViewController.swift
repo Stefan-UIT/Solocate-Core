@@ -114,7 +114,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
     private func initUI()  {
         self.setupTableView()
-        lblOrderId?.text = "Delivery".localized + " #\(orderDetail?.id ?? 0)"
+        lblOrderId?.text = "order".localized + " #\(orderDetail?.id ?? 0)"
         guard  let start = orderDetail?.to?.start_time?.date,
                let end = orderDetail?.to?.end_time?.date else{
             lblDateTime?.text = "Start/End-time is invalid".localized

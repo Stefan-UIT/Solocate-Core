@@ -10,7 +10,40 @@ import UIKit
 import ObjectMapper
 import CoreLocation
 
-	
+
+enum Package: String {
+    case Pallet = "PLT"
+    case Carton = "CTR"
+    
+    var name:String {
+        switch self {
+        case .Pallet:
+            return "pallet".localized
+        case .Carton:
+            return "carton".localized
+        }
+    }
+}
+
+enum OrderGroup: String {
+    case Terminal = "TM"
+    case Bonded = "BD"
+    case Free = "FR"
+    case Logistic = "LG"
+    
+    var name: String {
+        switch self {
+        case .Terminal:
+            return "terminal".localized
+        case .Bonded:
+            return "bonded".localized
+        case .Free:
+            return "free".localized
+        case .Logistic:
+            return "logistic".localized
+        }
+    }
+}
 
 enum StatusOrder: String {
     case newStatus = "OP"
@@ -60,7 +93,7 @@ enum StatusOrder: String {
 enum OrderType:Int {
     case delivery = 1
     case pickup
-    case deliveryAndPickup
+a
 }
 
 class Address: BaseModel {
