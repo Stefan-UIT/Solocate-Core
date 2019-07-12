@@ -756,7 +756,7 @@ fileprivate extension OrderDetailViewController{
             updateStatusButton?.setTitle("Pickup".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = orderDetail?.colorStatus
         default:
-            updateStatusButton?.setTitle("let-s-start".localized.uppercased(), for: .normal)
+            updateStatusButton?.setTitle("go-to-delivery".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = AppColor.buttonColor
         }
         let isHidden = (orderDetail?.statusOrder == StatusOrder.deliveryStatus ||
