@@ -31,6 +31,7 @@ class StartRouteOrderVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        btnCancel?.setTitle("cancel".localized.uppercased(), for: .normal)
         setupMapView()
         drawRouteMap(order: order)
     }
@@ -65,11 +66,11 @@ class StartRouteOrderVC: BaseViewController {
             return
         }
         switch statusOrder {
-        case .newStatus:
+        case .Loaded,.PartialLoaded:
             btnStart?.setTitle("Start".localized.uppercased(), for: .normal)
-        case .inProcessStatus:
-            btnStart?.setTitle("van-load".localized.uppercased(), for: .normal)
-        case .pickupStatus:
+//        case .InTransit:
+//            btnStart?.setTitle("van-load".localized.uppercased(), for: .normal)
+        case .InTransit:
             btnStart?.setTitle("Deliver".localized.uppercased(), for: .normal)
             
         default:
@@ -195,8 +196,8 @@ extension StartRouteOrderVC{
                 self?.updateUI()
                 self?.callback?(true,_orderDetail)
                 if _orderDetail.statusOrder == .deliveryStatus ||
-                    _orderDetail.statusOrder == .cancelStatus  ||
-                    _orderDetail.statusOrder == .cancelFinishStatus {
+                    _orderDetail.statusOrder == .CancelStatus  ||
+                    _orderDetail.statusOrder == .UnableToFinish {
                     self?.navigationController?.popViewController(animated: true)
                 }
             case .error(let error):
@@ -208,10 +209,10 @@ extension StartRouteOrderVC{
     
     fileprivate func cancelOrder(reason:Reason) {
         if order?.statusOrder == .newStatus{
-            updateStatusOrder(statusCode: StatusOrder.cancelStatus.rawValue,
+            updateStatusOrder(statusCode: StatusOrder.CancelStatus.rawValue,
                               cancelReason:reason)
         }else{
-            updateStatusOrder(statusCode: StatusOrder.cancelFinishStatus.rawValue,
+            updateStatusOrder(statusCode: StatusOrder.UnableToFinish.rawValue,
                               cancelReason:reason)
         }
     }
@@ -230,14 +231,14 @@ extension StartRouteOrderVC {
                                 positiveTitle: "YES".localized,
                                 positiveAction: {[weak self] (ok) in
                                     
-                                    statusNeedUpdate = StatusOrder.inProcessStatus.rawValue
+                                    statusNeedUpdate = StatusOrder.InTransit.rawValue
                                     self?.updateStatusOrder(statusCode: statusNeedUpdate)
                                     
             }, negativeTitle: "NO".localized) { (cancel) in
                 //
             }
             
-        case .inProcessStatus:
+        case .InTransit:
             let vc:LoadUnloadOrderVC = LoadUnloadOrderVC.loadSB(SB: .LoadUnloadOrder)
             vc.order = order
             vc.callback = {[weak self] (hasUpdate,order) in
@@ -257,14 +258,14 @@ extension StartRouteOrderVC {
                                 positiveTitle: "YES".localized,
                                 positiveAction: {[weak self] (ok) in
                                     
-                                    statusNeedUpdate = StatusOrder.pickupStatus.rawValue
+                                    statusNeedUpdate = StatusOrder.PickupStatus.rawValue
                                     self?.updateStatusOrder(statusCode: statusNeedUpdate)
                                     
             }, negativeTitle: "NO".localized) { (cancel) in
                 //
             }
             */
-        case .pickupStatus:
+        case .PickupStatus:
             if _orderDetail.validUpdateStatusOrder() == true { // finish-order
                 if _orderDetail.isRequireImage(){
                     self.showAlertView("picture-required".localized) {[weak self](action) in

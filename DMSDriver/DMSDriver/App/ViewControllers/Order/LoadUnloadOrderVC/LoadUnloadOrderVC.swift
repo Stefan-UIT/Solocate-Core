@@ -75,9 +75,9 @@ class LoadUnloadOrderVC: BaseViewController {
             //update order detail status
             for item in self?.order?.details ?? [] {
                 if item.barCode == code {
-                    if self?.order?.statusOrder == StatusOrder.inProcessStatus {
+                    if self?.order?.statusOrder == StatusOrder.InTransit {
                         item.status = .Loaded
-                    }else if self?.order?.statusOrder == StatusOrder.pickupStatus {
+                    }else if self?.order?.statusOrder == StatusOrder.PickupStatus {
                         item.status = .Unload
                     }
                     break
@@ -91,8 +91,8 @@ class LoadUnloadOrderVC: BaseViewController {
                 return
             }
             
-            if self?.order?.statusOrder == StatusOrder.inProcessStatus {
-                self?.updateStatusOrder(statusCode: StatusOrder.pickupStatus.rawValue)
+            if self?.order?.statusOrder == StatusOrder.InTransit {
+                self?.updateStatusOrder(statusCode: StatusOrder.PickupStatus.rawValue)
                 
             }else {
                 
@@ -178,14 +178,14 @@ extension LoadUnloadOrderVC:LoadUnLoadListCellDelegate{
             
         case .Loaded:
             if order.statusOrder == .newStatus ||
-                order.statusOrder == .inProcessStatus {
+                order.statusOrder == .InTransit {
                 detail.status = .NotLoad
-            }else if (order.statusOrder == .pickupStatus) {
+            }else if (order.statusOrder == .PickupStatus) {
                 detail.status = .Unload
             }
             
         case .Unload:
-            if order.statusOrder == .pickupStatus {
+            if order.statusOrder == .PickupStatus {
                 detail.status = .Loaded
             }
         }
@@ -201,8 +201,8 @@ extension LoadUnloadOrderVC:LoadUnLoadListCellDelegate{
         tbvContent?.reloadRows(at: [indexPath], with: .automatic)
         
         if validUpdateStatusOrder() == true {
-            if order.statusOrder == StatusOrder.inProcessStatus {
-                updateStatusOrder(statusCode: StatusOrder.pickupStatus.rawValue)
+            if order.statusOrder == StatusOrder.InTransit {
+                updateStatusOrder(statusCode: StatusOrder.PickupStatus.rawValue)
                 
             }else {
                 
@@ -235,12 +235,12 @@ extension LoadUnloadOrderVC:LoadUnLoadListCellDelegate{
     func validUpdateStatusOrder() -> Bool {
         var valid = true
         for item in order?.details ?? []  {
-            if order?.statusOrder == StatusOrder.inProcessStatus {
+            if order?.statusOrder == StatusOrder.InTransit {
                 if item.status != .Loaded {
                    valid = false
                     break
                 }
-            }else if order?.statusOrder == StatusOrder.pickupStatus {
+            }else if order?.statusOrder == StatusOrder.PickupStatus {
                 if item.status != .Unload {
                     valid = false
                     break

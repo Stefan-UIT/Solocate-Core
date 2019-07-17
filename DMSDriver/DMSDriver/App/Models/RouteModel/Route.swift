@@ -68,6 +68,7 @@ class BasicModel: BaseModel {
     }
 }
 
+
 //MARK: - Tracking
 class Tracking: BaseModel {
     var id:Int?
@@ -235,7 +236,7 @@ class Route: BaseModel {
             case "OP":
                 return AppColor.newStatus;
             case "IP":
-                return AppColor.inProcessStatus;
+                return AppColor.InTransit;
             case "DV":
                 return AppColor.deliveryStatus;
             case "CC":

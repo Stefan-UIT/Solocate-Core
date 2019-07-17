@@ -175,11 +175,11 @@ extension OrderListViewController: UITableViewDelegate, UITableViewDataSource {
         case .New:
             orderList = route?.orders(.newStatus) ?? []
         case .InProgess:
-            orderList = route?.orders(.inProcessStatus) ?? []
+            orderList = route?.orders(.InTransit) ?? []
         case .Finished:
             orderList = route?.orders(.deliveryStatus) ?? []
         case .Cancelled:
-            orderList = route?.orders(.cancelStatus) ?? []
+            orderList = route?.orders(.CancelStatus) ?? []
         }
         
         orderList.sort { (ord1, ord2) -> Bool in

@@ -16,7 +16,7 @@ extension Route {
     func checkInprogess() -> Bool {
         var result = false
         for item in orderList{
-            if item.statusOrder == .inProcessStatus{
+            if item.statusOrder == .InTransit{
                 result = true
                 break
             }
@@ -65,7 +65,7 @@ extension Route {
                     hasNew = true
                 }
                 
-                if order.statusOrder == .inProcessStatus{
+                if order.statusOrder == .InTransit{
                     hasInprocessStatus = true
                 }
                 
@@ -73,7 +73,7 @@ extension Route {
                     hasDV = true
                 }
                 
-                if order.statusOrder == .cancelStatus{
+                if order.statusOrder == .CancelStatus{
                     hasCanceled = true
                 }
             }

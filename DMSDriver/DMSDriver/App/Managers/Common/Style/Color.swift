@@ -11,8 +11,8 @@ struct AppColor {
     static let disableIconColor     = UIColor(hex: "#485D70")
     static let highLightColor       = UIColor(hex: "#b3e6ff")
 //    static let newStatus            = UIColor(hex: "#F18A20")
-    static let inProcessStatus            = UIColor(hex: "#F18A20")
-//    static let inProcessStatus      = UIColor(hex: "#009DF7")
+    static let InTransit            = UIColor(hex: "#F18A20")
+//    static let InTransit      = UIColor(hex: "#009DF7")
     static let newStatus      = UIColor(hex: "#28D467")
 //    static let pickedUpStatus       = UIColor(hex: "#28D467")
     static let pickedUpStatus       = UIColor(hex: "#009DF7")
@@ -28,6 +28,8 @@ struct AppColor {
     static let deliveryStatus       = UIColor.green
     static let redColor      = UIColor.red
     static let buttonColor          = UIColor(hex: "#28D467")
+    
+    static let cancelledColor          = UIColor(hex: "#FF4444")
 
 
 

@@ -13,7 +13,8 @@ protocol OrderDetailTableViewCellDelegate:class {
     func didSelectedDopdown(_ cell:OrderDetailTableViewCell,_ btn:UIButton)
     func didSelectEdit(_ cell:OrderDetailTableViewCell,_ btn:UIButton)
     func didSelectGo(_ cell:OrderDetailTableViewCell,_ btn:UIButton)
-
+    func didEnterPalletsQuantityTextField(_ cell:OrderDetailTableViewCell, value:String, detail:Order.Detail)
+    func didEnterCartonsQuantityTextField(_ cell:OrderDetailTableViewCell, value:String, detail:Order.Detail)
 }
 
 
@@ -45,7 +46,23 @@ class OrderDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var btnGo: UIButton?
     @IBOutlet weak var mapView: GMSMapView?
     
+    @IBOutlet weak var actualQuantityTextField: UITextField?
+    @IBOutlet weak var actualCartonsInPalletTextField: UITextField?
     
+    @IBOutlet weak var cartonInPalletsLabel: UILabel?
+    @IBOutlet weak var cartonInPalletViewContainer: UIView?
+    
+    
+    @IBOutlet weak var cartonsViewContainerHeightConstraint: NSLayoutConstraint?
+    
+    
+    @IBOutlet weak var palletsViewContainerHeightConstraint: NSLayoutConstraint?
+    
+    @IBOutlet weak var cartonsViewContainerTopSpacing: NSLayoutConstraint?
+    
+    
+    @IBOutlet weak var deliveredQtyStaticLabel: UILabel?
+    @IBOutlet weak var deliveredCartonsStaticLabel: UILabel?
     weak var delegate:OrderDetailTableViewCellDelegate?
     var orderDetailItem: OrderDetailInforRow! {
         didSet {
@@ -55,14 +72,29 @@ class OrderDetailTableViewCell: UITableViewCell {
         }
     }
     
+    var detail:Order.Detail!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         contentLabel?.numberOfLines = 0
+        guard let palletTextField = actualQuantityTextField, let cartonTextField = actualCartonsInPalletTextField else { return }
+        palletTextField.delegate = self
+        cartonTextField.delegate = self
     }
     
     func setupMapView()  {
         mapView?.isMyLocationEnabled = true
         mapView?.delegate = self
+    }
+    
+    func handleShowingDeliveredQtyRecored(isHidden:Bool) {
+        deliveredQtyStaticLabel?.isHidden = isHidden
+        actualQuantityTextField?.isHidden = isHidden
+    }
+    
+    func handleShowingDeliveredCartonsRecord(isHidden:Bool) {
+        deliveredCartonsStaticLabel?.isHidden = isHidden
+        actualCartonsInPalletTextField?.isHidden = isHidden
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -143,4 +175,19 @@ extension OrderDetailTableViewCell {
 //MARK: - GMSMapViewDelegate
 extension OrderDetailTableViewCell: GMSMapViewDelegate {
     
+}
+
+//MARK: - UITEXTFIELD
+extension OrderDetailTableViewCell: UITextFieldDelegate {
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let palletTextField = actualQuantityTextField, let cartonTextField = actualCartonsInPalletTextField else { return }
+        let text =  textField.text ?? ""
+        if textField == palletTextField {
+            detail.actualQty = Int(text) ?? 0
+            delegate?.didEnterPalletsQuantityTextField(self, value: text, detail: self.detail)
+        } else if textField == cartonTextField {
+            detail.actualCartonsInPallet = Int(text) ?? 0
+            delegate?.didEnterCartonsQuantityTextField(self, value: text, detail: self.detail)
+        }
+    }
 }
