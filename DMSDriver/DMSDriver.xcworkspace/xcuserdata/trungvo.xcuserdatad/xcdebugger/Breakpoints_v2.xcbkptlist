@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
-            timestampString = "585052554.143681"
+            timestampString = "585053730.3103319"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "988"
@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
-            timestampString = "585052554.144115"
+            timestampString = "585053730.310747"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "993"
@@ -170,7 +170,7 @@
                   moduleName = "Ashdod Dev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/trungvo/Ashdod_Solocate/DMSDriver/DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
-                  timestampString = "585052068.122638"
+                  timestampString = "585114534.54264"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "993"
@@ -185,7 +185,7 @@
                   moduleName = "Ashdod Dev"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/trungvo/Ashdod_Solocate/DMSDriver/DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
-                  timestampString = "585052068.124529"
+                  timestampString = "585114534.544912"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "993"
@@ -202,7 +202,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
-            timestampString = "585052554.144513"
+            timestampString = "585053730.311116"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "259"
@@ -218,7 +218,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
-            timestampString = "585052554.1448359"
+            timestampString = "585053730.311469"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "865"
@@ -234,13 +234,77 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
-            timestampString = "585052554.145236"
+            timestampString = "585053730.3117729"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "898"
             endingLineNumber = "898"
             landmarkName = "updateButtonStatus()"
             landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DMSDriver/App/ViewControllers/Dashboard/DashboardVC/DashboardVC.swift"
+            timestampString = "585114264.035231"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "109"
+            endingLineNumber = "109"
+            landmarkName = "setup(pieChartView:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DMSDriver/App/Models/ResponseDataDashboard/ResponseDataDashboard.swift"
+            timestampString = "585114534.051898"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "33"
+            endingLineNumber = "33"
+            landmarkName = "filterBy(status:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Ashdod_Dev.ResponseDataDashboard.filterBy(status: Ashdod_Dev.Route.RouteStatus) -&gt; Swift.Array&lt;Ashdod_Dev.Route&gt;"
+                  moduleName = "Ashdod Dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/trungvo/Ashdod_Solocate/DMSDriver/DMSDriver/App/Models/ResponseDataDashboard/ResponseDataDashboard.swift"
+                  timestampString = "585114534.570797"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "49">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Ashdod_Dev.Route) -&gt; Swift.Bool in Ashdod_Dev.ResponseDataDashboard.filterBy(status: Ashdod_Dev.Route.RouteStatus) -&gt; Swift.Array&lt;Ashdod_Dev.Route&gt;"
+                  moduleName = "Ashdod Dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/trungvo/Ashdod_Solocate/DMSDriver/DMSDriver/App/Models/ResponseDataDashboard/ResponseDataDashboard.swift"
+                  timestampString = "585114534.5728641"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "34"
+                  endingLineNumber = "34"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

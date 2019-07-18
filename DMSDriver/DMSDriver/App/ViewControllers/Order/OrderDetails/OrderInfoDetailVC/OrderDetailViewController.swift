@@ -241,23 +241,22 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     func showPalletReturnedPopUp() {
-        let alert = UIAlertController(title: "Returned Pallet", message: "Number of returned pallets", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Returned Pallets", message: "Number of returned pallets", preferredStyle: .alert)
         
         //2. Add the text field. You can configure it however you need.
         alert.addTextField { (textField) in
             textField.keyboardType = .numberPad
-            textField.text = "0"
+            textField.text = ""
         }
         
         // 3. Grab the value from the text field, and print it when the user clicks OK.
-        alert.addAction(UIAlertAction(title: "OK", style: .default, handler: { [weak alert] (_) in
+        alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { [weak alert] (_) in
             let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
             let returnedPalletQty = Int(textField?.text ?? "0")!
             if let detail = self.orderDetail?.details?.first {
                 detail.returnedPalletQty = returnedPalletQty
             }
             self.handleReturnedPalletAction()
-            print("returnedPalletQty: \(returnedPalletQty)")
         }))
         
         // 4. Present the alert.
@@ -867,7 +866,7 @@ fileprivate extension OrderDetailViewController{
     }
     
     private func updateButtonStatus() {
-//        orderDetail?.status?.code = StatusOrder.deliveryStatus.rawValue
+        orderDetail?.status?.code = StatusOrder.deliveryStatus.rawValue
 //        orderDetail?.details?[0].package?.cd = "PLT"
         handleShowingUnableToStartButton()
         updateStatusButton?.isEnabled = true
