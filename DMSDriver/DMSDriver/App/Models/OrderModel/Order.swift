@@ -84,13 +84,11 @@ enum StatusOrder: String {
     var color:UIColor {
         get {
             switch self {
-            case .newStatus:
+            case .newStatus, .Loaded, .PartialLoaded:
                 return AppColor.newStatus;
             case .InTransit:
                 return AppColor.InTransit;
-            case .PickupStatus:
-                return AppColor.pickedUpStatus;
-            case .deliveryStatus:
+            case .deliveryStatus, .PartialDelivered:
                 return AppColor.deliveryStatus;
             case .CancelStatus,
                  .UnableToFinish:

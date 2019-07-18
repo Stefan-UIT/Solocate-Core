@@ -259,6 +259,10 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             self.handleReturnedPalletAction()
         }))
         
+        alert.addAction(UIAlertAction(title: "cancel".localized, style: .cancel, handler: {
+            action in
+        }))
+        
         // 4. Present the alert.
         self.present(alert, animated: true, completion: nil)
     }
@@ -866,8 +870,8 @@ fileprivate extension OrderDetailViewController{
     }
     
     private func updateButtonStatus() {
-        orderDetail?.status?.code = StatusOrder.deliveryStatus.rawValue
-//        orderDetail?.details?[0].package?.cd = "PLT"
+        orderDetail?.status?.code = StatusOrder.PartialDelivered.rawValue
+        orderDetail?.details?[0].package?.cd = "PLT"
         handleShowingUnableToStartButton()
         updateStatusButton?.isEnabled = true
         switch orderDetail?.statusOrder.rawValue {
@@ -892,7 +896,7 @@ fileprivate extension OrderDetailViewController{
             break
         default:
             updateStatusButton?.setTitle("go-to-delivery".localized.uppercased(), for: .normal)
-            updateStatusButton?.backgroundColor = AppColor.mainColor
+            updateStatusButton?.backgroundColor = AppColor.greenColor
         }
         let isFinishedAndNotPalletType = ((orderDetail?.statusOrder == StatusOrder.deliveryStatus || orderDetail?.statusOrder == StatusOrder.PartialDelivered) && !(orderDetail?.details?[0].isPallet)!)
         let isHidden = ( orderDetail?.statusOrder == StatusOrder.CancelStatus ||
