@@ -56,6 +56,11 @@ class UserModel: BaseModel {
     var roles:[UserRole]?
     var token : String?
     var userInfo:UserInfo?
+    var isRampManager:Bool {
+        get {
+            return true
+        }
+    }
     
     required init?(map: Map) {
         super.init()
