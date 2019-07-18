@@ -870,8 +870,9 @@ fileprivate extension OrderDetailViewController{
     }
     
     private func updateButtonStatus() {
-        orderDetail?.status?.code = StatusOrder.PartialDelivered.rawValue
-        orderDetail?.details?[0].package?.cd = "PLT"
+//        orderDetail?.status?.code = StatusOrder.PartialDelivered.rawValue
+//        orderDetail?.details?[0].package?.cd = "PLT"
+        
         handleShowingUnableToStartButton()
         updateStatusButton?.isEnabled = true
         switch orderDetail?.statusOrder.rawValue {
