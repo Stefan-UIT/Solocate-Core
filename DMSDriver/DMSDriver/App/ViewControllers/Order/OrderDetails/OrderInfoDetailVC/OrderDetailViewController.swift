@@ -250,7 +250,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         }
         
         // 3. Grab the value from the text field, and print it when the user clicks OK.
-        alert.addAction(UIAlertAction(title: "Submit", style: .default, handler: { [weak alert] (_) in
+        alert.addAction(UIAlertAction(title: "submit".localized, style: .default, handler: { [weak alert] (_) in
             let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
             let returnedPalletQty = Int(textField?.text ?? "0")!
             if let detail = self.orderDetail?.details?.first {
@@ -873,16 +873,16 @@ fileprivate extension OrderDetailViewController{
         switch orderDetail?.statusOrder.rawValue {
         case StatusOrder.newStatus.rawValue:
             updateStatusButton?.setTitle("cancel".localized.uppercased(), for: .normal)
-            updateStatusButton?.backgroundColor = AppColor.cancelledColor
+            updateStatusButton?.backgroundColor = AppColor.redColor
             break
         case StatusOrder.InTransit.rawValue:
             updateStatusButton?.setTitle("Deliver".localized.uppercased(), for: .normal)
-            updateStatusButton?.backgroundColor = orderDetail?.colorStatus
+            updateStatusButton?.backgroundColor = AppColor.greenColor
             break
         case StatusOrder.deliveryStatus.rawValue, StatusOrder.PartialDelivered.rawValue:
 //            updateStatusButton?.setTitle("update-palette-return".localized.uppercased(), for: .normal)
             updateStatusButton?.setTitle("update-returned-pallets".localized.uppercased(), for: .normal)
-            updateStatusButton?.backgroundColor = orderDetail?.colorStatus
+            updateStatusButton?.backgroundColor = AppColor.greenColor
             break
             
         case StatusOrder.WarehouseClarification.rawValue:
@@ -892,7 +892,7 @@ fileprivate extension OrderDetailViewController{
             break
         default:
             updateStatusButton?.setTitle("go-to-delivery".localized.uppercased(), for: .normal)
-            updateStatusButton?.backgroundColor = AppColor.buttonColor
+            updateStatusButton?.backgroundColor = AppColor.mainColor
         }
         let isFinishedAndNotPalletType = ((orderDetail?.statusOrder == StatusOrder.deliveryStatus || orderDetail?.statusOrder == StatusOrder.PartialDelivered) && !(orderDetail?.details?[0].isPallet)!)
         let isHidden = ( orderDetail?.statusOrder == StatusOrder.CancelStatus ||
