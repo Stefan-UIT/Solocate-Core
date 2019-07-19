@@ -73,52 +73,52 @@ class LoadUnloadOrderVC: BaseViewController {
         vc.didScan = {[weak self](code) in
             
             //update order detail status
-            for item in self?.order?.details ?? [] {
-                if item.barCode == code {
-                    if self?.order?.statusOrder == StatusOrder.InTransit {
-                        item.status = .Loaded
-                    }else if self?.order?.statusOrder == StatusOrder.PickupStatus {
-                        item.status = .Unload
-                    }
-                    break
-                }
-            }
-            
-            self?.initData() //reload UI
-            
-            //Auto update status order to server
-            guard self?.validUpdateStatusOrder() == true else {
-                return
-            }
-            
-            if self?.order?.statusOrder == StatusOrder.InTransit {
-                self?.updateStatusOrder(statusCode: StatusOrder.PickupStatus.rawValue)
-                
-            }else {
-                
-                if self?.order?.isRequireSign() == false && self?.order?.isRequireImage() == false {
-                    
-                    self?.updateStatusOrder(statusCode: StatusOrder.deliveryStatus.rawValue)
-                    
-                }else {
-                    
-                    if self?.order?.isRequireImage() ?? false{
-                        self?.showAlertView("you-need-add-least-a-picture-to-finish-this-order".localized) {[weak self](action) in
-                            self?.showPictureViewController()
-                        }
-                        
-                    }else if (self?.order?.isRequireSign() ?? false) {
-                        self?.showAlertView("you-need-add-customer-s-signature-to-finish-this-order".localized) {[weak self](action) in
-                            self?.showSignatureViewController()
-                        }
-                        
-                    }else {
-                        
-                        let statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
-                        self?.updateStatusOrder(statusCode: statusNeedUpdate)
-                    }
-                }
-            }
+//            for item in self?.order?.details ?? [] {
+//                if item.barCode == code {
+//                    if self?.order?.statusOrder == StatusOrder.InTransit {
+//                        item.status = .Loaded
+//                    }else if self?.order?.statusOrder == StatusOrder.PickupStatus {
+//                        item.status = .Unload
+//                    }
+//                    break
+//                }
+//            }
+//
+//            self?.initData() //reload UI
+//
+//            //Auto update status order to server
+//            guard self?.validUpdateStatusOrder() == true else {
+//                return
+//            }
+//
+//            if self?.order?.statusOrder == StatusOrder.InTransit {
+//                self?.updateStatusOrder(statusCode: StatusOrder.PickupStatus.rawValue)
+//
+//            }else {
+//
+//                if self?.order?.isRequireSign() == false && self?.order?.isRequireImage() == false {
+//
+//                    self?.updateStatusOrder(statusCode: StatusOrder.deliveryStatus.rawValue)
+//
+//                }else {
+//
+//                    if self?.order?.isRequireImage() ?? false{
+//                        self?.showAlertView("you-need-add-least-a-picture-to-finish-this-order".localized) {[weak self](action) in
+//                            self?.showPictureViewController()
+//                        }
+//
+//                    }else if (self?.order?.isRequireSign() ?? false) {
+//                        self?.showAlertView("you-need-add-customer-s-signature-to-finish-this-order".localized) {[weak self](action) in
+//                            self?.showSignatureViewController()
+//                        }
+//
+//                    }else {
+//
+//                        let statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
+//                        self?.updateStatusOrder(statusCode: statusNeedUpdate)
+//                    }
+//                }
+//            }
         }
         
         self.navigationController?.present(vc, animated: true, completion: nil)
