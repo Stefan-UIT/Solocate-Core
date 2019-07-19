@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		12F11AA0B9EFA256B35655C5 /* Pods_Ashdod_Live.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FA8CFDD71B235E5A63203341 /* Pods_Ashdod_Live.framework */; };
 		185FC761228D0D5C00B085BC /* LoadUnloadOrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185FC760228D0D5C00B085BC /* LoadUnloadOrderVC.swift */; };
 		185FC762228D0D5C00B085BC /* LoadUnloadOrderVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 185FC760228D0D5C00B085BC /* LoadUnloadOrderVC.swift */; };
 		185FC764228D0D7C00B085BC /* LoadUnloadOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 185FC763228D0D7C00B085BC /* LoadUnloadOrder.storyboard */; };
@@ -598,10 +599,8 @@
 		3BF258292224FB5300A56B4E /* SignatureViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BF258272224FB5300A56B4E /* SignatureViewController.xib */; };
 		3BF838CF218957EA0056C4F1 /* ScrollMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BF838CE218957EA0056C4F1 /* ScrollMenuView.xib */; };
 		3BF838D22189589A0056C4F1 /* BaseScrollMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF838D12189589A0056C4F1 /* BaseScrollMenuView.swift */; };
-		3BF838D42189605A0056C4F1 /* Pods_DMSDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BF838D32189605A0056C4F1 /* Pods_DMSDriver.framework */; };
 		3BF838D5218976B30056C4F1 /* RouteListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B00D04F2151F9D700B0B062 /* RouteListVC.swift */; };
-		5D83588B0C093E48EC49DC8C /* Pods_DMSDriver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3BF838D32189605A0056C4F1 /* Pods_DMSDriver.framework */; };
-		834223F1A31A42AC42016114 /* Pods_DMSDriver_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E1AC34514E8CE5CA706A2A5D /* Pods_DMSDriver_Dev.framework */; };
+		BE122D51C94BA19BBECA247E /* Pods_Ashdod_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78467D145BAF1922F4EBBF6 /* Pods_Ashdod_Dev.framework */; };
 		C73D9D55226DA17900452A0C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C73D9D54226DA17900452A0C /* GoogleService-Info.plist */; };
 		C73D9D56226DA17900452A0C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C73D9D54226DA17900452A0C /* GoogleService-Info.plist */; };
 		C73D9D64226DD01500452A0C /* AppDelegate+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = C73D9D63226DD01500452A0C /* AppDelegate+Ext.swift */; };
@@ -1099,14 +1098,18 @@
 		3BF258272224FB5300A56B4E /* SignatureViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SignatureViewController.xib; sourceTree = "<group>"; };
 		3BF838CE218957EA0056C4F1 /* ScrollMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollMenuView.xib; sourceTree = "<group>"; };
 		3BF838D12189589A0056C4F1 /* BaseScrollMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScrollMenuView.swift; sourceTree = "<group>"; };
-		3BF838D32189605A0056C4F1 /* Pods_DMSDriver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_DMSDriver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		6406D038FB02DBF80C11EACD /* Pods-DMSDriver-Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver-Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev.release.xcconfig"; sourceTree = "<group>"; };
+		6BF942DD28D96E7B083B3DD5 /* Pods-Ashdod Live.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ashdod Live.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ashdod Live/Pods-Ashdod Live.debug.xcconfig"; sourceTree = "<group>"; };
+		79FCA8992A46E175D52FF7F3 /* Pods-Ashdod Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ashdod Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ashdod Dev/Pods-Ashdod Dev.debug.xcconfig"; sourceTree = "<group>"; };
 		7AAB4633DDF72A60B133B3E5 /* Pods-DMSDriver-Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver-Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev.debug.xcconfig"; sourceTree = "<group>"; };
 		9B8D9F73312991A219DA0D95 /* Pods-DMSDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.debug.xcconfig"; sourceTree = "<group>"; };
 		A02E53A1DFA611D4E6D34FF1 /* Pods_DMSDriver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DMSDriver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C73D9D54226DA17900452A0C /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		C73D9D63226DD01500452A0C /* AppDelegate+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Ext.swift"; sourceTree = "<group>"; };
-		E1AC34514E8CE5CA706A2A5D /* Pods_DMSDriver_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DMSDriver_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDAEBD89EDE8BAEB706EDEC0 /* Pods-Ashdod Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ashdod Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ashdod Dev/Pods-Ashdod Dev.release.xcconfig"; sourceTree = "<group>"; };
+		E39AD67E3A1BBE025F1D89C6 /* Pods-Ashdod Live.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ashdod Live.release.xcconfig"; path = "Pods/Target Support Files/Pods-Ashdod Live/Pods-Ashdod Live.release.xcconfig"; sourceTree = "<group>"; };
+		F78467D145BAF1922F4EBBF6 /* Pods_Ashdod_Dev.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ashdod_Dev.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FA8CFDD71B235E5A63203341 /* Pods_Ashdod_Live.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Ashdod_Live.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDC03CE773ADC70211B30346 /* Pods-DMSDriver.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.release.xcconfig"; sourceTree = "<group>"; };
 		FF0A9549B7E1BA139DDBDF08 /* Pods-DMSDriver.staging.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.staging.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.staging.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -1116,7 +1119,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				834223F1A31A42AC42016114 /* Pods_DMSDriver_Dev.framework in Frameworks */,
+				BE122D51C94BA19BBECA247E /* Pods_Ashdod_Dev.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1124,8 +1127,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3BF838D42189605A0056C4F1 /* Pods_DMSDriver.framework in Frameworks */,
-				5D83588B0C093E48EC49DC8C /* Pods_DMSDriver.framework in Frameworks */,
+				12F11AA0B9EFA256B35655C5 /* Pods_Ashdod_Live.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1135,10 +1137,10 @@
 		1679749FD325B91DFEB2C646 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				3BF838D32189605A0056C4F1 /* Pods_DMSDriver.framework */,
 				3B8732A421106100008C5C20 /* GoogleMaps */,
 				A02E53A1DFA611D4E6D34FF1 /* Pods_DMSDriver.framework */,
-				E1AC34514E8CE5CA706A2A5D /* Pods_DMSDriver_Dev.framework */,
+				F78467D145BAF1922F4EBBF6 /* Pods_Ashdod_Dev.framework */,
+				FA8CFDD71B235E5A63203341 /* Pods_Ashdod_Live.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1271,6 +1273,10 @@
 				FDC03CE773ADC70211B30346 /* Pods-DMSDriver.release.xcconfig */,
 				7AAB4633DDF72A60B133B3E5 /* Pods-DMSDriver-Dev.debug.xcconfig */,
 				6406D038FB02DBF80C11EACD /* Pods-DMSDriver-Dev.release.xcconfig */,
+				79FCA8992A46E175D52FF7F3 /* Pods-Ashdod Dev.debug.xcconfig */,
+				DDAEBD89EDE8BAEB706EDEC0 /* Pods-Ashdod Dev.release.xcconfig */,
+				6BF942DD28D96E7B083B3DD5 /* Pods-Ashdod Live.debug.xcconfig */,
+				E39AD67E3A1BBE025F1D89C6 /* Pods-Ashdod Live.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -3421,15 +3427,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Ashdod Live/Pods-Ashdod Live-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Ashdod Live/Pods-Ashdod Live-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Ashdod Live/Pods-Ashdod Live-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		6D96038D865B1C712768AFF9 /* [CP] Copy Pods Resources */ = {
@@ -3438,15 +3444,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Ashdod Live/Pods-Ashdod Live-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Ashdod Live/Pods-Ashdod Live-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DMSDriver/Pods-DMSDriver-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Ashdod Live/Pods-Ashdod Live-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		76E92A434B13EAEE47C1A624 /* [CP] Check Pods Manifest.lock */ = {
@@ -3460,7 +3466,7 @@
 			);
 			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DMSDriver-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Ashdod Live-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -3473,15 +3479,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev-resources-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Ashdod Dev/Pods-Ashdod Dev-resources-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev-resources-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Ashdod Dev/Pods-Ashdod Dev-resources-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev-resources.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Ashdod Dev/Pods-Ashdod Dev-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		DEC64F7B2964B6CE5D5CF254 /* [CP] Embed Pods Frameworks */ = {
@@ -3490,15 +3496,15 @@
 			files = (
 			);
 			inputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Ashdod Dev/Pods-Ashdod Dev-frameworks-${CONFIGURATION}-input-files.xcfilelist",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputFileListPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+				"${PODS_ROOT}/Target Support Files/Pods-Ashdod Dev/Pods-Ashdod Dev-frameworks-${CONFIGURATION}-output-files.xcfilelist",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-Ashdod Dev/Pods-Ashdod Dev-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		FA95DBFCD982B3026B3D6EAC /* [CP] Check Pods Manifest.lock */ = {
@@ -3516,7 +3522,7 @@
 			outputFileListPaths = (
 			);
 			outputPaths = (
-				"$(DERIVED_FILE_DIR)/Pods-DMSDriver-Dev-checkManifestLockResult.txt",
+				"$(DERIVED_FILE_DIR)/Pods-Ashdod Dev-checkManifestLockResult.txt",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -4098,7 +4104,7 @@
 /* Begin XCBuildConfiguration section */
 		2A443B4B22648C5A00CB6508 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 7AAB4633DDF72A60B133B3E5 /* Pods-DMSDriver-Dev.debug.xcconfig */;
+			baseConfigurationReference = 79FCA8992A46E175D52FF7F3 /* Pods-Ashdod Dev.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "DMSDriver-Dev.entitlements";
@@ -4132,7 +4138,7 @@
 		};
 		2A443B4C22648C5A00CB6508 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 6406D038FB02DBF80C11EACD /* Pods-DMSDriver-Dev.release.xcconfig */;
+			baseConfigurationReference = DDAEBD89EDE8BAEB706EDEC0 /* Pods-Ashdod Dev.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "DMSDriver-Dev.entitlements";
@@ -4279,7 +4285,7 @@
 		};
 		3B66B763210B1052000BDFEF /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 9B8D9F73312991A219DA0D95 /* Pods-DMSDriver.debug.xcconfig */;
+			baseConfigurationReference = 6BF942DD28D96E7B083B3DD5 /* Pods-Ashdod Live.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;
@@ -4313,7 +4319,7 @@
 		};
 		3B66B764210B1052000BDFEF /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = FDC03CE773ADC70211B30346 /* Pods-DMSDriver.release.xcconfig */;
+			baseConfigurationReference = E39AD67E3A1BBE025F1D89C6 /* Pods-Ashdod Live.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;

@@ -62,7 +62,7 @@ import Crashlytics
     
     private func initVar()  {
         if timeData == nil {
-            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeThisWeek)
+            timeData = (isRampManagerMode) ? TimeData.getTimeDataItemType(type: .TimeItemTypeAll) : TimeData.getTimeDataItemType(type: .TimeItemTypeThisWeek)
             filterModel.timeData = timeData
         }
     }

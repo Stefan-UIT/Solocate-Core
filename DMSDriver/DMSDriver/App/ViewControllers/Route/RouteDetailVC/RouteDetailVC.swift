@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 import SideMenu
+import Floaty
 
 enum TabBarItem:Int {
     case Order = 0
@@ -57,7 +58,8 @@ class RouteDetailVC: BaseViewController {
     @IBOutlet weak var vContainerMap:UIView?
     @IBOutlet weak var vContainerOrders:UIView?
      */
-
+    @IBOutlet weak var floatButtonViewContainer: UIView!
+    
     var scrollMenu:ScrollMenuView?
     var mapVC:MapsViewController?
     var orderListVC:OrderListViewController?
@@ -88,6 +90,7 @@ class RouteDetailVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
+        initFloatButton()
         setupCollectionView()
         setupScrollMenuView()
         
@@ -131,6 +134,33 @@ class RouteDetailVC: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    private func initFloatButton() {
+        let floaty = Floaty.global.button
+        floaty.addItem("Assign Truck", icon: UIImage(named: "ic_car")!, handler: { item in
+            let alert = UIAlertController(title: "Assign Truck", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            floaty.close()
+        })
+        
+        floaty.addItem("Assign Driver", icon: UIImage(named: "ic_login_user")!, handler: { item in
+            let alert = UIAlertController(title: "Assign Driver", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            floaty.close()
+        })
+        
+        floaty.addItem("Van Load", icon: UIImage(named: "route_list_search")!, handler: { item in
+            let alert = UIAlertController(title: "Assign Driver", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            floaty.close()
+        })
+        Floaty.global.show()
+//        floatButtonViewContainer.addSubview(floaty)
+        
     }
     
 
