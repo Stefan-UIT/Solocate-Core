@@ -116,6 +116,16 @@ class RouteDetailVC: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        updateNavigationBar()
+        if isRampManagerMode {
+            Floaty.global.show()
+        } else {
+            Floaty.global.hide()
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        Floaty.global.hide()
     }
 
     
@@ -137,30 +147,31 @@ class RouteDetailVC: BaseViewController {
     }
     
     private func initFloatButton() {
+        Floaty.global.button.items.removeAll()
         let floaty = Floaty.global.button
-        floaty.addItem("Assign Truck", icon: UIImage(named: "ic_car")!, handler: { item in
+        floaty.buttonColor = AppColor.mainColor
+        floaty.plusColor = UIColor.white
+        floaty.itemSize = 56.0
+        floaty.addItem("Van Load", icon: UIImage(named: "ic_ramp_van_load")!, handler: { item in
+            let alert = UIAlertController(title: "Assign Driver", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            floaty.close()
+        })
+        
+        floaty.addItem("Assign Driver", icon: UIImage(named: "ic_ramp_assign_driver")!, handler: { item in
+            let alert = UIAlertController(title: "Assign Driver", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            floaty.close()
+        })
+        
+        floaty.addItem("Assign Truck", icon: UIImage(named: "ic_ramp_assign_truck")!, handler: { item in
             let alert = UIAlertController(title: "Assign Truck", message: "", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
             self.present(alert, animated: true, completion: nil)
             floaty.close()
         })
-        
-        floaty.addItem("Assign Driver", icon: UIImage(named: "ic_login_user")!, handler: { item in
-            let alert = UIAlertController(title: "Assign Driver", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            floaty.close()
-        })
-        
-        floaty.addItem("Van Load", icon: UIImage(named: "route_list_search")!, handler: { item in
-            let alert = UIAlertController(title: "Assign Driver", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            floaty.close()
-        })
-        Floaty.global.show()
-//        floatButtonViewContainer.addSubview(floaty)
-        
     }
     
 
