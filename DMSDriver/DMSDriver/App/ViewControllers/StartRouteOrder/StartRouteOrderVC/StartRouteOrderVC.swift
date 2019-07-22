@@ -195,11 +195,12 @@ extension StartRouteOrderVC{
                 self?.order = _orderDetail
                 self?.updateUI()
                 self?.callback?(true,_orderDetail)
-                if _orderDetail.statusOrder == .deliveryStatus ||
-                    _orderDetail.statusOrder == .CancelStatus  ||
-                    _orderDetail.statusOrder == .UnableToFinish {
-                    self?.navigationController?.popViewController(animated: true)
-                }
+//                if _orderDetail.statusOrder == .deliveryStatus ||
+//                    _orderDetail.statusOrder == .CancelStatus  ||
+//                    _orderDetail.statusOrder == .UnableToFinish {
+//                    self?.navigationController?.popViewController(animated: true)
+//                }
+                self?.navigationController?.popViewController(animated: true)
             case .error(let error):
                 self?.callback?(false,_orderDetail)
                 self?.showAlertView(error.getMessage())

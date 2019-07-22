@@ -183,10 +183,10 @@ extension OrderDetailTableViewCell: UITextFieldDelegate {
         guard let palletTextField = actualQuantityTextField, let cartonTextField = actualCartonsInPalletTextField else { return }
         let text =  textField.text ?? ""
         if textField == palletTextField {
-            detail.actualQty = Int(text) ?? 0
+            detail.actualQty = Int(text)
             delegate?.didEnterPalletsQuantityTextField(self, value: text, detail: self.detail)
         } else if textField == cartonTextField {
-            detail.actualCartonsInPallet = Int(text) ?? 0
+            detail.actualCartonsInPallet = Int(text)
             delegate?.didEnterCartonsQuantityTextField(self, value: text, detail: self.detail)
         }
     }
