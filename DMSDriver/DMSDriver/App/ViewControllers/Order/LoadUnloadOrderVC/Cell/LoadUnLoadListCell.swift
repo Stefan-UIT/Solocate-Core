@@ -70,7 +70,7 @@ extension LoadUnLoadListCell:UITextFieldDelegate {
     func textFieldDidEndEditing(_ textField: UITextField) {
         if textField == actualQtyTextField, let text = textField.text {
             let validText = (text.isEmpty) ? "0" : text
-            let quantity = Double(validText)
+            let quantity = Int(validText)
             orderDetail?.actualQty = quantity
         }
     }

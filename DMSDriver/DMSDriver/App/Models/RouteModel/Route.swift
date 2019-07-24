@@ -11,38 +11,12 @@ import ObjectMapper
 import GoogleMaps
 
 //MARK: - TRUCK
-class Truck: BaseModel {
-    var id:Int?
-    var name:String?
-    
-    required init?(map: Map) {
-        super.init()
-    }
-    
-    override func mapping(map: Map) {
-        id <- map["id"]
-        name <- map["name"]
-    }
-}
-
-//MARK: - Tanker
-class Tanker: BaseModel {
-    var id:Int?
-    var name:String?
-    
-    required init?(map: Map) {
-        super.init()
-    }
-    
-    override func mapping(map: Map) {
-        id <- map["id"]
-        name <- map["name"]
-    }
-}
-
-//MARK: - Status
+class TruckType: BasicModel { }
+class Tanker: BasicModel { }
 class Status: BasicModel { }
 class Urgency: BasicModel { }
+class Warehouse: BasicModel { }
+class Company: BasicModel { }
 
 //MARK: - Status
 class BasicModel: BaseModel {
@@ -67,6 +41,24 @@ class BasicModel: BaseModel {
         }
     }
 }
+
+class RouteMaster: BasicModel {
+    var warehouse:Warehouse?
+    
+    override init() {
+        super.init()
+    }
+    
+    required init?(map: Map) {
+        super.init()
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        warehouse <- map["warehouse_location"]
+    }
+}
+
 
 //MARK: - Tracking
 class Tracking: BaseModel {
@@ -128,6 +120,8 @@ class ResponseGetRouteList: BaseModel {
 }
 
 
+
+
 //MARK: - Route
 class Route: BaseModel {
     
@@ -145,7 +139,7 @@ class Route: BaseModel {
     var  status_id = -1
     var  auto_status = -1
     var  driver:UserModel.UserInfo?
-    var  truck:Truck?
+//    var  truck:Truck?
     var  tanker:Tanker?
     var  status:Status?
     var  tracking:[Tracking]?
@@ -163,8 +157,11 @@ class Route: BaseModel {
     var totalDistance = ""
     var locationList:[Address] = []
     var notes:[Note] = []
-    
-    
+    //NEW
+    var truckType:TruckType?
+    var routeMaster:RouteMaster?
+    var company:Company?
+    var loadVolume:Double = 0.0
     
     convenience required init?(map: Map) {
         self.init()
@@ -187,7 +184,7 @@ class Route: BaseModel {
         orderList <- map["orders"]
         totalOrders <- map["orders_count"]
         tanker <- map["tanker"]
-        truck <- map["truck"]
+//        truck <- map["truck"]
         tracking <- map["tracking"]
         driver <- map["driver"]
         totalTimeEst <- map["est_dur"]
@@ -197,6 +194,11 @@ class Route: BaseModel {
         orderList.forEach { (order) in
             order.driver_id = driver?.id ?? 0
         }
+        
+        routeMaster <- map["route_master"]
+        truckType <- map["truck_type"]
+        company <- map["company"]
+        loadVolume <- map["load_vol"]
     }
     
     var isFirstStartOrder:Bool{
@@ -213,20 +215,22 @@ class Route: BaseModel {
         }
     }
     
-    lazy var routeStatus:RouteStatus = {
-        switch E(status?.code){
-        case "OP":
-            return RouteStatus.New
-        case "IP":
-            return RouteStatus.InProgess
-        case "DV":
-            return RouteStatus.Finished
-        case "CC":
-            return RouteStatus.Canceled
-        default:
-            return RouteStatus.New
+    var routeStatus:RouteStatus {
+        get {
+            switch E(status?.code){
+            case "OP":
+                return RouteStatus.New
+            case "IP":
+                return RouteStatus.InProgess
+            case "DV":
+                return RouteStatus.Finished
+            case "CC":
+                return RouteStatus.Canceled
+            default:
+                return RouteStatus.New
+            }
         }
-    }()
+    }
     
     var  colorStatus:UIColor {
         get{
@@ -235,7 +239,7 @@ class Route: BaseModel {
             case "OP":
                 return AppColor.newStatus;
             case "IP":
-                return AppColor.inProcessStatus;
+                return AppColor.InTransit;
             case "DV":
                 return AppColor.deliveryStatus;
             case "CC":

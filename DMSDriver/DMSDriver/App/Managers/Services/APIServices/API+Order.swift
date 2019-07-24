@@ -22,6 +22,7 @@ extension BaseAPIService{
     @discardableResult
     func updateOrderStatus(_ order:Order,
                            reason: Reason? = nil,
+                           updateDetailType:Order.Detail.DetailUpdateType = .Deliver,
                            callback: @escaping APICallback<ResponseDataModel<Order>>) -> APIRequest? {
         
         let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER.URL,
@@ -37,7 +38,7 @@ extension BaseAPIService{
         }
         
         if let details = order.details {
-            let detailsParam = details.map({$0.jsonDetailUpdateORderStatus()})
+            let detailsParam = details.map({$0.jsonDetailUpdateORderStatus(updateType:updateDetailType)})
             params["details"] = detailsParam
         }
         

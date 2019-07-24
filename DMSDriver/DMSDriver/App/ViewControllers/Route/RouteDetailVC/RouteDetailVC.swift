@@ -90,11 +90,6 @@ class RouteDetailVC: BaseViewController {
         initUI()
         setupCollectionView()
         setupScrollMenuView()
-        
-        guard let routeId = route?.id else {
-            return
-        }
-        getRouteDetail("\(routeId)")
     }
     
     func layoutAddNoteButton() {
@@ -113,6 +108,10 @@ class RouteDetailVC: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        updateNavigationBar()
+        guard let routeId = route?.id else {
+            return
+        }
+        getRouteDetail("\(routeId)")
     }
 
     

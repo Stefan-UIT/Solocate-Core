@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/StartRouteOrder/StartRouteOrderVC/StartRouteOrderVC.swift"
-            timestampString = "583843745.905159"
+            timestampString = "585486620.106298"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "233"
-            endingLineNumber = "233"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
             landmarkName = "handleStartOrFinishOrder()"
             landmarkType = "7">
          </BreakpointContent>
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/StartRouteOrder/StartRouteOrderVC/StartRouteOrderVC.swift"
-            timestampString = "583843745.905267"
+            timestampString = "585486620.106755"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "178"
-            endingLineNumber = "178"
+            startingLineNumber = "179"
+            endingLineNumber = "179"
             landmarkName = "updateStatusOrder(statusCode:cancelReason:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/Authorization/LoginViewController.swift"
-            timestampString = "584528422.674278"
+            timestampString = "585484736.8433371"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "173"
-            endingLineNumber = "173"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
             landmarkName = "onChangeSegmentControl(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/Authorization/LoginViewController.swift"
-            timestampString = "584528422.6769021"
+            timestampString = "585484736.843377"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
             landmarkName = "onChangeSegmentControl(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -106,11 +106,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/Authorization/LoginViewController.swift"
-            timestampString = "584528422.677124"
+            timestampString = "585484736.843413"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
+            startingLineNumber = "189"
+            endingLineNumber = "189"
             landmarkName = "onChangeSegmentControl(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -137,13 +137,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DMSDriver/App/RouteListVC/Cell/tableViewCell/RouteTableViewCell.swift"
-            timestampString = "583843745.905584"
+            filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
+            timestampString = "585486620.107097"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "34"
-            endingLineNumber = "34"
-            landmarkName = "loadData(_:)"
+            startingLineNumber = "1006"
+            endingLineNumber = "1006"
+            landmarkName = "updateOrderStatus(_:updateDetailType:cancelReason:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -153,60 +153,44 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DMSDriver/App/ViewControllers/Loading/LoadingViewController.swift"
-            timestampString = "584435620.315367"
+            filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
+            timestampString = "585486620.107432"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
-            landmarkName = "downloadFileFrom(name:path:saveTo:withCompletionHandler:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DMSDriver/App/ViewControllers/Loading/LoadingViewController.swift"
-            timestampString = "584435620.315995"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "downloadFileFrom(name:path:saveTo:withCompletionHandler:)"
+            startingLineNumber = "1011"
+            endingLineNumber = "1011"
+            landmarkName = "updateOrderStatusImport(_:updateDetailType:cancelReason:)"
             landmarkType = "7">
             <Locations>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "DMSDriver_Dev.LoadingViewController.downloadFileFrom(name: Swift.String, path: Swift.String, saveTo: Foundation.URL, withCompletionHandler: () -&gt; ()) -&gt; ()"
-                  moduleName = "DMSDriver-Dev"
+                  symbolName = "Ashdod_Dev.OrderDetailViewController.updateOrderStatusImport(_: Ashdod_Dev.Order, updateDetailType: Ashdod_Dev.Order.Detail.DetailUpdateType, cancelReason: Swift.Optional&lt;Ashdod_Dev.Reason&gt;) -&gt; ()"
+                  moduleName = "Ashdod Dev"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/trungvo/Solocate_A1/DMSDriver/DMSDriver/App/ViewControllers/Loading/LoadingViewController.swift"
-                  timestampString = "584435620.523329"
+                  urlString = "file:///Users/trungvo/Ashdod_Solocate/DMSDriver/DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
+                  timestampString = "585484056.25345"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "70"
-                  endingLineNumber = "70"
-                  offsetFromSymbolStart = "80">
+                  startingLineNumber = "1001"
+                  endingLineNumber = "1001"
+                  offsetFromSymbolStart = "59">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in DMSDriver_Dev.LoadingViewController.downloadFileFrom(name: Swift.String, path: Swift.String, saveTo: Foundation.URL, withCompletionHandler: () -&gt; ()) -&gt; ()"
-                  moduleName = "DMSDriver-Dev"
+                  symbolName = "closure #1 (Ashdod_Dev.APIOutput&lt;Ashdod_Dev.ResponseDataModel&lt;Ashdod_Dev.Order&gt;, Ashdod_Dev.APIError&gt;) -&gt; () in Ashdod_Dev.OrderDetailViewController.updateOrderStatusImport(_: Ashdod_Dev.Order, updateDetailType: Ashdod_Dev.Order.Detail.DetailUpdateType, cancelReason: Swift.Optional&lt;Ashdod_Dev.Reason&gt;) -&gt; ()"
+                  moduleName = "Ashdod Dev"
                   usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/trungvo/Solocate_A1/DMSDriver/DMSDriver/App/ViewControllers/Loading/LoadingViewController.swift"
-                  timestampString = "584435620.526577"
+                  urlString = "file:///Users/trungvo/Ashdod_Solocate/DMSDriver/DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
+                  timestampString = "585484056.2551039"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "67"
-                  endingLineNumber = "67"
-                  offsetFromSymbolStart = "231">
+                  startingLineNumber = "1001"
+                  endingLineNumber = "1001"
+                  offsetFromSymbolStart = "220">
                </Location>
             </Locations>
          </BreakpointContent>
@@ -217,13 +201,45 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DMSDriver/App/ViewControllers/Loading/LoadingViewController.swift"
-            timestampString = "584435620.3163151"
+            filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
+            timestampString = "585486620.107713"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "71"
-            endingLineNumber = "71"
-            landmarkName = "downloadFileFrom(name:path:saveTo:withCompletionHandler:)"
+            startingLineNumber = "263"
+            endingLineNumber = "263"
+            landmarkName = "showPalletReturnedPopUp()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
+            timestampString = "585486620.107995"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "915"
+            endingLineNumber = "915"
+            landmarkName = "updateButtonStatus()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DMSDriver/App/Models/OrderModel/Order.swift"
+            timestampString = "585486620.108269"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "426"
+            endingLineNumber = "426"
+            landmarkName = "mapping(map:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

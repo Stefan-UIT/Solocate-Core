@@ -10,45 +10,88 @@ import UIKit
 import ObjectMapper
 import CoreLocation
 
-	
+
+enum PackageE: String {
+    case Pallet = "PLT"
+    case Carton = "CTN"
+    
+    var name:String {
+        switch self {
+        case .Pallet:
+            return "pallet".localized
+        case .Carton:
+            return "carton".localized
+        }
+    }
+}
+
+enum OrderGroup: String {
+    case Terminal = "TERMINAL"
+    case Bonded = "BONDED"
+    case Free = "FREE"
+    case Logistic = "LOGISTIC"
+    
+    var name: String {
+        switch self {
+        case .Terminal:
+            return "terminal".localized
+        case .Bonded:
+            return "bonded".localized
+        case .Free:
+            return "free".localized
+        case .Logistic:
+            return "logistic".localized
+        }
+    }
+}
 
 enum StatusOrder: String {
     case newStatus = "OP"
-    case inProcessStatus = "IP"
+    case InTransit = "IT"
     case deliveryStatus = "DV"
-    case cancelStatus = "CC"
-    case cancelFinishStatus = "UF"
-    case pickupStatus = "PU"
-    
+    case CancelStatus = "CC"
+    case UnableToFinish = "UF"
+    case PickupStatus = "PU"
+    case Loaded = "LD"
+    case WarehouseClarification = "WC"
+    case PartialLoaded = "PL"
+    case PartialDelivered = "PD"
+
     var statusName: String {
         switch self {
         case .newStatus:
             return "New".localized
-        case .inProcessStatus:
-            return "Started".localized
-        case .pickupStatus:
+        case .InTransit:
+            return "in-transit".localized
+        case .PickupStatus:
             return "picked-up".localized
         case .deliveryStatus:
             return "Finished".localized
-        case .cancelStatus,
-             .cancelFinishStatus:
+        case .CancelStatus,
+             .UnableToFinish:
             return "Cancelled".localized
+        case .Loaded:
+            return "loaded".localized
+        case .PartialLoaded:
+            return "partial-loaded".localized
+        case .PartialDelivered:
+            return "partial-delivered".localized
+        case .WarehouseClarification:
+            return "warehouse-clarification".localized
         }
     }
     
     var color:UIColor {
         get {
             switch self {
-            case .newStatus:
+            case .newStatus, .Loaded, .PartialLoaded:
                 return AppColor.newStatus;
-            case .inProcessStatus:
-                return AppColor.inProcessStatus;
-            case .pickupStatus:
-                return AppColor.pickedUpStatus;
-            case .deliveryStatus:
+            case .InTransit:
+                return AppColor.InTransit;
+            case .deliveryStatus, .PartialDelivered:
                 return AppColor.deliveryStatus;
-            case .cancelStatus,
-                 .cancelFinishStatus:
+            case .CancelStatus,
+                 .UnableToFinish:
                 return AppColor.redColor;
             default:
                 return AppColor.newStatus;
@@ -60,8 +103,17 @@ enum StatusOrder: String {
 enum OrderType:Int {
     case delivery = 1
     case pickup
-    case deliveryAndPickup
+    
+    var name:String {
+        switch self {
+        case .pickup:
+            return "Pickup".localized
+        default:
+            return "Delivery".localized
+        }
+    }
 }
+
 
 class Address: BaseModel {
     var address:String?
@@ -157,17 +209,30 @@ class Order: BaseModel {
                 cd <- map["cd"]
             }
         }
+        
         var id:Int?
         var order_id:Int?
         var package_id:Int?
-        var qty:Double?
-        var actualQty:Double?
-        var remain_qty:Double?
+//        var remain_qty:Double?
         var package:Package?
         var unit:Unit?
         var barCode:String?
         var packageRefId:Int?
         var status:DetailStatus = .NotLoad
+        // NEW
+        var qty:Int?
+        var actualQty:Int?
+        var cartonsInPallet:Int?
+        var actualCartonsInPallet:Int?
+        var loadedQty:Int?
+        var loadedCartonsInPallet:Int?
+        var returnedPalletQty:Int?
+        var isPallet:Bool {
+            get {
+                return package?.cd == PackageE.Pallet.rawValue
+            }
+        }
+        
         
         
         override init() {
@@ -183,23 +248,52 @@ class Order: BaseModel {
             order_id <- map["order_id"]
             package_id <- map["package_id"]
             qty <- map["qty"]
-            actualQty <- map["act_dlvy"]
+            actualQty <- map["dlvd_qty"]
             if actualQty == nil {
                 actualQty = qty
             }
-            remain_qty <- map["remain_qty"]
+            cartonsInPallet <- map["ctn_in_plt"]
+            actualCartonsInPallet <- map["ctn_dlvd"]
+            if actualCartonsInPallet == nil {
+                actualCartonsInPallet = cartonsInPallet
+            }
+//            remain_qty <- map["remain_qty"]
             package <- map["package"]
             barCode <- map["barcode"]
             packageRefId <- map["pkg_ref_id"]
             unit <- map["unit"]
+            loadedQty <- map["load_qty"]
+            loadedCartonsInPallet <- map["ctn_loaded"]
+            returnedPalletQty <- map["plt_return"]
         }
         
-        func jsonDetailUpdateORderStatus() -> [String:Any] {
-            return [
-                "id" : id ?? 0,
-                "qty" : qty ?? 0,
-                "act_dlvy" : actualQty ?? 0,
+        enum DetailUpdateType {
+            case Load
+            case Deliver
+            case ReturnedPallet
+        }
+        
+        func jsonDetailUpdateORderStatus(updateType:DetailUpdateType = .Deliver) -> [String:Any] {
+            var params:[String:Any] = [
+                "id" : id ?? 0
             ]
+            switch updateType {
+            case .Load:
+                params["load_qty"] = loadedQty ?? 0
+                params["ctn_loaded"] = loadedCartonsInPallet ?? 0
+                break
+            case .ReturnedPallet:
+                params["plt_return"] = returnedPalletQty ?? 0
+                break
+            default:
+                params["dlvd_qty"] = actualQty ?? 0
+                if isPallet {
+                    params["ctn_dlvd"] = actualCartonsInPallet ?? 0
+                }
+                break
+            }
+            
+            return params
         }
     }
 
@@ -220,6 +314,9 @@ class Order: BaseModel {
             hazardous_mtrl <- map["hazardous_mtrl"]
         }
     }
+    
+    class OrderGroupModel:BasicModel {}
+    class OrderTypeModel:BasicModel {}
 
     var id = -1
     var from:Address?
@@ -259,6 +356,7 @@ class Order: BaseModel {
     var full_addr = ""
     var receiverPhone = ""
     
+    
     var urgent_type_id:Int = 0
     //var url:UrlFileMoldel?
     var files:[AttachFileModel]?
@@ -294,6 +392,23 @@ class Order: BaseModel {
         
         return Double(total)
     }()
+    
+    // NEW
+    var customer:UserModel?
+    var typeID:Int = 0
+    var group:String = ""
+    
+    lazy var orderGroup:OrderGroup = {
+        return OrderGroup.init(rawValue: group) ?? OrderGroup.Logistic
+    }()
+    
+    lazy var orderType:OrderType = {
+        return OrderType.init(rawValue: typeID) ?? OrderType.delivery
+    }()
+    
+    var CODAmount:Double = 0.0
+    var actualCODAmount:Double = 0.0
+    var codComment = ""
 
     convenience required init?(map: Map) {
         self.init()
@@ -327,16 +442,21 @@ class Order: BaseModel {
             to    <- map["to"]
         }
         
+        //NEW
+        customer    <- map["customer"]
+        typeID    <- map["type_id"]
+        group    <- map["group"]
+        
        updateStatusDetailOrder()
     }
     
     func updateStatusDetailOrder()  {
         for item in details ?? [] {
             if statusOrder == .newStatus ||
-                statusOrder == .inProcessStatus {
+                statusOrder == .InTransit {
                 item.status = .NotLoad
                 
-            }else if (statusOrder == .pickupStatus) {
+            }else if (statusOrder == .PickupStatus) {
                 item.status = .Loaded
             }else if (statusOrder == .deliveryStatus) {
                 item.status = .Unload
@@ -479,12 +599,12 @@ class Order: BaseModel {
     func validUpdateStatusOrder() -> Bool {
         var valid = true
         for item in details ?? []  {
-            if statusOrder == StatusOrder.inProcessStatus {
+            if statusOrder == StatusOrder.InTransit {
                 if item.status != .Loaded {
                     valid = false
                     break
                 }
-            }else if statusOrder == StatusOrder.pickupStatus {
+            }else if statusOrder == StatusOrder.PickupStatus {
                 if item.status != .Unload {
                     valid = false
                     break
