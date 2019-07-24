@@ -101,6 +101,10 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 //        tableView?.reloadSections(OrderDetailSection.sectionNatureOfGoods.indexSet, with: .automatic)
 //    }
     
+    fileprivate func cancelOrder(reason:Reason) {
+        updateOrderStatus(StatusOrder.CancelStatus.rawValue, cancelReason: reason)
+    }
+    
     //MARK: - Initialize
     private func setupTableView() {
         tableView?.delegate = self
@@ -236,7 +240,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     func showReasonView() {
         ReasonSkipView.show(inView: self.view) {[weak self] (success, reason) in
             guard let _reason = reason else {return}
-//            self?.cancelOrder(reason: _reason)
+            self?.cancelOrder(reason: _reason)
         }
     }
     
@@ -705,11 +709,16 @@ extension OrderDetailViewController:DMSNavigationServiceDelegate {
 extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
     
     func didEnterPalletsQuantityTextField(_ cell: OrderDetailTableViewCell, value: String, detail:Order.Detail) {
+//        if value.isEmpty {
+//            showAlertView("Delivered quantity is required")
+//        }
 //        showAlertView("Pallets: " + value)
     }
     
     func didEnterCartonsQuantityTextField(_ cell: OrderDetailTableViewCell, value: String, detail:Order.Detail) {
-//        showAlertView("Cartons: " + value)
+//        if detail.isPallet && value.isEmpty {
+//            showAlertView("Carton in Pallet is required")
+//        }
     }
     
     func didSelectGo(_ cell: OrderDetailTableViewCell, _ btn: UIButton) {
@@ -820,7 +829,11 @@ fileprivate extension OrderDetailViewController{
                     //self?.didUpdateStatus?(_orderDetail, nil)
                 }
                 
-            }else {
+            } else if (_orderDetail.details?.first?.actualQty == nil) {
+                showAlertView("Delivered quantity is required")
+            } else if ((_orderDetail.details?.first?.isPallet ?? false) &&  _orderDetail.details?.first?.actualCartonsInPallet == nil) {
+                showAlertView("Cartons in Pallet is required")
+            } else {
                 statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
                 self.updateOrderStatus(statusNeedUpdate)
             }
@@ -900,8 +913,9 @@ fileprivate extension OrderDetailViewController{
             updateStatusButton?.backgroundColor = AppColor.greenColor
         }
         let isFinishedAndNotPalletType = ((orderDetail?.statusOrder == StatusOrder.deliveryStatus || orderDetail?.statusOrder == StatusOrder.PartialDelivered) && !(orderDetail?.details?[0].isPallet)!)
+        let isUpdatedReturnedPalletsQty = orderDetail?.details?.first?.returnedPalletQty != nil
         let isHidden = ( orderDetail?.statusOrder == StatusOrder.CancelStatus ||
-            orderDetail?.statusOrder == StatusOrder.UnableToFinish || isFinishedAndNotPalletType)
+            orderDetail?.statusOrder == StatusOrder.UnableToFinish || isFinishedAndNotPalletType || isUpdatedReturnedPalletsQty)
         updateStatusButton?.isHidden = isHidden
         vAction?.isHidden = isHidden
     }
@@ -974,7 +988,7 @@ extension OrderDetailViewController{
         }
     }
     
-    func updateOrderStatus(_ statusCode: String, updateDetailType:Order.Detail.DetailUpdateType = .Deliver) {
+    func updateOrderStatus(_ statusCode: String, updateDetailType:Order.Detail.DetailUpdateType = .Deliver, cancelReason:Reason? = nil) {
         guard let _orderDetail = orderDetail else {
             return
         }
@@ -989,12 +1003,12 @@ extension OrderDetailViewController{
         if hasNetworkConnection {
             showLoadingIndicator()
         }
-        updateOrderStatusImport(_orderDetail, updateDetailType:updateDetailType)
+        updateOrderStatusImport(_orderDetail, updateDetailType:updateDetailType, cancelReason: cancelReason)
     }
     
     
-    func updateOrderStatusImport(_ order:Order, updateDetailType:Order.Detail.DetailUpdateType = .Deliver)  {
-        SERVICES().API.updateOrderStatus(order, updateDetailType:updateDetailType) {[weak self] (result) in
+    func updateOrderStatusImport(_ order:Order, updateDetailType:Order.Detail.DetailUpdateType = .Deliver, cancelReason:Reason? = nil)  {
+        SERVICES().API.updateOrderStatus(order, reason:cancelReason, updateDetailType:updateDetailType) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):

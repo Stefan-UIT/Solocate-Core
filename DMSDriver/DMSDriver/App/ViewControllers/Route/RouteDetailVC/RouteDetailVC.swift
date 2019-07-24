@@ -93,11 +93,6 @@ class RouteDetailVC: BaseViewController {
         initFloatButton()
         setupCollectionView()
         setupScrollMenuView()
-        
-        guard let routeId = route?.id else {
-            return
-        }
-        getRouteDetail("\(routeId)")
     }
     
     func layoutAddNoteButton() {
@@ -126,6 +121,10 @@ class RouteDetailVC: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         Floaty.global.hide()
+        guard let routeId = route?.id else {
+            return
+        }
+        getRouteDetail("\(routeId)")
     }
 
     
@@ -146,6 +145,29 @@ class RouteDetailVC: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func redirectToLoadingPackageVC() {
+        guard let orders = route?.orderList, let firstOrder = orders.first else { return }
+        var i = 1
+        while i < orders.count {
+            firstOrder.details?.append(orders[i].details ?? [])
+            i = i + 1
+        }
+        let vc:LoadUnloadOrderVC = LoadUnloadOrderVC.loadSB(SB: .LoadUnloadOrder)
+        vc.order = firstOrder
+        vc.callback = {[weak self] (hasUpdate,order) in
+//            if hasUpdate {
+//                self?.order = order
+//                self?.updateButtonStatus()
+//                self?.callback?(true,order)
+//                if order?.statusOrder == StatusOrder.deliveryStatus {
+//                    self?.navigationController?.popViewController(animated: false)
+//                }
+//            }
+        }
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     private func initFloatButton() {
         Floaty.global.button.items.removeAll()
         let floaty = Floaty.global.button
@@ -153,9 +175,7 @@ class RouteDetailVC: BaseViewController {
         floaty.plusColor = UIColor.white
         floaty.itemSize = 56.0
         floaty.addItem("Van Load", icon: UIImage(named: "ic_ramp_van_load")!, handler: { item in
-            let alert = UIAlertController(title: "Assign Driver", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
+            self.redirectToLoadingPackageVC()
             floaty.close()
         })
         

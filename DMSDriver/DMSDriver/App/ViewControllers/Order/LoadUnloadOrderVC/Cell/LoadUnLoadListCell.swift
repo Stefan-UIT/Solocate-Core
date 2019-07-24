@@ -43,7 +43,7 @@ class LoadUnLoadListCell: UITableViewCell {
         self.orderDetail = orderDetail
         lblPackage?.text = orderDetail.package?.name
         lblQty?.text = #"\#(orderDetail.qty ?? 0)"#
-        lblBarCode?.text = orderDetail.barCode
+        lblBarCode?.text = orderDetail.barCode ?? "-"
         lblPackageRefId?.text = #"\#( orderDetail.packageRefId ?? 0)"#
         actualQtyTextField.text = (orderDetail.actualQty != nil) ? "\(orderDetail.actualQty!)" : lblQty?.text
         btnLoadUnload?.setStyleBlueSquare()
