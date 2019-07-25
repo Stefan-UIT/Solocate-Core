@@ -11,6 +11,28 @@ import SVProgressHUD
 
 extension UIViewController {
     
+//    func showPalletReturnedPopUp(title:String, message:String, submitCompletionHandler:((_ action: UIAlertAction) -> Void)? = nil) {
+//        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+//        
+//        //2. Add the text field. You can configure it however you need.
+//        alert.addTextField { (textField) in
+//            textField.keyboardType = .numberPad
+//            textField.text = ""
+//        }
+//        
+//        // 3. Grab the value from the text field, and print it when the user clicks OK.
+//        alert.addAction(UIAlertAction(title: "submit".localized, style: .default, handler: { [weak alert] (_) in
+//
+//        }))
+//        
+//        alert.addAction(UIAlertAction(title: "cancel".localized, style: .cancel, handler: {
+//            action in
+//        }))
+//        
+//        // 4. Present the alert.
+//        self.present(alert, animated: true, completion: nil)
+//    }
+    
    static func loadSB<T>(SB:SBName) -> T {
         return UIStoryboard(name: SB.rawValue,
                             bundle: nil)
