@@ -233,8 +233,6 @@ class Order: BaseModel {
             }
         }
         
-        
-        
         override init() {
             super.init()
         }
@@ -273,22 +271,28 @@ class Order: BaseModel {
             case ReturnedPallet
         }
         
-        func jsonDetailUpdateORderStatus(updateType:DetailUpdateType = .Deliver) -> [String:Any] {
+        func jsonDetailUpdateORderStatus(updateType:DetailUpdateType = .Deliver, orderStatus:StatusOrder) -> [String:Any] {
             var params:[String:Any] = [
                 "id" : id ?? 0
             ]
             switch updateType {
             case .Load:
-                params["load_qty"] = loadedQty ?? 0
-                params["ctn_loaded"] = loadedCartonsInPallet ?? 0
+                if orderStatus == StatusOrder.Loaded || orderStatus == StatusOrder.PartialLoaded {
+                    params["load_qty"] = loadedQty ?? 0
+                    params["ctn_loaded"] = loadedCartonsInPallet ?? 0
+                }
                 break
             case .ReturnedPallet:
-                params["plt_return"] = returnedPalletQty ?? 0
+                if orderStatus == StatusOrder.deliveryStatus || orderStatus == StatusOrder.PartialDelivered {
+                    params["plt_return"] = returnedPalletQty ?? 0
+                }
                 break
             default:
-                params["dlvd_qty"] = actualQty ?? 0
-                if isPallet {
-                    params["ctn_dlvd"] = actualCartonsInPallet ?? 0
+                if orderStatus == StatusOrder.deliveryStatus || orderStatus == StatusOrder.PartialDelivered {
+                    params["dlvd_qty"] = actualQty ?? 0
+                    if isPallet {
+                        params["ctn_dlvd"] = actualCartonsInPallet ?? 0
+                    }
                 }
                 break
             }
@@ -406,9 +410,33 @@ class Order: BaseModel {
         return OrderType.init(rawValue: typeID) ?? OrderType.delivery
     }()
     
-    var CODAmount:Double = 0.0
-    var actualCODAmount:Double = 0.0
-    var codComment = ""
+    var codAmount:Double? {
+        get {
+            return Double(cash_on_dlvy ?? "")
+        }
+    }
+    var codReceived:Double? {
+        get {
+            return Double(cod_rcvd ?? "")
+        }
+    }
+    var codComment:String?
+    var cash_on_dlvy:String?
+    var cod_rcvd:String?
+    
+    var isHasCOD:Bool {
+        get {
+            guard let amount = codAmount else { return false }
+            return amount > 0.0
+        }
+    }
+    
+    var isUpdatedCODReceived:Bool {
+        get {
+            guard let amount = codReceived else { return false }
+            return amount > 0.0
+        }
+    }
 
     convenience required init?(map: Map) {
         self.init()
@@ -446,6 +474,9 @@ class Order: BaseModel {
         customer    <- map["customer"]
         typeID    <- map["type_id"]
         group    <- map["group"]
+        cash_on_dlvy    <- map["cash_on_dlvy"]
+        cod_rcvd    <- map["cod_rcvd"]
+        codComment    <- map["cash_on_dlvy_cmnt"]
         
        updateStatusDetailOrder()
     }

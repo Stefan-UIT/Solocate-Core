@@ -127,7 +127,7 @@ class StartRouteOrderVC: BaseViewController {
     }
     
     @IBAction func onbtnClickStart(btn:UIButton) {
-        handleStartOrFinishOrder()
+        handleStartOrder()
     }
     
     @IBAction func onbtnClickSkip(btn:UIButton) {
@@ -222,94 +222,106 @@ extension StartRouteOrderVC{
 
 // MARK: - PRIVATE FUNTIONS
 extension StartRouteOrderVC {
-    private func handleStartOrFinishOrder() {
+    private func handleStartOrder() {
         guard let _orderDetail = order else {return}
-        let status:StatusOrder = _orderDetail.statusOrder
-        var statusNeedUpdate = status.rawValue
-        switch status{
-        case .newStatus:
-            App().showAlertView("do-you-want-to-start-this-order".localized,
-                                positiveTitle: "YES".localized,
-                                positiveAction: {[weak self] (ok) in
-                                    
-                                    statusNeedUpdate = StatusOrder.InTransit.rawValue
-                                    self?.updateStatusOrder(statusCode: statusNeedUpdate)
-                                    
-            }, negativeTitle: "NO".localized) { (cancel) in
-                //
-            }
-            
-        case .InTransit:
-            let vc:LoadUnloadOrderVC = LoadUnloadOrderVC.loadSB(SB: .LoadUnloadOrder)
-            vc.order = order
-            vc.callback = {[weak self] (hasUpdate,order) in
-                if hasUpdate {
-                    self?.order = order
-                    self?.updateButtonStatus()
-                    self?.callback?(true,order)
-                    if order?.statusOrder == StatusOrder.deliveryStatus {
-                        self?.navigationController?.popViewController(animated: false)
-                    }
-                }
-            }
-            
-            self.navigationController?.pushViewController(vc, animated: true)
-            /*
-            App().showAlertView("do-you-want-to-pickup-this-order".localized,
-                                positiveTitle: "YES".localized,
-                                positiveAction: {[weak self] (ok) in
-                                    
-                                    statusNeedUpdate = StatusOrder.PickupStatus.rawValue
-                                    self?.updateStatusOrder(statusCode: statusNeedUpdate)
-                                    
-            }, negativeTitle: "NO".localized) { (cancel) in
-                //
-            }
-            */
-        case .PickupStatus:
-            if _orderDetail.validUpdateStatusOrder() == true { // finish-order
-                if _orderDetail.isRequireImage(){
-                    self.showAlertView("picture-required".localized) {[weak self](action) in
-                        self?.showPictureViewController()
-                    }
-                    
-                }else if (_orderDetail.isRequireSign()) {
-                    self.showAlertView("signature-required".localized) {[weak self](action) in
-                        self?.showSignatureViewController()
-                    }
-                    
-                }else {
-                    
-                    App().showAlertView("do-you-want-to-finish-this-order".localized,
-                                        positiveTitle: "YES".localized,
-                                        positiveAction: {[weak self] (ok) in
-                                            
-                                            statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
-                                            self?.updateStatusOrder(statusCode: statusNeedUpdate)
-                                            
-                    }, negativeTitle: "NO".localized) { (cancel) in
-                        //
-                    }
-                }
-                
-            }else { // Unload order detail
-              
-                let vc:LoadUnloadOrderVC = LoadUnloadOrderVC.loadSB(SB: .LoadUnloadOrder)
-                vc.order = order
-                vc.callback = {[weak self] (hasUpdate,order) in
-                    if hasUpdate {
-                        self?.order = order
-                        self?.updateButtonStatus()
-                        self?.callback?(true,order)
-                        self?.navigationController?.popViewController(animated: false)
-                    }
-                }
-                self.navigationController?.pushViewController(vc, animated: true)
-            }
-
-        default:
-            break
+        App().showAlertView("do-you-want-to-start-this-order".localized,
+                            positiveTitle: "YES".localized,
+                            positiveAction: {[weak self] (ok) in
+                                
+                                let statusNeedUpdate = StatusOrder.InTransit.rawValue
+                                self?.updateStatusOrder(statusCode: statusNeedUpdate)
+                                
+        }, negativeTitle: "NO".localized) { (cancel) in
+            //
         }
+        
+//        let status:StatusOrder = _orderDetail.statusOrder
+//        var statusNeedUpdate = status.rawValue
+//
+//        switch status{
+//        case .newStatus:
+//            App().showAlertView("do-you-want-to-start-this-order".localized,
+//                                positiveTitle: "YES".localized,
+//                                positiveAction: {[weak self] (ok) in
+//
+//                                    statusNeedUpdate = StatusOrder.InTransit.rawValue
+//                                    self?.updateStatusOrder(statusCode: statusNeedUpdate)
+//
+//            }, negativeTitle: "NO".localized) { (cancel) in
+//                //
+//            }
+//
+//        case .InTransit:
+//            let vc:LoadUnloadOrderVC = LoadUnloadOrderVC.loadSB(SB: .LoadUnloadOrder)
+//            vc.order = order
+//            vc.callback = {[weak self] (hasUpdate,order) in
+//                if hasUpdate {
+//                    self?.order = order
+//                    self?.updateButtonStatus()
+//                    self?.callback?(true,order)
+//                    if order?.statusOrder == StatusOrder.deliveryStatus {
+//                        self?.navigationController?.popViewController(animated: false)
+//                    }
+//                }
+//            }
+//
+//            self.navigationController?.pushViewController(vc, animated: true)
+//            /*
+//            App().showAlertView("do-you-want-to-pickup-this-order".localized,
+//                                positiveTitle: "YES".localized,
+//                                positiveAction: {[weak self] (ok) in
+//
+//                                    statusNeedUpdate = StatusOrder.PickupStatus.rawValue
+//                                    self?.updateStatusOrder(statusCode: statusNeedUpdate)
+//
+//            }, negativeTitle: "NO".localized) { (cancel) in
+//                //
+//            }
+//            */
+//        case .PickupStatus:
+//            if _orderDetail.validUpdateStatusOrder() == true { // finish-order
+//                if _orderDetail.isRequireImage(){
+//                    self.showAlertView("picture-required".localized) {[weak self](action) in
+//                        self?.showPictureViewController()
+//                    }
+//
+//                }else if (_orderDetail.isRequireSign()) {
+//                    self.showAlertView("signature-required".localized) {[weak self](action) in
+//                        self?.showSignatureViewController()
+//                    }
+//
+//                }else {
+//
+//                    App().showAlertView("do-you-want-to-finish-this-order".localized,
+//                                        positiveTitle: "YES".localized,
+//                                        positiveAction: {[weak self] (ok) in
+//
+//                                            statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
+//                                            self?.updateStatusOrder(statusCode: statusNeedUpdate)
+//
+//                    }, negativeTitle: "NO".localized) { (cancel) in
+//                        //
+//                    }
+//                }
+//
+//            }else { // Unload order detail
+//
+//                let vc:LoadUnloadOrderVC = LoadUnloadOrderVC.loadSB(SB: .LoadUnloadOrder)
+//                vc.order = order
+//                vc.callback = {[weak self] (hasUpdate,order) in
+//                    if hasUpdate {
+//                        self?.order = order
+//                        self?.updateButtonStatus()
+//                        self?.callback?(true,order)
+//                        self?.navigationController?.popViewController(animated: false)
+//                    }
+//                }
+//                self.navigationController?.pushViewController(vc, animated: true)
+//            }
+//
+//        default:
+//            break
+//        }
     }
     
     private func showPictureViewController() {
