@@ -217,6 +217,20 @@ extension BaseAPIService {
                        callback: callback);
     }
     
+    @discardableResult
+    func updateCODValue(_ value:Double,
+                        orderID:Int,
+                              callback: @escaping APICallback<ResponseDataModel<Order>>) -> APIRequest {
+        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER.URL, "\(orderID)")
+        var params = ResponseDictionary()
+        params["cod_rcvd"] = value
+        
+        return request(method: .PUT,
+                       path: path,
+                       input: .json(params),
+                       callback: callback);
+    }
+    
   
     //MARK: -  Help Method
     func parseJson(_ rawObject: Any) -> Data? {

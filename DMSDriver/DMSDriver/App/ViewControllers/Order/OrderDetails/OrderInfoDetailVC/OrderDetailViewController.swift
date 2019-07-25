@@ -271,6 +271,52 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    func showCODPopUp() {
+        guard let codAmount = orderDetail?.codAmount else { return }
+        let title = "COD Received"
+        let message = "Did you receive COD amount $\(codAmount)?"
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        //2. Add the text field. You can configure it however you need.
+        alert.addTextField { (textField) in
+            textField.keyboardType = .decimalPad
+            textField.text = ""
+        }
+        
+        // 3. Grab the value from the text field, and print it when the user clicks OK.
+        alert.addAction(UIAlertAction(title: "submit".localized, style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+            guard let text = textField?.text, let value = Double(text), value <= codAmount && value > 0.0  else {
+                self.showAlertView("COD must be less than or equal $\(codAmount)")
+                return
+            }
+            self.submitCODValue(value)
+        }))
+        
+        alert.addAction(UIAlertAction(title: "cancel".localized, style: .cancel, handler: {
+            action in
+        }))
+        
+        // 4. Present the alert.
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func submitCODValue(_ value:Double) {
+        self.showLoadingIndicator()
+        SERVICES().API.updateCODValue(value,orderID: orderDetail!.id) { [weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result {
+            case .object(_):
+                self?.orderDetail?.cod_rcvd = "\(value)"
+                let statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
+                self?.updateOrderStatus(statusNeedUpdate)
+            case .error(let error):
+                self?.showAlertView(error.description)
+            }
+        }
+    }
+    
     // MARK: - ACTION
     @IBAction func tapUpdateStatusButtonAction(_ sender: UIButton) {
         switch orderDetail?.statusOrder.rawValue {
@@ -809,38 +855,35 @@ fileprivate extension OrderDetailViewController{
     
     private func handleFinishAction() {
         guard let _orderDetail = orderDetail else {return}
-        let status:StatusOrder = _orderDetail.statusOrder
-        var statusNeedUpdate = status.rawValue
-        switch status{
-//        case .newStatus:
-//            statusNeedUpdate = StatusOrder.InTransit.rawValue
-//            updateOrderStatus(statusNeedUpdate)
-//
-        case .InTransit:
-            if _orderDetail.isRequireImage() &&
-                _orderDetail.pictures?.count ?? 0 <= 0{
-                self.showAlertView("picture-required".localized) {(action) in
-                    //self?.didUpdateStatus?(_orderDetail, nil)
-                }
-                
-            }else if (_orderDetail.isRequireSign() &&
-                _orderDetail.signature == nil) {
-                self.showAlertView("signature-required".localized) {(action) in
-                    //self?.didUpdateStatus?(_orderDetail, nil)
-                }
-                
-            } else if (_orderDetail.details?.first?.actualQty == nil) {
-                showAlertView("Delivered quantity is required")
-            } else if ((_orderDetail.details?.first?.isPallet ?? false) &&  _orderDetail.details?.first?.actualCartonsInPallet == nil) {
-                showAlertView("Cartons in Pallet is required")
-            } else {
-                statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
-                self.updateOrderStatus(statusNeedUpdate)
+        if _orderDetail.isRequireImage() &&
+            _orderDetail.pictures?.count ?? 0 <= 0{
+            self.showAlertView("picture-required".localized) {(action) in
+                //self?.didUpdateStatus?(_orderDetail, nil)
             }
             
-        default:
-            break
+        }else if (_orderDetail.isRequireSign() &&
+            _orderDetail.signature == nil) {
+            self.showAlertView("signature-required".localized) {(action) in
+                //self?.didUpdateStatus?(_orderDetail, nil)
+            }
+            
+        } else if (_orderDetail.details?.first?.actualQty == nil) {
+            showAlertView("Delivered quantity is required")
+        } else if ((_orderDetail.details?.first?.isPallet ?? false) &&  _orderDetail.details?.first?.actualCartonsInPallet == nil) {
+            showAlertView("Cartons in Pallet is required")
+        } else {
+            
+            if _orderDetail.isHasCOD && !_orderDetail.isUpdatedCODReceived {
+                showCODPopUp()
+                return
+            }
+            
+            let status:StatusOrder = _orderDetail.statusOrder
+            var statusNeedUpdate = status.rawValue
+            statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
+            self.updateOrderStatus(statusNeedUpdate)
         }
+            
     }
     
     private func handleReturnedPalletAction() {
@@ -883,7 +926,7 @@ fileprivate extension OrderDetailViewController{
     }
     
     private func updateButtonStatus() {
-//        orderDetail?.status?.code = StatusOrder.PartialDelivered.rawValue
+//        orderDetail?.status?.code = StatusOrder.InTransit.rawValue
 //        orderDetail?.details?[0].package?.cd = "PLT"
         
         handleShowingUnableToStartButton()

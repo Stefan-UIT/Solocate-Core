@@ -25,7 +25,7 @@ extension BaseAPIService{
                            updateDetailType:Order.Detail.DetailUpdateType = .Deliver,
                            callback: @escaping APICallback<ResponseDataModel<Order>>) -> APIRequest? {
         
-        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER.URL,
+        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL,
                           "\(order.id)", "\(order.status?.id ?? 0)")
         var params:[String:Any] = ["route_id": "\(order.route_id)"]
         if let _reason = reason {
@@ -38,7 +38,7 @@ extension BaseAPIService{
         }
         
         if let details = order.details {
-            let detailsParam = details.map({$0.jsonDetailUpdateORderStatus(updateType:updateDetailType)})
+            let detailsParam = details.map({$0.jsonDetailUpdateORderStatus(updateType:updateDetailType, orderStatus: order.statusOrder)})
             params["details"] = detailsParam
         }
         
@@ -80,7 +80,7 @@ extension BaseAPIService{
     }
     
     func submitSignature(_ file:AttachFileModel,_ order:Order, _ name:String, callback: @escaping APICallback<Order>) {
-        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER.URL, "\(order.id)","\(order.status?.id ?? 0)")
+        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL, "\(order.id)","\(order.status?.id ?? 0)")
         let url = E(SDBuildConf.serverUrlString()).appending(path)
 
         //let headers = ["Content-Type":"multipart/form-data; boundary=\(E(file.boundary))"];
@@ -146,7 +146,7 @@ extension BaseAPIService{
     }
     
     func uploadMultipleImageToOrder(_ files:[AttachFileModel],_ order:Order, callback: @escaping APICallback<Order>){
-        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER.URL, "\(order.id)","\(order.status?.id ?? 0)")
+        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL, "\(order.id)","\(order.status?.id ?? 0)")
         let url = E(SDBuildConf.serverUrlString()).appending(path)
         let params = ["route_id": "\(order.route_id)"]
         
