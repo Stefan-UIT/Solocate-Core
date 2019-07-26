@@ -146,14 +146,9 @@ class RouteDetailVC: BaseViewController {
     }
     
     func redirectToLoadingPackageVC() {
-        guard let orders = route?.orderList, let firstOrder = orders.first else { return }
-        var i = 1
-        while i < orders.count {
-            firstOrder.details?.append(orders[i].details ?? [])
-            i = i + 1
-        }
+        guard let orders = route?.orderList else { return }
         let vc:LoadUnloadOrderVC = LoadUnloadOrderVC.loadSB(SB: .LoadUnloadOrder)
-        vc.order = firstOrder
+        vc.orders = orders
         vc.callback = {[weak self] (hasUpdate,order) in
 //            if hasUpdate {
 //                self?.order = order

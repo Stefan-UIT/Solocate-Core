@@ -323,6 +323,8 @@
 		2AC97C5B224DF7F600DD07AE /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC97C5A224DF7F600DD07AE /* CommonUtils.swift */; };
 		2AC97C5D224E009400DD07AE /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC97C5C224E009400DD07AE /* Double+Ext.swift */; };
 		2ADE1D062253068100BE4092 /* GMSMapview+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE1D052253068100BE4092 /* GMSMapview+Ext.swift */; };
+		2E30BE6622E99A21007419FD /* LoadPackageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E30BE6522E99A21007419FD /* LoadPackageTableViewCell.swift */; };
+		2E30BE6722E99A21007419FD /* LoadPackageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E30BE6522E99A21007419FD /* LoadPackageTableViewCell.swift */; };
 		2E55A3DF22A6523D006F9944 /* NoteManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */; };
 		2E55A3E022A6523D006F9944 /* NoteManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */; };
 		2E57C67A22B8E3CD0064A787 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57C67922B8E3CD0064A787 /* AddNoteViewController.swift */; };
@@ -648,6 +650,7 @@
 		2AC97C5A224DF7F600DD07AE /* CommonUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
 		2AC97C5C224E009400DD07AE /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
 		2ADE1D052253068100BE4092 /* GMSMapview+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GMSMapview+Ext.swift"; sourceTree = "<group>"; };
+		2E30BE6522E99A21007419FD /* LoadPackageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadPackageTableViewCell.swift; sourceTree = "<group>"; };
 		2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteManagementViewController.swift; sourceTree = "<group>"; };
 		2E57C67922B8E3CD0064A787 /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
 		2E714CDA22B3A44900348B67 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1158,6 +1161,7 @@
 		185FC766228D102400B085BC /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				2E30BE6522E99A21007419FD /* LoadPackageTableViewCell.swift */,
 				185FC767228D104B00B085BC /* LoadUnLoadListCell.swift */,
 			);
 			path = Cell;
@@ -3654,6 +3658,7 @@
 				185FC774228D303100B085BC /* HSearchView.swift in Sources */,
 				2A443A9A22648C5A00CB6508 /* OrderMarker.swift in Sources */,
 				2A443A9B22648C5A00CB6508 /* UINavigationController+Ext.swift in Sources */,
+				2E30BE6622E99A21007419FD /* LoadPackageTableViewCell.swift in Sources */,
 				2A443A9C22648C5A00CB6508 /* UIAlertController+Extensions.swift in Sources */,
 				2A443A9D22648C5A00CB6508 /* UITextField+Ext.swift in Sources */,
 				2A443A9E22648C5A00CB6508 /* TextViewController.swift in Sources */,
@@ -3899,6 +3904,7 @@
 				185FC775228D303100B085BC /* HSearchView.swift in Sources */,
 				3B66B8EE210B1149000BDFEF /* OrderMarker.swift in Sources */,
 				2A1AA32522546D83004449AA /* UINavigationController+Ext.swift in Sources */,
+				2E30BE6722E99A21007419FD /* LoadPackageTableViewCell.swift in Sources */,
 				3B66B82A210B113D000BDFEF /* UIAlertController+Extensions.swift in Sources */,
 				3B66B807210B113D000BDFEF /* UITextField+Ext.swift in Sources */,
 				3B66B830210B113D000BDFEF /* TextViewController.swift in Sources */,

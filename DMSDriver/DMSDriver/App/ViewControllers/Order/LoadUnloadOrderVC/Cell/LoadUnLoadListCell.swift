@@ -47,7 +47,7 @@ class LoadUnLoadListCell: UITableViewCell {
         lblPackageRefId?.text = #"\#( orderDetail.packageRefId ?? 0)"#
         actualQtyTextField.text = (orderDetail.actualQty != nil) ? "\(orderDetail.actualQty!)" : lblQty?.text
         btnLoadUnload?.setStyleBlueSquare()
-        btnLoadUnload?.setTitle(orderDetail.status.name, for: .normal)
+        btnLoadUnload?.setTitle("Load".localized, for: .normal)
         /*
         switch orderDetail.status {
         case .NotLoad:
