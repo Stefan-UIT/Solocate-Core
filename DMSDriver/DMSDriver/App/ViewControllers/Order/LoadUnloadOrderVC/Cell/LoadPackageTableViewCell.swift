@@ -53,7 +53,6 @@ class LoadPackageTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        
     }
     
     func handleShowingCartonSection() {
@@ -62,11 +61,7 @@ class LoadPackageTableViewCell: UITableViewCell {
         
         if isShowedCartonSection {
             cartonInPalletsLabel?.text = "\(detail.cartonsInPallet ?? 0)"
-            actualCartonsInPalletTextField?.text = (detail.loadedCartonsInPallet != nil) ? "\(detail.loadedCartonsInPallet!)" : ""
-//            handleShowingDeliveredCartonsRecord(isHidden: isShowingOnly)
-//            cartonsViewContainerHeightConstraint?.constant = (isShowingOnly) ? 20.0 : 50.0
-//            cartonsViewContainerTopSpacing?.constant = 6.0
-            
+            actualCartonsInPalletTextField?.text = (detail.loadedCartonsInPallet != nil) ? "\(detail.loadedCartonsInPallet!)" : ""            
         } else {
             cartonsViewContainerHeightConstraint?.constant = 0.0
             cartonsViewContainerTopSpacing?.constant = 0.0
@@ -77,7 +72,7 @@ class LoadPackageTableViewCell: UITableViewCell {
         self.detail = detail
         packageNameLabel?.text = detail.package?.name
         quantityLabel?.text = "\(detail.qty ?? 0)"
-        wmsOrderCodeLabel?.text = "-"
+        wmsOrderCodeLabel?.text = detail.wmsOrderCode ?? "-"
         actualQuantityTextField?.text = (detail.loadedQty != nil) ? "\(detail.loadedQty!)" : ""
         vContent?.cornerRadius = 0
         

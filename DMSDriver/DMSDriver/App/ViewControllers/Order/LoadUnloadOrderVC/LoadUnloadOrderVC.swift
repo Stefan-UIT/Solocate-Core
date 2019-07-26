@@ -90,54 +90,9 @@ class LoadUnloadOrderVC: BaseViewController {
     @IBAction func onbtnClickScanBarCode(btn:UIButton){
         let vc:ScanBarCodeViewController =  ScanBarCodeViewController.loadSB(SB: .Order)
         vc.didScan = {[weak self](code) in
-            
-            //update order detail status
-//            for item in self?.order?.details ?? [] {
-//                if item.barCode == code {
-//                    if self?.order?.statusOrder == StatusOrder.InTransit {
-//                        item.status = .Loaded
-//                    }else if self?.order?.statusOrder == StatusOrder.PickupStatus {
-//                        item.status = .Unload
-//                    }
-//                    break
-//                }
-//            }
-//
-//            self?.initData() //reload UI
-//
-//            //Auto update status order to server
-//            guard self?.validUpdateStatusOrder() == true else {
-//                return
-//            }
-//
-//            if self?.order?.statusOrder == StatusOrder.InTransit {
-//                self?.updateStatusOrder(statusCode: StatusOrder.PickupStatus.rawValue)
-//
-//            }else {
-//
-//                if self?.order?.isRequireSign() == false && self?.order?.isRequireImage() == false {
-//
-//                    self?.updateStatusOrder(statusCode: StatusOrder.deliveryStatus.rawValue)
-//
-//                }else {
-//
-//                    if self?.order?.isRequireImage() ?? false{
-//                        self?.showAlertView("you-need-add-least-a-picture-to-finish-this-order".localized) {[weak self](action) in
-//                            self?.showPictureViewController()
-//                        }
-//
-//                    }else if (self?.order?.isRequireSign() ?? false) {
-//                        self?.showAlertView("you-need-add-customer-s-signature-to-finish-this-order".localized) {[weak self](action) in
-//                            self?.showSignatureViewController()
-//                        }
-//
-//                    }else {
-//
-//                        let statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
-//                        self?.updateStatusOrder(statusCode: statusNeedUpdate)
-//                    }
-//                }
-//            }
+            self?.strSearch = code
+            self?.searchView?.vSearch?.tfSearch?.text = code
+            self?.doSearch(strSearch: code)
         }
         
         self.navigationController?.present(vc, animated: true, completion: nil)
@@ -203,7 +158,7 @@ extension LoadUnloadOrderVC {
             self?.dismissLoadingIndicator()
             switch result{
             case .object(let obj):
-                
+                self?.showAlertView("updated-successful".localized)
                 break
             case .error(let error):
                 self?.showAlertView(error.getMessage())
@@ -267,7 +222,6 @@ extension LoadUnloadOrderVC:BaseSearchViewDelegate{
         let newSearchString = strSearch?.components(separatedBy: "\n").first?.lowercased()
         if !isEmpty(newSearchString) {
             dataDisplay = dataOrigin.filter({ (item) -> Bool in
-//                let isExist = item.barCode?.lowercased().contains(newSearchString!)
                 let isExist = item.wmsOrderCode?.lowercased().contains(newSearchString!)
                 return isExist ?? false
             })

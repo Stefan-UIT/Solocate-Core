@@ -145,19 +145,15 @@ class RouteDetailVC: BaseViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    func filterOrdersAbleToLoad(order:[Order]) -> [Order] {
+        return order.filter({$0.statusOrder == StatusOrder.newStatus || $0.statusOrder == StatusOrder.Loaded || $0.statusOrder == StatusOrder.PartialLoaded || $0.statusOrder == StatusOrder.WarehouseClarification})
+    }
+    
     func redirectToLoadingPackageVC() {
         guard let orders = route?.orderList else { return }
         let vc:LoadUnloadOrderVC = LoadUnloadOrderVC.loadSB(SB: .LoadUnloadOrder)
-        vc.orders = orders
+        vc.orders = filterOrdersAbleToLoad(order: orders)
         vc.callback = {[weak self] (hasUpdate,order) in
-//            if hasUpdate {
-//                self?.order = order
-//                self?.updateButtonStatus()
-//                self?.callback?(true,order)
-//                if order?.statusOrder == StatusOrder.deliveryStatus {
-//                    self?.navigationController?.popViewController(animated: false)
-//                }
-//            }
         }
         
         self.navigationController?.pushViewController(vc, animated: true)
