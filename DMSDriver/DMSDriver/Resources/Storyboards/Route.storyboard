@@ -1575,10 +1575,10 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bxg-uR-DIN">
-                                <rect key="frame" x="15" y="240" width="345" height="427"/>
+                                <rect key="frame" x="15" y="240" width="345" height="369"/>
                                 <subviews>
                                     <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="A12-ve-XLB">
-                                        <rect key="frame" x="0.0" y="0.0" width="345" height="427"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="345" height="369"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="04H-uB-557">
                                             <size key="itemSize" width="375" height="341"/>
@@ -1588,7 +1588,7 @@
                                         </collectionViewFlowLayout>
                                         <cells>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RouteDetailMapClvCell" id="XKm-W1-fhf" customClass="RouteDetailMapClvCell" customModule="Ashdod_Dev" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="43" width="384" height="341"/>
+                                                <rect key="frame" x="0.0" y="14" width="384" height="341"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                     <rect key="frame" x="0.0" y="0.0" width="384" height="341"/>
@@ -1610,7 +1610,7 @@
                                                 <size key="customSize" width="384" height="341"/>
                                             </collectionViewCell>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RouteDetailOrderListClvCell" id="OTS-7E-XYV" customClass="RouteDetailOrderListClvCell" customModule="Ashdod_Dev" customModuleProvider="target">
-                                                <rect key="frame" x="394" y="38.5" width="365" height="350"/>
+                                                <rect key="frame" x="394" y="9.5" width="365" height="350"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                     <rect key="frame" x="0.0" y="0.0" width="365" height="350"/>
@@ -1882,7 +1882,7 @@
                                                                             <rect key="frame" x="0.0" y="177" width="365" height="93"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="UVq-zK-yBm" id="jGb-c3-qok">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="92.5"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="365" height="93"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <subviews>
                                                                                     <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wj9-nS-UN4">
@@ -2032,7 +2032,7 @@
                                                 </connections>
                                             </collectionViewCell>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="RouteDetailLocationListClvCell" id="H6M-mi-vAv" customClass="RouteDetailLocationListClvCell" customModule="Ashdod_Dev" customModuleProvider="target">
-                                                <rect key="frame" x="769" y="38.5" width="365" height="350"/>
+                                                <rect key="frame" x="769" y="9.5" width="365" height="350"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                     <rect key="frame" x="0.0" y="0.0" width="365" height="350"/>
@@ -2234,7 +2234,7 @@
                                                 </connections>
                                             </collectionViewCell>
                                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="" id="M5d-f1-Tem" customClass="RouteDetailLocationListClvCell" customModule="Ashdod_Dev" customModuleProvider="target">
-                                                <rect key="frame" x="1144" y="43" width="375" height="341"/>
+                                                <rect key="frame" x="1144" y="14" width="375" height="341"/>
                                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="341"/>
@@ -2279,7 +2279,7 @@
                                                                             <rect key="frame" x="0.0" y="58" width="375" height="93"/>
                                                                             <autoresizingMask key="autoresizingMask"/>
                                                                             <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="uSK-Kk-734" id="yvk-bY-imH">
-                                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
+                                                                                <rect key="frame" x="0.0" y="0.0" width="375" height="92.5"/>
                                                                                 <autoresizingMask key="autoresizingMask"/>
                                                                                 <subviews>
                                                                                     <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aq6-uh-p7V">
@@ -2600,16 +2600,6 @@
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="diagonalMode" value="NO"/>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fri-cW-2FK">
-                                <rect key="frame" x="0.0" y="667" width="375" height="0.0"/>
-                                <color key="backgroundColor" red="0.1761970263" green="0.83050543070000005" blue="0.41389059449999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" id="P7I-8r-mjK"/>
-                                </constraints>
-                                <state key="normal" title="LET START">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                </state>
-                            </button>
                             <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MCe-rL-rnz">
                                 <rect key="frame" x="261" y="598" width="90" height="45"/>
                                 <color key="backgroundColor" red="0.1764705882" green="0.67450980390000004" blue="0.97647058819999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -2649,22 +2639,181 @@
                                     <constraint firstAttribute="height" constant="60" id="CJo-aQ-kIm"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mif-aD-tEf">
+                                <rect key="frame" x="0.0" y="617" width="375" height="50"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="Tsl-t1-KH3">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t6b-mi-ChQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="125" height="50"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_ramp_assign_driver" translatesAutoresizingMaskIntoConstraints="NO" id="rSQ-XI-G7t">
+                                                        <rect key="frame" x="8" y="10" width="30" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="T07-nY-U5D"/>
+                                                            <constraint firstAttribute="width" secondItem="rSQ-XI-G7t" secondAttribute="height" multiplier="1:1" id="iXZ-Oi-wsV"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assign Driver" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jh9-Wi-FIQ">
+                                                        <rect key="frame" x="46" y="6" width="77" height="38.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="V0L-jx-3Xi"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rmE-n7-Tkp">
+                                                        <rect key="frame" x="0.0" y="0.0" width="125" height="50"/>
+                                                        <connections>
+                                                            <action selector="onAssignDriverTouchUp:" destination="D22-kb-CLf" eventType="touchUpInside" id="ShH-0s-ftP"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="jh9-Wi-FIQ" firstAttribute="centerY" secondItem="rSQ-XI-G7t" secondAttribute="centerY" id="Bnp-Hk-1ow"/>
+                                                    <constraint firstItem="rSQ-XI-G7t" firstAttribute="centerY" secondItem="t6b-mi-ChQ" secondAttribute="centerY" id="FZR-5Q-lDH"/>
+                                                    <constraint firstAttribute="bottom" secondItem="rmE-n7-Tkp" secondAttribute="bottom" id="ZXr-eg-BGn"/>
+                                                    <constraint firstAttribute="trailing" secondItem="rmE-n7-Tkp" secondAttribute="trailing" id="aXc-Cy-ChQ"/>
+                                                    <constraint firstItem="rSQ-XI-G7t" firstAttribute="leading" secondItem="t6b-mi-ChQ" secondAttribute="leading" constant="8" id="hft-OC-5JA"/>
+                                                    <constraint firstItem="rmE-n7-Tkp" firstAttribute="top" secondItem="t6b-mi-ChQ" secondAttribute="top" id="lXT-v4-lXT"/>
+                                                    <constraint firstItem="jh9-Wi-FIQ" firstAttribute="leading" secondItem="rSQ-XI-G7t" secondAttribute="trailing" constant="8" id="nqR-gf-5Co"/>
+                                                    <constraint firstAttribute="trailing" secondItem="jh9-Wi-FIQ" secondAttribute="trailing" constant="2" id="s5e-FA-yQv"/>
+                                                    <constraint firstItem="rmE-n7-Tkp" firstAttribute="leading" secondItem="t6b-mi-ChQ" secondAttribute="leading" id="vaF-j6-kZo"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Hu-QJ-8Ak">
+                                                <rect key="frame" x="125" y="0.0" width="125" height="50"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_ramp_assign_truck" translatesAutoresizingMaskIntoConstraints="NO" id="csK-vY-G3N">
+                                                        <rect key="frame" x="8" y="10" width="30" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="30" id="6LR-Ft-DGz"/>
+                                                            <constraint firstAttribute="width" secondItem="csK-vY-G3N" secondAttribute="height" multiplier="1:1" id="9uq-4S-NpZ"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Assign Truck" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="UCr-nM-U1H">
+                                                        <rect key="frame" x="46" y="6" width="77" height="38.5"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="GN0-JZ-UPQ"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIT-fW-USL">
+                                                        <rect key="frame" x="0.0" y="0.0" width="125" height="50"/>
+                                                        <connections>
+                                                            <action selector="onAssignTruckTouchUp:" destination="D22-kb-CLf" eventType="touchUpInside" id="PiX-rn-p60"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="gIT-fW-USL" secondAttribute="trailing" id="970-Kf-6OD"/>
+                                                    <constraint firstItem="csK-vY-G3N" firstAttribute="leading" secondItem="2Hu-QJ-8Ak" secondAttribute="leading" constant="8" id="LIl-N6-EXG"/>
+                                                    <constraint firstItem="gIT-fW-USL" firstAttribute="leading" secondItem="2Hu-QJ-8Ak" secondAttribute="leading" id="O8J-fk-H1Q"/>
+                                                    <constraint firstItem="UCr-nM-U1H" firstAttribute="leading" secondItem="csK-vY-G3N" secondAttribute="trailing" constant="8" id="TWe-1J-nhc"/>
+                                                    <constraint firstItem="gIT-fW-USL" firstAttribute="top" secondItem="2Hu-QJ-8Ak" secondAttribute="top" id="d5n-hI-8gt"/>
+                                                    <constraint firstAttribute="trailing" secondItem="UCr-nM-U1H" secondAttribute="trailing" constant="2" id="dMc-oM-Wu4"/>
+                                                    <constraint firstAttribute="bottom" secondItem="gIT-fW-USL" secondAttribute="bottom" id="pxB-Q3-Iz7"/>
+                                                    <constraint firstItem="UCr-nM-U1H" firstAttribute="centerY" secondItem="csK-vY-G3N" secondAttribute="centerY" id="tHz-Ei-2EI"/>
+                                                    <constraint firstItem="csK-vY-G3N" firstAttribute="centerY" secondItem="2Hu-QJ-8Ak" secondAttribute="centerY" id="xxr-qt-iSk"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NI5-yS-amy">
+                                                <rect key="frame" x="250" y="0.0" width="125" height="50"/>
+                                                <subviews>
+                                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_ramp_van_load" translatesAutoresizingMaskIntoConstraints="NO" id="vL8-na-wCC">
+                                                        <rect key="frame" x="8" y="10" width="30" height="30"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" secondItem="vL8-na-wCC" secondAttribute="height" multiplier="1:1" id="La9-f5-9Up"/>
+                                                            <constraint firstAttribute="height" constant="30" id="gAE-2X-aBd"/>
+                                                        </constraints>
+                                                    </imageView>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="VAN LOAD" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hkS-k4-emt">
+                                                        <rect key="frame" x="46" y="15" width="77" height="20"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="6Fu-Rs-6Eo"/>
+                                                        </constraints>
+                                                        <fontDescription key="fontDescription" name="AvenirNext-Regular" family="Avenir Next" pointSize="14"/>
+                                                        <nil key="textColor"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zvm-5M-OhX">
+                                                        <rect key="frame" x="0.0" y="0.0" width="125" height="50"/>
+                                                        <connections>
+                                                            <action selector="onVanLoadTouchUp:" destination="D22-kb-CLf" eventType="touchUpInside" id="m3Q-Rm-snA"/>
+                                                        </connections>
+                                                    </button>
+                                                </subviews>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstItem="Zvm-5M-OhX" firstAttribute="top" secondItem="NI5-yS-amy" secondAttribute="top" id="6wg-cw-RHh"/>
+                                                    <constraint firstItem="vL8-na-wCC" firstAttribute="centerY" secondItem="NI5-yS-amy" secondAttribute="centerY" id="FrB-Hu-CQZ"/>
+                                                    <constraint firstAttribute="bottom" secondItem="Zvm-5M-OhX" secondAttribute="bottom" id="KBj-vM-RJ6"/>
+                                                    <constraint firstItem="vL8-na-wCC" firstAttribute="leading" secondItem="NI5-yS-amy" secondAttribute="leading" constant="8" id="PuM-uW-8sL"/>
+                                                    <constraint firstItem="hkS-k4-emt" firstAttribute="centerY" secondItem="vL8-na-wCC" secondAttribute="centerY" id="nJc-fc-piw"/>
+                                                    <constraint firstAttribute="trailing" secondItem="Zvm-5M-OhX" secondAttribute="trailing" id="nKm-OM-uXb"/>
+                                                    <constraint firstItem="hkS-k4-emt" firstAttribute="leading" secondItem="vL8-na-wCC" secondAttribute="trailing" constant="8" id="uaE-1j-wiZ"/>
+                                                    <constraint firstAttribute="trailing" secondItem="hkS-k4-emt" secondAttribute="trailing" constant="2" id="vBH-Mc-gHw"/>
+                                                    <constraint firstItem="Zvm-5M-OhX" firstAttribute="leading" secondItem="NI5-yS-amy" secondAttribute="leading" id="zpA-TC-Z9h"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                                        <real key="value" value="1"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                                        <color key="value" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Tsl-t1-KH3" firstAttribute="top" secondItem="mif-aD-tEf" secondAttribute="top" id="Hz7-cb-2Ih"/>
+                                    <constraint firstAttribute="trailing" secondItem="Tsl-t1-KH3" secondAttribute="trailing" id="Sw7-EM-dm4"/>
+                                    <constraint firstAttribute="bottom" secondItem="Tsl-t1-KH3" secondAttribute="bottom" id="Wdf-fr-Egd"/>
+                                    <constraint firstItem="Tsl-t1-KH3" firstAttribute="leading" secondItem="mif-aD-tEf" secondAttribute="leading" id="paj-fP-Irf"/>
+                                    <constraint firstAttribute="height" constant="50" id="wcg-bz-Xzm"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="r2Y-eJ-xnl" firstAttribute="trailing" secondItem="Xgp-Ta-F3x" secondAttribute="trailing" constant="16" id="0Xb-5q-j7q"/>
                             <constraint firstItem="r2Y-eJ-xnl" firstAttribute="trailing" secondItem="Bxg-uR-DIN" secondAttribute="trailing" constant="15" id="0gv-cy-H55"/>
-                            <constraint firstItem="r2Y-eJ-xnl" firstAttribute="trailing" secondItem="fri-cW-2FK" secondAttribute="trailing" id="4wu-aY-bqY"/>
                             <constraint firstItem="r2Y-eJ-xnl" firstAttribute="trailing" secondItem="E6F-ap-rRY" secondAttribute="trailing" id="6hJ-Yl-WlW"/>
-                            <constraint firstItem="r2Y-eJ-xnl" firstAttribute="bottom" secondItem="fri-cW-2FK" secondAttribute="bottom" id="EYh-cH-SRX"/>
-                            <constraint firstItem="fri-cW-2FK" firstAttribute="top" secondItem="Bxg-uR-DIN" secondAttribute="bottom" id="HXy-Mm-PK4"/>
-                            <constraint firstItem="fri-cW-2FK" firstAttribute="leading" secondItem="r2Y-eJ-xnl" secondAttribute="leading" id="I4c-Xa-FTR"/>
                             <constraint firstItem="E6F-ap-rRY" firstAttribute="top" secondItem="r2Y-eJ-xnl" secondAttribute="top" id="Mk9-et-E2c"/>
+                            <constraint firstItem="r2Y-eJ-xnl" firstAttribute="trailing" secondItem="mif-aD-tEf" secondAttribute="trailing" id="Stc-1C-uys"/>
                             <constraint firstItem="E6F-ap-rRY" firstAttribute="leading" secondItem="zeN-C9-SX0" secondAttribute="leading" id="YOR-k8-tOn"/>
+                            <constraint firstAttribute="bottom" secondItem="mif-aD-tEf" secondAttribute="bottom" id="aSX-tS-TwJ"/>
                             <constraint firstItem="r2Y-eJ-xnl" firstAttribute="trailing" secondItem="MCe-rL-rnz" secondAttribute="trailing" constant="24" id="brQ-Mk-40w"/>
                             <constraint firstItem="r2Y-eJ-xnl" firstAttribute="bottom" secondItem="MCe-rL-rnz" secondAttribute="bottom" constant="24" id="dEg-nL-hDO"/>
                             <constraint firstItem="Bxg-uR-DIN" firstAttribute="leading" secondItem="r2Y-eJ-xnl" secondAttribute="leading" constant="15" id="eua-wN-OWC"/>
+                            <constraint firstItem="mif-aD-tEf" firstAttribute="top" secondItem="Bxg-uR-DIN" secondAttribute="bottom" constant="8" id="lZc-UH-Cbq"/>
                             <constraint firstItem="Bxg-uR-DIN" firstAttribute="top" secondItem="E6F-ap-rRY" secondAttribute="bottom" constant="-5" id="nrq-7x-AK3"/>
+                            <constraint firstItem="mif-aD-tEf" firstAttribute="leading" secondItem="zeN-C9-SX0" secondAttribute="leading" id="qIo-Ut-nuB"/>
                             <constraint firstItem="r2Y-eJ-xnl" firstAttribute="bottom" secondItem="Xgp-Ta-F3x" secondAttribute="bottom" constant="16" id="sGc-xI-rQg"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="r2Y-eJ-xnl"/>
@@ -2686,6 +2835,8 @@
                         </userDefinedRuntimeAttributes>
                     </view>
                     <connections>
+                        <outlet property="actionViewContainerHeightConstraint" destination="wcg-bz-Xzm" id="8bk-cE-Z1C"/>
+                        <outlet property="actionsViewContainer" destination="mif-aD-tEf" id="EVl-sM-2vG"/>
                         <outlet property="addNoteButton" destination="MCe-rL-rnz" id="Y6G-A7-7jK"/>
                         <outlet property="clvContent" destination="A12-ve-XLB" id="KHz-o9-a3j"/>
                         <outlet property="floatButtonViewContainer" destination="Xgp-Ta-F3x" id="ERl-sT-rmU"/>
@@ -2710,6 +2861,9 @@
         <image name="ic_address" width="24" height="24"/>
         <image name="ic_arrowTp" width="30" height="30"/>
         <image name="ic_contact" width="32" height="32"/>
+        <image name="ic_ramp_assign_driver" width="12" height="12"/>
+        <image name="ic_ramp_assign_truck" width="12" height="12"/>
+        <image name="ic_ramp_van_load" width="12" height="12"/>
         <image name="ic_time" width="11" height="11"/>
         <image name="ic_timeBlack" width="30" height="30"/>
         <image name="route_list_km" width="28.5" height="16.5"/>

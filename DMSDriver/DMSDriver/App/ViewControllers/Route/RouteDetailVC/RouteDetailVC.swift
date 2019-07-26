@@ -64,7 +64,9 @@ class RouteDetailVC: BaseViewController {
     var mapVC:MapsViewController?
     var orderListVC:OrderListViewController?
 
-
+    @IBOutlet weak var actionsViewContainer: UIView!
+    
+    @IBOutlet weak var actionViewContainerHeightConstraint: NSLayoutConstraint!
     //MARK: - VARIABLE
     private let identifierOrderListCell = "RouteDetailOrderListClvCell"
     private let identifieMapCell = "RouteDetailMapClvCell"
@@ -90,7 +92,8 @@ class RouteDetailVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
-        initFloatButton()
+//        initFloatButton()
+        handleShowingActionsContainer()
         setupCollectionView()
         setupScrollMenuView()
     }
@@ -103,6 +106,10 @@ class RouteDetailVC: BaseViewController {
         addNoteButton.layer.masksToBounds = false
     }
     
+    func handleShowingActionsContainer() {
+        actionsViewContainer.isHidden = !isRampManagerMode
+        actionViewContainerHeightConstraint.constant = (isRampManagerMode) ? 50.0 : 0.0
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -111,11 +118,11 @@ class RouteDetailVC: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
 //        updateNavigationBar()
-        if isRampManagerMode {
-            Floaty.global.show()
-        } else {
-            Floaty.global.hide()
-        }
+//        if isRampManagerMode {
+//            Floaty.global.show()
+//        } else {
+//            Floaty.global.hide()
+//        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -160,8 +167,8 @@ class RouteDetailVC: BaseViewController {
     }
     
     private func initFloatButton() {
-        Floaty.global.button.items.removeAll()
-        let floaty = Floaty.global.button
+//        Floaty.global.button.items.removeAll()
+        let floaty = Floaty()
         floaty.buttonColor = AppColor.mainColor
         floaty.plusColor = UIColor.white
         floaty.itemSize = 56.0
@@ -183,6 +190,7 @@ class RouteDetailVC: BaseViewController {
             self.present(alert, animated: true, completion: nil)
             floaty.close()
         })
+        self.view.addSubview(floaty)
     }
     
 
@@ -246,6 +254,15 @@ class RouteDetailVC: BaseViewController {
         vc.route = _route
         vc.notes = _route.notes
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func onAssignDriverTouchUp(_ sender: UIButton) {
+    }
+    @IBAction func onAssignTruckTouchUp(_ sender: UIButton) {
+    }
+    
+    @IBAction func onVanLoadTouchUp(_ sender: UIButton) {
+        self.redirectToLoadingPackageVC()
     }
     
 }

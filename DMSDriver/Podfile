@@ -24,8 +24,7 @@ def shared_pods
     pod 'Crashlytics'
     pod 'ImageSlideshow'
     pod 'UITextView+Placeholder'
-    pod 'Floaty'
-
+	pod 'Floaty'
 end
 
 target 'Ashdod Dev' do

@@ -210,7 +210,7 @@ fileprivate extension LoginViewController {
             switch result {
             case .object(let obj):
                 
-                if obj.data?.isDriver == false {
+                if obj.data?.isDriver == false && obj.data?.isRampManager == false {
                     self?.showAlertView("sorry-this-account-is-not-use-as-driver-account-please-contact-your-administrator-for-more-information".localized)
                     return
                 }
