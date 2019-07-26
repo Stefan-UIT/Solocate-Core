@@ -267,7 +267,8 @@ extension LoadUnloadOrderVC:BaseSearchViewDelegate{
         let newSearchString = strSearch?.components(separatedBy: "\n").first?.lowercased()
         if !isEmpty(newSearchString) {
             dataDisplay = dataOrigin.filter({ (item) -> Bool in
-                let isExist = item.barCode?.lowercased().contains(newSearchString!)
+//                let isExist = item.barCode?.lowercased().contains(newSearchString!)
+                let isExist = item.wmsOrderCode?.lowercased().contains(newSearchString!)
                 return isExist ?? false
             })
             
