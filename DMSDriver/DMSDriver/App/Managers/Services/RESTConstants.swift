@@ -19,7 +19,8 @@ enum PATH_REQUEST_URL: String{
     case GET_ORDERS = "backend-api/driver/v1/orders"
     case GET_ORDER_BY_DATE = "backend-api/v1/routes/get-routes-by-date"
     case GET_ORDER_BY_COORDINATOR = "backend-api/v1/orders/all-order-by-coordinator?date=%@"
-    case GET_ROUTES_BY_DATE = "transaction/v1/mobile/routes/by-driver?start_time=%@&end_time=%@"
+    case GET_DRIVER_ROUTES_BY_DATE = "transaction/v1/mobile/routes/by-driver?start_time=%@&end_time=%@"
+    case GET_RAMP_ROUTES_BY_DATE = "transaction/v1/mobile/routes/by-ramp?start_time=%@&end_time=%@"
     case GET_ROUTE_BY_COORDINATOR = "backend-api/v1/routes/all-route-by-coordinator?date=%@"
     case GET_PACKAGES_IN_ROUTE = "backend-api/v1/routes/get-packages-by-driver?id=%@&date=%@"
     case GET_ORDER_DETAIL = "transaction/v1/orders/%@"
@@ -62,6 +63,8 @@ enum PATH_REQUEST_URL: String{
     case UPDATE_ROUTE_NOTE = "transaction/v1/routes/notes"
     case UPDATE_ORDER_NOTE = "transaction/v1/orders/notes"
     case GET_LIST_LANGUAGE  = "language/v1/namespaces/list-support?name=%@&system=%@"
+    case GET_DRIVER_LIST  = "masterdata/v1/drivers/list-suggest?route_id=%@&start_time=%@&end_time=%@"
+    case ASSIGN_TRUCK_DRIVER  = "transaction/v1/mobile/routes/assign/%@"
     
     var URL:String  {
         return rawValue

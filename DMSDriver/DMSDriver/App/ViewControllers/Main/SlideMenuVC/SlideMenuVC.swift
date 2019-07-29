@@ -100,7 +100,17 @@ extension SlideMenuVC: UITableViewDataSource{
         if menutype == .ASSIGN {
             return 0
         }
+        
+        if isRampManagerMode {
+            switch menutype {
+                case .DASHBOARD, .COUNTER, .ALERT:
+                    return 0
+                default:
+                    break
+            }
+        }
     }
+    
     return UITableView.automaticDimension
   }
   

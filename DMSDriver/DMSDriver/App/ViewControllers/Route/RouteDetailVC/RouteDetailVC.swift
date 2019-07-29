@@ -9,6 +9,7 @@
 import UIKit
 import Foundation
 import SideMenu
+import Floaty
 
 enum TabBarItem:Int {
     case Order = 0
@@ -42,6 +43,9 @@ enum RouteDetailDisplayMode:Int,CaseIterable {
 
 class RouteDetailVC: BaseViewController {
     
+    @IBOutlet weak var assignDriverButtonView: UIView!
+    
+    @IBOutlet weak var assignTruckButtonView: UIView!
     //MARK: - IBOUTLET
     @IBOutlet weak var menuScrollView:BaseScrollMenuView?
     @IBOutlet weak var clvContent:UICollectionView?
@@ -57,12 +61,15 @@ class RouteDetailVC: BaseViewController {
     @IBOutlet weak var vContainerMap:UIView?
     @IBOutlet weak var vContainerOrders:UIView?
      */
-
+    @IBOutlet weak var floatButtonViewContainer: UIView!
+    
     var scrollMenu:ScrollMenuView?
     var mapVC:MapsViewController?
     var orderListVC:OrderListViewController?
 
-
+    @IBOutlet weak var actionsViewContainer: UIView!
+    
+    @IBOutlet weak var actionViewContainerHeightConstraint: NSLayoutConstraint!
     //MARK: - VARIABLE
     private let identifierOrderListCell = "RouteDetailOrderListClvCell"
     private let identifieMapCell = "RouteDetailMapClvCell"
@@ -88,6 +95,8 @@ class RouteDetailVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
+//        initFloatButton()
+        handleShowingActionsContainer()
         setupCollectionView()
         setupScrollMenuView()
     }
@@ -100,6 +109,10 @@ class RouteDetailVC: BaseViewController {
         addNoteButton.layer.masksToBounds = false
     }
     
+    func handleShowingActionsContainer() {
+        actionsViewContainer.isHidden = !isRampManagerMode
+        actionViewContainerHeightConstraint.constant = (isRampManagerMode) ? 50.0 : 0.0
+    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -107,11 +120,22 @@ class RouteDetailVC: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        getRouteDetail("\(route?.id ?? -1)")
 //        updateNavigationBar()
-        guard let routeId = route?.id else {
-            return
-        }
-        getRouteDetail("\(routeId)")
+//        if isRampManagerMode {
+//            Floaty.global.show()
+//        } else {
+//            Floaty.global.hide()
+//        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+//        Floaty.global.hide()
+//        guard let routeId = route?.id else {
+//            return
+//        }
+//        getRouteDetail("\(routeId)")
     }
 
     
@@ -130,6 +154,47 @@ class RouteDetailVC: BaseViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func filterOrdersAbleToLoad(order:[Order]) -> [Order] {
+        return order.filter({$0.statusOrder == StatusOrder.newStatus || $0.statusOrder == StatusOrder.Loaded || $0.statusOrder == StatusOrder.PartialLoaded || $0.statusOrder == StatusOrder.WarehouseClarification})
+    }
+    
+    func redirectToLoadingPackageVC() {
+        guard let orders = route?.orderList else { return }
+        let vc:LoadUnloadOrderVC = LoadUnloadOrderVC.loadSB(SB: .LoadUnloadOrder)
+        vc.orders = filterOrdersAbleToLoad(order: orders)
+        vc.callback = {[weak self] (hasUpdate,order) in
+        }
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    private func initFloatButton() {
+//        Floaty.global.button.items.removeAll()
+        let floaty = Floaty()
+        floaty.buttonColor = AppColor.mainColor
+        floaty.plusColor = UIColor.white
+        floaty.itemSize = 56.0
+        floaty.addItem("Van Load", icon: UIImage(named: "ic_ramp_van_load")!, handler: { item in
+            self.redirectToLoadingPackageVC()
+            floaty.close()
+        })
+        
+        floaty.addItem("Assign Driver", icon: UIImage(named: "ic_ramp_assign_driver")!, handler: { item in
+            let alert = UIAlertController(title: "Assign Driver", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            floaty.close()
+        })
+        
+        floaty.addItem("Assign Truck", icon: UIImage(named: "ic_ramp_assign_truck")!, handler: { item in
+            let alert = UIAlertController(title: "Assign Truck", message: "", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            self.present(alert, animated: true, completion: nil)
+            floaty.close()
+        })
+        self.view.addSubview(floaty)
     }
     
 
@@ -193,6 +258,22 @@ class RouteDetailVC: BaseViewController {
         vc.route = _route
         vc.notes = _route.notes
         self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
+    @IBAction func onAssignDriverTouchUp(_ sender: UIButton) {
+        guard let _route = self.route else {
+            showAlertView("something-went-wrong".localized)
+            return }
+        let vc:AssignDriverViewController = LoadUnloadOrderVC.loadSB(SB: .LoadUnloadOrder)
+        vc.route = _route
+        
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    @IBAction func onAssignTruckTouchUp(_ sender: UIButton) {
+    }
+    
+    @IBAction func onVanLoadTouchUp(_ sender: UIButton) {
+        self.redirectToLoadingPackageVC()
     }
     
 }
@@ -309,6 +390,11 @@ extension RouteDetailVC:DMSNavigationServiceDelegate{
 //MARK: - API
 extension RouteDetailVC{
     
+    func updateActionsUI() {
+        guard let _route = route else { return }
+        assignDriverButtonView.isHidden = _route.isAssignedDriver
+    }
+    
     @objc func fetchData()  {
         if let route = self.route {
             getRouteDetail("\(route.id)", showLoading: false)
@@ -328,6 +414,7 @@ extension RouteDetailVC{
             case .object(let obj):
                 self?.route = obj.data
                 self?.clvContent?.reloadData()
+                self?.updateActionsUI()
                 /*
                  guard let data = obj.data else {return}
                  CoreDataManager.updateRoute(data) // Update route to DB local

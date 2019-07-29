@@ -11,6 +11,7 @@ import ObjectMapper
 import GoogleMaps
 
 //MARK: - TRUCK
+class Truck: BasicModel { }
 class TruckType: BasicModel { }
 class Tanker: BasicModel { }
 class Status: BasicModel { }
@@ -162,6 +163,37 @@ class Route: BaseModel {
     var routeMaster:RouteMaster?
     var company:Company?
     var loadVolume:Double = 0.0
+    var assignedInfo:[AssignedInfo]?
+    
+    var isAssignedDriver:Bool {
+        get {
+            guard let info = assignedInfo?.first else { return false}
+            return (info.driverID != nil || info.driver != nil)
+        }
+    }
+    
+    class AssignedInfo: BaseModel {
+        var id:Int?
+        var routeID:Int?
+        var driverID:Int?
+        var truckID:Int?
+        var driver:Driver?
+        var truck:Truck?
+        
+        required init?(map: Map) {
+            super.init()
+        }
+        
+        override func mapping(map: Map) {
+            id <- map["id"]
+            routeID <- map["route_id"]
+            driverID <- map["driver_id"]
+            truckID <- map["truck_id"]
+            driver <- map["driver"]
+            truck <- map["truck"]
+            
+        }
+    }
     
     convenience required init?(map: Map) {
         self.init()
@@ -199,6 +231,7 @@ class Route: BaseModel {
         truckType <- map["truck_type"]
         company <- map["company"]
         loadVolume <- map["load_vol"]
+        assignedInfo <- map["drivers"]
     }
     
     var isFirstStartOrder:Bool{

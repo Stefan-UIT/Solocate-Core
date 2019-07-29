@@ -231,6 +231,32 @@ extension BaseAPIService {
                        callback: callback);
     }
     
+    @discardableResult
+    func getDriverList(byRoute route:Route,
+                               callback: @escaping APICallback<ResponseDataListModel<Driver>>) -> APIRequest {
+        let routeID = route.id
+        let startTime = route.start_time
+        let endTime = route.end_time
+        let path = String(format: PATH_REQUEST_URL.GET_DRIVER_LIST.URL, "\(routeID)", startTime,endTime)
+        let encodedUrl = path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        return request(method: .GET,
+                       path: encodedUrl!,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func assignDriver(_ driverID:Int,
+                      toRoute routeID:Int,
+                       callback: @escaping APICallback<ResponseDataModel<EmptyModel>>) -> APIRequest {
+        let param = ["driver_id": driverID]
+        let path = String(format: PATH_REQUEST_URL.ASSIGN_TRUCK_DRIVER.URL, "\(routeID)")
+        return request(method: .PUT,
+                       path: path,
+                       input: .json(param),
+                       callback: callback);
+    }
+    
   
     //MARK: -  Help Method
     func parseJson(_ rawObject: Any) -> Data? {

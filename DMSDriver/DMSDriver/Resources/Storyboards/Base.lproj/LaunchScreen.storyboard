@@ -19,15 +19,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_solocate" translatesAutoresizingMaskIntoConstraints="NO" id="T8u-rf-z5i">
-                                <rect key="frame" x="16" y="36" width="343" height="615"/>
+                                <rect key="frame" x="60" y="66" width="255" height="555"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="T8u-rf-z5i" secondAttribute="bottom" constant="16" id="6vr-Rs-0Fm"/>
-                            <constraint firstItem="T8u-rf-z5i" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="DYX-wc-Qfq"/>
-                            <constraint firstItem="T8u-rf-z5i" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="16" id="Mic-cL-U7P"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="T8u-rf-z5i" secondAttribute="trailing" constant="16" id="jwh-vD-FVF"/>
+                            <constraint firstItem="T8u-rf-z5i" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="60" id="DYX-wc-Qfq"/>
+                            <constraint firstItem="T8u-rf-z5i" firstAttribute="centerY" secondItem="6Tk-OE-BBY" secondAttribute="centerY" id="IEI-ck-xcB"/>
+                            <constraint firstItem="T8u-rf-z5i" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="46" id="Mic-cL-U7P"/>
+                            <constraint firstItem="T8u-rf-z5i" firstAttribute="centerX" secondItem="6Tk-OE-BBY" secondAttribute="centerX" id="sNW-vV-YxX"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>

@@ -12,6 +12,12 @@ import FDFullscreenPopGesture
 import SideMenu
 import FirebaseAnalytics
 
+var isRampManagerMode:Bool {
+    get {
+        return Caches().user?.isRampManager ?? false
+    }
+}
+
 class BaseViewController: UIViewController {
   
     private var isRoot = true

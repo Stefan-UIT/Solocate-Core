@@ -157,24 +157,24 @@ class Order: BaseModel {
 
     class Detail: BaseModel {
         
-        enum DetailStatus {
-            case NotLoad
-            case Loaded
-            case Unload
-            
-            var name:String{
-                get{
-                    switch self {
-                    case .NotLoad:
-                        return "not-load".localized
-                    case .Loaded:
-                        return "loaded".localized
-                    case .Unload:
-                        return "unloaded".localized
-                    }
-                }
-            }
-        }
+//        enum DetailStatus {
+//            case NotLoad
+//            case Loaded
+//            case Unload
+//
+//            var name:String{
+//                get{
+//                    switch self {
+//                    case .NotLoad:
+//                        return "not-load".localized
+//                    case .Loaded:
+//                        return "loaded".localized
+//                    case .Unload:
+//                        return "unloaded".localized
+//                    }
+//                }
+//            }
+//        }
         
         struct Package:Mappable {
             var id:Int?
@@ -213,12 +213,10 @@ class Order: BaseModel {
         var id:Int?
         var order_id:Int?
         var package_id:Int?
-//        var remain_qty:Double?
         var package:Package?
         var unit:Unit?
         var barCode:String?
         var packageRefId:Int?
-        var status:DetailStatus = .NotLoad
         // NEW
         var qty:Int?
         var actualQty:Int?
@@ -227,6 +225,7 @@ class Order: BaseModel {
         var loadedQty:Int?
         var loadedCartonsInPallet:Int?
         var returnedPalletQty:Int?
+        var wmsOrderCode:String?
         var isPallet:Bool {
             get {
                 return package?.cd == PackageE.Pallet.rawValue
@@ -277,9 +276,11 @@ class Order: BaseModel {
             ]
             switch updateType {
             case .Load:
-                if orderStatus == StatusOrder.Loaded || orderStatus == StatusOrder.PartialLoaded {
+                if orderStatus == StatusOrder.Loaded || orderStatus == StatusOrder.PartialLoaded || orderStatus == StatusOrder.WarehouseClarification {
                     params["load_qty"] = loadedQty ?? 0
-                    params["ctn_loaded"] = loadedCartonsInPallet ?? 0
+                    if isPallet {
+                        params["ctn_loaded"] = loadedCartonsInPallet ?? 0
+                    }
                 }
                 break
             case .ReturnedPallet:
@@ -298,6 +299,24 @@ class Order: BaseModel {
             }
             
             return params
+        }
+        
+        func getLoadedStatusWithLoadingQuantity() -> StatusOrder {
+            if let loadedQty = self.loadedQty, let qty = self.qty {
+                if loadedQty != qty {
+                    return StatusOrder.WarehouseClarification
+                }
+                
+                if (self.isPallet) {
+                    if let loadedCartons = self.loadedCartonsInPallet, let cartons = self.cartonsInPallet {
+                        if loadedCartons != cartons {
+                            return StatusOrder.WarehouseClarification
+                        }
+                    }
+                }
+            }
+            
+            return StatusOrder.Loaded
         }
     }
 
@@ -369,11 +388,7 @@ class Order: BaseModel {
     var directionRoute:[DirectionRoute]? // use for save DirectionRoute
     var route:Route?
     
-    var status:Status? {
-        didSet {
-            updateStatusDetailOrder()
-        }
-    }
+    var status:Status?
     
     lazy var totalEstDuration:Int = {
         var total = 0
@@ -401,6 +416,10 @@ class Order: BaseModel {
     var customer:UserModel?
     var typeID:Int = 0
     var group:String = ""
+    var codComment:String?
+    var cash_on_dlvy:String?
+    var cod_rcvd:String?
+    var wmsOrderCode:String?
     
     lazy var orderGroup:OrderGroup = {
         return OrderGroup.init(rawValue: group) ?? OrderGroup.Logistic
@@ -420,9 +439,6 @@ class Order: BaseModel {
             return Double(cod_rcvd ?? "")
         }
     }
-    var codComment:String?
-    var cash_on_dlvy:String?
-    var cod_rcvd:String?
     
     var isHasCOD:Bool {
         get {
@@ -477,24 +493,27 @@ class Order: BaseModel {
         cash_on_dlvy    <- map["cash_on_dlvy"]
         cod_rcvd    <- map["cod_rcvd"]
         codComment    <- map["cash_on_dlvy_cmnt"]
-        
-       updateStatusDetailOrder()
-    }
-    
-    func updateStatusDetailOrder()  {
-        for item in details ?? [] {
-            if statusOrder == .newStatus ||
-                statusOrder == .InTransit {
-                item.status = .NotLoad
-                
-            }else if (statusOrder == .PickupStatus) {
-                item.status = .Loaded
-            }else if (statusOrder == .deliveryStatus) {
-                item.status = .Unload
-
-            }
+        wmsOrderCode    <- map["wms_order_cd"]
+        if let detail = details?.first { // cause Order & Detail is 1 to 1 relationship
+            detail.wmsOrderCode = wmsOrderCode
         }
     }
+    
+    
+//    func updateStatusDetailOrder()  {
+//        for item in details ?? [] {
+//            if statusOrder == .newStatus ||
+//                statusOrder == .InTransit {
+//                item.status = .NotLoad
+//
+//            }else if (statusOrder == .PickupStatus) {
+//                item.status = .Loaded
+//            }else if (statusOrder == .deliveryStatus) {
+//                item.status = .Unload
+//
+//            }
+//        }
+//    }
     
     func getChunkedListLocation() -> [[CLLocationCoordinate2D]] {
         let currentLocation = LocationManager.shared.currentLocation?.coordinate
@@ -627,24 +646,24 @@ class Order: BaseModel {
         return false //pod_req == 1 && pictures?.count ?? 0 <= 0
     }
     
-    func validUpdateStatusOrder() -> Bool {
-        var valid = true
-        for item in details ?? []  {
-            if statusOrder == StatusOrder.InTransit {
-                if item.status != .Loaded {
-                    valid = false
-                    break
-                }
-            }else if statusOrder == StatusOrder.PickupStatus {
-                if item.status != .Unload {
-                    valid = false
-                    break
-                }
-            }
-        }
-        
-        return valid
-    }
+//    func validUpdateStatusOrder() -> Bool {
+//        var valid = true
+//        for item in details ?? []  {
+//            if statusOrder == StatusOrder.InTransit {
+//                if item.status != .Loaded {
+//                    valid = false
+//                    break
+//                }
+//            }else if statusOrder == StatusOrder.PickupStatus {
+//                if item.status != .Unload {
+//                    valid = false
+//                    break
+//                }
+//            }
+//        }
+//        
+//        return valid
+//    }
     
     /*
     func cloneObject() -> Order? {

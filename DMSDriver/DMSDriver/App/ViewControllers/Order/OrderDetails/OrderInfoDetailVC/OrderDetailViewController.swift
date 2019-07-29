@@ -958,7 +958,8 @@ fileprivate extension OrderDetailViewController{
         let isFinishedAndNotPalletType = ((orderDetail?.statusOrder == StatusOrder.deliveryStatus || orderDetail?.statusOrder == StatusOrder.PartialDelivered) && !(orderDetail?.details?[0].isPallet)!)
         let isUpdatedReturnedPalletsQty = orderDetail?.details?.first?.returnedPalletQty != nil
         let isHidden = ( orderDetail?.statusOrder == StatusOrder.CancelStatus ||
-            orderDetail?.statusOrder == StatusOrder.UnableToFinish || isFinishedAndNotPalletType || isUpdatedReturnedPalletsQty)
+            orderDetail?.statusOrder == StatusOrder.UnableToFinish || isFinishedAndNotPalletType || isUpdatedReturnedPalletsQty || isRampManagerMode)
+        
         updateStatusButton?.isHidden = isHidden
         vAction?.isHidden = isHidden
     }
