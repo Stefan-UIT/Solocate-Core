@@ -342,6 +342,12 @@
 		2E96D06122C4CFED00DA29C5 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96D05F22C4CFED00DA29C5 /* LoadingViewController.swift */; };
 		2E9E08A622A8FDA4005E420C /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */; };
 		2E9E08A722A8FDA4005E420C /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */; };
+		2EF35D7F22EEAB3100131D33 /* AssignDriverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF35D7E22EEAB3100131D33 /* AssignDriverTableViewCell.swift */; };
+		2EF35D8022EEAB3100131D33 /* AssignDriverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF35D7E22EEAB3100131D33 /* AssignDriverTableViewCell.swift */; };
+		2EF35D8222EEAC3C00131D33 /* AssignDriverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF35D8122EEAC3C00131D33 /* AssignDriverViewController.swift */; };
+		2EF35D8322EEAC3C00131D33 /* AssignDriverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF35D8122EEAC3C00131D33 /* AssignDriverViewController.swift */; };
+		2EF35D8622EED4DF00131D33 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF35D8522EED4DF00131D33 /* Driver.swift */; };
+		2EF35D8722EED4DF00131D33 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF35D8522EED4DF00131D33 /* Driver.swift */; };
 		3B0035F7216C614D0032519D /* TextViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0035F4216C614D0032519D /* TextViewInput.swift */; };
 		3B0035F8216C614D0032519D /* TextViewInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0035F5216C614D0032519D /* TextViewInput.xib */; };
 		3B0035F9216C614D0032519D /* TextViewInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0035F6216C614D0032519D /* TextViewInputController.swift */; };
@@ -660,6 +666,9 @@
 		2E96D05F22C4CFED00DA29C5 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		2E98332D22D6F17200386992 /* DMSDriver-Dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "DMSDriver-Dev.entitlements"; sourceTree = "<group>"; };
 		2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
+		2EF35D7E22EEAB3100131D33 /* AssignDriverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignDriverTableViewCell.swift; sourceTree = "<group>"; };
+		2EF35D8122EEAC3C00131D33 /* AssignDriverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignDriverViewController.swift; sourceTree = "<group>"; };
+		2EF35D8522EED4DF00131D33 /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
 		3B0035F4216C614D0032519D /* TextViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewInput.swift; sourceTree = "<group>"; };
 		3B0035F5216C614D0032519D /* TextViewInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewInput.xib; sourceTree = "<group>"; };
 		3B0035F6216C614D0032519D /* TextViewInputController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewInputController.swift; sourceTree = "<group>"; };
@@ -1318,6 +1327,31 @@
 				2E714CDA22B3A44900348B67 /* ImageCollectionViewCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		2EF35D7822EEAACE00131D33 /* AssignDriver */ = {
+			isa = PBXGroup;
+			children = (
+				2EF35D7D22EEAB1800131D33 /* Cell */,
+				2EF35D8122EEAC3C00131D33 /* AssignDriverViewController.swift */,
+			);
+			path = AssignDriver;
+			sourceTree = "<group>";
+		};
+		2EF35D7D22EEAB1800131D33 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				2EF35D7E22EEAB3100131D33 /* AssignDriverTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		2EF35D8422EED4D400131D33 /* Driver */ = {
+			isa = PBXGroup;
+			children = (
+				2EF35D8522EED4DF00131D33 /* Driver.swift */,
+			);
+			path = Driver;
 			sourceTree = "<group>";
 		};
 		3B0035F3216C614D0032519D /* TextView */ = {
@@ -2265,6 +2299,7 @@
 		3B66B86B210B1148000BDFEF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2EF35D8422EED4D400131D33 /* Driver */,
 				2E96D05322C4C81300DA29C5 /* LanguageModel */,
 				199F488F22843D2B00DB6F7F /* GroupLocatonModel */,
 				2A4255582251F06400D55FEA /* ResponseDataDashboard */,
@@ -2344,6 +2379,7 @@
 		3B66B88C210B1148000BDFEF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2EF35D7822EEAACE00131D33 /* AssignDriver */,
 				2E96D05E22C4CFD700DA29C5 /* Loading */,
 				2E55A3DC22A65229006F9944 /* NoteManagement */,
 				3B36D8BB2228E5A200220BAE /* Dashboard */,
@@ -3727,11 +3763,13 @@
 				2A443AD722648C5A00CB6508 /* BaseAPIService.swift in Sources */,
 				2A443AD822648C5A00CB6508 /* AlertModel.swift in Sources */,
 				2A443AD922648C5A00CB6508 /* LocationManager.swift in Sources */,
+				2EF35D8622EED4DF00131D33 /* Driver.swift in Sources */,
 				2A443ADA22648C5A00CB6508 /* OneTextFieldViewController.swift in Sources */,
 				2A443ADB22648C5A00CB6508 /* OrderItemTableViewCell.swift in Sources */,
 				2A443ADC22648C5A00CB6508 /* APIServices.swift in Sources */,
 				2E96D06022C4CFED00DA29C5 /* LoadingViewController.swift in Sources */,
 				2A443ADD22648C5A00CB6508 /* HistoryNotifyVC.swift in Sources */,
+				2EF35D7F22EEAB3100131D33 /* AssignDriverTableViewCell.swift in Sources */,
 				2A443ADE22648C5A00CB6508 /* UISearchBar+Extensions.swift in Sources */,
 				2A443ADF22648C5A00CB6508 /* UITableView-Extensions.swift in Sources */,
 				2E8AA24A22D5D4A3008FC3A5 /* NSString+SDString.m in Sources */,
@@ -3768,6 +3806,7 @@
 				2A443AFE22648C5A00CB6508 /* Reason.swift in Sources */,
 				2A443AFF22648C5A00CB6508 /* GradientView.swift in Sources */,
 				2A443B0022648C5A00CB6508 /* API+Order.swift in Sources */,
+				2EF35D8222EEAC3C00131D33 /* AssignDriverViewController.swift in Sources */,
 				2A443B0122648C5A00CB6508 /* LeftMenuView.swift in Sources */,
 				2A443B0222648C5A00CB6508 /* TextViewInputController.swift in Sources */,
 				2A443B0322648C5A00CB6508 /* FilterDataListStatusCell.swift in Sources */,
@@ -3973,11 +4012,13 @@
 				3B66B84F210B113D000BDFEF /* BaseAPIService.swift in Sources */,
 				3B66B8DF210B1149000BDFEF /* AlertModel.swift in Sources */,
 				3B66B846210B113D000BDFEF /* LocationManager.swift in Sources */,
+				2EF35D8722EED4DF00131D33 /* Driver.swift in Sources */,
 				3B66B832210B113D000BDFEF /* OneTextFieldViewController.swift in Sources */,
 				3B66B90C210B1149000BDFEF /* OrderItemTableViewCell.swift in Sources */,
 				3B66B84E210B113D000BDFEF /* APIServices.swift in Sources */,
 				2E96D06122C4CFED00DA29C5 /* LoadingViewController.swift in Sources */,
 				3B7695EA21CA20A70032B142 /* HistoryNotifyVC.swift in Sources */,
+				2EF35D8022EEAB3100131D33 /* AssignDriverTableViewCell.swift in Sources */,
 				3B66B828210B113D000BDFEF /* UISearchBar+Extensions.swift in Sources */,
 				3B66B811210B113D000BDFEF /* UITableView-Extensions.swift in Sources */,
 				3B66B8E2210B1149000BDFEF /* Message.swift in Sources */,
@@ -4014,6 +4055,7 @@
 				3B66B8DE210B1149000BDFEF /* Reason.swift in Sources */,
 				3B0B96C9221A4E4D0076AE97 /* GradientView.swift in Sources */,
 				3B0724C821B13E6700CDB05B /* API+Order.swift in Sources */,
+				2EF35D8322EEAC3C00131D33 /* AssignDriverViewController.swift in Sources */,
 				3B66B920210B1149000BDFEF /* LeftMenuView.swift in Sources */,
 				3B0035F9216C614D0032519D /* TextViewInputController.swift in Sources */,
 				3B1629D9221BEF6000E7A83C /* FilterDataListStatusCell.swift in Sources */,

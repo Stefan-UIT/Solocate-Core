@@ -43,6 +43,9 @@ enum RouteDetailDisplayMode:Int,CaseIterable {
 
 class RouteDetailVC: BaseViewController {
     
+    @IBOutlet weak var assignDriverButtonView: UIView!
+    
+    @IBOutlet weak var assignTruckButtonView: UIView!
     //MARK: - IBOUTLET
     @IBOutlet weak var menuScrollView:BaseScrollMenuView?
     @IBOutlet weak var clvContent:UICollectionView?
@@ -117,6 +120,7 @@ class RouteDetailVC: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        getRouteDetail("\(route?.id ?? -1)")
 //        updateNavigationBar()
 //        if isRampManagerMode {
 //            Floaty.global.show()
@@ -127,11 +131,11 @@ class RouteDetailVC: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        Floaty.global.hide()
-        guard let routeId = route?.id else {
-            return
-        }
-        getRouteDetail("\(routeId)")
+//        Floaty.global.hide()
+//        guard let routeId = route?.id else {
+//            return
+//        }
+//        getRouteDetail("\(routeId)")
     }
 
     
@@ -257,6 +261,13 @@ class RouteDetailVC: BaseViewController {
     }
     
     @IBAction func onAssignDriverTouchUp(_ sender: UIButton) {
+        guard let _route = self.route else {
+            showAlertView("something-went-wrong".localized)
+            return }
+        let vc:AssignDriverViewController = LoadUnloadOrderVC.loadSB(SB: .LoadUnloadOrder)
+        vc.route = _route
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func onAssignTruckTouchUp(_ sender: UIButton) {
     }
@@ -379,6 +390,11 @@ extension RouteDetailVC:DMSNavigationServiceDelegate{
 //MARK: - API
 extension RouteDetailVC{
     
+    func updateActionsUI() {
+        guard let _route = route else { return }
+        assignDriverButtonView.isHidden = _route.isAssignedDriver
+    }
+    
     @objc func fetchData()  {
         if let route = self.route {
             getRouteDetail("\(route.id)", showLoading: false)
@@ -398,6 +414,7 @@ extension RouteDetailVC{
             case .object(let obj):
                 self?.route = obj.data
                 self?.clvContent?.reloadData()
+                self?.updateActionsUI()
                 /*
                  guard let data = obj.data else {return}
                  CoreDataManager.updateRoute(data) // Update route to DB local
