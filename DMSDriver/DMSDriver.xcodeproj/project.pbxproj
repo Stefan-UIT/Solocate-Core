@@ -332,6 +332,12 @@
 		2E714CDB22B3A44900348B67 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E714CDA22B3A44900348B67 /* ImageCollectionViewCell.swift */; };
 		2E714CDC22B3A44900348B67 /* ImageCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E714CDA22B3A44900348B67 /* ImageCollectionViewCell.swift */; };
 		2E8AA24A22D5D4A3008FC3A5 /* NSString+SDString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3B66B76B210B113C000BDFEF /* NSString+SDString.m */; };
+		2E920A6D22EFF09D000AD8EF /* AssignTruckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E920A6922EFF09D000AD8EF /* AssignTruckViewController.swift */; };
+		2E920A6E22EFF09D000AD8EF /* AssignTruckViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E920A6922EFF09D000AD8EF /* AssignTruckViewController.swift */; };
+		2E920A6F22EFF09D000AD8EF /* AssignTruckTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E920A6B22EFF09D000AD8EF /* AssignTruckTableViewCell.swift */; };
+		2E920A7022EFF09D000AD8EF /* AssignTruckTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E920A6B22EFF09D000AD8EF /* AssignTruckTableViewCell.swift */; };
+		2E920A7322EFFBC7000AD8EF /* Truck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E920A7222EFFBC6000AD8EF /* Truck.swift */; };
+		2E920A7422EFFBC7000AD8EF /* Truck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E920A7222EFFBC6000AD8EF /* Truck.swift */; };
 		2E96D05622C4C81300DA29C5 /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96D05422C4C81300DA29C5 /* LanguageModel.swift */; };
 		2E96D05722C4C81300DA29C5 /* LanguageModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96D05422C4C81300DA29C5 /* LanguageModel.swift */; };
 		2E96D05922C4C8D000DA29C5 /* FileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96D05822C4C8D000DA29C5 /* FileManager.swift */; };
@@ -660,6 +666,9 @@
 		2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteManagementViewController.swift; sourceTree = "<group>"; };
 		2E57C67922B8E3CD0064A787 /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
 		2E714CDA22B3A44900348B67 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
+		2E920A6922EFF09D000AD8EF /* AssignTruckViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignTruckViewController.swift; sourceTree = "<group>"; };
+		2E920A6B22EFF09D000AD8EF /* AssignTruckTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AssignTruckTableViewCell.swift; sourceTree = "<group>"; };
+		2E920A7222EFFBC6000AD8EF /* Truck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Truck.swift; sourceTree = "<group>"; };
 		2E96D05422C4C81300DA29C5 /* LanguageModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LanguageModel.swift; sourceTree = "<group>"; };
 		2E96D05822C4C8D000DA29C5 /* FileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FileManager.swift; sourceTree = "<group>"; };
 		2E96D05B22C4CEF400DA29C5 /* Loading.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Loading.storyboard; sourceTree = "<group>"; };
@@ -1302,6 +1311,31 @@
 				2E57C67922B8E3CD0064A787 /* AddNoteViewController.swift */,
 			);
 			path = NoteManagement;
+			sourceTree = "<group>";
+		};
+		2E920A6822EFF09D000AD8EF /* AssignTruck */ = {
+			isa = PBXGroup;
+			children = (
+				2E920A6922EFF09D000AD8EF /* AssignTruckViewController.swift */,
+				2E920A6A22EFF09D000AD8EF /* Cell */,
+			);
+			path = AssignTruck;
+			sourceTree = "<group>";
+		};
+		2E920A6A22EFF09D000AD8EF /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				2E920A6B22EFF09D000AD8EF /* AssignTruckTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		2E920A7122EFFBC6000AD8EF /* Truck */ = {
+			isa = PBXGroup;
+			children = (
+				2E920A7222EFFBC6000AD8EF /* Truck.swift */,
+			);
+			path = Truck;
 			sourceTree = "<group>";
 		};
 		2E96D05322C4C81300DA29C5 /* LanguageModel */ = {
@@ -2299,6 +2333,7 @@
 		3B66B86B210B1148000BDFEF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				2E920A7122EFFBC6000AD8EF /* Truck */,
 				2EF35D8422EED4D400131D33 /* Driver */,
 				2E96D05322C4C81300DA29C5 /* LanguageModel */,
 				199F488F22843D2B00DB6F7F /* GroupLocatonModel */,
@@ -2379,6 +2414,7 @@
 		3B66B88C210B1148000BDFEF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				2E920A6822EFF09D000AD8EF /* AssignTruck */,
 				2EF35D7822EEAACE00131D33 /* AssignDriver */,
 				2E96D05E22C4CFD700DA29C5 /* Loading */,
 				2E55A3DC22A65229006F9944 /* NoteManagement */,
@@ -3594,6 +3630,7 @@
 				2A443A3D22648C5A00CB6508 /* HistoryNotifyDetailVC.swift in Sources */,
 				2A443A3E22648C5A00CB6508 /* UploadFileResponse.swift in Sources */,
 				2A443A3F22648C5A00CB6508 /* CoreStatus+Ext.swift in Sources */,
+				2E920A6F22EFF09D000AD8EF /* AssignTruckTableViewCell.swift in Sources */,
 				2A443A4022648C5A00CB6508 /* FilterByDatePopupCell.swift in Sources */,
 				2A443A4122648C5A00CB6508 /* Cache.swift in Sources */,
 				2A443A4222648C5A00CB6508 /* TwoTextFieldsViewController.swift in Sources */,
@@ -3669,6 +3706,7 @@
 				2A443A8322648C5A00CB6508 /* OrderDetailVC.swift in Sources */,
 				2A443A8422648C5A00CB6508 /* CoreOrder+Ext.swift in Sources */,
 				2A443A8522648C5A00CB6508 /* UserLoginModel.swift in Sources */,
+				2E920A6D22EFF09D000AD8EF /* AssignTruckViewController.swift in Sources */,
 				2A443A8622648C5A00CB6508 /* Constants.swift in Sources */,
 				2A443A8722648C5A00CB6508 /* UIImageView+Extensions.swift in Sources */,
 				2A443A8822648C5A00CB6508 /* ImagePickerView.swift in Sources */,
@@ -3811,6 +3849,7 @@
 				2A443B0222648C5A00CB6508 /* TextViewInputController.swift in Sources */,
 				2A443B0322648C5A00CB6508 /* FilterDataListStatusCell.swift in Sources */,
 				2A443B0422648C5A00CB6508 /* ReceiveNotificationModel.swift in Sources */,
+				2E920A7322EFFBC7000AD8EF /* Truck.swift in Sources */,
 				2A443B0522648C5A00CB6508 /* DriverModel.swift in Sources */,
 				2A443B0622648C5A00CB6508 /* ScrollMenuCell.swift in Sources */,
 				2A443B0722648C5A00CB6508 /* CoreAttachFile+Ext.swift in Sources */,
@@ -3843,6 +3882,7 @@
 				3B7695F821CA3B820032B142 /* HistoryNotifyDetailVC.swift in Sources */,
 				3B66B8F3210B1149000BDFEF /* UploadFileResponse.swift in Sources */,
 				3B0724CB21B1440D00CDB05B /* CoreStatus+Ext.swift in Sources */,
+				2E920A7022EFF09D000AD8EF /* AssignTruckTableViewCell.swift in Sources */,
 				3B2B8B51222E131200ACDDFE /* FilterByDatePopupCell.swift in Sources */,
 				3B66B843210B113D000BDFEF /* Cache.swift in Sources */,
 				3B66B831210B113D000BDFEF /* TwoTextFieldsViewController.swift in Sources */,
@@ -3918,6 +3958,7 @@
 				3B66B90A210B1149000BDFEF /* OrderDetailVC.swift in Sources */,
 				3BEAB863214260380039CFBB /* CoreOrder+Ext.swift in Sources */,
 				3B66B8ED210B1149000BDFEF /* UserLoginModel.swift in Sources */,
+				2E920A6E22EFF09D000AD8EF /* AssignTruckViewController.swift in Sources */,
 				3B66B842210B113D000BDFEF /* Constants.swift in Sources */,
 				3B66B820210B113D000BDFEF /* UIImageView+Extensions.swift in Sources */,
 				3B66B81A210B113D000BDFEF /* ImagePickerView.swift in Sources */,
@@ -4060,6 +4101,7 @@
 				3B0035F9216C614D0032519D /* TextViewInputController.swift in Sources */,
 				3B1629D9221BEF6000E7A83C /* FilterDataListStatusCell.swift in Sources */,
 				3BDCEBD621816C5300C57DD4 /* ReceiveNotificationModel.swift in Sources */,
+				2E920A7422EFFBC7000AD8EF /* Truck.swift in Sources */,
 				3B9A376A2123D992004D881C /* DriverModel.swift in Sources */,
 				3B13CBF0211A8FF400A93E18 /* ScrollMenuCell.swift in Sources */,
 				3BEAB86D214260CD0039CFBB /* CoreAttachFile+Ext.swift in Sources */,

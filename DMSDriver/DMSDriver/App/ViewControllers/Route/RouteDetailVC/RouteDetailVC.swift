@@ -121,12 +121,6 @@ class RouteDetailVC: BaseViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getRouteDetail("\(route?.id ?? -1)")
-//        updateNavigationBar()
-//        if isRampManagerMode {
-//            Floaty.global.show()
-//        } else {
-//            Floaty.global.hide()
-//        }
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -143,12 +137,6 @@ class RouteDetailVC: BaseViewController {
     override func updateNavigationBar()  {
         super.updateNavigationBar()
         App().navigationService.updateNavigationBar(.Menu,"")
-//        App().navigationService.delegate = self;
-//        if displayMode == .DisplayModeMap {
-//            App().navigationService.updateNavigationBar(.Menu,"")
-//        }else {
-//            App().navigationService.updateNavigationBar(.Filter_Menu,"")
-//        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -168,33 +156,6 @@ class RouteDetailVC: BaseViewController {
         }
         
         self.navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    private func initFloatButton() {
-//        Floaty.global.button.items.removeAll()
-        let floaty = Floaty()
-        floaty.buttonColor = AppColor.mainColor
-        floaty.plusColor = UIColor.white
-        floaty.itemSize = 56.0
-        floaty.addItem("Van Load", icon: UIImage(named: "ic_ramp_van_load")!, handler: { item in
-            self.redirectToLoadingPackageVC()
-            floaty.close()
-        })
-        
-        floaty.addItem("Assign Driver", icon: UIImage(named: "ic_ramp_assign_driver")!, handler: { item in
-            let alert = UIAlertController(title: "Assign Driver", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            floaty.close()
-        })
-        
-        floaty.addItem("Assign Truck", icon: UIImage(named: "ic_ramp_assign_truck")!, handler: { item in
-            let alert = UIAlertController(title: "Assign Truck", message: "", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
-            self.present(alert, animated: true, completion: nil)
-            floaty.close()
-        })
-        self.view.addSubview(floaty)
     }
     
 
@@ -221,7 +182,7 @@ class RouteDetailVC: BaseViewController {
         
         lblStatus?.textColor = route?.colorStatus
         
-        layoutAddNoteButton()
+//        layoutAddNoteButton()
     }
     
     private func setupCollectionView() {
@@ -270,6 +231,13 @@ class RouteDetailVC: BaseViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func onAssignTruckTouchUp(_ sender: UIButton) {
+        guard let _route = self.route else {
+            showAlertView("something-went-wrong".localized)
+            return }
+        let vc:AssignTruckViewController = LoadUnloadOrderVC.loadSB(SB: .LoadUnloadOrder)
+        vc.route = _route
+        
+        self.navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction func onVanLoadTouchUp(_ sender: UIButton) {
@@ -393,6 +361,7 @@ extension RouteDetailVC{
     func updateActionsUI() {
         guard let _route = route else { return }
         assignDriverButtonView.isHidden = _route.isAssignedDriver
+        assignTruckButtonView.isHidden = _route.isAssignedTruck
     }
     
     @objc func fetchData()  {
@@ -412,9 +381,9 @@ extension RouteDetailVC{
             strongSelf.dismissLoadingIndicator()
             switch result{
             case .object(let obj):
-                self?.route = obj.data
-                self?.clvContent?.reloadData()
-                self?.updateActionsUI()
+                strongSelf.route = obj.data
+                strongSelf.clvContent?.reloadData()
+                strongSelf.updateActionsUI()
                 /*
                  guard let data = obj.data else {return}
                  CoreDataManager.updateRoute(data) // Update route to DB local
