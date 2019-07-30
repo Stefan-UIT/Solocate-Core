@@ -246,10 +246,32 @@ extension BaseAPIService {
     }
     
     @discardableResult
+    func getTruckList(truckTypeID:Int,
+                       callback: @escaping APICallback<ResponseDataListModel<Truck>>) -> APIRequest {
+        let path = String(format: PATH_REQUEST_URL.GET_TRUCK_LIST.URL, "\(truckTypeID)")
+        return request(method: .GET,
+                       path: path,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
     func assignDriver(_ driverID:Int,
                       toRoute routeID:Int,
                        callback: @escaping APICallback<ResponseDataModel<EmptyModel>>) -> APIRequest {
         let param = ["driver_id": driverID]
+        let path = String(format: PATH_REQUEST_URL.ASSIGN_TRUCK_DRIVER.URL, "\(routeID)")
+        return request(method: .PUT,
+                       path: path,
+                       input: .json(param),
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func assignTruck(_ truckID:Int,
+                      toRoute routeID:Int,
+                      callback: @escaping APICallback<ResponseDataModel<EmptyModel>>) -> APIRequest {
+        let param = ["truck_id": truckID]
         let path = String(format: PATH_REQUEST_URL.ASSIGN_TRUCK_DRIVER.URL, "\(routeID)")
         return request(method: .PUT,
                        path: path,

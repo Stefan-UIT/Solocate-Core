@@ -11,7 +11,6 @@ import ObjectMapper
 import GoogleMaps
 
 //MARK: - TRUCK
-class Truck: BasicModel { }
 class TruckType: BasicModel { }
 class Tanker: BasicModel { }
 class Status: BasicModel { }
@@ -169,6 +168,13 @@ class Route: BaseModel {
         get {
             guard let info = assignedInfo?.first else { return false}
             return (info.driverID != nil || info.driver != nil)
+        }
+    }
+    
+    var isAssignedTruck:Bool {
+        get {
+            guard let info = assignedInfo?.first else { return false}
+            return (info.truckID != nil || info.truck != nil)
         }
     }
     
