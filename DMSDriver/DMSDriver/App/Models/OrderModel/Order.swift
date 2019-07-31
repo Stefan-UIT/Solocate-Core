@@ -413,7 +413,7 @@ class Order: BaseModel {
     }()
     
     // NEW
-    var customer:UserModel?
+    var customer:UserModel.UserInfo?
     var typeID:Int = 0
     var group:String = ""
     var codComment:String?

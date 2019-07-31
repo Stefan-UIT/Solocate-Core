@@ -207,7 +207,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 //        let status = StatusOrder(rawValue: order.statusCode ?? "") ?? StatusOrder.newStatus
 //        let statusItem = OrderDetailInforRow("Status".localized,status.statusName.localized)
         let customerItem = OrderDetailInforRow("customer-name".localized,
-                                             order.custumer_name)
+                                             Slash(order.customer?.userName))
 //        let urgency = OrderDetailInforRow("Urgency".localized,
 //                                          isHebewLang() ? order.urgent_type_name_hb ?? "" :  order.urgent_type_name_en ?? "")
         let orderId = OrderDetailInforRow("order-id".localized,"#\(order.id)")
