@@ -50,6 +50,7 @@ enum PATH_REQUEST_URL: String{
     case ASSIGN_ORDER = "backend-api/v1/orders/assign-order"
 //    case GET_LIST_TASKS = "backend-api/v1/mobile/tasks/driver-task?from_delivery_date=%@&to_delivery_date=%@"
     case GET_LIST_TASKS = "transaction/v1/mobile/tasks?from_delivery_date=%@&to_delivery_date=%@"
+    case GET_RETURNED_ITEMS = "transaction/v1/item-returns?from_delivery_date=%@&to_delivery_date=%@"
 //    case GET_TASK_DETAIL = "backend-api/v1/mobile/tasks/%@"
     case GET_TASK_DETAIL = "transaction/v1/mobile/tasks/%@"
 //    case UPDATE_STATUS_TASK = "backend-api/v1/tasks/%@/%@"

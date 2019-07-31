@@ -207,6 +207,20 @@ extension BaseAPIService {
                        callback: callback);
     }
     
+    
+    //MARK : - Returned Items
+    @discardableResult
+    func getReturnedItems(_ timeData:TimeDataItem,
+                     callback: @escaping APICallback<ResponseDataModel<ResponseDataListModel<ReturnedItem>>>) -> APIRequest {
+        let startDate = DateFormatter.filterDate.string(from: timeData.startDate ?? Date())
+        let endDate = DateFormatter.filterDate.string(from: timeData.endDate ?? Date())
+        let path = String(format:PATH_REQUEST_URL.GET_RETURNED_ITEMS.URL, startDate, endDate)
+        return request(method: .GET,
+                       path: path,
+                       input: .empty,
+                       callback: callback);
+    }
+    
     @discardableResult
     func getLanguagesList(
         callback: @escaping APICallback<ResponseDataListModel<LanguageModel>>) -> APIRequest {

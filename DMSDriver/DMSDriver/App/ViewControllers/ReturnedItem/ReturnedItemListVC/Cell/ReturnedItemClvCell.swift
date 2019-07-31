@@ -9,7 +9,7 @@
 
 import UIKit
 
-class TaskListClvCell: UICollectionViewCell {
+class ReturnedItemListClvCell: UICollectionViewCell {
     
     @IBOutlet weak var lblTitle: UILabel?
     @IBOutlet weak var lblSubtitle: UILabel?
@@ -23,7 +23,7 @@ class TaskListClvCell: UICollectionViewCell {
     @IBOutlet weak var btnNumber: UIButton?
     @IBOutlet weak var vContent: UIView?
     
-    var task:TaskModel?{
+    var item:ReturnedItem?{
         didSet{
            updateUI()
         }
@@ -32,25 +32,25 @@ class TaskListClvCell: UICollectionViewCell {
     func updateUI()  {
         let displayDateTimeVN = DateFormatter.displayDateTimeVN
         let displayDateVN = DateFormatter.displayDateVietNames
-        let startTime = DateFormatter.serverDateFormater.date(from: E(task?.dlvy_start_time))
-        let endTime = DateFormatter.serverDateFormater.date(from: E(task?.dlvy_end_time))
-        let deliveryDate = DateFormatter.displayDateUS.date(from: E(task?.dlvy_date))
-        let status = TaskStatus(rawValue: E(task?.status.code)) ?? TaskStatus.open
+        let startTime = DateFormatter.serverDateFormater.date(from: E(item?.dlvy_start_time))
+        let endTime = DateFormatter.serverDateFormater.date(from: E(item?.dlvy_end_time))
+        let deliveryDate = DateFormatter.displayDateUS.date(from: E(item?.dlvy_date))
+        let status = TaskStatus(rawValue: E(item?.status.code)) ?? TaskStatus.open
 
-        lblTitle?.text = "\("\("TASK".localized) - \(task?.id ?? 0)")"
-        lblSubtitle?.text = task?.instructions
+        lblTitle?.text = "\("\("TASK".localized) - \(item?.id ?? 0)")"
+        lblSubtitle?.text = item?.instructions
 //        if Locale.current.languageCode == "he" {
-//            lblUrgency?.text = task?.urgent_type_name_hb
+//            lblUrgency?.text = item?.urgent_type_name_hb
 //        }else {
-//            lblUrgency?.text = task?.urgent_type_name_en
+//            lblUrgency?.text = item?.urgent_type_name_en
 //        }
-        lblUrgency?.text = E(task?.urgency.name).localized
-        lblUrgency?.textColor = task?.colorUrgent
+//        lblUrgency?.text = E(item?.urgency.name).localized
+//        lblUrgency?.textColor = item?.colorUrgent
         btnStatus?.setTitle("\(status.statusName.localized)", for: .normal)
         btnStatus?.borderWidth = 1.0;
         btnStatus?.layer.cornerRadius = 3.0;
-        btnStatus?.borderColor = task?.colorStatus;
-        btnStatus?.setTitleColor(task?.colorStatus, for: .normal)
+        btnStatus?.borderColor = item?.colorStatus;
+        btnStatus?.setTitleColor(item?.colorStatus, for: .normal)
         lblStartdate?.text = (startTime != nil) ? displayDateTimeVN.string(from: startTime!) : ""
         lblEnddate?.text = (endTime != nil) ? displayDateTimeVN.string(from: endTime!) : ""
         lblDeliveryDate?.text  = (deliveryDate != nil) ? displayDateVN.string(from: deliveryDate!) : ""

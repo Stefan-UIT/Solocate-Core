@@ -9,6 +9,7 @@ enum MenuItemType : Int {
   case COUNTER
   case ASSIGN
   case TASK
+    case RETURNEDITEMS
   case ALERT
   case LOGOUT
   
@@ -32,6 +33,8 @@ enum MenuItemType : Int {
         return "orders-assignment".localized.uppercased()
     case .TASK:
         return "tasks-list".localized.uppercased()
+    case .RETURNEDITEMS:
+        return "returned-items".localized.uppercased()
     case .ALERT:
         return "Alerts".localized.uppercased()
     case .LOGOUT:
@@ -52,6 +55,8 @@ enum MenuItemType : Int {
     case .ASSIGN:
         return #imageLiteral(resourceName: "ic_orderlist")
     case .TASK:
+        return #imageLiteral(resourceName: "Menu_Task")
+    case .RETURNEDITEMS:
         return #imageLiteral(resourceName: "Menu_Task")
     case .ALERT:
         return #imageLiteral(resourceName: "ic_notifyBlue")
@@ -164,6 +169,9 @@ extension SlideMenuVC:UITableViewDelegate{
     
         case .TASK:
             let vc:TaskListVC = .loadSB(SB: .Task)
+            App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
+        case .RETURNEDITEMS:
+            let vc:ReturnedItemsListVC = .loadSB(SB: .ReturnedItem)
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
             
         case .ALERT:

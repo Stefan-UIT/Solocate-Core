@@ -9,7 +9,7 @@
 import UIKit
 import SideMenu
 
-class TaskListVC: BaseViewController {
+class ReturnedItemsListVC: BaseViewController {
     
     @IBOutlet weak var clvContent:UICollectionView?
     @IBOutlet weak var lblNoData: UILabel?
@@ -23,7 +23,7 @@ class TaskListVC: BaseViewController {
     var dateStringFilter:String = Date().toString("MM/dd/yyyy")
     var dateFilter = Date()
     
-    var taskList:[TaskModel] = []
+    var items:[ReturnedItem] = []
     
 
     override func viewDidLoad() {
@@ -35,7 +35,7 @@ class TaskListVC: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.getListTask(timeDataItem: self.timeData!, isFetch: true)
+        fetchData()
     }
     
     override func updateNavigationBar() {
@@ -56,7 +56,7 @@ class TaskListVC: BaseViewController {
         }else{
             
             DispatchQueue.main.async {[weak self] in
-                self?.taskList = []
+                self?.items = []
                 self?.clvContent?.reloadData()
             }
         }
@@ -94,14 +94,14 @@ class TaskListVC: BaseViewController {
                                                        timeData: timeData,
                                                        needHides: arrHide as [NSNumber]) {[weak self] (success, timeData) in
                                                         self?.timeData = timeData
-                                                        self?.getListTask(timeDataItem: timeData, isFetch: true)
+                                                        self?.getReturnedItems(timeDataItem: timeData, isFetch: true)
         }
     }
 }
 
 
 //MARK: - DMSNavigationServiceDelegate
-extension TaskListVC:DMSNavigationServiceDelegate{
+extension ReturnedItemsListVC:DMSNavigationServiceDelegate{
     func didSelectedBackOrMenu() {
         showSideMenu()
     }
@@ -133,13 +133,13 @@ extension TaskListVC:DMSNavigationServiceDelegate{
 
 
 //MARK: - UICollectionViewDataSource
-extension TaskListVC:UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
+extension ReturnedItemsListVC:UICollectionViewDataSource, UICollectionViewDelegateFlowLayout{
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return taskList.count
+        return items.count
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -167,9 +167,9 @@ extension TaskListVC:UICollectionViewDataSource, UICollectionViewDelegateFlowLay
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: taskListIdebtifierCell, for: indexPath) as! TaskListClvCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ReturnedItemListClvCell", for: indexPath) as! ReturnedItemListClvCell
         
-        cell.task = taskList[indexPath.row]
+        cell.item = items[indexPath.row]
         cell.btnNumber?.setTitle("\(indexPath.row + 1)", for: .normal)
         
         return cell
@@ -178,24 +178,24 @@ extension TaskListVC:UICollectionViewDataSource, UICollectionViewDelegateFlowLay
 
 
 //MARK: - UICollectionViewDelegate
-extension TaskListVC:UICollectionViewDelegate{
+extension ReturnedItemsListVC:UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc: TaskDetailVC = .loadSB(SB: .Task)
-        vc.task = taskList[indexPath.row]
+        let vc: ReturnedItemDetailVC = .loadSB(SB: .ReturnedItem)
+        vc.item = items[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 
 //MARK - API
-extension TaskListVC{
+extension ReturnedItemsListVC{
     
     @objc func fetchData()  {
-        getListTask(timeDataItem:timeData! ,isFetch: true)
+        getReturnedItems(timeDataItem:timeData! ,isFetch: true)
     }
     
-    func getListTask(timeDataItem:TimeDataItem,isFetch:Bool = false) {
-        if !isFetch {
+    func getReturnedItems(timeDataItem:TimeDataItem,isFetch:Bool = false) {
+        if isFetch {
             self.showLoadingIndicator()
         }
         SERVICES().API.getTaskList(self.timeData!) {[weak self] (result) in
@@ -203,12 +203,15 @@ extension TaskListVC{
             self?.clvContent?.endRefreshControl()
             switch result{
             case .object(let obj):
-                self?.taskList = obj.data?.data ?? []
-                self?.taskList.sort(by: { (task1, task2) -> Bool in
-                    return task1.id < task2.id
-                })
+                let taskList = obj.data?.data ?? []
+                let array = taskList.map({$0.toReturnedItems()})
                 
-                self?.lblNoData?.isHidden = self?.taskList.count > 0
+                self?.items = array
+//                self?.taskList.sort(by: { (task1, task2) -> Bool in
+//                    return task1.id < task2.id
+//                })
+                
+                self?.lblNoData?.isHidden = self?.items.count > 0
                 self?.updateUI()
                 
             case .error(let error):

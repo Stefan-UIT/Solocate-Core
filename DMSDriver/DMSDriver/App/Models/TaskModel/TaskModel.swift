@@ -152,4 +152,11 @@ class TaskModel: BaseModel {
 //        reason_msg <- map["reason_msg"]
         
     }
+    
+    func toReturnedItems() -> ReturnedItem {
+        let json = self.toJSON()
+        return ReturnedItem(JSON: json)!
+    }
 }
+
+class ReturnedItem: TaskModel {}
