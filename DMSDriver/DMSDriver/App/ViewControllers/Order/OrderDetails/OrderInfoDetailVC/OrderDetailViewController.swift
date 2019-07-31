@@ -147,32 +147,60 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforNatureOfGoods.removeAll()
         
         guard let order = orderDetail else { return }
-        let displayDateTimeVN = DateFormatter.displayDateTimeVN
+//        let displayDateTimeVN = DateFormatter.displayDateTimeVN
+//        var startFromDate = ""
+//        if let date = order.from?.start_time?.date {
+//            startFromDate = displayDateTimeVN.string(from: date)
+//        }else {
+//            startFromDate = "invalid-date".localized
+//        }
+//
+//        var endFromDate = ""
+//        if let date = order.from?.end_time?.date {
+//            endFromDate = displayDateTimeVN.string(from: date)
+//        }else {
+//            endFromDate = "invalid-date".localized
+//        }
+//
+//        var startToDate = ""
+//        if let date = order.to?.start_time?.date {
+//            startToDate = displayDateTimeVN.string(from: date)
+//        }else {
+//            startToDate = "invalid-date".localized
+//        }
+//
+//        var endToDate = ""
+//        if let date = order.to?.end_time?.date {
+//            endToDate = displayDateTimeVN.string(from: date)
+//        }else {
+//            endToDate = "invalid-date".localized
+//        }
+        
         var startFromDate = ""
-        if let date = order.from?.start_time?.date {
-            startFromDate = displayDateTimeVN.string(from: date)
+        if let date = order.from?.start_time {
+            startFromDate = date
         }else {
             startFromDate = "invalid-date".localized
         }
         
         var endFromDate = ""
-        if let date = order.from?.end_time?.date {
-            endFromDate = displayDateTimeVN.string(from: date)
+        if let date = order.from?.end_time {
+            endFromDate = date
         }else {
             endFromDate = "invalid-date".localized
         }
         
         var startToDate = ""
-        if let date = order.to?.start_time?.date {
-            startToDate = displayDateTimeVN.string(from: date)
+        if let date = order.to?.start_time {
+            startToDate = date
         }else {
             startToDate = "invalid-date".localized
         }
         
         var endToDate = ""
-        if let date = order.to?.end_time?.date {
-            endToDate = displayDateTimeVN.string(from: date)
-        }else {
+        if let date = order.to?.end_time {
+            endToDate = date
+        } else {
             endToDate = "invalid-date".localized
         }
         
