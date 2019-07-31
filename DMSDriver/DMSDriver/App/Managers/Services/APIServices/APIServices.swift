@@ -20,6 +20,10 @@ public func E(_ val: String?) -> String {
   return (val != nil) ? val! : "";
 }
 
+public func Slash(_ val: String?) -> String {
+    return (val != nil && !val!.isEmpty) ? val! : "-";
+}
+
 
 extension BaseAPIService {
     @discardableResult
@@ -237,7 +241,14 @@ extension BaseAPIService {
         let routeID = route.id
         let startTime = route.start_time
         let endTime = route.end_time
-        let path = String(format: PATH_REQUEST_URL.GET_DRIVER_LIST.URL, "\(routeID)", startTime,endTime)
+        var path:String!
+        if let companyID = route.company?.id {
+            path = String(format: PATH_REQUEST_URL.GET_DRIVER_LIST.URL, "\(routeID)", startTime,endTime, "\(companyID)")
+        } else {
+            path = String(format: PATH_REQUEST_URL.GET_DRIVER_LIST.URL, "\(routeID)", startTime,endTime)
+        }
+        
+        
         let encodedUrl = path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         return request(method: .GET,
                        path: encodedUrl!,
