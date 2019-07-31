@@ -331,6 +331,8 @@
 		2E1BE35122F14FFD005F9BB5 /* ReturnedItemDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BE34A22F14FFD005F9BB5 /* ReturnedItemDetailVC.swift */; };
 		2E1BE35322F15297005F9BB5 /* ReturnedItem.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E1BE35222F15297005F9BB5 /* ReturnedItem.storyboard */; };
 		2E1BE35422F15297005F9BB5 /* ReturnedItem.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E1BE35222F15297005F9BB5 /* ReturnedItem.storyboard */; };
+		2E1BE35622F191C4005F9BB5 /* ReturnedItemQuantityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BE35522F191C4005F9BB5 /* ReturnedItemQuantityCell.swift */; };
+		2E1BE35722F191C4005F9BB5 /* ReturnedItemQuantityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BE35522F191C4005F9BB5 /* ReturnedItemQuantityCell.swift */; };
 		2E30BE6622E99A21007419FD /* LoadPackageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E30BE6522E99A21007419FD /* LoadPackageTableViewCell.swift */; };
 		2E30BE6722E99A21007419FD /* LoadPackageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E30BE6522E99A21007419FD /* LoadPackageTableViewCell.swift */; };
 		2E55A3DF22A6523D006F9944 /* NoteManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */; };
@@ -674,6 +676,7 @@
 		2E1BE34822F14FFD005F9BB5 /* ReturnedItemClvCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReturnedItemClvCell.swift; sourceTree = "<group>"; };
 		2E1BE34A22F14FFD005F9BB5 /* ReturnedItemDetailVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ReturnedItemDetailVC.swift; sourceTree = "<group>"; };
 		2E1BE35222F15297005F9BB5 /* ReturnedItem.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReturnedItem.storyboard; sourceTree = "<group>"; };
+		2E1BE35522F191C4005F9BB5 /* ReturnedItemQuantityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnedItemQuantityCell.swift; sourceTree = "<group>"; };
 		2E30BE6522E99A21007419FD /* LoadPackageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadPackageTableViewCell.swift; sourceTree = "<group>"; };
 		2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteManagementViewController.swift; sourceTree = "<group>"; };
 		2E57C67922B8E3CD0064A787 /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
@@ -1329,6 +1332,7 @@
 			isa = PBXGroup;
 			children = (
 				2E1BE34A22F14FFD005F9BB5 /* ReturnedItemDetailVC.swift */,
+				2E1BE35522F191C4005F9BB5 /* ReturnedItemQuantityCell.swift */,
 			);
 			path = ReturnedItemDetailVC;
 			sourceTree = "<group>";
@@ -3904,6 +3908,7 @@
 				2A443B0422648C5A00CB6508 /* ReceiveNotificationModel.swift in Sources */,
 				2E920A7322EFFBC7000AD8EF /* Truck.swift in Sources */,
 				2A443B0522648C5A00CB6508 /* DriverModel.swift in Sources */,
+				2E1BE35622F191C4005F9BB5 /* ReturnedItemQuantityCell.swift in Sources */,
 				2A443B0622648C5A00CB6508 /* ScrollMenuCell.swift in Sources */,
 				2A443B0722648C5A00CB6508 /* CoreAttachFile+Ext.swift in Sources */,
 				2A443B0822648C5A00CB6508 /* ReasonSkipView.swift in Sources */,
@@ -4159,6 +4164,7 @@
 				3BDCEBD621816C5300C57DD4 /* ReceiveNotificationModel.swift in Sources */,
 				2E920A7422EFFBC7000AD8EF /* Truck.swift in Sources */,
 				3B9A376A2123D992004D881C /* DriverModel.swift in Sources */,
+				2E1BE35722F191C4005F9BB5 /* ReturnedItemQuantityCell.swift in Sources */,
 				3B13CBF0211A8FF400A93E18 /* ScrollMenuCell.swift in Sources */,
 				3BEAB86D214260CD0039CFBB /* CoreAttachFile+Ext.swift in Sources */,
 				3B80E3DC22279D1B005A2E75 /* ReasonSkipView.swift in Sources */,

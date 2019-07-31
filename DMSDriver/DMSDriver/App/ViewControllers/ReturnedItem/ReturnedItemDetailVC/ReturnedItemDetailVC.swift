@@ -12,15 +12,16 @@ import CoreLocation
 
 class ReturnedItemDetailVC: BaseViewController {
     
-    enum TaskDetailSection:Int {
+    enum ReturnedItemSection:Int {
         case StatusSection = 0
         case DetailSection
+        case QuantitySection
         case InstructionSection
 //        case DescriptionSection
         
         static let count: Int = {
             var max: Int = 0
-            while let _ = TaskDetailSection(rawValue: max) { max += 1 }
+            while let _ = ReturnedItemSection(rawValue: max) { max += 1 }
             return max
         }()
     }
@@ -47,7 +48,7 @@ class ReturnedItemDetailVC: BaseViewController {
     fileprivate var scannedObjectIndexs = [Int]()
     fileprivate var shouldFilterOrderItemsList = true
     
-    fileprivate let cellHeight: CGFloat = 70.0
+    fileprivate let cellHeight: CGFloat = 65.0
     fileprivate let orderItemsPaddingTop: CGFloat = 40.0
     fileprivate let orderItemCellHeight: CGFloat = 130.0
     
@@ -174,6 +175,7 @@ class ReturnedItemDetailVC: BaseViewController {
         arrTitleHeader = ["Status".localized,
                           "Information".localized,
 //                          "Information".localized,
+            "Returned Item Quantity".localized,
                           "order_detail_notes".localized]
         
     }
@@ -253,12 +255,14 @@ extension ReturnedItemDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        let section:TaskDetailSection = TaskDetailSection(rawValue: section)!
+        let section:ReturnedItemSection = ReturnedItemSection(rawValue: section)!
         switch section {
         case .StatusSection:
             return taskInforStatus.count
         case .DetailSection:
             return taskInforRows.count
+        case .QuantitySection:
+            return 1
         case .InstructionSection:
             return taskInstruction.count;
         }
@@ -269,7 +273,7 @@ extension ReturnedItemDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return cellHeight
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -296,12 +300,14 @@ extension ReturnedItemDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let section:TaskDetailSection = TaskDetailSection(rawValue: indexPath.section)!
+        let section:ReturnedItemSection = ReturnedItemSection(rawValue: indexPath.section)!
         switch section {
         case .StatusSection:
             return cell(items: taskInforStatus, tableView, indexPath)
         case .DetailSection:
             return cell(items: taskInforRows, tableView, indexPath)
+        case .QuantitySection:
+            return quantityCell(tableView, indexPath)
         case .InstructionSection:
             return cellDiscription(tableView, indexPath)
         }
@@ -318,8 +324,19 @@ extension ReturnedItemDetailVC: UITableViewDataSource, UITableViewDelegate {
         if indexPath.row == items.count - 1{
             cell.vContent?.roundCornersLRB()
         }
+        
         return cell
 
+    }
+    
+    func quantityCell(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
+        guard let _item = self.item else { return UITableViewCell() }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ReturnedItemQuantityCell", for: indexPath) as! ReturnedItemQuantityCell
+        cell.configureCellWithDetail(_item)
+        cell.vContent?.cornerRadius = 0
+
+        return cell
+        
     }
     
     func cellDiscription(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell {

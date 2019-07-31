@@ -159,4 +159,12 @@ class TaskModel: BaseModel {
     }
 }
 
-class ReturnedItem: TaskModel {}
+class ReturnedItem: TaskModel {
+    var totalQuantity:Int?
+    var returnedQuantity:Int?
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        
+    }
+}
