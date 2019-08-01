@@ -226,6 +226,46 @@ extension BaseAPIService {
     }
     
     @discardableResult
+    func getReturnedItemDetail(_ itemID:Int,
+                       callback: @escaping APICallback<ResponseDataModel<ReturnedItem>>) -> APIRequest {
+        let path = String(format:PATH_REQUEST_URL.GET_RETURNED_ITEM_DETAIL.URL, "\(itemID)")
+        return request(method: .GET,
+                       path: path,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func rejectReturnedItem(_ itemID:Int,
+                          callback: @escaping APICallback<ResponseDataModel<EmptyModel>>) -> APIRequest {
+        let path = String(format:PATH_REQUEST_URL.REJECT_RETURNED_ITEM.URL, "\(itemID)")
+        return request(method: .POST,
+                       path: path,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func cancelReturnedItem(_ itemID:Int,
+                            callback: @escaping APICallback<ResponseDataModel<EmptyModel>>) -> APIRequest {
+        let path = String(format:PATH_REQUEST_URL.CANCEL_RETURNED_ITEM.URL, "\(itemID)")
+        return request(method: .POST,
+                       path: path,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func finishReturnedItem(_ itemID:Int,
+                            callback: @escaping APICallback<ResponseDataModel<EmptyModel>>) -> APIRequest {
+        let path = String(format:PATH_REQUEST_URL.FINISH_RETURNED_ITEM.URL, "\(itemID)")
+        return request(method: .POST,
+                       path: path,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
     func getLanguagesList(
         callback: @escaping APICallback<ResponseDataListModel<LanguageModel>>) -> APIRequest {
         let path = String(format:PATH_REQUEST_URL.GET_LIST_LANGUAGE.URL, "ios", "DMS")

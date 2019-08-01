@@ -37,8 +37,8 @@ class ReturnedItemListClvCell: UICollectionViewCell {
         let deliveryDate = DateFormatter.displayDateUS.date(from: E(item?.dlvy_date))
         let status = TaskStatus(rawValue: E(item?.status.code)) ?? TaskStatus.open
 
-        lblTitle?.text = "\("\("TASK".localized) - \(item?.id ?? 0)")"
-        lblSubtitle?.text = item?.instructions
+        lblTitle?.text = "\("\("Item".localized) - \(item?.id ?? 0)")"
+        lblSubtitle?.text = Slash(item?.instructions)
 //        if Locale.current.languageCode == "he" {
 //            lblUrgency?.text = item?.urgent_type_name_hb
 //        }else {

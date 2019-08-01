@@ -105,54 +105,32 @@ class ReturnedItemDetailVC: BaseViewController {
         taskInforRows.removeAll()
         taskInstruction.removeAll()
         
-        let displayDateVN = DateFormatter.displayDateVietNames
-        let displayHour = DateFormatter.hourFormater
-        let deliveryDate = DateFormatter.displayDateUS.date(from: E(_item.dlvy_date))
-        let dlvy_start_time = DateFormatter.serverDateFormater.date(from: E(_item.dlvy_start_time))
-        let dlvy_end_time = DateFormatter.serverDateFormater.date(from: E(_item.dlvy_end_time))
         let status = TaskStatus(rawValue: E(_item.status.code)) ?? TaskStatus.open
         let statusItem = OrderDetailInforRow("Status".localized,status.statusName.localized)
-//        let urgency = OrderDetailInforRow("Urgency".localized , _item.urgency.name ?? "")
-//        let reason = OrderDetailInforRow("failure-cause",E(_item.reason?.name))
-//        let mess = OrderDetailInforRow("Message",E(_item.reason_msg))
         let taskName = OrderDetailInforRow("Name".localized,"\(E(_item.name))")
-        let driver = OrderDetailInforRow("Driver".localized,"\(E(_item.assignee.userName))")
+        let routeID = OrderDetailInforRow("Route".localized,"\(_item.routeID ?? 0)")
 
-        let startTime = OrderDetailInforRow("start-time".localized, (dlvy_start_time != nil) ? displayHour.string(from: dlvy_start_time!) : "")
-        let endTime = OrderDetailInforRow("end-time".localized, (dlvy_end_time != nil) ? displayHour.string(from: dlvy_end_time!) : "")
-//        let date = OrderDetailInforRow("Date",(deliveryDate != nil) ? displayDateVN.string(from: deliveryDate!) : "")
-//        let clientName = OrderDetailInforRow("client-name",E(_item.client_name))
-//        let customerName = OrderDetailInforRow("customer-name" ,E(_item.customer_name))
-//        let collectCall = OrderDetailInforRow("Collectcall",E(_item.collect_call))
-//        let coordinationPhone = OrderDetailInforRow("coordination-phone", E(_item.coord_phone))
-//        let receiverName = OrderDetailInforRow("receiver-name",E(_item.rcvr_name))
-//        let phone = OrderDetailInforRow("Phone", E(_item.rcvr_phone))
-        let address = OrderDetailInforRow("Address".localized,E(_item.address.address))
+        let startTime = OrderDetailInforRow("start-time".localized, Slash(_item.dlvy_start_time))
+        let endTime = OrderDetailInforRow("end-time".localized, Slash(_item.dlvy_end_time))
+        let instruction = OrderDetailInforRow("Instructions".localized,Slash(_item.instructions))
+        let note = OrderDetailInforRow("Note".localized,Slash(_item.note))
+        
+        var assigneesName = ""
+        for i in _item.assignees {
+            assigneesName = assigneesName + ", " + Slash(i.userName)
+        }
+        
+        let assigneesRow = OrderDetailInforRow("Assignees".localized,assigneesName)
     
         taskInforStatus.append(statusItem)
-//        taskInforStatus.append(urgency)
-//        if  status == TaskStatus.cancel {
-//            taskInforStatus.append(reason)
-//            taskInforStatus.append(mess)
-//        }
-        
-//        taskInforRows.append(taskId)
         taskInforRows.append(taskName)
-        taskInforRows.append(address)
-        taskInforRows.append(driver)
+        taskInforRows.append(routeID)
+        taskInforRows.append(assigneesRow)
         taskInforRows.append(startTime)
         taskInforRows.append(endTime)
-//        taskInforRows.append(date)
-        
-//        informationRows.append(clientName)
-//        informationRows.append(customerName)
-//        informationRows.append(receiverName)
-//        informationRows.append(phone)
-//        informationRows.append(collectCall)
-//        informationRows.append(coordinationPhone)
-        
-        let instruction = OrderDetailInforRow("Instructions".localized,E(_item.instructions))
-        taskInstruction.append(instruction)
+        taskInforRows.append(instruction)
+        taskInforRows.append(note)
+//        taskInstruction.append(instruction)
     }
     
     
@@ -181,6 +159,33 @@ class ReturnedItemDetailVC: BaseViewController {
     }
     
     // MARK: ACTION
+    
+    
+    @IBAction func onFinishButtonTouchUp(_ sender: UIButton) {
+        guard let _item = self.item else { return }
+        self.showLoadingIndicator()
+        SERVICES().API.finishReturnedItem(_item.id) { [weak self] (result) in
+            self?.dismissLoadingIndicator()
+            self?.tableView?.endRefreshControl()
+            switch result{
+            case .object(let obj):
+                let message = obj.message ?? ""
+                self?.showAlertView(message)
+                self?.getTaskDetail(_item.id)
+                
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
+        }
+    }
+    
+    @IBAction func onCancelButtonTouchUp(_ sender: UIButton) {
+    }
+    
+    
+    @IBAction func onRejectButtonTouchUp(_ sender: UIButton) {
+    }
+    
     @IBAction func didClickFinish(_ sender: UIButton) {
         handleFinishAction()
     }
@@ -264,7 +269,8 @@ extension ReturnedItemDetailVC: UITableViewDataSource, UITableViewDelegate {
         case .QuantitySection:
             return 1
         case .InstructionSection:
-            return taskInstruction.count;
+//            return taskInstruction.count;
+            return 0
         }
     }
     
@@ -277,6 +283,10 @@ extension ReturnedItemDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        let section:ReturnedItemSection = ReturnedItemSection(rawValue: section)!
+        if section == ReturnedItemSection.InstructionSection {
+            return CGFloat.leastNormalMagnitude
+        }
         return 65
     }
     
@@ -290,6 +300,10 @@ extension ReturnedItemDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        let section:ReturnedItemSection = ReturnedItemSection(rawValue: section)!
+        if section == ReturnedItemSection.InstructionSection {
+            return CGFloat.leastNormalMagnitude
+        }
         return 15
     }
     
@@ -395,18 +409,18 @@ fileprivate extension ReturnedItemDetailVC{
     }
     
     func updateButtonStatus() {
-        updateStatusButton?.backgroundColor = AppColor.mainColor
-        btnUnable?.backgroundColor = AppColor.grayColor
-        btnUnable?.borderWidth = 1;
-        btnUnable?.borderColor = AppColor.grayBorderColor
-        vAction?.isHidden = true
-        updateStatusButton?.setTitle("Finish".localized.uppercased(), for: .normal)
-        btnUnable?.setTitle("cancel".localized.uppercased(), for: .normal)
-        guard  let statusTask = TaskStatus(rawValue: E(item?.status.code)) else {
+//        updateStatusButton?.backgroundColor = AppColor.mainColor
+//        btnUnable?.backgroundColor = AppColor.grayColor
+//        btnUnable?.borderWidth = 1;
+//        btnUnable?.borderColor = AppColor.grayBorderColor
+//        vAction?.isHidden = true
+//        updateStatusButton?.setTitle("Finish".localized.uppercased(), for: .normal)
+//        btnUnable?.setTitle("cancel".localized.uppercased(), for: .normal)
+        guard  let _item = item, let statusTask = TaskStatus(rawValue: E(_item.status.code)) else {
             return
         }
-        vAction?.isHidden = (statusTask == .delivered ||
-                             statusTask == .cancel)
+        
+        vAction?.isHidden = !_item.isAllowToActions
     }
 }
 
@@ -418,17 +432,18 @@ extension ReturnedItemDetailVC{
         getTaskDetail(item?.id ?? 0, true)
     }
     
-    func getTaskDetail(_ taskId: Int, _ isFetch:Bool = false) {
+    func getTaskDetail(_ itemID: Int, _ isFetch:Bool = false) {
         if !isFetch {
             self.showLoadingIndicator()
         }
-        SERVICES().API.getTaskDetail(taskId) {[weak self] (result) in
+        SERVICES().API.getReturnedItemDetail(itemID) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.tableView?.endRefreshControl()
             switch result{
             case .object(let obj):
-                let task = obj.data
-                self?.item = task?.toReturnedItems()
+//                let task = obj.data
+//                self?.item = task?.toReturnedItems()
+                self?.item = obj.data
                 
             case .error(let error):
                 self?.showAlertView(error.getMessage())

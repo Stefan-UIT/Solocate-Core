@@ -198,15 +198,17 @@ extension ReturnedItemsListVC{
         if isFetch {
             self.showLoadingIndicator()
         }
-        SERVICES().API.getTaskList(self.timeData!) {[weak self] (result) in
+        SERVICES().API.getReturnedItems(self.timeData!) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.clvContent?.endRefreshControl()
             switch result{
             case .object(let obj):
-                let taskList = obj.data?.data ?? []
-                let array = taskList.map({$0.toReturnedItems()})
+//                let taskList = obj.data?.data ?? []
+//                let array = taskList.map({$0.toReturnedItems()})
+//                self?.items = array
                 
-                self?.items = array
+                self?.items = obj.data?.data ?? []
+                
 //                self?.taskList.sort(by: { (task1, task2) -> Bool in
 //                    return task1.id < task2.id
 //                })

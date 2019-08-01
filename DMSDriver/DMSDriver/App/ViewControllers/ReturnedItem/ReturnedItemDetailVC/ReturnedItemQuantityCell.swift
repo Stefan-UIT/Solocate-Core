@@ -50,7 +50,7 @@ class ReturnedItemQuantityCell: UITableViewCell {
     func configureCellWithDetail(_ item:ReturnedItem) {
         self.item = item
         quantityLabel?.text = "\(item.totalQuantity ?? 0)"
-        actualQuantityTextField?.text = (item.totalQuantity != nil) ? "\(item.totalQuantity!)" : ""
+        actualQuantityTextField?.text = (item.returnedQuantity != nil) ? "\(item.returnedQuantity!)" : ""
         vContent?.cornerRadius = 0
     }
     
