@@ -438,6 +438,9 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             headerCell.delegate = self
             headerCell.btnEdit?.isHidden = true
             headerCell.btnStatus?.isHidden = true
+            
+            let statusesShouldAllowToSignAndUpload = (orderDetail?.statusOrder == StatusOrder.InTransit || orderDetail?.statusOrder == StatusOrder.deliveryStatus || orderDetail?.statusOrder == StatusOrder.PartialDelivered)
+            
             let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section)!
             switch orderSection {
             case .sectionOrderInfo:
@@ -452,22 +455,17 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
 //                var isAdd = false
 //                if (orderDetail?.signature == nil &&
 //                    orderDetail?.route?.driverId == Caches().user?.userInfo?.id){
-                let isAdd = orderDetail?.signature == nil
-                headerCell.btnEdit?.isHidden = !isAdd
+                let hasSigned = orderDetail?.signature != nil
+                let isHidden = hasSigned || !statusesShouldAllowToSignAndUpload
+                headerCell.btnEdit?.isHidden = isHidden
             case .sectionPictures:
-                var isAdd = false
 //                if orderDetail?.route?.driverId == Caches().user?.userInfo?.id &&
 //                        (orderDetail?.statusOrder == StatusOrder.newStatus ||
 //                         orderDetail?.statusOrder == StatusOrder.InTransit ||
 //                         orderDetail?.statusOrder == StatusOrder.PickupStatus){
 //                    isAdd = true
 //                }
-                if (orderDetail?.statusOrder == StatusOrder.newStatus ||
-                        orderDetail?.statusOrder == StatusOrder.InTransit ||
-                        orderDetail?.statusOrder == StatusOrder.PickupStatus){
-                    isAdd = true
-                }
-                headerCell.btnEdit?.isHidden = !isAdd
+                headerCell.btnEdit?.isHidden = !statusesShouldAllowToSignAndUpload
 //            case .sectionAddNote:
 //                headerCell.btnEdit?.isHidden = false
             default:
