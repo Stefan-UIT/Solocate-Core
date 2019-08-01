@@ -233,6 +233,7 @@ class Order: BaseModel {
         var loadedCartonsInPallet:Int?
         var returnedPalletQty:Int?
         var wmsOrderCode:String?
+        var wmsManifestNumber:String?
         var isPallet:Bool {
             get {
                 return package?.cd == PackageE.Pallet.rawValue
@@ -427,6 +428,7 @@ class Order: BaseModel {
     var cash_on_dlvy:String?
     var cod_rcvd:String?
     var wmsOrderCode:String?
+    var wmsManifestNumber:String?
     
     lazy var orderGroup:OrderGroup = {
         return OrderGroup.init(rawValue: group) ?? OrderGroup.Logistic
@@ -501,8 +503,10 @@ class Order: BaseModel {
         cod_rcvd    <- map["cod_rcvd"]
         codComment    <- map["cash_on_dlvy_cmnt"]
         wmsOrderCode    <- map["wms_order_cd"]
+        wmsManifestNumber    <- map["wms_mnfst_no"]
         if let detail = details?.first { // cause Order & Detail is 1 to 1 relationship
             detail.wmsOrderCode = wmsOrderCode
+            detail.wmsManifestNumber = wmsManifestNumber
         }
     }
     

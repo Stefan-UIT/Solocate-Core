@@ -701,6 +701,20 @@ fileprivate extension OrderDetailViewController {
                 cell.cartonsViewContainerTopSpacing?.constant = 0.0
             }
         }
+        
+        func handleShowingWMSCodeUI() {
+            let isHidden = order.orderGroup != OrderGroup.Logistic
+            cell.wmsOrderCodeViewContainer?.isHidden = isHidden
+            cell.wmsMainifestNumberViewContainer?.isHidden = isHidden
+            cell.wmsManifestHeightConstraint?.constant = (isHidden) ? 0.0 : 22.0
+            cell.wmsOrderCodeHeightConstraint?.constant = (isHidden) ? 0.0 : 22.0
+            cell.wmsOrderCodeTopSpacing?.constant = (isHidden) ? 0.0 : 6.0
+            cell.wmsManifestContainerTopSpacing?.constant = (isHidden) ? 0.0 : 8.0
+            cell.wmsOrderCodeLabel?.text = Slash(detail.wmsOrderCode)
+            cell.wmsOrderManifestNumberLabel?.text = Slash(detail.wmsManifestNumber)
+            
+        }
+        handleShowingWMSCodeUI()
         handleShowingPalletSection()
         handleShowingCartonSection()
         handleEnablingTextField()
