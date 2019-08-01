@@ -27,9 +27,9 @@ class AssignTruckViewController: BaseViewController {
     }
     
     func fetchData() {
-        guard let truckTypeID = route.truckType?.id else { return }
+        guard let _route = self.route else { return }
         self.showLoadingIndicator()
-        SERVICES().API.getTruckList(truckTypeID: truckTypeID) { [weak self] (result) in
+        SERVICES().API.getTruckList(byRoute: _route) { [weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result {
             case .object(let obj):

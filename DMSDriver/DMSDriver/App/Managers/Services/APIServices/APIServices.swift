@@ -238,14 +238,13 @@ extension BaseAPIService {
     @discardableResult
     func getDriverList(byRoute route:Route,
                                callback: @escaping APICallback<ResponseDataListModel<Driver>>) -> APIRequest {
-        let routeID = route.id
         let startTime = route.start_time
         let endTime = route.end_time
         var path:String!
         if let companyID = route.company?.id {
-            path = String(format: PATH_REQUEST_URL.GET_DRIVER_LIST.URL, "\(routeID)", startTime,endTime, "\(companyID)")
+            path = String(format: PATH_REQUEST_URL.GET_DRIVER_LIST.URL, startTime,endTime, "\(companyID)")
         } else {
-            path = String(format: PATH_REQUEST_URL.GET_DRIVER_LIST.URL, "\(routeID)", startTime,endTime)
+            path = String(format: PATH_REQUEST_URL.GET_DRIVER_LIST.URL, startTime,endTime)
         }
         
         
@@ -257,11 +256,20 @@ extension BaseAPIService {
     }
     
     @discardableResult
-    func getTruckList(truckTypeID:Int,
+    func getTruckList(byRoute route:Route,
                        callback: @escaping APICallback<ResponseDataListModel<Truck>>) -> APIRequest {
-        let path = String(format: PATH_REQUEST_URL.GET_TRUCK_LIST.URL, "\(truckTypeID)")
+        let startTime = route.start_time
+        let endTime = route.end_time
+        var path:String!
+        if let companyID = route.company?.id {
+            path = String(format: PATH_REQUEST_URL.GET_TRUCK_LIST.URL, startTime,endTime, "\(companyID)")
+        } else {
+            path = String(format: PATH_REQUEST_URL.GET_TRUCK_LIST.URL, startTime,endTime)
+        }
+        
+        let encodedUrl = path.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
         return request(method: .GET,
-                       path: path,
+                       path: encodedUrl!,
                        input: .empty,
                        callback: callback);
     }
