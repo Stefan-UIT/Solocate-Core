@@ -17,6 +17,7 @@ enum OrderDetailSection:Int {
     case sectionOrderInfo
     case sectionFrom
     case sectionTo
+    case sectionCOD
     case sectionNatureOfGoods
     case sectionSignature
     case sectionPictures
@@ -49,6 +50,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     fileprivate var orderInforDetail = [OrderDetailInforRow]()
     fileprivate var orderInforFrom = [OrderDetailInforRow]()
     fileprivate var orderInforTo = [OrderDetailInforRow]()
+    fileprivate var orderCODInfo = [OrderDetailInforRow]()
     fileprivate var orderInforNatureOfGoods = [OrderDetailInforRow]()
     fileprivate let cellIdentifier = "OrderDetailTableViewCell"
     fileprivate let headerCellIdentifier = "OrderDetailHeaderCell"
@@ -118,6 +120,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                           "order-info".localized.uppercased(),
                           "pickup".localized.uppercased(),
                           "Delivery".localized.uppercased(),
+                          "COD".localized.uppercased(),
                           "packgages".localized.uppercased(),
                           "Signature".localized.uppercased(),
                           "Picture".localized.uppercased(),
@@ -249,6 +252,12 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let tomEndtime = OrderDetailInforRow("end-time".localized,endToDate,false)
         let toLocationName = OrderDetailInforRow("location-name".localized, Slash(order.to?.loc_name),false)
         let toServiceTime = OrderDetailInforRow("service-time".localized,Slash(order.to?.serviceTime),false)
+        
+        let codAmount = OrderDetailInforRow("COD Amount".localized,"\(order.codAmount ?? 0)",false)
+        let codRemark = OrderDetailInforRow("COD Remark".localized,Slash(order.codComment),false)
+        
+        orderCODInfo.append(codAmount)
+        orderCODInfo.append(codRemark)
 
         orderInforFrom.append(fromLocationName)
         orderInforFrom.append(fromAddress)
@@ -390,7 +399,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section) else {
+        guard let _orderDetail = self.orderDetail, let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section) else {
             return 0
         }
         switch orderSection {
@@ -402,6 +411,8 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             return orderInforFrom.count
         case .sectionTo:
             return orderInforTo.count
+        case .sectionCOD:
+            return (_orderDetail.isHasCOD) ? orderCODInfo.count : 0
         case .sectionNatureOfGoods:
             return orderDetail?.details?.count ?? 0
         case .sectionSignature:
@@ -424,19 +435,21 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section) else {
+        guard let _orderDetail = self.orderDetail, let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section) else {
             return 0
         }
         switch orderSection {
         case .sectionMap:
             return 0
+        case .sectionCOD:
+            return (_orderDetail.isHasCOD) ? heightHeader : CGFloat.leastNormalMagnitude
         default:
             return heightHeader
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if let headerCell = tableView.dequeueReusableCell(withIdentifier: headerCellIdentifier) as? OrderDetailTableViewCell{
+        if let _orderDetail = self.orderDetail, let headerCell = tableView.dequeueReusableCell(withIdentifier: headerCellIdentifier) as? OrderDetailTableViewCell{
             headerCell.nameLabel?.text = arrTitleHeader[section];
             headerCell.btnEdit?.tag = section
             headerCell.delegate = self
@@ -472,6 +485,11 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 headerCell.btnEdit?.isHidden = !statusesShouldAllowToSignAndUpload
 //            case .sectionAddNote:
 //                headerCell.btnEdit?.isHidden = false
+                
+                case .sectionCOD:
+                    if !_orderDetail.isHasCOD {
+                        return nil
+                    }
             default:
                 break
             }
@@ -487,6 +505,10 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        guard let _orderDetail = self.orderDetail, let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section) else { return 10 }
+        if orderSection == OrderDetailSection.sectionCOD && !_orderDetail.isHasCOD {
+            return CGFloat.leastNormalMagnitude
+        }
         return 10
     }
     
@@ -507,6 +529,8 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             return cellInfoFromSection(tableView,indexPath)
         case .sectionTo:
             return cellInfoToSection(tableView,indexPath)
+        case .sectionCOD:
+            return cellCODInfo(tableView,indexPath)
         case .sectionNatureOfGoods:
             return cellNatureOfGood(tableView,indexPath)
         case .sectionSignature:
@@ -726,6 +750,19 @@ fileprivate extension OrderDetailViewController {
     func cellInfoDetail(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
         let item = orderInforDetail[indexPath.row]
   
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! OrderDetailTableViewCell
+        cell.orderDetailItem = item
+        cell.selectionStyle = .none
+        cell.vContent?.noRoundCornersLRT()
+        if indexPath.row == orderInforDetail.count - 1 {
+            cell.vContent?.roundCornersLRB()
+        }
+        return cell
+    }
+    
+    func cellCODInfo(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
+        let item = orderCODInfo[indexPath.row]
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! OrderDetailTableViewCell
         cell.orderDetailItem = item
         cell.selectionStyle = .none
