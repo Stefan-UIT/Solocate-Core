@@ -234,19 +234,21 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             orderInforDetail.append(mess)
         }
         
-        let fromLocationName = OrderDetailInforRow("location-name".localized, E(order.from?.loc_name),false)
+        let fromLocationName = OrderDetailInforRow("location-name".localized, Slash(order.from?.loc_name),false)
         let fromAddress = OrderDetailInforRow("Address".localized, E(order.from?.address),true)
         let fromContactName = OrderDetailInforRow("contact-name".localized,order.from?.name ?? "-")
         let fromContactPhone = OrderDetailInforRow("contact-phone".localized,order.from?.phone ?? "-",true)
         let fromStartTime = OrderDetailInforRow("start-time".localized,startFromDate,false)
         let fromEndtime = OrderDetailInforRow("end-time".localized,endFromDate,false)
+        let fromServiceTime = OrderDetailInforRow("service-time".localized,Slash(order.from?.serviceTime),false)
 
         let toAddress = OrderDetailInforRow("Address".localized, E(order.to?.address),true)
         let toContactName = OrderDetailInforRow("contact-name".localized,order.to?.name ?? "-")
         let toContactPhone = OrderDetailInforRow("contact-phone".localized,order.to?.phone ?? "-", true)
         let toStartTime = OrderDetailInforRow("start-time".localized,startToDate,false)
         let tomEndtime = OrderDetailInforRow("end-time".localized,endToDate,false)
-        let toLocationName = OrderDetailInforRow("location-name".localized, E(order.to?.loc_name),false)
+        let toLocationName = OrderDetailInforRow("location-name".localized, Slash(order.to?.loc_name),false)
+        let toServiceTime = OrderDetailInforRow("service-time".localized,Slash(order.to?.serviceTime),false)
 
         orderInforFrom.append(fromLocationName)
         orderInforFrom.append(fromAddress)
@@ -254,6 +256,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforFrom.append(fromContactPhone)
         orderInforFrom.append(fromStartTime)
         orderInforFrom.append(fromEndtime)
+        orderInforFrom.append(fromServiceTime)
 
         orderInforTo.append(toLocationName)
         orderInforTo.append(toAddress)
@@ -261,6 +264,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforTo.append(toContactPhone)
         orderInforTo.append(toStartTime)
         orderInforTo.append(tomEndtime)
+        orderInforTo.append(toServiceTime)
 
         tableView?.reloadData()
     }

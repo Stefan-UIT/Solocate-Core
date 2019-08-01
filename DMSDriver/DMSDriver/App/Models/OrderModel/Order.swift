@@ -123,6 +123,12 @@ class Address: BaseModel {
     var phone:String?
     var start_time:String?
     var end_time:String?
+    var srvc_time:Int?
+    var serviceTime:String {
+        guard let minutes = srvc_time else { return "" }
+        let string = (minutes > 1) ? ("\(minutes) " + "mins".localized.lowercased()) : ("\(minutes)" + "min".localized.lowercased())
+        return string
+    }
     var ctt_name:String?
     var ctt_phone:String?
     var seq = 1
@@ -144,6 +150,7 @@ class Address: BaseModel {
         phone <- map["ctt_phone"]
         start_time <- map["start_time"]
         end_time <- map["end_time"]
+        srvc_time <- map["srvc_time"]
         ctt_name <- map["ctt_name"]
         ctt_phone <- map["ctt_phone"]
         seq <- map["seq"]
