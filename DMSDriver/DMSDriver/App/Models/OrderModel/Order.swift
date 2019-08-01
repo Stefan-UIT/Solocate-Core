@@ -123,6 +123,12 @@ class Address: BaseModel {
     var phone:String?
     var start_time:String?
     var end_time:String?
+    var srvc_time:Int?
+    var serviceTime:String {
+        guard let minutes = srvc_time else { return "" }
+        let string = (minutes > 1) ? ("\(minutes) " + "mins".localized.lowercased()) : ("\(minutes)" + "min".localized.lowercased())
+        return string
+    }
     var ctt_name:String?
     var ctt_phone:String?
     var seq = 1
@@ -144,6 +150,7 @@ class Address: BaseModel {
         phone <- map["ctt_phone"]
         start_time <- map["start_time"]
         end_time <- map["end_time"]
+        srvc_time <- map["srvc_time"]
         ctt_name <- map["ctt_name"]
         ctt_phone <- map["ctt_phone"]
         seq <- map["seq"]
@@ -226,6 +233,7 @@ class Order: BaseModel {
         var loadedCartonsInPallet:Int?
         var returnedPalletQty:Int?
         var wmsOrderCode:String?
+        var wmsManifestNumber:String?
         var isPallet:Bool {
             get {
                 return package?.cd == PackageE.Pallet.rawValue
@@ -413,13 +421,14 @@ class Order: BaseModel {
     }()
     
     // NEW
-    var customer:UserModel?
+    var customer:UserModel.UserInfo?
     var typeID:Int = 0
     var group:String = ""
     var codComment:String?
     var cash_on_dlvy:String?
     var cod_rcvd:String?
     var wmsOrderCode:String?
+    var wmsManifestNumber:String?
     
     lazy var orderGroup:OrderGroup = {
         return OrderGroup.init(rawValue: group) ?? OrderGroup.Logistic
@@ -494,8 +503,10 @@ class Order: BaseModel {
         cod_rcvd    <- map["cod_rcvd"]
         codComment    <- map["cash_on_dlvy_cmnt"]
         wmsOrderCode    <- map["wms_order_cd"]
+        wmsManifestNumber    <- map["wms_mnfst_no"]
         if let detail = details?.first { // cause Order & Detail is 1 to 1 relationship
             detail.wmsOrderCode = wmsOrderCode
+            detail.wmsManifestNumber = wmsManifestNumber
         }
     }
     
@@ -639,7 +650,8 @@ class Order: BaseModel {
     }
     
     func isRequireSign() -> Bool  {
-        return false  //sig_req == 1 && signature == nil
+//        return false
+        return sig_req == 1 && signature == nil
     }
     
     func isRequireImage() -> Bool  {

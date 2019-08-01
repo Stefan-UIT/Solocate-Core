@@ -17,6 +17,7 @@ enum OrderDetailSection:Int {
     case sectionOrderInfo
     case sectionFrom
     case sectionTo
+    case sectionCOD
     case sectionNatureOfGoods
     case sectionSignature
     case sectionPictures
@@ -49,6 +50,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     fileprivate var orderInforDetail = [OrderDetailInforRow]()
     fileprivate var orderInforFrom = [OrderDetailInforRow]()
     fileprivate var orderInforTo = [OrderDetailInforRow]()
+    fileprivate var orderCODInfo = [OrderDetailInforRow]()
     fileprivate var orderInforNatureOfGoods = [OrderDetailInforRow]()
     fileprivate let cellIdentifier = "OrderDetailTableViewCell"
     fileprivate let headerCellIdentifier = "OrderDetailHeaderCell"
@@ -118,6 +120,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                           "order-info".localized.uppercased(),
                           "pickup".localized.uppercased(),
                           "Delivery".localized.uppercased(),
+                          "COD".localized.uppercased(),
                           "packgages".localized.uppercased(),
                           "Signature".localized.uppercased(),
                           "Picture".localized.uppercased(),
@@ -207,7 +210,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 //        let status = StatusOrder(rawValue: order.statusCode ?? "") ?? StatusOrder.newStatus
 //        let statusItem = OrderDetailInforRow("Status".localized,status.statusName.localized)
         let customerItem = OrderDetailInforRow("customer-name".localized,
-                                             order.custumer_name)
+                                             Slash(order.customer?.userName))
 //        let urgency = OrderDetailInforRow("Urgency".localized,
 //                                          isHebewLang() ? order.urgent_type_name_hb ?? "" :  order.urgent_type_name_en ?? "")
         let orderId = OrderDetailInforRow("order-id".localized,"#\(order.id)")
@@ -234,19 +237,27 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             orderInforDetail.append(mess)
         }
         
-        let fromLocationName = OrderDetailInforRow("location-name".localized, E(order.from?.loc_name),false)
+        let fromLocationName = OrderDetailInforRow("location-name".localized, Slash(order.from?.loc_name),false)
         let fromAddress = OrderDetailInforRow("Address".localized, E(order.from?.address),true)
         let fromContactName = OrderDetailInforRow("contact-name".localized,order.from?.name ?? "-")
         let fromContactPhone = OrderDetailInforRow("contact-phone".localized,order.from?.phone ?? "-",true)
         let fromStartTime = OrderDetailInforRow("start-time".localized,startFromDate,false)
         let fromEndtime = OrderDetailInforRow("end-time".localized,endFromDate,false)
+        let fromServiceTime = OrderDetailInforRow("service-time".localized,Slash(order.from?.serviceTime),false)
 
         let toAddress = OrderDetailInforRow("Address".localized, E(order.to?.address),true)
         let toContactName = OrderDetailInforRow("contact-name".localized,order.to?.name ?? "-")
         let toContactPhone = OrderDetailInforRow("contact-phone".localized,order.to?.phone ?? "-", true)
         let toStartTime = OrderDetailInforRow("start-time".localized,startToDate,false)
         let tomEndtime = OrderDetailInforRow("end-time".localized,endToDate,false)
-        let toLocationName = OrderDetailInforRow("location-name".localized, E(order.to?.loc_name),false)
+        let toLocationName = OrderDetailInforRow("location-name".localized, Slash(order.to?.loc_name),false)
+        let toServiceTime = OrderDetailInforRow("service-time".localized,Slash(order.to?.serviceTime),false)
+        
+        let codAmount = OrderDetailInforRow("COD Amount".localized,"\(order.codAmount ?? 0)",false)
+        let codRemark = OrderDetailInforRow("COD Remark".localized,Slash(order.codComment),false)
+        
+        orderCODInfo.append(codAmount)
+        orderCODInfo.append(codRemark)
 
         orderInforFrom.append(fromLocationName)
         orderInforFrom.append(fromAddress)
@@ -254,6 +265,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforFrom.append(fromContactPhone)
         orderInforFrom.append(fromStartTime)
         orderInforFrom.append(fromEndtime)
+        orderInforFrom.append(fromServiceTime)
 
         orderInforTo.append(toLocationName)
         orderInforTo.append(toAddress)
@@ -261,6 +273,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforTo.append(toContactPhone)
         orderInforTo.append(toStartTime)
         orderInforTo.append(tomEndtime)
+        orderInforTo.append(toServiceTime)
 
         tableView?.reloadData()
     }
@@ -386,7 +399,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section) else {
+        guard let _orderDetail = self.orderDetail, let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section) else {
             return 0
         }
         switch orderSection {
@@ -398,6 +411,8 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             return orderInforFrom.count
         case .sectionTo:
             return orderInforTo.count
+        case .sectionCOD:
+            return (_orderDetail.isHasCOD) ? orderCODInfo.count : 0
         case .sectionNatureOfGoods:
             return orderDetail?.details?.count ?? 0
         case .sectionSignature:
@@ -420,24 +435,29 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        guard let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section) else {
+        guard let _orderDetail = self.orderDetail, let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section) else {
             return 0
         }
         switch orderSection {
         case .sectionMap:
             return 0
+        case .sectionCOD:
+            return (_orderDetail.isHasCOD) ? heightHeader : CGFloat.leastNormalMagnitude
         default:
             return heightHeader
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if let headerCell = tableView.dequeueReusableCell(withIdentifier: headerCellIdentifier) as? OrderDetailTableViewCell{
+        if let _orderDetail = self.orderDetail, let headerCell = tableView.dequeueReusableCell(withIdentifier: headerCellIdentifier) as? OrderDetailTableViewCell{
             headerCell.nameLabel?.text = arrTitleHeader[section];
             headerCell.btnEdit?.tag = section
             headerCell.delegate = self
             headerCell.btnEdit?.isHidden = true
             headerCell.btnStatus?.isHidden = true
+            
+            let statusesShouldAllowToSignAndUpload = (orderDetail?.statusOrder == StatusOrder.InTransit || orderDetail?.statusOrder == StatusOrder.deliveryStatus || orderDetail?.statusOrder == StatusOrder.PartialDelivered)
+            
             let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section)!
             switch orderSection {
             case .sectionOrderInfo:
@@ -452,24 +472,24 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
 //                var isAdd = false
 //                if (orderDetail?.signature == nil &&
 //                    orderDetail?.route?.driverId == Caches().user?.userInfo?.id){
-                let isAdd = orderDetail?.signature == nil
-                headerCell.btnEdit?.isHidden = !isAdd
+                let hasSigned = orderDetail?.signature != nil
+                let isHidden = hasSigned || !statusesShouldAllowToSignAndUpload
+                headerCell.btnEdit?.isHidden = isHidden
             case .sectionPictures:
-                var isAdd = false
 //                if orderDetail?.route?.driverId == Caches().user?.userInfo?.id &&
 //                        (orderDetail?.statusOrder == StatusOrder.newStatus ||
 //                         orderDetail?.statusOrder == StatusOrder.InTransit ||
 //                         orderDetail?.statusOrder == StatusOrder.PickupStatus){
 //                    isAdd = true
 //                }
-                if (orderDetail?.statusOrder == StatusOrder.newStatus ||
-                        orderDetail?.statusOrder == StatusOrder.InTransit ||
-                        orderDetail?.statusOrder == StatusOrder.PickupStatus){
-                    isAdd = true
-                }
-                headerCell.btnEdit?.isHidden = !isAdd
+                headerCell.btnEdit?.isHidden = !statusesShouldAllowToSignAndUpload
 //            case .sectionAddNote:
 //                headerCell.btnEdit?.isHidden = false
+                
+                case .sectionCOD:
+                    if !_orderDetail.isHasCOD {
+                        return nil
+                    }
             default:
                 break
             }
@@ -485,6 +505,10 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        guard let _orderDetail = self.orderDetail, let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section) else { return 10 }
+        if orderSection == OrderDetailSection.sectionCOD && !_orderDetail.isHasCOD {
+            return CGFloat.leastNormalMagnitude
+        }
         return 10
     }
     
@@ -505,6 +529,8 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             return cellInfoFromSection(tableView,indexPath)
         case .sectionTo:
             return cellInfoToSection(tableView,indexPath)
+        case .sectionCOD:
+            return cellCODInfo(tableView,indexPath)
         case .sectionNatureOfGoods:
             return cellNatureOfGood(tableView,indexPath)
         case .sectionSignature:
@@ -699,6 +725,20 @@ fileprivate extension OrderDetailViewController {
                 cell.cartonsViewContainerTopSpacing?.constant = 0.0
             }
         }
+        
+        func handleShowingWMSCodeUI() {
+            let isHidden = order.orderGroup != OrderGroup.Logistic
+            cell.wmsOrderCodeViewContainer?.isHidden = isHidden
+            cell.wmsMainifestNumberViewContainer?.isHidden = isHidden
+            cell.wmsManifestHeightConstraint?.constant = (isHidden) ? 0.0 : 22.0
+            cell.wmsOrderCodeHeightConstraint?.constant = (isHidden) ? 0.0 : 22.0
+            cell.wmsOrderCodeTopSpacing?.constant = (isHidden) ? 0.0 : 6.0
+            cell.wmsManifestContainerTopSpacing?.constant = (isHidden) ? 0.0 : 8.0
+            cell.wmsOrderCodeLabel?.text = Slash(detail.wmsOrderCode)
+            cell.wmsOrderManifestNumberLabel?.text = Slash(detail.wmsManifestNumber)
+            
+        }
+        handleShowingWMSCodeUI()
         handleShowingPalletSection()
         handleShowingCartonSection()
         handleEnablingTextField()
@@ -710,6 +750,19 @@ fileprivate extension OrderDetailViewController {
     func cellInfoDetail(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
         let item = orderInforDetail[indexPath.row]
   
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! OrderDetailTableViewCell
+        cell.orderDetailItem = item
+        cell.selectionStyle = .none
+        cell.vContent?.noRoundCornersLRT()
+        if indexPath.row == orderInforDetail.count - 1 {
+            cell.vContent?.roundCornersLRB()
+        }
+        return cell
+    }
+    
+    func cellCODInfo(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
+        let item = orderCODInfo[indexPath.row]
+        
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! OrderDetailTableViewCell
         cell.orderDetailItem = item
         cell.selectionStyle = .none

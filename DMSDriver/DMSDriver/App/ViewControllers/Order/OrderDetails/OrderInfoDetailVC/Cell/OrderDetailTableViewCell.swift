@@ -63,6 +63,25 @@ class OrderDetailTableViewCell: UITableViewCell {
     
     @IBOutlet weak var deliveredQtyStaticLabel: UILabel?
     @IBOutlet weak var deliveredCartonsStaticLabel: UILabel?
+    
+    @IBOutlet weak var wmsOrderCodeViewContainer: UIView?
+    
+    @IBOutlet weak var wmsMainifestNumberViewContainer: UIView?
+    
+    @IBOutlet weak var wmsOrderCodeHeightConstraint: NSLayoutConstraint?
+    
+    @IBOutlet weak var wmsManifestHeightConstraint: NSLayoutConstraint?
+    
+    @IBOutlet weak var wmsOrderCodeLabel: UILabel?
+    
+    @IBOutlet weak var wmsOrderManifestNumberLabel: UILabel?
+    
+    @IBOutlet weak var wmsOrderCodeTopSpacing: NSLayoutConstraint?
+    
+    @IBOutlet weak var wmsManifestContainerTopSpacing: NSLayoutConstraint?
+    
+    
+    
     weak var delegate:OrderDetailTableViewCellDelegate?
     var orderDetailItem: OrderDetailInforRow! {
         didSet {
