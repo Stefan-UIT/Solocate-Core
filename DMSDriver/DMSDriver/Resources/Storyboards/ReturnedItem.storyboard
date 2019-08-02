@@ -359,7 +359,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="grouped" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" translatesAutoresizingMaskIntoConstraints="NO" id="zta-A2-Nf3">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="20" width="375" height="639"/>
                                 <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <view key="tableFooterView" contentMode="scaleToFill" id="rX6-XF-Nen">
                                     <rect key="frame" x="0.0" y="426.5" width="375" height="45"/>
@@ -705,10 +705,10 @@
                                 </connections>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                         <constraints>
                             <constraint firstItem="zta-A2-Nf3" firstAttribute="leading" secondItem="ea8-aO-n73" secondAttribute="leading" id="SyZ-QQ-exa"/>
-                            <constraint firstItem="ea8-aO-n73" firstAttribute="bottom" secondItem="zta-A2-Nf3" secondAttribute="bottom" id="bUT-ha-ord"/>
+                            <constraint firstItem="ea8-aO-n73" firstAttribute="bottom" secondItem="zta-A2-Nf3" secondAttribute="bottom" constant="8" id="bUT-ha-ord"/>
                             <constraint firstItem="zta-A2-Nf3" firstAttribute="top" secondItem="ea8-aO-n73" secondAttribute="top" id="dt7-Hy-bUm"/>
                             <constraint firstItem="zta-A2-Nf3" firstAttribute="trailing" secondItem="ea8-aO-n73" secondAttribute="trailing" id="hkA-Z9-BwI"/>
                         </constraints>

@@ -69,13 +69,13 @@ class ReturnedItemDetailVC: BaseViewController {
         updateUI()
         initVar()
         setupDataDetailInforRows()
+        if let _item = item {
+            self.getTaskDetail(_item.id)
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if let _item = item {
-            self.getTaskDetail(_item.id)
-        }
     }
     
     override func reachabilityChangedNetwork(_ isAvailaibleNetwork: Bool) {
@@ -158,25 +158,63 @@ class ReturnedItemDetailVC: BaseViewController {
         
     }
     
+    func presentSignatureViewController()  {
+        let viewController = SignatureViewController()
+        viewController.isFromOrderDetail = false
+        viewController.delegate = self
+        self.navigationController?.present(viewController, animated: true, completion: nil)
+    }
+    
+    func showNotePopUp(completionHandler:@escaping (_ isSkip:Bool, _ note:String) -> Void) {
+        let alert = UIAlertController(title: "Note".localized, message: "Please enter note for this returned item", preferredStyle: .alert)
+        
+        //2. Add the text field. You can configure it however you need.
+        alert.addTextField { (textField) in
+            textField.keyboardType = .numberPad
+            textField.text = ""
+        }
+        
+        // 3. Grab the value from the text field, and print it when the user clicks OK.
+        alert.addAction(UIAlertAction(title: "submit".localized, style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+            let value = textField?.text ?? ""
+            if let _item = self.item {
+                _item.note = value
+            }
+            
+            completionHandler(false,value)
+            
+            // call
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "skip".localized, style: .cancel, handler: {
+            action in
+            completionHandler(true,"")
+        }))
+        
+        // 4. Present the alert.
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     // MARK: ACTION
     
     
     @IBAction func onFinishButtonTouchUp(_ sender: UIButton) {
-        guard let _item = self.item else { return }
-        self.showLoadingIndicator()
-        SERVICES().API.finishReturnedItem(_item.id) { [weak self] (result) in
-            self?.dismissLoadingIndicator()
-            self?.tableView?.endRefreshControl()
-            switch result{
-            case .object(let obj):
-                let message = obj.message ?? ""
-                self?.showAlertView(message)
-                self?.getTaskDetail(_item.id)
-                
-            case .error(let error):
-                self?.showAlertView(error.getMessage())
+        if isRampManagerMode {
+            self.presentSignatureViewController()
+        } else {
+            showNotePopUp { (isSkip, note) in
+                if isSkip || note.isEmpty {
+                    self.finishReturnedItem()
+                    return
+                }
+                self.updateItemInfo(signedFile: nil, signName: nil, note: note )
             }
         }
+        
+        return
+        
     }
     
     @IBAction func onCancelButtonTouchUp(_ sender: UIButton) {
@@ -193,6 +231,24 @@ class ReturnedItemDetailVC: BaseViewController {
     @IBAction func didClickUnableToStart(_ sender: UIButton) {
 //        handleUnableToStartAction()
         handleCancelAction()
+    }
+    
+    func finishReturnedItem() {
+        guard let _item = self.item else { return }
+        SERVICES().API.finishReturnedItem(_item.id) { [weak self] (result) in
+            self?.dismissLoadingIndicator()
+            self?.tableView?.endRefreshControl()
+            switch result{
+            case .object(let obj):
+                let message = obj.message ?? ""
+                self?.showAlertView(message)
+                self?.getTaskDetail(_item.id)
+                
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
+        }
+
     }
     
     func handleUnableToStartAction() {
@@ -459,6 +515,37 @@ extension ReturnedItemDetailVC{
             switch result{
             case .object(_ ):
                 self?.fetchData()
+                
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
+        }
+    }
+}
+
+// MARK: - SignatureViewControllerDelegate
+extension ReturnedItemDetailVC:SignatureViewControllerDelegate{
+    func signatureViewController(view: SignatureViewController, didCompletedSignature signature: AttachFileModel?, signName:String?) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.5, execute: {
+            self.showNotePopUp(completionHandler: { (isSkip, value) in
+                let note = (isSkip) ? nil : value
+                self.updateItemInfo(signedFile: signature, signName: signName, note: note)
+            })
+        })
+        
+    }
+    
+    func updateItemInfo(signedFile:AttachFileModel?, signName:String?, note:String?) {
+        guard let _item = self.item else { return }
+        self.showLoadingIndicator()
+        SERVICES().API.updateReturnedItem(_item.id, returnedQty: _item.returnedQuantity, signedFile: signedFile, signName: signName, note: note) { [weak self] (result) in
+            self?.dismissLoadingIndicator()
+            self?.tableView?.endRefreshControl()
+            switch result{
+            case .object(let obj):
+//                let message = obj.message
+//                self?.showAlertView(message ?? "")
+                self?.finishReturnedItem()
                 
             case .error(let error):
                 self?.showAlertView(error.getMessage())
