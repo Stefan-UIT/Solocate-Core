@@ -168,10 +168,18 @@ class ReturnedItem: TaskModel {
     var note:String?
     var currentAssignee:UserModel.UserInfo!
     var myOwn:UserModel.UserInfo!
-    var isAllowToActions:Bool {
+    var isAllowedToActions:Bool {
         get {
-            return currentAssignee.id == myOwn.id
+            return currentAssignee.id == myOwn.id && !isFinished
         }
+    }
+    
+    var isAllowedToUpdateReturnedItemTextField:Bool {
+        return isAllowedToActions && isRampManagerMode
+    }
+    
+    var isFinished:Bool {
+        return status.code == TaskStatus.delivered.rawValue
     }
     
     override func mapping(map: Map) {

@@ -28,7 +28,7 @@ class ReturnedItemQuantityCell: UITableViewCell {
     @IBOutlet weak var cartonsViewContainerHeightConstraint: NSLayoutConstraint?
     
     
-    @IBOutlet weak var palletsViewContainerHeightConstraint: NSLayoutConstraint?
+    @IBOutlet weak var quantityViewContainerHeightConstraint: NSLayoutConstraint?
     
     @IBOutlet weak var cartonsViewContainerTopSpacing: NSLayoutConstraint?
     
@@ -51,7 +51,15 @@ class ReturnedItemQuantityCell: UITableViewCell {
         self.item = item
         quantityLabel?.text = "\(item.totalQuantity ?? 0)"
         actualQuantityTextField?.text = (item.returnedQuantity != nil) ? "\(item.returnedQuantity!)" : ""
+        
         vContent?.cornerRadius = 0
+        handleShowingActualQuantityTextField(isHidden: !item.isAllowedToUpdateReturnedItemTextField)
+    }
+    
+    func handleShowingActualQuantityTextField(isHidden:Bool) {
+        quantityViewContainerHeightConstraint?.constant = (isHidden) ? 22.0 : 45.0
+        actualQuantityTextField?.isHidden = isHidden
+        deliveredQtyStaticLabel?.isHidden = isHidden
     }
     
 }

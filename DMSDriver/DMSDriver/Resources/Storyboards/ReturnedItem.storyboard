@@ -612,7 +612,7 @@
                                                     <rect key="frame" x="15" y="0.0" width="345" height="65"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vfd-NN-Tag">
-                                                            <rect key="frame" x="15" y="8" width="310" height="22"/>
+                                                            <rect key="frame" x="15" y="8" width="310" height="45"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Total Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5KP-Ka-DRE">
                                                                     <rect key="frame" x="0.0" y="0.0" width="86" height="16"/>
@@ -629,13 +629,13 @@
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Returned Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7AI-52-Gif">
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Returned Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7AI-52-Gif">
                                                                     <rect key="frame" x="0.0" y="28" width="114" height="16"/>
                                                                     <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                     <color key="textColor" red="0.28235294119999998" green="0.36470588240000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
-                                                                <textField hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xV6-vb-wZh">
+                                                                <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xV6-vb-wZh">
                                                                     <rect key="frame" x="217" y="23" width="100" height="26"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" constant="26" id="Joy-iq-MH0"/>
@@ -656,7 +656,7 @@
                                                                 <constraint firstItem="7AI-52-Gif" firstAttribute="top" secondItem="5KP-Ka-DRE" secondAttribute="bottom" constant="12" id="aH8-xr-TZJ"/>
                                                                 <constraint firstItem="7AI-52-Gif" firstAttribute="leading" secondItem="5KP-Ka-DRE" secondAttribute="leading" id="bxt-BP-QI5"/>
                                                                 <constraint firstItem="5KP-Ka-DRE" firstAttribute="top" secondItem="vfd-NN-Tag" secondAttribute="top" id="kgo-KQ-ZAY"/>
-                                                                <constraint firstAttribute="height" constant="22" id="qdx-a1-cIj"/>
+                                                                <constraint firstAttribute="height" constant="45" id="qdx-a1-cIj"/>
                                                                 <constraint firstItem="xHF-xs-C8i" firstAttribute="leading" secondItem="5KP-Ka-DRE" secondAttribute="trailing" constant="10" id="qxZ-Sw-Ivg"/>
                                                             </constraints>
                                                         </view>
@@ -693,8 +693,8 @@
                                         <connections>
                                             <outlet property="actualQuantityTextField" destination="xV6-vb-wZh" id="ayL-xh-4Nb"/>
                                             <outlet property="deliveredQtyStaticLabel" destination="7AI-52-Gif" id="lil-Wl-vme"/>
-                                            <outlet property="palletsViewContainerHeightConstraint" destination="qdx-a1-cIj" id="DOt-6e-13E"/>
                                             <outlet property="quantityLabel" destination="xHF-xs-C8i" id="0UP-38-QHZ"/>
+                                            <outlet property="quantityViewContainerHeightConstraint" destination="qdx-a1-cIj" id="mFq-2E-x8P"/>
                                             <outlet property="vContent" destination="pK3-t2-Jdf" id="MtJ-TF-hlm"/>
                                         </connections>
                                     </tableViewCell>

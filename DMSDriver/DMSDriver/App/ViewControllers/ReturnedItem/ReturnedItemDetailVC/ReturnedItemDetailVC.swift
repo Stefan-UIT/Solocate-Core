@@ -420,7 +420,7 @@ fileprivate extension ReturnedItemDetailVC{
             return
         }
         
-        vAction?.isHidden = !_item.isAllowToActions
+        vAction?.isHidden = !_item.isAllowedToActions
     }
 }
 
