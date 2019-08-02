@@ -94,7 +94,7 @@ extension ReasonSkipView {
             self?.dismissLoadingIndicator()
             switch result{
             case .object(let obj):
-                guard let list = obj.data?.data else {return}
+                guard let list = obj.data else {return}
                 self?.listReason = list
                 self?.tableView.reloadData()
                 
