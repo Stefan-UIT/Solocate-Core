@@ -696,7 +696,7 @@ fileprivate extension OrderDetailViewController {
             cell.vContent?.roundCornersLRB()
         }
         
-        let isShowingOnly = (order.statusOrder == StatusOrder.newStatus || order.statusOrder == StatusOrder.Loaded || order.statusOrder == StatusOrder.PartialLoaded || order.statusOrder == StatusOrder.WarehouseClarification)
+        let isShowingOnly = (order.statusOrder == StatusOrder.newStatus || order.statusOrder == StatusOrder.Loaded || order.statusOrder == StatusOrder.PartialLoaded || order.statusOrder == StatusOrder.WarehouseClarification || order.statusOrder == StatusOrder.CancelStatus)
         
         func handleEnablingTextField() {
             let isEnabled = order.statusOrder == StatusOrder.InTransit
@@ -1038,8 +1038,9 @@ fileprivate extension OrderDetailViewController{
         }
         let isFinishedAndNotPalletType = ((orderDetail?.statusOrder == StatusOrder.deliveryStatus || orderDetail?.statusOrder == StatusOrder.PartialDelivered) && !(orderDetail?.details?[0].isPallet)!)
         let isUpdatedReturnedPalletsQty = orderDetail?.details?.first?.returnedPalletQty != nil
+        let isRampManagerAndNotNewOrder = (isRampManagerMode && orderDetail?.statusOrder != StatusOrder.newStatus)
         let isHidden = ( orderDetail?.statusOrder == StatusOrder.CancelStatus ||
-            orderDetail?.statusOrder == StatusOrder.UnableToFinish || isFinishedAndNotPalletType || isUpdatedReturnedPalletsQty || isRampManagerMode)
+            orderDetail?.statusOrder == StatusOrder.UnableToFinish || isFinishedAndNotPalletType || isUpdatedReturnedPalletsQty || isRampManagerAndNotNewOrder )
         
         updateStatusButton?.isHidden = isHidden
         vAction?.isHidden = isHidden

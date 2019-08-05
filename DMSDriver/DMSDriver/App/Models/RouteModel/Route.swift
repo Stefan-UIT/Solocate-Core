@@ -15,7 +15,6 @@ class TruckType: BasicModel { }
 class Tanker: BasicModel { }
 class Status: BasicModel { }
 class Urgency: BasicModel { }
-class Warehouse: BasicModel { }
 class Company: BasicModel { }
 
 //MARK: - Status
@@ -39,6 +38,26 @@ class BasicModel: BaseModel {
         if code == nil {
             code <- map["cd"]
         }
+    }
+}
+
+class Warehouse: BasicModel {
+    
+    var contactName:String?
+    var address:String?
+    var phone:String?
+    var email:String?
+    var longitude:String?
+    var latitude:String?
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        contactName <- map["ctt_name"]
+        address <- map["address"]
+        phone <- map["phone"]
+        email <- map["email"]
+        longitude <- map["longitude"]
+        latitude <- map["latitude"]
     }
 }
 

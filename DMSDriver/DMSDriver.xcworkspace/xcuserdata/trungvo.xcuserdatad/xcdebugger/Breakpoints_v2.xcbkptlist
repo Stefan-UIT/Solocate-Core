@@ -9,22 +9,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DMSDriver/App/ViewControllers/Order/Signature/SignatureViewController/SignatureViewController.swift"
-            timestampString = "583843745.904703"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "167"
-            endingLineNumber = "167"
-            landmarkName = "textFieldDidEndEditing(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/NoteManagement/Cell/NoteTableViewCell.swift"
             timestampString = "583923933.636434"
             startingColumnNumber = "9223372036854775807"
@@ -58,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/Order/ResonListVC/ReasonListViewController.swift"
-            timestampString = "582718132.0318381"
+            timestampString = "586432975.0459991"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "88"
@@ -170,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/Managers/Services/APIServices/APIServices.swift"
-            timestampString = "586325612.161497"
+            timestampString = "586432975.048975"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "180"
@@ -202,44 +186,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/Managers/Services/APIServices/APIServices.swift"
-            timestampString = "586325612.161597"
+            timestampString = "586432975.049183"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "264"
-            endingLineNumber = "264"
-            landmarkName = "getTruckList(byRoute:callback:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
-            timestampString = "586341432.717024"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "510"
-            endingLineNumber = "510"
-            landmarkName = "tableView(_:heightForFooterInSection:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
-            timestampString = "586341432.717479"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "490"
-            endingLineNumber = "490"
-            landmarkName = "tableView(_:viewForHeaderInSection:)"
+            startingLineNumber = "376"
+            endingLineNumber = "376"
+            landmarkName = "getDriverList(byRoute:callback:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

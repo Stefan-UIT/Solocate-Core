@@ -62,7 +62,7 @@ extension BaseAPIService{
     }
     
     @discardableResult
-    func getReasonList(callback: @escaping APICallback<ResponseDataModel<ResponseArrData<Reason>>>) -> APIRequest {
+    func getReasonList(callback: @escaping APICallback<ResponseArrData<Reason>>) -> APIRequest {
         return request(method: .GET,
                        path:  PATH_REQUEST_URL.GET_REASON_LIST.URL,
                        input: .empty,

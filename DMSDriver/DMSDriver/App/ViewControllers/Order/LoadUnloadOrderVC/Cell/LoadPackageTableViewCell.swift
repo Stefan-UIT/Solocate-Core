@@ -60,6 +60,8 @@ class LoadPackageTableViewCell: UITableViewCell {
         cartonInPalletViewContainer?.isHidden = !isShowedCartonSection
         
         if isShowedCartonSection {
+            cartonsViewContainerHeightConstraint?.constant = 50.0
+            cartonsViewContainerTopSpacing?.constant = 6.0
             cartonInPalletsLabel?.text = "\(detail.cartonsInPallet ?? 0)"
             actualCartonsInPalletTextField?.text = (detail.loadedCartonsInPallet != nil) ? "\(detail.loadedCartonsInPallet!)" : ""            
         } else {

@@ -211,6 +211,132 @@ extension BaseAPIService {
                        callback: callback);
     }
     
+    
+    //MARK : - Returned Items
+    @discardableResult
+    func getReturnedItems(_ timeData:TimeDataItem,
+                     callback: @escaping APICallback<ResponseDataModel<ResponseDataListModel<ReturnedItem>>>) -> APIRequest {
+        let startDate = DateFormatter.filterDate.string(from: timeData.startDate ?? Date())
+        let endDate = DateFormatter.filterDate.string(from: timeData.endDate ?? Date())
+        let path = String(format:PATH_REQUEST_URL.GET_RETURNED_ITEMS.URL, startDate, endDate)
+        return request(method: .GET,
+                       path: path,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+
+    func updateReturnedItem(_ itemID:Int,
+                            returnedQty:Int?,
+                            signedFile:AttachFileModel?,
+                            signName:String?,
+                            note:String?,
+                               callback: @escaping APICallback<ResponseDataModel<ReturnedItem>>){
+        let path = String(format:PATH_REQUEST_URL.UPDATE_RETURNED_ITEM_INFO.URL, "\(itemID)")
+        
+        var params = ResponseDictionary()
+        if let value = returnedQty {
+            params["dlvd_qty"] = value
+        }
+        if let value = signName {
+            params["sig_name"] = value
+        }
+        if let value = note {
+            params["note"] = value
+        }
+        if let file = signedFile {
+            let url = E(SDBuildConf.serverUrlString()).appending(path)
+            requestWithFormDataType(url: url,
+                                    method: .post,
+                                    files: [file],
+                                    parameters: params,
+                                    callback: callback)
+            return
+        }
+        
+        let _ = request(method: .POST,
+                       path: path,
+                       input: .json(params),
+                       callback: callback);
+    }
+    
+    func submitSignatures(_ file:AttachFileModel,_ order:Order, _ name:String, callback: @escaping APICallback<Order>) {
+        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL, "\(order.id)","\(order.status?.id ?? 0)")
+        let url = E(SDBuildConf.serverUrlString()).appending(path)
+        
+        //let headers = ["Content-Type":"multipart/form-data; boundary=\(E(file.boundary))"];
+        let params = [
+            "route_id": "\(order.route_id)",
+            "sig_name":name
+        ]
+        requestWithFormDataType(url: url,
+                                method: .post,
+                                files: [file],
+                                parameters: params,
+                                callback: callback)
+        
+        /*
+         if ReachabilityManager.isNetworkAvailable {
+         return request(method: .POST,
+         headers:headers,
+         path: uri,
+         input: .dto(file),
+         callback: callback);
+         }else{
+         
+         let stringHeader = jsonToString(json: headers as AnyObject)
+         let data = file.getJsonObject(method: .POST)
+         let request =  RequestModel.init(ParamsMethod.POST.rawValue,
+         E(RESTConstants.getBASEURL()),
+         uri,
+         data as? Data,
+         stringHeader)
+         CoreDataManager.saveRequest(request)
+         return nil
+         }
+         */
+    }
+    
+    @discardableResult
+    func getReturnedItemDetail(_ itemID:Int,
+                       callback: @escaping APICallback<ResponseDataModel<ReturnedItem>>) -> APIRequest {
+        let path = String(format:PATH_REQUEST_URL.GET_RETURNED_ITEM_DETAIL.URL, "\(itemID)")
+        return request(method: .GET,
+                       path: path,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func rejectReturnedItem(_ itemID:Int,
+                          callback: @escaping APICallback<ResponseDataModel<EmptyModel>>) -> APIRequest {
+        let path = String(format:PATH_REQUEST_URL.REJECT_RETURNED_ITEM.URL, "\(itemID)")
+        return request(method: .POST,
+                       path: path,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func cancelReturnedItem(_ itemID:Int,
+                            callback: @escaping APICallback<ResponseDataModel<EmptyModel>>) -> APIRequest {
+        let path = String(format:PATH_REQUEST_URL.CANCEL_RETURNED_ITEM.URL, "\(itemID)")
+        return request(method: .POST,
+                       path: path,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func finishReturnedItem(_ itemID:Int,
+                            callback: @escaping APICallback<ResponseDataModel<EmptyModel>>) -> APIRequest {
+        let path = String(format:PATH_REQUEST_URL.FINISH_RETURNED_ITEM.URL, "\(itemID)")
+        return request(method: .POST,
+                       path: path,
+                       input: .empty,
+                       callback: callback);
+    }
+    
     @discardableResult
     func getLanguagesList(
         callback: @escaping APICallback<ResponseDataListModel<LanguageModel>>) -> APIRequest {
@@ -261,8 +387,8 @@ extension BaseAPIService {
         let startTime = route.start_time
         let endTime = route.end_time
         var path:String!
-        if let companyID = route.company?.id {
-            path = String(format: PATH_REQUEST_URL.GET_TRUCK_LIST.URL, startTime,endTime, "\(companyID)")
+        if let companyID = route.company?.id, let truckTypeID = route.truckType?.id {
+            path = String(format: PATH_REQUEST_URL.GET_TRUCK_LIST.URL, startTime,endTime, "\(companyID)", "\(truckTypeID)")
         } else {
             path = String(format: PATH_REQUEST_URL.GET_TRUCK_LIST.URL, startTime,endTime)
         }

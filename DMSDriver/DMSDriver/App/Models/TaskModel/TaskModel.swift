@@ -152,4 +152,45 @@ class TaskModel: BaseModel {
 //        reason_msg <- map["reason_msg"]
         
     }
+    
+    func toReturnedItems() -> ReturnedItem {
+        let json = self.toJSON()
+        return ReturnedItem(JSON: json)!
+    }
+}
+
+class ReturnedItem: TaskModel {
+    var totalQuantity:Int?
+    var returnedQuantity:Int?
+    var warehouse:Warehouse?
+    var assignees:[UserModel.UserInfo] = []
+    var routeID:Int?
+    var note:String?
+    var currentAssignee:UserModel.UserInfo!
+    var myOwn:UserModel.UserInfo!
+    var isAllowedToActions:Bool {
+        get {
+            return currentAssignee.id == myOwn.id && !isFinished
+        }
+    }
+    
+    var isAllowedToUpdateReturnedItemTextField:Bool {
+        return isAllowedToActions && isRampManagerMode
+    }
+    
+    var isFinished:Bool {
+        return status.code == TaskStatus.delivered.rawValue
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        totalQuantity <- map["qty"]
+        returnedQuantity <- map["dlvd_qty"]
+        warehouse <- map["warehouse"]
+        assignees <- map["assignees"]
+        note <- map["note"]
+        routeID <- map["route_id"]
+        currentAssignee <- map["current_assignee"]
+        myOwn <- map["my_own"]
+    }
 }

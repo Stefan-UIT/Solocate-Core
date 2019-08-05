@@ -242,39 +242,39 @@ extension HistoryNotifyVC{
     }
     
     func fetchData(showLoading:Bool = true) {
-        if showLoading {
-            self.showLoadingIndicator()
-        }
-
-        SERVICES().API.getListAlerts(alertFilter:filterModel!) {[weak self] (result) in
-            self?.dismissLoadingIndicator()
-            self?.tbvContent?.endRefreshControl()
-            switch result {
-            case .object(let obj):
-                self?.data = obj.data
-                if self?.filterModel?.page == 1 {
-                    self?.arrContent = obj.data?.data ?? []
-                }else {
-                    self?.arrContent.append(obj.data?.data ?? [])
-                }
-                self?.arrContent.sort(by: { (item1, item2) -> Bool in
-                    return item2.status > item1.status
-                })
-                
-                self?.tbvContent?.reloadData()
-                self?.filterModel?.page = (self?.filterModel?.page ?? 0) + 1
-                
-                guard let tbv  = self?.tbvContent else {return}
-                if (self?.arrContent.count > 0){
-                    UIView.removeViewNoItemAtParentView(tbv)
-                }else {
-                    UIView.addViewNoItemWithTitle("no-data".localized,
-                                                  intoParentView: tbv)
-                }
-            case .error(let error):
-                self?.showAlertView(error.getMessage())
-            }
-        }
+//        if showLoading {
+//            self.showLoadingIndicator()
+//        }
+//
+//        SERVICES().API.getListAlerts(alertFilter:filterModel!) {[weak self] (result) in
+//            self?.dismissLoadingIndicator()
+//            self?.tbvContent?.endRefreshControl()
+//            switch result {
+//            case .object(let obj):
+//                self?.data = obj.data
+//                if self?.filterModel?.page == 1 {
+//                    self?.arrContent = obj.data?.data ?? []
+//                }else {
+//                    self?.arrContent.append(obj.data?.data ?? [])
+//                }
+//                self?.arrContent.sort(by: { (item1, item2) -> Bool in
+//                    return item2.status > item1.status
+//                })
+//                
+//                self?.tbvContent?.reloadData()
+//                self?.filterModel?.page = (self?.filterModel?.page ?? 0) + 1
+//                
+//                guard let tbv  = self?.tbvContent else {return}
+//                if (self?.arrContent.count > 0){
+//                    UIView.removeViewNoItemAtParentView(tbv)
+//                }else {
+//                    UIView.addViewNoItemWithTitle("no-data".localized,
+//                                                  intoParentView: tbv)
+//                }
+//            case .error(let error):
+//                self?.showAlertView(error.getMessage())
+//            }
+//        }
     }
     
     func resolveAlert(alert:AlertModel)  {

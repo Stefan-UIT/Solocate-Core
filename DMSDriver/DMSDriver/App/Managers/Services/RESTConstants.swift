@@ -50,10 +50,13 @@ enum PATH_REQUEST_URL: String{
     case ASSIGN_ORDER = "backend-api/v1/orders/assign-order"
 //    case GET_LIST_TASKS = "backend-api/v1/mobile/tasks/driver-task?from_delivery_date=%@&to_delivery_date=%@"
     case GET_LIST_TASKS = "transaction/v1/mobile/tasks?from_delivery_date=%@&to_delivery_date=%@"
+    case GET_RETURNED_ITEMS = "transaction/v1/mobile/item-returns?from_delivery_date=%@&to_delivery_date=%@"
 //    case GET_TASK_DETAIL = "backend-api/v1/mobile/tasks/%@"
     case GET_TASK_DETAIL = "transaction/v1/mobile/tasks/%@"
+    case GET_RETURNED_ITEM_DETAIL = "transaction/v1/item-returns/%@"
 //    case UPDATE_STATUS_TASK = "backend-api/v1/tasks/%@/%@"
     case UPDATE_STATUS_TASK = "transaction/v1/mobile/tasks/%@/%@"
+    case UPDATE_RETURNED_ITEM_INFO = "transaction/v1/mobile/item-returns/%@"
     case GET_DRIVING_RULE = "masterdata/v1/variables/get?key=driving_rule"
     case START_ROUTE = "transaction/v1/routes/process/%@/IP"
     case GET_LIST_STATUS = "masterdata/v1/order-statuses/list-active"
@@ -64,8 +67,11 @@ enum PATH_REQUEST_URL: String{
     case UPDATE_ORDER_NOTE = "transaction/v1/orders/notes"
     case GET_LIST_LANGUAGE  = "language/v1/namespaces/list-support?name=%@&system=%@"
     case GET_DRIVER_LIST  = "masterdata/v1/drivers/list-suggest?start_time=%@&end_time=%@&company_id=%@"
-    case GET_TRUCK_LIST  = "masterdata/v1/trucks/suggest?start_time=%@&end_time=%@&company_id=%@"
+    case GET_TRUCK_LIST  = "masterdata/v1/trucks/suggest?start_time=%@&end_time=%@&company_id=%@&truck_type_id=%@"
     case ASSIGN_TRUCK_DRIVER  = "transaction/v1/mobile/routes/assign/%@"
+    case REJECT_RETURNED_ITEM = "transaction/v1/mobile/item-returns/process/%@/reject"
+    case CANCEL_RETURNED_ITEM = "transaction/v1/mobile/item-returns/process/%@/cancel"
+    case FINISH_RETURNED_ITEM = "transaction/v1/mobile/item-returns/process/%@/finish"
     
     var URL:String  {
         return rawValue
