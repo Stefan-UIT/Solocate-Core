@@ -244,6 +244,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let fromStartTime = OrderDetailInforRow("start-time".localized,startFromDate,false)
         let fromEndtime = OrderDetailInforRow("end-time".localized,endFromDate,false)
         let fromServiceTime = OrderDetailInforRow("service-time".localized,Slash(order.from?.serviceTime),false)
+//        let fromFloor = Slash(order.from?.floor)
+//        let fromFloor = Slash(order.from?.floor)
 
         let toAddress = OrderDetailInforRow("Address".localized, E(order.to?.address),true)
         let toContactName = OrderDetailInforRow("contact-name".localized,order.to?.name ?? "-")

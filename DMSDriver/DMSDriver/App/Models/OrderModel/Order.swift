@@ -133,6 +133,9 @@ class Address: BaseModel {
     var ctt_phone:String?
     var seq = 1
     var loc_name:String?
+    var floor:String?
+    var apartment:String?
+    var number:String?
     
     override init() {
         super.init()
@@ -155,6 +158,9 @@ class Address: BaseModel {
         ctt_phone <- map["ctt_phone"]
         seq <- map["seq"]
         loc_name <- map["loc_name"]
+        floor <- map["floor"]
+        apartment <- map["apt"]
+        number <- map["number"]
     }
 }
 
