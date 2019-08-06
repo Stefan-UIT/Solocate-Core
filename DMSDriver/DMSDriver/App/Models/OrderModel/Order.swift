@@ -67,9 +67,10 @@ enum StatusOrder: String {
             return "picked-up".localized
         case .deliveryStatus:
             return "Delivered".localized
-        case .CancelStatus,
-             .UnableToFinish:
+        case .CancelStatus:
             return "Cancelled".localized
+        case .UnableToFinish:
+            return "unable-to-finish".localized
         case .Loaded:
             return "loaded".localized
         case .PartialLoaded:

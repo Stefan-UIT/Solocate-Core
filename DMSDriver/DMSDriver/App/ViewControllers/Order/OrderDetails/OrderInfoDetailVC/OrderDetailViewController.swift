@@ -103,8 +103,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 //        tableView?.reloadSections(OrderDetailSection.sectionNatureOfGoods.indexSet, with: .automatic)
 //    }
     
-    fileprivate func cancelOrder(reason:Reason) {
-        updateOrderStatus(StatusOrder.CancelStatus.rawValue, cancelReason: reason)
+    fileprivate func cancelOrder(reason:Reason,isUnableToFinish:Bool) {
+        let statusNeedToUpdate = (isUnableToFinish) ? StatusOrder.UnableToFinish.rawValue : StatusOrder.CancelStatus.rawValue
+        updateOrderStatus(statusNeedToUpdate, cancelReason: reason)
     }
     
     //MARK: - Initialize
@@ -294,10 +295,10 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         tableView?.reloadData()
     }
     
-    func showReasonView() {
+    func showReasonView(isUnableToFinish:Bool) {
         ReasonSkipView.show(inView: self.view) {[weak self] (success, reason) in
             guard let _reason = reason else {return}
-            self?.cancelOrder(reason: _reason)
+            self?.cancelOrder(reason: _reason, isUnableToFinish: isUnableToFinish)
         }
     }
     
@@ -420,7 +421,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     private func handleUpdateStatusWithDeliveryType() {
         switch orderDetail?.statusOrder.rawValue {
         case StatusOrder.newStatus.rawValue:
-            showReasonView()
+            showReasonView(isUnableToFinish: false)
             break
         case StatusOrder.deliveryStatus.rawValue, StatusOrder.PartialDelivered.rawValue:
             showPalletReturnedPopUp()
@@ -496,7 +497,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
     
     @IBAction func onUnableToStartTouchUp(_ sender: UIButton) {
-        showReasonView()
+        showReasonView(isUnableToFinish: true)
     }
 }
 

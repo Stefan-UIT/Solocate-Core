@@ -53,7 +53,7 @@ class LoadUnloadOrderVC: BaseViewController {
     
     override func updateNavigationBar() {
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.Menu,
+        App().navigationService.updateNavigationBar(.BackOnly,
                                                     "packages-list".localized,
                                                     AppColor.white, true)
     }
@@ -243,7 +243,7 @@ extension LoadUnloadOrderVC:BaseSearchViewDelegate{
 extension LoadUnloadOrderVC:DMSNavigationServiceDelegate {
     
     func didSelectedBackOrMenu() {
-        //
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
