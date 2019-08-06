@@ -245,8 +245,12 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let fromStartTime = OrderDetailInforRow("start-time".localized,startFromDate,false)
         let fromEndtime = OrderDetailInforRow("end-time".localized,endFromDate,false)
         let fromServiceTime = OrderDetailInforRow("service-time".localized,Slash(order.from?.serviceTime),false)
-//        let fromFloor = Slash(order.from?.floor)
-//        let fromFloor = Slash(order.from?.floor)
+        let fromFloor = Slash(order.from?.floor)
+        let fromApartment = Slash(order.from?.apartment)
+        let fromNumber = Slash(order.from?.number)
+        
+        let fromAddressDetail = "\(fromFloor)/\(fromApartment)/\(fromNumber)"
+        let fromAddressDetailRecord = OrderDetailInforRow("Floor/Apt/Number",fromAddressDetail,false)
 
         let toAddress = OrderDetailInforRow("Address".localized, E(order.to?.address),true)
         let toContactName = OrderDetailInforRow("contact-name".localized,order.to?.name ?? "-")
@@ -256,6 +260,13 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let toLocationName = OrderDetailInforRow("location-name".localized, Slash(order.to?.loc_name),false)
         let toServiceTime = OrderDetailInforRow("service-time".localized,Slash(order.to?.serviceTime),false)
         
+        let toFloor = Slash(order.to?.floor)
+        let toApartment = Slash(order.to?.apartment)
+        let toNumber = Slash(order.to?.number)
+        
+        let toAddressDetail = "\(toFloor)/\(toApartment)/\(toNumber)"
+        let toAddressDetailRecord = OrderDetailInforRow("Floor/Apt/Number",toAddressDetail,false)
+        
         let codAmount = OrderDetailInforRow("COD Amount".localized,"\(order.codAmount ?? 0)",false)
         let codRemark = OrderDetailInforRow("COD Remark".localized,Slash(order.codComment),false)
         
@@ -264,6 +275,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 
         orderInforFrom.append(fromLocationName)
         orderInforFrom.append(fromAddress)
+        orderInforFrom.append(fromAddressDetailRecord)
         orderInforFrom.append(fromContactName)
         orderInforFrom.append(fromContactPhone)
         orderInforFrom.append(fromStartTime)
@@ -272,6 +284,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 
         orderInforTo.append(toLocationName)
         orderInforTo.append(toAddress)
+        orderInforTo.append(toAddressDetailRecord)
         orderInforTo.append(toContactName)
         orderInforTo.append(toContactPhone)
         orderInforTo.append(toStartTime)
