@@ -148,6 +148,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforFrom.removeAll()
         orderInforTo.removeAll()
         orderInforNatureOfGoods.removeAll()
+        orderCODInfo.removeAll()
         
         guard let order = orderDetail else { return }
 //        let displayDateTimeVN = DateFormatter.displayDateTimeVN
@@ -314,6 +315,49 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
+    private func showReasonMessage(completionHandler:@escaping (_ reason:String)->Void) {
+        let alert = UIAlertController(title: "Reason",
+                                      message: nil, preferredStyle: .alert)
+        alert.showTextViewInput(placeholder: "Please enter a reason for Partial\nDelivered",
+                                nameAction: "submit".localized,
+                                oldText: "") {(success, string) in
+                                    //self?.orderDetail?.note = string
+                                    completionHandler(string)
+        }
+    }
+    
+    
+    func showReasonMessagePopup(completionHandler:@escaping (_ reason:String)->Void) {
+        let title = "Reason"
+        let message = "Please enter a reason for Partial Delivered"
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        //2. Add the text field. You can configure it however you need.
+        alert.addTextField { (textField) in
+            textField.text = ""
+        }
+        
+        // 3. Grab the value from the text field, and print it when the user clicks OK.
+        alert.addAction(UIAlertAction(title: "submit".localized, style: .default, handler: { [weak alert] (_) in
+            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+            guard let text = textField?.text, !text.isEmpty else {
+                self.showAlertView("You must enter a reason for Partial Delivered")
+                return
+            }
+            
+            completionHandler(text)
+            
+        }))
+        
+        alert.addAction(UIAlertAction(title: "cancel".localized, style: .cancel, handler: {
+            action in
+        }))
+        
+        // 4. Present the alert.
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     func showCODPopUp() {
         guard let codAmount = orderDetail?.codAmount else { return }
         let title = "COD Received"
@@ -360,8 +404,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         }
     }
     
-    // MARK: - ACTION
-    @IBAction func tapUpdateStatusButtonAction(_ sender: UIButton) {
+    private func handleUpdateStatusWithDeliveryType() {
         switch orderDetail?.statusOrder.rawValue {
         case StatusOrder.newStatus.rawValue:
             showReasonView()
@@ -371,18 +414,70 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             break
             
         case StatusOrder.Loaded.rawValue, StatusOrder.PartialLoaded.rawValue:
-            let vc:StartRouteOrderVC = StartRouteOrderVC.loadSB(SB: .Route)
-            vc.order = orderDetail
-            vc.callback = {[weak self](success, order) in
-                self?.orderDetail = order
-                self?.fetchData(showLoading: false)
+            App().showAlertView("do-you-want-to-start-this-order".localized,
+                                positiveTitle: "YES".localized,
+                                positiveAction: {[weak self] (ok) in
+                                    let statusNeedUpdate = StatusOrder.InTransit.rawValue
+                                    self?.updateOrderStatus(statusNeedUpdate)
+                                    
+            }, negativeTitle: "NO".localized) { (cancel) in
+                //
             }
-            self.navigationController?.pushViewController(vc, animated: true)
         case StatusOrder.InTransit.rawValue:
             handleFinishAction()
             break
         default:
             break
+        }
+    }
+    
+    private func handleUpdateStatusWithPickedUpType() {
+        guard let _order = orderDetail, let detail = _order.details?.first else { return }
+        switch orderDetail?.statusOrder.rawValue {
+        case StatusOrder.newStatus.rawValue:
+            self.submitPickedUpQuantity(detail: detail)
+            break
+        case StatusOrder.InTransit.rawValue:
+            handleFinishAction()
+            break
+        default:
+            break
+        }
+    }
+    
+    func submitPickedUpQuantity(detail:Order.Detail) {
+        if let loadedQty = detail.loadedQty, let qty = detail.qty, loadedQty <= qty {
+            if (detail.isPallet) {
+                if let loadedCartons = detail.loadedCartonsInPallet {
+                    let cartons = detail.cartonsInPallet ?? 0
+                    if loadedCartons <= cartons {
+                        updatePickedUpQuantity(detail:detail)
+                        return
+                    }
+                }
+                showAlertView("Picked up cartons quantity must be less than or equal \(detail.cartonsInPallet ?? 0)")
+                return
+            }
+            updatePickedUpQuantity(detail:detail)
+            // call without loaded carton
+        } else {
+            showAlertView("Picked up quantity must be less than or equal \(detail.qty ?? 0)")
+            return
+        }
+    }
+    
+    func updatePickedUpQuantity(detail:Order.Detail) {
+        let status = StatusOrder.InTransit.rawValue
+        updateOrderStatus(status,updateDetailType: .Load)
+    }
+    
+    // MARK: - ACTION
+    @IBAction func tapUpdateStatusButtonAction(_ sender: UIButton) {
+        guard let _order = orderDetail else { return }
+        if _order.isPickUpType {
+            handleUpdateStatusWithPickedUpType()
+        } else {
+            handleUpdateStatusWithDeliveryType()
         }
     }
     
@@ -691,19 +786,34 @@ fileprivate extension OrderDetailViewController {
         cell.contentLabel?.text = "\(detail.qty ?? 0)"
         cell.lblBarcode?.text = barCode
         cell.lblPackgage?.text = paRefId
-        cell.actualQuantityTextField?.text = "\(detail.actualQty!)"
+        
+        let isPickUpAndNewOrder = order.isPickUpType && order.isNewStatus
+        cell.actualQuantityTextField?.text = (isPickUpAndNewOrder) ? "\(detail.loadedQty ?? 0)" : "\(detail.actualQty!)"
         cell.vContent?.cornerRadius = 0
         cell.delegate = self
         if indexPath.row == (orderDetail?.details?.count ?? 0 ) - 1{
             cell.vContent?.roundCornersLRB()
         }
         
-        let isShowingOnly = (order.statusOrder == StatusOrder.newStatus || order.statusOrder == StatusOrder.Loaded || order.statusOrder == StatusOrder.PartialLoaded || order.statusOrder == StatusOrder.WarehouseClarification || order.statusOrder == StatusOrder.CancelStatus)
+        if order.isPickUpType {
+            cell.deliveredQtyStaticLabel?.text = (order.isNewStatus) ? "Picked Up Quantity" : "Delivered Quantity"
+            cell.deliveredCartonsStaticLabel?.text = (order.isNewStatus) ? "Picked Up Cartons Qty" : "Delivered Cartons Quantity"
+        }
+        
+        
+        
+        let isShowingOnly = order.isDeliveryType && (order.statusOrder == StatusOrder.newStatus || order.statusOrder == StatusOrder.Loaded || order.statusOrder == StatusOrder.PartialLoaded || order.statusOrder == StatusOrder.WarehouseClarification || order.statusOrder == StatusOrder.CancelStatus)
         
         func handleEnablingTextField() {
-            let isEnabled = order.statusOrder == StatusOrder.InTransit
-            cell.actualQuantityTextField?.isEnabled = isEnabled
-            cell.actualCartonsInPalletTextField?.isEnabled = isEnabled
+            if order.isDeliveryType {
+                let isEnabled = order.statusOrder == StatusOrder.InTransit
+                cell.actualQuantityTextField?.isEnabled = isEnabled
+                cell.actualCartonsInPalletTextField?.isEnabled = isEnabled
+            } else {
+                let isEnabled = order.isNewStatus || order.isInTransit
+                cell.actualQuantityTextField?.isEnabled = isEnabled
+                cell.actualCartonsInPalletTextField?.isEnabled = isEnabled
+            }
         }
         
         func handleShowingPalletSection() {
@@ -717,7 +827,7 @@ fileprivate extension OrderDetailViewController {
             
             if isShowedCartonSection {
                 cell.cartonInPalletsLabel?.text = "\(detail.cartonsInPallet ?? 0)"
-                cell.actualCartonsInPalletTextField?.text = "\(detail.actualCartonsInPallet ?? 0)"
+                cell.actualCartonsInPalletTextField?.text = (isPickUpAndNewOrder) ? "\(detail.loadedCartonsInPallet ?? 0)" : "\(detail.actualCartonsInPallet ?? 0)"
                 cell.handleShowingDeliveredCartonsRecord(isHidden: isShowingOnly)
                 cell.cartonsViewContainerHeightConstraint?.constant = (isShowingOnly) ? 20.0 : 50.0
                 cell.cartonsViewContainerTopSpacing?.constant = 6.0
@@ -838,16 +948,31 @@ extension OrderDetailViewController:DMSNavigationServiceDelegate {
 extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
     
     func didEnterPalletsQuantityTextField(_ cell: OrderDetailTableViewCell, value: String, detail:Order.Detail) {
-//        if value.isEmpty {
-//            showAlertView("Delivered quantity is required")
-//        }
-//        showAlertView("Pallets: " + value)
+        guard let _order = orderDetail else { return }
+        let inputQty = Int(value)
+        if _order.isDeliveryType {
+            detail.actualQty = inputQty
+        } else {
+            if _order.isNewStatus {
+                detail.loadedQty = inputQty
+            } else {
+                detail.actualQty = inputQty
+            }
+        }
     }
     
     func didEnterCartonsQuantityTextField(_ cell: OrderDetailTableViewCell, value: String, detail:Order.Detail) {
-//        if detail.isPallet && value.isEmpty {
-//            showAlertView("Carton in Pallet is required")
-//        }
+        guard let _order = orderDetail else { return }
+        let inputQty = Int(value)
+        if _order.isDeliveryType {
+            detail.actualCartonsInPallet = inputQty
+        } else {
+            if _order.isNewStatus {
+                detail.loadedCartonsInPallet = inputQty
+            } else {
+                detail.actualCartonsInPallet = inputQty
+            }
+        }
     }
     
     func didSelectGo(_ cell: OrderDetailTableViewCell, _ btn: UIButton) {
@@ -937,7 +1062,7 @@ fileprivate extension OrderDetailViewController{
     }
     
     private func handleFinishAction() {
-        guard let _orderDetail = orderDetail else {return}
+        guard let _orderDetail = orderDetail, let detail = _orderDetail.details?.first else {return}
         if _orderDetail.isRequireImage() &&
             _orderDetail.pictures?.count ?? 0 <= 0{
             self.showAlertView("picture-required".localized) {(action) in
@@ -961,10 +1086,14 @@ fileprivate extension OrderDetailViewController{
                 return
             }
             
-            let status:StatusOrder = _orderDetail.statusOrder
-            var statusNeedUpdate = status.rawValue
-            statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
-            self.updateOrderStatus(statusNeedUpdate)
+            let statusNeedUpdate = detail.getFinishedStatusWithInputQuantity()
+            if statusNeedUpdate == .PartialDelivered {
+                self.showReasonMessage { (reason) in
+                    self.updateOrderStatus(statusNeedUpdate.rawValue,reasonMessage:reason)
+                }
+            } else {
+                self.updateOrderStatus(statusNeedUpdate.rawValue)
+            }
         }
             
     }
@@ -1008,10 +1137,7 @@ fileprivate extension OrderDetailViewController{
         unableToStartButton.isHidden = isHiddenUnableToStartButton
     }
     
-    private func updateButtonStatus() {
-//        orderDetail?.status?.code = StatusOrder.InTransit.rawValue
-//        orderDetail?.details?[0].package?.cd = "PLT"
-        
+    private func handleShowingButtonStatusWithDeliveryType() {
         handleShowingUnableToStartButton()
         updateStatusButton?.isEnabled = true
         switch orderDetail?.statusOrder.rawValue {
@@ -1024,7 +1150,7 @@ fileprivate extension OrderDetailViewController{
             updateStatusButton?.backgroundColor = AppColor.greenColor
             break
         case StatusOrder.deliveryStatus.rawValue, StatusOrder.PartialDelivered.rawValue:
-//            updateStatusButton?.setTitle("update-palette-return".localized.uppercased(), for: .normal)
+            //            updateStatusButton?.setTitle("update-palette-return".localized.uppercased(), for: .normal)
             updateStatusButton?.setTitle("update-returned-pallets".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = AppColor.greenColor
             break
@@ -1046,6 +1172,44 @@ fileprivate extension OrderDetailViewController{
         
         updateStatusButton?.isHidden = isHidden
         vAction?.isHidden = isHidden
+
+    }
+    
+    private func handleShowingButtonStatusWithPickedUpType() {
+        guard let _order = orderDetail else { return }
+        handleShowingUnableToStartButton()
+        updateStatusButton?.isEnabled = true
+        switch orderDetail?.statusOrder.rawValue {
+        case StatusOrder.newStatus.rawValue:
+            updateStatusButton?.setTitle("picked-up".localized.uppercased(), for: .normal)
+            updateStatusButton?.backgroundColor = AppColor.pickedUpStatus
+            break
+        case StatusOrder.InTransit.rawValue:
+            updateStatusButton?.setTitle("Deliver".localized.uppercased(), for: .normal)
+            updateStatusButton?.backgroundColor = AppColor.greenColor
+            break
+        default:
+            updateStatusButton?.isHidden = true
+            vAction?.isHidden = true
+            return
+        }
+
+        let isHidden = (_order.isCancelled || _order.isFinished)
+        
+        updateStatusButton?.isHidden = isHidden
+        vAction?.isHidden = isHidden
+        
+    }
+    
+    private func updateButtonStatus() {
+//        orderDetail?.status?.code = StatusOrder.InTransit.rawValue
+//        orderDetail?.details?[0].package?.cd = "PLT"
+        guard let _order = orderDetail else { return }
+        if _order.isPickUpType {
+            handleShowingButtonStatusWithPickedUpType()
+        } else {
+            handleShowingButtonStatusWithDeliveryType()
+        }
     }
     
     private func getAssetThumbnail(asset: PHAsset, size: CGFloat) -> UIImage {
@@ -1116,7 +1280,7 @@ extension OrderDetailViewController{
         }
     }
     
-    func updateOrderStatus(_ statusCode: String, updateDetailType:Order.Detail.DetailUpdateType = .Deliver, cancelReason:Reason? = nil) {
+    func updateOrderStatus(_ statusCode: String, updateDetailType:Order.Detail.DetailUpdateType = .Deliver, cancelReason:Reason? = nil, reasonMessage:String? = nil) {
         guard let _orderDetail = orderDetail else {
             return
         }
@@ -1131,18 +1295,19 @@ extension OrderDetailViewController{
         if hasNetworkConnection {
             showLoadingIndicator()
         }
-        updateOrderStatusImport(_orderDetail, updateDetailType:updateDetailType, cancelReason: cancelReason)
+        updateOrderStatusImport(_orderDetail, updateDetailType:updateDetailType, cancelReason: cancelReason, reasonMessage: reasonMessage)
     }
     
     
-    func updateOrderStatusImport(_ order:Order, updateDetailType:Order.Detail.DetailUpdateType = .Deliver, cancelReason:Reason? = nil)  {
-        SERVICES().API.updateOrderStatus(order, reason:cancelReason, updateDetailType:updateDetailType) {[weak self] (result) in
+    func updateOrderStatusImport(_ order:Order, updateDetailType:Order.Detail.DetailUpdateType = .Deliver, cancelReason:Reason? = nil, reasonMessage:String? = nil)  {
+        SERVICES().API.updateOrderStatus(order, reason:cancelReason, updateDetailType:updateDetailType, reasonMessage: reasonMessage) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
                 self?.setupDataDetailInforRows()
                 self?.updateButtonStatus()
                 self?.tableView?.reloadData()
+                self?.tableView?.setContentOffset(.zero, animated: true)
                 self?.didUpdateStatus?(order, nil)
                 
             case .error(let error):
