@@ -23,11 +23,12 @@ class MainVC: BaseViewController {
         super.viewDidLoad()
 
         setupSideMenu()
-        if isRampManagerMode {
-            pushRouteListVC()
-        } else {
-            pushDashboardVC()
-        }
+        pushRouteListVC()
+//        if isRampManagerMode {
+//            pushRouteListVC()
+//        } else {
+//            pushDashboardVC()
+//        }
     }
 
     override func didReceiveMemoryWarning() {

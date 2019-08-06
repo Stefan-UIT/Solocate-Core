@@ -23,6 +23,7 @@ extension UIAlertController {
         
         self.addAction(cancelAction)
         self.addAction(doneAction)
+        doneAction.isEnabled = false
         textView.actionOK = doneAction
         
         self.show()
@@ -89,7 +90,7 @@ final class TextViewInputViewController: UIViewController, TextViewInputDelegate
         if UIDevice.current.userInterfaceIdiom == .pad {
             preferredContentSize.width = UIScreen.main.bounds.width * 0.7
         }
-        setupButtonClear()
+//        setupButtonClear()
         textViewInput.delegate = self
     }
     

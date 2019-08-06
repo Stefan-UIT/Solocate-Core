@@ -90,15 +90,30 @@ class LoadPackageTableViewCell: UITableViewCell {
 
 //MARK: - UITEXTFIELD
 extension LoadPackageTableViewCell: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let palletTextField = actualQuantityTextField, let cartonTextField = actualCartonsInPalletTextField else { return }
-        let text =  textField.text ?? ""
-        if textField == palletTextField {
-            detail.loadedQty = Int(text)
-//            delegate?.didEnterPalletsQuantityTextField(self, value: text, detail: self.detail)
-        } else if textField == cartonTextField {
-            detail.loadedCartonsInPallet = Int(text)
-//            delegate?.didEnterCartonsQuantityTextField(self, value: text, detail: self.detail)
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        guard let palletTextField = actualQuantityTextField, let cartonTextField = actualCartonsInPalletTextField else { return }
+//        let text =  textField.text ?? ""
+//        if textField == palletTextField {
+//            detail.loadedQty = Int(text)
+////            delegate?.didEnterPalletsQuantityTextField(self, value: text, detail: self.detail)
+//        } else if textField == cartonTextField {
+//            detail.loadedCartonsInPallet = Int(text)
+////            delegate?.didEnterCartonsQuantityTextField(self, value: text, detail: self.detail)
+//        }
+//    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text,
+            let textRange = Range(range, in: text) {
+            let updatedText = text.replacingCharacters(in: textRange,
+                                                       with: string)
+            guard let palletTextField = actualQuantityTextField, let cartonTextField = actualCartonsInPalletTextField else { return true }
+            if textField == palletTextField {
+                detail.loadedQty = Int(updatedText)
+            } else if textField == cartonTextField {
+                detail.loadedCartonsInPallet = Int(updatedText)
+            }
         }
+        return true
     }
 }

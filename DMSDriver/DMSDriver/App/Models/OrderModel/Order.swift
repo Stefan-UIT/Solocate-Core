@@ -67,9 +67,10 @@ enum StatusOrder: String {
             return "picked-up".localized
         case .deliveryStatus:
             return "Delivered".localized
-        case .CancelStatus,
-             .UnableToFinish:
+        case .CancelStatus:
             return "Cancelled".localized
+        case .UnableToFinish:
+            return "unable-to-finish".localized
         case .Loaded:
             return "loaded".localized
         case .PartialLoaded:
@@ -133,6 +134,9 @@ class Address: BaseModel {
     var ctt_phone:String?
     var seq = 1
     var loc_name:String?
+    var floor:String?
+    var apartment:String?
+    var number:String?
     
     override init() {
         super.init()
@@ -155,6 +159,9 @@ class Address: BaseModel {
         ctt_phone <- map["ctt_phone"]
         seq <- map["seq"]
         loc_name <- map["loc_name"]
+        floor <- map["floor"]
+        apartment <- map["apt"]
+        number <- map["number"]
     }
 }
 
@@ -284,7 +291,8 @@ class Order: BaseModel {
             ]
             switch updateType {
             case .Load:
-                if orderStatus == StatusOrder.Loaded || orderStatus == StatusOrder.PartialLoaded || orderStatus == StatusOrder.WarehouseClarification {
+                if orderStatus == StatusOrder.Loaded || orderStatus == StatusOrder.PartialLoaded || orderStatus == StatusOrder.WarehouseClarification || orderStatus == StatusOrder.InTransit // in case Order pickup
+                {
                     params["load_qty"] = loadedQty ?? 0
                     if isPallet {
                         params["ctn_loaded"] = loadedCartonsInPallet ?? 0
@@ -325,6 +333,24 @@ class Order: BaseModel {
             }
             
             return StatusOrder.Loaded
+        }
+        
+        func getFinishedStatusWithInputQuantity() -> StatusOrder {
+            if let actualQty = self.actualQty, let qty = self.qty {
+                if actualQty != qty {
+                    return StatusOrder.PartialDelivered
+                }
+                
+                if (self.isPallet) {
+                    if let actualCartons = self.actualCartonsInPallet, let cartons = self.cartonsInPallet {
+                        if actualCartons != cartons {
+                            return StatusOrder.PartialDelivered
+                        }
+                    }
+                }
+            }
+            
+            return StatusOrder.deliveryStatus
         }
     }
 
@@ -437,6 +463,34 @@ class Order: BaseModel {
     lazy var orderType:OrderType = {
         return OrderType.init(rawValue: typeID) ?? OrderType.delivery
     }()
+    
+    var isPickUpType:Bool {
+        return orderType == OrderType.pickup
+    }
+    
+    var isDeliveryType:Bool {
+        return orderType == OrderType.delivery
+    }
+    
+    var isNewStatus:Bool {
+        return statusOrder == .newStatus
+    }
+    
+    var isInTransit:Bool {
+        return statusOrder == .InTransit
+    }
+    
+    var isLoaded:Bool {
+        return statusOrder == .Loaded || statusOrder == .PartialLoaded
+    }
+    
+    var isFinished:Bool {
+        return statusOrder == .deliveryStatus || statusOrder == .PartialDelivered
+    }
+    
+    var isCancelled:Bool {
+        return statusOrder == .CancelStatus || statusOrder == .UnableToFinish
+    }
     
     var codAmount:Double? {
         get {
