@@ -52,7 +52,7 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>dms-customization.dev.seldatdirect.com</key>
+			<key>solocate.ashdodb.dev.seldatdirect.com</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
@@ -85,17 +85,17 @@
 				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
-            <key>seldat-dev-public.s3.amazonaws.com</key>
-            <dict>
-                <key>NSExceptionAllowsInsecureHTTPLoads</key>
-                <true/>
-                <key>NSExceptionMinimumTLSVersion</key>
-                <string>TLSv1.0</string>
-                <key>NSExceptionRequiresForwardSecrecy</key>
-                <true/>
-                <key>NSIncludesSubdomains</key>
-                <true/>
-            </dict>
+			<key>seldat-dev-public.s3.amazonaws.com</key>
+			<dict>
+				<key>NSExceptionAllowsInsecureHTTPLoads</key>
+				<true/>
+				<key>NSExceptionMinimumTLSVersion</key>
+				<string>TLSv1.0</string>
+				<key>NSExceptionRequiresForwardSecrecy</key>
+				<true/>
+				<key>NSIncludesSubdomains</key>
+				<true/>
+			</dict>
 		</dict>
 	</dict>
 	<key>NSCameraUsageDescription</key>

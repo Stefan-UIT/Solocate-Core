@@ -302,6 +302,10 @@ class Order: BaseModel {
             case .ReturnedPallet:
                 if orderStatus == StatusOrder.deliveryStatus || orderStatus == StatusOrder.PartialDelivered {
                     params["plt_return"] = returnedPalletQty ?? 0
+                    params["dlvd_qty"] = actualQty ?? 0
+                    if isPallet {
+                        params["ctn_dlvd"] = actualCartonsInPallet ?? 0
+                    }
                 }
                 break
             default:
