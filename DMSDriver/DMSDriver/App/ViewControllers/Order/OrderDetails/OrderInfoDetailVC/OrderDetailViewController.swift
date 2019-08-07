@@ -410,8 +410,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             switch result {
             case .object(_):
                 self?.orderDetail?.cod_rcvd = "\(value)"
-                let statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
-                self?.updateOrderStatus(statusNeedUpdate)
+//                let statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
+//                self?.updateOrderStatus(statusNeedUpdate)
+                self?.handleFinishAction()
             case .error(let error):
                 self?.showAlertView(error.description)
             }
@@ -1159,6 +1160,7 @@ fileprivate extension OrderDetailViewController{
     }
     
     private func handleShowingButtonStatusWithDeliveryType() {
+        guard let _order = orderDetail else { return }
         handleShowingUnableToStartButton()
         updateStatusButton?.isEnabled = true
         switch orderDetail?.statusOrder.rawValue {
@@ -1186,10 +1188,10 @@ fileprivate extension OrderDetailViewController{
             updateStatusButton?.backgroundColor = AppColor.greenColor
         }
         let isFinishedAndNotPalletType = ((orderDetail?.statusOrder == StatusOrder.deliveryStatus || orderDetail?.statusOrder == StatusOrder.PartialDelivered) && !(orderDetail?.details?[0].isPallet)!)
-        let isUpdatedReturnedPalletsQty = orderDetail?.details?.first?.returnedPalletQty != nil
+        let isFinishedAndUpdatedReturnedPalletsQty = (_order.isFinished && orderDetail?.details?.first?.returnedPalletQty != nil)
         let isRampManagerAndNotNewOrder = (isRampManagerMode && orderDetail?.statusOrder != StatusOrder.newStatus)
         let isHidden = ( orderDetail?.statusOrder == StatusOrder.CancelStatus ||
-            orderDetail?.statusOrder == StatusOrder.UnableToFinish || isFinishedAndNotPalletType || isUpdatedReturnedPalletsQty || isRampManagerAndNotNewOrder )
+            orderDetail?.statusOrder == StatusOrder.UnableToFinish || isFinishedAndNotPalletType || isFinishedAndUpdatedReturnedPalletsQty || isRampManagerAndNotNewOrder )
         
         updateStatusButton?.isHidden = isHidden
         vAction?.isHidden = isHidden
