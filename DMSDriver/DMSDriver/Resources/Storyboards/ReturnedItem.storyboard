@@ -23,17 +23,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aZ6-xN-E3o" userLabel="vType">
-                                <rect key="frame" x="0.0" y="80" width="375" height="50"/>
+                            <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aZ6-xN-E3o" userLabel="vType">
+                                <rect key="frame" x="0.0" y="80" width="375" height="0.0"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKu-q9-zS0">
-                                        <rect key="frame" x="15" y="0.0" width="0.0" height="50"/>
+                                        <rect key="frame" x="15" y="0.0" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uzr-Qe-8aU" userLabel="vPick">
-                                        <rect key="frame" x="274" y="10" width="86" height="30"/>
+                                        <rect key="frame" x="274" y="-15" width="86" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Week" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4kb-Iw-73I">
                                                 <rect key="frame" x="15" y="0.0" width="36" height="30"/>
@@ -81,7 +81,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="6z5-X6-IIN"/>
+                                    <constraint firstAttribute="height" id="6z5-X6-IIN"/>
                                     <constraint firstItem="sKu-q9-zS0" firstAttribute="leading" secondItem="aZ6-xN-E3o" secondAttribute="leading" constant="15" id="Eue-Zl-UIO"/>
                                     <constraint firstItem="sKu-q9-zS0" firstAttribute="height" secondItem="aZ6-xN-E3o" secondAttribute="height" id="ITa-uk-nDk"/>
                                     <constraint firstItem="Uzr-Qe-8aU" firstAttribute="centerY" secondItem="aZ6-xN-E3o" secondAttribute="centerY" id="SH1-4W-K2r"/>
@@ -90,7 +90,7 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XAA-hm-bRi">
-                                <rect key="frame" x="0.0" y="130" width="375" height="537"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="587"/>
                                 <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GhW-or-yB9">
                                     <size key="itemSize" width="374" height="220"/>

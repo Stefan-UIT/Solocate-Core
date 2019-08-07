@@ -81,7 +81,7 @@ class AssignDriverViewController: BaseViewController {
 }
 
 extension AssignDriverViewController:DMSNavigationServiceDelegate {
-    func didSelectedBackOrMenu() {
+    func didSelectedBackAction() {
         self.navigationController?.popViewController(animated: true)
     }
 }

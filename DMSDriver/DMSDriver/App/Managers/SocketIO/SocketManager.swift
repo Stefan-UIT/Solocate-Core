@@ -24,10 +24,12 @@ extension APISocketDelegate{
 
 // MARK: - LoginNamespace
 extension SocketService {
-    func login(_ id:Int,_ username:String,_ role:String, _ token:String) {
+    func login(_ id:Int,_ username:String,_ role:String, _ token:String, _ userInfo:UserModel.UserInfo
+        ) {
         let loginNamespaceSocket = socketWithNamespace(.login)
         loginNamespaceSocket.on(clientEvent: .connect) { (data, _) in
-            let  data = ["id":id,"username":username,"role":role,"token":token] as [String:Any]
+//            let  data = ["id":id,"username":username,"role":role,"token":token] as [String:Any]
+            let  data = ["id":id,"username":userInfo.toJSON(),"role":role,"token":token] as [String:Any]
             loginNamespaceSocket.emit(SocketConstants.SOCKET_LOGIN, data)
 
             print("Connected login namespace socket")

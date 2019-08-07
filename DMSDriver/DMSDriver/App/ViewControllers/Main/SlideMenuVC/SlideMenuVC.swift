@@ -69,6 +69,7 @@ enum MenuItemType : Int {
 
 class SlideMenuVC: BaseViewController {
   
+    @IBOutlet weak var buildVersionLabel: UILabel!
     @IBOutlet weak var tbvContent:UITableView?
 
     fileprivate let profileIndentifierCell = "SlideMenuAvartarCell"
@@ -79,11 +80,25 @@ class SlideMenuVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        setUpVersionLabel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         tbvContent?.reloadData()
+    }
+    
+    func getAppInfo()-> String {
+        let dictionary = Bundle.main.infoDictionary!
+        let version = dictionary["CFBundleShortVersionString"] as! String
+        let build = dictionary["CFBundleVersion"] as! String
+        return version + "(" + build + ")"
+    }
+    
+    func setUpVersionLabel() {
+        let buildVersion = getAppInfo()
+        let text = "Version: " + buildVersion
+        buildVersionLabel.text = text
     }
   
     func setupTableView() {

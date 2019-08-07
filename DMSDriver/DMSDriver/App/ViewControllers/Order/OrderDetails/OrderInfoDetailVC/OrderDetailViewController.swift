@@ -410,8 +410,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             switch result {
             case .object(_):
                 self?.orderDetail?.cod_rcvd = "\(value)"
-                let statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
-                self?.updateOrderStatus(statusNeedUpdate)
+//                let statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
+//                self?.updateOrderStatus(statusNeedUpdate)
+                self?.handleFinishAction()
             case .error(let error):
                 self?.showAlertView(error.description)
             }
@@ -800,6 +801,9 @@ fileprivate extension OrderDetailViewController {
         cell.contentLabel?.text = "\(detail.qty ?? 0)"
         cell.lblBarcode?.text = barCode
         cell.lblPackgage?.text = paRefId
+        cell.loadedQuantityLabel?.text = IntSlash(detail.loadedQty)
+        cell.loadedCartonsLabel?.text = IntSlash(detail.loadedCartonsInPallet)
+        cell.returnedPalletsLabel?.text = IntSlash(detail.returnedPalletQty)
         
         let isPickUpAndNewOrder = order.isPickUpType && order.isNewStatus
         cell.actualQuantityTextField?.text = (isPickUpAndNewOrder) ? "\(detail.loadedQty ?? 0)" : "\(detail.actualQty!)"
@@ -809,10 +813,25 @@ fileprivate extension OrderDetailViewController {
             cell.vContent?.roundCornersLRB()
         }
         
+        func hideLoadedQuantityContainer() {
+            cell.loadedQtyViewContainer?.isHidden = true
+            cell.loadedQtyTopSpaceConstraint?.constant = 0.0
+            cell.loadedQtyContainerHeightConstraint?.constant = 0.0
+        }
+        
         if order.isPickUpType {
             cell.deliveredQtyStaticLabel?.text = (order.isNewStatus) ? "Picked Up Quantity" : "Delivered Quantity"
             cell.deliveredCartonsStaticLabel?.text = (order.isNewStatus) ? "Picked Up Cartons Qty" : "Delivered Cartons Quantity"
+            hideLoadedQuantityContainer()
+        } else {
+            if !detail.isPallet {
+                cell.loadedCartonsQtyViewContainer?.isHidden = true
+                cell.loadedQtyContainerHeightConstraint?.constant = 22.0
+            }
         }
+        
+        
+        
         
         
         
@@ -1159,6 +1178,7 @@ fileprivate extension OrderDetailViewController{
     }
     
     private func handleShowingButtonStatusWithDeliveryType() {
+        guard let _order = orderDetail else { return }
         handleShowingUnableToStartButton()
         updateStatusButton?.isEnabled = true
         switch orderDetail?.statusOrder.rawValue {
@@ -1186,10 +1206,10 @@ fileprivate extension OrderDetailViewController{
             updateStatusButton?.backgroundColor = AppColor.greenColor
         }
         let isFinishedAndNotPalletType = ((orderDetail?.statusOrder == StatusOrder.deliveryStatus || orderDetail?.statusOrder == StatusOrder.PartialDelivered) && !(orderDetail?.details?[0].isPallet)!)
-        let isUpdatedReturnedPalletsQty = orderDetail?.details?.first?.returnedPalletQty != nil
+        let isFinishedAndUpdatedReturnedPalletsQty = (_order.isFinished && orderDetail?.details?.first?.returnedPalletQty != nil)
         let isRampManagerAndNotNewOrder = (isRampManagerMode && orderDetail?.statusOrder != StatusOrder.newStatus)
         let isHidden = ( orderDetail?.statusOrder == StatusOrder.CancelStatus ||
-            orderDetail?.statusOrder == StatusOrder.UnableToFinish || isFinishedAndNotPalletType || isUpdatedReturnedPalletsQty || isRampManagerAndNotNewOrder )
+            orderDetail?.statusOrder == StatusOrder.UnableToFinish || isFinishedAndNotPalletType || isFinishedAndUpdatedReturnedPalletsQty || isRampManagerAndNotNewOrder )
         
         updateStatusButton?.isHidden = isHidden
         vAction?.isHidden = isHidden

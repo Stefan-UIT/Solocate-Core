@@ -25,6 +25,9 @@ class UserModel: BaseModel {
         var timeZoneCompany:String?
         var avatar_native:String?
         var avatar_thumb:String?
+        var companyID: Int?
+        var supervisorID: Int?
+        var company:Company?
         
         required init?(map: Map) {
             super.init()
@@ -41,6 +44,8 @@ class UserModel: BaseModel {
             timeZoneCompany <- map[KEY_TIMEZONE_COMPANY]
             avatar_native <- map[KEY_AVARTAR_NATIVE]
             avatar_thumb <- map[KEY_AVARTAR_THUMB]
+            companyID <- map["company_id"]
+            company <- map["company"]
 
             let user_name = map[KEY_USER_NAME].currentValue
             

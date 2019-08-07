@@ -82,7 +82,7 @@ class AssignTruckViewController: BaseViewController {
 }
 
 extension AssignTruckViewController:DMSNavigationServiceDelegate {
-    func didSelectedBackOrMenu() {
+    func didSelectedBackAction() {
         self.navigationController?.popViewController(animated: true)
     }
 }

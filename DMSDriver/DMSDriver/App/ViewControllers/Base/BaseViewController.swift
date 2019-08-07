@@ -177,10 +177,12 @@ extension BaseViewController:UIPopoverPresentationControllerDelegate{
 // MARK: - APISocketDelegate
 extension BaseViewController:APISocketDelegate{
     func didReceiveConnected(data: Any) {
+        guard let user = Caches().user, let userInfo = user.userInfo else { return}
         SERVICES().socket.login(Caches().user?.userInfo?.id ?? 0,
                                 E(Caches().user?.userInfo?.userName),
                                 E(Caches().user?.roles?.first?.name),
-                                E(Caches().user?.token))
+                                E(Caches().user?.token),
+                                userInfo)
     }
     
     func didReceiveError(data: String) {
