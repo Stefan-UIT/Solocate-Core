@@ -24,6 +24,10 @@ public func Slash(_ val: String?) -> String {
     return (val != nil && !val!.isEmpty) ? val! : "-";
 }
 
+public func IntSlash(_ val: Int?) -> String {
+    return (val != nil) ? "\(val!)" : "-";
+}
+
 
 extension BaseAPIService {
     @discardableResult
@@ -216,9 +220,11 @@ extension BaseAPIService {
     @discardableResult
     func getReturnedItems(_ timeData:TimeDataItem,
                      callback: @escaping APICallback<ResponseDataModel<ResponseDataListModel<ReturnedItem>>>) -> APIRequest {
-        let startDate = DateFormatter.filterDate.string(from: timeData.startDate ?? Date())
-        let endDate = DateFormatter.filterDate.string(from: timeData.endDate ?? Date())
-        let path = String(format:PATH_REQUEST_URL.GET_RETURNED_ITEMS.URL, startDate, endDate)
+//        let startDate = DateFormatter.filterDate.string(from: timeData.startDate ?? Date())
+//        let endDate = DateFormatter.filterDate.string(from: timeData.endDate ?? Date())
+//        let path = String(format:PATH_REQUEST_URL.GET_RETURNED_ITEMS.URL, startDate, endDate)
+        
+        let path = String(format:PATH_REQUEST_URL.GET_RETURNED_ITEMS_TEMP.URL)
         return request(method: .GET,
                        path: path,
                        input: .empty,

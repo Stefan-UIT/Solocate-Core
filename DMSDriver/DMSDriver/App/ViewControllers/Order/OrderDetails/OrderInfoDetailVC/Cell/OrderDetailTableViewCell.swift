@@ -81,7 +81,18 @@ class OrderDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var wmsManifestContainerTopSpacing: NSLayoutConstraint?
     
     
+    @IBOutlet weak var loadedQtyViewContainer: UIView?
     
+    @IBOutlet weak var loadedQtyContainerHeightConstraint: NSLayoutConstraint?
+    
+    @IBOutlet weak var loadedQtyTopSpaceConstraint: NSLayoutConstraint?
+    
+    @IBOutlet weak var loadedCartonsLabel: UILabel?
+    @IBOutlet weak var loadedQuantityLabel: UILabel?
+    
+    @IBOutlet weak var returnedPalletsLabel: UILabel?
+    
+    @IBOutlet weak var loadedCartonsQtyViewContainer: UIView?
     weak var delegate:OrderDetailTableViewCellDelegate?
     var orderDetailItem: OrderDetailInforRow! {
         didSet {
