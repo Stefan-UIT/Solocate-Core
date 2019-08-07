@@ -91,7 +91,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     override func updateNavigationBar() {
         super.updateNavigationBar()
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.Menu, "")
+        App().navigationService.updateNavigationBar(.Back_Menu, "")
     }
     
     override func indicatorInfo(for pagerTabStripController: PagerTabStripViewController) -> IndicatorInfo {
@@ -952,8 +952,15 @@ fileprivate extension OrderDetailViewController {
 }
 
 extension OrderDetailViewController:DMSNavigationServiceDelegate {
-    func didSelectedBackOrMenu() {
+//    func didSelectedBackOrMenu() {
+//        showSideMenu()
+//    }
+    func didSelectedMenuAction() {
         showSideMenu()
+    }
+    
+    func didSelectedBackAction() {
+        popViewController()
     }
 }
 

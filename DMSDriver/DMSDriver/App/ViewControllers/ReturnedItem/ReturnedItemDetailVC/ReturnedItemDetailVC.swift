@@ -294,8 +294,8 @@ class ReturnedItemDetailVC: BaseViewController {
 
 //MARK: - DMSNavigationServiceDelegate
 extension ReturnedItemDetailVC:DMSNavigationServiceDelegate{
-    func didSelectedBackOrMenu() {
-       self.navigationController?.popViewController(animated: true)
+    func didSelectedBackAction() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

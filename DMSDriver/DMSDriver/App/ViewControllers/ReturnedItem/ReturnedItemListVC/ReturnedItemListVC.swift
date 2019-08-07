@@ -102,10 +102,9 @@ class ReturnedItemsListVC: BaseViewController {
 
 //MARK: - DMSNavigationServiceDelegate
 extension ReturnedItemsListVC:DMSNavigationServiceDelegate{
-    func didSelectedBackOrMenu() {
+    func didSelectedMenuAction() {
         showSideMenu()
     }
-    
     /*
     func didSelectedLeftButton(_ sender: UIBarButtonItem) {
         let dateFormater =  DateFormatter()

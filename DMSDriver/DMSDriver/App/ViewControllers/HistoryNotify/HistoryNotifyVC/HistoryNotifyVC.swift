@@ -197,9 +197,14 @@ extension HistoryNotifyVC:HistoryNotifyCellDelegate{
 
 //MARK: - HHeaderDelegate
 extension HistoryNotifyVC:DMSNavigationServiceDelegate{
-    func didSelectedBackOrMenu() {
-        showSideMenu()
-    }
+    //MARK: - DMSNavigationServiceDelegate
+        func didSelectedMenuAction() {
+            showSideMenu()
+        }
+        
+//        func didSelectedBackAction() {
+//            popViewController()
+//        }
     
     func didSelectedRightButton() {
         let dateFormater =  DateFormatter()

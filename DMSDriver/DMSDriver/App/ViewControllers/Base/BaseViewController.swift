@@ -205,6 +205,10 @@ extension BaseViewController:APISocketDelegate{
 //MARK: - OtherFuntion
 extension BaseViewController{
     
+    func popViewController() {
+        self.navigationController?.popViewController(animated: true)
+    }
+    
     func onbtnClickBackOrMenu() {
         self.view.endEditing(true)
         if let navi = self.navigationController {

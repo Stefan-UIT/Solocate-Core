@@ -9,7 +9,9 @@
 import UIKit
 
 @objc protocol DMSNavigationServiceDelegate {
-    func didSelectedBackOrMenu()
+//    func didSelectedBackOrMenu()
+    @objc optional func didSelectedBackAction()
+    @objc optional func didSelectedMenuAction()
     @objc optional func didSelectedRightButton()
     @objc optional func didSelectedLeftButton(_ sender:UIBarButtonItem)
     @objc optional func didSelectedAssignButton(_ sender:UIBarButtonItem)
@@ -151,6 +153,7 @@ fileprivate extension DMSNavigationService {
 extension DMSNavigationService {
     enum BarStyle {
         case Menu;
+        case Back_Menu;
         case Menu_Search;
         case Filter_Menu;
         case Menu_Calenda;
@@ -189,7 +192,9 @@ extension DMSNavigationService {
         switch barStyle {
         case .Menu:
             navigationItem?.rightBarButtonItem  = menuBarItem
-            
+        case .Back_Menu:
+            navigationItem?.rightBarButtonItem  = menuBarItem
+            navigationItem?.leftBarButtonItem = backBarItem
         case .Menu_Search:
             navigationItem?.rightBarButtonItem  = menuBarItem
             navigationItem?.leftBarButtonItem = searchBarItem
@@ -245,11 +250,13 @@ extension DMSNavigationService {
     }
     
     @objc func onNavigationBack(_ sender: UIBarButtonItem) {
-        delegate?.didSelectedBackOrMenu()
+//        delegate?.didSelectedBackOrMenu()
+        self.delegate?.didSelectedBackAction!()
     }
     
     @objc func onNavigationMenu(_ sender: UIBarButtonItem) {
-      delegate?.didSelectedBackOrMenu()
+//      delegate?.didSelectedBackOrMenu()
+        self.delegate?.didSelectedMenuAction!()
     }
     
     @objc func onNavigationClickRightButton(_ sender: UIBarButtonItem) {

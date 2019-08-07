@@ -102,10 +102,14 @@ class TaskListVC: BaseViewController {
 
 //MARK: - DMSNavigationServiceDelegate
 extension TaskListVC:DMSNavigationServiceDelegate{
-    func didSelectedBackOrMenu() {
+//    func didSelectedBackOrMenu() {
+//                showSideMenu()
+//    }
+    
+    
+    func didSelectedMenuAction() {
         showSideMenu()
     }
-    
     /*
     func didSelectedLeftButton(_ sender: UIBarButtonItem) {
         let dateFormater =  DateFormatter()
