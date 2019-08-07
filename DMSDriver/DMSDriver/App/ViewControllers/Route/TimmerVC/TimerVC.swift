@@ -171,9 +171,8 @@ class TimerVC: BaseViewController {
 
 //MARK: - DMSNavigationServiceDelegate
 extension TimerVC:DMSNavigationServiceDelegate{
-    func didSelectedBackOrMenu() {
+    func didSelectedMenuAction() {
         showSideMenu()
-
     }
 }
 

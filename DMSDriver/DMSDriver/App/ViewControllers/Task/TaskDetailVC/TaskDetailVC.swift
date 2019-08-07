@@ -231,8 +231,8 @@ class TaskDetailVC: BaseViewController {
 
 //MARK: - DMSNavigationServiceDelegate
 extension TaskDetailVC:DMSNavigationServiceDelegate{
-    func didSelectedBackOrMenu() {
-       self.navigationController?.popViewController(animated: true)
+    func didSelectedBackAction() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 

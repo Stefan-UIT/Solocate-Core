@@ -125,18 +125,14 @@ class RouteDetailVC: BaseViewController {
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-//        Floaty.global.hide()
-//        guard let routeId = route?.id else {
-//            return
-//        }
-//        getRouteDetail("\(routeId)")
     }
 
     
     
     override func updateNavigationBar()  {
         super.updateNavigationBar()
-        App().navigationService.updateNavigationBar(.Menu,"")
+        App().navigationService.delegate = self
+        App().navigationService.updateNavigationBar(.Back_Menu,"")
     }
 
     override func didReceiveMemoryWarning() {
@@ -347,12 +343,12 @@ extension RouteDetailVC:BaseScrollMenuViewDelegate{
 
 //MARK: - DMSNavigationServiceDelegate
 extension RouteDetailVC:DMSNavigationServiceDelegate{
-    func didSelectedBackOrMenu() {
+    func didSelectedMenuAction() {
         showSideMenu()
     }
     
-    func didSelectedLeftButton(_ sender: UIBarButtonItem) {
- 
+    func didSelectedBackAction() {
+        popViewController()
     }
 }
 

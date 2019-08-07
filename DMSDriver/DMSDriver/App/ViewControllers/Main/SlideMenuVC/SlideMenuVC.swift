@@ -102,18 +102,18 @@ extension SlideMenuVC: UITableViewDataSource{
         if menutype == .LOGOUT {
             return MAX(ScreenSize.SCREEN_HEIGHT - (CGFloat(((MenuItemType.count - 2) * 65)) + 200), 65)
         }
-        if menutype == .ASSIGN || menutype == .DASHBOARD {
+        if menutype == .ASSIGN || menutype == .DASHBOARD || menutype == .COUNTER || menutype == .ALERT  {
             return 0
         }
         
-        if isRampManagerMode {
-            switch menutype {
-                case .COUNTER, .ALERT:
-                    return 0
-                default:
-                    break
-            }
-        }
+//        if isRampManagerMode {
+//            switch menutype {
+//                case .COUNTER, .ALERT:
+//                    return 0
+//                default:
+//                    break
+//            }
+//        }
     }
     
     return UITableView.automaticDimension

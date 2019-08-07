@@ -93,8 +93,16 @@ import Crashlytics
  
  //MARK: - DMSNavigationServiceDelegate
  extension RouteListVC:DMSNavigationServiceDelegate {
-    func didSelectedBackOrMenu() {
+//    func didSelectedBackOrMenu() {
+//        showSideMenu()
+//    }
+    
+    func didSelectedMenuAction() {
         showSideMenu()
+    }
+    
+    func didSelectedBackAction() {
+        popViewController()
     }
     
     func didSelectedLeftButton(_ sender: UIBarButtonItem) {
