@@ -209,13 +209,28 @@ extension OrderDetailTableViewCell: GMSMapViewDelegate {
 
 //MARK: - UITEXTFIELD
 extension OrderDetailTableViewCell: UITextFieldDelegate {
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        guard let palletTextField = actualQuantityTextField, let cartonTextField = actualCartonsInPalletTextField else { return }
-        let text =  textField.text ?? ""
-        if textField == palletTextField {
-            delegate?.didEnterPalletsQuantityTextField(self, value: text, detail: self.detail)
-        } else if textField == cartonTextField {
-            delegate?.didEnterCartonsQuantityTextField(self, value: text, detail: self.detail)
+//    func textFieldDidEndEditing(_ textField: UITextField) {
+//        guard let palletTextField = actualQuantityTextField, let cartonTextField = actualCartonsInPalletTextField else { return }
+//        let text =  textField.text ?? ""
+//        if textField == palletTextField {
+//            delegate?.didEnterPalletsQuantityTextField(self, value: text, detail: self.detail)
+//        } else if textField == cartonTextField {
+//            delegate?.didEnterCartonsQuantityTextField(self, value: text, detail: self.detail)
+//        }
+//    }
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text,
+            let textRange = Range(range, in: text) {
+            let updatedText = text.replacingCharacters(in: textRange,
+                                                       with: string)
+            guard let palletTextField = actualQuantityTextField, let cartonTextField = actualCartonsInPalletTextField else { return true }
+            if textField == palletTextField {
+                delegate?.didEnterPalletsQuantityTextField(self, value: updatedText, detail: self.detail)
+            } else if textField == cartonTextField {
+                delegate?.didEnterCartonsQuantityTextField(self, value: updatedText, detail: self.detail)
+            }
         }
+        return true
     }
 }
