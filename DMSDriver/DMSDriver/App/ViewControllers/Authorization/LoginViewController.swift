@@ -22,7 +22,7 @@ enum ChooseEvironment:Int {
             case .QC:
                 return "QC"
             case .Demo:
-                return "Demo"
+                return "Staging"
             case .Live:
                 return "Live"
             }
@@ -56,11 +56,18 @@ class LoginViewController: BaseViewController {
         setupViewEvironment()
         setupRemeberButton()
 //        App().statusBarView?.backgroundColor = AppColor.backgroundLogin
+        
+    }
+    
+    func loadEnvironmentSwichUI() {
+        let index = SDBuildConf.currentEnvironment
+        segEvironmentControl?.selectedSegmentIndex = index.rawValue
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.registerForKeyboardNotifications()
+        loadEnvironmentSwichUI()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -68,6 +75,7 @@ class LoginViewController: BaseViewController {
         self.unregisterForKeyboardNotifications()
         App().statusBarView?.backgroundColor = AppColor.white
     }
+    
     
 //    override var preferredStatusBarStyle: UIStatusBarStyle{
 //        return .lightContent
@@ -103,7 +111,7 @@ class LoginViewController: BaseViewController {
 //                                                   ChooseEvironment.QC.name,
 //                                                   ChooseEvironment.Demo.name]
             segEvironmentControl?.segmentTitles = [ChooseEvironment.Development.name,
-            ChooseEvironment.QC.name]
+            ChooseEvironment.QC.name,ChooseEvironment.Demo.name]
             segEvironmentControl?.selectedSegmentIndex = 0
         }
     }
