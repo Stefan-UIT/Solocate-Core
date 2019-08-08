@@ -22,12 +22,14 @@ struct OrderDetailInforRow {
     var title: String = ""
     var content: String = ""
     var isHighlight = false
+    var textColor:UIColor?
     
     
-    init(_ title:String , _ content:String, _ isHighlight:Bool = false) {
+    init(_ title:String , _ content:String, _ isHighlight:Bool = false, _ textColor:UIColor? = nil ) {
         self.title = title
         self.content = content
         self.isHighlight = isHighlight
+        self.textColor = textColor
     }
 }
 
@@ -99,6 +101,9 @@ class OrderDetailTableViewCell: UITableViewCell {
             nameLabel?.text = orderDetailItem.title
             contentLabel?.text = orderDetailItem.content
             contentLabel?.textColor = orderDetailItem.isHighlight ? AppColor.buttonColor : AppColor.black
+            if let color = orderDetailItem.textColor {
+                contentLabel?.textColor = color
+            }
         }
     }
     

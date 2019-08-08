@@ -48,6 +48,7 @@ enum OrderGroup: String {
 enum StatusOrder: String {
     case newStatus = "OP"
     case InTransit = "IT"
+    case InProgress = "IP"
     case deliveryStatus = "DV"
     case CancelStatus = "CC"
     case UnableToFinish = "UF"
@@ -63,6 +64,8 @@ enum StatusOrder: String {
             return "New".localized
         case .InTransit:
             return "in-transit".localized
+        case .InProgress:
+            return "in-progress".localized
         case .PickupStatus:
             return "picked-up".localized
         case .deliveryStatus:
@@ -87,7 +90,7 @@ enum StatusOrder: String {
             switch self {
             case .newStatus, .Loaded, .PartialLoaded:
                 return AppColor.newStatus;
-            case .InTransit:
+            case .InTransit, .InProgress:
                 return AppColor.InTransit;
             case .deliveryStatus, .PartialDelivered:
                 return AppColor.deliveryStatus;

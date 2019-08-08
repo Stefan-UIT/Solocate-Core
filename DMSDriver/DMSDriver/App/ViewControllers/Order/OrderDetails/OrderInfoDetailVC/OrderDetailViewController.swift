@@ -181,36 +181,12 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 //            endToDate = "invalid-date".localized
 //        }
         
-        var startFromDate = ""
-        if let date = order.from?.start_time {
-            startFromDate = date
-        }else {
-            startFromDate = "invalid-date".localized
-        }
+        let startFromDate = Slash(order.from?.start_time)
+        let endFromDate = Slash(order.from?.end_time)
         
-        var endFromDate = ""
-        if let date = order.from?.end_time {
-            endFromDate = date
-        }else {
-            endFromDate = "invalid-date".localized
-        }
+        let startToDate = Slash(order.to?.start_time)
+        let endToDate = Slash(order.to?.end_time)
         
-        var startToDate = ""
-        if let date = order.to?.start_time {
-            startToDate = date
-        }else {
-            startToDate = "invalid-date".localized
-        }
-        
-        var endToDate = ""
-        if let date = order.to?.end_time {
-            endToDate = date
-        } else {
-            endToDate = "invalid-date".localized
-        }
-        
-//        let status = StatusOrder(rawValue: order.statusCode ?? "") ?? StatusOrder.newStatus
-//        let statusItem = OrderDetailInforRow("Status".localized,status.statusName.localized)
         let customerItem = OrderDetailInforRow("customer-name".localized,
                                              Slash(order.customer?.userName))
 //        let urgency = OrderDetailInforRow("Urgency".localized,

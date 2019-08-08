@@ -106,18 +106,23 @@ class ReturnedItemDetailVC: BaseViewController {
         taskInstruction.removeAll()
         
         let status = TaskStatus(rawValue: E(_item.status.code)) ?? TaskStatus.open
-        let statusItem = OrderDetailInforRow("Status".localized,status.statusName.localized)
+        let statusItem = OrderDetailInforRow("Status".localized,status.statusName.localized,false,_item.colorStatus)
         let taskName = OrderDetailInforRow("Name".localized,"\(E(_item.name))")
         let routeID = OrderDetailInforRow("Route".localized,"\(_item.routeID ?? 0)")
 
         let startTime = OrderDetailInforRow("start-time".localized, Slash(_item.dlvy_start_time))
         let endTime = OrderDetailInforRow("end-time".localized, Slash(_item.dlvy_end_time))
+        let warehouse = OrderDetailInforRow("Warehouse".localized, Slash(_item.warehouse?.address))
         let instruction = OrderDetailInforRow("Instructions".localized,Slash(_item.instructions))
         let note = OrderDetailInforRow("Note".localized,Slash(_item.note))
         
         var assigneesName = ""
         for i in _item.assignees {
-            assigneesName = assigneesName + ", " + Slash(i.userName)
+            assigneesName += Slash(i.userName)
+            let isLastItem = i.id == _item.assignees.last?.id
+            if !isLastItem {
+                assigneesName += ", "
+            }
         }
         
         let assigneesRow = OrderDetailInforRow("Assignees".localized,assigneesName)
@@ -128,6 +133,7 @@ class ReturnedItemDetailVC: BaseViewController {
         taskInforRows.append(assigneesRow)
         taskInforRows.append(startTime)
         taskInforRows.append(endTime)
+        taskInforRows.append(warehouse)
         taskInforRows.append(instruction)
         taskInforRows.append(note)
 //        taskInstruction.append(instruction)
@@ -152,7 +158,6 @@ class ReturnedItemDetailVC: BaseViewController {
     func initVar()  {
         arrTitleHeader = ["Status".localized,
                           "Information".localized,
-//                          "Information".localized,
             "Returned Item Quantity".localized,
                           "order_detail_notes".localized]
         
