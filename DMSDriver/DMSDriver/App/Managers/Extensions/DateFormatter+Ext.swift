@@ -21,6 +21,7 @@ let Hour24Formater = DateFormatter.hour24Formater
 let HourFormater = DateFormatter.hourFormater
 let ServerDateFormater = DateFormatter.serverDateFormater
 let ShortDateFormater = DateFormatter.shortDate
+let NormalDateFormater = DateFormatter.normalDateFormater
 
 
 //MARK: - DateFormatter Instance
@@ -36,5 +37,6 @@ extension DateFormatter {
     static let displayDateTimeVN = DateFormatter(format: "dd/MM/yyyy HH:mm");
     static let shortDate = DateFormatter(format: "MMM dd",timeZone: .company);
     static let serverDateFormater = DateFormatter(format: "yyyy/MM/dd HH:mm:ss", timeZone: .company);
+    static let normalDateFormater = DateFormatter(format: "yyyy/MM/dd HH:mm:ss");
     
 }
