@@ -217,20 +217,46 @@ class ReturnedItemDetailVC: BaseViewController {
     }
     
     @IBAction func onCancelButtonTouchUp(_ sender: UIButton) {
+        guard let _item = item else { return }
+        self.showLoadingIndicator()
+        SERVICES().API.cancelReturnedItem(_item.id) { [weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result {
+            case .object(let obj):
+                let message = obj.message
+                self?.showAlertView(message ?? "")
+                
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
+        }
     }
     
     
     @IBAction func onRejectButtonTouchUp(_ sender: UIButton) {
+        guard let _item = item else { return }
+        self.showLoadingIndicator()
+        SERVICES().API.rejectReturnedItem(_item.id) { [weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result {
+            case .object(let obj):
+                let message = obj.message
+                self?.showAlertView(message ?? "")
+                
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
+        }
     }
     
-    @IBAction func didClickFinish(_ sender: UIButton) {
-        handleFinishAction()
-    }
-    
-    @IBAction func didClickUnableToStart(_ sender: UIButton) {
-//        handleUnableToStartAction()
-        handleCancelAction()
-    }
+//    @IBAction func didClickFinish(_ sender: UIButton) {
+//        handleFinishAction()
+//    }
+//
+//    @IBAction func didClickUnableToStart(_ sender: UIButton) {
+////        handleUnableToStartAction()
+//        handleCancelAction()
+//    }
     
     func finishReturnedItem() {
         guard let _item = self.item else { return }
