@@ -170,7 +170,6 @@ class ReturnedItemDetailVC: BaseViewController {
         
         //2. Add the text field. You can configure it however you need.
         alert.addTextField { (textField) in
-            textField.keyboardType = .numberPad
             textField.text = ""
         }
         

@@ -830,11 +830,6 @@ fileprivate extension OrderDetailViewController {
             }
         }
         
-        
-        
-        
-        
-        
         let isShowingOnly = order.isDeliveryType && (order.statusOrder == StatusOrder.newStatus || order.statusOrder == StatusOrder.Loaded || order.statusOrder == StatusOrder.PartialLoaded || order.statusOrder == StatusOrder.WarehouseClarification || order.statusOrder == StatusOrder.CancelStatus)
         
         func handleEnablingTextField() {
