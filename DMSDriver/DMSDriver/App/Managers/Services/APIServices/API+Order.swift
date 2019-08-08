@@ -23,7 +23,7 @@ extension BaseAPIService{
     func updateOrderStatus(_ order:Order,
                            reason: Reason? = nil,
                            updateDetailType:Order.Detail.DetailUpdateType = .Deliver,
-                           reasonMessage:String? = nil,
+                           partialDeliveredReasonMsg:String? = nil,
                            callback: @escaping APICallback<ResponseDataModel<Order>>) -> APIRequest? {
         
         let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL,
@@ -34,7 +34,7 @@ extension BaseAPIService{
             params["reason_id"] = "\(_reason.id)"
         }
         
-        if let msg = reasonMessage {
+        if let msg = partialDeliveredReasonMsg {
             params["message"] = msg
         }
         

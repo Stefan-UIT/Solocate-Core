@@ -1134,8 +1134,9 @@ fileprivate extension OrderDetailViewController{
     }
     
     private func handleReturnedPalletAction() {
-        let statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
-        self.updateOrderStatus(statusNeedUpdate,updateDetailType:.ReturnedPallet)
+        guard let detail = orderDetail?.details?.first else {return}
+        let statusNeedUpdate = detail.getFinishedStatusWithInputQuantity()
+        self.updateOrderStatus(statusNeedUpdate.rawValue,updateDetailType:.ReturnedPallet)
     }
     
     private func showInputNote(_ statusNeedUpdate:String) {
@@ -1336,7 +1337,14 @@ extension OrderDetailViewController{
     
     
     func updateOrderStatusImport(_ order:Order, updateDetailType:Order.Detail.DetailUpdateType = .Deliver, cancelReason:Reason? = nil, reasonMessage:String? = nil)  {
-        SERVICES().API.updateOrderStatus(order, reason:cancelReason, updateDetailType:updateDetailType, reasonMessage: reasonMessage) {[weak self] (result) in
+        var partialDeliveredReasonMsg = reasonMessage
+        if order.statusOrder == .PartialDelivered && updateDetailType == .ReturnedPallet {
+            if let mes = order.partialDeliveredReason?.message {
+                partialDeliveredReasonMsg = mes
+            }
+        }
+        
+        SERVICES().API.updateOrderStatus(order, reason:cancelReason, updateDetailType:updateDetailType, partialDeliveredReasonMsg: partialDeliveredReasonMsg) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):

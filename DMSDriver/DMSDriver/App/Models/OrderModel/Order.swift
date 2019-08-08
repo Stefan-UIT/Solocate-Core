@@ -459,6 +459,7 @@ class Order: BaseModel {
     var cod_rcvd:String?
     var wmsOrderCode:String?
     var wmsManifestNumber:String?
+    var partialDeliveredReason:Reason?
     
     lazy var orderGroup:OrderGroup = {
         return OrderGroup.init(rawValue: group) ?? OrderGroup.Logistic
@@ -566,6 +567,7 @@ class Order: BaseModel {
             detail.wmsOrderCode = wmsOrderCode
             detail.wmsManifestNumber = wmsManifestNumber
         }
+        partialDeliveredReason    <- map["reason"]
     }
     
     
