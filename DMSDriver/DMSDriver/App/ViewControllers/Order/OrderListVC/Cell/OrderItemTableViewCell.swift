@@ -44,9 +44,16 @@ class OrderItemTableViewCell: UITableViewCell {
     }
     
     func updateCell() {
-        let startDate = HourFormater.string(from: order.from?.start_time?.date ?? Date())
-        let endDate = HourFormater.string(from:  order.to?.end_time?.date ?? Date())
-        let dateDate = DateFormatter.shortDate.string(from:  order.from?.end_time?.date ?? Date())
+        var startDate = "NA"
+        var endDate = "NA"
+        var dateDate = "NA"
+        if let start = order.from?.start_time?.date {
+            startDate = HourFormater.string(from:start)
+        }
+        if let end = order.to?.end_time?.date {
+            endDate = HourFormater.string(from:end)
+            dateDate = DateFormatter.shortDate.string(from:end)
+        }
         
         lblNumber?.text = "\(order.seq)."
         lblTitle?.text = String(format: "#%d".localized, order.id)

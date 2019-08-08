@@ -168,8 +168,14 @@ class RouteDetailVC: BaseViewController {
     }
     
     private func initUI()  {
-        let startDate = HourFormater.string(from: route?.start_time.date ?? Date())
-        let endDate = HourFormater.string(from: route?.end_time.date ?? Date())
+        var startDate = "NA"
+        var endDate = "NA"
+        if let start = route?.start_time.date {
+            startDate = HourFormater.string(from:start)
+        }
+        if let end = route?.end_time.date {
+            endDate = HourFormater.string(from:end)
+        }
         lblRoute?.text = "Route".localized + " #\(route?.id ?? 0)"
         lblTime?.text = "\(startDate) - \(endDate)"
         lblStatus?.text = route?.status?.name?.localized

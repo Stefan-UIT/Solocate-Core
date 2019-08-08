@@ -33,9 +33,16 @@ class RouteTableViewCell: UITableViewCell {
     }
     
     func loadData(_ route: Route) {
-        let stringDate = DateFormatter.shortDate.string(from: route.end_time.date ?? Date())
-        let startDate = HourFormater.string(from: route.start_time.date ?? Date())
-        let endDate = HourFormater.string(from: route.end_time.date ?? Date())
+        var startDate = "NA"
+        var endDate = "NA"
+        var stringDate = "NA"
+        if let start = route.start_time.date {
+            startDate = HourFormater.string(from:start)
+        }
+        if let end = route.end_time.date {
+            endDate = HourFormater.string(from:end)
+            stringDate = DateFormatter.shortDate.string(from: end)
+        }
 
         routeIDLabel.text = "#\(route.id)"
         statusLabel.text = route.status?.name?.localized
