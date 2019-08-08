@@ -76,6 +76,8 @@ class RouteDetailVC: BaseViewController {
     private let identifieLocationsCell = "RouteDetailLocationListClvCell"
 
     
+    @IBOutlet weak var vanLoadButtonView: UIView!
+    
     var route:Route?
     var dateStringFilter:String = Date().toString()
 
@@ -142,7 +144,7 @@ class RouteDetailVC: BaseViewController {
     
     func filterOrdersAbleToLoad(orders:[Order]) -> [Order] {
         let filteredArray = orders.filter({$0.isDeliveryType})
-        return filteredArray.filter({$0.statusOrder == StatusOrder.newStatus || $0.statusOrder == StatusOrder.Loaded || $0.statusOrder == StatusOrder.PartialLoaded || $0.statusOrder == StatusOrder.WarehouseClarification})
+        return filteredArray.filter({$0.statusOrder == StatusOrder.newStatus || $0.statusOrder == StatusOrder.WarehouseClarification})
     }
     
     func redirectToLoadingPackageVC() {
@@ -359,6 +361,14 @@ extension RouteDetailVC{
         guard let _route = route else { return }
         assignDriverButtonView.isHidden = _route.isAssignedDriver
         assignTruckButtonView.isHidden = _route.isAssignedTruck
+        vanLoadButtonView.isHidden = !_route.isHasOrderNeedToBeLoaded
+        
+        let shouldHideActionsContainer = (assignTruckButtonView.isHidden && assignTruckButtonView.isHidden && vanLoadButtonView.isHidden)
+        if shouldHideActionsContainer {
+            actionsViewContainer.isHidden = shouldHideActionsContainer
+            actionViewContainerHeightConstraint.constant = 0.0
+        }
+
     }
     
     @objc func fetchData()  {
@@ -380,7 +390,9 @@ extension RouteDetailVC{
             case .object(let obj):
                 strongSelf.route = obj.data
                 strongSelf.clvContent?.reloadData()
-                strongSelf.updateActionsUI()
+                if isRampManagerMode {
+                    strongSelf.updateActionsUI()
+                }
                 /*
                  guard let data = obj.data else {return}
                  CoreDataManager.updateRoute(data) // Update route to DB local

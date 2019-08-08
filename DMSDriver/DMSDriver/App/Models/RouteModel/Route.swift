@@ -259,6 +259,19 @@ class Route: BaseModel {
         assignedInfo <- map["drivers"]
     }
     
+    var ordersAbleToLoad:[Order] {
+        get {
+            let filteredArray = orderList.filter({$0.isDeliveryType})
+            return filteredArray.filter({$0.statusOrder == StatusOrder.newStatus || $0.statusOrder == StatusOrder.WarehouseClarification})
+        }
+    }
+    
+    var isHasOrderNeedToBeLoaded:Bool {
+        get {
+            return ordersAbleToLoad.count > 0
+        }
+    }
+    
     var isFirstStartOrder:Bool{
         get{
             var result = true

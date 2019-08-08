@@ -34,6 +34,11 @@ class LoadUnloadOrderVC: BaseViewController {
     }
     
     var orders:[Order] = []
+    var ordersAbleToLoad:[Order] {
+        get {
+            return orders.filter({$0.statusOrder == StatusOrder.newStatus || $0.statusOrder == StatusOrder.WarehouseClarification})
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -58,16 +63,16 @@ class LoadUnloadOrderVC: BaseViewController {
                                                     AppColor.white, true)
     }
     
+    
     func getAllDetailsFromOrders() -> [Order.Detail]{
         var details:[Order.Detail] = []
-        for value in orders {
+        for value in ordersAbleToLoad {
             details.append(value.details ?? [])
         }
         return details
     }
     
     func initData()  {
-        
         dataOrigin = getAllDetailsFromOrders()
         doSearch(strSearch: strSearch)
     }
@@ -159,6 +164,7 @@ extension LoadUnloadOrderVC {
             switch result{
             case .object(let obj):
                 self?.showAlertView("updated-successful".localized)
+                self?.initData()
                 break
             case .error(let error):
                 self?.showAlertView(error.getMessage())
