@@ -112,6 +112,7 @@ extension RouteDetailOrderListClvCell: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         let vc:OrderDetailViewController = .loadSB(SB: .Order)
+        vc.route = route
         vc.orderDetail = orderList[indexPath.row]
         vc.updateOrderDetail = {[weak self](order) in
             self?.fetchData()

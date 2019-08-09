@@ -1150,7 +1150,7 @@ fileprivate extension OrderDetailViewController{
     }
     
     private func handleShowingButtonStatusWithDeliveryType() {
-        guard let _order = orderDetail else { return }
+        guard let _order = orderDetail, let _route = route else { return }
         handleShowingUnableToStartButton()
         updateStatusButton?.isEnabled = true
         switch orderDetail?.statusOrder.rawValue {
@@ -1180,8 +1180,11 @@ fileprivate extension OrderDetailViewController{
         let isFinishedAndNotPalletType = ((orderDetail?.statusOrder == StatusOrder.deliveryStatus || orderDetail?.statusOrder == StatusOrder.PartialDelivered) && !(orderDetail?.details?[0].isPallet)!)
         let isFinishedAndUpdatedReturnedPalletsQty = (_order.isFinished && orderDetail?.details?.first?.returnedPalletQty != nil)
         let isRampManagerAndNotNewOrder = (isRampManagerMode && orderDetail?.statusOrder != StatusOrder.newStatus)
+        
+        let isNotAllowedToGoToDelivery = _order.isLoaded && !_route.isAllowedGoToDelivery
+        
         let isHidden = ( orderDetail?.statusOrder == StatusOrder.CancelStatus ||
-            orderDetail?.statusOrder == StatusOrder.UnableToFinish || isFinishedAndNotPalletType || isFinishedAndUpdatedReturnedPalletsQty || isRampManagerAndNotNewOrder )
+            orderDetail?.statusOrder == StatusOrder.UnableToFinish || isFinishedAndNotPalletType || isFinishedAndUpdatedReturnedPalletsQty || isRampManagerAndNotNewOrder || isNotAllowedToGoToDelivery)
         
         updateStatusButton?.isHidden = isHidden
         vAction?.isHidden = isHidden

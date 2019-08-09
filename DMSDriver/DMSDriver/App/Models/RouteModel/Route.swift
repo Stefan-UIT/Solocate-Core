@@ -183,6 +183,14 @@ class Route: BaseModel {
     var loadVolume:Double = 0.0
     var assignedInfo:[AssignedInfo]?
     
+    var isAllowedGoToDelivery:Bool {
+        get {
+            let deliveryOrders = orderList.filter({$0.isDeliveryType})
+            let WCAndNewOrders = deliveryOrders.filter({$0.isNewStatus || $0.isWarehouseClarification})
+            return WCAndNewOrders.count == 0
+        }
+    }
+    
     var isAssignedDriver:Bool {
         get {
             guard let info = assignedInfo?.first else { return false}

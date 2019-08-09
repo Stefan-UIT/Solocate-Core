@@ -484,6 +484,10 @@ class Order: BaseModel {
         return statusOrder == .newStatus
     }
     
+    var isWarehouseClarification:Bool {
+        return statusOrder == .WarehouseClarification
+    }
+    
     var isInTransit:Bool {
         return statusOrder == .InTransit
     }
