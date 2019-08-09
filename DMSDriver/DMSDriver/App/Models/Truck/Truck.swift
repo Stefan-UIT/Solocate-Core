@@ -12,10 +12,11 @@ import ObjectMapper
 class Truck:BaseModel {
     
     var id:Int = -1
-    var name = ""
+    var name = "-"
     var maxLoad = 0
     var maxVolume = 0
     var maxFloor = 0
+    var type:TruckType?
     
     override init() {
         super.init()
@@ -32,5 +33,6 @@ class Truck:BaseModel {
         maxLoad <- map["max_load"]
         maxVolume <- map["max_vol"]
         maxFloor <- map["max_floor"]
+        type <- map["type"]
     }
 }

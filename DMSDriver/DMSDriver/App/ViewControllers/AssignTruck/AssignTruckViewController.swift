@@ -14,8 +14,10 @@ class AssignTruckViewController: BaseViewController {
     var route:Route!
     var trucks:[Truck] = []
     
+    @IBOutlet weak var companyLabel: UILabel!
     override func viewDidLoad() {
         super.viewDidLoad()
+        companyLabel.text = Slash(route.company?.name)
         self.fetchData()
         // Do any additional setup after loading the view.
     }
