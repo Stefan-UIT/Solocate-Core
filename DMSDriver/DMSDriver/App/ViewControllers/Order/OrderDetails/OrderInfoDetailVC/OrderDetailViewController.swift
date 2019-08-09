@@ -189,6 +189,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         
         let customerItem = OrderDetailInforRow("customer-name".localized,
                                              Slash(order.customer?.userName))
+        let remark = OrderDetailInforRow("remark".localized,
+                                              Slash(order.remark))
 //        let urgency = OrderDetailInforRow("Urgency".localized,
 //                                          isHebewLang() ? order.urgent_type_name_hb ?? "" :  order.urgent_type_name_en ?? "")
         let orderId = OrderDetailInforRow("order-id".localized,"#\(order.id)")
@@ -204,6 +206,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforDetail.append(orderGroup)
         orderInforDetail.append(orderType)
         orderInforDetail.append(customerItem)
+        orderInforDetail.append(remark)
         //orderInforStatus.append(urgency)
         
         if  (order.statusOrder == .CancelStatus ||

@@ -463,6 +463,7 @@ class Order: BaseModel {
     var wmsOrderCode:String?
     var wmsManifestNumber:String?
     var partialDeliveredReason:Reason?
+    var remark:String?
     var consigneeName:String? {
         get {
             let name = (isPickUpType) ? from?.ctt_name : to?.ctt_name
@@ -581,6 +582,7 @@ class Order: BaseModel {
             detail.wmsManifestNumber = wmsManifestNumber
         }
         partialDeliveredReason    <- map["reason"]
+        remark    <- map["remark"]
     }
     
     
