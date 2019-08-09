@@ -33,6 +33,7 @@ class LoadUnloadOrderVC: BaseViewController {
         }
     }
     
+    var route:Route!
     var orders:[Order] = []
     var ordersAbleToLoad:[Order] {
         get {
@@ -57,12 +58,17 @@ class LoadUnloadOrderVC: BaseViewController {
     }
     
     override func updateNavigationBar() {
-        App().navigationService.delegate = self
+        let routeName = E(route.routeMaster?.code) + " - " + E(route.routeMaster?.name)
         App().navigationService.updateNavigationBar(.BackOnly,
                                                     "packages-list".localized,
-                                                    AppColor.white, true)
+                                                    AppColor.white, true, routeName)
+        App().navigationService.delegate = self
     }
     
+    func orderWithDetail(_ detail:Order.Detail) -> Order? {
+        let array = orders.filter({detail.id == $0.details?.first?.id})
+        return array.first
+    }
     
     func getAllDetailsFromOrders() -> [Order.Detail]{
         var details:[Order.Detail] = []
@@ -194,8 +200,8 @@ extension LoadUnloadOrderVC:UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let detail = dataDisplay[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: loadPackageCellIdentifier, for: indexPath) as! LoadPackageTableViewCell
-        
-        cell.configureCellWithDetail(detail)
+        guard let order = orderWithDetail(detail) else { return UITableViewCell() }
+        cell.configureCellWithOrder(order)
         cell.delegate = self
         
         return cell

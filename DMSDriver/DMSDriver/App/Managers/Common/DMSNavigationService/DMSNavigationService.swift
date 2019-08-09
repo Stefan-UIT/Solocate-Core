@@ -172,10 +172,11 @@ extension DMSNavigationService {
     func updateNavigationBar(_ barStyle:BarStyle,
                              _ title:String,
                              _ backgrondBar:UIColor = UIColor.white,
-                             _ useLargeTitle:Bool = false) {
+                             _ useLargeTitle:Bool = false,
+                             _ subMainTitle:String? = nil) {
         if useLargeTitle == true {
             navigationBar?.largeTitleTextAttributes = [NSAttributedString.Key.foregroundColor: AppColor.mainColor,
-                                                       NSAttributedString.Key.font: Font.helveticaBold(with: 35)]
+                                                       NSAttributedString.Key.font: Font.helveticaBold(with: 28)]
             navigationItem?.largeTitleDisplayMode = .automatic
             navigationItem?.title = E(title)
             App().statusBarView?.backgroundColor = AppColor.white
@@ -183,6 +184,10 @@ extension DMSNavigationService {
         else {
             navigationItem?.largeTitleDisplayMode = .never
             addTitleToNavigationBar(title: E(title) ,color: AppColor.mainColor)
+        }
+        
+        if let subTitle = subMainTitle {
+            addTitleToNavigationBar(title: E(subTitle) ,color: AppColor.mainColor)
         }
         
         navigationBar?.barTintColor = backgrondBar

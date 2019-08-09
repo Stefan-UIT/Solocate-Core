@@ -39,7 +39,7 @@ class LoadUnLoadListCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
-    func configura(orderDetail:Order.Detail) {
+    func configure(orderDetail:Order.Detail) {
         self.orderDetail = orderDetail
         lblPackage?.text = orderDetail.package?.name
         lblQty?.text = #"\#(orderDetail.qty ?? 0)"#

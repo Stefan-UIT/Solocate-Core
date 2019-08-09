@@ -463,6 +463,12 @@ class Order: BaseModel {
     var wmsOrderCode:String?
     var wmsManifestNumber:String?
     var partialDeliveredReason:Reason?
+    var consigneeName:String? {
+        get {
+            let name = (isPickUpType) ? from?.ctt_name : to?.ctt_name
+            return name
+        }
+    }
     
     lazy var orderGroup:OrderGroup = {
         return OrderGroup.init(rawValue: group) ?? OrderGroup.Logistic

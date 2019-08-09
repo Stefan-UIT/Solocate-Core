@@ -16,6 +16,8 @@ protocol LoadPackageTableViewCellDelegate:class {
 
 class LoadPackageTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var consigneeNameLabel: UILabel!
+    @IBOutlet weak var customerNameLabel: UILabel!
     @IBOutlet weak var packageNameLabel: UILabel?
     @IBOutlet weak var quantityLabel: UILabel?
     @IBOutlet weak var lblBarcode: UILabel?
@@ -70,13 +72,16 @@ class LoadPackageTableViewCell: UITableViewCell {
         }
     }
     
-    func configureCellWithDetail(_ detail:Order.Detail) {
+    func configureCellWithOrder(_ order:Order) {
+        guard let detail = order.details?.first else { return }
         self.detail = detail
         packageNameLabel?.text = detail.package?.name
         quantityLabel?.text = "\(detail.qty ?? 0)"
         wmsOrderCodeLabel?.text = detail.wmsOrderCode ?? "-"
         actualQuantityTextField?.text = (detail.loadedQty != nil) ? "\(detail.loadedQty!)" : ""
         vContent?.cornerRadius = 0
+        customerNameLabel.text = Slash(order.customer?.userName)
+        consigneeNameLabel.text = Slash(order.consigneeName)
         
         handleShowingCartonSection()
     }
