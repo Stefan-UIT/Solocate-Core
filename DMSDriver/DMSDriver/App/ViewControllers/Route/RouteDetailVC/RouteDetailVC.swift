@@ -76,6 +76,8 @@ class RouteDetailVC: BaseViewController {
     private let identifieLocationsCell = "RouteDetailLocationListClvCell"
 
     
+    @IBOutlet weak var vanLoadButtonView: UIView!
+    
     var route:Route?
     var dateStringFilter:String = Date().toString()
 
@@ -142,12 +144,13 @@ class RouteDetailVC: BaseViewController {
     
     func filterOrdersAbleToLoad(orders:[Order]) -> [Order] {
         let filteredArray = orders.filter({$0.isDeliveryType})
-        return filteredArray.filter({$0.statusOrder == StatusOrder.newStatus || $0.statusOrder == StatusOrder.Loaded || $0.statusOrder == StatusOrder.PartialLoaded || $0.statusOrder == StatusOrder.WarehouseClarification})
+        return filteredArray.filter({$0.statusOrder == StatusOrder.newStatus || $0.statusOrder == StatusOrder.WarehouseClarification})
     }
     
     func redirectToLoadingPackageVC() {
-        guard let orders = route?.orderList else { return }
+        guard let _route = route, let orders = route?.orderList else { return }
         let vc:LoadUnloadOrderVC = LoadUnloadOrderVC.loadSB(SB: .LoadUnloadOrder)
+        vc.route = _route
         vc.orders = filterOrdersAbleToLoad(orders: orders)
         vc.callback = {[weak self] (hasUpdate,order) in
         }
@@ -166,8 +169,14 @@ class RouteDetailVC: BaseViewController {
     }
     
     private func initUI()  {
-        let startDate = HourFormater.string(from: route?.start_time.date ?? Date())
-        let endDate = HourFormater.string(from: route?.end_time.date ?? Date())
+        var startDate = "NA"
+        var endDate = "NA"
+        if let start = route?.start_time.date {
+            startDate = HourFormater.string(from:start)
+        }
+        if let end = route?.end_time.date {
+            endDate = HourFormater.string(from:end)
+        }
         lblRoute?.text = "Route".localized + " #\(route?.id ?? 0)"
         lblTime?.text = "\(startDate) - \(endDate)"
         lblStatus?.text = route?.status?.name?.localized
@@ -359,6 +368,14 @@ extension RouteDetailVC{
         guard let _route = route else { return }
         assignDriverButtonView.isHidden = _route.isAssignedDriver
         assignTruckButtonView.isHidden = _route.isAssignedTruck
+        vanLoadButtonView.isHidden = !_route.isHasOrderNeedToBeLoaded
+        
+        let shouldHideActionsContainer = (assignTruckButtonView.isHidden && assignTruckButtonView.isHidden && vanLoadButtonView.isHidden)
+        if shouldHideActionsContainer {
+            actionsViewContainer.isHidden = shouldHideActionsContainer
+            actionViewContainerHeightConstraint.constant = 0.0
+        }
+
     }
     
     @objc func fetchData()  {
@@ -380,7 +397,9 @@ extension RouteDetailVC{
             case .object(let obj):
                 strongSelf.route = obj.data
                 strongSelf.clvContent?.reloadData()
-                strongSelf.updateActionsUI()
+                if isRampManagerMode {
+                    strongSelf.updateActionsUI()
+                }
                 /*
                  guard let data = obj.data else {return}
                  CoreDataManager.updateRoute(data) // Update route to DB local

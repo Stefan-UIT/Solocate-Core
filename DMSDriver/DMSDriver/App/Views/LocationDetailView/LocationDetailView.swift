@@ -77,9 +77,9 @@ extension LocationDetailView:UITableViewDataSource{
         case .Location:
             return 1
         case .Deliver:
-            return delivers.count
+            return (delivers.count > 0) ? 1 : 0
         case .Pickup:
-            return pickups.count
+            return (pickups.count > 0) ? 1 : 0
         }
     }
     
@@ -163,21 +163,50 @@ extension LocationDetailView:UITableViewDataSource{
             
         case .Deliver:
             let cell = tableView.dequeueReusableCell(withIdentifier: packageIdentifierCell, for: indexPath) as! LocationDetailViewCell
-            let deliver = delivers[row]
             
-            cell.lblSubTitle?.text = (deliver.package?.name != nil) ? deliver.package?.name : "package".localized + ": \(row + 1)"
+            let subTitle = locationDetailSubTitle(details: delivers)
+//            cell.lblSubTitle?.text = (deliver.package?.name != nil) ? deliver.package?.name : "package".localized + ": \(row + 1)"
+            cell.lblSubTitle?.text = subTitle
 
 
             return cell
         case .Pickup:
             let cell = tableView.dequeueReusableCell(withIdentifier: packageIdentifierCell, for: indexPath) as! LocationDetailViewCell
-            let pickup = pickups[row]
             
-            cell.lblSubTitle?.text = (pickup.package?.name != nil) ? pickup.package?.name : "package".localized + ": \(row + 1)"
+            
+            let subTitle = locationDetailSubTitle(details: pickups)
+            
+            cell.lblSubTitle?.text = subTitle
 
             
             return cell
         }
+    }
+    
+    func locationDetailSubTitle(details:[Order.Detail]) -> String {
+        var palletsQty = 0
+        var cartonsQty = 0
+        for item in details {
+            if item.isPallet {
+                palletsQty += item.qty ?? 0
+            } else {
+                cartonsQty += item.qty ?? 0
+            }
+        }
+        
+        var result = ""
+        if palletsQty > 0 {
+            result += "pallets".localized + ": " + "\(palletsQty)"
+        }
+        
+        if cartonsQty > 0 {
+            if !result.isEmpty {
+                result += ", "
+            }
+            result += "cartons".localized + ": " + "\(cartonsQty)"
+        }
+        
+        return result
     }
 }
 

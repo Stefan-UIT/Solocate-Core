@@ -181,38 +181,16 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 //            endToDate = "invalid-date".localized
 //        }
         
-        var startFromDate = ""
-        if let date = order.from?.start_time {
-            startFromDate = date
-        }else {
-            startFromDate = "invalid-date".localized
-        }
+        let startFromDate = Slash(order.from?.start_time)
+        let endFromDate = Slash(order.from?.end_time)
         
-        var endFromDate = ""
-        if let date = order.from?.end_time {
-            endFromDate = date
-        }else {
-            endFromDate = "invalid-date".localized
-        }
+        let startToDate = Slash(order.to?.start_time)
+        let endToDate = Slash(order.to?.end_time)
         
-        var startToDate = ""
-        if let date = order.to?.start_time {
-            startToDate = date
-        }else {
-            startToDate = "invalid-date".localized
-        }
-        
-        var endToDate = ""
-        if let date = order.to?.end_time {
-            endToDate = date
-        } else {
-            endToDate = "invalid-date".localized
-        }
-        
-//        let status = StatusOrder(rawValue: order.statusCode ?? "") ?? StatusOrder.newStatus
-//        let statusItem = OrderDetailInforRow("Status".localized,status.statusName.localized)
         let customerItem = OrderDetailInforRow("customer-name".localized,
                                              Slash(order.customer?.userName))
+        let remark = OrderDetailInforRow("remark".localized,
+                                              Slash(order.remark))
 //        let urgency = OrderDetailInforRow("Urgency".localized,
 //                                          isHebewLang() ? order.urgent_type_name_hb ?? "" :  order.urgent_type_name_en ?? "")
         let orderId = OrderDetailInforRow("order-id".localized,"#\(order.id)")
@@ -228,6 +206,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforDetail.append(orderGroup)
         orderInforDetail.append(orderType)
         orderInforDetail.append(customerItem)
+        orderInforDetail.append(remark)
         //orderInforStatus.append(urgency)
         
         if  (order.statusOrder == .CancelStatus ||
@@ -1134,8 +1113,9 @@ fileprivate extension OrderDetailViewController{
     }
     
     private func handleReturnedPalletAction() {
-        let statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
-        self.updateOrderStatus(statusNeedUpdate,updateDetailType:.ReturnedPallet)
+        guard let detail = orderDetail?.details?.first else {return}
+        let statusNeedUpdate = detail.getFinishedStatusWithInputQuantity()
+        self.updateOrderStatus(statusNeedUpdate.rawValue,updateDetailType:.ReturnedPallet)
     }
     
     private func showInputNote(_ statusNeedUpdate:String) {
@@ -1173,7 +1153,7 @@ fileprivate extension OrderDetailViewController{
     }
     
     private func handleShowingButtonStatusWithDeliveryType() {
-        guard let _order = orderDetail else { return }
+        guard let _order = orderDetail, let _route = route else { return }
         handleShowingUnableToStartButton()
         updateStatusButton?.isEnabled = true
         switch orderDetail?.statusOrder.rawValue {
@@ -1203,8 +1183,11 @@ fileprivate extension OrderDetailViewController{
         let isFinishedAndNotPalletType = ((orderDetail?.statusOrder == StatusOrder.deliveryStatus || orderDetail?.statusOrder == StatusOrder.PartialDelivered) && !(orderDetail?.details?[0].isPallet)!)
         let isFinishedAndUpdatedReturnedPalletsQty = (_order.isFinished && orderDetail?.details?.first?.returnedPalletQty != nil)
         let isRampManagerAndNotNewOrder = (isRampManagerMode && orderDetail?.statusOrder != StatusOrder.newStatus)
+        
+        let isNotAllowedToGoToDelivery = _order.isLoaded && !_route.isAllowedGoToDelivery
+        
         let isHidden = ( orderDetail?.statusOrder == StatusOrder.CancelStatus ||
-            orderDetail?.statusOrder == StatusOrder.UnableToFinish || isFinishedAndNotPalletType || isFinishedAndUpdatedReturnedPalletsQty || isRampManagerAndNotNewOrder )
+            orderDetail?.statusOrder == StatusOrder.UnableToFinish || isFinishedAndNotPalletType || isFinishedAndUpdatedReturnedPalletsQty || isRampManagerAndNotNewOrder || isNotAllowedToGoToDelivery)
         
         updateStatusButton?.isHidden = isHidden
         vAction?.isHidden = isHidden
@@ -1336,7 +1319,14 @@ extension OrderDetailViewController{
     
     
     func updateOrderStatusImport(_ order:Order, updateDetailType:Order.Detail.DetailUpdateType = .Deliver, cancelReason:Reason? = nil, reasonMessage:String? = nil)  {
-        SERVICES().API.updateOrderStatus(order, reason:cancelReason, updateDetailType:updateDetailType, reasonMessage: reasonMessage) {[weak self] (result) in
+        var partialDeliveredReasonMsg = reasonMessage
+        if order.statusOrder == .PartialDelivered && updateDetailType == .ReturnedPallet {
+            if let mes = order.partialDeliveredReason?.message {
+                partialDeliveredReasonMsg = mes
+            }
+        }
+        
+        SERVICES().API.updateOrderStatus(order, reason:cancelReason, updateDetailType:updateDetailType, partialDeliveredReasonMsg: partialDeliveredReasonMsg) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):

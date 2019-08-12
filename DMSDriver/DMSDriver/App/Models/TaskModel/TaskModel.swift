@@ -170,7 +170,7 @@ class ReturnedItem: TaskModel {
     var myOwn:UserModel.UserInfo!
     var isAllowedToActions:Bool {
         get {
-            return currentAssignee.id == myOwn.id && !isFinished
+            return currentAssignee.id == myOwn.id && !(isFinished || isCancelled)
         }
     }
     
@@ -180,6 +180,10 @@ class ReturnedItem: TaskModel {
     
     var isFinished:Bool {
         return status.code == TaskStatus.delivered.rawValue
+    }
+    
+    var isCancelled:Bool {
+        return status.code == TaskStatus.cancel.rawValue
     }
     
     override func mapping(map: Map) {

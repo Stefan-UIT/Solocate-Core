@@ -33,7 +33,13 @@ class LoadUnloadOrderVC: BaseViewController {
         }
     }
     
+    var route:Route!
     var orders:[Order] = []
+    var ordersAbleToLoad:[Order] {
+        get {
+            return orders.filter({$0.statusOrder == StatusOrder.newStatus || $0.statusOrder == StatusOrder.WarehouseClarification})
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,22 +58,27 @@ class LoadUnloadOrderVC: BaseViewController {
     }
     
     override func updateNavigationBar() {
-        App().navigationService.delegate = self
+        let routeName = E(route.routeMaster?.code) + " - " + E(route.routeMaster?.name)
         App().navigationService.updateNavigationBar(.BackOnly,
                                                     "packages-list".localized,
-                                                    AppColor.white, true)
+                                                    AppColor.white, true, routeName)
+        App().navigationService.delegate = self
+    }
+    
+    func orderWithDetail(_ detail:Order.Detail) -> Order? {
+        let array = orders.filter({detail.id == $0.details?.first?.id})
+        return array.first
     }
     
     func getAllDetailsFromOrders() -> [Order.Detail]{
         var details:[Order.Detail] = []
-        for value in orders {
+        for value in ordersAbleToLoad {
             details.append(value.details ?? [])
         }
         return details
     }
     
     func initData()  {
-        
         dataOrigin = getAllDetailsFromOrders()
         doSearch(strSearch: strSearch)
     }
@@ -159,6 +170,7 @@ extension LoadUnloadOrderVC {
             switch result{
             case .object(let obj):
                 self?.showAlertView("updated-successful".localized)
+                self?.initData()
                 break
             case .error(let error):
                 self?.showAlertView(error.getMessage())
@@ -188,8 +200,8 @@ extension LoadUnloadOrderVC:UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let detail = dataDisplay[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: loadPackageCellIdentifier, for: indexPath) as! LoadPackageTableViewCell
-        
-        cell.configureCellWithDetail(detail)
+        guard let order = orderWithDetail(detail) else { return UITableViewCell() }
+        cell.configureCellWithOrder(order)
         cell.delegate = self
         
         return cell

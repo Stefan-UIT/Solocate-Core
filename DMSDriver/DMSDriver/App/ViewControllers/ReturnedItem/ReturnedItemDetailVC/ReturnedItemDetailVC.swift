@@ -106,18 +106,23 @@ class ReturnedItemDetailVC: BaseViewController {
         taskInstruction.removeAll()
         
         let status = TaskStatus(rawValue: E(_item.status.code)) ?? TaskStatus.open
-        let statusItem = OrderDetailInforRow("Status".localized,status.statusName.localized)
+        let statusItem = OrderDetailInforRow("Status".localized,status.statusName.localized,false,_item.colorStatus)
         let taskName = OrderDetailInforRow("Name".localized,"\(E(_item.name))")
         let routeID = OrderDetailInforRow("Route".localized,"\(_item.routeID ?? 0)")
 
         let startTime = OrderDetailInforRow("start-time".localized, Slash(_item.dlvy_start_time))
         let endTime = OrderDetailInforRow("end-time".localized, Slash(_item.dlvy_end_time))
+        let warehouse = OrderDetailInforRow("Warehouse".localized, Slash(_item.warehouse?.address))
         let instruction = OrderDetailInforRow("Instructions".localized,Slash(_item.instructions))
         let note = OrderDetailInforRow("Note".localized,Slash(_item.note))
         
         var assigneesName = ""
         for i in _item.assignees {
-            assigneesName = assigneesName + ", " + Slash(i.userName)
+            assigneesName += Slash(i.userName)
+            let isLastItem = i.id == _item.assignees.last?.id
+            if !isLastItem {
+                assigneesName += ", "
+            }
         }
         
         let assigneesRow = OrderDetailInforRow("Assignees".localized,assigneesName)
@@ -128,6 +133,7 @@ class ReturnedItemDetailVC: BaseViewController {
         taskInforRows.append(assigneesRow)
         taskInforRows.append(startTime)
         taskInforRows.append(endTime)
+        taskInforRows.append(warehouse)
         taskInforRows.append(instruction)
         taskInforRows.append(note)
 //        taskInstruction.append(instruction)
@@ -152,7 +158,6 @@ class ReturnedItemDetailVC: BaseViewController {
     func initVar()  {
         arrTitleHeader = ["Status".localized,
                           "Information".localized,
-//                          "Information".localized,
             "Returned Item Quantity".localized,
                           "order_detail_notes".localized]
         
@@ -217,20 +222,46 @@ class ReturnedItemDetailVC: BaseViewController {
     }
     
     @IBAction func onCancelButtonTouchUp(_ sender: UIButton) {
+        guard let _item = item else { return }
+        self.showLoadingIndicator()
+        SERVICES().API.cancelReturnedItem(_item.id) { [weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result {
+            case .object(let obj):
+                let message = obj.message
+                self?.showAlertView(message ?? "")
+                
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
+        }
     }
     
     
     @IBAction func onRejectButtonTouchUp(_ sender: UIButton) {
+        guard let _item = item else { return }
+        self.showLoadingIndicator()
+        SERVICES().API.rejectReturnedItem(_item.id) { [weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result {
+            case .object(let obj):
+                let message = obj.message
+                self?.showAlertView(message ?? "")
+                
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
+        }
     }
     
-    @IBAction func didClickFinish(_ sender: UIButton) {
-        handleFinishAction()
-    }
-    
-    @IBAction func didClickUnableToStart(_ sender: UIButton) {
-//        handleUnableToStartAction()
-        handleCancelAction()
-    }
+//    @IBAction func didClickFinish(_ sender: UIButton) {
+//        handleFinishAction()
+//    }
+//
+//    @IBAction func didClickUnableToStart(_ sender: UIButton) {
+////        handleUnableToStartAction()
+//        handleCancelAction()
+//    }
     
     func finishReturnedItem() {
         guard let _item = self.item else { return }
@@ -471,7 +502,7 @@ fileprivate extension ReturnedItemDetailVC{
 //        vAction?.isHidden = true
 //        updateStatusButton?.setTitle("Finish".localized.uppercased(), for: .normal)
 //        btnUnable?.setTitle("cancel".localized.uppercased(), for: .normal)
-        guard  let _item = item, let statusTask = TaskStatus(rawValue: E(_item.status.code)) else {
+        guard  let _item = item else {
             return
         }
         

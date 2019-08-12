@@ -10,6 +10,7 @@ import UIKit
 
 class AssignTruckTableViewCell: UITableViewCell {
 
+    @IBOutlet weak var truckTypeLabel: UILabel!
     @IBOutlet weak var maxLoadLabel: UILabel!
     @IBOutlet weak var maxVolumeLabel: UILabel!
     @IBOutlet weak var maxFloorLabel: UILabel!
@@ -26,12 +27,10 @@ class AssignTruckTableViewCell: UITableViewCell {
     }
     
     func configureCell(truck:Truck) {
-        nameLabel.text = truck.name ?? "-"
+        nameLabel.text = truck.name
+        truckTypeLabel.text = Slash(truck.type?.name)
         maxLoadLabel.text = "\(truck.maxLoad)"
         maxVolumeLabel.text = "\(truck.maxVolume)"
         maxFloorLabel.text = "\(truck.maxFloor)"
-        
-        
     }
-
 }

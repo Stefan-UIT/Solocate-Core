@@ -238,7 +238,7 @@ extension BaseAPIService {
                             signName:String?,
                             note:String?,
                                callback: @escaping APICallback<ResponseDataModel<ReturnedItem>>){
-        let path = String(format:PATH_REQUEST_URL.UPDATE_RETURNED_ITEM_INFO.URL, "\(itemID)")
+        let path = String(format:PATH_REQUEST_URL.RETURNED_ITEM_DETAIL.URL, "\(itemID)")
         
         var params = ResponseDictionary()
         if let value = returnedQty {
@@ -306,7 +306,7 @@ extension BaseAPIService {
     @discardableResult
     func getReturnedItemDetail(_ itemID:Int,
                        callback: @escaping APICallback<ResponseDataModel<ReturnedItem>>) -> APIRequest {
-        let path = String(format:PATH_REQUEST_URL.GET_RETURNED_ITEM_DETAIL.URL, "\(itemID)")
+        let path = String(format:PATH_REQUEST_URL.RETURNED_ITEM_DETAIL.URL, "\(itemID)")
         return request(method: .GET,
                        path: path,
                        input: .empty,

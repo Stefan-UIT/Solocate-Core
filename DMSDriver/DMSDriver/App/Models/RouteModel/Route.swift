@@ -183,6 +183,14 @@ class Route: BaseModel {
     var loadVolume:Double = 0.0
     var assignedInfo:[AssignedInfo]?
     
+    var isAllowedGoToDelivery:Bool {
+        get {
+            let deliveryOrders = orderList.filter({$0.isDeliveryType})
+            let WCAndNewOrders = deliveryOrders.filter({$0.isNewStatus || $0.isWarehouseClarification})
+            return WCAndNewOrders.count == 0
+        }
+    }
+    
     var isAssignedDriver:Bool {
         get {
             guard let info = assignedInfo?.first else { return false}
@@ -195,6 +203,15 @@ class Route: BaseModel {
             guard let info = assignedInfo?.first else { return false}
             return (info.truckID != nil || info.truck != nil)
         }
+    }
+    
+    func sortbyCustomerLocation() -> [Order] {
+        var result = [Order]()
+        for loc in locationList {
+            let array = orderList.filter({$0.customerLocation?.address?.lowercased() == loc.address?.lowercased()})
+                result.append(array)
+        }
+        return result
     }
     
     class AssignedInfo: BaseModel {
@@ -257,6 +274,25 @@ class Route: BaseModel {
         company <- map["company"]
         loadVolume <- map["load_vol"]
         assignedInfo <- map["drivers"]
+    }
+    
+    var ordersAbleToLoad:[Order] {
+        get {
+            let filteredArray = orderList.filter({$0.isDeliveryType})
+            return filteredArray.filter({$0.statusOrder == StatusOrder.newStatus || $0.statusOrder == StatusOrder.WarehouseClarification})
+        }
+    }
+    
+    var ordersGroupByCustomer:[Order] {
+        get {
+            return sortbyCustomerLocation()
+        }
+    }
+    
+    var isHasOrderNeedToBeLoaded:Bool {
+        get {
+            return ordersAbleToLoad.count > 0
+        }
     }
     
     var isFirstStartOrder:Bool{

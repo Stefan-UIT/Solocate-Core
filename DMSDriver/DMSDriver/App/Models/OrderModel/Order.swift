@@ -48,6 +48,7 @@ enum OrderGroup: String {
 enum StatusOrder: String {
     case newStatus = "OP"
     case InTransit = "IT"
+    case InProgress = "IP"
     case deliveryStatus = "DV"
     case CancelStatus = "CC"
     case UnableToFinish = "UF"
@@ -63,6 +64,8 @@ enum StatusOrder: String {
             return "New".localized
         case .InTransit:
             return "in-transit".localized
+        case .InProgress:
+            return "in-progress".localized
         case .PickupStatus:
             return "picked-up".localized
         case .deliveryStatus:
@@ -87,7 +90,7 @@ enum StatusOrder: String {
             switch self {
             case .newStatus, .Loaded, .PartialLoaded:
                 return AppColor.newStatus;
-            case .InTransit:
+            case .InTransit, .InProgress:
                 return AppColor.InTransit;
             case .deliveryStatus, .PartialDelivered:
                 return AppColor.deliveryStatus;
@@ -117,6 +120,7 @@ enum OrderType:Int {
 
 
 class Address: BaseModel {
+    var id:Int = -1
     var address:String?
     var lattd:String?
     var lngtd:String?
@@ -147,6 +151,7 @@ class Address: BaseModel {
     }
     
     override func mapping(map: Map) {
+        id <- map["id"]
         address <- map["address"]
         lattd <- map["lattd"]
         lngtd <- map["lngtd"]
@@ -459,6 +464,20 @@ class Order: BaseModel {
     var cod_rcvd:String?
     var wmsOrderCode:String?
     var wmsManifestNumber:String?
+    var partialDeliveredReason:Reason?
+    var remark:String?
+    var consigneeName:String? {
+        get {
+            let name = (isPickUpType) ? from?.ctt_name : to?.ctt_name
+            return name
+        }
+    }
+    
+    var customerLocation:Address? {
+        get {
+            return isDeliveryType ? to : from
+        }
+    }
     
     lazy var orderGroup:OrderGroup = {
         return OrderGroup.init(rawValue: group) ?? OrderGroup.Logistic
@@ -478,6 +497,10 @@ class Order: BaseModel {
     
     var isNewStatus:Bool {
         return statusOrder == .newStatus
+    }
+    
+    var isWarehouseClarification:Bool {
+        return statusOrder == .WarehouseClarification
     }
     
     var isInTransit:Bool {
@@ -566,6 +589,8 @@ class Order: BaseModel {
             detail.wmsOrderCode = wmsOrderCode
             detail.wmsManifestNumber = wmsManifestNumber
         }
+        partialDeliveredReason    <- map["reason"]
+        remark    <- map["remark"]
     }
     
     

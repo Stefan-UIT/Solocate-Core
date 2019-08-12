@@ -32,6 +32,8 @@ class Reason: BaseModel {
         if isEmpty(name) {
            name <- map["reason_name"]
         }
+        
+        message <- map["message"]
     }
 }
 

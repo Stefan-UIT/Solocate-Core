@@ -66,7 +66,8 @@ extension String {
     }
   
     var date: Date? {
-        return ServerDateFormater.date(from: self)
+//        return ServerDateFormater.date(from: self)
+        return NormalDateFormater.date(from: self)
     }
     
     func replaceDoubleQuoteIfNeeded() -> String {

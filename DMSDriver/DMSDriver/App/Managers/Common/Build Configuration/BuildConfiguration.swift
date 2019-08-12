@@ -35,7 +35,15 @@ enum ServerEnvironment: String {
 struct BuildConfiguration {
     let serverEnvironment: ServerEnvironment
     let tagetBuild:TagetBuild
-
+    var currentEnvironment: ChooseEvironment {
+        get {
+            let number = UserDefaults.standard.integer(forKey: "ENVIRONMENT")
+            guard let environment = ChooseEvironment(rawValue: number)  else {
+                return .Development
+            }
+            return environment
+        }
+    }
     init() {
         #if DEVELOPMENT  // check taget
         let number = UserDefaults.standard.integer(forKey: "ENVIRONMENT")
