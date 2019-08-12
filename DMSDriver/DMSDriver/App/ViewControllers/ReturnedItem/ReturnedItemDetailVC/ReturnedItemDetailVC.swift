@@ -502,7 +502,7 @@ fileprivate extension ReturnedItemDetailVC{
 //        vAction?.isHidden = true
 //        updateStatusButton?.setTitle("Finish".localized.uppercased(), for: .normal)
 //        btnUnable?.setTitle("cancel".localized.uppercased(), for: .normal)
-        guard  let _item = item, let statusTask = TaskStatus(rawValue: E(_item.status.code)) else {
+        guard  let _item = item else {
             return
         }
         
