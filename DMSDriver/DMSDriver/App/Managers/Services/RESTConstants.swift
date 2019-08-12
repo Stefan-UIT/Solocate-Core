@@ -68,7 +68,7 @@ enum PATH_REQUEST_URL: String{
     case UPDATE_ORDER_NOTE = "transaction/v1/orders/notes"
     case GET_LIST_LANGUAGE  = "language/v1/namespaces/list-support?name=%@&system=%@"
     case GET_DRIVER_LIST  = "masterdata/v1/drivers/list-suggest?start_time=%@&end_time=%@&company_id=%@"
-    case GET_TRUCK_LIST  = "masterdata/v1/trucks/suggest?start_time=%@&end_time=%@&company_id=%@&truck_type_id=%@"
+    case GET_TRUCK_LIST  = "masterdata/v1/trucks/suggest?start_time=%@&end_time=%@&company_id=%@"
     case ASSIGN_TRUCK_DRIVER  = "transaction/v1/mobile/routes/assign/%@"
     case REJECT_RETURNED_ITEM = "transaction/v1/mobile/item-returns/process/%@/reject"
     case CANCEL_RETURNED_ITEM = "transaction/v1/mobile/item-returns/process/%@/cancel"

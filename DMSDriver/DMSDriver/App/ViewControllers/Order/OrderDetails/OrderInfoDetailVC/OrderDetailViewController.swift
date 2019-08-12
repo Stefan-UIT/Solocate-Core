@@ -189,6 +189,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         
         let customerItem = OrderDetailInforRow("customer-name".localized,
                                              Slash(order.customer?.userName))
+        let customerItem = OrderDetailInforRow("customer-name".localized,
+                                               Slash(order.customer?.userName))
         let remark = OrderDetailInforRow("remark".localized,
                                               Slash(order.remark))
 //        let urgency = OrderDetailInforRow("Urgency".localized,
