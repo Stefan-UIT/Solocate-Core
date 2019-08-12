@@ -55,7 +55,7 @@ class OrderItemTableViewCell: UITableViewCell {
             dateDate = DateFormatter.shortDate.string(from:end)
         }
         
-        lblNumber?.text = "\(order.seq)."
+//        lblNumber?.text = "\(order.seq)."
         lblTitle?.text = String(format: "#%d".localized, order.id)
         lblFromAddresss?.text = order.from?.address
         lblToAddress?.text = order.to?.address

@@ -120,6 +120,7 @@ enum OrderType:Int {
 
 
 class Address: BaseModel {
+    var id:Int = -1
     var address:String?
     var lattd:String?
     var lngtd:String?
@@ -150,6 +151,7 @@ class Address: BaseModel {
     }
     
     override func mapping(map: Map) {
+        id <- map["id"]
         address <- map["address"]
         lattd <- map["lattd"]
         lngtd <- map["lngtd"]
@@ -468,6 +470,12 @@ class Order: BaseModel {
         get {
             let name = (isPickUpType) ? from?.ctt_name : to?.ctt_name
             return name
+        }
+    }
+    
+    var customerLocation:Address? {
+        get {
+            return isDeliveryType ? to : from
         }
     }
     

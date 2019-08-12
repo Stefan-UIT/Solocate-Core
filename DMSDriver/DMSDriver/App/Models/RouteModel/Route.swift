@@ -205,6 +205,15 @@ class Route: BaseModel {
         }
     }
     
+    func sortbyCustomerLocation() -> [Order] {
+        var result = [Order]()
+        for loc in locationList {
+            let array = orderList.filter({$0.customerLocation?.address?.lowercased() == loc.address?.lowercased()})
+                result.append(array)
+        }
+        return result
+    }
+    
     class AssignedInfo: BaseModel {
         var id:Int?
         var routeID:Int?
@@ -271,6 +280,12 @@ class Route: BaseModel {
         get {
             let filteredArray = orderList.filter({$0.isDeliveryType})
             return filteredArray.filter({$0.statusOrder == StatusOrder.newStatus || $0.statusOrder == StatusOrder.WarehouseClarification})
+        }
+    }
+    
+    var ordersGroupByCustomer:[Order] {
+        get {
+            return sortbyCustomerLocation()
         }
     }
     

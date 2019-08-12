@@ -96,9 +96,10 @@ extension RouteDetailOrderListClvCell: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: displayMode == .Reduced ? cellReducedIdentifier : cellIdentifier,
                                                     for: indexPath) as? OrderItemTableViewCell {
-            
             let order = orderList[indexPath.row]
             cell.order = order
+            let seq = indexPath.row + 1
+            cell.lblNumber?.text = "\(seq)."
      
             return cell
         }
@@ -142,22 +143,25 @@ extension RouteDetailOrderListClvCell: UITableViewDelegate, UITableViewDataSourc
     }
     
     func filterDataWithTapDisplay() {
-        switch filterOrderList {
-        case .All:
-            orderList = route?.getOrderList() ?? []
-        case .New:
-            orderList = route?.orders(.newStatus) ?? []
-        case .InProgess:
-            orderList = route?.orders(.InTransit) ?? []
-        case .Finished:
-            orderList = route?.orders(.deliveryStatus) ?? []
-        case .Cancelled:
-            orderList = route?.orders(.CancelStatus) ?? []
-        }
+        guard let _route = route else { return }
+//        switch filterOrderList {
+//        case .All:
+//            orderList = route?.getOrderList() ?? []
+//        case .New:
+//            orderList = route?.orders(.newStatus) ?? []
+//        case .InProgess:
+//            orderList = route?.orders(.InTransit) ?? []
+//        case .Finished:
+//            orderList = route?.orders(.deliveryStatus) ?? []
+//        case .Cancelled:
+//            orderList = route?.orders(.CancelStatus) ?? []
+//        }
         
-        orderList.sort { (ord1, ord2) -> Bool in
-            return ord1.seq < ord2.seq
-        }
+//        orderList.sort { (ord1, ord2) -> Bool in
+//            return ord1.seq < ord2.seq
+//        }
+        
+        orderList = _route.ordersGroupByCustomer
         noOrdersLabel?.isHidden = orderList.count > 0
         self.tbvContent?.reloadData()
     }
