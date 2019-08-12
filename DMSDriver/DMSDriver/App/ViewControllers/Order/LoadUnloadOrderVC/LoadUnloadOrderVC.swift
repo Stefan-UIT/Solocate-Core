@@ -58,7 +58,7 @@ class LoadUnloadOrderVC: BaseViewController {
     }
     
     override func updateNavigationBar() {
-        let routeName = E(route.routeMaster?.code) + " - " + E(route.routeMaster?.name)
+        let routeName = "Route".localized + " #\(route.id)" + " - " + E(route.routeMaster?.name)
         App().navigationService.updateNavigationBar(.BackOnly,
                                                     "packages-list".localized,
                                                     AppColor.white, true, routeName)
