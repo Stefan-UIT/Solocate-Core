@@ -44,9 +44,9 @@ class OrderItemTableViewCell: UITableViewCell {
     }
     
     func updateCell() {
-        var startDate = "NA"
-        var endDate = "NA"
-        var dateDate = "NA"
+        var startDate = "NA".localized
+        var endDate = "NA".localized
+        var dateDate = "NA".localized
         if let start = order.from?.start_time?.date {
             startDate = HourFormater.string(from:start)
         }

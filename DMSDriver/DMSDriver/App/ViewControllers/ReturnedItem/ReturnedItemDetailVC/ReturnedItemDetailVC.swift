@@ -158,7 +158,7 @@ class ReturnedItemDetailVC: BaseViewController {
     func initVar()  {
         arrTitleHeader = ["Status".localized,
                           "Information".localized,
-            "Returned Item Quantity".localized,
+            "returned-item-quantity".localized,
                           "order_detail_notes".localized]
         
     }
@@ -171,7 +171,7 @@ class ReturnedItemDetailVC: BaseViewController {
     }
     
     func showNotePopUp(completionHandler:@escaping (_ isSkip:Bool, _ note:String) -> Void) {
-        let alert = UIAlertController(title: "Note".localized, message: "Please enter note for this returned item", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Note".localized, message: "please-enter-note-for-this-returned-item".localized, preferredStyle: .alert)
         
         //2. Add the text field. You can configure it however you need.
         alert.addTextField { (textField) in

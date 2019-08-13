@@ -43,8 +43,8 @@ class AssignDriverViewController: BaseViewController {
     
     func showAssignDriverPopup(driver:Driver) {
         let name = driver.userName ?? "-"
-        let title = "Assign Driver"
-        let message = "Are you sure you want to assign \(name) to this route?"
+        let title = "assign-driver".localized
+        let message = String(format: "are-you-sure-you-want-to-assign-to-this-route".localized, "\(name)")
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         

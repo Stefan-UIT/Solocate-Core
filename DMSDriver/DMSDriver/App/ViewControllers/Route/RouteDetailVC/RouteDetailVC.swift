@@ -169,8 +169,8 @@ class RouteDetailVC: BaseViewController {
     }
     
     private func initUI()  {
-        var startDate = "NA"
-        var endDate = "NA"
+        var startDate = "NA".localized
+        var endDate = "NA".localized
         if let start = route?.start_time.date {
             startDate = HourFormater.string(from:start)
         }

@@ -135,7 +135,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         lblOrderId?.text = "order".localized + " #\(orderDetail?.id ?? 0)"
         guard  let start = orderDetail?.to?.start_time?.date,
                let end = orderDetail?.to?.end_time?.date else{
-            lblDateTime?.text = "Start/End-time is invalid".localized
             return
         }
         let timeStart = DateFormatter.hour24Formater.string(from: start)
@@ -233,7 +232,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let fromNumber = Slash(order.from?.number)
         
         let fromAddressDetail = "\(fromFloor)/\(fromApartment)/\(fromNumber)"
-        let fromAddressDetailRecord = OrderDetailInforRow("Floor/Apt/Number",fromAddressDetail,false)
+        let fromAddressDetailRecord = OrderDetailInforRow("floor-apt-number".localized,fromAddressDetail,false)
 
         let toAddress = OrderDetailInforRow("Address".localized, E(order.to?.address),true)
         let toContactName = OrderDetailInforRow("contact-name".localized,order.to?.name ?? "-")
@@ -248,10 +247,10 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let toNumber = Slash(order.to?.number)
         
         let toAddressDetail = "\(toFloor)/\(toApartment)/\(toNumber)"
-        let toAddressDetailRecord = OrderDetailInforRow("Floor/Apt/Number",toAddressDetail,false)
+        let toAddressDetailRecord = OrderDetailInforRow("floor-apt-number".localized,toAddressDetail,false)
         
-        let codAmount = OrderDetailInforRow("COD Amount".localized,"\(order.codAmount ?? 0)",false)
-        let codRemark = OrderDetailInforRow("COD Remark".localized,Slash(order.codComment),false)
+        let codAmount = OrderDetailInforRow("cod-amount".localized,"\(order.codAmount ?? 0)",false)
+        let codRemark = OrderDetailInforRow("cod-remark".localized,Slash(order.codComment),false)
         
         orderCODInfo.append(codAmount)
         orderCODInfo.append(codRemark)
@@ -285,7 +284,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     func showPalletReturnedPopUp() {
-        let alert = UIAlertController(title: "Returned Pallets", message: "Number of returned pallets", preferredStyle: .alert)
+        let alert = UIAlertController(title: "returned-pallets".localized, message: "number-of-returned-pallets".localized, preferredStyle: .alert)
         
         //2. Add the text field. You can configure it however you need.
         alert.addTextField { (textField) in
@@ -312,9 +311,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     private func showReasonMessage(completionHandler:@escaping (_ reason:String)->Void) {
-        let alert = UIAlertController(title: "Reason",
+        let alert = UIAlertController(title: "Reason".localized,
                                       message: nil, preferredStyle: .alert)
-        alert.showTextViewInput(placeholder: "Please enter a reason for Partial\nDelivered",
+        alert.showTextViewInput(placeholder: "please-enter-a-reason-for-partial-delivered".localized,
                                 nameAction: "submit".localized,
                                 oldText: "") {(success, string) in
                                     //self?.orderDetail?.note = string
@@ -323,41 +322,11 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     
-    func showReasonMessagePopup(completionHandler:@escaping (_ reason:String)->Void) {
-        let title = "Reason"
-        let message = "Please enter a reason for Partial Delivered"
-        
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        
-        //2. Add the text field. You can configure it however you need.
-        alert.addTextField { (textField) in
-            textField.text = ""
-        }
-        
-        // 3. Grab the value from the text field, and print it when the user clicks OK.
-        alert.addAction(UIAlertAction(title: "submit".localized, style: .default, handler: { [weak alert] (_) in
-            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
-            guard let text = textField?.text, !text.isEmpty else {
-                self.showAlertView("You must enter a reason for Partial Delivered")
-                return
-            }
-            
-            completionHandler(text)
-            
-        }))
-        
-        alert.addAction(UIAlertAction(title: "cancel".localized, style: .cancel, handler: {
-            action in
-        }))
-        
-        // 4. Present the alert.
-        self.present(alert, animated: true, completion: nil)
-    }
     
     func showCODPopUp() {
         guard let codAmount = orderDetail?.codAmount else { return }
-        let title = "COD Received"
-        let message = "Did you receive COD amount $\(codAmount)?"
+        let title = "cod-received".localized
+        let message = String(format: "did-you-receive-cod-amount".localized, "\(codAmount)")
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         
@@ -371,7 +340,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         alert.addAction(UIAlertAction(title: "submit".localized, style: .default, handler: { [weak alert] (_) in
             let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
             guard let text = textField?.text, let value = Double(text), value <= codAmount && value > 0.0  else {
-                self.showAlertView("COD must be less than or equal $\(codAmount)")
+                let msg = String(format: "cod-must-be-less-than-or-equal".localized, "\(codAmount)")
+                self.showAlertView(msg)
                 return
             }
             self.submitCODValue(value)
@@ -452,13 +422,15 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                         return
                     }
                 }
-                showAlertView("Picked up cartons quantity must be less than or equal \(detail.cartonsInPallet ?? 0)")
+                let message = String(format: "picked-up-cartons-quantity-must-be-less-than-or-equal".localized, "\(detail.cartonsInPallet ?? 0)")
+                showAlertView(message)
                 return
             }
             updatePickedUpQuantity(detail:detail)
             // call without loaded carton
         } else {
-            showAlertView("Picked up quantity must be less than or equal \(detail.qty ?? 0)")
+            let message = String(format: "picked-up-quantity-must-be-less-than-or-equal".localized, "\(detail.qty ?? 0)")
+            showAlertView(message)
             return
         }
     }
@@ -802,8 +774,8 @@ fileprivate extension OrderDetailViewController {
         }
         
         if order.isPickUpType {
-            cell.deliveredQtyStaticLabel?.text = (order.isNewStatus) ? "Picked Up Quantity" : "Delivered Quantity"
-            cell.deliveredCartonsStaticLabel?.text = (order.isNewStatus) ? "Picked Up Cartons Qty" : "Delivered Cartons Quantity"
+            cell.deliveredQtyStaticLabel?.text = (order.isNewStatus) ? "picked-up-quantity".localized : "delivered-quantity".localized
+            cell.deliveredCartonsStaticLabel?.text = (order.isNewStatus) ? "picked-up-cartons-qty".localized : "delivered-cartons-quantity".localized
             hideLoadedQuantityContainer()
         } else {
             if !detail.isPallet {
@@ -1093,9 +1065,9 @@ fileprivate extension OrderDetailViewController{
             }
             
         } else if (_orderDetail.details?.first?.actualQty == nil) {
-            showAlertView("Delivered quantity is required")
+            showAlertView("delivered-quantity-is-required".localized)
         } else if ((_orderDetail.details?.first?.isPallet ?? false) &&  _orderDetail.details?.first?.actualCartonsInPallet == nil) {
-            showAlertView("Cartons in Pallet is required")
+            showAlertView("cartons-in-pallet-is-required".localized)
         } else {
             
             if _orderDetail.isHasCOD && !_orderDetail.isUpdatedCODReceived {

@@ -33,9 +33,9 @@ class RouteTableViewCell: UITableViewCell {
     }
     
     func loadData(_ route: Route) {
-        var startDate = "NA"
-        var endDate = "NA"
-        var stringDate = "NA"
+        var startDate = "NA".localized
+        var endDate = "NA".localized
+        var stringDate = "NA".localized
         if let start = route.start_time.date {
             startDate = HourFormater.string(from:start)
         }

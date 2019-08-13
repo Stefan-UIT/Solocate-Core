@@ -97,7 +97,7 @@ class SlideMenuVC: BaseViewController {
     
     func setUpVersionLabel() {
         let buildVersion = getAppInfo()
-        let text = "Version: " + buildVersion
+        let text = "Version".localized + ": " + buildVersion
         buildVersionLabel.text = text
     }
   
