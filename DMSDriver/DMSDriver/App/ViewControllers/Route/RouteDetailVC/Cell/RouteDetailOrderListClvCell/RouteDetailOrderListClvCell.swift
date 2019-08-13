@@ -14,6 +14,11 @@ class RouteDetailOrderListClvCell: UICollectionViewCell {
     
     @IBOutlet weak var tbvContent: UITableView?
     @IBOutlet weak var noOrdersLabel: UILabel?
+    @IBOutlet weak var searchView:BaseSearchView?
+    private var strSearch:String?
+    
+    private var dataOrigin:[Order] = []
+    private var dataDisplay:[Order] = []
     
     fileprivate let cellIdentifier = "OrderItemTableViewCell"
     fileprivate let cellReducedIdentifier = "OrderItemCollapseTableViewCell"
@@ -45,6 +50,9 @@ class RouteDetailOrderListClvCell: UICollectionViewCell {
         filterDataWithTapDisplay()
         updateUI()
         tbvContent?.backgroundColor = UIColor.clear
+        self.searchView?.delegate = self
+//        self.searchView?.vSearch?.tfSearch?.placeholder(text: "WMS Code")
+//        self.searchView?.vSearch?.tfSearch?.placeholderKey = "WMS Code"
     }
     
     func updateUI() {
@@ -66,6 +74,10 @@ class RouteDetailOrderListClvCell: UICollectionViewCell {
             displayMode = .Expanded
         }
     }
+    
+    @IBAction func onFilterButtonTouchUp(_ sender: UIButton) {
+        
+    }
 }
 
 // MARK: - Private methods
@@ -86,7 +98,7 @@ extension RouteDetailOrderListClvCell {
 //MARK: - RouteDetailOrderListClvCell,UITableViewDataSource
 extension RouteDetailOrderListClvCell: UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return orderList.count
+        return dataDisplay.count
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -96,7 +108,8 @@ extension RouteDetailOrderListClvCell: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         if let cell = tableView.dequeueReusableCell(withIdentifier: displayMode == .Reduced ? cellReducedIdentifier : cellIdentifier,
                                                     for: indexPath) as? OrderItemTableViewCell {
-            let order = orderList[indexPath.row]
+//            let order = orderList[indexPath.row]
+            let order = dataDisplay[indexPath.row]
             cell.order = order
             let seq = indexPath.row + 1
             cell.lblNumber?.text = "\(seq)."
@@ -114,7 +127,7 @@ extension RouteDetailOrderListClvCell: UITableViewDelegate, UITableViewDataSourc
         tableView.deselectRow(at: indexPath, animated: true)
         let vc:OrderDetailViewController = .loadSB(SB: .Order)
         vc.route = route
-        vc.orderDetail = orderList[indexPath.row]
+        vc.orderDetail = dataDisplay[indexPath.row]
         vc.updateOrderDetail = {[weak self](order) in
             self?.fetchData()
         }
@@ -162,6 +175,9 @@ extension RouteDetailOrderListClvCell: UITableViewDelegate, UITableViewDataSourc
 //        }
         
         orderList = _route.ordersGroupByCustomer
+        dataOrigin = orderList
+        doSearch(strSearch: strSearch)
+        
         noOrdersLabel?.isHidden = orderList.count > 0
         self.tbvContent?.reloadData()
     }
@@ -202,3 +218,37 @@ extension RouteDetailOrderListClvCell{
     }
 }
 
+
+extension RouteDetailOrderListClvCell:BaseSearchViewDelegate{
+    func tfSearchShouldBeginEditing(view: BaseSearchView, textField: UITextField) {
+        //
+    }
+    
+    func tfSearchShouldChangeCharactersInRangeWithString(view: BaseSearchView, text: String) {
+        strSearch = text
+        self.doSearch(strSearch: strSearch)
+    }
+    
+    func tfSearchDidEndEditing(view: BaseSearchView, textField: UITextField) {
+        //
+    }
+    
+    func doSearch(strSearch:String? = nil)  {
+        let newSearchString = strSearch?.components(separatedBy: "\n").first?.lowercased()
+        if !isEmpty(newSearchString) {
+            dataDisplay = dataOrigin.filter({ (item) -> Bool in
+                let isExist = item.wmsOrderCode?.lowercased().contains(newSearchString!)
+                return isExist ?? false
+            })
+            
+        }else {
+            dataDisplay = dataOrigin
+        }
+        if dataDisplay.count <= 0 {
+            UIView.addViewNoItemWithTitle("no-data".localized, intoParentView: self)
+        }else {
+            UIView.removeViewNoItemAtParentView(self)
+        }
+        self.tbvContent?.reloadData()
+    }
+}
