@@ -211,6 +211,7 @@ class Route: BaseModel {
             let array = orderList.filter({$0.customerLocation?.address?.lowercased() == loc.address?.lowercased()})
                 result.append(array)
         }
+    
         return result
     }
     

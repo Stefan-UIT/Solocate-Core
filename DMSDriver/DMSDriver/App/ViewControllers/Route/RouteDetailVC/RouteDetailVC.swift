@@ -397,6 +397,7 @@ extension RouteDetailVC{
             case .object(let obj):
                 strongSelf.route = obj.data
                 strongSelf.clvContent?.reloadData()
+                strongSelf.initUI()
                 if isRampManagerMode {
                     strongSelf.updateActionsUI()
                 }
