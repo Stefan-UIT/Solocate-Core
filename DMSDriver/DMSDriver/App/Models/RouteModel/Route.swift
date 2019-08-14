@@ -211,6 +211,7 @@ class Route: BaseModel {
             let array = orderList.filter({$0.customerLocation?.address?.lowercased() == loc.address?.lowercased()})
                 result.append(array)
         }
+    
         return result
     }
     
@@ -286,6 +287,20 @@ class Route: BaseModel {
     var ordersGroupByCustomer:[Order] {
         get {
             return sortbyCustomerLocation()
+        }
+    }
+    
+    var customerNameArr:[String] {
+        get {
+           let array = orderList.unique(map: {$0.customer!.userName})
+            return array.map({$0.customer?.userName ?? ""})
+        }
+    }
+    
+    var consigneeNameArr:[String] {
+        get {
+            let array = orderList.unique(map: {$0.consigneeName})
+            return array.map({$0.consigneeName ?? ""})
         }
     }
     

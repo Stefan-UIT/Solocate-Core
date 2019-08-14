@@ -194,7 +194,7 @@ import Crashlytics
             App().navigationService.updateNavigationBar(.Filter_Menu, "")
         }
         else {
-            App().navigationService.updateNavigationBar(.Filter_Menu, "List Routes".localized.uppercased())
+            App().navigationService.updateNavigationBar(.Filter_Menu, "list-routes".localized.uppercased())
             
         }
     }
@@ -231,19 +231,6 @@ import Crashlytics
         }
     }
     
-    func fakaData()  {
-        let route = Route()
-        route.id = 1234
-        route.totalTimeEst = 5
-        route.totalDistance = "25"
-        route.route_name_sts = "New"
-        route.start_time = "05:50 AM"
-        route.end_time = "08:50 PM"
-        route.date = Date().toString()
-        
-        routes = [route,route,route,route,route,route,route]
-        tableView.reloadData()
-    }
  }
 
 

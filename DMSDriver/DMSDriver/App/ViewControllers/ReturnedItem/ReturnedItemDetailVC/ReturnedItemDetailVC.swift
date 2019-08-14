@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 
+let MSG_ARE_YOU_SURE = "are-you-sure-you-want-to-perform-this-action".localized
 
 class ReturnedItemDetailVC: BaseViewController {
     
@@ -108,7 +109,7 @@ class ReturnedItemDetailVC: BaseViewController {
         let status = TaskStatus(rawValue: E(_item.status.code)) ?? TaskStatus.open
         let statusItem = OrderDetailInforRow("Status".localized,status.statusName.localized,false,_item.colorStatus)
         let taskName = OrderDetailInforRow("Name".localized,"\(E(_item.name))")
-        let routeID = OrderDetailInforRow("Route".localized,"\(_item.routeID ?? 0)")
+        let routeID = OrderDetailInforRow("route-id".localized,"\(_item.routeID ?? 0)")
 
         let startTime = OrderDetailInforRow("start-time".localized, Slash(_item.dlvy_start_time))
         let endTime = OrderDetailInforRow("end-time".localized, Slash(_item.dlvy_end_time))
@@ -158,7 +159,7 @@ class ReturnedItemDetailVC: BaseViewController {
     func initVar()  {
         arrTitleHeader = ["Status".localized,
                           "Information".localized,
-            "Returned Item Quantity".localized,
+            "returned-item-quantity".localized,
                           "order_detail_notes".localized]
         
     }
@@ -171,7 +172,7 @@ class ReturnedItemDetailVC: BaseViewController {
     }
     
     func showNotePopUp(completionHandler:@escaping (_ isSkip:Bool, _ note:String) -> Void) {
-        let alert = UIAlertController(title: "Note".localized, message: "Please enter note for this returned item", preferredStyle: .alert)
+        let alert = UIAlertController(title: "Note".localized, message: "please-enter-note-for-this-returned-item".localized, preferredStyle: .alert)
         
         //2. Add the text field. You can configure it however you need.
         alert.addTextField { (textField) in
@@ -203,8 +204,7 @@ class ReturnedItemDetailVC: BaseViewController {
     
     // MARK: ACTION
     
-    
-    @IBAction func onFinishButtonTouchUp(_ sender: UIButton) {
+    func handleFinishedAction() {
         if isRampManagerMode {
             self.presentSignatureViewController()
         } else {
@@ -216,12 +216,15 @@ class ReturnedItemDetailVC: BaseViewController {
                 self.updateItemInfo(signedFile: nil, signName: nil, note: note )
             }
         }
-        
-        return
-        
     }
     
-    @IBAction func onCancelButtonTouchUp(_ sender: UIButton) {
+    @IBAction func onFinishButtonTouchUp(_ sender: UIButton) {
+        self.showAlertView(MSG_ARE_YOU_SURE, positiveAction: { [weak self](action) in
+            self?.handleFinishedAction()
+        })
+    }
+    
+    func cancelItem() {
         guard let _item = item else { return }
         self.showLoadingIndicator()
         SERVICES().API.cancelReturnedItem(_item.id) { [weak self] (result) in
@@ -237,8 +240,13 @@ class ReturnedItemDetailVC: BaseViewController {
         }
     }
     
+    @IBAction func onCancelButtonTouchUp(_ sender: UIButton) {
+        self.showAlertView(MSG_ARE_YOU_SURE, positiveAction: { [weak self](action) in
+            self?.cancelItem()
+        })
+    }
     
-    @IBAction func onRejectButtonTouchUp(_ sender: UIButton) {
+    func rejectItem() {
         guard let _item = item else { return }
         self.showLoadingIndicator()
         SERVICES().API.rejectReturnedItem(_item.id) { [weak self] (result) in
@@ -254,14 +262,12 @@ class ReturnedItemDetailVC: BaseViewController {
         }
     }
     
-//    @IBAction func didClickFinish(_ sender: UIButton) {
-//        handleFinishAction()
-//    }
-//
-//    @IBAction func didClickUnableToStart(_ sender: UIButton) {
-////        handleUnableToStartAction()
-//        handleCancelAction()
-//    }
+    @IBAction func onRejectButtonTouchUp(_ sender: UIButton) {
+        self.showAlertView(MSG_ARE_YOU_SURE, positiveAction: { [weak self](action) in
+            self?.rejectItem()
+        })
+    }
+    
     
     func finishReturnedItem() {
         guard let _item = self.item else { return }
@@ -530,6 +536,8 @@ extension ReturnedItemDetailVC{
 //                let task = obj.data
 //                self?.item = task?.toReturnedItems()
                 self?.item = obj.data
+                self?.updateUI()
+                self?.setupDataDetailInforRows()
                 
             case .error(let error):
                 self?.showAlertView(error.getMessage())

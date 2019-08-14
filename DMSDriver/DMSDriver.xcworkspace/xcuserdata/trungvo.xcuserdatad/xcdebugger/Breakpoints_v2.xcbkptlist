@@ -58,7 +58,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/AssignDriver/AssignDriverViewController.swift"
-            timestampString = "586882805.61686"
+            timestampString = "587363534.773736"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "32"
@@ -74,7 +74,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/Managers/Services/APIServices/APIServices.swift"
-            timestampString = "587041552.357852"
+            timestampString = "587299713.3049231"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "184"
@@ -90,7 +90,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/AssignDriver/AssignDriverViewController.swift"
-            timestampString = "586882805.617566"
+            timestampString = "587363534.779291"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "73"
@@ -106,7 +106,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/Managers/Services/APIServices/APIServices.swift"
-            timestampString = "587041552.3586119"
+            timestampString = "587299713.305885"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "382"
@@ -122,11 +122,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
-            timestampString = "587041552.358708"
+            timestampString = "587470987.345479"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "458"
-            endingLineNumber = "458"
+            startingLineNumber = "431"
+            endingLineNumber = "431"
             landmarkName = "submitPickedUpQuantity(detail:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -138,11 +138,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
-            timestampString = "587041552.358796"
+            timestampString = "587470987.345601"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "443"
-            endingLineNumber = "443"
+            startingLineNumber = "416"
+            endingLineNumber = "416"
             landmarkName = "submitPickedUpQuantity(detail:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -153,40 +153,8 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DMSDriver/App/Managers/SocketIO/SocketManager.swift"
-            timestampString = "586871175.5084881"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
-            landmarkName = "login(_:_:_:_:_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DMSDriver/App/ViewControllers/Base/BaseViewController.swift"
-            timestampString = "586871175.508582"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "didReceiveConnected(data:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/Managers/Services/RESTConstants.swift"
-            timestampString = "587041552.35893"
+            timestampString = "587299713.307709"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "112"
@@ -202,13 +170,75 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
-            timestampString = "587041552.359015"
+            timestampString = "587470987.345698"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1323"
-            endingLineNumber = "1323"
+            startingLineNumber = "1303"
+            endingLineNumber = "1303"
             landmarkName = "updateOrderStatusImport(_:updateDetailType:cancelReason:reasonMessage:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Ashdod_Dev.OrderDetailViewController.updateOrderStatusImport(_: Ashdod_Dev.Order, updateDetailType: Ashdod_Dev.Order.Detail.DetailUpdateType, cancelReason: Swift.Optional&lt;Ashdod_Dev.Reason&gt;, reasonMessage: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
+                  moduleName = "Ashdod Dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/trungvo/Ashdod_Solocate/DMSDriver/DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
+                  timestampString = "587470987.484624"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1304"
+                  endingLineNumber = "1304"
+                  offsetFromSymbolStart = "317">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "default argument 1 of Ashdod_Dev.OrderDetailViewController.updateOrderStatusImport(_: Ashdod_Dev.Order, updateDetailType: Ashdod_Dev.Order.Detail.DetailUpdateType, cancelReason: Swift.Optional&lt;Ashdod_Dev.Reason&gt;, reasonMessage: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
+                  moduleName = "Ashdod Dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/trungvo/Ashdod_Solocate/DMSDriver/DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
+                  timestampString = "587470987.486829"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1303"
+                  endingLineNumber = "1303"
+                  offsetFromSymbolStart = "6">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "default argument 2 of Ashdod_Dev.OrderDetailViewController.updateOrderStatusImport(_: Ashdod_Dev.Order, updateDetailType: Ashdod_Dev.Order.Detail.DetailUpdateType, cancelReason: Swift.Optional&lt;Ashdod_Dev.Reason&gt;, reasonMessage: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
+                  moduleName = "Ashdod Dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/trungvo/Ashdod_Solocate/DMSDriver/DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
+                  timestampString = "587470987.489283"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1303"
+                  endingLineNumber = "1303"
+                  offsetFromSymbolStart = "6">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "default argument 3 of Ashdod_Dev.OrderDetailViewController.updateOrderStatusImport(_: Ashdod_Dev.Order, updateDetailType: Ashdod_Dev.Order.Detail.DetailUpdateType, cancelReason: Swift.Optional&lt;Ashdod_Dev.Reason&gt;, reasonMessage: Swift.Optional&lt;Swift.String&gt;) -&gt; ()"
+                  moduleName = "Ashdod Dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/trungvo/Ashdod_Solocate/DMSDriver/DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
+                  timestampString = "587470987.491127"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "1303"
+                  endingLineNumber = "1303"
+                  offsetFromSymbolStart = "8">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -58,7 +58,7 @@ class LoadUnloadOrderVC: BaseViewController {
     }
     
     override func updateNavigationBar() {
-        let routeName = E(route.routeMaster?.code) + " - " + E(route.routeMaster?.name)
+        let routeName = "Route".localized + " #\(route.id)" + " - " + E(route.routeMaster?.name)
         App().navigationService.updateNavigationBar(.BackOnly,
                                                     "packages-list".localized,
                                                     AppColor.white, true, routeName)
@@ -129,13 +129,15 @@ extension LoadUnloadOrderVC {
                         return
                     }
                 }
-                showAlertView("Loaded cartons must be less than or equal \(detail.cartonsInPallet ?? 0)")
+                let message = String(format: "loaded-cartons-must-be-less-than-or-equal".localized, "\(detail.cartonsInPallet ?? 0)")
+                showAlertView(message)
                 return
             }
             updateLoadedQuantity(detail:detail)
             // call without loaded carton
         } else {
-            showAlertView("Loaded quantity must be less than or equal \(detail.qty ?? 0)")
+            let message = String(format: "loaded-quantity-must-be-less-than-or-equal".localized, "\(detail.qty ?? 0)")
+            showAlertView(message)
             return
         }
     }

@@ -37,7 +37,7 @@ class ReturnedItemListClvCell: UICollectionViewCell {
         let deliveryDate = DateFormatter.displayDateUS.date(from: E(item?.dlvy_date))
         let status = TaskStatus(rawValue: E(item?.status.code)) ?? TaskStatus.open
 
-        lblTitle?.text = "\("\("Item".localized) - \(item?.id ?? 0)")"
+        lblTitle?.text = "\("\("item".localized) - \(item?.id ?? 0)")"
         lblSubtitle?.text = Slash(item?.instructions)
 //        if Locale.current.languageCode == "he" {
 //            lblUrgency?.text = item?.urgent_type_name_hb
@@ -51,9 +51,9 @@ class ReturnedItemListClvCell: UICollectionViewCell {
         btnStatus?.layer.cornerRadius = 3.0;
         btnStatus?.borderColor = item?.colorStatus;
         btnStatus?.setTitleColor(item?.colorStatus, for: .normal)
-        lblStartdate?.text = (startTime != nil) ? displayDateTimeVN.string(from: startTime!) : ""
-        lblEnddate?.text = (endTime != nil) ? displayDateTimeVN.string(from: endTime!) : ""
-        lblDeliveryDate?.text  = (deliveryDate != nil) ? displayDateVN.string(from: deliveryDate!) : ""
+        lblStartdate?.text = startTime != nil ? Slash(displayDateTimeVN.string(from: startTime!)) : "-"
+        lblEnddate?.text = endTime != nil ? Slash(displayDateTimeVN.string(from: endTime!)) : "-"
+        lblDeliveryDate?.text  = deliveryDate != nil ? Slash(displayDateVN.string(from: deliveryDate!)) : "-"
         vContent?.cornerRadius = 4.0;
         vContent?.backgroundColor = AppColor.grayColor
     }

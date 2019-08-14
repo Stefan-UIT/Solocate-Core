@@ -393,8 +393,8 @@ extension BaseAPIService {
         let startTime = route.start_time
         let endTime = route.end_time
         var path:String!
-        if let companyID = route.company?.id, let truckTypeID = route.truckType?.id {
-            path = String(format: PATH_REQUEST_URL.GET_TRUCK_LIST.URL, startTime,endTime, "\(companyID)", "\(truckTypeID)")
+        if let companyID = route.company?.id {
+            path = String(format: PATH_REQUEST_URL.GET_TRUCK_LIST.URL, startTime,endTime, "\(companyID)")
         } else {
             path = String(format: PATH_REQUEST_URL.GET_TRUCK_LIST.URL, startTime,endTime)
         }

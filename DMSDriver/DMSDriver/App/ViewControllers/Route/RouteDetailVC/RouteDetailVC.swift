@@ -78,6 +78,8 @@ class RouteDetailVC: BaseViewController {
     
     @IBOutlet weak var vanLoadButtonView: UIView!
     
+    var isOrderFiltering:Bool = false
+    
     var route:Route?
     var dateStringFilter:String = Date().toString()
 
@@ -122,7 +124,10 @@ class RouteDetailVC: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getRouteDetail("\(route?.id ?? -1)")
+        if !isOrderFiltering {
+            getRouteDetail("\(route?.id ?? -1)")
+        }
+        isOrderFiltering = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -169,8 +174,8 @@ class RouteDetailVC: BaseViewController {
     }
     
     private func initUI()  {
-        var startDate = "NA"
-        var endDate = "NA"
+        var startDate = "NA".localized
+        var endDate = "NA".localized
         if let start = route?.start_time.date {
             startDate = HourFormater.string(from:start)
         }
@@ -397,6 +402,7 @@ extension RouteDetailVC{
             case .object(let obj):
                 strongSelf.route = obj.data
                 strongSelf.clvContent?.reloadData()
+                strongSelf.initUI()
                 if isRampManagerMode {
                     strongSelf.updateActionsUI()
                 }
