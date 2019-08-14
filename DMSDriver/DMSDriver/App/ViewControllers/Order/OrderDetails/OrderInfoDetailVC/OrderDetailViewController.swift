@@ -678,30 +678,30 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
 }
 
 //MARK:  - UIScrollViewDelegate
-extension OrderDetailViewController:UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if orderDetail?.statusOrder != StatusOrder.newStatus &&
-            orderDetail?.statusOrder != StatusOrder.InTransit {
-            return
-        }
-        
-        let offsetY = scrollView.contentOffset.y
-        print("OffsetY :\(offsetY)")
-        UIView.animate(withDuration: 0.7, animations: {
-            if offsetY > 45 {
-                self.vAction?.isHidden = false
-                self.btnGo?.isHidden = true
-            }else {
-                self.vAction?.isHidden = true
-                self.btnGo?.isHidden = false
-            }
-           self.vAction?.layoutIfNeeded()
-            
-        }) { (finished) in
-            //
-        }
-    }
-}
+//extension OrderDetailViewController:UIScrollViewDelegate {
+//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+//        if orderDetail?.statusOrder != StatusOrder.newStatus &&
+//            orderDetail?.statusOrder != StatusOrder.InTransit {
+//            return
+//        }
+//        
+//        let offsetY = scrollView.contentOffset.y
+//        print("OffsetY :\(offsetY)")
+//        UIView.animate(withDuration: 0.7, animations: {
+//            if offsetY > 45 {
+//                self.vAction?.isHidden = false
+//                self.btnGo?.isHidden = true
+//            }else {
+//                self.vAction?.isHidden = true
+//                self.btnGo?.isHidden = false
+//            }
+//           self.vAction?.layoutIfNeeded()
+//
+//        }) { (finished) in
+//            //
+//        }
+//    }
+//}
 
 //MARK: - CELL FUNTION
 fileprivate extension OrderDetailViewController {
@@ -1188,7 +1188,7 @@ fileprivate extension OrderDetailViewController{
             return
         }
 
-        let isHidden = (_order.isCancelled || _order.isFinished)
+        let isHidden = (_order.isCancelled || _order.isFinished || isRampManagerMode)
         
         updateStatusButton?.isHidden = isHidden
         vAction?.isHidden = isHidden
