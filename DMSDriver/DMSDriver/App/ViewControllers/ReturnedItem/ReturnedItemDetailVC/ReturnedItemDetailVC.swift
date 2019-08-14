@@ -9,6 +9,7 @@
 import UIKit
 import CoreLocation
 
+let MSG_ARE_YOU_SURE = "are-you-sure-you-want-to-perform-this-action".localized
 
 class ReturnedItemDetailVC: BaseViewController {
     
@@ -203,8 +204,7 @@ class ReturnedItemDetailVC: BaseViewController {
     
     // MARK: ACTION
     
-    
-    @IBAction func onFinishButtonTouchUp(_ sender: UIButton) {
+    func handleFinishedAction() {
         if isRampManagerMode {
             self.presentSignatureViewController()
         } else {
@@ -216,12 +216,15 @@ class ReturnedItemDetailVC: BaseViewController {
                 self.updateItemInfo(signedFile: nil, signName: nil, note: note )
             }
         }
-        
-        return
-        
     }
     
-    @IBAction func onCancelButtonTouchUp(_ sender: UIButton) {
+    @IBAction func onFinishButtonTouchUp(_ sender: UIButton) {
+        self.showAlertView(MSG_ARE_YOU_SURE, positiveAction: { [weak self](action) in
+            self?.handleFinishedAction()
+        })
+    }
+    
+    func cancelItem() {
         guard let _item = item else { return }
         self.showLoadingIndicator()
         SERVICES().API.cancelReturnedItem(_item.id) { [weak self] (result) in
@@ -237,8 +240,13 @@ class ReturnedItemDetailVC: BaseViewController {
         }
     }
     
+    @IBAction func onCancelButtonTouchUp(_ sender: UIButton) {
+        self.showAlertView(MSG_ARE_YOU_SURE, positiveAction: { [weak self](action) in
+            self?.cancelItem()
+        })
+    }
     
-    @IBAction func onRejectButtonTouchUp(_ sender: UIButton) {
+    func rejectItem() {
         guard let _item = item else { return }
         self.showLoadingIndicator()
         SERVICES().API.rejectReturnedItem(_item.id) { [weak self] (result) in
@@ -254,14 +262,12 @@ class ReturnedItemDetailVC: BaseViewController {
         }
     }
     
-//    @IBAction func didClickFinish(_ sender: UIButton) {
-//        handleFinishAction()
-//    }
-//
-//    @IBAction func didClickUnableToStart(_ sender: UIButton) {
-////        handleUnableToStartAction()
-//        handleCancelAction()
-//    }
+    @IBAction func onRejectButtonTouchUp(_ sender: UIButton) {
+        self.showAlertView(MSG_ARE_YOU_SURE, positiveAction: { [weak self](action) in
+            self?.rejectItem()
+        })
+    }
+    
     
     func finishReturnedItem() {
         guard let _item = self.item else { return }
@@ -530,6 +536,8 @@ extension ReturnedItemDetailVC{
 //                let task = obj.data
 //                self?.item = task?.toReturnedItems()
                 self?.item = obj.data
+                self?.updateUI()
+                self?.setupDataDetailInforRows()
                 
             case .error(let error):
                 self?.showAlertView(error.getMessage())

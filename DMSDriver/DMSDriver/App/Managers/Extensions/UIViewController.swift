@@ -44,6 +44,19 @@ extension UIViewController {
                  bundle: nil);
     }
     
+    func showAlertView(_ title:String? = nil, _ message: String? = nil,
+                       positiveTitle: String? = nil,
+                       positiveAction:((_ action: UIAlertAction) -> Void)? = nil,
+                       negativeTitle: String? = nil,
+                       negativeAction: ((_ action: UIAlertAction) -> Void)? = nil)  {
+        let alert = UIAlertController(title: E(title), message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: isEmpty(positiveTitle) ? "OK".localized : positiveTitle, style: .default, handler: positiveAction)
+        let cancelAction = UIAlertAction(title: isEmpty(negativeTitle) ? "Cancel".localized : negativeTitle, style: .cancel, handler: negativeAction)
+            alert.addAction(cancelAction)
+        alert.addAction(okAction)
+        present(alert, animated: true, completion: nil)
+    }
+    
     
     func showAlertView(_ message: String, completionHandler:((_ action: UIAlertAction) -> Void)? = nil)  {
         let alert = UIAlertController(title: message, message: nil, preferredStyle: .alert)

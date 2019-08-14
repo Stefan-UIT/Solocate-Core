@@ -51,9 +51,9 @@ class ReturnedItemListClvCell: UICollectionViewCell {
         btnStatus?.layer.cornerRadius = 3.0;
         btnStatus?.borderColor = item?.colorStatus;
         btnStatus?.setTitleColor(item?.colorStatus, for: .normal)
-        lblStartdate?.text = Slash(displayDateTimeVN.string(from: startTime!))
-        lblEnddate?.text = Slash(displayDateTimeVN.string(from: endTime!))
-        lblDeliveryDate?.text  = Slash(displayDateVN.string(from: deliveryDate!))
+        lblStartdate?.text = startTime != nil ? Slash(displayDateTimeVN.string(from: startTime!)) : "-"
+        lblEnddate?.text = endTime != nil ? Slash(displayDateTimeVN.string(from: endTime!)) : "-"
+        lblDeliveryDate?.text  = deliveryDate != nil ? Slash(displayDateVN.string(from: deliveryDate!)) : "-"
         vContent?.cornerRadius = 4.0;
         vContent?.backgroundColor = AppColor.grayColor
     }

@@ -440,8 +440,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         updateOrderStatus(status,updateDetailType: .Load)
     }
     
-    // MARK: - ACTION
-    @IBAction func tapUpdateStatusButtonAction(_ sender: UIButton) {
+    func handleUpdateStatusAction() {
         guard let _order = orderDetail else { return }
         if _order.isPickUpType {
             handleUpdateStatusWithPickedUpType()
@@ -449,10 +448,18 @@ class OrderDetailViewController: BaseOrderDetailViewController {
             handleUpdateStatusWithDeliveryType()
         }
     }
+    // MARK: - ACTION
+    @IBAction func tapUpdateStatusButtonAction(_ sender: UIButton) {
+        self.showAlertView(MSG_ARE_YOU_SURE, positiveAction: { [weak self](action) in
+            self?.handleUpdateStatusAction()
+        })
+    }
     
     
     @IBAction func onUnableToStartTouchUp(_ sender: UIButton) {
-        showReasonView(isUnableToFinish: true)
+        self.showAlertView(MSG_ARE_YOU_SURE, positiveAction: { [weak self](action) in
+            self?.showReasonView(isUnableToFinish: true)
+        })
     }
 }
 
@@ -684,7 +691,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
 //            orderDetail?.statusOrder != StatusOrder.InTransit {
 //            return
 //        }
-//        
+//
 //        let offsetY = scrollView.contentOffset.y
 //        print("OffsetY :\(offsetY)")
 //        UIView.animate(withDuration: 0.7, animations: {
