@@ -17,6 +17,7 @@ import CoreData
 import Fabric
 import Crashlytics
  import Alamofire
+ import DropDown
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -64,6 +65,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
         // Follow Crashlytics app by Fabric
         Fabric.with([Crashlytics.self])
+        DropDown.startListeningToKeyboard()
+
         
         return true
     }

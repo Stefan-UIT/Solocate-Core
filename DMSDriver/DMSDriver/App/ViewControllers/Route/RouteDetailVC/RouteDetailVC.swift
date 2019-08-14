@@ -78,6 +78,8 @@ class RouteDetailVC: BaseViewController {
     
     @IBOutlet weak var vanLoadButtonView: UIView!
     
+    var isOrderFiltering:Bool = false
+    
     var route:Route?
     var dateStringFilter:String = Date().toString()
 
@@ -122,7 +124,10 @@ class RouteDetailVC: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getRouteDetail("\(route?.id ?? -1)")
+        if !isOrderFiltering {
+            getRouteDetail("\(route?.id ?? -1)")
+        }
+        isOrderFiltering = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {

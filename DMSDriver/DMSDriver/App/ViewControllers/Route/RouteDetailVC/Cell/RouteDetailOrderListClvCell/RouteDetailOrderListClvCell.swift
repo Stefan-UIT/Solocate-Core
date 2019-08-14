@@ -31,6 +31,8 @@ class RouteDetailOrderListClvCell: UICollectionViewCell {
         }
     }
     
+    var filterOrderModel = FilterOrderModel()
+    
     var displayMode:DisplayMode = DisplayMode.Expanded {
         didSet{
             tbvContent?.reloadData()
@@ -42,7 +44,7 @@ class RouteDetailOrderListClvCell: UICollectionViewCell {
             filterDataWithTapDisplay()
         }
     }
-    var rootVC: BaseViewController?
+    var rootVC: RouteDetailVC?
     var dateStringFilter = ""
     
     override func awakeFromNib() {
@@ -51,8 +53,11 @@ class RouteDetailOrderListClvCell: UICollectionViewCell {
         updateUI()
         tbvContent?.backgroundColor = UIColor.clear
         self.searchView?.delegate = self
-//        self.searchView?.vSearch?.tfSearch?.placeholder(text: "WMS Code")
-//        self.searchView?.vSearch?.tfSearch?.placeholderKey = "WMS Code"
+    }
+    
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
+        self.searchView?.vSearch?.tfSearch?.placeholder(text: "wms-code".localized, color: UIColor.lightGray)
     }
     
     func updateUI() {
@@ -76,7 +81,13 @@ class RouteDetailOrderListClvCell: UICollectionViewCell {
     }
     
     @IBAction func onFilterButtonTouchUp(_ sender: UIButton) {
-        
+        guard let _route = route else { return }
+        self.rootVC?.isOrderFiltering = true
+        let vc:FilterOrderDataViewController = .loadSB(SB: .Common)
+        vc.route = _route
+        vc.filterOrderModel = filterOrderModel
+        vc.delegate = self
+        self.rootVC?.navigationController?.present(vc, animated: true, completion: nil)
     }
 }
 
@@ -175,6 +186,7 @@ extension RouteDetailOrderListClvCell: UITableViewDelegate, UITableViewDataSourc
 //        }
         
         orderList = _route.ordersGroupByCustomer
+        dataOrigin = orderList.map({$0})
         dataOrigin = orderList
         doSearch(strSearch: strSearch)
         
@@ -250,5 +262,20 @@ extension RouteDetailOrderListClvCell:BaseSearchViewDelegate{
             UIView.removeViewNoItemAtParentView(self)
         }
         self.tbvContent?.reloadData()
+    }
+}
+
+extension RouteDetailOrderListClvCell:FilterOrderDataViewControllerDelegate {
+    func didFilterBy(_ filterOrderModel:FilterOrderModel) {
+        dataOrigin = orderList.map({$0})
+        
+        if let value = filterOrderModel.consigneeName {
+            dataOrigin = dataOrigin.filter({value == $0.consigneeName})
+        }
+        if let value = filterOrderModel.customerName {
+            dataOrigin = dataOrigin.filter({value == $0.customer?.userName})
+        }
+        self.filterOrderModel = filterOrderModel
+        self.doSearch(strSearch: strSearch)
     }
 }

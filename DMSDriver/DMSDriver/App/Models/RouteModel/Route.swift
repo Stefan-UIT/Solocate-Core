@@ -290,6 +290,20 @@ class Route: BaseModel {
         }
     }
     
+    var customerNameArr:[String] {
+        get {
+           let array = orderList.unique(map: {$0.customer!.userName})
+            return array.map({$0.customer?.userName ?? ""})
+        }
+    }
+    
+    var consigneeNameArr:[String] {
+        get {
+            let array = orderList.unique(map: {$0.consigneeName})
+            return array.map({$0.consigneeName ?? ""})
+        }
+    }
+    
     var isHasOrderNeedToBeLoaded:Bool {
         get {
             return ordersAbleToLoad.count > 0

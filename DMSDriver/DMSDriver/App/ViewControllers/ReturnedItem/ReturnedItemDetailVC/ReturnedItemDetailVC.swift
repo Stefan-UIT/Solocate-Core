@@ -108,7 +108,7 @@ class ReturnedItemDetailVC: BaseViewController {
         let status = TaskStatus(rawValue: E(_item.status.code)) ?? TaskStatus.open
         let statusItem = OrderDetailInforRow("Status".localized,status.statusName.localized,false,_item.colorStatus)
         let taskName = OrderDetailInforRow("Name".localized,"\(E(_item.name))")
-        let routeID = OrderDetailInforRow("Route".localized,"\(_item.routeID ?? 0)")
+        let routeID = OrderDetailInforRow("route-id".localized,"\(_item.routeID ?? 0)")
 
         let startTime = OrderDetailInforRow("start-time".localized, Slash(_item.dlvy_start_time))
         let endTime = OrderDetailInforRow("end-time".localized, Slash(_item.dlvy_end_time))
