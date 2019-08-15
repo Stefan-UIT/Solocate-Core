@@ -57,9 +57,7 @@ class ReturnedItemQuantityCell: UITableViewCell {
     }
     
     func handleShowingActualQuantityTextField(isHidden:Bool) {
-        quantityViewContainerHeightConstraint?.constant = (isHidden) ? 22.0 : 45.0
-        actualQuantityTextField?.isHidden = isHidden
-        deliveredQtyStaticLabel?.isHidden = isHidden
+        actualQuantityTextField?.isUserInteractionEnabled = false
     }
     
 }
