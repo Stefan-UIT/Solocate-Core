@@ -233,7 +233,7 @@ class ReturnedItemDetailVC: BaseViewController {
             case .object(let obj):
                 let message = obj.message
                 self?.showAlertView(message ?? "")
-                
+                self?.getTaskDetail(_item.id)
             case .error(let error):
                 self?.showAlertView(error.getMessage())
             }
@@ -255,7 +255,7 @@ class ReturnedItemDetailVC: BaseViewController {
             case .object(let obj):
                 let message = obj.message
                 self?.showAlertView(message ?? "")
-                
+                self?.getTaskDetail(_item.id)
             case .error(let error):
                 self?.showAlertView(error.getMessage())
             }
