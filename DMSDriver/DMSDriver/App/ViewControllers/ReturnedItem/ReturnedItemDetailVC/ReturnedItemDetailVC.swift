@@ -219,7 +219,8 @@ class ReturnedItemDetailVC: BaseViewController {
     }
     
     @IBAction func onFinishButtonTouchUp(_ sender: UIButton) {
-        self.showAlertView(MSG_ARE_YOU_SURE, positiveAction: { [weak self](action) in
+        let message = "Returned quantity" + ": \(item?.returnedQuantity ?? 0)"
+        self.showAlertView(MSG_ARE_YOU_SURE, message, positiveAction: { [weak self](action) in
             self?.handleFinishedAction()
         })
     }
@@ -299,26 +300,10 @@ class ReturnedItemDetailVC: BaseViewController {
     }
     
     func handleFinishAction() {
-//        App().showAlertView("are-you-sure-you-want-to-finish-this-task".localized,
-//                            positiveTitle: "Finish".localized,
-//                            positiveAction: { (hasOK) in
-//
-//                        self.updateTaskStatus("3")
-//        }, negativeTitle: "cancel".localized) { (hasCancel) in
-//            //
-//        }
         self.updateTaskStatus("3")
     }
     
     func handleCancelAction() {
-//        App().showAlertView("are-you-sure-you-want-to-cancel-this-task".localized,
-//                            positiveTitle: "Confirm".localized,
-//                            positiveAction: { (hasOK) in
-//
-//                                self.updateTaskStatus("4")
-//        }, negativeTitle: "cancel".localized) { (hasCancel) in
-//            //
-//        }
         self.updateTaskStatus("4")
     }
     
@@ -501,13 +486,6 @@ fileprivate extension ReturnedItemDetailVC{
     }
     
     func updateButtonStatus() {
-//        updateStatusButton?.backgroundColor = AppColor.mainColor
-//        btnUnable?.backgroundColor = AppColor.grayColor
-//        btnUnable?.borderWidth = 1;
-//        btnUnable?.borderColor = AppColor.grayBorderColor
-//        vAction?.isHidden = true
-//        updateStatusButton?.setTitle("Finish".localized.uppercased(), for: .normal)
-//        btnUnable?.setTitle("cancel".localized.uppercased(), for: .normal)
         guard  let _item = item else {
             return
         }

@@ -1073,8 +1073,6 @@ fileprivate extension OrderDetailViewController{
             
         } else if (_orderDetail.details?.first?.actualQty == nil) {
             showAlertView("delivered-quantity-is-required".localized)
-        } else if ((_orderDetail.details?.first?.isPallet ?? false) &&  _orderDetail.details?.first?.actualCartonsInPallet == nil) {
-            showAlertView("cartons-in-pallet-is-required".localized)
         } else {
             
             if _orderDetail.isHasCOD && !_orderDetail.isUpdatedCODReceived {
