@@ -274,7 +274,6 @@ class Order: BaseModel {
             if actualCartonsInPallet == nil {
                 actualCartonsInPallet = cartonsInPallet
             }
-//            remain_qty <- map["remain_qty"]
             package <- map["package"]
             barCode <- map["barcode"]
             packageRefId <- map["pkg_ref_id"]
@@ -332,13 +331,13 @@ class Order: BaseModel {
                     return StatusOrder.WarehouseClarification
                 }
                 
-                if (self.isPallet) {
-                    if let loadedCartons = self.loadedCartonsInPallet, let cartons = self.cartonsInPallet {
-                        if loadedCartons != cartons {
-                            return StatusOrder.WarehouseClarification
-                        }
-                    }
-                }
+//                if (self.isPallet) {
+//                    if let loadedCartons = self.loadedCartonsInPallet, let cartons = self.cartonsInPallet {
+//                        if loadedCartons != cartons {
+//                            return StatusOrder.WarehouseClarification
+//                        }
+//                    }
+//                }
             }
             
             return StatusOrder.Loaded
@@ -349,14 +348,13 @@ class Order: BaseModel {
                 if actualQty != qty {
                     return StatusOrder.PartialDelivered
                 }
-                
-                if (self.isPallet) {
-                    if let actualCartons = self.actualCartonsInPallet, let cartons = self.cartonsInPallet {
-                        if actualCartons != cartons {
-                            return StatusOrder.PartialDelivered
-                        }
-                    }
-                }
+//                if (self.isPallet) {
+//                    if let actualCartons = self.actualCartonsInPallet, let cartons = self.cartonsInPallet {
+//                        if actualCartons != cartons {
+//                            return StatusOrder.PartialDelivered
+//                        }
+//                    }
+//                }
             }
             
             return StatusOrder.deliveryStatus
@@ -593,21 +591,6 @@ class Order: BaseModel {
         remark    <- map["remark"]
     }
     
-    
-//    func updateStatusDetailOrder()  {
-//        for item in details ?? [] {
-//            if statusOrder == .newStatus ||
-//                statusOrder == .InTransit {
-//                item.status = .NotLoad
-//
-//            }else if (statusOrder == .PickupStatus) {
-//                item.status = .Loaded
-//            }else if (statusOrder == .deliveryStatus) {
-//                item.status = .Unload
-//
-//            }
-//        }
-//    }
     
     func getChunkedListLocation() -> [[CLLocationCoordinate2D]] {
         let currentLocation = LocationManager.shared.currentLocation?.coordinate

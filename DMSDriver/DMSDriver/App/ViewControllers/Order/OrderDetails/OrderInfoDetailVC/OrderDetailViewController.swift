@@ -391,7 +391,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                 //
             }
         case StatusOrder.InTransit.rawValue:
-            handleFinishAction()
+                handleFinishAction()
             break
         default:
             break
@@ -420,11 +420,11 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                     if loadedCartons <= cartons {
                         updatePickedUpQuantity(detail:detail)
                         return
+                    } else {
+                        let message = String(format: "picked-up-cartons-quantity-must-be-less-than-or-equal".localized, "\(detail.cartonsInPallet ?? 0)")
+                        showAlertView(message)
                     }
                 }
-                let message = String(format: "picked-up-cartons-quantity-must-be-less-than-or-equal".localized, "\(detail.cartonsInPallet ?? 0)")
-                showAlertView(message)
-                return
             }
             updatePickedUpQuantity(detail:detail)
             // call without loaded carton
@@ -436,8 +436,18 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     func updatePickedUpQuantity(detail:Order.Detail) {
-        let status = StatusOrder.InTransit.rawValue
-        updateOrderStatus(status,updateDetailType: .Load)
+        guard let pickedUpQty = detail.loadedQty else { return }
+        var message = "picked-up-quantity".localized
+        message += ": \(pickedUpQty)"
+        if detail.isPallet && detail.loadedCartonsInPallet != nil {
+            message += "\n" + "carton-in-pallets".localized
+            message += ": \(detail.loadedCartonsInPallet!)"
+        }
+        
+        self.showAlertView(MSG_ARE_YOU_SURE, message, positiveAction: { [weak self](action) in
+            let status = StatusOrder.InTransit.rawValue
+            self?.updateOrderStatus(status,updateDetailType: .Load)
+        })
     }
     
     func handleUpdateStatusAction() {
@@ -450,16 +460,12 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     // MARK: - ACTION
     @IBAction func tapUpdateStatusButtonAction(_ sender: UIButton) {
-        self.showAlertView(MSG_ARE_YOU_SURE, positiveAction: { [weak self](action) in
-            self?.handleUpdateStatusAction()
-        })
+        self.handleUpdateStatusAction()
     }
     
     
     @IBAction func onUnableToStartTouchUp(_ sender: UIButton) {
-        self.showAlertView(MSG_ARE_YOU_SURE, positiveAction: { [weak self](action) in
-            self?.showReasonView(isUnableToFinish: true)
-        })
+        self.showReasonView(isUnableToFinish: true)
     }
 }
 
@@ -1080,14 +1086,23 @@ fileprivate extension OrderDetailViewController{
                 return
             }
             
-            let statusNeedUpdate = detail.getFinishedStatusWithInputQuantity()
-            if statusNeedUpdate == .PartialDelivered {
-                self.showReasonMessage { (reason) in
-                    self.updateOrderStatus(statusNeedUpdate.rawValue,reasonMessage:reason)
-                }
-            } else {
-                self.updateOrderStatus(statusNeedUpdate.rawValue)
+            var message = "delivered-quantity".localized
+            message += ": \(detail.actualQty!)"
+            if detail.isPallet && detail.actualCartonsInPallet != nil {
+                message += "\n" + "carton-in-pallets".localized
+                message += ": \(detail.actualCartonsInPallet!)"
             }
+            
+            self.showAlertView(MSG_ARE_YOU_SURE, message, positiveAction: { [weak self](action) in
+                let statusNeedUpdate = detail.getFinishedStatusWithInputQuantity()
+                if statusNeedUpdate == .PartialDelivered {
+                    self?.showReasonMessage { (reason) in
+                        self?.updateOrderStatus(statusNeedUpdate.rawValue,reasonMessage:reason)
+                    }
+                } else {
+                    self?.updateOrderStatus(statusNeedUpdate.rawValue)
+                }
+            })
         }
             
     }
