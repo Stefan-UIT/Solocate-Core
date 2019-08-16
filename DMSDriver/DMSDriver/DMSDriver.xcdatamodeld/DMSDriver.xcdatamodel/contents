@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14460.32" systemVersion="18A391" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14492.1" systemVersion="18E226" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="CoreAttachFile" representedClassName="CoreAttachFile" syncable="YES" codeGenerationType="class">
         <attribute name="boundary" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="contentFile" optional="YES" attributeType="Binary" syncable="YES"/>
@@ -139,6 +139,11 @@
         <relationship name="orderList" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreOrder" inverseName="list" inverseEntity="CoreOrder" syncable="YES"/>
         <relationship name="warehouse" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoreWarehouse" inverseName="route" inverseEntity="CoreWarehouse" syncable="YES"/>
     </entity>
+    <entity name="CoreRouteStatus" representedClassName="CoreRouteStatus" syncable="YES" codeGenerationType="class">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="CoreStatus" representedClassName="CoreStatus" syncable="YES" codeGenerationType="class">
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -162,10 +167,11 @@
         <element name="CoreCoordinatorRoute" positionX="-369" positionY="144" width="128" height="120"/>
         <element name="CoreOrder" positionX="-54" positionY="-9" width="128" height="1215"/>
         <element name="CoreReason" positionX="-351" positionY="162" width="128" height="120"/>
-        <element name="CoreRequest" positionX="-369" positionY="153" width="128" height="165"/>
-        <element name="CoreRoute" positionX="-326" positionY="225" width="128" height="360"/>
-        <element name="CoreUrlFile" positionX="-369" positionY="144" width="128" height="90"/>
+        <element name="CoreRequest" positionX="-200.59765625" positionY="132.25390625" width="128" height="165"/>
+        <element name="CoreRoute" positionX="-416.171875" positionY="443.79296875" width="128" height="360"/>
+        <element name="CoreStatus" positionX="-206.94140625" positionY="16.265625" width="128" height="88"/>
+        <element name="CoreUrlFile" positionX="-532.75" positionY="121.26171875" width="128" height="90"/>
         <element name="CoreWarehouse" positionX="-578" positionY="243" width="128" height="135"/>
-        <element name="CoreStatus" positionX="-369" positionY="144" width="128" height="90"/>
+        <element name="CoreRouteStatus" positionX="-357.03125" positionY="17.22265625" width="128" height="90"/>
     </elements>
 </model>

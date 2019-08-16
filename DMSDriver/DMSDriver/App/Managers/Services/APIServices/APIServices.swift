@@ -73,6 +73,14 @@ extension BaseAPIService {
     
     //GET_LIST_STATUS
     @discardableResult
+    func getListRouteStatus(callback: @escaping APICallback<ResponseDataModel<ResponseArrData<Status>>>) -> APIRequest {
+        return request(method: .GET,
+                       path: PATH_REQUEST_URL.GET_LIST_ROUTE_STATUS.URL,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
     func getListStatus(callback: @escaping APICallback<ResponseDataModel<ResponseArrData<Status>>>) -> APIRequest {
         return request(method: .GET,
                        path: PATH_REQUEST_URL.GET_LIST_STATUS.URL,

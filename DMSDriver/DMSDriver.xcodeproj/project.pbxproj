@@ -626,6 +626,8 @@
 		3BF838CF218957EA0056C4F1 /* ScrollMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3BF838CE218957EA0056C4F1 /* ScrollMenuView.xib */; };
 		3BF838D22189589A0056C4F1 /* BaseScrollMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3BF838D12189589A0056C4F1 /* BaseScrollMenuView.swift */; };
 		3BF838D5218976B30056C4F1 /* RouteListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B00D04F2151F9D700B0B062 /* RouteListVC.swift */; };
+		760B209D23068F7500E96A12 /* CoreRouteStatus+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760B209C23068F7500E96A12 /* CoreRouteStatus+Ext.swift */; };
+		760B209E23068F7500E96A12 /* CoreRouteStatus+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760B209C23068F7500E96A12 /* CoreRouteStatus+Ext.swift */; };
 		BE122D51C94BA19BBECA247E /* Pods_Ashdod_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78467D145BAF1922F4EBBF6 /* Pods_Ashdod_Dev.framework */; };
 		C73D9D55226DA17900452A0C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C73D9D54226DA17900452A0C /* GoogleService-Info.plist */; };
 		C73D9D56226DA17900452A0C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C73D9D54226DA17900452A0C /* GoogleService-Info.plist */; };
@@ -1139,6 +1141,7 @@
 		3BF838D12189589A0056C4F1 /* BaseScrollMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScrollMenuView.swift; sourceTree = "<group>"; };
 		6406D038FB02DBF80C11EACD /* Pods-DMSDriver-Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver-Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev.release.xcconfig"; sourceTree = "<group>"; };
 		6BF942DD28D96E7B083B3DD5 /* Pods-Ashdod Live.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ashdod Live.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ashdod Live/Pods-Ashdod Live.debug.xcconfig"; sourceTree = "<group>"; };
+		760B209C23068F7500E96A12 /* CoreRouteStatus+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreRouteStatus+Ext.swift"; sourceTree = "<group>"; };
 		79FCA8992A46E175D52FF7F3 /* Pods-Ashdod Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ashdod Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ashdod Dev/Pods-Ashdod Dev.debug.xcconfig"; sourceTree = "<group>"; };
 		7AAB4633DDF72A60B133B3E5 /* Pods-DMSDriver-Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver-Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev.debug.xcconfig"; sourceTree = "<group>"; };
 		9B8D9F73312991A219DA0D95 /* Pods-DMSDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3181,6 +3184,7 @@
 				3BEAB86C214260CD0039CFBB /* CoreAttachFile+Ext.swift */,
 				3BB9308C21466776009F6DCC /* CoreRequest+Ext.swift */,
 				3B0724CA21B1440D00CDB05B /* CoreStatus+Ext.swift */,
+				760B209C23068F7500E96A12 /* CoreRouteStatus+Ext.swift */,
 			);
 			path = CoreDataModel;
 			sourceTree = "<group>";
@@ -3676,6 +3680,7 @@
 				2A443A3222648C5A00CB6508 /* ContentCell.swift in Sources */,
 				2A443A3322648C5A00CB6508 /* UIColor+Extensions.swift in Sources */,
 				2A443A3422648C5A00CB6508 /* AttributedTextBlock.swift in Sources */,
+				760B209D23068F7500E96A12 /* CoreRouteStatus+Ext.swift in Sources */,
 				2A443A3522648C5A00CB6508 /* FilterDataModel.swift in Sources */,
 				185FC768228D104B00B085BC /* LoadUnLoadListCell.swift in Sources */,
 				2A443A3622648C5A00CB6508 /* DashboardVC.swift in Sources */,
@@ -3933,6 +3938,7 @@
 				2A42050B22576AF000789837 /* ContentCell.swift in Sources */,
 				3B66B826210B113D000BDFEF /* UIColor+Extensions.swift in Sources */,
 				3B66B82F210B113D000BDFEF /* AttributedTextBlock.swift in Sources */,
+				760B209E23068F7500E96A12 /* CoreRouteStatus+Ext.swift in Sources */,
 				3B0D52BD221D44A400610A9A /* FilterDataModel.swift in Sources */,
 				185FC769228D104B00B085BC /* LoadUnLoadListCell.swift in Sources */,
 				3B36D8BE2228E5D200220BAE /* DashboardVC.swift in Sources */,
