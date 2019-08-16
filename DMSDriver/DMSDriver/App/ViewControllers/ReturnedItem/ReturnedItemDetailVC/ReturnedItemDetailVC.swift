@@ -219,10 +219,16 @@ class ReturnedItemDetailVC: BaseViewController {
     }
     
     @IBAction func onFinishButtonTouchUp(_ sender: UIButton) {
-        let message = "Returned quantity" + ": \(item?.returnedQuantity ?? 0)"
-        self.showAlertView(MSG_ARE_YOU_SURE, message, positiveAction: { [weak self](action) in
-            self?.handleFinishedAction()
-        })
+        if let returnedQty = item?.returnedQuantity, returnedQty > 0 {
+            let message = "returned-quantity".localized + ": \(returnedQty)"
+            self.showAlertView(MSG_ARE_YOU_SURE, message, positiveAction: { [weak self](action) in
+                self?.handleFinishedAction()
+            })
+        } else {
+            self.showAlertView(MSG_ARE_YOU_SURE, positiveAction: { [weak self](action) in
+                self?.handleFinishedAction()
+            })
+        }
     }
     
     func cancelItem() {
