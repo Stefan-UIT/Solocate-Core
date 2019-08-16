@@ -84,7 +84,17 @@ class LoadingViewController: UIViewController {
         let res = dict.reduce("", { $0 + "\"\($1.key)\" = \"\(($1.value).replaceDoubleQuoteIfNeeded())\";\n" })
         let filePath = destination.appendingPathComponent("Localizable.strings")
         let data = res.data(using: .utf32)
-        FileManager.default.createFile(atPath: filePath.path, contents: data, attributes: nil)
+        
+        if FileManager.default.fileExists(atPath: filePath.path) {
+            do {
+                try data?.write(to: filePath)
+            } catch {
+                let nserror = error as NSError
+                fatalError("Override localize file failed by \(nserror), \(nserror.userInfo)")
+            }
+        } else {
+            FileManager.default.createFile(atPath: filePath.path, contents: data, attributes: nil)
+        }
     }
     
 }

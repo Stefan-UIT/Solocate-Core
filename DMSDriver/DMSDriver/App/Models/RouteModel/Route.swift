@@ -208,7 +208,7 @@ class Route: BaseModel {
     func sortbyCustomerLocation() -> [Order] {
         var result = [Order]()
         for loc in locationList {
-            let array = orderList.filter({$0.customerLocation?.address?.lowercased() == loc.address?.lowercased()})
+            let array = orderList.filter({$0.customerLocation?.lngtd == loc.lngtd && $0.customerLocation?.lattd == loc.lattd})
                 result.append(array)
         }
     

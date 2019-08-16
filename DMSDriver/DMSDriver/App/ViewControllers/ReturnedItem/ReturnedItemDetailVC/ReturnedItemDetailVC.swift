@@ -10,6 +10,9 @@ import UIKit
 import CoreLocation
 
 let MSG_ARE_YOU_SURE = "are-you-sure-you-want-to-perform-this-action".localized
+let MSG_FINISH_ITEM = "are-you-sure-you-want-to-finish-returned-item".localized
+let MSG_CANCEL_ITEM = "are-you-sure-you-want-to-cancel-returned-item".localized
+let MSG_REJECT_ITEM = "are-you-sure-you-want-to-reject-returned-item".localized
 
 class ReturnedItemDetailVC: BaseViewController {
     
@@ -219,9 +222,16 @@ class ReturnedItemDetailVC: BaseViewController {
     }
     
     @IBAction func onFinishButtonTouchUp(_ sender: UIButton) {
-        self.showAlertView(MSG_ARE_YOU_SURE, positiveAction: { [weak self](action) in
-            self?.handleFinishedAction()
-        })
+        if let returnedQty = item?.returnedQuantity, returnedQty > 0 {
+            let message = "returned-quantity".localized + ": \(returnedQty)"
+            self.showAlertView(MSG_FINISH_ITEM, message, positiveAction: { [weak self](action) in
+                self?.handleFinishedAction()
+            })
+        } else {
+            self.showAlertView(MSG_ARE_YOU_SURE, positiveAction: { [weak self](action) in
+                self?.handleFinishedAction()
+            })
+        }
     }
     
     func cancelItem() {
@@ -233,7 +243,7 @@ class ReturnedItemDetailVC: BaseViewController {
             case .object(let obj):
                 let message = obj.message
                 self?.showAlertView(message ?? "")
-                
+                self?.getTaskDetail(_item.id)
             case .error(let error):
                 self?.showAlertView(error.getMessage())
             }
@@ -241,7 +251,7 @@ class ReturnedItemDetailVC: BaseViewController {
     }
     
     @IBAction func onCancelButtonTouchUp(_ sender: UIButton) {
-        self.showAlertView(MSG_ARE_YOU_SURE, positiveAction: { [weak self](action) in
+        self.showAlertView(MSG_CANCEL_ITEM, positiveAction: { [weak self](action) in
             self?.cancelItem()
         })
     }
@@ -255,7 +265,7 @@ class ReturnedItemDetailVC: BaseViewController {
             case .object(let obj):
                 let message = obj.message
                 self?.showAlertView(message ?? "")
-                
+                self?.getTaskDetail(_item.id)
             case .error(let error):
                 self?.showAlertView(error.getMessage())
             }
@@ -263,7 +273,7 @@ class ReturnedItemDetailVC: BaseViewController {
     }
     
     @IBAction func onRejectButtonTouchUp(_ sender: UIButton) {
-        self.showAlertView(MSG_ARE_YOU_SURE, positiveAction: { [weak self](action) in
+        self.showAlertView(MSG_REJECT_ITEM, positiveAction: { [weak self](action) in
             self?.rejectItem()
         })
     }
@@ -299,26 +309,10 @@ class ReturnedItemDetailVC: BaseViewController {
     }
     
     func handleFinishAction() {
-//        App().showAlertView("are-you-sure-you-want-to-finish-this-task".localized,
-//                            positiveTitle: "Finish".localized,
-//                            positiveAction: { (hasOK) in
-//
-//                        self.updateTaskStatus("3")
-//        }, negativeTitle: "cancel".localized) { (hasCancel) in
-//            //
-//        }
         self.updateTaskStatus("3")
     }
     
     func handleCancelAction() {
-//        App().showAlertView("are-you-sure-you-want-to-cancel-this-task".localized,
-//                            positiveTitle: "Confirm".localized,
-//                            positiveAction: { (hasOK) in
-//
-//                                self.updateTaskStatus("4")
-//        }, negativeTitle: "cancel".localized) { (hasCancel) in
-//            //
-//        }
         self.updateTaskStatus("4")
     }
     
@@ -501,13 +495,6 @@ fileprivate extension ReturnedItemDetailVC{
     }
     
     func updateButtonStatus() {
-//        updateStatusButton?.backgroundColor = AppColor.mainColor
-//        btnUnable?.backgroundColor = AppColor.grayColor
-//        btnUnable?.borderWidth = 1;
-//        btnUnable?.borderColor = AppColor.grayBorderColor
-//        vAction?.isHidden = true
-//        updateStatusButton?.setTitle("Finish".localized.uppercased(), for: .normal)
-//        btnUnable?.setTitle("cancel".localized.uppercased(), for: .normal)
         guard  let _item = item else {
             return
         }

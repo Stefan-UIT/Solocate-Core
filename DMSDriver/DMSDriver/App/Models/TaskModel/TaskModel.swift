@@ -26,7 +26,7 @@ enum TaskStatus: String {
         case .inprogress:
             return "in-progress".localized
         case .delivered:
-            return "Finished".localized
+            return "Delivered".localized
         case .cancel:
             return "Cancelled".localized
         case .pickedUp:
