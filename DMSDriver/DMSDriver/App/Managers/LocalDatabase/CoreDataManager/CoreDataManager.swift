@@ -22,6 +22,7 @@ enum Entity:String {
     case Reason = "CoreReason"
     case CoreStatus = "CoreStatus"
     case Request = "CoreRequest"
+    case CoreRouteStatus = "CoreRouteStatus"
 
 }
 
@@ -638,6 +639,17 @@ class _CoreDataManager {
                 self?.saveContext(context)
             }
         }
+    }
+    
+    func getListRouteStatus() -> [Status] {
+        var results:[Status] = []
+        let items = fetchRecordsForEntity(Entity.CoreRouteStatus.rawValue,
+                                          inManagedObjectContext: self.persistentContainer.viewContext) as? [CoreRouteStatus]
+        items?.forEach({ (core) in
+            results.append(core.convertToStatusModel())
+        })
+        
+        return results
     }
     
     func getListStatus() -> [Status] {

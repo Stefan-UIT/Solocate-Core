@@ -26,6 +26,7 @@ import Crashlytics
     var routes = [Route]()
     var filterModel = FilterDataModel()
     var isFromDashboard = false
+    var isFromFilter = false
     
 
     // MARK: - View Life Cycle
@@ -38,8 +39,10 @@ import Crashlytics
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if isFromDashboard == false {
+        if isFromDashboard == false && isFromFilter == false{
             fetchData(isShowLoading: true)
+        } else if isFromFilter {
+            isFromFilter = false
         }
     }
     
@@ -113,6 +116,7 @@ import Crashlytics
             strongSelf.filterModel = data
             strongSelf.fetchData(isShowLoading: true)
         }
+        self.isFromFilter = true
     }
  }
  

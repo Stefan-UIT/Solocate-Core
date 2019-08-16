@@ -65,21 +65,15 @@ class FilterDataListVC: BaseViewController {
     }
     
     func setupData()  {
-        arrStatus = CoreDataManager.getListStatus()
+        arrStatus = CoreDataManager.getListRouteStatus()
         
         if arrStatus.count == 0 {
-            getListStatus()
+            getListRouteStatus()
         }
         
-        arrCustomer = ["Nguyen Mach".localized,
-                     "Bao Phan".localized,
-                     "Hien Son".localized,
-                     "Xuan Huynh".localized]
+        arrCustomer = []
         
-        arrCity =    [ "Ho Chi Mịnh",
-                       "Binh Duong",
-                       "Soc Trang",
-                       "Bac Lieu"]
+        arrCity = []
         
         arrCityDisplay = arrCity
         arrCustomerDisplay = arrCustomer
@@ -570,8 +564,8 @@ extension FilterDataListVC:FilterDataListHeaderCellDelegate{
 }
 
 extension FilterDataListVC {
-    func getListStatus()  {
-        SERVICES().API.getListStatus {[weak self] (result) in
+    func getListRouteStatus()  {
+        SERVICES().API.getListRouteStatus {[weak self] (result) in
             switch result{
             case .object(let obj):
                 guard let list = obj.data?.data else {return}
