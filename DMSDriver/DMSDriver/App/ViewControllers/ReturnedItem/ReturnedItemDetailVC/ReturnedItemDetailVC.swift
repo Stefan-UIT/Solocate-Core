@@ -10,6 +10,9 @@ import UIKit
 import CoreLocation
 
 let MSG_ARE_YOU_SURE = "are-you-sure-you-want-to-perform-this-action".localized
+let MSG_FINISH_ITEM = "are-you-sure-you-want-to-finish-returned-item".localized
+let MSG_CANCEL_ITEM = "are-you-sure-you-want-to-cancel-returned-item".localized
+let MSG_REJECT_ITEM = "are-you-sure-you-want-to-reject-returned-item".localized
 
 class ReturnedItemDetailVC: BaseViewController {
     
@@ -221,7 +224,7 @@ class ReturnedItemDetailVC: BaseViewController {
     @IBAction func onFinishButtonTouchUp(_ sender: UIButton) {
         if let returnedQty = item?.returnedQuantity, returnedQty > 0 {
             let message = "returned-quantity".localized + ": \(returnedQty)"
-            self.showAlertView(MSG_ARE_YOU_SURE, message, positiveAction: { [weak self](action) in
+            self.showAlertView(MSG_FINISH_ITEM, message, positiveAction: { [weak self](action) in
                 self?.handleFinishedAction()
             })
         } else {
@@ -248,7 +251,7 @@ class ReturnedItemDetailVC: BaseViewController {
     }
     
     @IBAction func onCancelButtonTouchUp(_ sender: UIButton) {
-        self.showAlertView(MSG_ARE_YOU_SURE, positiveAction: { [weak self](action) in
+        self.showAlertView(MSG_CANCEL_ITEM, positiveAction: { [weak self](action) in
             self?.cancelItem()
         })
     }
@@ -270,7 +273,7 @@ class ReturnedItemDetailVC: BaseViewController {
     }
     
     @IBAction func onRejectButtonTouchUp(_ sender: UIButton) {
-        self.showAlertView(MSG_ARE_YOU_SURE, positiveAction: { [weak self](action) in
+        self.showAlertView(MSG_REJECT_ITEM, positiveAction: { [weak self](action) in
             self?.rejectItem()
         })
     }
