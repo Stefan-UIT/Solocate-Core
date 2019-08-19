@@ -773,7 +773,7 @@ fileprivate extension OrderDetailViewController {
         cell.returnedPalletsLabel?.text = IntSlash(detail.returnedPalletQty)
         
         let isPickUpAndNewOrder = order.isPickUpType && order.isNewStatus
-        cell.actualQuantityTextField?.text = (isPickUpAndNewOrder) ? "\(detail.loadedQty ?? 0)" : "\(detail.actualQty!)"
+        cell.actualQuantityTextField?.text = (isPickUpAndNewOrder) ? "\(detail.loadedQty ?? 0)" : "\(detail.actualQty ?? 0)"
         cell.vContent?.cornerRadius = 0
         cell.delegate = self
         if indexPath.row == (orderDetail?.details?.count ?? 0 ) - 1{
