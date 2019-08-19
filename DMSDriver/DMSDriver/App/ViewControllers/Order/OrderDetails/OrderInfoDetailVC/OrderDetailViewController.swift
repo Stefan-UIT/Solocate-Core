@@ -333,7 +333,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         //2. Add the text field. You can configure it however you need.
         alert.addTextField { (textField) in
             textField.keyboardType = .decimalPad
-            textField.text = ""
+            textField.text = "\(codAmount)"
         }
         
         // 3. Grab the value from the text field, and print it when the user clicks OK.
