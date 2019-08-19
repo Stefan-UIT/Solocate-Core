@@ -1065,6 +1065,7 @@ fileprivate extension OrderDetailViewController{
     
     private func handleFinishAction() {
         guard let _orderDetail = orderDetail, let detail = _orderDetail.details?.first else {return}
+        let actualQty = _orderDetail.details?.first?.actualQty
         if _orderDetail.isRequireImage() &&
             _orderDetail.pictures?.count ?? 0 <= 0{
             self.showAlertView("picture-required".localized) {(action) in
@@ -1077,8 +1078,9 @@ fileprivate extension OrderDetailViewController{
                 //self?.didUpdateStatus?(_orderDetail, nil)
             }
             
-        } else if (_orderDetail.details?.first?.actualQty == nil) {
-            showAlertView("delivered-quantity-is-required".localized)
+        } else if (actualQty == nil || actualQty! == 0 || actualQty > detail.qty!) {
+            let mes = String(format: "Delivered quantity must be less than or equal %@", "\(detail.qty!)")
+            showAlertView(mes)
         } else {
             
             if _orderDetail.isHasCOD && !_orderDetail.isUpdatedCODReceived {
