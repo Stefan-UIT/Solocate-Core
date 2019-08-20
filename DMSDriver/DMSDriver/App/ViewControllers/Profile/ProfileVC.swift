@@ -387,9 +387,9 @@ extension ProfileVC:UITextFieldDelegate{
 
 //MARK: -DMSNavigationServiceDelegate
 extension ProfileVC:DMSNavigationServiceDelegate{
-  func didSelectedBackOrMenu() {
-    showSideMenu()
-  }
+    func didSelectedMenuAction() {
+        showSideMenu()
+    }
 }
 
 //MARK: - API
