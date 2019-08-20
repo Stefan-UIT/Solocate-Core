@@ -50,10 +50,12 @@ class FilterDataListVC: BaseViewController {
     fileprivate var arrCityDisplay:[String] = []
     fileprivate let PICKUP_TYPE = "Pickup"
     fileprivate let DELIVERY_TYPE = "Delivery"
-
+    var timeData:TimeDataItem?
+    var isSelected:Bool = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        initVar()
         setupTableView()
         setupData()
         App().statusBarView?.backgroundColor = UIColor(hex: 0x2A2E43)
@@ -62,6 +64,13 @@ class FilterDataListVC: BaseViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         App().statusBarView?.backgroundColor = UIColor.white
+    }
+    
+    private func initVar()  {
+        if timeData == nil {
+            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeThisWeek)
+            filterModel.timeData = timeData
+        }
     }
     
     func setupData()  {
@@ -481,6 +490,7 @@ extension FilterDataListVC:FilterDataTypeRowCellDelegate {
 //MARK: - FilterDataListStatusCellDelegate
 extension FilterDataListVC:FilterDataListStatusCellDelegate{
     func filterDataListStatusCell(cell: FilterDataListStatusCell, didSelect status: String, index: Int) {
+        isSelected = false
         let status = arrStatus[index]
         filterModel.status = status
         filterModel.selectingField = nil
@@ -523,15 +533,18 @@ extension FilterDataListVC:FilterDataListHeaderCellDelegate{
 
         }
         
-        let transition = CATransition()
-        transition.type = CATransitionType.moveIn
-        transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
-        transition.fillMode = CAMediaTimingFillMode.forwards
-        transition.duration = 0.5
-        transition.subtype = CATransitionSubtype.fromTop
-        self.tbvContent?.layer.add(transition, forKey: "UITableViewReloadDataAnimationKey")
+        if !isSelected {
+            isSelected = true
+            let transition = CATransition()
+            transition.type = CATransitionType.moveIn
+            transition.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
+            transition.fillMode = CAMediaTimingFillMode.forwards
+            transition.duration = 0.5
+            transition.subtype = CATransitionSubtype.fromTop
+            self.tbvContent?.layer.add(transition, forKey: "UITableViewReloadDataAnimationKey")
+            
+        }
         self.tbvContent?.reloadData()
-        
         if sectionDisplay == .SectionCity {
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.5) {
                 self.tbvContent?.selectRow(at: IndexPath(row: 0, section: FilterDataListSection.SectionCity.rawValue), animated: true, scrollPosition: .bottom)
@@ -560,6 +573,7 @@ extension FilterDataListVC:FilterDataListHeaderCellDelegate{
                                                         self?.filterModel.timeData = timeData
                                                         self?.tbvContent?.reloadData()
         }
+        isSelected = false
     }
 }
 
@@ -569,8 +583,11 @@ extension FilterDataListVC {
             switch result{
             case .object(let obj):
                 guard let list = obj.data?.data else {return}
-                self?.arrStatus = list
-                CoreDataManager.updateListStatus(list)
+                let allStatuses = Status()
+                allStatuses.name = "all-statuses".localized
+                self?.arrStatus.append(allStatuses)
+                self?.arrStatus.append(list)
+                CoreDataManager.updateRouteListStatus(list)
             case .error(_ ):
                 break
             }

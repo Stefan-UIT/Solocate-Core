@@ -629,6 +629,18 @@ class _CoreDataManager {
         }
     }
     
+    func updateRouteListStatus(_ list:[Status]) {
+        clearDatabase(entity: .CoreRouteStatus)
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
+            list.forEach { (status) in
+                let coreRouteStatus = self?.createRecordForEntity(Entity.CoreStatus.rawValue,
+                                                                  inManagedObjectContext: context) as? CoreRouteStatus
+                coreRouteStatus?.setAttributeFrom(status)
+                self?.saveContext(context)
+            }
+        }
+    }
+    
     func updateListStatus(_ list:[Status]) {
         clearDatabase(entity: .CoreStatus)
         self.persistentContainer.performBackgroundTask {[weak self]  (context) in
