@@ -18,14 +18,9 @@ class ReasonSkipView: BaseView {
     private var callback:ReasonSkipViewCallback?
     private var reasonSelect:Reason?
     private var selectedIndex: Int = -1
-
+    var isCancelledReason:Bool = true
     override init() {
         super.init()
-        tableView.register(UINib(nibName: "ReasonSkipTableViewCell", bundle: nil), forCellReuseIdentifier: "ReasonSkipTableViewCell")
-        
-        tableView.backgroundColor = .clear
-        
-        getReasonList()
         /*
         listReason = ["CUSTOMER NOT AVAILABLE",
                       "CUSTOMER IS NOT IN A DEFINED LOCATION",
@@ -34,6 +29,19 @@ class ReasonSkipView: BaseView {
                       "THE CAR BROKE DOWN",
                       "OTHER"]
          */
+    }
+    
+    convenience init(isCancelledReason:Bool) {
+        self.init()
+        tableView.register(UINib(nibName: "ReasonSkipTableViewCell", bundle: nil), forCellReuseIdentifier: "ReasonSkipTableViewCell")
+        
+        tableView.backgroundColor = .clear
+        
+        if isCancelledReason {
+            getReasonList()
+        } else {
+            getReturnReasonList()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -104,11 +112,28 @@ extension ReasonSkipView {
             }
         }
     }
+    
+    func getReturnReasonList() {
+        self.showLoadingIndicator()
+        SERVICES().API.getReturnReasonList {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(let obj):
+                guard let list = obj.data else {return}
+                self?.listReason = list
+                self?.tableView.reloadData()
+                
+            case .error(let error):
+                //self?.showAlertView(error.getMessage())
+                break
+            }
+        }
+    }
 }
 
 extension ReasonSkipView{
-    class func show(inView:UIView,callback:@escaping ReasonSkipViewCallback)  {
-        let reasonSkipView = ReasonSkipView()
+    class func show(inView:UIView, isCancelledReason:Bool = true, callback:@escaping ReasonSkipViewCallback)  {
+        let reasonSkipView = ReasonSkipView.init(isCancelledReason: isCancelledReason)
         reasonSkipView.callback = callback
         reasonSkipView.showViewInWindow()
     }

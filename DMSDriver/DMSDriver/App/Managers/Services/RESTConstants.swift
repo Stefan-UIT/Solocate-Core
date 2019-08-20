@@ -74,6 +74,7 @@ enum PATH_REQUEST_URL: String{
     case CANCEL_RETURNED_ITEM = "transaction/v1/mobile/item-returns/process/%@/cancel"
     case FINISH_RETURNED_ITEM = "transaction/v1/mobile/item-returns/process/%@/finish"
     case GET_LIST_ROUTE_STATUS = "masterdata/v1/route-statuses/list-active"
+    case GET_RETURN_REASON_LIST = "masterdata/v1/return-reasons/list-active"
     
     var URL:String  {
         return rawValue

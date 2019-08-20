@@ -283,6 +283,14 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         }
     }
     
+    func showReturnReasonView(completionHandler:@escaping (_ reason:Reason)->Void) {
+        ReasonSkipView.show(inView: self.view, isCancelledReason: false) {(success, reason) in
+            guard let _reason = reason else {return}
+            completionHandler(_reason)
+            
+        }
+    }
+    
     func showPalletReturnedPopUp() {
         let alert = UIAlertController(title: "returned-pallets".localized, message: "number-of-returned-pallets".localized, preferredStyle: .alert)
         
@@ -309,19 +317,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         // 4. Present the alert.
         self.present(alert, animated: true, completion: nil)
     }
-    
-    private func showReasonMessage(completionHandler:@escaping (_ reason:String)->Void) {
-        let alert = UIAlertController(title: "Reason".localized,
-                                      message: nil, preferredStyle: .alert)
-        alert.showTextViewInput(placeholder: "please-enter-a-reason-for-partial-delivered".localized,
-                                nameAction: "submit".localized,
-                                oldText: "") {(success, string) in
-                                    //self?.orderDetail?.note = string
-                                    completionHandler(string)
-        }
-    }
-    
-    
     
     func showCODPopUp() {
         guard let codAmount = orderDetail?.codAmount else { return }
@@ -1098,8 +1093,8 @@ fileprivate extension OrderDetailViewController{
             self.showAlertView(MSG_ARE_YOU_SURE, message, positiveAction: { [weak self](action) in
                 let statusNeedUpdate = detail.getFinishedStatusWithInputQuantity()
                 if statusNeedUpdate == .PartialDelivered {
-                    self?.showReasonMessage { (reason) in
-                        self?.updateOrderStatus(statusNeedUpdate.rawValue,reasonMessage:reason)
+                    self?.showReturnReasonView { (reason) in
+                        self?.updateOrderStatus(statusNeedUpdate.rawValue,cancelReason: reason)
                     }
                 } else {
                     self?.updateOrderStatus(statusNeedUpdate.rawValue)
