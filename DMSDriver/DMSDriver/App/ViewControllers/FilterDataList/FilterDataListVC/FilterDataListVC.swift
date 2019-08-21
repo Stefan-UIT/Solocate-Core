@@ -68,7 +68,7 @@ class FilterDataListVC: BaseViewController {
     
     private func initVar()  {
         if timeData == nil {
-            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeThisWeek)
+            timeData = TimeData.getTimeDataItemDefault()
             filterModel.timeData = timeData
         }
     }
