@@ -844,7 +844,7 @@ fileprivate extension OrderDetailViewController {
         handleShowingPalletSection()
         handleShowingCartonSection()
         handleEnablingTextField()
-        tableView.reloadSections(OrderDetailSection.sectionNatureOfGoods.indexSet, with: .automatic)
+//        tableView.reloadSections(OrderDetailSection.sectionNatureOfGoods.indexSet, with: .none)
         
         return cell
     }
