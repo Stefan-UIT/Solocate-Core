@@ -66,6 +66,7 @@ class ProfileVC: BaseViewController {
     override func updateNavigationBar() {
         super.updateNavigationBar()
         App().navigationService.delegate = self
+        App().navigationService.updateNavigationBar(.Menu, "".localized)
         App().navigationService.updateNavigationBar(.Menu,
                                                     "profile".localized,
                                                     AppColor.white, true)
