@@ -133,13 +133,18 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     private func initUI()  {
         self.setupTableView()
         lblOrderId?.text = "order".localized + " #\(orderDetail?.id ?? 0)"
-        guard  let start = orderDetail?.to?.start_time?.date,
-               let end = orderDetail?.to?.end_time?.date else{
-            return
+        var timeStart = "NA".localized
+        var timeEnd = "NA".localized
+        var date = "NA".localized
+        if let start = orderDetail?.from?.start_time?.date {
+            timeStart = DateFormatter.hour24Formater.string(from: start)
         }
-        let timeStart = DateFormatter.hour24Formater.string(from: start)
-        let timeEnd = DateFormatter.hour24Formater.string(from: end)
-        let date = DateFormatter.shortDate.string(from: end)
+        
+        if let end = orderDetail?.to?.end_time?.date {
+            timeEnd = DateFormatter.hour24Formater.string(from: end)
+            date = DateFormatter.shortDate.string(from: end)
+        }
+        
         lblDateTime?.text = "\(timeStart) - \(timeEnd) \(date)"
     }
     
