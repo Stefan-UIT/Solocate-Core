@@ -633,7 +633,7 @@ class _CoreDataManager {
         clearDatabase(entity: .CoreRouteStatus)
         self.persistentContainer.performBackgroundTask {[weak self] (context) in
             list.forEach { (status) in
-                let coreRouteStatus = self?.createRecordForEntity(Entity.CoreStatus.rawValue,
+                let coreRouteStatus = self?.createRecordForEntity(Entity.CoreRouteStatus.rawValue,
                                                                   inManagedObjectContext: context) as? CoreRouteStatus
                 coreRouteStatus?.setAttributeFrom(status)
                 self?.saveContext(context)

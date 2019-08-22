@@ -74,11 +74,8 @@ class FilterDataListVC: BaseViewController {
     }
     
     func setupData()  {
-        arrStatus = CoreDataManager.getListRouteStatus()
         
-        if arrStatus.count == 0 {
-            getListRouteStatus()
-        }
+        setupStatusData()
         
         arrCustomer = []
         
@@ -87,7 +84,13 @@ class FilterDataListVC: BaseViewController {
         arrCityDisplay = arrCity
         arrCustomerDisplay = arrCustomer
     }
-
+    
+    private func setupStatusData() {
+        let allStatuses = Status()
+        allStatuses.name = "all-statuses".localized
+        arrStatus.append(allStatuses)
+        arrStatus.append(CoreDataManager.getListRouteStatus())
+    }
 
     /*
     // MARK: - Navigation
@@ -576,25 +579,6 @@ extension FilterDataListVC:FilterDataListHeaderCellDelegate{
         isSelected = false
     }
 }
-
-extension FilterDataListVC {
-    func getListRouteStatus()  {
-        SERVICES().API.getListRouteStatus {[weak self] (result) in
-            switch result{
-            case .object(let obj):
-                guard let list = obj.data?.data else {return}
-                let allStatuses = Status()
-                allStatuses.name = "all-statuses".localized
-                self?.arrStatus.append(allStatuses)
-                self?.arrStatus.append(list)
-                CoreDataManager.updateRouteListStatus(list)
-            case .error(_ ):
-                break
-            }
-        }
-    }
-}
-
 
 //MARK: - Suport method
 extension FilterDataListVC {
