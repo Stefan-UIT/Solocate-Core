@@ -795,6 +795,12 @@ fileprivate extension OrderDetailViewController {
         let isShowingOnly = order.isDeliveryType && (order.statusOrder == StatusOrder.newStatus || order.statusOrder == StatusOrder.Loaded || order.statusOrder == StatusOrder.PartialLoaded || order.statusOrder == StatusOrder.WarehouseClarification || order.statusOrder == StatusOrder.CancelStatus)
         
         func handleEnablingTextField() {
+            if isRampManagerMode {
+                cell.actualQuantityTextField?.isEnabled = false
+                cell.actualCartonsInPalletTextField?.isEnabled = false
+                return
+            }
+            
             if order.isDeliveryType {
                 let isEnabled = order.statusOrder == StatusOrder.InTransit
                 cell.actualQuantityTextField?.isEnabled = isEnabled
