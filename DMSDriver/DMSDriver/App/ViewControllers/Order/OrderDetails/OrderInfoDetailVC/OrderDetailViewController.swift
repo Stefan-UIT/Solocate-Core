@@ -787,10 +787,17 @@ fileprivate extension OrderDetailViewController {
         }
         
         if order.isPickUpType {
+            if detail.loadedQty != nil {
+                cell.loadedPickUpLabel.text = "\(detail.loadedQty ?? 0)"
+                cell.loadedPickUpQtyContainerHeightConstraint.constant = 28
+            } else {
+                cell.loadedPickUpQtyContainerHeightConstraint.constant = 0
+            }
             cell.deliveredQtyStaticLabel?.text = (order.isNewStatus) ? "picked-up-quantity".localized : "delivered-quantity".localized
             cell.deliveredCartonsStaticLabel?.text = (order.isNewStatus) ? "picked-up-cartons-qty".localized : "delivered-cartons-quantity".localized
             hideLoadedQuantityContainer()
         } else {
+            cell.loadedPickUpQtyContainerHeightConstraint.constant = 0
             if !detail.isPallet {
                 cell.loadedCartonsQtyViewContainer?.isHidden = true
                 cell.loadedQtyContainerHeightConstraint?.constant = 22.0
