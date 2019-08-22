@@ -79,9 +79,29 @@ class ResponseData<T:BaseModel>: BaseModel {
 
 class ResponseDataModel<T: BaseModel>: BaseModel, APIDataPresentable {
   
+    class Meta: BaseModel {
+        var current_page:Int = 1
+        var count:Int = 0
+        var per_page:Int = 1
+        var total:Int = 0
+        var total_pages = 0
+        
+        required init?(map: Map) {
+            super.init()
+        }
+        override func mapping(map: Map) {
+            current_page <- map["current_page"]
+            count <- map["count"]
+            per_page <- map["per_page"]
+            total <- map["total"]
+            total_pages <- map["total_pages"]
+        }
+    }
+    
     var message:String?
     var status:Int?
     var data: T?
+    var meta:Meta?
     
     var rawData: Data?
     var rawObject: Any?
@@ -95,15 +115,36 @@ class ResponseDataModel<T: BaseModel>: BaseModel, APIDataPresentable {
         message <- map["message"]
         status <- map["status"]
         data <- map["data"]
+        meta <- map["meta"]
     }
 }
 
 class ResponseDataListModel<T: BaseModel>: BaseModel, APIDataPresentable {
   
+    class Meta: BaseModel {
+        var current_page:Int = 1
+        var count:Int = 0
+        var per_page:Int = 1
+        var total:Int = 0
+        var total_pages = 0
+        
+        required init?(map: Map) {
+            super.init()
+        }
+        override func mapping(map: Map) {
+            current_page <- map["current_page"]
+            count <- map["count"]
+            per_page <- map["per_page"]
+            total <- map["total"]
+            total_pages <- map["total_pages"]
+        }
+    }
+    
     var message:String?
     var status:Int?
     var data:[T]?
-  
+    var meta:Meta?
+
     var rawData: Data?
     var rawObject: Any?
     
@@ -115,5 +156,6 @@ class ResponseDataListModel<T: BaseModel>: BaseModel, APIDataPresentable {
         message <- map["message"]
         status <- map["status"]
         data <- map["data"]
+        meta <- map["meta"]
     }
 }

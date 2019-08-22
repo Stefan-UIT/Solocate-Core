@@ -16,15 +16,17 @@ class ReturnedItemsListVC: BaseViewController {
 
     @IBOutlet weak var filterLabel: UILabel!
     var timeData:TimeDataItem?
-
     
     fileprivate let taskListIdebtifierCell = "TaskListClvCell"
     
     var dateStringFilter:String = Date().toString("MM/dd/yyyy")
     var dateFilter = Date()
-    
+    var isFetchInProgress = false
+    var isInfiniteScrolling = false
     var items:[ReturnedItem] = []
-    
+    var page:Int = 1
+    var currentPage:Int = 1
+    var totalPages:Int = 1
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,7 +68,7 @@ class ReturnedItemsListVC: BaseViewController {
         if let _timeData = TimeData.getTimeDataItemDefault() {
             timeData = _timeData
         }else {
-            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeThisWeek)
+            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeToday)
             TimeData.setTimeDataItemDefault(item: timeData!)
         }
     }
@@ -80,6 +82,7 @@ class ReturnedItemsListVC: BaseViewController {
     func setupCollectionView() {
         clvContent?.delegate = self
         clvContent?.dataSource = self
+        clvContent?.prefetchDataSource = self
         clvContent?.addPullToRefetch(self, action: #selector(fetchData))
     }
     
@@ -185,6 +188,25 @@ extension ReturnedItemsListVC:UICollectionViewDelegate{
     }
 }
 
+//MARK: - ScrollViewDelegate
+
+private extension ReturnedItemsListVC {
+    func isLoadingCell(for indexPath: IndexPath) -> Bool {
+        return indexPath.item+1 >= self.items.count
+    }
+}
+
+extension ReturnedItemsListVC: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        if indexPaths.contains(where: isLoadingCell) {
+            if !(currentPage == totalPages) {
+                self.isInfiniteScrolling = true
+                self.fetchData()
+            }
+        }
+    }
+}
+
 
 //MARK - API
 extension ReturnedItemsListVC{
@@ -194,10 +216,24 @@ extension ReturnedItemsListVC{
     }
     
     func getReturnedItems(timeDataItem:TimeDataItem,isFetch:Bool = false) {
+        guard !isFetchInProgress else {
+            return
+        }
+        isFetchInProgress = true
+        
         if isFetch {
             self.showLoadingIndicator()
         }
-        SERVICES().API.getReturnedItems(self.timeData!) {[weak self] (result) in
+        
+        if isInfiniteScrolling {
+            self.isInfiniteScrolling = false
+        } else {
+            self.page = 1
+            self.items = [ReturnedItem]()
+            clvContent?.reloadData()
+        }
+        
+        SERVICES().API.getReturnedItems(self.timeData!,page: page) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.clvContent?.endRefreshControl()
             switch result{
@@ -205,8 +241,14 @@ extension ReturnedItemsListVC{
 //                let taskList = obj.data?.data ?? []
 //                let array = taskList.map({$0.toReturnedItems()})
 //                self?.items = array
+                self?.totalPages = obj.data?.meta?.total_pages ?? 1
+                self?.currentPage = obj.data?.meta?.current_page ?? 1
                 
-                self?.items = obj.data?.data ?? []
+                if self?.currentPage != self?.totalPages {
+                    self?.page = (self?.currentPage ?? 1) + 1
+                }
+                
+                self?.items.append(obj.data?.data ?? [])
                 
 //                self?.taskList.sort(by: { (task1, task2) -> Bool in
 //                    return task1.id < task2.id
@@ -214,9 +256,10 @@ extension ReturnedItemsListVC{
                 
                 self?.lblNoData?.isHidden = self?.items.count > 0
                 self?.updateUI()
-                
+                self?.isFetchInProgress = false
             case .error(let error):
                 self?.showAlertView(error.getMessage())
+                self?.isFetchInProgress = false
                 break
             }
         }

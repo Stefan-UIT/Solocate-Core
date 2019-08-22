@@ -70,7 +70,7 @@ import Crashlytics
     
     private func initVar()  {
         if timeData == nil {
-            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeThisWeek)
+            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeToday)
             filterModel.timeData = timeData
         }
     }

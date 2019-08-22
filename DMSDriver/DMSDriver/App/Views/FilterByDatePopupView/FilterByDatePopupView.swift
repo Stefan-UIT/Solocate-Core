@@ -40,7 +40,7 @@ class FilterByDatePopupView: UIViewController {
         
         arrTimeData = TimeData.arrTimeDataItem()
         if (timeData == nil) {
-            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeThisWeek)
+            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeToday)
         }
     }
     
