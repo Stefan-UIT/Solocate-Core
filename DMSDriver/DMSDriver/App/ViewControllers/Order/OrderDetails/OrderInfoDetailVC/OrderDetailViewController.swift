@@ -208,7 +208,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforDetail.append(orderType)
         orderInforDetail.append(customerItem)
         orderInforDetail.append(consigneeName)
-        orderInforDetail.append(remark)
+//        orderInforDetail.append(remark)
         //orderInforStatus.append(urgency)
         
         if  (order.statusOrder == .CancelStatus ||
