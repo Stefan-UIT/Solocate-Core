@@ -101,6 +101,13 @@ class OrderDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var loadedPickUpLabel: UILabel!
     
     
+    @IBOutlet weak var loadedPickUpCartonsContainerHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var loadedPickUpCartonsLabel: UILabel!
+    
+    @IBOutlet weak var returnedPalletsContainerHeightConstraint: NSLayoutConstraint!
+    
+    
     weak var delegate:OrderDetailTableViewCellDelegate?
     var orderDetailItem: OrderDetailInforRow! {
         didSet {

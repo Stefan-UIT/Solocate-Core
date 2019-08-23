@@ -771,6 +771,8 @@ fileprivate extension OrderDetailViewController {
         cell.loadedQuantityLabel?.text = IntSlash(detail.loadedQty)
         cell.loadedCartonsLabel?.text = IntSlash(detail.loadedCartonsInPallet)
         cell.returnedPalletsLabel?.text = IntSlash(detail.returnedPalletQty)
+        cell.loadedPickUpLabel.text = "\(detail.loadedQty ?? 0)"
+        cell.loadedPickUpCartonsLabel.text = "\(detail.loadedCartonsInPallet ?? 0)"
         
         let isPickUpAndNewOrder = order.isPickUpType && order.isNewStatus
         cell.actualQuantityTextField?.text = (isPickUpAndNewOrder) ? "\(detail.loadedQty ?? 0)" : "\(detail.actualQty ?? 0)"
@@ -787,9 +789,12 @@ fileprivate extension OrderDetailViewController {
         }
         
         if order.isPickUpType {
-            if detail.loadedQty != nil {
-                cell.loadedPickUpLabel.text = "\(detail.loadedQty ?? 0)"
-                cell.loadedPickUpQtyContainerHeightConstraint.constant = 28
+            cell.returnedPalletsContainerHeightConstraint.constant = 0
+            if detail.loadedQty != nil && detail.loadedCartonsInPallet != 0 {
+                cell.loadedPickUpQtyContainerHeightConstraint.constant = 50
+            } else if detail.loadedQty != nil && detail.loadedCartonsInPallet == 0{
+                cell.loadedPickUpQtyContainerHeightConstraint.constant = 25
+                cell.loadedPickUpCartonsContainerHeightConstraint.constant = 0
             } else {
                 cell.loadedPickUpQtyContainerHeightConstraint.constant = 0
             }
