@@ -164,34 +164,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderCODInfo.removeAll()
         
         guard let order = orderDetail else { return }
-//        let displayDateTimeVN = DateFormatter.displayDateTimeVN
-//        var startFromDate = ""
-//        if let date = order.from?.start_time?.date {
-//            startFromDate = displayDateTimeVN.string(from: date)
-//        }else {
-//            startFromDate = "invalid-date".localized
-//        }
-//
-//        var endFromDate = ""
-//        if let date = order.from?.end_time?.date {
-//            endFromDate = displayDateTimeVN.string(from: date)
-//        }else {
-//            endFromDate = "invalid-date".localized
-//        }
-//
-//        var startToDate = ""
-//        if let date = order.to?.start_time?.date {
-//            startToDate = displayDateTimeVN.string(from: date)
-//        }else {
-//            startToDate = "invalid-date".localized
-//        }
-//
-//        var endToDate = ""
-//        if let date = order.to?.end_time?.date {
-//            endToDate = displayDateTimeVN.string(from: date)
-//        }else {
-//            endToDate = "invalid-date".localized
-//        }
         
         let startFromDate = Slash(order.from?.start_time)
         let endFromDate = Slash(order.from?.end_time)
@@ -205,10 +177,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                                                Slash(order.consigneeName))
         let remark = OrderDetailInforRow("remark".localized,
                                               Slash(order.remark))
-//        let urgency = OrderDetailInforRow("Urgency".localized,
-//                                          isHebewLang() ? order.urgent_type_name_hb ?? "" :  order.urgent_type_name_en ?? "")
         let orderId = OrderDetailInforRow("order-id".localized,"#\(order.id)")
-//        let seq = OrderDetailInforRow("SEQ".localized,"\(order.seq ?? 0)")
         
         //NEW
         let wmsOrderCode = OrderDetailInforRow("wms-order-code".localized,"#\(order.wmsOrderCode ?? "")")
@@ -543,7 +512,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         }
         switch orderSection {
         case .sectionMap:
-            return isMapHidden ? CGFloat.leastNormalMagnitude : 0
+            return 0
         case .sectionCOD:
             return (_orderDetail.isHasCOD) ? heightHeader : CGFloat.leastNormalMagnitude
         default:
@@ -572,19 +541,10 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 headerCell.btnStatus?.setTitleColor(orderDetail?.colorStatus, for: .normal)
                 
             case .sectionSignature:
-//                var isAdd = false
-//                if (orderDetail?.signature == nil &&
-//                    orderDetail?.route?.driverId == Caches().user?.userInfo?.id){
                 let hasSigned = orderDetail?.signature != nil
                 let isHidden = hasSigned || !statusesShouldAllowToSignAndUpload
                 headerCell.btnEdit?.isHidden = isHidden
             case .sectionPictures:
-//                if orderDetail?.route?.driverId == Caches().user?.userInfo?.id &&
-//                        (orderDetail?.statusOrder == StatusOrder.newStatus ||
-//                         orderDetail?.statusOrder == StatusOrder.InTransit ||
-//                         orderDetail?.statusOrder == StatusOrder.PickupStatus){
-//                    isAdd = true
-//                }
                 headerCell.btnEdit?.isHidden = !statusesShouldAllowToSignAndUpload
 //            case .sectionAddNote:
 //                headerCell.btnEdit?.isHidden = false
@@ -600,12 +560,6 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             let headerView = UIView()
             headerView.addSubview(headerCell)
             headerCell.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: heightHeader)
-            
-//            if orderSection == OrderDetailSection.sectionMap {
-//                headerCell.vContent?.backgroundColor = isMapHidden ? UIColor.clear : UIColor.white
-//                headerView.backgroundColor = isMapHidden ? UIColor.clear : UIColor.white
-//            }
-
             return headerView;
         }
         
@@ -723,32 +677,6 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         }
     }
 }
-
-//MARK:  - UIScrollViewDelegate
-//extension OrderDetailViewController:UIScrollViewDelegate {
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if orderDetail?.statusOrder != StatusOrder.newStatus &&
-//            orderDetail?.statusOrder != StatusOrder.InTransit {
-//            return
-//        }
-//
-//        let offsetY = scrollView.contentOffset.y
-//        print("OffsetY :\(offsetY)")
-//        UIView.animate(withDuration: 0.7, animations: {
-//            if offsetY > 45 {
-//                self.vAction?.isHidden = false
-//                self.btnGo?.isHidden = true
-//            }else {
-//                self.vAction?.isHidden = true
-//                self.btnGo?.isHidden = false
-//            }
-//           self.vAction?.layoutIfNeeded()
-//
-//        }) { (finished) in
-//            //
-//        }
-//    }
-//}
 
 //MARK: - CELL FUNTION
 fileprivate extension OrderDetailViewController {
@@ -987,9 +915,6 @@ fileprivate extension OrderDetailViewController {
 }
 
 extension OrderDetailViewController:DMSNavigationServiceDelegate {
-//    func didSelectedBackOrMenu() {
-//        showSideMenu()
-//    }
     func didSelectedMenuAction() {
         showSideMenu()
     }
@@ -1037,11 +962,6 @@ extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
         vc.callback = {[weak self](success, order) in
             self?.orderDetail = order
             self?.fetchData(showLoading: false)
-            /*
-            self?.setupDataDetailInforRows()
-            self?.tableView?.reloadData()
-            self?.updateOrderDetail?(order)
-             */
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }
