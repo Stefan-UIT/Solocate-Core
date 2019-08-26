@@ -2163,6 +2163,7 @@
                         <viewLayoutGuide key="safeArea" id="6w1-QI-8Cl"/>
                     </view>
                     <connections>
+                        <outlet property="navigateButton" destination="sEn-bX-KUc" id="aPq-Wu-n5S"/>
                         <outlet property="orderInfoBtn" destination="qzC-T5-gdk" id="zrg-jt-J9s"/>
                         <outlet property="tableView" destination="4rp-Ib-0KY" id="XcR-gs-Nx8"/>
                         <outlet property="unableToStartButton" destination="o8H-ay-ogW" id="rpI-4I-FTq"/>
