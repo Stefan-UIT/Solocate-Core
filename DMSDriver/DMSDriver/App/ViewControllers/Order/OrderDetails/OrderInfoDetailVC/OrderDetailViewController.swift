@@ -46,6 +46,11 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     @IBOutlet weak var lblOrderId: UILabel?
     @IBOutlet weak var lblDateTime: UILabel?
     @IBOutlet weak var unableToStartButton: UIButton!
+    @IBOutlet weak var wmsOrderCodeLabel: UILabel!
+    @IBOutlet weak var orderInfoBtn: UIButton!
+    
+    @IBOutlet weak var navigateButton: UIButton!
+    
     
     fileprivate var orderInforDetail = [OrderDetailInforRow]()
     fileprivate var orderInforFrom = [OrderDetailInforRow]()
@@ -62,6 +67,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 
     fileprivate var arrTitleHeader:[String] = []
     fileprivate let heightHeader:CGFloat = 65
+    fileprivate var isMapHidden:Bool = true
     
     var dateStringFilter = Date().toString()
     var btnGo: UIButton?
@@ -133,6 +139,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     private func initUI()  {
         self.setupTableView()
         lblOrderId?.text = "order".localized + " #\(orderDetail?.id ?? 0)"
+        wmsOrderCodeLabel.text = "WMS Order Code".localized + " \n#\(orderDetail?.wmsOrderCode ?? "")"
+        orderInfoBtn.setTitle(orderDetail?.orderType.name.localized, for: .normal)
         var timeStart = "NA".localized
         var timeEnd = "NA".localized
         var date = "NA".localized
@@ -203,17 +211,21 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 //        let seq = OrderDetailInforRow("SEQ".localized,"\(order.seq ?? 0)")
         
         //NEW
+        let wmsOrderCode = OrderDetailInforRow("wms-order-code".localized,"#\(order.wmsOrderCode ?? "")")
+        let wmsManifestNumber = OrderDetailInforRow("wms-manifest-number".localized,"#\(order.wmsManifestNumber ?? "")")
         let orderGroup = OrderDetailInforRow("order-group".localized,order.orderGroup.name)
         let orderType = OrderDetailInforRow("order-type".localized,order.orderType.name)
         
 
         orderInforDetail.append(orderId)
+        orderInforDetail.append(wmsOrderCode)
+        orderInforDetail.append(wmsManifestNumber)
 //        orderInforDetail.append(seq)
         orderInforDetail.append(orderGroup)
         orderInforDetail.append(orderType)
         orderInforDetail.append(customerItem)
         orderInforDetail.append(consigneeName)
-//        orderInforDetail.append(remark)
+        orderInforDetail.append(remark)
         //orderInforStatus.append(urgency)
         
         if  (order.statusOrder == .CancelStatus ||
@@ -467,6 +479,18 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     @IBAction func onUnableToStartTouchUp(_ sender: UIButton) {
         self.showReasonView(isUnableToFinish: true)
     }
+    
+    @IBAction func tapOrderInfoButton(_ sender: Any) {
+    }
+    
+    @IBAction func tapOrderNavigateButton(_ sender: Any) {
+        navigateButton.isSelected = !navigateButton.isSelected
+        isMapHidden = !navigateButton.isSelected
+        tableView?.reloadSections(OrderDetailSection.sectionMap.indexSet, with: .top)
+//        tableView?.reloadData()
+    }
+    
+    
 }
 
 
@@ -483,7 +507,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         }
         switch orderSection {
         case .sectionMap:
-            return 1
+            return isMapHidden ? 0 : 1
         case .sectionOrderInfo:
             return orderInforDetail.count
         case .sectionFrom:
@@ -519,7 +543,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         }
         switch orderSection {
         case .sectionMap:
-            return 0
+            return isMapHidden ? CGFloat.leastNormalMagnitude : 0
         case .sectionCOD:
             return (_orderDetail.isHasCOD) ? heightHeader : CGFloat.leastNormalMagnitude
         default:
@@ -576,6 +600,11 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             let headerView = UIView()
             headerView.addSubview(headerCell)
             headerCell.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: heightHeader)
+            
+//            if orderSection == OrderDetailSection.sectionMap {
+//                headerCell.vContent?.backgroundColor = isMapHidden ? UIColor.clear : UIColor.white
+//                headerView.backgroundColor = isMapHidden ? UIColor.clear : UIColor.white
+//            }
 
             return headerView;
         }
@@ -585,6 +614,11 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         guard let _orderDetail = self.orderDetail, let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section) else { return 10 }
+        
+        if orderSection == OrderDetailSection.sectionMap && isMapHidden {
+            return CGFloat.leastNormalMagnitude
+        }
+        
         if orderSection == OrderDetailSection.sectionCOD && !_orderDetail.isHasCOD {
             return CGFloat.leastNormalMagnitude
         }
@@ -769,7 +803,9 @@ fileprivate extension OrderDetailViewController {
         cell.lblBarcode?.text = barCode
         cell.lblPackgage?.text = paRefId
         cell.loadedQuantityLabel?.text = IntSlash(detail.loadedQty)
+        cell.loadedQuantityLabel?.textColor = AppColor.greenColor
         cell.loadedCartonsLabel?.text = IntSlash(detail.loadedCartonsInPallet)
+        cell.loadedCartonsLabel?.textColor = AppColor.greenColor
         cell.returnedPalletsLabel?.text = IntSlash(detail.returnedPalletQty)
         cell.loadedPickUpLabel.text = "\(detail.loadedQty ?? 0)"
         cell.loadedPickUpCartonsLabel.text = "\(detail.loadedCartonsInPallet ?? 0)"
