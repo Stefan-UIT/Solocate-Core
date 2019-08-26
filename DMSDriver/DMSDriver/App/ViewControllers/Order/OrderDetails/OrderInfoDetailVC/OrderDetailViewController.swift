@@ -47,8 +47,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     @IBOutlet weak var lblDateTime: UILabel?
     @IBOutlet weak var unableToStartButton: UIButton!
     @IBOutlet weak var wmsOrderCodeLabel: UILabel!
-    @IBOutlet weak var orderInfoBtn: UIButton!
-    
     @IBOutlet weak var navigateButton: UIButton!
     
     
@@ -139,8 +137,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     private func initUI()  {
         self.setupTableView()
         lblOrderId?.text = "order".localized + " #\(orderDetail?.id ?? 0)"
-        wmsOrderCodeLabel.text = "WMS Order Code".localized + " \n#\(orderDetail?.wmsOrderCode ?? "")"
-        orderInfoBtn.setTitle(orderDetail?.orderType.name.localized, for: .normal)
+        wmsOrderCodeLabel.text = "wms-order-code".localized + " \n#\(orderDetail?.wmsOrderCode ?? "")"
         var timeStart = "NA".localized
         var timeEnd = "NA".localized
         var date = "NA".localized
@@ -154,6 +151,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         }
         
         lblDateTime?.text = "\(timeStart) - \(timeEnd) \(date)"
+        //setup NavigateButton
+        navigateButton.backgroundColor = AppColor.mainColor
+        
     }
     
     private func setupDataDetailInforRows() {
@@ -447,9 +447,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
     @IBAction func onUnableToStartTouchUp(_ sender: UIButton) {
         self.showReasonView(isUnableToFinish: true)
-    }
-    
-    @IBAction func tapOrderInfoButton(_ sender: Any) {
     }
     
     @IBAction func tapOrderNavigateButton(_ sender: Any) {
