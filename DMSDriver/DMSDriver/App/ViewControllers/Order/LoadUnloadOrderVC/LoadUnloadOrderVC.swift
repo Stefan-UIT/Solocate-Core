@@ -15,7 +15,7 @@ class LoadUnloadOrderVC: BaseViewController {
     @IBOutlet weak var tbvContent:UITableView?
     @IBOutlet weak var searchView:BaseSearchView?
     @IBOutlet weak var lblNoResult:UILabel?
-
+    
     private var strSearch:String?
     private let cellContentIdentifier = "LoadUnLoadListCell"
     private let loadPackageCellIdentifier = "LoadPackageTableViewCell"
