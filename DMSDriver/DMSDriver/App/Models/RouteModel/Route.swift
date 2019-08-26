@@ -180,7 +180,7 @@ class Route: BaseModel {
     var truckType:TruckType?
     var routeMaster:RouteMaster?
     var company:Company?
-    var loadVolume:Double = 0.0
+    var loadVolume:String = "0.0"
     var assignedInfo:[AssignedInfo]?
     
     var isAllowedGoToDelivery:Bool {

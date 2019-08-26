@@ -133,13 +133,18 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     private func initUI()  {
         self.setupTableView()
         lblOrderId?.text = "order".localized + " #\(orderDetail?.id ?? 0)"
-        guard  let start = orderDetail?.to?.start_time?.date,
-               let end = orderDetail?.to?.end_time?.date else{
-            return
+        var timeStart = "NA".localized
+        var timeEnd = "NA".localized
+        var date = "NA".localized
+        if let start = orderDetail?.from?.start_time?.date {
+            timeStart = DateFormatter.hour24Formater.string(from: start)
         }
-        let timeStart = DateFormatter.hour24Formater.string(from: start)
-        let timeEnd = DateFormatter.hour24Formater.string(from: end)
-        let date = DateFormatter.shortDate.string(from: end)
+        
+        if let end = orderDetail?.to?.end_time?.date {
+            timeEnd = DateFormatter.hour24Formater.string(from: end)
+            date = DateFormatter.shortDate.string(from: end)
+        }
+        
         lblDateTime?.text = "\(timeStart) - \(timeEnd) \(date)"
     }
     
@@ -208,7 +213,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforDetail.append(orderType)
         orderInforDetail.append(customerItem)
         orderInforDetail.append(consigneeName)
-        orderInforDetail.append(remark)
+//        orderInforDetail.append(remark)
         //orderInforStatus.append(urgency)
         
         if  (order.statusOrder == .CancelStatus ||
@@ -283,6 +288,14 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         }
     }
     
+    func showReturnReasonView(completionHandler:@escaping (_ reason:Reason)->Void) {
+        ReasonSkipView.show(inView: self.view, isCancelledReason: false) {(success, reason) in
+            guard let _reason = reason else {return}
+            completionHandler(_reason)
+            
+        }
+    }
+    
     func showPalletReturnedPopUp() {
         let alert = UIAlertController(title: "returned-pallets".localized, message: "number-of-returned-pallets".localized, preferredStyle: .alert)
         
@@ -310,19 +323,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         self.present(alert, animated: true, completion: nil)
     }
     
-    private func showReasonMessage(completionHandler:@escaping (_ reason:String)->Void) {
-        let alert = UIAlertController(title: "Reason".localized,
-                                      message: nil, preferredStyle: .alert)
-        alert.showTextViewInput(placeholder: "please-enter-a-reason-for-partial-delivered".localized,
-                                nameAction: "submit".localized,
-                                oldText: "") {(success, string) in
-                                    //self?.orderDetail?.note = string
-                                    completionHandler(string)
-        }
-    }
-    
-    
-    
     func showCODPopUp() {
         guard let codAmount = orderDetail?.codAmount else { return }
         let title = "cod-received".localized
@@ -333,7 +333,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         //2. Add the text field. You can configure it however you need.
         alert.addTextField { (textField) in
             textField.keyboardType = .decimalPad
-            textField.text = ""
+            textField.text = "\(codAmount)"
         }
         
         // 3. Grab the value from the text field, and print it when the user clicks OK.
@@ -771,9 +771,11 @@ fileprivate extension OrderDetailViewController {
         cell.loadedQuantityLabel?.text = IntSlash(detail.loadedQty)
         cell.loadedCartonsLabel?.text = IntSlash(detail.loadedCartonsInPallet)
         cell.returnedPalletsLabel?.text = IntSlash(detail.returnedPalletQty)
+        cell.loadedPickUpLabel.text = "\(detail.loadedQty ?? 0)"
+        cell.loadedPickUpCartonsLabel.text = "\(detail.loadedCartonsInPallet ?? 0)"
         
         let isPickUpAndNewOrder = order.isPickUpType && order.isNewStatus
-        cell.actualQuantityTextField?.text = (isPickUpAndNewOrder) ? "\(detail.loadedQty ?? 0)" : "\(detail.actualQty!)"
+        cell.actualQuantityTextField?.text = (isPickUpAndNewOrder) ? "\(detail.loadedQty ?? 0)" : "\(detail.actualQty ?? 0)"
         cell.vContent?.cornerRadius = 0
         cell.delegate = self
         if indexPath.row == (orderDetail?.details?.count ?? 0 ) - 1{
@@ -787,10 +789,20 @@ fileprivate extension OrderDetailViewController {
         }
         
         if order.isPickUpType {
+            cell.returnedPalletsContainerHeightConstraint.constant = 0
+            if detail.loadedQty != nil && detail.loadedCartonsInPallet != 0 {
+                cell.loadedPickUpQtyContainerHeightConstraint.constant = 50
+            } else if detail.loadedQty != nil && detail.loadedCartonsInPallet == 0{
+                cell.loadedPickUpQtyContainerHeightConstraint.constant = 25
+                cell.loadedPickUpCartonsContainerHeightConstraint.constant = 0
+            } else {
+                cell.loadedPickUpQtyContainerHeightConstraint.constant = 0
+            }
             cell.deliveredQtyStaticLabel?.text = (order.isNewStatus) ? "picked-up-quantity".localized : "delivered-quantity".localized
             cell.deliveredCartonsStaticLabel?.text = (order.isNewStatus) ? "picked-up-cartons-qty".localized : "delivered-cartons-quantity".localized
             hideLoadedQuantityContainer()
         } else {
+            cell.loadedPickUpQtyContainerHeightConstraint.constant = 0
             if !detail.isPallet {
                 cell.loadedCartonsQtyViewContainer?.isHidden = true
                 cell.loadedQtyContainerHeightConstraint?.constant = 22.0
@@ -800,6 +812,12 @@ fileprivate extension OrderDetailViewController {
         let isShowingOnly = order.isDeliveryType && (order.statusOrder == StatusOrder.newStatus || order.statusOrder == StatusOrder.Loaded || order.statusOrder == StatusOrder.PartialLoaded || order.statusOrder == StatusOrder.WarehouseClarification || order.statusOrder == StatusOrder.CancelStatus)
         
         func handleEnablingTextField() {
+            if isRampManagerMode {
+                cell.actualQuantityTextField?.isEnabled = false
+                cell.actualCartonsInPalletTextField?.isEnabled = false
+                return
+            }
+            
             if order.isDeliveryType {
                 let isEnabled = order.statusOrder == StatusOrder.InTransit
                 cell.actualQuantityTextField?.isEnabled = isEnabled
@@ -849,7 +867,7 @@ fileprivate extension OrderDetailViewController {
         handleShowingPalletSection()
         handleShowingCartonSection()
         handleEnablingTextField()
-        tableView.reloadSections(OrderDetailSection.sectionNatureOfGoods.indexSet, with: .automatic)
+//        tableView.reloadSections(OrderDetailSection.sectionNatureOfGoods.indexSet, with: .none)
         
         return cell
     }
@@ -1065,6 +1083,7 @@ fileprivate extension OrderDetailViewController{
     
     private func handleFinishAction() {
         guard let _orderDetail = orderDetail, let detail = _orderDetail.details?.first else {return}
+        let actualQty = _orderDetail.details?.first?.actualQty
         if _orderDetail.isRequireImage() &&
             _orderDetail.pictures?.count ?? 0 <= 0{
             self.showAlertView("picture-required".localized) {(action) in
@@ -1077,8 +1096,9 @@ fileprivate extension OrderDetailViewController{
                 //self?.didUpdateStatus?(_orderDetail, nil)
             }
             
-        } else if (_orderDetail.details?.first?.actualQty == nil) {
-            showAlertView("delivered-quantity-is-required".localized)
+        } else if (actualQty == nil || actualQty! == 0 || actualQty > detail.qty!) {
+            let mes = String(format: "Delivered quantity must be less than or equal %@", "\(detail.qty!)")
+            showAlertView(mes)
         } else {
             
             if _orderDetail.isHasCOD && !_orderDetail.isUpdatedCODReceived {
@@ -1096,8 +1116,8 @@ fileprivate extension OrderDetailViewController{
             self.showAlertView(MSG_ARE_YOU_SURE, message, positiveAction: { [weak self](action) in
                 let statusNeedUpdate = detail.getFinishedStatusWithInputQuantity()
                 if statusNeedUpdate == .PartialDelivered {
-                    self?.showReasonMessage { (reason) in
-                        self?.updateOrderStatus(statusNeedUpdate.rawValue,reasonMessage:reason)
+                    self?.showReturnReasonView { (reason) in
+                        self?.updateOrderStatus(statusNeedUpdate.rawValue,cancelReason: reason)
                     }
                 } else {
                     self?.updateOrderStatus(statusNeedUpdate.rawValue)

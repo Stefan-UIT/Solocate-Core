@@ -121,18 +121,18 @@ extension LoadUnloadOrderVC: LoadPackageTableViewCellDelegate {
 extension LoadUnloadOrderVC {
     func submitLoadedQuantity(detail:Order.Detail) {
         if let loadedQty = detail.loadedQty, let qty = detail.qty, loadedQty <= qty {
-            if (detail.isPallet) {
-                if let loadedCartons = detail.loadedCartonsInPallet {
-                    let cartons = detail.cartonsInPallet ?? 0
-                    if loadedCartons <= cartons {
-                        updateLoadedQuantity(detail:detail)
-                        return
-                    }
-                }
-                let message = String(format: "loaded-cartons-must-be-less-than-or-equal".localized, "\(detail.cartonsInPallet ?? 0)")
-                showAlertView(message)
-                return
-            }
+//            if (detail.isPallet) {
+//                if let loadedCartons = detail.loadedCartonsInPallet {
+//                    let cartons = detail.cartonsInPallet ?? 0
+//                    if loadedCartons <= cartons {
+//                        updateLoadedQuantity(detail:detail)
+//                        return
+//                    }
+//                }
+//                let message = String(format: "loaded-cartons-must-be-less-than-or-equal".localized, "\(detail.cartonsInPallet ?? 0)")
+//                showAlertView(message)
+//                return
+//            }
             updateLoadedQuantity(detail:detail)
             // call without loaded carton
         } else {

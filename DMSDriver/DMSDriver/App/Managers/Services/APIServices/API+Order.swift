@@ -74,6 +74,13 @@ extension BaseAPIService{
                        callback: callback);
     }
     
+    @discardableResult
+    func getReturnReasonList(callback: @escaping APICallback<ResponseArrData<Reason>>) -> APIRequest {
+        return request(method: .GET,
+                       path:  PATH_REQUEST_URL.GET_RETURN_REASON_LIST.URL,
+                       input: .empty,
+                       callback: callback);
+    }
     
     @discardableResult
     func getOrderDetail(orderId:String, callback: @escaping APICallback<ResponseDataModel<Order>>) -> APIRequest {

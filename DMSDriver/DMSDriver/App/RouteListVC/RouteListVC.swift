@@ -27,7 +27,7 @@ import Crashlytics
     var filterModel = FilterDataModel()
     var isFromDashboard = false
     var isFromFilter = false
-    
+    var isBackButton = false
 
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -49,7 +49,12 @@ import Crashlytics
     override func updateNavigationBar() {
         super.updateNavigationBar()
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.Filter_Menu, "")
+        if isBackButton {
+            App().navigationService.updateNavigationBar(.Back_Menu, "")
+            isBackButton = false
+        } else {
+            App().navigationService.updateNavigationBar(.Filter_Menu, "")
+        }
     }
     
     private func setupTableView()  {
@@ -65,7 +70,7 @@ import Crashlytics
     
     private func initVar()  {
         if timeData == nil {
-            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeThisWeek)
+            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeToday)
             filterModel.timeData = timeData
         }
     }
@@ -87,6 +92,7 @@ import Crashlytics
         for (index,route) in self.routes.enumerated() {
             if route.id == routeNeedUpdate.id {
                 self.routes[index] = routeNeedUpdate
+                isBackButton = true
                 break
             }
         }
@@ -174,7 +180,9 @@ import Crashlytics
         let contentOffsetY = scrollView.contentOffset.y
         let heightViewHiDriver = viewHiDriver?.frame.size.height ?? 0
         updateViewHiDriverFollowScrollView(scrollView: scrollView)
-        updateNavigationBar(isShowTitle: contentOffsetY > heightViewHiDriver)
+        if !isBackButton {
+            updateNavigationBar(isShowTitle: contentOffsetY > heightViewHiDriver)
+        }
     }
     
     func updateViewHiDriverFollowScrollView(scrollView:UIScrollView)  {

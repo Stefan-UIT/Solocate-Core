@@ -66,7 +66,7 @@ class TaskListVC: BaseViewController {
         if let _timeData = TimeData.getTimeDataItemDefault() {
             timeData = _timeData
         }else {
-            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeThisWeek)
+            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeToday)
             TimeData.setTimeDataItemDefault(item: timeData!)
         }
     }
