@@ -43,6 +43,11 @@ class LoadPackageTableViewCell: UITableViewCell {
     
     @IBOutlet weak var deliveredQtyStaticLabel: UILabel?
     @IBOutlet weak var deliveredCartonsStaticLabel: UILabel?
+    
+    
+    @IBOutlet weak var orderIDLabel: UILabel?
+    
+    
     weak var delegate:LoadPackageTableViewCellDelegate?
     var detail:Order.Detail!
     
@@ -75,6 +80,7 @@ class LoadPackageTableViewCell: UITableViewCell {
     func configureCellWithOrder(_ order:Order) {
         guard let detail = order.details?.first else { return }
         self.detail = detail
+        orderIDLabel?.text = (detail.order_id != nil) ? "\(detail.order_id!)" : "-"
         packageNameLabel?.text = detail.package?.name
         quantityLabel?.text = "\(detail.qty ?? 0)"
         wmsOrderCodeLabel?.text = detail.wmsOrderCode ?? "-"

@@ -46,6 +46,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     @IBOutlet weak var lblOrderId: UILabel?
     @IBOutlet weak var lblDateTime: UILabel?
     @IBOutlet weak var unableToStartButton: UIButton!
+    @IBOutlet weak var wmsOrderCodeLabel: UILabel!
+    @IBOutlet weak var navigateButton: UIButton!
+    
     
     fileprivate var orderInforDetail = [OrderDetailInforRow]()
     fileprivate var orderInforFrom = [OrderDetailInforRow]()
@@ -62,6 +65,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 
     fileprivate var arrTitleHeader:[String] = []
     fileprivate let heightHeader:CGFloat = 65
+    fileprivate var isMapHidden:Bool = true
     
     var dateStringFilter = Date().toString()
     var btnGo: UIButton?
@@ -133,6 +137,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     private func initUI()  {
         self.setupTableView()
         lblOrderId?.text = "order".localized + " #\(orderDetail?.id ?? 0)"
+        wmsOrderCodeLabel.text = "wms-order-code".localized + " \n#\(orderDetail?.wmsOrderCode ?? "")"
         var timeStart = "NA".localized
         var timeEnd = "NA".localized
         var date = "NA".localized
@@ -146,6 +151,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         }
         
         lblDateTime?.text = "\(timeStart) - \(timeEnd) \(date)"
+        //setup NavigateButton
+        navigateButton.backgroundColor = AppColor.mainColor
+        
     }
     
     private func setupDataDetailInforRows() {
@@ -156,34 +164,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderCODInfo.removeAll()
         
         guard let order = orderDetail else { return }
-//        let displayDateTimeVN = DateFormatter.displayDateTimeVN
-//        var startFromDate = ""
-//        if let date = order.from?.start_time?.date {
-//            startFromDate = displayDateTimeVN.string(from: date)
-//        }else {
-//            startFromDate = "invalid-date".localized
-//        }
-//
-//        var endFromDate = ""
-//        if let date = order.from?.end_time?.date {
-//            endFromDate = displayDateTimeVN.string(from: date)
-//        }else {
-//            endFromDate = "invalid-date".localized
-//        }
-//
-//        var startToDate = ""
-//        if let date = order.to?.start_time?.date {
-//            startToDate = displayDateTimeVN.string(from: date)
-//        }else {
-//            startToDate = "invalid-date".localized
-//        }
-//
-//        var endToDate = ""
-//        if let date = order.to?.end_time?.date {
-//            endToDate = displayDateTimeVN.string(from: date)
-//        }else {
-//            endToDate = "invalid-date".localized
-//        }
         
         let startFromDate = Slash(order.from?.start_time)
         let endFromDate = Slash(order.from?.end_time)
@@ -197,23 +177,24 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                                                Slash(order.consigneeName))
         let remark = OrderDetailInforRow("remark".localized,
                                               Slash(order.remark))
-//        let urgency = OrderDetailInforRow("Urgency".localized,
-//                                          isHebewLang() ? order.urgent_type_name_hb ?? "" :  order.urgent_type_name_en ?? "")
         let orderId = OrderDetailInforRow("order-id".localized,"#\(order.id)")
-//        let seq = OrderDetailInforRow("SEQ".localized,"\(order.seq ?? 0)")
         
         //NEW
+        let wmsOrderCode = OrderDetailInforRow("wms-order-code".localized,"#\(order.wmsOrderCode ?? "")")
+        let wmsManifestNumber = OrderDetailInforRow("wms-manifest-number".localized,"#\(order.wmsManifestNumber ?? "")")
         let orderGroup = OrderDetailInforRow("order-group".localized,order.orderGroup.name)
         let orderType = OrderDetailInforRow("order-type".localized,order.orderType.name)
         
 
         orderInforDetail.append(orderId)
+        orderInforDetail.append(wmsOrderCode)
+        orderInforDetail.append(wmsManifestNumber)
 //        orderInforDetail.append(seq)
         orderInforDetail.append(orderGroup)
         orderInforDetail.append(orderType)
         orderInforDetail.append(customerItem)
         orderInforDetail.append(consigneeName)
-//        orderInforDetail.append(remark)
+        orderInforDetail.append(remark)
         //orderInforStatus.append(urgency)
         
         if  (order.statusOrder == .CancelStatus ||
@@ -467,6 +448,15 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     @IBAction func onUnableToStartTouchUp(_ sender: UIButton) {
         self.showReasonView(isUnableToFinish: true)
     }
+    
+    @IBAction func tapOrderNavigateButton(_ sender: Any) {
+        navigateButton.isSelected = !navigateButton.isSelected
+        isMapHidden = !navigateButton.isSelected
+        tableView?.reloadSections(OrderDetailSection.sectionMap.indexSet, with: .top)
+//        tableView?.reloadData()
+    }
+    
+    
 }
 
 
@@ -483,7 +473,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         }
         switch orderSection {
         case .sectionMap:
-            return 1
+            return isMapHidden ? 0 : 1
         case .sectionOrderInfo:
             return orderInforDetail.count
         case .sectionFrom:
@@ -548,19 +538,10 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 headerCell.btnStatus?.setTitleColor(orderDetail?.colorStatus, for: .normal)
                 
             case .sectionSignature:
-//                var isAdd = false
-//                if (orderDetail?.signature == nil &&
-//                    orderDetail?.route?.driverId == Caches().user?.userInfo?.id){
                 let hasSigned = orderDetail?.signature != nil
                 let isHidden = hasSigned || !statusesShouldAllowToSignAndUpload
                 headerCell.btnEdit?.isHidden = isHidden
             case .sectionPictures:
-//                if orderDetail?.route?.driverId == Caches().user?.userInfo?.id &&
-//                        (orderDetail?.statusOrder == StatusOrder.newStatus ||
-//                         orderDetail?.statusOrder == StatusOrder.InTransit ||
-//                         orderDetail?.statusOrder == StatusOrder.PickupStatus){
-//                    isAdd = true
-//                }
                 headerCell.btnEdit?.isHidden = !statusesShouldAllowToSignAndUpload
 //            case .sectionAddNote:
 //                headerCell.btnEdit?.isHidden = false
@@ -576,7 +557,6 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             let headerView = UIView()
             headerView.addSubview(headerCell)
             headerCell.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: heightHeader)
-
             return headerView;
         }
         
@@ -585,6 +565,11 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         guard let _orderDetail = self.orderDetail, let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section) else { return 10 }
+        
+        if orderSection == OrderDetailSection.sectionMap && isMapHidden {
+            return CGFloat.leastNormalMagnitude
+        }
+        
         if orderSection == OrderDetailSection.sectionCOD && !_orderDetail.isHasCOD {
             return CGFloat.leastNormalMagnitude
         }
@@ -690,32 +675,6 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     }
 }
 
-//MARK:  - UIScrollViewDelegate
-//extension OrderDetailViewController:UIScrollViewDelegate {
-//    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-//        if orderDetail?.statusOrder != StatusOrder.newStatus &&
-//            orderDetail?.statusOrder != StatusOrder.InTransit {
-//            return
-//        }
-//
-//        let offsetY = scrollView.contentOffset.y
-//        print("OffsetY :\(offsetY)")
-//        UIView.animate(withDuration: 0.7, animations: {
-//            if offsetY > 45 {
-//                self.vAction?.isHidden = false
-//                self.btnGo?.isHidden = true
-//            }else {
-//                self.vAction?.isHidden = true
-//                self.btnGo?.isHidden = false
-//            }
-//           self.vAction?.layoutIfNeeded()
-//
-//        }) { (finished) in
-//            //
-//        }
-//    }
-//}
-
 //MARK: - CELL FUNTION
 fileprivate extension OrderDetailViewController {
     func cellMap(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell {
@@ -769,7 +728,9 @@ fileprivate extension OrderDetailViewController {
         cell.lblBarcode?.text = barCode
         cell.lblPackgage?.text = paRefId
         cell.loadedQuantityLabel?.text = IntSlash(detail.loadedQty)
+        cell.loadedQuantityLabel?.textColor = AppColor.greenColor
         cell.loadedCartonsLabel?.text = IntSlash(detail.loadedCartonsInPallet)
+        cell.loadedCartonsLabel?.textColor = AppColor.greenColor
         cell.returnedPalletsLabel?.text = IntSlash(detail.returnedPalletQty)
         cell.loadedPickUpLabel.text = "\(detail.loadedQty ?? 0)"
         cell.loadedPickUpCartonsLabel.text = "\(detail.loadedCartonsInPallet ?? 0)"
@@ -951,9 +912,6 @@ fileprivate extension OrderDetailViewController {
 }
 
 extension OrderDetailViewController:DMSNavigationServiceDelegate {
-//    func didSelectedBackOrMenu() {
-//        showSideMenu()
-//    }
     func didSelectedMenuAction() {
         showSideMenu()
     }
@@ -1001,11 +959,6 @@ extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
         vc.callback = {[weak self](success, order) in
             self?.orderDetail = order
             self?.fetchData(showLoading: false)
-            /*
-            self?.setupDataDetailInforRows()
-            self?.tableView?.reloadData()
-            self?.updateOrderDetail?(order)
-             */
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }

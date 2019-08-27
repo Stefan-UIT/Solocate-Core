@@ -21,6 +21,10 @@ class LoadingViewController: UIViewController {
     
     func fetchMultiLanguageFiles() {
         self.showLoadingIndicator()
+        if !ReachabilityManager.isNetworkAvailable {
+            self.appCheckLoginSuccess()
+            return
+        }
         SERVICES().API.getLanguagesList { (result) in
             switch result{
             case .object(let obj):
