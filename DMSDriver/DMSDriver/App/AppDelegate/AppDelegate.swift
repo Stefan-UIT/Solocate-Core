@@ -66,6 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Follow Crashlytics app by Fabric
         Fabric.with([Crashlytics.self])
         DropDown.startListeningToKeyboard()
+        SERVICES().socket.delegate = self
 
         
         return true
@@ -199,5 +200,50 @@ extension AppDelegate {
                 return
             }
         })
+    }
+}
+ 
+extension AppDelegate:APISocketDelegate{
+    func didReceiveConnected(data: Any) {
+        guard let user = Caches().user, let userInfo = user.userInfo else { return}
+        SERVICES().socket.login(Caches().user?.userInfo?.id ?? 0,
+                                E(Caches().user?.userInfo?.userName),
+                                E(Caches().user?.roles?.first?.name),
+                                E(Caches().user?.token),
+                                userInfo)
+    }
+
+    func didReceiveError(data: String) {
+        if SocketConstants.messangeNeedRelogines.contains(data) {
+            App().reLogin()
+            self.showAlertView(data)
+        }
+    }
+
+    func didReceiveResultLogin(data: Any) {
+        let mess = getMessengeStatus(data: data).0
+        let status = getMessengeStatus(data: data).1
+        
+        if status != 1 {
+            self.showAlertView(E(mess))
+            App().reLogin()
+        }
+    }
+    
+    func getMessengeStatus(data:Any) -> (String?,Int?) {
+        if let dic = (data as? ResponseDictionary){
+            let status = dic["status"] as? Int
+            let mess = dic["message"] as? String
+            return (mess,status)
+            
+        }else if let dicList = (data as? ResponseArray){
+            if let dic = dicList.first as? ResponseDictionary{
+                let status = dic["status"] as? Int
+                let mess = dic["message"] as? String
+                return (mess,status )
+            }
+        }
+        
+        return ("Data response is invalid.",-1)
     }
 }
