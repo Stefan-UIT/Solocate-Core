@@ -30,13 +30,13 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="au1-ZQ-VK5">
-                                                <rect key="frame" x="40" y="177.5" width="295" height="312"/>
+                                                <rect key="frame" x="40" y="122" width="295" height="423"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ashdod_logo" translatesAutoresizingMaskIntoConstraints="NO" id="5no-5h-GKx">
-                                                        <rect key="frame" x="139.5" y="0.0" width="16" height="16"/>
+                                                        <rect key="frame" x="87.5" y="0.0" width="120" height="120"/>
                                                     </imageView>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nk2-zT-JBD">
-                                                        <rect key="frame" x="0.0" y="43" width="295" height="98"/>
+                                                        <rect key="frame" x="0.0" y="147" width="295" height="98"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Let-Fn-BtS">
                                                                 <rect key="frame" x="0.0" y="0.0" width="295" height="44"/>
@@ -125,7 +125,7 @@
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZD-KY-mMp">
-                                                        <rect key="frame" x="0.0" y="168" width="295" height="17"/>
+                                                        <rect key="frame" x="0.0" y="272" width="295" height="24"/>
                                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
                                                         <state key="normal" title="Remember Me" image="check_normal">
                                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -139,7 +139,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JwE-2P-DeR">
-                                                        <rect key="frame" x="0.0" y="212" width="295" height="44"/>
+                                                        <rect key="frame" x="0.0" y="323" width="295" height="44"/>
                                                         <color key="backgroundColor" red="0.30196078431372547" green="0.80784313725490198" blue="0.48627450980392156" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="tsu-rV-SiF"/>
@@ -159,7 +159,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8HT-Vh-BAx">
-                                                        <rect key="frame" x="90.5" y="283" width="114" height="29"/>
+                                                        <rect key="frame" x="90.5" y="394" width="114" height="29"/>
                                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
                                                         <state key="normal" title="Forgot password?">
                                                             <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -181,16 +181,16 @@
                                                 </constraints>
                                             </stackView>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="login_bg" translatesAutoresizingMaskIntoConstraints="NO" id="eXu-jL-9OY">
-                                                <rect key="frame" x="0.0" y="508" width="375" height="159"/>
+                                                <rect key="frame" x="0.0" y="508" width="375.00000000000023" height="159"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" secondItem="eXu-jL-9OY" secondAttribute="height" multiplier="125:53" id="HvX-yk-Kwr"/>
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R6s-kp-b2C">
-                                                <rect key="frame" x="100" y="577" width="175" height="80"/>
+                                                <rect key="frame" x="62.5" y="577" width="250" height="80"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Environment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fi-9T-vBL">
-                                                        <rect key="frame" x="0.0" y="0.0" width="175" height="25"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="1ip-mh-8by"/>
                                                         </constraints>
@@ -199,7 +199,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="z3u-GQ-hlU">
-                                                        <rect key="frame" x="10" y="35" width="155" height="36"/>
+                                                        <rect key="frame" x="10" y="35" width="230" height="36"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <segments>
                                                             <segment title="DEV"/>
@@ -221,6 +221,7 @@
                                                     <constraint firstItem="z3u-GQ-hlU" firstAttribute="top" secondItem="2fi-9T-vBL" secondAttribute="bottom" constant="10" id="MLa-SI-XXi"/>
                                                     <constraint firstItem="z3u-GQ-hlU" firstAttribute="leading" secondItem="R6s-kp-b2C" secondAttribute="leading" constant="10" id="Odk-ev-kZE"/>
                                                     <constraint firstItem="2fi-9T-vBL" firstAttribute="leading" secondItem="R6s-kp-b2C" secondAttribute="leading" id="VUm-Ff-1lv"/>
+                                                    <constraint firstAttribute="width" constant="250" id="X7H-lF-j0Z"/>
                                                     <constraint firstAttribute="bottom" secondItem="z3u-GQ-hlU" secondAttribute="bottom" constant="10" id="XCs-yU-NTz"/>
                                                     <constraint firstAttribute="trailing" secondItem="2fi-9T-vBL" secondAttribute="trailing" id="f3y-UI-t8L"/>
                                                     <constraint firstAttribute="trailing" secondItem="z3u-GQ-hlU" secondAttribute="trailing" constant="10" id="fVP-2Z-vTn"/>
@@ -238,7 +239,6 @@
                                             <constraint firstAttribute="bottom" secondItem="R6s-kp-b2C" secondAttribute="bottom" constant="10" id="NCZ-UV-UZt"/>
                                             <constraint firstItem="eXu-jL-9OY" firstAttribute="leading" secondItem="99z-PL-E8J" secondAttribute="leading" id="PFK-NR-xzA"/>
                                             <constraint firstItem="au1-ZQ-VK5" firstAttribute="centerY" secondItem="99z-PL-E8J" secondAttribute="centerY" id="cAp-Vv-GX0"/>
-                                            <constraint firstItem="R6s-kp-b2C" firstAttribute="leading" secondItem="99z-PL-E8J" secondAttribute="leading" constant="100" id="tDL-U2-gRI"/>
                                             <constraint firstItem="R6s-kp-b2C" firstAttribute="centerX" secondItem="99z-PL-E8J" secondAttribute="centerX" id="wZ1-Zb-79I"/>
                                         </constraints>
                                     </view>

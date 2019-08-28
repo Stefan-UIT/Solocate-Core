@@ -10,6 +10,7 @@ enum TagetBuild:String {
 enum ServerEnvironment: String {
     case development = "development"
     case qc = "qc"
+    case staging = "staging"
     case demo = "demo"
     case production = "production"
 
@@ -23,6 +24,8 @@ enum ServerEnvironment: String {
             return DMSAppConfiguration.baseUrl_Dev
         case .qc:
             return DMSAppConfiguration.baseUrl_QC
+        case .staging:
+            return DMSAppConfiguration.baseUrl_Staging
         case .demo:
             return DMSAppConfiguration.baseUrl_Demo
         case .production:
@@ -57,6 +60,8 @@ struct BuildConfiguration {
         case .QC:
             self.serverEnvironment = .qc
             break
+        case .Staging:
+            self.serverEnvironment = .staging
         case .Demo:
             self.serverEnvironment = .demo
             break
@@ -93,6 +98,8 @@ extension BuildConfiguration {
             return URL(string:DMSAppConfiguration.baseUrl_Dev)
         case .qc:
             return URL(string:DMSAppConfiguration.baseUrl_QC)
+        case .staging:
+            return URL(string:DMSAppConfiguration.baseUrl_Staging)
         case .demo:
             return URL(string:DMSAppConfiguration.baseUrl_Demo)
         case .production:
