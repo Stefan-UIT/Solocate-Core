@@ -187,10 +187,10 @@
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="R6s-kp-b2C">
-                                                <rect key="frame" x="100" y="577" width="175" height="80"/>
+                                                <rect key="frame" x="62.5" y="577" width="250" height="80"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Environment" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2fi-9T-vBL">
-                                                        <rect key="frame" x="0.0" y="0.0" width="175" height="25"/>
+                                                        <rect key="frame" x="0.0" y="0.0" width="250" height="25"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="25" id="1ip-mh-8by"/>
                                                         </constraints>
@@ -199,7 +199,7 @@
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="z3u-GQ-hlU">
-                                                        <rect key="frame" x="10" y="35" width="155" height="36"/>
+                                                        <rect key="frame" x="10" y="35" width="230" height="36"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         <segments>
                                                             <segment title="DEV"/>
@@ -221,6 +221,7 @@
                                                     <constraint firstItem="z3u-GQ-hlU" firstAttribute="top" secondItem="2fi-9T-vBL" secondAttribute="bottom" constant="10" id="MLa-SI-XXi"/>
                                                     <constraint firstItem="z3u-GQ-hlU" firstAttribute="leading" secondItem="R6s-kp-b2C" secondAttribute="leading" constant="10" id="Odk-ev-kZE"/>
                                                     <constraint firstItem="2fi-9T-vBL" firstAttribute="leading" secondItem="R6s-kp-b2C" secondAttribute="leading" id="VUm-Ff-1lv"/>
+                                                    <constraint firstAttribute="width" constant="250" id="X7H-lF-j0Z"/>
                                                     <constraint firstAttribute="bottom" secondItem="z3u-GQ-hlU" secondAttribute="bottom" constant="10" id="XCs-yU-NTz"/>
                                                     <constraint firstAttribute="trailing" secondItem="2fi-9T-vBL" secondAttribute="trailing" id="f3y-UI-t8L"/>
                                                     <constraint firstAttribute="trailing" secondItem="z3u-GQ-hlU" secondAttribute="trailing" constant="10" id="fVP-2Z-vTn"/>
@@ -238,7 +239,6 @@
                                             <constraint firstAttribute="bottom" secondItem="R6s-kp-b2C" secondAttribute="bottom" constant="10" id="NCZ-UV-UZt"/>
                                             <constraint firstItem="eXu-jL-9OY" firstAttribute="leading" secondItem="99z-PL-E8J" secondAttribute="leading" id="PFK-NR-xzA"/>
                                             <constraint firstItem="au1-ZQ-VK5" firstAttribute="centerY" secondItem="99z-PL-E8J" secondAttribute="centerY" id="cAp-Vv-GX0"/>
-                                            <constraint firstItem="R6s-kp-b2C" firstAttribute="leading" secondItem="99z-PL-E8J" secondAttribute="leading" constant="100" id="tDL-U2-gRI"/>
                                             <constraint firstItem="R6s-kp-b2C" firstAttribute="centerX" secondItem="99z-PL-E8J" secondAttribute="centerX" id="wZ1-Zb-79I"/>
                                         </constraints>
                                     </view>

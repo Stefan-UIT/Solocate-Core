@@ -172,6 +172,17 @@ extension Route {
         return result
     }
     
+    func sortedGroupingLocationList() -> [GroupLocatonModel] {
+        var result:[GroupLocatonModel] = []
+        let group = groupingLocationList()
+        for location in locationList {
+            if let loc = group.filter({ $0.address?.address == location.address}).first {
+                result.append(loc)
+            }
+        }
+        return result
+    }
+    
     func getChunkedListLocation() -> [[CLLocationCoordinate2D]] {
         let locationList = getListLocations()
         let sortedList = locationList.sorted(by: { (lhs, rhs) -> Bool in

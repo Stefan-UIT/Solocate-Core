@@ -35,7 +35,7 @@ class RouteDetailLocationListClvCell: UICollectionViewCell {
     }
     
     func initData() {
-        groupLocationList = route?.groupingLocationList() ?? []
+        groupLocationList = route?.sortedGroupingLocationList() ?? []
     }
     
     func updateUI() {

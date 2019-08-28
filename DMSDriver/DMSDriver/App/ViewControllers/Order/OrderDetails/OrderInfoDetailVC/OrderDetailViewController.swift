@@ -41,6 +41,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
     @IBOutlet weak var tableView: UITableView?
     @IBOutlet weak var updateStatusButton: UIButton?
+    @IBOutlet weak var shortcutUpdateStatusButton: UIButton?
     @IBOutlet weak var btnUnable: UIButton?
     @IBOutlet weak var vAction: UIView?
     @IBOutlet weak var lblOrderId: UILabel?
@@ -137,7 +138,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     private func initUI()  {
         self.setupTableView()
         lblOrderId?.text = "order".localized + " #\(orderDetail?.id ?? 0)"
-        wmsOrderCodeLabel.text = "wms-order-code".localized + " \n#\(orderDetail?.wmsOrderCode ?? "")"
+        wmsOrderCodeLabel.text = "wms-order-code".localized + " #\(orderDetail?.wmsOrderCode ?? "")"
         var timeStart = "NA".localized
         var timeEnd = "NA".localized
         var date = "NA".localized
@@ -153,7 +154,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         lblDateTime?.text = "\(timeStart) - \(timeEnd) \(date)"
         //setup NavigateButton
         navigateButton.backgroundColor = AppColor.mainColor
-        
+//        shortcutUpdateStatusButton = updateStatusButton
     }
     
     private func setupDataDetailInforRows() {
@@ -1158,8 +1159,20 @@ fileprivate extension OrderDetailViewController{
             orderDetail?.statusOrder == StatusOrder.UnableToFinish || isFinishedAndNotPalletType || isFinishedAndUpdatedReturnedPalletsQty || isRampManagerAndNotNewOrder || isNotAllowedToGoToDelivery)
         
         updateStatusButton?.isHidden = isHidden
+        copyUpdateStatusButton()
         vAction?.isHidden = isHidden
 
+    }
+    
+    private func copyUpdateStatusButton() {
+        shortcutUpdateStatusButton?.isEnabled = updateStatusButton?.isEnabled ?? true
+        shortcutUpdateStatusButton?.isHidden = updateStatusButton?.isHidden ?? true
+        if updateStatusButton?.isEnabled == false {
+            shortcutUpdateStatusButton?.isHidden = true
+        }
+        shortcutUpdateStatusButton?.backgroundColor = updateStatusButton?.backgroundColor
+        let title = updateStatusButton?.title(for: .normal)
+        shortcutUpdateStatusButton?.setTitle(title, for: .normal)
     }
     
     private func handleShowingButtonStatusWithPickedUpType() {
@@ -1184,6 +1197,7 @@ fileprivate extension OrderDetailViewController{
         let isHidden = (_order.isCancelled || _order.isFinished || isRampManagerMode)
         
         updateStatusButton?.isHidden = isHidden
+        copyUpdateStatusButton()
         vAction?.isHidden = isHidden
         
     }
