@@ -138,7 +138,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     private func initUI()  {
         self.setupTableView()
         lblOrderId?.text = "order".localized + " #\(orderDetail?.id ?? 0)"
-        wmsOrderCodeLabel.text = "wms-order-code".localized + " \n#\(orderDetail?.wmsOrderCode ?? "")"
+        wmsOrderCodeLabel.text = "wms-order-code".localized + " #\(orderDetail?.wmsOrderCode ?? "")"
         var timeStart = "NA".localized
         var timeEnd = "NA".localized
         var date = "NA".localized
