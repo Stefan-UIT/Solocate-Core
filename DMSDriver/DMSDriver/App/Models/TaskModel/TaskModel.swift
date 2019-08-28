@@ -170,9 +170,9 @@ class ReturnedItem: TaskModel {
     var myOwn:UserModel.UserInfo!
     var isAllowedToActions:Bool {
         get {
-            if isRampManagerMode {
-                return currentAssignee == nil && !(isFinished || isCancelled)
-            }
+//            if isRampManagerMode {
+//                return currentAssignee == nil && !(isFinished || isCancelled)
+//            }
             return myOwn.id == currentAssignee?.id && !(isFinished || isCancelled)
         }
     }
