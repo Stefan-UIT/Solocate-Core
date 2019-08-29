@@ -168,13 +168,13 @@ class ReturnedItem: TaskModel {
     var routeID:Int?
     var note:String?
     var currentAssignee:UserModel.UserInfo?
-    var myOwn:UserModel.UserInfo!
+    var myOwn:UserModel.UserInfo?
     var isAllowedToActions:Bool {
         get {
-//            if isRampManagerMode {
-//                return currentAssignee == nil && !(isFinished || isCancelled)
-//            }
-            return myOwn.id == currentAssignee?.id && !(isFinished || isCancelled)
+            if isRampManagerMode {
+                return currentAssignee == nil && !(isFinished || isCancelled)
+            }
+            return myOwn?.id == currentAssignee?.id && !(isFinished || isCancelled)
         }
     }
     
