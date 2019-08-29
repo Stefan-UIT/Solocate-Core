@@ -24,16 +24,16 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aZ6-xN-E3o" userLabel="vType">
-                                <rect key="frame" x="0.0" y="80" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="0.0"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sKu-q9-zS0">
-                                        <rect key="frame" x="15" y="0.0" width="0.0" height="50"/>
+                                        <rect key="frame" x="15" y="0.0" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" name="Helvetica" family="Helvetica" pointSize="14"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Uzr-Qe-8aU" userLabel="vPick">
-                                        <rect key="frame" x="274" y="10" width="86" height="30"/>
+                                        <rect key="frame" x="274" y="-15" width="86" height="30"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Week" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4kb-Iw-73I">
                                                 <rect key="frame" x="15" y="0.0" width="36" height="30"/>
@@ -81,7 +81,7 @@
                                 </subviews>
                                 <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="50" id="6z5-X6-IIN"/>
+                                    <constraint firstAttribute="height" id="6z5-X6-IIN"/>
                                     <constraint firstItem="sKu-q9-zS0" firstAttribute="leading" secondItem="aZ6-xN-E3o" secondAttribute="leading" constant="15" id="Eue-Zl-UIO"/>
                                     <constraint firstItem="sKu-q9-zS0" firstAttribute="height" secondItem="aZ6-xN-E3o" secondAttribute="height" id="ITa-uk-nDk"/>
                                     <constraint firstItem="Uzr-Qe-8aU" firstAttribute="centerY" secondItem="aZ6-xN-E3o" secondAttribute="centerY" id="SH1-4W-K2r"/>
@@ -90,24 +90,24 @@
                                 </constraints>
                             </view>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="XAA-hm-bRi">
-                                <rect key="frame" x="0.0" y="130" width="375" height="537"/>
+                                <rect key="frame" x="0.0" y="80" width="375" height="587"/>
                                 <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="1" colorSpace="calibratedRGB"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="GhW-or-yB9">
-                                    <size key="itemSize" width="374" height="350"/>
+                                    <size key="itemSize" width="374" height="300"/>
                                     <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
                                     <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ReturnedItemListClvCell" id="Tax-5T-5Tv" customClass="ReturnedItemListClvCell" customModule="Ashdod_Dev" customModuleProvider="target">
-                                        <rect key="frame" x="0.5" y="0.0" width="374" height="311"/>
+                                        <rect key="frame" x="0.5" y="0.0" width="374" height="271"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
-                                            <rect key="frame" x="0.0" y="0.0" width="374" height="311"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="374" height="271"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKJ-DQ-X6b">
-                                                    <rect key="frame" x="10" y="10" width="354" height="291"/>
+                                                    <rect key="frame" x="10" y="10" width="354" height="301"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QMS-Y2-Iek">
                                                             <rect key="frame" x="0.0" y="0.0" width="346" height="45"/>
@@ -440,7 +440,7 @@
                                             <constraint firstItem="dKJ-DQ-X6b" firstAttribute="leading" secondItem="Tax-5T-5Tv" secondAttribute="leading" constant="10" id="Tba-5l-2Fu"/>
                                             <constraint firstItem="dKJ-DQ-X6b" firstAttribute="top" secondItem="Tax-5T-5Tv" secondAttribute="top" constant="10" id="adJ-Mq-VHr"/>
                                         </constraints>
-                                        <size key="customSize" width="374" height="321"/>
+                                        <size key="customSize" width="374" height="271"/>
                                         <connections>
                                             <outlet property="btnNumber" destination="go4-Fm-kKU" id="MY5-MO-hSA"/>
                                             <outlet property="btnStatus" destination="2Pc-LV-Y5s" id="GZe-Se-taK"/>
