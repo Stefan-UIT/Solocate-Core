@@ -11,6 +11,7 @@ import UIKit
 enum ChooseEvironment:Int {
     case Development = 0
     case QC
+    case Staging
     case Demo
     case Live
     
@@ -21,8 +22,10 @@ enum ChooseEvironment:Int {
                 return "Dev"
             case .QC:
                 return "QC"
-            case .Demo:
+            case .Staging:
                 return "Staging"
+            case .Demo:
+                return "Demo"
             case .Live:
                 return "Live"
             }
@@ -111,7 +114,7 @@ class LoginViewController: BaseViewController {
 //                                                   ChooseEvironment.QC.name,
 //                                                   ChooseEvironment.Demo.name]
             segEvironmentControl?.segmentTitles = [ChooseEvironment.Development.name,
-            ChooseEvironment.QC.name,ChooseEvironment.Demo.name]
+            ChooseEvironment.QC.name, ChooseEvironment.Staging.name, ChooseEvironment.Demo.name]
             segEvironmentControl?.selectedSegmentIndex = 0
         }
     }
@@ -187,6 +190,8 @@ class LoginViewController: BaseViewController {
             Debug.setup(shared: Debug(useServer: DMSAppConfiguration.baseUrl_Dev))
         case .QC:
             Debug.setup(shared: Debug(useServer: DMSAppConfiguration.baseUrl_QC))
+        case .Staging:
+            Debug.setup(shared: Debug(useServer: DMSAppConfiguration.baseUrl_Staging))
         case .Demo:
             Debug.setup(shared: Debug(useServer: DMSAppConfiguration.baseUrl_Demo))
         case .Live:

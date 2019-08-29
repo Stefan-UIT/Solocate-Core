@@ -23,7 +23,8 @@ struct SocketConfiguration {
 struct SocketConstants {
     static let SERVER_DEV = "http://solocate.ashdodb.dev.seldatdirect.com"
     static let SERVER_QC = "http://solocate.ashdodb.qc.seldatdirect.com"
-    static let SERVER_DEMO = "http://solocate.ashdodb.staging.seldatdirect.com"
+    static let SERVER_DEMO = "http://solocate.ashdodb.demo.seldatdirect.com"
+    static let SERVER_STAGING = "http://solocate.ashdodb.staging.seldatdirect.com"
     static let SERVER_PROD = "http://dms-customization.seldatdirect.com"
     static let SOCKET_LOGIN = "request-login"
     static let SOCKET_LOGOUT = "request-logout"
@@ -48,6 +49,8 @@ struct SocketConstants {
                 return SocketConstants.SERVER_DEV
             case .qc:
                 return SocketConstants.SERVER_QC
+            case .staging:
+                return SocketConstants.SERVER_STAGING
             case .demo:
                 return SocketConstants.SERVER_DEMO
             case .production:

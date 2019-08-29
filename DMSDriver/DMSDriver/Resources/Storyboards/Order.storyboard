@@ -1130,10 +1130,8 @@
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="rGS-gb-AdD"/>
                                                 </constraints>
                                             </view>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uKF-Eo-VK9">
-                                                <rect key="frame" x="180" y="4.5" width="180" height="41"/>
-                                                <string key="text">WMS Order Code
-#312</string>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="WMS Order Code #312" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="14" translatesAutoresizingMaskIntoConstraints="NO" id="uKF-Eo-VK9">
+                                                <rect key="frame" x="185" y="4.5" width="175" height="41"/>
                                                 <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="17"/>
                                                 <color key="textColor" red="0.3411764706" green="0.45098039220000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -1143,7 +1141,7 @@
                                         <constraints>
                                             <constraint firstItem="WHi-A5-UeI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xxg-N4-sOQ" secondAttribute="top" id="3cz-OL-3n9"/>
                                             <constraint firstItem="uKF-Eo-VK9" firstAttribute="centerY" secondItem="WHi-A5-UeI" secondAttribute="centerY" id="OXl-na-kWd"/>
-                                            <constraint firstItem="uKF-Eo-VK9" firstAttribute="leading" secondItem="WHi-A5-UeI" secondAttribute="trailing" constant="5" id="V32-vd-e50"/>
+                                            <constraint firstItem="uKF-Eo-VK9" firstAttribute="leading" secondItem="WHi-A5-UeI" secondAttribute="trailing" constant="10" id="V32-vd-e50"/>
                                             <constraint firstItem="WHi-A5-UeI" firstAttribute="leading" secondItem="xxg-N4-sOQ" secondAttribute="leading" constant="15" id="hYZ-Du-sg7"/>
                                             <constraint firstAttribute="trailing" secondItem="uKF-Eo-VK9" secondAttribute="trailing" constant="15" id="lzU-5j-N5l"/>
                                             <constraint firstAttribute="height" constant="60" id="xEf-UM-yKA"/>
@@ -1188,10 +1186,10 @@
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="Suj-jZ-QtY">
-                                                    <rect key="frame" x="0.0" y="-168.5" width="375" height="465"/>
+                                                    <rect key="frame" x="15" y="0.0" width="290" height="160"/>
                                                     <subviews>
-                                                        <button hidden="YES" opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qzC-T5-gdk">
-                                                            <rect key="frame" x="0.0" y="0.0" width="249" height="465"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qzC-T5-gdk">
+                                                            <rect key="frame" x="0.0" y="0.0" width="140" height="160"/>
                                                             <state key="normal" title="Delivery">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             </state>
@@ -1204,8 +1202,8 @@
                                                                 <action selector="tapUpdateStatusButtonAction:" destination="LBW-HQ-IwL" eventType="touchUpInside" id="enl-cO-K9N"/>
                                                             </connections>
                                                         </button>
-                                                        <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEn-bX-KUc" userLabel="Navigate">
-                                                            <rect key="frame" x="259" y="0.0" width="61" height="465"/>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sEn-bX-KUc" userLabel="Navigate">
+                                                            <rect key="frame" x="150" y="0.0" width="140" height="160"/>
                                                             <color key="tintColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <state key="normal" title="Navigate">
                                                                 <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -1239,7 +1237,7 @@
                                         </view>
                                         <prototypes>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailMapCell" rowHeight="251" id="8LT-Xx-6pL" customClass="OrderDetailTableViewCell" customModule="Ashdod_Dev" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="520.5" width="375" height="251"/>
+                                                <rect key="frame" x="0.0" y="110.5" width="375" height="251"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" ambiguous="YES" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8LT-Xx-6pL" id="bli-AI-C9K">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="251"/>
@@ -1343,14 +1341,14 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailAddressCell" rowHeight="92" id="gGD-dm-nUU" customClass="OrderDetailTableViewCell" customModule="Ashdod_Dev" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="771.5" width="375" height="92"/>
+                                                <rect key="frame" x="0.0" y="361.5" width="375" height="92"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gGD-dm-nUU" id="yG3-GK-UCT">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dyk-kG-kU2">
-                                                            <rect key="frame" x="15" y="0.0" width="290" height="91.5"/>
+                                                            <rect key="frame" x="15" y="0.0" width="290" height="92"/>
                                                             <subviews>
                                                                 <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="map" translatesAutoresizingMaskIntoConstraints="NO" id="FYW-mf-YaR">
                                                                     <rect key="frame" x="0.0" y="10" width="0.0" height="0.0"/>
@@ -1360,7 +1358,7 @@
                                                                     </constraints>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WCL-is-thT">
-                                                                    <rect key="frame" x="15" y="0.0" width="225" height="76.5"/>
+                                                                    <rect key="frame" x="15" y="0.0" width="225" height="77"/>
                                                                     <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                     <nil key="textColor"/>
                                                                     <nil key="highlightedColor"/>
@@ -1402,14 +1400,14 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailTableViewCell" rowHeight="92" id="yws-LQ-txW" customClass="OrderDetailTableViewCell" customModule="Ashdod_Dev" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="863.5" width="375" height="92"/>
+                                                <rect key="frame" x="0.0" y="453.5" width="375" height="92"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yws-LQ-txW" id="XlE-OA-q44">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="91.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W9S-RT-Y1c">
-                                                            <rect key="frame" x="15" y="0.0" width="290" height="91.5"/>
+                                                            <rect key="frame" x="15" y="0.0" width="290" height="92"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Zas-bn-Uvc">
                                                                     <rect key="frame" x="15" y="7" width="26" height="16"/>
@@ -1466,17 +1464,17 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailHeaderCell" rowHeight="104" id="WXj-B2-1HB" customClass="OrderDetailTableViewCell" customModule="Ashdod_Dev" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="955.5" width="375" height="104"/>
+                                                <rect key="frame" x="0.0" y="545.5" width="375" height="104"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WXj-B2-1HB" id="XXL-P9-5Sw">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="103.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="104"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JgD-O1-IAZ">
-                                                            <rect key="frame" x="15" y="10" width="290" height="91.5"/>
+                                                            <rect key="frame" x="15" y="10" width="290" height="92"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qRJ-ES-2gh">
-                                                                    <rect key="frame" x="15" y="0.0" width="38" height="91.5"/>
+                                                                    <rect key="frame" x="15" y="0.0" width="38" height="92"/>
                                                                     <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="14"/>
                                                                     <color key="textColor" red="0.035294117649999998" green="0.1529411765" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                                                                     <nil key="highlightedColor"/>
@@ -1543,7 +1541,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailDropdownCell" rowHeight="93" id="mlJ-Zq-0kN" customClass="OrderDetailTableViewCell" customModule="Ashdod_Dev" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1059.5" width="375" height="93"/>
+                                                <rect key="frame" x="0.0" y="649.5" width="375" height="93"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mlJ-Zq-0kN" id="Rdl-hw-UcP">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="92.5"/>
@@ -1638,7 +1636,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="PictureTableViewCell" rowHeight="90" id="sRZ-47-C7k" customClass="PictureTableViewCell" customModule="Ashdod_Dev" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1152.5" width="375" height="90"/>
+                                                <rect key="frame" x="0.0" y="742.5" width="375" height="90"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sRZ-47-C7k" id="9Yi-qW-6pY">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="89.5"/>
@@ -1697,7 +1695,7 @@
                                                 </connections>
                                             </tableViewCell>
                                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailNatureOfGoodsCell" rowHeight="300" id="t0S-Ao-mal" customClass="OrderDetailTableViewCell" customModule="Ashdod_Dev" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="1242.5" width="375" height="300"/>
+                                                <rect key="frame" x="0.0" y="832.5" width="375" height="300"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="t0S-Ao-mal" id="iQf-U8-GQ8">
                                                     <rect key="frame" x="0.0" y="0.0" width="375" height="299.5"/>
@@ -2169,9 +2167,10 @@
                         <outlet property="lblDateTime" destination="shY-FR-nAx" id="2FI-wJ-9F6"/>
                         <outlet property="lblOrderId" destination="R5m-Ae-QGr" id="ceA-g9-20S"/>
                         <outlet property="navigateButton" destination="sEn-bX-KUc" id="aPq-Wu-n5S"/>
+                        <outlet property="shortcutUpdateStatusButton" destination="qzC-T5-gdk" id="nwR-OI-55H"/>
                         <outlet property="tableView" destination="4rp-Ib-0KY" id="XcR-gs-Nx8"/>
                         <outlet property="unableToStartButton" destination="o8H-ay-ogW" id="rpI-4I-FTq"/>
-                        <outlet property="updateStatusButton" destination="qzC-T5-gdk" id="wkF-KD-pgc"/>
+                        <outlet property="updateStatusButton" destination="pbX-10-KuK" id="ZtD-vb-xwa"/>
                         <outlet property="vAction" destination="0vT-dI-kdl" id="8vI-pF-Lbe"/>
                         <outlet property="wmsOrderCodeLabel" destination="uKF-Eo-VK9" id="s5r-WZ-6ia"/>
                     </connections>

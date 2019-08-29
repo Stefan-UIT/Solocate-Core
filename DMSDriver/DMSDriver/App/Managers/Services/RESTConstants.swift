@@ -113,9 +113,11 @@ class RESTConstants: NSObject {
         case .development:
             serverURL = "http://solocate.ashdodb.dev.seldatdirect.com/"
         case .qc:
-            serverURL = "http://solocate-a1.qc.seldatdirect.com/"
+            serverURL = "http://solocate.ashdodb.qc.seldatdirect.com/"
+        case .staging:
+            serverURL = "http://solocate.ashdodb.staging.seldatdirect.com/"
         case .demo:
-            serverURL = "http://solocate-a1.demo.seldatdirect.com/"
+            serverURL = "http://solocate.ashdodb.demo.seldatdirect.com/"
         case .production:
             serverURL = "http://dms-customization.live.seldatdirect.com/"
         }
