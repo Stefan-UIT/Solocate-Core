@@ -9,8 +9,13 @@
 import UIKit
 import SVProgressHUD
 
+protocol RouteDetailOrderListClvCellDelegate: class {
+    func didBeginEditSearchText()
+    func didEndEditSearchText()
+}
 
 class RouteDetailOrderListClvCell: UICollectionViewCell {
+    weak var delegate: RouteDetailOrderListClvCellDelegate?
     
     @IBOutlet weak var tbvContent: UITableView?
     @IBOutlet weak var noOrdersLabel: UILabel?
@@ -233,7 +238,7 @@ extension RouteDetailOrderListClvCell{
 
 extension RouteDetailOrderListClvCell:BaseSearchViewDelegate{
     func tfSearchShouldBeginEditing(view: BaseSearchView, textField: UITextField) {
-        //
+        self.delegate?.didBeginEditSearchText()
     }
     
     func tfSearchShouldChangeCharactersInRangeWithString(view: BaseSearchView, text: String) {
@@ -242,7 +247,7 @@ extension RouteDetailOrderListClvCell:BaseSearchViewDelegate{
     }
     
     func tfSearchDidEndEditing(view: BaseSearchView, textField: UITextField) {
-        //
+        self.delegate?.didEndEditSearchText()
     }
     
     func doSearch(strSearch:String? = nil)  {
