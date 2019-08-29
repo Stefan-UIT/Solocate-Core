@@ -737,7 +737,13 @@ fileprivate extension OrderDetailViewController {
         cell.loadedPickUpCartonsLabel.text = "\(detail.loadedCartonsInPallet ?? 0)"
         
         let isPickUpAndNewOrder = order.isPickUpType && order.isNewStatus
-        cell.actualQuantityTextField?.text = (isPickUpAndNewOrder) ? "\(detail.loadedQty ?? 0)" : "\(detail.actualQty ?? 0)"
+        var actualQty:String!
+        if order.isCancelled {
+            actualQty = "0"
+        } else {
+            actualQty = (isPickUpAndNewOrder) ? "\(detail.loadedQty ?? 0)" : "\(detail.actualQty ?? 0)"
+        }
+        cell.actualQuantityTextField?.text = actualQty
         cell.vContent?.cornerRadius = 0
         cell.delegate = self
         if indexPath.row == (orderDetail?.details?.count ?? 0 ) - 1{
@@ -801,8 +807,14 @@ fileprivate extension OrderDetailViewController {
             cell.cartonInPalletViewContainer?.isHidden = !isShowedCartonSection
             
             if isShowedCartonSection {
+                var actualCartons:String!
+                if order.isCancelled {
+                    actualCartons = "0"
+                } else {
+                    actualCartons = (isPickUpAndNewOrder) ? "\(detail.loadedCartonsInPallet ?? 0)" : "\(detail.actualCartonsInPallet ?? 0)"
+                }
+                cell.actualCartonsInPalletTextField?.text = actualCartons
                 cell.cartonInPalletsLabel?.text = "\(detail.cartonsInPallet ?? 0)"
-                cell.actualCartonsInPalletTextField?.text = (isPickUpAndNewOrder) ? "\(detail.loadedCartonsInPallet ?? 0)" : "\(detail.actualCartonsInPallet ?? 0)"
                 cell.handleShowingDeliveredCartonsRecord(isHidden: isShowingOnly)
                 cell.cartonsViewContainerHeightConstraint?.constant = (isShowingOnly) ? 20.0 : 50.0
                 cell.cartonsViewContainerTopSpacing?.constant = 6.0
