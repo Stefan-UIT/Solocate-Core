@@ -76,6 +76,7 @@ class TaskModel: BaseModel {
     var reason:Reason?
     var reason_msg = ""
     var route_name:String?
+    var drivers: [UserModel.UserInfo]?
     
     var colorUrgent:UIColor{
         get{
@@ -151,6 +152,7 @@ class TaskModel: BaseModel {
 //        reason <- map["reason"]
 //        reason_msg <- map["reason_msg"]
         route_name <- map["route_name"]
+        drivers <- map["drivers"]
         
     }
     

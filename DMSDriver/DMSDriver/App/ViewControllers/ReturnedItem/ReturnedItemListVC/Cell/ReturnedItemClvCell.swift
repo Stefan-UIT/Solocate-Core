@@ -46,7 +46,7 @@ class ReturnedItemListClvCell: UICollectionViewCell {
         lblRouteName?.text = item?.route_name
         lblRouteDate?.text = endTime != nil ? Slash(displayDate.string(from: endTime!)) : "-"
         lblWareHouse?.text = item?.warehouse?.name != nil ? item?.warehouse?.name : item?.warehouse?.address
-        lblDriver?.text = "driver"
+        lblDriver?.text = item?.drivers?.first?.userName
         lblSubtitle?.text = Slash(item?.instructions)
 //        if Locale.current.languageCode == "he" {
 //            lblUrgency?.text = item?.urgent_type_name_hb
