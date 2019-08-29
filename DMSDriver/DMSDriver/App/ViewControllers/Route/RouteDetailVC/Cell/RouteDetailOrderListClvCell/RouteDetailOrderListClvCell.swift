@@ -222,8 +222,9 @@ extension RouteDetailOrderListClvCell{
             case .object(let obj):
                 self?.route = obj.data
                 self?.filterDataWithTapDisplay()
-                guard let _route = obj.data else {return}
-                self?.reloadOrderListScreen(route: _route)
+                self?.tbvContent?.reloadData()
+//                guard let _route = obj.data else {return}
+//                self?.reloadOrderListScreen(route: _route)
                 
                 // Update route to DB local
             //CoreDataManager.updateRoute(obj.data!)
