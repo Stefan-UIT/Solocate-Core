@@ -75,7 +75,8 @@ class TaskModel: BaseModel {
     var dlvd_dt:String?
     var reason:Reason?
     var reason_msg = ""
-
+    var route_name:String?
+    var drivers: [UserModel.UserInfo]?
     
     var colorUrgent:UIColor{
         get{
@@ -150,6 +151,8 @@ class TaskModel: BaseModel {
 //        dlvd_dt <- map["dlvd_dt"]
 //        reason <- map["reason"]
 //        reason_msg <- map["reason_msg"]
+        route_name <- map["route_name"]
+        drivers <- map["drivers"]
         
     }
     
