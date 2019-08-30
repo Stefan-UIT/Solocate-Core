@@ -228,12 +228,12 @@ extension BaseAPIService {
     @discardableResult
     func getReturnedItems(_ timeData:TimeDataItem,page:Int = 1,
                      callback: @escaping APICallback<ResponseDataModel<ResponseDataListModel<ReturnedItem>>>) -> APIRequest {
-//        let startDate = DateFormatter.filterDate.string(from: timeData.startDate ?? Date())
-//        let endDate = DateFormatter.filterDate.string(from: timeData.endDate ?? Date())
-//        var path = String(format:PATH_REQUEST_URL.GET_RETURNED_ITEMS.URL, startDate, endDate)
+        let startDate = DateFormatter.filterDate.string(from: timeData.startDate ?? Date())
+        let endDate = DateFormatter.filterDate.string(from: timeData.endDate ?? Date())
+        var path = String(format:PATH_REQUEST_URL.GET_RETURNED_ITEMS.URL, startDate, endDate)
         
-        var path = String(format:PATH_REQUEST_URL.GET_RETURNED_ITEMS_TEMP.URL)
-        path = path + "?page=\(page)&limit=10"
+//        var path = String(format:PATH_REQUEST_URL.GET_RETURNED_ITEMS_TEMP.URL)
+        path = path + "&page=\(page)&limit=10"
         return request(method: .GET,
                        path: path,
                        input: .empty,
