@@ -234,7 +234,7 @@ fileprivate extension LoginViewController {
                 }
                 
                 App().loginSuccess()
-                self?.getDrivingRule()
+//                self?.getDrivingRule()
                 self?.getListStatus()
                 self?.getListRouteStatus()
                 
