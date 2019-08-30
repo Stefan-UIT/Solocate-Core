@@ -422,7 +422,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         var message = "picked-up-quantity".localized
         message += ": \(pickedUpQty)"
         if detail.isPallet && detail.loadedCartonsInPallet != nil {
-            message += "\n" + "carton-in-pallets".localized
+            message += "\n" + "picked-up-cartons-qty".localized
             message += ": \(detail.loadedCartonsInPallet!)"
         }
         
@@ -737,7 +737,13 @@ fileprivate extension OrderDetailViewController {
         cell.loadedPickUpCartonsLabel.text = "\(detail.loadedCartonsInPallet ?? 0)"
         
         let isPickUpAndNewOrder = order.isPickUpType && order.isNewStatus
-        cell.actualQuantityTextField?.text = (isPickUpAndNewOrder) ? "\(detail.loadedQty ?? 0)" : "\(detail.actualQty ?? 0)"
+        var actualQty:String!
+        if order.isCancelled {
+            actualQty = "0"
+        } else {
+            actualQty = (isPickUpAndNewOrder) ? "\(detail.loadedQty ?? 0)" : "\(detail.actualQty ?? 0)"
+        }
+        cell.actualQuantityTextField?.text = actualQty
         cell.vContent?.cornerRadius = 0
         cell.delegate = self
         if indexPath.row == (orderDetail?.details?.count ?? 0 ) - 1{
@@ -801,8 +807,14 @@ fileprivate extension OrderDetailViewController {
             cell.cartonInPalletViewContainer?.isHidden = !isShowedCartonSection
             
             if isShowedCartonSection {
+                var actualCartons:String!
+                if order.isCancelled {
+                    actualCartons = "0"
+                } else {
+                    actualCartons = (isPickUpAndNewOrder) ? "\(detail.loadedCartonsInPallet ?? 0)" : "\(detail.actualCartonsInPallet ?? 0)"
+                }
+                cell.actualCartonsInPalletTextField?.text = actualCartons
                 cell.cartonInPalletsLabel?.text = "\(detail.cartonsInPallet ?? 0)"
-                cell.actualCartonsInPalletTextField?.text = (isPickUpAndNewOrder) ? "\(detail.loadedCartonsInPallet ?? 0)" : "\(detail.actualCartonsInPallet ?? 0)"
                 cell.handleShowingDeliveredCartonsRecord(isHidden: isShowingOnly)
                 cell.cartonsViewContainerHeightConstraint?.constant = (isShowingOnly) ? 20.0 : 50.0
                 cell.cartonsViewContainerTopSpacing?.constant = 6.0
@@ -1051,8 +1063,9 @@ fileprivate extension OrderDetailViewController{
             }
             
         } else if (actualQty == nil || actualQty! == 0 || actualQty > detail.qty!) {
-            let mes = String(format: "Delivered quantity must be less than or equal %@", "\(detail.qty!)")
-            showAlertView(mes)
+            let mes = "delivered-quantity-must-be-less-than-or-equal".localized
+            let pickupMes = mes + "\(detail.qty!)"
+            showAlertView(pickupMes)
         } else {
             
             if _orderDetail.isHasCOD && !_orderDetail.isUpdatedCODReceived {
@@ -1063,7 +1076,7 @@ fileprivate extension OrderDetailViewController{
             var message = "delivered-quantity".localized
             message += ": \(detail.actualQty!)"
             if detail.isPallet && detail.actualCartonsInPallet != nil {
-                message += "\n" + "carton-in-pallets".localized
+                message += "\n" + "delivered-cartons-quantity".localized
                 message += ": \(detail.actualCartonsInPallet!)"
             }
             

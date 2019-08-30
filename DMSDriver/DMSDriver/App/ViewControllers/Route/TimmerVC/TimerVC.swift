@@ -26,9 +26,9 @@ class TimerVC: BaseViewController {
         super.viewDidLoad()
         
         drivingRule = Caches().drivingRule
-        if drivingRule == nil {
-            getDrivingRule()
-        }
+//        if drivingRule == nil {
+//            getDrivingRule()
+//        }
         
         setupTotalSecondRemaining()
         setupLblTimeRemaining()

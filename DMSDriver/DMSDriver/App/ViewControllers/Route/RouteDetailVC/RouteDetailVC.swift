@@ -297,6 +297,7 @@ extension RouteDetailVC: UICollectionViewDataSource {
                                                       for: indexPath) as! RouteDetailOrderListClvCell
         cell.rootVC = self
         cell.route = route
+        cell.delegate = self
         return cell
     }
     
@@ -364,6 +365,18 @@ extension RouteDetailVC:DMSNavigationServiceDelegate{
     func didSelectedBackAction() {
         popViewController()
     }
+}
+
+//MARK: - RouteDetailOrderListClvCellDelegate
+extension RouteDetailVC:RouteDetailOrderListClvCellDelegate{
+    func didBeginEditSearchText() {
+        self.clvContent?.isScrollEnabled = false
+    }
+    
+    func didEndEditSearchText() {
+        self.clvContent?.isScrollEnabled = true
+    }
+    
 }
 
 //MARK: - API

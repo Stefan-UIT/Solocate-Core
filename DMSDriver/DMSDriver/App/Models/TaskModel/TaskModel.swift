@@ -75,7 +75,8 @@ class TaskModel: BaseModel {
     var dlvd_dt:String?
     var reason:Reason?
     var reason_msg = ""
-
+    var route_name:String?
+    var drivers: [UserModel.UserInfo]?
     
     var colorUrgent:UIColor{
         get{
@@ -150,6 +151,8 @@ class TaskModel: BaseModel {
 //        dlvd_dt <- map["dlvd_dt"]
 //        reason <- map["reason"]
 //        reason_msg <- map["reason_msg"]
+        route_name <- map["route_name"]
+        drivers <- map["drivers"]
         
     }
     
@@ -167,13 +170,13 @@ class ReturnedItem: TaskModel {
     var routeID:Int?
     var note:String?
     var currentAssignee:UserModel.UserInfo?
-    var myOwn:UserModel.UserInfo!
+    var myOwn:UserModel.UserInfo?
     var isAllowedToActions:Bool {
         get {
-//            if isRampManagerMode {
-//                return currentAssignee == nil && !(isFinished || isCancelled)
-//            }
-            return myOwn.id == currentAssignee?.id && !(isFinished || isCancelled)
+            if isRampManagerMode {
+                return currentAssignee == nil && !(isFinished || isCancelled)
+            }
+            return myOwn?.id == currentAssignee?.id && !(isFinished || isCancelled)
         }
     }
     
