@@ -422,7 +422,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         var message = "picked-up-quantity".localized
         message += ": \(pickedUpQty)"
         if detail.isPallet && detail.loadedCartonsInPallet != nil {
-            message += "\n" + "carton-in-pallets".localized
+            message += "\n" + "picked-up-cartons-qty".localized
             message += ": \(detail.loadedCartonsInPallet!)"
         }
         
@@ -1075,7 +1075,7 @@ fileprivate extension OrderDetailViewController{
             var message = "delivered-quantity".localized
             message += ": \(detail.actualQty!)"
             if detail.isPallet && detail.actualCartonsInPallet != nil {
-                message += "\n" + "carton-in-pallets".localized
+                message += "\n" + "delivered-cartons-quantity".localized
                 message += ": \(detail.actualCartonsInPallet!)"
             }
             
