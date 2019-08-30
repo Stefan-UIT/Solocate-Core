@@ -1063,8 +1063,9 @@ fileprivate extension OrderDetailViewController{
             }
             
         } else if (actualQty == nil || actualQty! == 0 || actualQty > detail.qty!) {
-            let mes = String(format: "Delivered quantity must be less than or equal %@", "\(detail.qty!)")
-            showAlertView(mes)
+            let mes = "delivered-quantity-must-be-less-than-or-equal".localized
+            let pickupMes = mes + "\(detail.qty!)"
+            showAlertView(pickupMes)
         } else {
             
             if _orderDetail.isHasCOD && !_orderDetail.isUpdatedCODReceived {
