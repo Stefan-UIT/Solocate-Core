@@ -343,6 +343,7 @@ extension RouteDetailVC:UIScrollViewDelegate {
 //MARK: - BaseScrollMenuViewDelegate
 extension RouteDetailVC:BaseScrollMenuViewDelegate{
     func baseScrollMenuViewDidSelectAtIndexPath(_ view: BaseScrollMenuView, _ indexPath: IndexPath) {
+        self.view.endEditing(true)
         displayMode = RouteDetailDisplayMode(rawValue: indexPath.row) ?? .DisplayModeMap
         scrollToPageSelected(indexPath.row)
     }

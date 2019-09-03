@@ -89,6 +89,9 @@ class FilterDataListVC: BaseViewController {
         let allStatuses = Status()
         allStatuses.name = "all-statuses".localized
         arrStatus.append(allStatuses)
+        if CoreDataManager.getListRouteStatus().count == 0 {
+            self.getListRouteStatus()
+        }
         arrStatus.append(CoreDataManager.getListRouteStatus())
     }
 
@@ -582,6 +585,18 @@ extension FilterDataListVC:FilterDataListHeaderCellDelegate{
 
 //MARK: - Suport method
 extension FilterDataListVC {
+    
+    private func getListRouteStatus() {
+        SERVICES().API.getListRouteStatus { (result) in
+            switch result{
+            case .object(let obj):
+                guard let list = obj.data?.data else {return}
+                CoreDataManager.updateRouteListStatus(list)
+            case .error(_ ):
+                break
+            }
+        }
+    }
     
     class func show(atViewController viewController:UIViewController,
                     currentFilter:FilterDataModel?,

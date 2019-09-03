@@ -758,7 +758,7 @@ fileprivate extension OrderDetailViewController {
         
         if order.isPickUpType {
             cell.returnedPalletsContainerHeightConstraint.constant = 0
-            if detail.loadedQty != nil && detail.loadedCartonsInPallet != 0 {
+            if detail.loadedQty != nil && detail.loadedCartonsInPallet != 0 && !order.isNewStatus {
                 cell.loadedPickUpQtyContainerHeightConstraint.constant = 50
             } else if detail.loadedQty != nil && detail.loadedCartonsInPallet == 0{
                 cell.loadedPickUpQtyContainerHeightConstraint.constant = 25
@@ -771,7 +771,9 @@ fileprivate extension OrderDetailViewController {
             hideLoadedQuantityContainer()
         } else {
             cell.loadedPickUpQtyContainerHeightConstraint.constant = 0
+            cell.returnedPalletsContainerHeightConstraint.constant = 22
             if !detail.isPallet {
+                cell.returnedPalletsContainerHeightConstraint.constant = 0
                 cell.loadedCartonsQtyViewContainer?.isHidden = true
                 cell.loadedQtyContainerHeightConstraint?.constant = 22.0
             }
@@ -1203,6 +1205,7 @@ fileprivate extension OrderDetailViewController{
             break
         default:
             updateStatusButton?.isHidden = true
+            shortcutUpdateStatusButton?.isHidden = true
             vAction?.isHidden = true
             return
         }
