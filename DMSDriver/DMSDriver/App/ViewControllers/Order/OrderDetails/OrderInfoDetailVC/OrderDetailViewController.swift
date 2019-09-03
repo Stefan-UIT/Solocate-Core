@@ -771,7 +771,9 @@ fileprivate extension OrderDetailViewController {
             hideLoadedQuantityContainer()
         } else {
             cell.loadedPickUpQtyContainerHeightConstraint.constant = 0
+            cell.returnedPalletsContainerHeightConstraint.constant = 22
             if !detail.isPallet {
+                cell.returnedPalletsContainerHeightConstraint.constant = 0
                 cell.loadedCartonsQtyViewContainer?.isHidden = true
                 cell.loadedQtyContainerHeightConstraint?.constant = 22.0
             }
