@@ -1205,6 +1205,7 @@ fileprivate extension OrderDetailViewController{
             break
         default:
             updateStatusButton?.isHidden = true
+            shortcutUpdateStatusButton?.isHidden = true
             vAction?.isHidden = true
             return
         }
