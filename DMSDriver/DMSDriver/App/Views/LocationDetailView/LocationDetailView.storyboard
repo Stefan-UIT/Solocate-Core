@@ -13,7 +13,7 @@
         <!--Location Detail View-->
         <scene sceneID="Drt-Rr-Ou7">
             <objects>
-                <viewController storyboardIdentifier="LocationDetailView" modalPresentationStyle="overFullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gaB-G7-3v8" customClass="LocationDetailView" customModule="DMSDriver" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LocationDetailView" modalPresentationStyle="overFullScreen" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gaB-G7-3v8" customClass="LocationDetailView" customModule="Ashdod_Dev" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="PEo-kA-vte">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -88,7 +88,7 @@
                                         <rect key="frame" x="0.0" y="60" width="414" height="608"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <prototypes>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationDetailAddressCell" rowHeight="135" id="dKJ-Hz-JwW" customClass="LocationDetailViewCell" customModule="DMSDriver" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationDetailAddressCell" rowHeight="135" id="dKJ-Hz-JwW" customClass="LocationDetailViewCell" customModule="Ashdod_Dev" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="28" width="414" height="135"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dKJ-Hz-JwW" id="pi6-56-dX2">
@@ -216,10 +216,11 @@
                                                 <connections>
                                                     <outlet property="lblExpectedTime" destination="x2Z-wc-DgE" id="XB1-5E-VoJ"/>
                                                     <outlet property="lblLocationName" destination="E0f-HE-i2i" id="vV6-kL-THO"/>
+                                                    <outlet property="lblSubTitle" destination="mFi-N3-4Dh" id="doR-jb-rUL"/>
                                                     <outlet property="lblTitle" destination="hHg-rX-knB" id="0jf-FO-q81"/>
                                                 </connections>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationDetailHeaderCell" rowHeight="83" id="kKB-sh-a4M" customClass="LocationDetailViewCell" customModule="DMSDriver" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationDetailHeaderCell" rowHeight="83" id="kKB-sh-a4M" customClass="LocationDetailViewCell" customModule="Ashdod_Dev" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="163" width="414" height="83"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="kKB-sh-a4M" id="fPk-8B-L7X">
@@ -244,7 +245,7 @@
                                                     <outlet property="lblTitle" destination="IFM-l9-YlG" id="wmW-JL-nq6"/>
                                                 </connections>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationDetailPackageCell" rowHeight="83" id="sLN-zB-i3t" customClass="LocationDetailViewCell" customModule="DMSDriver" customModuleProvider="target">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="LocationDetailPackageCell" rowHeight="83" id="sLN-zB-i3t" customClass="LocationDetailViewCell" customModule="Ashdod_Dev" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="246" width="414" height="83"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="sLN-zB-i3t" id="3DJ-K6-e45">
