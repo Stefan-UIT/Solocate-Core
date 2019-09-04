@@ -280,23 +280,27 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
     func showPalletReturnedPopUp() {
         let alert = UIAlertController(title: "returned-pallets".localized, message: "number-of-returned-pallets".localized, preferredStyle: .alert)
-        
-        //2. Add the text field. You can configure it however you need.
-        alert.addTextField { (textField) in
-            textField.keyboardType = .numberPad
-            textField.text = ""
-        }
-        
-        // 3. Grab the value from the text field, and print it when the user clicks OK.
-        alert.addAction(UIAlertAction(title: "submit".localized, style: .default, handler: { [weak alert] (_) in
+        // 2. Grab the value from the text field, and print it when the user clicks Submit.
+        let submitButton = UIAlertAction(title: "submit".localized, style: .default, handler: { [weak alert] (_) in
             let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
             let returnedPalletQty = Int(textField?.text ?? "0")!
             if let detail = self.orderDetail?.details?.first {
                 detail.returnedPalletQty = returnedPalletQty
             }
             self.handleReturnedPalletAction()
-        }))
+            })
         
+        submitButton.isEnabled = false
+        
+        //3. Add the text field. You can configure it however you need.
+        alert.addTextField(configurationHandler: { (textField) in
+            textField.keyboardType = .numberPad
+            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { (notification) in
+                submitButton.isEnabled = textField.text!.length > 0
+            }
+        })
+        
+        alert.addAction(submitButton)
         alert.addAction(UIAlertAction(title: "cancel".localized, style: .cancel, handler: {
             action in
         }))
