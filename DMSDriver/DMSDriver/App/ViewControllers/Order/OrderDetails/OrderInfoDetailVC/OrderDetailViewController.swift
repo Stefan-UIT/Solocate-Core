@@ -762,9 +762,9 @@ fileprivate extension OrderDetailViewController {
         
         if order.isPickUpType {
             cell.returnedPalletsContainerHeightConstraint.constant = 0
-            if detail.loadedQty != nil && detail.loadedCartonsInPallet != 0 && !order.isNewStatus {
+            if detail.loadedQty != nil && detail.loadedCartonsInPallet != nil && !order.isNewStatus {
                 cell.loadedPickUpQtyContainerHeightConstraint.constant = 50
-            } else if detail.loadedQty != nil && detail.loadedCartonsInPallet == 0{
+            } else if detail.loadedQty != nil && !detail.isPallet && !order.isNewStatus {
                 cell.loadedPickUpQtyContainerHeightConstraint.constant = 25
                 cell.loadedPickUpCartonsContainerHeightConstraint.constant = 0
             } else {
