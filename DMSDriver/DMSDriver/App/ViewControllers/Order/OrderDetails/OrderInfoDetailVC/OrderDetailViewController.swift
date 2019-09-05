@@ -264,17 +264,16 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     func showReasonView(isUnableToFinish:Bool) {
-        ReasonSkipView.show(inView: self.view) {[weak self] (success, reason) in
+        ReasonSkipView.present(inViewController: self) {[weak self] (success, reason) in
             guard let _reason = reason else {return}
             self?.cancelOrder(reason: _reason, isUnableToFinish: isUnableToFinish)
         }
     }
     
     func showReturnReasonView(completionHandler:@escaping (_ reason:Reason)->Void) {
-        ReasonSkipView.show(inView: self.view, isCancelledReason: false) {(success, reason) in
+        ReasonSkipView.present(inViewController: self, isCancelledReason: false) {(success, reason) in
             guard let _reason = reason else {return}
             completionHandler(_reason)
-            
         }
     }
     

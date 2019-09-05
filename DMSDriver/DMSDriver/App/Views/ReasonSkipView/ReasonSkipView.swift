@@ -12,8 +12,8 @@ typealias ReasonSkipViewCallback = (Bool,Reason?)-> Void
 
 class ReasonSkipView: BaseView {
     @IBOutlet weak var tableView: UITableView!
-    
-    
+    @IBOutlet weak var noteTextView: UITextView!
+    @IBOutlet weak var okButton: UIButton!
     private var listReason = [Reason]()
     private var callback:ReasonSkipViewCallback?
     private var reasonSelect:Reason?
@@ -30,37 +30,45 @@ class ReasonSkipView: BaseView {
                       "OTHER"]
          */
     }
-    
+   
     convenience init(isCancelledReason:Bool) {
         self.init()
         tableView.register(UINib(nibName: "ReasonSkipTableViewCell", bundle: nil), forCellReuseIdentifier: "ReasonSkipTableViewCell")
         
         tableView.backgroundColor = .clear
-        
+        okButton.isEnabled = !(selectedIndex >= 0) ? false : true
         if isCancelledReason {
             getReasonList()
         } else {
             getReturnReasonList()
         }
     }
-    
+   
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+   
+   func dismiss() {
+      if let vc = self.parentViewController {
+         vc.dismiss(animated: true, completion: nil)
+      }
+   }
     
     //MARK: - ACTION
-    @IBAction func onbtnClickDismissView(btn:UIButton){
-        removeFromSuperview()
-    }
+   @IBAction func onbtnClickDismissView(btn:UIButton){
+      self.dismiss()
+   }
     
     @IBAction func onbtnClickOK(btn:UIButton){
         guard selectedIndex >= 0 else {
             return
         }
         reasonSelect = listReason[selectedIndex]
+        if noteTextView.text.count > 0 {
+           reasonSelect?.message = noteTextView.text
+        }
         callback?(true,reasonSelect)
-        removeFromSuperview()
+        self.dismiss()
     }
 }
 
@@ -91,6 +99,7 @@ extension ReasonSkipView: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         selectedIndex = indexPath.row
+        okButton.isEnabled = !(selectedIndex >= 0) ? false : true
         tableView.reloadData()
     }
 }
@@ -136,6 +145,19 @@ extension ReasonSkipView{
         let reasonSkipView = ReasonSkipView.init(isCancelledReason: isCancelledReason)
         reasonSkipView.callback = callback
         reasonSkipView.showViewInWindow()
+    }
+    
+    class func present(inViewController controller :UIViewController, isCancelledReason:Bool = true, callback:@escaping ReasonSkipViewCallback)  {
+         let reasonSkipView = ReasonSkipView.init(isCancelledReason: isCancelledReason)
+         reasonSkipView.callback = callback
+      
+         let vc = UIViewController()
+         vc.view = reasonSkipView
+      
+         let nv:BaseNV = BaseNV()
+         nv.isNavigationBarHidden = true
+         nv.setViewControllers([vc], animated: false)
+         controller.present(nv, animated: false, completion: nil)
     }
 }
 
