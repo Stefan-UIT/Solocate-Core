@@ -13,6 +13,7 @@ class Truck:BaseModel {
     
     var id:Int = -1
     var name = "-"
+    var plateNumber = "-"
     var maxLoad = 0
     var maxVolume = 0
     var maxFloor = 0
@@ -30,6 +31,7 @@ class Truck:BaseModel {
     override func mapping(map: Map) {
         id <- map["id"]
         name <- map["name"]
+        plateNumber <- map["plate_num"]
         maxLoad <- map["max_load"]
         maxVolume <- map["max_vol"]
         maxFloor <- map["max_floor"]
