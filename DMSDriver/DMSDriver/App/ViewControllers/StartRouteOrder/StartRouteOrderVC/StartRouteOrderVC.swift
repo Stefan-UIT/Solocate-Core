@@ -38,12 +38,18 @@ class StartRouteOrderVC: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        App().mainVC?.navigationController?.isNavigationBarHidden = true
+//        App().mainVC?.navigationController?.isNavigationBarHidden = true
     }
     
-    deinit {
-        App().mainVC?.navigationController?.isNavigationBarHidden = false
+    override func updateNavigationBar() {
+        super.updateNavigationBar()
+        App().navigationService.delegate = self
+        App().navigationService.updateNavigationBar(.BackOnly, "")
     }
+    
+//    deinit {
+//        App().mainVC?.navigationController?.isNavigationBarHidden = false
+//    }
     
     override func updateUI() {
         super.updateUI()
@@ -131,7 +137,7 @@ class StartRouteOrderVC: BaseViewController {
     }
     
     @IBAction func onbtnClickSkip(btn:UIButton) {
-        ReasonSkipView.show(inView: self.view) {[weak self] (success, reason) in
+        ReasonSkipView.present(inViewController: self) { [weak self] (success, reason) in
             guard let _reason = reason else {return}
             self?.cancelOrder(reason: _reason)
         }
@@ -393,6 +399,12 @@ extension StartRouteOrderVC:SignatureViewControllerDelegate{
         if let sig = signature {
             submitSignatureAndFinishOrder(sig, signName ?? "")
         }
+    }
+}
+
+extension StartRouteOrderVC:DMSNavigationServiceDelegate {
+    func didSelectedBackAction() {
+        popViewController()
     }
 }
 

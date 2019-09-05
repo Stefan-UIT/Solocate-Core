@@ -27,7 +27,7 @@ class AssignTruckTableViewCell: UITableViewCell {
     }
     
     func configureCell(truck:Truck) {
-        nameLabel.text = truck.name
+        nameLabel.text = truck.plateNumber
         truckTypeLabel.text = Slash(truck.type?.name)
         maxLoadLabel.text = "\(truck.maxLoad)"
         maxVolumeLabel.text = "\(truck.maxVolume)"
