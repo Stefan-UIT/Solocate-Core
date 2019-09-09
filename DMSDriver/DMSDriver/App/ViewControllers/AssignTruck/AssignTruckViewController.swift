@@ -45,7 +45,7 @@ class AssignTruckViewController: BaseViewController {
     }
     
     func showAssignTruckPopup(truck:Truck) {
-        let name = truck.name
+        let name = truck.plateNumber
         let title = "assign-truck".localized
         let message = String(format: "are-you-sure-you-want-to-assign-to-this-route".localized, "\(name)")
         
