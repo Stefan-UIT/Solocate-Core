@@ -389,7 +389,7 @@ extension RouteDetailVC{
         assignTruckButtonView.isHidden = _route.isAssignedTruck
         vanLoadButtonView.isHidden = !_route.isHasOrderNeedToBeLoaded
         
-        let shouldHideActionsContainer = (assignTruckButtonView.isHidden && assignTruckButtonView.isHidden && vanLoadButtonView.isHidden)
+        let shouldHideActionsContainer = (assignDriverButtonView.isHidden && assignTruckButtonView.isHidden && vanLoadButtonView.isHidden)
         if shouldHideActionsContainer {
             actionsViewContainer.isHidden = shouldHideActionsContainer
             actionViewContainerHeightConstraint.constant = 0.0
