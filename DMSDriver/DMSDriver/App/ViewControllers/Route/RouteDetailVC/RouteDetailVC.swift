@@ -118,6 +118,7 @@ class RouteDetailVC: BaseViewController {
     func handleShowingActionsContainer() {
         actionsViewContainer.isHidden = !isRampManagerMode
         actionViewContainerHeightConstraint.constant = (isRampManagerMode) ? 50.0 : 0.0
+        menuScrollViewHeightConstraint.constant = (isRampManagerMode) ? 0.0 : 45.0
     }
     
     override func viewDidAppear(_ animated: Bool) {
