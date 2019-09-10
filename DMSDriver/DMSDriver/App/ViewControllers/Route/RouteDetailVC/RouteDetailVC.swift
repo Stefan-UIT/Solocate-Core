@@ -67,6 +67,7 @@ class RouteDetailVC: BaseViewController {
     var mapVC:MapsViewController?
     var orderListVC:OrderListViewController?
 
+    @IBOutlet weak var menuScrollViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var actionsViewContainer: UIView!
     
     @IBOutlet weak var actionViewContainerHeightConstraint: NSLayoutConstraint!
@@ -98,6 +99,7 @@ class RouteDetailVC: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        clvContent?.isHidden = true
         initUI()
 //        initFloatButton()
         handleShowingActionsContainer()
@@ -116,6 +118,8 @@ class RouteDetailVC: BaseViewController {
     func handleShowingActionsContainer() {
         actionsViewContainer.isHidden = !isRampManagerMode
         actionViewContainerHeightConstraint.constant = (isRampManagerMode) ? 50.0 : 0.0
+        menuScrollViewHeightConstraint.constant = (isRampManagerMode) ? 0.0 : 45.0
+        clvContent?.isScrollEnabled = !isRampManagerMode
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -211,13 +215,28 @@ class RouteDetailVC: BaseViewController {
                                         .layerMaxXMaxYCorner,
                                         .layerMinXMaxYCorner],10)
         menuScrollView?.backgroundCell = AppColor.white
+        
         menuScrollView?.selectedBackground = AppColor.mainColor
         menuScrollView?.cornerRadiusCell = 10
         menuScrollView?.delegate = self
         menuScrollView?.isHidden = false
-        menuScrollView?.dataSource = [mapMode,orderMode,locationMode]
+        let dataSource = (isRampManagerMode) ? [orderMode] : [mapMode,orderMode,locationMode]
+        menuScrollView?.dataSource = dataSource
         menuScrollView?.reloadData()
+        if isRampManagerMode {
+            let displayOrders = 1
+            displayMode = RouteDetailDisplayMode(rawValue: displayOrders) ?? .DisplayModeMap
+            scrollToPageSelected(displayOrders)
+        }
     }
+    
+//    func hideMenuScrollView() {
+//        menuScrollView?.isHidden = true
+//        menuScrollViewHeightConstraint.constant = 0.0
+//        let displayOrders = 1
+//        displayMode = RouteDetailDisplayMode(rawValue: displayOrders) ?? .DisplayModeMap
+//        scrollToPageSelected(displayOrders)
+//    }
     
     func updateRouteDetail(route:Route)  {
         self.route = route
@@ -343,6 +362,9 @@ extension RouteDetailVC:UIScrollViewDelegate {
 //MARK: - BaseScrollMenuViewDelegate
 extension RouteDetailVC:BaseScrollMenuViewDelegate{
     func baseScrollMenuViewDidSelectAtIndexPath(_ view: BaseScrollMenuView, _ indexPath: IndexPath) {
+        if isRampManagerMode {
+            return
+        }
         self.view.endEditing(true)
         displayMode = RouteDetailDisplayMode(rawValue: indexPath.row) ?? .DisplayModeMap
         scrollToPageSelected(indexPath.row)
@@ -389,7 +411,7 @@ extension RouteDetailVC{
         assignTruckButtonView.isHidden = _route.isAssignedTruck
         vanLoadButtonView.isHidden = !_route.isHasOrderNeedToBeLoaded
         
-        let shouldHideActionsContainer = (assignTruckButtonView.isHidden && assignTruckButtonView.isHidden && vanLoadButtonView.isHidden)
+        let shouldHideActionsContainer = (assignDriverButtonView.isHidden && assignTruckButtonView.isHidden && vanLoadButtonView.isHidden)
         if shouldHideActionsContainer {
             actionsViewContainer.isHidden = shouldHideActionsContainer
             actionViewContainerHeightConstraint.constant = 0.0
@@ -415,10 +437,12 @@ extension RouteDetailVC{
             switch result{
             case .object(let obj):
                 strongSelf.route = obj.data
+                strongSelf.clvContent?.isHidden = false
                 strongSelf.clvContent?.reloadData()
                 strongSelf.initUI()
                 if isRampManagerMode {
                     strongSelf.updateActionsUI()
+                    strongSelf.setupScrollMenuView()
                 }
                 /*
                  guard let data = obj.data else {return}
