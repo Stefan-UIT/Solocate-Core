@@ -72,7 +72,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eVV-2Y-Lag" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2101.5999999999999" y="-143.47826086956522"/>
+            <point key="canvasLocation" x="2105" y="-170"/>
         </scene>
         <!--Order Detail Map View Controller-->
         <scene sceneID="H9N-9m-JN6">
@@ -168,7 +168,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MFL-QQ-6eD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3610" y="-159"/>
+            <point key="canvasLocation" x="3590" y="-224"/>
         </scene>
         <!--Scan Bar Code View Controller-->
         <scene sceneID="nFV-ZI-nS4">
@@ -1483,7 +1483,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sjX-6F-7y5">
-                                                                    <rect key="frame" x="324" y="35" width="16" height="22"/>
+                                                                    <rect key="frame" x="300" y="26" width="40" height="40"/>
                                                                     <state key="normal" image="ic_add"/>
                                                                     <connections>
                                                                         <action selector="onbtnClickEditWithBtn:" destination="WXj-B2-1HB" eventType="touchUpInside" id="x1D-eK-zVi"/>
@@ -1563,7 +1563,7 @@
                                                                     <rect key="frame" x="235" y="29" width="100" height="35"/>
                                                                     <subviews>
                                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_dropdownblue" translatesAutoresizingMaskIntoConstraints="NO" id="0rh-WJ-TfN">
-                                                                            <rect key="frame" x="71" y="9.5" width="24" height="16"/>
+                                                                            <rect key="frame" x="71" y="11.5" width="24" height="12"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="width" constant="24" id="aMj-Fj-4lH"/>
                                                                             </constraints>
@@ -2177,7 +2177,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bTe-vM-7rJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2852" y="-143.47826086956522"/>
+            <point key="canvasLocation" x="2863" y="-170"/>
         </scene>
         <!--Order List View Controller-->
         <scene sceneID="VcF-1h-0bo">
@@ -2203,7 +2203,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_dropdownblue" translatesAutoresizingMaskIntoConstraints="NO" id="dxr-la-YVK">
-                                                <rect key="frame" x="115" y="8" width="20" height="16"/>
+                                                <rect key="frame" x="115" y="10" width="20" height="12"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="20" id="asV-aC-ZRH"/>
                                                 </constraints>
