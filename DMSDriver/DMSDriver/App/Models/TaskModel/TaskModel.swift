@@ -150,7 +150,7 @@ class TaskModel: BaseModel {
         created_at <- map["created_at"]
 //        dlvd_dt <- map["dlvd_dt"]
 //        reason <- map["reason"]
-//        reason_msg <- map["reason_msg"]
+        reason_msg <- map["reason_msg"]
         route_name <- map["route_name"]
         drivers <- map["drivers"]
         
