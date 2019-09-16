@@ -67,6 +67,7 @@ import Crashlytics
             let dataManager = TimeData()
             timeData = dataManager.getTimeDataItemType(type: .TimeItemTypeToday)
             filterModel.timeData = timeData
+            dataManager.setTimeDataItemDefault(item: filterModel.timeData!)
         }
     }
     
