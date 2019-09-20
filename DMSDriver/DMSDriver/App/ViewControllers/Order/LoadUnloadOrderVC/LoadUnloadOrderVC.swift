@@ -37,7 +37,8 @@ class LoadUnloadOrderVC: BaseViewController {
     var orders:[Order] = []
     var ordersAbleToLoad:[Order] {
         get {
-            return orders.filter({$0.statusOrder == StatusOrder.newStatus || $0.statusOrder == StatusOrder.WarehouseClarification})
+//            return orders.filter({$0.statusOrder == StatusOrder.newStatus || $0.statusOrder == StatusOrder.WarehouseClarification})
+            return orders.filter({$0.statusOrder == StatusOrder.newStatus})
         }
     }
     

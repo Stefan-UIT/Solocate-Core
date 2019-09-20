@@ -280,7 +280,8 @@ class Route: BaseModel {
     var ordersAbleToLoad:[Order] {
         get {
             let filteredArray = orderList.filter({$0.isDeliveryType})
-            return filteredArray.filter({$0.statusOrder == StatusOrder.newStatus || $0.statusOrder == StatusOrder.WarehouseClarification})
+//            return filteredArray.filter({$0.statusOrder == StatusOrder.newStatus || $0.statusOrder == StatusOrder.WarehouseClarification})
+            return filteredArray.filter({$0.statusOrder == StatusOrder.newStatus})
         }
     }
     
