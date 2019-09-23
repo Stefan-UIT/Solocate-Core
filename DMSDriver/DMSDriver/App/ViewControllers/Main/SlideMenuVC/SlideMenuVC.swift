@@ -7,7 +7,7 @@ enum MenuItemType : Int {
   case DASHBOARD
   case ROUTES
   case COUNTER
-  case ASSIGN
+  case RENTINGORDERS
   case TASK
     case RETURNEDITEMS
   case ALERT
@@ -29,8 +29,8 @@ enum MenuItemType : Int {
         return "Routes".localized.uppercased()
     case .COUNTER:
         return "Counter".localized.uppercased()
-    case .ASSIGN:
-        return "orders-assignment".localized.uppercased()
+    case .RENTINGORDERS:
+        return "renting-orders".localized.uppercased()
     case .TASK:
         return "tasks-list".localized.uppercased()
     case .RETURNEDITEMS:
@@ -52,7 +52,7 @@ enum MenuItemType : Int {
       return #imageLiteral(resourceName: "ic_route")
     case .COUNTER:
         return UIImage(named: "ic_alarm-clock")
-    case .ASSIGN:
+    case .RENTINGORDERS:
         return #imageLiteral(resourceName: "ic_orderlist")
     case .TASK:
         return #imageLiteral(resourceName: "Menu_Task")
@@ -119,7 +119,7 @@ extension SlideMenuVC: UITableViewDataSource{
         if menutype == .LOGOUT {
             return MAX(ScreenSize.SCREEN_HEIGHT - (CGFloat(((MenuItemType.count - 2) * 65)) + 200), 65)
         }
-        if menutype == .ASSIGN || menutype == .DASHBOARD || menutype == .COUNTER || menutype == .ALERT  {
+        if menutype == .DASHBOARD || menutype == .COUNTER || menutype == .ALERT || menutype == .RETURNEDITEMS || menutype == .TASK {
             return 0
         }
         
@@ -182,7 +182,7 @@ extension SlideMenuVC:UITableViewDelegate{
             let vc:TimerVC = .loadSB(SB: SBName.Packages)
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
             
-        case .ASSIGN:
+        case .RENTINGORDERS:
             let vc:AssignOrderVC = .loadSB(SB: .Order)
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
     

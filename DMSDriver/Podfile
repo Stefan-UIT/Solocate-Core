@@ -28,11 +28,11 @@ def shared_pods
     pod 'DropDown'
 end
 
-target 'Ashdod Dev' do
+target 'Gadot Dev' do
     shared_pods
 end
 
-target 'Ashdod Live' do
+target 'Gadot Live' do
     shared_pods
 end
 
