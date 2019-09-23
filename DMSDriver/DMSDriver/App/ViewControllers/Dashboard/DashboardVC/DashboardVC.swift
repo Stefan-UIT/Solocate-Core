@@ -67,11 +67,12 @@ class DashboardVC: BaseViewController {
     }
     
     func initVar()  {
-        if let _timeData = TimeData.getTimeDataItemDefault() {
+        let dataManager = TimeData()
+        if let _timeData = dataManager.getTimeDataItemDefault() {
             timeData = _timeData
         }else {
-            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeToday)
-            TimeData.setTimeDataItemDefault(item: timeData!)
+            timeData = dataManager.getTimeDataItemType(type: .TimeItemTypeToday)
+            dataManager.setTimeDataItemDefault(item: timeData!)
         }
     }
     

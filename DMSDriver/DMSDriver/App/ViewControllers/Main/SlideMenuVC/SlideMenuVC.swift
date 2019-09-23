@@ -76,7 +76,9 @@ class SlideMenuVC: BaseViewController {
     fileprivate let rowIndentifierCell = "SlideMenuRowCell"
 
     var currentItem:MenuItemType = .DASHBOARD
-
+    var returnedItemTimeDataManager = TimeData()
+    var taskTimeDataManager = TimeData()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
@@ -160,6 +162,8 @@ extension SlideMenuVC:UITableViewDelegate{
         return
     }
     
+
+    
     if currentItem != menuType{
         currentItem = menuType
         switch menuType {
@@ -184,9 +188,23 @@ extension SlideMenuVC:UITableViewDelegate{
     
         case .TASK:
             let vc:TaskListVC = .loadSB(SB: .Task)
+            
+            if let _timeData = taskTimeDataManager.getTimeDataItemDefault() {
+                vc.selectedTimeData = _timeData
+            } else {
+                vc.selectedTimeData = taskTimeDataManager.getTimeDataItemType(type: .TimeItemTypeToday)
+                taskTimeDataManager.setTimeDataItemDefault(item: vc.selectedTimeData!)
+            }
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
         case .RETURNEDITEMS:
             let vc:ReturnedItemsListVC = .loadSB(SB: .ReturnedItem)
+            
+            if let _timeData = returnedItemTimeDataManager.getTimeDataItemDefault() {
+                vc.selectedTimeData = _timeData
+            } else {
+                vc.selectedTimeData = returnedItemTimeDataManager.getTimeDataItemType(type: .TimeItemTypeToday)
+                returnedItemTimeDataManager.setTimeDataItemDefault(item: vc.selectedTimeData!)
+            }
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
             
         case .ALERT:

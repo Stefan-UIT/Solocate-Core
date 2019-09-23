@@ -82,7 +82,7 @@ class MainVC: BaseViewController {
                 return
             }else if (((viewController as? TaskListVC) != nil)){
                 let vc = viewController as? TaskListVC
-                vc?.getListTask(timeDataItem: (vc?.timeData)!, isFetch: true)
+                vc?.getListTask(timeDataItem: (vc?.selectedTimeData)!, isFetch: true)
                 return
 
             }else if (((viewController as? HistoryNotifyVC) != nil)){

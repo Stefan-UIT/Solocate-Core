@@ -50,9 +50,9 @@ class FilterDataListVC: BaseViewController {
     fileprivate var arrCityDisplay:[String] = []
     fileprivate let PICKUP_TYPE = "Pickup"
     fileprivate let DELIVERY_TYPE = "Delivery"
-    var timeData:TimeDataItem?
+    var dataManager = TimeData()
     var isSelected:Bool = false
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         initVar()
@@ -67,9 +67,15 @@ class FilterDataListVC: BaseViewController {
     }
     
     private func initVar()  {
-        if timeData == nil {
-            timeData = TimeData.getTimeDataItemDefault()
+        if let _timeData = dataManager.getTimeDataItemDefault() {
+            filterModel.timeData = _timeData
+        }else {
+            guard let timeDataType = filterModel.timeData?.type else {
+                return
+            }
+            let timeData = dataManager.getTimeDataItemType(type: timeDataType)
             filterModel.timeData = timeData
+            dataManager.setTimeDataItemDefault(item: filterModel.timeData!)
         }
     }
     

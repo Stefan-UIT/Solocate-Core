@@ -252,7 +252,7 @@ extension Date {
         let day = dateComponents.day
         let offset = dateComponents.weekday
         
-        dateComponents.day = (day ?? 0) - (offset ?? 0)
+        dateComponents.day = (day ?? 0) - (offset ?? 0) + 1 //start day is Sunday
         dateComponents.hour = 0;
         dateComponents.minute = 0;
         dateComponents.second = 0;
@@ -266,7 +266,7 @@ extension Date {
         let day = dateComponents.day
         let offset = dateComponents.weekday
         
-        dateComponents.day = (day ?? 0) - (offset ?? 0) + 6 //start day + 6
+        dateComponents.day = (day ?? 0) - (offset ?? 0) + 7 //start day is Sunday
         dateComponents.hour = 23;
         dateComponents.minute = 59;
         dateComponents.second = 59;
