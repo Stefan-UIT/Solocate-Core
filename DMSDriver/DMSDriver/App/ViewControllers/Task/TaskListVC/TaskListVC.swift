@@ -15,7 +15,7 @@ class TaskListVC: BaseViewController {
     @IBOutlet weak var lblNoData: UILabel?
 
     @IBOutlet weak var filterLabel: UILabel!
-    var timeData:TimeDataItem?
+    var selectedTimeData:TimeDataItem?
 
     
     fileprivate let taskListIdebtifierCell = "TaskListClvCell"
@@ -35,7 +35,7 @@ class TaskListVC: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.getListTask(timeDataItem: self.timeData!, isFetch: true)
+        self.getListTask(timeDataItem: self.selectedTimeData!, isFetch: true)
     }
     
     override func updateNavigationBar() {
@@ -44,7 +44,7 @@ class TaskListVC: BaseViewController {
     
     override func updateUI()  {
         super.updateUI()
-        filterLabel?.text = timeData?.title
+        filterLabel?.text = selectedTimeData?.title
         clvContent?.reloadData()
     }
     
@@ -63,11 +63,12 @@ class TaskListVC: BaseViewController {
     }
     
     func initVar()  {
-        if let _timeData = TimeData.getTimeDataItemDefault() {
-            timeData = _timeData
+        let dataManager = TimeData()
+        if let _timeData = dataManager.getTimeDataItemDefault() {
+            selectedTimeData = _timeData
         }else {
-            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeToday)
-            TimeData.setTimeDataItemDefault(item: timeData!)
+            selectedTimeData = dataManager.getTimeDataItemType(type: .TimeItemTypeToday)
+            dataManager.setTimeDataItemDefault(item: selectedTimeData!)
         }
     }
     
@@ -91,9 +92,9 @@ class TaskListVC: BaseViewController {
                        TimeItemType.TimeItemTypeNextYear.rawValue]
         FilterByDatePopupView.showFilterListTimeAtView(view: btn,
                                                        atViewContrller: self,
-                                                       timeData: timeData,
+                                                       timeData: selectedTimeData,
                                                        needHides: arrHide as [NSNumber]) {[weak self] (success, timeData) in
-                                                        self?.timeData = timeData
+                                                        self?.selectedTimeData = timeData
                                                         self?.getListTask(timeDataItem: timeData, isFetch: true)
         }
     }
@@ -195,14 +196,14 @@ extension TaskListVC:UICollectionViewDelegate{
 extension TaskListVC{
     
     @objc func fetchData()  {
-        getListTask(timeDataItem:timeData! ,isFetch: true)
+        getListTask(timeDataItem:selectedTimeData! ,isFetch: true)
     }
     
     func getListTask(timeDataItem:TimeDataItem,isFetch:Bool = false) {
         if !isFetch {
             self.showLoadingIndicator()
         }
-        SERVICES().API.getTaskList(self.timeData!) {[weak self] (result) in
+        SERVICES().API.getTaskList(self.selectedTimeData!) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.clvContent?.endRefreshControl()
             switch result{

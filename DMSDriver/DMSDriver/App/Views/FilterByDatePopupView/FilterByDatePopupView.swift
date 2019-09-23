@@ -24,7 +24,7 @@ class FilterByDatePopupView: UIViewController {
     var timeData:TimeDataItem?
     var callback:FilterByDatePopupViewCallback?
     var arrNeedHide:[NSNumber]?
-
+    let dataManager = TimeData()
     var arrTimeData:[TimeDataItem] = []
 
     override func viewDidLoad() {
@@ -38,9 +38,9 @@ class FilterByDatePopupView: UIViewController {
         self.view.layer.cornerRadius = 5.0;
         self.view.clipsToBounds = true;
         
-        arrTimeData = TimeData.arrTimeDataItem()
+        arrTimeData = dataManager.arrTimeDataItem()
         if (timeData == nil) {
-            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeToday)
+            timeData = dataManager.getTimeDataItemType(type: .TimeItemTypeToday)
         }
     }
     
@@ -139,7 +139,7 @@ extension FilterByDatePopupView:UITableViewDataSource,UITableViewDelegate{
                 cell.btnCheck?.isSelected = false
                 var text = ""
                 
-                let customTime = TimeData.getTimeDataItemCustom()
+                let customTime = dataManager.getTimeDataItemCustom()
                 if customTime != nil {
                     text = customTime?.subtitle ?? ""
                 }else if (timeData != nil){
@@ -184,7 +184,7 @@ extension FilterByDatePopupView:UITableViewDataSource,UITableViewDelegate{
         if timeData?.type == TimeItemType.TimeItemTypeCustom {
             var start:Date?
             var end:Date?
-            let custom = TimeData.getTimeDataItemCustom()
+            let custom = dataManager.getTimeDataItemCustom()
             
             if (custom != nil) {
                 start = custom?.startDate;
@@ -220,8 +220,8 @@ extension FilterByDatePopupView:UITableViewDataSource,UITableViewDelegate{
                                                 }
                                                 
                                                 // Update Default
-                                                TimeData.setTimeDataItemCustom(item: time)
-                                                TimeData.setTimeDataItemDefault(item: time)
+                                                self?.dataManager.setTimeDataItemCustom(item: time)
+                                                self?.dataManager.setTimeDataItemDefault(item: time)
                                                 self?.dismiss(animated: false, completion: nil)
                                             }
             }
@@ -229,7 +229,7 @@ extension FilterByDatePopupView:UITableViewDataSource,UITableViewDelegate{
             
         }else {
             guard let data = timeData else {return}
-            TimeData.setTimeDataItemDefault(item: data)
+            dataManager.setTimeDataItemDefault(item: data)
             callback?(true,data)
             self.dismiss(animated: false, completion: nil)
         }

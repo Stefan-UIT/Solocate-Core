@@ -64,8 +64,10 @@ import Crashlytics
     
     private func initVar()  {
         if timeData == nil {
-            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeToday)
+            let dataManager = TimeData()
+            timeData = dataManager.getTimeDataItemType(type: .TimeItemTypeToday)
             filterModel.timeData = timeData
+            dataManager.setTimeDataItemDefault(item: filterModel.timeData!)
         }
     }
     

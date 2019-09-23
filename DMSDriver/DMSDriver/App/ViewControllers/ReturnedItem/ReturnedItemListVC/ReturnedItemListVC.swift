@@ -15,7 +15,7 @@ class ReturnedItemsListVC: BaseViewController {
     @IBOutlet weak var lblNoData: UILabel?
 
     @IBOutlet weak var filterLabel: UILabel!
-    var timeData:TimeDataItem?
+    var selectedTimeData:TimeDataItem?
     
     fileprivate let taskListIdebtifierCell = "TaskListClvCell"
     
@@ -46,7 +46,7 @@ class ReturnedItemsListVC: BaseViewController {
     
     override func updateUI()  {
         super.updateUI()
-        filterLabel?.text = timeData?.title
+        filterLabel?.text = selectedTimeData?.title
         clvContent?.reloadData()
     }
     
@@ -65,12 +65,13 @@ class ReturnedItemsListVC: BaseViewController {
     }
     
     func initVar()  {
-        if let _timeData = TimeData.getTimeDataItemDefault() {
-            timeData = _timeData
-        }else {
-            timeData = TimeData.getTimeDataItemType(type: .TimeItemTypeToday)
-            TimeData.setTimeDataItemDefault(item: timeData!)
-        }
+//        let dataManager = TimeData()
+//        if let _timeData = dataManager.getTimeDataItemDefault() {
+//            selectedTimeData = _timeData
+//        }else {
+//            selectedTimeData = dataManager.getTimeDataItemType(type: .TimeItemTypeToday)
+//            dataManager.setTimeDataItemDefault(item: selectedTimeData!)
+//        }
     }
     
     //MARK: - Intialize
@@ -94,9 +95,9 @@ class ReturnedItemsListVC: BaseViewController {
                        TimeItemType.TimeItemTypeNextYear.rawValue]
         FilterByDatePopupView.showFilterListTimeAtView(view: btn,
                                                        atViewContrller: self,
-                                                       timeData: timeData,
+                                                       timeData: selectedTimeData,
                                                        needHides: arrHide as [NSNumber]) {[weak self] (success, timeData) in
-                                                        self?.timeData = timeData
+                                                        self?.selectedTimeData = timeData
                                                         self?.getReturnedItems(timeDataItem: timeData, isFetch: true)
         }
     }
@@ -212,7 +213,7 @@ extension ReturnedItemsListVC: UICollectionViewDataSourcePrefetching {
 extension ReturnedItemsListVC{
     
     @objc func fetchData()  {
-        getReturnedItems(timeDataItem:timeData! ,isFetch: true)
+        getReturnedItems(timeDataItem:selectedTimeData! ,isFetch: true)
     }
     
     func getReturnedItems(timeDataItem:TimeDataItem,isFetch:Bool = false) {
@@ -233,7 +234,7 @@ extension ReturnedItemsListVC{
             clvContent?.reloadData()
         }
         
-        SERVICES().API.getReturnedItems(self.timeData!,page: page) {[weak self] (result) in
+        SERVICES().API.getReturnedItems(self.selectedTimeData!,page: page) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.clvContent?.endRefreshControl()
             switch result{

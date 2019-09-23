@@ -97,6 +97,8 @@ enum StatusOrder: String {
             case .CancelStatus,
                  .UnableToFinish:
                 return AppColor.redColor;
+            case .WarehouseClarification:
+                return AppColor.orangeColor
             default:
                 return AppColor.newStatus;
             }
