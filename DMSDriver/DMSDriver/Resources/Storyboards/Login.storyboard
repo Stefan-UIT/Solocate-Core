@@ -18,7 +18,7 @@
         <!--Login View Controller-->
         <scene sceneID="upI-VQ-Pfn">
             <objects>
-                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3T1-w1-Qsx" customClass="LoginViewController" customModule="Ashdod_Dev" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="LoginViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="3T1-w1-Qsx" customClass="LoginViewController" customModule="Gadot_Dev" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CDp-iu-yfc">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -30,13 +30,37 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
                                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="27" translatesAutoresizingMaskIntoConstraints="NO" id="au1-ZQ-VK5">
-                                                <rect key="frame" x="40" y="177.5" width="295" height="312"/>
+                                                <rect key="frame" x="40" y="145.5" width="295" height="376"/>
                                                 <subviews>
-                                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ashdod_logo" translatesAutoresizingMaskIntoConstraints="NO" id="5no-5h-GKx">
-                                                        <rect key="frame" x="139.5" y="0.0" width="16" height="16"/>
-                                                    </imageView>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vd0-2J-WQF">
+                                                        <rect key="frame" x="0.0" y="0.0" width="295" height="80"/>
+                                                        <subviews>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo_solocate_color" translatesAutoresizingMaskIntoConstraints="NO" id="p3x-iE-7Ni">
+                                                                <rect key="frame" x="0.0" y="0.0" width="295" height="40"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="40" id="acQ-0d-mHM"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="logo-gadot" translatesAutoresizingMaskIntoConstraints="NO" id="XR2-SJ-l5v">
+                                                                <rect key="frame" x="82" y="48" width="187" height="17"/>
+                                                                <constraints>
+                                                                    <constraint firstAttribute="height" constant="17" id="0xm-hg-n1p"/>
+                                                                    <constraint firstAttribute="width" secondItem="XR2-SJ-l5v" secondAttribute="height" multiplier="11:1" id="S8b-1o-dJn"/>
+                                                                </constraints>
+                                                            </imageView>
+                                                        </subviews>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                        <constraints>
+                                                            <constraint firstItem="p3x-iE-7Ni" firstAttribute="top" secondItem="Vd0-2J-WQF" secondAttribute="top" id="HYc-e6-1QJ"/>
+                                                            <constraint firstAttribute="height" constant="80" id="PcL-HW-05R"/>
+                                                            <constraint firstItem="XR2-SJ-l5v" firstAttribute="top" secondItem="p3x-iE-7Ni" secondAttribute="bottom" constant="8" id="bd6-DS-gms"/>
+                                                            <constraint firstAttribute="trailing" secondItem="XR2-SJ-l5v" secondAttribute="trailing" constant="26" id="dPh-OL-MZn"/>
+                                                            <constraint firstItem="p3x-iE-7Ni" firstAttribute="leading" secondItem="Vd0-2J-WQF" secondAttribute="leading" id="gtb-B1-ibD"/>
+                                                            <constraint firstItem="p3x-iE-7Ni" firstAttribute="width" secondItem="Vd0-2J-WQF" secondAttribute="width" id="t22-VP-o0m"/>
+                                                        </constraints>
+                                                    </view>
                                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nk2-zT-JBD">
-                                                        <rect key="frame" x="0.0" y="43" width="295" height="98"/>
+                                                        <rect key="frame" x="0.0" y="107" width="295" height="98"/>
                                                         <subviews>
                                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Let-Fn-BtS">
                                                                 <rect key="frame" x="0.0" y="0.0" width="295" height="44"/>
@@ -125,7 +149,7 @@
                                                         </constraints>
                                                     </view>
                                                     <button opaque="NO" contentMode="scaleToFill" selected="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="iZD-KY-mMp">
-                                                        <rect key="frame" x="0.0" y="168" width="295" height="17"/>
+                                                        <rect key="frame" x="0.0" y="232" width="295" height="17"/>
                                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
                                                         <state key="normal" title="Remember Me" image="check_normal">
                                                             <color key="titleColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -139,7 +163,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JwE-2P-DeR">
-                                                        <rect key="frame" x="0.0" y="212" width="295" height="44"/>
+                                                        <rect key="frame" x="0.0" y="276" width="295" height="44"/>
                                                         <color key="backgroundColor" red="0.30196078431372547" green="0.80784313725490198" blue="0.48627450980392156" alpha="1" colorSpace="calibratedRGB"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="44" id="tsu-rV-SiF"/>
@@ -159,7 +183,7 @@
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8HT-Vh-BAx">
-                                                        <rect key="frame" x="90.5" y="283" width="114" height="29"/>
+                                                        <rect key="frame" x="90.5" y="347" width="114" height="29"/>
                                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
                                                         <state key="normal" title="Forgot password?">
                                                             <color key="titleColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -278,11 +302,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ashdod_logo" width="120" height="120"/>
         <image name="check_normal" width="24" height="24"/>
         <image name="check_selected" width="24" height="24"/>
         <image name="login_bg" width="929" height="247"/>
         <image name="login_password" width="48" height="48"/>
         <image name="login_username" width="48" height="55"/>
+        <image name="logo-gadot" width="2242" height="204"/>
+        <image name="logo_solocate_color" width="320" height="52"/>
     </resources>
 </document>
