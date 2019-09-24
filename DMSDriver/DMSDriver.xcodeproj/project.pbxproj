@@ -1314,6 +1314,7 @@
 		2E1BE34422F14FFD005F9BB5 /* ReturnedItem */ = {
 			isa = PBXGroup;
 			children = (
+				2E47AA592339C5D500B96921 /* RentingOrder */,
 				2E1BE34522F14FFD005F9BB5 /* ReturnedItemListVC */,
 				2E1BE34922F14FFD005F9BB5 /* ReturnedItemDetailVC */,
 			);
@@ -1344,6 +1345,46 @@
 				2E1BE35522F191C4005F9BB5 /* ReturnedItemQuantityCell.swift */,
 			);
 			path = ReturnedItemDetailVC;
+			sourceTree = "<group>";
+		};
+		2E47AA592339C5D500B96921 /* RentingOrder */ = {
+			isa = PBXGroup;
+			children = (
+				2E47AA5A2339C5D500B96921 /* RentingOrderListVC */,
+				2E47AA5C2339C5D500B96921 /* RentingOrderDetail */,
+			);
+			name = RentingOrder;
+			path = DMSDriver/App/ViewControllers/RentingOrder;
+			sourceTree = SOURCE_ROOT;
+		};
+		2E47AA5A2339C5D500B96921 /* RentingOrderListVC */ = {
+			isa = PBXGroup;
+			children = (
+				2E47AA5B2339C5D500B96921 /* Cell */,
+			);
+			path = RentingOrderListVC;
+			sourceTree = "<group>";
+		};
+		2E47AA5B2339C5D500B96921 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		2E47AA5C2339C5D500B96921 /* RentingOrderDetail */ = {
+			isa = PBXGroup;
+			children = (
+				2E47AA5D2339C5D500B96921 /* Cell */,
+			);
+			path = RentingOrderDetail;
+			sourceTree = "<group>";
+		};
+		2E47AA5D2339C5D500B96921 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
 			sourceTree = "<group>";
 		};
 		2E482ACD4DD6945570D21CE8 /* Pods */ = {
