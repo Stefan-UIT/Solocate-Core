@@ -337,6 +337,8 @@
 		2E30BE6722E99A21007419FD /* LoadPackageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E30BE6522E99A21007419FD /* LoadPackageTableViewCell.swift */; };
 		2E42DB592303C8CE004AFD41 /* FilterOrderDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E42DB582303C8CE004AFD41 /* FilterOrderDataViewController.swift */; };
 		2E42DB5A2303C8CE004AFD41 /* FilterOrderDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E42DB582303C8CE004AFD41 /* FilterOrderDataViewController.swift */; };
+		2E47AA562339C22000B96921 /* RentingOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E47AA552339C22000B96921 /* RentingOrder.storyboard */; };
+		2E47AA572339C22000B96921 /* RentingOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E47AA552339C22000B96921 /* RentingOrder.storyboard */; };
 		2E55A3DF22A6523D006F9944 /* NoteManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */; };
 		2E55A3E022A6523D006F9944 /* NoteManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */; };
 		2E57C67A22B8E3CD0064A787 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57C67922B8E3CD0064A787 /* AddNoteViewController.swift */; };
@@ -683,6 +685,7 @@
 		2E1BE35522F191C4005F9BB5 /* ReturnedItemQuantityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnedItemQuantityCell.swift; sourceTree = "<group>"; };
 		2E30BE6522E99A21007419FD /* LoadPackageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadPackageTableViewCell.swift; sourceTree = "<group>"; };
 		2E42DB582303C8CE004AFD41 /* FilterOrderDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOrderDataViewController.swift; sourceTree = "<group>"; };
+		2E47AA552339C22000B96921 /* RentingOrder.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RentingOrder.storyboard; sourceTree = "<group>"; };
 		2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteManagementViewController.swift; sourceTree = "<group>"; };
 		2E57C67922B8E3CD0064A787 /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
 		2E714CDA22B3A44900348B67 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -2362,6 +2365,7 @@
 				3B66B7F8210B113C000BDFEF /* Login.storyboard */,
 				3B66B7F9210B113C000BDFEF /* Task.storyboard */,
 				3B66B7FA210B113C000BDFEF /* Order.storyboard */,
+				2E47AA552339C22000B96921 /* RentingOrder.storyboard */,
 				2E96D05B22C4CEF400DA29C5 /* Loading.storyboard */,
 			);
 			path = Storyboards;
@@ -3445,6 +3449,7 @@
 				2A443B4022648C5A00CB6508 /* ChangePasswordTableViewCell.xib in Resources */,
 				2A443B4122648C5A00CB6508 /* ChangePasswordView.xib in Resources */,
 				2A443B4222648C5A00CB6508 /* FilterDataListHeaderCell.xib in Resources */,
+				2E47AA562339C22000B96921 /* RentingOrder.storyboard in Resources */,
 				2A443B4322648C5A00CB6508 /* ApprovePictureViewController.xib in Resources */,
 				2A443B4422648C5A00CB6508 /* FilterDataListInsertContentCell.xib in Resources */,
 				2A443B4522648C5A00CB6508 /* Assets.xcassets in Resources */,
@@ -3513,6 +3518,7 @@
 				3B66B921210B1149000BDFEF /* ChangePasswordTableViewCell.xib in Resources */,
 				3B66B92A210B1149000BDFEF /* ChangePasswordView.xib in Resources */,
 				3B1629D1221BEA8200E7A83C /* FilterDataListHeaderCell.xib in Resources */,
+				2E47AA572339C22000B96921 /* RentingOrder.storyboard in Resources */,
 				3BF258222224FABB00A56B4E /* ApprovePictureViewController.xib in Resources */,
 				3B4778EF221E4ED1005639E4 /* FilterDataListInsertContentCell.xib in Resources */,
 				3B66B867210B113D000BDFEF /* Assets.xcassets in Resources */,
