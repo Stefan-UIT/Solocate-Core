@@ -102,7 +102,7 @@ class RouteDetailVC: BaseViewController {
         clvContent?.isHidden = true
         initUI()
 //        initFloatButton()
-        handleShowingActionsContainer()
+//        handleShowingActionsContainer()
         setupCollectionView()
         setupScrollMenuView()
     }
@@ -115,12 +115,12 @@ class RouteDetailVC: BaseViewController {
         addNoteButton.layer.masksToBounds = false
     }
     
-    func handleShowingActionsContainer() {
-        actionsViewContainer.isHidden = !isRampManagerMode
-        actionViewContainerHeightConstraint.constant = (isRampManagerMode) ? 50.0 : 0.0
-        menuScrollViewHeightConstraint.constant = (isRampManagerMode) ? 0.0 : 45.0
-        clvContent?.isScrollEnabled = !isRampManagerMode
-    }
+//    func handleShowingActionsContainer() {
+//        actionsViewContainer.isHidden = !isRampManagerMode
+//        actionViewContainerHeightConstraint.constant = (isRampManagerMode) ? 50.0 : 0.0
+//        menuScrollViewHeightConstraint.constant = (isRampManagerMode) ? 0.0 : 45.0
+//        clvContent?.isScrollEnabled = !isRampManagerMode
+//    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -220,14 +220,9 @@ class RouteDetailVC: BaseViewController {
         menuScrollView?.cornerRadiusCell = 10
         menuScrollView?.delegate = self
         menuScrollView?.isHidden = false
-        let dataSource = (isRampManagerMode) ? [orderMode] : [mapMode,orderMode,locationMode]
+        let dataSource = [mapMode,orderMode,locationMode]
         menuScrollView?.dataSource = dataSource
         menuScrollView?.reloadData()
-        if isRampManagerMode {
-            let displayOrders = 1
-            displayMode = RouteDetailDisplayMode(rawValue: displayOrders) ?? .DisplayModeMap
-            scrollToPageSelected(displayOrders)
-        }
     }
     
 //    func hideMenuScrollView() {
@@ -362,9 +357,6 @@ extension RouteDetailVC:UIScrollViewDelegate {
 //MARK: - BaseScrollMenuViewDelegate
 extension RouteDetailVC:BaseScrollMenuViewDelegate{
     func baseScrollMenuViewDidSelectAtIndexPath(_ view: BaseScrollMenuView, _ indexPath: IndexPath) {
-        if isRampManagerMode {
-            return
-        }
         self.view.endEditing(true)
         displayMode = RouteDetailDisplayMode(rawValue: indexPath.row) ?? .DisplayModeMap
         scrollToPageSelected(indexPath.row)
@@ -396,6 +388,7 @@ extension RouteDetailVC:RouteDetailOrderListClvCellDelegate{
         self.clvContent?.isScrollEnabled = false
     }
     
+    
     func didEndEditSearchText() {
         self.clvContent?.isScrollEnabled = true
     }
@@ -407,16 +400,13 @@ extension RouteDetailVC{
     
     func updateActionsUI() {
         guard let _route = route else { return }
-        assignDriverButtonView.isHidden = _route.isAssignedDriver
-        assignTruckButtonView.isHidden = _route.isAssignedTruck
+        assignDriverButtonView.isHidden = true
+        assignTruckButtonView.isHidden = true
         vanLoadButtonView.isHidden = !_route.isHasOrderNeedToBeLoaded
         
         let shouldHideActionsContainer = (assignDriverButtonView.isHidden && assignTruckButtonView.isHidden && vanLoadButtonView.isHidden)
-        if shouldHideActionsContainer {
-            actionsViewContainer.isHidden = shouldHideActionsContainer
-            actionViewContainerHeightConstraint.constant = 0.0
-        }
-
+        actionsViewContainer.isHidden = shouldHideActionsContainer
+        actionViewContainerHeightConstraint.constant = shouldHideActionsContainer ? 0.0 : 50.0
     }
     
     @objc func fetchData()  {
@@ -440,10 +430,10 @@ extension RouteDetailVC{
                 strongSelf.clvContent?.isHidden = false
                 strongSelf.clvContent?.reloadData()
                 strongSelf.initUI()
-                if isRampManagerMode {
+//                if isRampManagerMode {
                     strongSelf.updateActionsUI()
-                    strongSelf.setupScrollMenuView()
-                }
+//                    strongSelf.setupScrollMenuView()
+//                }
                 /*
                  guard let data = obj.data else {return}
                  CoreDataManager.updateRoute(data) // Update route to DB local

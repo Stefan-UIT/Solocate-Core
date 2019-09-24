@@ -785,12 +785,6 @@ fileprivate extension OrderDetailViewController {
         let isShowingOnly = order.isDeliveryType && (order.statusOrder == StatusOrder.newStatus || order.statusOrder == StatusOrder.Loaded || order.statusOrder == StatusOrder.PartialLoaded || order.statusOrder == StatusOrder.WarehouseClarification || order.statusOrder == StatusOrder.CancelStatus)
         
         func handleEnablingTextField() {
-            if isRampManagerMode {
-                cell.actualQuantityTextField?.isEnabled = false
-                cell.actualCartonsInPalletTextField?.isEnabled = false
-                return
-            }
-            
             if order.isDeliveryType {
                 let isEnabled = order.statusOrder == StatusOrder.InTransit
                 cell.actualQuantityTextField?.isEnabled = isEnabled
@@ -1169,12 +1163,11 @@ fileprivate extension OrderDetailViewController{
         }
         let isFinishedAndNotPalletType = ((orderDetail?.statusOrder == StatusOrder.deliveryStatus || orderDetail?.statusOrder == StatusOrder.PartialDelivered) && !(orderDetail?.details?[0].isPallet)!)
         let isFinishedAndUpdatedReturnedPalletsQty = (_order.isFinished && orderDetail?.details?.first?.returnedPalletQty != nil)
-        let isRampManagerAndNotNewOrder = (isRampManagerMode && orderDetail?.statusOrder != StatusOrder.newStatus)
         
         let isNotAllowedToGoToDelivery = _order.isLoaded && !_route.isAllowedGoToDelivery
         
         let isHidden = ( orderDetail?.statusOrder == StatusOrder.CancelStatus ||
-            orderDetail?.statusOrder == StatusOrder.UnableToFinish || isFinishedAndNotPalletType || isFinishedAndUpdatedReturnedPalletsQty || isRampManagerAndNotNewOrder || isNotAllowedToGoToDelivery)
+            orderDetail?.statusOrder == StatusOrder.UnableToFinish || isFinishedAndNotPalletType || isFinishedAndUpdatedReturnedPalletsQty || isNotAllowedToGoToDelivery)
         
         updateStatusButton?.isHidden = isHidden
         copyUpdateStatusButton()
@@ -1213,7 +1206,7 @@ fileprivate extension OrderDetailViewController{
             return
         }
 
-        let isHidden = (_order.isCancelled || _order.isFinished || isRampManagerMode)
+        let isHidden = (_order.isCancelled || _order.isFinished)
         
         updateStatusButton?.isHidden = isHidden
         copyUpdateStatusButton()

@@ -30,7 +30,8 @@ extension BaseAPIService {
         let endDate = DateFormatter.filterDate.string(from: filterMode.timeData?.endDate ?? Date())
         let status = filterMode.status
         
-        let urlString = (isRampManagerMode) ? PATH_REQUEST_URL.GET_RAMP_ROUTES_BY_DATE.URL : PATH_REQUEST_URL.GET_DRIVER_ROUTES_BY_DATE.URL
+//        let urlString = (isRampManagerMode) ? PATH_REQUEST_URL.GET_RAMP_ROUTES_BY_DATE.URL : PATH_REQUEST_URL.GET_DRIVER_ROUTES_BY_DATE.URL
+        let urlString = PATH_REQUEST_URL.GET_DRIVER_ROUTES_BY_DATE.URL
         var path = String(format: urlString,startDate,endDate)
         if let _statusId = status?.id {
             path = path + "&status_id=\(_statusId)"
