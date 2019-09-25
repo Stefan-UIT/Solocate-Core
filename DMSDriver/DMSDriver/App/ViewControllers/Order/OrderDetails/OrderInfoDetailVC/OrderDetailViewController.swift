@@ -361,9 +361,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         case StatusOrder.newStatus.rawValue:
             showReasonView(isUnableToFinish: false)
             break
-        case StatusOrder.deliveryStatus.rawValue, StatusOrder.PartialDelivered.rawValue:
-            showPalletReturnedPopUp()
-            break
+//        case StatusOrder.deliveryStatus.rawValue, StatusOrder.PartialDelivered.rawValue:
+//            showPalletReturnedPopUp()
+//            break
             
         case StatusOrder.Loaded.rawValue, StatusOrder.PartialLoaded.rawValue:
             App().showAlertView("do-you-want-to-start-this-order".localized,
@@ -733,11 +733,11 @@ fileprivate extension OrderDetailViewController {
         cell.lblPackgage?.text = paRefId
         cell.loadedQuantityLabel?.text = IntSlash(detail.loadedQty)
         cell.loadedQuantityLabel?.textColor = AppColor.greenColor
-        cell.loadedCartonsLabel?.text = IntSlash(detail.loadedCartonsInPallet)
-        cell.loadedCartonsLabel?.textColor = AppColor.greenColor
-        cell.returnedPalletsLabel?.text = IntSlash(detail.returnedPalletQty)
+//        cell.loadedCartonsLabel?.text = IntSlash(detail.loadedCartonsInPallet)
+//        cell.loadedCartonsLabel?.textColor = AppColor.greenColor
+//        cell.returnedPalletsLabel?.text = IntSlash(detail.returnedPalletQty)
         cell.loadedPickUpLabel.text = "\(detail.loadedQty ?? 0)"
-        cell.loadedPickUpCartonsLabel.text = "\(detail.loadedCartonsInPallet ?? 0)"
+//        cell.loadedPickUpCartonsLabel.text = "\(detail.loadedCartonsInPallet ?? 0)"
         
         let isPickUpAndNewOrder = order.isPickUpType && order.isNewStatus
         var actualQty:String!
@@ -1161,13 +1161,13 @@ fileprivate extension OrderDetailViewController{
             updateStatusButton?.setTitle("go-to-delivery".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = AppColor.greenColor
         }
-        let isFinishedAndNotPalletType = ((orderDetail?.statusOrder == StatusOrder.deliveryStatus || orderDetail?.statusOrder == StatusOrder.PartialDelivered) && !(orderDetail?.details?[0].isPallet)!)
-        let isFinishedAndUpdatedReturnedPalletsQty = (_order.isFinished && orderDetail?.details?.first?.returnedPalletQty != nil)
+//        let isFinishedAndNotPalletType = ((orderDetail?.statusOrder == StatusOrder.deliveryStatus || orderDetail?.statusOrder == StatusOrder.PartialDelivered) && !(orderDetail?.details?[0].isPallet)!)
+//        let isFinishedAndUpdatedReturnedPalletsQty = (_order.isFinished && orderDetail?.details?.first?.returnedPalletQty != nil)
         
         let isNotAllowedToGoToDelivery = _order.isLoaded && !_route.isAllowedGoToDelivery
         
-        let isHidden = ( orderDetail?.statusOrder == StatusOrder.CancelStatus ||
-            orderDetail?.statusOrder == StatusOrder.UnableToFinish || isFinishedAndNotPalletType || isFinishedAndUpdatedReturnedPalletsQty || isNotAllowedToGoToDelivery)
+//        let isHidden = ( orderDetail?.isCancelled || orderDetail?.isFinished || isFinishedAndNotPalletType || isFinishedAndUpdatedReturnedPalletsQty || isNotAllowedToGoToDelivery)
+        let isHidden = _order.isCancelled || _order.isFinished || isNotAllowedToGoToDelivery
         
         updateStatusButton?.isHidden = isHidden
         copyUpdateStatusButton()
