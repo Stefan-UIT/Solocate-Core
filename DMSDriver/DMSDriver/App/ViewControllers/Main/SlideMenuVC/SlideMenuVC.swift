@@ -183,7 +183,8 @@ extension SlideMenuVC:UITableViewDelegate{
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
             
         case .RENTINGORDERS:
-            let vc:AssignOrderVC = .loadSB(SB: .Order)
+//            let vc:AssignOrderVC = .loadSB(SB: .Order)
+            let vc:RentingOrderListVC = .loadSB(SB: .RentingOrder)
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
     
         case .TASK:
