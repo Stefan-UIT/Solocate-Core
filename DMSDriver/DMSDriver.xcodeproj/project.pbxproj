@@ -360,6 +360,8 @@
 		2E96D06122C4CFED00DA29C5 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96D05F22C4CFED00DA29C5 /* LoadingViewController.swift */; };
 		2E9E08A622A8FDA4005E420C /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */; };
 		2E9E08A722A8FDA4005E420C /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */; };
+		2EF1AAD9233B745700689A87 /* OrderDetailSKUCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1AAD8233B745700689A87 /* OrderDetailSKUCell.swift */; };
+		2EF1AADA233B745700689A87 /* OrderDetailSKUCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1AAD8233B745700689A87 /* OrderDetailSKUCell.swift */; };
 		2EF35D7F22EEAB3100131D33 /* AssignDriverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF35D7E22EEAB3100131D33 /* AssignDriverTableViewCell.swift */; };
 		2EF35D8022EEAB3100131D33 /* AssignDriverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF35D7E22EEAB3100131D33 /* AssignDriverTableViewCell.swift */; };
 		2EF35D8222EEAC3C00131D33 /* AssignDriverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF35D8122EEAC3C00131D33 /* AssignDriverViewController.swift */; };
@@ -695,6 +697,7 @@
 		2E96D05F22C4CFED00DA29C5 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		2E98332D22D6F17200386992 /* DMSDriver-Dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "DMSDriver-Dev.entitlements"; sourceTree = "<group>"; };
 		2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
+		2EF1AAD8233B745700689A87 /* OrderDetailSKUCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailSKUCell.swift; sourceTree = "<group>"; };
 		2EF35D7E22EEAB3100131D33 /* AssignDriverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignDriverTableViewCell.swift; sourceTree = "<group>"; };
 		2EF35D8122EEAC3C00131D33 /* AssignDriverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignDriverViewController.swift; sourceTree = "<group>"; };
 		2EF35D8522EED4DF00131D33 /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
@@ -1767,6 +1770,7 @@
 			isa = PBXGroup;
 			children = (
 				3B66B897210B1148000BDFEF /* OrderDetailTableViewCell.swift */,
+				2EF1AAD8233B745700689A87 /* OrderDetailSKUCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -3763,6 +3767,7 @@
 				2A443A7C22648C5A00CB6508 /* ChangePasswordTableViewCell.swift in Sources */,
 				2A443A7D22648C5A00CB6508 /* LogoutTableViewCell.swift in Sources */,
 				2A443A7E22648C5A00CB6508 /* OrderDetailMapViewController.swift in Sources */,
+				2EF1AAD9233B745700689A87 /* OrderDetailSKUCell.swift in Sources */,
 				2A443A7F22648C5A00CB6508 /* String.swift in Sources */,
 				2A443A8022648C5A00CB6508 /* AppDelegate.swift in Sources */,
 				2A443A8122648C5A00CB6508 /* RESTConstants.swift in Sources */,
@@ -4021,6 +4026,7 @@
 				3B66B922210B1149000BDFEF /* ChangePasswordTableViewCell.swift in Sources */,
 				3B66B923210B1149000BDFEF /* LogoutTableViewCell.swift in Sources */,
 				3B66B907210B1149000BDFEF /* OrderDetailMapViewController.swift in Sources */,
+				2EF1AADA233B745700689A87 /* OrderDetailSKUCell.swift in Sources */,
 				3B66B809210B113D000BDFEF /* String.swift in Sources */,
 				3B66B91F210B1149000BDFEF /* AppDelegate.swift in Sources */,
 				3B66B84B210B113D000BDFEF /* RESTConstants.swift in Sources */,

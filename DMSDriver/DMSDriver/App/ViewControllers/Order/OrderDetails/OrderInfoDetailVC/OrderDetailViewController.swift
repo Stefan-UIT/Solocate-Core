@@ -57,6 +57,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     fileprivate var orderCODInfo = [OrderDetailInforRow]()
     fileprivate var orderInforNatureOfGoods = [OrderDetailInforRow]()
     fileprivate let cellIdentifier = "OrderDetailTableViewCell"
+    fileprivate let cellSKUInfoIdentifier = "OrderDetailSKUCell"
     fileprivate let headerCellIdentifier = "OrderDetailHeaderCell"
     fileprivate let addressCellIdentifier =  "OrderDetailAddressCell"
     fileprivate let orderDropdownCellIdentifier = "OrderDetailDropdownCell"
@@ -600,7 +601,8 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         case .sectionCOD:
             return cellCODInfo(tableView,indexPath)
         case .sectionNatureOfGoods:
-            return cellNatureOfGood(tableView,indexPath)
+            //return cellNatureOfGood(tableView,indexPath)
+            return cellSKUsInfoSection(tableView, indexPath)
         case .sectionSignature:
             return cellSignature(tableView, indexPath)
         case .sectionPictures:
@@ -717,6 +719,20 @@ fileprivate extension OrderDetailViewController {
         }
         return cell
   
+    }
+    
+    func cellSKUsInfoSection(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellSKUInfoIdentifier, for: indexPath) as! OrderDetailSKUCell
+        cell.selectionStyle = .none
+        guard let order = orderDetail, let detail = order.details?[indexPath.row] else { return cell }
+        
+        cell.configureCell(detail: detail)
+        cell.vContent?.cornerRadius = 0
+        if indexPath.row == order.details!.count - 1{
+            cell.vContent?.roundCornersLRB()
+        }
+        return cell
+        
     }
     
     func cellNatureOfGood(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
