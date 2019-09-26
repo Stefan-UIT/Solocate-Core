@@ -19,8 +19,10 @@ class LoadUnloadOrderVC: BaseViewController {
     private var strSearch:String?
     private let cellContentIdentifier = "LoadUnLoadListCell"
     private let loadPackageCellIdentifier = "LoadPackageTableViewCell"
+    private let loadSKUIdentifier = "LoadOrderDetailSKUCell"
     private var dataOrigin:[Order.Detail] = []
     private var dataDisplay:[Order.Detail] = []
+    private var dataOrderDisplay:[Order] = []
 
     var callback:LoadUnloadOrderVCCallback?
     
@@ -74,6 +76,7 @@ class LoadUnloadOrderVC: BaseViewController {
     func getAllDetailsFromOrders() -> [Order.Detail]{
         var details:[Order.Detail] = []
         for value in ordersAbleToLoad {
+            dataOrderDisplay.append(value)
             details.append(value.details ?? [])
         }
         return details
@@ -117,6 +120,13 @@ extension LoadUnloadOrderVC: LoadPackageTableViewCellDelegate {
         submitLoadedQuantity(detail: detail)
     }
     
+}
+
+extension LoadUnloadOrderVC: LoadOrderDetailSKUTableViewCellDelete {
+    func didEnterDeliveredQuantityTextField(_ cell: LoadOrderDetailSKUTableViewCell, value: String, detail: Order.Detail) {
+        selectedDetail = detail
+        submitLoadedQuantity(detail: detail)
+    }
 }
 
 extension LoadUnloadOrderVC {
@@ -202,11 +212,10 @@ extension LoadUnloadOrderVC:UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let detail = dataDisplay[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: loadPackageCellIdentifier, for: indexPath) as! LoadPackageTableViewCell
-        guard let order = orderWithDetail(detail) else { return UITableViewCell() }
-        cell.configureCellWithOrder(order)
+        let order = dataOrderDisplay[indexPath.row]
+        let cell = tableView.dequeueReusableCell(withIdentifier: loadSKUIdentifier, for: indexPath) as! LoadOrderDetailSKUTableViewCell
+        cell.configureCell(detail: detail, order: order)
         cell.delegate = self
-        
         return cell
     }
 }
