@@ -232,6 +232,7 @@ class Order: BaseModel {
         }
         
         var id:Int?
+        var name:String?
         var order_id:Int?
         var package_id:Int?
         var package:Package?
@@ -330,16 +331,8 @@ class Order: BaseModel {
         func getLoadedStatusWithLoadingQuantity() -> StatusOrder {
             if let loadedQty = self.loadedQty, let qty = self.qty {
                 if loadedQty != qty {
-                    return StatusOrder.WarehouseClarification
+                    return StatusOrder.PartialLoaded
                 }
-                
-//                if (self.isPallet) {
-//                    if let loadedCartons = self.loadedCartonsInPallet, let cartons = self.cartonsInPallet {
-//                        if loadedCartons != cartons {
-//                            return StatusOrder.WarehouseClarification
-//                        }
-//                    }
-//                }
             }
             
             return StatusOrder.Loaded
@@ -350,13 +343,6 @@ class Order: BaseModel {
                 if actualQty != qty {
                     return StatusOrder.PartialDelivered
                 }
-//                if (self.isPallet) {
-//                    if let actualCartons = self.actualCartonsInPallet, let cartons = self.cartonsInPallet {
-//                        if actualCartons != cartons {
-//                            return StatusOrder.PartialDelivered
-//                        }
-//                    }
-//                }
             }
             
             return StatusOrder.deliveryStatus
@@ -406,7 +392,13 @@ class Order: BaseModel {
     var order_type_name_hb = ""
     var order_type_name = ""
     var reason_msg:String?
-    var custumer_name = ""
+    var customer_name:String {
+        get {
+            var fullname = ""
+            fullname = (customer?.lastName ?? "") + " " + (customer?.firstName ?? "")
+            return fullname
+        }
+    }
     var doubleType = -1
     var orderReference = ""
     var packages = 0
