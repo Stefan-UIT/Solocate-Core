@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol OrderDetailSKUCellDelegate:class {
+    func didEnterDeliveredQuantityTextField(_ cell:OrderDetailSKUCell, value:String, detail:Order.Detail)
+}
+
 class OrderDetailSKUCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
@@ -16,8 +20,10 @@ class OrderDetailSKUCell: UITableViewCell {
     @IBOutlet weak var loadedQtyViewContainer: UIView!
     @IBOutlet weak var loadedQtyHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var deliveredQtyTextField: UITextField!
-    
+    var detail:Order.Detail!
     @IBOutlet weak var vContent: UIView!
+    
+    weak var delegate:OrderDetailSKUCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -30,6 +36,7 @@ class OrderDetailSKUCell: UITableViewCell {
     }
     
     func configureCell(detail:Order.Detail) {
+        self.detail = detail
         nameLabel.text = detail.package?.name
         quantityLabel.text = IntSlash(detail.qty)
         if let loadedQty = detail.loadedQty {
@@ -41,4 +48,19 @@ class OrderDetailSKUCell: UITableViewCell {
         }
     }
 
+}
+
+extension OrderDetailSKUCell: UITextFieldDelegate {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        if let text = textField.text,
+            let textRange = Range(range, in: text) {
+            let updatedText = text.replacingCharacters(in: textRange,
+                                                       with: string)
+            guard let actualTextField = deliveredQtyTextField else { return true }
+            if textField == actualTextField {
+                delegate?.didEnterDeliveredQuantityTextField(self, value: updatedText, detail: self.detail)
+            }
+        }
+        return true
+    }
 }

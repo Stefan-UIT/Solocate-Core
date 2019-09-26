@@ -128,7 +128,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                           "pickup".localized.uppercased(),
                           "Delivery".localized.uppercased(),
                           "COD".localized.uppercased(),
-                          "packgages".localized.uppercased(),
+                          "SKUs".localized.uppercased(),
                           "Signature".localized.uppercased(),
                           "Picture".localized.uppercased(),
 //                          "add-note".localized.uppercased()
@@ -725,7 +725,7 @@ fileprivate extension OrderDetailViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellSKUInfoIdentifier, for: indexPath) as! OrderDetailSKUCell
         cell.selectionStyle = .none
         guard let order = orderDetail, let detail = order.details?[indexPath.row] else { return cell }
-        
+        cell.delegate = self
         cell.configureCell(detail: detail)
         cell.vContent?.cornerRadius = 0
         if indexPath.row == order.details!.count - 1{
@@ -946,6 +946,23 @@ extension OrderDetailViewController:DMSNavigationServiceDelegate {
     
     func didSelectedBackAction() {
         popViewController()
+    }
+}
+
+//MARK: - OrderDetailSKUCellDelegate
+extension OrderDetailViewController: OrderDetailSKUCellDelegate {
+    func didEnterDeliveredQuantityTextField(_ cell: OrderDetailSKUCell, value: String, detail: Order.Detail) {
+        guard let _order = orderDetail else { return }
+        let inputQty = Int(value)
+        if _order.isDeliveryType {
+            detail.actualQty = inputQty
+        } else {
+            if _order.isNewStatus {
+                detail.loadedQty = inputQty
+            } else {
+                detail.actualQty = inputQty
+            }
+        }
     }
 }
 

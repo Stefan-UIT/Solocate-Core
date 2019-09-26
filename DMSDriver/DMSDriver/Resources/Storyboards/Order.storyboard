@@ -1544,7 +1544,7 @@
                                                 <rect key="frame" x="0.0" y="649.5" width="375" height="93"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mlJ-Zq-0kN" id="Rdl-hw-UcP">
-                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="92.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="93"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I2T-t3-AKc">
@@ -2217,7 +2217,7 @@
                                                                                     </userDefinedRuntimeAttributes>
                                                                                 </label>
                                                                                 <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="right" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="fXH-oi-aiv">
-                                                                                    <rect key="frame" x="237" y="15" width="80" height="26"/>
+                                                                                    <rect key="frame" x="242" y="15" width="80" height="26"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="26" id="WTs-lH-gUm"/>
                                                                                         <constraint firstAttribute="width" constant="80" id="mFq-or-tPK"/>
@@ -2233,7 +2233,7 @@
                                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="6Fd-7u-ZU9"/>
                                                                                 <constraint firstItem="fqf-ke-mD0" firstAttribute="leading" secondItem="F8g-Bd-9fM" secondAttribute="leading" id="TNR-v1-Af4"/>
                                                                                 <constraint firstItem="fXH-oi-aiv" firstAttribute="centerY" secondItem="fqf-ke-mD0" secondAttribute="centerY" id="esF-oL-o6N"/>
-                                                                                <constraint firstAttribute="trailing" secondItem="fXH-oi-aiv" secondAttribute="trailing" constant="-2" id="tsP-Mq-0mU"/>
+                                                                                <constraint firstAttribute="trailing" secondItem="fXH-oi-aiv" secondAttribute="trailing" constant="-7" id="tsP-Mq-0mU"/>
                                                                             </constraints>
                                                                         </view>
                                                                     </subviews>
