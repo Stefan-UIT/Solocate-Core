@@ -110,6 +110,7 @@ class RentingOrderDetailVC: BaseViewController {
     override func updateUI()  {
         super.updateUI()
         self.updateStatusButtonView()
+        tbvContent?.reloadData()
     }
     
     func initVar() {
@@ -152,11 +153,9 @@ class RentingOrderDetailVC: BaseViewController {
         case .START_RENTING_ORDER:
             rentingOrder?.rentingStatus = StatusRentingOrder(rawValue: "IP")
             updateUI()
-            tbvContent?.reloadData()
         case .FINISH_RENTING_ORDER:
             rentingOrder?.rentingStatus = StatusRentingOrder(rawValue: "DV")
             updateUI()
-            tbvContent?.reloadData()
         }
         
     }
