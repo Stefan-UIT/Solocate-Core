@@ -407,7 +407,13 @@ class Order: BaseModel {
     var order_type_name_hb = ""
     var order_type_name = ""
     var reason_msg:String?
-    var custumer_name = ""
+    var customer_name:String {
+        get {
+            var fullname = ""
+            fullname = (customer?.lastName ?? "") + " " + (customer?.firstName ?? "")
+            return fullname
+        }
+    }
     var doubleType = -1
     var orderReference = ""
     var packages = 0

@@ -634,6 +634,8 @@
 		760B209E23068F7500E96A12 /* CoreRouteStatus+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760B209C23068F7500E96A12 /* CoreRouteStatus+Ext.swift */; };
 		760C0A98233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C0A97233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift */; };
 		760C0A99233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C0A97233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift */; };
+		760C46FD233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C46FC233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift */; };
+		760C46FE233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C46FC233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift */; };
 		76BFFD6C2339D8B50021E01A /* RentingOrderListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD6B2339D8B50021E01A /* RentingOrderListVC.swift */; };
 		76BFFD6D2339D8B50021E01A /* RentingOrderListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD6B2339D8B50021E01A /* RentingOrderListVC.swift */; };
 		76BFFD6F2339F4660021E01A /* RentingOrderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD6E2339F4660021E01A /* RentingOrderListTableViewCell.swift */; };
@@ -1159,6 +1161,7 @@
 		6BF942DD28D96E7B083B3DD5 /* Pods-Ashdod Live.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ashdod Live.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ashdod Live/Pods-Ashdod Live.debug.xcconfig"; sourceTree = "<group>"; };
 		760B209C23068F7500E96A12 /* CoreRouteStatus+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreRouteStatus+Ext.swift"; sourceTree = "<group>"; };
 		760C0A97233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderDetailTableViewCell.swift; sourceTree = "<group>"; };
+		760C46FC233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOrderDetailSKUTableViewCell.swift; sourceTree = "<group>"; };
 		76BFFD6B2339D8B50021E01A /* RentingOrderListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderListVC.swift; sourceTree = "<group>"; };
 		76BFFD6E2339F4660021E01A /* RentingOrderListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderListTableViewCell.swift; sourceTree = "<group>"; };
 		76BFFD732339F62D0021E01A /* RentingOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrder.swift; sourceTree = "<group>"; };
@@ -1223,6 +1226,7 @@
 			children = (
 				2E30BE6522E99A21007419FD /* LoadPackageTableViewCell.swift */,
 				185FC767228D104B00B085BC /* LoadUnLoadListCell.swift */,
+				760C46FC233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -3959,6 +3963,7 @@
 				2E96D06022C4CFED00DA29C5 /* LoadingViewController.swift in Sources */,
 				2A443ADD22648C5A00CB6508 /* HistoryNotifyVC.swift in Sources */,
 				2EF35D7F22EEAB3100131D33 /* AssignDriverTableViewCell.swift in Sources */,
+				760C46FD233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift in Sources */,
 				2A443ADE22648C5A00CB6508 /* UISearchBar+Extensions.swift in Sources */,
 				2A443ADF22648C5A00CB6508 /* UITableView-Extensions.swift in Sources */,
 				2E8AA24A22D5D4A3008FC3A5 /* NSString+SDString.m in Sources */,
@@ -4223,6 +4228,7 @@
 				2E96D06122C4CFED00DA29C5 /* LoadingViewController.swift in Sources */,
 				3B7695EA21CA20A70032B142 /* HistoryNotifyVC.swift in Sources */,
 				2EF35D8022EEAB3100131D33 /* AssignDriverTableViewCell.swift in Sources */,
+				760C46FE233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift in Sources */,
 				3B66B828210B113D000BDFEF /* UISearchBar+Extensions.swift in Sources */,
 				3B66B811210B113D000BDFEF /* UITableView-Extensions.swift in Sources */,
 				3B66B8E2210B1149000BDFEF /* Message.swift in Sources */,
