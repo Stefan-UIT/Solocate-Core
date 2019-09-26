@@ -23,10 +23,16 @@ class OrderDetailSKUCell: UITableViewCell {
     var detail:Order.Detail!
     @IBOutlet weak var vContent: UIView!
     
+    @IBOutlet weak var deliveredQtyStaticLabel: UILabel!
+    
+    @IBOutlet weak var deliveredQtyHeightConstraint: NSLayoutConstraint!
+    
+    @IBOutlet weak var deliveredQtyViewContainer: UIView!
     weak var delegate:OrderDetailSKUCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        deliveredQtyTextField.delegate = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -35,16 +41,64 @@ class OrderDetailSKUCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCell(detail:Order.Detail) {
+    func configureCell(detail:Order.Detail, order:Order) {
         self.detail = detail
         nameLabel.text = detail.package?.name
         quantityLabel.text = IntSlash(detail.qty)
+        
+        updateDeliverdQtyUI(order: order)
+        updateLoadedQtyUI()
+        handleDisablingTextField(order:order)
+        updateDeliveredTextFieldValue(order: order)
+    }
+    
+    func updateDeliveredTextFieldValue(order:Order) {
+        let isPickUpAndNewOrder = order.isPickUpType && order.isNewStatus
+        var actualQty:String!
+        if order.isCancelled {
+            actualQty = "0"
+        } else {
+            actualQty = (isPickUpAndNewOrder) ? "\(detail.loadedQty ?? 0)" : "\(detail.actualQty ?? 0)"
+        }
+        deliveredQtyTextField.text = actualQty
+    }
+    
+    func handleDisablingTextField(order:Order) {
+        var isDisabled:Bool!
+        if order.isPickUpType {
+            isDisabled = order.isCancelled || order.isFinished
+        } else {
+            isDisabled = !order.isInTransit
+        }
+        deliveredQtyTextField.isEnabled = !isDisabled
+    }
+    
+    func updateDeliverdQtyUI(order:Order) {
+        if order.isPickUpType {
+            deliveredQtyStaticLabel?.text = (order.isNewStatus) ? "picked-up-quantity".localized : "delivered-quantity".localized
+        } else {
+            let isHidden = order.isNewStatus || order.isLoaded
+            deliveryQtyViewContainer(isHidden: isHidden)
+        }
+    }
+    
+    func deliveryQtyViewContainer(isHidden:Bool) {
+        deliveredQtyHeightConstraint.constant = isHidden ? 0.0 : 25.0
+        deliveredQtyViewContainer.isHidden = isHidden
+    }
+    
+    func loadedQtyViewContainer(isHidden:Bool) {
+        loadedQtyHeightConstraint.constant = isHidden ? 0.0 : 22.0
+        loadedQtyViewContainer.isHidden = isHidden
+    }
+    
+    func updateLoadedQtyUI() {
         if let loadedQty = detail.loadedQty {
             loadedQtyLabel.text = "\(loadedQty)"
-            loadedQtyHeightConstraint.constant = 22.0
+            loadedQtyViewContainer(isHidden:false)
         } else {
             // remove loadedQty record
-            loadedQtyHeightConstraint.constant = 0.0
+            loadedQtyViewContainer(isHidden:true)
         }
     }
 
