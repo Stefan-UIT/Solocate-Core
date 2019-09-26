@@ -337,6 +337,8 @@
 		2E30BE6722E99A21007419FD /* LoadPackageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E30BE6522E99A21007419FD /* LoadPackageTableViewCell.swift */; };
 		2E42DB592303C8CE004AFD41 /* FilterOrderDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E42DB582303C8CE004AFD41 /* FilterOrderDataViewController.swift */; };
 		2E42DB5A2303C8CE004AFD41 /* FilterOrderDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E42DB582303C8CE004AFD41 /* FilterOrderDataViewController.swift */; };
+		2E47AA562339C22000B96921 /* RentingOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E47AA552339C22000B96921 /* RentingOrder.storyboard */; };
+		2E47AA572339C22000B96921 /* RentingOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E47AA552339C22000B96921 /* RentingOrder.storyboard */; };
 		2E55A3DF22A6523D006F9944 /* NoteManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */; };
 		2E55A3E022A6523D006F9944 /* NoteManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */; };
 		2E57C67A22B8E3CD0064A787 /* AddNoteViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E57C67922B8E3CD0064A787 /* AddNoteViewController.swift */; };
@@ -630,6 +632,16 @@
 		3BF838D5218976B30056C4F1 /* RouteListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B00D04F2151F9D700B0B062 /* RouteListVC.swift */; };
 		760B209D23068F7500E96A12 /* CoreRouteStatus+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760B209C23068F7500E96A12 /* CoreRouteStatus+Ext.swift */; };
 		760B209E23068F7500E96A12 /* CoreRouteStatus+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760B209C23068F7500E96A12 /* CoreRouteStatus+Ext.swift */; };
+		760C0A98233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C0A97233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift */; };
+		760C0A99233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C0A97233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift */; };
+		76BFFD6C2339D8B50021E01A /* RentingOrderListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD6B2339D8B50021E01A /* RentingOrderListVC.swift */; };
+		76BFFD6D2339D8B50021E01A /* RentingOrderListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD6B2339D8B50021E01A /* RentingOrderListVC.swift */; };
+		76BFFD6F2339F4660021E01A /* RentingOrderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD6E2339F4660021E01A /* RentingOrderListTableViewCell.swift */; };
+		76BFFD702339F4660021E01A /* RentingOrderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD6E2339F4660021E01A /* RentingOrderListTableViewCell.swift */; };
+		76BFFD742339F62D0021E01A /* RentingOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD732339F62D0021E01A /* RentingOrder.swift */; };
+		76BFFD752339F62D0021E01A /* RentingOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD732339F62D0021E01A /* RentingOrder.swift */; };
+		76BFFD77233A0CFC0021E01A /* RentingOrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD76233A0CFC0021E01A /* RentingOrderDetailVC.swift */; };
+		76BFFD78233A0CFC0021E01A /* RentingOrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD76233A0CFC0021E01A /* RentingOrderDetailVC.swift */; };
 		BE122D51C94BA19BBECA247E /* Pods_Ashdod_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78467D145BAF1922F4EBBF6 /* Pods_Ashdod_Dev.framework */; };
 		C73D9D55226DA17900452A0C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C73D9D54226DA17900452A0C /* GoogleService-Info.plist */; };
 		C73D9D56226DA17900452A0C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C73D9D54226DA17900452A0C /* GoogleService-Info.plist */; };
@@ -685,6 +697,7 @@
 		2E1BE35522F191C4005F9BB5 /* ReturnedItemQuantityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnedItemQuantityCell.swift; sourceTree = "<group>"; };
 		2E30BE6522E99A21007419FD /* LoadPackageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadPackageTableViewCell.swift; sourceTree = "<group>"; };
 		2E42DB582303C8CE004AFD41 /* FilterOrderDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOrderDataViewController.swift; sourceTree = "<group>"; };
+		2E47AA552339C22000B96921 /* RentingOrder.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RentingOrder.storyboard; sourceTree = "<group>"; };
 		2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteManagementViewController.swift; sourceTree = "<group>"; };
 		2E57C67922B8E3CD0064A787 /* AddNoteViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNoteViewController.swift; sourceTree = "<group>"; };
 		2E714CDA22B3A44900348B67 /* ImageCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1145,6 +1158,11 @@
 		6406D038FB02DBF80C11EACD /* Pods-DMSDriver-Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver-Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev.release.xcconfig"; sourceTree = "<group>"; };
 		6BF942DD28D96E7B083B3DD5 /* Pods-Ashdod Live.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ashdod Live.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ashdod Live/Pods-Ashdod Live.debug.xcconfig"; sourceTree = "<group>"; };
 		760B209C23068F7500E96A12 /* CoreRouteStatus+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreRouteStatus+Ext.swift"; sourceTree = "<group>"; };
+		760C0A97233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderDetailTableViewCell.swift; sourceTree = "<group>"; };
+		76BFFD6B2339D8B50021E01A /* RentingOrderListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderListVC.swift; sourceTree = "<group>"; };
+		76BFFD6E2339F4660021E01A /* RentingOrderListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderListTableViewCell.swift; sourceTree = "<group>"; };
+		76BFFD732339F62D0021E01A /* RentingOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrder.swift; sourceTree = "<group>"; };
+		76BFFD76233A0CFC0021E01A /* RentingOrderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderDetailVC.swift; sourceTree = "<group>"; };
 		79FCA8992A46E175D52FF7F3 /* Pods-Ashdod Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ashdod Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ashdod Dev/Pods-Ashdod Dev.debug.xcconfig"; sourceTree = "<group>"; };
 		7AAB4633DDF72A60B133B3E5 /* Pods-DMSDriver-Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver-Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev.debug.xcconfig"; sourceTree = "<group>"; };
 		9B8D9F73312991A219DA0D95 /* Pods-DMSDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2366,6 +2384,7 @@
 				3B66B7F8210B113C000BDFEF /* Login.storyboard */,
 				3B66B7F9210B113C000BDFEF /* Task.storyboard */,
 				3B66B7FA210B113C000BDFEF /* Order.storyboard */,
+				2E47AA552339C22000B96921 /* RentingOrder.storyboard */,
 				2E96D05B22C4CEF400DA29C5 /* Loading.storyboard */,
 			);
 			path = Storyboards;
@@ -2395,6 +2414,7 @@
 		3B66B86B210B1148000BDFEF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				76BFFD722339F60F0021E01A /* RentingOrderModel */,
 				2E920A7122EFFBC6000AD8EF /* Truck */,
 				2EF35D8422EED4D400131D33 /* Driver */,
 				2E96D05322C4C81300DA29C5 /* LanguageModel */,
@@ -2476,6 +2496,7 @@
 		3B66B88C210B1148000BDFEF /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				76BFFD662339D7D80021E01A /* RentingOrder */,
 				2E1BE34422F14FFD005F9BB5 /* ReturnedItem */,
 				2E920A6822EFF09D000AD8EF /* AssignTruck */,
 				2EF35D7822EEAACE00131D33 /* AssignDriver */,
@@ -3246,6 +3267,57 @@
 			path = BaseScrollMenuView;
 			sourceTree = "<group>";
 		};
+		76BFFD662339D7D80021E01A /* RentingOrder */ = {
+			isa = PBXGroup;
+			children = (
+				76BFFD672339D8590021E01A /* RentingOrderListVC */,
+				76BFFD682339D86F0021E01A /* RentingOrderDetailVC */,
+			);
+			path = RentingOrder;
+			sourceTree = "<group>";
+		};
+		76BFFD672339D8590021E01A /* RentingOrderListVC */ = {
+			isa = PBXGroup;
+			children = (
+				76BFFD6B2339D8B50021E01A /* RentingOrderListVC.swift */,
+				76BFFD692339D88F0021E01A /* Cell */,
+			);
+			path = RentingOrderListVC;
+			sourceTree = "<group>";
+		};
+		76BFFD682339D86F0021E01A /* RentingOrderDetailVC */ = {
+			isa = PBXGroup;
+			children = (
+				76BFFD76233A0CFC0021E01A /* RentingOrderDetailVC.swift */,
+				76BFFD6A2339D8980021E01A /* Cell */,
+			);
+			path = RentingOrderDetailVC;
+			sourceTree = "<group>";
+		};
+		76BFFD692339D88F0021E01A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				76BFFD6E2339F4660021E01A /* RentingOrderListTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		76BFFD6A2339D8980021E01A /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				760C0A97233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift */,
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		76BFFD722339F60F0021E01A /* RentingOrderModel */ = {
+			isa = PBXGroup;
+			children = (
+				76BFFD732339F62D0021E01A /* RentingOrder.swift */,
+			);
+			path = RentingOrderModel;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -3449,6 +3521,7 @@
 				2A443B4022648C5A00CB6508 /* ChangePasswordTableViewCell.xib in Resources */,
 				2A443B4122648C5A00CB6508 /* ChangePasswordView.xib in Resources */,
 				2A443B4222648C5A00CB6508 /* FilterDataListHeaderCell.xib in Resources */,
+				2E47AA562339C22000B96921 /* RentingOrder.storyboard in Resources */,
 				2A443B4322648C5A00CB6508 /* ApprovePictureViewController.xib in Resources */,
 				2A443B4422648C5A00CB6508 /* FilterDataListInsertContentCell.xib in Resources */,
 				2A443B4522648C5A00CB6508 /* Assets.xcassets in Resources */,
@@ -3517,6 +3590,7 @@
 				3B66B921210B1149000BDFEF /* ChangePasswordTableViewCell.xib in Resources */,
 				3B66B92A210B1149000BDFEF /* ChangePasswordView.xib in Resources */,
 				3B1629D1221BEA8200E7A83C /* FilterDataListHeaderCell.xib in Resources */,
+				2E47AA572339C22000B96921 /* RentingOrder.storyboard in Resources */,
 				3BF258222224FABB00A56B4E /* ApprovePictureViewController.xib in Resources */,
 				3B4778EF221E4ED1005639E4 /* FilterDataListInsertContentCell.xib in Resources */,
 				3B66B867210B113D000BDFEF /* Assets.xcassets in Resources */,
@@ -3731,6 +3805,7 @@
 				2A443A5A22648C5A00CB6508 /* TaskListVC.swift in Sources */,
 				2A443A5B22648C5A00CB6508 /* BuildConfiguration.swift in Sources */,
 				2A443A5C22648C5A00CB6508 /* GMSMapview+Ext.swift in Sources */,
+				76BFFD6F2339F4660021E01A /* RentingOrderListTableViewCell.swift in Sources */,
 				2A443A5D22648C5A00CB6508 /* ReachabilityManager.swift in Sources */,
 				2A443A5E22648C5A00CB6508 /* OrderPictureViewController.swift in Sources */,
 				2A443A5F22648C5A00CB6508 /* UserModel.swift in Sources */,
@@ -3788,6 +3863,7 @@
 				191D38F0228529D80062B69B /* Route+Ext.swift in Sources */,
 				2A443A8E22648C5A00CB6508 /* UIColor.swift in Sources */,
 				2A443A8F22648C5A00CB6508 /* FilterDataListHeaderCell.swift in Sources */,
+				76BFFD6C2339D8B50021E01A /* RentingOrderListVC.swift in Sources */,
 				2A443A9022648C5A00CB6508 /* CoreCoordinatorRoute+Ext.swift in Sources */,
 				2A443A9122648C5A00CB6508 /* TaskDetailVC.swift in Sources */,
 				185FC772228D303100B085BC /* BaseSearchView.swift in Sources */,
@@ -3870,12 +3946,15 @@
 				2A443AD522648C5A00CB6508 /* LoadMoreCell.swift in Sources */,
 				2A443AD622648C5A00CB6508 /* ReasonListCell.swift in Sources */,
 				2A443AD722648C5A00CB6508 /* BaseAPIService.swift in Sources */,
+				76BFFD77233A0CFC0021E01A /* RentingOrderDetailVC.swift in Sources */,
 				2A443AD822648C5A00CB6508 /* AlertModel.swift in Sources */,
+				76BFFD742339F62D0021E01A /* RentingOrder.swift in Sources */,
 				2A443AD922648C5A00CB6508 /* LocationManager.swift in Sources */,
 				2EF35D8622EED4DF00131D33 /* Driver.swift in Sources */,
 				2A443ADA22648C5A00CB6508 /* OneTextFieldViewController.swift in Sources */,
 				2A443ADB22648C5A00CB6508 /* OrderItemTableViewCell.swift in Sources */,
 				2E42DB592303C8CE004AFD41 /* FilterOrderDataViewController.swift in Sources */,
+				760C0A98233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift in Sources */,
 				2A443ADC22648C5A00CB6508 /* APIServices.swift in Sources */,
 				2E96D06022C4CFED00DA29C5 /* LoadingViewController.swift in Sources */,
 				2A443ADD22648C5A00CB6508 /* HistoryNotifyVC.swift in Sources */,
@@ -3990,6 +4069,7 @@
 				3B014948217D75D00097FEB6 /* TaskListVC.swift in Sources */,
 				3B66B81B210B113D000BDFEF /* BuildConfiguration.swift in Sources */,
 				2ADE1D062253068100BE4092 /* GMSMapview+Ext.swift in Sources */,
+				76BFFD702339F4660021E01A /* RentingOrderListTableViewCell.swift in Sources */,
 				3B21A0022140E009003CBC14 /* ReachabilityManager.swift in Sources */,
 				3B66B900210B1149000BDFEF /* OrderPictureViewController.swift in Sources */,
 				3B66B8EC210B1149000BDFEF /* UserModel.swift in Sources */,
@@ -4047,6 +4127,7 @@
 				19007579228522CD00A08E3B /* Route+Ext.swift in Sources */,
 				3B66B806210B113D000BDFEF /* UIColor.swift in Sources */,
 				3B1629D0221BEA8200E7A83C /* FilterDataListHeaderCell.swift in Sources */,
+				76BFFD6D2339D8B50021E01A /* RentingOrderListVC.swift in Sources */,
 				3BEAB867214260740039CFBB /* CoreCoordinatorRoute+Ext.swift in Sources */,
 				3B014951217D7E010097FEB6 /* TaskDetailVC.swift in Sources */,
 				185FC773228D303100B085BC /* BaseSearchView.swift in Sources */,
@@ -4129,12 +4210,15 @@
 				3BF026B921DCA8DD0029A652 /* LoadMoreCell.swift in Sources */,
 				3BC053E42180179D001B7D89 /* ReasonListCell.swift in Sources */,
 				3B66B84F210B113D000BDFEF /* BaseAPIService.swift in Sources */,
+				76BFFD78233A0CFC0021E01A /* RentingOrderDetailVC.swift in Sources */,
 				3B66B8DF210B1149000BDFEF /* AlertModel.swift in Sources */,
+				76BFFD752339F62D0021E01A /* RentingOrder.swift in Sources */,
 				3B66B846210B113D000BDFEF /* LocationManager.swift in Sources */,
 				2EF35D8722EED4DF00131D33 /* Driver.swift in Sources */,
 				3B66B832210B113D000BDFEF /* OneTextFieldViewController.swift in Sources */,
 				3B66B90C210B1149000BDFEF /* OrderItemTableViewCell.swift in Sources */,
 				2E42DB5A2303C8CE004AFD41 /* FilterOrderDataViewController.swift in Sources */,
+				760C0A99233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift in Sources */,
 				3B66B84E210B113D000BDFEF /* APIServices.swift in Sources */,
 				2E96D06122C4CFED00DA29C5 /* LoadingViewController.swift in Sources */,
 				3B7695EA21CA20A70032B142 /* HistoryNotifyVC.swift in Sources */,

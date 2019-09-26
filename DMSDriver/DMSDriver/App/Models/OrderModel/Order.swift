@@ -232,6 +232,7 @@ class Order: BaseModel {
         }
         
         var id:Int?
+        var name:String?
         var order_id:Int?
         var package_id:Int?
         var package:Package?
