@@ -18,7 +18,7 @@
         <!--Returned Items ListVC-->
         <scene sceneID="iPm-mA-Lpo">
             <objects>
-                <viewController storyboardIdentifier="ReturnedItemsListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WEt-JQ-kSy" customClass="ReturnedItemsListVC" customModule="Ashdod_Dev" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReturnedItemsListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WEt-JQ-kSy" customClass="ReturnedItemsListVC" customModule="Gadot_Dev" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="skn-sV-Cvh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -99,7 +99,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ReturnedItemListClvCell" id="Tax-5T-5Tv" customClass="ReturnedItemListClvCell" customModule="Ashdod_Dev" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ReturnedItemListClvCell" id="Tax-5T-5Tv" customClass="ReturnedItemListClvCell" customModule="Gadot_Dev" customModuleProvider="target">
                                         <rect key="frame" x="0.5" y="0.0" width="374" height="311"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -107,7 +107,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dKJ-DQ-X6b">
-                                                    <rect key="frame" x="10" y="10" width="354" height="301"/>
+                                                    <rect key="frame" x="10" y="10" width="354" height="291"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QMS-Y2-Iek">
                                                             <rect key="frame" x="0.0" y="0.0" width="346" height="45"/>
@@ -514,12 +514,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X54-Ve-qQp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1192.8" y="1036.7316341829087"/>
+            <point key="canvasLocation" x="1311" y="1059"/>
         </scene>
         <!--Returned Item DetailVC-->
         <scene sceneID="CIh-vn-Uks">
             <objects>
-                <viewController storyboardIdentifier="ReturnedItemDetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="j4x-t3-HQl" customClass="ReturnedItemDetailVC" customModule="Ashdod_Dev" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ReturnedItemDetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="j4x-t3-HQl" customClass="ReturnedItemDetailVC" customModule="Gadot_Dev" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NDG-wt-1Gd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -603,7 +603,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailAddressCell" rowHeight="92" id="gqs-b9-fqt" customClass="OrderDetailTableViewCell" customModule="Ashdod_Dev" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailAddressCell" rowHeight="92" id="gqs-b9-fqt" customClass="OrderDetailTableViewCell" customModule="Gadot_Dev" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gqs-b9-fqt" id="j75-5e-zy2">
@@ -661,7 +661,7 @@
                                             <outlet property="iconImgView" destination="W87-Rq-ezg" id="p7a-fW-qsm"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailTableViewCell" rowHeight="92" id="t3k-KQ-8L8" customClass="OrderDetailTableViewCell" customModule="Ashdod_Dev" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailTableViewCell" rowHeight="92" id="t3k-KQ-8L8" customClass="OrderDetailTableViewCell" customModule="Gadot_Dev" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="147.5" width="375" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="t3k-KQ-8L8" id="ZAv-0n-fcI">
@@ -724,7 +724,7 @@
                                             <outlet property="nameLabel" destination="M4b-QF-y2u" id="zcZ-u0-FTn"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailHeaderCell" rowHeight="104" id="Ua6-lR-3Mv" customClass="OrderDetailTableViewCell" customModule="Ashdod_Dev" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailHeaderCell" rowHeight="104" id="Ua6-lR-3Mv" customClass="OrderDetailTableViewCell" customModule="Gadot_Dev" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="239.5" width="375" height="104"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ua6-lR-3Mv" id="DdA-0o-Wch">
@@ -767,7 +767,7 @@
                                             <outlet property="nameLabel" destination="m4j-Gm-bIq" id="21I-kX-IBn"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ReturnedItemQuantityCell" rowHeight="65" id="oy1-LF-VW3" customClass="ReturnedItemQuantityCell" customModule="Ashdod_Dev" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" reuseIdentifier="ReturnedItemQuantityCell" rowHeight="65" id="oy1-LF-VW3" customClass="ReturnedItemQuantityCell" customModule="Gadot_Dev" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="343.5" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="oy1-LF-VW3" id="bDF-Bf-EQg">
@@ -893,7 +893,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lhN-ds-Nrb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2225" y="1037"/>
+            <point key="canvasLocation" x="2225" y="1058"/>
         </scene>
     </scenes>
     <resources>

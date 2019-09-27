@@ -13,17 +13,17 @@
         <!--DashboardVC-->
         <scene sceneID="gAS-YA-oGg">
             <objects>
-                <viewController storyboardIdentifier="DashboardVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1iP-pm-ufN" customClass="DashboardVC" customModule="DMSDriver" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DashboardVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="1iP-pm-ufN" customClass="DashboardVC" customModule="Gadot_Dev" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="GST-Q4-NwQ"/>
                         <viewControllerLayoutGuide type="bottom" id="4x1-j2-JGp"/>
                     </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="ZHT-dv-qrO" customClass="GradientView" customModule="DMSDriver" customModuleProvider="target">
+                    <view key="view" contentMode="scaleToFill" id="ZHT-dv-qrO" customClass="GradientView" customModule="Gadot_Dev" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6mK-B0-RwL" userLabel="vType">
-                                <rect key="frame" x="0.0" y="35" width="375" height="50"/>
+                                <rect key="frame" x="0.0" y="25" width="375" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lbM-XZ-ToD">
                                         <rect key="frame" x="15" y="0.0" width="0.0" height="50"/>
@@ -89,7 +89,7 @@
                                 </constraints>
                             </view>
                             <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="TCE-15-Pg8" userLabel="vChart">
-                                <rect key="frame" x="20" y="90" width="335" height="210"/>
+                                <rect key="frame" x="20" y="80" width="335" height="210"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cX4-hS-Lwd" customClass="PieChartView" customModule="Charts">
                                         <rect key="frame" x="0.0" y="0.0" width="335" height="210"/>
@@ -111,7 +111,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <collectionView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" keyboardDismissMode="onDrag" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="4nR-fT-yFz">
-                                <rect key="frame" x="20" y="310" width="335" height="337"/>
+                                <rect key="frame" x="20" y="300" width="335" height="347"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="2" minimumInteritemSpacing="2" id="kCV-f4-xy2">
                                     <size key="itemSize" width="100" height="100"/>
@@ -120,7 +120,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="5" maxX="0.0" maxY="5"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TileClc" id="YJu-zV-2Xl" customClass="DashboardClvCell" customModule="DMSDriver" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TileClc" id="YJu-zV-2Xl" customClass="DashboardClvCell" customModule="Gadot_Dev" customModuleProvider="target">
                                         <rect key="frame" x="115" y="5" width="105" height="109"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
@@ -239,7 +239,7 @@
                                             <outlet property="lblTitle" destination="nxx-R1-DWY" id="ac2-sb-9Qo"/>
                                         </connections>
                                     </collectionViewCell>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TileHeaderClc" id="Nvh-Li-hyK" customClass="DashboardClvCell" customModule="DMSDriver" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TileHeaderClc" id="Nvh-Li-hyK" customClass="DashboardClvCell" customModule="Gadot_Dev" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="116" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -336,7 +336,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="pNM-gn-Fl7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="172" y="-395.35232383808096"/>
+            <point key="canvasLocation" x="201" y="-374"/>
         </scene>
     </scenes>
     <resources>
