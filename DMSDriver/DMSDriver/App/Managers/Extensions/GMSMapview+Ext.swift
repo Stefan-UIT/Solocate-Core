@@ -34,12 +34,13 @@ extension GMSMapView {
         
         switch type {
         case .From:
-            let labelOrder = labelMarkerWithText("From".localized.uppercased(), .From)
-            marker.iconView = labelOrder
-            
+//            let labelOrder = labelMarkerWithText("From".localized.uppercased(), .From)
+//            marker.iconView = labelOrder
+            break
         case .To:
-            let labelOrder = labelMarkerWithText("To".localized.uppercased(),.To)
-            marker.iconView = labelOrder
+//            let labelOrder = labelMarkerWithText("To".localized.uppercased(),.To)
+//            marker.iconView = labelOrder
+            break
         case .Pickup:
             let labelOrder = labelMarkerWithText("pick-up".localized.uppercased(),.Pickup)
             marker.iconView = labelOrder

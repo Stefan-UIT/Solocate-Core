@@ -20,7 +20,7 @@ class LocationManager: NSObject {
     static let shared = LocationManager()
     private var locManager = CLLocationManager()
     var currentLocation: CLLocation?
-
+    var userLocation = CLLocationCoordinate2D()
     override init() {
         super.init()
     }
@@ -35,7 +35,7 @@ class LocationManager: NSObject {
             locManager.requestAlwaysAuthorization()
             locManager.startUpdatingLocation()
 
-        }else if (CLLocationManager.authorizationStatus() == .denied) {
+        }else if (CLLocationManager.authorizationStatus() == .denied || CLLocationManager.authorizationStatus() == .restricted) {
           
             App().showAlertView("order_detail_access_location".localized,
                                 "1.Location -> 2.Tap Always or While Using the App".localized,
@@ -87,6 +87,7 @@ class LocationManager: NSObject {
 
 extension LocationManager: CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
+    userLocation = manager.location!.coordinate
     if status == .authorizedAlways || status == .authorizedWhenInUse {
       manager.startUpdatingLocation()
     }
@@ -96,6 +97,7 @@ extension LocationManager: CLLocationManagerDelegate {
   
   func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
     currentLocation = locations.first
+    userLocation = manager.location!.coordinate
     self.delegate?.didUpdateLocation(locations.first)
     print("Did update new location \(currentLocation!.coordinate)")
   }
