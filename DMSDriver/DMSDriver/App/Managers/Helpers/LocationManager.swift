@@ -101,7 +101,6 @@ class LocationManager: NSObject {
 
 extension LocationManager: CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    //userLocation = manager.location!.coordinate
     if status == .authorizedAlways || status == .authorizedWhenInUse {
       manager.startUpdatingLocation()
     }
