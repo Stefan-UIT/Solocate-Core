@@ -331,16 +331,8 @@ class Order: BaseModel {
         func getLoadedStatusWithLoadingQuantity() -> StatusOrder {
             if let loadedQty = self.loadedQty, let qty = self.qty {
                 if loadedQty != qty {
-                    return StatusOrder.WarehouseClarification
+                    return StatusOrder.PartialLoaded
                 }
-                
-//                if (self.isPallet) {
-//                    if let loadedCartons = self.loadedCartonsInPallet, let cartons = self.cartonsInPallet {
-//                        if loadedCartons != cartons {
-//                            return StatusOrder.WarehouseClarification
-//                        }
-//                    }
-//                }
             }
             
             return StatusOrder.Loaded
@@ -351,13 +343,6 @@ class Order: BaseModel {
                 if actualQty != qty {
                     return StatusOrder.PartialDelivered
                 }
-//                if (self.isPallet) {
-//                    if let actualCartons = self.actualCartonsInPallet, let cartons = self.cartonsInPallet {
-//                        if actualCartons != cartons {
-//                            return StatusOrder.PartialDelivered
-//                        }
-//                    }
-//                }
             }
             
             return StatusOrder.deliveryStatus
