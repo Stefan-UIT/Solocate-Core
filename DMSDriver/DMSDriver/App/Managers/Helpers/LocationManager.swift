@@ -25,32 +25,46 @@ class LocationManager: NSObject {
         super.init()
     }
   
+//    func requestLocation() {
+//        locManager.delegate = self
+//        locManager.desiredAccuracy=kCLLocationAccuracyBest
+//        locManager.distanceFilter = kCLDistanceFilterNone
+//        locManager.pausesLocationUpdatesAutomatically = false
+//
+//        if CLLocationManager.authorizationStatus() == .notDetermined {
+//            locManager.requestAlwaysAuthorization()
+//            locManager.startUpdatingLocation()
+//
+//        }else if (CLLocationManager.authorizationStatus() == .denied || CLLocationManager.authorizationStatus() == .restricted) {
+//
+//            App().showAlertView("order_detail_access_location".localized,
+//                                "1.Location -> 2.Tap Always or While Using the App".localized,
+//                                positiveTitle: "Setting".localized,
+//                                positiveAction: { (hasOK) in
+//
+//                                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
+//                                          options: [:],
+//                                          completionHandler: nil)
+//            })
+//
+//        }else {
+//          locManager.startUpdatingLocation()
+//        }
+//    }
     func requestLocation() {
-        locManager.delegate = self
-        locManager.desiredAccuracy=kCLLocationAccuracyBest
-        locManager.distanceFilter = 15.0
-        locManager.pausesLocationUpdatesAutomatically = false
-
-        if CLLocationManager.authorizationStatus() == .notDetermined {
-            locManager.requestAlwaysAuthorization()
-            locManager.startUpdatingLocation()
-
-        }else if (CLLocationManager.authorizationStatus() == .denied || CLLocationManager.authorizationStatus() == .restricted) {
-          
-            App().showAlertView("order_detail_access_location".localized,
-                                "1.Location -> 2.Tap Always or While Using the App".localized,
-                                positiveTitle: "Setting".localized,
-                                positiveAction: { (hasOK) in
-                                
-                                    UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!,
-                                          options: [:],
-                                          completionHandler: nil)
-            })
+            self.locManager.delegate = self
+            self.locManager.desiredAccuracy=kCLLocationAccuracyBest
+            self.locManager.distanceFilter = kCLDistanceFilterNone
+            self.locManager.pausesLocationUpdatesAutomatically = false
+    //        locManager.allowsBackgroundLocationUpdates = true
+            if CLLocationManager.authorizationStatus() == .notDetermined || CLLocationManager.authorizationStatus() == .denied || CLLocationManager.authorizationStatus() == .restricted{
+                self.locManager.requestAlwaysAuthorization()
+            }
             
-        }else {
-          locManager.startUpdatingLocation()
-        }
+                self.locManager.startUpdatingLocation()
     }
+    
+
     
     func stopUpdatingLocation() {
         locManager.stopUpdatingLocation()
@@ -87,7 +101,7 @@ class LocationManager: NSObject {
 
 extension LocationManager: CLLocationManagerDelegate {
   func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
-    userLocation = manager.location!.coordinate
+    //userLocation = manager.location!.coordinate
     if status == .authorizedAlways || status == .authorizedWhenInUse {
       manager.startUpdatingLocation()
     }

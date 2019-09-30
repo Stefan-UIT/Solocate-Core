@@ -202,6 +202,7 @@ extension OrderDetailTableViewCell {
     // Current location is user location.
     private func drawDirections(order:Order?)  {
 //        guard let userLocation = LocationManager.shared.currentLocation?.coordinate else { return }
+        
         let userLocation = LocationManager.shared.userLocation
         var listLocation = [CLLocationCoordinate2D]()
         let lastLocation = CLLocationCoordinate2D(latitude: Double(order?.customerLocation?.lattd ?? "0") ?? 0.0, longitude: Double(order?.customerLocation?.lngtd ?? "0") ?? 0)
