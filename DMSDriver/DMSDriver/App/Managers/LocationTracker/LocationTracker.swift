@@ -36,6 +36,7 @@ class LocationTracker: NSObject {
             invalidTimer()
             return
         }
+        
         guard let userLocation = LocationManager.shared.currentLocation else {
             LocationManager.shared.delegate = self
             LocationManager.shared.requestLocation()

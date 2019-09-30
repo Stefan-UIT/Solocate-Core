@@ -178,15 +178,16 @@ class OrderDetailTableViewCell: UITableViewCell {
 
 // MARK: - PRIVATE FUNTIONS
 extension OrderDetailTableViewCell {
+    /* CurrentLocation is first location of Orders.
     private func drawDirections(order:Order?)  {
         order?.getChunkedListLocation().forEach { (listLocation) in
             if let firstLocation = listLocation.first,
                 let lastLocation = listLocation.last  {
-                
+
                 let wayPoints = listLocation
                 let result = wayPoints.dropFirst()
                 let newResult = Array(result.dropLast())
-                
+
                 mapView?.drawPath(fromLocation: firstLocation,
                                   toLocation: lastLocation,
                                   wayPoints: newResult,
@@ -196,16 +197,39 @@ extension OrderDetailTableViewCell {
             }
         }
     }
+    */
+    
+    // Current location is user location.
+    private func drawDirections(order:Order?)  {
+//        guard let userLocation = LocationManager.shared.currentLocation?.coordinate else { return }
+        
+        let userLocation = LocationManager.shared.userLocation
+        var listLocation = [CLLocationCoordinate2D]()
+        let lastLocation = CLLocationCoordinate2D(latitude: Double(order?.customerLocation?.lattd ?? "0") ?? 0.0, longitude: Double(order?.customerLocation?.lngtd ?? "0") ?? 0)
+        listLocation.append(userLocation)
+        listLocation.append(lastLocation)
+        let wayPoints = listLocation
+        let result = wayPoints.dropFirst()
+        let newResult = Array(result.dropLast())
+
+        mapView?.drawPath(fromLocation: userLocation,
+                          toLocation: lastLocation,
+                          wayPoints: newResult,
+                          complation: { (success, directionRoutes) in order?.directionRoute = directionRoutes
+        })
+    }
     
     private  func showAllMarker(order:Order?) {
-        if let from = order?.from,
-            let lat = from.lattd?.doubleValue,
-            let lng = from.lngtd?.doubleValue  {
-            let location = CLLocationCoordinate2D(latitude: lat, longitude: lng)
-            mapView?.showMarker(type: .From,
-                                location: location,
-                                name: order?.from?.name,
-                                snippet:  order?.from?.ctt_phone)
+//        if let from = order?.from,
+//            let lat = from.lattd?.doubleValue,
+//            let lng = from.lngtd?.doubleValue  {
+        if (order?.from) != nil {
+//            let location = CLLocationCoordinate2D(latitude: lat, longitude: lng)
+//            let userLocation = LocationManager.shared.userLocation
+//            mapView?.showMarker(type: .From,
+//                                location: userLocation,
+//                                name: order?.from?.name,
+//                                snippet:  order?.from?.ctt_phone)
         }
         
         if let to = order?.to,

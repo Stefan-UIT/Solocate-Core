@@ -335,6 +335,7 @@
 		2E1BE35722F191C4005F9BB5 /* ReturnedItemQuantityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BE35522F191C4005F9BB5 /* ReturnedItemQuantityCell.swift */; };
 		2E30BE6622E99A21007419FD /* LoadPackageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E30BE6522E99A21007419FD /* LoadPackageTableViewCell.swift */; };
 		2E30BE6722E99A21007419FD /* LoadPackageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E30BE6522E99A21007419FD /* LoadPackageTableViewCell.swift */; };
+		2E3AFBC32341BC20004D3724 /* Dev-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2E3AFBC22341BC20004D3724 /* Dev-Info.plist */; };
 		2E42DB592303C8CE004AFD41 /* FilterOrderDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E42DB582303C8CE004AFD41 /* FilterOrderDataViewController.swift */; };
 		2E42DB5A2303C8CE004AFD41 /* FilterOrderDataViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E42DB582303C8CE004AFD41 /* FilterOrderDataViewController.swift */; };
 		2E47AA562339C22000B96921 /* RentingOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2E47AA552339C22000B96921 /* RentingOrder.storyboard */; };
@@ -698,6 +699,7 @@
 		2E1BE35222F15297005F9BB5 /* ReturnedItem.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = ReturnedItem.storyboard; sourceTree = "<group>"; };
 		2E1BE35522F191C4005F9BB5 /* ReturnedItemQuantityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReturnedItemQuantityCell.swift; sourceTree = "<group>"; };
 		2E30BE6522E99A21007419FD /* LoadPackageTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadPackageTableViewCell.swift; sourceTree = "<group>"; };
+		2E3AFBC22341BC20004D3724 /* Dev-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Dev-Info.plist"; sourceTree = "<group>"; };
 		2E42DB582303C8CE004AFD41 /* FilterOrderDataViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterOrderDataViewController.swift; sourceTree = "<group>"; };
 		2E47AA552339C22000B96921 /* RentingOrder.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = RentingOrder.storyboard; sourceTree = "<group>"; };
 		2E55A3DE22A6523D006F9944 /* NoteManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteManagementViewController.swift; sourceTree = "<group>"; };
@@ -2329,6 +2331,7 @@
 				3B66B7DD210B113C000BDFEF /* Localize */,
 				3B66B7E3210B113C000BDFEF /* Service */,
 				3B66B7EB210B113C000BDFEF /* Info.plist */,
+				2E3AFBC22341BC20004D3724 /* Dev-Info.plist */,
 				2A443B4F22648C5B00CB6508 /* DMSDriver-Dev-Info.plist */,
 				3B66B7EC210B113C000BDFEF /* BridgingHeaders */,
 			);
@@ -3486,6 +3489,7 @@
 				2A443B1E22648C5A00CB6508 /* GoogleService-Info-prod.plist in Resources */,
 				2A443B1F22648C5A00CB6508 /* ReasonSkipTableViewCell.xib in Resources */,
 				2A443B2022648C5A00CB6508 /* RouteTableViewCell.xib in Resources */,
+				2E3AFBC32341BC20004D3724 /* Dev-Info.plist in Resources */,
 				185FC776228D303100B085BC /* HSearchView.xib in Resources */,
 				2A443B2122648C5A00CB6508 /* FilterByDatePopupView.xib in Resources */,
 				2A443B2222648C5A00CB6508 /* FilterByDatePopupCustomCell.xib in Resources */,
@@ -4377,7 +4381,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/DMSDriver-Dev-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/DMSDriver/Supporting Files/Dev-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -4410,7 +4414,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Pods/GoogleMaps/Maps/Frameworks",
 				);
-				INFOPLIST_FILE = "$(SRCROOT)/DMSDriver-Dev-Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/DMSDriver/Supporting Files/Dev-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

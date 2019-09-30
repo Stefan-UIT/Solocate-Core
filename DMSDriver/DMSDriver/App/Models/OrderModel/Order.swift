@@ -467,7 +467,19 @@ class Order: BaseModel {
     
     var customerLocation:Address? {
         get {
-            return isDeliveryType ? to : from
+            var address: Address?
+            if isDeliveryType {
+                address = to
+            } else {
+                if statusOrder == .newStatus {
+                    address = from
+                } else if statusOrder == .InProgress {
+                    address = to
+                } else {
+                    address = to
+                }
+            }
+            return address
         }
     }
     
