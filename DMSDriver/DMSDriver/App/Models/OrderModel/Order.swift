@@ -347,7 +347,62 @@ class Order: BaseModel {
             
             return StatusOrder.deliveryStatus
         }
+        
+        var isLoadedQtyEqualQty:Bool {
+            get {
+                if let _loadedQty = self.loadedQty, let _qty = self.qty {
+                    return _loadedQty == _qty
+                }
+                return false
+            }
+        }
+        
+        var isValidLoadedQty:Bool {
+            get {
+                if let _loadedQty = loadedQty, let _qty = qty {
+                    return _loadedQty <= _qty
+                }
+                return false
+            }
+        }
+        
+        var isDeliveredQtyEqualQty:Bool {
+            get {
+                if let _actualQty = self.actualQty, let _qty = self.qty {
+                    return _actualQty == _qty
+                }
+                return false
+            }
+        }
+        
     }
+    
+    var isValidAllLoadedQty:Bool {
+        get {
+            guard let _details = details else { return false }
+            let array = _details.filter({$0.isValidLoadedQty})
+            let isAllValid = array.count == _details.count
+            return isAllValid
+        }
+    }
+    
+    func getLoadedStatusWithLoadingQuantity() -> StatusOrder {
+        guard let _details = details else { return .newStatus}
+        let array = _details.filter({$0.isLoadedQtyEqualQty})
+        let isAllEqual = array.count == _details.count
+        return (isAllEqual) ? StatusOrder.Loaded : StatusOrder.PartialLoaded
+        
+    }
+    
+//    func getFinishedStatusWithInputQuantity() -> StatusOrder {
+//        if let actualQty = self.actualQty, let qty = self.qty {
+//            if actualQty != qty {
+//                return StatusOrder.PartialDelivered
+//            }
+//        }
+//
+//        return StatusOrder.deliveryStatus
+//    }
 
     class Nature: BaseModel {
         var id:Int?

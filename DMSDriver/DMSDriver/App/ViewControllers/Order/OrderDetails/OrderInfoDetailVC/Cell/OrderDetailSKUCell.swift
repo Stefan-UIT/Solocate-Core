@@ -64,12 +64,7 @@ class OrderDetailSKUCell: UITableViewCell {
     }
     
     func handleDisablingTextField(order:Order) {
-        var isDisabled:Bool!
-        if order.isPickUpType {
-            isDisabled = order.isCancelled || order.isFinished
-        } else {
-            isDisabled = !order.isInTransit
-        }
+        let isDisabled = order.isCancelled || order.isFinished
         deliveredQtyTextField.isEnabled = !isDisabled
     }
     
@@ -77,8 +72,9 @@ class OrderDetailSKUCell: UITableViewCell {
         if order.isPickUpType {
             deliveredQtyStaticLabel?.text = (order.isNewStatus) ? "picked-up-quantity".localized : "delivered-quantity".localized
         } else {
-            let isHidden = order.isNewStatus || order.isLoaded
-            deliveryQtyViewContainer(isHidden: isHidden)
+//            let isHidden = order.isNewStatus || order.isLoaded
+//            deliveryQtyViewContainer(isHidden: isHidden)
+            deliveredQtyStaticLabel?.text = (order.isNewStatus) ? "loaded-quantity".localized : "delivered-quantity".localized
         }
     }
     

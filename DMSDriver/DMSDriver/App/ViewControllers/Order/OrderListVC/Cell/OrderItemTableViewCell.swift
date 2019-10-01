@@ -21,7 +21,7 @@ class OrderItemTableViewCell: UITableViewCell {
     @IBOutlet weak var lblConsigneeName: UILabel!
     @IBOutlet weak var lblQuantity: UILabel!
     @IBOutlet weak var lblPallet: UILabel!
-    @IBOutlet weak var lblWMS: UILabel!
+    @IBOutlet weak var orderTypeLabel: UILabel?
     
     @IBOutlet weak var lblExpectedTime: UILabel?
     @IBOutlet weak var lblRecordsFrom: UILabel?
@@ -81,7 +81,7 @@ class OrderItemTableViewCell: UITableViewCell {
             lblPalletHeightConstraint.constant = 0
             lblPalletTopConstraint.constant = 0
         }
-        lblWMS?.text = order.wmsOrderCode
+        orderTypeLabel?.text = order.orderType.name
         lblFromAddresss?.text = order.from?.address
         lblToAddress?.text = order.to?.address
         lblUrgency?.textColor = order.colorUrgent

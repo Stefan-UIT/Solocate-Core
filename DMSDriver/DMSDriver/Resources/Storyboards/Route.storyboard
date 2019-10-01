@@ -1495,11 +1495,14 @@
                                                                                                         <color key="textColor" red="0.28235294119999998" green="0.36470588240000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                         <nil key="highlightedColor"/>
                                                                                                     </label>
-                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="WMS order code" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ltn-ft-jkv">
-                                                                                                        <rect key="frame" x="15" y="131" width="105.5" height="16"/>
+                                                                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="order-type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ltn-ft-jkv">
+                                                                                                        <rect key="frame" x="15" y="131" width="64" height="16"/>
                                                                                                         <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                                                         <color key="textColor" red="0.28235294119999998" green="0.36470588240000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                                                         <nil key="highlightedColor"/>
+                                                                                                        <userDefinedRuntimeAttributes>
+                                                                                                            <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="order-type"/>
+                                                                                                        </userDefinedRuntimeAttributes>
                                                                                                     </label>
                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="right" lineBreakMode="wordWrap" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ChR-uf-0KB">
                                                                                                         <rect key="frame" x="123" y="8" width="227" height="22"/>
@@ -1538,7 +1541,7 @@
                                                                                                         <nil key="highlightedColor"/>
                                                                                                     </label>
                                                                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f2L-Wh-DZm">
-                                                                                                        <rect key="frame" x="128.5" y="128" width="221.5" height="22"/>
+                                                                                                        <rect key="frame" x="87" y="128" width="263" height="22"/>
                                                                                                         <constraints>
                                                                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="22" id="prs-9z-cuy"/>
                                                                                                         </constraints>
@@ -1706,7 +1709,7 @@
                                                                                 <outlet property="lblQuantity" destination="oXU-nJ-Df9" id="0gm-Xm-Xdu"/>
                                                                                 <outlet property="lblTitle" destination="g1S-sZ-bhH" id="cdT-6H-rgq"/>
                                                                                 <outlet property="lblToAddress" destination="EXX-zt-K42" id="lnl-oe-8wm"/>
-                                                                                <outlet property="lblWMS" destination="f2L-Wh-DZm" id="57q-Vz-Xds"/>
+                                                                                <outlet property="orderTypeLabel" destination="f2L-Wh-DZm" id="NcP-QY-Zun"/>
                                                                             </connections>
                                                                         </tableViewCell>
                                                                         <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderItemCollapseTableViewCell" rowHeight="93" id="UVq-zK-yBm" customClass="OrderItemTableViewCell" customModule="Gadot_Dev" customModuleProvider="target">

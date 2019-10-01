@@ -431,7 +431,7 @@ extension RouteDetailVC{
                 strongSelf.clvContent?.reloadData()
                 strongSelf.initUI()
 //                if isRampManagerMode {
-                    strongSelf.updateActionsUI()
+//                    strongSelf.updateActionsUI()
 //                    strongSelf.setupScrollMenuView()
 //                }
                 /*

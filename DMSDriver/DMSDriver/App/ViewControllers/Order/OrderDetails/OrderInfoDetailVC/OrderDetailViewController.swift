@@ -357,15 +357,40 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         }
     }
     
+    func submitLoadedQuantity(detail:Order.Detail) {
+        if let loadedQty = detail.loadedQty, let qty = detail.qty, loadedQty <= qty {
+            updateLoadedQuantity(detail:detail)
+        } else {
+            let message = String(format: "loaded-quantity-must-be-less-than-or-equal".localized, "\(detail.qty ?? 0)")
+            showAlertView(message)
+            return
+        }
+    }
+    
+    func updateLoadedQuantity(detail:Order.Detail) {
+        let status = detail.getLoadedStatusWithLoadingQuantity()
+        updateOrderStatus(status.rawValue)
+    }
+    
+    func handleLoadAction() {
+        guard let order = orderDetail else { return }
+        if order.isValidAllLoadedQty {
+            // Update loaded quantity to Server
+        } else {
+//            let message = String(format: "loaded-quantity-must-be-less-than-or-equal".localized, "\(detail.qty ?? 0)")
+            let message = "loaded-quantity-must-be-less-than-or-equal-the-quantity".localized
+            showAlertView(message)
+            return
+        }
+    }
+    
     private func handleUpdateStatusWithDeliveryType() {
-        switch orderDetail?.statusOrder.rawValue {
-        case StatusOrder.newStatus.rawValue:
-            showReasonView(isUnableToFinish: false)
+        guard let order = orderDetail else { return }
+        switch order.statusOrder.rawValue {
+        case StatusOrder.newStatus.rawValue:s
+//            showReasonView(isUnableToFinish: false)
+            handleFinishAction()
             break
-//        case StatusOrder.deliveryStatus.rawValue, StatusOrder.PartialDelivered.rawValue:
-//            showPalletReturnedPopUp()
-//            break
-            
         case StatusOrder.Loaded.rawValue, StatusOrder.PartialLoaded.rawValue:
             App().showAlertView("do-you-want-to-start-this-order".localized,
                                 positiveTitle: "YES".localized,
@@ -400,18 +425,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
     func submitPickedUpQuantity(detail:Order.Detail) {
         if let loadedQty = detail.loadedQty, let qty = detail.qty, loadedQty <= qty {
-//            if (detail.isPallet) {
-//                if let loadedCartons = detail.loadedCartonsInPallet {
-//                    let cartons = detail.cartonsInPallet ?? 0
-//                    if loadedCartons <= cartons {
-//                        updatePickedUpQuantity(detail:detail)
-//                        return
-//                    } else {
-//                        let message = String(format: "picked-up-cartons-quantity-must-be-less-than-or-equal".localized, "\(detail.cartonsInPallet ?? 0)")
-//                        showAlertView(message)
-//                    }
-//                }
-//            }
             updatePickedUpQuantity(detail:detail)
             // call without loaded carton
         } else {
@@ -425,11 +438,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         guard let pickedUpQty = detail.loadedQty else { return }
         var message = "picked-up-quantity".localized
         message += ": \(pickedUpQty)"
-//        if detail.isPallet && detail.loadedCartonsInPallet != nil {
-//            message += "\n" + "picked-up-cartons-qty".localized
-//            message += ": \(detail.loadedCartonsInPallet!)"
-//        }
-        
         self.showAlertView(MSG_ARE_YOU_SURE, message, positiveAction: { [weak self](action) in
             let status = StatusOrder.InTransit.rawValue
             self?.updateOrderStatus(status,updateDetailType: .Load)
@@ -519,6 +527,8 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         case .sectionCOD:
 //            return (_orderDetail.isHasCOD) ? heightHeader : CGFloat.leastNormalMagnitude
             return CGFloat.leastNormalMagnitude
+//        case .sectionSignature, .sectionPictures:
+//            return (_orderDetail.isLoaded || _orderDetail.isNewStatus) ? CGFloat.leastNormalMagnitude : heightHeader
         default:
             return heightHeader
         }
@@ -979,14 +989,10 @@ extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
     func didEnterPalletsQuantityTextField(_ cell: OrderDetailTableViewCell, value: String, detail:Order.Detail) {
         guard let _order = orderDetail else { return }
         let inputQty = Int(value)
-        if _order.isDeliveryType {
-            detail.actualQty = inputQty
+        if _order.isNewStatus {
+            detail.loadedQty = inputQty
         } else {
-            if _order.isNewStatus {
-                detail.loadedQty = inputQty
-            } else {
-                detail.actualQty = inputQty
-            }
+            detail.actualQty = inputQty
         }
     }
     
@@ -1169,15 +1175,14 @@ fileprivate extension OrderDetailViewController{
         updateStatusButton?.isEnabled = true
         switch orderDetail?.statusOrder.rawValue {
         case StatusOrder.newStatus.rawValue:
-            updateStatusButton?.setTitle("cancel".localized.uppercased(), for: .normal)
-            updateStatusButton?.backgroundColor = AppColor.redColor
+            updateStatusButton?.setTitle("Load".localized.uppercased(), for: .normal)
+            updateStatusButton?.backgroundColor = AppColor.pickedUpStatus
             break
         case StatusOrder.InTransit.rawValue:
             updateStatusButton?.setTitle("Deliver".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = AppColor.greenColor
             break
         case StatusOrder.deliveryStatus.rawValue, StatusOrder.PartialDelivered.rawValue:
-            //            updateStatusButton?.setTitle("update-palette-return".localized.uppercased(), for: .normal)
             updateStatusButton?.setTitle("update-returned-pallets".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = AppColor.greenColor
             break
