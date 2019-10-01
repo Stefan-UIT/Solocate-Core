@@ -127,6 +127,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                           "order-info".localized.uppercased(),
                           "pickup".localized.uppercased(),
                           "Delivery".localized.uppercased(),
+                          "COD".localized.uppercased(),
                           "SKUs".localized.uppercased(),
                           "Signature".localized.uppercased(),
                           "Picture".localized.uppercased(),
