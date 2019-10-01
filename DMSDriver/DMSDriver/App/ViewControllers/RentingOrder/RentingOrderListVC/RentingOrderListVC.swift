@@ -13,7 +13,12 @@ class RentingOrderListVC: BaseViewController {
     
     @IBOutlet weak var tbvContent:UITableView?
     var rentingOrder = [RentingOrder]()
-    
+    var timeData:TimeDataItem?
+//    var routes = [Route]()
+    var orders = [Order]()
+    var filterModel = FilterDataModel()
+    var isFromDashboard = false
+    var isFromFilter = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +28,11 @@ class RentingOrderListVC: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        fetchData()
+        if isFromDashboard == false && isFromFilter == false{
+            fetchData(isShowLoading: true)
+        } else if isFromFilter {
+            isFromFilter = false
+        }
     }
     
     override func updateNavigationBar() {
@@ -71,17 +80,43 @@ class RentingOrderListVC: BaseViewController {
         rentingOrder.append(rentingOrder2)
     }
     
+    private func initVar() {
+        if timeData == nil {
+            let dataManager = TimeData()
+            timeData = dataManager.getTimeDataItemType(type: .TimeItemTypeToday)
+            filterModel.timeData = timeData
+            dataManager.setTimeDataItemDefault(item: filterModel.timeData!)
+        }
+    }
+    
     func setupNavigateBar() {
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.Menu, "".localized)
+        App().navigationService.updateNavigationBar(.Filter_Menu, "".localized)
     }
     
     func setupTableView() {
         tbvContent?.delegate = self
         tbvContent?.dataSource = self
+        if isFromDashboard == false {
+            tbvContent?.addRefreshControl(self, action: #selector(fetchData(isShowLoading:)))
+        }
 //        tbvContent?.prefetchDataSource = self
 //        tbvContent?.addPullToRefetch(self, action: #selector(fetchData))
     }
+    
+    @objc func fetchData(isShowLoading:Bool = true)  {
+//        getRoutes(filterMode: filterModel, isShowLoading: isShowLoading)
+    }
+    
+//    func updateRouteList(routeNeedUpdate:Route) {
+//        for (index,route) in self.routes.enumerated() {
+//            if route.id == routeNeedUpdate.id {
+//                self.routes[index] = routeNeedUpdate
+//                break
+//            }
+//        }
+//        tableView.reloadData()
+//    }
     
     
 }
@@ -128,31 +163,39 @@ extension RentingOrderListVC: UITableViewDataSourcePrefetching {
 }
 
 //MARK: - DMSNavigationServiceDelegate
-extension RentingOrderListVC:DMSNavigationServiceDelegate{
+extension RentingOrderListVC:DMSNavigationServiceDelegate {
+    //    func didSelectedBackOrMenu() {
+    //        showSideMenu()
+    //    }
+    
     func didSelectedMenuAction() {
         showSideMenu()
     }
-    /*
-     func didSelectedLeftButton(_ sender: UIBarButtonItem) {
-     let dateFormater =  DateFormatter()
-     dateFormater.dateFormat = "MM/dd/yyyy"
-     
-     let currentDate = dateFormater.date(from: dateStringFilter)
-     UIAlertController.showDatePicker(style: .actionSheet,
-     mode: .date,
-     title: "select-date".localized,
-     currentDate: currentDate) {[weak self] (date) in
-     
-     self?.dateFilter = date
-     self?.dateStringFilter = date.toString("MM/dd/yyyy")
-     if self?.hasNetworkConnection ?? false{
-     //self?.getDataFromServer()
-     self?.getListTask()
-     
-     }else{
-     //self?.getDataFromDBLocal(E(self?.dateStringFilter))
-     }
-     }
-     }
-     */
+    
+    func didSelectedBackAction() {
+        popViewController()
+    }
+    
+    func didSelectedLeftButton(_ sender: UIBarButtonItem) {
+        FilterDataListVC.show(atViewController: self,currentFilter: filterModel) {[weak self] (success, data) in
+            guard let strongSelf = self,success == true else{
+                return
+            }
+            strongSelf.filterModel = data
+            strongSelf.fetchData(isShowLoading: true)
+        }
+        self.isFromFilter = true
+    }
+}
+
+// MARK: -API
+fileprivate extension RentingOrderListVC {
+    func getOrders(filterMode: FilterDataModel, isShowLoading:Bool = true) {
+        if isShowLoading {
+            showLoadingIndicator()
+        }
+        
+        
+        ////
+    }
 }
