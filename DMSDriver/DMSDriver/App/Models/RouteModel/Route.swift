@@ -176,12 +176,15 @@ class Route: BaseModel {
     var totalDistance = ""
     var locationList:[Address] = []
     var notes:[Note] = []
-    //NEW
     var truckType:TruckType?
     var routeMaster:RouteMaster?
     var company:Company?
     var loadVolume:String = "0.0"
     var assignedInfo:[AssignedInfo]?
+    
+    
+    // NEW
+    
     
     var isAllowedGoToDelivery:Bool {
         get {
