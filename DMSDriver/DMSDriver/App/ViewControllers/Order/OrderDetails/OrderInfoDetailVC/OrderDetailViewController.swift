@@ -362,12 +362,28 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         updateOrderStatus(status.rawValue, updateDetailType: .Load)
     }
     
+    func updatePickUpQuantity(order:Order) {
+        let status = StatusOrder.InTransit
+        updateOrderStatus(status.rawValue, updateDetailType: .Load)
+    }
+    
     func handleLoadAction() {
         guard let order = orderDetail else { return }
         if order.isValidAllLoadedQty {
             updateLoadedQuantity(order: order)
         } else {
             let message = "loaded-quantity-must-be-less-than-or-equal-the-quantity".localized
+            showAlertView(message)
+            return
+        }
+    }
+    
+    func handlePickUpAction() {
+        guard let order = orderDetail else { return }
+        if order.isValidAllLoadedQty {
+            updatePickUpQuantity(order: order)
+        } else {
+            let message = "picked-up-quantity-must-be-less-than-or-equal-the-quantity".localized
             showAlertView(message)
             return
         }
@@ -399,10 +415,10 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     private func handleUpdateStatusWithPickedUpType() {
-        guard let _order = orderDetail, let detail = _order.details?.first else { return }
-        switch orderDetail?.statusOrder.rawValue {
+        guard let _order = orderDetail else { return }
+        switch _order.statusOrder.rawValue {
         case StatusOrder.newStatus.rawValue:
-            self.submitPickedUpQuantity(detail: detail)
+            handlePickUpAction()
             break
         case StatusOrder.InTransit.rawValue:
             handleFinishAction()
@@ -412,26 +428,26 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         }
     }
     
-    func submitPickedUpQuantity(detail:Order.Detail) {
-        if let loadedQty = detail.loadedQty, let qty = detail.qty, loadedQty <= qty {
-            updatePickedUpQuantity(detail:detail)
-            // call without loaded carton
-        } else {
-            let message = String(format: "picked-up-quantity-must-be-less-than-or-equal".localized, "\(detail.qty ?? 0)")
-            showAlertView(message)
-            return
-        }
-    }
-    
-    func updatePickedUpQuantity(detail:Order.Detail) {
-        guard let pickedUpQty = detail.loadedQty else { return }
-        var message = "picked-up-quantity".localized
-        message += ": \(pickedUpQty)"
-        self.showAlertView(MSG_ARE_YOU_SURE, message, positiveAction: { [weak self](action) in
-            let status = StatusOrder.InTransit.rawValue
-            self?.updateOrderStatus(status,updateDetailType: .Load)
-        })
-    }
+//    func submitPickedUpQuantity(detail:Order.Detail) {
+//        if let loadedQty = detail.loadedQty, let qty = detail.qty, loadedQty <= qty {
+//            updatePickedUpQuantity(detail:detail)
+//            // call without loaded carton
+//        } else {
+//            let message = String(format: "picked-up-quantity-must-be-less-than-or-equal".localized, "\(detail.qty ?? 0)")
+//            showAlertView(message)
+//            return
+//        }
+//    }
+//
+//    func updatePickedUpQuantity(detail:Order.Detail) {
+//        guard let pickedUpQty = detail.loadedQty else { return }
+//        var message = "picked-up-quantity".localized
+//        message += ": \(pickedUpQty)"
+//        self.showAlertView(MSG_ARE_YOU_SURE, message, positiveAction: { [weak self](action) in
+//            let status = StatusOrder.InTransit.rawValue
+//            self?.updateOrderStatus(status,updateDetailType: .Load)
+//        })
+//    }
     
     func handleUpdateStatusAction() {
         guard let _order = orderDetail else { return }
@@ -1080,7 +1096,7 @@ fileprivate extension OrderDetailViewController{
     
     private func handleFinishAction() {
         guard let _orderDetail = orderDetail, let detail = _orderDetail.details?.first else {return}
-        let actualQty = _orderDetail.details?.first?.actualQty
+//        let actualQty = _orderDetail.details?.first?.actualQty
         if _orderDetail.isRequireImage() &&
             _orderDetail.pictures?.count ?? 0 <= 0{
             self.showAlertView("picture-required".localized) {(action) in
@@ -1093,25 +1109,33 @@ fileprivate extension OrderDetailViewController{
                 //self?.didUpdateStatus?(_orderDetail, nil)
             }
             
-        } else if (actualQty == nil || actualQty! == 0 || actualQty > detail.qty!) {
-            let mes = "delivered-quantity-must-be-less-than-or-equal".localized
-            let pickupMes = mes + "\(detail.qty!)"
-            showAlertView(pickupMes)
+        } else if (!_orderDetail.isValidAllDeliveredQty) {
+            let mes = "delivered-quantity-must-be-less-than-or-equal-the-quantity".localized
+            showAlertView(mes)
         } else {
             
-            var message = "delivered-quantity".localized
-            message += ": \(detail.actualQty!)"
+//            var message = "delivered-quantity".localized
+//            message += ": \(detail.actualQty!)"
             
-            self.showAlertView(MSG_ARE_YOU_SURE, message, positiveAction: { [weak self](action) in
-                let statusNeedUpdate = detail.getFinishedStatusWithInputQuantity()
-                if statusNeedUpdate == .PartialDelivered {
-                    self?.showReturnReasonView { (reason) in
-                        self?.updateOrderStatus(statusNeedUpdate.rawValue,cancelReason: reason)
-                    }
-                } else {
-                    self?.updateOrderStatus(statusNeedUpdate.rawValue)
+//            self.showAlertView(MSG_ARE_YOU_SURE, message, positiveAction: { [weak self](action) in
+//                let statusNeedUpdate = detail.getFinishedStatusWithInputQuantity()
+//                if statusNeedUpdate == .PartialDelivered {
+//                    self?.showReturnReasonView { (reason) in
+//                        self?.updateOrderStatus(statusNeedUpdate.rawValue,cancelReason: reason)
+//                    }
+//                } else {
+//                    self?.updateOrderStatus(statusNeedUpdate.rawValue)
+//                }
+//            })
+            
+            let statusNeedUpdate = _orderDetail.getDeliveredStatusWithDeliveredQuantity()
+            if statusNeedUpdate == .PartialDelivered {
+                self.showReturnReasonView { (reason) in
+                    self.updateOrderStatus(statusNeedUpdate.rawValue,cancelReason: reason)
                 }
-            })
+            } else {
+                self.updateOrderStatus(statusNeedUpdate.rawValue)
+            }
         }
             
     }

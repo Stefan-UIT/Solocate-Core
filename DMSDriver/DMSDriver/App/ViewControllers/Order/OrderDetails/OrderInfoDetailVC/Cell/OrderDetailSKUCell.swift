@@ -25,6 +25,7 @@ class OrderDetailSKUCell: UITableViewCell {
     
     @IBOutlet weak var deliveredQtyStaticLabel: UILabel!
     
+    @IBOutlet weak var loadedQtyStaticLabel: UILabel!
     @IBOutlet weak var deliveredQtyHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var deliveredQtyViewContainer: UIView!
@@ -47,7 +48,7 @@ class OrderDetailSKUCell: UITableViewCell {
         quantityLabel.text = IntSlash(detail.qty)
         
         updateDeliverdQtyUI(order: order)
-        updateLoadedQtyUI()
+        updateLoadedQtyUI(order:order)
         handleDisablingTextField(order:order)
         updateDeliveredTextFieldValue(order: order)
     }
@@ -91,8 +92,9 @@ class OrderDetailSKUCell: UITableViewCell {
         loadedQtyViewContainer.isHidden = isHidden
     }
     
-    func updateLoadedQtyUI() {
+    func updateLoadedQtyUI(order:Order) {
         if let loadedQty = detail.loadedQty {
+            loadedQtyStaticLabel.text = order.isPickUpType ? "picked-up-quantity".localized : "loaded-quantity".localized
             loadedQtyLabel.text = "\(loadedQty)"
             loadedQtyViewContainer(isHidden:false)
         } else {

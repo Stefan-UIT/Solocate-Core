@@ -375,6 +375,15 @@ class Order: BaseModel {
             }
         }
         
+        var isValidDeliveredQty:Bool {
+            get {
+                if let _deliveredQty = actualQty, let _qty = qty {
+                    return _deliveredQty > 0 && _deliveredQty <= _qty
+                }
+                return false
+            }
+        }
+        
     }
     
     var isValidAllLoadedQty:Bool {
@@ -386,11 +395,27 @@ class Order: BaseModel {
         }
     }
     
+    var isValidAllDeliveredQty:Bool {
+        get {
+            guard let _details = details else { return false }
+            let array = _details.filter({$0.isValidDeliveredQty})
+            let isAllValid = array.count == _details.count
+            return isAllValid
+        }
+    }
+    
     func getLoadedStatusWithLoadingQuantity() -> StatusOrder {
         guard let _details = details else { return .newStatus}
         let array = _details.filter({$0.isLoadedQtyEqualQty})
         let isAllEqual = array.count == _details.count
         return (isAllEqual) ? StatusOrder.Loaded : StatusOrder.PartialLoaded
+    }
+    
+    func getDeliveredStatusWithDeliveredQuantity() -> StatusOrder {
+        guard let _details = details else { return .newStatus}
+        let array = _details.filter({$0.isDeliveredQtyEqualQty})
+        let isAllEqual = array.count == _details.count
+        return (isAllEqual) ? StatusOrder.deliveryStatus : StatusOrder.PartialDelivered
     }
     
 //    func getFinishedStatusWithInputQuantity() -> StatusOrder {
