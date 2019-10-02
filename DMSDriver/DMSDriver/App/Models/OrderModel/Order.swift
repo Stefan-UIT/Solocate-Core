@@ -298,30 +298,30 @@ class Order: BaseModel {
             ]
             switch updateType {
             case .Load:
-                if orderStatus == StatusOrder.Loaded || orderStatus == StatusOrder.PartialLoaded || orderStatus == StatusOrder.WarehouseClarification || orderStatus == StatusOrder.InTransit // in case Order pickup
-                {
+//                if orderStatus == StatusOrder.Loaded || orderStatus == StatusOrder.PartialLoaded || orderStatus == StatusOrder.WarehouseClarification || orderStatus == StatusOrder.InTransit // in case Order pickup
+//                {
                     params["load_qty"] = loadedQty ?? 0
-                    if isPallet {
-                        params["ctn_loaded"] = loadedCartonsInPallet ?? 0
-                    }
-                }
+//                    if isPallet {
+//                        params["ctn_loaded"] = loadedCartonsInPallet ?? 0
+//                    }
+//                }
                 break
             case .ReturnedPallet:
-                if orderStatus == StatusOrder.deliveryStatus || orderStatus == StatusOrder.PartialDelivered {
+//                if orderStatus == StatusOrder.deliveryStatus || orderStatus == StatusOrder.PartialDelivered {
                     params["plt_return"] = returnedPalletQty ?? 0
                     params["dlvd_qty"] = actualQty ?? 0
-                    if isPallet {
-                        params["ctn_dlvd"] = actualCartonsInPallet ?? 0
-                    }
-                }
+//                    if isPallet {
+//                        params["ctn_dlvd"] = actualCartonsInPallet ?? 0
+//                    }
+//                }
                 break
             default:
-                if orderStatus == StatusOrder.deliveryStatus || orderStatus == StatusOrder.PartialDelivered {
+//                if orderStatus == StatusOrder.deliveryStatus || orderStatus == StatusOrder.PartialDelivered {
                     params["dlvd_qty"] = actualQty ?? 0
-                    if isPallet {
-                        params["ctn_dlvd"] = actualCartonsInPallet ?? 0
-                    }
-                }
+//                    if isPallet {
+//                        params["ctn_dlvd"] = actualCartonsInPallet ?? 0
+//                    }
+//                }
                 break
             }
             
@@ -360,7 +360,7 @@ class Order: BaseModel {
         var isValidLoadedQty:Bool {
             get {
                 if let _loadedQty = loadedQty, let _qty = qty {
-                    return _loadedQty <= _qty
+                    return _loadedQty > 0 && _loadedQty <= _qty
                 }
                 return false
             }
@@ -391,7 +391,6 @@ class Order: BaseModel {
         let array = _details.filter({$0.isLoadedQtyEqualQty})
         let isAllEqual = array.count == _details.count
         return (isAllEqual) ? StatusOrder.Loaded : StatusOrder.PartialLoaded
-        
     }
     
 //    func getFinishedStatusWithInputQuantity() -> StatusOrder {

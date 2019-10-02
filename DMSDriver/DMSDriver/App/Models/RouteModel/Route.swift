@@ -218,6 +218,20 @@ class Route: BaseModel {
         return result
     }
     
+    func order(orderID:Int) -> Order? {
+//        let array = orderList.filter({orderID == $0.id})
+//        let order = array.first
+        if let i = orderList.firstIndex(where: { orderID == $0.id }) {
+            return orderList[i]
+        }
+        return nil
+    }
+    
+    func updateOrder(orderID:Int, toStatus status:Status) {
+        let order = self.order(orderID:orderID)
+        order?.status = status
+    }
+    
     class AssignedInfo: BaseModel {
         var id:Int?
         var routeID:Int?

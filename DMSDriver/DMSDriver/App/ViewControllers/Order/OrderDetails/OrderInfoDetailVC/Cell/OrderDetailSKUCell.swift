@@ -53,12 +53,14 @@ class OrderDetailSKUCell: UITableViewCell {
     }
     
     func updateDeliveredTextFieldValue(order:Order) {
-        let isPickUpAndNewOrder = order.isPickUpType && order.isNewStatus
+//        let isPickUpAndNewOrder = order.isPickUpType && order.isNewStatus
         var actualQty:String!
         if order.isCancelled {
             actualQty = "0"
         } else {
-            actualQty = (isPickUpAndNewOrder) ? "\(detail.loadedQty ?? 0)" : "\(detail.actualQty ?? 0)"
+            let orderLoadedQty = (detail.loadedQty != nil) ? "\(detail.loadedQty!)" : ""
+            let orderActualQty = (detail.actualQty != nil) ? "\(detail.actualQty!)" : ""
+            actualQty = (order.isNewStatus) ? orderLoadedQty : orderActualQty
         }
         deliveredQtyTextField.text = actualQty
     }
@@ -72,9 +74,10 @@ class OrderDetailSKUCell: UITableViewCell {
         if order.isPickUpType {
             deliveredQtyStaticLabel?.text = (order.isNewStatus) ? "picked-up-quantity".localized : "delivered-quantity".localized
         } else {
-//            let isHidden = order.isNewStatus || order.isLoaded
-//            deliveryQtyViewContainer(isHidden: isHidden)
             deliveredQtyStaticLabel?.text = (order.isNewStatus) ? "loaded-quantity".localized : "delivered-quantity".localized
+            
+            let isHidden = order.isLoaded
+            deliveryQtyViewContainer(isHidden: isHidden)
         }
     }
     
