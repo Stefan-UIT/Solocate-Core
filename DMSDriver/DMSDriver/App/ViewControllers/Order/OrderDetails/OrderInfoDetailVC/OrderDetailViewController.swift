@@ -448,7 +448,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
     
     @IBAction func onUnableToStartTouchUp(_ sender: UIButton) {
-        self.showReasonView(isUnableToFinish: true)
+        guard let _order = orderDetail else { return }
+        let isCancelled = _order.isNewStatus
+        self.showReasonView(isUnableToFinish: !isCancelled)
     }
     
     @IBAction func tapOrderNavigateButton(_ sender: Any) {
@@ -1150,7 +1152,10 @@ fileprivate extension OrderDetailViewController{
     }
     
     private func handleShowingUnableToStartButton() {
-        let isHiddenUnableToStartButton = orderDetail?.status?.code != StatusOrder.InTransit.rawValue
+        var isHiddenUnableToStartButton = true
+        if orderDetail?.status?.code == StatusOrder.InTransit.rawValue || (orderDetail?.isNewStatus ?? false) {
+            isHiddenUnableToStartButton = false
+        }
         unableToStartButton.isHidden = isHiddenUnableToStartButton
     }
     
@@ -1214,10 +1219,14 @@ fileprivate extension OrderDetailViewController{
         case StatusOrder.newStatus.rawValue:
             updateStatusButton?.setTitle("picked-up".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = AppColor.pickedUpStatus
+            
+            unableToStartButton?.setTitle("cancel".localized.uppercased(), for: .normal)
             break
         case StatusOrder.InTransit.rawValue:
             updateStatusButton?.setTitle("Deliver".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = AppColor.greenColor
+            
+            unableToStartButton?.setTitle("unable-to-deliver".localized.uppercased(), for: .normal)
             break
         default:
             updateStatusButton?.isHidden = true
