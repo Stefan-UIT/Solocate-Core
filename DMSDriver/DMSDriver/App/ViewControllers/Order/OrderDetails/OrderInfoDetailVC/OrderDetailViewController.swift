@@ -387,7 +387,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     private func handleUpdateStatusWithDeliveryType() {
         guard let order = orderDetail else { return }
         switch order.statusOrder.rawValue {
-        case StatusOrder.newStatus.rawValue:s
+        case StatusOrder.newStatus.rawValue:
 //            showReasonView(isUnableToFinish: false)
             handleFinishAction()
             break
