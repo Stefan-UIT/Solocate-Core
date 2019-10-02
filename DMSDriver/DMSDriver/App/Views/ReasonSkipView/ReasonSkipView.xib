@@ -15,11 +15,12 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReasonSkipView" customModule="Ashdod_Dev" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ReasonSkipView" customModule="Gadot_Dev" customModuleProvider="target">
             <connections>
                 <outlet property="noteTextView" destination="DUw-Bu-BeK" id="cea-S8-CCF"/>
                 <outlet property="okButton" destination="Otk-7j-Q64" id="UoM-ud-Aep"/>
                 <outlet property="tableView" destination="tbc-eE-uCE" id="9KP-Wc-F4g"/>
+                <outlet property="titleLabel" destination="1eb-Ax-1gc" id="ozy-AA-dW3"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
