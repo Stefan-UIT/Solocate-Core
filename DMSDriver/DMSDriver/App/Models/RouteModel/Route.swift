@@ -176,12 +176,15 @@ class Route: BaseModel {
     var totalDistance = ""
     var locationList:[Address] = []
     var notes:[Note] = []
-    //NEW
     var truckType:TruckType?
     var routeMaster:RouteMaster?
     var company:Company?
     var loadVolume:String = "0.0"
     var assignedInfo:[AssignedInfo]?
+    
+    
+    // NEW
+    
     
     var isAllowedGoToDelivery:Bool {
         get {
@@ -213,6 +216,20 @@ class Route: BaseModel {
         }
     
         return result
+    }
+    
+    func order(orderID:Int) -> Order? {
+//        let array = orderList.filter({orderID == $0.id})
+//        let order = array.first
+        if let i = orderList.firstIndex(where: { orderID == $0.id }) {
+            return orderList[i]
+        }
+        return nil
+    }
+    
+    func updateOrder(orderID:Int, toStatus status:Status) {
+        let order = self.order(orderID:orderID)
+        order?.status = status
     }
     
     class AssignedInfo: BaseModel {

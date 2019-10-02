@@ -20,8 +20,8 @@ class OrderItemTableViewCell: UITableViewCell {
     @IBOutlet weak var lblCustomerName: UILabel!
     @IBOutlet weak var lblConsigneeName: UILabel!
     @IBOutlet weak var lblQuantity: UILabel!
-    @IBOutlet weak var lblPallet: UILabel!
-    @IBOutlet weak var lblWMS: UILabel!
+//    @IBOutlet weak var lblPallet: UILabel!
+    @IBOutlet weak var orderTypeLabel: UILabel?
     
     @IBOutlet weak var lblExpectedTime: UILabel?
     @IBOutlet weak var lblRecordsFrom: UILabel?
@@ -32,9 +32,9 @@ class OrderItemTableViewCell: UITableViewCell {
     @IBOutlet weak var vContent: UIView?
 
     
-    @IBOutlet weak var lblCartonInPallets: UILabel!
-    @IBOutlet weak var lblPalletHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var lblPalletTopConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var lblCartonInPallets: UILabel!
+//    @IBOutlet weak var lblPalletHeightConstraint: NSLayoutConstraint!
+//    @IBOutlet weak var lblPalletTopConstraint: NSLayoutConstraint!
     
     var order: Order! {
         didSet {
@@ -73,15 +73,15 @@ class OrderItemTableViewCell: UITableViewCell {
         lblCustomerName?.text = order.customer?.userName
         lblConsigneeName?.text = order.consigneeName
         lblQuantity?.text = "\(detail.qty ?? 0)"
-        if detail.isPallet {
-            lblPallet?.text = "\(detail.cartonsInPallet ?? 0)"
-        } else {
-            lblPallet.isHidden = true
-            lblCartonInPallets.isHidden = true
-            lblPalletHeightConstraint.constant = 0
-            lblPalletTopConstraint.constant = 0
-        }
-        lblWMS?.text = order.wmsOrderCode
+//        if detail.isPallet {
+//            lblPallet?.text = "\(detail.cartonsInPallet ?? 0)"
+//        } else {
+//            lblPallet.isHidden = true
+//            lblCartonInPallets.isHidden = true
+//            lblPalletHeightConstraint.constant = 0
+//            lblPalletTopConstraint.constant = 0
+//        }
+        orderTypeLabel?.text = order.orderType.name
         lblFromAddresss?.text = order.from?.address
         lblToAddress?.text = order.to?.address
         lblUrgency?.textColor = order.colorUrgent

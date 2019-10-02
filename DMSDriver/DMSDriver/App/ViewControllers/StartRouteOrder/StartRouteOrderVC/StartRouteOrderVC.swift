@@ -137,7 +137,7 @@ class StartRouteOrderVC: BaseViewController {
     }
     
     @IBAction func onbtnClickSkip(btn:UIButton) {
-        ReasonSkipView.present(inViewController: self) { [weak self] (success, reason) in
+        ReasonSkipView.present(inViewController: self, reasonType: .UnableToFinish) { [weak self] (success, reason) in
             guard let _reason = reason else {return}
             self?.cancelOrder(reason: _reason)
         }

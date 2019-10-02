@@ -127,6 +127,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                           "order-info".localized.uppercased(),
                           "pickup".localized.uppercased(),
                           "Delivery".localized.uppercased(),
+                          "COD".localized.uppercased(),
                           "SKUs".localized.uppercased(),
                           "Signature".localized.uppercased(),
                           "Picture".localized.uppercased(),
@@ -264,14 +265,15 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     func showReasonView(isUnableToFinish:Bool) {
-        ReasonSkipView.present(inViewController: self) {[weak self] (success, reason) in
+        let reasonType = isUnableToFinish ? ReasonType.UnableToFinish : ReasonType.Cancel
+        ReasonSkipView.present(inViewController: self, reasonType: reasonType) {[weak self] (success, reason) in
             guard let _reason = reason else {return}
             self?.cancelOrder(reason: _reason, isUnableToFinish: isUnableToFinish)
         }
     }
     
     func showReturnReasonView(completionHandler:@escaping (_ reason:Reason)->Void) {
-        ReasonSkipView.present(inViewController: self, isCancelledReason: false) {(success, reason) in
+        ReasonSkipView.present(inViewController: self, isCancelledReason: false, reasonType: .UnableToFinish) {(success, reason) in
             guard let _reason = reason else {return}
             completionHandler(_reason)
         }
@@ -356,15 +358,45 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         }
     }
     
+    func updateLoadedQuantity(order:Order) {
+        let status = order.getLoadedStatusWithLoadingQuantity()
+        updateOrderStatus(status.rawValue, updateDetailType: .Load)
+    }
+    
+    func updatePickUpQuantity(order:Order) {
+        let status = StatusOrder.InTransit
+        updateOrderStatus(status.rawValue, updateDetailType: .Load)
+    }
+    
+    func handleLoadAction() {
+        guard let order = orderDetail else { return }
+        if order.isValidAllLoadedQty {
+            updateLoadedQuantity(order: order)
+        } else {
+            let message = "loaded-quantity-must-be-less-than-or-equal-the-quantity".localized
+            showAlertView(message)
+            return
+        }
+    }
+    
+    func handlePickUpAction() {
+        guard let order = orderDetail else { return }
+        if order.isValidAllLoadedQty {
+            updatePickUpQuantity(order: order)
+        } else {
+            let message = "picked-up-quantity-must-be-less-than-or-equal-the-quantity".localized
+            showAlertView(message)
+            return
+        }
+    }
+    
     private func handleUpdateStatusWithDeliveryType() {
-        switch orderDetail?.statusOrder.rawValue {
+        guard let order = orderDetail else { return }
+        switch order.statusOrder.rawValue {
         case StatusOrder.newStatus.rawValue:
-            showReasonView(isUnableToFinish: false)
+//            showReasonView(isUnableToFinish: false)
+            handleLoadAction()
             break
-//        case StatusOrder.deliveryStatus.rawValue, StatusOrder.PartialDelivered.rawValue:
-//            showPalletReturnedPopUp()
-//            break
-            
         case StatusOrder.Loaded.rawValue, StatusOrder.PartialLoaded.rawValue:
             App().showAlertView("do-you-want-to-start-this-order".localized,
                                 positiveTitle: "YES".localized,
@@ -384,10 +416,10 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     private func handleUpdateStatusWithPickedUpType() {
-        guard let _order = orderDetail, let detail = _order.details?.first else { return }
-        switch orderDetail?.statusOrder.rawValue {
+        guard let _order = orderDetail else { return }
+        switch _order.statusOrder.rawValue {
         case StatusOrder.newStatus.rawValue:
-            self.submitPickedUpQuantity(detail: detail)
+            handlePickUpAction()
             break
         case StatusOrder.InTransit.rawValue:
             handleFinishAction()
@@ -397,43 +429,26 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         }
     }
     
-    func submitPickedUpQuantity(detail:Order.Detail) {
-        if let loadedQty = detail.loadedQty, let qty = detail.qty, loadedQty <= qty {
-//            if (detail.isPallet) {
-//                if let loadedCartons = detail.loadedCartonsInPallet {
-//                    let cartons = detail.cartonsInPallet ?? 0
-//                    if loadedCartons <= cartons {
-//                        updatePickedUpQuantity(detail:detail)
-//                        return
-//                    } else {
-//                        let message = String(format: "picked-up-cartons-quantity-must-be-less-than-or-equal".localized, "\(detail.cartonsInPallet ?? 0)")
-//                        showAlertView(message)
-//                    }
-//                }
-//            }
-            updatePickedUpQuantity(detail:detail)
-            // call without loaded carton
-        } else {
-            let message = String(format: "picked-up-quantity-must-be-less-than-or-equal".localized, "\(detail.qty ?? 0)")
-            showAlertView(message)
-            return
-        }
-    }
-    
-    func updatePickedUpQuantity(detail:Order.Detail) {
-        guard let pickedUpQty = detail.loadedQty else { return }
-        var message = "picked-up-quantity".localized
-        message += ": \(pickedUpQty)"
-//        if detail.isPallet && detail.loadedCartonsInPallet != nil {
-//            message += "\n" + "picked-up-cartons-qty".localized
-//            message += ": \(detail.loadedCartonsInPallet!)"
+//    func submitPickedUpQuantity(detail:Order.Detail) {
+//        if let loadedQty = detail.loadedQty, let qty = detail.qty, loadedQty <= qty {
+//            updatePickedUpQuantity(detail:detail)
+//            // call without loaded carton
+//        } else {
+//            let message = String(format: "picked-up-quantity-must-be-less-than-or-equal".localized, "\(detail.qty ?? 0)")
+//            showAlertView(message)
+//            return
 //        }
-        
-        self.showAlertView(MSG_ARE_YOU_SURE, message, positiveAction: { [weak self](action) in
-            let status = StatusOrder.InTransit.rawValue
-            self?.updateOrderStatus(status,updateDetailType: .Load)
-        })
-    }
+//    }
+//
+//    func updatePickedUpQuantity(detail:Order.Detail) {
+//        guard let pickedUpQty = detail.loadedQty else { return }
+//        var message = "picked-up-quantity".localized
+//        message += ": \(pickedUpQty)"
+//        self.showAlertView(MSG_ARE_YOU_SURE, message, positiveAction: { [weak self](action) in
+//            let status = StatusOrder.InTransit.rawValue
+//            self?.updateOrderStatus(status,updateDetailType: .Load)
+//        })
+//    }
     
     func handleUpdateStatusAction() {
         guard let _order = orderDetail else { return }
@@ -450,7 +465,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
     
     @IBAction func onUnableToStartTouchUp(_ sender: UIButton) {
-        self.showReasonView(isUnableToFinish: true)
+        guard let _order = orderDetail else { return }
+        let isCancelled = _order.isNewStatus
+        self.showReasonView(isUnableToFinish: !isCancelled)
     }
     
     @IBAction func tapOrderNavigateButton(_ sender: Any) {
@@ -518,6 +535,8 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         case .sectionCOD:
 //            return (_orderDetail.isHasCOD) ? heightHeader : CGFloat.leastNormalMagnitude
             return CGFloat.leastNormalMagnitude
+//        case .sectionSignature, .sectionPictures:
+//            return (_orderDetail.isLoaded || _orderDetail.isNewStatus) ? CGFloat.leastNormalMagnitude : heightHeader
         default:
             return heightHeader
         }
@@ -740,131 +759,131 @@ fileprivate extension OrderDetailViewController {
         
     }
     
-    func cellNatureOfGood(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
-        let cell = tableView.dequeueReusableCell(withIdentifier: orderDetailNatureOfGoodsCell,
-                                                    for: indexPath) as! OrderDetailTableViewCell
-        cell.selectionStyle = .none
-        guard let order = orderDetail, let detail = order.details?[indexPath.row] else { return cell }
-        let barCode = detail.barCode ?? ""
-        let paRefId = ((detail.packageRefId) != nil) ? "\((detail.packageRefId)!)" : ""
-        cell.detail = detail
-        cell.nameLabel?.text = detail.package?.name
-        cell.contentLabel?.text = "\(detail.qty ?? 0)"
-        cell.lblBarcode?.text = barCode
-        cell.lblPackgage?.text = paRefId
-        cell.loadedQuantityLabel?.text = IntSlash(detail.loadedQty)
-        cell.loadedQuantityLabel?.textColor = AppColor.greenColor
-//        cell.loadedCartonsLabel?.text = IntSlash(detail.loadedCartonsInPallet)
-//        cell.loadedCartonsLabel?.textColor = AppColor.greenColor
-//        cell.returnedPalletsLabel?.text = IntSlash(detail.returnedPalletQty)
-        cell.loadedPickUpLabel.text = "\(detail.loadedQty ?? 0)"
-//        cell.loadedPickUpCartonsLabel.text = "\(detail.loadedCartonsInPallet ?? 0)"
-        
-        let isPickUpAndNewOrder = order.isPickUpType && order.isNewStatus
-        var actualQty:String!
-        if order.isCancelled {
-            actualQty = "0"
-        } else {
-            actualQty = (isPickUpAndNewOrder) ? "\(detail.loadedQty ?? 0)" : "\(detail.actualQty ?? 0)"
-        }
-        cell.actualQuantityTextField?.text = actualQty
-        cell.vContent?.cornerRadius = 0
-        cell.delegate = self
-        if indexPath.row == (orderDetail?.details?.count ?? 0 ) - 1{
-            cell.vContent?.roundCornersLRB()
-        }
-        
-        func hideLoadedQuantityContainer() {
-            cell.loadedQtyViewContainer?.isHidden = true
-            cell.loadedQtyTopSpaceConstraint?.constant = 0.0
-            cell.loadedQtyContainerHeightConstraint?.constant = 0.0
-        }
-        
-        if order.isPickUpType {
-            cell.returnedPalletsContainerHeightConstraint.constant = 0
-            if detail.isPallet && (detail.loadedQty != nil || detail.loadedCartonsInPallet != nil) && !order.isNewStatus {
-                cell.loadedPickUpQtyContainerHeightConstraint.constant = 50
-            } else if detail.loadedQty != nil && !detail.isPallet && !order.isNewStatus {
-                cell.loadedPickUpQtyContainerHeightConstraint.constant = 25
-                cell.loadedPickUpCartonsContainerHeightConstraint.constant = 0
-            } else {
-                cell.loadedPickUpQtyContainerHeightConstraint.constant = 0
-            }
-            cell.deliveredQtyStaticLabel?.text = (order.isNewStatus) ? "picked-up-quantity".localized : "delivered-quantity".localized
-            cell.deliveredCartonsStaticLabel?.text = (order.isNewStatus) ? "picked-up-cartons-qty".localized : "delivered-cartons-quantity".localized
-            hideLoadedQuantityContainer()
-        } else {
-            cell.loadedPickUpQtyContainerHeightConstraint.constant = 0
-            cell.returnedPalletsContainerHeightConstraint.constant = 22
-            if !detail.isPallet {
-                cell.returnedPalletsContainerHeightConstraint.constant = 0
-                cell.loadedCartonsQtyViewContainer?.isHidden = true
-                cell.loadedQtyContainerHeightConstraint?.constant = 22.0
-            }
-        }
-        
-        let isShowingOnly = order.isDeliveryType && (order.statusOrder == StatusOrder.newStatus || order.statusOrder == StatusOrder.Loaded || order.statusOrder == StatusOrder.PartialLoaded || order.statusOrder == StatusOrder.WarehouseClarification || order.statusOrder == StatusOrder.CancelStatus)
-        
-        func handleEnablingTextField() {
-            if order.isDeliveryType {
-                let isEnabled = order.statusOrder == StatusOrder.InTransit
-                cell.actualQuantityTextField?.isEnabled = isEnabled
-                cell.actualCartonsInPalletTextField?.isEnabled = isEnabled
-            } else {
-                let isEnabled = order.isNewStatus || order.isInTransit
-                cell.actualQuantityTextField?.isEnabled = isEnabled
-                cell.actualCartonsInPalletTextField?.isEnabled = isEnabled
-            }
-        }
-        
-        func handleShowingPalletSection() {
-            cell.handleShowingDeliveredQtyRecored(isHidden: isShowingOnly)
-            cell.palletsViewContainerHeightConstraint?.constant = (isShowingOnly) ? 20.0 : 50.0
-        }
-        
-        func handleShowingCartonSection() {
-            let isShowedCartonSection = detail.package?.cd == PackageE.Pallet.rawValue
-            cell.cartonInPalletViewContainer?.isHidden = !isShowedCartonSection
-            
-            if isShowedCartonSection {
-                var actualCartons:String!
-                if order.isCancelled {
-                    actualCartons = "0"
-                } else {
-                    actualCartons = (isPickUpAndNewOrder) ? "\(detail.loadedCartonsInPallet ?? 0)" : "\(detail.actualCartonsInPallet ?? 0)"
-                }
-                cell.actualCartonsInPalletTextField?.text = actualCartons
-                cell.cartonInPalletsLabel?.text = "\(detail.cartonsInPallet ?? 0)"
-                cell.handleShowingDeliveredCartonsRecord(isHidden: isShowingOnly)
-                cell.cartonsViewContainerHeightConstraint?.constant = (isShowingOnly) ? 20.0 : 50.0
-                cell.cartonsViewContainerTopSpacing?.constant = 6.0
-                
-            } else {
-                cell.cartonsViewContainerHeightConstraint?.constant = 0.0
-                cell.cartonsViewContainerTopSpacing?.constant = 0.0
-            }
-        }
-        
-        func handleShowingWMSCodeUI() {
-            let isHidden = order.orderGroup != OrderGroup.Logistic
-            cell.wmsOrderCodeViewContainer?.isHidden = isHidden
-            cell.wmsMainifestNumberViewContainer?.isHidden = isHidden
-            cell.wmsManifestHeightConstraint?.constant = (isHidden) ? 0.0 : 22.0
-            cell.wmsOrderCodeHeightConstraint?.constant = (isHidden) ? 0.0 : 22.0
-            cell.wmsOrderCodeTopSpacing?.constant = (isHidden) ? 0.0 : 6.0
-            cell.wmsManifestContainerTopSpacing?.constant = (isHidden) ? 0.0 : 8.0
-            cell.wmsOrderCodeLabel?.text = Slash(detail.wmsOrderCode)
-            cell.wmsOrderManifestNumberLabel?.text = Slash(detail.wmsManifestNumber)
-            
-        }
-        handleShowingWMSCodeUI()
-        handleShowingPalletSection()
-        handleShowingCartonSection()
-        handleEnablingTextField()
-//        tableView.reloadSections(OrderDetailSection.sectionNatureOfGoods.indexSet, with: .none)
-        
-        return cell
-    }
+//    func cellNatureOfGood(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: orderDetailNatureOfGoodsCell,
+//                                                    for: indexPath) as! OrderDetailTableViewCell
+//        cell.selectionStyle = .none
+//        guard let order = orderDetail, let detail = order.details?[indexPath.row] else { return cell }
+//        let barCode = detail.barCode ?? ""
+//        let paRefId = ((detail.packageRefId) != nil) ? "\((detail.packageRefId)!)" : ""
+//        cell.detail = detail
+//        cell.nameLabel?.text = detail.package?.name
+//        cell.contentLabel?.text = "\(detail.qty ?? 0)"
+//        cell.lblBarcode?.text = barCode
+//        cell.lblPackgage?.text = paRefId
+//        cell.loadedQuantityLabel?.text = IntSlash(detail.loadedQty)
+//        cell.loadedQuantityLabel?.textColor = AppColor.greenColor
+////        cell.loadedCartonsLabel?.text = IntSlash(detail.loadedCartonsInPallet)
+////        cell.loadedCartonsLabel?.textColor = AppColor.greenColor
+////        cell.returnedPalletsLabel?.text = IntSlash(detail.returnedPalletQty)
+//        cell.loadedPickUpLabel.text = "\(detail.loadedQty ?? 0)"
+////        cell.loadedPickUpCartonsLabel.text = "\(detail.loadedCartonsInPallet ?? 0)"
+//
+//        let isPickUpAndNewOrder = order.isPickUpType && order.isNewStatus
+//        var actualQty:String!
+//        if order.isCancelled {
+//            actualQty = "0"
+//        } else {
+//            actualQty = (isPickUpAndNewOrder) ? "\(detail.loadedQty ?? 0)" : "\(detail.actualQty ?? 0)"
+//        }
+//        cell.actualQuantityTextField?.text = actualQty
+//        cell.vContent?.cornerRadius = 0
+//        cell.delegate = self
+//        if indexPath.row == (orderDetail?.details?.count ?? 0 ) - 1{
+//            cell.vContent?.roundCornersLRB()
+//        }
+//
+//        func hideLoadedQuantityContainer() {
+//            cell.loadedQtyViewContainer?.isHidden = true
+//            cell.loadedQtyTopSpaceConstraint?.constant = 0.0
+//            cell.loadedQtyContainerHeightConstraint?.constant = 0.0
+//        }
+//
+//        if order.isPickUpType {
+//            cell.returnedPalletsContainerHeightConstraint.constant = 0
+//            if detail.isPallet && (detail.loadedQty != nil || detail.loadedCartonsInPallet != nil) && !order.isNewStatus {
+//                cell.loadedPickUpQtyContainerHeightConstraint.constant = 50
+//            } else if detail.loadedQty != nil && !detail.isPallet && !order.isNewStatus {
+//                cell.loadedPickUpQtyContainerHeightConstraint.constant = 25
+//                cell.loadedPickUpCartonsContainerHeightConstraint.constant = 0
+//            } else {
+//                cell.loadedPickUpQtyContainerHeightConstraint.constant = 0
+//            }
+//            cell.deliveredQtyStaticLabel?.text = (order.isNewStatus) ? "picked-up-quantity".localized : "delivered-quantity".localized
+//            cell.deliveredCartonsStaticLabel?.text = (order.isNewStatus) ? "picked-up-cartons-qty".localized : "delivered-cartons-quantity".localized
+//            hideLoadedQuantityContainer()
+//        } else {
+//            cell.loadedPickUpQtyContainerHeightConstraint.constant = 0
+//            cell.returnedPalletsContainerHeightConstraint.constant = 22
+//            if !detail.isPallet {
+//                cell.returnedPalletsContainerHeightConstraint.constant = 0
+//                cell.loadedCartonsQtyViewContainer?.isHidden = true
+//                cell.loadedQtyContainerHeightConstraint?.constant = 22.0
+//            }
+//        }
+//
+//        let isShowingOnly = order.isDeliveryType && (order.statusOrder == StatusOrder.newStatus || order.statusOrder == StatusOrder.Loaded || order.statusOrder == StatusOrder.PartialLoaded || order.statusOrder == StatusOrder.WarehouseClarification || order.statusOrder == StatusOrder.CancelStatus)
+//
+//        func handleEnablingTextField() {
+//            if order.isDeliveryType {
+//                let isEnabled = order.statusOrder == StatusOrder.InTransit
+//                cell.actualQuantityTextField?.isEnabled = isEnabled
+//                cell.actualCartonsInPalletTextField?.isEnabled = isEnabled
+//            } else {
+//                let isEnabled = order.isNewStatus || order.isInTransit
+//                cell.actualQuantityTextField?.isEnabled = isEnabled
+//                cell.actualCartonsInPalletTextField?.isEnabled = isEnabled
+//            }
+//        }
+//
+//        func handleShowingPalletSection() {
+//            cell.handleShowingDeliveredQtyRecored(isHidden: isShowingOnly)
+//            cell.palletsViewContainerHeightConstraint?.constant = (isShowingOnly) ? 20.0 : 50.0
+//        }
+//
+//        func handleShowingCartonSection() {
+//            let isShowedCartonSection = detail.package?.cd == PackageE.Pallet.rawValue
+//            cell.cartonInPalletViewContainer?.isHidden = !isShowedCartonSection
+//
+//            if isShowedCartonSection {
+//                var actualCartons:String!
+//                if order.isCancelled {
+//                    actualCartons = "0"
+//                } else {
+//                    actualCartons = (isPickUpAndNewOrder) ? "\(detail.loadedCartonsInPallet ?? 0)" : "\(detail.actualCartonsInPallet ?? 0)"
+//                }
+//                cell.actualCartonsInPalletTextField?.text = actualCartons
+//                cell.cartonInPalletsLabel?.text = "\(detail.cartonsInPallet ?? 0)"
+//                cell.handleShowingDeliveredCartonsRecord(isHidden: isShowingOnly)
+//                cell.cartonsViewContainerHeightConstraint?.constant = (isShowingOnly) ? 20.0 : 50.0
+//                cell.cartonsViewContainerTopSpacing?.constant = 6.0
+//
+//            } else {
+//                cell.cartonsViewContainerHeightConstraint?.constant = 0.0
+//                cell.cartonsViewContainerTopSpacing?.constant = 0.0
+//            }
+//        }
+//
+//        func handleShowingWMSCodeUI() {
+//            let isHidden = order.orderGroup != OrderGroup.Logistic
+//            cell.wmsOrderCodeViewContainer?.isHidden = isHidden
+//            cell.wmsMainifestNumberViewContainer?.isHidden = isHidden
+//            cell.wmsManifestHeightConstraint?.constant = (isHidden) ? 0.0 : 22.0
+//            cell.wmsOrderCodeHeightConstraint?.constant = (isHidden) ? 0.0 : 22.0
+//            cell.wmsOrderCodeTopSpacing?.constant = (isHidden) ? 0.0 : 6.0
+//            cell.wmsManifestContainerTopSpacing?.constant = (isHidden) ? 0.0 : 8.0
+//            cell.wmsOrderCodeLabel?.text = Slash(detail.wmsOrderCode)
+//            cell.wmsOrderManifestNumberLabel?.text = Slash(detail.wmsManifestNumber)
+//
+//        }
+//        handleShowingWMSCodeUI()
+//        handleShowingPalletSection()
+//        handleShowingCartonSection()
+//        handleEnablingTextField()
+////        tableView.reloadSections(OrderDetailSection.sectionNatureOfGoods.indexSet, with: .none)
+//
+//        return cell
+//    }
     
     func cellInfoDetail(_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
         let item = orderInforDetail[indexPath.row]
@@ -959,14 +978,10 @@ extension OrderDetailViewController: OrderDetailSKUCellDelegate {
     func didEnterDeliveredQuantityTextField(_ cell: OrderDetailSKUCell, value: String, detail: Order.Detail) {
         guard let _order = orderDetail else { return }
         let inputQty = Int(value)
-        if _order.isDeliveryType {
-            detail.actualQty = inputQty
+        if _order.isNewStatus {
+            detail.loadedQty = inputQty
         } else {
-            if _order.isNewStatus {
-                detail.loadedQty = inputQty
-            } else {
-                detail.actualQty = inputQty
-            }
+            detail.actualQty = inputQty
         }
     }
 }
@@ -976,31 +991,27 @@ extension OrderDetailViewController: OrderDetailSKUCellDelegate {
 extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
     
     func didEnterPalletsQuantityTextField(_ cell: OrderDetailTableViewCell, value: String, detail:Order.Detail) {
-        guard let _order = orderDetail else { return }
-        let inputQty = Int(value)
-        if _order.isDeliveryType {
-            detail.actualQty = inputQty
-        } else {
-            if _order.isNewStatus {
-                detail.loadedQty = inputQty
-            } else {
-                detail.actualQty = inputQty
-            }
-        }
+//        guard let _order = orderDetail else { return }
+//        let inputQty = Int(value)
+//        if _order.isNewStatus {
+//            detail.loadedQty = inputQty
+//        } else {
+//            detail.actualQty = inputQty
+//        }
     }
     
     func didEnterCartonsQuantityTextField(_ cell: OrderDetailTableViewCell, value: String, detail:Order.Detail) {
-        guard let _order = orderDetail else { return }
-        let inputQty = Int(value)
-        if _order.isDeliveryType {
-            detail.actualCartonsInPallet = inputQty
-        } else {
-            if _order.isNewStatus {
-                detail.loadedCartonsInPallet = inputQty
-            } else {
-                detail.actualCartonsInPallet = inputQty
-            }
-        }
+//        guard let _order = orderDetail else { return }
+//        let inputQty = Int(value)
+//        if _order.isDeliveryType {
+//            detail.actualCartonsInPallet = inputQty
+//        } else {
+//            if _order.isNewStatus {
+//                detail.loadedCartonsInPallet = inputQty
+//            } else {
+//                detail.actualCartonsInPallet = inputQty
+//            }
+//        }
     }
     
     func didSelectGo(_ cell: OrderDetailTableViewCell, _ btn: UIButton) {
@@ -1086,7 +1097,7 @@ fileprivate extension OrderDetailViewController{
     
     private func handleFinishAction() {
         guard let _orderDetail = orderDetail, let detail = _orderDetail.details?.first else {return}
-        let actualQty = _orderDetail.details?.first?.actualQty
+//        let actualQty = _orderDetail.details?.first?.actualQty
         if _orderDetail.isRequireImage() &&
             _orderDetail.pictures?.count ?? 0 <= 0{
             self.showAlertView("picture-required".localized) {(action) in
@@ -1099,25 +1110,33 @@ fileprivate extension OrderDetailViewController{
                 //self?.didUpdateStatus?(_orderDetail, nil)
             }
             
-        } else if (actualQty == nil || actualQty! == 0 || actualQty > detail.qty!) {
-            let mes = "delivered-quantity-must-be-less-than-or-equal".localized
-            let pickupMes = mes + "\(detail.qty!)"
-            showAlertView(pickupMes)
+        } else if (!_orderDetail.isValidAllDeliveredQty) {
+            let mes = "delivered-quantity-must-be-less-than-or-equal-the-quantity".localized
+            showAlertView(mes)
         } else {
             
-            var message = "delivered-quantity".localized
-            message += ": \(detail.actualQty!)"
+//            var message = "delivered-quantity".localized
+//            message += ": \(detail.actualQty!)"
             
-            self.showAlertView(MSG_ARE_YOU_SURE, message, positiveAction: { [weak self](action) in
-                let statusNeedUpdate = detail.getFinishedStatusWithInputQuantity()
-                if statusNeedUpdate == .PartialDelivered {
-                    self?.showReturnReasonView { (reason) in
-                        self?.updateOrderStatus(statusNeedUpdate.rawValue,cancelReason: reason)
-                    }
-                } else {
-                    self?.updateOrderStatus(statusNeedUpdate.rawValue)
+//            self.showAlertView(MSG_ARE_YOU_SURE, message, positiveAction: { [weak self](action) in
+//                let statusNeedUpdate = detail.getFinishedStatusWithInputQuantity()
+//                if statusNeedUpdate == .PartialDelivered {
+//                    self?.showReturnReasonView { (reason) in
+//                        self?.updateOrderStatus(statusNeedUpdate.rawValue,cancelReason: reason)
+//                    }
+//                } else {
+//                    self?.updateOrderStatus(statusNeedUpdate.rawValue)
+//                }
+//            })
+            
+            let statusNeedUpdate = _orderDetail.getDeliveredStatusWithDeliveredQuantity()
+            if statusNeedUpdate == .PartialDelivered {
+                self.showReturnReasonView { (reason) in
+                    self.updateOrderStatus(statusNeedUpdate.rawValue,cancelReason: reason)
                 }
-            })
+            } else {
+                self.updateOrderStatus(statusNeedUpdate.rawValue)
+            }
         }
             
     }
@@ -1158,7 +1177,10 @@ fileprivate extension OrderDetailViewController{
     }
     
     private func handleShowingUnableToStartButton() {
-        let isHiddenUnableToStartButton = orderDetail?.status?.code != StatusOrder.InTransit.rawValue
+        var isHiddenUnableToStartButton = true
+        if orderDetail?.status?.code == StatusOrder.InTransit.rawValue || (orderDetail?.isNewStatus ?? false) {
+            isHiddenUnableToStartButton = false
+        }
         unableToStartButton.isHidden = isHiddenUnableToStartButton
     }
     
@@ -1168,15 +1190,14 @@ fileprivate extension OrderDetailViewController{
         updateStatusButton?.isEnabled = true
         switch orderDetail?.statusOrder.rawValue {
         case StatusOrder.newStatus.rawValue:
-            updateStatusButton?.setTitle("cancel".localized.uppercased(), for: .normal)
-            updateStatusButton?.backgroundColor = AppColor.redColor
+            updateStatusButton?.setTitle("Load".localized.uppercased(), for: .normal)
+            updateStatusButton?.backgroundColor = AppColor.pickedUpStatus
             break
         case StatusOrder.InTransit.rawValue:
             updateStatusButton?.setTitle("Deliver".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = AppColor.greenColor
             break
         case StatusOrder.deliveryStatus.rawValue, StatusOrder.PartialDelivered.rawValue:
-            //            updateStatusButton?.setTitle("update-palette-return".localized.uppercased(), for: .normal)
             updateStatusButton?.setTitle("update-returned-pallets".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = AppColor.greenColor
             break
@@ -1223,10 +1244,14 @@ fileprivate extension OrderDetailViewController{
         case StatusOrder.newStatus.rawValue:
             updateStatusButton?.setTitle("picked-up".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = AppColor.pickedUpStatus
+            
+            unableToStartButton?.setTitle("cancel".localized.uppercased(), for: .normal)
             break
         case StatusOrder.InTransit.rawValue:
             updateStatusButton?.setTitle("Deliver".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = AppColor.greenColor
+            
+            unableToStartButton?.setTitle("unable-to-deliver".localized.uppercased(), for: .normal)
             break
         default:
             updateStatusButton?.isHidden = true
@@ -1244,8 +1269,6 @@ fileprivate extension OrderDetailViewController{
     }
     
     private func updateButtonStatus() {
-//        orderDetail?.status?.code = StatusOrder.InTransit.rawValue
-//        orderDetail?.details?[0].package?.cd = "PLT"
         guard let _order = orderDetail else { return }
         if _order.isPickUpType {
             handleShowingButtonStatusWithPickedUpType()
@@ -1353,6 +1376,7 @@ extension OrderDetailViewController{
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
+                self?.updateOrderStatusInRoute(orderID: order.id, status: order.status!)
                 self?.setupDataDetailInforRows()
                 self?.updateButtonStatus()
                 self?.tableView?.reloadData()
@@ -1363,6 +1387,10 @@ extension OrderDetailViewController{
                 self?.showAlertView(error.getMessage())
             }
         }
+    }
+    
+    func updateOrderStatusInRoute(orderID:Int, status:Status) {
+        route?.updateOrder(orderID: orderID, toStatus: status)
     }
     
     func submitSignature(_ file: AttachFileModel,_ name:String) {

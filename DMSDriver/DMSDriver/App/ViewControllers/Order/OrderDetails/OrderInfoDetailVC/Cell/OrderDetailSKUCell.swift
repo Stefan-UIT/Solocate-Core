@@ -25,6 +25,7 @@ class OrderDetailSKUCell: UITableViewCell {
     
     @IBOutlet weak var deliveredQtyStaticLabel: UILabel!
     
+    @IBOutlet weak var loadedQtyStaticLabel: UILabel!
     @IBOutlet weak var deliveredQtyHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var deliveredQtyViewContainer: UIView!
@@ -47,29 +48,26 @@ class OrderDetailSKUCell: UITableViewCell {
         quantityLabel.text = IntSlash(detail.qty)
         
         updateDeliverdQtyUI(order: order)
-        updateLoadedQtyUI()
+        updateLoadedQtyUI(order:order)
         handleDisablingTextField(order:order)
         updateDeliveredTextFieldValue(order: order)
     }
     
     func updateDeliveredTextFieldValue(order:Order) {
-        let isPickUpAndNewOrder = order.isPickUpType && order.isNewStatus
+//        let isPickUpAndNewOrder = order.isPickUpType && order.isNewStatus
         var actualQty:String!
         if order.isCancelled {
             actualQty = "0"
         } else {
-            actualQty = (isPickUpAndNewOrder) ? "\(detail.loadedQty ?? 0)" : "\(detail.actualQty ?? 0)"
+            let orderLoadedQty = (detail.loadedQty != nil) ? "\(detail.loadedQty!)" : ""
+            let orderActualQty = (detail.actualQty != nil) ? "\(detail.actualQty!)" : ""
+            actualQty = (order.isNewStatus) ? orderLoadedQty : orderActualQty
         }
         deliveredQtyTextField.text = actualQty
     }
     
     func handleDisablingTextField(order:Order) {
-        var isDisabled:Bool!
-        if order.isPickUpType {
-            isDisabled = order.isCancelled || order.isFinished
-        } else {
-            isDisabled = !order.isInTransit
-        }
+        let isDisabled = order.isCancelled || order.isFinished
         deliveredQtyTextField.isEnabled = !isDisabled
     }
     
@@ -77,7 +75,9 @@ class OrderDetailSKUCell: UITableViewCell {
         if order.isPickUpType {
             deliveredQtyStaticLabel?.text = (order.isNewStatus) ? "picked-up-quantity".localized : "delivered-quantity".localized
         } else {
-            let isHidden = order.isNewStatus || order.isLoaded
+            deliveredQtyStaticLabel?.text = (order.isNewStatus) ? "loaded-quantity".localized : "delivered-quantity".localized
+            
+            let isHidden = order.isLoaded
             deliveryQtyViewContainer(isHidden: isHidden)
         }
     }
@@ -92,8 +92,9 @@ class OrderDetailSKUCell: UITableViewCell {
         loadedQtyViewContainer.isHidden = isHidden
     }
     
-    func updateLoadedQtyUI() {
+    func updateLoadedQtyUI(order:Order) {
         if let loadedQty = detail.loadedQty {
+            loadedQtyStaticLabel.text = order.isPickUpType ? "picked-up-quantity".localized : "loaded-quantity".localized
             loadedQtyLabel.text = "\(loadedQty)"
             loadedQtyViewContainer(isHidden:false)
         } else {

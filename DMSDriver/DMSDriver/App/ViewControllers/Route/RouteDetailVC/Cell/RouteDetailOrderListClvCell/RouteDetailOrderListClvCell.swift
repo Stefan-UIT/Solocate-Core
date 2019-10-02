@@ -141,9 +141,13 @@ extension RouteDetailOrderListClvCell: UITableViewDelegate, UITableViewDataSourc
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
+        guard let _route = route else { return }
         let vc:OrderDetailViewController = .loadSB(SB: .Order)
         vc.route = route
-        vc.orderDetail = dataDisplay[indexPath.row]
+        let currentOrder = dataDisplay[indexPath.row]
+        // cause reference object issue
+        let orderInRoute = _route.order(orderID: currentOrder.id)
+        vc.orderDetail = orderInRoute
         vc.updateOrderDetail = {[weak self](order) in
             self?.fetchData()
         }
