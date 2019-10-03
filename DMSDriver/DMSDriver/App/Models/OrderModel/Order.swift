@@ -178,25 +178,6 @@ class Order: BaseModel {
 
     class Detail: BaseModel {
         
-//        enum DetailStatus {
-//            case NotLoad
-//            case Loaded
-//            case Unload
-//
-//            var name:String{
-//                get{
-//                    switch self {
-//                    case .NotLoad:
-//                        return "not-load".localized
-//                    case .Loaded:
-//                        return "loaded".localized
-//                    case .Unload:
-//                        return "unloaded".localized
-//                    }
-//                }
-//            }
-//        }
-        
         struct Package:Mappable {
             var id:Int?
             var name:String?
@@ -231,6 +212,29 @@ class Order: BaseModel {
             }
         }
         
+        struct Pivot:Mappable {
+            var sku_id:Int?
+            var shipping_order_id:Int?
+            var cd:String?
+            var qty:Int?
+            var deliveredQty:Int?
+            var loadedQty:Int?
+            
+            
+            init?(map: Map) {
+                //
+            }
+            
+            mutating func mapping(map: Map) {
+                sku_id <- map["sku_id"]
+                shipping_order_id <- map["shipping_order_id"]
+                qty <- map["qty"]
+                loadedQty <- map["loaded_qty"]
+                deliveredQty <- map["delivered_qty"]
+                
+            }
+        }
+        
         var id:Int?
         var name:String?
         var order_id:Int?
@@ -239,16 +243,12 @@ class Order: BaseModel {
         var unit:Unit?
         var barCode:String?
         var packageRefId:Int?
+        var wmsOrderCode:String?
         // NEW
         var qty:Int?
         var actualQty:Int?
-        var cartonsInPallet:Int?
-        var actualCartonsInPallet:Int?
         var loadedQty:Int?
-        var loadedCartonsInPallet:Int?
-        var returnedPalletQty:Int?
-        var wmsOrderCode:String?
-        var wmsManifestNumber:String?
+        var pivot:Pivot?
         var isPallet:Bool {
             get {
                 return package?.cd == PackageE.Pallet.rawValue
@@ -265,31 +265,30 @@ class Order: BaseModel {
         
         override func mapping(map: Map) {
             id <- map["id"]
+            name <- map["name"]
             order_id <- map["order_id"]
             package_id <- map["package_id"]
-            qty <- map["qty"]
-            actualQty <- map["dlvd_qty"]
-            if actualQty == nil {
-                actualQty = qty
-            }
-            cartonsInPallet <- map["ctn_in_plt"]
-            actualCartonsInPallet <- map["ctn_dlvd"]
-            if actualCartonsInPallet == nil {
-                actualCartonsInPallet = cartonsInPallet
-            }
+            
+
             package <- map["package"]
             barCode <- map["barcode"]
             packageRefId <- map["pkg_ref_id"]
             unit <- map["unit"]
-            loadedQty <- map["load_qty"]
-            loadedCartonsInPallet <- map["ctn_loaded"]
-            returnedPalletQty <- map["plt_return"]
+            pivot <- map["pivot"]
+            
+            
+            
+            qty = pivot?.qty
+            actualQty = pivot?.deliveredQty
+            if actualQty == nil {
+                actualQty = qty
+            }
+            loadedQty = pivot?.loadedQty
         }
         
         enum DetailUpdateType {
             case Load
             case Deliver
-            case ReturnedPallet
         }
         
         func jsonDetailUpdateORderStatus(updateType:DetailUpdateType = .Deliver, orderStatus:StatusOrder) -> [String:Any] {
@@ -298,30 +297,10 @@ class Order: BaseModel {
             ]
             switch updateType {
             case .Load:
-//                if orderStatus == StatusOrder.Loaded || orderStatus == StatusOrder.PartialLoaded || orderStatus == StatusOrder.WarehouseClarification || orderStatus == StatusOrder.InTransit // in case Order pickup
-//                {
                     params["load_qty"] = loadedQty ?? 0
-//                    if isPallet {
-//                        params["ctn_loaded"] = loadedCartonsInPallet ?? 0
-//                    }
-//                }
-                break
-            case .ReturnedPallet:
-//                if orderStatus == StatusOrder.deliveryStatus || orderStatus == StatusOrder.PartialDelivered {
-                    params["plt_return"] = returnedPalletQty ?? 0
-                    params["dlvd_qty"] = actualQty ?? 0
-//                    if isPallet {
-//                        params["ctn_dlvd"] = actualCartonsInPallet ?? 0
-//                    }
-//                }
                 break
             default:
-//                if orderStatus == StatusOrder.deliveryStatus || orderStatus == StatusOrder.PartialDelivered {
                     params["dlvd_qty"] = actualQty ?? 0
-//                    if isPallet {
-//                        params["ctn_dlvd"] = actualCartonsInPallet ?? 0
-//                    }
-//                }
                 break
             }
             
@@ -670,7 +649,7 @@ class Order: BaseModel {
         wmsManifestNumber    <- map["wms_mnfst_no"]
         if let detail = details?.first { // cause Order & Detail is 1 to 1 relationship
             detail.wmsOrderCode = wmsOrderCode
-            detail.wmsManifestNumber = wmsManifestNumber
+//            detail.wmsManifestNumber = wmsManifestNumber
         }
         partialDeliveredReason    <- map["reason"]
         remark    <- map["remark"]

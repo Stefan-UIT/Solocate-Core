@@ -69,8 +69,8 @@ class LoadPackageTableViewCell: UITableViewCell {
         if isShowedCartonSection {
             cartonsViewContainerHeightConstraint?.constant = 50.0
             cartonsViewContainerTopSpacing?.constant = 6.0
-            cartonInPalletsLabel?.text = "\(detail.cartonsInPallet ?? 0)"
-            actualCartonsInPalletTextField?.text = (detail.loadedCartonsInPallet != nil) ? "\(detail.loadedCartonsInPallet!)" : ""            
+//            cartonInPalletsLabel?.text = "\(detail.cartonsInPallet ?? 0)"
+//            actualCartonsInPalletTextField?.text = (detail.loadedCartonsInPallet != nil) ? "\(detail.loadedCartonsInPallet!)" : ""
         } else {
             cartonsViewContainerHeightConstraint?.constant = 0.0
             cartonsViewContainerTopSpacing?.constant = 0.0
@@ -83,7 +83,7 @@ class LoadPackageTableViewCell: UITableViewCell {
         orderIDLabel?.text = (detail.order_id != nil) ? "\(detail.order_id!)" : "-"
         packageNameLabel?.text = detail.package?.name
         quantityLabel?.text = "\(detail.qty ?? 0)"
-        wmsOrderCodeLabel?.text = detail.wmsOrderCode ?? "-"
+//        wmsOrderCodeLabel?.text = detail.wmsOrderCode ?? "-"
         actualQuantityTextField?.text = (detail.loadedQty != nil) ? "\(detail.loadedQty!)" : ""
         vContent?.cornerRadius = 0
         customerNameLabel.text = Slash(order.customer?.userName)
@@ -101,18 +101,6 @@ class LoadPackageTableViewCell: UITableViewCell {
 
 //MARK: - UITEXTFIELD
 extension LoadPackageTableViewCell: UITextFieldDelegate {
-//    func textFieldDidEndEditing(_ textField: UITextField) {
-//        guard let palletTextField = actualQuantityTextField, let cartonTextField = actualCartonsInPalletTextField else { return }
-//        let text =  textField.text ?? ""
-//        if textField == palletTextField {
-//            detail.loadedQty = Int(text)
-////            delegate?.didEnterPalletsQuantityTextField(self, value: text, detail: self.detail)
-//        } else if textField == cartonTextField {
-//            detail.loadedCartonsInPallet = Int(text)
-////            delegate?.didEnterCartonsQuantityTextField(self, value: text, detail: self.detail)
-//        }
-//    }
-    
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         if let text = textField.text,
             let textRange = Range(range, in: text) {
@@ -122,7 +110,7 @@ extension LoadPackageTableViewCell: UITextFieldDelegate {
             if textField == palletTextField {
                 detail.loadedQty = Int(updatedText)
             } else if textField == cartonTextField {
-                detail.loadedCartonsInPallet = Int(updatedText)
+//                detail.loadedCartonsInPallet = Int(updatedText)
             }
         }
         return true
