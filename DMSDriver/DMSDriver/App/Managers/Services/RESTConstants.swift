@@ -21,6 +21,7 @@ enum PATH_REQUEST_URL: String{
     case GET_ORDER_BY_COORDINATOR = "backend-api/v1/orders/all-order-by-coordinator?date=%@"
     case GET_DRIVER_ROUTES_BY_DATE = "transaction/v1/mobile/routes/by-driver?start_time=%@&end_time=%@"
     case GET_RAMP_ROUTES_BY_DATE = "transaction/v1/mobile/routes/by-ramp?start_time=%@&end_time=%@"
+    case GET_ROUTES_LIST = "transaction/v1/routes?page=1&limit=100"
     case GET_ROUTE_BY_COORDINATOR = "backend-api/v1/routes/all-route-by-coordinator?date=%@"
     case GET_PACKAGES_IN_ROUTE = "backend-api/v1/routes/get-packages-by-driver?id=%@&date=%@"
     case GET_ORDER_DETAIL = "transaction/v1/orders/%@"

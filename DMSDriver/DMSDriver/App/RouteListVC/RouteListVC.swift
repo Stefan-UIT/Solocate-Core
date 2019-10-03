@@ -220,7 +220,7 @@ import Crashlytics
             }
             switch result{
             case .object(let obj):
-                if let data = obj.data {
+                if let data = obj.data?.data {
                     strongSelf.routes = data
                     // DMSCurrentRoutes.routes = data
                     strongSelf.lblNoResult?.isHidden = (strongSelf.routes.count > 0)
