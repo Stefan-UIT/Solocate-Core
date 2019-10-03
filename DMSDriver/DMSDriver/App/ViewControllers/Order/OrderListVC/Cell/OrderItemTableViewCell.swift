@@ -72,7 +72,7 @@ class OrderItemTableViewCell: UITableViewCell {
         lblTitle?.text = String(format: "#%d".localized, order.id)
         lblCustomerName?.text = order.customer?.userName
         lblConsigneeName?.text = order.consigneeName
-        lblQuantity?.text = "\(detail.qty ?? 0)"
+        lblQuantity?.text = "\(detail.pivot?.qty ?? 0)"
 //        if detail.isPallet {
 //            lblPallet?.text = "\(detail.cartonsInPallet ?? 0)"
 //        } else {

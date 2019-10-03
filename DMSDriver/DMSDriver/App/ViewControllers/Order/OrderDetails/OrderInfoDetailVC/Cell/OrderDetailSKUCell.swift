@@ -44,8 +44,8 @@ class OrderDetailSKUCell: UITableViewCell {
     
     func configureCell(detail:Order.Detail, order:Order) {
         self.detail = detail
-        nameLabel.text = detail.package?.name
-        quantityLabel.text = IntSlash(detail.qty)
+        nameLabel.text = detail.name
+        quantityLabel.text = IntSlash(detail.pivot?.qty)
         
         updateDeliverdQtyUI(order: order)
         updateLoadedQtyUI(order:order)
@@ -59,8 +59,8 @@ class OrderDetailSKUCell: UITableViewCell {
         if order.isCancelled {
             actualQty = "0"
         } else {
-            let orderLoadedQty = (detail.loadedQty != nil) ? "\(detail.loadedQty!)" : ""
-            let orderActualQty = (detail.actualQty != nil) ? "\(detail.actualQty!)" : ""
+            let orderLoadedQty = (detail.pivot?.loadedQty != nil) ? "\(detail.pivot?.loadedQty!)" : ""
+            let orderActualQty = (detail.pivot?.deliveredQty != nil) ? "\(detail.pivot?.deliveredQty!)" : ""
             actualQty = (order.isNewStatus) ? orderLoadedQty : orderActualQty
         }
         deliveredQtyTextField.text = actualQty
@@ -93,7 +93,7 @@ class OrderDetailSKUCell: UITableViewCell {
     }
     
     func updateLoadedQtyUI(order:Order) {
-        if let loadedQty = detail.loadedQty {
+        if let loadedQty = detail.pivot?.loadedQty {
             loadedQtyStaticLabel.text = order.isPickUpType ? "picked-up-quantity".localized : "loaded-quantity".localized
             loadedQtyLabel.text = "\(loadedQty)"
             loadedQtyViewContainer(isHidden:false)

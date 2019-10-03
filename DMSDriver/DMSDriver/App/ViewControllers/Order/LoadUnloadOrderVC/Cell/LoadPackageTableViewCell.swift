@@ -82,9 +82,9 @@ class LoadPackageTableViewCell: UITableViewCell {
         self.detail = detail
         orderIDLabel?.text = (detail.order_id != nil) ? "\(detail.order_id!)" : "-"
         packageNameLabel?.text = detail.package?.name
-        quantityLabel?.text = "\(detail.qty ?? 0)"
+        quantityLabel?.text = "\(detail.pivot?.qty ?? 0)"
 //        wmsOrderCodeLabel?.text = detail.wmsOrderCode ?? "-"
-        actualQuantityTextField?.text = (detail.loadedQty != nil) ? "\(detail.loadedQty!)" : ""
+        actualQuantityTextField?.text = (detail.pivot?.loadedQty != nil) ? "\(detail.pivot?.loadedQty!)" : ""
         vContent?.cornerRadius = 0
         customerNameLabel.text = Slash(order.customer?.userName)
         consigneeNameLabel.text = Slash(order.consigneeName)
@@ -108,7 +108,7 @@ extension LoadPackageTableViewCell: UITextFieldDelegate {
                                                        with: string)
             guard let palletTextField = actualQuantityTextField, let cartonTextField = actualCartonsInPalletTextField else { return true }
             if textField == palletTextField {
-                detail.loadedQty = Int(updatedText)
+                detail.pivot?.loadedQty = Int(updatedText)
             } else if textField == cartonTextField {
 //                detail.loadedCartonsInPallet = Int(updatedText)
             }

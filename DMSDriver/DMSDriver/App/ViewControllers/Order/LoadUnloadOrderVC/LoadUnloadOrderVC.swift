@@ -131,7 +131,7 @@ extension LoadUnloadOrderVC: LoadOrderDetailSKUTableViewCellDelete {
 
 extension LoadUnloadOrderVC {
     func submitLoadedQuantity(detail:Order.Detail) {
-        if let loadedQty = detail.loadedQty, let qty = detail.qty, loadedQty <= qty {
+        if let loadedQty = detail.pivot?.loadedQty, let qty = detail.pivot?.qty, loadedQty <= qty {
 //            if (detail.isPallet) {
 //                if let loadedCartons = detail.loadedCartonsInPallet {
 //                    let cartons = detail.cartonsInPallet ?? 0
@@ -147,7 +147,7 @@ extension LoadUnloadOrderVC {
             updateLoadedQuantity(detail:detail)
             // call without loaded carton
         } else {
-            let message = String(format: "loaded-quantity-must-be-less-than-or-equal".localized, "\(detail.qty ?? 0)")
+            let message = String(format: "loaded-quantity-must-be-less-than-or-equal".localized, "\(detail.pivot?.qty ?? 0)")
             showAlertView(message)
             return
         }

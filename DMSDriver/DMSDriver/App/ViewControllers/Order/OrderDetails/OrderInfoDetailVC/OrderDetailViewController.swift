@@ -971,9 +971,9 @@ extension OrderDetailViewController: OrderDetailSKUCellDelegate {
         guard let _order = orderDetail else { return }
         let inputQty = Int(value)
         if _order.isNewStatus {
-            detail.loadedQty = inputQty
+            detail.pivot?.loadedQty = inputQty
         } else {
-            detail.actualQty = inputQty
+            detail.pivot?.deliveredQty = inputQty
         }
     }
 }

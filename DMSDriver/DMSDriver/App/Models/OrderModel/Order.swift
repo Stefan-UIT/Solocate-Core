@@ -215,7 +215,9 @@ class Order: BaseModel {
         struct Pivot:Mappable {
             var sku_id:Int?
             var shipping_order_id:Int?
-            var cd:String?
+            var unit_id:String?
+            var bcd:String?
+            var batch_id:String?
             var qty:Int?
             var deliveredQty:Int?
             var loadedQty:Int?
@@ -228,9 +230,15 @@ class Order: BaseModel {
             mutating func mapping(map: Map) {
                 sku_id <- map["sku_id"]
                 shipping_order_id <- map["shipping_order_id"]
+                unit_id <- map["unit_id"]
+                bcd <- map["bcd"]
+                batch_id <- map["batch_id"]
                 qty <- map["qty"]
                 loadedQty <- map["loaded_qty"]
                 deliveredQty <- map["delivered_qty"]
+                if deliveredQty == nil {
+                    deliveredQty = qty
+                }
                 
             }
         }
@@ -245,9 +253,6 @@ class Order: BaseModel {
         var packageRefId:Int?
         var wmsOrderCode:String?
         // NEW
-        var qty:Int?
-        var actualQty:Int?
-        var loadedQty:Int?
         var pivot:Pivot?
         var isPallet:Bool {
             get {
@@ -275,15 +280,6 @@ class Order: BaseModel {
             packageRefId <- map["pkg_ref_id"]
             unit <- map["unit"]
             pivot <- map["pivot"]
-            
-            
-            
-            qty = pivot?.qty
-            actualQty = pivot?.deliveredQty
-            if actualQty == nil {
-                actualQty = qty
-            }
-            loadedQty = pivot?.loadedQty
         }
         
         enum DetailUpdateType {
@@ -292,23 +288,25 @@ class Order: BaseModel {
         }
         
         func jsonDetailUpdateORderStatus(updateType:DetailUpdateType = .Deliver, orderStatus:StatusOrder) -> [String:Any] {
-            var params:[String:Any] = [
-                "id" : id ?? 0
-            ]
-            switch updateType {
-            case .Load:
-                    params["load_qty"] = loadedQty ?? 0
-                break
-            default:
-                    params["dlvd_qty"] = actualQty ?? 0
-                break
-            }
+            return self.pivot!.toJSON()
+//            var params:[String:Any] = [
+//                "id" : id ?? 0
+//            ]
+//            switch updateType {
+//            case .Load:
+//                params["load_qty"] = pivot?.loadedQty ?? 0
+//                break
+//            default:
+//                    params["dlvd_qty"] = pivot?.deliveredQty ?? 0
+//                break
+//            }
+//
+//            return params
             
-            return params
         }
         
         func getLoadedStatusWithLoadingQuantity() -> StatusOrder {
-            if let loadedQty = self.loadedQty, let qty = self.qty {
+            if let loadedQty = pivot?.loadedQty, let qty = pivot?.qty {
                 if loadedQty != qty {
                     return StatusOrder.PartialLoaded
                 }
@@ -318,7 +316,7 @@ class Order: BaseModel {
         }
         
         func getFinishedStatusWithInputQuantity() -> StatusOrder {
-            if let actualQty = self.actualQty, let qty = self.qty {
+            if let actualQty = pivot?.deliveredQty , let qty = pivot?.qty {
                 if actualQty != qty {
                     return StatusOrder.PartialDelivered
                 }
@@ -329,7 +327,7 @@ class Order: BaseModel {
         
         var isLoadedQtyEqualQty:Bool {
             get {
-                if let _loadedQty = self.loadedQty, let _qty = self.qty {
+                if let _loadedQty = pivot?.loadedQty, let _qty = pivot?.qty {
                     return _loadedQty == _qty
                 }
                 return false
@@ -338,7 +336,7 @@ class Order: BaseModel {
         
         var isValidLoadedQty:Bool {
             get {
-                if let _loadedQty = loadedQty, let _qty = qty {
+                if let _loadedQty = pivot?.loadedQty, let _qty = pivot?.qty {
                     return _loadedQty > 0 && _loadedQty <= _qty
                 }
                 return false
@@ -347,7 +345,7 @@ class Order: BaseModel {
         
         var isDeliveredQtyEqualQty:Bool {
             get {
-                if let _actualQty = self.actualQty, let _qty = self.qty {
+                if let _actualQty = pivot?.deliveredQty, let _qty = pivot?.qty {
                     return _actualQty == _qty
                 }
                 return false
@@ -356,7 +354,7 @@ class Order: BaseModel {
         
         var isValidDeliveredQty:Bool {
             get {
-                if let _deliveredQty = actualQty, let _qty = qty {
+                if let _deliveredQty = pivot?.deliveredQty, let _qty = pivot?.qty {
                     return _deliveredQty > 0 && _deliveredQty <= _qty
                 }
                 return false

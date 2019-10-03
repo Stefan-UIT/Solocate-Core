@@ -42,10 +42,10 @@ class LoadUnLoadListCell: UITableViewCell {
     func configure(orderDetail:Order.Detail) {
         self.orderDetail = orderDetail
         lblPackage?.text = orderDetail.package?.name
-        lblQty?.text = #"\#(orderDetail.qty ?? 0)"#
+        lblQty?.text = #"\#(orderDetail.pivot?.qty ?? 0)"#
         lblBarCode?.text = orderDetail.barCode ?? "-"
         lblPackageRefId?.text = #"\#( orderDetail.packageRefId ?? 0)"#
-        actualQtyTextField.text = (orderDetail.actualQty != nil) ? "\(orderDetail.actualQty!)" : lblQty?.text
+        actualQtyTextField.text = (orderDetail.pivot?.deliveredQty != nil) ? "\(orderDetail.pivot?.deliveredQty!)" : lblQty?.text
         btnLoadUnload?.setStyleBlueSquare()
         btnLoadUnload?.setTitle("Load".localized, for: .normal)
         /*
@@ -71,7 +71,7 @@ extension LoadUnLoadListCell:UITextFieldDelegate {
         if textField == actualQtyTextField, let text = textField.text {
             let validText = (text.isEmpty) ? "0" : text
             let quantity = Int(validText)
-            orderDetail?.actualQty = quantity
+            orderDetail?.pivot?.deliveredQty = quantity
         }
     }
 }
