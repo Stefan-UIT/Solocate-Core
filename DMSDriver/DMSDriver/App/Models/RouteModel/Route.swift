@@ -184,7 +184,9 @@ class Route: BaseModel {
     
     
     // NEW
-    
+    var division = ""
+    var zone = ""
+    var tankers:[Tanker]?
     
     var isAllowedGoToDelivery:Bool {
         get {
