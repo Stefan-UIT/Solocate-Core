@@ -43,7 +43,7 @@ extension BaseAPIService{
         }
         
         if ReachabilityManager.isNetworkAvailable{
-            return request(method: .POST,
+            return request(method: .PUT,
                            path: path,
                            input: .json(params),
                            callback: callback);

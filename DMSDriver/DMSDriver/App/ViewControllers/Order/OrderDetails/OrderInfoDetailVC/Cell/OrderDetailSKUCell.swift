@@ -59,8 +59,8 @@ class OrderDetailSKUCell: UITableViewCell {
         if order.isCancelled {
             actualQty = "0"
         } else {
-            let orderLoadedQty = (detail.pivot?.loadedQty != nil) ? "\(detail.pivot?.loadedQty!)" : ""
-            let orderActualQty = (detail.pivot?.deliveredQty != nil) ? "\(detail.pivot?.deliveredQty!)" : ""
+            let orderLoadedQty = (detail.pivot?.loadedQty != nil) ? "\(detail.pivot!.loadedQty!)" : ""
+            let orderActualQty = (detail.pivot?.deliveredQty != nil) ? "\(detail.pivot!.deliveredQty!)" : ""
             actualQty = (order.isNewStatus) ? orderLoadedQty : orderActualQty
         }
         deliveredQtyTextField.text = actualQty

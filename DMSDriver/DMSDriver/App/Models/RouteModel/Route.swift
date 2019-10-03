@@ -159,7 +159,7 @@ class Route: BaseModel {
     var  status_id = -1
     var  auto_status = -1
     var  driver:UserModel.UserInfo?
-//    var  truck:Truck?
+    var  truck:Truck?
     var  tanker:Tanker?
     var  status:Status?
     var  tracking:[Tracking]?
@@ -288,7 +288,7 @@ class Route: BaseModel {
         orderList <- map["shipping_orders"]
         totalOrders <- map["shipping_orders_count"]
         tanker <- map["tanker"]
-//        truck <- map["truck"]
+        truck <- map["truck"]
         tracking <- map["tracking"]
         driver <- map["driver"]
         totalTimeEst <- map["est_dur"]

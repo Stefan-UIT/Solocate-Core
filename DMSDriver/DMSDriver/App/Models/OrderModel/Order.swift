@@ -215,12 +215,13 @@ class Order: BaseModel {
         struct Pivot:Mappable {
             var sku_id:Int?
             var shipping_order_id:Int?
-            var unit_id:String?
+            var unit_id:Int?
             var bcd:String?
             var batch_id:String?
             var qty:Int?
             var deliveredQty:Int?
             var loadedQty:Int?
+            var returnedQty:Int?
             
             
             init?(map: Map) {
@@ -239,6 +240,7 @@ class Order: BaseModel {
                 if deliveredQty == nil {
                     deliveredQty = qty
                 }
+                returnedQty <- map["returned_qty"]
                 
             }
         }

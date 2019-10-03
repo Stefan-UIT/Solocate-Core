@@ -81,7 +81,7 @@ extension BaseAPIService {
     }
     
     @discardableResult
-    func getListStatus(callback: @escaping APICallback<ResponseDataModel<ResponseArrData<Status>>>) -> APIRequest {
+    func getListStatus(callback: @escaping APICallback<ResponseArrData<Status>>) -> APIRequest {
         return request(method: .GET,
                        path: PATH_REQUEST_URL.GET_LIST_STATUS.URL,
                        input: .empty,
