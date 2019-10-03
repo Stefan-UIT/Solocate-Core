@@ -19,10 +19,11 @@ class RouteTableViewCell: UITableViewCell {
     @IBOutlet weak var distanceLabel: UILabel!
     @IBOutlet weak var stopsLabel: UILabel!
     //NEW
-    @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var warehouseLabel: UILabel!
+    @IBOutlet weak var divisionLabel: UILabel!
+    @IBOutlet weak var zoneLabel: UILabel!
+    @IBOutlet weak var trailerTankerLabel: UILabel!
     @IBOutlet weak var companyLabel: UILabel!
-    @IBOutlet weak var truckTypeLabel: UILabel!
+    @IBOutlet weak var truckLabel: UILabel!
     @IBOutlet weak var loadVolumeLabel: UILabel!
     
     
@@ -53,12 +54,12 @@ class RouteTableViewCell: UITableViewCell {
         durationLabel.text = CommonUtils.formatEstTime(seconds: Int64(route.totalTimeEst))
         distanceLabel.text = CommonUtils.formatEstKm(met: route.totalDistance.doubleValue)
         stopsLabel.text = (route.totalOrders > 1) ? ("\(route.totalOrders) " + "orders".localized.uppercased()) : ("\(route.totalOrders) " + "order".localized.uppercased())
-        
         //NEW
-        nameLabel.text = route.routeMaster?.name ?? "-"
-        warehouseLabel.text = route.routeMaster?.warehouse?.name ?? "-"
-        companyLabel.text = route.company?.name ?? "-"
-        truckTypeLabel.text = route.truckType?.name ?? "-"
+        divisionLabel.text = Slash(route.division)
+        zoneLabel.text = Slash(route.zone?.name)
+        companyLabel.text = Slash(route.company?.name)
+        truckLabel.text = Slash(route.assignedInfo?.first?.truck?.name)
+        trailerTankerLabel.text = Slash(route.trailerTankerName)
         let loadValue = Double(route.loadVolume)?.rounded(toPlaces: 1)
         loadVolumeLabel.text = "\(loadValue!)" + "%"
     }
