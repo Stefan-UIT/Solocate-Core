@@ -23,19 +23,14 @@ extension BaseAPIService{
     func updateOrderStatus(_ order:Order,
                            reason: Reason? = nil,
                            updateDetailType:Order.Detail.DetailUpdateType = .Deliver,
-                           partialDeliveredReasonMsg:String? = nil,
                            callback: @escaping APICallback<ResponseDataModel<Order>>) -> APIRequest? {
         
         let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL,
                           "\(order.id)", "\(order.status?.id ?? 0)")
         var params:[String:Any] = ["route_id": "\(order.route_id)"]
         if let _reason = reason {
-            params["message"] = _reason.message != nil ? _reason.message :  _reason.reasonDescription
-            params["reason_id"] = "\(_reason.id)"
-        }
-        
-        if let msg = partialDeliveredReasonMsg {
-            params["message"] = msg
+            params["shipping_msg"] = _reason.message != nil ? _reason.message :  _reason.reasonDescription
+            params["reason_fail_id"] = "\(_reason.id)"
         }
         
         if !isEmpty(order.note){
@@ -44,11 +39,11 @@ extension BaseAPIService{
         
         if let details = order.details {
             let detailsParam = details.map({$0.jsonDetailUpdateORderStatus(updateType:updateDetailType, orderStatus: order.statusOrder)})
-            params["details"] = detailsParam
+            params["shipping_details"] = detailsParam
         }
         
         if ReachabilityManager.isNetworkAvailable{
-            return request(method: .POST,
+            return request(method: .PUT,
                            path: path,
                            input: .json(params),
                            callback: callback);

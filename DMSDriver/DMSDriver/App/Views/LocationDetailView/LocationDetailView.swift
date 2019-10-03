@@ -188,9 +188,9 @@ extension LocationDetailView:UITableViewDataSource{
         var cartonsQty = 0
         for item in details {
             if item.isPallet {
-                palletsQty += item.qty ?? 0
+                palletsQty += item.pivot?.qty ?? 0
             } else {
-                cartonsQty += item.qty ?? 0
+                cartonsQty += item.pivot?.qty ?? 0
             }
         }
         

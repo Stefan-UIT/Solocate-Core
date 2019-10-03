@@ -46,7 +46,7 @@ class LoadOrderDetailSKUTableViewCell: UITableViewCell {
         barCodeLabel.text = detail.barCode ?? "-"
         orderIdLabel.text = "\(detail.order_id ?? 0)"
         customerNameLabel.text = order.customer_name
-        quantityLabel.text = IntSlash(detail.qty)
+        quantityLabel.text = IntSlash(detail.pivot?.qty)
         loadedQtyHeightConstraint.constant = 0.0
     }
 
@@ -65,7 +65,7 @@ extension LoadOrderDetailSKUTableViewCell: UITextFieldDelegate {
                                                        with: string)
             guard let actualTextField = deliveredQtyTextField else { return true }
             if textField == actualTextField {
-                detail.loadedQty = Int(updatedText)
+                detail.pivot?.loadedQty = Int(updatedText)
             }
         }
         return true

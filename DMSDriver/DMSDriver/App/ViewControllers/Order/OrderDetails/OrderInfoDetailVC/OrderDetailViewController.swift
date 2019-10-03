@@ -47,7 +47,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     @IBOutlet weak var lblOrderId: UILabel?
     @IBOutlet weak var lblDateTime: UILabel?
     @IBOutlet weak var unableToStartButton: UIButton!
-    @IBOutlet weak var wmsOrderCodeLabel: UILabel!
     @IBOutlet weak var navigateButton: UIButton!
     
     
@@ -139,7 +138,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     private func initUI()  {
         self.setupTableView()
         lblOrderId?.text = "order".localized + " #\(orderDetail?.id ?? 0)"
-        wmsOrderCodeLabel.text = "wms-order-code".localized + " #\(orderDetail?.wmsOrderCode ?? "")"
+        
         var timeStart = "NA".localized
         var timeEnd = "NA".localized
         var date = "NA".localized
@@ -182,17 +181,10 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let orderId = OrderDetailInforRow("order-id".localized,"#\(order.id)")
         
         //NEW
-        let wmsOrderCode = OrderDetailInforRow("wms-order-code".localized,"#\(order.wmsOrderCode ?? "")")
-        let wmsManifestNumber = OrderDetailInforRow("wms-manifest-number".localized,"#\(order.wmsManifestNumber ?? "")")
-        let orderGroup = OrderDetailInforRow("order-group".localized,order.orderGroup.name)
         let orderType = OrderDetailInforRow("order-type".localized,order.orderType.name)
         
 
         orderInforDetail.append(orderId)
-        orderInforDetail.append(wmsOrderCode)
-        orderInforDetail.append(wmsManifestNumber)
-//        orderInforDetail.append(seq)
-        orderInforDetail.append(orderGroup)
         orderInforDetail.append(orderType)
         orderInforDetail.append(customerItem)
         orderInforDetail.append(consigneeName)
@@ -279,36 +271,36 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         }
     }
     
-    func showPalletReturnedPopUp() {
-        let alert = UIAlertController(title: "returned-pallets".localized, message: "number-of-returned-pallets".localized, preferredStyle: .alert)
-        // 2. Grab the value from the text field, and print it when the user clicks Submit.
-        let submitButton = UIAlertAction(title: "submit".localized, style: .default, handler: { [weak alert] (_) in
-            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
-            let returnedPalletQty = Int(textField?.text ?? "0")!
-            if let detail = self.orderDetail?.details?.first {
-                detail.returnedPalletQty = returnedPalletQty
-            }
-            self.handleReturnedPalletAction()
-            })
-        
-        submitButton.isEnabled = false
-        
-        //3. Add the text field. You can configure it however you need.
-        alert.addTextField(configurationHandler: { (textField) in
-            textField.keyboardType = .numberPad
-            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { (notification) in
-                submitButton.isEnabled = textField.text!.length > 0
-            }
-        })
-        
-        alert.addAction(submitButton)
-        alert.addAction(UIAlertAction(title: "cancel".localized, style: .cancel, handler: {
-            action in
-        }))
-        
-        // 4. Present the alert.
-        self.present(alert, animated: true, completion: nil)
-    }
+//    func showPalletReturnedPopUp() {
+//        let alert = UIAlertController(title: "returned-pallets".localized, message: "number-of-returned-pallets".localized, preferredStyle: .alert)
+//        // 2. Grab the value from the text field, and print it when the user clicks Submit.
+//        let submitButton = UIAlertAction(title: "submit".localized, style: .default, handler: { [weak alert] (_) in
+//            let textField = alert?.textFields![0] // Force unwrapping because we know it exists.
+//            let returnedPalletQty = Int(textField?.text ?? "0")!
+//            if let detail = self.orderDetail?.details?.first {
+//                detail.returnedPalletQty = returnedPalletQty
+//            }
+//            self.handleReturnedPalletAction()
+//            })
+//
+//        submitButton.isEnabled = false
+//
+//        //3. Add the text field. You can configure it however you need.
+//        alert.addTextField(configurationHandler: { (textField) in
+//            textField.keyboardType = .numberPad
+//            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main) { (notification) in
+//                submitButton.isEnabled = textField.text!.length > 0
+//            }
+//        })
+//
+//        alert.addAction(submitButton)
+//        alert.addAction(UIAlertAction(title: "cancel".localized, style: .cancel, handler: {
+//            action in
+//        }))
+//
+//        // 4. Present the alert.
+//        self.present(alert, animated: true, completion: nil)
+//    }
     
     func showCODPopUp() {
         guard let codAmount = orderDetail?.codAmount else { return }
@@ -979,9 +971,9 @@ extension OrderDetailViewController: OrderDetailSKUCellDelegate {
         guard let _order = orderDetail else { return }
         let inputQty = Int(value)
         if _order.isNewStatus {
-            detail.loadedQty = inputQty
+            detail.pivot?.loadedQty = inputQty
         } else {
-            detail.actualQty = inputQty
+            detail.pivot?.deliveredQty = inputQty
         }
     }
 }
@@ -1141,11 +1133,11 @@ fileprivate extension OrderDetailViewController{
             
     }
     
-    private func handleReturnedPalletAction() {
-        guard let detail = orderDetail?.details?.first else {return}
-        let statusNeedUpdate = detail.getFinishedStatusWithInputQuantity()
-        self.updateOrderStatus(statusNeedUpdate.rawValue,updateDetailType:.ReturnedPallet)
-    }
+//    private func handleReturnedPalletAction() {
+//        guard let detail = orderDetail?.details?.first else {return}
+//        let statusNeedUpdate = detail.getFinishedStatusWithInputQuantity()
+//        self.updateOrderStatus(statusNeedUpdate.rawValue,updateDetailType:.ReturnedPallet)
+//    }
     
     private func showInputNote(_ statusNeedUpdate:String) {
         let alert = UIAlertController(title: "finish-order".localized,
@@ -1192,10 +1184,14 @@ fileprivate extension OrderDetailViewController{
         case StatusOrder.newStatus.rawValue:
             updateStatusButton?.setTitle("Load".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = AppColor.pickedUpStatus
+            
+            unableToStartButton?.setTitle("cancel".localized.uppercased(), for: .normal)
             break
         case StatusOrder.InTransit.rawValue:
             updateStatusButton?.setTitle("Deliver".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = AppColor.greenColor
+            
+            unableToStartButton?.setTitle("unable-to-deliver".localized.uppercased(), for: .normal)
             break
         case StatusOrder.deliveryStatus.rawValue, StatusOrder.PartialDelivered.rawValue:
             updateStatusButton?.setTitle("update-returned-pallets".localized.uppercased(), for: .normal)
@@ -1365,14 +1361,14 @@ extension OrderDetailViewController{
     
     
     func updateOrderStatusImport(_ order:Order, updateDetailType:Order.Detail.DetailUpdateType = .Deliver, cancelReason:Reason? = nil, reasonMessage:String? = nil)  {
-        var partialDeliveredReasonMsg = reasonMessage
-        if order.statusOrder == .PartialDelivered && updateDetailType == .ReturnedPallet {
-            if let mes = order.partialDeliveredReason?.message {
-                partialDeliveredReasonMsg = mes
-            }
-        }
+//        var partialDeliveredReasonMsg = reasonMessage
+//        if order.statusOrder == .PartialDelivered && updateDetailType == .ReturnedPallet {
+//            if let mes = order.partialDeliveredReason?.message {
+//                partialDeliveredReasonMsg = mes
+//            }
+//        }
         
-        SERVICES().API.updateOrderStatus(order, reason:cancelReason, updateDetailType:updateDetailType, partialDeliveredReasonMsg: partialDeliveredReasonMsg) {[weak self] (result) in
+        SERVICES().API.updateOrderStatus(order, reason:cancelReason, updateDetailType:updateDetailType) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):

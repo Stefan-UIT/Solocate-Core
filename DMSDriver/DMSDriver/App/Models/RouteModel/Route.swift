@@ -16,6 +16,7 @@ class Tanker: BasicModel { }
 class Status: BasicModel { }
 class Urgency: BasicModel { }
 class Company: BasicModel { }
+class Zone: BasicModel { }
 
 //MARK: - Status
 class BasicModel: BaseModel {
@@ -158,7 +159,7 @@ class Route: BaseModel {
     var  status_id = -1
     var  auto_status = -1
     var  driver:UserModel.UserInfo?
-//    var  truck:Truck?
+    var  truck:Truck?
     var  tanker:Tanker?
     var  status:Status?
     var  tracking:[Tracking]?
@@ -184,7 +185,9 @@ class Route: BaseModel {
     
     
     // NEW
-    
+    var division:BasicModel?
+    var zone:Zone?
+    var tankers:[Tanker]?
     
     var isAllowedGoToDelivery:Bool {
         get {
@@ -205,6 +208,16 @@ class Route: BaseModel {
         get {
             guard let info = assignedInfo?.first else { return false}
             return (info.truckID != nil || info.truck != nil)
+        }
+    }
+    
+    var trailerTankerName: String {
+        get {
+            var _trailerTankerName = ""
+            for tanker in tankers ?? [] {
+                _trailerTankerName = _trailerTankerName + ", " + (tanker.name ?? "")
+            }
+            return _trailerTankerName
         }
     }
     
@@ -266,17 +279,16 @@ class Route: BaseModel {
         truckFloorCap <- map["truck_floor_cap"]
         date        <- map["date"]
         status      <- map["status"]
-        orderList   <- (map["order_list"])
         route_number <- map["route_number"]
         route_name_sts <- map["route_name_sts"]
         start_time <- map["start_time"]
         driver_name <- map["driver_name"]
         end_time <- map["end_time"]
         shop_name <- map["shop_name"]
-        orderList <- map["orders"]
-        totalOrders <- map["orders_count"]
+        orderList <- map["shipping_orders"]
+        totalOrders <- map["shipping_orders_count"]
         tanker <- map["tanker"]
-//        truck <- map["truck"]
+        truck <- map["truck"]
         tracking <- map["tracking"]
         driver <- map["driver"]
         totalTimeEst <- map["est_dur"]

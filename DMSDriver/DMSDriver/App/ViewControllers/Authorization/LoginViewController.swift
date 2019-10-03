@@ -269,7 +269,7 @@ fileprivate extension LoginViewController {
         SERVICES().API.getListStatus { (result) in
             switch result{
             case .object(let obj):
-                guard let list = obj.data?.data else {return}
+                guard let list = obj.data else {return}
                 CoreDataManager.updateListStatus(list)
             case .error(_ ):
                 break
