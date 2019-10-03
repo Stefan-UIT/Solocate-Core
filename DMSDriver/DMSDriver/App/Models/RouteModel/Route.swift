@@ -16,6 +16,7 @@ class Tanker: BasicModel { }
 class Status: BasicModel { }
 class Urgency: BasicModel { }
 class Company: BasicModel { }
+class Zone: BasicModel { }
 
 //MARK: - Status
 class BasicModel: BaseModel {
@@ -185,7 +186,7 @@ class Route: BaseModel {
     
     // NEW
     var division = ""
-    var zone = ""
+    var zone:Zone?
     var tankers:[Tanker]?
     
     var isAllowedGoToDelivery:Bool {
@@ -207,6 +208,16 @@ class Route: BaseModel {
         get {
             guard let info = assignedInfo?.first else { return false}
             return (info.truckID != nil || info.truck != nil)
+        }
+    }
+    
+    var trailerTankerName: String {
+        get {
+            var _trailerTankerName = ""
+            for tanker in tankers ?? [] {
+                _trailerTankerName = _trailerTankerName + ", " + (tanker.name ?? "")
+            }
+            return _trailerTankerName
         }
     }
     
