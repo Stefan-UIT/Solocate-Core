@@ -176,25 +176,9 @@ extension RouteDetailOrderListClvCell: UITableViewDelegate, UITableViewDataSourc
     }
     
     func filterDataWithTapDisplay() {
-        guard let _route = route else { return }
-//        switch filterOrderList {
-//        case .All:
-//            orderList = route?.getOrderList() ?? []
-//        case .New:
-//            orderList = route?.orders(.newStatus) ?? []
-//        case .InProgess:
-//            orderList = route?.orders(.InTransit) ?? []
-//        case .Finished:
-//            orderList = route?.orders(.deliveryStatus) ?? []
-//        case .Cancelled:
-//            orderList = route?.orders(.CancelStatus) ?? []
-//        }
-        
-//        orderList.sort { (ord1, ord2) -> Bool in
-//            return ord1.seq < ord2.seq
-//        }
-        
-        orderList = _route.ordersGroupByCustomer
+        guard let _route = route else { return }        
+//        orderList = _route.ordersGroupByCustomer
+        orderList = _route.orderList
         dataOrigin = orderList.map({$0})
         dataOrigin = orderList
         doSearch(strSearch: strSearch)

@@ -634,34 +634,34 @@ class Order: BaseModel {
     override func mapping(map: Map) {
         id    <- map["id"]
         route_id <- map["route_id"]
-        status_id <- map["status_id"]
+        status_id <- map["shipping_status_id"]
         seq <- map["seq"]
         pod_req <- map["pod_req"]
         sig_req <- map["sig_req"]
         note <- map["note"]
         notes <- map["notes"]
-        details <- map["details"]
-        files <- map["files"]
+        details <- map["shipping_details"]
+        files <- map["shipping_files"]
         urgent_type_id <- map["urgent_type_id"]
-        status <- map["status"]
+        status <- map["shipping_status"]
         driver_id <- map["driver_id"]
         route <- map["route"]
         
-        if  let dataFrom = map["from"].currentValue as? String{
+        if  let dataFrom = map["shipping_from"].currentValue as? String{
             from    = Address(JSON: dataFrom.parseToJSON() ?? [:])
         }else{
-            from    <- map["from"]
+            from    <- map["shipping_from"]
         }
         
-        if  let dataTo = map["to"].currentValue as? String{
+        if  let dataTo = map["shipping_to"].currentValue as? String{
             to    = Address(JSON: dataTo.parseToJSON() ?? [:])
         }else{
-            to    <- map["to"]
+            to    <- map["shipping_to"]
         }
         
         //NEW
-        customer    <- map["customer"]
-        typeID    <- map["type_id"]
+        customer    <- map["shipping_customer"]
+        typeID    <- map["shipping_type_id"]
         group    <- map["group"]
         cash_on_dlvy    <- map["cash_on_dlvy"]
         cod_rcvd    <- map["cod_rcvd"]

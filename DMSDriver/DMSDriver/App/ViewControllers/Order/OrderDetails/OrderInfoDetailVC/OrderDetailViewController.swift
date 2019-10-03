@@ -182,17 +182,10 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let orderId = OrderDetailInforRow("order-id".localized,"#\(order.id)")
         
         //NEW
-        let wmsOrderCode = OrderDetailInforRow("wms-order-code".localized,"#\(order.wmsOrderCode ?? "")")
-        let wmsManifestNumber = OrderDetailInforRow("wms-manifest-number".localized,"#\(order.wmsManifestNumber ?? "")")
-        let orderGroup = OrderDetailInforRow("order-group".localized,order.orderGroup.name)
         let orderType = OrderDetailInforRow("order-type".localized,order.orderType.name)
         
 
         orderInforDetail.append(orderId)
-        orderInforDetail.append(wmsOrderCode)
-        orderInforDetail.append(wmsManifestNumber)
-//        orderInforDetail.append(seq)
-        orderInforDetail.append(orderGroup)
         orderInforDetail.append(orderType)
         orderInforDetail.append(customerItem)
         orderInforDetail.append(consigneeName)

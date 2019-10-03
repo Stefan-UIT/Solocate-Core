@@ -268,7 +268,6 @@ class Route: BaseModel {
         truckFloorCap <- map["truck_floor_cap"]
         date        <- map["date"]
         status      <- map["status"]
-        orderList   <- (map["order_list"])
         route_number <- map["route_number"]
         route_name_sts <- map["route_name_sts"]
         start_time <- map["start_time"]
