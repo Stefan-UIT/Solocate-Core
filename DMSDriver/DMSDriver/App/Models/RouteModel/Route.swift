@@ -185,7 +185,7 @@ class Route: BaseModel {
     
     
     // NEW
-    var division = ""
+    var division:BasicModel?
     var zone:Zone?
     var tankers:[Tanker]?
     

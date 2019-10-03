@@ -47,7 +47,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     @IBOutlet weak var lblOrderId: UILabel?
     @IBOutlet weak var lblDateTime: UILabel?
     @IBOutlet weak var unableToStartButton: UIButton!
-    @IBOutlet weak var wmsOrderCodeLabel: UILabel!
     @IBOutlet weak var navigateButton: UIButton!
     
     
@@ -139,7 +138,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     private func initUI()  {
         self.setupTableView()
         lblOrderId?.text = "order".localized + " #\(orderDetail?.id ?? 0)"
-        wmsOrderCodeLabel.text = "wms-order-code".localized + " #\(orderDetail?.wmsOrderCode ?? "")"
+        
         var timeStart = "NA".localized
         var timeEnd = "NA".localized
         var date = "NA".localized
@@ -1185,10 +1184,14 @@ fileprivate extension OrderDetailViewController{
         case StatusOrder.newStatus.rawValue:
             updateStatusButton?.setTitle("Load".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = AppColor.pickedUpStatus
+            
+            unableToStartButton?.setTitle("cancel".localized.uppercased(), for: .normal)
             break
         case StatusOrder.InTransit.rawValue:
             updateStatusButton?.setTitle("Deliver".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = AppColor.greenColor
+            
+            unableToStartButton?.setTitle("unable-to-deliver".localized.uppercased(), for: .normal)
             break
         case StatusOrder.deliveryStatus.rawValue, StatusOrder.PartialDelivered.rawValue:
             updateStatusButton?.setTitle("update-returned-pallets".localized.uppercased(), for: .normal)

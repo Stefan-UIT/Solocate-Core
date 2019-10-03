@@ -55,7 +55,7 @@ class RouteTableViewCell: UITableViewCell {
         distanceLabel.text = CommonUtils.formatEstKm(met: route.totalDistance.doubleValue)
         stopsLabel.text = (route.totalOrders > 1) ? ("\(route.totalOrders) " + "orders".localized.uppercased()) : ("\(route.totalOrders) " + "order".localized.uppercased())
         //NEW
-        divisionLabel.text = Slash(route.division)
+        divisionLabel.text = Slash(route.division?.name)
         zoneLabel.text = Slash(route.zone?.name)
         companyLabel.text = Slash(route.company?.name)
         truckLabel.text = Slash(route.assignedInfo?.first?.truck?.name)
