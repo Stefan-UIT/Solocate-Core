@@ -87,7 +87,9 @@ extension BaseAPIService{
     }
     
     func submitSignature(_ file:AttachFileModel,_ order:Order, _ name:String, callback: @escaping APICallback<Order>) {
-        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL, "\(order.id)","\(order.status?.id ?? 0)")
+//        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL, "\(order.id)","\(order.status?.id ?? 0)")
+        let path = String(format:PATH_REQUEST_URL.UPLOAD_FILES.URL, order.id)
+//        let headers = ["Content-Type":"multipart/form-data; boundary=\(E(file.boundary))"];
         let url = E(SDBuildConf.serverUrlString()).appending(path)
 
         //let headers = ["Content-Type":"multipart/form-data; boundary=\(E(file.boundary))"];
