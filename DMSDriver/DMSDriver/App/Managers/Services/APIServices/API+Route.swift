@@ -43,6 +43,14 @@ extension BaseAPIService {
                        callback: callback);
     }
     
+    func getRentingOrders(filterMode:FilterDataModel, callback: @escaping APICallback<ResponseDataModel<ResponseDataListModel<RentingOrder>>>) -> APIRequest {
+        let urlString = PATH_REQUEST_URL.GET_RENTING_ORDERS.URL
+        return request(method: .GET,
+                       path:urlString,
+                       input: APIInput.empty,
+                       callback: callback);
+    }
+    
     @discardableResult
     func getRoutesByCoordinator(byDate date:String = Date().toString("yyyy-MM-dd"),
                                 callback: @escaping APICallback<ResponseDataModel<CoordinatorRoute>>) -> APIRequest {

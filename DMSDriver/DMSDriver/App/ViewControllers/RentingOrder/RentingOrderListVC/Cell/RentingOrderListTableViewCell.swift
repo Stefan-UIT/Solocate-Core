@@ -34,15 +34,14 @@ class RentingOrderListTableViewCell: UITableViewCell {
 
     func configureCellWithRentingOrder(_ rentingOrder:RentingOrder) {
         self.rentingOrder = rentingOrder
-        orderIdLbl.text = "#"+"\(rentingOrder.rentingOrderId ?? 0)"
-        statusLbl.text = rentingOrder.rentingStatus?.statusName.localized
-        statusLbl.textColor = rentingOrder.rentingStatus?.color
+        orderIdLbl.text = "#"+"\(rentingOrder.id)"
+        statusLbl.text = rentingOrder.rentingOrderStatus?.name?.localized
+//        statusLbl.textColor = rentingOrder.rentingStatus?.color
         startDateLbl.text = rentingOrder.startDate ?? ""
         endDateLbl.text = rentingOrder.endDate ?? ""
         dateLbl.text = rentingOrder.endDate ?? ""
-        refCodeLbl.text = "\(rentingOrder.refCode ?? 0)"
-        customerLbl.text = rentingOrder.customerName ?? ""
-        truckLbl.text = rentingOrder.truckType?.name ?? ""
+        refCodeLbl.text = "\(rentingOrder.referenceCode)"
+        customerLbl.text = rentingOrder.rentingOrderCustomer?.userName ?? ""
+        truckLbl.text = rentingOrder.rentingOrderTruckType?.name
     }
-    
 }
