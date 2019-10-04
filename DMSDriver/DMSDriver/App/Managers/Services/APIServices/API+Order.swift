@@ -88,14 +88,15 @@ extension BaseAPIService{
     
     func submitSignature(_ file:AttachFileModel,_ order:Order, _ name:String, callback: @escaping APICallback<Order>) {
 //        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL, "\(order.id)","\(order.status?.id ?? 0)")
-        let path = String(format:PATH_REQUEST_URL.UPLOAD_FILES.URL, order.id)
+        let path = String(format:PATH_REQUEST_URL.UPLOAD_FILES.URL, "\(order.id)")
 //        let headers = ["Content-Type":"multipart/form-data; boundary=\(E(file.boundary))"];
         let url = E(SDBuildConf.serverUrlString()).appending(path)
 
         //let headers = ["Content-Type":"multipart/form-data; boundary=\(E(file.boundary))"];
         let params = [
             "route_id": "\(order.route_id)",
-            "sig_name":name
+            "sig_name":name,
+            "type" : "SIG"
         ]
         requestWithFormDataType(url: url,
                                 method: .post,
@@ -155,9 +156,14 @@ extension BaseAPIService{
     }
     
     func uploadMultipleImageToOrder(_ files:[AttachFileModel],_ order:Order, callback: @escaping APICallback<Order>){
-        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL, "\(order.id)","\(order.status?.id ?? 0)")
+//        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL, "\(order.id)","\(order.status?.id ?? 0)")
+        let path = String(format:PATH_REQUEST_URL.UPLOAD_FILES.URL, "\(order.id)")
+        
         let url = E(SDBuildConf.serverUrlString()).appending(path)
-        let params = ["route_id": "\(order.route_id)"]
+        let params = [
+            "route_id": "\(order.route_id)",
+            "type":"POD"
+        ]
         
         if ReachabilityManager.isNetworkAvailable {
       

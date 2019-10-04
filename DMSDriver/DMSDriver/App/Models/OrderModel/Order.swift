@@ -362,8 +362,8 @@ class Order: BaseModel {
         
         var isValidDeliveredQty:Bool {
             get {
-                if let _deliveredQty = pivot?.deliveredQty, let _qty = pivot?.qty {
-                    return _deliveredQty > 0 && _deliveredQty <= _qty
+                if let _deliveredQty = pivot?.deliveredQty, let _loadedQty = pivot?.loadedQty {
+                    return _deliveredQty > 0 && _deliveredQty <= _loadedQty
                 }
                 return false
             }
@@ -435,6 +435,7 @@ class Order: BaseModel {
     class OrderTypeModel:BasicModel {}
 
     var id = -1
+    var purchaseOrderID = -1
     var from:Address?
     var to:Address?
     var route_id:Int = 0
@@ -622,6 +623,7 @@ class Order: BaseModel {
     
     override func mapping(map: Map) {
         id    <- map["id"]
+        purchaseOrderID    <- map["purchase_order_id"]
         route_id <- map["route_id"]
         status_id <- map["shipping_status_id"]
         seq <- map["seq"]

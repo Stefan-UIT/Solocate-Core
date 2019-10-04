@@ -184,10 +184,12 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let orderType = OrderDetailInforRow("order-type".localized,order.orderType.name)
         let division = OrderDetailInforRow("division".localized,Slash(order.division?.name))
         let zone = OrderDetailInforRow("zone".localized,Slash(order.zone?.name))
+        let purchaseOrderID = OrderDetailInforRow("purchase-order-id".localized,IntSlash(order.purchaseOrderID))
         
 
         orderInforDetail.append(orderId)
         orderInforDetail.append(orderType)
+        orderInforDetail.append(purchaseOrderID)
         orderInforDetail.append(customerItem)
         orderInforDetail.append(consigneeName)
         orderInforDetail.append(division)
@@ -1107,32 +1109,21 @@ fileprivate extension OrderDetailViewController{
             }
             
         } else if (!_orderDetail.isValidAllDeliveredQty) {
-            let mes = "delivered-quantity-must-be-less-than-or-equal-the-quantity".localized
+            let mes = "delivered-quantity-must-be-less-than-or-equal-the-loaded-quantity".localized
             showAlertView(mes)
         } else {
             
-//            var message = "delivered-quantity".localized
-//            message += ": \(detail.actualQty!)"
-            
-//            self.showAlertView(MSG_ARE_YOU_SURE, message, positiveAction: { [weak self](action) in
-//                let statusNeedUpdate = detail.getFinishedStatusWithInputQuantity()
-//                if statusNeedUpdate == .PartialDelivered {
-//                    self?.showReturnReasonView { (reason) in
-//                        self?.updateOrderStatus(statusNeedUpdate.rawValue,cancelReason: reason)
-//                    }
-//                } else {
-//                    self?.updateOrderStatus(statusNeedUpdate.rawValue)
-//                }
-//            })
             
             let statusNeedUpdate = _orderDetail.getDeliveredStatusWithDeliveredQuantity()
-            if statusNeedUpdate == .PartialDelivered {
-                self.showReturnReasonView { (reason) in
-                    self.updateOrderStatus(statusNeedUpdate.rawValue,cancelReason: reason)
-                }
-            } else {
-                self.updateOrderStatus(statusNeedUpdate.rawValue)
-            }
+//            if statusNeedUpdate == .PartialDelivered {
+//                self.showReturnReasonView { (reason) in
+//                    self.updateOrderStatus(statusNeedUpdate.rawValue,cancelReason: reason)
+//                }
+//            } else {
+//                self.updateOrderStatus(statusNeedUpdate.rawValue)
+//            }
+            
+            self.updateOrderStatus(statusNeedUpdate.rawValue)
         }
             
     }

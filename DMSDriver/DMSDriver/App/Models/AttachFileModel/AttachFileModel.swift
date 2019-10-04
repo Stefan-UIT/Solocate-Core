@@ -51,7 +51,9 @@ class AttachFileModel: BaseModel, InputSource {
             
         //let contentType = "multipart/form-data; boundary=" + boundary
       
-        let fileParamConstant = "file_sig_req"
+//        let fileParamConstant = "file_sig_req"
+//            let fileParamConstant = "files"
+            let fileParamConstant = "files[0]"
         let boundaryStart = "--\(boundary)\r\n"
         let boundaryEnd = "--\(boundary)--\r\n"
         let contentDispositionString = "Content-Disposition: form-data; name=\"\(fileParamConstant)\"; filename=\"\(E(name))\"\r\n"

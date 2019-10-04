@@ -62,7 +62,7 @@ class RouteDetailOrderListClvCell: UICollectionViewCell {
     
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
-        self.searchView?.vSearch?.tfSearch?.placeholder(text: "wms-code".localized, color: UIColor.lightGray)
+        self.searchView?.vSearch?.tfSearch?.placeholder(text: "order-id".localized, color: UIColor.lightGray)
     }
     
     func updateUI() {
@@ -242,8 +242,9 @@ extension RouteDetailOrderListClvCell:BaseSearchViewDelegate{
         let newSearchString = strSearch?.components(separatedBy: "\n").first?.lowercased()
         if !isEmpty(newSearchString) {
             dataDisplay = dataOrigin.filter({ (item) -> Bool in
-                let isExist = item.wmsOrderCode?.lowercased().contains(newSearchString!)
-                return isExist ?? false
+                let orderid = "\(item.id)"
+                let isExist =  orderid.contains(newSearchString!)
+                return isExist
             })
             
         }else {

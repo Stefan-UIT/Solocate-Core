@@ -224,7 +224,8 @@ extension ImagePickerView:UIImagePickerControllerDelegate,UINavigationController
                     file.type = ".png"
                     file.mimeType = "image/png"
                     file.contentFile = data
-                    file.param = "file_pod_req[\(i)]"
+//                    file.param = "file_pod_req[\(i)]"
+                    file.param = "files[\(i)]"
                     arrAttachfile.append(file)
                     
                 }else {
@@ -241,7 +242,8 @@ extension ImagePickerView:UIImagePickerControllerDelegate,UINavigationController
                 file.type = ".png"
                 file.mimeType = "image/png"
                 file.contentFile = data
-                file.param = "file_pod_req[0]"
+//                file.param = "file_pod_req[0]"
+                file.param = "files[0]"
                 self.callback?(true,[file])
                 
             }else {
