@@ -76,10 +76,10 @@ class OrderDetailSKUCell: UITableViewCell {
             deliveredQtyStaticLabel?.text = (order.isNewStatus) ? "picked-up-quantity".localized : "delivered-quantity".localized
         } else {
             deliveredQtyStaticLabel?.text = (order.isNewStatus) ? "loaded-quantity".localized : "delivered-quantity".localized
-            
-            let isHidden = order.isLoaded
-            deliveryQtyViewContainer(isHidden: isHidden)
         }
+        
+        let isHidden = order.isLoaded
+        deliveryQtyViewContainer(isHidden: isHidden)
     }
     
     func deliveryQtyViewContainer(isHidden:Bool) {
@@ -93,7 +93,7 @@ class OrderDetailSKUCell: UITableViewCell {
     }
     
     func updateLoadedQtyUI(order:Order) {
-        if let loadedQty = detail.pivot?.loadedQty {
+        if let loadedQty = detail.pivot?.loadedQty, !order.isNewStatus {
             loadedQtyStaticLabel.text = order.isPickUpType ? "picked-up-quantity".localized : "loaded-quantity".localized
             loadedQtyLabel.text = "\(loadedQty)"
             loadedQtyViewContainer(isHidden:false)

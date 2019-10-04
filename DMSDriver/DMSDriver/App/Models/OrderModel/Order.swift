@@ -237,14 +237,14 @@ class Order: BaseModel {
                 qty <- map["qty"]
                 
                 loadedQty <- map["loaded_qty"]
-                if loadedQty != nil && loadedQty == 0 {
-                    loadedQty = nil // trick , cause server return 0 at the first time
-                }
-                
+//                if loadedQty != nil && loadedQty == 0 {
+//                    loadedQty = nil // trick , cause server return 0 at the first time
+//                }
+//
                 deliveredQty <- map["delivered_qty"]
-                if deliveredQty == nil {
-                    deliveredQty = qty // trick for default delivered qty
-                }
+//                if deliveredQty == nil {
+//                    deliveredQty = qty // trick for default delivered qty
+//                }
                 
                 returnedQty <- map["returned_qty"]
                 
@@ -345,7 +345,7 @@ class Order: BaseModel {
         var isValidLoadedQty:Bool {
             get {
                 if let _loadedQty = pivot?.loadedQty, let _qty = pivot?.qty {
-                    return _loadedQty > 0 && _loadedQty <= _qty
+                    return _loadedQty <= _qty
                 }
                 return false
             }
@@ -363,7 +363,7 @@ class Order: BaseModel {
         var isValidDeliveredQty:Bool {
             get {
                 if let _deliveredQty = pivot?.deliveredQty, let _loadedQty = pivot?.loadedQty {
-                    return _deliveredQty > 0 && _deliveredQty <= _loadedQty
+                    return _deliveredQty <= _loadedQty
                 }
                 return false
             }
