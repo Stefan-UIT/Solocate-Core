@@ -182,12 +182,16 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         
         //NEW
         let orderType = OrderDetailInforRow("order-type".localized,order.orderType.name)
+        let division = OrderDetailInforRow("division".localized,Slash(order.division?.name))
+        let zone = OrderDetailInforRow("zone".localized,Slash(order.zone?.name))
         
 
         orderInforDetail.append(orderId)
         orderInforDetail.append(orderType)
         orderInforDetail.append(customerItem)
         orderInforDetail.append(consigneeName)
+        orderInforDetail.append(division)
+        orderInforDetail.append(zone)
         orderInforDetail.append(remark)
         //orderInforStatus.append(urgency)
         
@@ -542,7 +546,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             headerCell.btnEdit?.isHidden = true
             headerCell.btnStatus?.isHidden = true
             
-            let statusesShouldAllowToSignAndUpload = (orderDetail?.statusOrder == StatusOrder.InTransit || orderDetail?.statusOrder == StatusOrder.deliveryStatus || orderDetail?.statusOrder == StatusOrder.PartialDelivered)
+            let statusesShouldAllowToSignAndUpload = (_orderDetail.isInTransit || _orderDetail.isFinished)
             
             let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section)!
             switch orderSection {

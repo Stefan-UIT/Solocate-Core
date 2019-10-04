@@ -235,11 +235,17 @@ class Order: BaseModel {
                 bcd <- map["bcd"]
                 batch_id <- map["batch_id"]
                 qty <- map["qty"]
+                
                 loadedQty <- map["loaded_qty"]
+                if loadedQty != nil && loadedQty == 0 {
+                    loadedQty = nil // trick , cause server return 0 at the first time
+                }
+                
                 deliveredQty <- map["delivered_qty"]
                 if deliveredQty == nil {
-                    deliveredQty = qty
+                    deliveredQty = qty // trick for default delivered qty
                 }
+                
                 returnedQty <- map["returned_qty"]
                 
             }
@@ -505,7 +511,6 @@ class Order: BaseModel {
         return Double(total)
     }()
     
-    // NEW
     var customer:UserModel.UserInfo?
     var typeID:Int = 0
     var group:String = ""
@@ -516,6 +521,11 @@ class Order: BaseModel {
     var wmsManifestNumber:String?
     var partialDeliveredReason:Reason?
     var remark:String?
+    
+    // NEW
+    var division:BasicModel?
+    var zone:BasicModel?
+    
     var consigneeName:String? {
         get {
             let name = (isPickUpType) ? from?.ctt_name : to?.ctt_name
@@ -653,6 +663,8 @@ class Order: BaseModel {
         }
         partialDeliveredReason    <- map["reason"]
         remark    <- map["remark"]
+        division <- map["shipping_division"]
+        zone <- map["shipping_zone"]
     }
     
     

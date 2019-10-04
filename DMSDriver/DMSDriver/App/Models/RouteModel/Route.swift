@@ -12,11 +12,29 @@ import GoogleMaps
 
 //MARK: - TRUCK
 class TruckType: BasicModel { }
-class Tanker: BasicModel { }
+class Tanker: Truck { }
 class Status: BasicModel { }
 class Urgency: BasicModel { }
 class Company: BasicModel { }
 class Zone: BasicModel { }
+
+class TankerJSON: BaseModel {
+    var id:Int?
+    var tanker:Tanker!
+    
+    override init() {
+        super.init()
+    }
+    
+    required init?(map: Map) {
+        super.init()
+    }
+    
+    override func mapping(map: Map) {
+        id <- map["id"]
+        tanker <- map["tanker"]
+    }
+}
 
 //MARK: - Status
 class BasicModel: BaseModel {
@@ -185,9 +203,8 @@ class Route: BaseModel {
     
     
     // NEW
-    var division:BasicModel?
-    var zone:Zone?
     var tankers:[Tanker]?
+    var tankersJSON:[TankerJSON]?
     
     var isAllowedGoToDelivery:Bool {
         get {
@@ -215,7 +232,7 @@ class Route: BaseModel {
         get {
             var _trailerTankerName = ""
             for tanker in tankers ?? [] {
-                _trailerTankerName = _trailerTankerName + ", " + (tanker.name ?? "")
+                _trailerTankerName = _trailerTankerName + ", " + tanker.plateNumber
             }
             return _trailerTankerName
         }
@@ -304,6 +321,9 @@ class Route: BaseModel {
         company <- map["company"]
         loadVolume <- map["load_vol"]
         assignedInfo <- map["drivers"]
+        tankersJSON <- map["tankers"]
+        guard let array = tankersJSON else { return }
+        tankers = array.map({$0.tanker})
     }
     
     var ordersAbleToLoad:[Order] {
