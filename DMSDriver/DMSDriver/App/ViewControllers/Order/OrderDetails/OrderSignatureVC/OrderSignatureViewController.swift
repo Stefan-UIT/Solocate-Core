@@ -94,7 +94,8 @@ class OrderSignatureViewController: BaseOrderDetailViewController {
             signatureFile.typeFile = "SIG"
             signatureFile.mimeType = "image/png"
             signatureFile.contentFile = data
-            signatureFile.param = "file_sig_req"
+//            signatureFile.param = "file_sig_req"
+            signatureFile.param = "files[0]"
             
             if orderDetail?.files == nil {
                 orderDetail?.files = []

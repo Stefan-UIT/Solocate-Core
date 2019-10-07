@@ -107,69 +107,11 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="eSw-8O-ha8">
                                 <rect key="frame" x="10" y="74.5" width="260" height="230.5"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="tyT-Cv-ZlJ" userLabel="Division">
-                                        <rect key="frame" x="0.0" y="0.0" width="260" height="30"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Division" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XOh-dz-cNw">
-                                                <rect key="frame" x="0.0" y="4" width="49.5" height="22"/>
-                                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
-                                                <color key="textColor" red="0.28235294119999998" green="0.36470588240000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="division"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eJN-xD-AhE">
-                                                <rect key="frame" x="225.5" y="7" width="34.5" height="16"/>
-                                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstItem="XOh-dz-cNw" firstAttribute="leading" secondItem="tyT-Cv-ZlJ" secondAttribute="leading" id="1YK-px-1jC"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="Yz5-e8-sxB"/>
-                                            <constraint firstItem="XOh-dz-cNw" firstAttribute="top" secondItem="tyT-Cv-ZlJ" secondAttribute="top" constant="4" id="f6c-MR-d7h"/>
-                                            <constraint firstItem="eJN-xD-AhE" firstAttribute="centerY" secondItem="XOh-dz-cNw" secondAttribute="centerY" id="geS-6S-nuL"/>
-                                            <constraint firstItem="XOh-dz-cNw" firstAttribute="centerY" secondItem="tyT-Cv-ZlJ" secondAttribute="centerY" id="q9I-EP-Dnm"/>
-                                            <constraint firstAttribute="trailing" secondItem="eJN-xD-AhE" secondAttribute="trailing" id="qy0-ns-WEp"/>
-                                        </constraints>
-                                    </view>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5VK-Sd-T0d" userLabel="Zone">
-                                        <rect key="frame" x="0.0" y="30" width="260" height="40"/>
-                                        <subviews>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Zone" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="a7j-hJ-YBX">
-                                                <rect key="frame" x="0.0" y="4" width="32" height="32"/>
-                                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
-                                                <color key="textColor" red="0.28235294119999998" green="0.36470588240000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                <nil key="highlightedColor"/>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="zone"/>
-                                                </userDefinedRuntimeAttributes>
-                                            </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3dy-kT-ZRH">
-                                                <rect key="frame" x="225.5" y="12" width="34.5" height="16"/>
-                                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
-                                                <nil key="textColor"/>
-                                                <nil key="highlightedColor"/>
-                                            </label>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="3Pq-qi-UMR"/>
-                                            <constraint firstItem="a7j-hJ-YBX" firstAttribute="leading" secondItem="5VK-Sd-T0d" secondAttribute="leading" id="I3m-Bg-TWZ"/>
-                                            <constraint firstItem="a7j-hJ-YBX" firstAttribute="centerY" secondItem="5VK-Sd-T0d" secondAttribute="centerY" id="M1W-0K-Fws"/>
-                                            <constraint firstItem="a7j-hJ-YBX" firstAttribute="top" secondItem="5VK-Sd-T0d" secondAttribute="top" constant="4" id="T0n-LK-g4Q"/>
-                                            <constraint firstAttribute="trailing" secondItem="3dy-kT-ZRH" secondAttribute="trailing" id="jJl-TU-QS7"/>
-                                            <constraint firstItem="3dy-kT-ZRH" firstAttribute="centerY" secondItem="a7j-hJ-YBX" secondAttribute="centerY" id="qUy-6G-XTm"/>
-                                        </constraints>
-                                    </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nn9-Vp-y6U" userLabel="Trailer Tanker">
-                                        <rect key="frame" x="0.0" y="70" width="260" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="260" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Trailer/Tanker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n3b-yN-6Rk">
-                                                <rect key="frame" x="0.0" y="4" width="85.5" height="22"/>
+                                                <rect key="frame" x="0.0" y="4" width="85.5" height="42"/>
                                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                 <color key="textColor" red="0.28235294119999998" green="0.36470588240000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -178,7 +120,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ENH-Dw-32P">
-                                                <rect key="frame" x="225.5" y="7" width="34.5" height="16"/>
+                                                <rect key="frame" x="225.5" y="17" width="34.5" height="16"/>
                                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -195,7 +137,7 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="F6X-Ue-x6D" userLabel="Company">
-                                        <rect key="frame" x="0.0" y="100" width="260" height="50"/>
+                                        <rect key="frame" x="0.0" y="50" width="260" height="50"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Company" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="q29-xn-Oof">
                                                 <rect key="frame" x="0.0" y="4" width="60" height="42"/>
@@ -224,10 +166,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lNi-Fq-Mc4" userLabel="Truck Type">
-                                        <rect key="frame" x="0.0" y="150" width="260" height="50.5"/>
+                                        <rect key="frame" x="0.0" y="100" width="260" height="100.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Truck" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iZj-d8-sFe">
-                                                <rect key="frame" x="0.0" y="17.5" width="34.5" height="16"/>
+                                                <rect key="frame" x="0.0" y="42.5" width="34.5" height="16"/>
                                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                 <color key="textColor" red="0.28235294119999998" green="0.36470588240000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -236,7 +178,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DEc-1u-ETY">
-                                                <rect key="frame" x="225.5" y="17.5" width="34.5" height="16"/>
+                                                <rect key="frame" x="225.5" y="42.5" width="34.5" height="16"/>
                                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
@@ -423,7 +365,6 @@
             <connections>
                 <outlet property="companyLabel" destination="DSM-BZ-Bl1" id="qX9-q5-D0e"/>
                 <outlet property="distanceLabel" destination="KjY-SX-SFG" id="kI9-uS-JHw"/>
-                <outlet property="divisionLabel" destination="eJN-xD-AhE" id="cmo-n5-H6P"/>
                 <outlet property="durationLabel" destination="NgX-J5-3kp" id="hfC-Cz-av3"/>
                 <outlet property="endTimeLabel" destination="Vwr-df-rjI" id="SqE-6M-bg1"/>
                 <outlet property="expectedStartDateLabel" destination="qU9-Bb-BFU" id="859-F6-I1s"/>
@@ -434,7 +375,6 @@
                 <outlet property="stopsLabel" destination="ahI-7z-bkz" id="xaK-3d-ppT"/>
                 <outlet property="trailerTankerLabel" destination="ENH-Dw-32P" id="nYU-Tn-Lwl"/>
                 <outlet property="truckLabel" destination="DEc-1u-ETY" id="UBR-Rn-QsS"/>
-                <outlet property="zoneLabel" destination="3dy-kT-ZRH" id="fgX-ZR-vDM"/>
             </connections>
             <point key="canvasLocation" x="-270.39999999999998" y="91.754122938530742"/>
         </tableViewCell>

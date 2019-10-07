@@ -235,11 +235,17 @@ class Order: BaseModel {
                 bcd <- map["bcd"]
                 batch_id <- map["batch_id"]
                 qty <- map["qty"]
+                
                 loadedQty <- map["loaded_qty"]
+//                if loadedQty != nil && loadedQty == 0 {
+//                    loadedQty = nil // trick , cause server return 0 at the first time
+//                }
+//
                 deliveredQty <- map["delivered_qty"]
-                if deliveredQty == nil {
-                    deliveredQty = qty
-                }
+//                if deliveredQty == nil {
+//                    deliveredQty = qty // trick for default delivered qty
+//                }
+                
                 returnedQty <- map["returned_qty"]
                 
             }
@@ -339,7 +345,7 @@ class Order: BaseModel {
         var isValidLoadedQty:Bool {
             get {
                 if let _loadedQty = pivot?.loadedQty, let _qty = pivot?.qty {
-                    return _loadedQty > 0 && _loadedQty <= _qty
+                    return _loadedQty <= _qty
                 }
                 return false
             }
@@ -356,8 +362,8 @@ class Order: BaseModel {
         
         var isValidDeliveredQty:Bool {
             get {
-                if let _deliveredQty = pivot?.deliveredQty, let _qty = pivot?.qty {
-                    return _deliveredQty > 0 && _deliveredQty <= _qty
+                if let _deliveredQty = pivot?.deliveredQty, let _loadedQty = pivot?.loadedQty {
+                    return _deliveredQty <= _loadedQty
                 }
                 return false
             }
@@ -429,6 +435,7 @@ class Order: BaseModel {
     class OrderTypeModel:BasicModel {}
 
     var id = -1
+    var purchaseOrderID = -1
     var from:Address?
     var to:Address?
     var route_id:Int = 0
@@ -505,7 +512,6 @@ class Order: BaseModel {
         return Double(total)
     }()
     
-    // NEW
     var customer:UserModel.UserInfo?
     var typeID:Int = 0
     var group:String = ""
@@ -516,6 +522,11 @@ class Order: BaseModel {
     var wmsManifestNumber:String?
     var partialDeliveredReason:Reason?
     var remark:String?
+    
+    // NEW
+    var division:BasicModel?
+    var zone:BasicModel?
+    
     var consigneeName:String? {
         get {
             let name = (isPickUpType) ? from?.ctt_name : to?.ctt_name
@@ -612,6 +623,7 @@ class Order: BaseModel {
     
     override func mapping(map: Map) {
         id    <- map["id"]
+        purchaseOrderID    <- map["purchase_order_id"]
         route_id <- map["route_id"]
         status_id <- map["shipping_status_id"]
         seq <- map["seq"]
@@ -653,6 +665,8 @@ class Order: BaseModel {
         }
         partialDeliveredReason    <- map["reason"]
         remark    <- map["remark"]
+        division <- map["shipping_division"]
+        zone <- map["shipping_zone"]
     }
     
     

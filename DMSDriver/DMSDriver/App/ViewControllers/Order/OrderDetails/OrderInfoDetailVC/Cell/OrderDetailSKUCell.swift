@@ -15,6 +15,8 @@ protocol OrderDetailSKUCellDelegate:class {
 class OrderDetailSKUCell: UITableViewCell {
 
     @IBOutlet weak var nameLabel: UILabel!
+    @IBOutlet weak var barcodeLabel: UILabel!
+    @IBOutlet weak var batchIdLabel: UILabel!
     @IBOutlet weak var quantityLabel: UILabel!
     @IBOutlet weak var loadedQtyLabel: UILabel!
     @IBOutlet weak var loadedQtyViewContainer: UIView!
@@ -45,6 +47,9 @@ class OrderDetailSKUCell: UITableViewCell {
     func configureCell(detail:Order.Detail, order:Order) {
         self.detail = detail
         nameLabel.text = detail.name
+        barcodeLabel.text = detail.barCode // barCode is String
+//        barcodeLabel.text = Slash(detail.barCode) barCode is Int
+        batchIdLabel.text = detail.pivot?.batch_id
         quantityLabel.text = IntSlash(detail.pivot?.qty)
         
         updateDeliverdQtyUI(order: order)
@@ -76,10 +81,10 @@ class OrderDetailSKUCell: UITableViewCell {
             deliveredQtyStaticLabel?.text = (order.isNewStatus) ? "picked-up-quantity".localized : "delivered-quantity".localized
         } else {
             deliveredQtyStaticLabel?.text = (order.isNewStatus) ? "loaded-quantity".localized : "delivered-quantity".localized
-            
-            let isHidden = order.isLoaded
-            deliveryQtyViewContainer(isHidden: isHidden)
         }
+        
+        let isHidden = order.isLoaded
+        deliveryQtyViewContainer(isHidden: isHidden)
     }
     
     func deliveryQtyViewContainer(isHidden:Bool) {
@@ -93,7 +98,7 @@ class OrderDetailSKUCell: UITableViewCell {
     }
     
     func updateLoadedQtyUI(order:Order) {
-        if let loadedQty = detail.pivot?.loadedQty {
+        if let loadedQty = detail.pivot?.loadedQty, !order.isNewStatus {
             loadedQtyStaticLabel.text = order.isPickUpType ? "picked-up-quantity".localized : "loaded-quantity".localized
             loadedQtyLabel.text = "\(loadedQty)"
             loadedQtyViewContainer(isHidden:false)

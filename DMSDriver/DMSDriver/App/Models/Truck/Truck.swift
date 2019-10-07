@@ -31,10 +31,13 @@ class Truck:BaseModel {
     override func mapping(map: Map) {
         id <- map["id"]
         name <- map["name"]
-        plateNumber <- map["plate_num"]
         maxLoad <- map["max_load"]
         maxVolume <- map["max_vol"]
         maxFloor <- map["max_floor"]
         type <- map["type"]
+        plateNumber <- map["plate_number"]
+        if plateNumber == "-" {
+            plateNumber <- map["plate_num"]
+        }
     }
 }
