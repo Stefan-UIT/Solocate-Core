@@ -89,6 +89,14 @@ extension BaseAPIService {
     }
     
     @discardableResult
+    func getListRentingOrderStatus(callback: @escaping APICallback<ResponseArrData<RentingOrderStatus>>) -> APIRequest {
+        return request(method: .GET,
+                       path: PATH_REQUEST_URL.GET_LIST_RENTING_ORDER_STATUS.URL,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
     func getDriversByCoordinator(callback: @escaping APICallback<CoordinatorDriverModel>) -> APIRequest {
         return request(method: .GET,
                        path: PATH_REQUEST_URL.GET_DRIVER_BY_COORDINATOR.URL,

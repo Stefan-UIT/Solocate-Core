@@ -9,62 +9,39 @@
 import UIKit
 import ObjectMapper
 
-enum StatusRentingOrder: String {
-    case newStatus = "OP"
-    case InTransit = "IT"
+enum RentingOrderStatusCode: String {
+    case NewStatus = "OP"
+    case PartlyAssigned = "PA"
+    case FullyAssigned = "FA"
     case InProgress = "IP"
-    case deliveryStatus = "DV"
-    case CancelStatus = "CC"
-    case UnableToFinish = "UF"
-    case PickupStatus = "PU"
-    case Loaded = "LD"
-    case WarehouseClarification = "WC"
-    case PartialLoaded = "PL"
-    case PartialDelivered = "PD"
+    case Finished = "FH"
     
     var statusName: String {
         switch self {
-        case .newStatus:
+        case .NewStatus:
             return "New".localized
-        case .InTransit:
-            return "in-transit".localized
+        case .PartlyAssigned:
+            return "partly-assigned".localized
+        case .FullyAssigned:
+            return "fully-assigned".localized
         case .InProgress:
             return "in-progress".localized
-        case .PickupStatus:
-            return "picked-up".localized
-        case .deliveryStatus:
-            return "Delivered".localized
-        case .CancelStatus:
-            return "Cancelled".localized
-        case .UnableToFinish:
-            return "unable-to-finish".localized
-        case .Loaded:
-            return "loaded".localized
-        case .PartialLoaded:
-            return "partial-loaded".localized
-        case .PartialDelivered:
-            return "partial-delivered".localized
-        case .WarehouseClarification:
-            return "warehouse-clarification".localized
+        case .Finished:
+            return "Finished".localized
         }
     }
     
     var color:UIColor {
         get {
             switch self {
-            case .newStatus, .Loaded, .PartialLoaded:
+            case .NewStatus:
                 return AppColor.newStatus;
-            case .InTransit, .InProgress:
+            case .InProgress:
                 return AppColor.InTransit;
-            case .deliveryStatus, .PartialDelivered:
+            case .FullyAssigned, .PartlyAssigned:
+                return AppColor.mainColor
+            case .Finished:
                 return AppColor.deliveryStatus;
-            case .CancelStatus,
-                 .UnableToFinish:
-                return AppColor.redColor;
-            case .WarehouseClarification:
-                return AppColor.orangeColor
-            default:
-                return AppColor.newStatus;
             }
         }
     }
@@ -140,7 +117,7 @@ class RentingOrder: BaseModel {
         get {
             var _trailerTankers = ""
             for trailerTanker in rentingOrderTankers {
-                _trailerTankers = _trailerTankers == "" ? "" : _trailerTankers + ", " + (trailerTanker?.name ?? "")
+                _trailerTankers = _trailerTankers == "" ? (trailerTanker?.name ?? "") : _trailerTankers + ", " + (trailerTanker?.name ?? "")
             }
             return _trailerTankers
         }
@@ -150,7 +127,7 @@ class RentingOrder: BaseModel {
         get {
             var _skusName = ""
             for skuName in rentingOrderSKUs ?? [] {
-                _skusName = _skusName == "" ? "" : _skusName + ", " + (skuName.name ?? "")
+                _skusName = _skusName == "" ? (skuName.name ?? "") : _skusName + ", " + (skuName.name ?? "")
             }
             return _skusName
         }
