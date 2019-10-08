@@ -278,24 +278,24 @@ fileprivate extension LoginViewController {
         }
     }
     
-    func getListRentingOrderStatus() {
-        SERVICES().API.getListRentingOrderStatus { (result) in
-            switch result {
-            case .object(let obj):
-                guard let list = obj.data else { return }
-                CoreDataManager.updateRentingOrderStatus(list)
-            case .error(_ ):
-                break
-            }
-        }
-    }
-    
     func getListRouteStatus() {
         SERVICES().API.getListRouteStatus { (result) in
             switch result{
             case .object(let obj):
                 guard let list = obj.data?.data else {return}
                 CoreDataManager.updateRouteListStatus(list)
+            case .error(_ ):
+                break
+            }
+        }
+    }
+    
+    func getListRentingOrderStatus() {
+        SERVICES().API.getListRentingOrderStatus { (result) in
+            switch result {
+            case .object(let obj):
+                guard let list = obj.data?.data else { return }
+                CoreDataManager.updateRentingOrderStatus(list)
             case .error(_ ):
                 break
             }

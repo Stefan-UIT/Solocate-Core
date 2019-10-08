@@ -8,6 +8,11 @@
 
 import UIKit
 
+enum FilterSceneType {
+    case RouteListVC
+    case RentingOrderListVC
+}
+
 enum FilterDataListSection:Int {
     case SectionDate = 0
     case SectionType
@@ -43,7 +48,8 @@ class FilterDataListVC: BaseViewController {
 
     fileprivate var callback:FilterDataListCallback?
     fileprivate var filterModel = FilterDataModel()
-    fileprivate var arrStatus:[Status] = []
+    fileprivate var arrRouteStatus:[Status] = []
+    fileprivate var arrRentingOrderStatus:[RentingOrderStatus] = []
     fileprivate var arrCustomer:[String] = []
     fileprivate var arrCity:[String] = []
     fileprivate var arrCustomerDisplay:[String] = []
@@ -52,6 +58,7 @@ class FilterDataListVC: BaseViewController {
     fileprivate let DELIVERY_TYPE = "Delivery"
     var dataManager = TimeData()
     var isSelected:Bool = false
+    var filterSceneType:FilterSceneType = .RouteListVC
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -92,13 +99,34 @@ class FilterDataListVC: BaseViewController {
     }
     
     private func setupStatusData() {
+        switch filterSceneType {
+        case .RouteListVC:
+            setupRouteStatus()
+            break
+        case .RentingOrderListVC:
+            setupRentingOrderStatus()
+            break
+        }
+    }
+    
+    private func setupRouteStatus() {
         let allStatuses = Status()
         allStatuses.name = "all-statuses".localized
-        arrStatus.append(allStatuses)
+        arrRouteStatus.append(allStatuses)
         if CoreDataManager.getListRouteStatus().count == 0 {
             self.getListRouteStatus()
         }
-        arrStatus.append(CoreDataManager.getListRouteStatus())
+        arrRouteStatus.append(CoreDataManager.getListRouteStatus())
+    }
+    
+    private func setupRentingOrderStatus() {
+        let allStatuses = RentingOrderStatus()
+        allStatuses.name = "all-statuses".localized
+        arrRentingOrderStatus.append(allStatuses)
+        if CoreDataManager.getListRentingOrderStatus().count == 0 {
+            self.getListRentingOrderStatus()
+        }
+        arrRentingOrderStatus.append(CoreDataManager.getListRentingOrderStatus())
     }
 
     /*
@@ -154,7 +182,12 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                 }
             case .SectionStatus:
                 if filterModel.selectingField == FilterDataModel.SelectingField.StatusField {
-                    return arrStatus.count
+                    switch filterSceneType {
+                    case .RouteListVC:
+                        return arrRouteStatus.count
+                    case .RentingOrderListVC:
+                        return arrRentingOrderStatus.count
+                    }
                 }
             case .SectionCustomer:
                 if filterModel.selectingField == FilterDataModel.SelectingField.CustomerField {
@@ -372,6 +405,15 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                 
             case .SectionStatus:
                 let cell = tableView.dequeueReusableCell(withIdentifier: identifierStatusCell) as! FilterDataListStatusCell
+                var arrStatus:[BasicModel] = []
+                switch filterSceneType {
+                case .RouteListVC:
+                    arrStatus = arrRouteStatus
+                    break
+                case .RentingOrderListVC:
+                    arrStatus = arrRentingOrderStatus
+                    break
+                }
                 cell.btnStatus?.setTitle(arrStatus[row].name, for: .normal)
                 cell.btnStatus?.tag = indexPath.row
                 cell.delegate = self
@@ -503,7 +545,13 @@ extension FilterDataListVC:FilterDataTypeRowCellDelegate {
 extension FilterDataListVC:FilterDataListStatusCellDelegate{
     func filterDataListStatusCell(cell: FilterDataListStatusCell, didSelect status: String, index: Int) {
         isSelected = false
-        let status = arrStatus[index]
+        var status = BasicModel()
+        switch filterSceneType {
+        case .RouteListVC:
+            status = arrRouteStatus[index]
+        case .RentingOrderListVC:
+            status = arrRentingOrderStatus[index]
+        }
         filterModel.status = status
         filterModel.selectingField = nil
         tbvContent?.reloadData()
@@ -604,11 +652,24 @@ extension FilterDataListVC {
         }
     }
     
+    private func getListRentingOrderStatus() {
+        SERVICES().API.getListRentingOrderStatus { (result) in
+            switch result{
+            case .object(let obj):
+                guard let list = obj.data?.data else {return}
+                CoreDataManager.updateRentingOrderStatus(list)
+            case .error(_ ):
+                break
+            }
+        }
+    }
+    
     class func show(atViewController viewController:UIViewController,
-                    currentFilter:FilterDataModel?,
+                    currentFilter:FilterDataModel?, filterScenceType:FilterSceneType = .RouteListVC,
                     callback:@escaping FilterDataListCallback)  {
         let vc:FilterDataListVC = FilterDataListVC.load(nib: "FilterDataListVC")
         vc.callback = callback
+        vc.filterSceneType = filterScenceType
         if let copyObject:FilterDataModel = currentFilter?.cloneObject(){
             vc.filterModel = copyObject
         }

@@ -48,25 +48,7 @@ enum RentingOrderStatusCode: String {
 }
 //MARK: RENTING
 class RentingOrderCompany: BasicModel { }
-class RentingOrderStatus: BaseModel {
-    var id:Int?
-    var name:String?
-    var code:String?
-    
-    override init() {
-        super.init()
-    }
-    
-    required init?(map: Map) {
-        super.init()
-    }
-    
-    override func mapping(map: Map) {
-        id <- map["id"]
-        name <- map["name"]
-        code <- map["cd"]
-    }
-}
+class RentingOrderStatus: BasicModel { }
 
 class RentingOrder: BaseModel {
     
