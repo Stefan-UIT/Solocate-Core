@@ -72,6 +72,121 @@ class RentingOrder: BaseModel {
         }
     }
     
+    class RentingOrderDetail: BaseModel {
+        struct RentingTruckType:Mappable {
+            var id:Int?
+            var name:String?
+            var cd:String?
+            var fuelType:String?
+            var numberOfCompartments:Int?
+            var maxVol:String?
+            var tachograph:Int?
+            var companyId:Int?
+            
+            init?(map: Map) {
+                //
+            }
+            
+            mutating func mapping(map: Map) {
+                id <- map["id"]
+                name <- map["name"]
+                cd <- map["code"]
+                fuelType <- map["fuel_type"]
+                numberOfCompartments <- map["num_of_compartments"]
+                maxVol <- map["max_vol"]
+                tachograph <- map["tachograph"]
+                companyId <- map ["company_id"]
+            }
+        }
+        
+        struct RentingTruck:Mappable {
+            var id:Int?
+            var typeId:String?
+            var driverId:String?
+            var maxWeight:Int?
+            var selfWeight:Int?
+            var maxVol:Int?
+            var plateNum:String?
+            var companyId:Int?
+            
+            init?(map: Map) {
+                //
+            }
+            
+            mutating func mapping(map: Map) {
+                id <- map["id"]
+                typeId <- map["type_id"]
+                driverId <- map["driver_id"]
+                maxWeight <- map["max_weight"]
+                selfWeight <- map["self_weight"]
+                maxVol <- map["max_vol"]
+                plateNum <- map["plate_num"]
+                if plateNum == "" {
+                    plateNum <- map["plate_number"]
+                }
+                companyId <- map["company_id"]
+            }
+        }
+        
+        struct RentingTanker:Mappable {
+            var tanker:[RentingTruck]?
+            var tankerType:[RentingTruckType]?
+            
+            init?(map: Map) {
+                //
+            }
+            
+            mutating func mapping(map: Map) {
+                tanker <- map["tankers"]
+                tankerType <- map["tanker_type"]
+            }
+        }
+        
+        var id = -1
+        var rentingOrderID = -1
+        var truckTypeId = -1
+        var truckId = -1
+        var truckType:RentingTruckType?
+        var truck:RentingTruck?
+        var driver:UserModel.UserInfo?
+        var sku:[RentingOrderSKU]?
+        var tanker:RentingTanker?
+        var driverId = -1
+        // NEW
+        
+        override init() {
+            super.init()
+        }
+        
+        required init?(map: Map) {
+            super.init()
+        }
+        
+        override func mapping(map: Map) {
+            id <- map["id"]
+            rentingOrderID <- map["renting_order_id"]
+            truckTypeId <- map["truck_type_id"]
+            truckId <- map["truck_id"]
+            truckType <- map["truck_type"]
+            truck <- map["truck"]
+            driver <- map["driver"]
+            sku <- map["sku"]
+            tanker <- map["tanker"]
+            driverId <- map["driver_id"]
+        }
+        
+        var skulist: String {
+            get {
+                var _skuList = ""
+                for each in 0..<(sku?.count ?? 0){
+                    _skuList = _skuList == "" ? (sku?[each].name ?? "") : _skuList + ", " + (sku?[each].name ?? "")
+                }
+                return _skuList
+            }
+        }
+        
+    }
+    
     var id = -1
     var referenceCode = ""
     var customerId = -1
@@ -93,6 +208,7 @@ class RentingOrder: BaseModel {
     var rentingOrderTruckType:TruckType?
     var rentingOrderSKUs:[RentingOrderSKU]?
     var rentingOrderCompany:RentingOrderCompany?
+    var rentingOrderDetails:[RentingOrderDetail]?
 //    var renting_order_creator:UserModel.UserInfo?
     
     var trailerTankers: String {
@@ -102,6 +218,13 @@ class RentingOrder: BaseModel {
                 _trailerTankers = _trailerTankers == "" ? (trailerTanker?.name ?? "") : _trailerTankers + ", " + (trailerTanker?.name ?? "")
             }
             return _trailerTankers
+        }
+    }
+    
+    var rentingOrderStatusColor: UIColor {
+        get {
+            let _rentingOrderStatus = RentingOrderStatusCode(rawValue: rentingOrderStatus?.code ?? "")
+            return _rentingOrderStatus?.color ?? AppColor.mainColor
         }
     }
     
@@ -133,15 +256,16 @@ class RentingOrder: BaseModel {
         updatedBy <- map["updated_by"]
         createdAt <- map["created_at"]
         updatedAt <- map["updated_at"]
-        rentingOrderTrucks <- map["renting_order_trucks"]
-        rentingOrderDrivers <- map["renting_order_drivers"]
-        rentingOrderTankers <- map["renting_order_tankers"]
+//        rentingOrderTrucks <- map["renting_order_trucks"]
+//        rentingOrderDrivers <- map["renting_order_drivers"]
+//        rentingOrderTankers <- map["renting_order_tankers"]
         rentingOrderStatus <- map["renting_order_status"]
         rentingOrderCustomer <- map["renting_order_customer"]
-        rentingOrderTruckType <- map["renting_order_truck_type"]
-        rentingOrderSKUs <- map["renting_order_skus"]
+//        rentingOrderTruckType <- map["renting_order_truck_type"]
+//        rentingOrderSKUs <- map["renting_order_skus"]
         rentingOrderCompany <- map["renting_order_company"]
 //        renting_order_creator <- map["renting_order_creator"]
+        rentingOrderDetails <- map["renting_order_details"]
     }
 }
 

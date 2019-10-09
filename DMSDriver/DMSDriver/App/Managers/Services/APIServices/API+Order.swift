@@ -20,6 +20,20 @@ extension BaseAPIService{
     }
     
     @discardableResult
+    func updateRentingOrderStatus(_ rentingOrder:RentingOrder, callback: @escaping APICallback<ResponseDataModel<RentingOrder>>) -> APIRequest? {
+        let path = String(format:PATH_REQUEST_URL.UPDATE_RENTING_ORDER_STATUS.URL, "\(rentingOrder.id )")
+        let params:[String:Any] = ["renting_order_status_id": "\(rentingOrder.rentingOrderStatusId )"]
+        if ReachabilityManager.isNetworkAvailable {
+            return request(method: .PUT,
+                           path: path,
+                           input: .json(params),
+                           callback: callback);
+        } else {
+            return nil
+        }
+    }
+    
+    @discardableResult
     func updateOrderStatus(_ order:Order,
                            reason: Reason? = nil,
                            updateDetailType:Order.Detail.DetailUpdateType = .Deliver,

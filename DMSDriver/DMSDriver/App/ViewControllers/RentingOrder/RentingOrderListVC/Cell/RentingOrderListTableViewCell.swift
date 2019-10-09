@@ -18,7 +18,7 @@ class RentingOrderListTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var refCodeLbl: UILabel!
     @IBOutlet weak var customerLbl: UILabel!
-    @IBOutlet weak var truckLbl: UILabel!
+    @IBOutlet weak var detailsLbl: UILabel!
     var rentingOrder:RentingOrder!
     
     override func awakeFromNib() {
@@ -36,12 +36,12 @@ class RentingOrderListTableViewCell: UITableViewCell {
         self.rentingOrder = rentingOrder
         orderIdLbl.text = "#"+"\(rentingOrder.id)"
         statusLbl.text = rentingOrder.rentingOrderStatus?.name?.localized
-//        statusLbl.textColor = rentingOrder.rentingStatus?.color
+        statusLbl.textColor = rentingOrder.rentingOrderStatusColor
         startDateLbl.text = rentingOrder.startDate ?? ""
         endDateLbl.text = rentingOrder.endDate ?? ""
         dateLbl.text = rentingOrder.endDate ?? ""
         refCodeLbl.text = "\(rentingOrder.referenceCode)"
         customerLbl.text = rentingOrder.rentingOrderCustomer?.userName ?? ""
-        truckLbl.text = rentingOrder.rentingOrderTruckType?.name
+        detailsLbl.text = "\(rentingOrder.rentingOrderDetails?.count ?? 0)"
     }
 }

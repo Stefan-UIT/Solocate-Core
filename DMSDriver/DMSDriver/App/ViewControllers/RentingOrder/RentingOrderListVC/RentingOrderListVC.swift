@@ -61,7 +61,7 @@ class RentingOrderListVC: BaseViewController {
     }
     
     @objc func fetchData(isShowLoading:Bool = true)  {
-//        getRoutes(filterMode: filterModel, isShowLoading: isShowLoading)
+        getRoutes(filterMode: filterModel, isShowLoading: isShowLoading)
     }
     
 //    func updateRouteList(routeNeedUpdate:Route) {

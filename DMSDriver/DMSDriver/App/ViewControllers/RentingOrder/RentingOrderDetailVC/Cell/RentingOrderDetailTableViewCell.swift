@@ -8,40 +8,24 @@
 
 import UIKit
 
-struct RentingOrderDetailInforRow {
-    var title: String = ""
-    var content: String = ""
-    var isHighlight = false
-    var textColor:UIColor?
-    
-    
-    init(_ title:String , _ content:String, _ isHighlight:Bool = false, _ textColor:UIColor? = nil ) {
-        self.title = title
-        self.content = content
-        self.isHighlight = isHighlight
-        self.textColor = textColor
-    }
-}
 
 class RentingOrderDetailTableViewCell: UITableViewCell {
-    @IBOutlet weak var nameLabel: UILabel?
-    @IBOutlet weak var contentLabel: UILabel?
     
-    var rentingOrderDetailItem: RentingOrderDetailInforRow! {
-        didSet {
-            nameLabel?.text = rentingOrderDetailItem.title
-            contentLabel?.text = rentingOrderDetailItem.content
-//            contentLabel?.textColor = orderDetailItem.isHighlight ? AppColor.buttonColor : AppColor.black
-            if let color = rentingOrderDetailItem.textColor {
-                contentLabel?.textColor = color
-            }
-        }
-    }
+    @IBOutlet weak var truckTypeLabel: UILabel!
+    @IBOutlet weak var truckLabel: UILabel!
+    @IBOutlet weak var trailerTankerTypeLabel: UILabel!
+    @IBOutlet weak var tankerLabel: UILabel!
+    @IBOutlet weak var trailerTankerType2Label: UILabel!
+    @IBOutlet weak var tanker2Label: UILabel!
+    @IBOutlet weak var skulistLabel: UILabel!
+    @IBOutlet weak var driverLabel: UILabel!
+    @IBOutlet weak var trailerTankerType2View: UIView!
+    @IBOutlet weak var tanker2View: UIView!
     
+    var rentingOrderDetail:RentingOrder.RentingOrderDetail!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        contentLabel?.numberOfLines = 0
         // Initialization code
     }
 
@@ -51,4 +35,24 @@ class RentingOrderDetailTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func configureCellWithRentingOrderDetail(_ rentingOrderDetail: RentingOrder.RentingOrderDetail) {
+        trailerTankerType2View.isHidden = true
+        tanker2View.isHidden = true
+        truckTypeLabel.text = rentingOrderDetail.truckType?.name
+        truckLabel.text = "\(rentingOrderDetail.truck?.id ?? 0)"
+        trailerTankerTypeLabel.text = rentingOrderDetail.tanker?.tankerType?[0].name
+        tankerLabel.text = rentingOrderDetail.tanker?.tanker?[0].plateNum
+        if rentingOrderDetail.tanker?.tankerType?.count > 1 {
+            trailerTankerType2View.isHidden = false
+            trailerTankerType2Label.text = rentingOrderDetail.tanker?.tankerType?[1].name
+            
+        }
+        if rentingOrderDetail.tanker?.tanker?.count > 1 {
+            tanker2View.isHidden = false
+            tanker2Label.text = rentingOrderDetail.tanker?.tanker?[1].plateNum
+        }
+        skulistLabel.text = rentingOrderDetail.skulist
+        driverLabel.text = rentingOrderDetail.driver?.userName
+    }
+    
 }
