@@ -480,13 +480,13 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Vl-qh-5gd">
-                                                    <rect key="frame" x="15" y="11" width="345" height="260"/>
+                                                    <rect key="frame" x="15" y="1" width="345" height="260"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rgf-jx-QJZ">
                                                             <rect key="frame" x="0.0" y="0.0" width="345" height="260"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JD1-H3-AXi">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="345" height="50"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="345" height="30"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Truck Type" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="seM-ao-EUQ">
                                                                             <rect key="frame" x="15" y="7" width="68.5" height="16"/>
@@ -499,7 +499,7 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVI-1s-Oga">
-                                                                            <rect key="frame" x="93.5" y="5" width="236.5" height="40"/>
+                                                                            <rect key="frame" x="93.5" y="5" width="236.5" height="20"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="dTA-jR-RkD"/>
                                                                             </constraints>
@@ -520,7 +520,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CgL-CW-qLm">
-                                                                    <rect key="frame" x="0.0" y="50" width="345" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="30" width="345" height="30"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Truck" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pgA-fz-PfZ">
                                                                             <rect key="frame" x="15" y="7" width="34.5" height="16"/>
@@ -554,7 +554,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="eT3-ae-SyR">
-                                                                    <rect key="frame" x="0.0" y="80" width="345" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="60" width="345" height="30"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Trailer/Tanker Type " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="PZM-Mb-l6i">
                                                                             <rect key="frame" x="15" y="7" width="123" height="16"/>
@@ -588,7 +588,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0LC-eq-wbh">
-                                                                    <rect key="frame" x="0.0" y="110" width="345" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="90" width="345" height="30"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Tanker" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S1k-d7-TEz">
                                                                             <rect key="frame" x="15" y="7" width="42.5" height="16"/>
@@ -622,7 +622,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cL4-Ek-9IP">
-                                                                    <rect key="frame" x="0.0" y="140" width="345" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="120" width="345" height="30"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Trailer/Tanker Type 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1cG-64-88H">
                                                                             <rect key="frame" x="15" y="7" width="131" height="16"/>
@@ -656,7 +656,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7Py-vg-QLT">
-                                                                    <rect key="frame" x="0.0" y="170" width="345" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="150" width="345" height="30"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Tanker 2" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xVO-pn-9Ty">
                                                                             <rect key="frame" x="15" y="7" width="54" height="16"/>
@@ -690,7 +690,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="leh-yQ-6dr">
-                                                                    <rect key="frame" x="0.0" y="200" width="345" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="180" width="345" height="30"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="SKU list" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBT-Hi-mq3">
                                                                             <rect key="frame" x="15" y="7" width="50" height="16"/>
@@ -724,7 +724,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a2v-HD-NIL">
-                                                                    <rect key="frame" x="0.0" y="230" width="345" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="210" width="345" height="50"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Driver" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nyh-ZF-TPa">
                                                                             <rect key="frame" x="15" y="7" width="37.5" height="16"/>
@@ -737,7 +737,7 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZIk-x0-qbG">
-                                                                            <rect key="frame" x="62.5" y="5" width="267.5" height="20"/>
+                                                                            <rect key="frame" x="62.5" y="5" width="267.5" height="40"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="3te-Gi-IyL"/>
                                                                             </constraints>
@@ -772,9 +772,9 @@
                                             <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="0.0" colorSpace="calibratedRGB"/>
                                             <constraints>
                                                 <constraint firstItem="1Vl-qh-5gd" firstAttribute="leading" secondItem="lJi-sd-9c5" secondAttribute="leadingMargin" id="5WX-xE-x94"/>
-                                                <constraint firstItem="1Vl-qh-5gd" firstAttribute="top" secondItem="lJi-sd-9c5" secondAttribute="topMargin" id="6vU-rp-xzO"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="1Vl-qh-5gd" secondAttribute="bottom" id="FL1-mJ-D1Z"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="1Vl-qh-5gd" secondAttribute="bottom" constant="-7" id="FL1-mJ-D1Z"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="1Vl-qh-5gd" secondAttribute="trailing" id="Nhs-wQ-5WN"/>
+                                                <constraint firstItem="1Vl-qh-5gd" firstAttribute="top" secondItem="lJi-sd-9c5" secondAttribute="topMargin" constant="-10" id="xUe-YP-bRG"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -784,9 +784,11 @@
                                             <outlet property="tanker2Label" destination="HAu-ek-hBe" id="RED-P2-g5e"/>
                                             <outlet property="tanker2View" destination="7Py-vg-QLT" id="gWE-6f-H6N"/>
                                             <outlet property="tankerLabel" destination="Q5z-E1-y7b" id="vnI-KJ-ypR"/>
+                                            <outlet property="tankerView" destination="0LC-eq-wbh" id="kLa-sN-2XC"/>
                                             <outlet property="trailerTankerType2Label" destination="VZa-Xe-fWJ" id="Teo-de-zjs"/>
                                             <outlet property="trailerTankerType2View" destination="cL4-Ek-9IP" id="MrH-Cn-GdY"/>
                                             <outlet property="trailerTankerTypeLabel" destination="Ny0-KE-FaD" id="EsT-q3-iew"/>
+                                            <outlet property="trailerTankerTypeView" destination="eT3-ae-SyR" id="O8x-Ve-znc"/>
                                             <outlet property="truckLabel" destination="YUf-rs-Dx7" id="H6f-Lx-waH"/>
                                             <outlet property="truckTypeLabel" destination="OVI-1s-Oga" id="ex9-lL-ec4"/>
                                         </connections>

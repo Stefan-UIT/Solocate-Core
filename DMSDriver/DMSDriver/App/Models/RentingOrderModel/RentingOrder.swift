@@ -52,18 +52,26 @@ class RentingOrderStatus: BasicModel { }
 
 class RentingOrder: BaseModel {
     
-    class RentingOrderSKU: Order.Detail {
+    class RentingOrderSKU: BaseModel {
+        var id:Int?
+        var name:String?
         var referenceCode:String?
         var materialId:String?
         var unitTypeId:String?
         var ac:String?
         var companyId:Int?
         
+        override init() {
+            super.init()
+        }
+        
         required init?(map: Map) {
             super.init()
         }
         
         override func mapping(map: Map) {
+            id <- map["id"]
+            name <- map["name"]
             referenceCode <- map["ref_cd"]
             materialId <- map["material_id"]
             unitTypeId <- map["unit_type_id"]
@@ -121,7 +129,7 @@ class RentingOrder: BaseModel {
                 selfWeight <- map["self_weight"]
                 maxVol <- map["max_vol"]
                 plateNum <- map["plate_num"]
-                if plateNum == "" {
+                if plateNum == nil {
                     plateNum <- map["plate_number"]
                 }
                 companyId <- map["company_id"]
@@ -129,7 +137,7 @@ class RentingOrder: BaseModel {
         }
         
         struct RentingTanker:Mappable {
-            var tanker:[RentingTruck]?
+            var tankers:[RentingTruck]?
             var tankerType:[RentingTruckType]?
             
             init?(map: Map) {
@@ -137,7 +145,7 @@ class RentingOrder: BaseModel {
             }
             
             mutating func mapping(map: Map) {
-                tanker <- map["tankers"]
+                tankers <- map["tankers"]
                 tankerType <- map["tanker_type"]
             }
         }
