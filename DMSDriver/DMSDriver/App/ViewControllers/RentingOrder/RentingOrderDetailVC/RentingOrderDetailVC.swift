@@ -29,6 +29,7 @@ class RentingOrderDetailVC: BaseViewController {
     @IBOutlet weak var tbvContent: UITableView?
     @IBOutlet weak var statusButtonView: UIView!
     @IBOutlet weak var updateStatusButton: UIButton!
+    @IBOutlet weak var cancelStatusButton: UIButton!
     
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
     fileprivate var rentingOrderInfo = [RentingOrderDetailInforRow]()
@@ -116,35 +117,45 @@ class RentingOrderDetailVC: BaseViewController {
     }
     
     func updateStatusButtonView() {
-        if rentingOrder?.rentingOrderStatus?.name == RentingOrderStatusCode.Finished.rawValue {
+        if rentingOrder?.rentingOrderStatus?.code == RentingOrderStatusCode.Finished.rawValue || rentingOrder?.rentingOrderStatus?.code == RentingOrderStatusCode.Cancelled.rawValue {
+            self.handleShowingUpdateStatusView(false)
+        } else {
+            cancelStatusButton.setTitle("Cancel".localized.uppercased(), for: .normal)
+            cancelStatusButton.backgroundColor = AppColor.redColor
+            self.handleShowingUpdateStatusView(true)
+            updateStatusButton.isHidden = true
+        }
+        if rentingOrder?.rentingOrderStatus?.code == RentingOrderStatusCode.InProgress.rawValue {
             updateStatusButton.setTitle("Finish".localized.uppercased(), for: .normal)
             updateStatusButton.backgroundColor = AppColor.greenColor
             typeUpdateBtn = .FINISH_RENTING_ORDER
             self.handleShowingUpdateStatusView(true)
-        } else {
+        } else if rentingOrder?.rentingOrderStatus?.code == RentingOrderStatusCode.FullyAssigned.rawValue {
             updateStatusButton.setTitle("Start".localized.uppercased(), for: .normal)
             updateStatusButton.backgroundColor = AppColor.greenColor
-            typeUpdateBtn = .START_RENTING_ORDER
             self.handleShowingUpdateStatusView(true)
+            typeUpdateBtn = .START_RENTING_ORDER
         }
     }
     
     func handleShowingUpdateStatusView(_ isShow: Bool) {
         tableViewBottomConstraint.constant = isShow ? 50 : 0
-        statusButtonView.isHidden = isShow ? false : true
+        statusButtonView.isHidden = !isShow
+        updateStatusButton.isHidden = !isShow
     }
     
     // MARK: - Action
     @IBAction func didTapUpdateStatusButton(_ sender: Any) {
         switch typeUpdateBtn {
         case .START_RENTING_ORDER:
-            self.updateRentingOrderStatusWith(rentingOrder!)
-            updateUI()
+            self.updateRentingOrderStatusWith(RentingOrderStatusCode.InProgress.code, rentingOrder: rentingOrder!)
         case .FINISH_RENTING_ORDER:
-            self.updateRentingOrderStatusWith(rentingOrder!)
-            updateUI()
+            self.updateRentingOrderStatusWith(RentingOrderStatusCode.Finished.code, rentingOrder: rentingOrder!)
         }
-        
+    }
+    
+    @IBAction func didTapCancelButton(_ sender: Any) {
+        self.updateRentingOrderStatusWith(RentingOrderStatusCode.Cancelled.code, rentingOrder: rentingOrder!)
     }
     
     func handleFisnishedAction() {
@@ -297,8 +308,8 @@ extension RentingOrderDetailVC {
 //                    self?.rootVC?.order =  self?.orderDetail
                     self?.initVar()
                     self?.updateUI()
-                    //CoreDataManager.updateOrderDetail(object) // update orderdetail to DB local
                     
+                    //CoreDataManager.updateOrderDetail(object) // update orderdetail to DB local
                 case .error(let error):
                     self?.showAlertView(error.getMessage())
                 }
@@ -319,19 +330,14 @@ extension RentingOrderDetailVC {
         }
     }
     
-    func updateRentingOrderStatusWith(_ rentingOrder: RentingOrder){
-        SERVICES().API.updateRentingOrderStatus(rentingOrder) {[weak self] (result) in
+    func updateRentingOrderStatusWith(_ rentingOrderStatus: Int, rentingOrder: RentingOrder){
+        SERVICES().API.updateRentingOrderStatusWith(rentingOrderStatus, rentingOrder: rentingOrder) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
+                self?.showAlertView(MSG_UPDATED_SUCCESSFUL)
+                self?.fetchData()
                 break
-//                self?.updateOrderStatusInRoute(orderID: rentingOrder.id, status: order.status!)
-//                self?.setupDataDetailInforRows()
-//                self?.updateButtonStatus()
-//                self?.tableView?.reloadData()
-//                self?.tableView?.setContentOffset(.zero, animated: true)
-//                self?.didUpdateStatus?(order, nil)
-                
             case .error(let error):
                 self?.showAlertView(error.getMessage())
             }

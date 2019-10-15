@@ -15,6 +15,7 @@ enum RentingOrderStatusCode: String {
     case FullyAssigned = "FA"
     case InProgress = "IP"
     case Finished = "FH"
+    case Cancelled = "CC"
     
     var statusName: String {
         switch self {
@@ -28,20 +29,43 @@ enum RentingOrderStatusCode: String {
             return "in-progress".localized
         case .Finished:
             return "Finished".localized
+        case .Cancelled:
+            return "Cancelled".localized
         }
     }
     
     var color:UIColor {
         get {
             switch self {
-            case .NewStatus:
+            case .NewStatus, .PartlyAssigned:
                 return AppColor.newStatus;
             case .InProgress:
                 return AppColor.InTransit;
-            case .FullyAssigned, .PartlyAssigned:
+            case .FullyAssigned:
                 return AppColor.mainColor
             case .Finished:
                 return AppColor.deliveryStatus;
+            case .Cancelled:
+                return AppColor.redColor;
+            }
+        }
+    }
+    
+    var code:Int {
+        get {
+            switch self {
+            case .NewStatus:
+                return 1
+            case .PartlyAssigned:
+                return 2
+            case .FullyAssigned:
+                return 3
+            case .InProgress:
+                return 4
+            case .Finished:
+                return 5
+            case .Cancelled:
+                return 6
             }
         }
     }

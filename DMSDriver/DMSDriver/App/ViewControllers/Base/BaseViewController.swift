@@ -12,6 +12,9 @@ import FDFullscreenPopGesture
 import SideMenu
 import FirebaseAnalytics
 
+
+let MSG_UPDATED_SUCCESSFUL = "updated-successful".localized
+
 var isRampManagerMode:Bool {
     get {
         return Caches().user?.isRampManager ?? false

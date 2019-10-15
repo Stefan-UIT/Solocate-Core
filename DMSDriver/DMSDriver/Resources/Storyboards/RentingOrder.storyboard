@@ -480,10 +480,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Vl-qh-5gd">
-                                                    <rect key="frame" x="15" y="1" width="345" height="260"/>
+                                                    <rect key="frame" x="15" y="1" width="345" height="276"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rgf-jx-QJZ">
-                                                            <rect key="frame" x="0.0" y="0.0" width="345" height="260"/>
+                                                            <rect key="frame" x="0.0" y="8" width="345" height="260"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JD1-H3-AXi">
                                                                     <rect key="frame" x="0.0" y="0.0" width="345" height="30"/>
@@ -495,7 +495,7 @@
                                                                             <nil key="highlightedColor"/>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="NO"/>
-                                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="truck_type"/>
+                                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="truck-type"/>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OVI-1s-Oga">
@@ -762,10 +762,10 @@
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstAttribute="bottom" secondItem="rgf-jx-QJZ" secondAttribute="bottom" id="dDw-Ta-tka"/>
+                                                        <constraint firstAttribute="bottom" secondItem="rgf-jx-QJZ" secondAttribute="bottom" constant="8" id="dDw-Ta-tka"/>
                                                         <constraint firstAttribute="trailing" secondItem="rgf-jx-QJZ" secondAttribute="trailing" id="ljw-63-HhN"/>
                                                         <constraint firstItem="rgf-jx-QJZ" firstAttribute="leading" secondItem="1Vl-qh-5gd" secondAttribute="leading" id="s2Z-9z-Vef"/>
-                                                        <constraint firstItem="rgf-jx-QJZ" firstAttribute="top" secondItem="1Vl-qh-5gd" secondAttribute="top" id="tBI-y6-voW"/>
+                                                        <constraint firstItem="rgf-jx-QJZ" firstAttribute="top" secondItem="1Vl-qh-5gd" secondAttribute="top" constant="8" id="tBI-y6-voW"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -805,8 +805,19 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="lJF-Uq-Ct9">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                         <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hei-qa-xIU">
+                                                <rect key="frame" x="0.0" y="0.0" width="187.5" height="50"/>
+                                                <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="0.0" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
+                                                <state key="normal">
+                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                </state>
+                                                <connections>
+                                                    <action selector="didTapCancelButton:" destination="gM6-5l-brP" eventType="touchUpInside" id="yID-7H-8lC"/>
+                                                </connections>
+                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qFu-UO-41v">
-                                                <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
+                                                <rect key="frame" x="187.5" y="0.0" width="187.5" height="50"/>
                                                 <color key="backgroundColor" red="0.89803921568627454" green="0.89803921568627454" blue="0.89803921568627454" alpha="0.0" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                 <state key="normal">
@@ -843,6 +854,7 @@
                         <viewLayoutGuide key="safeArea" id="GaF-QJ-ih9"/>
                     </view>
                     <connections>
+                        <outlet property="cancelStatusButton" destination="Hei-qa-xIU" id="G93-nB-YPQ"/>
                         <outlet property="statusButtonView" destination="AJh-pd-nIW" id="A3N-vn-oVj"/>
                         <outlet property="tableViewBottomConstraint" destination="SfS-K3-PbF" id="jud-4L-EW1"/>
                         <outlet property="tbvContent" destination="k3c-Mf-MDb" id="Dpe-3s-5Op"/>
