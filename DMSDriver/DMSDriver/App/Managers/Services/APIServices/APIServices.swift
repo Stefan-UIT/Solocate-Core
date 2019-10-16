@@ -123,6 +123,18 @@ extension BaseAPIService {
                     callback: callback);
     }
     
+    @discardableResult
+    func uploadRequestMoreOrderWith(amountOfLegs:Int) {
+//        let params = [
+//            "amount": amount
+//            ] as [String : Any]
+//        return request(method: .POST,
+//                       serverURL:
+//            RESTConstants.SERVER_TRACKING_URL(),
+//                       path: PATH_REQUEST_URL.UPDATE_DRIVER_LOCATION.URL,
+//                       input: .json(params),
+//                       callback: callback);
+    }
     
     //MARK: - TRACKING
     @discardableResult

@@ -386,6 +386,39 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         }
     }
     
+    func handleRequestMoreOrdersAction() {
+        let alert = UIAlertController(title: "Please enter amount of legs you would like to request", message: "", preferredStyle: .alert)
+        let submitAction = UIAlertAction(title: "Submit", style: .default, handler: { (action) -> Void in
+            // Get TextFields text
+            let numberOfRequestTxt = alert.textFields![0]
+            let amount = Int(numberOfRequestTxt.text ?? "0") ?? 0
+            //callAPI
+//            submitAction.isEnabled = amount > 0 ? true : false
+            self.uploadRequestMoreOrderWith(amount)
+        })
+        submitAction.isEnabled = false
+        // Cancel button
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+        
+        // textField for amount of order
+        alert.addTextField { (textField: UITextField) in
+            textField.placeholder = "Amount of legs"
+            textField.keyboardType = .asciiCapableNumberPad
+            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main, using:
+                {_ in
+                    let textCount = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
+                    let amountOflegs = Int(textField.text ?? "0") ?? 0
+                    let textIsNotEmpty = (textCount > 0 && amountOflegs > 0)
+                    submitAction.isEnabled = textIsNotEmpty
+            })
+        }
+        
+        // Add actions
+        alert.addAction(cancel)
+        alert.addAction(submitAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     private func handleUpdateStatusWithDeliveryType() {
         guard let order = orderDetail else { return }
         switch order.statusOrder.rawValue {
@@ -425,6 +458,17 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         }
     }
     
+    private func handleRequestMoreOrders() {
+        guard let _order = orderDetail else { return }
+        switch _order.statusOrder.rawValue {
+        case StatusOrder.deliveryStatus.rawValue:
+            handleRequestMoreOrdersAction()
+            break
+        default:
+            break
+        }
+    }
+    
 //    func submitPickedUpQuantity(detail:Order.Detail) {
 //        if let loadedQty = detail.loadedQty, let qty = detail.qty, loadedQty <= qty {
 //            updatePickedUpQuantity(detail:detail)
@@ -453,6 +497,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         } else {
             handleUpdateStatusWithDeliveryType()
         }
+        handleRequestMoreOrders()
     }
     // MARK: - ACTION
     @IBAction func tapUpdateStatusButtonAction(_ sender: UIButton) {
@@ -1207,6 +1252,9 @@ fileprivate extension OrderDetailViewController{
             updateStatusButton?.isEnabled = false
             updateStatusButton?.backgroundColor = UIColor.lightGray
             break
+        case StatusOrder.deliveryStatus.rawValue:
+            updateStatusButton?.setTitle("request-more-legs".localized.uppercased(), for: .normal)
+            updateStatusButton?.backgroundColor = AppColor.greenColor
         default:
             updateStatusButton?.setTitle("go-to-delivery".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = AppColor.greenColor
@@ -1217,7 +1265,10 @@ fileprivate extension OrderDetailViewController{
         let isNotAllowedToGoToDelivery = _order.isLoaded && !_route.isAllowedGoToDelivery
         
 //        let isHidden = ( orderDetail?.isCancelled || orderDetail?.isFinished || isFinishedAndNotPalletType || isFinishedAndUpdatedReturnedPalletsQty || isNotAllowedToGoToDelivery)
-        let isHidden = _order.isCancelled || _order.isFinished || isNotAllowedToGoToDelivery
+        
+        
+//        let isHidden = _order.isCancelled || _order.isFinished || isNotAllowedToGoToDelivery
+        let isHidden = _order.isCancelled || isNotAllowedToGoToDelivery
         
         updateStatusButton?.isHidden = isHidden
         copyUpdateStatusButton()
@@ -1253,6 +1304,9 @@ fileprivate extension OrderDetailViewController{
             
             unableToStartButton?.setTitle("unable-to-deliver".localized.uppercased(), for: .normal)
             break
+        case StatusOrder.deliveryStatus.rawValue:
+            updateStatusButton?.setTitle("request-more-legs".localized.uppercased(), for: .normal)
+            updateStatusButton?.backgroundColor = AppColor.mainColor
         default:
             updateStatusButton?.isHidden = true
             shortcutUpdateStatusButton?.isHidden = true
@@ -1260,8 +1314,8 @@ fileprivate extension OrderDetailViewController{
             return
         }
 
-        let isHidden = (_order.isCancelled || _order.isFinished)
-        
+//        let isHidden = (_order.isCancelled || _order.isFinished)
+        let isHidden = _order.isCancelled
         updateStatusButton?.isHidden = isHidden
         copyUpdateStatusButton()
         vAction?.isHidden = isHidden
@@ -1457,6 +1511,19 @@ extension OrderDetailViewController{
                 self?.showAlertView(error.getMessage())
             }
         }
+    }
+    
+    func uploadRequestMoreOrderWith(_ amount: Int) {
+//        self.showLoadingIndicator()
+//        SERVICES().API.uploadRequestMoreOrderWith(amountOfLegs: amount) {[weak self] (result) in
+//            self?.dismissLoadingIndicator()
+//            switch result {
+//            case .object(_):
+//                self?.showAlertView(object.message)
+//            case .error(let error):
+//                self?.showAlertView(error.getMessage())
+//            }
+//        }
     }
 }
 

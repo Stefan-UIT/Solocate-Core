@@ -23,10 +23,16 @@ import Crashlytics
     
     private let identifierRowCell = "RouteTableViewCell"
     var timeData:TimeDataItem?
-    var routes = [Route]()
     var filterModel = FilterDataModel()
     var isFromDashboard = false
     var isFromFilter = false
+    
+    var isFetchInProgress = false
+    var isInfiniteScrolling = false
+    var routes:[Route] = []
+    var page:Int = 1
+    var currentPage:Int = 1
+    var totalPages:Int = 1
 
     // MARK: - View Life Cycle
     override func viewDidLoad() {
@@ -54,6 +60,7 @@ import Crashlytics
     private func setupTableView()  {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.prefetchDataSource = self
         tableView.register(UINib(nibName: ClassName(RouteTableViewCell()),
                                  bundle: nil),
                            forCellReuseIdentifier: identifierRowCell)
@@ -81,7 +88,7 @@ import Crashlytics
     }
     
     @objc func fetchData(isShowLoading:Bool = true)  {
-        getRoutes(filterMode: filterModel, isShowLoading: isShowLoading)
+        getRoutes(filterMode: filterModel, isShowLoading: isShowLoading, isFetch: true)
     }
     
     func updateRouteList(routeNeedUpdate:Route) {
@@ -205,14 +212,44 @@ import Crashlytics
     }
  }
  
+ private extension RouteListVC {
+    func isLoadingCell(for indexPath: IndexPath) -> Bool {
+        return indexPath.row + 1 >= self.routes.count
+    }
+ }
+ 
+ extension RouteListVC: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        if indexPaths.contains(where: isLoadingCell) {
+            if !(currentPage == totalPages) {
+                self.isInfiniteScrolling = true
+                self.fetchData()
+            }
+        }
+    }
+ }
+ 
  //MARK: - API
  fileprivate extension RouteListVC {
-    func getRoutes(filterMode:FilterDataModel, isShowLoading:Bool = true) {
-        if isShowLoading {
-            showLoadingIndicator()
+    func getRoutes(filterMode:FilterDataModel, isShowLoading:Bool = true, isFetch:Bool = false) {
+        guard !isFetchInProgress else {
+            return
+        }
+        isFetchInProgress = true
+        
+        if isFetch {
+            self.showLoadingIndicator()
         }
         
-        SERVICES().API.getRoutes(filterMode: filterMode) {[weak self] (result) in
+        if isInfiniteScrolling {
+            self.isInfiniteScrolling = false
+        } else {
+            self.page = 1
+            self.routes = [Route]()
+            tableView?.reloadData()
+        }
+        
+        SERVICES().API.getRoutes(filterMode: filterMode, page: page) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.tableView.endRefreshControl()
             guard let strongSelf = self else {
@@ -221,17 +258,30 @@ import Crashlytics
             switch result{
             case .object(let obj):
                 if let data = obj.data?.data {
-                    strongSelf.routes = data
+//                    strongSelf.routes = data
                     // DMSCurrentRoutes.routes = data
+                    
+                    self?.totalPages = obj.data?.meta?.total_pages ?? 1
+                    self?.currentPage = obj.data?.meta?.current_page ?? 1
+
+                    if self?.currentPage != self?.totalPages {
+                        self?.page = (self?.currentPage ?? 1) + 1
+                    }
+
+                    self?.routes.append(data)
+                    
+                    
                     strongSelf.lblNoResult?.isHidden = (strongSelf.routes.count > 0)
                     strongSelf.tableView.reloadData()
-                    
+                    self?.isFetchInProgress = false
                 } else {
                     // TODO: Do something.
                 }
                 
             case .error(let error):
                 strongSelf.showAlertView(error.getMessage())
+                self?.isFetchInProgress = false
+                break
             }
         }
     }
