@@ -1130,10 +1130,11 @@
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="rGS-gb-AdD"/>
                                                 </constraints>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xxs-Ho-MrO">
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xxs-Ho-MrO">
                                                 <rect key="frame" x="245" y="15" width="99" height="30"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="90" id="W3j-s8-NNe"/>
+                                                    <constraint firstAttribute="height" constant="40" id="hlV-fZ-G4P"/>
                                                 </constraints>
                                                 <state key="normal" title="Add note"/>
                                                 <userDefinedRuntimeAttributes>
@@ -1155,8 +1156,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="WHi-A5-UeI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xxg-N4-sOQ" secondAttribute="top" id="3cz-OL-3n9"/>
-                                            <constraint firstItem="Xxs-Ho-MrO" firstAttribute="bottom" secondItem="WHi-A5-UeI" secondAttribute="bottom" id="GzB-In-yQZ"/>
-                                            <constraint firstItem="Xxs-Ho-MrO" firstAttribute="top" secondItem="WHi-A5-UeI" secondAttribute="top" id="LVX-T5-JXJ"/>
+                                            <constraint firstItem="Xxs-Ho-MrO" firstAttribute="centerY" secondItem="xxg-N4-sOQ" secondAttribute="centerY" id="DDt-vm-mRg"/>
                                             <constraint firstItem="WHi-A5-UeI" firstAttribute="leading" secondItem="xxg-N4-sOQ" secondAttribute="leading" constant="15" id="hYZ-Du-sg7"/>
                                             <constraint firstAttribute="trailing" secondItem="Xxs-Ho-MrO" secondAttribute="trailing" constant="15" id="r7s-8w-UpA"/>
                                             <constraint firstAttribute="height" constant="60" id="xEf-UM-yKA"/>

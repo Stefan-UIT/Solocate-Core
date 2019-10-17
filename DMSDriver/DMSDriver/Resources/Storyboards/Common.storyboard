@@ -1540,54 +1540,80 @@
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="5"/>
                                     </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                                 <connections>
                                     <outlet property="dataSource" destination="hx4-C8-k5N" id="MBS-dU-NEz"/>
                                     <outlet property="delegate" destination="hx4-C8-k5N" id="McV-Uj-ARY"/>
                                 </connections>
                             </tableView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fzw-D0-l1Y">
-                                <rect key="frame" x="311" y="603" width="40" height="40"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qaf-Ib-fbA">
+                                <rect key="frame" x="291" y="583" width="60" height="60"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_note" translatesAutoresizingMaskIntoConstraints="NO" id="Ubg-nu-uNV">
+                                        <rect key="frame" x="15" y="15" width="30" height="30"/>
+                                        <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="Ubg-nu-uNV" secondAttribute="height" multiplier="1:1" id="DYr-qo-h9I"/>
+                                        </constraints>
+                                    </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Pn5-O8-nYJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
+                                        <connections>
+                                            <action selector="onAddNoteTouchUp:" destination="hx4-C8-k5N" eventType="touchUpInside" id="xpW-8h-lJ8"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0" green="0.61568627450000002" blue="0.96862745100000003" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="aIT-kl-zEF"/>
-                                    <constraint firstAttribute="width" secondItem="fzw-D0-l1Y" secondAttribute="height" multiplier="1:1" id="h7N-H2-R8V"/>
+                                    <constraint firstItem="Ubg-nu-uNV" firstAttribute="centerX" secondItem="qaf-Ib-fbA" secondAttribute="centerX" id="0Ta-WF-xKE"/>
+                                    <constraint firstAttribute="bottom" secondItem="Pn5-O8-nYJ" secondAttribute="bottom" id="N2t-eD-Xkr"/>
+                                    <constraint firstAttribute="trailing" secondItem="Pn5-O8-nYJ" secondAttribute="trailing" id="QCH-lx-XDY"/>
+                                    <constraint firstItem="Ubg-nu-uNV" firstAttribute="centerY" secondItem="qaf-Ib-fbA" secondAttribute="centerY" id="d9v-XX-3uP"/>
+                                    <constraint firstAttribute="width" secondItem="qaf-Ib-fbA" secondAttribute="height" multiplier="1:1" id="dxX-C7-deA"/>
+                                    <constraint firstAttribute="height" constant="60" id="gPt-WH-Xic"/>
+                                    <constraint firstItem="Ubg-nu-uNV" firstAttribute="leading" secondItem="qaf-Ib-fbA" secondAttribute="leading" constant="15" id="hP7-83-vs3"/>
+                                    <constraint firstItem="Pn5-O8-nYJ" firstAttribute="leading" secondItem="qaf-Ib-fbA" secondAttribute="leading" id="sFV-j1-dDR"/>
+                                    <constraint firstItem="Pn5-O8-nYJ" firstAttribute="top" secondItem="qaf-Ib-fbA" secondAttribute="top" id="vyW-YH-UZ1"/>
                                 </constraints>
-                                <state key="normal" image="ic_note"/>
                                 <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
-                                        <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
-                                        <size key="value" width="20" height="20"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="1"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="circleCorner" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="shadowColor">
+                                        <color key="value" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <action selector="onAddNoteTouchUp:" destination="hx4-C8-k5N" eventType="touchUpInside" id="zXZ-9d-kfU"/>
-                                </connections>
-                            </button>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="UFH-8u-7Kn" firstAttribute="centerX" secondItem="J2S-PU-FYy" secondAttribute="centerX" id="476-WW-7HQ"/>
                             <constraint firstItem="UFH-8u-7Kn" firstAttribute="centerY" secondItem="J2S-PU-FYy" secondAttribute="centerY" id="4eN-5T-262"/>
                             <constraint firstItem="J2S-PU-FYy" firstAttribute="bottom" secondItem="acH-Fj-TRM" secondAttribute="bottom" id="7Ax-MH-OVO"/>
-                            <constraint firstItem="J2S-PU-FYy" firstAttribute="bottom" secondItem="fzw-D0-l1Y" secondAttribute="bottom" constant="24" id="Gm3-Eu-qdU"/>
+                            <constraint firstItem="qaf-Ib-fbA" firstAttribute="trailing" secondItem="J2S-PU-FYy" secondAttribute="trailing" constant="-24" id="UQ4-22-wwA"/>
                             <constraint firstItem="acH-Fj-TRM" firstAttribute="leading" secondItem="J2S-PU-FYy" secondAttribute="leading" id="Wou-3K-tmy"/>
                             <constraint firstItem="J2S-PU-FYy" firstAttribute="trailing" secondItem="acH-Fj-TRM" secondAttribute="trailing" id="arD-oM-UUW"/>
                             <constraint firstItem="acH-Fj-TRM" firstAttribute="top" secondItem="J2S-PU-FYy" secondAttribute="top" id="mQH-kk-l3m"/>
-                            <constraint firstItem="J2S-PU-FYy" firstAttribute="trailing" secondItem="fzw-D0-l1Y" secondAttribute="trailing" constant="24" id="o4f-b3-oLB"/>
+                            <constraint firstItem="J2S-PU-FYy" firstAttribute="bottom" secondItem="qaf-Ib-fbA" secondAttribute="bottom" constant="24" id="q36-N6-CNR"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="J2S-PU-FYy"/>
                     </view>
                     <connections>
                         <outlet property="noDataLabel" destination="UFH-8u-7Kn" id="CNe-5R-37t"/>
-                        <outlet property="noteButton" destination="fzw-D0-l1Y" id="iCK-Gw-mlC"/>
+                        <outlet property="noteViewContainer" destination="qaf-Ib-fbA" id="dCx-2F-fck"/>
                         <outlet property="tableView" destination="acH-Fj-TRM" id="hxV-DN-wGC"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ySv-Ee-16R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1486" y="746"/>
+            <point key="canvasLocation" x="1485.5999999999999" y="745.27736131934034"/>
         </scene>
     </scenes>
     <resources>
