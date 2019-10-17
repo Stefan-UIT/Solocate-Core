@@ -203,7 +203,7 @@ extension LocationDetailView:UITableViewDataSource{
             if !result.isEmpty {
                 result += ", "
             }
-            result += "cartons".localized + ": " + "\(cartonsQty)"
+            result += "SKUs".localized + ": " + "\(cartonsQty)"
         }
         
         return result
