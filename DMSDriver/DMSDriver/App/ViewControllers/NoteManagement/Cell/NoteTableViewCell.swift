@@ -65,7 +65,7 @@ class NoteTableViewCell: UITableViewCell {
         self.note = note
         handleShowingCollectionViewImages()
         self.collectionView.reloadData()
-        self.authorNameLabel.text = note.user.userName ?? ""
+        self.authorNameLabel.text = note.createdBy.userName
         self.contentLabel.text = note.content
         self.timeLabel.text = displayedStringDate(from:note.createdAt)
         let numberOfAttachedFiles = note.files.count

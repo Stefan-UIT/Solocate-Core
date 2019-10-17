@@ -74,7 +74,7 @@ enum PATH_REQUEST_URL: String{
     case GET_LIST_ALERT = "masterdata/v1/mobile/alerts/driver-alerts"
     case DASHBOARD = "transaction/v1/mobile/dashboard/by-driver?start_time=%@&end_time=%@"
     case UPDATE_ROUTE_NOTE = "transaction/v1/routes/notes"
-    case UPDATE_ORDER_NOTE = "transaction/v1/orders/notes"
+    case UPDATE_ORDER_NOTE = "transaction/v1/shipping-orders/%@/notes"
     case GET_LIST_LANGUAGE  = "language/v1/namespaces/list-support?name=%@&system=%@"
     case GET_DRIVER_LIST  = "masterdata/v1/drivers/list-suggest?start_time=%@&end_time=%@&company_id=%@"
     case GET_TRUCK_LIST  = "masterdata/v1/trucks/suggest?start_time=%@&end_time=%@&company_id=%@"

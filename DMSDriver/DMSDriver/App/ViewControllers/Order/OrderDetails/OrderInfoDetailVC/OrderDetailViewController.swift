@@ -48,7 +48,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     @IBOutlet weak var lblDateTime: UILabel?
     @IBOutlet weak var unableToStartButton: UIButton!
     @IBOutlet weak var navigateButton: UIButton!
-    
+    @IBOutlet weak var addNoteButton: UIButton!
     
     fileprivate var orderInforDetail = [OrderDetailInforRow]()
     fileprivate var orderInforFrom = [OrderDetailInforRow]()
@@ -155,6 +155,14 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         //setup NavigateButton
         navigateButton.backgroundColor = AppColor.mainColor
 //        shortcutUpdateStatusButton = updateStatusButton
+    }
+    
+    func layoutAddNoteButton() {
+        addNoteButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        addNoteButton.layer.shadowOffset = CGSize(width: 0, height: 3)
+        addNoteButton.layer.shadowOpacity = 1.0
+        addNoteButton.layer.shadowRadius = 10
+        addNoteButton.layer.masksToBounds = false
     }
     
     private func setupDataDetailInforRows() {
@@ -518,6 +526,13 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 //        tableView?.reloadData()
     }
     
+    @IBAction func onNoteManagementTouchUp(_ sender: UIButton) {
+        guard let _order = orderDetail else { return }
+        let vc:NoteManagementViewController = .loadSB(SB: .Common)
+        vc.order = _order
+        vc.notes = _order.notes
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
 }
 

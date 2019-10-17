@@ -219,17 +219,21 @@ extension BaseAPIService{
     }
     
     func updateNoteToOrder(_ orderID:Int, message:String, files:[AttachFileModel]?, callback: @escaping APICallback<Order>){
-        let path = PATH_REQUEST_URL.UPDATE_ORDER_NOTE.URL
-        let url = E(SDBuildConf.serverUrlString()).appending(path)
+        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_NOTE.URL, "\(orderID)")
+//        let url = E(SDBuildConf.serverUrlString()).appending(path)
         let params:[String:Any] = ["order_id": orderID, "content":message]
         
         if ReachabilityManager.isNetworkAvailable {
             
-            requestWithFormDataType(url: url,
-                                    method: .post,
-                                    files: files,
-                                    parameters: params,
-                                    callback: callback)
+//            requestWithFormDataType(url: url,
+//                                    method: .put,
+//                                    files: files,
+//                                    parameters: params,
+//                                    callback: callback)
+            _ = request(method: .PUT,
+                           path: path,
+                           input: .json(params),
+                           callback: callback);
         }
     }
 }

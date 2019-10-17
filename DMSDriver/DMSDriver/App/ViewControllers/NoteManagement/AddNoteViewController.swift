@@ -77,7 +77,7 @@ extension AddNoteViewController:UITextViewDelegate{
 }
 
 extension AddNoteViewController:DMSNavigationServiceDelegate {
-    func didSelectedBackOrMenu() {
+    func didSelectedBackAction() {
         self.navigationController?.popViewController(animated: true)
     }
     

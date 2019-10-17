@@ -188,7 +188,7 @@ extension NoteManagementViewController:AddNoteViewControllerDelegate {
 
 
 extension NoteManagementViewController:DMSNavigationServiceDelegate {
-    func didSelectedBackOrMenu() {
+    func didSelectedBackAction() {
         self.navigationController?.popViewController(animated: true)
     }
 }

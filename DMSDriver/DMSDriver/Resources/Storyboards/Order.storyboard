@@ -95,7 +95,7 @@
                                         <rect key="frame" x="0.0" y="328" width="375" height="80"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="p4Q-nd-3KK" id="Qlv-gf-VEP">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="79.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="80"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="home-map-marker" translatesAutoresizingMaskIntoConstraints="NO" id="6fW-SK-sSQ">
@@ -483,7 +483,7 @@
                                         <rect key="frame" x="0.0" y="82" width="335" height="90"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cnI-N1-lHO" id="wPj-46-9Ro">
-                                            <rect key="frame" x="0.0" y="0.0" width="335" height="89.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="335" height="90"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="place_holder" translatesAutoresizingMaskIntoConstraints="NO" id="OCG-fm-zg6">
@@ -766,7 +766,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="270"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="q1u-eY-oVJ" id="F9i-f6-0Nf">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="269.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="270"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view alpha="0.80000001192092896" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wvf-u9-4jF">
@@ -1097,7 +1097,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xxg-N4-sOQ" customClass="GradientView" customModule="Gadot_Dev" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WHi-A5-UeI">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WHi-A5-UeI">
                                                 <rect key="frame" x="15" y="0.0" width="160" height="50"/>
                                                 <subviews>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Delivery  #AS876" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R5m-Ae-QGr">
@@ -1120,7 +1120,7 @@
                                                     </label>
                                                 </subviews>
                                                 <constraints>
-                                                    <constraint firstItem="R5m-Ae-QGr" firstAttribute="top" secondItem="WHi-A5-UeI" secondAttribute="top" id="0Vm-mD-G7b"/>
+                                                    <constraint firstItem="R5m-Ae-QGr" firstAttribute="top" relation="greaterThanOrEqual" secondItem="WHi-A5-UeI" secondAttribute="top" id="0Vm-mD-G7b"/>
                                                     <constraint firstItem="R5m-Ae-QGr" firstAttribute="leading" secondItem="WHi-A5-UeI" secondAttribute="leading" id="6Na-2T-mWI"/>
                                                     <constraint firstItem="shY-FR-nAx" firstAttribute="top" secondItem="R5m-Ae-QGr" secondAttribute="bottom" id="Coe-Ef-dBX"/>
                                                     <constraint firstAttribute="trailing" secondItem="R5m-Ae-QGr" secondAttribute="trailing" id="IUw-3Q-9RH"/>
@@ -1130,11 +1130,24 @@
                                                     <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="160" id="rGS-gb-AdD"/>
                                                 </constraints>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xxs-Ho-MrO">
+                                                <rect key="frame" x="245" y="15" width="99" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="90" id="W3j-s8-NNe"/>
+                                                </constraints>
+                                                <state key="normal" title="Add note"/>
+                                                <connections>
+                                                    <action selector="onNoteManagementTouchUp:" destination="LBW-HQ-IwL" eventType="touchUpInside" id="dk4-Nm-Uzl"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="WHi-A5-UeI" firstAttribute="top" relation="greaterThanOrEqual" secondItem="xxg-N4-sOQ" secondAttribute="top" id="3cz-OL-3n9"/>
+                                            <constraint firstItem="Xxs-Ho-MrO" firstAttribute="bottom" secondItem="WHi-A5-UeI" secondAttribute="bottom" id="GzB-In-yQZ"/>
+                                            <constraint firstItem="Xxs-Ho-MrO" firstAttribute="top" secondItem="WHi-A5-UeI" secondAttribute="top" id="LVX-T5-JXJ"/>
                                             <constraint firstItem="WHi-A5-UeI" firstAttribute="leading" secondItem="xxg-N4-sOQ" secondAttribute="leading" constant="15" id="hYZ-Du-sg7"/>
+                                            <constraint firstAttribute="trailing" secondItem="Xxs-Ho-MrO" secondAttribute="trailing" constant="15" id="r7s-8w-UpA"/>
                                             <constraint firstAttribute="height" constant="60" id="xEf-UM-yKA"/>
                                         </constraints>
                                         <userDefinedRuntimeAttributes>
@@ -2345,6 +2358,7 @@
                         <viewLayoutGuide key="safeArea" id="6w1-QI-8Cl"/>
                     </view>
                     <connections>
+                        <outlet property="addNoteButton" destination="Xxs-Ho-MrO" id="zp3-Id-weT"/>
                         <outlet property="lblDateTime" destination="shY-FR-nAx" id="2FI-wJ-9F6"/>
                         <outlet property="lblOrderId" destination="R5m-Ae-QGr" id="ceA-g9-20S"/>
                         <outlet property="navigateButton" destination="sEn-bX-KUc" id="aPq-Wu-n5S"/>
@@ -2357,7 +2371,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bTe-vM-7rJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2863" y="-170"/>
+            <point key="canvasLocation" x="2861.5999999999999" y="-170.46476761619192"/>
         </scene>
         <!--Order List View Controller-->
         <scene sceneID="VcF-1h-0bo">
@@ -2446,7 +2460,7 @@
                                         <rect key="frame" x="0.0" y="28" width="375" height="149"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="3oa-HF-5QD" id="Lwy-6f-set">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="148.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="WwZ-4R-jhz">
@@ -2660,7 +2674,7 @@
                                         <rect key="frame" x="0.0" y="177" width="375" height="145"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KFe-kF-GVQ" id="xm3-dQ-XJP">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="144.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="145"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view alpha="0.80000001192092896" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eLc-Kq-dMM">
