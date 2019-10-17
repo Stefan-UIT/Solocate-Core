@@ -630,7 +630,7 @@ class Order: BaseModel {
         pod_req <- map["pod_req"]
         sig_req <- map["sig_req"]
         note <- map["note"]
-        notes <- map["notes"]
+        notes <- map["shipping_notes"]
         details <- map["shipping_details"]
         files <- map["shipping_files"]
         urgent_type_id <- map["urgent_type_id"]

@@ -10,15 +10,12 @@ import UIKit
 import ObjectMapper
 
 class Note: NSObject, Mappable {
-  var author = ""
-  var createdAt = ""
-  var content = ""
-    
-    var updatedBy = ""
-    var statusName = ""
-    var id = 0
+    var id = -1
+    var content = ""
+    var statusId = -1
+    var createdBy:UserModel.UserInfo!
+    var createdAt = ""
     var files = [AttachFileModel]()
-    var user:UserModel.UserInfo!
     var status:Status!
   
   required convenience init?(map: Map) {
@@ -26,15 +23,13 @@ class Note: NSObject, Mappable {
   }
     
   func mapping(map: Map) {
-    author <- map["author"]
-    createdAt <- map["created_at"]
-    content <- map["content"]
-    updatedBy <- map["updated_by"]
-    statusName <- map["status_name"]
     id <- map["id"]
-    files <- map["files"]
-    user <- map["user"]
-    status <- map["status"]
+    content <- map["content"]
+    statusId <- map["status_id"]
+    createdBy <- map["created_by"]
+    status <- map["shipping_status"]
+    createdAt <- map["created_at"]
+    
   }
 }
 

@@ -25,7 +25,7 @@ extension BaseAPIService {
                        callback: callback);
     }
     @discardableResult
-    func getRoutes(filterMode:FilterDataModel, callback: @escaping APICallback<ResponseDataModel<ResponseDataListModel<Route>>>) -> APIRequest {
+    func getRoutes(filterMode:FilterDataModel, page:Int = 1, callback: @escaping APICallback<ResponseDataModel<ResponseDataListModel<Route>>>) -> APIRequest {
 //        let startDate = DateFormatter.filterDate.string(from: filterMode.timeData?.startDate ?? Date())
 //        let endDate = DateFormatter.filterDate.string(from: filterMode.timeData?.endDate ?? Date())
 //        let status = filterMode.status
@@ -33,12 +33,22 @@ extension BaseAPIService {
 //        let urlString = (isRampManagerMode) ? PATH_REQUEST_URL.GET_RAMP_ROUTES_BY_DATE.URL : PATH_REQUEST_URL.GET_DRIVER_ROUTES_BY_DATE.URL
 //        let urlString = PATH_REQUEST_URL.GET_DRIVER_ROUTES_BY_DATE.URL
         let urlString = PATH_REQUEST_URL.GET_ROUTES_LIST.URL
+        let path = urlString + "?page=\(page)&limit=10"
 //        var path = String(format: urlString,startDate,endDate)
 //        if let _statusId = status?.id {
 //            path = path + "&status_id=\(_statusId)"
 //        }
         return request(method: .GET,
-                       path:urlString,
+                       path:path,
+                       input: APIInput.empty,
+                       callback: callback);
+    }
+    
+    func getRentingOrders(filterMode:FilterDataModel, page:Int = 1, callback: @escaping APICallback<ResponseDataModel<ResponseDataListModel<RentingOrder>>>) -> APIRequest {
+        let urlString = PATH_REQUEST_URL.GET_RENTING_ORDERS.URL
+        let path = urlString + "?page=\(page)&limit=10"
+        return request(method: .GET,
+                       path:path,
                        input: APIInput.empty,
                        callback: callback);
     }

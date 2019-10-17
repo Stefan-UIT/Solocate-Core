@@ -23,6 +23,7 @@ enum Entity:String {
     case CoreStatus = "CoreStatus"
     case Request = "CoreRequest"
     case CoreRouteStatus = "CoreRouteStatus"
+    case CoreRentingOrderStatus = "CoreRentingOrderStatus"
 
 }
 
@@ -641,6 +642,17 @@ class _CoreDataManager {
         }
     }
     
+    func updateRentingOrderStatus(_ list:[RentingOrderStatus]) {
+        clearDatabase(entity: .CoreRentingOrderStatus)
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
+            list.forEach { (status) in
+                let coreRentingOrderStatus = self?.createRecordForEntity(Entity.CoreRentingOrderStatus.rawValue, inManagedObjectContext: context) as? CoreRentingOrderStatus
+                coreRentingOrderStatus?.setAttributeFrom(status)
+                self?.saveContext(context)
+            }
+        }
+    }
+    
     func updateListStatus(_ list:[Status]) {
         clearDatabase(entity: .CoreStatus)
         self.persistentContainer.performBackgroundTask {[weak self]  (context) in
@@ -668,6 +680,16 @@ class _CoreDataManager {
         var results:[Status] = []
         let items = fetchRecordsForEntity(Entity.CoreStatus.rawValue,
                                           inManagedObjectContext: self.persistentContainer.viewContext) as? [CoreStatus]
+        items?.forEach({ (core) in
+            results.append(core.convertToStatusModel())
+        })
+        
+        return results
+    }
+    
+    func getListRentingOrderStatus() -> [RentingOrderStatus] {
+        var results:[RentingOrderStatus] = []
+        let items = fetchRecordsForEntity(Entity.CoreRentingOrderStatus.rawValue, inManagedObjectContext: self.persistentContainer.viewContext) as? [CoreRentingOrderStatus]
         items?.forEach({ (core) in
             results.append(core.convertToStatusModel())
         })

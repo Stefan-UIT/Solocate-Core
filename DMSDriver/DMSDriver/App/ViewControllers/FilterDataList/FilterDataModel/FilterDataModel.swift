@@ -22,7 +22,7 @@ class FilterDataModel: BaseModel {
     var date:Date?
     var timeData:TimeDataItem?
     var type:[String]?
-    var status:Status?
+    var status:BasicModel?
     var customer:String?
     var city:String?
     

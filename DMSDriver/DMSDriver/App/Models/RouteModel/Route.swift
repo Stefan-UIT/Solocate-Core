@@ -232,7 +232,7 @@ class Route: BaseModel {
         get {
             var _trailerTankerName = ""
             for tanker in tankers ?? [] {
-                _trailerTankerName = _trailerTankerName + ", " + tanker.plateNumber
+                _trailerTankerName = _trailerTankerName == "" ? tanker.plateNumber : _trailerTankerName + ", " + tanker.plateNumber
             }
             return _trailerTankerName
         }

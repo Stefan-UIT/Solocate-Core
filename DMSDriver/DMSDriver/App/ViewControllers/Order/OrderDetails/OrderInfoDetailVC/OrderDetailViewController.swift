@@ -48,7 +48,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     @IBOutlet weak var lblDateTime: UILabel?
     @IBOutlet weak var unableToStartButton: UIButton!
     @IBOutlet weak var navigateButton: UIButton!
-    
+    @IBOutlet weak var addNoteButton: UIButton!
     
     fileprivate var orderInforDetail = [OrderDetailInforRow]()
     fileprivate var orderInforFrom = [OrderDetailInforRow]()
@@ -155,6 +155,14 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         //setup NavigateButton
         navigateButton.backgroundColor = AppColor.mainColor
 //        shortcutUpdateStatusButton = updateStatusButton
+    }
+    
+    func layoutAddNoteButton() {
+        addNoteButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        addNoteButton.layer.shadowOffset = CGSize(width: 0, height: 3)
+        addNoteButton.layer.shadowOpacity = 1.0
+        addNoteButton.layer.shadowRadius = 10
+        addNoteButton.layer.masksToBounds = false
     }
     
     private func setupDataDetailInforRows() {
@@ -373,6 +381,39 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         }
     }
     
+    func handleRequestMoreOrdersAction() {
+        let alert = UIAlertController(title: "Please enter amount of legs you would like to request", message: "", preferredStyle: .alert)
+        let submitAction = UIAlertAction(title: "Submit", style: .default, handler: { (action) -> Void in
+            // Get TextFields text
+            let numberOfRequestTxt = alert.textFields![0]
+            let amount = Int(numberOfRequestTxt.text ?? "0") ?? 0
+            //callAPI
+//            submitAction.isEnabled = amount > 0 ? true : false
+            self.uploadRequestMoreOrderWith(amount)
+        })
+        submitAction.isEnabled = false
+        // Cancel button
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+        
+        // textField for amount of order
+        alert.addTextField { (textField: UITextField) in
+            textField.placeholder = "Amount of legs"
+            textField.keyboardType = .asciiCapableNumberPad
+            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main, using:
+                {_ in
+                    let textCount = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
+                    let amountOflegs = Int(textField.text ?? "0") ?? 0
+                    let textIsNotEmpty = (textCount > 0 && amountOflegs > 0)
+                    submitAction.isEnabled = textIsNotEmpty
+            })
+        }
+        
+        // Add actions
+        alert.addAction(cancel)
+        alert.addAction(submitAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
     private func handleUpdatingStatus() {
         guard let order = orderDetail else { return }
         switch order.statusOrder.rawValue {
@@ -393,11 +434,13 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         case StatusOrder.InTransit.rawValue:
                 handleFinishAction()
             break
+        case StatusOrder.deliveryStatus.rawValue, StatusOrder.PartialDelivered.rawValue:
+            handleRequestMoreOrdersAction()
+            break
         default:
             break
         }
     }
-    
     
     // MARK: - ACTION
     @IBAction func tapUpdateStatusButtonAction(_ sender: UIButton) {
@@ -418,6 +461,13 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 //        tableView?.reloadData()
     }
     
+    @IBAction func onNoteManagementTouchUp(_ sender: UIButton) {
+        guard let _order = orderDetail else { return }
+        let vc:NoteManagementViewController = .loadSB(SB: .Common)
+        vc.order = _order
+        vc.notes = _order.notes
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
 }
 
@@ -1006,13 +1056,15 @@ fileprivate extension OrderDetailViewController{
             
             unableToStartButton?.setTitle("unable-to-deliver".localized.uppercased(), for: .normal)
             break
+        case StatusOrder.deliveryStatus.rawValue, StatusOrder.PartialDelivered.rawValue :
+            updateStatusButton?.setTitle("request-more-legs".localized.uppercased(), for: .normal)
+            updateStatusButton?.backgroundColor = AppColor.greenColor
+            break
         default:
             let title = _order.isPickUpType ? "back-to-warehouse".localized : "go-to-delivery".localized
             updateStatusButton?.setTitle(title.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = AppColor.greenColor
         }
-        
-//        let isNotAllowedToGoToDelivery = _order.isLoaded && !_route.isAllowedGoToDelivery
         
         let isHidden = _order.isCancelled || _order.isFinished
         
@@ -1050,6 +1102,9 @@ fileprivate extension OrderDetailViewController{
             
             unableToStartButton?.setTitle("unable-to-deliver".localized.uppercased(), for: .normal)
             break
+        case StatusOrder.deliveryStatus.rawValue:
+            updateStatusButton?.setTitle("request-more-legs".localized.uppercased(), for: .normal)
+            updateStatusButton?.backgroundColor = AppColor.mainColor
         default:
             updateStatusButton?.isHidden = true
             shortcutUpdateStatusButton?.isHidden = true
@@ -1057,8 +1112,8 @@ fileprivate extension OrderDetailViewController{
             return
         }
 
-        let isHidden = (_order.isCancelled || _order.isFinished)
-        
+//        let isHidden = (_order.isCancelled || _order.isFinished)
+        let isHidden = _order.isCancelled
         updateStatusButton?.isHidden = isHidden
         copyUpdateStatusButton()
         vAction?.isHidden = isHidden
@@ -1255,6 +1310,19 @@ extension OrderDetailViewController{
                 self?.showAlertView(error.getMessage())
             }
         }
+    }
+    
+    func uploadRequestMoreOrderWith(_ amount: Int) {
+//        self.showLoadingIndicator()
+//        SERVICES().API.uploadRequestMoreOrderWith(amountOfLegs: amount) {[weak self] (result) in
+//            self?.dismissLoadingIndicator()
+//            switch result {
+//            case .object(_):
+//                self?.showAlertView(object.message)
+//            case .error(let error):
+//                self?.showAlertView(error.getMessage())
+//            }
+//        }
     }
 }
 
