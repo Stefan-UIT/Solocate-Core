@@ -698,6 +698,18 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         }
         let row = indexPath.row
         switch orderSection {
+        case .sectionMap:
+            guard let _orderDetail = orderDetail else { return }
+            let lat = _orderDetail.to?.lattd?.doubleValue ?? 0.0
+            let lng = _orderDetail.to?.lngtd?.doubleValue ?? 0.0
+            if (UIApplication.shared.canOpenURL(NSURL(string:"comgooglemaps://")! as URL)) {
+                UIApplication.shared.openURL(NSURL(string:
+                    "comgooglemaps://?saddr=My%20Location&daddr=\(lat),\(lng)")! as URL)
+            } else {
+                UIApplication.shared.openURL(NSURL(string:
+                    "https://maps.google.com/?saddr=My%20Location&daddr=\(lat),\(lng)")! as URL)
+            }
+            break
         case .sectionFrom:
             if row != 0 &&  // from-address, contact-phone
                 row != orderInforFrom.count - 3 {
@@ -705,18 +717,17 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             }
             
             if row == 0{ //from-address
-                let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
-                vc.orderDetail = orderDetail
-                if let _orderDetail = orderDetail,
-                    let lng = _orderDetail.from?.lngtd,
-                    let lat = _orderDetail.from?.lattd  {
-                    let location = CLLocationCoordinate2D(latitude: lat.doubleValue ,
-                                                          longitude: lng.doubleValue)
-                    vc.orderLocation = location
-                }
-                
-                self.navigationController?.pushViewController( vc, animated: true)
-
+//                let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
+//                vc.orderDetail = orderDetail
+//                if let _orderDetail = orderDetail,
+//                    let lng = _orderDetail.from?.lngtd,
+//                    let lat = _orderDetail.from?.lattd  {
+//                    let location = CLLocationCoordinate2D(latitude: lat.doubleValue ,
+//                                                          longitude: lng.doubleValue)
+//                    vc.orderLocation = location
+//                }
+//
+//                self.navigationController?.pushViewController( vc, animated: true)
             }else {
                 let item = orderInforFrom[row]
                 callPhone(phone: item.content)
@@ -729,17 +740,17 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             }
             
             if row == 0{
-                let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
-                vc.orderDetail = orderDetail
-
-                if let _orderDetail = orderDetail,
-                    let lng = _orderDetail.to?.lngtd,
-                    let lat = _orderDetail.to?.lattd  {
-                    let location = CLLocationCoordinate2D(latitude: lat.doubleValue ,
-                                                          longitude: lng.doubleValue)
-                    vc.orderLocation = location
-                }
-                self.navigationController?.pushViewController( vc, animated: true)
+//                let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
+//                vc.orderDetail = orderDetail
+//
+//                if let _orderDetail = orderDetail,
+//                    let lng = _orderDetail.to?.lngtd,
+//                    let lat = _orderDetail.to?.lattd  {
+//                    let location = CLLocationCoordinate2D(latitude: lat.doubleValue ,
+//                                                          longitude: lng.doubleValue)
+//                    vc.orderLocation = location
+//                }
+//                self.navigationController?.pushViewController( vc, animated: true)
                 
             }else {
                 let item = orderInforTo[row]
