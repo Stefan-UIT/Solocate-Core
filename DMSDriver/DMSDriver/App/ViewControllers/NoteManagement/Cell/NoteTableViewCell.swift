@@ -76,10 +76,9 @@ class NoteTableViewCell: UITableViewCell {
         }
         
         let statusOrder = StatusOrder(rawValue: note.status.code ?? "OP")
-//        statusButton.borderColor = statusOrder?.color
-//        statusButton.setTitle(statusOrder?.statusName, for: .normal)
-//        statusButton.setTitleColor(statusOrder?.color, for: .normal)
-        statusButton.setTitle(statusOrder?.statusName.localized, for: .normal)
+        let status = (statusOrder?.statusName.localized ?? "")
+        let statusName = ("   " + status + "   ")
+        statusButton.setTitle(statusName, for: .normal)
         statusButton.backgroundColor = statusOrder?.color
         statusButton.borderColor = statusOrder?.color
         statusButton.setTitleColor(.white, for: .normal)
