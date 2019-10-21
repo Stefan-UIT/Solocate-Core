@@ -631,7 +631,6 @@
                                                                             <nil key="highlightedColor"/>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="NO"/>
-                                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="trailer-tanker-type-2"/>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VZa-Xe-fWJ">
@@ -665,7 +664,6 @@
                                                                             <nil key="highlightedColor"/>
                                                                             <userDefinedRuntimeAttributes>
                                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="NO"/>
-                                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="Tanker-2"/>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Content" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HAu-ek-hBe">
@@ -782,10 +780,12 @@
                                             <outlet property="driverLabel" destination="ZIk-x0-qbG" id="v9P-jL-n8P"/>
                                             <outlet property="skulistLabel" destination="mGy-VN-YUg" id="e81-G9-NgV"/>
                                             <outlet property="tanker2Label" destination="HAu-ek-hBe" id="RED-P2-g5e"/>
+                                            <outlet property="tanker2NameLabel" destination="xVO-pn-9Ty" id="kri-Wj-hfa"/>
                                             <outlet property="tanker2View" destination="7Py-vg-QLT" id="gWE-6f-H6N"/>
                                             <outlet property="tankerLabel" destination="Q5z-E1-y7b" id="vnI-KJ-ypR"/>
                                             <outlet property="tankerView" destination="0LC-eq-wbh" id="kLa-sN-2XC"/>
                                             <outlet property="trailerTankerType2Label" destination="VZa-Xe-fWJ" id="Teo-de-zjs"/>
+                                            <outlet property="trailerTankerType2NameLabel" destination="1cG-64-88H" id="SH5-63-J6A"/>
                                             <outlet property="trailerTankerType2View" destination="cL4-Ek-9IP" id="MrH-Cn-GdY"/>
                                             <outlet property="trailerTankerTypeLabel" destination="Ny0-KE-FaD" id="EsT-q3-iew"/>
                                             <outlet property="trailerTankerTypeView" destination="eT3-ae-SyR" id="O8x-Ve-znc"/>

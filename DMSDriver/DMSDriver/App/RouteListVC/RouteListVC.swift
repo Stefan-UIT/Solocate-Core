@@ -82,9 +82,17 @@ import Crashlytics
         setupTableView()
         let userName = Caches().user?.userInfo?.userName ?? ""
 //        let date = #"Here is your plan for today - \#(ShortDateFormater.string(from: filterModel.timeData?.startDate ?? Date()))"#.localized
+        let filterTimeData = filterModel.timeData
+        let dateTitle = filterTimeData?.title ?? ""
+        var dateString = ""
+        if filterTimeData?.type == TimeItemType.TimeItemTypeToday {
+            dateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date())
+        } else {
+            dateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date()) + " - " + ShortDateFormater.string(from: filterTimeData?.endDate ?? Date())
+        }
         let date = "here-is-your-plan".localized
         lblNameDriver?.text = "hi".localized + " \(userName)"
-        lblDate?.text = date
+        lblDate?.text = date + " for " + dateTitle + " " + dateString
     }
     
     @objc func fetchData(isShowLoading:Bool = true)  {
@@ -122,6 +130,7 @@ import Crashlytics
                 return
             }
             strongSelf.filterModel = data
+            strongSelf.initUI()
             strongSelf.fetchData(isShowLoading: true)
         }
         self.isFromFilter = true

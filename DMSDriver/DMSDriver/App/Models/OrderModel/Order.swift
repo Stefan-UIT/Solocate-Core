@@ -552,6 +552,16 @@ class Order: BaseModel {
         }
     }
     
+    var skusName: String {
+        get {
+            var _skusName = ""
+            for skuName in details ?? [] {
+                _skusName = _skusName == "" ? (skuName.name ?? "") : _skusName + ", " + (skuName.name ?? "")
+            }
+            return _skusName
+        }
+    }
+    
     lazy var orderGroup:OrderGroup = {
         return OrderGroup.init(rawValue: group) ?? OrderGroup.Logistic
     }()
