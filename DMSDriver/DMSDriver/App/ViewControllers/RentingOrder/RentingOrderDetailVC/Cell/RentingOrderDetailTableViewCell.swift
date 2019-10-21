@@ -24,6 +24,8 @@ class RentingOrderDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var trailerTankerType2View: UIView!
     @IBOutlet weak var tanker2View: UIView!
     
+    @IBOutlet weak var trailerTankerType2NameLabel: UILabel!
+    @IBOutlet weak var tanker2NameLabel: UILabel!
     var rentingOrderDetail:RentingOrder.RentingOrderDetail!
     
     override func awakeFromNib() {
@@ -38,6 +40,8 @@ class RentingOrderDetailTableViewCell: UITableViewCell {
     }
 
     func configureCellWithRentingOrderDetail(_ rentingOrderDetail: RentingOrder.RentingOrderDetail) {
+        trailerTankerType2NameLabel.text = "trailer-tanker-type".localized + " 2"
+        tanker2NameLabel.text = "Tanker".localized + " 2"
         if rentingOrderDetail.tanker?.tankers?.count == 0 {
             trailerTankerTypeView.isHidden = true
             trailerTankerType2View.isHidden = true
