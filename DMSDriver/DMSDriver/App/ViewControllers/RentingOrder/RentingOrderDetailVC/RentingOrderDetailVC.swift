@@ -107,7 +107,7 @@ class RentingOrderDetailVC: BaseViewController {
     }
     
     func initVar() {
-        arrTitleHeader = ["order_info".localized,
+        arrTitleHeader = ["order-info".localized,
                           "details".localized]
     }
     
