@@ -18,7 +18,7 @@ class NoteManagementViewController: BaseViewController {
     @IBOutlet weak var tableView: UITableView!
     var slideshow = ImageSlideshow()
     
-    @IBOutlet weak var noteButton: UIButton!
+    @IBOutlet weak var noteViewContainer: UIView!
     var route:Route?
     var order:Order?
     var notes = [Note]()
@@ -35,11 +35,11 @@ class NoteManagementViewController: BaseViewController {
         reloadUI()
 //        noteButton.backgroundColor = UIColor(red: 171/255, green: 178/255, blue: 186/255, alpha: 1.0)
         // Shadow and Radius
-        noteButton.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
-        noteButton.layer.shadowOffset = CGSize(width: 0.0, height: 3.0)
-        noteButton.layer.shadowOpacity = 1.0
-        noteButton.layer.shadowRadius = 20.0
-        noteButton.layer.masksToBounds = false
+        noteViewContainer.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: 0.25).cgColor
+        noteViewContainer.layer.shadowOffset = CGSize(width: 0.0, height: 3.0)
+        noteViewContainer.layer.shadowOpacity = 1.0
+        noteViewContainer.layer.shadowRadius = 20.0
+        noteViewContainer.layer.masksToBounds = false
 //        noteButton.layer.cornerRadius = 4.0
 
     }
