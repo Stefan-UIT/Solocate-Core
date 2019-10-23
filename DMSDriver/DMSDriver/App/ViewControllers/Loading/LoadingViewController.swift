@@ -13,20 +13,23 @@ class LoadingViewController: UIViewController {
     typealias DownloadedFilesCompletion = () -> Void
     var languages:[LanguageModel]!
     
+    struct Connectivity {
+        static let sharedInstance = NetworkReachabilityManager()!
+        static var isConnectedToInternet:Bool {
+            return self.sharedInstance.isReachable
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let manager = FileManager.default
-        for lang in self.languages ?? [] {
-            let destination = App().bundlePath.appendingPathComponent("\(lang.locale).lproj", isDirectory: true)
-            if manager.fileExists(atPath: destination.path) && !ReachabilityManager.isNetworkAvailable {
-                self.appCheckLoginSuccess()
-                return
-            } else {
-                fetchMultiLanguageFiles()
-                return
-            }
+        let isNetWorkAvailable = Connectivity.isConnectedToInternet
+        if isLocalizedFileExist() && !isNetWorkAvailable {
+            self.appCheckLoginSuccess()
+            return
+        } else {
+            fetchMultiLanguageFiles()
+            return
         }
-        fetchMultiLanguageFiles()
         // Do any additional setup after loading the view.
     }
     
@@ -108,6 +111,21 @@ class LoadingViewController: UIViewController {
         }
     }
     
+    func isLocalizedFileExist() -> Bool {
+        let path = App().bundlePath.appendingPathComponent("en.lproj", isDirectory: true).path
+        let url = NSURL(fileURLWithPath: path)
+        if let pathComponent = url.appendingPathComponent("Localizable.strings") {
+            let filePath = pathComponent.path
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: filePath) {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
+    }
 }
 
 
