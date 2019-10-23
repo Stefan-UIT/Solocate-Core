@@ -15,16 +15,23 @@ class LoadingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let manager = FileManager.default
+//        for lang in self.languages ?? [] {
+//            let destination = App().bundlePath.appendingPathComponent("\(lang.locale).lproj", isDirectory: true)
+//            if manager.fileExists(atPath: destination.path) && !ReachabilityManager.isNetworkAvailable {
+//                self.appCheckLoginSuccess()
+//                return
+//            } else {
+//                fetchMultiLanguageFiles()
+//                return
+//            }
+//        }
         fetchMultiLanguageFiles()
         // Do any additional setup after loading the view.
     }
     
     func fetchMultiLanguageFiles() {
         self.showLoadingIndicator()
-//        if !ReachabilityManager.isNetworkAvailable {
-//            self.appCheckLoginSuccess()
-//            return
-//        }
         SERVICES().API.getLanguagesList { (result) in
             switch result{
             case .object(let obj):
