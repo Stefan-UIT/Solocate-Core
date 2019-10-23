@@ -13,16 +13,9 @@ class LoadingViewController: UIViewController {
     typealias DownloadedFilesCompletion = () -> Void
     var languages:[LanguageModel]!
     
-    struct Connectivity {
-        static let sharedInstance = NetworkReachabilityManager()!
-        static var isConnectedToInternet:Bool {
-            return self.sharedInstance.isReachable
-        }
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let isNetWorkAvailable = Connectivity.isConnectedToInternet
+        let isNetWorkAvailable = ReachabilityManager.isConnectedToInternet
         if isLocalizedFileExist() && !isNetWorkAvailable {
             self.appCheckLoginSuccess()
             return

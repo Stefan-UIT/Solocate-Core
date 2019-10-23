@@ -13,6 +13,7 @@ class _ReachabilityManager: NSObject {
     
     private var backgroundTaskIdentifier = UIBackgroundTaskIdentifier(rawValue: 1)
     var isCalling:Bool = false
+    let sharedInstance = NetworkReachabilityManager()!
     @objc dynamic var temp:[CoreRequest]!
 
     
@@ -27,6 +28,10 @@ class _ReachabilityManager: NSObject {
     
     var isReachableViaWWAN : Bool {
         return reachabilityStatus == .reachableViaWWAN
+    }
+    
+    var isConnectedToInternet:Bool {
+        return sharedInstance.isReachable
     }
     
     // 4. Tracks current NetworkStatus (notReachable, reachableViaWiFi, reachableViaWWAN)
