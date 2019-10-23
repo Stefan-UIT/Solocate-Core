@@ -56,7 +56,8 @@ class ApprovePictureViewController: BaseViewController {
             file.typeFile = "SIG"
             file.mimeType = "image/png"
             file.contentFile = data
-            file.param = "file_pod_req[0]"
+//            file.param = "file_pod_req[0]"
+            file.param = "files[0]"
 
             if order?.isRequireSign() == false {
                 uploadMultipleFile(files: [file], isNeedFinishOrder: true)

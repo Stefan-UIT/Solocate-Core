@@ -116,7 +116,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GeI-lo-ly8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="47" y="91"/>
+            <point key="canvasLocation" x="284" y="-6"/>
         </scene>
         <!--Picker Type ListVC-->
         <scene sceneID="GlE-US-gZy">
@@ -259,7 +259,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dRV-G8-nPc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1041" y="-349"/>
+            <point key="canvasLocation" x="1230" y="-7"/>
         </scene>
         <!--Add AttachmentVC-->
         <scene sceneID="HcG-hz-u6D">
@@ -372,7 +372,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nM5-zp-nuq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1999" y="-306"/>
+            <point key="canvasLocation" x="2044" y="-7"/>
         </scene>
         <!--Pop Up TbvVC-->
         <scene sceneID="HWy-Pw-KyN">
@@ -498,7 +498,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9za-QC-DA6" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="345" y="761"/>
+            <point key="canvasLocation" x="284" y="818"/>
         </scene>
         <!--Reason List View Controller-->
         <scene sceneID="UqX-Nj-9Fs">
@@ -699,7 +699,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="TM1-0K-NPD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2817" y="-48"/>
+            <point key="canvasLocation" x="2927" y="-40"/>
         </scene>
         <!--Picker Input View-->
         <scene sceneID="lJP-mc-9Bs">
@@ -1034,7 +1034,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="IHi-SR-FS4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3614" y="16"/>
+            <point key="canvasLocation" x="3764" y="18"/>
         </scene>
         <!--Filter Order Data View Controller-->
         <scene sceneID="DSz-FU-Pic">
@@ -1278,7 +1278,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fZj-xV-PGR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4423" y="882"/>
+            <point key="canvasLocation" x="3959" y="749"/>
         </scene>
         <!--Add Note View Controller-->
         <scene sceneID="0fX-qL-StK">
@@ -1357,7 +1357,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="SGw-jZ-Cth" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2726" y="761"/>
+            <point key="canvasLocation" x="2498" y="817"/>
         </scene>
         <!--Note Management View Controller-->
         <scene sceneID="jML-JG-aDC">
@@ -1553,7 +1553,7 @@
                                 <rect key="frame" x="291" y="583" width="60" height="60"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_note" translatesAutoresizingMaskIntoConstraints="NO" id="Ubg-nu-uNV">
-                                        <rect key="frame" x="15" y="15" width="30" height="30"/>
+                                        <rect key="frame" x="20" y="20" width="20" height="20"/>
                                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstAttribute="width" secondItem="Ubg-nu-uNV" secondAttribute="height" multiplier="1:1" id="DYr-qo-h9I"/>
@@ -1574,7 +1574,7 @@
                                     <constraint firstItem="Ubg-nu-uNV" firstAttribute="centerY" secondItem="qaf-Ib-fbA" secondAttribute="centerY" id="d9v-XX-3uP"/>
                                     <constraint firstAttribute="width" secondItem="qaf-Ib-fbA" secondAttribute="height" multiplier="1:1" id="dxX-C7-deA"/>
                                     <constraint firstAttribute="height" constant="60" id="gPt-WH-Xic"/>
-                                    <constraint firstItem="Ubg-nu-uNV" firstAttribute="leading" secondItem="qaf-Ib-fbA" secondAttribute="leading" constant="15" id="hP7-83-vs3"/>
+                                    <constraint firstItem="Ubg-nu-uNV" firstAttribute="leading" secondItem="qaf-Ib-fbA" secondAttribute="leading" constant="20" id="hP7-83-vs3"/>
                                     <constraint firstItem="Pn5-O8-nYJ" firstAttribute="leading" secondItem="qaf-Ib-fbA" secondAttribute="leading" id="sFV-j1-dDR"/>
                                     <constraint firstItem="Pn5-O8-nYJ" firstAttribute="top" secondItem="qaf-Ib-fbA" secondAttribute="top" id="vyW-YH-UZ1"/>
                                 </constraints>

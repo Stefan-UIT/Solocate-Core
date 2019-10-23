@@ -68,7 +68,8 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
                         file.mimeType = "image/png"
                         file.typeFile = "DOC"
                         file.contentFile = data
-                        file.param = "file_pod_req[\(i)]"
+//                        file.param = "file_pod_req[\(i)]"
+                        file.param = "files[\(i)]"
                         arrAttachfile.append(file)
                         
                     }else {
@@ -98,7 +99,8 @@ class OrderPictureViewController: BaseOrderDetailViewController, UINavigationCon
                     file.type = ".png"
                     file.mimeType = "image/png"
                     file.contentFile = data
-                    file.param = "file_pod_req[0]"
+//                    file.param = "file_pod_req[0]"
+                    file.param = "files[0]"
                     file.typeFile = "DOC"
                     
                     if !self.hasNetworkConnection{

@@ -579,7 +579,7 @@
                                         <rect key="frame" x="0.0" y="588" width="375" height="180"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xzo-jk-Vgk" id="QIC-Qw-q0I">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="180"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="179.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LnY-YZ-aEo">
@@ -769,7 +769,7 @@
                                         <rect key="frame" x="0.0" y="768" width="375" height="280"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="iMf-Ul-Tww" id="xRM-hn-rXZ">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="279.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="NZU-2r-QQx">
@@ -1096,7 +1096,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="kg5-VB-Xlv" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="lNo-ia-Fml" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="-162.40000000000001" y="25.637181409295355"/>
+            <point key="canvasLocation" x="-326" y="-223"/>
         </scene>
         <!--Assign Driver View Controller-->
         <scene sceneID="mXZ-ek-Lmd">
@@ -1529,7 +1529,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="mxU-T7-CYY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1578" y="-237"/>
+            <point key="canvasLocation" x="1582" y="-223"/>
         </scene>
     </scenes>
     <resources>
