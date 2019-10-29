@@ -238,6 +238,7 @@ private extension SlideMenuVC{
             switch result{
             case .object(_):
             Caches().user = nil
+            CoreDataManager.clearAllDB()
             case .error(let error):
             self.showAlertView(error.getMessage())
             }

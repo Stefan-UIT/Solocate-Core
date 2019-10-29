@@ -33,6 +33,15 @@ class UserModel: BaseModel {
             super.init()
         }
         
+        override init() {
+            super.init()
+        }
+        
+        convenience init?(username:String?) {
+            self.init()
+            self.userName = username
+        }
+        
         override func mapping(map: Map) {
             id <- map[KEY_USER_ID]
             email <- map[KEY_EMAIL]

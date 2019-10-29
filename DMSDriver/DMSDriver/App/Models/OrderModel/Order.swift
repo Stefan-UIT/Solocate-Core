@@ -251,7 +251,7 @@ class Order: BaseModel {
             }
         }
         
-        var id:Int?
+        var id:Int = -1
         var name:String?
         var order_id:Int?
         var package_id:Int?
@@ -527,10 +527,16 @@ class Order: BaseModel {
     var division:BasicModel?
     var zone:BasicModel?
     
+    var consigneeNameCoreData: String = ""
+    
     var consigneeName:String? {
         get {
-            let name = (isPickUpType) ? from?.ctt_name : to?.ctt_name
-            return name
+            if ReachabilityManager.isNetworkAvailable {
+                let name = (isPickUpType) ? from?.ctt_name : to?.ctt_name
+                return name
+            } else {
+                return consigneeNameCoreData
+            }
         }
     }
     

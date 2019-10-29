@@ -647,6 +647,7 @@
 		76BFFD77233A0CFC0021E01A /* RentingOrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD76233A0CFC0021E01A /* RentingOrderDetailVC.swift */; };
 		76BFFD78233A0CFC0021E01A /* RentingOrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD76233A0CFC0021E01A /* RentingOrderDetailVC.swift */; };
 		76E633A7234DE7140039E556 /* RentingOrderDetailInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E633A6234DE7140039E556 /* RentingOrderDetailInfoTableViewCell.swift */; };
+		76ECFF052361B0600099164F /* CoreSKUl+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ECFF042361B0600099164F /* CoreSKUl+Ext.swift */; };
 		BE122D51C94BA19BBECA247E /* Pods_Ashdod_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78467D145BAF1922F4EBBF6 /* Pods_Ashdod_Dev.framework */; };
 		C73D9D55226DA17900452A0C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C73D9D54226DA17900452A0C /* GoogleService-Info.plist */; };
 		C73D9D56226DA17900452A0C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C73D9D54226DA17900452A0C /* GoogleService-Info.plist */; };
@@ -1171,6 +1172,7 @@
 		76BFFD732339F62D0021E01A /* RentingOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrder.swift; sourceTree = "<group>"; };
 		76BFFD76233A0CFC0021E01A /* RentingOrderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderDetailVC.swift; sourceTree = "<group>"; };
 		76E633A6234DE7140039E556 /* RentingOrderDetailInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderDetailInfoTableViewCell.swift; sourceTree = "<group>"; };
+		76ECFF042361B0600099164F /* CoreSKUl+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreSKUl+Ext.swift"; sourceTree = "<group>"; };
 		79FCA8992A46E175D52FF7F3 /* Pods-Ashdod Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ashdod Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ashdod Dev/Pods-Ashdod Dev.debug.xcconfig"; sourceTree = "<group>"; };
 		7AAB4633DDF72A60B133B3E5 /* Pods-DMSDriver-Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver-Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev.debug.xcconfig"; sourceTree = "<group>"; };
 		9B8D9F73312991A219DA0D95 /* Pods-DMSDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3220,6 +3222,7 @@
 				3B0724CA21B1440D00CDB05B /* CoreStatus+Ext.swift */,
 				760B209C23068F7500E96A12 /* CoreRouteStatus+Ext.swift */,
 				766B7456234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift */,
+				76ECFF042361B0600099164F /* CoreSKUl+Ext.swift */,
 			);
 			path = CoreDataModel;
 			sourceTree = "<group>";
@@ -3778,6 +3781,7 @@
 				2A443A3822648C5A00CB6508 /* ReasonSkipTableViewCell.swift in Sources */,
 				2E1BE34E22F14FFD005F9BB5 /* ReturnedItemClvCell.swift in Sources */,
 				2A443A3922648C5A00CB6508 /* SlideMenuCell.swift in Sources */,
+				76ECFF052361B0600099164F /* CoreSKUl+Ext.swift in Sources */,
 				2A443A3A22648C5A00CB6508 /* HistoryNotifyDetailCell.swift in Sources */,
 				2A443A3B22648C5A00CB6508 /* PickerTypeListVC.swift in Sources */,
 				2A443A3C22648C5A00CB6508 /* OrderItem.swift in Sources */,

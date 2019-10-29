@@ -241,58 +241,72 @@ import Crashlytics
  //MARK: - API
  fileprivate extension RouteListVC {
     func getRoutes(filterMode:FilterDataModel, isShowLoading:Bool = true, isFetch:Bool = false) {
-        guard !isFetchInProgress else {
-            return
-        }
-        isFetchInProgress = true
-        
-        if isFetch {
-            self.showLoadingIndicator()
-        }
-        
-        if isInfiniteScrolling {
-            self.isInfiniteScrolling = false
-        } else {
-            self.page = 1
-            self.routes = [Route]()
-            tableView?.reloadData()
-        }
-        
-        SERVICES().API.getRoutes(filterMode: filterMode, page: page) {[weak self] (result) in
-            self?.dismissLoadingIndicator()
-            self?.tableView.endRefreshControl()
-            guard let strongSelf = self else {
+        if ReachabilityManager.isNetworkAvailable {
+            guard !isFetchInProgress else {
                 return
             }
-            switch result{
-            case .object(let obj):
-                if let data = obj.data?.data {
-//                    strongSelf.routes = data
-                    // DMSCurrentRoutes.routes = data
-                    
-                    self?.totalPages = obj.data?.meta?.total_pages ?? 1
-                    self?.currentPage = obj.data?.meta?.current_page ?? 1
-
-                    if self?.currentPage != self?.totalPages {
-                        self?.page = (self?.currentPage ?? 1) + 1
-                    }
-
-                    self?.routes.append(data)
-                    
-                    
-                    strongSelf.lblNoResult?.isHidden = (strongSelf.routes.count > 0)
-                    strongSelf.tableView.reloadData()
-                    self?.isFetchInProgress = false
-                } else {
-                    // TODO: Do something.
-                }
-                
-            case .error(let error):
-                strongSelf.showAlertView(error.getMessage())
-                self?.isFetchInProgress = false
-                break
+            isFetchInProgress = true
+            
+            if isFetch {
+                self.showLoadingIndicator()
             }
+            
+            if isInfiniteScrolling {
+                self.isInfiniteScrolling = false
+            } else {
+                self.page = 1
+                self.routes = [Route]()
+                tableView?.reloadData()
+            }
+            
+            SERVICES().API.getRoutes(filterMode: filterMode, page: page) {[weak self] (result) in
+                self?.dismissLoadingIndicator()
+                self?.tableView.endRefreshControl()
+                guard let strongSelf = self else {
+                    return
+                }
+                switch result{
+                case .object(let obj):
+                    if let data = obj.data?.data {
+                        //                    strongSelf.routes = data
+                        // DMSCurrentRoutes.routes = data
+                        
+                        self?.totalPages = obj.data?.meta?.total_pages ?? 1
+                        self?.currentPage = obj.data?.meta?.current_page ?? 1
+                        
+                        if self?.currentPage != self?.totalPages {
+                            self?.page = (self?.currentPage ?? 1) + 1
+                        }
+                        
+                        self?.routes.append(data)
+                        CoreDataManager.saveRoutes(self?.routes ?? [])
+                        
+                        strongSelf.lblNoResult?.isHidden = (strongSelf.routes.count > 0)
+                        strongSelf.tableView.reloadData()
+                        self?.isFetchInProgress = false
+                    } else {
+                        // TODO: Do something.
+                    }
+                    
+                case .error(let error):
+                    strongSelf.showAlertView(error.getMessage())
+                    self?.isFetchInProgress = false
+                    break
+                }
+            }
+        } else {
+            self.routes = getRoutes()
         }
+        
+    }
+    
+ }
+ 
+ //MARK: - CoreData
+ fileprivate extension RouteListVC {
+    func getRoutes() -> [Route] {
+        let results = CoreDataManager.getListRoutes()
+        return results
     }
     
  }

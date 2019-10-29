@@ -24,6 +24,7 @@ enum Entity:String {
     case Request = "CoreRequest"
     case CoreRouteStatus = "CoreRouteStatus"
     case CoreRentingOrderStatus = "CoreRentingOrderStatus"
+    case CoreSKU = "CoreSKU"
 
 }
 
@@ -194,6 +195,9 @@ class _CoreDataManager {
                 if coreRoute != nil{
                     //context.delete(coreRoute!)
                     //self.updateRouteOnCoreCooradinator(coreRoute!, route, context)
+                    routes.forEach({ (route) in
+                        self?.updateRoute(route)
+                    })
                 }else{
                     let _ = self?.insertRoute(route, context)
                 }
@@ -324,10 +328,10 @@ class _CoreDataManager {
     func updateRoute(_ route:Route,_ callback:((Bool,Route) -> Void)? = nil) {
         self.persistentContainer.performBackgroundTask {[weak self] (context) in
             let predicate = NSPredicate(format: "id = \(route.id)")
-            let reaults = self?.fetchRecordsForEntity(Entity.Route.rawValue,
+            let results = self?.fetchRecordsForEntity(Entity.Route.rawValue,
                                                 predicate:predicate,
                                                 inManagedObjectContext: context) as? [CoreRoute]
-            reaults?.forEach { (coreRoute) in
+            results?.forEach { (coreRoute) in
                 if coreRoute.id == route.id {
                     coreRoute.setAttribiteFrom(route)
                     route.orderList.forEach({ (order) in
@@ -352,6 +356,22 @@ class _CoreDataManager {
                             coreOdr.driver_id = Int16(route.driverId)
                             coreRoute.addToOrderList(coreOdr)
                         }
+                        
+                        order.details?.forEach{ (detail) in
+                            let predicate = NSPredicate(format: "id = \(detail.id)")
+                            let coreSKU = (self?.fetchRecordsForEntity(Entity.CoreSKU.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreSKU])?.last
+                            if let _coreSKU = coreSKU {
+                                _coreSKU.setAttributeFrom(detail)
+                            } else {
+                                let detailDB = NSEntityDescription.entity(forEntityName: Entity.CoreSKU.rawValue, in: context)
+                                let coreSKU:CoreSKU = CoreSKU(entity: detailDB!, insertInto: context)
+                                
+                                coreSKU.id = Int16(detail.id)
+                                // Set List Attribute
+                                coreSKU.setAttributeFrom(detail)
+                                coreOrder?.addToDetail(coreSKU)
+                            }
+                        }
                         self?.saveContext(context)
                     })
                 }
@@ -372,6 +392,7 @@ class _CoreDataManager {
                                                      in: context)
         let urlDB = NSEntityDescription.entity(forEntityName:Entity.UrlFile.rawValue,
                                                   in: context)
+        let skuBD = NSEntityDescription.entity(forEntityName: Entity.CoreSKU.rawValue, in: context)
         
         let coreRoute:CoreRoute = CoreRoute(entity: routeDB!,
                                             insertInto: context)
@@ -402,10 +423,21 @@ class _CoreDataManager {
                 coreOrder.url = coreUrl
             }
             
+            order.details?.forEach({ (detail) in
+                let coreSKU:CoreSKU = CoreSKU(entity: skuBD!, insertInto: context)
+                
+                // Set Details Attribute
+                coreSKU.setAttributeFrom(detail)
+                coreSKU.id = Int16(detail.id)
+                
+                // Set List Relationship
+                coreOrder.addToDetail(coreSKU)
+            })
+            
             // Set List Relationship
             coreRoute.addToOrderList(coreOrder)
         })
-        
+        coreRoute.setAttribiteFrom(route)
         saveContext(context)
         return coreRoute
     }
@@ -663,6 +695,16 @@ class _CoreDataManager {
                 self?.saveContext(context)
             }
         }
+    }
+    
+    func getListRoutes() -> [Route] {
+        var results:[Route] = []
+        let items = fetchRecordsForEntity(Entity.Route.rawValue, inManagedObjectContext: self.persistentContainer.viewContext) as? [CoreRoute]
+        items?.forEach({ (core) in
+            results.append(core.convertToRoute())
+        })
+        
+        return results
     }
     
     func getListRouteStatus() -> [Status] {
