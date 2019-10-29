@@ -183,7 +183,7 @@ fileprivate extension RentingOrderListVC {
         }
         
         
-        SERVICES().API.getRentingOrders(filterMode: filterMode) {[weak self] (result) in
+        SERVICES().API.getRentingOrders(filterMode: filterMode, page: page) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             self?.tbvContent?.endRefreshControl()
             guard let strongSelf = self else {

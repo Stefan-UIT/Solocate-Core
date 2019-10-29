@@ -168,29 +168,6 @@ class Route: BaseModel {
         case InProgess = "IP"
         case Finished = "DV"
         case Canceled = "CC"
-        
-        var name: String {
-            get {
-                switch self {
-                case .New:
-                    return "New".localized
-                case .InProgess:
-                    return "in-progress".localized;
-                case .Finished:
-                    return "Finished".localized;
-                case .Canceled:
-                    return "Cancelled".localized;
-                }
-            }
-            
-        }
-        
-        func convertToStatus() -> Status {
-            let result = Status()
-            result.code = rawValue
-            result.name = name
-            return result
-        }
     }
   
     var  id = -1
@@ -251,19 +228,13 @@ class Route: BaseModel {
         }
     }
     
-    var trailerTankerNameCoreData: String = ""
-    
     var trailerTankerName: String {
         get {
-            if ReachabilityManager.isNetworkAvailable {
-                var _trailerTankerName = ""
-                for tanker in tankers ?? [] {
-                    _trailerTankerName = _trailerTankerName == "" ? tanker.plateNumber : _trailerTankerName + ", " + tanker.plateNumber
-                }
-                return _trailerTankerName
-            } else {
-                return trailerTankerNameCoreData
+            var _trailerTankerName = ""
+            for tanker in tankers ?? [] {
+                _trailerTankerName = _trailerTankerName == "" ? tanker.plateNumber : _trailerTankerName + ", " + tanker.plateNumber
             }
+            return _trailerTankerName
         }
     }
     
@@ -350,9 +321,11 @@ class Route: BaseModel {
         company <- map["company"]
         loadVolume <- map["load_vol"]
         assignedInfo <- map["drivers"]
-        tankersJSON <- map["tankers"]
-        guard let array = tankersJSON else { return }
-        tankers = array.map({$0.tanker ?? Tanker()})
+        tankers <- map["tankers"]
+//        tankersJSON <- map["tankers"]
+//        guard let array = tankersJSON else { return }
+//
+//        tankers = array.map({$0.tanker ?? Tanker()})
     }
     
     var ordersAbleToLoad:[Order] {
@@ -443,7 +416,18 @@ class Route: BaseModel {
         
             //self.updateStatusWhenOffline()
             
-            return routeStatus.name
+            switch E(status?.code) {
+            case "OP":
+                return "New".localized
+            case "IP":
+                return "in-progress".localized;
+            case "DV":
+                return "Finished".localized;
+            case "CC":
+                return "Cancelled".localized;
+            default:
+                return "Unknown";
+            }
         }
     }
 }
