@@ -20,7 +20,7 @@ class Zone: BasicModel { }
 
 class TankerJSON: BaseModel {
     var id:Int?
-    var tanker:Tanker!
+    var tanker:Tanker?
     
     override init() {
         super.init()
@@ -321,9 +321,11 @@ class Route: BaseModel {
         company <- map["company"]
         loadVolume <- map["load_vol"]
         assignedInfo <- map["drivers"]
-        tankersJSON <- map["tankers"]
-        guard let array = tankersJSON else { return }
-        tankers = array.map({$0.tanker})
+        tankers <- map["tankers"]
+//        tankersJSON <- map["tankers"]
+//        guard let array = tankersJSON else { return }
+//
+//        tankers = array.map({$0.tanker ?? Tanker()})
     }
     
     var ordersAbleToLoad:[Order] {
