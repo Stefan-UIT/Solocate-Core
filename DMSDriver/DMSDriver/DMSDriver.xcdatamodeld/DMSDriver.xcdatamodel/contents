@@ -30,10 +30,17 @@
         <attribute name="created_at" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="custumer_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deliveryAdd" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deliveryApt" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deliveryCity" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deliveryContactName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deliveryContactPhone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deliveryDate" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deliveryEndTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deliveryFloor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deliveryLocationName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deliveryNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="deliveryServiceTime" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="deliveryStartTime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="deliveryState" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="descriptionNote" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="division" optional="YES" attributeType="String" syncable="YES"/>
@@ -64,9 +71,16 @@
         <attribute name="orderTypeName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="packages" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="pallets" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="pickupApt" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pickupContactEmail" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pickupContactName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pickupContactPhone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pickupEndTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pickupFloor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pickupLocationName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pickupNumber" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="pickupService" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="pickupStartTime" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="pod" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="purchaseId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="reason_msg" optional="YES" attributeType="String" syncable="YES"/>
@@ -163,19 +177,22 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="CoreSKU" representedClassName="CoreSKU" syncable="YES" codeGenerationType="class">
+        <attribute name="barcode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="batchId" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="companyId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="cusId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="cusLocId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="createdBy" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="deliveredQty" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="purchaseOrderId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="loadedQty" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="materialId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="packageId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="qty" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="refCode" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="routeId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="seq" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="shippingStatusCode" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="shippingStatusId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="shippingTypeCode" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="shippingTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="sig" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="unitTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedBy" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="detail" optional="YES" maxCount="1" deletionRule="Nullify" ordered="YES" destinationEntity="CoreOrder" inverseName="detail" inverseEntity="CoreOrder" syncable="YES"/>
     </entity>
     <entity name="CoreStatus" representedClassName="CoreStatus" syncable="YES" codeGenerationType="class">
@@ -199,13 +216,13 @@
     <elements>
         <element name="CoreAttachFile" positionX="-778.109375" positionY="166.765625" width="128" height="195"/>
         <element name="CoreCoordinatorRoute" positionX="-209.0078125" positionY="16.91015625" width="128" height="120"/>
-        <element name="CoreOrder" positionX="-54" positionY="-9" width="128" height="1320"/>
+        <element name="CoreOrder" positionX="-54" positionY="-9" width="128" height="1530"/>
         <element name="CoreReason" positionX="-261.1484375" positionY="280.81640625" width="128" height="120"/>
         <element name="CoreRentingOrderStatus" positionX="-616.34375" positionY="-3.58203125" width="128" height="90"/>
         <element name="CoreRequest" positionX="-200.59765625" positionY="132.25390625" width="128" height="165"/>
         <element name="CoreRoute" positionX="-416.171875" positionY="443.79296875" width="128" height="448"/>
         <element name="CoreRouteStatus" positionX="-442.53125" positionY="-9.43359375" width="128" height="90"/>
-        <element name="CoreSKU" positionX="-575.1015625" positionY="1001.6796875" width="128" height="255"/>
+        <element name="CoreSKU" positionX="-575.1015625" positionY="1001.6796875" width="128" height="300"/>
         <element name="CoreStatus" positionX="-206.94140625" positionY="16.265625" width="128" height="88"/>
         <element name="CoreUrlFile" positionX="-532.75" positionY="121.26171875" width="128" height="90"/>
         <element name="CoreWarehouse" positionX="-578" positionY="243" width="128" height="135"/>

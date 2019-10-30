@@ -1173,8 +1173,7 @@ extension OrderDetailViewController{
     }
     
     private func getOrderDetail(isFetch:Bool = false) {
-        if hasNetworkConnection &&
-            ReachabilityManager.isCalling == false {
+        if ReachabilityManager.isNetworkAvailable {
             guard let _orderID = orderDetail?.id else { return }
             if !isFetch {
                 showLoadingIndicator()
@@ -1183,11 +1182,12 @@ extension OrderDetailViewController{
                 self?.dismissLoadingIndicator()
                 switch result{
                 case .object(let object):
-                    self?.orderDetail = object.data
+                    guard let _orderDetail = object.data else { return }
+                    self?.orderDetail = _orderDetail
                     self?.rootVC?.order =  self?.orderDetail
                     self?.initVar()
                     self?.updateUI()
-                    //CoreDataManager.updateOrderDetail(object) // update orderdetail to DB local
+                    CoreDataManager.updateOrderDetail(_orderDetail) // update orderdetail to DB local
                     
                 case .error(let error):
                     self?.showAlertView(error.getMessage())
@@ -1195,17 +1195,15 @@ extension OrderDetailViewController{
             }
             
         }else {
-            
             //Get data from local DB
-            /*
              if let _order = self.orderDetail{
-             CoreDataManager.queryOrderDetail(_order.id, callback: {[weak self] (success,data) in
-             guard let strongSelf = self else{return}
-             strongSelf.orderDetail = data
-             strongSelf.updateUI()
-             })
+                CoreDataManager.queryOrderDetail(_order.id, callback: {[weak self] (success,data) in
+                    guard let strongSelf = self else{return}
+                    strongSelf.orderDetail = data
+                    strongSelf.initVar()
+                    strongSelf.updateUI()
+                })
              }
-             */
         }
     }
     
