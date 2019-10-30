@@ -168,6 +168,30 @@ class Route: BaseModel {
         case InProgess = "IP"
         case Finished = "DV"
         case Canceled = "CC"
+        
+        var name: String {
+            get {
+                switch self {
+                case .New:
+                    return "New".localized
+                case .InProgess:
+                    return "in-progress".localized;
+                case .Finished:
+                    return "Finished".localized;
+                case .Canceled:
+                    return "Cancelled".localized;
+                }
+            }
+            
+        }
+        
+        func convertToStatus() -> Status {
+            let result = Status()
+            result.code = rawValue
+            result.name = name
+            return result
+        }
+
     }
   
     var  id = -1
@@ -228,13 +252,19 @@ class Route: BaseModel {
         }
     }
     
+    var trailerTankerNameCoreData: String = ""
+    
     var trailerTankerName: String {
         get {
-            var _trailerTankerName = ""
-            for tanker in tankers ?? [] {
-                _trailerTankerName = _trailerTankerName == "" ? tanker.plateNumber : _trailerTankerName + ", " + tanker.plateNumber
+            if ReachabilityManager.isNetworkAvailable {
+                var _trailerTankerName = ""
+                for tanker in tankers ?? [] {
+                    _trailerTankerName = _trailerTankerName == "" ? tanker.plateNumber : _trailerTankerName + ", " + tanker.plateNumber
+                }
+                return _trailerTankerName
+            } else {
+                return trailerTankerNameCoreData
             }
-            return _trailerTankerName
         }
     }
     
