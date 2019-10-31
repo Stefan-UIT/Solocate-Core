@@ -39,7 +39,6 @@ import Crashlytics
         super.viewDidLoad()
         initVar()
         initUI()
-        //fakaData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -295,7 +294,8 @@ import Crashlytics
                 }
             }
         } else {
-            self.routes = getRoutes()
+            self.routes = handleFilterRoute(with: filterMode, routes: getRoutes())
+            tableView.reloadData()
         }
         
     }
@@ -311,8 +311,24 @@ import Crashlytics
     
  }
 
-
-
-
- 
+ //MARK: - Filter Routes
+ fileprivate extension RouteListVC {
+    func handleFilterRoute(with filterDataModel: FilterDataModel, routes: [Route]) -> [Route] {
+        var filterRoutes = [Route]()
+        let startDate = filterDataModel.timeData?.startDate
+        let endDate = filterDataModel.timeData?.endDate
+        let statusName = filterDataModel.status?.name
+        if statusName == nil || statusName == "all-statuses".localized {
+            filterRoutes = routes
+        } else {
+            filterRoutes = routes.filter({$0.nameStatus == statusName})
+        }
+        if startDate == nil && endDate == nil {
+            
+        } else {
+            filterRoutes = filterRoutes.filter({$0.startDate >= startDate! && $0.endDate <= endDate!})
+        }
+        return filterRoutes
+    }
+ }
 

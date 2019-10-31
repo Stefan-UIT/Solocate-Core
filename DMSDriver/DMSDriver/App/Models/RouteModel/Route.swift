@@ -461,5 +461,19 @@ class Route: BaseModel {
             }
         }
     }
+    
+    var startDate: Date {
+        get {
+            guard let _startDate = start_time.date else { return Date() }
+            return _startDate
+        }
+    }
+    
+    var endDate: Date {
+        get {
+            guard let _endDate = end_time.date else { return Date() }
+            return _endDate
+        }
+    }
 }
 
