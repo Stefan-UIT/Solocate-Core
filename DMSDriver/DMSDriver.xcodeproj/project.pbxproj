@@ -646,6 +646,10 @@
 		76BFFD752339F62D0021E01A /* RentingOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD732339F62D0021E01A /* RentingOrder.swift */; };
 		76BFFD77233A0CFC0021E01A /* RentingOrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD76233A0CFC0021E01A /* RentingOrderDetailVC.swift */; };
 		76BFFD78233A0CFC0021E01A /* RentingOrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD76233A0CFC0021E01A /* RentingOrderDetailVC.swift */; };
+		76DC378E236AD88700C3FCE8 /* CoreLocation+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DC378D236AD88700C3FCE8 /* CoreLocation+Ext.swift */; };
+		76DC3790236AD89700C3FCE8 /* CoreLocation+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DC378D236AD88700C3FCE8 /* CoreLocation+Ext.swift */; };
+		76DC3791236AD89900C3FCE8 /* CoreSKUl+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ECFF042361B0600099164F /* CoreSKUl+Ext.swift */; };
+		76DC3792236AD89C00C3FCE8 /* CoreRentingOrderStatus+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766B7456234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift */; };
 		76E633A7234DE7140039E556 /* RentingOrderDetailInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E633A6234DE7140039E556 /* RentingOrderDetailInfoTableViewCell.swift */; };
 		76ECFF052361B0600099164F /* CoreSKUl+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ECFF042361B0600099164F /* CoreSKUl+Ext.swift */; };
 		BE122D51C94BA19BBECA247E /* Pods_Ashdod_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78467D145BAF1922F4EBBF6 /* Pods_Ashdod_Dev.framework */; };
@@ -1171,6 +1175,7 @@
 		76BFFD6E2339F4660021E01A /* RentingOrderListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderListTableViewCell.swift; sourceTree = "<group>"; };
 		76BFFD732339F62D0021E01A /* RentingOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrder.swift; sourceTree = "<group>"; };
 		76BFFD76233A0CFC0021E01A /* RentingOrderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderDetailVC.swift; sourceTree = "<group>"; };
+		76DC378D236AD88700C3FCE8 /* CoreLocation+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreLocation+Ext.swift"; sourceTree = "<group>"; };
 		76E633A6234DE7140039E556 /* RentingOrderDetailInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderDetailInfoTableViewCell.swift; sourceTree = "<group>"; };
 		76ECFF042361B0600099164F /* CoreSKUl+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreSKUl+Ext.swift"; sourceTree = "<group>"; };
 		79FCA8992A46E175D52FF7F3 /* Pods-Ashdod Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ashdod Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ashdod Dev/Pods-Ashdod Dev.debug.xcconfig"; sourceTree = "<group>"; };
@@ -3223,6 +3228,7 @@
 				760B209C23068F7500E96A12 /* CoreRouteStatus+Ext.swift */,
 				766B7456234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift */,
 				76ECFF042361B0600099164F /* CoreSKUl+Ext.swift */,
+				76DC378D236AD88700C3FCE8 /* CoreLocation+Ext.swift */,
 			);
 			path = CoreDataModel;
 			sourceTree = "<group>";
@@ -3996,6 +4002,7 @@
 				2A443AEB22648C5A00CB6508 /* Note.swift in Sources */,
 				2A443AEC22648C5A00CB6508 /* AddNoteView.swift in Sources */,
 				2A443AED22648C5A00CB6508 /* FilterDataListInsertContentCell.swift in Sources */,
+				76DC378E236AD88700C3FCE8 /* CoreLocation+Ext.swift in Sources */,
 				2A443AEE22648C5A00CB6508 /* OrderDetailViewController.swift in Sources */,
 				2A443AEF22648C5A00CB6508 /* UIViewController+Extensions.swift in Sources */,
 				2A443AF022648C5A00CB6508 /* Optional+Extensions.swift in Sources */,
@@ -4040,6 +4047,7 @@
 				3BB9308D21466776009F6DCC /* CoreRequest+Ext.swift in Sources */,
 				2A42050B22576AF000789837 /* ContentCell.swift in Sources */,
 				3B66B826210B113D000BDFEF /* UIColor+Extensions.swift in Sources */,
+				76DC3791236AD89900C3FCE8 /* CoreSKUl+Ext.swift in Sources */,
 				3B66B82F210B113D000BDFEF /* AttributedTextBlock.swift in Sources */,
 				760B209E23068F7500E96A12 /* CoreRouteStatus+Ext.swift in Sources */,
 				3B0D52BD221D44A400610A9A /* FilterDataModel.swift in Sources */,
@@ -4148,6 +4156,7 @@
 				3B1629D0221BEA8200E7A83C /* FilterDataListHeaderCell.swift in Sources */,
 				76BFFD6D2339D8B50021E01A /* RentingOrderListVC.swift in Sources */,
 				3BEAB867214260740039CFBB /* CoreCoordinatorRoute+Ext.swift in Sources */,
+				76DC3792236AD89C00C3FCE8 /* CoreRentingOrderStatus+Ext.swift in Sources */,
 				3B014951217D7E010097FEB6 /* TaskDetailVC.swift in Sources */,
 				185FC773228D303100B085BC /* BaseSearchView.swift in Sources */,
 				3B1629E5221C082B00E7A83C /* FilterDataListFooterView.swift in Sources */,
@@ -4265,6 +4274,7 @@
 				3B66B82B210B113D000BDFEF /* Optional+Extensions.swift in Sources */,
 				3B17EB5B21AD049C00CDF7D3 /* TimerVC.swift in Sources */,
 				3B66B817210B113D000BDFEF /* NSAtribitedString+Ext.swift in Sources */,
+				76DC3790236AD89700C3FCE8 /* CoreLocation+Ext.swift in Sources */,
 				3B66B838210B113D000BDFEF /* CurrencyCell.swift in Sources */,
 				3B9A37672123D6B9004D881C /* SelectionModel.swift in Sources */,
 				3B66B928210B1149000BDFEF /* ForgetPasswordView.swift in Sources */,

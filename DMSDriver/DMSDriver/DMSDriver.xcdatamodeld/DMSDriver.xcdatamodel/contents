@@ -19,6 +19,25 @@
         <relationship name="coordinator" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreRoute" inverseName="listcd" inverseEntity="CoreRoute" syncable="YES"/>
         <relationship name="drivers" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreRoute" inverseName="listdr" inverseEntity="CoreRoute" syncable="YES"/>
     </entity>
+    <entity name="CoreLocation" representedClassName="CoreLocation" syncable="YES" codeGenerationType="class">
+        <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="apartment" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cttName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cttPhone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="endTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="floor" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lattd" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="lngtd" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="locName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="number" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="seq" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="srvcTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="startTime" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="locationList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreRoute" inverseName="locationList" inverseEntity="CoreRoute" syncable="YES"/>
+    </entity>
     <entity name="CoreOrder" representedClassName="CoreOrder" syncable="YES" codeGenerationType="class">
         <attribute name="ac" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="bcd" optional="YES" attributeType="String" syncable="YES"/>
@@ -167,6 +186,7 @@
         <attribute name="userId" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="listcd" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreCoordinatorRoute" inverseName="coordinator" inverseEntity="CoreCoordinatorRoute" syncable="YES"/>
         <relationship name="listdr" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreCoordinatorRoute" inverseName="drivers" inverseEntity="CoreCoordinatorRoute" syncable="YES"/>
+        <relationship name="locationList" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreLocation" inverseName="locationList" inverseEntity="CoreLocation" syncable="YES"/>
         <relationship name="order" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoreOrder" inverseName="route_detail" inverseEntity="CoreOrder" syncable="YES"/>
         <relationship name="orderList" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreOrder" inverseName="list" inverseEntity="CoreOrder" syncable="YES"/>
         <relationship name="warehouse" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoreWarehouse" inverseName="route" inverseEntity="CoreWarehouse" syncable="YES"/>
@@ -220,11 +240,12 @@
         <element name="CoreReason" positionX="-261.1484375" positionY="280.81640625" width="128" height="120"/>
         <element name="CoreRentingOrderStatus" positionX="-616.34375" positionY="-3.58203125" width="128" height="90"/>
         <element name="CoreRequest" positionX="-200.59765625" positionY="132.25390625" width="128" height="165"/>
-        <element name="CoreRoute" positionX="-416.171875" positionY="443.79296875" width="128" height="448"/>
+        <element name="CoreRoute" positionX="-416.171875" positionY="443.79296875" width="128" height="465"/>
         <element name="CoreRouteStatus" positionX="-442.53125" positionY="-9.43359375" width="128" height="90"/>
         <element name="CoreSKU" positionX="-575.1015625" positionY="1001.6796875" width="128" height="300"/>
         <element name="CoreStatus" positionX="-206.94140625" positionY="16.265625" width="128" height="88"/>
         <element name="CoreUrlFile" positionX="-532.75" positionY="121.26171875" width="128" height="90"/>
         <element name="CoreWarehouse" positionX="-578" positionY="243" width="128" height="135"/>
+        <element name="CoreLocation" positionX="-576" positionY="144" width="128" height="300"/>
     </elements>
 </model>

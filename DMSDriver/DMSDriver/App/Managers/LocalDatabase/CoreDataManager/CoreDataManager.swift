@@ -25,6 +25,7 @@ enum Entity:String {
     case CoreRouteStatus = "CoreRouteStatus"
     case CoreRentingOrderStatus = "CoreRentingOrderStatus"
     case CoreSKU = "CoreSKU"
+    case CoreLocation = "CoreLocation"
 
 }
 
@@ -88,8 +89,8 @@ class _CoreDataManager {
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nserror = error as NSError
-                print("Unresolved error \(nserror), \(nserror.userInfo)")
+//                let nserror = error as NSError
+//                print("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }
@@ -334,6 +335,21 @@ class _CoreDataManager {
             results?.forEach { (coreRoute) in
                 if coreRoute.id == route.id {
                     coreRoute.setAttribiteFrom(route)
+                    route.locationList.forEach({ (location) in
+                        //LocationList
+                        let predicateLocation = NSPredicate(format: "id = \(location.id)")
+                        let coreLocation = (self?.fetchRecordsForEntity(Entity.CoreLocation.rawValue, predicate: predicateLocation, inManagedObjectContext: context) as? [CoreLocation])?.last
+                        if let _coreLocation = coreLocation {
+                            _coreLocation.setAttributeFrom(location)
+                        } else {
+                            let locationDB = NSEntityDescription.entity(forEntityName: Entity.CoreLocation.rawValue, in: context)
+                            let coreLocation:CoreLocation = CoreLocation(entity: locationDB!, insertInto: context)
+                            
+                            // Set LocationList Attribute
+                            coreLocation.setAttributeFrom(location)
+                            coreRoute.addToLocationList(coreLocation)
+                        }
+                    })
                     route.orderList.forEach({ (order) in
                         order.driver_id = route.driverId
                         order.driver_name = route.driver_name
@@ -357,6 +373,7 @@ class _CoreDataManager {
                             coreRoute.addToOrderList(coreOdr)
                         }
                         
+                        // SKUs
                         order.details?.forEach{ (detail) in
                             let predicate = NSPredicate(format: "id = \(detail.id)")
                             let coreSKU = (self?.fetchRecordsForEntity(Entity.CoreSKU.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreSKU])?.last
@@ -372,10 +389,10 @@ class _CoreDataManager {
                                 coreOrder?.addToDetail(coreSKU)
                             }
                         }
-                        self?.saveContext(context)
                     })
                 }
             }
+            self?.saveContext(context)
             callback?(true,route)
         }
     }
@@ -394,49 +411,60 @@ class _CoreDataManager {
                                                   in: context)
         let skuBD = NSEntityDescription.entity(forEntityName: Entity.CoreSKU.rawValue, in: context)
         
+        let locationDB = NSEntityDescription.entity(forEntityName: Entity.CoreLocation.rawValue, in: context)
+        
         let coreRoute:CoreRoute = CoreRoute(entity: routeDB!,
                                             insertInto: context)
-       
-        route.orderList.forEach({ (order) in
-            let coreOrder:CoreOrder = CoreOrder(entity: orderDB!,
-                                                insertInto: context)
-            
-            // Set List Attribute
-            coreOrder.setAttribiteFrom(order)
-            coreOrder.driver_id = Int16(route.driverId)
-            if order.files != nil{
-                let coreUrl:CoreUrlFile = CoreUrlFile(entity: urlDB!, insertInto: context)
-                if let sig = order.signature{
-                    let coreSig = createRecordForEntity(Entity.AttachFile.rawValue,
-                                                        inManagedObjectContext: context) as? CoreAttachFile
-                    coreSig?.setAttributeFrom(sig)
-                    coreUrl.sig = coreSig
-                }
-                
-                if let docs = order.pictures {
-                    docs.forEach({ (doc) in
-                        let coreDoc = createRecordForEntity(Entity.AttachFile.rawValue, inManagedObjectContext: context) as? CoreAttachFile
-                        coreDoc?.setAttributeFrom(doc)
-                        coreUrl.addToDoc(coreDoc!)
-                    })
-                }
-                coreOrder.url = coreUrl
-            }
-            
-            order.details?.forEach({ (detail) in
-                let coreSKU:CoreSKU = CoreSKU(entity: skuBD!, insertInto: context)
-                
-                // Set Details Attribute
-                coreSKU.setAttributeFrom(detail)
-                coreSKU.id = Int16(detail.id)
-                
-                // Set List Relationship
-                coreOrder.addToDetail(coreSKU)
+        
+            route.locationList.forEach({ (location) in
+                let coreLocation:CoreLocation = CoreLocation(entity: locationDB!,
+                                                             insertInto: context)
+                coreLocation.setAttributeFrom(location)
+                coreRoute.addToLocationList(coreLocation)
             })
             
-            // Set List Relationship
-            coreRoute.addToOrderList(coreOrder)
-        })
+            route.orderList.forEach({ (order) in
+                let coreOrder:CoreOrder = CoreOrder(entity: orderDB!,
+                                                    insertInto: context)
+                // Set List Attribute
+                coreOrder.setAttribiteFrom(order)
+                coreOrder.driver_id = Int16(route.driverId)
+                if order.files != nil{
+                    let coreUrl:CoreUrlFile = CoreUrlFile(entity: urlDB!, insertInto: context)
+                    if let sig = order.signature{
+                        let coreSig = self.createRecordForEntity(Entity.AttachFile.rawValue,
+                                                            inManagedObjectContext: context) as? CoreAttachFile
+                        coreSig?.setAttributeFrom(sig)
+                        coreUrl.sig = coreSig
+                    }
+                    
+                    if let docs = order.pictures {
+                        docs.forEach({ (doc) in
+                            let coreDoc = self.createRecordForEntity(Entity.AttachFile.rawValue, inManagedObjectContext: context) as? CoreAttachFile
+                            coreDoc?.setAttributeFrom(doc)
+                            coreUrl.addToDoc(coreDoc!)
+                        })
+                    }
+                    coreOrder.url = coreUrl
+                }
+                
+                // SKUs
+                order.details?.forEach({ (detail) in
+                    let coreSKU:CoreSKU = CoreSKU(entity: skuBD!, insertInto: context)
+                    
+                    // Set Details Attribute
+                    coreSKU.setAttributeFrom(detail)
+                    coreSKU.id = Int16(detail.id)
+                    
+                    // Set List Relationship
+                    coreOrder.addToDetail(coreSKU)
+                })
+                
+                // Set List Relationship
+                coreRoute.addToOrderList(coreOrder)
+            })
+        
+        
         coreRoute.setAttribiteFrom(route)
         saveContext(context)
         return coreRoute

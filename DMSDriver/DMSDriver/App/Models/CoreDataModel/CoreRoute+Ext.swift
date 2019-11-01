@@ -33,6 +33,7 @@ extension CoreRoute{
         trailerTankerName = route.trailerTankerName
         loadVolume = route.loadVolume
         orderList?.addingObjects(from: route.orderList)
+        locationList?.addingObjects(from: route.locationList)
     }
     
     func convertToRoute() -> Route {
@@ -69,6 +70,12 @@ extension CoreRoute{
         if  let orderList = orderList?.allObjects as? [CoreOrder] {
             orderList.forEach { (order) in
                 route.orderList.append(order.converToOrder())
+            }
+        }
+        
+        if let locationList = locationList?.allObjects as? [CoreLocation] {
+            locationList.forEach { (location) in
+                route.locationList.append(location.convertTocLocationModel())
             }
         }
         
