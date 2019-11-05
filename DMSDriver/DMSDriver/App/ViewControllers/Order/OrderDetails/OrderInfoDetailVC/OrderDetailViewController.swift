@@ -1077,7 +1077,7 @@ fileprivate extension OrderDetailViewController{
             updateStatusButton?.backgroundColor = AppColor.greenColor
         }
         
-        let isHidden = _order.isCancelled || _order.isFinished
+        let isHidden = _order.isCancelled
         
         updateStatusButton?.isHidden = isHidden
         copyUpdateStatusButton()
@@ -1113,7 +1113,7 @@ fileprivate extension OrderDetailViewController{
             
             unableToStartButton?.setTitle("unable-to-deliver".localized.uppercased(), for: .normal)
             break
-        case StatusOrder.deliveryStatus.rawValue:
+        case StatusOrder.deliveryStatus.rawValue, StatusOrder.PartialDelivered.rawValue:
             updateStatusButton?.setTitle("request-more-legs".localized.uppercased(), for: .normal)
             updateStatusButton?.backgroundColor = AppColor.mainColor
         default:
