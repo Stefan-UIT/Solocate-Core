@@ -242,4 +242,27 @@ extension BaseAPIService{
                            callback: callback);
         }
     }
+    
+    func checkMoreLegs(_ orderID: Int, callback: @escaping APICallback<BoolModel>) -> APIRequest? {
+        let path = String(format:PATH_REQUEST_URL.REQUEST_MORE_LEGS.URL, "\(orderID)")
+        if ReachabilityManager.isNetworkAvailable {
+            return request(method: .GET,
+                        path: path,
+                        input: .empty,
+                        callback: callback);
+        } else {
+            return nil
+        }
+    }
+    
+    func requestMoreLegs(_ orderID: Int, legs: Int, callback: @escaping APICallback<ResponseDataModel<EmptyModel>>){
+        let path = String(format:PATH_REQUEST_URL.GET_MORE_LEGS.URL, "\(orderID)")
+        let params:[String:Any] = ["legs": legs]
+        if ReachabilityManager.isNetworkAvailable {
+            _ = request(method: .PUT,
+                        path: path,
+                        input: .json(params),
+                        callback: callback);
+        }
+    }
 }

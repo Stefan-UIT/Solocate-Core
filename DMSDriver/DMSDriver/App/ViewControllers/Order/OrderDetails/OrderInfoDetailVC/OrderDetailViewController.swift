@@ -70,6 +70,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
     var dateStringFilter = Date().toString()
     var btnGo: UIButton?
+    var isHaveMoreLegs:Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -282,6 +283,13 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         ReasonSkipView.present(inViewController: self, isCancelledReason: false, reasonType: .UnableToFinish) {(success, reason) in
             guard let _reason = reason else {return}
             completionHandler(_reason)
+        }
+    }
+    
+    func handleRequestMoreLegs() {
+        guard let order = orderDetail else { return }
+        if order.isFinished {
+            self.requestMoreLegs(orderID: order.id)
         }
     }
     
@@ -1077,7 +1085,7 @@ fileprivate extension OrderDetailViewController{
             updateStatusButton?.backgroundColor = AppColor.greenColor
         }
         
-        let isHidden = _order.isCancelled
+        let isHidden = _order.isCancelled || !isHaveMoreLegs
         
         updateStatusButton?.isHidden = isHidden
         copyUpdateStatusButton()
@@ -1138,6 +1146,7 @@ fileprivate extension OrderDetailViewController{
 //        } else {
 //            handleShowingButtonStatusWithDeliveryType()
 //        }
+        handleRequestMoreLegs()
         handleShowingButtonStatus()
     }
     
@@ -1323,17 +1332,36 @@ extension OrderDetailViewController{
         }
     }
     
+    func requestMoreLegs(orderID: Int) {
+        if ReachabilityManager.isNetworkAvailable {
+            self.showLoadingIndicator()
+            SERVICES().API.checkMoreLegs(orderID) { [weak self] (result)in
+                self?.dismissLoadingIndicator()
+                switch result {
+                case .object(let object):
+                    self?.isHaveMoreLegs = object.data
+                case .error(let error):
+                    self?.showAlertView(error.getMessage())
+                }
+            }
+        } else {
+            showAlertView("No Network")
+        }
+        
+    }
+    
     func uploadRequestMoreOrderWith(_ amount: Int) {
-//        self.showLoadingIndicator()
-//        SERVICES().API.uploadRequestMoreOrderWith(amountOfLegs: amount) {[weak self] (result) in
-//            self?.dismissLoadingIndicator()
-//            switch result {
-//            case .object(_):
-//                self?.showAlertView(object.message)
-//            case .error(let error):
-//                self?.showAlertView(error.getMessage())
-//            }
-//        }
+        self.showLoadingIndicator()
+        guard let order = orderDetail else { return }
+        SERVICES().API.requestMoreLegs(order.id, legs: amount) { [weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result {
+            case .object(_):
+                self?.showAlertView("Finished")
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
+        }
     }
 }
 
