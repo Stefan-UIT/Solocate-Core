@@ -243,15 +243,13 @@ extension BaseAPIService{
         }
     }
     
-    func checkMoreLegs(_ orderID: Int, callback: @escaping APICallback<BoolModel>) -> APIRequest? {
+    func checkMoreLegs(_ orderID: Int, callback: @escaping APICallback<BoolModel>) {
         let path = String(format:PATH_REQUEST_URL.REQUEST_MORE_LEGS.URL, "\(orderID)")
         if ReachabilityManager.isNetworkAvailable {
-            return request(method: .GET,
+            _ = request(method: .GET,
                         path: path,
                         input: .empty,
                         callback: callback);
-        } else {
-            return nil
         }
     }
     

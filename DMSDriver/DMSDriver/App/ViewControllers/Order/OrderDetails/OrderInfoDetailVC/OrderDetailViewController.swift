@@ -1356,10 +1356,7 @@ extension OrderDetailViewController{
                     self?.showAlertView(error.getMessage())
                 }
             }
-        } else {
-            showAlertView("No Network")
         }
-        
     }
     
     func uploadRequestMoreOrderWith(_ amount: Int) {
