@@ -42,26 +42,28 @@ class RentingOrderDetailTableViewCell: UITableViewCell {
     func configureCellWithRentingOrderDetail(_ rentingOrderDetail: RentingOrder.RentingOrderDetail) {
         trailerTankerType2NameLabel.text = "trailer-tanker-type".localized + " 2"
         tanker2NameLabel.text = "Tanker".localized + " 2"
+        let tanker1Index = 0
+        let tanker2Index = 1
+        tanker2View.isHidden = true
+        trailerTankerType2View.isHidden = true
+        
+        // Handle Show Tanker/Tanker2 and TrailerTankerType/TrailerTankerType2
         if rentingOrderDetail.tanker?.tankers?.count == 0 || rentingOrderDetail.tanker?.tankers == nil{
             trailerTankerTypeView.isHidden = true
-            trailerTankerType2View.isHidden = true
             tankerView.isHidden = true
-            tanker2View.isHidden = true
         } else if rentingOrderDetail.tanker?.tankers?.count > 0 {
             trailerTankerTypeView.isHidden = false
             tankerView.isHidden = false
-            trailerTankerTypeLabel.text = rentingOrderDetail.tanker?.tankerType?[0].name
-            tankerLabel.text = rentingOrderDetail.tanker?.tankers?[0].plateNum
-            tanker2View.isHidden = true
-            trailerTankerType2View.isHidden = true
+            trailerTankerTypeLabel.text = rentingOrderDetail.tanker?.tankerType?[tanker1Index].name
+            tankerLabel.text = rentingOrderDetail.tanker?.tankers?[tanker1Index].plateNum
         } else if rentingOrderDetail.tanker?.tankers?.count > 1 || rentingOrderDetail.tanker?.tankers?.last != nil {
             tanker2View.isHidden = false
-            tanker2Label.text = rentingOrderDetail.tanker?.tankers?[1].plateNum
+            tanker2Label.text = rentingOrderDetail.tanker?.tankers?[tanker2Index].plateNum
         }
         
         if rentingOrderDetail.tanker?.tankerType?.count > 1 || rentingOrderDetail.tanker?.tankerType?.last != nil {
             trailerTankerType2View.isHidden = false
-            trailerTankerType2Label.text = rentingOrderDetail.tanker?.tankerType?[1].name
+            trailerTankerType2Label.text = rentingOrderDetail.tanker?.tankerType?[tanker2Index].name
             
         }
         

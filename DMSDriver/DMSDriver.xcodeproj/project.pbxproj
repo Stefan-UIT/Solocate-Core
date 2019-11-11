@@ -638,6 +638,8 @@
 		760C46FD233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C46FC233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift */; };
 		760C46FE233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C46FC233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift */; };
 		766B7457234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766B7456234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift */; };
+		76A0BF7823716A1200942C6D /* BoolModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0BF7723716A1200942C6D /* BoolModel.swift */; };
+		76A0BF7923716A1200942C6D /* BoolModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0BF7723716A1200942C6D /* BoolModel.swift */; };
 		76BFFD6C2339D8B50021E01A /* RentingOrderListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD6B2339D8B50021E01A /* RentingOrderListVC.swift */; };
 		76BFFD6D2339D8B50021E01A /* RentingOrderListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD6B2339D8B50021E01A /* RentingOrderListVC.swift */; };
 		76BFFD6F2339F4660021E01A /* RentingOrderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD6E2339F4660021E01A /* RentingOrderListTableViewCell.swift */; };
@@ -1171,6 +1173,7 @@
 		760C0A97233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderDetailTableViewCell.swift; sourceTree = "<group>"; };
 		760C46FC233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOrderDetailSKUTableViewCell.swift; sourceTree = "<group>"; };
 		766B7456234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreRentingOrderStatus+Ext.swift"; sourceTree = "<group>"; };
+		76A0BF7723716A1200942C6D /* BoolModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolModel.swift; sourceTree = "<group>"; };
 		76BFFD6B2339D8B50021E01A /* RentingOrderListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderListVC.swift; sourceTree = "<group>"; };
 		76BFFD6E2339F4660021E01A /* RentingOrderListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderListTableViewCell.swift; sourceTree = "<group>"; };
 		76BFFD732339F62D0021E01A /* RentingOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrder.swift; sourceTree = "<group>"; };
@@ -2497,6 +2500,7 @@
 				3B66B886210B1148000BDFEF /* WarehouseModel.swift */,
 				3B66B887210B1148000BDFEF /* UploadFileResponse.swift */,
 				3B66B888210B1148000BDFEF /* ResponseDataModel.swift */,
+				76A0BF7723716A1200942C6D /* BoolModel.swift */,
 			);
 			path = APIModels;
 			sourceTree = "<group>";
@@ -3801,6 +3805,7 @@
 				2A443A4322648C5A00CB6508 /* TaskListClvCell.swift in Sources */,
 				2A443A4422648C5A00CB6508 /* SocketConstants.swift in Sources */,
 				2A443A4522648C5A00CB6508 /* PickerTimeVC.swift in Sources */,
+				76A0BF7823716A1200942C6D /* BoolModel.swift in Sources */,
 				2A443A4622648C5A00CB6508 /* CoreDataManager.swift in Sources */,
 				2A443A4722648C5A00CB6508 /* AssignOrderVC.swift in Sources */,
 				2A443A4822648C5A00CB6508 /* LoadMoreView.swift in Sources */,
@@ -4213,6 +4218,7 @@
 				3B66B912210B1149000BDFEF /* RouteDetailVC.swift in Sources */,
 				3B66B8F5210B1149000BDFEF /* AttachFileModel.swift in Sources */,
 				3B2B8B55222E135B00ACDDFE /* FilterByDatePopupCustomCell.swift in Sources */,
+				76A0BF7923716A1200942C6D /* BoolModel.swift in Sources */,
 				3B66B80B210B113D000BDFEF /* UIImage.swift in Sources */,
 				3B66B91E210B1149000BDFEF /* BaseView.swift in Sources */,
 				3BEAB861214260200039CFBB /* CoreRoute+Ext.swift in Sources */,

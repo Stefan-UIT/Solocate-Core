@@ -84,6 +84,9 @@ enum PATH_REQUEST_URL: String{
     case FINISH_RETURNED_ITEM = "transaction/v1/mobile/item-returns/process/%@/finish"
     case GET_LIST_ROUTE_STATUS = "masterdata/v1/route-statuses/list-active"
     case GET_RETURN_REASON_LIST = "masterdata/v1/return-reasons/list-active"
+    case REQUEST_MORE_LEGS = "transaction/v1/shipping-orders/%@/check-more-legs"
+    case GET_MORE_LEGS = "transaction/v1/shipping-orders/%@/more-legs"
+    
     
     var URL:String  {
         return rawValue

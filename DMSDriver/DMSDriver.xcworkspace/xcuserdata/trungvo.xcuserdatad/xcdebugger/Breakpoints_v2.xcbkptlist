@@ -121,54 +121,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DMSDriver/App/ViewControllers/Order/OrderListVC/Cell/OrderItemTableViewCell.swift"
-            timestampString = "591793218.689378"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
-            landmarkName = "updateCell()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
-            timestampString = "593324433.965495"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1083"
-            endingLineNumber = "1083"
-            landmarkName = "handleShowingButtonStatus()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DMSDriver/App/Managers/SocketIO/SocketConstants.swift"
-            timestampString = "593493710.921121"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "46"
-            endingLineNumber = "46"
-            landmarkName = "BASE_URL_SOCKET"
-            landmarkType = "24">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/Managers/Services/RESTConstants.swift"
             timestampString = "593493103.746154"
             startingColumnNumber = "9223372036854775807"
@@ -185,29 +137,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DMSDriver/App/Managers/SocketIO/SocketService.swift"
-            timestampString = "593493257.690738"
+            filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
+            timestampString = "594622345.778005"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "registerGenericEventHandler()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DMSDriver/App/AppDelegate/AppDelegate.swift"
-            timestampString = "593493611.605285"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "224"
-            endingLineNumber = "224"
-            landmarkName = "didReceiveResultLogin(data:)"
+            startingLineNumber = "1127"
+            endingLineNumber = "1127"
+            landmarkName = "handleShowingButtonStatusWithPickedUpType()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
