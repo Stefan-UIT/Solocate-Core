@@ -26,6 +26,7 @@ enum Entity:String {
     case CoreRentingOrderStatus = "CoreRentingOrderStatus"
     case CoreSKU = "CoreSKU"
     case CoreLocation = "CoreLocation"
+    case CoreNote = "CoreNote"
 
 }
 
@@ -109,21 +110,24 @@ class _CoreDataManager {
         clearDatabase(entity: .Warehouse)
         clearDatabase(entity: .AttachFile)
         clearDatabase(entity: .UrlFile)
+        clearDatabase(entity: .CoreNote)
     }
     
-    func clearDatabase( entity:Entity ) {
-        self.persistentContainer.performBackgroundTask {[weak self] (context) in
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity.rawValue )
-            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-            
-            do {
-                try context.execute(deleteRequest)
-            } catch let error as NSError {
-                debugPrint(error)
-            }
-            self?.saveContext(context)
+    func clearDatabase(entity:Entity) {
+        let delegate = UIApplication.shared.delegate as! AppDelegate
+        let context = delegate.persistentContainer.viewContext
+        
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: entity.rawValue)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+        
+        do {
+            try context.execute(deleteRequest)
+            try context.save()
+        } catch {
+            print ("There was an error")
         }
     }
+
     
     
     //MARK: - REQUEST
