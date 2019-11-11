@@ -701,12 +701,18 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             }
             
         case .sectionSignature:
-            self.showImage(nil, linkUrl: orderDetail?.signature?.url, placeHolder: nil)
-            
+            if ReachabilityManager.isNetworkAvailable {
+                self.showImage(nil, linkUrl: orderDetail?.signature?.url, placeHolder: nil)
+            } else {
+                self.showImage(UIImage(data: orderDetail?.signature?.contentFile ?? Data()), linkUrl: nil, placeHolder: nil)
+            }
         case .sectionPictures:
             let picture = orderDetail?.pictures?[row]
-            self.showImage(nil, linkUrl: picture?.url, placeHolder: nil)
-            
+            if ReachabilityManager.isNetworkAvailable {
+                self.showImage(nil, linkUrl: picture?.url, placeHolder: nil)
+            } else {
+                self.showImage(UIImage(data: orderDetail?.pictures?[row].contentFile ?? Data()), linkUrl: nil, placeHolder: nil)
+            }
         default:
             break
         }
@@ -801,11 +807,15 @@ fileprivate extension OrderDetailViewController {
         cell.selectionStyle = .none
         if let sig =  orderDetail?.signature {
             cell.nameLabel.text = sig.name
-            if sig.url_thumbnail != nil {
-                cell.imgView.sd_setImage(with: URL(string: E(sig.url_thumbnail)),
-                                         placeholderImage: #imageLiteral(resourceName: "place_holder"),
-                                         options: .refreshCached, completed: nil)
-            }else {
+            if ReachabilityManager.isNetworkAvailable {
+                if sig.url_thumbnail != nil {
+                    cell.imgView.sd_setImage(with: URL(string: E(sig.url_thumbnail)),
+                                             placeholderImage: #imageLiteral(resourceName: "place_holder"),
+                                             options: .refreshCached, completed: nil)
+                }else {
+                    cell.imgView.image = UIImage(data: sig.contentFile ?? Data())
+                }
+            } else {
                 cell.imgView.image = UIImage(data: sig.contentFile ?? Data())
             }
         }
@@ -819,11 +829,15 @@ fileprivate extension OrderDetailViewController {
         cell.imgView.image = nil
         if let picture =  orderDetail?.pictures?[indexPath.row] {
             cell.nameLabel.text = picture.name
-            if picture.url != nil {
-                cell.imgView.sd_setImage(with: URL(string: E(picture.urlS3)),
-                                         placeholderImage: #imageLiteral(resourceName: "place_holder"),
-                                         options: .refreshCached, completed: nil)
-            }else {
+            if ReachabilityManager.isNetworkAvailable {
+                if picture.url != nil {
+                    cell.imgView.sd_setImage(with: URL(string: E(picture.urlS3)),
+                                             placeholderImage: #imageLiteral(resourceName: "place_holder"),
+                                             options: .refreshCached, completed: nil)
+                }else {
+                    cell.imgView.image = UIImage(data: picture.contentFile ?? Data())
+                }
+            } else {
                 cell.imgView.image = UIImage(data: picture.contentFile ?? Data())
             }
         }

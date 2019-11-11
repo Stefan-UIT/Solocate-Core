@@ -31,7 +31,9 @@ extension  CoreOrder{
         remark = order.remark
         typeId = Int16(order.typeID)
         
-         detail?.addingObjects(from: order.details ?? [])
+        detail?.addingObjects(from: order.details ?? [])
+        //
+        orderFile?.addingObjects(from: order.files ?? [])
         
         // Pick up
         pickupContactName = order.from?.name
@@ -127,6 +129,15 @@ extension  CoreOrder{
             }
         }
         order.details = coreDetails
+        
+        var coreFile = [AttachFileModel]()
+        if let files = orderFile?.allObjects as? [CoreAttachFile] {
+            files.forEach{ (file) in
+                coreFile.append(file.convertToAttachfileModel())
+            }
+        }
+        order.files = coreFile
+
         
         return order
     }

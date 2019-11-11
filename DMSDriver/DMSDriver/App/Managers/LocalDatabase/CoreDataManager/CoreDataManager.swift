@@ -373,6 +373,22 @@ class _CoreDataManager {
                             coreRoute.addToOrderList(coreOdr)
                         }
                         
+                        // File
+                        order.files?.forEach{ (file) in
+                            let predicate = NSPredicate(format: "id = \(file.id)")
+                            let coreAttachFile = (self?.fetchRecordsForEntity(Entity.AttachFile.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreAttachFile])?.last
+                            if let _coreAttach = coreAttachFile {
+                                _coreAttach.setAttributeFrom(file)
+                            } else {
+                                let fileDB = NSEntityDescription.entity(forEntityName: Entity.AttachFile.rawValue, in: context)
+                                let _coreFile:CoreAttachFile = CoreAttachFile(entity: fileDB!, insertInto: context)
+                                _coreFile.id = Int32(file.id )
+                                _coreFile.setAttributeFrom(file)
+                                coreOrder?.addToOrderFile(_coreFile)
+                            }
+                        }
+
+                        
                         // SKUs
                         order.details?.forEach{ (detail) in
                             let predicate = NSPredicate(format: "id = \(detail.id)")
@@ -409,10 +425,13 @@ class _CoreDataManager {
                                                      in: context)
         let urlDB = NSEntityDescription.entity(forEntityName:Entity.UrlFile.rawValue,
                                                   in: context)
-        let skuBD = NSEntityDescription.entity(forEntityName: Entity.CoreSKU.rawValue, in: context)
-        
-        let locationDB = NSEntityDescription.entity(forEntityName: Entity.CoreLocation.rawValue, in: context)
-        
+        let skuBD = NSEntityDescription.entity(forEntityName: Entity.CoreSKU.rawValue,
+                                               in: context)
+        let locationDB = NSEntityDescription.entity(forEntityName: Entity.CoreLocation.rawValue,
+                                                    in: context)
+        let attachFileDB = NSEntityDescription.entity(forEntityName: Entity.AttachFile.rawValue,
+                                                      in: context)!
+
         let coreRoute:CoreRoute = CoreRoute(entity: routeDB!,
                                             insertInto: context)
         
@@ -429,25 +448,12 @@ class _CoreDataManager {
                 // Set List Attribute
                 coreOrder.setAttribiteFrom(order)
                 coreOrder.driver_id = Int16(route.driverId)
-                if order.files != nil{
-                    let coreUrl:CoreUrlFile = CoreUrlFile(entity: urlDB!, insertInto: context)
-                    if let sig = order.signature{
-                        let coreSig = self.createRecordForEntity(Entity.AttachFile.rawValue,
-                                                            inManagedObjectContext: context) as? CoreAttachFile
-                        coreSig?.setAttributeFrom(sig)
-                        coreUrl.sig = coreSig
-                    }
-                    
-                    if let docs = order.pictures {
-                        docs.forEach({ (doc) in
-                            let coreDoc = self.createRecordForEntity(Entity.AttachFile.rawValue, inManagedObjectContext: context) as? CoreAttachFile
-                            coreDoc?.setAttributeFrom(doc)
-                            coreUrl.addToDoc(coreDoc!)
-                        })
-                    }
-                    coreOrder.url = coreUrl
+                order.files?.forEach{ (file) in
+                    let coreAttachFile:CoreAttachFile = CoreAttachFile(entity: attachFileDB, insertInto: context)
+                    coreAttachFile.id = Int32(file.id)
+                    coreAttachFile.setAttributeFrom(file)
+                    coreOrder.addToOrderFile(coreAttachFile)
                 }
-                
                 // SKUs
                 order.details?.forEach({ (detail) in
                     let coreSKU:CoreSKU = CoreSKU(entity: skuBD!, insertInto: context)
