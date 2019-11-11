@@ -392,6 +392,34 @@ class _CoreDataManager {
                             }
                         }
 
+                        // Order Note
+                        order.notes.forEach({ (note) in
+                            let predicate = NSPredicate(format: "id = \(note.id)")
+                            let coreNote = (self?.fetchRecordsForEntity(Entity.CoreNote.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreNote])?.last
+                            if let _coreNote = coreNote {
+                                _coreNote.setAttributeFrom(note)
+                            } else {
+                                let noteDB = NSEntityDescription.entity(forEntityName: Entity.CoreNote.rawValue, in: context)
+                                let _coreNote:CoreNote = CoreNote(entity: noteDB!, insertInto: context)
+                                _coreNote.id = Int16(note.id)
+                                _coreNote.setAttributeFrom(note)
+                                coreOrder?.addToOrderNote(_coreNote)
+                            }
+                            note.files.forEach{ (file) in
+                                let predicate = NSPredicate(format: "id = \(file.id)")
+                                let coreAttachFile = (self?.fetchRecordsForEntity(Entity.AttachFile.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreAttachFile])?.last
+                                if let _coreAttach = coreAttachFile {
+                                    _coreAttach.setAttributeFrom(file)
+                                } else {
+                                    let fileDB = NSEntityDescription.entity(forEntityName: Entity.AttachFile.rawValue, in: context)
+                                    let _coreFile:CoreAttachFile = CoreAttachFile(entity: fileDB!, insertInto: context)
+                                    _coreFile.id = Int32(file.id )
+                                    _coreFile.setAttributeFrom(file)
+                                    coreNote?.addToNoteFile(_coreFile)
+                                }
+                            }
+                        })
+
                         
                         // SKUs
                         order.details?.forEach{ (detail) in
@@ -435,6 +463,8 @@ class _CoreDataManager {
                                                     in: context)
         let attachFileDB = NSEntityDescription.entity(forEntityName: Entity.AttachFile.rawValue,
                                                       in: context)!
+        let orderNote = NSEntityDescription.entity(forEntityName: Entity.CoreNote.rawValue,
+                                                   in: context)
 
         let coreRoute:CoreRoute = CoreRoute(entity: routeDB!,
                                             insertInto: context)
@@ -452,12 +482,30 @@ class _CoreDataManager {
                 // Set List Attribute
                 coreOrder.setAttribiteFrom(order)
                 coreOrder.driver_id = Int16(route.driverId)
+                
+                // Order File
                 order.files?.forEach{ (file) in
                     let coreAttachFile:CoreAttachFile = CoreAttachFile(entity: attachFileDB, insertInto: context)
                     coreAttachFile.id = Int32(file.id)
                     coreAttachFile.setAttributeFrom(file)
                     coreOrder.addToOrderFile(coreAttachFile)
                 }
+                
+                // Order Note
+                order.notes.forEach({ (note) in
+                    let coreNote:CoreNote = CoreNote(entity: orderNote!,
+                                                     insertInto: context)
+                    coreNote.setAttributeFrom(note)
+                    coreNote.id = Int16(note.id)
+                    note.files.forEach({ (file) in
+                        let coreAttachFile:CoreAttachFile = CoreAttachFile(entity: attachFileDB, insertInto: context)
+                        coreAttachFile.id = Int32(file.id)
+                        coreAttachFile.setAttributeFrom(file)
+                        coreNote.addToNoteFile(coreAttachFile)
+                    })
+                    coreOrder.addToOrderNote(coreNote)
+                })
+
                 // SKUs
                 order.details?.forEach({ (detail) in
                     let coreSKU:CoreSKU = CoreSKU(entity: skuBD!, insertInto: context)

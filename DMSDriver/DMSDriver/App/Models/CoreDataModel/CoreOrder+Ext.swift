@@ -34,6 +34,7 @@ extension  CoreOrder{
         detail?.addingObjects(from: order.details ?? [])
         //
         orderFile?.addingObjects(from: order.files ?? [])
+        orderNote?.addingObjects(from: order.notes)
         
         // Pick up
         pickupContactName = order.from?.name
@@ -137,7 +138,14 @@ extension  CoreOrder{
             }
         }
         order.files = coreFile
-
+        
+        var coreNote = [Note]()
+        if let note = orderNote?.allObjects as? [CoreNote] {
+            note.forEach { (note) in
+                coreNote.append(note.convertToNoteModel())
+            }
+        }
+        order.notes = coreNote
         
         return order
     }

@@ -75,12 +75,13 @@ class NoteTableViewCell: UITableViewCell {
             self.attachedFilesLabel.text = (numberOfAttachedFiles > 1) ? "\(numberOfAttachedFiles) attached files" : "\(numberOfAttachedFiles) attached file"
         }
         
-        let statusOrder = StatusOrder(rawValue: note.status.code ?? "OP")
-        let status = (statusOrder?.statusName.localized ?? "")
+//        let statusOrder = StatusOrder(rawValue: note.status.code ?? "OP")
+        guard let statusOrder = StatusOrder(rawValue: note.status?.code ?? "OP") else { return }
+        let status = (statusOrder.statusName.localized ?? "")
         let statusName = ("  " + status + "  ")
         statusButton.setTitle(statusName, for: .normal)
-        statusButton.backgroundColor = statusOrder?.color
-        statusButton.borderColor = statusOrder?.color
+        statusButton.backgroundColor = statusOrder.color
+        statusButton.borderColor = statusOrder.color
         statusButton.setTitleColor(.white, for: .normal)
         statusButton.cornerRadius = 10.0
     }
