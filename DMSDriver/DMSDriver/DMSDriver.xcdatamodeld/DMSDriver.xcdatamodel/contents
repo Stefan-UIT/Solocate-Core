@@ -41,7 +41,9 @@
         <attribute name="seq" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="srvcTime" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="startTime" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="from" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreOrder" inverseName="from" inverseEntity="CoreOrder" syncable="YES"/>
         <relationship name="locationList" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreRoute" inverseName="locationList" inverseEntity="CoreRoute" syncable="YES"/>
+        <relationship name="to" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreOrder" inverseName="to" inverseEntity="CoreOrder" syncable="YES"/>
     </entity>
     <entity name="CoreNote" representedClassName="CoreNote" syncable="YES" codeGenerationType="class">
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
@@ -158,11 +160,13 @@
         <attribute name="urgent_type_name_hb" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="zoneName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="detail" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreSKU" inverseName="detail" inverseEntity="CoreSKU" syncable="YES"/>
+        <relationship name="from" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoreLocation" inverseName="from" inverseEntity="CoreLocation" syncable="YES"/>
         <relationship name="list" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreRoute" inverseName="orderList" inverseEntity="CoreRoute" syncable="YES"/>
         <relationship name="orderFile" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreAttachFile" inverseName="orderFile" inverseEntity="CoreAttachFile" syncable="YES"/>
         <relationship name="orderNote" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreNote" inverseName="orderNote" inverseEntity="CoreNote" syncable="YES"/>
         <relationship name="reason" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreReason" inverseName="reasonCancel" inverseEntity="CoreReason" syncable="YES"/>
         <relationship name="route_detail" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreRoute" inverseName="order" inverseEntity="CoreRoute" syncable="YES"/>
+        <relationship name="to" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoreLocation" inverseName="to" inverseEntity="CoreLocation" syncable="YES"/>
         <relationship name="url" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoreUrlFile" inverseName="order" inverseEntity="CoreUrlFile" syncable="YES"/>
     </entity>
     <entity name="CoreReason" representedClassName="CoreReason" syncable="YES" codeGenerationType="class">
@@ -262,8 +266,9 @@
     <elements>
         <element name="CoreAttachFile" positionX="-778.109375" positionY="166.765625" width="128" height="270"/>
         <element name="CoreCoordinatorRoute" positionX="-209.0078125" positionY="16.91015625" width="128" height="120"/>
-        <element name="CoreLocation" positionX="-576" positionY="144" width="128" height="300"/>
-        <element name="CoreOrder" positionX="-54" positionY="-9" width="128" height="1560"/>
+        <element name="CoreLocation" positionX="-576" positionY="144" width="128" height="330"/>
+        <element name="CoreNote" positionX="-576" positionY="144" width="128" height="300"/>
+        <element name="CoreOrder" positionX="-54" positionY="-9" width="128" height="1590"/>
         <element name="CoreReason" positionX="-261.1484375" positionY="280.81640625" width="128" height="120"/>
         <element name="CoreRentingOrderStatus" positionX="-616.34375" positionY="-3.58203125" width="128" height="90"/>
         <element name="CoreRequest" positionX="-200.59765625" positionY="132.25390625" width="128" height="165"/>
@@ -273,6 +278,5 @@
         <element name="CoreStatus" positionX="-206.94140625" positionY="16.265625" width="128" height="88"/>
         <element name="CoreUrlFile" positionX="-532.75" positionY="121.26171875" width="128" height="90"/>
         <element name="CoreWarehouse" positionX="-578" positionY="243" width="128" height="135"/>
-        <element name="CoreNote" positionX="-576" positionY="144" width="128" height="300"/>
     </elements>
 </model>

@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 import CoreLocation
-
+import CoreData
 
 enum PackageE: String {
     case Pallet = "PLT"
@@ -169,6 +169,55 @@ class Address: BaseModel {
         floor <- map["floor"]
         apartment <- map["apt"]
         number <- map["number"]
+    }
+    
+    func toCoreLocation(context:NSManagedObjectContext) -> CoreLocation {
+        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+            return CoreLocation()
+        }
+        
+        var result : [NSManagedObject] = []
+        //        let context = appDelegate.persistentContainer.viewContext
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "CoreLocation")
+        fetchRequest.predicate = NSPredicate(format: "id = \(id)")
+        do {
+            result = try context.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        guard let coreLocation = result.first else {
+            let locationDB = NSEntityDescription.entity(forEntityName: "CoreLocation", in: context)
+            let _coreLocation:CoreLocation = CoreLocation(entity: locationDB!,
+                                                          insertInto: context)
+            _coreLocation.address = address ?? ""
+            _coreLocation.apartment = apartment
+            _coreLocation.cttName = ctt_name
+            _coreLocation.cttPhone = ctt_phone ?? ""
+            _coreLocation.endTime = end_time
+            _coreLocation.startTime = start_time
+            _coreLocation.floor = floor
+            _coreLocation.id = Int16(id )
+            _coreLocation.lattd = lattd
+            _coreLocation.lngtd = lngtd
+            _coreLocation.locName = loc_name
+            _coreLocation.name =  name
+            _coreLocation.number = number
+            _coreLocation.phone = phone
+            _coreLocation.seq = Int16(seq)
+            _coreLocation.srvcTime = Int64(srvc_time ?? 0)
+            
+            print("Find DB At: ", FileManager.default.urls(for: .documentDirectory,
+                                                           in: .userDomainMask).last ?? "Not Found!")
+            do {
+                try context.save()
+            } catch {
+                //  let nserror = error as NSError
+                //  print("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+            return _coreLocation
+        }
+        return coreLocation as! CoreLocation
     }
 }
 

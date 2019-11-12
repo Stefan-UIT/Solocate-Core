@@ -364,7 +364,7 @@ class _CoreDataManager {
                                                                inManagedObjectContext: context) as? [CoreOrder])?.last
                         
                         if let _coreOrder = coreOrder{
-                            _coreOrder.setAttribiteFrom(order)
+                            _coreOrder.setAttribiteFrom(order, context: context)
                             
                         }else {
                             let orderDB = NSEntityDescription.entity(forEntityName:Entity.Order.rawValue,
@@ -372,7 +372,7 @@ class _CoreDataManager {
                             let coreOdr:CoreOrder = CoreOrder(entity: orderDB!,
                                                               insertInto: context)
                             // Set List Attribute
-                            coreOdr.setAttribiteFrom(order)
+                            coreOdr.setAttribiteFrom(order, context: context)
                             coreOdr.driver_id = Int16(route.driverId)
                             coreRoute.addToOrderList(coreOdr)
                         }
@@ -480,7 +480,7 @@ class _CoreDataManager {
                 let coreOrder:CoreOrder = CoreOrder(entity: orderDB!,
                                                     insertInto: context)
                 // Set List Attribute
-                coreOrder.setAttribiteFrom(order)
+                coreOrder.setAttribiteFrom(order, context: context)
                 coreOrder.driver_id = Int16(route.driverId)
                 
                 // Order File
@@ -638,7 +638,7 @@ class _CoreDataManager {
             let reaults = try? context.fetch(fetchRequest)
             reaults?.forEach { (coreOrder) in
                 if coreOrder.id == orderDetail.id {
-                    coreOrder.setAttribiteFrom(orderDetail)
+                    coreOrder.setAttribiteFrom(orderDetail, context: context)
                     if let _ = orderDetail.files{
                         
                         coreOrder.url?.sig = nil

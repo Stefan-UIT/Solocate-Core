@@ -7,11 +7,12 @@
 //
 
 import Foundation
+import CoreData
 
 //MARK: - CoreOrder
 extension  CoreOrder{
     
-    func setAttribiteFrom(_ order:Order) {
+    func setAttribiteFrom(_ order:Order, context: NSManagedObjectContext) {
         driver_id = Int16(order.driver_id)
         driver_name = order.driver_name
         id =  Int16(order.id)
@@ -36,28 +37,11 @@ extension  CoreOrder{
         orderFile?.addingObjects(from: order.files ?? [])
         orderNote?.addingObjects(from: order.notes)
         
-        // Pick up
-        pickupContactName = order.from?.name
-        pickupContactPhone = order.from?.phone
-        pickupLocationName = order.from?.loc_name
-        pickupFloor = order.from?.floor
-        pickupApt = order.from?.apartment
-        pickupNumber = order.from?.number
-        pickupStartTime = order.from?.start_time
-        pickupEndTime = order.from?.end_time
-        pickupService = Int32(order.from?.srvc_time ?? 0)
+        let _fromCoreLocation = order.from?.toCoreLocation(context: context)
+        from = _fromCoreLocation
         
-        // Delivery
-        deliveryContactName = order.to?.name
-        deliveryContactPhone = order.to?.phone
-        deliveryLocationName = order.to?.loc_name
-        deliveryFloor = order.to?.floor
-        deliveryApt = order.to?.apartment
-        deliveryNumber = order.to?.number
-        deliveryStartTime = order.to?.start_time
-        deliveryEndTime = order.to?.end_time
-        deliveryServiceTime = Int32(order.to?.srvc_time ?? 0)
-       
+        let _toCoreLocation = order.to?.toCoreLocation(context: context)
+        to = _toCoreLocation
     }
     
     func converToOrder() -> Order {
@@ -83,33 +67,8 @@ extension  CoreOrder{
         customer?.userName = custumer_name
         order.customer = customer
         
-        // Pick up
-        let from = Address()
-        from.address = from_address_full_addr
-        from.name = pickupContactName
-        from.loc_name = pickupContactName
-        from.phone = pickupContactPhone
-        from.apartment = pickupApt
-        from.floor = pickupFloor
-        from.number = pickupNumber
-        from.start_time = pickupStartTime
-        from.end_time = pickupEndTime
-        from.srvc_time = Int(pickupService)
-        order.from = from
-        
-        // Delivery
-        let to = Address()
-        to.address = toAddressFullAddress
-        to.name = deliveryContactName
-        to.loc_name = deliveryLocationName
-        to.phone = deliveryContactPhone
-        to.apartment = deliveryApt
-        to.floor = deliveryFloor
-        to.number = deliveryNumber
-        to.start_time = deliveryStartTime
-        to.end_time = deliveryEndTime
-        to.srvc_time = Int(deliveryServiceTime)
-        order.to = to
+        order.from = self.from?.convertTocLocationModel()
+        order.to = self.to?.convertTocLocationModel()
         
         let divisionModel = BasicModel()
         divisionModel.name = division
