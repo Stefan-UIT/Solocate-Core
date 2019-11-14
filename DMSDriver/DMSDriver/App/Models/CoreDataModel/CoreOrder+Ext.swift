@@ -51,7 +51,6 @@ extension  CoreOrder{
         order.id =  Int(id)
         order.seq = Int(seq)
         order.urgent_type_id = Int(urgent_type_id)
-        order.consigneeNameCoreData = consigneeName ?? ""
         order.remark = remark
         order.purchaseOrderID = Int(purchaseId)
         
@@ -60,11 +59,8 @@ extension  CoreOrder{
         status.name = statusName
         order.status = status
         
-//        let customer = UserModel.UserInfo(map: <#Map#>)
-        let customer = UserModel.UserInfo(username: custumer_name)
-//        let json = ["username" : custumer_name]
-//        let customer = UserModel.UserInfo(map: json)
-        customer?.userName = custumer_name
+        let customerJSON = ["username": (custumer_name ?? "")] as [String:Any]
+        let customer = UserModel.UserInfo(JSON: customerJSON)
         order.customer = customer
         
         order.from = self.from?.convertTocLocationModel()

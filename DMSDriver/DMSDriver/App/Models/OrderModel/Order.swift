@@ -571,16 +571,10 @@ class Order: BaseModel {
     var division:BasicModel?
     var zone:BasicModel?
     
-    var consigneeNameCoreData: String = ""
-    
     var consigneeName:String? {
         get {
-            if ReachabilityManager.isNetworkAvailable {
-                let name = (isPickUpType) ? from?.ctt_name : to?.ctt_name
-                return name
-            } else {
-                return consigneeNameCoreData
-            }
+            let name = (isPickUpType) ? from?.ctt_name : to?.ctt_name
+            return name
         }
     }
     
