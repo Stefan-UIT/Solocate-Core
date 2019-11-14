@@ -647,32 +647,64 @@ class _CoreDataManager {
             reaults?.forEach { (coreOrder) in
                 if coreOrder.id == orderDetail.id {
                     coreOrder.setAttribiteFrom(orderDetail, context: context)
-                    if let _ = orderDetail.files{
-                        
-                        coreOrder.url?.sig = nil
-                        coreOrder.url?.doc = nil
-                        
-                        let coreUrl = self?.createRecordForEntity(Entity.UrlFile.rawValue,
-                                                            inManagedObjectContext: context) as? CoreUrlFile
-                        if let sig = orderDetail.signature {
-                            self?.deleteAttachFileById(sig.id, context: context)
-                            let coreSig = self?.createRecordForEntity(Entity.AttachFile.rawValue,inManagedObjectContext: context) as? CoreAttachFile
-                            coreSig?.setAttributeFrom(sig)
-                            coreUrl?.sig = coreSig
+                    
+                    // Order File
+                    orderDetail.files?.forEach { (orderFile) in
+                        let predicate = NSPredicate(format: "id = \(orderFile.id)")
+                        let coreAttachFile = (self?.fetchRecordsForEntity(Entity.AttachFile.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreAttachFile])?.last
+                        if let _coreAttach = coreAttachFile {
+                            _coreAttach.setAttributeFrom(orderFile)
+                        } else {
+                            let fileDB = NSEntityDescription.entity(forEntityName: Entity.AttachFile.rawValue, in: context)
+                            let _coreFile:CoreAttachFile = CoreAttachFile(entity: fileDB!, insertInto: context)
+                            _coreFile.id = Int32(orderFile.id )
+                            _coreFile.setAttributeFrom(orderFile)
+                            coreOrder.addToOrderFile(_coreFile)
                         }
-                        
-                        if let docs = orderDetail.pictures {
-                            docs.forEach({ (doc) in
-                                var coreDoc :CoreAttachFile? = self?.queryCoreAttachfileBy(doc.id, context: context)
-                                if coreDoc == nil || doc.id == 0{
-                                    coreDoc  = (self?.createRecordForEntity(Entity.AttachFile.rawValue,
-                                                                      inManagedObjectContext: context) as! CoreAttachFile)
-                                }
-                                coreDoc?.setAttributeFrom(doc)
-                                coreUrl?.addToDoc(coreDoc!)
-                            })
+                    }
+                    
+                    // Order Note
+                    orderDetail.notes.forEach({ (note) in
+                        let predicate = NSPredicate(format: "id = \(note.id)")
+                        let coreNote = (self?.fetchRecordsForEntity(Entity.CoreNote.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreNote])?.last
+                        if let _coreNote = coreNote {
+                            _coreNote.setAttributeFrom(note)
+                        } else {
+                            let noteDB = NSEntityDescription.entity(forEntityName: Entity.CoreNote.rawValue, in: context)
+                            let _coreNote:CoreNote = CoreNote(entity: noteDB!, insertInto: context)
+                            _coreNote.id = Int16(note.id)
+                            _coreNote.setAttributeFrom(note)
+                            coreOrder.addToOrderNote(_coreNote)
                         }
-                        coreOrder.url = coreUrl
+                        note.files.forEach{ (file) in
+                            let predicate = NSPredicate(format: "id = \(file.id)")
+                            let coreAttachFile = (self?.fetchRecordsForEntity(Entity.AttachFile.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreAttachFile])?.last
+                            if let _coreAttach = coreAttachFile {
+                                _coreAttach.setAttributeFrom(file)
+                            } else {
+                                let fileDB = NSEntityDescription.entity(forEntityName: Entity.AttachFile.rawValue, in: context)
+                                let _coreFile:CoreAttachFile = CoreAttachFile(entity: fileDB!, insertInto: context)
+                                _coreFile.id = Int32(file.id )
+                                _coreFile.setAttributeFrom(file)
+                                coreNote?.addToNoteFile(_coreFile)
+                            }
+                        }
+                    })
+                    
+                    // SKUs
+                    orderDetail.details?.forEach{ (detail) in
+                        let predicate = NSPredicate(format: "id = \(detail.id)")
+                        let coreSKU = (self?.fetchRecordsForEntity(Entity.CoreSKU.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreSKU])?.last
+                        if let _coreSKU = coreSKU {
+                            _coreSKU.setAttributeFrom(detail)
+                        } else {
+                            let detailDB = NSEntityDescription.entity(forEntityName: Entity.CoreSKU.rawValue, in: context)
+                            let _coreSKU:CoreSKU = CoreSKU(entity: detailDB!, insertInto: context)
+                            _coreSKU.id = Int16(detail.id)
+                            // Set List Attribute
+                            _coreSKU.setAttributeFrom(detail)
+                            coreOrder.addToDetail(_coreSKU)
+                        }
                     }
                     
                     var recordReason: CoreReason? = nil
@@ -680,7 +712,7 @@ class _CoreDataManager {
                     if let listRecord = lists?.first {
                         recordReason = listRecord as? CoreReason
                     } else if let listRecord = self?.createRecordForEntity(Entity.Reason.rawValue,
-                                                                     inManagedObjectContext: context) {
+                                                                           inManagedObjectContext: context) {
                         recordReason = listRecord as? CoreReason
                     }
                     
@@ -799,6 +831,18 @@ class _CoreDataManager {
         })
         
         return results
+    }
+    
+    func getRoute(_ routeID: String) -> Route {
+        var result:Route!
+        let predicate = NSPredicate(format: "id = \(routeID)")
+        let context = getManagedObjectContext()
+        let coreRoute = (self.fetchRecordsForEntity(Entity.Route.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreRoute])?.last
+        guard let _coreRoute = coreRoute else {
+            return result
+        }
+        result = _coreRoute.convertToRoute()
+        return result
     }
     
     func getListSKU() -> [Order.Detail] {

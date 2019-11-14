@@ -16,6 +16,7 @@ extension CoreAttachFile{
         id = Int32(attachFile.id)
         name = attachFile.name
         type = attachFile.type
+        typeFile = attachFile.typeFile
         url = attachFile.url
         urlThumbnail = attachFile.url_thumbnail
     }
@@ -25,6 +26,7 @@ extension CoreAttachFile{
         file.id = Int(id)
         file.name = name
         file.type = type
+        file.typeFile = typeFile
         file.url = url
         file.url_thumbnail = urlThumbnail
         file.contentFile = contentFile

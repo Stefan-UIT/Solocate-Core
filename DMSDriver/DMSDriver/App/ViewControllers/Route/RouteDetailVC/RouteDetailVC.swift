@@ -442,7 +442,11 @@ extension RouteDetailVC{
                 }
             }
         } else {
-            ///
+            self.route = CoreDataManager.getRoute(routeID)
+            self.clvContent?.endRefreshControl()
+            self.clvContent?.isHidden = false
+            self.clvContent?.reloadData()
+            self.initUI()
         }
     }
 }

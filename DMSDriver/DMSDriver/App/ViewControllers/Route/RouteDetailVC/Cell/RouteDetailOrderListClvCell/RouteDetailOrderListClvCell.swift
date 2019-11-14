@@ -142,6 +142,7 @@ extension RouteDetailOrderListClvCell: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let _route = route else { return }
+        self.rootVC?.isOrderFiltering = false
         let vc:OrderDetailViewController = .loadSB(SB: .Order)
         vc.route = route
         let currentOrder = dataDisplay[indexPath.row]
