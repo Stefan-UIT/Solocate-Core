@@ -257,6 +257,7 @@ class Order: BaseModel {
         }
         
         struct Pivot:Mappable {
+            var id:Int?
             var sku_id:Int?
             var shipping_order_id:Int?
             var unit_id:Int?
@@ -273,6 +274,7 @@ class Order: BaseModel {
             }
             
             mutating func mapping(map: Map) {
+                id <- map["id"]
                 sku_id <- map["sku_id"]
                 shipping_order_id <- map["shipping_order_id"]
                 unit_id <- map["unit_id"]

@@ -431,7 +431,7 @@ class _CoreDataManager {
                         
                         // SKUs
                         order.details?.forEach{ (detail) in
-                            let predicate = NSPredicate(format: "id = \(detail.pivot?.sku_id ?? 0)")
+                            let predicate = NSPredicate(format: "id = \(detail.pivot?.id ?? 0)")
                             let coreSKU = (self?.fetchRecordsForEntity(Entity.CoreSKU.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreSKU])?.last
                             if let _coreSKU = coreSKU {
                                 _coreSKU.setAttributeFrom(detail)
@@ -439,7 +439,7 @@ class _CoreDataManager {
                                 let detailDB = NSEntityDescription.entity(forEntityName: Entity.CoreSKU.rawValue, in: context)
                                 let coreSKU:CoreSKU = CoreSKU(entity: detailDB!, insertInto: context)
                                 
-                                coreSKU.id = Int16(detail.id)
+                                coreSKU.id = Int16(detail.pivot?.id ?? 0)
                                 // Set List Attribute
                                 coreSKU.setAttributeFrom(detail)
                                 coreOrder?.addToDetail(coreSKU)
@@ -520,7 +520,7 @@ class _CoreDataManager {
                     
                     // Set Details Attribute
                     coreSKU.setAttributeFrom(detail)
-                    coreSKU.id = Int16(detail.pivot?.sku_id ?? 0)
+                    coreSKU.id = Int16(detail.pivot?.id ?? 0)
                     
                     // Set List Relationship
                     coreOrder.addToDetail(coreSKU)
@@ -693,14 +693,14 @@ class _CoreDataManager {
                     
                     // SKUs
                     orderDetail.details?.forEach{ (detail) in
-                        let predicate = NSPredicate(format: "id = \(detail.id)")
+                        let predicate = NSPredicate(format: "id = \(detail.pivot?.id ?? 0)")
                         let coreSKU = (self?.fetchRecordsForEntity(Entity.CoreSKU.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreSKU])?.last
                         if let _coreSKU = coreSKU {
                             _coreSKU.setAttributeFrom(detail)
                         } else {
                             let detailDB = NSEntityDescription.entity(forEntityName: Entity.CoreSKU.rawValue, in: context)
                             let _coreSKU:CoreSKU = CoreSKU(entity: detailDB!, insertInto: context)
-                            _coreSKU.id = Int16(detail.id)
+                            _coreSKU.id = Int16(detail.pivot?.id ?? 0)
                             // Set List Attribute
                             _coreSKU.setAttributeFrom(detail)
                             coreOrder.addToDetail(_coreSKU)

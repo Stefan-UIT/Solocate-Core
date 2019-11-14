@@ -10,7 +10,7 @@ import Foundation
 
 extension CoreSKU {
     func setAttributeFrom(_ orderDetail: Order.Detail)  {
-        id = Int16(orderDetail.id)
+        id = Int16(orderDetail.pivot?.id ?? 0)
         name = orderDetail.name
         barcode = orderDetail.pivot?.bcd
         batchId = orderDetail.pivot?.batch_id

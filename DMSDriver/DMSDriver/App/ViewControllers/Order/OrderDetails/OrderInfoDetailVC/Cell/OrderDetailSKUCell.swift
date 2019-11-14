@@ -47,8 +47,7 @@ class OrderDetailSKUCell: UITableViewCell {
     func configureCell(detail:Order.Detail, order:Order) {
         self.detail = detail
         nameLabel.text = detail.name
-        barcodeLabel.text = Slash(detail.barCode)  // barCode is String
-//        barcodeLabel.text = IntSlash(detail.barCode) barCode is Int
+        barcodeLabel.text = Slash(detail.pivot?.bcd)
         batchIdLabel.text = Slash(detail.pivot?.batch_id)
         quantityLabel.text = IntSlash(detail.pivot?.qty)
         
