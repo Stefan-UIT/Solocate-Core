@@ -243,7 +243,7 @@
         <attribute name="unitTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedBy" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <relationship name="detail" optional="YES" maxCount="1" deletionRule="Nullify" ordered="YES" destinationEntity="CoreOrder" inverseName="detail" inverseEntity="CoreOrder" syncable="YES"/>
+        <relationship name="detail" optional="YES" maxCount="1" deletionRule="Cascade" ordered="YES" destinationEntity="CoreOrder" inverseName="detail" inverseEntity="CoreOrder" syncable="YES"/>
     </entity>
     <entity name="CoreStatus" representedClassName="CoreStatus" syncable="YES" codeGenerationType="class">
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>

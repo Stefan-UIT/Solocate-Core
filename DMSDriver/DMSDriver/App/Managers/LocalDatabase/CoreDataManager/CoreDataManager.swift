@@ -431,7 +431,7 @@ class _CoreDataManager {
                         
                         // SKUs
                         order.details?.forEach{ (detail) in
-                            let predicate = NSPredicate(format: "id = \(detail.id)")
+                            let predicate = NSPredicate(format: "id = \(detail.pivot?.sku_id ?? 0)")
                             let coreSKU = (self?.fetchRecordsForEntity(Entity.CoreSKU.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreSKU])?.last
                             if let _coreSKU = coreSKU {
                                 _coreSKU.setAttributeFrom(detail)
@@ -520,7 +520,7 @@ class _CoreDataManager {
                     
                     // Set Details Attribute
                     coreSKU.setAttributeFrom(detail)
-                    coreSKU.id = Int16(detail.id)
+                    coreSKU.id = Int16(detail.pivot?.sku_id ?? 0)
                     
                     // Set List Relationship
                     coreOrder.addToDetail(coreSKU)
@@ -798,6 +798,15 @@ class _CoreDataManager {
             results.append(core.convertToRoute())
         })
         
+        return results
+    }
+    
+    func getListSKU() -> [Order.Detail] {
+        var results:[Order.Detail] = []
+        let items = fetchRecordsForEntity(Entity.CoreSKU.rawValue, inManagedObjectContext: self.persistentContainer.viewContext) as? [CoreSKU]
+        items?.forEach({ (core) in
+            results.append(core.convertToOrderDetailModel())
+        })
         return results
     }
     
