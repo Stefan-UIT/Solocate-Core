@@ -172,12 +172,7 @@ class Address: BaseModel {
     }
     
     func toCoreLocation(context:NSManagedObjectContext) -> CoreLocation {
-        guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-            return CoreLocation()
-        }
-        
         var result : [NSManagedObject] = []
-        //        let context = appDelegate.persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "CoreLocation")
         fetchRequest.predicate = NSPredicate(format: "id = \(id)")
         do {

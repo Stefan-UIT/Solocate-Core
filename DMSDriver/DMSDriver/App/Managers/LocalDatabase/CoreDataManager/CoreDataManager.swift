@@ -111,11 +111,17 @@ class _CoreDataManager {
         clearDatabase(entity: .AttachFile)
         clearDatabase(entity: .UrlFile)
         clearDatabase(entity: .CoreNote)
+        clearDatabase(entity: .CoreLocation)
+        clearDatabase(entity: .Order)
+        clearDatabase(entity: .CoreStatus)
+        clearDatabase(entity: .Request)
+        clearDatabase(entity: .CoreRouteStatus)
+        clearDatabase(entity: .CoreRentingOrderStatus)
+        clearDatabase(entity: .CoreSKU)
     }
     
     func clearDatabase(entity:Entity) {
-        let delegate = UIApplication.shared.delegate as! AppDelegate
-        let context = delegate.persistentContainer.viewContext
+        let context = self.persistentContainer.viewContext
         
         let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: entity.rawValue)
         let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
@@ -126,6 +132,8 @@ class _CoreDataManager {
         } catch {
             print ("There was an error")
         }
+        let route = CoreDataManager.getListRoutes()
+        print("Database Route: \(route.count)")
     }
 
     
