@@ -197,28 +197,17 @@ extension LocationDetailView:UITableViewDataSource{
     }
     
     func locationDetailSubTitle(details:[Order.Detail]) -> String {
-        var palletsQty = 0
         var cartonsQty = 0
-        for item in details {
-            if item.isPallet {
-                palletsQty += item.pivot?.qty ?? 0
-            } else {
-                cartonsQty += item.pivot?.qty ?? 0
-            }
-        }
         
         var result = ""
-        if palletsQty > 0 {
-            result += "pallets Total quantity".localized + ": " + "\(palletsQty)"
-        }
-        
-        if cartonsQty > 0 {
+        for item in details {
+            cartonsQty += item.pivot?.qty ?? 0
             if !result.isEmpty {
-                result += ", "
+                result += ""
+            } else {
+                result += "Total quantity".localized + ": " + "\(cartonsQty)"
             }
-            result += "Total quantity".localized + ": " + "\(cartonsQty)"
         }
-        
         return result
     }
 }
