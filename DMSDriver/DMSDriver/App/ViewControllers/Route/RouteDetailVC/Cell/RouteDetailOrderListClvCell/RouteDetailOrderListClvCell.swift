@@ -223,7 +223,9 @@ extension RouteDetailOrderListClvCell{
                 }
             }
         } else {
-            // CoreData
+            self.route = CoreDataManager.getRoute(routeID)
+            self.tbvContent?.endRefreshControl()
+            self.filterDataWithTapDisplay()
         }
     }
 }
