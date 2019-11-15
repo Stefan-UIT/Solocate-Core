@@ -71,6 +71,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     var dateStringFilter = Date().toString()
     var btnGo: UIButton?
     var isHaveMoreLegs:Bool = false
+    let dispatchGroup = DispatchGroup()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -1160,7 +1161,6 @@ fileprivate extension OrderDetailViewController{
 //        } else {
 //            handleShowingButtonStatusWithDeliveryType()
 //        }
-        handleRequestMoreLegs()
         handleShowingButtonStatus()
     }
     
@@ -1192,7 +1192,11 @@ fileprivate extension OrderDetailViewController{
 //MARK: API
 extension OrderDetailViewController{
     func fetchData(showLoading:Bool = false)  {
-        getOrderDetail()
+        dispatchGroup.enter()
+        handleRequestMoreLegs()
+        dispatchGroup.notify(queue: DispatchQueue.main) {
+            self.getOrderDetail()
+        }
     }
     
     private func getOrderDetail(isFetch:Bool = false) {
@@ -1352,10 +1356,13 @@ extension OrderDetailViewController{
                 switch result {
                 case .object(let object):
                     self?.isHaveMoreLegs = object.data
+                    self?.dispatchGroup.leave()
                 case .error(let error):
                     self?.showAlertView(error.getMessage())
                 }
             }
+        } else {
+            self.dispatchGroup.leave()
         }
     }
     
