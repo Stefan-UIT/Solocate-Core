@@ -67,17 +67,21 @@ extension CoreRoute{
         
         route.loadVolume = E(loadVolume)
         
+        var _orderList = [Order]()
         if  let orderList = orderList?.allObjects as? [CoreOrder] {
             orderList.forEach { (order) in
-                route.orderList.append(order.converToOrder())
+                _orderList.append(order.converToOrder())
             }
         }
+        route.orderList = _orderList.sorted { $0.id < $1.id }
         
+        var _locationList = [Address]()
         if let locationList = locationList?.allObjects as? [CoreLocation] {
             locationList.forEach { (location) in
-                route.locationList.append(location.convertTocLocationModel())
+                _locationList.append(location.convertTocLocationModel())
             }
         }
+        route.locationList = _locationList.sorted { $0.id < $1.id }
         
         return route
     }

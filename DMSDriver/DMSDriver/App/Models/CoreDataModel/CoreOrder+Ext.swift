@@ -84,7 +84,7 @@ extension  CoreOrder{
                 coreDetails.append(detail.convertToOrderDetailModel())
             }
         }
-        order.details = coreDetails
+        order.details = coreDetails.sorted { $0.id > $1.id }
         
         var coreFile = [AttachFileModel]()
         if let files = orderFile?.allObjects as? [CoreAttachFile] {
@@ -92,7 +92,7 @@ extension  CoreOrder{
                 coreFile.append(file.convertToAttachfileModel())
             }
         }
-        order.files = coreFile
+        order.files = coreFile.sorted { $0.id > $1.id }
         
         var coreNote = [Note]()
         if let note = orderNote?.allObjects as? [CoreNote] {
@@ -100,7 +100,7 @@ extension  CoreOrder{
                 coreNote.append(note.convertToNoteModel())
             }
         }
-        order.notes = coreNote
+        order.notes = coreNote.sorted { $0.id > $1.id }
         
         return order
     }
