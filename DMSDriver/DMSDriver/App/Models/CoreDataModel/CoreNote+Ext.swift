@@ -17,6 +17,7 @@ extension CoreNote {
         statusId = Int16(note.status?.id ?? 0)
         statusName = note.status?.name
         statusCode = note.status?.code
+        createdAt = note.createdAt
         noteFile?.addingObjects(from: note.files)
     }
     
@@ -24,7 +25,7 @@ extension CoreNote {
         let note = Note()
         note.id = Int(id)
         note.content = content ?? ""
-        
+        note.createdAt = createdAt ?? ""
         let createdByJSON = ["id":Int(userId), "username": (userName ?? "")] as [String:Any]
         let _createdBy = UserModel.UserInfo(JSON: createdByJSON)
         note.createdBy = _createdBy

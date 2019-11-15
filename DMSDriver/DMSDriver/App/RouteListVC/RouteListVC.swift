@@ -295,6 +295,7 @@ import Crashlytics
             }
         } else {
             self.routes = handleFilterRoute(with: filterMode, routes: getRoutes())
+            self.tableView.endRefreshControl()
             self.lblNoResult?.isHidden = (self.routes.count > 0)
             tableView.reloadData()
         }
