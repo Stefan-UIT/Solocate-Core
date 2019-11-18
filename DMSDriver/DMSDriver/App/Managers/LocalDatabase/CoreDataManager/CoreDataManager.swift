@@ -29,6 +29,10 @@ enum Entity:String {
     case CoreNote = "CoreNote"
     case CoreUserInfo = "CoreUserInfo"
     case CoreRentingOrder = "CoreRentingOrder"
+    case CoreTanker = "CoreTanker"
+    case CoreTankerType = "CoreTankerType"
+    case CoreTruck = "CoreTruck"
+    case CoreTruckType = "CoreTruckType"
 
 }
 
@@ -121,6 +125,10 @@ class _CoreDataManager {
         clearDatabase(entity: .CoreRentingOrderStatus)
         clearDatabase(entity: .CoreSKU)
         clearDatabase(entity: .CoreUserInfo)
+        clearDatabase(entity: .CoreTanker)
+        clearDatabase(entity: .CoreTankerType)
+        clearDatabase(entity: .CoreTruck)
+        clearDatabase(entity: .CoreTruckType)
     }
     
     func clearDatabase(entity:Entity) {

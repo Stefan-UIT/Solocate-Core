@@ -641,6 +641,14 @@
 		7622BCE923823BB5008792C8 /* CoreUserInfo+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCE723823BB5008792C8 /* CoreUserInfo+Ext.swift */; };
 		7622BCEC2382412C008792C8 /* CoreRentingOrder+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCEB2382412C008792C8 /* CoreRentingOrder+Ext.swift */; };
 		7622BCED2382412C008792C8 /* CoreRentingOrder+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCEB2382412C008792C8 /* CoreRentingOrder+Ext.swift */; };
+		7622BCEF23828531008792C8 /* CoreTanker+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCEE23828531008792C8 /* CoreTanker+Ext.swift */; };
+		7622BCF023828531008792C8 /* CoreTanker+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCEE23828531008792C8 /* CoreTanker+Ext.swift */; };
+		7622BCF223828543008792C8 /* CoreTankerType+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCF123828543008792C8 /* CoreTankerType+Ext.swift */; };
+		7622BCF323828543008792C8 /* CoreTankerType+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCF123828543008792C8 /* CoreTankerType+Ext.swift */; };
+		7622BCF523828552008792C8 /* CoreTruck+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCF423828552008792C8 /* CoreTruck+Ext.swift */; };
+		7622BCF623828552008792C8 /* CoreTruck+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCF423828552008792C8 /* CoreTruck+Ext.swift */; };
+		7622BCF82382855F008792C8 /* CoreTruckType+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCF72382855F008792C8 /* CoreTruckType+Ext.swift */; };
+		7622BCF92382855F008792C8 /* CoreTruckType+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCF72382855F008792C8 /* CoreTruckType+Ext.swift */; };
 		762CC61223794F6200D25CCD /* CoreNote+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762CC61123794F6200D25CCD /* CoreNote+Ext.swift */; };
 		762CC61323794F6200D25CCD /* CoreNote+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762CC61123794F6200D25CCD /* CoreNote+Ext.swift */; };
 		766B7457234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766B7456234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift */; };
@@ -1180,6 +1188,10 @@
 		760C46FC233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOrderDetailSKUTableViewCell.swift; sourceTree = "<group>"; };
 		7622BCE723823BB5008792C8 /* CoreUserInfo+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreUserInfo+Ext.swift"; sourceTree = "<group>"; };
 		7622BCEB2382412C008792C8 /* CoreRentingOrder+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreRentingOrder+Ext.swift"; sourceTree = "<group>"; };
+		7622BCEE23828531008792C8 /* CoreTanker+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreTanker+Ext.swift"; sourceTree = "<group>"; };
+		7622BCF123828543008792C8 /* CoreTankerType+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreTankerType+Ext.swift"; sourceTree = "<group>"; };
+		7622BCF423828552008792C8 /* CoreTruck+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreTruck+Ext.swift"; sourceTree = "<group>"; };
+		7622BCF72382855F008792C8 /* CoreTruckType+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreTruckType+Ext.swift"; sourceTree = "<group>"; };
 		762CC61123794F6200D25CCD /* CoreNote+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreNote+Ext.swift"; sourceTree = "<group>"; };
 		766B7456234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreRentingOrderStatus+Ext.swift"; sourceTree = "<group>"; };
 		76A0BF7723716A1200942C6D /* BoolModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolModel.swift; sourceTree = "<group>"; };
@@ -3245,6 +3257,10 @@
 				762CC61123794F6200D25CCD /* CoreNote+Ext.swift */,
 				7622BCE723823BB5008792C8 /* CoreUserInfo+Ext.swift */,
 				7622BCEB2382412C008792C8 /* CoreRentingOrder+Ext.swift */,
+				7622BCEE23828531008792C8 /* CoreTanker+Ext.swift */,
+				7622BCF123828543008792C8 /* CoreTankerType+Ext.swift */,
+				7622BCF423828552008792C8 /* CoreTruck+Ext.swift */,
+				7622BCF72382855F008792C8 /* CoreTruckType+Ext.swift */,
 			);
 			path = CoreDataModel;
 			sourceTree = "<group>";
@@ -3807,6 +3823,7 @@
 				2A443A3A22648C5A00CB6508 /* HistoryNotifyDetailCell.swift in Sources */,
 				2A443A3B22648C5A00CB6508 /* PickerTypeListVC.swift in Sources */,
 				2A443A3C22648C5A00CB6508 /* OrderItem.swift in Sources */,
+				7622BCF82382855F008792C8 /* CoreTruckType+Ext.swift in Sources */,
 				2A443A3D22648C5A00CB6508 /* HistoryNotifyDetailVC.swift in Sources */,
 				2A443A3E22648C5A00CB6508 /* UploadFileResponse.swift in Sources */,
 				2A443A3F22648C5A00CB6508 /* CoreStatus+Ext.swift in Sources */,
@@ -3842,6 +3859,7 @@
 				2A443A5822648C5A00CB6508 /* CoreUrlFile+Ext.swift in Sources */,
 				2A443A5922648C5A00CB6508 /* TextViewInput.swift in Sources */,
 				2A443A5A22648C5A00CB6508 /* TaskListVC.swift in Sources */,
+				7622BCEF23828531008792C8 /* CoreTanker+Ext.swift in Sources */,
 				2A443A5B22648C5A00CB6508 /* BuildConfiguration.swift in Sources */,
 				2A443A5C22648C5A00CB6508 /* GMSMapview+Ext.swift in Sources */,
 				76BFFD6F2339F4660021E01A /* RentingOrderListTableViewCell.swift in Sources */,
@@ -4036,6 +4054,7 @@
 				2A443AF822648C5A00CB6508 /* RouteDetailOrderListClvCell.swift in Sources */,
 				2A443AF922648C5A00CB6508 /* Locale+Extensions.swift in Sources */,
 				2A443AFB22648C5A00CB6508 /* SocketService.swift in Sources */,
+				7622BCF523828552008792C8 /* CoreTruck+Ext.swift in Sources */,
 				2A443AFC22648C5A00CB6508 /* WarehouseModel.swift in Sources */,
 				2A443AFD22648C5A00CB6508 /* NavigationService.swift in Sources */,
 				2A443AFE22648C5A00CB6508 /* Reason.swift in Sources */,
@@ -4047,6 +4066,7 @@
 				2A443B0322648C5A00CB6508 /* FilterDataListStatusCell.swift in Sources */,
 				2A443B0422648C5A00CB6508 /* ReceiveNotificationModel.swift in Sources */,
 				2E920A7322EFFBC7000AD8EF /* Truck.swift in Sources */,
+				7622BCF223828543008792C8 /* CoreTankerType+Ext.swift in Sources */,
 				2A443B0522648C5A00CB6508 /* DriverModel.swift in Sources */,
 				2E1BE35622F191C4005F9BB5 /* ReturnedItemQuantityCell.swift in Sources */,
 				2A443B0622648C5A00CB6508 /* ScrollMenuCell.swift in Sources */,
@@ -4114,6 +4134,7 @@
 				3BEAB8692142609C0039CFBB /* CoreUrlFile+Ext.swift in Sources */,
 				3B0035F7216C614D0032519D /* TextViewInput.swift in Sources */,
 				3B014948217D75D00097FEB6 /* TaskListVC.swift in Sources */,
+				7622BCF623828552008792C8 /* CoreTruck+Ext.swift in Sources */,
 				3B66B81B210B113D000BDFEF /* BuildConfiguration.swift in Sources */,
 				2ADE1D062253068100BE4092 /* GMSMapview+Ext.swift in Sources */,
 				76BFFD702339F4660021E01A /* RentingOrderListTableViewCell.swift in Sources */,
@@ -4170,6 +4191,7 @@
 				3B66B83C210B113D000BDFEF /* GradientSlider.swift in Sources */,
 				3B66B824210B113D000BDFEF /* String+Extensions.swift in Sources */,
 				3B66B814210B113D000BDFEF /* SignatureView.swift in Sources */,
+				7622BCF92382855F008792C8 /* CoreTruckType+Ext.swift in Sources */,
 				3B355ED921ABE078004A2879 /* API+Route.swift in Sources */,
 				19007579228522CD00A08E3B /* Route+Ext.swift in Sources */,
 				3B66B806210B113D000BDFEF /* UIColor.swift in Sources */,
@@ -4243,6 +4265,7 @@
 				7622BCED2382412C008792C8 /* CoreRentingOrder+Ext.swift in Sources */,
 				3B454C4E222CCD260064F455 /* FilterByDatePopupView.swift in Sources */,
 				3B66B83B210B113D000BDFEF /* SegmentedControl.swift in Sources */,
+				7622BCF023828531008792C8 /* CoreTanker+Ext.swift in Sources */,
 				3B4BBF7D2214085800EA7485 /* RouteListHeaderTableView.swift in Sources */,
 				2E96D05722C4C81300DA29C5 /* LanguageModel.swift in Sources */,
 				3BF838D22189589A0056C4F1 /* BaseScrollMenuView.swift in Sources */,
@@ -4251,6 +4274,7 @@
 				3B66B92D210B1149000BDFEF /* AlertMessageView.swift in Sources */,
 				3B66B8F9210B1149000BDFEF /* ScanBarCodeViewController.swift in Sources */,
 				2AB4A98A224B78C70019F196 /* RouteDetailLocationListClvCell.swift in Sources */,
+				7622BCF323828543008792C8 /* CoreTankerType+Ext.swift in Sources */,
 				3B66B834210B113D000BDFEF /* PhotoLibraryPickerViewController.swift in Sources */,
 				3B66B8EF210B1149000BDFEF /* EmptyModel.swift in Sources */,
 				3B66B836210B113D000BDFEF /* DatePickerViewController.swift in Sources */,

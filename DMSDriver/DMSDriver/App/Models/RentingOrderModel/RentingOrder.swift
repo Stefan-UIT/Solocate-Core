@@ -8,6 +8,7 @@
 
 import UIKit
 import ObjectMapper
+import CoreData
 
 enum RentingOrderStatusCode: String {
     case NewStatus = "OP"
@@ -114,6 +115,12 @@ class RentingOrder: BaseModel {
             var maxVol:String?
             var tachograph:Int?
             var companyId:Int?
+            var manufacturer:String?
+            var createdAt:String?
+            var createdBy:Int?
+            var updatedAt:String?
+            var updatedBy:Int?
+            var vol:String?
             
             init?(map: Map) {
                 //
@@ -127,19 +134,103 @@ class RentingOrder: BaseModel {
                 numberOfCompartments <- map["num_of_compartments"]
                 maxVol <- map["max_vol"]
                 tachograph <- map["tachograph"]
-                companyId <- map ["company_id"]
+                vol <- map["vol"]
+                manufacturer <- map["manufacturer"]
+                companyId <- map["company_id"]
+                createdAt <- map["created_at"]
+                createdBy <- map["created_by"]
+                updatedAt <- map["updated_at"]
+                updatedBy <- map["updated_by"]
             }
+            
+            func toCoreTruckType(context:NSManagedObjectContext) -> CoreTruckType {
+                var result : [NSManagedObject] = []
+                let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "CoreTruckType")
+                fetchRequest.predicate = NSPredicate(format: "id = \(id ?? 0)")
+                do {
+                    result = try context.fetch(fetchRequest)
+                } catch let error as NSError {
+                    print("Could not fetch. \(error), \(error.userInfo)")
+                }
+                
+                guard let coreTruckType = result.first else {
+                    let userInfoDB = NSEntityDescription.entity(forEntityName: "CoreTruckType", in: context)
+                    let _coreTruckType:CoreTruckType = CoreTruckType(entity: userInfoDB!,
+                                                         insertInto: context)
+                    _coreTruckType.id = Int16(id ?? 0)
+                    _coreTruckType.name = name
+                    _coreTruckType.code = cd
+                    _coreTruckType.fuelType = fuelType
+                    _coreTruckType.manufacturer = manufacturer
+                    _coreTruckType.vol = vol
+                    _coreTruckType.createdAt = createdAt
+                    _coreTruckType.createdBy = Int16(createdBy ?? 0)
+                    _coreTruckType.updatedAt = updatedAt
+                    _coreTruckType.updatedBy = Int16(updatedBy ?? 0)
+                    
+                    print("Find DB At: ", FileManager.default.urls(for: .documentDirectory,
+                                                                   in: .userDomainMask).last ?? "Not Found!")
+                    do {
+                        try context.save()
+                    } catch {
+                        //  let nserror = error as NSError
+                        //  print("Unresolved error \(nserror), \(nserror.userInfo)")
+                    }
+                    return _coreTruckType
+                }
+                return coreTruckType as! CoreTruckType
+            }
+            
+//            func toCoreTankerType(context:NSManagedObjectContext) -> CoreTankerType {
+//                var result : [NSManagedObject] = []
+//                let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "CoreTankerType")
+//                fetchRequest.predicate = NSPredicate(format: "id = \(id ?? 0)")
+//                do {
+//                    result = try context.fetch(fetchRequest)
+//                } catch let error as NSError {
+//                    print("Could not fetch. \(error), \(error.userInfo)")
+//                }
+//
+//                guard let coreTankerType = result.first else {
+//                    let userInfoDB = NSEntityDescription.entity(forEntityName: "CoreTankerType", in: context)
+//                    let _coreTankerType:CoreTankerType = CoreTankerType(entity: userInfoDB!,
+//                                                                     insertInto: context)
+//                    _coreTankerType.id = Int16(id ?? 0)
+//                    _coreTankerType.name = name
+//                    _coreTankerType.maxVol = maxVol
+//                    _coreTankerType.numOfCompartments = Int32(numberOfCompartments ?? 0)
+//                    _coreTankerType.companyId = Int16(companyId ?? 0)
+//                    _coreTankerType.tachograph = Int32(tachograph ?? 0)
+//                    _coreTankerType.createdAt = createdAt
+//                    _coreTankerType.createdBy = Int16(createdBy ?? 0)
+//                    _coreTankerType.updatedAt = updatedAt
+//                    _coreTankerType.updatedBy = Int16(updatedBy ?? 0)
+//
+//                    print("Find DB At: ", FileManager.default.urls(for: .documentDirectory,
+//                                                                   in: .userDomainMask).last ?? "Not Found!")
+//                    do {
+//                        try context.save()
+//                    } catch {
+//                        //  let nserror = error as NSError
+//                        //  print("Unresolved error \(nserror), \(nserror.userInfo)")
+//                    }
+//                    return _coreTankerType
+//                }
+//                return coreTankerType as! CoreTankerType
+//            }
         }
         
         struct RentingTruck:Mappable {
             var id:Int?
-            var typeId:String?
-            var driverId:String?
+            var typeId:Int?
+            var driverId:Int?
             var maxWeight:Int?
             var selfWeight:Int?
             var maxVol:Int?
             var plateNum:String?
             var companyId:Int?
+            var createdAt:String?
+            var updatedAt:String?
             
             init?(map: Map) {
                 //
@@ -157,6 +248,84 @@ class RentingOrder: BaseModel {
                     plateNum <- map["plate_number"]
                 }
                 companyId <- map["company_id"]
+                createdAt <- map["created_at"]
+                updatedAt <- map["updated_at"]
+            }
+            
+//            func toCoreTanker(context:NSManagedObjectContext) -> CoreTanker {
+//                var result : [NSManagedObject] = []
+//                let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "CoreTanker")
+//                fetchRequest.predicate = NSPredicate(format: "id = \(id ?? 0)")
+//                do {
+//                    result = try context.fetch(fetchRequest)
+//                } catch let error as NSError {
+//                    print("Could not fetch. \(error), \(error.userInfo)")
+//                }
+//
+//                guard let coreTanker = result.first else {
+//                    let userInfoDB = NSEntityDescription.entity(forEntityName: "CoreTanker", in: context)
+//                    let _coreTanker:CoreTanker = CoreTanker(entity: userInfoDB!,
+//                                                         insertInto: context)
+//                    _coreTanker.id = Int16(id ?? 0)
+//                    _coreTanker.typeId = Int16(typeId ?? 0)
+//                    _coreTanker.driverId = Int16(driverId ?? 0)
+//                    _coreTanker.maxWeight = Int32(maxWeight ?? 0)
+//                    _coreTanker.selfWeight = Int32(selfWeight ?? 0)
+//                    _coreTanker.maxVol = Int32(maxVol ?? 0)
+//                    _coreTanker.plateNum = plateNum
+//                    _coreTanker.companyId = Int16(companyId ?? 0)
+//                    _coreTanker.createdAt = createdAt
+//                    _coreTanker.updatedAt = updatedAt
+//
+//                    print("Find DB At: ", FileManager.default.urls(for: .documentDirectory,
+//                                                                   in: .userDomainMask).last ?? "Not Found!")
+//                    do {
+//                        try context.save()
+//                    } catch {
+//                        //  let nserror = error as NSError
+//                        //  print("Unresolved error \(nserror), \(nserror.userInfo)")
+//                    }
+//                    return _coreTanker
+//                }
+//                return coreTanker as! CoreTanker
+//            }
+            
+            func toCoreTruck(context:NSManagedObjectContext) -> CoreTruck {
+                var result : [NSManagedObject] = []
+                let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "CoreTruck")
+                fetchRequest.predicate = NSPredicate(format: "id = \(id ?? 0)")
+                do {
+                    result = try context.fetch(fetchRequest)
+                } catch let error as NSError {
+                    print("Could not fetch. \(error), \(error.userInfo)")
+                }
+                
+                guard let coreTruck = result.first else {
+                    let userInfoDB = NSEntityDescription.entity(forEntityName: "CoreTruck", in: context)
+                    let _coreTruck:CoreTruck = CoreTruck(entity: userInfoDB!,
+                                                                  insertInto: context)
+                    _coreTruck.id = Int16(id ?? 0)
+                    _coreTruck.typeId = Int16(typeId ?? 0)
+                    _coreTruck.driverId = Int16(driverId ?? 0)
+                    _coreTruck.maxWeight = Int32(maxWeight ?? 0)
+                    _coreTruck.selfWeight = Int32(selfWeight ?? 0)
+                    _coreTruck.maxVol = Int32(maxVol ?? 0)
+                    _coreTruck.plateNum = plateNum
+                    _coreTruck.companyId = Int16(companyId ?? 0)
+                    _coreTruck.createdAt = createdAt
+                    _coreTruck.updatedAt = updatedAt
+                    
+                    print("Find DB At: ", FileManager.default.urls(for: .documentDirectory,
+                                                                   in: .userDomainMask).last ?? "Not Found!")
+                    do {
+                        try context.save()
+                    } catch {
+                        //  let nserror = error as NSError
+                        //  print("Unresolved error \(nserror), \(nserror.userInfo)")
+                    }
+                    return _coreTruck
+                }
+                return coreTruck as! CoreTruck
             }
         }
         
