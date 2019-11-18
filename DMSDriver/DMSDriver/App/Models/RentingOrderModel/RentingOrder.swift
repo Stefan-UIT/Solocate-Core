@@ -299,5 +299,19 @@ class RentingOrder: BaseModel {
 //        renting_order_creator <- map["renting_order_creator"]
         rentingOrderDetails <- map["renting_order_details"]
     }
+    
+    var startByDate: Date {
+        get {
+            guard let _startDate = startDate?.date else { return Date() }
+            return _startDate
+        }
+    }
+    
+    var endByDate: Date {
+        get {
+            guard let _endDate = endDate?.date else { return Date() }
+            return _endDate
+        }
+    }
 }
 

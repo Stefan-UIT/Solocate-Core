@@ -28,6 +28,7 @@ enum Entity:String {
     case CoreLocation = "CoreLocation"
     case CoreNote = "CoreNote"
     case CoreUserInfo = "CoreUserInfo"
+    case CoreRentingOrder = "CoreRentingOrder"
 
 }
 
@@ -202,6 +203,25 @@ class _CoreDataManager {
         return listCoreRequest?.count ?? 0
     }
     
+    //MARK: - RENTING ORDER
+    func saveRentingOrder(_ rentingOrder:[RentingOrder], callback:((Bool,[RentingOrder]) -> Void)? = nil) {
+        self.persistentContainer.performBackgroundTask { [weak self] (context) in
+            rentingOrder.forEach({ (order) in
+                let coreRentingOrder = self?.queryCoreRentingOrderById(order.id, context)
+                if coreRentingOrder != nil {
+                    rentingOrder.forEach({ (order) in
+                        self?.updateRentingOrder(order)
+                    })
+                } else {
+                    let _ = self?.insertRentingOrder(order, context)
+                }
+            })
+            DispatchQueue.main.async {
+                callback?(true,rentingOrder)
+            }
+        }
+    }
+    
     //MARK: - ROUTE
     func saveRoutes(_ routes:[Route], callback:((Bool,[Route]) -> Void)? = nil) {
         self.persistentContainer.performBackgroundTask {[weak self] (context) in
@@ -336,6 +356,36 @@ class _CoreDataManager {
                 })
             }
         })
+    }
+    
+    //MARK : - RENTING ORDER
+    func updateRentingOrder(_ rentingOrder:RentingOrder,_ callback:((Bool,RentingOrder) -> Void)? = nil) {
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
+            let predicate = NSPredicate(format: "id = \(rentingOrder.id)")
+            let results = self?.fetchRecordsForEntity(Entity.CoreRentingOrder.rawValue,
+                                                      predicate:predicate,
+                                                      inManagedObjectContext: context) as? [CoreRentingOrder]
+            results?.forEach { (coreRentingOrder) in
+                if coreRentingOrder.id == rentingOrder.id {
+                    
+                    coreRentingOrder.setAttribiteFrom(rentingOrder, context: context)
+                }
+            }
+            self?.saveContext(context)
+        }
+        callback?(true,rentingOrder)
+    }
+    
+    func insertRentingOrder(_ rentingOrder:RentingOrder,_ context:NSManagedObjectContext) -> CoreRentingOrder  {
+        let rentingOrderDB = NSEntityDescription.entity(forEntityName:Entity.CoreRentingOrder.rawValue ,                                                                in: context)
+        let userInfoDB = NSEntityDescription.entity(forEntityName: Entity.CoreUserInfo.rawValue,
+                                                    in: context)!
+        let coreRentingOrder:CoreRentingOrder = CoreRentingOrder(entity: rentingOrderDB!,
+                                                                 insertInto: context)
+        
+        coreRentingOrder.setAttribiteFrom(rentingOrder, context: context)
+        saveContext(context)
+        return coreRentingOrder
     }
     
     
@@ -577,6 +627,23 @@ class _CoreDataManager {
         }
     }
     
+    func queryRentingOrderBy(_ id:Int, _ callback:@escaping (Bool,RentingOrder?)-> Void) {
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
+            let order = self?.queryCoreRentingOrderById(id, context)
+            let rentingOrder = order?.convertToRentingOrder()
+            
+            DispatchQueue.main.async {
+                callback(true,rentingOrder)
+            }
+        }
+    }
+    
+    func queryCoreRentingOrderById(_ id: Int,_ context:NSManagedObjectContext) -> CoreRentingOrder? {
+        let fetchRequest:NSFetchRequest = CoreRentingOrder.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id = \(id)")
+        let orders = try? context.fetch(fetchRequest)
+        return orders?.first
+    }
     
     func queryRouteBy(_ id: Int, _ callback:@escaping (Bool,Route?)-> Void) {
         self.persistentContainer.performBackgroundTask {[weak self] (context) in
@@ -832,7 +899,17 @@ class _CoreDataManager {
             results.append(core.convertToRoute())
         })
         
-        return results
+        return results.sorted(by: {$0.id < $1.id})
+    }
+    
+    func getListRentingOrder() -> [RentingOrder] {
+        var results:[RentingOrder] = []
+        let items = fetchRecordsForEntity(Entity.CoreRentingOrder.rawValue, inManagedObjectContext: self.persistentContainer.viewContext) as? [CoreRentingOrder]
+        items?.forEach({ (core) in
+            results.append(core.convertToRentingOrder())
+        })
+        
+        return results.sorted(by: {$0.id < $1.id})
     }
     
     func getRoute(_ routeID: String) -> Route {

@@ -67,10 +67,6 @@ class UserModel: BaseModel {
         }
         
         func toCoreUserInfo(context:NSManagedObjectContext) -> CoreUserInfo {
-            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
-                return CoreUserInfo()
-            }
-            
             var result : [NSManagedObject] = []
             //        let context = appDelegate.persistentContainer.viewContext
             let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "CoreUserInfo")
@@ -89,6 +85,7 @@ class UserModel: BaseModel {
                 _coreUserInfo.email = email
                 _coreUserInfo.firstName = firstName
                 _coreUserInfo.lastName = lastName
+                _coreUserInfo.userName = userName
                 _coreUserInfo.phone = phone
                 _coreUserInfo.companyId = Int16(companyID ?? -1)
                 

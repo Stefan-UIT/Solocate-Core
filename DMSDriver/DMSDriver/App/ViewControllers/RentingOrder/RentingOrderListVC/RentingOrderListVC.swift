@@ -165,56 +165,87 @@ extension RentingOrderListVC:DMSNavigationServiceDelegate {
 // MARK: -API
 fileprivate extension RentingOrderListVC {
     func getRoutes(filterMode:FilterDataModel, isShowLoading:Bool = true, isFetch:Bool = false) {
-        guard !isFetchInProgress else {
-            return
-        }
-        isFetchInProgress = true
-        
-        if isFetch {
-            self.showLoadingIndicator()
-        }
-        
-        if isInfiniteScrolling {
-            self.isInfiniteScrolling = false
-        } else {
-            self.page = 1
-            self.rentingOrders = [RentingOrder]()
-            tbvContent?.reloadData()
-        }
-        
-        
-        SERVICES().API.getRentingOrders(filterMode: filterMode, page: page) {[weak self] (result) in
-            self?.dismissLoadingIndicator()
-            self?.tbvContent?.endRefreshControl()
-            guard let strongSelf = self else {
+        if ReachabilityManager.isNetworkAvailable {
+            guard !isFetchInProgress else {
                 return
             }
-            switch result{
-            case .object(let obj):
-                if let data = obj.data?.data {
-//                    strongSelf.rentingOrders = data
-                    // DMSCurrentRoutes.routes = data
-//                    strongSelf.lblNoResult?.isHidden = (strongSelf.routes.count > 0)
-                    self?.totalPages = obj.data?.meta?.total_pages ?? 1
-                    self?.currentPage = obj.data?.meta?.current_page ?? 1
-                    
-                    if self?.currentPage != self?.totalPages {
-                        self?.page = (self?.currentPage ?? 1) + 1
-                    }
-                    self?.rentingOrders.append(data)
-                    strongSelf.tbvContent?.reloadData()
-                    self?.isFetchInProgress = false
-                    
-                } else {
-                    // TODO: Do something.
-                }
-                
-            case .error(let error):
-                strongSelf.showAlertView(error.getMessage())
-                self?.isFetchInProgress = false
-                break
+            isFetchInProgress = true
+            
+            if isFetch {
+                self.showLoadingIndicator()
             }
+            
+            if isInfiniteScrolling {
+                self.isInfiniteScrolling = false
+            } else {
+                self.page = 1
+                self.rentingOrders = [RentingOrder]()
+                tbvContent?.reloadData()
+            }
+            
+            
+            SERVICES().API.getRentingOrders(filterMode: filterMode, page: page) {[weak self] (result) in
+                self?.dismissLoadingIndicator()
+                self?.tbvContent?.endRefreshControl()
+                guard let strongSelf = self else {
+                    return
+                }
+                switch result{
+                case .object(let obj):
+                    if let data = obj.data?.data {
+                        
+                        //                    strongSelf.rentingOrders = data
+                        // DMSCurrentRoutes.routes = data
+                        //                    strongSelf.lblNoResult?.isHidden = (strongSelf.routes.count > 0)
+                        self?.totalPages = obj.data?.meta?.total_pages ?? 1
+                        self?.currentPage = obj.data?.meta?.current_page ?? 1
+                        
+                        if self?.currentPage != self?.totalPages {
+                            self?.page = (self?.currentPage ?? 1) + 1
+                        }
+                        self?.rentingOrders.append(data)
+                        CoreDataManager.saveRentingOrder(data ?? [])
+                        strongSelf.tbvContent?.reloadData()
+                        self?.isFetchInProgress = false
+                        
+                    }
+                case .error(let error):
+                    strongSelf.showAlertView(error.getMessage())
+                    self?.isFetchInProgress = false
+                    break
+                }
+            }
+        } else {
+            // CoreData
+            self.rentingOrders = handleFilterRentingorder(with: filterMode, rentingOrders: getRentingOrders())
+//            self.lblNoResult?.isHidden = (self.routes.count > 0)
+            self.tbvContent?.endRefreshControl()
+            tbvContent?.reloadData()
         }
     }
     
+}
+
+//MARK: - CoreData
+fileprivate extension RentingOrderListVC {
+    func getRentingOrders() -> [RentingOrder] {
+        let results = CoreDataManager.getListRentingOrder()
+        return results
+    }
+    
+}
+
+//MARK: - Filter Routes
+fileprivate extension RentingOrderListVC {
+    func handleFilterRentingorder(with filterDataModel: FilterDataModel, rentingOrders: [RentingOrder]) -> [RentingOrder] {
+        var filterRentingOrders = [RentingOrder]()
+        let startDate = timeData?.startDate
+        let endDate = timeData?.endDate
+        let statusName = filterDataModel.status?.name
+        // Filter by Status
+        filterRentingOrders = (statusName == nil || statusName == "all-statuses".localized) ? rentingOrders : rentingOrders.filter({$0.rentingOrderStatus?.name == statusName})
+        // Filter by DateTime
+        filterRentingOrders = (startDate == nil && endDate == nil) ? filterRentingOrders : rentingOrders.filter({$0.startByDate >= startDate! && $0.endByDate <= endDate!})
+        return filterRentingOrders
+    }
 }

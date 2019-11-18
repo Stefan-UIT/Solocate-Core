@@ -177,6 +177,20 @@
         <attribute name="reasonDescription" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="reasonCancel" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreOrder" inverseName="reason" inverseEntity="CoreOrder" syncable="YES"/>
     </entity>
+    <entity name="CoreRentingOrder" representedClassName="CoreRentingOrder" syncable="YES" codeGenerationType="class">
+        <attribute name="companyId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="createdAt" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="cusId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="endTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="refCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="startTime" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="statusCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="statusName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="updatedAt" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="creator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreUserInfo" inverseName="rentingCreator" inverseEntity="CoreUserInfo" syncable="YES"/>
+        <relationship name="customer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreUserInfo" inverseName="rentingCustomer" inverseEntity="CoreUserInfo" syncable="YES"/>
+    </entity>
     <entity name="CoreRentingOrderStatus" representedClassName="CoreRentingOrderStatus" syncable="YES" codeGenerationType="class">
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -264,6 +278,8 @@
         <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="rentingCreator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreRentingOrder" inverseName="creator" inverseEntity="CoreRentingOrder" syncable="YES"/>
+        <relationship name="rentingCustomer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreRentingOrder" inverseName="customer" inverseEntity="CoreRentingOrder" syncable="YES"/>
     </entity>
     <entity name="CoreWarehouse" representedClassName="CoreWarehouse" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -288,6 +304,7 @@
         <element name="CoreStatus" positionX="-206.94140625" positionY="16.265625" width="128" height="88"/>
         <element name="CoreUrlFile" positionX="-532.75" positionY="121.26171875" width="128" height="90"/>
         <element name="CoreWarehouse" positionX="-578" positionY="243" width="128" height="135"/>
-        <element name="CoreUserInfo" positionX="-567" positionY="153" width="128" height="150"/>
+        <element name="CoreUserInfo" positionX="-567" positionY="153" width="128" height="180"/>
+        <element name="CoreRentingOrder" positionX="-558" positionY="162" width="128" height="225"/>
     </elements>
 </model>
