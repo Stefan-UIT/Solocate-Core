@@ -8,6 +8,7 @@
 
 import UIKit
 import ObjectMapper
+import CoreData
 
 
 class UserModel: BaseModel {
@@ -63,6 +64,45 @@ class UserModel: BaseModel {
             } else {
                 userName <- map[KEY_USER_NAME]
             }
+        }
+        
+        func toCoreUserInfo(context:NSManagedObjectContext) -> CoreUserInfo {
+            guard let appDelegate = UIApplication.shared.delegate as? AppDelegate else {
+                return CoreUserInfo()
+            }
+            
+            var result : [NSManagedObject] = []
+            //        let context = appDelegate.persistentContainer.viewContext
+            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "CoreUserInfo")
+            fetchRequest.predicate = NSPredicate(format: "id = \(id)")
+            do {
+                result = try context.fetch(fetchRequest)
+            } catch let error as NSError {
+                print("Could not fetch. \(error), \(error.userInfo)")
+            }
+            
+            guard let coreUserInfo = result.first else {
+                let userInfoDB = NSEntityDescription.entity(forEntityName: "CoreUserInfo", in: context)
+                let _coreUserInfo:CoreUserInfo = CoreUserInfo(entity: userInfoDB!,
+                                                              insertInto: context)
+                _coreUserInfo.id = Int32(id)
+                _coreUserInfo.email = email
+                _coreUserInfo.firstName = firstName
+                _coreUserInfo.lastName = lastName
+                _coreUserInfo.phone = phone
+                _coreUserInfo.companyId = Int16(companyID ?? -1)
+                
+                print("Find DB At: ", FileManager.default.urls(for: .documentDirectory,
+                                                               in: .userDomainMask).last ?? "Not Found!")
+                do {
+                    try context.save()
+                } catch {
+                    //  let nserror = error as NSError
+                    //  print("Unresolved error \(nserror), \(nserror.userInfo)")
+                }
+                return _coreUserInfo
+            }
+            return coreUserInfo as! CoreUserInfo
         }
     }
     

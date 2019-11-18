@@ -256,6 +256,15 @@
         <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreOrder" inverseName="url" inverseEntity="CoreOrder" syncable="YES"/>
         <relationship name="sig" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoreAttachFile" inverseName="signature" inverseEntity="CoreAttachFile" syncable="YES"/>
     </entity>
+    <entity name="CoreUserInfo" representedClassName="CoreUserInfo" syncable="YES" codeGenerationType="class">
+        <attribute name="companyId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="email" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="firstName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="lastName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="phone" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="CoreWarehouse" representedClassName="CoreWarehouse" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -279,5 +288,6 @@
         <element name="CoreStatus" positionX="-206.94140625" positionY="16.265625" width="128" height="88"/>
         <element name="CoreUrlFile" positionX="-532.75" positionY="121.26171875" width="128" height="90"/>
         <element name="CoreWarehouse" positionX="-578" positionY="243" width="128" height="135"/>
+        <element name="CoreUserInfo" positionX="-567" positionY="153" width="128" height="150"/>
     </elements>
 </model>

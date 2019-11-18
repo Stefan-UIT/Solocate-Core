@@ -27,6 +27,7 @@ enum Entity:String {
     case CoreSKU = "CoreSKU"
     case CoreLocation = "CoreLocation"
     case CoreNote = "CoreNote"
+    case CoreUserInfo = "CoreUserInfo"
 
 }
 
@@ -118,6 +119,7 @@ class _CoreDataManager {
         clearDatabase(entity: .CoreRouteStatus)
         clearDatabase(entity: .CoreRentingOrderStatus)
         clearDatabase(entity: .CoreSKU)
+        clearDatabase(entity: .CoreUserInfo)
     }
     
     func clearDatabase(entity:Entity) {
