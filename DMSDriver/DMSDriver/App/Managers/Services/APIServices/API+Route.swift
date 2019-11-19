@@ -41,6 +41,7 @@ extension BaseAPIService {
                        callback: callback);
     }
     
+    @discardableResult
     func getRentingOrders(filterMode:FilterDataModel, page:Int = 1, callback: @escaping APICallback<ResponseDataModel<ResponseDataListModel<RentingOrder>>>) -> APIRequest {
         let startDate = DateFormatter.filterDate.string(from: filterMode.timeData?.startDate ?? Date())
         let endDate = DateFormatter.filterDate.string(from: filterMode.timeData?.endDate ?? Date())
