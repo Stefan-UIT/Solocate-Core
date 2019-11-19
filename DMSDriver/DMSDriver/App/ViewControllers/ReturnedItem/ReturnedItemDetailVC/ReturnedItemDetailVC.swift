@@ -302,8 +302,7 @@ class ReturnedItemDetailVC: BaseViewController {
 //        vc.task = task
         vc.displayMode = .displayModeTask
         vc.didCancelSuccess =  { [weak self] (success, order) in
-            //self?.task = order as? TaskModel
-            //self?.didUpdateStatus?((self?.orderDetail)!, nil)
+
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -448,39 +447,6 @@ extension ReturnedItemDetailVC: UITableViewDataSource, UITableViewDelegate {
         
         return cell
     }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        /*
-        let orderSection:OrderDetailSection = OrderDetailSection(rawValue: indexPath.section)!
-        let row = indexPath.row
-        switch orderSection {
-        case .sectionInformation:
-            
-            if row == informationRows.count - 2 ||
-                row == informationRows.count - 3 ||
-                row == informationRows.count - 4{// Phone row
-                let item = informationRows[row]
-                
-                if !isEmpty(item.content){
-                    let urlString = "tel://\(item.content)"
-                    if let url = URL(string: urlString) {
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                    }
-                }
-                
-            }else if (row == informationRows.count - 1){ //Address row
-                let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
-                if let _task = task {
-                    vc.orderLocation = _item.location
-                }
-                self.navigationController?.pushViewController( vc, animated: true)
-            }
-            
-        default:
-            break
-        }
-         */
-    }
 }
 
 
@@ -567,9 +533,7 @@ extension ReturnedItemDetailVC:SignatureViewControllerDelegate{
             self?.dismissLoadingIndicator()
             self?.tableView?.endRefreshControl()
             switch result{
-            case .object(let obj):
-//                let message = obj.message
-//                self?.showAlertView(message ?? "")
+            case .object(let _):
                 self?.finishReturnedItem()
                 
             case .error(let error):

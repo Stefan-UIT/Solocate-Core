@@ -39,10 +39,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UserDefaults.standard.setValue(false, forKey: "_UIConstraintBasedLayoutLogUnsatisfiable")//disable autolayout error/warning
     
         let buildConfiguration = BuildConfiguration()
-        // Debug server environment at here ex: .production,.development ...
-        // Debug.setup(shared: Debug(useServer: DMSAppConfiguration.baseUrl_Dev)) // Use for Debug Only
-
-        //App service
         Services.setupShared(buildConf: buildConfiguration)
         
         print(#"""
@@ -73,8 +69,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func applicationDidBecomeActive(_ application: UIApplication) {
-        // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-        //connectToFcm()
         // DMSLocationManager.startUpdatingDriverLocationIfNeeded()
         ReachabilityManager.startMonitoring()
         refreshBadgeIconNumber()
@@ -117,7 +111,11 @@ extension AppDelegate {
                                      E(Caches().user?.roles?.first?.name))
         }
         SERVICES().socket.disconnect()
-        
+        clearCaches()
+        mainVC?.endAutoRefetchRouteList()
+    }
+    
+    func clearCaches() {
         Caches().drivingRule = nil
         Caches().timePlaying = 0
         Caches().isPauseRoute = false
@@ -125,7 +123,6 @@ extension AppDelegate {
         Caches().isCancelCounter = true
         Caches().dateStartRoute = nil
         Caches().datePauseRoute = nil
-        mainVC?.endAutoRefetchRouteList()
     }
     
     func loginSuccess() {
