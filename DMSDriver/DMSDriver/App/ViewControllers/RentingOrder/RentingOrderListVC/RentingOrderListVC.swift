@@ -68,7 +68,7 @@ class RentingOrderListVC: BaseViewController {
     }
     
     @objc func fetchData(isShowLoading:Bool = true)  {
-        getRoutes(filterMode: filterModel, isShowLoading: isShowLoading, isFetch: true)
+        getRentingOrders(filterMode: filterModel, isShowLoading: isShowLoading, isFetch: true)
     }
     
 //    func updateRouteList(routeNeedUpdate:Route) {
@@ -164,7 +164,7 @@ extension RentingOrderListVC:DMSNavigationServiceDelegate {
 
 // MARK: -API
 fileprivate extension RentingOrderListVC {
-    func getRoutes(filterMode:FilterDataModel, isShowLoading:Bool = true, isFetch:Bool = false) {
+    func getRentingOrders(filterMode:FilterDataModel, isShowLoading:Bool = true, isFetch:Bool = false) {
         guard !isFetchInProgress else {
             return
         }

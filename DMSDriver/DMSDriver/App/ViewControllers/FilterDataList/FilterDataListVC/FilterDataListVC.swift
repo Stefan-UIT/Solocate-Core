@@ -656,7 +656,7 @@ extension FilterDataListVC {
         SERVICES().API.getListRentingOrderStatus { (result) in
             switch result{
             case .object(let obj):
-                guard let list = obj.data?.data else {return}
+                guard let list = obj.data else {return}
                 CoreDataManager.updateRentingOrderStatus(list)
             case .error(_ ):
                 break
