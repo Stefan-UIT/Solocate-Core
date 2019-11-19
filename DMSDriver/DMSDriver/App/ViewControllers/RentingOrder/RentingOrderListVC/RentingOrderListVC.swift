@@ -240,6 +240,7 @@ fileprivate extension RentingOrderListVC {
 fileprivate extension RentingOrderListVC {
     func handleFilterRentingorder(with filterDataModel: FilterDataModel, rentingOrders: [RentingOrder]) -> [RentingOrder] {
         var filterRentingOrders = [RentingOrder]()
+        let timeData = filterDataModel.timeData
         let startDate = timeData?.startDate
         let endDate = timeData?.endDate
         let statusName = filterDataModel.status?.name
