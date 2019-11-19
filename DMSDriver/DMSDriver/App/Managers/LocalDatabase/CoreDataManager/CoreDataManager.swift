@@ -957,6 +957,18 @@ class _CoreDataManager {
         return results.sorted(by: {$0.id < $1.id})
     }
     
+    func getRoute(_ routeID: String) -> Route {
+        var result:Route!
+        let predicate = NSPredicate(format: "id = \(routeID)")
+        let context = getManagedObjectContext()
+        let coreRoute = (self.fetchRecordsForEntity(Entity.Route.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreRoute])?.last
+        guard let _coreRoute = coreRoute else {
+            return result
+        }
+        result = _coreRoute.convertToRoute()
+        return result
+    }
+    
     func getListRentingOrder() -> [RentingOrder] {
         var results:[RentingOrder] = []
         let items = fetchRecordsForEntity(Entity.CoreRentingOrder.rawValue, inManagedObjectContext: self.persistentContainer.viewContext) as? [CoreRentingOrder]
@@ -967,15 +979,15 @@ class _CoreDataManager {
         return results.sorted(by: {$0.id < $1.id})
     }
     
-    func getRoute(_ routeID: String) -> Route {
-        var result:Route!
-        let predicate = NSPredicate(format: "id = \(routeID)")
+    func getRentingOrder(_ rentingId: Int) -> RentingOrder {
+        var result:RentingOrder!
+        let predicate = NSPredicate(format: "id = \(rentingId)")
         let context = getManagedObjectContext()
-        let coreRoute = (self.fetchRecordsForEntity(Entity.Route.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreRoute])?.last
-        guard let _coreRoute = coreRoute else {
+        let coreRenting = (self.fetchRecordsForEntity(Entity.CoreRentingOrder.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreRentingOrder])?.last
+        guard let _coreRenting = coreRenting else {
             return result
         }
-        result = _coreRoute.convertToRoute()
+        result = _coreRenting.convertToRentingOrder()
         return result
     }
     

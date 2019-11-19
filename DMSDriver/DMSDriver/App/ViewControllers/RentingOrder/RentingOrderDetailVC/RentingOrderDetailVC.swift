@@ -303,29 +303,25 @@ extension RentingOrderDetailVC {
                 self?.dismissLoadingIndicator()
                 switch result{
                 case .object(let object):
-                    self?.rentingOrder = object.data
+                    if let _rentingOrder = object.data {
+                        self?.rentingOrder = _rentingOrder
+                        CoreDataManager.updateRentingOrder(_rentingOrder) // update rentingOrderDetail to DB local
+                    }
 //                    self?.rootVC?.order =  self?.orderDetail
                     self?.initVar()
                     self?.updateUI()
-                    
-                    //CoreDataManager.updateOrderDetail(object) // update orderdetail to DB local
                 case .error(let error):
                     self?.showAlertView(error.getMessage())
                 }
             }
             
         }else {
-            
             //Get data from local DB
-            /*
-             if let _order = self.orderDetail{
-             CoreDataManager.queryOrderDetail(_order.id, callback: {[weak self] (success,data) in
-             guard let strongSelf = self else{return}
-             strongSelf.orderDetail = data
-             strongSelf.updateUI()
-             })
-             }
-             */
+            if let _rentingOrder = self.rentingOrder {
+                self.rentingOrder = CoreDataManager.getRentingOrder(_rentingOrder.id)
+                self.initVar()
+                self.updateUI()
+            }
         }
     }
     
