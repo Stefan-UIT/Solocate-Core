@@ -23,7 +23,7 @@ extension CoreTruckType {
         
     }
     
-    func convertToTruckTypeModel() -> RentingOrder.RentingOrderDetail.RentingTruck? {
+    func convertToTruckTypeModel() -> RentingOrder.RentingOrderDetail.RentingTruckType? {
         let truckTypeJSON = ["id":id,
                           "name":(name ?? ""),
                           "manufacturer":(manufacturer ?? ""),
@@ -34,7 +34,7 @@ extension CoreTruckType {
                           "created_at":(createdAt ?? ""),
                           "updated_by":updatedBy,
                           "updated_at":(updatedAt ?? "")] as [String:Any]
-        let truckType = RentingOrder.RentingOrderDetail.RentingTruck(JSON: truckTypeJSON)
+        let truckType = RentingOrder.RentingOrderDetail.RentingTruckType(JSON: truckTypeJSON)
         return truckType
     }
     

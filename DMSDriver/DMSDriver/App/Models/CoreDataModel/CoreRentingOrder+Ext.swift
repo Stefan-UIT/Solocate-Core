@@ -25,6 +25,7 @@ extension CoreRentingOrder {
         let _customerUserInfo = rentingOrder.rentingOrderCustomer?.toCoreUserInfo(context: context)
         customer = _customerUserInfo
         
+        details?.addingObjects(from: rentingOrder.rentingOrderDetails ?? [])
     }
     
     func convertToRentingOrder() -> RentingOrder {
@@ -44,6 +45,14 @@ extension CoreRentingOrder {
         rentingOrder.rentingOrderStatus = rentingStatus
         
         rentingOrder.rentingOrderCustomer = customer?.convertToUserInfoModel()
+        
+        var _details = [RentingOrder.RentingOrderDetail]()
+        if let details = details?.allObjects as? [CoreRentingOrderDetail] {
+            details.forEach { (detail) in
+                _details.append(detail.convertToRentingOrder())
+            }
+        }
+        rentingOrder.rentingOrderDetails = _details
         
         return rentingOrder
     }

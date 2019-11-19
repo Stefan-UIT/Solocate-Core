@@ -33,6 +33,7 @@ enum Entity:String {
     case CoreTankerType = "CoreTankerType"
     case CoreTruck = "CoreTruck"
     case CoreTruckType = "CoreTruckType"
+    case CoreRentingOrderDetail = "CoreRentingOrderDetail"
 
 }
 
@@ -129,6 +130,8 @@ class _CoreDataManager {
         clearDatabase(entity: .CoreTankerType)
         clearDatabase(entity: .CoreTruck)
         clearDatabase(entity: .CoreTruckType)
+        clearDatabase(entity: .CoreRentingOrderDetail)
+        clearDatabase(entity: .CoreRentingOrder)
     }
     
     func clearDatabase(entity:Entity) {
@@ -386,11 +389,55 @@ class _CoreDataManager {
     
     func insertRentingOrder(_ rentingOrder:RentingOrder,_ context:NSManagedObjectContext) -> CoreRentingOrder  {
         let rentingOrderDB = NSEntityDescription.entity(forEntityName:Entity.CoreRentingOrder.rawValue ,                                                                in: context)
-        let userInfoDB = NSEntityDescription.entity(forEntityName: Entity.CoreUserInfo.rawValue,
+        let rentingOrderDetailDB = NSEntityDescription.entity(forEntityName: Entity.CoreRentingOrderDetail.rawValue,
                                                     in: context)!
+        let skuDB = NSEntityDescription.entity(forEntityName: Entity.CoreSKU.rawValue,
+                                               in: context)
+        let tankerDB = NSEntityDescription.entity(forEntityName: Entity.CoreTanker.rawValue, in: context)!
+        let tankerTypeDB = NSEntityDescription.entity(forEntityName: Entity.CoreTankerType.rawValue, in: context)!
         let coreRentingOrder:CoreRentingOrder = CoreRentingOrder(entity: rentingOrderDB!,
                                                                  insertInto: context)
-        
+        rentingOrder.rentingOrderDetails?.forEach({ (detail) in
+            let coreRentingOrderDetail:CoreRentingOrderDetail = CoreRentingOrderDetail(entity: rentingOrderDetailDB, insertInto: context)
+            coreRentingOrderDetail.setAttributeFrom(detail, context: context)
+            coreRentingOrder.addToDetails(coreRentingOrderDetail)
+            
+            detail.sku?.forEach({ (eachSKU) in
+                let coreSKU:CoreSKU = CoreSKU(entity: skuDB!,insertInto: context)
+                coreSKU.setAttributeFrom(eachSKU)
+                coreSKU.id = Int16(eachSKU.id ?? 0)
+                coreRentingOrderDetail.addToSku(coreSKU)
+                coreSKU.addToSku(coreRentingOrderDetail)
+            })
+            
+            detail.tanker?.tankers?.forEach({ (tanker) in
+                let coreTanker:CoreTanker = CoreTanker(entity: tankerDB, insertInto: context)
+                coreTanker.setAttribiteFrom(tanker: tanker)
+                coreTanker.id = Int16(tanker.id ?? 0)
+                coreRentingOrderDetail.addToTankers(coreTanker)
+            })
+            
+            detail.tanker?.tankerType?.forEach({ (tankerType) in
+                let coreTankerType:CoreTankerType = CoreTankerType(entity: tankerTypeDB, insertInto: context)
+                coreTankerType.setAttribiteFrom(tankerType: tankerType)
+                coreTankerType.id = Int16(tankerType.id ?? 0)
+                coreRentingOrderDetail.addToTankerType(coreTankerType)
+            })
+            
+        })
+//        rentingOrder.rentingOrderDetails?.forEach({ (detail) in
+//            let coreRentingOrderDetail:CoreRentingOrderDetail = CoreRentingOrderDetail(entity: rentingOrderDetailDB,
+//                                                         insertInto: context)
+//            coreRentingOrderDetail.setAttributeFrom(detail, context: context)
+//            detail.sku?.forEach({ (eachSKU) in
+//                let coreSKU:CoreSKU = CoreSKU(entity: skuDB!, insertInto: context)
+//                coreSKU.setAttributeFrom(eachSKU)
+//                coreSKU.id = Int16(eachSKU.id ?? 0)
+//                coreRentingOrderDetail.addToSku(coreSKU)
+//                coreSKU.addToSku(coreRentingOrderDetail)
+//            })
+//            coreRentingOrder.addToDetails(coreRentingOrderDetail)
+//        })
         coreRentingOrder.setAttribiteFrom(rentingOrder, context: context)
         saveContext(context)
         return coreRentingOrder

@@ -32,5 +32,20 @@ extension CoreSKU {
         orderDetail.pivot = _pivot
         return orderDetail
     }
+    
+    func setAttributeFrom(_ rentingSKU: RentingOrder.RentingOrderSKU)  {
+        id = Int16(rentingSKU.id ?? 0)
+        name = rentingSKU.name
+//        barcode = IntrentingSKU.barcode ?? 0
+        refCode = rentingSKU.referenceCode
+    }
+    
+    func convertToRentingOrderSKUModel() -> RentingOrder.RentingOrderSKU {
+        let rentingSKU = RentingOrder.RentingOrderSKU()
+        rentingSKU.id = Int(id)
+        rentingSKU.name = name
+        rentingSKU.referenceCode = refCode
+        return rentingSKU
+    }
 }
 

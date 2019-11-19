@@ -190,6 +190,17 @@
         <attribute name="updatedAt" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="creator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreUserInfo" inverseName="rentingCreator" inverseEntity="CoreUserInfo" syncable="YES"/>
         <relationship name="customer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreUserInfo" inverseName="rentingCustomer" inverseEntity="CoreUserInfo" syncable="YES"/>
+        <relationship name="details" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreRentingOrderDetail" inverseName="details" inverseEntity="CoreRentingOrderDetail" syncable="YES"/>
+    </entity>
+    <entity name="CoreRentingOrderDetail" representedClassName="CoreRentingOrderDetail" syncable="YES" codeGenerationType="class">
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="details" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreRentingOrder" inverseName="details" inverseEntity="CoreRentingOrder" syncable="YES"/>
+        <relationship name="driver" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreUserInfo" inverseName="rentingDriver" inverseEntity="CoreUserInfo" syncable="YES"/>
+        <relationship name="sku" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreSKU" inverseName="sku" inverseEntity="CoreSKU" syncable="YES"/>
+        <relationship name="tankers" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CoreTanker" inverseName="rentingTanker" inverseEntity="CoreTanker" syncable="YES"/>
+        <relationship name="tankerType" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CoreTankerType" inverseName="rentingTankerType" inverseEntity="CoreTankerType" syncable="YES"/>
+        <relationship name="truck" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreTruck" inverseName="rentingTruck" inverseEntity="CoreTruck" syncable="YES"/>
+        <relationship name="truckType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreTruckType" inverseName="rentingTruckType" inverseEntity="CoreTruckType" syncable="YES"/>
     </entity>
     <entity name="CoreRentingOrderStatus" representedClassName="CoreRentingOrderStatus" syncable="YES" codeGenerationType="class">
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
@@ -259,6 +270,7 @@
         <attribute name="updatedAt" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedBy" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="detail" optional="YES" maxCount="1" deletionRule="Cascade" ordered="YES" destinationEntity="CoreOrder" inverseName="detail" inverseEntity="CoreOrder" syncable="YES"/>
+        <relationship name="sku" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreRentingOrderDetail" inverseName="sku" inverseEntity="CoreRentingOrderDetail" syncable="YES"/>
     </entity>
     <entity name="CoreStatus" representedClassName="CoreStatus" syncable="YES" codeGenerationType="class">
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
@@ -276,6 +288,7 @@
         <attribute name="selfWeight" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="typeId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="rentingTanker" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CoreRentingOrderDetail" inverseName="tankers" inverseEntity="CoreRentingOrderDetail" syncable="YES"/>
     </entity>
     <entity name="CoreTankerType" representedClassName="CoreTankerType" syncable="YES" codeGenerationType="class">
         <attribute name="companyId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -292,6 +305,7 @@
         <attribute name="typeNumberOfCompartments" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedBy" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <relationship name="rentingTankerType" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CoreRentingOrderDetail" inverseName="tankerType" inverseEntity="CoreRentingOrderDetail" syncable="YES"/>
     </entity>
     <entity name="CoreTruck" representedClassName="CoreTruck" syncable="YES" codeGenerationType="class">
         <attribute name="companyId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -306,6 +320,7 @@
         <attribute name="typeId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="typeName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="rentingTruck" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CoreRentingOrderDetail" inverseName="truck" inverseEntity="CoreRentingOrderDetail" syncable="YES"/>
     </entity>
     <entity name="CoreTruckType" representedClassName="CoreTruckType" syncable="YES" codeGenerationType="class">
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
@@ -318,6 +333,7 @@
         <attribute name="updatedAt" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="updatedBy" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="vol" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="rentingTruckType" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="CoreRentingOrderDetail" inverseName="truckType" inverseEntity="CoreRentingOrderDetail" syncable="YES"/>
     </entity>
     <entity name="CoreUrlFile" representedClassName="CoreUrlFile" syncable="YES" codeGenerationType="class">
         <relationship name="doc" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreAttachFile" inverseName="listDoc" inverseEntity="CoreAttachFile" syncable="YES"/>
@@ -334,6 +350,7 @@
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="rentingCreator" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreRentingOrder" inverseName="creator" inverseEntity="CoreRentingOrder" syncable="YES"/>
         <relationship name="rentingCustomer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreRentingOrder" inverseName="customer" inverseEntity="CoreRentingOrder" syncable="YES"/>
+        <relationship name="rentingDriver" optional="YES" toMany="YES" deletionRule="Cascade" destinationEntity="CoreRentingOrderDetail" inverseName="driver" inverseEntity="CoreRentingOrderDetail" syncable="YES"/>
     </entity>
     <entity name="CoreWarehouse" representedClassName="CoreWarehouse" syncable="YES" codeGenerationType="class">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -350,19 +367,20 @@
         <element name="CoreNote" positionX="-576" positionY="144" width="128" height="300"/>
         <element name="CoreOrder" positionX="-54" positionY="-9" width="128" height="1590"/>
         <element name="CoreReason" positionX="-261.1484375" positionY="280.81640625" width="128" height="120"/>
-        <element name="CoreRentingOrder" positionX="-558" positionY="162" width="128" height="225"/>
+        <element name="CoreRentingOrder" positionX="-558" positionY="162" width="128" height="240"/>
+        <element name="CoreRentingOrderDetail" positionX="-567" positionY="153" width="128" height="165"/>
         <element name="CoreRentingOrderStatus" positionX="-616.34375" positionY="-3.58203125" width="128" height="90"/>
         <element name="CoreRequest" positionX="-200.59765625" positionY="132.25390625" width="128" height="165"/>
         <element name="CoreRoute" positionX="-416.171875" positionY="443.79296875" width="128" height="465"/>
         <element name="CoreRouteStatus" positionX="-442.53125" positionY="-9.43359375" width="128" height="90"/>
-        <element name="CoreSKU" positionX="-575.1015625" positionY="1001.6796875" width="128" height="300"/>
+        <element name="CoreSKU" positionX="-575.1015625" positionY="1001.6796875" width="128" height="315"/>
         <element name="CoreStatus" positionX="-206.94140625" positionY="16.265625" width="128" height="88"/>
+        <element name="CoreTanker" positionX="-531" positionY="189" width="128" height="210"/>
+        <element name="CoreTankerType" positionX="-540" positionY="180" width="128" height="270"/>
+        <element name="CoreTruck" positionX="-576" positionY="144" width="128" height="240"/>
+        <element name="CoreTruckType" positionX="-522" positionY="198" width="128" height="210"/>
         <element name="CoreUrlFile" positionX="-532.75" positionY="121.26171875" width="128" height="90"/>
-        <element name="CoreUserInfo" positionX="-567" positionY="153" width="128" height="180"/>
+        <element name="CoreUserInfo" positionX="-567" positionY="153" width="128" height="195"/>
         <element name="CoreWarehouse" positionX="-578" positionY="243" width="128" height="135"/>
-        <element name="CoreTankerType" positionX="-540" positionY="180" width="128" height="255"/>
-        <element name="CoreTanker" positionX="-531" positionY="189" width="128" height="195"/>
-        <element name="CoreTruckType" positionX="-522" positionY="198" width="128" height="195"/>
-        <element name="CoreTruck" positionX="-576" positionY="144" width="128" height="225"/>
     </elements>
 </model>

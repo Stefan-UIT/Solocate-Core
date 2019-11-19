@@ -85,6 +85,8 @@ class RentingOrder: BaseModel {
         var unitTypeId:String?
         var ac:String?
         var companyId:Int?
+        var barcode:Int?
+        var packageId:Int?
         
         override init() {
             super.init()
@@ -102,6 +104,8 @@ class RentingOrder: BaseModel {
             unitTypeId <- map["unit_type_id"]
             ac <- map["ac"]
             companyId <- map["company_id"]
+            barcode <- map["barcode"]
+            packageId <- map["package_id"]
         }
     }
     

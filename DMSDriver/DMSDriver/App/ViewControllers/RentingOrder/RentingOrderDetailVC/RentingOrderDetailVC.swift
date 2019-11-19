@@ -294,8 +294,7 @@ extension RentingOrderDetailVC {
     }
     
     private func getRentingOrderDetail(isFetch:Bool = false) {
-        if hasNetworkConnection &&
-            ReachabilityManager.isCalling == false {
+        if ReachabilityManager.isNetworkAvailable {
             guard let _rentingOrderID = rentingOrder?.id else { return }
             if !isFetch {
                 showLoadingIndicator()

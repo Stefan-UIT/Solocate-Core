@@ -649,6 +649,8 @@
 		7622BCF623828552008792C8 /* CoreTruck+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCF423828552008792C8 /* CoreTruck+Ext.swift */; };
 		7622BCF82382855F008792C8 /* CoreTruckType+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCF72382855F008792C8 /* CoreTruckType+Ext.swift */; };
 		7622BCF92382855F008792C8 /* CoreTruckType+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCF72382855F008792C8 /* CoreTruckType+Ext.swift */; };
+		7622BCFB238299A0008792C8 /* CoreRentingOrderDetail+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCFA238299A0008792C8 /* CoreRentingOrderDetail+Ext.swift */; };
+		7622BCFC238299A0008792C8 /* CoreRentingOrderDetail+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCFA238299A0008792C8 /* CoreRentingOrderDetail+Ext.swift */; };
 		762CC61223794F6200D25CCD /* CoreNote+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762CC61123794F6200D25CCD /* CoreNote+Ext.swift */; };
 		762CC61323794F6200D25CCD /* CoreNote+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762CC61123794F6200D25CCD /* CoreNote+Ext.swift */; };
 		766B7457234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766B7456234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift */; };
@@ -1192,6 +1194,7 @@
 		7622BCF123828543008792C8 /* CoreTankerType+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreTankerType+Ext.swift"; sourceTree = "<group>"; };
 		7622BCF423828552008792C8 /* CoreTruck+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreTruck+Ext.swift"; sourceTree = "<group>"; };
 		7622BCF72382855F008792C8 /* CoreTruckType+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreTruckType+Ext.swift"; sourceTree = "<group>"; };
+		7622BCFA238299A0008792C8 /* CoreRentingOrderDetail+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreRentingOrderDetail+Ext.swift"; sourceTree = "<group>"; };
 		762CC61123794F6200D25CCD /* CoreNote+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreNote+Ext.swift"; sourceTree = "<group>"; };
 		766B7456234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreRentingOrderStatus+Ext.swift"; sourceTree = "<group>"; };
 		76A0BF7723716A1200942C6D /* BoolModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolModel.swift; sourceTree = "<group>"; };
@@ -3261,6 +3264,7 @@
 				7622BCF123828543008792C8 /* CoreTankerType+Ext.swift */,
 				7622BCF423828552008792C8 /* CoreTruck+Ext.swift */,
 				7622BCF72382855F008792C8 /* CoreTruckType+Ext.swift */,
+				7622BCFA238299A0008792C8 /* CoreRentingOrderDetail+Ext.swift */,
 			);
 			path = CoreDataModel;
 			sourceTree = "<group>";
@@ -3820,6 +3824,7 @@
 				2E1BE34E22F14FFD005F9BB5 /* ReturnedItemClvCell.swift in Sources */,
 				2A443A3922648C5A00CB6508 /* SlideMenuCell.swift in Sources */,
 				76ECFF052361B0600099164F /* CoreSKUl+Ext.swift in Sources */,
+				7622BCFB238299A0008792C8 /* CoreRentingOrderDetail+Ext.swift in Sources */,
 				2A443A3A22648C5A00CB6508 /* HistoryNotifyDetailCell.swift in Sources */,
 				2A443A3B22648C5A00CB6508 /* PickerTypeListVC.swift in Sources */,
 				2A443A3C22648C5A00CB6508 /* OrderItem.swift in Sources */,
@@ -4316,6 +4321,7 @@
 				3B66B8E4210B1149000BDFEF /* Note.swift in Sources */,
 				3B80E3E322279DDA005A2E75 /* AddNoteView.swift in Sources */,
 				3B4778EE221E4ED1005639E4 /* FilterDataListInsertContentCell.swift in Sources */,
+				7622BCFC238299A0008792C8 /* CoreRentingOrderDetail+Ext.swift in Sources */,
 				3B66B8FA210B1149000BDFEF /* OrderDetailViewController.swift in Sources */,
 				3B66B821210B113D000BDFEF /* UIViewController+Extensions.swift in Sources */,
 				3B66B82B210B113D000BDFEF /* Optional+Extensions.swift in Sources */,

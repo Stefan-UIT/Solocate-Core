@@ -23,7 +23,7 @@ extension CoreTankerType {
         
     }
     
-    func convertToTankerTypeModel() -> RentingOrder.RentingOrderDetail.RentingTruck? {
+    func convertToTankerTypeModel() -> RentingOrder.RentingOrderDetail.RentingTruckType? {
         let tankerTypeJSON = ["id":id,
                           "name":(name ?? ""),
                           "max_vol":(maxVol ?? ""),
@@ -33,7 +33,7 @@ extension CoreTankerType {
                           "created_at":(createdAt ?? ""),
                           "updated_by":updatedBy,
                           "updated_at":(updatedAt ?? "")] as [String:Any]
-        let tankerType = RentingOrder.RentingOrderDetail.RentingTruck(JSON: tankerTypeJSON)
+        let tankerType = RentingOrder.RentingOrderDetail.RentingTruckType(JSON: tankerTypeJSON)
         return tankerType
     }
     
