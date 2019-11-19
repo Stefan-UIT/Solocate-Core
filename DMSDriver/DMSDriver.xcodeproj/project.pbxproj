@@ -637,6 +637,25 @@
 		760C0A99233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C0A97233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift */; };
 		760C46FD233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C46FC233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift */; };
 		760C46FE233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C46FC233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift */; };
+		7622BCE823823BB5008792C8 /* CoreUserInfo+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCE723823BB5008792C8 /* CoreUserInfo+Ext.swift */; };
+		7622BCE923823BB5008792C8 /* CoreUserInfo+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCE723823BB5008792C8 /* CoreUserInfo+Ext.swift */; };
+		7622BCEC2382412C008792C8 /* CoreRentingOrder+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCEB2382412C008792C8 /* CoreRentingOrder+Ext.swift */; };
+		7622BCED2382412C008792C8 /* CoreRentingOrder+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCEB2382412C008792C8 /* CoreRentingOrder+Ext.swift */; };
+		7622BCEF23828531008792C8 /* CoreTanker+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCEE23828531008792C8 /* CoreTanker+Ext.swift */; };
+		7622BCF023828531008792C8 /* CoreTanker+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCEE23828531008792C8 /* CoreTanker+Ext.swift */; };
+		7622BCF223828543008792C8 /* CoreTankerType+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCF123828543008792C8 /* CoreTankerType+Ext.swift */; };
+		7622BCF323828543008792C8 /* CoreTankerType+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCF123828543008792C8 /* CoreTankerType+Ext.swift */; };
+		7622BCF523828552008792C8 /* CoreTruck+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCF423828552008792C8 /* CoreTruck+Ext.swift */; };
+		7622BCF623828552008792C8 /* CoreTruck+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCF423828552008792C8 /* CoreTruck+Ext.swift */; };
+		7622BCF82382855F008792C8 /* CoreTruckType+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCF72382855F008792C8 /* CoreTruckType+Ext.swift */; };
+		7622BCF92382855F008792C8 /* CoreTruckType+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCF72382855F008792C8 /* CoreTruckType+Ext.swift */; };
+		7622BCFB238299A0008792C8 /* CoreRentingOrderDetail+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCFA238299A0008792C8 /* CoreRentingOrderDetail+Ext.swift */; };
+		7622BCFC238299A0008792C8 /* CoreRentingOrderDetail+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCFA238299A0008792C8 /* CoreRentingOrderDetail+Ext.swift */; };
+		762CC61223794F6200D25CCD /* CoreNote+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762CC61123794F6200D25CCD /* CoreNote+Ext.swift */; };
+		762CC61323794F6200D25CCD /* CoreNote+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762CC61123794F6200D25CCD /* CoreNote+Ext.swift */; };
+		766B7457234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766B7456234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift */; };
+		76A0BF7823716A1200942C6D /* BoolModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0BF7723716A1200942C6D /* BoolModel.swift */; };
+		76A0BF7923716A1200942C6D /* BoolModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0BF7723716A1200942C6D /* BoolModel.swift */; };
 		76BFFD6C2339D8B50021E01A /* RentingOrderListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD6B2339D8B50021E01A /* RentingOrderListVC.swift */; };
 		76BFFD6D2339D8B50021E01A /* RentingOrderListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD6B2339D8B50021E01A /* RentingOrderListVC.swift */; };
 		76BFFD6F2339F4660021E01A /* RentingOrderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD6E2339F4660021E01A /* RentingOrderListTableViewCell.swift */; };
@@ -645,6 +664,12 @@
 		76BFFD752339F62D0021E01A /* RentingOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD732339F62D0021E01A /* RentingOrder.swift */; };
 		76BFFD77233A0CFC0021E01A /* RentingOrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD76233A0CFC0021E01A /* RentingOrderDetailVC.swift */; };
 		76BFFD78233A0CFC0021E01A /* RentingOrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD76233A0CFC0021E01A /* RentingOrderDetailVC.swift */; };
+		76DC378E236AD88700C3FCE8 /* CoreLocation+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DC378D236AD88700C3FCE8 /* CoreLocation+Ext.swift */; };
+		76DC3790236AD89700C3FCE8 /* CoreLocation+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76DC378D236AD88700C3FCE8 /* CoreLocation+Ext.swift */; };
+		76DC3791236AD89900C3FCE8 /* CoreSKUl+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ECFF042361B0600099164F /* CoreSKUl+Ext.swift */; };
+		76DC3792236AD89C00C3FCE8 /* CoreRentingOrderStatus+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766B7456234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift */; };
+		76E633A7234DE7140039E556 /* RentingOrderDetailInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E633A6234DE7140039E556 /* RentingOrderDetailInfoTableViewCell.swift */; };
+		76ECFF052361B0600099164F /* CoreSKUl+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76ECFF042361B0600099164F /* CoreSKUl+Ext.swift */; };
 		BE122D51C94BA19BBECA247E /* Pods_Ashdod_Dev.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F78467D145BAF1922F4EBBF6 /* Pods_Ashdod_Dev.framework */; };
 		C73D9D55226DA17900452A0C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C73D9D54226DA17900452A0C /* GoogleService-Info.plist */; };
 		C73D9D56226DA17900452A0C /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = C73D9D54226DA17900452A0C /* GoogleService-Info.plist */; };
@@ -688,7 +713,6 @@
 		2A42050A22576AF000789837 /* ContentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
 		2A42555A2251F08E00D55FEA /* ResponseDataDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDataDashboard.swift; sourceTree = "<group>"; };
 		2A443B4E22648C5A00CB6508 /* Gadot Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gadot Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		2A443B4F22648C5B00CB6508 /* DMSDriver-Dev-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "DMSDriver-Dev-Info.plist"; path = "/Volumes/NguyenMach/PROJECT-SELDAT/DMS-PROJECT/ios-driver/DMSDriver/DMSDriver-Dev-Info.plist"; sourceTree = "<absolute>"; };
 		2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailLocationListClvCell.swift; sourceTree = "<group>"; };
 		2AC97C5A224DF7F600DD07AE /* CommonUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
 		2AC97C5C224E009400DD07AE /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
@@ -1164,10 +1188,23 @@
 		760B209C23068F7500E96A12 /* CoreRouteStatus+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreRouteStatus+Ext.swift"; sourceTree = "<group>"; };
 		760C0A97233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderDetailTableViewCell.swift; sourceTree = "<group>"; };
 		760C46FC233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOrderDetailSKUTableViewCell.swift; sourceTree = "<group>"; };
+		7622BCE723823BB5008792C8 /* CoreUserInfo+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreUserInfo+Ext.swift"; sourceTree = "<group>"; };
+		7622BCEB2382412C008792C8 /* CoreRentingOrder+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreRentingOrder+Ext.swift"; sourceTree = "<group>"; };
+		7622BCEE23828531008792C8 /* CoreTanker+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreTanker+Ext.swift"; sourceTree = "<group>"; };
+		7622BCF123828543008792C8 /* CoreTankerType+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreTankerType+Ext.swift"; sourceTree = "<group>"; };
+		7622BCF423828552008792C8 /* CoreTruck+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreTruck+Ext.swift"; sourceTree = "<group>"; };
+		7622BCF72382855F008792C8 /* CoreTruckType+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreTruckType+Ext.swift"; sourceTree = "<group>"; };
+		7622BCFA238299A0008792C8 /* CoreRentingOrderDetail+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreRentingOrderDetail+Ext.swift"; sourceTree = "<group>"; };
+		762CC61123794F6200D25CCD /* CoreNote+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreNote+Ext.swift"; sourceTree = "<group>"; };
+		766B7456234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreRentingOrderStatus+Ext.swift"; sourceTree = "<group>"; };
+		76A0BF7723716A1200942C6D /* BoolModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolModel.swift; sourceTree = "<group>"; };
 		76BFFD6B2339D8B50021E01A /* RentingOrderListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderListVC.swift; sourceTree = "<group>"; };
 		76BFFD6E2339F4660021E01A /* RentingOrderListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderListTableViewCell.swift; sourceTree = "<group>"; };
 		76BFFD732339F62D0021E01A /* RentingOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrder.swift; sourceTree = "<group>"; };
 		76BFFD76233A0CFC0021E01A /* RentingOrderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderDetailVC.swift; sourceTree = "<group>"; };
+		76DC378D236AD88700C3FCE8 /* CoreLocation+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreLocation+Ext.swift"; sourceTree = "<group>"; };
+		76E633A6234DE7140039E556 /* RentingOrderDetailInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderDetailInfoTableViewCell.swift; sourceTree = "<group>"; };
+		76ECFF042361B0600099164F /* CoreSKUl+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreSKUl+Ext.swift"; sourceTree = "<group>"; };
 		79FCA8992A46E175D52FF7F3 /* Pods-Ashdod Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ashdod Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ashdod Dev/Pods-Ashdod Dev.debug.xcconfig"; sourceTree = "<group>"; };
 		7AAB4633DDF72A60B133B3E5 /* Pods-DMSDriver-Dev.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver-Dev.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev.debug.xcconfig"; sourceTree = "<group>"; };
 		9B8D9F73312991A219DA0D95 /* Pods-DMSDriver.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver.debug.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver/Pods-DMSDriver.debug.xcconfig"; sourceTree = "<group>"; };
@@ -2332,7 +2369,6 @@
 				3B66B7E3210B113C000BDFEF /* Service */,
 				3B66B7EB210B113C000BDFEF /* Info.plist */,
 				2E3AFBC22341BC20004D3724 /* Dev-Info.plist */,
-				2A443B4F22648C5B00CB6508 /* DMSDriver-Dev-Info.plist */,
 				3B66B7EC210B113C000BDFEF /* BridgingHeaders */,
 			);
 			path = "Supporting Files";
@@ -2488,6 +2524,7 @@
 				3B66B886210B1148000BDFEF /* WarehouseModel.swift */,
 				3B66B887210B1148000BDFEF /* UploadFileResponse.swift */,
 				3B66B888210B1148000BDFEF /* ResponseDataModel.swift */,
+				76A0BF7723716A1200942C6D /* BoolModel.swift */,
 			);
 			path = APIModels;
 			sourceTree = "<group>";
@@ -3217,6 +3254,17 @@
 				3BB9308C21466776009F6DCC /* CoreRequest+Ext.swift */,
 				3B0724CA21B1440D00CDB05B /* CoreStatus+Ext.swift */,
 				760B209C23068F7500E96A12 /* CoreRouteStatus+Ext.swift */,
+				766B7456234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift */,
+				76ECFF042361B0600099164F /* CoreSKUl+Ext.swift */,
+				76DC378D236AD88700C3FCE8 /* CoreLocation+Ext.swift */,
+				762CC61123794F6200D25CCD /* CoreNote+Ext.swift */,
+				7622BCE723823BB5008792C8 /* CoreUserInfo+Ext.swift */,
+				7622BCEB2382412C008792C8 /* CoreRentingOrder+Ext.swift */,
+				7622BCEE23828531008792C8 /* CoreTanker+Ext.swift */,
+				7622BCF123828543008792C8 /* CoreTankerType+Ext.swift */,
+				7622BCF423828552008792C8 /* CoreTruck+Ext.swift */,
+				7622BCF72382855F008792C8 /* CoreTruckType+Ext.swift */,
+				7622BCFA238299A0008792C8 /* CoreRentingOrderDetail+Ext.swift */,
 			);
 			path = CoreDataModel;
 			sourceTree = "<group>";
@@ -3313,6 +3361,7 @@
 			isa = PBXGroup;
 			children = (
 				760C0A97233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift */,
+				76E633A6234DE7140039E556 /* RentingOrderDetailInfoTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -3774,9 +3823,12 @@
 				2A443A3822648C5A00CB6508 /* ReasonSkipTableViewCell.swift in Sources */,
 				2E1BE34E22F14FFD005F9BB5 /* ReturnedItemClvCell.swift in Sources */,
 				2A443A3922648C5A00CB6508 /* SlideMenuCell.swift in Sources */,
+				76ECFF052361B0600099164F /* CoreSKUl+Ext.swift in Sources */,
+				7622BCFB238299A0008792C8 /* CoreRentingOrderDetail+Ext.swift in Sources */,
 				2A443A3A22648C5A00CB6508 /* HistoryNotifyDetailCell.swift in Sources */,
 				2A443A3B22648C5A00CB6508 /* PickerTypeListVC.swift in Sources */,
 				2A443A3C22648C5A00CB6508 /* OrderItem.swift in Sources */,
+				7622BCF82382855F008792C8 /* CoreTruckType+Ext.swift in Sources */,
 				2A443A3D22648C5A00CB6508 /* HistoryNotifyDetailVC.swift in Sources */,
 				2A443A3E22648C5A00CB6508 /* UploadFileResponse.swift in Sources */,
 				2A443A3F22648C5A00CB6508 /* CoreStatus+Ext.swift in Sources */,
@@ -3787,6 +3839,7 @@
 				2A443A4322648C5A00CB6508 /* TaskListClvCell.swift in Sources */,
 				2A443A4422648C5A00CB6508 /* SocketConstants.swift in Sources */,
 				2A443A4522648C5A00CB6508 /* PickerTimeVC.swift in Sources */,
+				76A0BF7823716A1200942C6D /* BoolModel.swift in Sources */,
 				2A443A4622648C5A00CB6508 /* CoreDataManager.swift in Sources */,
 				2A443A4722648C5A00CB6508 /* AssignOrderVC.swift in Sources */,
 				2A443A4822648C5A00CB6508 /* LoadMoreView.swift in Sources */,
@@ -3811,6 +3864,7 @@
 				2A443A5822648C5A00CB6508 /* CoreUrlFile+Ext.swift in Sources */,
 				2A443A5922648C5A00CB6508 /* TextViewInput.swift in Sources */,
 				2A443A5A22648C5A00CB6508 /* TaskListVC.swift in Sources */,
+				7622BCEF23828531008792C8 /* CoreTanker+Ext.swift in Sources */,
 				2A443A5B22648C5A00CB6508 /* BuildConfiguration.swift in Sources */,
 				2A443A5C22648C5A00CB6508 /* GMSMapview+Ext.swift in Sources */,
 				76BFFD6F2339F4660021E01A /* RentingOrderListTableViewCell.swift in Sources */,
@@ -3821,6 +3875,7 @@
 				2A443A6122648C5A00CB6508 /* ItemWithImage.swift in Sources */,
 				2A443A6222648C5A00CB6508 /* UIBarButtonItem + Style.swift in Sources */,
 				2A443A6322648C5A00CB6508 /* Double+Ext.swift in Sources */,
+				7622BCE823823BB5008792C8 /* CoreUserInfo+Ext.swift in Sources */,
 				2A443A6422648C5A00CB6508 /* ChangePasswordModel.swift in Sources */,
 				2A443A6522648C5A00CB6508 /* OrderSignatureViewController.swift in Sources */,
 				2E9E08A622A8FDA4005E420C /* NoteTableViewCell.swift in Sources */,
@@ -3901,7 +3956,9 @@
 				2A443AA622648C5A00CB6508 /* BaseTableViewCell.swift in Sources */,
 				2A443AA722648C5A00CB6508 /* ChangePasswordView.swift in Sources */,
 				2A443AA822648C5A00CB6508 /* Common+Extensions.swift in Sources */,
+				76E633A7234DE7140039E556 /* RentingOrderDetailInfoTableViewCell.swift in Sources */,
 				2A443AA922648C5A00CB6508 /* Array.swift in Sources */,
+				766B7457234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift in Sources */,
 				2A443AAA22648C5A00CB6508 /* SignatureViewController.swift in Sources */,
 				2E714CDB22B3A44900348B67 /* ImageCollectionViewCell.swift in Sources */,
 				2A443AAB22648C5A00CB6508 /* TimeDataItem.swift in Sources */,
@@ -3960,6 +4017,7 @@
 				2A443AD922648C5A00CB6508 /* LocationManager.swift in Sources */,
 				2EF35D8622EED4DF00131D33 /* Driver.swift in Sources */,
 				2A443ADA22648C5A00CB6508 /* OneTextFieldViewController.swift in Sources */,
+				7622BCEC2382412C008792C8 /* CoreRentingOrder+Ext.swift in Sources */,
 				2A443ADB22648C5A00CB6508 /* OrderItemTableViewCell.swift in Sources */,
 				2E42DB592303C8CE004AFD41 /* FilterOrderDataViewController.swift in Sources */,
 				760C0A98233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift in Sources */,
@@ -3986,6 +4044,7 @@
 				2A443AEB22648C5A00CB6508 /* Note.swift in Sources */,
 				2A443AEC22648C5A00CB6508 /* AddNoteView.swift in Sources */,
 				2A443AED22648C5A00CB6508 /* FilterDataListInsertContentCell.swift in Sources */,
+				76DC378E236AD88700C3FCE8 /* CoreLocation+Ext.swift in Sources */,
 				2A443AEE22648C5A00CB6508 /* OrderDetailViewController.swift in Sources */,
 				2A443AEF22648C5A00CB6508 /* UIViewController+Extensions.swift in Sources */,
 				2A443AF022648C5A00CB6508 /* Optional+Extensions.swift in Sources */,
@@ -3995,10 +4054,12 @@
 				2A443AF422648C5A00CB6508 /* SelectionModel.swift in Sources */,
 				2A443AF522648C5A00CB6508 /* ForgetPasswordView.swift in Sources */,
 				2A443AF622648C5A00CB6508 /* UIImage+Extensions.swift in Sources */,
+				762CC61223794F6200D25CCD /* CoreNote+Ext.swift in Sources */,
 				2A443AF722648C5A00CB6508 /* TaskModel.swift in Sources */,
 				2A443AF822648C5A00CB6508 /* RouteDetailOrderListClvCell.swift in Sources */,
 				2A443AF922648C5A00CB6508 /* Locale+Extensions.swift in Sources */,
 				2A443AFB22648C5A00CB6508 /* SocketService.swift in Sources */,
+				7622BCF523828552008792C8 /* CoreTruck+Ext.swift in Sources */,
 				2A443AFC22648C5A00CB6508 /* WarehouseModel.swift in Sources */,
 				2A443AFD22648C5A00CB6508 /* NavigationService.swift in Sources */,
 				2A443AFE22648C5A00CB6508 /* Reason.swift in Sources */,
@@ -4010,6 +4071,7 @@
 				2A443B0322648C5A00CB6508 /* FilterDataListStatusCell.swift in Sources */,
 				2A443B0422648C5A00CB6508 /* ReceiveNotificationModel.swift in Sources */,
 				2E920A7322EFFBC7000AD8EF /* Truck.swift in Sources */,
+				7622BCF223828543008792C8 /* CoreTankerType+Ext.swift in Sources */,
 				2A443B0522648C5A00CB6508 /* DriverModel.swift in Sources */,
 				2E1BE35622F191C4005F9BB5 /* ReturnedItemQuantityCell.swift in Sources */,
 				2A443B0622648C5A00CB6508 /* ScrollMenuCell.swift in Sources */,
@@ -4030,6 +4092,7 @@
 				3BB9308D21466776009F6DCC /* CoreRequest+Ext.swift in Sources */,
 				2A42050B22576AF000789837 /* ContentCell.swift in Sources */,
 				3B66B826210B113D000BDFEF /* UIColor+Extensions.swift in Sources */,
+				76DC3791236AD89900C3FCE8 /* CoreSKUl+Ext.swift in Sources */,
 				3B66B82F210B113D000BDFEF /* AttributedTextBlock.swift in Sources */,
 				760B209E23068F7500E96A12 /* CoreRouteStatus+Ext.swift in Sources */,
 				3B0D52BD221D44A400610A9A /* FilterDataModel.swift in Sources */,
@@ -4076,6 +4139,7 @@
 				3BEAB8692142609C0039CFBB /* CoreUrlFile+Ext.swift in Sources */,
 				3B0035F7216C614D0032519D /* TextViewInput.swift in Sources */,
 				3B014948217D75D00097FEB6 /* TaskListVC.swift in Sources */,
+				7622BCF623828552008792C8 /* CoreTruck+Ext.swift in Sources */,
 				3B66B81B210B113D000BDFEF /* BuildConfiguration.swift in Sources */,
 				2ADE1D062253068100BE4092 /* GMSMapview+Ext.swift in Sources */,
 				76BFFD702339F4660021E01A /* RentingOrderListTableViewCell.swift in Sources */,
@@ -4132,12 +4196,14 @@
 				3B66B83C210B113D000BDFEF /* GradientSlider.swift in Sources */,
 				3B66B824210B113D000BDFEF /* String+Extensions.swift in Sources */,
 				3B66B814210B113D000BDFEF /* SignatureView.swift in Sources */,
+				7622BCF92382855F008792C8 /* CoreTruckType+Ext.swift in Sources */,
 				3B355ED921ABE078004A2879 /* API+Route.swift in Sources */,
 				19007579228522CD00A08E3B /* Route+Ext.swift in Sources */,
 				3B66B806210B113D000BDFEF /* UIColor.swift in Sources */,
 				3B1629D0221BEA8200E7A83C /* FilterDataListHeaderCell.swift in Sources */,
 				76BFFD6D2339D8B50021E01A /* RentingOrderListVC.swift in Sources */,
 				3BEAB867214260740039CFBB /* CoreCoordinatorRoute+Ext.swift in Sources */,
+				76DC3792236AD89C00C3FCE8 /* CoreRentingOrderStatus+Ext.swift in Sources */,
 				3B014951217D7E010097FEB6 /* TaskDetailVC.swift in Sources */,
 				185FC773228D303100B085BC /* BaseSearchView.swift in Sources */,
 				3B1629E5221C082B00E7A83C /* FilterDataListFooterView.swift in Sources */,
@@ -4194,14 +4260,17 @@
 				3B66B912210B1149000BDFEF /* RouteDetailVC.swift in Sources */,
 				3B66B8F5210B1149000BDFEF /* AttachFileModel.swift in Sources */,
 				3B2B8B55222E135B00ACDDFE /* FilterByDatePopupCustomCell.swift in Sources */,
+				76A0BF7923716A1200942C6D /* BoolModel.swift in Sources */,
 				3B66B80B210B113D000BDFEF /* UIImage.swift in Sources */,
 				3B66B91E210B1149000BDFEF /* BaseView.swift in Sources */,
 				3BEAB861214260200039CFBB /* CoreRoute+Ext.swift in Sources */,
 				3B6193F9221FA981006651EA /* StartRouteOrderVC.swift in Sources */,
 				3B66B829210B113D000BDFEF /* UIApplication+Extensions.swift in Sources */,
 				3B66B8F6210B1149000BDFEF /* Route.swift in Sources */,
+				7622BCED2382412C008792C8 /* CoreRentingOrder+Ext.swift in Sources */,
 				3B454C4E222CCD260064F455 /* FilterByDatePopupView.swift in Sources */,
 				3B66B83B210B113D000BDFEF /* SegmentedControl.swift in Sources */,
+				7622BCF023828531008792C8 /* CoreTanker+Ext.swift in Sources */,
 				3B4BBF7D2214085800EA7485 /* RouteListHeaderTableView.swift in Sources */,
 				2E96D05722C4C81300DA29C5 /* LanguageModel.swift in Sources */,
 				3BF838D22189589A0056C4F1 /* BaseScrollMenuView.swift in Sources */,
@@ -4210,9 +4279,11 @@
 				3B66B92D210B1149000BDFEF /* AlertMessageView.swift in Sources */,
 				3B66B8F9210B1149000BDFEF /* ScanBarCodeViewController.swift in Sources */,
 				2AB4A98A224B78C70019F196 /* RouteDetailLocationListClvCell.swift in Sources */,
+				7622BCF323828543008792C8 /* CoreTankerType+Ext.swift in Sources */,
 				3B66B834210B113D000BDFEF /* PhotoLibraryPickerViewController.swift in Sources */,
 				3B66B8EF210B1149000BDFEF /* EmptyModel.swift in Sources */,
 				3B66B836210B113D000BDFEF /* DatePickerViewController.swift in Sources */,
+				762CC61323794F6200D25CCD /* CoreNote+Ext.swift in Sources */,
 				2A42050722576ADD00789837 /* FooterCell.swift in Sources */,
 				3B44C03721BE0B48008F070D /* LocationTracker.swift in Sources */,
 				3B9A37622123D5C1004D881C /* PickerTypeListCell.swift in Sources */,
@@ -4250,11 +4321,13 @@
 				3B66B8E4210B1149000BDFEF /* Note.swift in Sources */,
 				3B80E3E322279DDA005A2E75 /* AddNoteView.swift in Sources */,
 				3B4778EE221E4ED1005639E4 /* FilterDataListInsertContentCell.swift in Sources */,
+				7622BCFC238299A0008792C8 /* CoreRentingOrderDetail+Ext.swift in Sources */,
 				3B66B8FA210B1149000BDFEF /* OrderDetailViewController.swift in Sources */,
 				3B66B821210B113D000BDFEF /* UIViewController+Extensions.swift in Sources */,
 				3B66B82B210B113D000BDFEF /* Optional+Extensions.swift in Sources */,
 				3B17EB5B21AD049C00CDF7D3 /* TimerVC.swift in Sources */,
 				3B66B817210B113D000BDFEF /* NSAtribitedString+Ext.swift in Sources */,
+				76DC3790236AD89700C3FCE8 /* CoreLocation+Ext.swift in Sources */,
 				3B66B838210B113D000BDFEF /* CurrencyCell.swift in Sources */,
 				3B9A37672123D6B9004D881C /* SelectionModel.swift in Sources */,
 				3B66B928210B1149000BDFEF /* ForgetPasswordView.swift in Sources */,
@@ -4277,6 +4350,7 @@
 				2E920A7422EFFBC7000AD8EF /* Truck.swift in Sources */,
 				3B9A376A2123D992004D881C /* DriverModel.swift in Sources */,
 				2E1BE35722F191C4005F9BB5 /* ReturnedItemQuantityCell.swift in Sources */,
+				7622BCE923823BB5008792C8 /* CoreUserInfo+Ext.swift in Sources */,
 				3B13CBF0211A8FF400A93E18 /* ScrollMenuCell.swift in Sources */,
 				3BEAB86D214260CD0039CFBB /* CoreAttachFile+Ext.swift in Sources */,
 				3B80E3DC22279D1B005A2E75 /* ReasonSkipView.swift in Sources */,
@@ -4425,7 +4499,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.gadot.debug;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = Ashdod_Debug_AppStore_A1;
+				PROVISIONING_PROFILE_SPECIFIER = Gadot_Debug_AppStore_;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 5.0;

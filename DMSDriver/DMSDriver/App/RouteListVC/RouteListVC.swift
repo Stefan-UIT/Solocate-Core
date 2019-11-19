@@ -23,17 +23,22 @@ import Crashlytics
     
     private let identifierRowCell = "RouteTableViewCell"
     var timeData:TimeDataItem?
-    var routes = [Route]()
     var filterModel = FilterDataModel()
     var isFromDashboard = false
     var isFromFilter = false
+    
+    var isFetchInProgress = false
+    var isInfiniteScrolling = false
+    var routes:[Route] = []
+    var page:Int = 1
+    var currentPage:Int = 1
+    var totalPages:Int = 1
 
     // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         initVar()
         initUI()
-        //fakaData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -54,6 +59,7 @@ import Crashlytics
     private func setupTableView()  {
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.prefetchDataSource = self
         tableView.register(UINib(nibName: ClassName(RouteTableViewCell()),
                                  bundle: nil),
                            forCellReuseIdentifier: identifierRowCell)
@@ -75,13 +81,21 @@ import Crashlytics
         setupTableView()
         let userName = Caches().user?.userInfo?.userName ?? ""
 //        let date = #"Here is your plan for today - \#(ShortDateFormater.string(from: filterModel.timeData?.startDate ?? Date()))"#.localized
+        let filterTimeData = filterModel.timeData
+        let dateTitle = filterTimeData?.title ?? ""
+        var dateString = ""
+        if filterTimeData?.type == TimeItemType.TimeItemTypeToday {
+            dateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date())
+        } else {
+            dateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date()) + " - " + ShortDateFormater.string(from: filterTimeData?.endDate ?? Date())
+        }
         let date = "here-is-your-plan".localized
         lblNameDriver?.text = "hi".localized + " \(userName)"
-        lblDate?.text = date
+        lblDate?.text = date + " for " + dateTitle + " " + dateString
     }
     
     @objc func fetchData(isShowLoading:Bool = true)  {
-        getRoutes(filterMode: filterModel, isShowLoading: isShowLoading)
+        getRoutes(filterMode: filterModel, isShowLoading: isShowLoading, isFetch: true)
     }
     
     func updateRouteList(routeNeedUpdate:Route) {
@@ -115,6 +129,7 @@ import Crashlytics
                 return
             }
             strongSelf.filterModel = data
+            strongSelf.initUI()
             strongSelf.fetchData(isShowLoading: true)
         }
         self.isFromFilter = true
@@ -205,41 +220,117 @@ import Crashlytics
     }
  }
  
+ private extension RouteListVC {
+    func isLoadingCell(for indexPath: IndexPath) -> Bool {
+        return indexPath.row + 1 >= self.routes.count
+    }
+ }
+ 
+ extension RouteListVC: UITableViewDataSourcePrefetching {
+    func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
+        if indexPaths.contains(where: isLoadingCell) {
+            if !(currentPage == totalPages) {
+                self.isInfiniteScrolling = true
+                self.fetchData()
+            }
+        }
+    }
+ }
+ 
  //MARK: - API
  fileprivate extension RouteListVC {
-    func getRoutes(filterMode:FilterDataModel, isShowLoading:Bool = true) {
-        if isShowLoading {
-            showLoadingIndicator()
-        }
-        
-        SERVICES().API.getRoutes(filterMode: filterMode) {[weak self] (result) in
-            self?.dismissLoadingIndicator()
-            self?.tableView.endRefreshControl()
-            guard let strongSelf = self else {
+    func getRoutes(filterMode:FilterDataModel, isShowLoading:Bool = true, isFetch:Bool = false) {
+        if ReachabilityManager.isNetworkAvailable {
+            guard !isFetchInProgress else {
                 return
             }
-            switch result{
-            case .object(let obj):
-                if let data = obj.data?.data {
-                    strongSelf.routes = data
-                    // DMSCurrentRoutes.routes = data
-                    strongSelf.lblNoResult?.isHidden = (strongSelf.routes.count > 0)
-                    strongSelf.tableView.reloadData()
-                    
-                } else {
-                    // TODO: Do something.
-                }
-                
-            case .error(let error):
-                strongSelf.showAlertView(error.getMessage())
+            isFetchInProgress = true
+            
+            if isFetch {
+                self.showLoadingIndicator()
             }
+            
+            if isInfiniteScrolling {
+                self.isInfiniteScrolling = false
+            } else {
+                self.page = 1
+                self.routes = [Route]()
+                tableView?.reloadData()
+            }
+            
+            SERVICES().API.getRoutes(filterMode: filterMode, page: page) {[weak self] (result) in
+                self?.dismissLoadingIndicator()
+                self?.tableView.endRefreshControl()
+                guard let strongSelf = self else {
+                    return
+                }
+                switch result{
+                case .object(let obj):
+                    if let data = obj.data?.data {
+                        //                    strongSelf.routes = data
+                        // DMSCurrentRoutes.routes = data
+                        
+                        self?.totalPages = obj.data?.meta?.total_pages ?? 1
+                        self?.currentPage = obj.data?.meta?.current_page ?? 1
+                        
+                        if self?.currentPage != self?.totalPages {
+                            self?.page = (self?.currentPage ?? 1) + 1
+                        }
+                        
+                        self?.routes.append(data)
+                        CoreDataManager.saveRoutes(self?.routes ?? [])
+                        
+                        strongSelf.lblNoResult?.isHidden = (strongSelf.routes.count > 0)
+                        strongSelf.tableView.reloadData()
+                        self?.isFetchInProgress = false
+                    } else {
+                        // TODO: Do something.
+                    }
+                    
+                case .error(let error):
+                    strongSelf.showAlertView(error.getMessage())
+                    self?.isFetchInProgress = false
+                    break
+                }
+            }
+        } else {
+            self.routes = handleFilterRoute(with: filterMode, routes: getRoutes())
+            self.tableView.endRefreshControl()
+            self.lblNoResult?.isHidden = (self.routes.count > 0)
+            tableView.reloadData()
         }
+        
+    }
+    
+ }
+ 
+ //MARK: - CoreData
+ fileprivate extension RouteListVC {
+    func getRoutes() -> [Route] {
+        let results = CoreDataManager.getListRoutes()
+        return results
     }
     
  }
 
-
-
-
- 
+ //MARK: - Filter Routes
+ fileprivate extension RouteListVC {
+    func handleFilterRoute(with filterDataModel: FilterDataModel, routes: [Route]) -> [Route] {
+        var filterRoutes = [Route]()
+        let startDate = filterDataModel.timeData?.startDate
+        let endDate = filterDataModel.timeData?.endDate
+        let statusName = filterDataModel.status?.name
+        if statusName == nil || statusName == "all-statuses".localized {
+            filterRoutes = routes
+        } else {
+            filterRoutes = routes.filter({$0.nameStatus == statusName})
+        }
+        if startDate == nil && endDate == nil {
+            
+        } else {
+            filterRoutes = filterRoutes.filter({$0.startDate >= startDate! && $0.endDate <= endDate!})
+        }
+        return filterRoutes
+    }
+ }
 

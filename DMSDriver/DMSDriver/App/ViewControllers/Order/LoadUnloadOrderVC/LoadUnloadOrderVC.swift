@@ -182,7 +182,7 @@ extension LoadUnloadOrderVC {
             self?.dismissLoadingIndicator()
             switch result{
             case .object(let obj):
-                self?.showAlertView("updated-successful".localized)
+                self?.showAlertView(MSG_UPDATED_SUCCESSFUL)
                 self?.initData()
                 break
             case .error(let error):

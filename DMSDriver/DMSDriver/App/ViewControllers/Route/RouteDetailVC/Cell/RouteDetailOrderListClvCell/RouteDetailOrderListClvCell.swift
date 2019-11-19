@@ -142,6 +142,7 @@ extension RouteDetailOrderListClvCell: UITableViewDelegate, UITableViewDataSourc
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
         guard let _route = route else { return }
+        self.rootVC?.isOrderFiltering = false
         let vc:OrderDetailViewController = .loadSB(SB: .Order)
         vc.route = route
         let currentOrder = dataDisplay[indexPath.row]
@@ -199,26 +200,32 @@ extension RouteDetailOrderListClvCell{
     }
     
     func getRouteDetail(_ routeID:String, isFetch:Bool = false) {
-        if !isFetch {
-            self.rootVC?.showLoadingIndicator()
-        }
-        SERVICES().API.getRouteDetail(route: routeID) {[weak self] (result) in
-            self?.rootVC?.dismissLoadingIndicator()
-            self?.tbvContent?.endRefreshControl()
-            
-            switch result{
-            case .object(let obj):
-                self?.route = obj.data
-                self?.filterDataWithTapDisplay()
-//                guard let _route = obj.data else {return}
-//                self?.reloadOrderListScreen(route: _route)
-                
-                // Update route to DB local
-            //CoreDataManager.updateRoute(obj.data!)
-            case .error(let error):
-                self?.rootVC?.showAlertView(error.getMessage())
-                
+        if ReachabilityManager.isNetworkAvailable {
+            if !isFetch {
+                self.rootVC?.showLoadingIndicator()
             }
+            SERVICES().API.getRouteDetail(route: routeID) {[weak self] (result) in
+                self?.rootVC?.dismissLoadingIndicator()
+                self?.tbvContent?.endRefreshControl()
+                
+                switch result{
+                case .object(let obj):
+                    self?.route = obj.data
+                    self?.filterDataWithTapDisplay()
+                    //                guard let _route = obj.data else {return}
+                    //                self?.reloadOrderListScreen(route: _route)
+                    
+                    // Update route to DB local
+                    CoreDataManager.updateRoute(obj.data!)
+                case .error(let error):
+                    self?.rootVC?.showAlertView(error.getMessage())
+                    
+                }
+            }
+        } else {
+            self.route = CoreDataManager.getRoute(routeID)
+            self.tbvContent?.endRefreshControl()
+            self.filterDataWithTapDisplay()
         }
     }
 }

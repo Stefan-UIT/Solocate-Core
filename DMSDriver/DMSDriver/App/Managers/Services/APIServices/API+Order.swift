@@ -20,6 +20,20 @@ extension BaseAPIService{
     }
     
     @discardableResult
+    func updateRentingOrderStatusWith(_ rentingOrderStatus:Int, rentingOrder: RentingOrder, callback: @escaping APICallback<ResponseDataModel<RentingOrder>>) -> APIRequest? {
+        let path = String(format:PATH_REQUEST_URL.UPDATE_RENTING_ORDER_STATUS.URL, "\(rentingOrder.id )")
+        let params:[String:Any] = ["renting_order_status_id": rentingOrderStatus]
+        if ReachabilityManager.isNetworkAvailable {
+            return request(method: .PUT,
+                           path: path,
+                           input: .json(params),
+                           callback: callback);
+        } else {
+            return nil
+        }
+    }
+    
+    @discardableResult
     func updateOrderStatus(_ order:Order,
                            reason: Reason? = nil,
                            updateDetailType:Order.Detail.DetailUpdateType = .Deliver,
@@ -80,6 +94,15 @@ extension BaseAPIService{
     @discardableResult
     func getOrderDetail(orderId:String, callback: @escaping APICallback<ResponseDataModel<Order>>) -> APIRequest {
         let uri = String(format:PATH_REQUEST_URL.GET_ORDER_DETAIL.URL , orderId)
+        return request(method: .GET,
+                       path: uri,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func getRentingOrderDetail(rentingOrderId:String, callback: @escaping APICallback<ResponseDataModel<RentingOrder>>) -> APIRequest {
+        let uri = String(format:PATH_REQUEST_URL.GET_RENTING_ORDER_DETAIL.URL , rentingOrderId)
         return request(method: .GET,
                        path: uri,
                        input: .empty,
@@ -202,17 +225,42 @@ extension BaseAPIService{
     }
     
     func updateNoteToOrder(_ orderID:Int, message:String, files:[AttachFileModel]?, callback: @escaping APICallback<Order>){
-        let path = PATH_REQUEST_URL.UPDATE_ORDER_NOTE.URL
-        let url = E(SDBuildConf.serverUrlString()).appending(path)
+        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_NOTE.URL, "\(orderID)")
+//        let url = E(SDBuildConf.serverUrlString()).appending(path)
         let params:[String:Any] = ["order_id": orderID, "content":message]
         
         if ReachabilityManager.isNetworkAvailable {
             
-            requestWithFormDataType(url: url,
-                                    method: .post,
-                                    files: files,
-                                    parameters: params,
-                                    callback: callback)
+//            requestWithFormDataType(url: url,
+//                                    method: .put,
+//                                    files: files,
+//                                    parameters: params,
+//                                    callback: callback)
+            _ = request(method: .PUT,
+                           path: path,
+                           input: .json(params),
+                           callback: callback);
+        }
+    }
+    
+    func checkMoreLegs(_ orderID: Int, callback: @escaping APICallback<BoolModel>) {
+        let path = String(format:PATH_REQUEST_URL.REQUEST_MORE_LEGS.URL, "\(orderID)")
+        if ReachabilityManager.isNetworkAvailable {
+            _ = request(method: .GET,
+                        path: path,
+                        input: .empty,
+                        callback: callback);
+        }
+    }
+    
+    func requestMoreLegs(_ orderID: Int, legs: Int, callback: @escaping APICallback<ResponseDataModel<EmptyModel>>){
+        let path = String(format:PATH_REQUEST_URL.GET_MORE_LEGS.URL, "\(orderID)")
+        let params:[String:Any] = ["legs": legs]
+        if ReachabilityManager.isNetworkAvailable {
+            _ = request(method: .PUT,
+                        path: path,
+                        input: .json(params),
+                        callback: callback);
         }
     }
 }

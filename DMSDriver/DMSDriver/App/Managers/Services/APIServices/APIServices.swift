@@ -89,6 +89,14 @@ extension BaseAPIService {
     }
     
     @discardableResult
+    func getListRentingOrderStatus(callback: @escaping APICallback<ResponseArrData<RentingOrderStatus>>) -> APIRequest {
+        return request(method: .GET,
+                       path: PATH_REQUEST_URL.GET_LIST_RENTING_ORDER_STATUS.URL,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
     func getDriversByCoordinator(callback: @escaping APICallback<CoordinatorDriverModel>) -> APIRequest {
         return request(method: .GET,
                        path: PATH_REQUEST_URL.GET_DRIVER_BY_COORDINATOR.URL,
@@ -115,6 +123,18 @@ extension BaseAPIService {
                     callback: callback);
     }
     
+    @discardableResult
+    func uploadRequestMoreOrderWith(amountOfLegs:Int) {
+//        let params = [
+//            "amount": amount
+//            ] as [String : Any]
+//        return request(method: .POST,
+//                       serverURL:
+//            RESTConstants.SERVER_TRACKING_URL(),
+//                       path: PATH_REQUEST_URL.UPDATE_DRIVER_LOCATION.URL,
+//                       input: .json(params),
+//                       callback: callback);
+    }
     
     //MARK: - TRACKING
     @discardableResult

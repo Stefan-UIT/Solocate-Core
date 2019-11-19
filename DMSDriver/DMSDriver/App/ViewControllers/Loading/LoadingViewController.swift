@@ -15,16 +15,19 @@ class LoadingViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        fetchMultiLanguageFiles()
+        let isNetWorkAvailable = ReachabilityManager.isConnectedToInternet
+        if isLocalizedFileExist() && !isNetWorkAvailable {
+            self.appCheckLoginSuccess()
+            return
+        } else {
+            fetchMultiLanguageFiles()
+            return
+        }
         // Do any additional setup after loading the view.
     }
     
     func fetchMultiLanguageFiles() {
         self.showLoadingIndicator()
-//        if !ReachabilityManager.isNetworkAvailable {
-//            self.appCheckLoginSuccess()
-//            return
-//        }
         SERVICES().API.getLanguagesList { (result) in
             switch result{
             case .object(let obj):
@@ -101,6 +104,21 @@ class LoadingViewController: UIViewController {
         }
     }
     
+    func isLocalizedFileExist() -> Bool {
+        let path = App().bundlePath.appendingPathComponent("en.lproj", isDirectory: true).path
+        let url = NSURL(fileURLWithPath: path)
+        if let pathComponent = url.appendingPathComponent("Localizable.strings") {
+            let filePath = pathComponent.path
+            let fileManager = FileManager.default
+            if fileManager.fileExists(atPath: filePath) {
+                return true
+            } else {
+                return false
+            }
+        } else {
+            return false
+        }
+    }
 }
 
 

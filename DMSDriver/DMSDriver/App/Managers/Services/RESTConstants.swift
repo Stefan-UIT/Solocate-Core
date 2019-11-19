@@ -21,13 +21,16 @@ enum PATH_REQUEST_URL: String{
     case GET_ORDER_BY_COORDINATOR = "backend-api/v1/orders/all-order-by-coordinator?date=%@"
     case GET_DRIVER_ROUTES_BY_DATE = "transaction/v1/mobile/routes/by-driver?start_time=%@&end_time=%@"
     case GET_RAMP_ROUTES_BY_DATE = "transaction/v1/mobile/routes/by-ramp?start_time=%@&end_time=%@"
-    case GET_ROUTES_LIST = "transaction/v1/routes?page=1&limit=100"
+    case GET_ROUTES_LIST = "transaction/v1/routes?from_start_time=%@&to_start_time=%@"
+    case GET_RENTING_ORDERS = "transaction/v1/renting-orders?from_dt=%@&to_dt=%@"
     case GET_ROUTE_BY_COORDINATOR = "backend-api/v1/routes/all-route-by-coordinator?date=%@"
     case GET_PACKAGES_IN_ROUTE = "backend-api/v1/routes/get-packages-by-driver?id=%@&date=%@"
 //    case GET_ORDER_DETAIL = "transaction/v1/orders/%@"
     case GET_ORDER_DETAIL = "transaction/v1/shipping-orders/%@"
+    case GET_RENTING_ORDER_DETAIL = "transaction/v1/renting-orders/%@"
 //    case UPDATE_ORDER_STATUS = "transaction/v1/mobile/orders/%@/%@"
     case UPDATE_ORDER_STATUS = "transaction/v1/shipping-orders/%@/change-state/%@"
+    case UPDATE_RENTING_ORDER_STATUS = "transaction/v1/renting-orders/change-status/%@"
     case UPDATE_ORDER = "transaction/v1/mobile/orders/%@"
     case UPDATE_SEQUENCE = "backend-api/v1/routes/update-sequence"
 //    case UPLOAD_FILES = "transaction/v1/orders/%@/%@"
@@ -66,11 +69,12 @@ enum PATH_REQUEST_URL: String{
     case GET_DRIVING_RULE = "masterdata/v1/variables/get?key=driving_rule"
     case START_ROUTE = "transaction/v1/routes/process/%@/IP"
     case GET_LIST_STATUS = "masterdata/v1/shipping-order-statuses/list-active"
-    case GET_ALL_ROUTE_INPROGESS = "transaction/v1/routes/in-progress"
+    case GET_LIST_RENTING_ORDER_STATUS = "masterdata/v1/renting-order-statuses/list-active"
+    case GET_ALL_ROUTE_INPROGESS = "transaction/v1/routes/in-progress" // API not done
     case GET_LIST_ALERT = "masterdata/v1/mobile/alerts/driver-alerts"
     case DASHBOARD = "transaction/v1/mobile/dashboard/by-driver?start_time=%@&end_time=%@"
     case UPDATE_ROUTE_NOTE = "transaction/v1/routes/notes"
-    case UPDATE_ORDER_NOTE = "transaction/v1/orders/notes"
+    case UPDATE_ORDER_NOTE = "transaction/v1/shipping-orders/%@/notes"
     case GET_LIST_LANGUAGE  = "language/v1/namespaces/list-support?name=%@&system=%@"
     case GET_DRIVER_LIST  = "masterdata/v1/drivers/list-suggest?start_time=%@&end_time=%@&company_id=%@"
     case GET_TRUCK_LIST  = "masterdata/v1/trucks/suggest?start_time=%@&end_time=%@&company_id=%@"
@@ -80,6 +84,9 @@ enum PATH_REQUEST_URL: String{
     case FINISH_RETURNED_ITEM = "transaction/v1/mobile/item-returns/process/%@/finish"
     case GET_LIST_ROUTE_STATUS = "masterdata/v1/route-statuses/list-active"
     case GET_RETURN_REASON_LIST = "masterdata/v1/return-reasons/list-active"
+    case REQUEST_MORE_LEGS = "transaction/v1/shipping-orders/%@/check-more-legs"
+    case GET_MORE_LEGS = "transaction/v1/shipping-orders/%@/more-legs"
+    
     
     var URL:String  {
         return rawValue
@@ -116,9 +123,9 @@ class RESTConstants: NSObject {
         let type = SDBuildConf.serverEnvironment
         switch type {
         case .development:
-            serverURL = "http://solocate.ashdodb.dev.seldatdirect.com/"
+            serverURL = "https://dms.gadot.dev.seldatdirect.com/"
         case .qc:
-            serverURL = "http://solocate.ashdodb.qc.seldatdirect.com/"
+            serverURL = "https://dms.gadot.qc.seldatdirect.com/"
         case .staging:
             serverURL = "http://solocate.ashdodb.staging.seldatdirect.com/"
         case .demo:

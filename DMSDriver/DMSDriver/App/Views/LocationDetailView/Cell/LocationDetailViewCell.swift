@@ -13,6 +13,7 @@ class LocationDetailViewCell: UITableViewCell {
     @IBOutlet weak var btnClose:UIButton?
     @IBOutlet weak var lblTitle:UILabel?
     @IBOutlet weak var lblSubTitle:UILabel?
+    @IBOutlet weak var lblSubTitle2:UILabel?
     @IBOutlet weak var lblLocationName: UILabel?
     @IBOutlet weak var lblExpectedTime: UILabel?
     @IBOutlet weak var lblDate: UILabel?

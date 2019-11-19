@@ -18,7 +18,7 @@ class RentingOrderListTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var refCodeLbl: UILabel!
     @IBOutlet weak var customerLbl: UILabel!
-    @IBOutlet weak var truckLbl: UILabel!
+    @IBOutlet weak var detailsLbl: UILabel!
     var rentingOrder:RentingOrder!
     
     override func awakeFromNib() {
@@ -33,16 +33,23 @@ class RentingOrderListTableViewCell: UITableViewCell {
     }
 
     func configureCellWithRentingOrder(_ rentingOrder:RentingOrder) {
+        var startDate = "NA".localized
+        var endDate = "NA".localized
+        if let start = rentingOrder.startDate?.date {
+            startDate = HourFormater.string(from:start)
+        }
+        if let end = rentingOrder.endDate?.date {
+            endDate = HourFormater.string(from:end)
+        }
         self.rentingOrder = rentingOrder
-        orderIdLbl.text = "#"+"\(rentingOrder.rentingOrderId ?? 0)"
-        statusLbl.text = rentingOrder.rentingStatus?.statusName.localized
-        statusLbl.textColor = rentingOrder.rentingStatus?.color
-        startDateLbl.text = rentingOrder.startDate ?? ""
-        endDateLbl.text = rentingOrder.endDate ?? ""
-        dateLbl.text = rentingOrder.endDate ?? ""
-        refCodeLbl.text = "\(rentingOrder.refCode ?? 0)"
-        customerLbl.text = rentingOrder.customerName ?? ""
-        truckLbl.text = rentingOrder.truckType?.name ?? ""
+        orderIdLbl.text = "#"+"\(rentingOrder.id)"
+        statusLbl.text = rentingOrder.rentingOrderStatus?.name?.localized
+        statusLbl.textColor = rentingOrder.rentingOrderStatusColor
+        startDateLbl.text = startDate + " - "
+        endDateLbl.text = endDate
+        dateLbl.text = endDate
+        refCodeLbl.text = "\(rentingOrder.referenceCode)"
+        customerLbl.text = rentingOrder.rentingOrderCustomer?.userName ?? ""
+        detailsLbl.text = "\(rentingOrder.rentingOrderDetails?.count ?? 0)"
     }
-    
 }

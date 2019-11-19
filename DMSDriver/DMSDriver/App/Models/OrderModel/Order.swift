@@ -9,7 +9,7 @@
 import UIKit
 import ObjectMapper
 import CoreLocation
-
+import CoreData
 
 enum PackageE: String {
     case Pallet = "PLT"
@@ -162,13 +162,57 @@ class Address: BaseModel {
         start_time <- map["start_time"]
         end_time <- map["end_time"]
         srvc_time <- map["srvc_time"]
-        ctt_name <- map["ctt_name"]
-        ctt_phone <- map["ctt_phone"]
+        ctt_name <- map["consignee_name"]
+        ctt_phone <- map["consignee_phone"]
         seq <- map["seq"]
         loc_name <- map["loc_name"]
         floor <- map["floor"]
         apartment <- map["apt"]
         number <- map["number"]
+    }
+    
+    func toCoreLocation(context:NSManagedObjectContext) -> CoreLocation {
+        var result : [NSManagedObject] = []
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "CoreLocation")
+        fetchRequest.predicate = NSPredicate(format: "id = \(id)")
+        do {
+            result = try context.fetch(fetchRequest)
+        } catch let error as NSError {
+            print("Could not fetch. \(error), \(error.userInfo)")
+        }
+        
+        guard let coreLocation = result.first else {
+            let locationDB = NSEntityDescription.entity(forEntityName: "CoreLocation", in: context)
+            let _coreLocation:CoreLocation = CoreLocation(entity: locationDB!,
+                                                          insertInto: context)
+            _coreLocation.address = address ?? ""
+            _coreLocation.apartment = apartment
+            _coreLocation.cttName = ctt_name
+            _coreLocation.cttPhone = ctt_phone ?? ""
+            _coreLocation.endTime = end_time
+            _coreLocation.startTime = start_time
+            _coreLocation.floor = floor
+            _coreLocation.id = Int16(id )
+            _coreLocation.lattd = lattd
+            _coreLocation.lngtd = lngtd
+            _coreLocation.locName = loc_name
+            _coreLocation.name =  name
+            _coreLocation.number = number
+            _coreLocation.phone = phone
+            _coreLocation.seq = Int16(seq)
+            _coreLocation.srvcTime = Int64(srvc_time ?? 0)
+            
+            print("Find DB At: ", FileManager.default.urls(for: .documentDirectory,
+                                                           in: .userDomainMask).last ?? "Not Found!")
+            do {
+                try context.save()
+            } catch {
+                //  let nserror = error as NSError
+                //  print("Unresolved error \(nserror), \(nserror.userInfo)")
+            }
+            return _coreLocation
+        }
+        return coreLocation as! CoreLocation
     }
 }
 
@@ -213,6 +257,7 @@ class Order: BaseModel {
         }
         
         struct Pivot:Mappable {
+            var id:Int?
             var sku_id:Int?
             var shipping_order_id:Int?
             var unit_id:Int?
@@ -229,6 +274,7 @@ class Order: BaseModel {
             }
             
             mutating func mapping(map: Map) {
+                id <- map["id"]
                 sku_id <- map["sku_id"]
                 shipping_order_id <- map["shipping_order_id"]
                 unit_id <- map["unit_id"]
@@ -251,7 +297,7 @@ class Order: BaseModel {
             }
         }
         
-        var id:Int?
+        var id:Int = -1
         var name:String?
         var order_id:Int?
         var package_id:Int?
@@ -552,6 +598,16 @@ class Order: BaseModel {
         }
     }
     
+    var skusName: String {
+        get {
+            var _skusName = ""
+            for skuName in details ?? [] {
+                _skusName = _skusName == "" ? (skuName.name ?? "") : _skusName + ", " + (skuName.name ?? "")
+            }
+            return _skusName
+        }
+    }
+    
     lazy var orderGroup:OrderGroup = {
         return OrderGroup.init(rawValue: group) ?? OrderGroup.Logistic
     }()
@@ -630,7 +686,7 @@ class Order: BaseModel {
         pod_req <- map["pod_req"]
         sig_req <- map["sig_req"]
         note <- map["note"]
-        notes <- map["notes"]
+        notes <- map["shipping_notes"]
         details <- map["shipping_details"]
         files <- map["shipping_files"]
         urgent_type_id <- map["urgent_type_id"]

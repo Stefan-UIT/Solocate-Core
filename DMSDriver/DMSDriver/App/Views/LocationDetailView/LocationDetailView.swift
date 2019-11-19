@@ -101,7 +101,7 @@ extension LocationDetailView:UITableViewDataSource{
         if indexPath.section == LocationViewSection.Location.rawValue {
             return 140
         }
-        return 45
+        return 80
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -165,9 +165,10 @@ extension LocationDetailView:UITableViewDataSource{
             let cell = tableView.dequeueReusableCell(withIdentifier: packageIdentifierCell, for: indexPath) as! LocationDetailViewCell
             
             let subTitle = locationDetailSubTitle(details: delivers)
+            let subTitle2 = locationDetailSubTitle2(details: delivers)
 //            cell.lblSubTitle?.text = (deliver.package?.name != nil) ? deliver.package?.name : "package".localized + ": \(row + 1)"
             cell.lblSubTitle?.text = subTitle
-
+            cell.lblSubTitle2?.text = subTitle2
 
             return cell
         case .Pickup:
@@ -175,37 +176,38 @@ extension LocationDetailView:UITableViewDataSource{
             
             
             let subTitle = locationDetailSubTitle(details: pickups)
+            let subTitle2 = locationDetailSubTitle2(details: pickups)
             
             cell.lblSubTitle?.text = subTitle
+            cell.lblSubTitle2?.text = subTitle2
 
             
             return cell
         }
     }
     
-    func locationDetailSubTitle(details:[Order.Detail]) -> String {
-        var palletsQty = 0
-        var cartonsQty = 0
-        for item in details {
-            if item.isPallet {
-                palletsQty += item.pivot?.qty ?? 0
-            } else {
-                cartonsQty += item.pivot?.qty ?? 0
-            }
+    func locationDetailSubTitle2(details: [Order.Detail]) -> String {
+        var result = ""
+        var skusName = ""
+        for detail in details {
+            skusName = skusName == "" ? (detail.name ?? "") : skusName + ", " + (detail.name ?? "")
         }
+        result += "SKUs".localized + ": " + "\(skusName)"
+        return result
+    }
+    
+    func locationDetailSubTitle(details:[Order.Detail]) -> String {
+        var cartonsQty = 0
         
         var result = ""
-        if palletsQty > 0 {
-            result += "pallets".localized + ": " + "\(palletsQty)"
-        }
-        
-        if cartonsQty > 0 {
+        for item in details {
+            cartonsQty += item.pivot?.qty ?? 0
             if !result.isEmpty {
-                result += ", "
+                result += ""
+            } else {
+                result += "Total quantity".localized + ": " + "\(cartonsQty)"
             }
-            result += "cartons".localized + ": " + "\(cartonsQty)"
         }
-        
         return result
     }
 }

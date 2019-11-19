@@ -65,7 +65,7 @@ class NoteTableViewCell: UITableViewCell {
         self.note = note
         handleShowingCollectionViewImages()
         self.collectionView.reloadData()
-        self.authorNameLabel.text = note.user.userName ?? ""
+        self.authorNameLabel.text = note.createdBy.userName
         self.contentLabel.text = note.content
         self.timeLabel.text = displayedStringDate(from:note.createdAt)
         let numberOfAttachedFiles = note.files.count
@@ -75,13 +75,13 @@ class NoteTableViewCell: UITableViewCell {
             self.attachedFilesLabel.text = (numberOfAttachedFiles > 1) ? "\(numberOfAttachedFiles) attached files" : "\(numberOfAttachedFiles) attached file"
         }
         
-        let statusOrder = StatusOrder(rawValue: note.status.code ?? "OP")
-//        statusButton.borderColor = statusOrder?.color
-//        statusButton.setTitle(statusOrder?.statusName, for: .normal)
-//        statusButton.setTitleColor(statusOrder?.color, for: .normal)
-        statusButton.setTitle(statusOrder?.statusName.localized, for: .normal)
-        statusButton.backgroundColor = statusOrder?.color
-        statusButton.borderColor = statusOrder?.color
+//        let statusOrder = StatusOrder(rawValue: note.status.code ?? "OP")
+        guard let statusOrder = StatusOrder(rawValue: note.status?.code ?? "OP") else { return }
+        let status = (statusOrder.statusName.localized ?? "")
+        let statusName = ("  " + status + "  ")
+        statusButton.setTitle(statusName, for: .normal)
+        statusButton.backgroundColor = statusOrder.color
+        statusButton.borderColor = statusOrder.color
         statusButton.setTitleColor(.white, for: .normal)
         statusButton.cornerRadius = 10.0
     }

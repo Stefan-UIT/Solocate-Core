@@ -29,12 +29,13 @@ class RentingOrderDetailVC: BaseViewController {
     @IBOutlet weak var tbvContent: UITableView?
     @IBOutlet weak var statusButtonView: UIView!
     @IBOutlet weak var updateStatusButton: UIButton!
+    @IBOutlet weak var cancelStatusButton: UIButton!
     
     @IBOutlet var tableViewBottomConstraint: NSLayoutConstraint!
     fileprivate var rentingOrderInfo = [RentingOrderDetailInforRow]()
     fileprivate var rentingSKUS = [RentingOrderDetailInforRow]()
     fileprivate let headerCellIdentifier = "RentingOrderDetailHeaderCell"
-    fileprivate let cellIdentifier = "RentingOrderDetailTableViewCell"
+    fileprivate let rentingDetailInfocellIdentifier = "RentingOrderDetailInfoTableViewCell"
     fileprivate var scanItems = [String]()
     fileprivate var arrTitleHeader:[String] = []
     
@@ -53,6 +54,7 @@ class RentingOrderDetailVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
+        fetchData(showLoading: true)
         setupTableView()
         initVar()
         setupDataDetailInforRows()
@@ -85,26 +87,17 @@ class RentingOrderDetailVC: BaseViewController {
         rentingOrderInfo.removeAll()
         rentingSKUS.removeAll()
         
-        let rentingOrderID = RentingOrderDetailInforRow("renting-order-id".localized,"\(_rentingOrder.rentingOrderId ?? 0)")
-        let rentingRefCode = RentingOrderDetailInforRow("ref-code".localized,"\(_rentingOrder.refCode ?? 0)")
-        let rentingCustomer = RentingOrderDetailInforRow("customer-name".localized, _rentingOrder.customerName ?? "")
-        let rentingDateRange = RentingOrderDetailInforRow("date-range".localized,"\(_rentingOrder.startDate ?? "")"+" - "+"\(_rentingOrder.endDate ?? "")")
-        let rentingTruckType = RentingOrderDetailInforRow("truck-type".localized,"\(_rentingOrder.truckType?.name ?? "")")
-        let rentingTrailerTankerType = RentingOrderDetailInforRow("trailer-tanker-type".localized, _rentingOrder.trailerTankerType ?? "")
-        
-        let rentingSKUs = RentingOrderDetailInforRow(_rentingOrder.skusName, "")
-        
         // Cell Renting Detail Info
+        let rentingOrderID = RentingOrderDetailInforRow("renting-order-id".localized,"\(_rentingOrder.id)")
+        let rentingRefCode = RentingOrderDetailInforRow("ref-code".localized,"\(_rentingOrder.referenceCode)")
+        let rentingCustomer = RentingOrderDetailInforRow("customer-name".localized, _rentingOrder.rentingOrderCustomer?.userName ?? "")
+        let rentingDateRange = RentingOrderDetailInforRow("date-range".localized,"\(_rentingOrder.startDate ?? "")"+" - "+"\(_rentingOrder.endDate ?? "")")
+        
         rentingOrderInfo.append(rentingOrderID)
         rentingOrderInfo.append(rentingRefCode)
         rentingOrderInfo.append(rentingCustomer)
         rentingOrderInfo.append(rentingDateRange)
-        rentingOrderInfo.append(rentingTruckType)
-        rentingOrderInfo.append(rentingTrailerTankerType)
         
-        
-        // Cell Reting SKUs
-        rentingSKUS.append(rentingSKUs)
     }
     
     override func updateUI()  {
@@ -114,8 +107,8 @@ class RentingOrderDetailVC: BaseViewController {
     }
     
     func initVar() {
-        arrTitleHeader = ["order_info".localized,
-                          "SKUS".localized]
+        arrTitleHeader = ["order-info".localized,
+                          "details".localized]
     }
     
     func setupTableView() {
@@ -124,40 +117,45 @@ class RentingOrderDetailVC: BaseViewController {
     }
     
     func updateStatusButtonView() {
-        switch rentingOrder?.rentingStatus?.rawValue {
-        case StatusRentingOrder.newStatus.rawValue:
-            updateStatusButton.setTitle("Start".localized.uppercased(), for: .normal)
-            updateStatusButton.backgroundColor = AppColor.greenColor
-            typeUpdateBtn = .START_RENTING_ORDER
+        if rentingOrder?.rentingOrderStatus?.code == RentingOrderStatusCode.Finished.rawValue || rentingOrder?.rentingOrderStatus?.code == RentingOrderStatusCode.Cancelled.rawValue {
+            self.handleShowingUpdateStatusView(false)
+        } else {
+            cancelStatusButton.setTitle("Cancel".localized.uppercased(), for: .normal)
+            cancelStatusButton.backgroundColor = AppColor.redColor
             self.handleShowingUpdateStatusView(true)
-        case StatusRentingOrder.InProgress.rawValue:
+            updateStatusButton.isHidden = true
+        }
+        if rentingOrder?.rentingOrderStatus?.code == RentingOrderStatusCode.InProgress.rawValue {
             updateStatusButton.setTitle("Finish".localized.uppercased(), for: .normal)
             updateStatusButton.backgroundColor = AppColor.greenColor
             typeUpdateBtn = .FINISH_RENTING_ORDER
             self.handleShowingUpdateStatusView(true)
-        case StatusRentingOrder.deliveryStatus.rawValue:
-            self.handleShowingUpdateStatusView(false)
-        default:
-            self.handleShowingUpdateStatusView(false)
+        } else if rentingOrder?.rentingOrderStatus?.code == RentingOrderStatusCode.FullyAssigned.rawValue {
+            updateStatusButton.setTitle("Start".localized.uppercased(), for: .normal)
+            updateStatusButton.backgroundColor = AppColor.greenColor
+            self.handleShowingUpdateStatusView(true)
+            typeUpdateBtn = .START_RENTING_ORDER
         }
     }
     
     func handleShowingUpdateStatusView(_ isShow: Bool) {
         tableViewBottomConstraint.constant = isShow ? 50 : 0
-        statusButtonView.isHidden = isShow ? false : true
+        statusButtonView.isHidden = !isShow
+        updateStatusButton.isHidden = !isShow
     }
     
     // MARK: - Action
     @IBAction func didTapUpdateStatusButton(_ sender: Any) {
         switch typeUpdateBtn {
         case .START_RENTING_ORDER:
-            rentingOrder?.rentingStatus = StatusRentingOrder(rawValue: "IP")
-            updateUI()
+            self.updateRentingOrderStatusWith(RentingOrderStatusCode.InProgress.code, rentingOrder: rentingOrder!)
         case .FINISH_RENTING_ORDER:
-            rentingOrder?.rentingStatus = StatusRentingOrder(rawValue: "DV")
-            updateUI()
+            self.updateRentingOrderStatusWith(RentingOrderStatusCode.Finished.code, rentingOrder: rentingOrder!)
         }
-        
+    }
+    
+    @IBAction func didTapCancelButton(_ sender: Any) {
+        self.updateRentingOrderStatusWith(RentingOrderStatusCode.Cancelled.code, rentingOrder: rentingOrder!)
     }
     
     func handleFisnishedAction() {
@@ -189,7 +187,7 @@ extension RentingOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
         case .OrderInfo:
             return rentingOrderInfo.count
         case .SKUS:
-            return rentingSKUS.count
+            return rentingOrder?.rentingOrderDetails?.count ?? 0
         }
     }
     
@@ -206,12 +204,13 @@ extension RentingOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if let headerCell = tableView.dequeueReusableCell(withIdentifier: headerCellIdentifier) as? RentingOrderDetailTableViewCell{
+        if let headerCell = tableView.dequeueReusableCell(withIdentifier: headerCellIdentifier) as? RentingOrderDetailInfoTableViewCell{
             headerCell.nameLabel?.text = arrTitleHeader[section]
             if section == 0 {
                 headerCell.contentLabel?.isHidden = false
-                headerCell.contentLabel?.text = rentingOrder?.rentingStatus?.statusName.localized
-                headerCell.contentLabel?.textColor = rentingOrder?.rentingStatus?.color
+                headerCell.contentLabel?.text = rentingOrder?.rentingOrderStatus?.name?.localized
+                headerCell.contentLabel?.textColor = rentingOrder?.rentingOrderStatusColor
+                
             } else {
                 headerCell.contentLabel?.isHidden = true
             }
@@ -235,17 +234,19 @@ extension RentingOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
         let section:RentingOrderSection = RentingOrderSection(rawValue: indexPath.section)!
         switch section {
         case .OrderInfo:
-            return cell(items: rentingOrderInfo, tableView, indexPath)
+            return rentingOrderInfoCell(items: rentingOrderInfo, tableView, indexPath)
         case .SKUS:
-            return cell(items: rentingSKUS, tableView, indexPath)
-            //        return UITableViewCell()
+            let cell = tbvContent?.dequeueReusableCell(withIdentifier: "RentingOrderDetailTableViewCell", for: indexPath) as! RentingOrderDetailTableViewCell
+            guard let rentingOrderDetail = rentingOrder?.rentingOrderDetails?[indexPath.row] else {return cell}
+            cell.configureCellWithRentingOrderDetail(rentingOrderDetail)
+            return cell
         }
             
     }
     
-    func cell(items:[RentingOrderDetailInforRow],_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
+    func rentingOrderInfoCell(items:[RentingOrderDetailInforRow],_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
         let item = items[indexPath.row]
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier, for: indexPath) as! RentingOrderDetailTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: rentingDetailInfocellIdentifier, for: indexPath) as! RentingOrderDetailInfoTableViewCell
         cell.rentingOrderDetailItem = item
         cell.selectionStyle = .none
         return cell
@@ -284,4 +285,58 @@ extension RentingOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
 //         }
 //         */
 //    }
+}
+
+//MARK: API
+extension RentingOrderDetailVC {
+    func fetchData(showLoading:Bool = false)  {
+        getRentingOrderDetail()
+    }
+    
+    private func getRentingOrderDetail(isFetch:Bool = false) {
+        if ReachabilityManager.isNetworkAvailable {
+            guard let _rentingOrderID = rentingOrder?.id else { return }
+            if !isFetch {
+                showLoadingIndicator()
+            }
+            SERVICES().API.getRentingOrderDetail(rentingOrderId: "\(_rentingOrderID)") {[weak self] (result) in
+                self?.dismissLoadingIndicator()
+                switch result{
+                case .object(let object):
+                    if let _rentingOrder = object.data {
+                        self?.rentingOrder = _rentingOrder
+                        CoreDataManager.updateRentingOrder(_rentingOrder) // update rentingOrderDetail to DB local
+                    }
+//                    self?.rootVC?.order =  self?.orderDetail
+                    self?.initVar()
+                    self?.updateUI()
+                case .error(let error):
+                    self?.showAlertView(error.getMessage())
+                }
+            }
+            
+        }else {
+            //Get data from local DB
+            if let _rentingOrder = self.rentingOrder {
+                self.rentingOrder = CoreDataManager.getRentingOrder(_rentingOrder.id)
+                self.initVar()
+                self.updateUI()
+            }
+        }
+    }
+    
+    func updateRentingOrderStatusWith(_ rentingOrderStatus: Int, rentingOrder: RentingOrder){
+        SERVICES().API.updateRentingOrderStatusWith(rentingOrderStatus, rentingOrder: rentingOrder) {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(_):
+                self?.showAlertView(MSG_UPDATED_SUCCESSFUL)
+                self?.fetchData()
+                break
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
+        }
+    }
+    
 }

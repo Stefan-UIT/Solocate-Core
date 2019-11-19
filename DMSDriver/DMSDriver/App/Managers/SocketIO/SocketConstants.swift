@@ -21,8 +21,8 @@ struct SocketConfiguration {
 
 // SOCKET KEY
 struct SocketConstants {
-    static let SERVER_DEV = "http://solocate.ashdodb.dev.seldatdirect.com"
-    static let SERVER_QC = "http://solocate.ashdodb.qc.seldatdirect.com"
+    static let SERVER_DEV = "http://dms.gadot.dev.seldatdirect.com"
+    static let SERVER_QC = "http://dms.gadot.qc.seldatdirect.com"
     static let SERVER_DEMO = "http://solocate.ashdodb.demo.seldatdirect.com"
     static let SERVER_STAGING = "http://solocate.ashdodb.staging.seldatdirect.com"
     static let SERVER_PROD = "http://dms-customization.seldatdirect.com"

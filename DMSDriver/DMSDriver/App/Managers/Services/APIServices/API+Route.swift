@@ -25,20 +25,35 @@ extension BaseAPIService {
                        callback: callback);
     }
     @discardableResult
-    func getRoutes(filterMode:FilterDataModel, callback: @escaping APICallback<ResponseDataModel<ResponseDataListModel<Route>>>) -> APIRequest {
-//        let startDate = DateFormatter.filterDate.string(from: filterMode.timeData?.startDate ?? Date())
-//        let endDate = DateFormatter.filterDate.string(from: filterMode.timeData?.endDate ?? Date())
-//        let status = filterMode.status
-        
-//        let urlString = (isRampManagerMode) ? PATH_REQUEST_URL.GET_RAMP_ROUTES_BY_DATE.URL : PATH_REQUEST_URL.GET_DRIVER_ROUTES_BY_DATE.URL
-//        let urlString = PATH_REQUEST_URL.GET_DRIVER_ROUTES_BY_DATE.URL
+    func getRoutes(filterMode:FilterDataModel, page:Int = 1, callback: @escaping APICallback<ResponseDataModel<ResponseDataListModel<Route>>>) -> APIRequest {
+        let startDate = DateFormatter.filterDate.string(from: filterMode.timeData?.startDate ?? Date())
+        let endDate = DateFormatter.filterDate.string(from: filterMode.timeData?.endDate ?? Date())
+        let status = filterMode.status
         let urlString = PATH_REQUEST_URL.GET_ROUTES_LIST.URL
-//        var path = String(format: urlString,startDate,endDate)
-//        if let _statusId = status?.id {
-//            path = path + "&status_id=\(_statusId)"
-//        }
+        var path = String(format: urlString,startDate,endDate)
+        if let _statusId = status?.id {
+            path = path + "&status_id=\(_statusId)"
+        }
+        path = path + "&page=\(page)&limit=10"
         return request(method: .GET,
-                       path:urlString,
+                       path:path,
+                       input: APIInput.empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func getRentingOrders(filterMode:FilterDataModel, page:Int = 1, callback: @escaping APICallback<ResponseDataModel<ResponseDataListModel<RentingOrder>>>) -> APIRequest {
+        let startDate = DateFormatter.filterDate.string(from: filterMode.timeData?.startDate ?? Date())
+        let endDate = DateFormatter.filterDate.string(from: filterMode.timeData?.endDate ?? Date())
+        let status = filterMode.status
+        let urlString = PATH_REQUEST_URL.GET_RENTING_ORDERS.URL
+        var path = String(format: urlString,startDate,endDate)
+        if let _statusId = status?.id {
+            path = path + "&renting_order_status_id=\(_statusId)"
+        }
+        path = path + "&page=\(page)&limit=10"
+        return request(method: .GET,
+                       path:path,
                        input: APIInput.empty,
                        callback: callback);
     }

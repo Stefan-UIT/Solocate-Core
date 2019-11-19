@@ -11,11 +11,14 @@ import Foundation
 //MARK: - CoreAttachFile
 extension CoreAttachFile{
     func setAttributeFrom(_ attachFile: AttachFileModel)  {
-        contentFile = attachFile.contentFile
+        let image = UIImage(named: "place_holder")
+        contentFile = image?.pngData()
         id = Int32(attachFile.id)
         name = attachFile.name
         type = attachFile.type
+        typeFile = attachFile.typeFile
         url = attachFile.url
+        urlThumbnail = attachFile.url_thumbnail
     }
     
     func convertToAttachfileModel() -> AttachFileModel {
@@ -23,7 +26,9 @@ extension CoreAttachFile{
         file.id = Int(id)
         file.name = name
         file.type = type
+        file.typeFile = typeFile
         file.url = url
+        file.url_thumbnail = urlThumbnail
         file.contentFile = contentFile
         
         return file

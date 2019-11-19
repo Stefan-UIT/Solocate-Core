@@ -85,7 +85,7 @@ class RouteDetailVC: BaseViewController {
     var dateStringFilter:String = Date().toString()
 
 
-    var displayMode:RouteDetailDisplayMode = .DisplayModeMap{
+    var displayMode:RouteDetailDisplayMode = ReachabilityManager.isNetworkAvailable ? .DisplayModeMap : .DisplayModeStops{
         didSet{
             updateUIWithMode(displayMode)
         }
@@ -99,7 +99,7 @@ class RouteDetailVC: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        clvContent?.isHidden = true
+//        clvContent?.isHidden = true
         initUI()
 //        initFloatButton()
 //        handleShowingActionsContainer()
@@ -198,6 +198,7 @@ class RouteDetailVC: BaseViewController {
         lblStatus?.textColor = route?.colorStatus
         
 //        layoutAddNoteButton()
+        clvContent?.reloadData()
     }
     
     private func setupCollectionView() {
@@ -416,32 +417,36 @@ extension RouteDetailVC{
     }
     
     func getRouteDetail(_ routeID:String, showLoading:Bool = true) {
-        if showLoading {
-            self.showLoadingIndicator()
-        }
-        SERVICES().API.getRouteDetail(route: routeID) {[weak self] (result) in
-            guard let strongSelf = self else {
-                return
+        if ReachabilityManager.isNetworkAvailable {
+            if showLoading {
+                self.showLoadingIndicator()
             }
-            strongSelf.dismissLoadingIndicator()
-            switch result{
-            case .object(let obj):
-                strongSelf.route = obj.data
-                strongSelf.clvContent?.isHidden = false
-                strongSelf.clvContent?.reloadData()
-                strongSelf.initUI()
-//                if isRampManagerMode {
-//                    strongSelf.updateActionsUI()
-//                    strongSelf.setupScrollMenuView()
-//                }
-                /*
-                 guard let data = obj.data else {return}
-                 CoreDataManager.updateRoute(data) // Update route to DB local
-                 */
-            case .error(let error):
-                strongSelf.showAlertView(error.getMessage())
-                
+            SERVICES().API.getRouteDetail(route: routeID) {[weak self] (result) in
+                guard let strongSelf = self else {
+                    return
+                }
+                strongSelf.dismissLoadingIndicator()
+                switch result{
+                case .object(let obj):
+                    strongSelf.route = obj.data
+                    strongSelf.clvContent?.isHidden = false
+                    strongSelf.clvContent?.reloadData()
+                    strongSelf.initUI()
+                    
+                    
+                     guard let data = obj.data else {return}
+                     CoreDataManager.updateRoute(data) // Update route to DB local
+                case .error(let error):
+                    strongSelf.showAlertView(error.getMessage())
+                    
+                }
             }
+        } else {
+            self.route = CoreDataManager.getRoute(routeID)
+            self.clvContent?.endRefreshControl()
+            self.clvContent?.isHidden = false
+            self.clvContent?.reloadData()
+            self.initUI()
         }
     }
 }

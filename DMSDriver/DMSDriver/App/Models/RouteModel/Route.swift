@@ -20,7 +20,7 @@ class Zone: BasicModel { }
 
 class TankerJSON: BaseModel {
     var id:Int?
-    var tanker:Tanker!
+    var tanker:Tanker?
     
     override init() {
         super.init()
@@ -168,6 +168,30 @@ class Route: BaseModel {
         case InProgess = "IP"
         case Finished = "DV"
         case Canceled = "CC"
+        
+        var name: String {
+            get {
+                switch self {
+                case .New:
+                    return "New".localized
+                case .InProgess:
+                    return "in-progress".localized;
+                case .Finished:
+                    return "Finished".localized;
+                case .Canceled:
+                    return "Cancelled".localized;
+                }
+            }
+            
+        }
+        
+        func convertToStatus() -> Status {
+            let result = Status()
+            result.code = rawValue
+            result.name = name
+            return result
+        }
+
     }
   
     var  id = -1
@@ -228,13 +252,20 @@ class Route: BaseModel {
         }
     }
     
+    var trailerTankerNameCoreData: String = ""
+    
     var trailerTankerName: String {
         get {
-            var _trailerTankerName = ""
-            for tanker in tankers ?? [] {
-                _trailerTankerName = _trailerTankerName + ", " + tanker.plateNumber
+            if ReachabilityManager.isNetworkAvailable {
+                var _trailerTankerName = ""
+                for tanker in tankers ?? [] {
+                    _trailerTankerName = _trailerTankerName == "" ? tanker.plateNumber : _trailerTankerName + ", " + tanker.plateNumber
+                    _trailerTankerName = _trailerTankerName == "-" ? "" : _trailerTankerName
+                }
+                return _trailerTankerName
+            } else {
+                return trailerTankerNameCoreData
             }
-            return _trailerTankerName
         }
     }
     
@@ -321,9 +352,11 @@ class Route: BaseModel {
         company <- map["company"]
         loadVolume <- map["load_vol"]
         assignedInfo <- map["drivers"]
-        tankersJSON <- map["tankers"]
-        guard let array = tankersJSON else { return }
-        tankers = array.map({$0.tanker})
+        tankers <- map["tankers"]
+//        tankersJSON <- map["tankers"]
+//        guard let array = tankersJSON else { return }
+//
+//        tankers = array.map({$0.tanker ?? Tanker()})
     }
     
     var ordersAbleToLoad:[Order] {
@@ -426,6 +459,20 @@ class Route: BaseModel {
             default:
                 return "Unknown";
             }
+        }
+    }
+    
+    var startDate: Date {
+        get {
+            guard let _startDate = start_time.date else { return Date() }
+            return _startDate
+        }
+    }
+    
+    var endDate: Date {
+        get {
+            guard let _endDate = end_time.date else { return Date() }
+            return _endDate
         }
     }
 }

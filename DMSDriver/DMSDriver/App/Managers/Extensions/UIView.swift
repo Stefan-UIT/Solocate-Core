@@ -442,6 +442,15 @@ extension UIView {
     
 }
 
+extension UIView {
+    func makeShadow(_ alpha: CGFloat = 0.25) {
+        self.layer.shadowColor = UIColor(red: 0, green: 0, blue: 0, alpha: alpha).cgColor
+        self.layer.shadowOffset = CGSize(width: 0.0, height: 3.0)
+        self.layer.shadowOpacity = 1.0
+        self.layer.shadowRadius = 20.0
+        self.layer.masksToBounds = false
+    }
+}
 
 extension CGFloat {
     func scaleHeight() -> CGFloat {

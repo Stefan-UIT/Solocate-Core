@@ -30,7 +30,6 @@ class ReturnedItemsListVC: BaseViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        initVar()
         updateUI()
         setupCollectionView()
     }
@@ -62,16 +61,6 @@ class ReturnedItemsListVC: BaseViewController {
                 self?.clvContent?.reloadData()
             }
         }
-    }
-    
-    func initVar()  {
-//        let dataManager = TimeData()
-//        if let _timeData = dataManager.getTimeDataItemDefault() {
-//            selectedTimeData = _timeData
-//        }else {
-//            selectedTimeData = dataManager.getTimeDataItemType(type: .TimeItemTypeToday)
-//            dataManager.setTimeDataItemDefault(item: selectedTimeData!)
-//        }
     }
     
     //MARK: - Intialize
@@ -109,29 +98,6 @@ extension ReturnedItemsListVC:DMSNavigationServiceDelegate{
     func didSelectedMenuAction() {
         showSideMenu()
     }
-    /*
-    func didSelectedLeftButton(_ sender: UIBarButtonItem) {
-        let dateFormater =  DateFormatter()
-        dateFormater.dateFormat = "MM/dd/yyyy"
-        
-        let currentDate = dateFormater.date(from: dateStringFilter)
-        UIAlertController.showDatePicker(style: .actionSheet,
-                                         mode: .date,
-                                         title: "select-date".localized,
-                                         currentDate: currentDate) {[weak self] (date) in
-                                            
-                                            self?.dateFilter = date
-                                            self?.dateStringFilter = date.toString("MM/dd/yyyy")
-                                            if self?.hasNetworkConnection ?? false{
-                                                //self?.getDataFromServer()
-                                                self?.getListTask()
-                                                
-                                            }else{
-                                                //self?.getDataFromDBLocal(E(self?.dateStringFilter))
-                                            }
-        }
-    }
-     */
 }
 
 
@@ -239,9 +205,6 @@ extension ReturnedItemsListVC{
             self?.clvContent?.endRefreshControl()
             switch result{
             case .object(let obj):
-//                let taskList = obj.data?.data ?? []
-//                let array = taskList.map({$0.toReturnedItems()})
-//                self?.items = array
                 self?.totalPages = obj.data?.meta?.total_pages ?? 1
                 self?.currentPage = obj.data?.meta?.current_page ?? 1
                 
@@ -250,11 +213,6 @@ extension ReturnedItemsListVC{
                 }
                 
                 self?.items.append(obj.data?.data ?? [])
-                
-//                self?.taskList.sort(by: { (task1, task2) -> Bool in
-//                    return task1.id < task2.id
-//                })
-                
                 self?.lblNoData?.isHidden = self?.items.count > 0
                 self?.updateUI()
                 self?.isFetchInProgress = false

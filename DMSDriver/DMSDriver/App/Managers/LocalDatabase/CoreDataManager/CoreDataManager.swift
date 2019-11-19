@@ -23,6 +23,17 @@ enum Entity:String {
     case CoreStatus = "CoreStatus"
     case Request = "CoreRequest"
     case CoreRouteStatus = "CoreRouteStatus"
+    case CoreRentingOrderStatus = "CoreRentingOrderStatus"
+    case CoreSKU = "CoreSKU"
+    case CoreLocation = "CoreLocation"
+    case CoreNote = "CoreNote"
+    case CoreUserInfo = "CoreUserInfo"
+    case CoreRentingOrder = "CoreRentingOrder"
+    case CoreTanker = "CoreTanker"
+    case CoreTankerType = "CoreTankerType"
+    case CoreTruck = "CoreTruck"
+    case CoreTruckType = "CoreTruckType"
+    case CoreRentingOrderDetail = "CoreRentingOrderDetail"
 
 }
 
@@ -86,8 +97,8 @@ class _CoreDataManager {
             } catch {
                 // Replace this implementation with code to handle the error appropriately.
                 // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nserror = error as NSError
-                print("Unresolved error \(nserror), \(nserror.userInfo)")
+//                let nserror = error as NSError
+//                print("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
     }
@@ -106,21 +117,39 @@ class _CoreDataManager {
         clearDatabase(entity: .Warehouse)
         clearDatabase(entity: .AttachFile)
         clearDatabase(entity: .UrlFile)
+        clearDatabase(entity: .CoreNote)
+        clearDatabase(entity: .CoreLocation)
+        clearDatabase(entity: .Order)
+        clearDatabase(entity: .CoreStatus)
+        clearDatabase(entity: .Request)
+        clearDatabase(entity: .CoreRouteStatus)
+        clearDatabase(entity: .CoreRentingOrderStatus)
+        clearDatabase(entity: .CoreSKU)
+        clearDatabase(entity: .CoreUserInfo)
+        clearDatabase(entity: .CoreTanker)
+        clearDatabase(entity: .CoreTankerType)
+        clearDatabase(entity: .CoreTruck)
+        clearDatabase(entity: .CoreTruckType)
+        clearDatabase(entity: .CoreRentingOrderDetail)
+        clearDatabase(entity: .CoreRentingOrder)
     }
     
-    func clearDatabase( entity:Entity ) {
-        self.persistentContainer.performBackgroundTask {[weak self] (context) in
-            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity.rawValue )
-            let deleteRequest = NSBatchDeleteRequest(fetchRequest: fetchRequest)
-            
-            do {
-                try context.execute(deleteRequest)
-            } catch let error as NSError {
-                debugPrint(error)
-            }
-            self?.saveContext(context)
+    func clearDatabase(entity:Entity) {
+        let context = self.persistentContainer.viewContext
+        
+        let deleteFetch = NSFetchRequest<NSFetchRequestResult>(entityName: entity.rawValue)
+        let deleteRequest = NSBatchDeleteRequest(fetchRequest: deleteFetch)
+        
+        do {
+            try context.execute(deleteRequest)
+            try context.save()
+        } catch {
+            print ("There was an error")
         }
+        let route = CoreDataManager.getListRoutes()
+        print("Database Route: \(route.count)")
     }
+
     
     
     //MARK: - REQUEST
@@ -185,6 +214,25 @@ class _CoreDataManager {
         return listCoreRequest?.count ?? 0
     }
     
+    //MARK: - RENTING ORDER
+    func saveRentingOrder(_ rentingOrder:[RentingOrder], callback:((Bool,[RentingOrder]) -> Void)? = nil) {
+        self.persistentContainer.performBackgroundTask { [weak self] (context) in
+            rentingOrder.forEach({ (order) in
+                let coreRentingOrder = self?.queryCoreRentingOrderById(order.id, context)
+                if coreRentingOrder != nil {
+                    rentingOrder.forEach({ (order) in
+                        self?.updateRentingOrder(order)
+                    })
+                } else {
+                    let _ = self?.insertRentingOrder(order, context)
+                }
+            })
+            DispatchQueue.main.async {
+                callback?(true,rentingOrder)
+            }
+        }
+    }
+    
     //MARK: - ROUTE
     func saveRoutes(_ routes:[Route], callback:((Bool,[Route]) -> Void)? = nil) {
         self.persistentContainer.performBackgroundTask {[weak self] (context) in
@@ -193,6 +241,9 @@ class _CoreDataManager {
                 if coreRoute != nil{
                     //context.delete(coreRoute!)
                     //self.updateRouteOnCoreCooradinator(coreRoute!, route, context)
+                    routes.forEach({ (route) in
+                        self?.updateRoute(route)
+                    })
                 }else{
                     let _ = self?.insertRoute(route, context)
                 }
@@ -318,17 +369,106 @@ class _CoreDataManager {
         })
     }
     
+    //MARK : - RENTING ORDER
+    func updateRentingOrder(_ rentingOrder:RentingOrder,_ callback:((Bool,RentingOrder) -> Void)? = nil) {
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
+            let predicate = NSPredicate(format: "id = \(rentingOrder.id)")
+            let results = self?.fetchRecordsForEntity(Entity.CoreRentingOrder.rawValue,
+                                                      predicate:predicate,
+                                                      inManagedObjectContext: context) as? [CoreRentingOrder]
+            results?.forEach { (coreRentingOrder) in
+                if coreRentingOrder.id == rentingOrder.id {
+                    
+                    coreRentingOrder.setAttribiteFrom(rentingOrder, context: context)
+                }
+            }
+            self?.saveContext(context)
+        }
+        callback?(true,rentingOrder)
+    }
+    
+    func insertRentingOrder(_ rentingOrder:RentingOrder,_ context:NSManagedObjectContext) -> CoreRentingOrder  {
+        let rentingOrderDB = NSEntityDescription.entity(forEntityName:Entity.CoreRentingOrder.rawValue ,                                                                in: context)
+        let rentingOrderDetailDB = NSEntityDescription.entity(forEntityName: Entity.CoreRentingOrderDetail.rawValue,
+                                                    in: context)!
+        let skuDB = NSEntityDescription.entity(forEntityName: Entity.CoreSKU.rawValue,
+                                               in: context)
+        let tankerDB = NSEntityDescription.entity(forEntityName: Entity.CoreTanker.rawValue, in: context)!
+        let tankerTypeDB = NSEntityDescription.entity(forEntityName: Entity.CoreTankerType.rawValue, in: context)!
+        let coreRentingOrder:CoreRentingOrder = CoreRentingOrder(entity: rentingOrderDB!,
+                                                                 insertInto: context)
+        rentingOrder.rentingOrderDetails?.forEach({ (detail) in
+            let coreRentingOrderDetail:CoreRentingOrderDetail = CoreRentingOrderDetail(entity: rentingOrderDetailDB, insertInto: context)
+            coreRentingOrderDetail.setAttributeFrom(detail, context: context)
+            coreRentingOrder.addToDetails(coreRentingOrderDetail)
+            
+            detail.sku?.forEach({ (eachSKU) in
+                let coreSKU:CoreSKU = CoreSKU(entity: skuDB!,insertInto: context)
+                coreSKU.setAttributeFrom(eachSKU)
+                coreSKU.id = Int16(eachSKU.id ?? 0)
+                coreRentingOrderDetail.addToSku(coreSKU)
+                coreSKU.addToSku(coreRentingOrderDetail)
+            })
+            
+            detail.tanker?.tankers?.forEach({ (tanker) in
+                let coreTanker:CoreTanker = CoreTanker(entity: tankerDB, insertInto: context)
+                coreTanker.setAttribiteFrom(tanker: tanker)
+                coreTanker.id = Int16(tanker.id ?? 0)
+                coreRentingOrderDetail.addToTankers(coreTanker)
+            })
+            
+            detail.tanker?.tankerType?.forEach({ (tankerType) in
+                let coreTankerType:CoreTankerType = CoreTankerType(entity: tankerTypeDB, insertInto: context)
+                coreTankerType.setAttribiteFrom(tankerType: tankerType)
+                coreTankerType.id = Int16(tankerType.id ?? 0)
+                coreRentingOrderDetail.addToTankerType(coreTankerType)
+            })
+            
+        })
+//        rentingOrder.rentingOrderDetails?.forEach({ (detail) in
+//            let coreRentingOrderDetail:CoreRentingOrderDetail = CoreRentingOrderDetail(entity: rentingOrderDetailDB,
+//                                                         insertInto: context)
+//            coreRentingOrderDetail.setAttributeFrom(detail, context: context)
+//            detail.sku?.forEach({ (eachSKU) in
+//                let coreSKU:CoreSKU = CoreSKU(entity: skuDB!, insertInto: context)
+//                coreSKU.setAttributeFrom(eachSKU)
+//                coreSKU.id = Int16(eachSKU.id ?? 0)
+//                coreRentingOrderDetail.addToSku(coreSKU)
+//                coreSKU.addToSku(coreRentingOrderDetail)
+//            })
+//            coreRentingOrder.addToDetails(coreRentingOrderDetail)
+//        })
+        coreRentingOrder.setAttribiteFrom(rentingOrder, context: context)
+        saveContext(context)
+        return coreRentingOrder
+    }
+    
     
     //MARK : - ROUTE
     func updateRoute(_ route:Route,_ callback:((Bool,Route) -> Void)? = nil) {
         self.persistentContainer.performBackgroundTask {[weak self] (context) in
             let predicate = NSPredicate(format: "id = \(route.id)")
-            let reaults = self?.fetchRecordsForEntity(Entity.Route.rawValue,
+            let results = self?.fetchRecordsForEntity(Entity.Route.rawValue,
                                                 predicate:predicate,
                                                 inManagedObjectContext: context) as? [CoreRoute]
-            reaults?.forEach { (coreRoute) in
+            results?.forEach { (coreRoute) in
                 if coreRoute.id == route.id {
                     coreRoute.setAttribiteFrom(route)
+                    route.locationList.forEach({ (location) in
+                        //LocationList
+                        let predicateLocation = NSPredicate(format: "id = \(location.id)")
+                        let coreLocation = (self?.fetchRecordsForEntity(Entity.CoreLocation.rawValue, predicate: predicateLocation, inManagedObjectContext: context) as? [CoreLocation])?.last
+                        if let _coreLocation = coreLocation {
+                            _coreLocation.setAttributeFrom(location)
+                        } else {
+                            let locationDB = NSEntityDescription.entity(forEntityName: Entity.CoreLocation.rawValue, in: context)
+                            let coreLocation:CoreLocation = CoreLocation(entity: locationDB!, insertInto: context)
+                            
+                            // Set LocationList Attribute
+                            coreLocation.setAttributeFrom(location)
+                            coreRoute.addToLocationList(coreLocation)
+                        }
+                    })
                     route.orderList.forEach({ (order) in
                         order.driver_id = route.driverId
                         order.driver_name = route.driver_name
@@ -339,7 +479,7 @@ class _CoreDataManager {
                                                                inManagedObjectContext: context) as? [CoreOrder])?.last
                         
                         if let _coreOrder = coreOrder{
-                            _coreOrder.setAttribiteFrom(order)
+                            _coreOrder.setAttribiteFrom(order, context: context)
                             
                         }else {
                             let orderDB = NSEntityDescription.entity(forEntityName:Entity.Order.rawValue,
@@ -347,14 +487,75 @@ class _CoreDataManager {
                             let coreOdr:CoreOrder = CoreOrder(entity: orderDB!,
                                                               insertInto: context)
                             // Set List Attribute
-                            coreOdr.setAttribiteFrom(order)
+                            coreOdr.setAttribiteFrom(order, context: context)
                             coreOdr.driver_id = Int16(route.driverId)
                             coreRoute.addToOrderList(coreOdr)
                         }
-                        self?.saveContext(context)
+                        
+                        // File
+                        order.files?.forEach{ (file) in
+                            let predicate = NSPredicate(format: "id = \(file.id)")
+                            let coreAttachFile = (self?.fetchRecordsForEntity(Entity.AttachFile.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreAttachFile])?.last
+                            if let _coreAttach = coreAttachFile {
+                                _coreAttach.setAttributeFrom(file)
+                            } else {
+                                let fileDB = NSEntityDescription.entity(forEntityName: Entity.AttachFile.rawValue, in: context)
+                                let _coreFile:CoreAttachFile = CoreAttachFile(entity: fileDB!, insertInto: context)
+                                _coreFile.id = Int32(file.id )
+                                _coreFile.setAttributeFrom(file)
+                                coreOrder?.addToOrderFile(_coreFile)
+                            }
+                        }
+
+                        // Order Note
+                        order.notes.forEach({ (note) in
+                            let predicate = NSPredicate(format: "id = \(note.id)")
+                            let coreNote = (self?.fetchRecordsForEntity(Entity.CoreNote.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreNote])?.last
+                            if let _coreNote = coreNote {
+                                _coreNote.setAttributeFrom(note)
+                            } else {
+                                let noteDB = NSEntityDescription.entity(forEntityName: Entity.CoreNote.rawValue, in: context)
+                                let _coreNote:CoreNote = CoreNote(entity: noteDB!, insertInto: context)
+                                _coreNote.id = Int16(note.id)
+                                _coreNote.setAttributeFrom(note)
+                                coreOrder?.addToOrderNote(_coreNote)
+                            }
+                            note.files.forEach{ (file) in
+                                let predicate = NSPredicate(format: "id = \(file.id)")
+                                let coreAttachFile = (self?.fetchRecordsForEntity(Entity.AttachFile.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreAttachFile])?.last
+                                if let _coreAttach = coreAttachFile {
+                                    _coreAttach.setAttributeFrom(file)
+                                } else {
+                                    let fileDB = NSEntityDescription.entity(forEntityName: Entity.AttachFile.rawValue, in: context)
+                                    let _coreFile:CoreAttachFile = CoreAttachFile(entity: fileDB!, insertInto: context)
+                                    _coreFile.id = Int32(file.id )
+                                    _coreFile.setAttributeFrom(file)
+                                    coreNote?.addToNoteFile(_coreFile)
+                                }
+                            }
+                        })
+
+                        
+                        // SKUs
+                        order.details?.forEach{ (detail) in
+                            let predicate = NSPredicate(format: "id = \(detail.pivot?.id ?? 0)")
+                            let coreSKU = (self?.fetchRecordsForEntity(Entity.CoreSKU.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreSKU])?.last
+                            if let _coreSKU = coreSKU {
+                                _coreSKU.setAttributeFrom(detail)
+                            } else {
+                                let detailDB = NSEntityDescription.entity(forEntityName: Entity.CoreSKU.rawValue, in: context)
+                                let coreSKU:CoreSKU = CoreSKU(entity: detailDB!, insertInto: context)
+                                
+                                coreSKU.id = Int16(detail.pivot?.id ?? 0)
+                                // Set List Attribute
+                                coreSKU.setAttributeFrom(detail)
+                                coreOrder?.addToDetail(coreSKU)
+                            }
+                        }
                     })
                 }
             }
+            self?.saveContext(context)
             callback?(true,route)
         }
     }
@@ -371,40 +572,73 @@ class _CoreDataManager {
                                                      in: context)
         let urlDB = NSEntityDescription.entity(forEntityName:Entity.UrlFile.rawValue,
                                                   in: context)
-        
+        let skuBD = NSEntityDescription.entity(forEntityName: Entity.CoreSKU.rawValue,
+                                               in: context)
+        let locationDB = NSEntityDescription.entity(forEntityName: Entity.CoreLocation.rawValue,
+                                                    in: context)
+        let attachFileDB = NSEntityDescription.entity(forEntityName: Entity.AttachFile.rawValue,
+                                                      in: context)!
+        let orderNote = NSEntityDescription.entity(forEntityName: Entity.CoreNote.rawValue,
+                                                   in: context)
+
         let coreRoute:CoreRoute = CoreRoute(entity: routeDB!,
                                             insertInto: context)
-       
-        route.orderList.forEach({ (order) in
-            let coreOrder:CoreOrder = CoreOrder(entity: orderDB!,
-                                                insertInto: context)
+        
+            route.locationList.forEach({ (location) in
+                let coreLocation:CoreLocation = CoreLocation(entity: locationDB!,
+                                                             insertInto: context)
+                coreLocation.setAttributeFrom(location)
+                coreRoute.addToLocationList(coreLocation)
+            })
             
-            // Set List Attribute
-            coreOrder.setAttribiteFrom(order)
-            coreOrder.driver_id = Int16(route.driverId)
-            if order.files != nil{
-                let coreUrl:CoreUrlFile = CoreUrlFile(entity: urlDB!, insertInto: context)
-                if let sig = order.signature{
-                    let coreSig = createRecordForEntity(Entity.AttachFile.rawValue,
-                                                        inManagedObjectContext: context) as? CoreAttachFile
-                    coreSig?.setAttributeFrom(sig)
-                    coreUrl.sig = coreSig
+            route.orderList.forEach({ (order) in
+                let coreOrder:CoreOrder = CoreOrder(entity: orderDB!,
+                                                    insertInto: context)
+                // Set List Attribute
+                coreOrder.setAttribiteFrom(order, context: context)
+                coreOrder.driver_id = Int16(route.driverId)
+                
+                // Order File
+                order.files?.forEach{ (file) in
+                    let coreAttachFile:CoreAttachFile = CoreAttachFile(entity: attachFileDB, insertInto: context)
+                    coreAttachFile.id = Int32(file.id)
+                    coreAttachFile.setAttributeFrom(file)
+                    coreOrder.addToOrderFile(coreAttachFile)
                 }
                 
-                if let docs = order.pictures {
-                    docs.forEach({ (doc) in
-                        let coreDoc = createRecordForEntity(Entity.AttachFile.rawValue, inManagedObjectContext: context) as? CoreAttachFile
-                        coreDoc?.setAttributeFrom(doc)
-                        coreUrl.addToDoc(coreDoc!)
+                // Order Note
+                order.notes.forEach({ (note) in
+                    let coreNote:CoreNote = CoreNote(entity: orderNote!,
+                                                     insertInto: context)
+                    coreNote.setAttributeFrom(note)
+                    coreNote.id = Int16(note.id)
+                    note.files.forEach({ (file) in
+                        let coreAttachFile:CoreAttachFile = CoreAttachFile(entity: attachFileDB, insertInto: context)
+                        coreAttachFile.id = Int32(file.id)
+                        coreAttachFile.setAttributeFrom(file)
+                        coreNote.addToNoteFile(coreAttachFile)
                     })
-                }
-                coreOrder.url = coreUrl
-            }
-            
-            // Set List Relationship
-            coreRoute.addToOrderList(coreOrder)
-        })
+                    coreOrder.addToOrderNote(coreNote)
+                })
+
+                // SKUs
+                order.details?.forEach({ (detail) in
+                    let coreSKU:CoreSKU = CoreSKU(entity: skuBD!, insertInto: context)
+                    
+                    // Set Details Attribute
+                    coreSKU.setAttributeFrom(detail)
+                    coreSKU.id = Int16(detail.pivot?.id ?? 0)
+                    
+                    // Set List Relationship
+                    coreOrder.addToDetail(coreSKU)
+                })
+                
+                // Set List Relationship
+                coreRoute.addToOrderList(coreOrder)
+            })
         
+        
+        coreRoute.setAttribiteFrom(route)
         saveContext(context)
         return coreRoute
     }
@@ -448,6 +682,23 @@ class _CoreDataManager {
         }
     }
     
+    func queryRentingOrderBy(_ id:Int, _ callback:@escaping (Bool,RentingOrder?)-> Void) {
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
+            let order = self?.queryCoreRentingOrderById(id, context)
+            let rentingOrder = order?.convertToRentingOrder()
+            
+            DispatchQueue.main.async {
+                callback(true,rentingOrder)
+            }
+        }
+    }
+    
+    func queryCoreRentingOrderById(_ id: Int,_ context:NSManagedObjectContext) -> CoreRentingOrder? {
+        let fetchRequest:NSFetchRequest = CoreRentingOrder.fetchRequest()
+        fetchRequest.predicate = NSPredicate(format: "id = \(id)")
+        let orders = try? context.fetch(fetchRequest)
+        return orders?.first
+    }
     
     func queryRouteBy(_ id: Int, _ callback:@escaping (Bool,Route?)-> Void) {
         self.persistentContainer.performBackgroundTask {[weak self] (context) in
@@ -519,33 +770,65 @@ class _CoreDataManager {
             let reaults = try? context.fetch(fetchRequest)
             reaults?.forEach { (coreOrder) in
                 if coreOrder.id == orderDetail.id {
-                    coreOrder.setAttribiteFrom(orderDetail)
-                    if let _ = orderDetail.files{
-                        
-                        coreOrder.url?.sig = nil
-                        coreOrder.url?.doc = nil
-                        
-                        let coreUrl = self?.createRecordForEntity(Entity.UrlFile.rawValue,
-                                                            inManagedObjectContext: context) as? CoreUrlFile
-                        if let sig = orderDetail.signature {
-                            self?.deleteAttachFileById(sig.id, context: context)
-                            let coreSig = self?.createRecordForEntity(Entity.AttachFile.rawValue,inManagedObjectContext: context) as? CoreAttachFile
-                            coreSig?.setAttributeFrom(sig)
-                            coreUrl?.sig = coreSig
+                    coreOrder.setAttribiteFrom(orderDetail, context: context)
+                    
+                    // Order File
+                    orderDetail.files?.forEach { (orderFile) in
+                        let predicate = NSPredicate(format: "id = \(orderFile.id)")
+                        let coreAttachFile = (self?.fetchRecordsForEntity(Entity.AttachFile.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreAttachFile])?.last
+                        if let _coreAttach = coreAttachFile {
+                            _coreAttach.setAttributeFrom(orderFile)
+                        } else {
+                            let fileDB = NSEntityDescription.entity(forEntityName: Entity.AttachFile.rawValue, in: context)
+                            let _coreFile:CoreAttachFile = CoreAttachFile(entity: fileDB!, insertInto: context)
+                            _coreFile.id = Int32(orderFile.id )
+                            _coreFile.setAttributeFrom(orderFile)
+                            coreOrder.addToOrderFile(_coreFile)
                         }
-                        
-                        if let docs = orderDetail.pictures {
-                            docs.forEach({ (doc) in
-                                var coreDoc :CoreAttachFile? = self?.queryCoreAttachfileBy(doc.id, context: context)
-                                if coreDoc == nil || doc.id == 0{
-                                    coreDoc  = (self?.createRecordForEntity(Entity.AttachFile.rawValue,
-                                                                      inManagedObjectContext: context) as! CoreAttachFile)
-                                }
-                                coreDoc?.setAttributeFrom(doc)
-                                coreUrl?.addToDoc(coreDoc!)
-                            })
+                    }
+                    
+                    // Order Note
+                    orderDetail.notes.forEach({ (note) in
+                        let predicate = NSPredicate(format: "id = \(note.id)")
+                        let coreNote = (self?.fetchRecordsForEntity(Entity.CoreNote.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreNote])?.last
+                        if let _coreNote = coreNote {
+                            _coreNote.setAttributeFrom(note)
+                        } else {
+                            let noteDB = NSEntityDescription.entity(forEntityName: Entity.CoreNote.rawValue, in: context)
+                            let _coreNote:CoreNote = CoreNote(entity: noteDB!, insertInto: context)
+                            _coreNote.id = Int16(note.id)
+                            _coreNote.setAttributeFrom(note)
+                            coreOrder.addToOrderNote(_coreNote)
                         }
-                        coreOrder.url = coreUrl
+                        note.files.forEach{ (file) in
+                            let predicate = NSPredicate(format: "id = \(file.id)")
+                            let coreAttachFile = (self?.fetchRecordsForEntity(Entity.AttachFile.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreAttachFile])?.last
+                            if let _coreAttach = coreAttachFile {
+                                _coreAttach.setAttributeFrom(file)
+                            } else {
+                                let fileDB = NSEntityDescription.entity(forEntityName: Entity.AttachFile.rawValue, in: context)
+                                let _coreFile:CoreAttachFile = CoreAttachFile(entity: fileDB!, insertInto: context)
+                                _coreFile.id = Int32(file.id )
+                                _coreFile.setAttributeFrom(file)
+                                coreNote?.addToNoteFile(_coreFile)
+                            }
+                        }
+                    })
+                    
+                    // SKUs
+                    orderDetail.details?.forEach{ (detail) in
+                        let predicate = NSPredicate(format: "id = \(detail.pivot?.id ?? 0)")
+                        let coreSKU = (self?.fetchRecordsForEntity(Entity.CoreSKU.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreSKU])?.last
+                        if let _coreSKU = coreSKU {
+                            _coreSKU.setAttributeFrom(detail)
+                        } else {
+                            let detailDB = NSEntityDescription.entity(forEntityName: Entity.CoreSKU.rawValue, in: context)
+                            let _coreSKU:CoreSKU = CoreSKU(entity: detailDB!, insertInto: context)
+                            _coreSKU.id = Int16(detail.pivot?.id ?? 0)
+                            // Set List Attribute
+                            _coreSKU.setAttributeFrom(detail)
+                            coreOrder.addToDetail(_coreSKU)
+                        }
                     }
                     
                     var recordReason: CoreReason? = nil
@@ -553,7 +836,7 @@ class _CoreDataManager {
                     if let listRecord = lists?.first {
                         recordReason = listRecord as? CoreReason
                     } else if let listRecord = self?.createRecordForEntity(Entity.Reason.rawValue,
-                                                                     inManagedObjectContext: context) {
+                                                                           inManagedObjectContext: context) {
                         recordReason = listRecord as? CoreReason
                     }
                     
@@ -641,6 +924,17 @@ class _CoreDataManager {
         }
     }
     
+    func updateRentingOrderStatus(_ list:[RentingOrderStatus]) {
+        clearDatabase(entity: .CoreRentingOrderStatus)
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
+            list.forEach { (status) in
+                let coreRentingOrderStatus = self?.createRecordForEntity(Entity.CoreRentingOrderStatus.rawValue, inManagedObjectContext: context) as? CoreRentingOrderStatus
+                coreRentingOrderStatus?.setAttributeFrom(status)
+                self?.saveContext(context)
+            }
+        }
+    }
+    
     func updateListStatus(_ list:[Status]) {
         clearDatabase(entity: .CoreStatus)
         self.persistentContainer.performBackgroundTask {[weak self]  (context) in
@@ -651,6 +945,59 @@ class _CoreDataManager {
                 self?.saveContext(context)
             }
         }
+    }
+    
+    func getListRoutes() -> [Route] {
+        var results:[Route] = []
+        let items = fetchRecordsForEntity(Entity.Route.rawValue, inManagedObjectContext: self.persistentContainer.viewContext) as? [CoreRoute]
+        items?.forEach({ (core) in
+            results.append(core.convertToRoute())
+        })
+        
+        return results.sorted(by: {$0.id < $1.id})
+    }
+    
+    func getRoute(_ routeID: String) -> Route {
+        var result:Route!
+        let predicate = NSPredicate(format: "id = \(routeID)")
+        let context = getManagedObjectContext()
+        let coreRoute = (self.fetchRecordsForEntity(Entity.Route.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreRoute])?.last
+        guard let _coreRoute = coreRoute else {
+            return result
+        }
+        result = _coreRoute.convertToRoute()
+        return result
+    }
+    
+    func getListRentingOrder() -> [RentingOrder] {
+        var results:[RentingOrder] = []
+        let items = fetchRecordsForEntity(Entity.CoreRentingOrder.rawValue, inManagedObjectContext: self.persistentContainer.viewContext) as? [CoreRentingOrder]
+        items?.forEach({ (core) in
+            results.append(core.convertToRentingOrder())
+        })
+        
+        return results.sorted(by: {$0.id < $1.id})
+    }
+    
+    func getRentingOrder(_ rentingId: Int) -> RentingOrder {
+        var result:RentingOrder!
+        let predicate = NSPredicate(format: "id = \(rentingId)")
+        let context = getManagedObjectContext()
+        let coreRenting = (self.fetchRecordsForEntity(Entity.CoreRentingOrder.rawValue, predicate: predicate, inManagedObjectContext: context) as? [CoreRentingOrder])?.last
+        guard let _coreRenting = coreRenting else {
+            return result
+        }
+        result = _coreRenting.convertToRentingOrder()
+        return result
+    }
+    
+    func getListSKU() -> [Order.Detail] {
+        var results:[Order.Detail] = []
+        let items = fetchRecordsForEntity(Entity.CoreSKU.rawValue, inManagedObjectContext: self.persistentContainer.viewContext) as? [CoreSKU]
+        items?.forEach({ (core) in
+            results.append(core.convertToOrderDetailModel())
+        })
+        return results
     }
     
     func getListRouteStatus() -> [Status] {
@@ -668,6 +1015,16 @@ class _CoreDataManager {
         var results:[Status] = []
         let items = fetchRecordsForEntity(Entity.CoreStatus.rawValue,
                                           inManagedObjectContext: self.persistentContainer.viewContext) as? [CoreStatus]
+        items?.forEach({ (core) in
+            results.append(core.convertToStatusModel())
+        })
+        
+        return results
+    }
+    
+    func getListRentingOrderStatus() -> [RentingOrderStatus] {
+        var results:[RentingOrderStatus] = []
+        let items = fetchRecordsForEntity(Entity.CoreRentingOrderStatus.rawValue, inManagedObjectContext: self.persistentContainer.viewContext) as? [CoreRentingOrderStatus]
         items?.forEach({ (core) in
             results.append(core.convertToStatusModel())
         })

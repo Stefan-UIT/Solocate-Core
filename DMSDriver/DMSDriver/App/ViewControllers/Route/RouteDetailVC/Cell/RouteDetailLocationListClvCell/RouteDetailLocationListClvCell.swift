@@ -112,23 +112,27 @@ extension RouteDetailLocationListClvCell{
     }
     
     func getRouteDetail(_ routeID:String, isFetch:Bool = false) {
-        if !isFetch {
-            self.rootVC?.showLoadingIndicator()
-        }
-        SERVICES().API.getRouteDetail(route: routeID) {[weak self] (result) in
-            self?.rootVC?.dismissLoadingIndicator()
-            self?.tbvContent?.endRefreshControl()
-            
-            switch result{
-            case .object(let obj):
-                self?.route = obj.data
-                
-            // Update route to DB local
-            // CoreDataManager.updateRoute(obj.data!)
-            case .error(let error):
-                self?.rootVC?.showAlertView(error.getMessage())
-                
+        if ReachabilityManager.isNetworkAvailable {
+            if !isFetch {
+                self.rootVC?.showLoadingIndicator()
             }
+            SERVICES().API.getRouteDetail(route: routeID) {[weak self] (result) in
+                self?.rootVC?.dismissLoadingIndicator()
+                self?.tbvContent?.endRefreshControl()
+                
+                switch result{
+                case .object(let obj):
+                    self?.route = obj.data
+                    
+                    // Update route to DB local
+                // CoreDataManager.updateRoute(obj.data!)
+                case .error(let error):
+                    self?.rootVC?.showAlertView(error.getMessage())
+                    
+                }
+            }
+        } else {
+            // Core Data
         }
     }
 }
