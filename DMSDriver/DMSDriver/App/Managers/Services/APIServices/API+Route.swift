@@ -41,6 +41,7 @@ extension BaseAPIService {
                        callback: callback);
     }
     
+    @discardableResult
     func getRentingOrders(filterMode:FilterDataModel, page:Int = 1, callback: @escaping APICallback<ResponseDataModel<ResponseDataListModel<RentingOrder>>>) -> APIRequest {
         let startDate = DateFormatter.filterDate.string(from: filterMode.timeData?.startDate ?? Date())
         let endDate = DateFormatter.filterDate.string(from: filterMode.timeData?.endDate ?? Date())
@@ -48,7 +49,7 @@ extension BaseAPIService {
         let urlString = PATH_REQUEST_URL.GET_RENTING_ORDERS.URL
         var path = String(format: urlString,startDate,endDate)
         if let _statusId = status?.id {
-            path = path + "&status_id=\(_statusId)"
+            path = path + "&renting_order_status_id=\(_statusId)"
         }
         path = path + "&page=\(page)&limit=10"
         return request(method: .GET,
