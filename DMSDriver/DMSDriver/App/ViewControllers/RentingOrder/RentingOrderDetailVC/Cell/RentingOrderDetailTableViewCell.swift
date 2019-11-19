@@ -49,22 +49,31 @@ class RentingOrderDetailTableViewCell: UITableViewCell {
         
         // Handle Show Tanker/Tanker2 and TrailerTankerType/TrailerTankerType2
         if rentingOrderDetail.tanker?.tankers?.count == 0 || rentingOrderDetail.tanker?.tankers == nil{
-            trailerTankerTypeView.isHidden = true
             tankerView.isHidden = true
-        } else if rentingOrderDetail.tanker?.tankers?.count > 0 {
-            trailerTankerTypeView.isHidden = false
+        } else if rentingOrderDetail.tanker?.tankers?.count == 1 {
             tankerView.isHidden = false
-            trailerTankerTypeLabel.text = rentingOrderDetail.tanker?.tankerType?[tanker1Index].name
-            tankerLabel.text = rentingOrderDetail.tanker?.tankers?[tanker1Index].plateNum
-        } else if rentingOrderDetail.tanker?.tankers?.count > 1 || rentingOrderDetail.tanker?.tankers?.last != nil {
+            tankerLabel.text = tankerPlateNum(with: tanker1Index, rentingOrderDetail: rentingOrderDetail)
+        } else if rentingOrderDetail.tanker?.tankers?.count > 1 && rentingOrderDetail.tanker?.tankers?.last != nil {
+            tankerView.isHidden = false
+            tankerLabel.text = tankerPlateNum(with: tanker1Index, rentingOrderDetail: rentingOrderDetail)
             tanker2View.isHidden = false
-            tanker2Label.text = rentingOrderDetail.tanker?.tankers?[tanker2Index].plateNum
+            tanker2Label.text = tankerPlateNum(with: tanker2Index, rentingOrderDetail: rentingOrderDetail)
+        } else if rentingOrderDetail.tanker?.tankers?.count > 1 && rentingOrderDetail.tanker?.tankers?.last == nil {
+            tanker2View.isHidden = true
         }
         
-        if rentingOrderDetail.tanker?.tankerType?.count > 1 || rentingOrderDetail.tanker?.tankerType?.last != nil {
+        if rentingOrderDetail.tanker?.tankerType?.count == 0 || rentingOrderDetail.tanker?.tankerType == nil{
+            trailerTankerTypeView.isHidden = true
+        } else if rentingOrderDetail.tanker?.tankerType?.count == 1 {
+            trailerTankerTypeView.isHidden = false
+            trailerTankerTypeLabel.text = trailerTankerTypeName(with: tanker1Index, rentingOrderDetail: rentingOrderDetail)
+        } else if rentingOrderDetail.tanker?.tankerType?.count > 1 || rentingOrderDetail.tanker?.tankerType?.last != nil {
+            trailerTankerTypeView.isHidden = false
+            trailerTankerTypeLabel.text = trailerTankerTypeName(with: tanker1Index, rentingOrderDetail: rentingOrderDetail)
             trailerTankerType2View.isHidden = false
-            trailerTankerType2Label.text = rentingOrderDetail.tanker?.tankerType?[tanker2Index].name
-            
+            trailerTankerType2Label.text = trailerTankerTypeName(with: tanker2Index, rentingOrderDetail: rentingOrderDetail)
+        } else if rentingOrderDetail.tanker?.tankerType?.count > 1 && rentingOrderDetail.tanker?.tankerType?.last == nil {
+            trailerTankerType2View.isHidden = true
         }
         
         truckTypeLabel.text = rentingOrderDetail.truckType?.name
@@ -73,4 +82,16 @@ class RentingOrderDetailTableViewCell: UITableViewCell {
         driverLabel.text = rentingOrderDetail.driver?.userName
     }
     
+    
+    func tankerPlateNum(with index:Int, rentingOrderDetail: RentingOrder.RentingOrderDetail) -> String {
+        var result = ""
+        result = (rentingOrderDetail.tanker?.tankers?[index].plateNum) ?? ""
+        return result
+    }
+    
+    func trailerTankerTypeName(with index:Int, rentingOrderDetail: RentingOrder.RentingOrderDetail) -> String {
+        var result = ""
+        result = (rentingOrderDetail.tanker?.tankerType?[index].name) ?? ""
+        return result
+    }
 }

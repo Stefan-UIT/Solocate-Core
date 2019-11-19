@@ -68,7 +68,7 @@ class RentingOrderListVC: BaseViewController {
     }
     
     @objc func fetchData(isShowLoading:Bool = true)  {
-        getRoutes(filterMode: filterModel, isShowLoading: isShowLoading, isFetch: true)
+        getRentingOrders(filterMode: filterModel, isShowLoading: isShowLoading, isFetch: true)
     }
     
 //    func updateRouteList(routeNeedUpdate:Route) {
@@ -164,8 +164,9 @@ extension RentingOrderListVC:DMSNavigationServiceDelegate {
 
 // MARK: -API
 fileprivate extension RentingOrderListVC {
-    func getRoutes(filterMode:FilterDataModel, isShowLoading:Bool = true, isFetch:Bool = false) {
-        if ReachabilityManager.isNetworkAvailable {
+
+    func getRentingOrders(filterMode:FilterDataModel, isShowLoading:Bool = true, isFetch:Bool = false) {
+         if ReachabilityManager.isNetworkAvailable {
             guard !isFetchInProgress else {
                 return
             }
@@ -204,7 +205,7 @@ fileprivate extension RentingOrderListVC {
                             self?.page = (self?.currentPage ?? 1) + 1
                         }
                         self?.rentingOrders.append(data)
-                        CoreDataManager.saveRentingOrder(data ?? [])
+                        CoreDataManager.saveRentingOrder(data)
                         strongSelf.tbvContent?.reloadData()
                         self?.isFetchInProgress = false
                         
