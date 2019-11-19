@@ -111,7 +111,11 @@ extension AppDelegate {
                                      E(Caches().user?.roles?.first?.name))
         }
         SERVICES().socket.disconnect()
-        
+        clearCaches()
+        mainVC?.endAutoRefetchRouteList()
+    }
+    
+    func clearCaches() {
         Caches().drivingRule = nil
         Caches().timePlaying = 0
         Caches().isPauseRoute = false
@@ -119,7 +123,6 @@ extension AppDelegate {
         Caches().isCancelCounter = true
         Caches().dateStartRoute = nil
         Caches().datePauseRoute = nil
-        mainVC?.endAutoRefetchRouteList()
     }
     
     func loginSuccess() {
