@@ -1092,7 +1092,7 @@ fileprivate extension OrderDetailViewController{
             updateStatusButton?.backgroundColor = AppColor.greenColor
         }
         
-        let isHidden = _order.isCancelled || !isHaveMoreLegs
+        let isHidden = _order.isCancelled || (!isHaveMoreLegs && _order.isFinished)
         
         updateStatusButton?.isHidden = isHidden
         copyUpdateStatusButton()
