@@ -146,8 +146,8 @@ class _CoreDataManager {
         } catch {
             print ("There was an error")
         }
-        let route = CoreDataManager.getListRoutes()
-        print("Database Route: \(route.count)")
+        let coredata = CoreDataManager.getListCoreData(entity.rawValue)
+        print("Database \(entity.rawValue): \(coredata.count)")
     }
 
     
@@ -945,6 +945,12 @@ class _CoreDataManager {
                 self?.saveContext(context)
             }
         }
+    }
+    
+    func getListCoreData(_ name: String) -> [NSManagedObject] {
+        var results:[NSManagedObject] = []
+        results = fetchRecordsForEntity(name, inManagedObjectContext: self.persistentContainer.viewContext)
+        return results
     }
     
     func getListRoutes() -> [Route] {

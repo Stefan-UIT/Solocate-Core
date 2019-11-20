@@ -233,28 +233,15 @@ extension SlideMenuVC:UITableViewDelegate{
 //MARK: API
 private extension SlideMenuVC{
     func handleLogOut() {
-        if ReachabilityManager.isNetworkAvailable {
-            callLoggingOutRequest()
-        } else {
-            clearData()
-            App().reLogin()
-        }
-    }
-    
-    func callLoggingOutRequest() {
-        SERVICES().API.logout { [weak self] (result) in
+        CoreDataManager.clearAllDB()
+        App().reLogin()
+        SERVICES().API.logout { (result) in
             switch result{
             case .object(_):
-                App().reLogin()
-                self?.clearData()
+                Caches().user = nil
             case .error(let error):
-                self?.showAlertView(error.getMessage())
+                self.showAlertView(error.getMessage())
             }
         }
-    }
-    
-    func clearData() {
-        Caches().user = nil
-        CoreDataManager.clearAllDB()
     }
 }
