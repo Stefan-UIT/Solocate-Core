@@ -71,7 +71,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     var dateStringFilter = Date().toString()
     var btnGo: UIButton?
     var isHaveMoreLegs:Bool = false
-    let dispatchGroup = DispatchGroup()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -284,13 +283,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         ReasonSkipView.present(inViewController: self, isCancelledReason: false, reasonType: .UnableToFinish) {(success, reason) in
             guard let _reason = reason else {return}
             completionHandler(_reason)
-        }
-    }
-    
-    func handleRequestMoreLegs() {
-        guard let order = orderDetail else { return }
-        if order.isFinished {
-            self.requestMoreLegs(orderID: order.id)
         }
     }
     
@@ -1100,7 +1092,7 @@ fileprivate extension OrderDetailViewController{
             updateStatusButton?.backgroundColor = AppColor.greenColor
         }
         
-        let isHidden = _order.isCancelled || !isHaveMoreLegs
+        let isHidden = _order.isCancelled || (!isHaveMoreLegs && _order.isFinished)
         
         updateStatusButton?.isHidden = isHidden
         copyUpdateStatusButton()
@@ -1192,11 +1184,7 @@ fileprivate extension OrderDetailViewController{
 //MARK: API
 extension OrderDetailViewController{
     func fetchData(showLoading:Bool = false)  {
-        dispatchGroup.enter()
-        handleRequestMoreLegs()
-        dispatchGroup.notify(queue: DispatchQueue.main) {
-            self.getOrderDetail()
-        }
+        self.getOrderDetail()
     }
     
     private func getOrderDetail(isFetch:Bool = false) {
@@ -1215,7 +1203,9 @@ extension OrderDetailViewController{
                     self?.initVar()
                     self?.updateUI()
                     CoreDataManager.updateOrderDetail(_orderDetail) // update orderdetail to DB local
-                    
+                    if _orderDetail.isFinished {
+                        self?.requestMoreLegs(orderID: _orderDetail.id)
+                    }
                 case .error(let error):
                     self?.showAlertView(error.getMessage())
                 }
@@ -1270,6 +1260,11 @@ extension OrderDetailViewController{
                 self?.updateButtonStatus()
                 self?.tableView?.reloadData()
                 self?.tableView?.setContentOffset(.zero, animated: true)
+                
+                if order.isFinished {
+                    self?.requestMoreLegs(orderID: order.id)
+                }
+                
                 self?.didUpdateStatus?(order, nil)
                 
             case .error(let error):
@@ -1356,13 +1351,11 @@ extension OrderDetailViewController{
                 switch result {
                 case .object(let object):
                     self?.isHaveMoreLegs = object.data
-                    self?.dispatchGroup.leave()
+                    self?.handleShowingButtonStatus()
                 case .error(let error):
                     self?.showAlertView(error.getMessage())
                 }
             }
-        } else {
-            self.dispatchGroup.leave()
         }
     }
     
