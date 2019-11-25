@@ -39,11 +39,6 @@ class TaskListClvCell: UICollectionViewCell {
 
         lblTitle?.text = "\("\("TASK".localized) - \(task?.id ?? 0)")"
         lblSubtitle?.text = task?.instructions
-//        if Locale.current.languageCode == "he" {
-//            lblUrgency?.text = task?.urgent_type_name_hb
-//        }else {
-//            lblUrgency?.text = task?.urgent_type_name_en
-//        }
         lblUrgency?.text = E(task?.urgency.name).localized
         lblUrgency?.textColor = task?.colorUrgent
         btnStatus?.setTitle("\(status.statusName.localized)", for: .normal)
