@@ -13,18 +13,14 @@ class TaskListVC: BaseViewController {
     
     @IBOutlet weak var clvContent:UICollectionView?
     @IBOutlet weak var lblNoData: UILabel?
-
     @IBOutlet weak var filterLabel: UILabel!
-    var selectedTimeData:TimeDataItem?
 
-    
     fileprivate let taskListIdebtifierCell = "TaskListClvCell"
     
     var dateStringFilter:String = Date().toString("MM/dd/yyyy")
     var dateFilter = Date()
-    
     var taskList:[TaskModel] = []
-    
+    var selectedTimeData:TimeDataItem?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,37 +99,9 @@ class TaskListVC: BaseViewController {
 
 //MARK: - DMSNavigationServiceDelegate
 extension TaskListVC:DMSNavigationServiceDelegate{
-//    func didSelectedBackOrMenu() {
-//                showSideMenu()
-//    }
-    
-    
     func didSelectedMenuAction() {
         showSideMenu()
     }
-    /*
-    func didSelectedLeftButton(_ sender: UIBarButtonItem) {
-        let dateFormater =  DateFormatter()
-        dateFormater.dateFormat = "MM/dd/yyyy"
-        
-        let currentDate = dateFormater.date(from: dateStringFilter)
-        UIAlertController.showDatePicker(style: .actionSheet,
-                                         mode: .date,
-                                         title: "select-date".localized,
-                                         currentDate: currentDate) {[weak self] (date) in
-                                            
-                                            self?.dateFilter = date
-                                            self?.dateStringFilter = date.toString("MM/dd/yyyy")
-                                            if self?.hasNetworkConnection ?? false{
-                                                //self?.getDataFromServer()
-                                                self?.getListTask()
-                                                
-                                            }else{
-                                                //self?.getDataFromDBLocal(E(self?.dateStringFilter))
-                                            }
-        }
-    }
-     */
 }
 
 

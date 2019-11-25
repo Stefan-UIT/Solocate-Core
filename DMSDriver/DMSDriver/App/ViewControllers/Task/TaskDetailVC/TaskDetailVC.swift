@@ -40,6 +40,12 @@ class TaskDetailVC: BaseViewController {
     fileprivate let headerCellIdentifier = "OrderDetailHeaderCell"
     fileprivate let addressCellIdentifier =  "OrderDetailAddressCell"
     fileprivate let orderDropdownCellIdentifier = "OrderDetailDropdownCell"
+    fileprivate let FINISHED_STATUS = "3"
+    fileprivate let CANCELLED_STATUS = "4"
+    fileprivate let CELL_HEIGHT:CGFloat = 100.0
+    fileprivate let HEADER_HEIGHT:CGFloat = 65.0
+    fileprivate let FOOTER_HEIGHT:CGFloat = 15.0
+    
     fileprivate var scanItems = [String]()
     fileprivate var arrTitleHeader:[String] = []
     
@@ -112,43 +118,20 @@ class TaskDetailVC: BaseViewController {
         let status = TaskStatus(rawValue: E(_task.status.code)) ?? TaskStatus.open
         let statusItem = OrderDetailInforRow("Status".localized,status.statusName.localized)
         let urgency = OrderDetailInforRow("Urgency".localized , _task.urgency.name ?? "")
-//        let reason = OrderDetailInforRow("failure-cause",E(_task.reason?.name))
-//        let mess = OrderDetailInforRow("Message",E(_task.reason_msg))
         let taskName = OrderDetailInforRow("Name".localized,"\(E(_task.name))")
         let driver = OrderDetailInforRow("Driver".localized,"\(E(_task.assignee.userName))")
 
         let startTime = OrderDetailInforRow("start-time".localized, (dlvy_start_time != nil) ? displayHour.string(from: dlvy_start_time!) : "")
         let endTime = OrderDetailInforRow("end-time".localized, (dlvy_end_time != nil) ? displayHour.string(from: dlvy_end_time!) : "")
-//        let date = OrderDetailInforRow("Date",(deliveryDate != nil) ? displayDateVN.string(from: deliveryDate!) : "")
-//        let clientName = OrderDetailInforRow("client-name",E(_task.client_name))
-//        let customerName = OrderDetailInforRow("customer-name" ,E(_task.customer_name))
-//        let collectCall = OrderDetailInforRow("Collectcall",E(_task.collect_call))
-//        let coordinationPhone = OrderDetailInforRow("coordination-phone", E(_task.coord_phone))
-//        let receiverName = OrderDetailInforRow("receiver-name",E(_task.rcvr_name))
-//        let phone = OrderDetailInforRow("Phone", E(_task.rcvr_phone))
         let address = OrderDetailInforRow("Address".localized,E(_task.address.address))
     
         taskInforStatus.append(statusItem)
         taskInforStatus.append(urgency)
-//        if  status == TaskStatus.cancel {
-//            taskInforStatus.append(reason)
-//            taskInforStatus.append(mess)
-//        }
-        
-//        taskInforRows.append(taskId)
         taskInforRows.append(taskName)
         taskInforRows.append(address)
         taskInforRows.append(driver)
         taskInforRows.append(startTime)
         taskInforRows.append(endTime)
-//        taskInforRows.append(date)
-        
-//        informationRows.append(clientName)
-//        informationRows.append(customerName)
-//        informationRows.append(receiverName)
-//        informationRows.append(phone)
-//        informationRows.append(collectCall)
-//        informationRows.append(coordinationPhone)
         
         let instruction = OrderDetailInforRow("Instructions".localized,E(_task.instructions))
         taskInstruction.append(instruction)
@@ -200,31 +183,14 @@ class TaskDetailVC: BaseViewController {
     }
     
     func handleFinishAction() {
-//        App().showAlertView("are-you-sure-you-want-to-finish-this-task".localized,
-//                            positiveTitle: "Finish".localized,
-//                            positiveAction: { (hasOK) in
-//
-//                        self.updateTaskStatus("3")
-//        }, negativeTitle: "cancel".localized) { (hasCancel) in
-//            //
-//        }
-        self.updateTaskStatus("3")
+        self.updateTaskStatus(FINISHED_STATUS)
     }
     
     func handleCancelAction() {
-//        App().showAlertView("are-you-sure-you-want-to-cancel-this-task".localized,
-//                            positiveTitle: "Confirm".localized,
-//                            positiveAction: { (hasOK) in
-//
-//                                self.updateTaskStatus("4")
-//        }, negativeTitle: "cancel".localized) { (hasCancel) in
-//            //
-//        }
-        self.updateTaskStatus("4")
+        self.updateTaskStatus(CANCELLED_STATUS)
     }
     
     func showInputNote(_ statusNeedUpdate:String) {
-        //
     }
 }
 
@@ -269,11 +235,11 @@ extension TaskDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return CELL_HEIGHT
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 65
+        return HEADER_HEIGHT
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -286,7 +252,7 @@ extension TaskDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 15
+        return FOOTER_HEIGHT
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -306,7 +272,6 @@ extension TaskDetailVC: UITableViewDataSource, UITableViewDelegate {
             return cellDiscription(tableView, indexPath)
         }
         
-//        return UITableViewCell()
     }
     
     func cell(items:[OrderDetailInforRow],_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
@@ -330,39 +295,6 @@ extension TaskDetailVC: UITableViewDataSource, UITableViewDelegate {
         cell.vContent?.roundCornersLRB()
         
         return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        /*
-        let orderSection:OrderDetailSection = OrderDetailSection(rawValue: indexPath.section)!
-        let row = indexPath.row
-        switch orderSection {
-        case .sectionInformation:
-            
-            if row == informationRows.count - 2 ||
-                row == informationRows.count - 3 ||
-                row == informationRows.count - 4{// Phone row
-                let item = informationRows[row]
-                
-                if !isEmpty(item.content){
-                    let urlString = "tel://\(item.content)"
-                    if let url = URL(string: urlString) {
-                        UIApplication.shared.open(url, options: [:], completionHandler: nil)
-                    }
-                }
-                
-            }else if (row == informationRows.count - 1){ //Address row
-                let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
-                if let _task = task {
-                    vc.orderLocation = _task.location
-                }
-                self.navigationController?.pushViewController( vc, animated: true)
-            }
-            
-        default:
-            break
-        }
-         */
     }
 }
 

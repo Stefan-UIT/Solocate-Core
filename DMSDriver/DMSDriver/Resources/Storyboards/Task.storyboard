@@ -18,7 +18,7 @@
         <!--Task ListVC-->
         <scene sceneID="iPm-mA-Lpo">
             <objects>
-                <viewController storyboardIdentifier="TaskListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WEt-JQ-kSy" customClass="TaskListVC" customModule="DMSDriver" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TaskListVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="WEt-JQ-kSy" customClass="TaskListVC" customModule="Gadot_Dev" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="skn-sV-Cvh">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -99,7 +99,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TaskListClvCell" id="Tax-5T-5Tv" customClass="TaskListClvCell" customModule="DMSDriver" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TaskListClvCell" id="Tax-5T-5Tv" customClass="TaskListClvCell" customModule="Gadot_Dev" customModuleProvider="target">
                                         <rect key="frame" x="0.5" y="0.0" width="374" height="220"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
@@ -348,12 +348,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="X54-Ve-qQp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1192.8" y="1036.7316341829087"/>
+            <point key="canvasLocation" x="177" y="1021"/>
         </scene>
         <!--Task DetailVC-->
         <scene sceneID="CIh-vn-Uks">
             <objects>
-                <viewController storyboardIdentifier="TaskDetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="j4x-t3-HQl" customClass="TaskDetailVC" customModule="DMSDriver" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="TaskDetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="j4x-t3-HQl" customClass="TaskDetailVC" customModule="Gadot_Dev" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="NDG-wt-1Gd">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -413,7 +413,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailAddressCell" rowHeight="92" id="gqs-b9-fqt" customClass="OrderDetailTableViewCell" customModule="DMSDriver" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailAddressCell" rowHeight="92" id="gqs-b9-fqt" customClass="OrderDetailTableViewCell" customModule="Gadot_Dev" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="gqs-b9-fqt" id="j75-5e-zy2">
@@ -471,7 +471,7 @@
                                             <outlet property="iconImgView" destination="W87-Rq-ezg" id="p7a-fW-qsm"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailTableViewCell" rowHeight="92" id="t3k-KQ-8L8" customClass="OrderDetailTableViewCell" customModule="DMSDriver" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailTableViewCell" rowHeight="92" id="t3k-KQ-8L8" customClass="OrderDetailTableViewCell" customModule="Gadot_Dev" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="147.5" width="375" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="t3k-KQ-8L8" id="ZAv-0n-fcI">
@@ -534,7 +534,7 @@
                                             <outlet property="nameLabel" destination="M4b-QF-y2u" id="zcZ-u0-FTn"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailHeaderCell" rowHeight="104" id="Ua6-lR-3Mv" customClass="OrderDetailTableViewCell" customModule="DMSDriver" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailHeaderCell" rowHeight="104" id="Ua6-lR-3Mv" customClass="OrderDetailTableViewCell" customModule="Gadot_Dev" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="239.5" width="375" height="104"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ua6-lR-3Mv" id="DdA-0o-Wch">
@@ -577,7 +577,7 @@
                                             <outlet property="nameLabel" destination="m4j-Gm-bIq" id="21I-kX-IBn"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailDropdownCell" rowHeight="93" id="lTk-Z7-6LV" customClass="OrderDetailTableViewCell" customModule="DMSDriver" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailDropdownCell" rowHeight="93" id="lTk-Z7-6LV" customClass="OrderDetailTableViewCell" customModule="Gadot_Dev" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="343.5" width="375" height="93"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lTk-Z7-6LV" id="LFf-sA-Bse">
@@ -600,7 +600,7 @@
                                                             <rect key="frame" x="235" y="29" width="100" height="35"/>
                                                             <subviews>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" image="ic_dropdownblue" translatesAutoresizingMaskIntoConstraints="NO" id="5y6-PB-NFm">
-                                                                    <rect key="frame" x="239.5" y="9.5" width="20" height="16"/>
+                                                                    <rect key="frame" x="239.5" y="11.5" width="20" height="12"/>
                                                                 </imageView>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="Driver" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jhj-yF-tIV">
                                                                     <rect key="frame" x="3" y="9.5" width="37.5" height="16"/>
@@ -694,7 +694,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lhN-ds-Nrb" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2868" y="-647"/>
+            <point key="canvasLocation" x="1543" y="1021"/>
         </scene>
     </scenes>
     <resources>
