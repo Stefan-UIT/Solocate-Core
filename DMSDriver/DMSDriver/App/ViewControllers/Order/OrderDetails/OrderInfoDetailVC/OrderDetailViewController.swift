@@ -1228,22 +1228,20 @@ extension OrderDetailViewController{
         guard let _orderDetail = orderDetail else {
             return
         }
-        let listStatus =  CoreDataManager.getListStatus()
-        for item in listStatus {
-            if item.code == statusCode{
-                _orderDetail.status = item
-                break
-            }
-        }
+        
+        let oldStatusCode = _orderDetail.status!.code!
+        let newStatus = CoreDataManager.getStatus(withCode: statusCode)
+        _orderDetail.status = newStatus
+
         
         if hasNetworkConnection {
             showLoadingIndicator()
         }
-        updateOrderStatusImport(_orderDetail, updateDetailType:updateDetailType, cancelReason: cancelReason, reasonMessage: reasonMessage)
+        updateOrderStatusImport(_orderDetail, oldStatusCode:oldStatusCode, updateDetailType:updateDetailType, cancelReason: cancelReason, reasonMessage: reasonMessage)
     }
     
     
-    func updateOrderStatusImport(_ order:Order, updateDetailType:Order.Detail.DetailUpdateType = .Deliver, cancelReason:Reason? = nil, reasonMessage:String? = nil)  {
+    func updateOrderStatusImport(_ order:Order, oldStatusCode:String, updateDetailType:Order.Detail.DetailUpdateType = .Deliver, cancelReason:Reason? = nil, reasonMessage:String? = nil)  {
 //        var partialDeliveredReasonMsg = reasonMessage
 //        if order.statusOrder == .PartialDelivered && updateDetailType == .ReturnedPallet {
 //            if let mes = order.partialDeliveredReason?.message {
@@ -1268,6 +1266,8 @@ extension OrderDetailViewController{
                 self?.didUpdateStatus?(order, nil)
                 
             case .error(let error):
+                let oldStatus = CoreDataManager.getStatus(withCode: oldStatusCode)
+                order.status = oldStatus
                 self?.showAlertView(error.getMessage())
             }
         }
