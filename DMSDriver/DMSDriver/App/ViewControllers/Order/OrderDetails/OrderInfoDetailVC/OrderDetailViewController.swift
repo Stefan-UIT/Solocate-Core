@@ -873,6 +873,9 @@ extension OrderDetailViewController: OrderDetailSKUCellDelegate {
             detail.pivot?.loadedQty = inputQty
         } else {
             detail.pivot?.deliveredQty = inputQty
+            if let _deliverQty = inputQty, let _loadedQty = detail.pivot?.loadedQty {
+                detail.pivot?.returnedQty = _loadedQty - _deliverQty
+            }
         }
     }
 }
