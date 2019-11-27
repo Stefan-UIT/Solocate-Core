@@ -1028,6 +1028,16 @@ class _CoreDataManager {
         return results
     }
     
+    func getStatus(withCode statusCode:String) -> Status? {
+        let listStatus = getListStatus()
+        for item in listStatus {
+            if item.code == statusCode{
+                return item
+            }
+        }
+        return nil
+    }
+    
     func getListRentingOrderStatus() -> [RentingOrderStatus] {
         var results:[RentingOrderStatus] = []
         let items = fetchRecordsForEntity(Entity.CoreRentingOrderStatus.rawValue, inManagedObjectContext: self.persistentContainer.viewContext) as? [CoreRentingOrderStatus]
