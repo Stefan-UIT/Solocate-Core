@@ -343,19 +343,6 @@ class Order: BaseModel {
         
         func jsonDetailUpdateORderStatus(updateType:DetailUpdateType = .Deliver, orderStatus:StatusOrder) -> [String:Any] {
             return self.pivot!.toJSON()
-//            var params:[String:Any] = [
-//                "id" : id ?? 0
-//            ]
-//            switch updateType {
-//            case .Load:
-//                params["load_qty"] = pivot?.loadedQty ?? 0
-//                break
-//            default:
-//                    params["dlvd_qty"] = pivot?.deliveredQty ?? 0
-//                break
-//            }
-//
-//            return params
             
         }
         
