@@ -40,3 +40,5 @@ let KEY_ID                      = "id"
 let KEY_NAME                    = "name"
 let KEY_LAT_LONG                = "lat_log"
 
+let KEY_REASON_CANCEL           = "SO"
+let KEY_REASON_PARTIAL_DELIVERY = "PDSO"
