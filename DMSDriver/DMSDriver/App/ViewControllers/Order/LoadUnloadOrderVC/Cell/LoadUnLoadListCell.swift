@@ -23,20 +23,15 @@ class LoadUnLoadListCell: UITableViewCell {
     @IBOutlet weak var actualQtyTextField: UITextField!
     
     weak var delegate:LoadUnLoadListCellDelegate?
-    
-
     private var orderDetail:Order.Detail?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         actualQtyTextField.delegate = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
 
     func configure(orderDetail:Order.Detail) {
@@ -48,16 +43,6 @@ class LoadUnLoadListCell: UITableViewCell {
         actualQtyTextField.text = (orderDetail.pivot?.deliveredQty != nil) ? "\(orderDetail.pivot?.deliveredQty!)" : lblQty?.text
         btnLoadUnload?.setStyleBlueSquare()
         btnLoadUnload?.setTitle("Load".localized, for: .normal)
-        /*
-        switch orderDetail.status {
-        case .NotLoad:
-            btnLoadUnload?.setTitle("Load".localized, for: .normal)
-        case .Loaded:
-            btnLoadUnload?.setTitle("Unload".localized, for: .normal)
-        case .Unload:
-            btnLoadUnload?.setTitle("Load".localized, for: .normal)
-        }
-         */
     }
     
     //MARK : - Action

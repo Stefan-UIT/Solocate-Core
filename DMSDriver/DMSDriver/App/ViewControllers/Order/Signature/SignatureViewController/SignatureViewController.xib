@@ -18,7 +18,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SignatureViewController" customModule="DMSDriver" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SignatureViewController" customModule="Gadot_Dev" customModuleProvider="target">
             <connections>
                 <outlet property="btnClear" destination="1Tj-eK-kGO" id="5te-KB-vl1"/>
                 <outlet property="btnOK" destination="NVj-CL-nXL" id="3jh-6z-6E9"/>
@@ -56,7 +56,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="p98-6J-SZ3">
                     <rect key="frame" x="30" y="96" width="315" height="392"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T8M-7c-2NR" customClass="SignatureView" customModule="DMSDriver" customModuleProvider="target">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="T8M-7c-2NR" customClass="SignatureView" customModule="Gadot_Dev" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="0.0" width="315" height="392"/>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="l3g-um-M8n">
@@ -170,7 +170,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="p98-6J-SZ3" secondAttribute="trailing" constant="30" id="yUl-IR-T4C"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="28" y="6"/>
+            <point key="canvasLocation" x="82" y="-30"/>
         </view>
     </objects>
 </document>

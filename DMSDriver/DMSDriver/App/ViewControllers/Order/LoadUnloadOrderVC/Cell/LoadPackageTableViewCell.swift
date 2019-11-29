@@ -69,8 +69,6 @@ class LoadPackageTableViewCell: UITableViewCell {
         if isShowedCartonSection {
             cartonsViewContainerHeightConstraint?.constant = 50.0
             cartonsViewContainerTopSpacing?.constant = 6.0
-//            cartonInPalletsLabel?.text = "\(detail.cartonsInPallet ?? 0)"
-//            actualCartonsInPalletTextField?.text = (detail.loadedCartonsInPallet != nil) ? "\(detail.loadedCartonsInPallet!)" : ""
         } else {
             cartonsViewContainerHeightConstraint?.constant = 0.0
             cartonsViewContainerTopSpacing?.constant = 0.0
@@ -83,7 +81,6 @@ class LoadPackageTableViewCell: UITableViewCell {
         orderIDLabel?.text = (detail.order_id != nil) ? "\(detail.order_id!)" : "-"
         packageNameLabel?.text = detail.package?.name
         quantityLabel?.text = "\(detail.pivot?.qty ?? 0)"
-//        wmsOrderCodeLabel?.text = detail.wmsOrderCode ?? "-"
         actualQuantityTextField?.text = (detail.pivot?.loadedQty != nil) ? "\(detail.pivot?.loadedQty!)" : ""
         vContent?.cornerRadius = 0
         customerNameLabel.text = Slash(order.customer?.userName)
@@ -110,7 +107,6 @@ extension LoadPackageTableViewCell: UITextFieldDelegate {
             if textField == palletTextField {
                 detail.pivot?.loadedQty = Int(updatedText)
             } else if textField == cartonTextField {
-//                detail.loadedCartonsInPallet = Int(updatedText)
             }
         }
         return true

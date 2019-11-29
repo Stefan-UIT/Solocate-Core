@@ -16,7 +16,6 @@ class TaskDetailVC: BaseViewController {
         case StatusSection = 0
         case DetailSection
         case InstructionSection
-//        case DescriptionSection
         
         static let count: Int = {
             var max: Int = 0
@@ -156,7 +155,6 @@ class TaskDetailVC: BaseViewController {
     func initVar()  {
         arrTitleHeader = ["task-status".localized,
                           "task-information".localized,
-//                          "Information".localized,
                           "Instructions".localized]
         
     }
@@ -167,7 +165,6 @@ class TaskDetailVC: BaseViewController {
     }
     
     @IBAction func didClickUnableToStart(_ sender: UIButton) {
-//        handleUnableToStartAction()
         handleCancelAction()
     }
     
@@ -176,8 +173,6 @@ class TaskDetailVC: BaseViewController {
         vc.task = task
         vc.displayMode = .displayModeTask
         vc.didCancelSuccess =  { [weak self] (success, order) in
-            //self?.task = order as? TaskModel
-            //self?.didUpdateStatus?((self?.orderDetail)!, nil)
         }
         self.navigationController?.pushViewController(vc, animated: true)
     }

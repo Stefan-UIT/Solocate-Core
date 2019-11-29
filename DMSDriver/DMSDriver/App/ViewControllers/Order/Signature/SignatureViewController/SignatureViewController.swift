@@ -141,8 +141,6 @@ fileprivate extension SignatureViewController {
         signatureFile.typeFile = "SIG"
         signatureFile.mimeType = "image/png"
         signatureFile.contentFile = data
-//        signatureFile.param = "file_sig_req"
-//        signatureFile.param = "files"
         signatureFile.param = "files[0]"
         
         

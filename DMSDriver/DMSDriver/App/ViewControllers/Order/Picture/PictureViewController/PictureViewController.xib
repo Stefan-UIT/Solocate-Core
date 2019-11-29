@@ -15,7 +15,7 @@
         </array>
     </customFonts>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PictureViewController" customModule="DMSDriver" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PictureViewController" customModule="Gadot_Dev" customModuleProvider="target">
             <connections>
                 <outlet property="btnSkip" destination="wH2-Lf-H4D" id="0pV-oD-D40"/>
                 <outlet property="previewView" destination="pP6-vU-ujd" id="AfL-FY-jml"/>
@@ -133,7 +133,7 @@
                 <constraint firstItem="pGK-Th-WCi" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="60" id="lbu-KF-2iz"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="130.40000000000001" y="134.48275862068968"/>
+            <point key="canvasLocation" x="39" y="107"/>
         </view>
     </objects>
     <resources>
