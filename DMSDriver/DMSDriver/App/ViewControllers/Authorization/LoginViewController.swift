@@ -240,7 +240,7 @@ fileprivate extension LoginViewController {
                 self?.getListRentingOrderStatus()
                 
                 // Fetch reasons save to local DB
-                //self?.getReasonList()
+                self?.getReasonList()
                 
             case .error(let error):
                 self?.dismissLoadingIndicator()

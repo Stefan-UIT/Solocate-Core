@@ -67,6 +67,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     fileprivate var arrTitleHeader:[String] = []
     fileprivate let heightHeader:CGFloat = 65
     fileprivate var isMapHidden:Bool = true
+    fileprivate var isReasonListShowing:Bool = false
     
     var dateStringFilter = Date().toString()
     var btnGo: UIButton?
@@ -80,6 +81,10 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if isReasonListShowing {
+            isReasonListShowing = false
+            return
+        }
         updateUI()
     }
     
@@ -272,15 +277,15 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     }
     
     func showReasonView(isUnableToFinish:Bool) {
-        let reasonType = isUnableToFinish ? ReasonType.UnableToFinish : ReasonType.Cancel
-        ReasonSkipView.present(inViewController: self, reasonType: reasonType) {[weak self] (success, reason) in
+        isReasonListShowing = true
+        ReasonSkipView.present(inViewController: self) {[weak self] (success, reason) in
             guard let _reason = reason else {return}
             self?.cancelOrder(reason: _reason, isUnableToFinish: isUnableToFinish)
         }
     }
     
     func showReturnReasonView(completionHandler:@escaping (_ reason:Reason)->Void) {
-        ReasonSkipView.present(inViewController: self, isCancelledReason: false, reasonType: .UnableToFinish) {(success, reason) in
+        ReasonSkipView.present(inViewController: self, isCancelledReason: false) {(success, reason) in
             guard let _reason = reason else {return}
             completionHandler(_reason)
         }
@@ -1009,17 +1014,14 @@ fileprivate extension OrderDetailViewController{
             showAlertView(mes)
         } else {
             
-            
             let statusNeedUpdate = _orderDetail.getDeliveredStatusWithDeliveredQuantity()
-//            if statusNeedUpdate == .PartialDelivered {
-//                self.showReturnReasonView { (reason) in
-//                    self.updateOrderStatus(statusNeedUpdate.rawValue,cancelReason: reason)
-//                }
-//            } else {
-//                self.updateOrderStatus(statusNeedUpdate.rawValue)
-//            }
-            
-            self.updateOrderStatus(statusNeedUpdate.rawValue)
+            if statusNeedUpdate == .PartialDelivered {
+                self.showReturnReasonView { (reason) in
+                    self.updateOrderStatus(statusNeedUpdate.rawValue,cancelReason: reason)
+                }
+            } else {
+                self.updateOrderStatus(statusNeedUpdate.rawValue)
+            }
         }
             
     }
@@ -1245,14 +1247,14 @@ extension OrderDetailViewController{
     
     
     func updateOrderStatusImport(_ order:Order, oldStatusCode:String, updateDetailType:Order.Detail.DetailUpdateType = .Deliver, cancelReason:Reason? = nil, reasonMessage:String? = nil)  {
-//        var partialDeliveredReasonMsg = reasonMessage
-//        if order.statusOrder == .PartialDelivered && updateDetailType == .ReturnedPallet {
-//            if let mes = order.partialDeliveredReason?.message {
-//                partialDeliveredReasonMsg = mes
-//            }
-//        }
+        var partialDeliveredReasonMsg = reasonMessage
+        if order.statusOrder == .PartialDelivered && updateDetailType == .Deliver {
+            if let mes = order.partialDeliveredReason?.message {
+                partialDeliveredReasonMsg = mes
+            }
+        }
         
-        SERVICES().API.updateOrderStatus(order, reason:cancelReason, updateDetailType:updateDetailType) {[weak self] (result) in
+        SERVICES().API.updateOrderStatus(order, reason:cancelReason, updateDetailType:updateDetailType, partialDeliveredReasonMsg: partialDeliveredReasonMsg) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):

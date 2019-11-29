@@ -37,6 +37,7 @@ extension BaseAPIService{
     func updateOrderStatus(_ order:Order,
                            reason: Reason? = nil,
                            updateDetailType:Order.Detail.DetailUpdateType = .Deliver,
+                           partialDeliveredReasonMsg:String? = nil,
                            callback: @escaping APICallback<ResponseDataModel<Order>>) -> APIRequest? {
         
         let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL,
@@ -45,6 +46,10 @@ extension BaseAPIService{
         if let _reason = reason {
             params["shipping_msg"] = _reason.message != nil ? _reason.message :  _reason.reasonDescription
             params["reason_fail_id"] = "\(_reason.id)"
+        }
+        
+        if let msg = partialDeliveredReasonMsg {
+            params["message"] = msg
         }
         
         if !isEmpty(order.note){
@@ -86,7 +91,7 @@ extension BaseAPIService{
     @discardableResult
     func getReturnReasonList(callback: @escaping APICallback<ResponseArrData<Reason>>) -> APIRequest {
         return request(method: .GET,
-                       path:  PATH_REQUEST_URL.GET_RETURN_REASON_LIST.URL,
+                       path:  PATH_REQUEST_URL.GET_REASON_LIST.URL,
                        input: .empty,
                        callback: callback);
     }

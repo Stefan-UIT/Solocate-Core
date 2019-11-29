@@ -20,12 +20,12 @@ class LoadUnloadOrderVC: BaseViewController {
     private let cellContentIdentifier = "LoadUnLoadListCell"
     private let loadPackageCellIdentifier = "LoadPackageTableViewCell"
     private let loadSKUIdentifier = "LoadOrderDetailSKUCell"
+    private let CELL_HEIGHT:CGFloat = 100.0
     private var dataOrigin:[Order.Detail] = []
     private var dataDisplay:[Order.Detail] = []
     private var dataOrderDisplay:[Order] = []
 
     var callback:LoadUnloadOrderVCCallback?
-    
     var selectedDetail:Order.Detail?
     var selectedOrder:Order? {
         get {
@@ -39,7 +39,6 @@ class LoadUnloadOrderVC: BaseViewController {
     var orders:[Order] = []
     var ordersAbleToLoad:[Order] {
         get {
-//            return orders.filter({$0.statusOrder == StatusOrder.newStatus || $0.statusOrder == StatusOrder.WarehouseClarification})
             return orders.filter({$0.statusOrder == StatusOrder.newStatus})
         }
     }
@@ -132,18 +131,6 @@ extension LoadUnloadOrderVC: LoadOrderDetailSKUTableViewCellDelete {
 extension LoadUnloadOrderVC {
     func submitLoadedQuantity(detail:Order.Detail) {
         if let loadedQty = detail.pivot?.loadedQty, let qty = detail.pivot?.qty, loadedQty <= qty {
-//            if (detail.isPallet) {
-//                if let loadedCartons = detail.loadedCartonsInPallet {
-//                    let cartons = detail.cartonsInPallet ?? 0
-//                    if loadedCartons <= cartons {
-//                        updateLoadedQuantity(detail:detail)
-//                        return
-//                    }
-//                }
-//                let message = String(format: "loaded-cartons-must-be-less-than-or-equal".localized, "\(detail.cartonsInPallet ?? 0)")
-//                showAlertView(message)
-//                return
-//            }
             updateLoadedQuantity(detail:detail)
             // call without loaded carton
         } else {
@@ -207,7 +194,7 @@ extension LoadUnloadOrderVC:UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 100
+        return CELL_HEIGHT
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -270,200 +257,3 @@ extension LoadUnloadOrderVC:DMSNavigationServiceDelegate {
         self.navigationController?.popViewController(animated: true)
     }
 }
-
-
-//MARK : - LoadUnLoadListCellDelegate
-//extension LoadUnloadOrderVC:LoadUnLoadListCellDelegate{
-//    func didSelectedLoadUnload(cell: LoadUnLoadListCell, orderDetail: Order.Detail?) {
-//        guard let order = selectedOrder,
-//              let detail = orderDetail,
-//              let indexPath = tbvContent?.indexPath(for: cell) else {
-//            return
-//        }
-//
-//        showAlertView("Submit Load")
-//        let row = indexPath.row
-//        switch detail.status {
-//        case .NotLoad:
-//            orderDetail?.status = .Loaded
-//
-//        case .Loaded:
-//            if order.statusOrder == .newStatus ||
-//                order.statusOrder == .InTransit {
-//                detail.status = .NotLoad
-//            }else if (order.statusOrder == .PickupStatus) {
-//                detail.status = .Unload
-//            }
-//
-//        case .Unload:
-//            if order.statusOrder == .PickupStatus {
-//                detail.status = .Loaded
-//            }
-//        }
-//
-//        for var item in order.details ?? [] {
-//            if item.barCode == detail.barCode {
-//                item = detail
-//                break
-//            }
-//        }
-//
-//        dataDisplay[row] = detail
-//        tbvContent?.reloadRows(at: [indexPath], with: .automatic)
-//
-//        if validUpdateStatusOrder() == true {
-//            if order.statusOrder == StatusOrder.InTransit {
-//                updateStatusOrder(statusCode: StatusOrder.PickupStatus.rawValue)
-//
-//            }else {
-//
-//                if order.isRequireSign() == false && order.isRequireImage() == false {
-//
-//                    updateStatusOrder(statusCode: StatusOrder.deliveryStatus.rawValue)
-//
-//                }else {
-//
-//                     if order.isRequireImage(){
-//                        self.showAlertView("you-need-add-least-a-picture-to-finish-this-order".localized) {[weak self](action) in
-//                            self?.showPictureViewController()
-//                        }
-//
-//                    }else if (order.isRequireSign()) {
-//                        self.showAlertView("you-need-add-customer-s-signature-to-finish-this-order".localized) {[weak self](action) in
-//                            self?.showSignatureViewController()
-//                        }
-//
-//                     }else {
-//
-//                        let statusNeedUpdate = StatusOrder.deliveryStatus.rawValue
-//                        self.updateStatusOrder(statusCode: statusNeedUpdate)
-//                    }
-//                }
-//            }
-//        }
-//    }
-
-//    func validUpdateStatusOrder() -> Bool {
-//        var valid = true
-//        for item in order?.details ?? []  {
-//            if order?.statusOrder == StatusOrder.InTransit {
-//                if item.status != .Loaded {
-//                   valid = false
-//                    break
-//                }
-//            }else if order?.statusOrder == StatusOrder.PickupStatus {
-//                if item.status != .Unload {
-//                    valid = false
-//                    break
-//                }
-//            }
-//        }
-//
-//        return valid
-//    }
-    
-//    func showPictureViewController() {
-//        let viewController = PictureViewController()
-//        let navi = BaseNV(rootViewController: viewController)
-//        navi.statusBarStyle = .lightContent
-//        viewController.order = order
-//        viewController.callback = {[weak self](success,order) in
-//            if success {
-//                self?.callback?(true,order)
-//            }
-//        }
-//        present(navi, animated: true, completion: nil)
-//    }
-//
-//    func showSignatureViewController() {
-//        let viewController = SignatureViewController()
-//        viewController.delegate = self
-//        viewController.order = order
-//        self.callback?(true,order)
-//        self.navigationController?.present(viewController, animated: true, completion: nil)
-//    }
-//}
-    
-//MARK: - BaseSearchViewDelegate
-
-
-
-//MARK: - API
-//extension LoadUnloadOrderVC {
-//    fileprivate func updateStatusOrder(statusCode: String, cancelReason:Reason? = nil) {
-//        guard let _orderDetail:Order = selectedOrder?.cloneObject() else {
-//            return
-//        }
-//        let listStatus =  CoreDataManager.getListStatus()
-//        for item in listStatus {
-//            if item.code == statusCode{
-//                _orderDetail.status = item
-//                break
-//            }
-//        }
-//
-//        if hasNetworkConnection {
-//            showLoadingIndicator()
-//        }
-//
-//        SERVICES().API.updateOrderStatus(_orderDetail,reason: cancelReason) {[weak self] (result) in
-//            self?.dismissLoadingIndicator()
-//            switch result{
-//            case .object(_):
-//                self?.order = _orderDetail
-//                self?.callback?(true,_orderDetail)
-//
-//                if _orderDetail.statusOrder == StatusOrder.deliveryStatus {
-//                    App().mainVC?.rootNV?.popToController(OrderDetailViewController.self, animated: false)
-//                }else {
-//                    self?.navigationController?.popViewController(animated: true)
-//                }
-//
-//            case .error(let error):
-//                //self?.callback?(false,_orderDetail)
-//                self?.showAlertView(error.getMessage())
-//            }
-//        }
-//    }
-//
-//    fileprivate func submitSignatureAndFinishOrder(_ file: AttachFileModel,_ name:String) {
-//        guard let order:Order = order?.cloneObject() else { return }
-//        let listStatus =  CoreDataManager.getListStatus()
-//        for item in listStatus {
-//            if item.code == StatusOrder.deliveryStatus.rawValue{
-//                order.status = item
-//                break
-//            }
-//        }
-//        if hasNetworkConnection {
-//            showLoadingIndicator()
-//        }
-//        SERVICES().API.submitSignature(file,order,name) {[weak self] (result) in
-//            self?.dismissLoadingIndicator()
-//            switch result{
-//            case .object(_):
-//                self?.showAlertView("order-has-delivered-successfully".localized) {[weak self](action) in
-//                    if order.files == nil{
-//                        order.files = []
-//                    }
-//                    order.files?.append(file)
-//                    self?.callback?(true,order)
-//                    self?.navigationController?.popViewController(animated: true)
-//                }
-//
-//            case .error(let error):
-//                self?.showAlertView(error.getMessage())
-//                break
-//            }
-//        }
-//    }
-//}
-//
-////MARK: - SignatureViewControllerDelegate
-//extension LoadUnloadOrderVC:SignatureViewControllerDelegate{
-//    func signatureViewController(view: SignatureViewController, didCompletedSignature signature: AttachFileModel?, signName:String?) {
-//        if let sig = signature{
-//            submitSignatureAndFinishOrder(sig, signName ?? "")
-//        }
-//    }
-//}

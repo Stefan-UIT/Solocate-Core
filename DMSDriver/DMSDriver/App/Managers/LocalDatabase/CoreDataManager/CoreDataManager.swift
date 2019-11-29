@@ -1052,10 +1052,23 @@ class _CoreDataManager {
         var results:[Reason] = []
         let items = fetchRecordsForEntity(Entity.Reason.rawValue,
                                           inManagedObjectContext: self.persistentContainer.viewContext) as? [CoreReason]
+        var _tempReason:[Reason] = []
         items?.forEach({ (coreReason) in
-            results.append(coreReason.convertToReasonOrderCC())
+            _tempReason.append(coreReason.convertToReasonOrderCC())
         })
-        
+        results = _tempReason.filter({$0.catalog?.code == KEY_REASON_CANCEL})
+        return results
+    }
+    
+    func getListReasonPartialDeliverd() -> [Reason] {
+        var results:[Reason] = []
+        let items = fetchRecordsForEntity(Entity.Reason.rawValue,
+                                          inManagedObjectContext: self.persistentContainer.viewContext) as? [CoreReason]
+        var _tempReason:[Reason] = []
+        items?.forEach({ (coreReason) in
+            _tempReason.append(coreReason.convertToReasonOrderCC())
+        })
+        results = _tempReason.filter({$0.catalog?.code == KEY_REASON_PARTIAL_DELIVERY})
         return results
     }
     

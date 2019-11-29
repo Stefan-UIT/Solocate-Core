@@ -171,6 +171,9 @@
         <relationship name="url" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoreUrlFile" inverseName="order" inverseEntity="CoreUrlFile" syncable="YES"/>
     </entity>
     <entity name="CoreReason" representedClassName="CoreReason" syncable="YES" codeGenerationType="class">
+        <attribute name="catalogCode" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="catalogId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="catalogName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
@@ -366,7 +369,7 @@
         <element name="CoreLocation" positionX="-576" positionY="144" width="128" height="330"/>
         <element name="CoreNote" positionX="-576" positionY="144" width="128" height="300"/>
         <element name="CoreOrder" positionX="-54" positionY="-9" width="128" height="1590"/>
-        <element name="CoreReason" positionX="-261.1484375" positionY="280.81640625" width="128" height="120"/>
+        <element name="CoreReason" positionX="-261.1484375" positionY="280.81640625" width="128" height="165"/>
         <element name="CoreRentingOrder" positionX="-558" positionY="162" width="128" height="240"/>
         <element name="CoreRentingOrderDetail" positionX="-567" positionY="153" width="128" height="165"/>
         <element name="CoreRentingOrderStatus" positionX="-616.34375" positionY="-3.58203125" width="128" height="90"/>

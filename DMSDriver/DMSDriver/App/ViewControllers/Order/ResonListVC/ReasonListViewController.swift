@@ -15,33 +15,26 @@ class ReasonListViewController: BaseViewController {
         case displayModeTask = "2"
     }
     
-    
-    fileprivate var reasonList:[Reason] = [Reason]()
-    fileprivate var selectedIndex: Int = -1
-    var orderDetail: Order?
-    var task: TaskModel?
-
-    var routeID: Int = -1
-    var itemID: String?
-    
-    var didCancelSuccess:((_ success:Bool,_ data: Any) -> Void)?
-    var displayMode:ReasonDisplayMode = .displayModeOrder
-    
-  
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var finishButton: UIButton?
     @IBOutlet weak var tvMessange: UITextView?
     @IBOutlet weak var lblPlaceholder: UILabel?
     @IBOutlet weak var btnBack: UIButton?
-
     
+    fileprivate var reasonList:[Reason] = [Reason]()
+    fileprivate var selectedIndex: Int = -1
+    var orderDetail: Order?
+    var task: TaskModel?
+    var routeID: Int = -1
+    var itemID: String?
+    var didCancelSuccess:((_ success:Bool,_ data: Any) -> Void)?
+    var displayMode:ReasonDisplayMode = .displayModeOrder
     var validateSubmit:Bool = false{
         didSet{
             finishButton?.isEnabled = validateSubmit
             finishButton?.alpha = validateSubmit ? 1 : 0.4
         }
     }
-
   
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -82,7 +75,6 @@ class ReasonListViewController: BaseViewController {
         lblPlaceholder?.text = "enter-a-message".localized
     }
   
-    
     // MARK: - ACTION
     @IBAction func submit(_ sender: UIButton) {
         guard selectedIndex >= 0 else {
@@ -192,9 +184,8 @@ extension ReasonListViewController: UITableViewDataSource, UITableViewDelegate {
   
   func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
     let cell = tableView.dequeueReusableCell(withIdentifier: "ReasonListCell", for: indexPath) as! ReasonListCell
-    
-    cell.lblTitle?.text =  reasonList[indexPath.row].name
-    cell.lblSubtitle?.text = ""
+    let reason = reasonList[indexPath.row]
+    cell.configureCell(reason: reason)
     if selectedIndex == indexPath.row {
         cell.imgIcon?.image = UIImage(named: "ic_selected")
     }else{
