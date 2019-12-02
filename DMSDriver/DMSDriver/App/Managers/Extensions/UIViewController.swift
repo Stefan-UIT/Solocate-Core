@@ -101,10 +101,12 @@ extension UIViewController {
   }
     
   func showLoadingIndicator() {
+    UIApplication.shared.beginIgnoringInteractionEvents()
     SVProgressHUD.show()
   }
   
   func dismissLoadingIndicator() {
+    UIApplication.shared.endIgnoringInteractionEvents()
     SVProgressHUD.dismiss()
   }
   
