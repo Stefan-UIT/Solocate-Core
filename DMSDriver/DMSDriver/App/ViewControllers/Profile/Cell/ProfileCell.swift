@@ -15,7 +15,6 @@ protocol ProfileCellDelegate {
 }
 
 class ProfileCell: UITableViewCell {
-
     @IBOutlet weak var lblTitle:UILabel?
     @IBOutlet weak var tfContent:UITextField?
     @IBOutlet weak var imvAvartar:UIImageView?
@@ -23,19 +22,14 @@ class ProfileCell: UITableViewCell {
     @IBOutlet weak var lineEdit:UIView?
     @IBOutlet weak var vContent:UIView?
 
-  
     var delegate:ProfileCellDelegate?
-  
   
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
   
     @IBAction func onbtnClickEdit(btn:UIButton){
