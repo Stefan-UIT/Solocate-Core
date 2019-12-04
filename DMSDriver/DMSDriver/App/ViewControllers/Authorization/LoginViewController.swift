@@ -58,7 +58,6 @@ class LoginViewController: BaseViewController {
         setupTextField()
         setupViewEvironment()
         setupRemeberButton()
-//        App().statusBarView?.backgroundColor = AppColor.backgroundLogin
         
     }
     
@@ -78,11 +77,6 @@ class LoginViewController: BaseViewController {
         self.unregisterForKeyboardNotifications()
         App().statusBarView?.backgroundColor = AppColor.white
     }
-    
-    
-//    override var preferredStatusBarStyle: UIStatusBarStyle{
-//        return .lightContent
-//    }
     
     override func keyboardWillChangeFrame(noti: Notification) {
         let frame = self.getKeyboardFrameEnd(noti: noti)
@@ -234,7 +228,6 @@ fileprivate extension LoginViewController {
                 }
                 
                 App().loginSuccess()
-//                self?.getDrivingRule()
                 self?.getListStatus()
                 self?.getListRouteStatus()
                 self?.getListRentingOrderStatus()
@@ -254,10 +247,6 @@ fileprivate extension LoginViewController {
         SERVICES().API.getDrivingRule { (result) in
             switch result{
             case .object(let obj):
-                /*
-                 let data = DrivingRule()
-                 data.data = 1
-                 */
                 Caches().drivingRule = obj
                 
             case .error(_ ):

@@ -48,6 +48,10 @@ class ProfileVC: BaseViewController {
   
     private var textFieldEdit:UITextField?
     private var changePasswordView : ChangePasswordView!
+    
+    let CELL_HEIGHT:CGFloat = 80.0
+    let HEADER_HEIGHT:CGFloat = 50.0
+    let FOOTER_HEIGHT:CGFloat = 35.0
   
 
     override func viewDidLoad() {
@@ -91,26 +95,8 @@ class ProfileVC: BaseViewController {
     
     
     func setupImageView() {
-        /*
-        imvAvartar?.setImageWithURL(url: user?.avatar_thumb,
-                                    placeHolderImage: #imageLiteral(resourceName: "ic_nonAvartar"),
-                                    complateDownload: { (image, error) in
-            //
-        })
-        */
-        
         imvAvartar?.setImage(withURL: E(user?.avatar_thumb), placeholderImage: #imageLiteral(resourceName: "ic_nonAvartar"))
     }
-
-    /*
-    // MARK: - Navigation
-	
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     // MARK: - ACTION
     @IBAction func onbtnClickChangeAvatar(btn:UIButton) {
@@ -147,21 +133,21 @@ extension ProfileVC:UITableViewDataSource {
       return privateInforDatas.count
     }
   }
-  
+    
   func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
     return UITableView.automaticDimension
   }
     
   func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 80
+    return CELL_HEIGHT
   }
   
   func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-    return 50
+    return HEADER_HEIGHT
   }
   
   func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-    return 35
+    return FOOTER_HEIGHT
   }
   
   func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
