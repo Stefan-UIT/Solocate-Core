@@ -21,13 +21,10 @@ class SlideMenuCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
     
     func configura(menuType:MenuItemType,selectedType:MenuItemType) {
@@ -51,15 +48,6 @@ class SlideMenuCell: UITableViewCell {
             lblSubtitle?.text = Cache.shared.userLogin?.email
             lblTitle?.textColor = AppColor.white
             lblSubtitle?.textColor = AppColor.white
-            /*
-            use this method is do not work
-            imvIcon?.setImageWithURL(url: Caches().user?.userInfo?.avatar_thumb,
-                                     placeHolderImage: menuType?.normalIcon(),
-                                     complateDownload: nil)
-            imvIcon?.sd_setImage(with: URL(string: E(Caches().user?.userInfo?.avatar_thumb)),
-                                     placeholderImage: menuType?.normalIcon(),
-                                     options: [.refreshCached,.scaleDownLargeImages], completed: nil)
-             */
             imvIcon?.setImage(withURL: E(Caches().user?.userInfo?.avatar_thumb),placeholderImage: menuType?.normalIcon())
         }else {
             imvIcon?.image = menuType?.normalIcon()

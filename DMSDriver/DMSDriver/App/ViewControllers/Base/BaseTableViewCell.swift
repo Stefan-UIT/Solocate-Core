@@ -12,7 +12,6 @@ class BaseTableViewCell: UITableViewCell {
 
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
     
     func loadData(_ data: Any) {

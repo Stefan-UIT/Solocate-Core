@@ -74,6 +74,7 @@ class SlideMenuVC: BaseViewController {
 
     fileprivate let profileIndentifierCell = "SlideMenuAvartarCell"
     fileprivate let rowIndentifierCell = "SlideMenuRowCell"
+    private let CELL_HEIGHT:CGFloat = 100
 
     var currentItem:MenuItemType = .DASHBOARD
     var returnedItemTimeDataManager = TimeData()
@@ -122,22 +123,13 @@ extension SlideMenuVC: UITableViewDataSource{
         if menutype == .DASHBOARD || menutype == .COUNTER || menutype == .ALERT || menutype == .RETURNEDITEMS || menutype == .TASK {
             return 0
         }
-        
-//        if isRampManagerMode {
-//            switch menutype {
-//                case .COUNTER, .ALERT:
-//                    return 0
-//                default:
-//                    break
-//            }
-//        }
     }
     
     return UITableView.automaticDimension
   }
   
   func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-    return 100
+    return CELL_HEIGHT
   }
   
   func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -183,7 +175,6 @@ extension SlideMenuVC:UITableViewDelegate{
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
             
         case .RENTINGORDERS:
-//            let vc:AssignOrderVC = .loadSB(SB: .Order)
             let vc:RentingOrderListVC = .loadSB(SB: .RentingOrder)
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
     

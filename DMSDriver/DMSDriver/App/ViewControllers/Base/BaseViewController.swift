@@ -66,7 +66,6 @@ class BaseViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = AppColor.white
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         navigationController?.navigationBar.shadowImage = UIImage()
-        //self.navigationController?.navigationBar.borderColor = AppColor.white
     }
     
     func printControllerName() {
