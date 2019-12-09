@@ -11,33 +11,31 @@ import ImageSlideshow
 import SDWebImage
 
 class NoteManagementViewController: BaseViewController {
-    
-    let CELL_IDENTIFIER = "NoteTableViewCell"
-
+    // MARK: - IBOutlet
     @IBOutlet weak var noDataLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
-    var slideshow = ImageSlideshow()
-    
     @IBOutlet weak var noteViewContainer: UIView!
+    
+    // MARK: - Private Var
+    let CELL_IDENTIFIER = "NoteTableViewCell"
+    let CELL_HEIGHT:CGFloat = 80.0
+    
+    // MARK: - Variables
+    var slideshow = ImageSlideshow()
     var route:Route?
     var order:Order?
     var notes = [Note]()
-    
     var isRouteNoteManagement:Bool {
         get {
             return (route != nil)
         }
     }
     
+    // MARK: - View Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         reloadUI()
-//        noteButton.backgroundColor = UIColor(red: 171/255, green: 178/255, blue: 186/255, alpha: 1.0)
-        // Shadow and Radius
         noteViewContainer.makeShadow()
-//        noteButton.layer.cornerRadius = 4.0
-
     }
     
     override func updateNavigationBar()  {
@@ -55,15 +53,11 @@ class NoteManagementViewController: BaseViewController {
     
     func redirectToAddNoteVC() {
         let vc:AddNoteViewController = .loadSB(SB: .Common)
-//        vc.order = orderDetail
-//        vc.notes = orderDetail?.notes ?? []
         vc.delegate = self
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
     // MARK: - ACTION
-    
-    
     @IBAction func onAddNoteTouchUp(_ sender: UIButton) {
         redirectToAddNoteVC()
         
@@ -75,7 +69,6 @@ class NoteManagementViewController: BaseViewController {
 }
 
 extension NoteManagementViewController {
-    
     func updateAttachFilesParamsProperty(attachedFiles:[AttachFileModel]?) {
         guard let files = attachedFiles else { return }
         for i in 0..<files.count {
@@ -88,7 +81,6 @@ extension NoteManagementViewController {
         if hasNetworkConnection {
             showLoadingIndicator()
         }
-        
         updateAttachFilesParamsProperty(attachedFiles: files)
         SERVICES().API.updateNoteToOrder(orderID, message: message, files: files) { [weak self] (result) in
             self?.dismissLoadingIndicator()
@@ -108,7 +100,6 @@ extension NoteManagementViewController {
         if hasNetworkConnection {
             showLoadingIndicator()
         }
-        
         updateAttachFilesParamsProperty(attachedFiles: files)
         SERVICES().API.updateNoteToRoute(routeID, message: message, files: files) { [weak self] (result) in
             self?.dismissLoadingIndicator()
@@ -123,7 +114,6 @@ extension NoteManagementViewController {
             }
         }
     }
-
     
     func fetchRouteData()  {
         if let route = self.route {
@@ -155,7 +145,6 @@ extension NoteManagementViewController {
     
     func getOrderDetail(_ orderID:Int) {
         showLoadingIndicator()
-        
         SERVICES().API.getOrderDetail(orderId: "\(orderID)") {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
@@ -237,11 +226,6 @@ extension NoteManagementViewController:UITableViewDelegate,UITableViewDataSource
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-//        let files = notes[indexPath.row].files
-//        if files.count > 0 {
-//            showSlideImages(files: files)
-//        }
-//
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -249,7 +233,7 @@ extension NoteManagementViewController:UITableViewDelegate,UITableViewDataSource
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 80.0
+        return CELL_HEIGHT
     } 
 }
 
