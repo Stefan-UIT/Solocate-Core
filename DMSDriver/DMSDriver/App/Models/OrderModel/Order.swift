@@ -378,7 +378,7 @@ class Order: BaseModel {
         var isValidLoadedQty:Bool {
             get {
                 if let _loadedQty = pivot?.loadedQty, let _qty = pivot?.qty {
-                    return _loadedQty <= _qty
+                    return (_loadedQty <= _qty && _loadedQty > 0)
                 }
                 return false
             }
