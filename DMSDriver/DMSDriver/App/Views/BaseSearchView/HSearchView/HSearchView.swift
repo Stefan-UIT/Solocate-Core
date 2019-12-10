@@ -16,29 +16,20 @@ protocol HSearchViewDelegate:AnyObject {
 }
 
 class HSearchView: UIView {
-    
+    //MARK: - IBOutlet
     @IBOutlet weak var tfSearch:UITextField?
     @IBOutlet weak var vContent:UITextField?
     
+    //MARK: - Variables
     var delegate:HSearchViewDelegate?
     
-
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
-    }
-    */
-
     override func awakeFromNib() {
         super.awakeFromNib()
         tfSearch?.delegate = self
     }
 }
 
-
+//MARK: - UITextFieldDelegate
 extension HSearchView:UITextFieldDelegate{
     func textFieldDidBeginEditing(_ textField: UITextField) {
         delegate?.tfSearchShouldBeginEditing(view: self, textField: textField)

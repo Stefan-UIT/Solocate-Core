@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB" customClass="HSearchView" customModule="Ashdod_Dev" customModuleProvider="target">
+        <view clipsSubviews="YES" contentMode="scaleToFill" id="iN0-l3-epB" customClass="HSearchView" customModule="Gadot_Dev" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="436" height="105"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -77,7 +77,7 @@
             <connections>
                 <outlet property="tfSearch" destination="u2Z-Do-KOp" id="IoB-aa-GBI"/>
             </connections>
-            <point key="canvasLocation" x="278.39999999999998" y="1316.4917541229386"/>
+            <point key="canvasLocation" x="400" y="736"/>
         </view>
     </objects>
     <resources>

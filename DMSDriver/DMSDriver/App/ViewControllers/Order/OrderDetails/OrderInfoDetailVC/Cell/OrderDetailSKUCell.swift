@@ -23,6 +23,7 @@ class OrderDetailSKUCell: UITableViewCell {
     @IBOutlet weak var loadedQtyHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var deliveredQtyTextField: UITextField!
     var detail:Order.Detail!
+    var tempActualQty:Int?
     @IBOutlet weak var vContent: UIView!
     
     @IBOutlet weak var deliveredQtyStaticLabel: UILabel!
@@ -66,6 +67,7 @@ class OrderDetailSKUCell: UITableViewCell {
             let orderLoadedQty = (detail.pivot?.loadedQty != nil) ? "\(detail.pivot!.loadedQty!)" : ""
             let orderActualQty = (detail.pivot?.deliveredQty != nil) ? "\(detail.pivot!.deliveredQty!)" : ""
             actualQty = (order.isNewStatus) ? orderLoadedQty : orderActualQty
+            actualQty = actualQty == "0" ? String(format: "\(tempActualQty ?? 0)") : actualQty
         }
         deliveredQtyTextField.text = actualQty
     }

@@ -14,20 +14,24 @@ protocol AddNoteViewControllerDelegate: class {
 }
 
 class AddNoteViewController: BaseViewController {
+    // MARK: - IBOutlet
     @IBOutlet weak var noteTextView: UITextView!
     @IBOutlet weak var submitButton: UIButton!
     @IBOutlet weak var hintLabel: UILabel!
     
+    // MARK: - Delegate
     weak var delegate: AddNoteViewControllerDelegate?
-    var attachedFiles:[AttachFileModel]?
     
+    // MARK: - Variables
+    var attachedFiles:[AttachFileModel]?
     var validateSubmit:Bool = false{
         didSet{
             submitButton?.isEnabled = validateSubmit
             submitButton?.alpha = validateSubmit ? 1 : 0.4
         }
     }
-
+    
+    // MARK: - View Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         noteTextView.placeholder = "write-here".localized
@@ -35,7 +39,6 @@ class AddNoteViewController: BaseViewController {
         validateSubmit = false
         noteTextView.delegate = self
         noteTextView.becomeFirstResponder()
-        // Do any additional setup after loading the view.
     }
     
     override func updateNavigationBar()  {
@@ -62,6 +65,7 @@ class AddNoteViewController: BaseViewController {
         }
     }
     
+    // MARK: - ACTION
     @IBAction func submit(_ sender: UIButton) {
         let message = self.noteTextView?.text ?? ""
         self.delegate?.didSubmitNote(message, images: self.attachedFiles)
@@ -70,6 +74,7 @@ class AddNoteViewController: BaseViewController {
 
 }
 
+// MARK: - TextViewDelegate
 extension AddNoteViewController:UITextViewDelegate{
     func textViewDidChange(_ textView: UITextView) {
         validateSubmit = (textView.text.length > 0)

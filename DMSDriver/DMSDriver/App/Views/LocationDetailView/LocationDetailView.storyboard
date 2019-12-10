@@ -96,7 +96,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LdP-i6-wy5">
-                                                            <rect key="frame" x="0.0" y="5" width="414" height="125"/>
+                                                            <rect key="frame" x="0.0" y="5" width="375" height="125"/>
                                                             <subviews>
                                                                 <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bgx-eZ-2DC">
                                                                     <rect key="frame" x="10" y="15" width="8" height="8"/>
@@ -112,7 +112,7 @@
                                                                     </userDefinedRuntimeAttributes>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="YYx-xg-M7a">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="125"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="125"/>
                                                                     <subviews>
                                                                         <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_address" translatesAutoresizingMaskIntoConstraints="NO" id="C45-vo-Yxm">
                                                                             <rect key="frame" x="18" y="42" width="15" height="15"/>
@@ -128,7 +128,7 @@
                                                                             </constraints>
                                                                         </imageView>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E0f-HE-i2i">
-                                                                            <rect key="frame" x="18" y="6.5" width="391" height="25"/>
+                                                                            <rect key="frame" x="18" y="6.5" width="352" height="25"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" constant="25" id="uur-Ez-uho"/>
                                                                             </constraints>
@@ -139,12 +139,12 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tzela haar Modiin 2628" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hHg-rX-knB">
-                                                                            <rect key="frame" x="38" y="41.5" width="371" height="16"/>
+                                                                            <rect key="frame" x="38" y="41.5" width="332" height="16"/>
                                                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tzela haar Modiin 2628" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mFi-N3-4Dh">
-                                                                            <rect key="frame" x="38" y="67.5" width="371" height="16"/>
+                                                                            <rect key="frame" x="38" y="67.5" width="332" height="16"/>
                                                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
@@ -228,7 +228,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IFM-l9-YlG">
-                                                            <rect key="frame" x="10" y="33.5" width="389" height="16"/>
+                                                            <rect key="frame" x="10" y="33.5" width="350" height="16"/>
                                                             <fontDescription key="fontDescription" name="Arial-BoldMT" family="Arial" pointSize="14"/>
                                                             <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                             <nil key="highlightedColor"/>
@@ -328,7 +328,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7kP-Bg-cp8" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-530.43478260869574" y="-79.017857142857139"/>
+            <point key="canvasLocation" x="-561" y="-173"/>
         </scene>
     </scenes>
     <resources>

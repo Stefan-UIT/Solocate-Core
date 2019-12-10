@@ -68,6 +68,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     fileprivate let heightHeader:CGFloat = 65
     fileprivate var isMapHidden:Bool = true
     fileprivate var isReasonListShowing:Bool = false
+    fileprivate var tempActualQty = [Int:Int]()
     
     var dateStringFilter = Date().toString()
     var btnGo: UIButton?
@@ -762,6 +763,7 @@ fileprivate extension OrderDetailViewController {
         cell.selectionStyle = .none
         guard let order = orderDetail, let detail = order.details?[indexPath.row] else { return cell }
         cell.delegate = self
+        cell.tempActualQty = tempActualQty[detail.pivot?.id ?? 0]
         cell.configureCell(detail: detail, order: order)
         cell.vContent?.cornerRadius = 0
         if indexPath.row == order.details!.count - 1{
@@ -874,6 +876,7 @@ extension OrderDetailViewController: OrderDetailSKUCellDelegate {
     func didEnterDeliveredQuantityTextField(_ cell: OrderDetailSKUCell, value: String, detail: Order.Detail) {
         guard let _order = orderDetail else { return }
         let inputQty = Int(value)
+        tempActualQty.updateValue(inputQty ?? 0, forKey: detail.pivot?.id ?? 0)
         if _order.isNewStatus {
             detail.pivot?.loadedQty = inputQty
         } else {

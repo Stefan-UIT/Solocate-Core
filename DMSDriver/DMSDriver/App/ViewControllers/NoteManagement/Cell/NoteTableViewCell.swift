@@ -24,6 +24,7 @@ class NoteTableViewCell: UITableViewCell {
     @IBOutlet weak var collectionViewHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var collectionViewBottomSpace: NSLayoutConstraint!
     weak var delegate: NoteTableViewCellDelegate?
+    private let CELL_IDENTIFIER = "ImageCollectionViewCell"
     private let itemsPerRow: CGFloat = 3
     private let sectionInsets = UIEdgeInsets(top: 50.0,
                                              left: 20.0,
@@ -34,12 +35,9 @@ class NoteTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         statusButton.borderWidth = 1.0
-        
         collectionView.delegate = self
         collectionView.dataSource = self
-        
         if let layout = collectionView.collectionViewLayout as? UICollectionViewFlowLayout {
             layout.scrollDirection = .horizontal
         }
@@ -47,7 +45,6 @@ class NoteTableViewCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-        // Configure the view for the selected state
     }
     
     func shouldHideAttachedFilesSection(isHidden:Bool) {
@@ -69,13 +66,11 @@ class NoteTableViewCell: UITableViewCell {
         self.contentLabel.text = note.content
         self.timeLabel.text = displayedStringDate(from:note.createdAt)
         let numberOfAttachedFiles = note.files.count
-//        shouldHideAttachedFilesSection(isHidden: numberOfAttachedFiles==0)
         shouldHideAttachedFilesSection(isHidden: true)
         if numberOfAttachedFiles > 0 {
             self.attachedFilesLabel.text = (numberOfAttachedFiles > 1) ? "\(numberOfAttachedFiles) attached files" : "\(numberOfAttachedFiles) attached file"
         }
         
-//        let statusOrder = StatusOrder(rawValue: note.status.code ?? "OP")
         guard let statusOrder = StatusOrder(rawValue: note.status?.code ?? "OP") else { return }
         let status = (statusOrder.statusName.localized ?? "")
         let statusName = ("  " + status + "  ")
@@ -120,21 +115,9 @@ extension NoteTableViewCell:UICollectionViewDataSource,UICollectionViewDelegateF
         return CGSize(width: widthPerItem, height: widthPerItem)
     }
     
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-//        return sectionInsets
-//    }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-//        return sectionInsets.left
-//    }
-    
-//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-//        return 0
-//    }
-    
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ImageCollectionViewCell", for: indexPath) as? ImageCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_IDENTIFIER, for: indexPath) as? ImageCollectionViewCell
         let file  = note.files[indexPath.row]
         cell?.imageView.sd_setImage(with: URL(string: E(file.url_thumbnail)),
                                     placeholderImage: #imageLiteral(resourceName: "place_holder"),
