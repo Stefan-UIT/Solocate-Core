@@ -9,7 +9,7 @@
 import UIKit
 
 class LocationDetailViewCell: UITableViewCell {
-    
+    //MARK: - IBOutlets
     @IBOutlet weak var btnClose:UIButton?
     @IBOutlet weak var lblTitle:UILabel?
     @IBOutlet weak var lblSubTitle:UILabel?
@@ -19,15 +19,12 @@ class LocationDetailViewCell: UITableViewCell {
     @IBOutlet weak var lblDate: UILabel?
     @IBOutlet weak var vContent: UIView?
 
+    //MARK: - View Life Cycles
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
     }
-
 }

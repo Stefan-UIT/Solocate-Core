@@ -15,19 +15,23 @@ class LocationDetailView: UIViewController {
         case Pickup
     }
     
+    //MARK: - IBOutlets
     @IBOutlet weak var tbvContent:UITableView?
     
+    //MARK: - Private Variables
     private let headerIdentifierCell = "LocationDetailHeaderCell"
     private let packageIdentifierCell = "LocationDetailPackageCell"
     private let addressIdentifierCell = "LocationDetailAddressCell"
-
+    let LOCATION_CELL_HEIGHT:CGFloat = 140.0
+    let CELL_HEIGHT:CGFloat = 80.0
     private let titleHeader = ["location".localized.uppercased(),
                                "Deliver".localized.uppercased(),
                                "Pickup".localized.uppercased()]
-    
     private var delivers:[Order.Detail] = []
     private var pickups:[Order.Detail] = []
-
+    
+    
+    //MARK: - Variables
     var location:GroupLocatonModel? {
         didSet {
             delivers = location?.getDeliverPackages() ?? []
@@ -35,22 +39,11 @@ class LocationDetailView: UIViewController {
         }
     }
     
-
+    //MARK: - View Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     func setupTableView() {
         tbvContent?.dataSource = self
@@ -99,9 +92,9 @@ extension LocationDetailView:UITableViewDataSource{
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         if indexPath.section == LocationViewSection.Location.rawValue {
-            return 140
+            return LOCATION_CELL_HEIGHT
         }
-        return 80
+        return CELL_HEIGHT
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
@@ -166,7 +159,6 @@ extension LocationDetailView:UITableViewDataSource{
             
             let subTitle = locationDetailSubTitle(details: delivers)
             let subTitle2 = locationDetailSubTitle2(details: delivers)
-//            cell.lblSubTitle?.text = (deliver.package?.name != nil) ? deliver.package?.name : "package".localized + ": \(row + 1)"
             cell.lblSubTitle?.text = subTitle
             cell.lblSubTitle2?.text = subTitle2
 

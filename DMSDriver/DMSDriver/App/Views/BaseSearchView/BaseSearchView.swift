@@ -21,11 +21,9 @@ extension BaseSearchViewDelegate{
 }
 
 class BaseSearchView: UIView {
-    
     var vSearch:HSearchView?
     var delegate:BaseSearchViewDelegate?
     
-
     override func awakeFromNib() {
         super.awakeFromNib()
         
@@ -48,7 +46,6 @@ class BaseSearchView: UIView {
 
 
 extension BaseSearchView:HSearchViewDelegate{
-    
     func tfSearchShouldBeginEditing(view: HSearchView, textField: UITextField) {
         delegate?.tfSearchShouldBeginEditing(view: self, textField: textField)
     }

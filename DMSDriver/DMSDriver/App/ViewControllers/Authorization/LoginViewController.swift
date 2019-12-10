@@ -34,14 +34,15 @@ enum ChooseEvironment:Int {
 }
 
 class LoginViewController: BaseViewController {
-  
+    // MARK: - IBOutlet
     @IBOutlet weak var userNameTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     @IBOutlet weak var rememberButton: UIButton!
     @IBOutlet weak var conBotViewLogin: NSLayoutConstraint?
     @IBOutlet weak var vEvironment: UIView?
     @IBOutlet weak var segEvironmentControl:UISegmentedControl?
-
+    
+    //MARK: - Private Variables
     private let DEVELOMENT = 0
     private let QC = 1
     private let DEMO = 2
@@ -53,6 +54,7 @@ class LoginViewController: BaseViewController {
         }
     }
     
+    //MARK: - View Life Cycles
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTextField()
