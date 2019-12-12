@@ -549,7 +549,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             headerCell.btnStatus?.isHidden = true
             
             let statusesShouldAllowToSignAndUpload = (_orderDetail.isInTransit || _orderDetail.isFinished)
-            
+            let statusesNotAllowToSignAnUpload = (_orderDetail.isPartialDelivered || _orderDetail.isDelivery)
             let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section)!
             switch orderSection {
             case .sectionOrderInfo:
@@ -562,7 +562,8 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 
             case .sectionSignature:
                 let hasSigned = orderDetail?.signature != nil
-                let isHidden = hasSigned || !statusesShouldAllowToSignAndUpload
+                var isHidden = hasSigned || !statusesShouldAllowToSignAndUpload
+                isHidden = statusesNotAllowToSignAnUpload ? true : isHidden
                 headerCell.btnEdit?.isHidden = isHidden
             case .sectionPictures:
                 headerCell.btnEdit?.isHidden = !statusesShouldAllowToSignAndUpload

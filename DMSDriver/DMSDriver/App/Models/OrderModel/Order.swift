@@ -623,6 +623,14 @@ class Order: BaseModel {
         return statusOrder == .InTransit
     }
     
+    var isPartialDelivered:Bool {
+        return statusOrder == .PartialDelivered
+    }
+    
+    var isDelivery:Bool {
+        return statusOrder == .deliveryStatus
+    }
+    
     var isLoaded:Bool {
         return statusOrder == .Loaded || statusOrder == .PartialLoaded
     }
