@@ -55,12 +55,7 @@ class RouteDetailVC: BaseViewController {
     @IBOutlet weak var lblRoute:UILabel?
     @IBOutlet weak var lblTime:UILabel?
     @IBOutlet weak var lblStatus:UILabel?
-
     @IBOutlet weak var addNoteButton: UIButton!
-    /*
-    @IBOutlet weak var vContainerMap:UIView?
-    @IBOutlet weak var vContainerOrders:UIView?
-     */
     @IBOutlet weak var floatButtonViewContainer: UIView!
     
     var scrollMenu:ScrollMenuView?
@@ -114,13 +109,6 @@ class RouteDetailVC: BaseViewController {
         addNoteButton.layer.shadowRadius = 10
         addNoteButton.layer.masksToBounds = false
     }
-    
-//    func handleShowingActionsContainer() {
-//        actionsViewContainer.isHidden = !isRampManagerMode
-//        actionViewContainerHeightConstraint.constant = (isRampManagerMode) ? 50.0 : 0.0
-//        menuScrollViewHeightConstraint.constant = (isRampManagerMode) ? 0.0 : 45.0
-//        clvContent?.isScrollEnabled = !isRampManagerMode
-//    }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
