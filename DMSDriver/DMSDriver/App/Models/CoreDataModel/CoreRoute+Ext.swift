@@ -31,7 +31,7 @@ extension CoreRoute{
         companyName = route.company?.name
         truckNumber = route.truck?.plateNumber
         trailerTankerName = route.trailerTankerName
-        loadVolume = route.loadVolume
+//        loadVolume = route.loadVolume
         orderList?.addingObjects(from: route.orderList)
         locationList?.addingObjects(from: route.locationList)
     }
@@ -65,7 +65,7 @@ extension CoreRoute{
         route.truck = _truck
         route.trailerTankerNameCoreData = E(trailerTankerName)
         
-        route.loadVolume = E(loadVolume)
+//        route.loadVolume = E(loadVolume)
         
         var _orderList = [Order]()
         if  let orderList = orderList?.allObjects as? [CoreOrder] {
