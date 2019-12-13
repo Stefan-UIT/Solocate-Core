@@ -57,8 +57,8 @@ class RouteTableViewCell: UITableViewCell {
         companyLabel.text = Slash(route.company?.name)
         truckLabel.text = Slash(route.truck?.plateNumber)
         trailerTankerLabel.text = Slash(route.trailerTankerName)
-        let loadValue = Double(route.loadVolume)?.rounded(toPlaces: 1)
-        loadVolumeLabel.text = "\(loadValue!)" + "%"
+        let loadValue = Double(route.loadVolume ?? 0).rounded(toPlaces: 1)
+        loadVolumeLabel.text = "\(loadValue)" + "%"
     }
     
 }
