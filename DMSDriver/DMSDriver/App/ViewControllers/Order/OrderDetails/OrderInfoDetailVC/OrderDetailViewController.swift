@@ -1277,6 +1277,7 @@ extension OrderDetailViewController{
             case .error(let error):
                 let oldStatus = CoreDataManager.getStatus(withCode: oldStatusCode)
                 order.status = oldStatus
+                self?.updateButtonStatus()
                 self?.showAlertView(error.getMessage())
             }
         }
