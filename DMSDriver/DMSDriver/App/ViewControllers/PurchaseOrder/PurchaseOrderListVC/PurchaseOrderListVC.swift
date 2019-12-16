@@ -113,7 +113,7 @@ extension PurchaseOrderListVC: UITableViewDataSource {
 extension PurchaseOrderListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        let vc:RentingOrderDetailVC = RentingOrderDetailVC.loadSB(SB: .RentingOrder)
+        let vc:PurchaseOrderDetailVC = PurchaseOrderDetailVC.loadSB(SB: .PurchaseOrder)
         vc.rentingOrder = rentingOrders[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }

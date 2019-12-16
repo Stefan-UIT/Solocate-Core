@@ -645,14 +645,10 @@
 		761ED79523A76AF0005826B6 /* PurchaseOrderDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ED79323A76AF0005826B6 /* PurchaseOrderDetailVC.swift */; };
 		761ED79723A76B10005826B6 /* PurchaseOrderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ED79623A76B10005826B6 /* PurchaseOrderListTableViewCell.swift */; };
 		761ED79823A76B10005826B6 /* PurchaseOrderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ED79623A76B10005826B6 /* PurchaseOrderListTableViewCell.swift */; };
-		761ED79A23A76B23005826B6 /* PurchaseOrderInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ED79923A76B23005826B6 /* PurchaseOrderInfoTableViewCell.swift */; };
-		761ED79B23A76B23005826B6 /* PurchaseOrderInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ED79923A76B23005826B6 /* PurchaseOrderInfoTableViewCell.swift */; };
-		761ED79D23A76BAA005826B6 /* PurchaseOrderItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ED79C23A76BAA005826B6 /* PurchaseOrderItemTableViewCell.swift */; };
-		761ED79E23A76BAA005826B6 /* PurchaseOrderItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ED79C23A76BAA005826B6 /* PurchaseOrderItemTableViewCell.swift */; };
-		761ED7A023A76BBA005826B6 /* PurchaseOrderPicktupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ED79F23A76BBA005826B6 /* PurchaseOrderPicktupTableViewCell.swift */; };
-		761ED7A123A76BBA005826B6 /* PurchaseOrderPicktupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ED79F23A76BBA005826B6 /* PurchaseOrderPicktupTableViewCell.swift */; };
 		761ED7A423A779D1005826B6 /* PurchaseOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ED7A323A779D1005826B6 /* PurchaseOrder.swift */; };
 		761ED7A523A779D1005826B6 /* PurchaseOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ED7A323A779D1005826B6 /* PurchaseOrder.swift */; };
+		761ED7AA23A7864E005826B6 /* PurchaseOrderDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ED7A923A7864E005826B6 /* PurchaseOrderDetailTableViewCell.swift */; };
+		761ED7AB23A7864E005826B6 /* PurchaseOrderDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ED7A923A7864E005826B6 /* PurchaseOrderDetailTableViewCell.swift */; };
 		7622BCE823823BB5008792C8 /* CoreUserInfo+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCE723823BB5008792C8 /* CoreUserInfo+Ext.swift */; };
 		7622BCE923823BB5008792C8 /* CoreUserInfo+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCE723823BB5008792C8 /* CoreUserInfo+Ext.swift */; };
 		7622BCEC2382412C008792C8 /* CoreRentingOrder+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCEB2382412C008792C8 /* CoreRentingOrder+Ext.swift */; };
@@ -1208,10 +1204,8 @@
 		761ED79023A76AD6005826B6 /* PurchaseOrderListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderListVC.swift; sourceTree = "<group>"; };
 		761ED79323A76AF0005826B6 /* PurchaseOrderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderDetailVC.swift; sourceTree = "<group>"; };
 		761ED79623A76B10005826B6 /* PurchaseOrderListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderListTableViewCell.swift; sourceTree = "<group>"; };
-		761ED79923A76B23005826B6 /* PurchaseOrderInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderInfoTableViewCell.swift; sourceTree = "<group>"; };
-		761ED79C23A76BAA005826B6 /* PurchaseOrderItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderItemTableViewCell.swift; sourceTree = "<group>"; };
-		761ED79F23A76BBA005826B6 /* PurchaseOrderPicktupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderPicktupTableViewCell.swift; sourceTree = "<group>"; };
 		761ED7A323A779D1005826B6 /* PurchaseOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrder.swift; sourceTree = "<group>"; };
+		761ED7A923A7864E005826B6 /* PurchaseOrderDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderDetailTableViewCell.swift; sourceTree = "<group>"; };
 		7622BCE723823BB5008792C8 /* CoreUserInfo+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreUserInfo+Ext.swift"; sourceTree = "<group>"; };
 		7622BCEB2382412C008792C8 /* CoreRentingOrder+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreRentingOrder+Ext.swift"; sourceTree = "<group>"; };
 		7622BCEE23828531008792C8 /* CoreTanker+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreTanker+Ext.swift"; sourceTree = "<group>"; };
@@ -3387,9 +3381,7 @@
 		761ED78F23A76AB1005826B6 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				761ED79923A76B23005826B6 /* PurchaseOrderInfoTableViewCell.swift */,
-				761ED79C23A76BAA005826B6 /* PurchaseOrderItemTableViewCell.swift */,
-				761ED79F23A76BBA005826B6 /* PurchaseOrderPicktupTableViewCell.swift */,
+				761ED7A923A7864E005826B6 /* PurchaseOrderDetailTableViewCell.swift */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -4028,7 +4020,6 @@
 				2E30BE6622E99A21007419FD /* LoadPackageTableViewCell.swift in Sources */,
 				2A443A9C22648C5A00CB6508 /* UIAlertController+Extensions.swift in Sources */,
 				2A443A9D22648C5A00CB6508 /* UITextField+Ext.swift in Sources */,
-				761ED79D23A76BAA005826B6 /* PurchaseOrderItemTableViewCell.swift in Sources */,
 				2A443A9E22648C5A00CB6508 /* TextViewController.swift in Sources */,
 				2A443A9F22648C5A00CB6508 /* DateFormatter+Ext.swift in Sources */,
 				761ED79423A76AF0005826B6 /* PurchaseOrderDetailVC.swift in Sources */,
@@ -4108,8 +4099,6 @@
 				2A443ADB22648C5A00CB6508 /* OrderItemTableViewCell.swift in Sources */,
 				2E42DB592303C8CE004AFD41 /* FilterOrderDataViewController.swift in Sources */,
 				760C0A98233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift in Sources */,
-				761ED79A23A76B23005826B6 /* PurchaseOrderInfoTableViewCell.swift in Sources */,
-				761ED7A023A76BBA005826B6 /* PurchaseOrderPicktupTableViewCell.swift in Sources */,
 				2A443ADC22648C5A00CB6508 /* APIServices.swift in Sources */,
 				2E96D06022C4CFED00DA29C5 /* LoadingViewController.swift in Sources */,
 				2A443ADD22648C5A00CB6508 /* HistoryNotifyVC.swift in Sources */,
@@ -4159,6 +4148,7 @@
 				2A443B0222648C5A00CB6508 /* TextViewInputController.swift in Sources */,
 				2A443B0322648C5A00CB6508 /* FilterDataListStatusCell.swift in Sources */,
 				2A443B0422648C5A00CB6508 /* ReceiveNotificationModel.swift in Sources */,
+				761ED7AA23A7864E005826B6 /* PurchaseOrderDetailTableViewCell.swift in Sources */,
 				2E920A7322EFFBC7000AD8EF /* Truck.swift in Sources */,
 				7622BCF223828543008792C8 /* CoreTankerType+Ext.swift in Sources */,
 				2A443B0522648C5A00CB6508 /* DriverModel.swift in Sources */,
@@ -4337,7 +4327,6 @@
 				3B66B80A210B113D000BDFEF /* UIButton.swift in Sources */,
 				3B66B840210B113D000BDFEF /* Debug.swift in Sources */,
 				2E55A3E022A6523D006F9944 /* NoteManagementViewController.swift in Sources */,
-				761ED79E23A76BAA005826B6 /* PurchaseOrderItemTableViewCell.swift in Sources */,
 				2A42555B2251F08E00D55FEA /* ResponseDataDashboard.swift in Sources */,
 				3B66B90E210B1149000BDFEF /* PackagesViewController.swift in Sources */,
 				3B66B848210B113D000BDFEF /* Services.swift in Sources */,
@@ -4384,7 +4373,6 @@
 				3BF026B921DCA8DD0029A652 /* LoadMoreCell.swift in Sources */,
 				3BC053E42180179D001B7D89 /* ReasonListCell.swift in Sources */,
 				3B66B84F210B113D000BDFEF /* BaseAPIService.swift in Sources */,
-				761ED79B23A76B23005826B6 /* PurchaseOrderInfoTableViewCell.swift in Sources */,
 				76BFFD78233A0CFC0021E01A /* RentingOrderDetailVC.swift in Sources */,
 				3B66B8DF210B1149000BDFEF /* AlertModel.swift in Sources */,
 				76BFFD752339F62D0021E01A /* RentingOrder.swift in Sources */,
@@ -4397,7 +4385,6 @@
 				3B66B84E210B113D000BDFEF /* APIServices.swift in Sources */,
 				2E96D06122C4CFED00DA29C5 /* LoadingViewController.swift in Sources */,
 				3B7695EA21CA20A70032B142 /* HistoryNotifyVC.swift in Sources */,
-				761ED7A123A76BBA005826B6 /* PurchaseOrderPicktupTableViewCell.swift in Sources */,
 				2EF35D8022EEAB3100131D33 /* AssignDriverTableViewCell.swift in Sources */,
 				760C46FE233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift in Sources */,
 				3B66B828210B113D000BDFEF /* UISearchBar+Extensions.swift in Sources */,
@@ -4424,6 +4411,7 @@
 				3B17EB5B21AD049C00CDF7D3 /* TimerVC.swift in Sources */,
 				3B66B817210B113D000BDFEF /* NSAtribitedString+Ext.swift in Sources */,
 				76DC3790236AD89700C3FCE8 /* CoreLocation+Ext.swift in Sources */,
+				761ED7AB23A7864E005826B6 /* PurchaseOrderDetailTableViewCell.swift in Sources */,
 				3B66B838210B113D000BDFEF /* CurrencyCell.swift in Sources */,
 				3B9A37672123D6B9004D881C /* SelectionModel.swift in Sources */,
 				3B66B928210B1149000BDFEF /* ForgetPasswordView.swift in Sources */,
