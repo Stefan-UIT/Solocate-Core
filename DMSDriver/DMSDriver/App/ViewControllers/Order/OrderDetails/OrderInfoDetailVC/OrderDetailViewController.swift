@@ -1340,11 +1340,6 @@ extension OrderDetailViewController{
                 self?.updateOrderDetail?(self?.orderDetail)
                 self?.showAlertView("assigned-successfull".localized,
                                     completionHandler: { (ok) in
-                                        /*
-                                        let vc:JobListVC = .loadSB(SB: .Job)
-                                        vc.dateStringFilter = E(self?.dateStringFilter)
-                                        App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
-                                         */
                 })
                 
             case .error(let error):
