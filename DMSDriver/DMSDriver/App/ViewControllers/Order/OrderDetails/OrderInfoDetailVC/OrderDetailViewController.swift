@@ -1376,7 +1376,9 @@ extension OrderDetailViewController{
             self?.dismissLoadingIndicator()
             switch result {
             case .object(_):
-                self?.showAlertView("Finished")
+                self?.showAlertView(MSG_UPDATED_SUCCESSFUL, completionHandler: { (action) in
+                    self?.popViewController()
+                })
             case .error(let error):
                 self?.showAlertView(error.getMessage())
             }
