@@ -651,6 +651,8 @@
 		761ED79E23A76BAA005826B6 /* PurchaseOrderItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ED79C23A76BAA005826B6 /* PurchaseOrderItemTableViewCell.swift */; };
 		761ED7A023A76BBA005826B6 /* PurchaseOrderPicktupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ED79F23A76BBA005826B6 /* PurchaseOrderPicktupTableViewCell.swift */; };
 		761ED7A123A76BBA005826B6 /* PurchaseOrderPicktupTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ED79F23A76BBA005826B6 /* PurchaseOrderPicktupTableViewCell.swift */; };
+		761ED7A423A779D1005826B6 /* PurchaseOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ED7A323A779D1005826B6 /* PurchaseOrder.swift */; };
+		761ED7A523A779D1005826B6 /* PurchaseOrder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ED7A323A779D1005826B6 /* PurchaseOrder.swift */; };
 		7622BCE823823BB5008792C8 /* CoreUserInfo+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCE723823BB5008792C8 /* CoreUserInfo+Ext.swift */; };
 		7622BCE923823BB5008792C8 /* CoreUserInfo+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCE723823BB5008792C8 /* CoreUserInfo+Ext.swift */; };
 		7622BCEC2382412C008792C8 /* CoreRentingOrder+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7622BCEB2382412C008792C8 /* CoreRentingOrder+Ext.swift */; };
@@ -1209,6 +1211,7 @@
 		761ED79923A76B23005826B6 /* PurchaseOrderInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderInfoTableViewCell.swift; sourceTree = "<group>"; };
 		761ED79C23A76BAA005826B6 /* PurchaseOrderItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderItemTableViewCell.swift; sourceTree = "<group>"; };
 		761ED79F23A76BBA005826B6 /* PurchaseOrderPicktupTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderPicktupTableViewCell.swift; sourceTree = "<group>"; };
+		761ED7A323A779D1005826B6 /* PurchaseOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrder.swift; sourceTree = "<group>"; };
 		7622BCE723823BB5008792C8 /* CoreUserInfo+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreUserInfo+Ext.swift"; sourceTree = "<group>"; };
 		7622BCEB2382412C008792C8 /* CoreRentingOrder+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreRentingOrder+Ext.swift"; sourceTree = "<group>"; };
 		7622BCEE23828531008792C8 /* CoreTanker+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreTanker+Ext.swift"; sourceTree = "<group>"; };
@@ -2479,6 +2482,7 @@
 		3B66B86B210B1148000BDFEF /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				761ED7A223A779C2005826B6 /* PurchaseOrderModel */,
 				76BFFD722339F60F0021E01A /* RentingOrderModel */,
 				2E920A7122EFFBC6000AD8EF /* Truck */,
 				2EF35D8422EED4D400131D33 /* Driver */,
@@ -3390,6 +3394,14 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		761ED7A223A779C2005826B6 /* PurchaseOrderModel */ = {
+			isa = PBXGroup;
+			children = (
+				761ED7A323A779D1005826B6 /* PurchaseOrder.swift */,
+			);
+			path = PurchaseOrderModel;
+			sourceTree = "<group>";
+		};
 		76BFFD662339D7D80021E01A /* RentingOrder */ = {
 			isa = PBXGroup;
 			children = (
@@ -3986,6 +3998,7 @@
 				2A443A8522648C5A00CB6508 /* UserLoginModel.swift in Sources */,
 				2E920A6D22EFF09D000AD8EF /* AssignTruckViewController.swift in Sources */,
 				2A443A8622648C5A00CB6508 /* Constants.swift in Sources */,
+				761ED7A423A779D1005826B6 /* PurchaseOrder.swift in Sources */,
 				2E1BE34C22F14FFD005F9BB5 /* ReturnedItemListVC.swift in Sources */,
 				2A443A8722648C5A00CB6508 /* UIImageView+Extensions.swift in Sources */,
 				2A443A8822648C5A00CB6508 /* ImagePickerView.swift in Sources */,
@@ -4197,6 +4210,7 @@
 				3B66B90F210B1149000BDFEF /* MapsViewController.swift in Sources */,
 				2E57C67B22B8E3CD0064A787 /* AddNoteViewController.swift in Sources */,
 				3B66B812210B113D000BDFEF /* HCSStarRatingView.m in Sources */,
+				761ED7A523A779D1005826B6 /* PurchaseOrder.swift in Sources */,
 				2E96D05A22C4C8D000DA29C5 /* FileManager.swift in Sources */,
 				3B13CBEF211A8FF400A93E18 /* ScrollMenuView.swift in Sources */,
 				3B66B81F210B113D000BDFEF /* UISegmentedControl+Extensions.swift in Sources */,
