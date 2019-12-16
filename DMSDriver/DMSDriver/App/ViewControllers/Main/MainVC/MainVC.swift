@@ -22,7 +22,8 @@ class MainVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupSideMenu()
-        pushRouteListVC()
+//        pushRouteListVC()
+        pushPurchaseOrderVC()
     }
 
     override func didReceiveMemoryWarning() {
@@ -62,6 +63,11 @@ class MainVC: BaseViewController {
     
     func pushRouteListVC() {
         let vc:RouteListVC = .loadSB(SB: .Route)
+        rootNV?.setViewControllers([vc], animated: false)
+    }
+    
+    func pushPurchaseOrderVC() {
+        let vc:PurchaseOrderListVC = .loadSB(SB: .PurchaseOrder)
         rootNV?.setViewControllers([vc], animated: false)
     }
     
