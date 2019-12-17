@@ -212,14 +212,14 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforDetail.append(remark)
         //orderInforStatus.append(urgency)
         
-        if  (order.statusOrder == .CancelStatus ||
-             order.statusOrder == .UnableToFinish),
-            let _orderDetail = orderDetail{
-            let reason = OrderDetailInforRow("failure-cause".localized,_orderDetail.reason?.name ?? "-")
-            let mess = OrderDetailInforRow("Message".localized,_orderDetail.reason_msg ?? "-")
-            orderInforDetail.append(reason)
-            orderInforDetail.append(mess)
-        }
+//        if  (order.statusOrder == .CancelStatus ||
+//             order.statusOrder == .UnableToFinish),
+//            let _orderDetail = orderDetail{
+//            let reason = OrderDetailInforRow("failure-cause".localized,_orderDetail.reason?.name ?? "-")
+//            let mess = OrderDetailInforRow("Message".localized,_orderDetail.reason_msg ?? "-")
+//            orderInforDetail.append(reason)
+//            orderInforDetail.append(mess)
+//        }
         
         let fromLocationName = OrderDetailInforRow("location-name".localized, Slash(order.from?.loc_name),false)
         let fromAddress = OrderDetailInforRow("Address".localized, E(order.from?.address),true)
