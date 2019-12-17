@@ -65,7 +65,7 @@ class PurchaseOrderDetailVC: BaseViewController {
     }
     
     func setupDataDetailInforRows() {
-        var _order:Order!
+        var _order:PurchaseOrder!
         if order != nil {
             _order = order!
         }
@@ -78,9 +78,9 @@ class PurchaseOrderDetailVC: BaseViewController {
         let purchaseId = OrderDetailInforRow("purchase-order-id".localized,IntSlash(_order.id))
         let purchaseOrderType = OrderDetailInforRow("order-type".localized, Slash(_order.orderType.name))
         let purchaseDivision = OrderDetailInforRow("division".localized,Slash(_order.division?.code))
-        let purchaseRefCode = OrderDetailInforRow("ref-code".localized, Slash(_order.orderReference))
-        let purchaseCustomer = OrderDetailInforRow("customer-name".localized, Slash(_order.customer_name))
-        let purchaseDueDateRange = OrderDetailInforRow("due-date-range".localized,Slash(_order.startTime)+" - "+Slash(_order.endTime))
+        let purchaseRefCode = OrderDetailInforRow("ref-code".localized, Slash(_order.referenceCode))
+        let purchaseCustomer = OrderDetailInforRow("customer-name".localized, Slash(_order.customer?.userName))
+        let purchaseDueDateRange = OrderDetailInforRow("due-date-range".localized,Slash(_order.from?.start_time)+" - "+Slash(_order.to?.end_time))
         
         purchaseOrderInfo.append(purchaseId)
         purchaseOrderInfo.append(purchaseOrderType)

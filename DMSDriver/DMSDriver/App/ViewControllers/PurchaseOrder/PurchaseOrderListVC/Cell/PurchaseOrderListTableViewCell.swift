@@ -50,10 +50,10 @@ class PurchaseOrderListTableViewCell: UITableViewCell {
         endDateLbl.text = endDate
         dateLbl.text = endDate
         
-        refCodeLbl.text = Slash(purchaseOrder.orderReference)
-        customerNameLbl.text = Slash(purchaseOrder.customer_name)
+        refCodeLbl.text = Slash(purchaseOrder.referenceCode)
+        customerNameLbl.text = Slash(purchaseOrder.customer?.userName)
         detailsLbl.text = IntSlash(purchaseOrder.details?.count)
-        zoneLbl.text = "zone"
-        divisionLbl.text = "division"
+        zoneLbl.text = Slash(purchaseOrder.zone?.name)
+        divisionLbl.text = Slash(purchaseOrder.division?.name)
     }
 }
