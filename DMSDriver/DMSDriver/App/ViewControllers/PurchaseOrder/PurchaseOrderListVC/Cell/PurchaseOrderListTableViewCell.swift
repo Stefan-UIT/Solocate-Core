@@ -20,7 +20,7 @@ class PurchaseOrderListTableViewCell: UITableViewCell {
     @IBOutlet weak var customerNameLbl: UILabel!
     @IBOutlet weak var zoneLbl: UILabel!
     @IBOutlet weak var detailsLbl: UILabel!
-    var rentingOrder:RentingOrder!
+    var purchaseOrder:PurchaseOrder!
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -33,26 +33,26 @@ class PurchaseOrderListTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCellWithRentingOrder(_ rentingOrder:RentingOrder) {
+    func configureCell(_ purchaseOrder:PurchaseOrder) {
         var startDate = "NA".localized
         var endDate = "NA".localized
-        if let start = rentingOrder.startDate?.date {
+        if let start = purchaseOrder.startTime.date {
             startDate = HourFormater.string(from:start)
         }
-        if let end = rentingOrder.endDate?.date {
+        if let end = purchaseOrder.endTime.date {
             endDate = ShortDateFormater.string(from:end)
         }
-        self.rentingOrder = rentingOrder
-        orderIdLbl.text = "#"+"\(rentingOrder.id)"
-        statusLbl.text = rentingOrder.rentingOrderStatus?.name?.localized
-        statusLbl.textColor = rentingOrder.rentingOrderStatusColor
+//        self.rentingOrder = rentingOrder
+        orderIdLbl.text = "#"+"\(purchaseOrder.id)"
+        statusLbl.text = purchaseOrder.status?.name?.localized
+        statusLbl.textColor = purchaseOrder.colorStatus
         startDateLbl.text = startDate + " - "
         endDateLbl.text = endDate
         dateLbl.text = endDate
         
-        refCodeLbl.text = Slash(rentingOrder.referenceCode)
-        customerNameLbl.text = Slash(rentingOrder.rentingOrderCustomer?.userName)
-        detailsLbl.text = IntSlash(rentingOrder.rentingOrderDetails?.count)
+        refCodeLbl.text = Slash(purchaseOrder.orderReference)
+        customerNameLbl.text = Slash(purchaseOrder.customer_name)
+        detailsLbl.text = IntSlash(purchaseOrder.details?.count)
         zoneLbl.text = "zone"
         divisionLbl.text = "division"
     }

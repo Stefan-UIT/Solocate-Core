@@ -19,11 +19,12 @@ class PurchaseOrderListVC: BaseViewController {
     
     var isFetchInProgress = false
     var isInfiniteScrolling = false
-    var rentingOrders:[RentingOrder] = []
+    var order:[PurchaseOrder] = []
     var page:Int = 1
     var currentPage:Int = 1
     var totalPages:Int = 1
     var selectedTimeData:TimeDataItem?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -89,14 +90,14 @@ class PurchaseOrderListVC: BaseViewController {
 // MARK: - UICollectionViewDataSource
 extension PurchaseOrderListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rentingOrders.count
+        return order.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tbvContent?.dequeueReusableCell(withIdentifier: "PurchaseOrderListTableViewCell", for: indexPath) as! PurchaseOrderListTableViewCell
         //        guard let _order = self.rentingOrder else { return UITableViewCell() }
-        let order = rentingOrders[indexPath.row]
-        cell.configureCellWithRentingOrder(order)
+        let _order = order[indexPath.row]
+        cell.configureCell(_order)
         return cell
     }
     
@@ -115,14 +116,14 @@ extension PurchaseOrderListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
         let vc:PurchaseOrderDetailVC = PurchaseOrderDetailVC.loadSB(SB: .PurchaseOrder)
-        vc.rentingOrder = rentingOrders[indexPath.row]
+        vc.order = order[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
 private extension PurchaseOrderListVC {
     func isLoadingCell(for indexPath: IndexPath) -> Bool {
-        return indexPath.row + 1 >= self.rentingOrders.count
+        return indexPath.row + 1 >= self.order.count
     }
 }
 
@@ -181,12 +182,11 @@ fileprivate extension PurchaseOrderListVC {
                 self.isInfiniteScrolling = false
             } else {
                 self.page = 1
-                self.rentingOrders = [RentingOrder]()
+                self.order = [PurchaseOrder]()
                 tbvContent?.reloadData()
             }
             
-            
-            SERVICES().API.getRentingOrders(filterMode: filterMode, page: page) {[weak self] (result) in
+            SERVICES().API.getRouteDetail(route: "23") {[weak self] (result) in
                 self?.dismissLoadingIndicator()
                 self?.tbvContent?.endRefreshControl()
                 guard let strongSelf = self else {
@@ -194,35 +194,26 @@ fileprivate extension PurchaseOrderListVC {
                 }
                 switch result{
                 case .object(let obj):
-                    if let data = obj.data?.data {
-                        
-                        //                    strongSelf.rentingOrders = data
-                        // DMSCurrentRoutes.routes = data
-                        //                    strongSelf.lblNoResult?.isHidden = (strongSelf.routes.count > 0)
-                        self?.totalPages = obj.data?.meta?.total_pages ?? 1
-                        self?.currentPage = obj.data?.meta?.current_page ?? 1
-                        
-                        if self?.currentPage != self?.totalPages {
-                            self?.page = (self?.currentPage ?? 1) + 1
-                        }
-                        self?.rentingOrders.append(data)
-                        CoreDataManager.saveRentingOrder(data)
+                    if let data = obj.data?.orderList {
+//                        self?.order = data
+//                        self?.totalPages = obj.data?.meta?.total_pages ?? 1
+//                        self?.currentPage = obj.data?.meta?.current_page ?? 1
+//
+//                        if self?.currentPage != self?.totalPages {
+//                            self?.page = (self?.currentPage ?? 1) + 1
+//                        }
+//                        self?.rentingOrders.append(data)
                         strongSelf.tbvContent?.reloadData()
                         self?.isFetchInProgress = false
-                        
-                    }
+                }
                 case .error(let error):
-                    strongSelf.showAlertView(error.getMessage())
                     self?.isFetchInProgress = false
-                    break
+                    strongSelf.showAlertView(error.getMessage())
+                    
                 }
             }
         } else {
             // CoreData
-            self.rentingOrders = handleFilterRentingorder(with: filterMode, rentingOrders: getRentingOrders())
-            //            self.lblNoResult?.isHidden = (self.routes.count > 0)
-            self.tbvContent?.endRefreshControl()
-            tbvContent?.reloadData()
         }
     }
     

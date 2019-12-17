@@ -30,14 +30,13 @@ class PurchaseOrderDetailVC: BaseViewController {
     fileprivate var purchaseOrderDelivery = [OrderDetailInforRow]()
     fileprivate var purchaseOrderSKU = [OrderDetailInforRow]()
     fileprivate let purchaseDetailInfocellIdentifier = "OrderDetailTableViewCell"
-    fileprivate let cellSKUInfoIdentifier = "OrderDetailSKUCell"
+    fileprivate let cellSKUInfoIdentifier = "PurchaseOrderSKUTableViewCell"
     fileprivate let headerCellIdentifier = "OrderDetailHeaderCell"
     fileprivate var arrTitleHeader:[String] = []
     
     fileprivate let cellHeight: CGFloat = 65.0
     
     var dateStringFilter = Date().toString()
-    var rentingOrder: RentingOrder?
     var order:PurchaseOrder?
     
     override func viewDidLoad() {
@@ -52,6 +51,7 @@ class PurchaseOrderDetailVC: BaseViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        fetchData(showLoading: true)
     }
     
     override func updateNavigationBar() {
@@ -65,9 +65,9 @@ class PurchaseOrderDetailVC: BaseViewController {
     }
     
     func setupDataDetailInforRows() {
-        var _rentingOrder:RentingOrder!
-        if rentingOrder != nil {
-            _rentingOrder = rentingOrder!
+        var _order:Order!
+        if order != nil {
+            _order = order!
         }
         purchaseOrderInfo.removeAll()
         purchaseOrderPickup.removeAll()
@@ -75,13 +75,15 @@ class PurchaseOrderDetailVC: BaseViewController {
         purchaseOrderSKU.removeAll()
         
         // Cell PurchaseOrder Info
-        let purchaseId = OrderDetailInforRow("purchase-order-id".localized,"-")
-        let purchaseDivision = OrderDetailInforRow("division".localized,"-")
-        let purchaseRefCode = OrderDetailInforRow("ref-code".localized, "-")
-        let purchaseCustomer = OrderDetailInforRow("customer-name".localized, "-")
-        let purchaseDueDateRange = OrderDetailInforRow("due-date-range".localized,"13/12/2019 11:00"+" - "+"14/12/2019 11:00")
+        let purchaseId = OrderDetailInforRow("purchase-order-id".localized,IntSlash(_order.id))
+        let purchaseOrderType = OrderDetailInforRow("order-type".localized, Slash(_order.orderType.name))
+        let purchaseDivision = OrderDetailInforRow("division".localized,Slash(_order.division?.code))
+        let purchaseRefCode = OrderDetailInforRow("ref-code".localized, Slash(_order.orderReference))
+        let purchaseCustomer = OrderDetailInforRow("customer-name".localized, Slash(_order.customer_name))
+        let purchaseDueDateRange = OrderDetailInforRow("due-date-range".localized,Slash(_order.startTime)+" - "+Slash(_order.endTime))
         
         purchaseOrderInfo.append(purchaseId)
+        purchaseOrderInfo.append(purchaseOrderType)
         purchaseOrderInfo.append(purchaseDivision)
         purchaseOrderInfo.append(purchaseRefCode)
         purchaseOrderInfo.append(purchaseCustomer)
@@ -90,13 +92,13 @@ class PurchaseOrderDetailVC: BaseViewController {
         
         // Cell PurchaseOrder Pickup
         
-        let purchasePUAddress = OrderDetailInforRow("address".localized, "-")
-        let purchasePUFloor = OrderDetailInforRow("floor".localized, "-")
-        let purchasePUApartment = OrderDetailInforRow("apartment".localized, "-")
-        let purchasePUNumber = OrderDetailInforRow("number".localized, "-")
-        let purchasePUZone = OrderDetailInforRow("zone".localized, "-")
-        let purchasePUConsigneeName = OrderDetailInforRow("consignee-name".localized, "-")
-        let purchasePUConsigneePhone = OrderDetailInforRow("consignee-phone".localized, "-")
+        let purchasePUAddress = OrderDetailInforRow("address".localized, Slash(_order.from?.address))
+        let purchasePUFloor = OrderDetailInforRow("floor".localized, Slash(_order.from?.floor))
+        let purchasePUApartment = OrderDetailInforRow("apartment".localized, Slash(_order.from?.apartment))
+        let purchasePUNumber = OrderDetailInforRow("number".localized, Slash(_order.from?.number))
+        let purchasePUZone = OrderDetailInforRow("zone".localized, Slash(_order.zone?.name))
+        let purchasePUConsigneeName = OrderDetailInforRow("consignee-name".localized, Slash(_order.from?.ctt_name))
+        let purchasePUConsigneePhone = OrderDetailInforRow("consignee-phone".localized, Slash(_order.from?.ctt_phone))
         let purchasePUOpenTime = OrderDetailInforRow("open-time".localized, "-")
         let purchasePUCloseTime = OrderDetailInforRow("close-time".localized, "-")
         let purchasePUTimeRange = OrderDetailInforRow("time-range".localized, "-")
@@ -119,13 +121,13 @@ class PurchaseOrderDetailVC: BaseViewController {
         
         // Cell PurchaseOrder Delivery
         
-        let purchaseDeliveryAddress = OrderDetailInforRow("address".localized, "-")
-        let purchaseDeliveryFloor = OrderDetailInforRow("floor".localized, "-")
-        let purchaseDeliveryApartment = OrderDetailInforRow("apartment".localized, "-")
-        let purchaseDeliveryNumber = OrderDetailInforRow("number".localized, "-")
-        let purchaseDeliveryZone = OrderDetailInforRow("zone".localized, "-")
-        let purchaseDeliveryConsigneeName = OrderDetailInforRow("consignee-name".localized, "-")
-        let purchaseDeliveryConsigneePhone = OrderDetailInforRow("consignee-phone".localized, "-")
+        let purchaseDeliveryAddress = OrderDetailInforRow("address".localized, Slash(_order.to?.address))
+        let purchaseDeliveryFloor = OrderDetailInforRow("floor".localized, Slash(_order.to?.floor))
+        let purchaseDeliveryApartment = OrderDetailInforRow("apartment".localized, Slash(_order.to?.apartment))
+        let purchaseDeliveryNumber = OrderDetailInforRow("number".localized, Slash(_order.to?.number))
+        let purchaseDeliveryZone = OrderDetailInforRow("zone".localized, Slash(_order.zone?.name))
+        let purchaseDeliveryConsigneeName = OrderDetailInforRow("consignee-name".localized, Slash(_order.to?.ctt_name))
+        let purchaseDeliveryConsigneePhone = OrderDetailInforRow("consignee-phone".localized, Slash(_order.to?.ctt_phone))
         let purchaseDeliveryOpenTime = OrderDetailInforRow("open-time".localized, "-")
         let purchaseDeliveryCloseTime = OrderDetailInforRow("close-time".localized, "-")
         let purchaseDeliveryTimeRange = OrderDetailInforRow("time-range".localized, "-")
@@ -154,9 +156,9 @@ class PurchaseOrderDetailVC: BaseViewController {
     
     func initVar() {
         arrTitleHeader = ["order-info".localized,
-                          "items".localized,
                           "pickup".localized,
-                          "Delivery".localized]
+                          "Delivery".localized,
+                          "items".localized]
     }
     
     func setupTableView() {
@@ -185,11 +187,11 @@ extension PurchaseOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
         case .OrderInfo:
             return purchaseOrderInfo.count
         case .SKUS:
-            return rentingOrder?.rentingOrderDetails?.count ?? 0
+            return order?.details?.count ?? 0
         case .Pickup:
-            return purchaseOrderPickup.count
+            return order?.from == nil ? 0 : purchaseOrderPickup.count
         case .Delivery:
-            return purchaseOrderDelivery.count
+            return order?.to == nil ? 0 : purchaseOrderDelivery.count
         }
     }
     
@@ -210,8 +212,8 @@ extension PurchaseOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
             headerCell.nameLabel?.text = arrTitleHeader[section]
             if section == 0 {
                 headerCell.contentLabel?.isHidden = false
-                headerCell.contentLabel?.text = rentingOrder?.rentingOrderStatus?.name?.localized
-                headerCell.contentLabel?.textColor = rentingOrder?.rentingOrderStatusColor
+                headerCell.contentLabel?.text = order?.status?.name?.localized
+                headerCell.contentLabel?.textColor = order?.colorStatus
                 
             } else {
                 headerCell.contentLabel?.isHidden = true
@@ -238,9 +240,9 @@ extension PurchaseOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
         case .OrderInfo:
             return purchaseOrderInfoCell(items: purchaseOrderInfo, tableView, indexPath)
         case .SKUS:
-            let cell = tbvContent?.dequeueReusableCell(withIdentifier: "RentingOrderDetailTableViewCell", for: indexPath) as! RentingOrderDetailTableViewCell
-            guard let rentingOrderDetail = rentingOrder?.rentingOrderDetails?[indexPath.row] else {return cell}
-            cell.configureCellWithRentingOrderDetail(rentingOrderDetail)
+            let cell = tbvContent?.dequeueReusableCell(withIdentifier: cellSKUInfoIdentifier, for: indexPath) as! PurchaseOrderSKUTableViewCell
+            guard let purchaseOrderDetail = order?.details?[indexPath.row] else {return cell}
+            cell.configure(purchaseOrderSKU: purchaseOrderDetail)
             return cell
         case .Pickup:
             return purchaseOrderInfoCell(items: purchaseOrderPickup, tableView, indexPath)
@@ -268,21 +270,19 @@ extension PurchaseOrderDetailVC {
     
     private func getRentingOrderDetail(isFetch:Bool = false) {
         if ReachabilityManager.isNetworkAvailable {
-            guard let _rentingOrderID = rentingOrder?.id else { return }
+            guard let _orderID = order?.id else { return }
             if !isFetch {
                 showLoadingIndicator()
             }
-            SERVICES().API.getRentingOrderDetail(rentingOrderId: "\(_rentingOrderID)") {[weak self] (result) in
+            SERVICES().API.getOrderDetail(orderId: "\(_orderID)") {[weak self] (result) in
                 self?.dismissLoadingIndicator()
                 switch result{
                 case .object(let object):
-                    if let _rentingOrder = object.data {
-                        self?.rentingOrder = _rentingOrder
-//                        CoreDataManager.updateRentingOrder(_rentingOrder) // update rentingOrderDetail to DB local
-                    }
-                    //                    self?.rootVC?.order =  self?.orderDetail
+                    guard let _orderDetail = object.data else { return }
+//                    self?.order = _orderDetail
                     self?.initVar()
                     self?.updateUI()
+//                    CoreDataManager.updateOrderDetail(_orderDetail) // update orderdetail to DB local
                 case .error(let error):
                     self?.showAlertView(error.getMessage())
                 }
