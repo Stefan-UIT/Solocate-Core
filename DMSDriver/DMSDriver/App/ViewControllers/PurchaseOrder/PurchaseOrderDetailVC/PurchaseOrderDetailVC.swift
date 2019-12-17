@@ -25,18 +25,20 @@ class PurchaseOrderDetailVC: BaseViewController {
     
     @IBOutlet weak var tbvContent: UITableView?
     
-    fileprivate var purchaseOrderInfo = [PurchaseOrderDetailInforRow]()
-    fileprivate var purchaseOrderPickup = [PurchaseOrderDetailInforRow]()
-    fileprivate var purchaseOrderDelivery = [PurchaseOrderDetailInforRow]()
-    fileprivate var purchaseOrderSKU = [PurchaseOrderDetailInforRow]()
-    fileprivate let headerCellIdentifier = "PurchaseOrderDetailHeaderCell"
-    fileprivate let purchaseDetailInfocellIdentifier = "PurchaseOrderDetailTableViewCell"
+    fileprivate var purchaseOrderInfo = [OrderDetailInforRow]()
+    fileprivate var purchaseOrderPickup = [OrderDetailInforRow]()
+    fileprivate var purchaseOrderDelivery = [OrderDetailInforRow]()
+    fileprivate var purchaseOrderSKU = [OrderDetailInforRow]()
+    fileprivate let purchaseDetailInfocellIdentifier = "OrderDetailTableViewCell"
+    fileprivate let cellSKUInfoIdentifier = "OrderDetailSKUCell"
+    fileprivate let headerCellIdentifier = "OrderDetailHeaderCell"
     fileprivate var arrTitleHeader:[String] = []
     
     fileprivate let cellHeight: CGFloat = 65.0
     
     var dateStringFilter = Date().toString()
     var rentingOrder: RentingOrder?
+    var order:PurchaseOrder?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,11 +75,11 @@ class PurchaseOrderDetailVC: BaseViewController {
         purchaseOrderSKU.removeAll()
         
         // Cell PurchaseOrder Info
-        let purchaseId = PurchaseOrderDetailInforRow("purchase-order-id".localized,"-")
-        let purchaseDivision = PurchaseOrderDetailInforRow("division".localized,"-")
-        let purchaseRefCode = PurchaseOrderDetailInforRow("ref-code".localized, "-")
-        let purchaseCustomer = PurchaseOrderDetailInforRow("customer-name".localized, "-")
-        let purchaseDueDateRange = PurchaseOrderDetailInforRow("due-date-range".localized,"13/12/2019 11:00"+" - "+"14/12/2019 11:00")
+        let purchaseId = OrderDetailInforRow("purchase-order-id".localized,"-")
+        let purchaseDivision = OrderDetailInforRow("division".localized,"-")
+        let purchaseRefCode = OrderDetailInforRow("ref-code".localized, "-")
+        let purchaseCustomer = OrderDetailInforRow("customer-name".localized, "-")
+        let purchaseDueDateRange = OrderDetailInforRow("due-date-range".localized,"13/12/2019 11:00"+" - "+"14/12/2019 11:00")
         
         purchaseOrderInfo.append(purchaseId)
         purchaseOrderInfo.append(purchaseDivision)
@@ -88,18 +90,18 @@ class PurchaseOrderDetailVC: BaseViewController {
         
         // Cell PurchaseOrder Pickup
         
-        let purchasePUAddress = PurchaseOrderDetailInforRow("address".localized, "-")
-        let purchasePUFloor = PurchaseOrderDetailInforRow("floor".localized, "-")
-        let purchasePUApartment = PurchaseOrderDetailInforRow("apartment".localized, "-")
-        let purchasePUNumber = PurchaseOrderDetailInforRow("number".localized, "-")
-        let purchasePUZone = PurchaseOrderDetailInforRow("zone".localized, "-")
-        let purchasePUConsigneeName = PurchaseOrderDetailInforRow("consignee-name".localized, "-")
-        let purchasePUConsigneePhone = PurchaseOrderDetailInforRow("consignee-phone".localized, "-")
-        let purchasePUOpenTime = PurchaseOrderDetailInforRow("open-time".localized, "-")
-        let purchasePUCloseTime = PurchaseOrderDetailInforRow("close-time".localized, "-")
-        let purchasePUTimeRange = PurchaseOrderDetailInforRow("time-range".localized, "-")
-        let purchasePUServiceTime = PurchaseOrderDetailInforRow("service-time".localized, "-")
-        let purchasePUActualTime = PurchaseOrderDetailInforRow("actual-time".localized, "-")
+        let purchasePUAddress = OrderDetailInforRow("address".localized, "-")
+        let purchasePUFloor = OrderDetailInforRow("floor".localized, "-")
+        let purchasePUApartment = OrderDetailInforRow("apartment".localized, "-")
+        let purchasePUNumber = OrderDetailInforRow("number".localized, "-")
+        let purchasePUZone = OrderDetailInforRow("zone".localized, "-")
+        let purchasePUConsigneeName = OrderDetailInforRow("consignee-name".localized, "-")
+        let purchasePUConsigneePhone = OrderDetailInforRow("consignee-phone".localized, "-")
+        let purchasePUOpenTime = OrderDetailInforRow("open-time".localized, "-")
+        let purchasePUCloseTime = OrderDetailInforRow("close-time".localized, "-")
+        let purchasePUTimeRange = OrderDetailInforRow("time-range".localized, "-")
+        let purchasePUServiceTime = OrderDetailInforRow("service-time".localized, "-")
+        let purchasePUActualTime = OrderDetailInforRow("actual-time".localized, "-")
         
         purchaseOrderPickup.append(purchasePUAddress)
         purchaseOrderPickup.append(purchasePUFloor)
@@ -117,18 +119,18 @@ class PurchaseOrderDetailVC: BaseViewController {
         
         // Cell PurchaseOrder Delivery
         
-        let purchaseDeliveryAddress = PurchaseOrderDetailInforRow("address".localized, "-")
-        let purchaseDeliveryFloor = PurchaseOrderDetailInforRow("floor".localized, "-")
-        let purchaseDeliveryApartment = PurchaseOrderDetailInforRow("apartment".localized, "-")
-        let purchaseDeliveryNumber = PurchaseOrderDetailInforRow("number".localized, "-")
-        let purchaseDeliveryZone = PurchaseOrderDetailInforRow("zone".localized, "-")
-        let purchaseDeliveryConsigneeName = PurchaseOrderDetailInforRow("consignee-name".localized, "-")
-        let purchaseDeliveryConsigneePhone = PurchaseOrderDetailInforRow("consignee-phone".localized, "-")
-        let purchaseDeliveryOpenTime = PurchaseOrderDetailInforRow("open-time".localized, "-")
-        let purchaseDeliveryCloseTime = PurchaseOrderDetailInforRow("close-time".localized, "-")
-        let purchaseDeliveryTimeRange = PurchaseOrderDetailInforRow("time-range".localized, "-")
-        let purchaseDeliveryServiceTime = PurchaseOrderDetailInforRow("service-time".localized, "-")
-        let purchaseDeliveryActualTime = PurchaseOrderDetailInforRow("actual-time".localized, "-")
+        let purchaseDeliveryAddress = OrderDetailInforRow("address".localized, "-")
+        let purchaseDeliveryFloor = OrderDetailInforRow("floor".localized, "-")
+        let purchaseDeliveryApartment = OrderDetailInforRow("apartment".localized, "-")
+        let purchaseDeliveryNumber = OrderDetailInforRow("number".localized, "-")
+        let purchaseDeliveryZone = OrderDetailInforRow("zone".localized, "-")
+        let purchaseDeliveryConsigneeName = OrderDetailInforRow("consignee-name".localized, "-")
+        let purchaseDeliveryConsigneePhone = OrderDetailInforRow("consignee-phone".localized, "-")
+        let purchaseDeliveryOpenTime = OrderDetailInforRow("open-time".localized, "-")
+        let purchaseDeliveryCloseTime = OrderDetailInforRow("close-time".localized, "-")
+        let purchaseDeliveryTimeRange = OrderDetailInforRow("time-range".localized, "-")
+        let purchaseDeliveryServiceTime = OrderDetailInforRow("service-time".localized, "-")
+        let purchaseDeliveryActualTime = OrderDetailInforRow("actual-time".localized, "-")
         
         purchaseOrderDelivery.append(purchaseDeliveryAddress)
         purchaseOrderDelivery.append(purchaseDeliveryFloor)
@@ -248,7 +250,7 @@ extension PurchaseOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
         
     }
     
-    func purchaseOrderInfoCell(items:[PurchaseOrderDetailInforRow],_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
+    func purchaseOrderInfoCell(items:[OrderDetailInforRow],_ tableView:UITableView, _ indexPath:IndexPath) -> UITableViewCell  {
         let item = items[indexPath.row]
         let cell = tableView.dequeueReusableCell(withIdentifier: purchaseDetailInfocellIdentifier, for: indexPath) as! PurchaseOrderDetailTableViewCell
         cell.purchaseOrderDetailItem = item

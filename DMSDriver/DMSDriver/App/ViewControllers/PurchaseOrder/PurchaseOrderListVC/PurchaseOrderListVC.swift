@@ -23,6 +23,7 @@ class PurchaseOrderListVC: BaseViewController {
     var page:Int = 1
     var currentPage:Int = 1
     var totalPages:Int = 1
+    var selectedTimeData:TimeDataItem?
     
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -8,26 +8,12 @@
 
 import UIKit
 
-struct PurchaseOrderDetailInforRow {
-    var title: String = ""
-    var content: String = ""
-    var isHighlight = false
-    var textColor:UIColor?
-    
-    
-    init(_ title:String , _ content:String, _ isHighlight:Bool = false, _ textColor:UIColor? = nil ) {
-        self.title = title
-        self.content = content
-        self.isHighlight = isHighlight
-        self.textColor = textColor
-    }
-}
 
 class PurchaseOrderDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var nameLabel: UILabel?
     @IBOutlet weak var contentLabel: UILabel?
     
-    var purchaseOrderDetailItem: PurchaseOrderDetailInforRow! {
+    var purchaseOrderDetailItem: OrderDetailInforRow! {
         didSet {
             nameLabel?.text = purchaseOrderDetailItem.title
             contentLabel?.text = purchaseOrderDetailItem.content
