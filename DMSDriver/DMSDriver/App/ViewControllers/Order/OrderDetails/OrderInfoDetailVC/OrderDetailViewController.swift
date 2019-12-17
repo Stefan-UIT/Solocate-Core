@@ -764,7 +764,8 @@ fileprivate extension OrderDetailViewController {
         cell.selectionStyle = .none
         guard let order = orderDetail, let detail = order.details?[indexPath.row] else { return cell }
         cell.delegate = self
-        cell.tempActualQty = tempActualQty[detail.pivot?.id ?? 0]
+        let isNotUpdate = detail.pivot?.deliveredQty == 0
+        cell.tempActualQty = isNotUpdate ? nil : tempActualQty[detail.pivot?.id ?? 0]
         cell.configureCell(detail: detail, order: order)
         cell.vContent?.cornerRadius = 0
         if indexPath.row == order.details!.count - 1{
