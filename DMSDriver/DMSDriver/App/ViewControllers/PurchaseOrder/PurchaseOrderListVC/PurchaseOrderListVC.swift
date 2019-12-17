@@ -185,8 +185,7 @@ fileprivate extension PurchaseOrderListVC {
                 self.order = [PurchaseOrder]()
                 tbvContent?.reloadData()
             }
-            
-            SERVICES().API.getRouteDetail(route: "23") {[weak self] (result) in
+            SERVICES().API.getPurchaseOrders(filterMode: filterMode, page: page) {[weak self] (result) in
                 self?.dismissLoadingIndicator()
                 self?.tbvContent?.endRefreshControl()
                 guard let strongSelf = self else {
@@ -194,15 +193,14 @@ fileprivate extension PurchaseOrderListVC {
                 }
                 switch result{
                 case .object(let obj):
-                    if let data = obj.data?.orderList {
-//                        self?.order = data
-//                        self?.totalPages = obj.data?.meta?.total_pages ?? 1
-//                        self?.currentPage = obj.data?.meta?.current_page ?? 1
-//
-//                        if self?.currentPage != self?.totalPages {
-//                            self?.page = (self?.currentPage ?? 1) + 1
-//                        }
-//                        self?.rentingOrders.append(data)
+                    if let data = obj.data?.data {
+                        self?.totalPages = obj.data?.meta?.total_pages ?? 1
+                        self?.currentPage = obj.data?.meta?.current_page ?? 1
+
+                        if self?.currentPage != self?.totalPages {
+                            self?.page = (self?.currentPage ?? 1) + 1
+                        }
+                        self?.order.append(data)
                         strongSelf.tbvContent?.reloadData()
                         self?.isFetchInProgress = false
                 }
@@ -221,25 +219,25 @@ fileprivate extension PurchaseOrderListVC {
 
 //MARK: - CoreData
 fileprivate extension PurchaseOrderListVC {
-    func getRentingOrders() -> [RentingOrder] {
-        let results = CoreDataManager.getListRentingOrder()
-        return results
-    }
-    
+//    func getRentingOrders() -> [RentingOrder] {
+//        let results = CoreDataManager.getListRentingOrder()
+//        return results
+//    }
+//
 }
 
 //MARK: - Filter Routes
 fileprivate extension PurchaseOrderListVC {
-    func handleFilterRentingorder(with filterDataModel: FilterDataModel, rentingOrders: [RentingOrder]) -> [RentingOrder] {
-        var filterRentingOrders = [RentingOrder]()
-        let timeData = filterDataModel.timeData
-        let startDate = timeData?.startDate
-        let endDate = timeData?.endDate
-        let statusName = filterDataModel.status?.name
-        // Filter by Status
-        filterRentingOrders = (statusName == nil || statusName == "all-statuses".localized) ? rentingOrders : rentingOrders.filter({$0.rentingOrderStatus?.name == statusName})
-        // Filter by DateTime
-        filterRentingOrders = (startDate == nil && endDate == nil) ? filterRentingOrders : rentingOrders.filter({$0.startByDate >= startDate! && $0.endByDate <= endDate!})
-        return filterRentingOrders
-    }
+//    func handleFilterRentingorder(with filterDataModel: FilterDataModel, rentingOrders: [RentingOrder]) -> [RentingOrder] {
+//        var filterRentingOrders = [RentingOrder]()
+//        let timeData = filterDataModel.timeData
+//        let startDate = timeData?.startDate
+//        let endDate = timeData?.endDate
+//        let statusName = filterDataModel.status?.name
+//        // Filter by Status
+//        filterRentingOrders = (statusName == nil || statusName == "all-statuses".localized) ? rentingOrders : rentingOrders.filter({$0.rentingOrderStatus?.name == statusName})
+//        // Filter by DateTime
+//        filterRentingOrders = (startDate == nil && endDate == nil) ? filterRentingOrders : rentingOrders.filter({$0.startByDate >= startDate! && $0.endByDate <= endDate!})
+//        return filterRentingOrders
+//    }
 }

@@ -114,6 +114,16 @@ extension BaseAPIService{
                        callback: callback);
     }
     
+    @discardableResult
+    func getPurchaseOrderDetail(orderId:String, callback: @escaping APICallback<ResponseDataModel<PurchaseOrder>>) -> APIRequest {
+        let uri = String(format:PATH_REQUEST_URL.GET_PURCHASE_ORDER_DETAIL.URL , orderId)
+        return request(method: .GET,
+                       path: uri,
+                       input: .empty,
+                       callback: callback);
+    }
+
+    
     func submitSignature(_ file:AttachFileModel,_ order:Order, _ name:String, callback: @escaping APICallback<Order>) {
 //        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL, "\(order.id)","\(order.status?.id ?? 0)")
         let path = String(format:PATH_REQUEST_URL.UPLOAD_FILES.URL, "\(order.id)")

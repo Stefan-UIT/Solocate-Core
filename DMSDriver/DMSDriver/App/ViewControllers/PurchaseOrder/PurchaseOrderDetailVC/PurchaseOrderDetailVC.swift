@@ -284,12 +284,12 @@ extension PurchaseOrderDetailVC {
             if !isFetch {
                 showLoadingIndicator()
             }
-            SERVICES().API.getOrderDetail(orderId: "\(_orderID)") {[weak self] (result) in
+            SERVICES().API.getPurchaseOrderDetail(orderId: "\(_orderID)") {[weak self] (result) in
                 self?.dismissLoadingIndicator()
                 switch result{
                 case .object(let object):
                     guard let _orderDetail = object.data else { return }
-//                    self?.order = _orderDetail
+                    self?.order = _orderDetail
                     self?.initVar()
                     self?.updateUI()
 //                    CoreDataManager.updateOrderDetail(_orderDetail) // update orderdetail to DB local

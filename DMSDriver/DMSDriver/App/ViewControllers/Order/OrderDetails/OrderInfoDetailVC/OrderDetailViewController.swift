@@ -643,7 +643,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         switch orderSection {
         case .sectionOrderInfo:
             let vc:PurchaseOrderDetailVC = PurchaseOrderDetailVC.loadSB(SB: .PurchaseOrder)
-            vc.order = orderDetail
+//            vc.order = orderDetail?.id
             self.navigationController?.pushViewController(vc, animated: true)
         case .sectionMap:
             guard let _orderDetail = orderDetail else { return }
