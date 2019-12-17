@@ -31,6 +31,10 @@ class BaseViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        guard let nav = navigationController else { return }
+        if nav.responds(to: #selector(getter: UINavigationController.interactivePopGestureRecognizer)) {
+            nav.view.removeGestureRecognizer(nav.interactivePopGestureRecognizer!)
+        }
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{

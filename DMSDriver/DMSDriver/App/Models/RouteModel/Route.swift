@@ -222,7 +222,7 @@ class Route: BaseModel {
     var truckType:TruckType?
     var routeMaster:RouteMaster?
     var company:Company?
-    var loadVolume:String = "0.0"
+    var loadVolume:Int?
     var assignedInfo:[AssignedInfo]?
     
     

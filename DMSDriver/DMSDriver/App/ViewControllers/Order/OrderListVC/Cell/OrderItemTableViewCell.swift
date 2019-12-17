@@ -22,6 +22,7 @@ class OrderItemTableViewCell: UITableViewCell {
     @IBOutlet weak var lblQuantity: UILabel!
 //    @IBOutlet weak var lblPallet: UILabel!
     @IBOutlet weak var orderTypeLabel: UILabel?
+    @IBOutlet weak var quantityLabel: UILabel!
     
     @IBOutlet weak var lblExpectedTime: UILabel?
     @IBOutlet weak var lblRecordsFrom: UILabel?
@@ -82,6 +83,7 @@ class OrderItemTableViewCell: UITableViewCell {
 //            lblPalletTopConstraint.constant = 0
 //        }
         orderTypeLabel?.text = order.orderType.name
+        quantityLabel?.text = IntSlash(order.totalQuantity)
         lblFromAddresss?.text = order.from?.address
         lblToAddress?.text = order.to?.address
         lblUrgency?.textColor = order.colorUrgent
