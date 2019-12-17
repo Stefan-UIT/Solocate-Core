@@ -479,6 +479,21 @@ class Order: BaseModel {
     var note:String?
     var notes:[Note] = []
     var details:[Detail]?
+    var totalQuantity:Int? {
+        get {
+            guard let _details = details else  {
+                return nil
+            }
+            var total:Int = 0
+            for item in _details {
+                if let _qty = item.pivot?.qty {
+                    total += _qty
+                }
+            }
+            
+            return total
+        }
+    }
     var reason:Reason?
     var startTime = ""
     var endTime = ""

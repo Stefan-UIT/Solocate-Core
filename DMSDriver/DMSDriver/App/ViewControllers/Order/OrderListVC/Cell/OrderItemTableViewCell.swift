@@ -83,7 +83,7 @@ class OrderItemTableViewCell: UITableViewCell {
 //            lblPalletTopConstraint.constant = 0
 //        }
         orderTypeLabel?.text = order.orderType.name
-        quantityLabel?.text = "\(order.details?.count ?? 0)"
+        quantityLabel?.text = IntSlash(order.totalQuantity)
         lblFromAddresss?.text = order.from?.address
         lblToAddress?.text = order.to?.address
         lblUrgency?.textColor = order.colorUrgent
