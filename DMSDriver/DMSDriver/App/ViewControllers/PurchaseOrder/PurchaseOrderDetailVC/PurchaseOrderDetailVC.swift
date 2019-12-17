@@ -206,7 +206,7 @@ extension PurchaseOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if let headerCell = tableView.dequeueReusableCell(withIdentifier: headerCellIdentifier) as? RentingOrderDetailInfoTableViewCell{
+        if let headerCell = tableView.dequeueReusableCell(withIdentifier: headerCellIdentifier) as? PurchaseOrderDetailTableViewCell{
             headerCell.nameLabel?.text = arrTitleHeader[section]
             if section == 0 {
                 headerCell.contentLabel?.isHidden = false

@@ -40,7 +40,7 @@ class PurchaseOrderListTableViewCell: UITableViewCell {
             startDate = HourFormater.string(from:start)
         }
         if let end = rentingOrder.endDate?.date {
-            endDate = HourFormater.string(from:end)
+            endDate = ShortDateFormater.string(from:end)
         }
         self.rentingOrder = rentingOrder
         orderIdLbl.text = "#"+"\(rentingOrder.id)"
@@ -50,9 +50,9 @@ class PurchaseOrderListTableViewCell: UITableViewCell {
         endDateLbl.text = endDate
         dateLbl.text = endDate
         
-        refCodeLbl.text = "\(rentingOrder.referenceCode)"
-        customerNameLbl.text = rentingOrder.rentingOrderCustomer?.userName ?? ""
-        detailsLbl.text = "\(rentingOrder.rentingOrderDetails?.count ?? 0)"
+        refCodeLbl.text = Slash(rentingOrder.referenceCode)
+        customerNameLbl.text = Slash(rentingOrder.rentingOrderCustomer?.userName)
+        detailsLbl.text = IntSlash(rentingOrder.rentingOrderDetails?.count)
         zoneLbl.text = "zone"
         divisionLbl.text = "division"
     }
