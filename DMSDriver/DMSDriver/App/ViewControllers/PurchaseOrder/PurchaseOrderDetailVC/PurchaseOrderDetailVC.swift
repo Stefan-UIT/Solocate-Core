@@ -204,7 +204,17 @@ extension PurchaseOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        let section:PurchaseOrderSection = PurchaseOrderSection(rawValue: section)!
+        switch section {
+        case .OrderInfo:
+            return 50
+        case .SKUS:
+            return (order?.details?.count > 0) ? 50 : 0
+        case .Pickup:
+            return order?.from == nil ? 0 : 50
+        case .Delivery:
+            return order?.to == nil ? 0 : 50
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
