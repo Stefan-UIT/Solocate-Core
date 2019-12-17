@@ -212,14 +212,14 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforDetail.append(remark)
         //orderInforStatus.append(urgency)
         
-        if  (order.statusOrder == .CancelStatus ||
-             order.statusOrder == .UnableToFinish),
-            let _orderDetail = orderDetail{
-            let reason = OrderDetailInforRow("failure-cause".localized,_orderDetail.reason?.name ?? "-")
-            let mess = OrderDetailInforRow("Message".localized,_orderDetail.reason_msg ?? "-")
-            orderInforDetail.append(reason)
-            orderInforDetail.append(mess)
-        }
+//        if  (order.statusOrder == .CancelStatus ||
+//             order.statusOrder == .UnableToFinish),
+//            let _orderDetail = orderDetail{
+//            let reason = OrderDetailInforRow("failure-cause".localized,_orderDetail.reason?.name ?? "-")
+//            let mess = OrderDetailInforRow("Message".localized,_orderDetail.reason_msg ?? "-")
+//            orderInforDetail.append(reason)
+//            orderInforDetail.append(mess)
+//        }
         
         let fromLocationName = OrderDetailInforRow("location-name".localized, Slash(order.from?.loc_name),false)
         let fromAddress = OrderDetailInforRow("Address".localized, E(order.from?.address),true)
@@ -764,7 +764,8 @@ fileprivate extension OrderDetailViewController {
         cell.selectionStyle = .none
         guard let order = orderDetail, let detail = order.details?[indexPath.row] else { return cell }
         cell.delegate = self
-        cell.tempActualQty = tempActualQty[detail.pivot?.id ?? 0]
+        let isNotUpdate = detail.pivot?.deliveredQty == 0
+        cell.tempActualQty = isNotUpdate ? nil : tempActualQty[detail.pivot?.id ?? 0]
         cell.configureCell(detail: detail, order: order)
         cell.vContent?.cornerRadius = 0
         if indexPath.row == order.details!.count - 1{
@@ -1277,6 +1278,7 @@ extension OrderDetailViewController{
             case .error(let error):
                 let oldStatus = CoreDataManager.getStatus(withCode: oldStatusCode)
                 order.status = oldStatus
+                self?.updateButtonStatus()
                 self?.showAlertView(error.getMessage())
             }
         }
@@ -1339,11 +1341,6 @@ extension OrderDetailViewController{
                 self?.updateOrderDetail?(self?.orderDetail)
                 self?.showAlertView("assigned-successfull".localized,
                                     completionHandler: { (ok) in
-                                        /*
-                                        let vc:JobListVC = .loadSB(SB: .Job)
-                                        vc.dateStringFilter = E(self?.dateStringFilter)
-                                        App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
-                                         */
                 })
                 
             case .error(let error):
@@ -1375,7 +1372,9 @@ extension OrderDetailViewController{
             self?.dismissLoadingIndicator()
             switch result {
             case .object(_):
-                self?.showAlertView("Finished")
+                self?.showAlertView(MSG_UPDATED_SUCCESSFUL, completionHandler: { (action) in
+                    self?.popViewController()
+                })
             case .error(let error):
                 self?.showAlertView(error.getMessage())
             }
