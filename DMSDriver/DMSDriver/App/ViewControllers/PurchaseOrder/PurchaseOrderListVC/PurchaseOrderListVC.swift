@@ -12,6 +12,8 @@ import SideMenu
 class PurchaseOrderListVC: BaseViewController {
 
     @IBOutlet weak var tbvContent:UITableView?
+    @IBOutlet weak var lblDate:UILabel!
+    
     var timeData:TimeDataItem?
     var filterModel = FilterDataModel()
     var isFromDashboard = false
@@ -29,6 +31,8 @@ class PurchaseOrderListVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        initVar()
+        initUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -38,6 +42,21 @@ class PurchaseOrderListVC: BaseViewController {
         } else if isFromFilter {
             isFromFilter = false
         }
+    }
+    
+    // MARK: - Setup View
+    
+    private func initUI() {
+        let filterTimeData = filterModel.timeData
+        let dateTitle = filterTimeData?.title ?? ""
+        var dateString = ""
+        if filterTimeData?.type == TimeItemType.TimeItemTypeToday {
+            dateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date())
+        } else {
+            dateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date()) + " - " + ShortDateFormater.string(from: filterTimeData?.endDate ?? Date())
+        }
+        let date = "here-is-your-plan".localized
+        lblDate?.text = date + " for " + dateTitle + " " + dateString
     }
     
     override func updateNavigationBar() {
@@ -158,6 +177,7 @@ extension PurchaseOrderListVC:DMSNavigationServiceDelegate {
                 return
             }
             strongSelf.filterModel = data
+            strongSelf.initUI()
             strongSelf.fetchData(isShowLoading: true)
         }
         self.isFromFilter = true

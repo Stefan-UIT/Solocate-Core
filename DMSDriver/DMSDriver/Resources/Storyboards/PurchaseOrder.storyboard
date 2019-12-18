@@ -358,16 +358,13 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1Ei-j4-QIg">
-                                        <rect key="frame" x="30" y="49" width="106" height="16.5"/>
+                                        <rect key="frame" x="30" y="49" width="315" height="16.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16.5" id="xCb-FY-FNc"/>
+                                        </constraints>
                                         <string key="text">Here is your plan
 
 </string>
-                                        <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
-                                        <color key="textColor" red="0.3411764706" green="0.45098039220000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="k4P-Zi-qJL">
-                                        <rect key="frame" x="140" y="57.5" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.3411764706" green="0.45098039220000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -378,11 +375,9 @@
                                     <constraint firstItem="1Ei-j4-QIg" firstAttribute="leading" secondItem="1z4-gT-EIx" secondAttribute="leading" id="7jP-h3-EfJ"/>
                                     <constraint firstItem="1z4-gT-EIx" firstAttribute="top" secondItem="iYe-3d-vbe" secondAttribute="top" constant="10" id="EVF-Vq-yKE"/>
                                     <constraint firstItem="1z4-gT-EIx" firstAttribute="leading" secondItem="iYe-3d-vbe" secondAttribute="leading" constant="30" id="FpE-TN-1sP"/>
-                                    <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="k4P-Zi-qJL" secondAttribute="trailing" constant="5" id="Hgz-2h-yof"/>
                                     <constraint firstAttribute="trailing" secondItem="1z4-gT-EIx" secondAttribute="trailing" constant="30" id="OgN-Nw-bP9"/>
-                                    <constraint firstItem="k4P-Zi-qJL" firstAttribute="centerY" secondItem="1Ei-j4-QIg" secondAttribute="centerY" id="UhI-G3-nb4"/>
                                     <constraint firstAttribute="bottom" secondItem="1Ei-j4-QIg" secondAttribute="bottom" constant="20" id="Uli-Ea-ZBo"/>
-                                    <constraint firstItem="k4P-Zi-qJL" firstAttribute="leading" secondItem="1Ei-j4-QIg" secondAttribute="trailing" constant="4" id="bug-j6-830"/>
+                                    <constraint firstItem="Vfd-my-p0v" firstAttribute="trailing" secondItem="1Ei-j4-QIg" secondAttribute="trailing" constant="30" id="VG0-wS-lj4"/>
                                     <constraint firstItem="1Ei-j4-QIg" firstAttribute="top" secondItem="1z4-gT-EIx" secondAttribute="bottom" constant="4" id="hnL-To-vOS"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="Vfd-my-p0v"/>
@@ -401,6 +396,7 @@
                         <viewLayoutGuide key="safeArea" id="6CC-YA-e6y"/>
                     </view>
                     <connections>
+                        <outlet property="lblDate" destination="1Ei-j4-QIg" id="JrM-iw-GZb"/>
                         <outlet property="tbvContent" destination="uBM-lt-dvE" id="jJn-1n-nHv"/>
                     </connections>
                 </viewController>
