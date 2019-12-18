@@ -50,8 +50,10 @@ class DMSNavigationService: NSObject , NavigationService {
     fileprivate lazy var searchBarItem = UIBarButtonItem.barButtonItem(with: #imageLiteral(resourceName: "search-solid"),
                                                                          target: self,
                                                                          action: #selector(onNavigationClickLeftButton(_:)))
-    fileprivate lazy var filterBarItem = UIBarButtonItem.filterButton(target: self,
-                                                                      action: #selector(onNavigationClickLeftButton(_:)))
+
+    fileprivate lazy var filterBarItem = UIBarButtonItem.barButtonItem(with: #imageLiteral(resourceName: "route_list_filter_icon"),
+                                                                       target: self,
+                                                                       action: #selector(onNavigationClickLeftButton(_:)))
     
     
     fileprivate(set) var leftBarButtonItemType: NavigationItemType?

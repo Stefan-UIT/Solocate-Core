@@ -86,7 +86,7 @@ class LoginViewController: BaseViewController {
         if frame.minY == ScreenSize.SCREEN_HEIGHT {
             conBotViewLogin?.constant = 0
         }else {
-            conBotViewLogin?.constant = -(frame.height / 2)
+            conBotViewLogin?.constant = -(frame.height / 2.8)
         }
         
         UIView.animate(withDuration: 0.2, animations: {
