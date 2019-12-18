@@ -137,11 +137,10 @@ class FilterDataListVC: BaseViewController {
         let allStatuses = PurchaseOrderStatus()
         allStatuses.name = "all-statuses".localized
         arrPurchaseOrderStatus.append(allStatuses)
-        getListPurchaseOrderStatus()
-//        if CoreDataManager.getListPurchaseOrderStatus().count == 0 {
-//            self.getListRentingOrderStatus()
-//        }
-//        arrPurchaseOrderStatus.append(CoreDataManager.getListPurchaseOrderStatus())
+        if CoreDataManager.getListPurchaseOrderStatus().count == 0 {
+            self.getListPurchaseOrderStatus()
+        }
+        arrPurchaseOrderStatus.append(CoreDataManager.getListPurchaseOrderStatus())
     }
 
     /*
@@ -690,8 +689,7 @@ extension FilterDataListVC {
             switch result{
             case .object(let obj):
                 guard let list = obj.data else {return}
-                self.arrPurchaseOrderStatus.append(list)
-//                CoreDataManager.updatePurchaseOrderStatus(list)
+                CoreDataManager.updatePurchaseOrderStatus(list)
             case .error(_ ):
                 break
             }

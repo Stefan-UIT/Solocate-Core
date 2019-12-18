@@ -233,6 +233,7 @@ fileprivate extension LoginViewController {
                 self?.getListStatus()
                 self?.getListRouteStatus()
                 self?.getListRentingOrderStatus()
+                self?.getListPurchaseOrderStatus()
                 
                 // Fetch reasons save to local DB
                 self?.getReasonList()
@@ -287,6 +288,18 @@ fileprivate extension LoginViewController {
             case .object(let obj):
                 guard let list = obj.data else { return }
                 CoreDataManager.updateRentingOrderStatus(list)
+            case .error(_ ):
+                break
+            }
+        }
+    }
+    
+    func getListPurchaseOrderStatus() {
+        SERVICES().API.getListPurchaseOrderStatus { (result) in
+            switch result {
+            case .object(let obj):
+                guard let list = obj.data else { return }
+                CoreDataManager.updatePurchaseOrderStatus(list)
             case .error(_ ):
                 break
             }

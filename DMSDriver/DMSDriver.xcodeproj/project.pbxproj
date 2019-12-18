@@ -670,6 +670,8 @@
 		766B7457234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766B7456234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift */; };
 		76A0BF7823716A1200942C6D /* BoolModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0BF7723716A1200942C6D /* BoolModel.swift */; };
 		76A0BF7923716A1200942C6D /* BoolModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76A0BF7723716A1200942C6D /* BoolModel.swift */; };
+		76B8EE8A23A9E5DC00F28CAD /* CorePurchaseOrderStatus+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B8EE8923A9E5DC00F28CAD /* CorePurchaseOrderStatus+Ext.swift */; };
+		76B8EE8C23A9E5E000F28CAD /* CorePurchaseOrderStatus+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76B8EE8923A9E5DC00F28CAD /* CorePurchaseOrderStatus+Ext.swift */; };
 		76BFFD6C2339D8B50021E01A /* RentingOrderListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD6B2339D8B50021E01A /* RentingOrderListVC.swift */; };
 		76BFFD6D2339D8B50021E01A /* RentingOrderListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD6B2339D8B50021E01A /* RentingOrderListVC.swift */; };
 		76BFFD6F2339F4660021E01A /* RentingOrderListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76BFFD6E2339F4660021E01A /* RentingOrderListTableViewCell.swift */; };
@@ -1219,6 +1221,7 @@
 		7661BCC423A8AEBF00F57B13 /* PurchaseOrderSKUTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderSKUTableViewCell.swift; sourceTree = "<group>"; };
 		766B7456234724AC00770E42 /* CoreRentingOrderStatus+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreRentingOrderStatus+Ext.swift"; sourceTree = "<group>"; };
 		76A0BF7723716A1200942C6D /* BoolModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoolModel.swift; sourceTree = "<group>"; };
+		76B8EE8923A9E5DC00F28CAD /* CorePurchaseOrderStatus+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CorePurchaseOrderStatus+Ext.swift"; sourceTree = "<group>"; };
 		76BFFD6B2339D8B50021E01A /* RentingOrderListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderListVC.swift; sourceTree = "<group>"; };
 		76BFFD6E2339F4660021E01A /* RentingOrderListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderListTableViewCell.swift; sourceTree = "<group>"; };
 		76BFFD732339F62D0021E01A /* RentingOrder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrder.swift; sourceTree = "<group>"; };
@@ -3289,6 +3292,7 @@
 				7622BCF423828552008792C8 /* CoreTruck+Ext.swift */,
 				7622BCF72382855F008792C8 /* CoreTruckType+Ext.swift */,
 				7622BCFA238299A0008792C8 /* CoreRentingOrderDetail+Ext.swift */,
+				76B8EE8923A9E5DC00F28CAD /* CorePurchaseOrderStatus+Ext.swift */,
 			);
 			path = CoreDataModel;
 			sourceTree = "<group>";
@@ -3951,6 +3955,7 @@
 				2A443A5F22648C5A00CB6508 /* UserModel.swift in Sources */,
 				2A443A6022648C5A00CB6508 /* Font.swift in Sources */,
 				2A443A6122648C5A00CB6508 /* ItemWithImage.swift in Sources */,
+				76B8EE8A23A9E5DC00F28CAD /* CorePurchaseOrderStatus+Ext.swift in Sources */,
 				2A443A6222648C5A00CB6508 /* UIBarButtonItem + Style.swift in Sources */,
 				2A443A6322648C5A00CB6508 /* Double+Ext.swift in Sources */,
 				7622BCE823823BB5008792C8 /* CoreUserInfo+Ext.swift in Sources */,
@@ -4443,6 +4448,7 @@
 				7622BCE923823BB5008792C8 /* CoreUserInfo+Ext.swift in Sources */,
 				3B13CBF0211A8FF400A93E18 /* ScrollMenuCell.swift in Sources */,
 				3BEAB86D214260CD0039CFBB /* CoreAttachFile+Ext.swift in Sources */,
+				76B8EE8C23A9E5E000F28CAD /* CorePurchaseOrderStatus+Ext.swift in Sources */,
 				3B80E3DC22279D1B005A2E75 /* ReasonSkipView.swift in Sources */,
 				3B66B8E9210B1149000BDFEF /* ResultsRequestModel.swift in Sources */,
 				3B66B8F1210B1149000BDFEF /* APIError.swift in Sources */,

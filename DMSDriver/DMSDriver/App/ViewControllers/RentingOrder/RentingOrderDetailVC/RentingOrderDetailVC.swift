@@ -148,14 +148,14 @@ class RentingOrderDetailVC: BaseViewController {
     @IBAction func didTapUpdateStatusButton(_ sender: Any) {
         switch typeUpdateBtn {
         case .START_RENTING_ORDER:
-            self.updateRentingOrderStatusWith(RentingOrderStatusCode.InProgress.code, rentingOrder: rentingOrder!)
+            self.updateRentingOrderStatus(RentingOrderStatusCode.InProgress.code, rentingOrder: rentingOrder!)
         case .FINISH_RENTING_ORDER:
-            self.updateRentingOrderStatusWith(RentingOrderStatusCode.Finished.code, rentingOrder: rentingOrder!)
+            self.updateRentingOrderStatus(RentingOrderStatusCode.Finished.code, rentingOrder: rentingOrder!)
         }
     }
     
     @IBAction func didTapCancelButton(_ sender: Any) {
-        self.updateRentingOrderStatusWith(RentingOrderStatusCode.Cancelled.code, rentingOrder: rentingOrder!)
+        self.updateRentingOrderStatus(RentingOrderStatusCode.Cancelled.code, rentingOrder: rentingOrder!)
     }
     
     func handleFisnishedAction() {
@@ -325,8 +325,8 @@ extension RentingOrderDetailVC {
         }
     }
     
-    func updateRentingOrderStatusWith(_ rentingOrderStatus: Int, rentingOrder: RentingOrder){
-        SERVICES().API.updateRentingOrderStatusWith(rentingOrderStatus, rentingOrder: rentingOrder) {[weak self] (result) in
+    func updateRentingOrderStatus(_ rentingOrderStatus: Int, rentingOrder: RentingOrder){
+        SERVICES().API.updateRentingOrderStatus(rentingOrderStatus, rentingOrder: rentingOrder) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
