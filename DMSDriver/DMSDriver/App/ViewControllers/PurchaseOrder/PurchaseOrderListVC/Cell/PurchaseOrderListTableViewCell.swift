@@ -12,8 +12,7 @@ class PurchaseOrderListTableViewCell: UITableViewCell {
 
     @IBOutlet weak var orderIdLbl: UILabel!
     @IBOutlet weak var statusLbl: UILabel!
-    @IBOutlet weak var startDateLbl: UILabel!
-    @IBOutlet weak var endDateLbl: UILabel!
+    @IBOutlet weak var rangeDateLbl: UILabel!
     @IBOutlet weak var dateLbl: UILabel!
     @IBOutlet weak var divisionLbl: UILabel!
     @IBOutlet weak var refCodeLbl: UILabel!
@@ -46,8 +45,7 @@ class PurchaseOrderListTableViewCell: UITableViewCell {
         orderIdLbl.text = "#"+"\(purchaseOrder.id)"
         statusLbl.text = purchaseOrder.status?.name?.localized
         statusLbl.textColor = purchaseOrder.colorStatus
-        startDateLbl.text = startDate + " - "
-        endDateLbl.text = endDate
+        rangeDateLbl.text = startDate + " - " + endDate
         dateLbl.text = endDate
         
         refCodeLbl.text = Slash(purchaseOrder.referenceCode)

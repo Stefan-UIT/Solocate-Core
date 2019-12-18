@@ -108,15 +108,6 @@
                                                                             <color key="textColor" red="0.47058823529999999" green="0.51764705879999995" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dXi-Ee-8UE">
-                                                                            <rect key="frame" x="78" y="9.5" width="56" height="15.5"/>
-                                                                            <string key="text">08:50 AM
-
-</string>
-                                                                            <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="13"/>
-                                                                            <color key="textColor" red="0.47058823529999999" green="0.51764705879999995" blue="0.61960784310000006" alpha="1" colorSpace="calibratedRGB"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                        </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="JAN 10" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="stF-UB-QS9">
                                                                             <rect key="frame" x="277" y="9.5" width="43" height="15.5"/>
                                                                             <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="13"/>
@@ -126,12 +117,10 @@
                                                                     </subviews>
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
-                                                                        <constraint firstItem="dXi-Ee-8UE" firstAttribute="centerY" secondItem="X7n-hL-uqZ" secondAttribute="centerY" id="25G-Kn-7ye"/>
                                                                         <constraint firstAttribute="trailing" secondItem="stF-UB-QS9" secondAttribute="trailing" constant="15" id="Asr-tD-KSX"/>
                                                                         <constraint firstItem="stF-UB-QS9" firstAttribute="centerY" secondItem="X7n-hL-uqZ" secondAttribute="centerY" id="H64-PY-Xaj"/>
                                                                         <constraint firstItem="1Ry-ma-VGz" firstAttribute="leading" secondItem="X7n-hL-uqZ" secondAttribute="leading" constant="15" id="RlZ-aP-HWw"/>
                                                                         <constraint firstItem="1Ry-ma-VGz" firstAttribute="centerY" secondItem="X7n-hL-uqZ" secondAttribute="centerY" id="USE-Wm-aaF"/>
-                                                                        <constraint firstItem="dXi-Ee-8UE" firstAttribute="leading" secondItem="1Ry-ma-VGz" secondAttribute="trailing" constant="3" id="dNJ-u1-MNm"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5qc-ll-rRO" userLabel="lineView">
@@ -338,10 +327,9 @@
                                             <outlet property="dateLbl" destination="stF-UB-QS9" id="Jb3-Lk-Kqx"/>
                                             <outlet property="detailsLbl" destination="0Xn-ig-Ml8" id="Bdj-lc-YjW"/>
                                             <outlet property="divisionLbl" destination="fvo-gS-VXz" id="f4e-tH-Tjm"/>
-                                            <outlet property="endDateLbl" destination="dXi-Ee-8UE" id="GEe-Jm-eVD"/>
                                             <outlet property="orderIdLbl" destination="gTy-kC-oho" id="gXu-Pr-0mv"/>
+                                            <outlet property="rangeDateLbl" destination="1Ry-ma-VGz" id="U1h-gP-CWp"/>
                                             <outlet property="refCodeLbl" destination="ciF-Ad-2EL" id="sVg-xn-47f"/>
-                                            <outlet property="startDateLbl" destination="1Ry-ma-VGz" id="U1h-gP-CWp"/>
                                             <outlet property="statusLbl" destination="fKd-fI-YEv" id="3fx-60-rpV"/>
                                             <outlet property="zoneLbl" destination="Qvv-oA-x4F" id="Di5-IX-1Dd"/>
                                         </connections>
