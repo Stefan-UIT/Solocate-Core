@@ -172,7 +172,7 @@ extension PurchaseOrderListVC:DMSNavigationServiceDelegate {
     }
     
     func didSelectedLeftButton(_ sender: UIBarButtonItem) {
-        FilterDataListVC.show(atViewController: self, currentFilter: filterModel, filterScenceType: .RentingOrderListVC) {[weak self] (success, data) in
+        FilterDataListVC.show(atViewController: self, currentFilter: filterModel, filterScenceType: .PurchaseOrderListVC) {[weak self] (success, data) in
             guard let strongSelf = self,success == true else{
                 return
             }
