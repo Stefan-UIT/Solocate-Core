@@ -12,6 +12,8 @@ import SideMenu
 class RentingOrderListVC: BaseViewController {
     
     @IBOutlet weak var tbvContent:UITableView?
+    @IBOutlet weak var dateLbl: UILabel!
+    
     var timeData:TimeDataItem?
     var filterModel = FilterDataModel()
     var isFromDashboard = false
@@ -26,7 +28,8 @@ class RentingOrderListVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupTableView()
+        initVar()
+        initUI()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -49,6 +52,20 @@ class RentingOrderListVC: BaseViewController {
             filterModel.timeData = timeData
             dataManager.setTimeDataItemDefault(item: filterModel.timeData!)
         }
+    }
+    
+    private func initUI() {
+        setupTableView()
+        let filterTimeData = filterModel.timeData
+        let dateTitle = filterTimeData?.title ?? ""
+        var dateString = ""
+        if filterTimeData?.type == TimeItemType.TimeItemTypeToday {
+            dateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date())
+        } else {
+            dateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date()) + " - " + ShortDateFormater.string(from: filterTimeData?.endDate ?? Date())
+        }
+        let date = "here-is-your-plan".localized
+        dateLbl?.text = date + " for " + dateTitle + " " + dateString
     }
     
     func setupNavigateBar() {
@@ -156,6 +173,7 @@ extension RentingOrderListVC:DMSNavigationServiceDelegate {
                 return
             }
             strongSelf.filterModel = data
+            strongSelf.initUI()
             strongSelf.fetchData(isShowLoading: true)
         }
         self.isFromFilter = true
