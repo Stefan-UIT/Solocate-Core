@@ -73,4 +73,11 @@ extension String {
     func replaceDoubleQuoteIfNeeded() -> String {
         return self.replacingOccurrences(of: "\"", with: "\\\"")
     }
+    
+    func rangeTime(_ toTime:String?) -> String {
+        guard let _toTime = toTime else { return "-" }
+        var rangeTime = ""
+        rangeTime = self + " - " + _toTime
+        return rangeTime
+    }
 }

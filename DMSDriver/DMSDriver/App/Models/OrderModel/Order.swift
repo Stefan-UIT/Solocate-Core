@@ -268,6 +268,9 @@ class Order: BaseModel {
             var loadedQty:Int?
             var returnedQty:Int?
             
+            // Purchase Order
+            var deliveringQty:Int?
+            var remainingQty:Int?
             
             init?(map: Map) {
                 //
@@ -293,6 +296,9 @@ class Order: BaseModel {
 //                }
                 
                 returnedQty <- map["returned_qty"]
+                
+                deliveringQty <- map["delivering_qty"]
+                remainingQty <- map["remaining_qty"]
                 
             }
         }

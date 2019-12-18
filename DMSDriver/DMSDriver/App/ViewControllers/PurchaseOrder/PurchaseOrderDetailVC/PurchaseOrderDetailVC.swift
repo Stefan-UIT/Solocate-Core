@@ -34,7 +34,8 @@ class PurchaseOrderDetailVC: BaseViewController {
     fileprivate let headerCellIdentifier = "OrderDetailHeaderCell"
     fileprivate var arrTitleHeader:[String] = []
     
-    fileprivate let cellHeight: CGFloat = 65.0
+    fileprivate let CELL_HEIGHT: CGFloat = 65.0
+    fileprivate let FOOTER_HEIGHT: CGFloat = 15.0
     
     var dateStringFilter = Date().toString()
     var order:PurchaseOrder?
@@ -43,7 +44,6 @@ class PurchaseOrderDetailVC: BaseViewController {
         super.viewDidLoad()
         updateUI()
         fetchData(showLoading: true)
-        setupTableView()
         initVar()
         setupDataDetailInforRows()
         
@@ -77,10 +77,11 @@ class PurchaseOrderDetailVC: BaseViewController {
         // Cell PurchaseOrder Info
         let purchaseId = OrderDetailInforRow("purchase-order-id".localized,IntSlash(_order.id))
         let purchaseOrderType = OrderDetailInforRow("order-type".localized, Slash(_order.orderType.name))
-        let purchaseDivision = OrderDetailInforRow("division".localized,Slash(_order.division?.code))
+        let purchaseDivision = OrderDetailInforRow("division".localized,Slash(_order.division?.name))
         let purchaseRefCode = OrderDetailInforRow("ref-code".localized, Slash(_order.referenceCode))
         let purchaseCustomer = OrderDetailInforRow("customer-name".localized, Slash(_order.customer?.userName))
-        let purchaseDueDateRange = OrderDetailInforRow("due-date-range".localized,Slash(_order.from?.start_time)+" - "+Slash(_order.to?.end_time))
+        let purchaseDueDateRange = OrderDetailInforRow("due-date-range".localized, Slash(_order.from?.start_time?.rangeTime(_order.to?.end_time)))
+        let purchaseZone = OrderDetailInforRow("zone".localized, Slash(_order.zone?.name))
         
         purchaseOrderInfo.append(purchaseId)
         purchaseOrderInfo.append(purchaseOrderType)
@@ -88,28 +89,27 @@ class PurchaseOrderDetailVC: BaseViewController {
         purchaseOrderInfo.append(purchaseRefCode)
         purchaseOrderInfo.append(purchaseCustomer)
         purchaseOrderInfo.append(purchaseDueDateRange)
+        purchaseOrderInfo.append(purchaseZone)
         
         
         // Cell PurchaseOrder Pickup
         
         let purchasePUAddress = OrderDetailInforRow("address".localized, Slash(_order.from?.address))
-        let purchasePUFloor = OrderDetailInforRow("floor".localized, Slash(_order.from?.floor))
-        let purchasePUApartment = OrderDetailInforRow("apartment".localized, Slash(_order.from?.apartment))
-        let purchasePUNumber = OrderDetailInforRow("number".localized, Slash(_order.from?.number))
-        let purchasePUZone = OrderDetailInforRow("zone".localized, Slash(_order.zone?.name))
+        let fromFloor = Slash(_order.from?.floor)
+        let fromApartment = Slash(_order.from?.apartment)
+        let fromNumber = Slash(_order.from?.number)
+        let fromAddressDetail = "\(fromFloor)/\(fromApartment)/\(fromNumber)"
+        let fromAddressDetailRecord = OrderDetailInforRow("floor-apt-number".localized,fromAddressDetail,false)
         let purchasePUConsigneeName = OrderDetailInforRow("consignee-name".localized, Slash(_order.from?.ctt_name))
         let purchasePUConsigneePhone = OrderDetailInforRow("consignee-phone".localized, Slash(_order.from?.ctt_phone))
-        let purchasePUOpenTime = OrderDetailInforRow("open-time".localized, "-")
-        let purchasePUCloseTime = OrderDetailInforRow("close-time".localized, "-")
-        let purchasePUTimeRange = OrderDetailInforRow("time-range".localized, "-")
-        let purchasePUServiceTime = OrderDetailInforRow("service-time".localized, "-")
+        let purchasePUOpenTime = OrderDetailInforRow("open-time".localized, Slash(_order.from?.start_time))
+        let purchasePUCloseTime = OrderDetailInforRow("close-time".localized, Slash(_order.from?.end_time))
+        let purchasePUTimeRange = OrderDetailInforRow("time-range".localized, Slash(_order.from?.start_time?.rangeTime(_order.to?.end_time)))
+        let purchasePUServiceTime = OrderDetailInforRow("service-time".localized, IntSlash(_order.from?.srvc_time))
         let purchasePUActualTime = OrderDetailInforRow("actual-time".localized, "-")
         
         purchaseOrderPickup.append(purchasePUAddress)
-        purchaseOrderPickup.append(purchasePUFloor)
-        purchaseOrderPickup.append(purchasePUApartment)
-        purchaseOrderPickup.append(purchasePUNumber)
-        purchaseOrderPickup.append(purchasePUZone)
+        purchaseOrderPickup.append(fromAddressDetailRecord)
         purchaseOrderPickup.append(purchasePUConsigneeName)
         purchaseOrderPickup.append(purchasePUConsigneePhone)
         purchaseOrderPickup.append(purchasePUOpenTime)
@@ -122,23 +122,21 @@ class PurchaseOrderDetailVC: BaseViewController {
         // Cell PurchaseOrder Delivery
         
         let purchaseDeliveryAddress = OrderDetailInforRow("address".localized, Slash(_order.to?.address))
-        let purchaseDeliveryFloor = OrderDetailInforRow("floor".localized, Slash(_order.to?.floor))
-        let purchaseDeliveryApartment = OrderDetailInforRow("apartment".localized, Slash(_order.to?.apartment))
-        let purchaseDeliveryNumber = OrderDetailInforRow("number".localized, Slash(_order.to?.number))
-        let purchaseDeliveryZone = OrderDetailInforRow("zone".localized, Slash(_order.zone?.name))
+        let toFloor = Slash(_order.to?.floor)
+        let toApartment = Slash(_order.to?.apartment)
+        let toNumber = Slash(_order.to?.number)
+        let toAddressDetail = "\(toFloor)/\(toApartment)/\(toNumber)"
+        let toAddressDetailRecord = OrderDetailInforRow("floor-apt-number".localized,toAddressDetail,false)
         let purchaseDeliveryConsigneeName = OrderDetailInforRow("consignee-name".localized, Slash(_order.to?.ctt_name))
         let purchaseDeliveryConsigneePhone = OrderDetailInforRow("consignee-phone".localized, Slash(_order.to?.ctt_phone))
-        let purchaseDeliveryOpenTime = OrderDetailInforRow("open-time".localized, "-")
-        let purchaseDeliveryCloseTime = OrderDetailInforRow("close-time".localized, "-")
-        let purchaseDeliveryTimeRange = OrderDetailInforRow("time-range".localized, "-")
-        let purchaseDeliveryServiceTime = OrderDetailInforRow("service-time".localized, "-")
+        let purchaseDeliveryOpenTime = OrderDetailInforRow("open-time".localized, Slash(_order.to?.start_time))
+        let purchaseDeliveryCloseTime = OrderDetailInforRow("close-time".localized, Slash(_order.to?.end_time))
+        let purchaseDeliveryTimeRange = OrderDetailInforRow("time-range".localized, Slash(_order.from?.start_time?.rangeTime(_order.to?.end_time)))
+        let purchaseDeliveryServiceTime = OrderDetailInforRow("service-time".localized, IntSlash(_order.to?.srvc_time))
         let purchaseDeliveryActualTime = OrderDetailInforRow("actual-time".localized, "-")
         
         purchaseOrderDelivery.append(purchaseDeliveryAddress)
-        purchaseOrderDelivery.append(purchaseDeliveryFloor)
-        purchaseOrderDelivery.append(purchaseDeliveryApartment)
-        purchaseOrderDelivery.append(purchaseDeliveryNumber)
-        purchaseOrderDelivery.append(purchaseDeliveryZone)
+        purchaseOrderDelivery.append(toAddressDetailRecord)
         purchaseOrderDelivery.append(purchaseDeliveryConsigneeName)
         purchaseOrderDelivery.append(purchaseDeliveryConsigneePhone)
         purchaseOrderDelivery.append(purchaseDeliveryOpenTime)
@@ -160,12 +158,6 @@ class PurchaseOrderDetailVC: BaseViewController {
                           "Delivery".localized,
                           "items".localized]
     }
-    
-    func setupTableView() {
-        tbvContent?.estimatedRowHeight = cellHeight
-        tbvContent?.rowHeight = UITableView.automaticDimension
-    }
-    
 }
 
 extension PurchaseOrderDetailVC: DMSNavigationServiceDelegate {
@@ -200,7 +192,7 @@ extension PurchaseOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return cellHeight
+        return CELL_HEIGHT
     }
     
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -209,23 +201,31 @@ extension PurchaseOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
         case .OrderInfo:
             return 50
         case .SKUS:
-            return (order?.details?.count > 0) ? 50 : 0
+            return (order?.details?.count > 0) ? 50 : CGFloat.leastNormalMagnitude
         case .Pickup:
-            return order?.from == nil ? 0 : 50
+            return order?.from == nil ? CGFloat.leastNormalMagnitude : 50
         case .Delivery:
-            return order?.to == nil ? 0 : 50
+            return order?.to == nil ? CGFloat.leastNormalMagnitude : 50
         }
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if let headerCell = tableView.dequeueReusableCell(withIdentifier: headerCellIdentifier) as? PurchaseOrderDetailTableViewCell{
             headerCell.nameLabel?.text = arrTitleHeader[section]
-            if section == 0 {
+            let section:PurchaseOrderSection = PurchaseOrderSection(rawValue: section)!
+            switch section {
+            case .OrderInfo:
                 headerCell.contentLabel?.isHidden = false
                 headerCell.contentLabel?.text = order?.status?.name?.localized
                 headerCell.contentLabel?.textColor = order?.colorStatus
-                
-            } else {
+            case .SKUS:
+                headerCell.isHidden = order?.details != nil ? false : true
+                headerCell.contentLabel?.isHidden = true
+            case .Pickup:
+                headerCell.isHidden = order?.from != nil ? false : true
+                headerCell.contentLabel?.isHidden = true
+            case .Delivery:
+                headerCell.isHidden = order?.to != nil ? false : true
                 headerCell.contentLabel?.isHidden = true
             }
             return headerCell
@@ -235,7 +235,17 @@ extension PurchaseOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 15
+        let section:PurchaseOrderSection = PurchaseOrderSection(rawValue: section)!
+        switch section {
+        case .OrderInfo:
+            return FOOTER_HEIGHT
+        case .SKUS:
+            return order?.details != nil ? FOOTER_HEIGHT : CGFloat.leastNormalMagnitude
+        case .Pickup:
+            return order?.from != nil ? FOOTER_HEIGHT : CGFloat.leastNormalMagnitude
+        case .Delivery:
+            return order?.to != nil ? FOOTER_HEIGHT : CGFloat.leastNormalMagnitude
+        }
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {

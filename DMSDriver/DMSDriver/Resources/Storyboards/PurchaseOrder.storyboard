@@ -172,8 +172,8 @@
                                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="division"/>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvo-gS-VXz">
-                                                                            <rect key="frame" x="285.5" y="4" width="34.5" height="16"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fvo-gS-VXz">
+                                                                            <rect key="frame" x="315" y="4" width="5" height="16"/>
                                                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -200,8 +200,8 @@
                                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="ref-code"/>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciF-Ad-2EL">
-                                                                            <rect key="frame" x="285.5" y="4" width="34.5" height="16"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ciF-Ad-2EL">
+                                                                            <rect key="frame" x="315" y="4" width="5" height="16"/>
                                                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -227,8 +227,8 @@
                                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="customer-name"/>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hWl-VN-Vj2">
-                                                                            <rect key="frame" x="136" y="4" width="184" height="16"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="-" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hWl-VN-Vj2">
+                                                                            <rect key="frame" x="136" y="5" width="184" height="14"/>
                                                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -237,8 +237,11 @@
                                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                     <constraints>
                                                                         <constraint firstItem="hWl-VN-Vj2" firstAttribute="leading" secondItem="DFZ-6O-kUQ" secondAttribute="trailing" constant="60" id="6Qg-wG-tnR"/>
+                                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="24" id="Pgh-dv-WhZ"/>
+                                                                        <constraint firstItem="hWl-VN-Vj2" firstAttribute="top" secondItem="xod-ce-eGw" secondAttribute="top" constant="5" id="RBY-Pp-JrB"/>
                                                                         <constraint firstItem="DFZ-6O-kUQ" firstAttribute="leading" secondItem="xod-ce-eGw" secondAttribute="leading" constant="15" id="WED-V1-b8R"/>
                                                                         <constraint firstItem="DFZ-6O-kUQ" firstAttribute="centerY" secondItem="xod-ce-eGw" secondAttribute="centerY" id="gCo-Yd-XkS"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="hWl-VN-Vj2" secondAttribute="bottom" constant="5" id="iA2-x8-NNj"/>
                                                                         <constraint firstItem="hWl-VN-Vj2" firstAttribute="centerY" secondItem="xod-ce-eGw" secondAttribute="centerY" id="rMs-be-AeE"/>
                                                                         <constraint firstAttribute="trailing" secondItem="hWl-VN-Vj2" secondAttribute="trailing" constant="15" id="x0B-Da-7Th"/>
                                                                     </constraints>
@@ -255,8 +258,8 @@
                                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="zone"/>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qvv-oA-x4F">
-                                                                            <rect key="frame" x="285.5" y="4" width="34.5" height="16"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qvv-oA-x4F">
+                                                                            <rect key="frame" x="315" y="4" width="5" height="16"/>
                                                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -282,8 +285,8 @@
                                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="details"/>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Xn-ig-Ml8">
-                                                                            <rect key="frame" x="285.5" y="4" width="34.5" height="16"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Xn-ig-Ml8">
+                                                                            <rect key="frame" x="315" y="4" width="5" height="16"/>
                                                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -299,7 +302,6 @@
                                                                 </view>
                                                             </subviews>
                                                             <constraints>
-                                                                <constraint firstItem="xod-ce-eGw" firstAttribute="height" secondItem="gVg-M7-Tgu" secondAttribute="height" id="4YC-8i-2gf"/>
                                                                 <constraint firstItem="uE9-ch-6yU" firstAttribute="height" secondItem="gVg-M7-Tgu" secondAttribute="height" id="PMW-E8-pjy"/>
                                                                 <constraint firstItem="oP5-sf-qqF" firstAttribute="height" secondItem="gVg-M7-Tgu" secondAttribute="height" id="YCT-7g-fLu"/>
                                                                 <constraint firstItem="hMG-4r-2As" firstAttribute="height" secondItem="gVg-M7-Tgu" secondAttribute="height" id="gxs-WS-Ns3"/>
@@ -425,10 +427,10 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="60"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sd0-jz-ZyR">
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sd0-jz-ZyR">
                                                     <rect key="frame" x="15" y="2" width="345" height="65"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVV-7t-LuL">
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LVV-7t-LuL">
                                                             <rect key="frame" x="15" y="2" width="38" height="63"/>
                                                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="14"/>
                                                             <color key="textColor" red="0.035294117649999998" green="0.1529411765" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -437,7 +439,7 @@
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="NO"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QqC-dX-A29">
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QqC-dX-A29">
                                                             <rect key="frame" x="324.5" y="22.5" width="5.5" height="22"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="3d3-aw-Hig"/>
@@ -474,11 +476,11 @@
                                             <outlet property="nameLabel" destination="LVV-7t-LuL" id="1Vp-Fd-Ydc"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="1" reuseIdentifier="PurchaseOrderSKUTableViewCell" rowHeight="344" id="xNh-Ay-Wks" customClass="PurchaseOrderSKUTableViewCell" customModule="Gadot_Dev" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="115.5" width="375" height="344"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="1" reuseIdentifier="PurchaseOrderSKUTableViewCell" rowHeight="280" id="xNh-Ay-Wks" customClass="PurchaseOrderSKUTableViewCell" customModule="Gadot_Dev" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="115.5" width="375" height="280"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="xNh-Ay-Wks" id="xe9-Gu-IKC">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="344"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="280"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lYx-0q-eh9">
@@ -792,16 +794,16 @@
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailTableViewCell" rowHeight="92" id="lAa-cq-YSI" customClass="PurchaseOrderDetailTableViewCell" customModule="Gadot_Dev" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="459.5" width="375" height="92"/>
+                                        <rect key="frame" x="0.0" y="395.5" width="375" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lAa-cq-YSI" id="pMZ-1P-d1m">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="92"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuX-GY-K2I">
+                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zuX-GY-K2I">
                                                     <rect key="frame" x="15" y="0.0" width="345" height="92"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wnj-2e-Wr2">
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wnj-2e-Wr2">
                                                             <rect key="frame" x="15" y="7" width="26" height="16"/>
                                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                             <color key="textColor" red="0.28235294119999998" green="0.36470588240000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
@@ -810,7 +812,7 @@
                                                                 <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="NO"/>
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Jo-Rq-QqK">
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Jo-Rq-QqK">
                                                             <rect key="frame" x="51" y="5" width="279" height="82"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="uMA-vz-4dP"/>

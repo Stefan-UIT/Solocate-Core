@@ -32,14 +32,14 @@ class PurchaseOrderSKUTableViewCell: UITableViewCell {
     }
     
     func configure(purchaseOrderSKU: PurchaseOrder.Detail) {
-        skuLbl.text = IntSlash(purchaseOrderSKU.id)
+        skuLbl.text = Slash(purchaseOrderSKU.name)
         quantityLbl.text = IntSlash(purchaseOrderSKU.pivot?.qty)
         uomLbl.text = IntSlash(purchaseOrderSKU.id)
         batchIdLbl.text = Slash(purchaseOrderSKU.pivot?.batch_id)
         barcodeLbl.text = Slash(purchaseOrderSKU.pivot?.bcd)
-        deliveringQtyLbl.text = IntSlash(purchaseOrderSKU.pivot?.qty)
-        deliveredQtyLbl.text = IntSlash(purchaseOrderSKU.pivot?.qty)
-        remainingQtyLbl.text = IntSlash(purchaseOrderSKU.pivot?.qty)
+        deliveringQtyLbl.text = IntSlash(purchaseOrderSKU.pivot?.deliveringQty)
+        deliveredQtyLbl.text = IntSlash(purchaseOrderSKU.pivot?.deliveredQty)
+        remainingQtyLbl.text = IntSlash(purchaseOrderSKU.pivot?.remainingQty)
     }
 
 }
