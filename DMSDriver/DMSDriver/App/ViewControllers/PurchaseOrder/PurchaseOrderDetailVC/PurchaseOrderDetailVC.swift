@@ -45,7 +45,6 @@ class PurchaseOrderDetailVC: BaseViewController {
         updateUI()
         fetchData(showLoading: true)
         initVar()
-        setupDataDetailInforRows()
         
     }
     
@@ -149,6 +148,7 @@ class PurchaseOrderDetailVC: BaseViewController {
     
     override func updateUI()  {
         super.updateUI()
+        setupDataDetailInforRows()
         tbvContent?.reloadData()
     }
     
