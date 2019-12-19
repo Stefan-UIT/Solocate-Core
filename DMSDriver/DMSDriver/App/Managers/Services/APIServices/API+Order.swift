@@ -20,7 +20,7 @@ extension BaseAPIService{
     }
     
     @discardableResult
-    func updateRentingOrderStatusWith(_ rentingOrderStatus:Int, rentingOrder: RentingOrder, callback: @escaping APICallback<ResponseDataModel<RentingOrder>>) -> APIRequest? {
+    func updateRentingOrderStatus(_ rentingOrderStatus:Int, rentingOrder: RentingOrder, callback: @escaping APICallback<ResponseDataModel<RentingOrder>>) -> APIRequest? {
         let path = String(format:PATH_REQUEST_URL.UPDATE_RENTING_ORDER_STATUS.URL, "\(rentingOrder.id )")
         let params:[String:Any] = ["renting_order_status_id": rentingOrderStatus]
         if ReachabilityManager.isNetworkAvailable {
@@ -113,6 +113,16 @@ extension BaseAPIService{
                        input: .empty,
                        callback: callback);
     }
+    
+    @discardableResult
+    func getPurchaseOrderDetail(orderId:String, callback: @escaping APICallback<ResponseDataModel<PurchaseOrder>>) -> APIRequest {
+        let uri = String(format:PATH_REQUEST_URL.GET_PURCHASE_ORDER_DETAIL.URL , orderId)
+        return request(method: .GET,
+                       path: uri,
+                       input: .empty,
+                       callback: callback);
+    }
+
     
     func submitSignature(_ file:AttachFileModel,_ order:Order, _ name:String, callback: @escaping APICallback<Order>) {
 //        let path = String(format:PATH_REQUEST_URL.UPDATE_ORDER_STATUS.URL, "\(order.id)","\(order.status?.id ?? 0)")

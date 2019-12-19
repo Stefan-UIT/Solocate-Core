@@ -143,6 +143,7 @@ class Address: BaseModel {
     var floor:String?
     var apartment:String?
     var number:String?
+    var actualTime:String?
     
     override init() {
         super.init()
@@ -169,6 +170,7 @@ class Address: BaseModel {
         floor <- map["floor"]
         apartment <- map["apt"]
         number <- map["number"]
+        actualTime <- map["act_time"]
     }
     
     func toCoreLocation(context:NSManagedObjectContext) -> CoreLocation {
@@ -268,6 +270,10 @@ class Order: BaseModel {
             var loadedQty:Int?
             var returnedQty:Int?
             
+            // Purchase Order
+            var deliveringQty:Int?
+            var remainingQty:Int?
+            var uom:BasicModel?
             
             init?(map: Map) {
                 //
@@ -294,6 +300,9 @@ class Order: BaseModel {
                 
                 returnedQty <- map["returned_qty"]
                 
+                deliveringQty <- map["delivering_qty"]
+                remainingQty <- map["remaining_qty"]
+                uom <- map["uom"]
             }
         }
         

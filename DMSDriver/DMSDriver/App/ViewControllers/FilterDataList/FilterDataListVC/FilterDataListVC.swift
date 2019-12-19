@@ -11,6 +11,7 @@ import UIKit
 enum FilterSceneType {
     case RouteListVC
     case RentingOrderListVC
+    case PurchaseOrderListVC
 }
 
 enum FilterDataListSection:Int {
@@ -50,6 +51,7 @@ class FilterDataListVC: BaseViewController {
     fileprivate var filterModel = FilterDataModel()
     fileprivate var arrRouteStatus:[Status] = []
     fileprivate var arrRentingOrderStatus:[RentingOrderStatus] = []
+    fileprivate var arrPurchaseOrderStatus:[PurchaseOrderStatus] = []
     fileprivate var arrCustomer:[String] = []
     fileprivate var arrCity:[String] = []
     fileprivate var arrCustomerDisplay:[String] = []
@@ -106,6 +108,8 @@ class FilterDataListVC: BaseViewController {
         case .RentingOrderListVC:
             setupRentingOrderStatus()
             break
+        case .PurchaseOrderListVC:
+            setupPurchaseOrderStatus()
         }
     }
     
@@ -127,6 +131,16 @@ class FilterDataListVC: BaseViewController {
             self.getListRentingOrderStatus()
         }
         arrRentingOrderStatus.append(CoreDataManager.getListRentingOrderStatus())
+    }
+    
+    private func setupPurchaseOrderStatus() {
+        let allStatuses = PurchaseOrderStatus()
+        allStatuses.name = "all-statuses".localized
+        arrPurchaseOrderStatus.append(allStatuses)
+        if CoreDataManager.getListPurchaseOrderStatus().count == 0 {
+            self.getListPurchaseOrderStatus()
+        }
+        arrPurchaseOrderStatus.append(CoreDataManager.getListPurchaseOrderStatus())
     }
 
     /*
@@ -187,6 +201,8 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                         return arrRouteStatus.count
                     case .RentingOrderListVC:
                         return arrRentingOrderStatus.count
+                    case .PurchaseOrderListVC:
+                        return arrPurchaseOrderStatus.count
                     }
                 }
             case .SectionCustomer:
@@ -413,6 +429,8 @@ extension FilterDataListVC :UITableViewDataSource,UITableViewDelegate{
                 case .RentingOrderListVC:
                     arrStatus = arrRentingOrderStatus
                     break
+                case .PurchaseOrderListVC:
+                    arrStatus = arrPurchaseOrderStatus
                 }
                 cell.btnStatus?.setTitle(arrStatus[row].name, for: .normal)
                 cell.btnStatus?.tag = indexPath.row
@@ -551,6 +569,8 @@ extension FilterDataListVC:FilterDataListStatusCellDelegate{
             status = arrRouteStatus[index]
         case .RentingOrderListVC:
             status = arrRentingOrderStatus[index]
+        case .PurchaseOrderListVC:
+            status = arrPurchaseOrderStatus[index]
         }
         filterModel.status = status
         filterModel.selectingField = nil
@@ -658,6 +678,18 @@ extension FilterDataListVC {
             case .object(let obj):
                 guard let list = obj.data else {return}
                 CoreDataManager.updateRentingOrderStatus(list)
+            case .error(_ ):
+                break
+            }
+        }
+    }
+    
+    private func getListPurchaseOrderStatus() {
+        SERVICES().API.getListPurchaseOrderStatus { (result) in
+            switch result{
+            case .object(let obj):
+                guard let list = obj.data else {return}
+                CoreDataManager.updatePurchaseOrderStatus(list)
             case .error(_ ):
                 break
             }

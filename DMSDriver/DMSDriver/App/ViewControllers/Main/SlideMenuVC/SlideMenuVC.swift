@@ -10,6 +10,7 @@ enum MenuItemType : Int {
   case RENTINGORDERS
   case TASK
     case RETURNEDITEMS
+    case PURCHASEORDER
   case ALERT
   case LOGOUT
   
@@ -39,6 +40,8 @@ enum MenuItemType : Int {
         return "Alerts".localized.uppercased()
     case .LOGOUT:
       return "Logout".localized.uppercased()
+    case .PURCHASEORDER:
+        return "purchase-order".localized.uppercased()
     }
   }
   
@@ -62,6 +65,8 @@ enum MenuItemType : Int {
         return #imageLiteral(resourceName: "ic_notifyBlue")
     case .LOGOUT:
       return #imageLiteral(resourceName: "ic_logout")
+    case .PURCHASEORDER:
+        return #imageLiteral(resourceName: "ic_orderlist")
     }
   }
 }
@@ -78,6 +83,7 @@ class SlideMenuVC: BaseViewController {
 
     var currentItem:MenuItemType = .DASHBOARD
     var returnedItemTimeDataManager = TimeData()
+    var purchaseOrderTimeDataManager = TimeData()
     var taskTimeDataManager = TimeData()
     
     override func viewDidLoad() {
@@ -209,6 +215,16 @@ extension SlideMenuVC:UITableViewDelegate{
                     self.handleLogOut()
                 })
             }
+        case .PURCHASEORDER:
+            let vc:PurchaseOrderListVC = .loadSB(SB: .PurchaseOrder)
+            
+            if let _timeData = purchaseOrderTimeDataManager.getTimeDataItemDefault() {
+                vc.selectedTimeData = _timeData
+            } else {
+                vc.selectedTimeData = purchaseOrderTimeDataManager.getTimeDataItemType(type: .TimeItemTypeToday)
+                purchaseOrderTimeDataManager.setTimeDataItemDefault(item: vc.selectedTimeData!)
+            }
+            App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
         }
     }
     

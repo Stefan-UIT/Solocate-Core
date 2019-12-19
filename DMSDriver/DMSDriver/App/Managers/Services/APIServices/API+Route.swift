@@ -59,6 +59,23 @@ extension BaseAPIService {
     }
     
     @discardableResult
+    func getPurchaseOrders(filterMode:FilterDataModel, page:Int = 1, callback: @escaping APICallback<ResponseDataModel<ResponseDataListModel<PurchaseOrder>>>) -> APIRequest {
+        let startDate = DateFormatter.displayDateUS.string(from: filterMode.timeData?.startDate ?? Date())
+        let endDate = DateFormatter.displayDateUS.string(from: filterMode.timeData?.endDate ?? Date())
+        let status = filterMode.status
+        let urlString = PATH_REQUEST_URL.GET_PURCHASE_ORDERS.URL
+        var path = String(format: urlString,startDate,endDate)
+        if let _statusId = status?.id {
+            path = path + "&purchase_status_ids=\(_statusId)"
+        }
+        path = path + "&page=\(page)&limit=10"
+        return request(method: .GET,
+                       path:path,
+                       input: APIInput.empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
     func getRoutesByCoordinator(byDate date:String = Date().toString("yyyy-MM-dd"),
                                 callback: @escaping APICallback<ResponseDataModel<CoordinatorRoute>>) -> APIRequest {
         let path = String(format: PATH_REQUEST_URL.GET_ROUTE_BY_COORDINATOR.URL, date)

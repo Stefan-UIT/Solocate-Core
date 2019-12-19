@@ -65,6 +65,7 @@ class MainVC: BaseViewController {
         rootNV?.setViewControllers([vc], animated: false)
     }
     
+    
     func refetchDataRouteOrTaskListOrHistoryNotify()  {
         rootNV?.viewControllers.forEach({ (viewController) in
             if ((viewController as? RouteListVC) != nil) {

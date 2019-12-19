@@ -199,7 +199,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let orderType = OrderDetailInforRow("order-type".localized,order.orderType.name)
         let division = OrderDetailInforRow("division".localized,Slash(order.division?.name))
         let zone = OrderDetailInforRow("zone".localized,Slash(order.zone?.name))
-        let purchaseOrderID = OrderDetailInforRow("purchase-order-id".localized,IntSlash(order.purchaseOrderID))
+        let purchaseOrderID = OrderDetailInforRow("purchase-order-id".localized,IntSlash(order.purchaseOrderID),true)
         
 
         orderInforDetail.append(orderId)
@@ -449,6 +449,13 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         }
     }
     
+    func redirectToPurchaseOrderDetail() {
+        let vc:PurchaseOrderDetailVC = PurchaseOrderDetailVC.loadSB(SB: .PurchaseOrder)
+        vc.order = PurchaseOrder()
+        vc.order?.id = orderDetail?.purchaseOrderID ?? 0
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
     // MARK: - ACTION
     @IBAction func tapUpdateStatusButtonAction(_ sender: UIButton) {
         handleUpdatingStatus()
@@ -641,6 +648,11 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
         }
         let row = indexPath.row
         switch orderSection {
+        case .sectionOrderInfo:
+            let purchaseOrderIDRow = 2
+            if row == purchaseOrderIDRow {
+                redirectToPurchaseOrderDetail()
+            }
         case .sectionMap:
             guard let _orderDetail = orderDetail else { return }
             let lat = _orderDetail.to?.lattd?.doubleValue ?? 0.0

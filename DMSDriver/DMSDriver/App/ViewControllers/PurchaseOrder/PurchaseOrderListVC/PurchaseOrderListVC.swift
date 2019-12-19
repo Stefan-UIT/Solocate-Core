@@ -1,18 +1,18 @@
 //
-//  RentingOrderListViewController.swift
+//  PurchaseOrderListVC.swift
 //  DMSDriver
 //
-//  Created by Phong Nguyen on 9/24/19.
+//  Created by Phong Nguyen on 12/16/19.
 //  Copyright © 2019 machnguyen_uit. All rights reserved.
 //
 
 import UIKit
 import SideMenu
 
-class RentingOrderListVC: BaseViewController {
-    
+class PurchaseOrderListVC: BaseViewController {
+
     @IBOutlet weak var tbvContent:UITableView?
-    @IBOutlet weak var dateLbl: UILabel!
+    @IBOutlet weak var lblDate:UILabel!
     
     var timeData:TimeDataItem?
     var filterModel = FilterDataModel()
@@ -21,13 +21,16 @@ class RentingOrderListVC: BaseViewController {
     
     var isFetchInProgress = false
     var isInfiniteScrolling = false
-    var rentingOrders:[RentingOrder] = []
+    var order:[PurchaseOrder] = []
     var page:Int = 1
     var currentPage:Int = 1
     var totalPages:Int = 1
+    var selectedTimeData:TimeDataItem?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTableView()
         initVar()
         initUI()
     }
@@ -39,6 +42,21 @@ class RentingOrderListVC: BaseViewController {
         } else if isFromFilter {
             isFromFilter = false
         }
+    }
+    
+    // MARK: - Setup View
+    
+    private func initUI() {
+        let filterTimeData = filterModel.timeData
+        let dateTitle = filterTimeData?.title ?? ""
+        var dateString = ""
+        if filterTimeData?.type == TimeItemType.TimeItemTypeToday {
+            dateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date())
+        } else {
+            dateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date()) + " - " + ShortDateFormater.string(from: filterTimeData?.endDate ?? Date())
+        }
+        let date = "here-is-your-plan".localized
+        lblDate?.text = date + " for " + dateTitle + " " + dateString
     }
     
     override func updateNavigationBar() {
@@ -54,20 +72,6 @@ class RentingOrderListVC: BaseViewController {
         }
     }
     
-    private func initUI() {
-        setupTableView()
-        let filterTimeData = filterModel.timeData
-        let dateTitle = filterTimeData?.title ?? ""
-        var dateString = ""
-        if filterTimeData?.type == TimeItemType.TimeItemTypeToday {
-            dateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date())
-        } else {
-            dateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date()) + " - " + ShortDateFormater.string(from: filterTimeData?.endDate ?? Date())
-        }
-        let date = "here-is-your-plan".localized
-        dateLbl?.text = date + " for " + dateTitle + " " + dateString
-    }
-    
     func setupNavigateBar() {
         App().navigationService.delegate = self
         App().navigationService.updateNavigationBar(.Filter_Menu, "".localized)
@@ -80,44 +84,44 @@ class RentingOrderListVC: BaseViewController {
         if isFromDashboard == false {
             tbvContent?.addRefreshControl(self, action: #selector(fetchData(isShowLoading:)))
         }
-//        tbvContent?.prefetchDataSource = self
-//        tbvContent?.addPullToRefetch(self, action: #selector(fetchData))
+        //        tbvContent?.prefetchDataSource = self
+        //        tbvContent?.addPullToRefetch(self, action: #selector(fetchData))
     }
     
     @objc func fetchData(isShowLoading:Bool = true)  {
         getRentingOrders(filterMode: filterModel, isShowLoading: isShowLoading, isFetch: true)
     }
     
-//    func updateRouteList(routeNeedUpdate:Route) {
-//        for (index,route) in self.routes.enumerated() {
-//            if route.id == routeNeedUpdate.id {
-//                self.routes[index] = routeNeedUpdate
-//                break
-//            }
-//        }
-//        tableView.reloadData()
-//    }
+    //    func updateRouteList(routeNeedUpdate:Route) {
+    //        for (index,route) in self.routes.enumerated() {
+    //            if route.id == routeNeedUpdate.id {
+    //                self.routes[index] = routeNeedUpdate
+    //                break
+    //            }
+    //        }
+    //        tableView.reloadData()
+    //    }
     
     
 }
 
 
 // MARK: - UICollectionViewDataSource
-extension RentingOrderListVC: UITableViewDataSource {
+extension PurchaseOrderListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return rentingOrders.count
+        return order.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tbvContent?.dequeueReusableCell(withIdentifier: "RentingOrderListTableViewCell", for: indexPath) as! RentingOrderListTableViewCell
-//        guard let _order = self.rentingOrder else { return UITableViewCell() }
-        let order = rentingOrders[indexPath.row]
-        cell.configureCellWithRentingOrder(order)
+        let cell = tbvContent?.dequeueReusableCell(withIdentifier: "PurchaseOrderListTableViewCell", for: indexPath) as! PurchaseOrderListTableViewCell
+        //        guard let _order = self.rentingOrder else { return UITableViewCell() }
+        let _order = order[indexPath.row]
+        cell.configureCell(_order)
         return cell
     }
     
     func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 140.0
+        return 200.0
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -127,22 +131,22 @@ extension RentingOrderListVC: UITableViewDataSource {
 }
 
 //MARK: - UICollectionViewDelegate
-extension RentingOrderListVC: UITableViewDelegate {
+extension PurchaseOrderListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        let vc:RentingOrderDetailVC = RentingOrderDetailVC.loadSB(SB: .RentingOrder)
-        vc.rentingOrder = rentingOrders[indexPath.row]
+        let vc:PurchaseOrderDetailVC = PurchaseOrderDetailVC.loadSB(SB: .PurchaseOrder)
+        vc.order = order[indexPath.row]
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
-private extension RentingOrderListVC {
+private extension PurchaseOrderListVC {
     func isLoadingCell(for indexPath: IndexPath) -> Bool {
-        return indexPath.row + 1 >= self.rentingOrders.count
+        return indexPath.row + 1 >= self.order.count
     }
 }
 
-extension RentingOrderListVC: UITableViewDataSourcePrefetching {
+extension PurchaseOrderListVC: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         if indexPaths.contains(where: isLoadingCell) {
             if !(currentPage == totalPages) {
@@ -154,7 +158,7 @@ extension RentingOrderListVC: UITableViewDataSourcePrefetching {
 }
 
 //MARK: - DMSNavigationServiceDelegate
-extension RentingOrderListVC:DMSNavigationServiceDelegate {
+extension PurchaseOrderListVC:DMSNavigationServiceDelegate {
     //    func didSelectedBackOrMenu() {
     //        showSideMenu()
     //    }
@@ -168,7 +172,7 @@ extension RentingOrderListVC:DMSNavigationServiceDelegate {
     }
     
     func didSelectedLeftButton(_ sender: UIBarButtonItem) {
-        FilterDataListVC.show(atViewController: self, currentFilter: filterModel, filterScenceType: .RentingOrderListVC) {[weak self] (success, data) in
+        FilterDataListVC.show(atViewController: self, currentFilter: filterModel, filterScenceType: .PurchaseOrderListVC) {[weak self] (success, data) in
             guard let strongSelf = self,success == true else{
                 return
             }
@@ -181,10 +185,10 @@ extension RentingOrderListVC:DMSNavigationServiceDelegate {
 }
 
 // MARK: -API
-fileprivate extension RentingOrderListVC {
-
+fileprivate extension PurchaseOrderListVC {
+    
     func getRentingOrders(filterMode:FilterDataModel, isShowLoading:Bool = true, isFetch:Bool = false) {
-         if ReachabilityManager.isNetworkAvailable {
+        if ReachabilityManager.isNetworkAvailable {
             guard !isFetchInProgress else {
                 return
             }
@@ -198,12 +202,10 @@ fileprivate extension RentingOrderListVC {
                 self.isInfiniteScrolling = false
             } else {
                 self.page = 1
-                self.rentingOrders = [RentingOrder]()
+                self.order = [PurchaseOrder]()
                 tbvContent?.reloadData()
             }
-            
-            
-            SERVICES().API.getRentingOrders(filterMode: filterMode, page: page) {[weak self] (result) in
+            SERVICES().API.getPurchaseOrders(filterMode: filterMode, page: page) {[weak self] (result) in
                 self?.dismissLoadingIndicator()
                 self?.tbvContent?.endRefreshControl()
                 guard let strongSelf = self else {
@@ -212,60 +214,50 @@ fileprivate extension RentingOrderListVC {
                 switch result{
                 case .object(let obj):
                     if let data = obj.data?.data {
-                        
-                        //                    strongSelf.rentingOrders = data
-                        // DMSCurrentRoutes.routes = data
-                        //                    strongSelf.lblNoResult?.isHidden = (strongSelf.routes.count > 0)
                         self?.totalPages = obj.data?.meta?.total_pages ?? 1
                         self?.currentPage = obj.data?.meta?.current_page ?? 1
-                        
+
                         if self?.currentPage != self?.totalPages {
                             self?.page = (self?.currentPage ?? 1) + 1
                         }
-                        self?.rentingOrders.append(data)
-                        CoreDataManager.saveRentingOrder(data)
+                        self?.order.append(data)
                         strongSelf.tbvContent?.reloadData()
                         self?.isFetchInProgress = false
-                        
-                    }
+                }
                 case .error(let error):
-                    strongSelf.showAlertView(error.getMessage())
                     self?.isFetchInProgress = false
-                    break
+                    strongSelf.showAlertView(error.getMessage())
+                    
                 }
             }
         } else {
             // CoreData
-            self.rentingOrders = handleFilterRentingorder(with: filterMode, rentingOrders: getRentingOrders())
-//            self.lblNoResult?.isHidden = (self.routes.count > 0)
-            self.tbvContent?.endRefreshControl()
-            tbvContent?.reloadData()
         }
     }
     
 }
 
 //MARK: - CoreData
-fileprivate extension RentingOrderListVC {
-    func getRentingOrders() -> [RentingOrder] {
-        let results = CoreDataManager.getListRentingOrder()
-        return results
-    }
-    
+fileprivate extension PurchaseOrderListVC {
+//    func getRentingOrders() -> [RentingOrder] {
+//        let results = CoreDataManager.getListRentingOrder()
+//        return results
+//    }
+//
 }
 
 //MARK: - Filter Routes
-fileprivate extension RentingOrderListVC {
-    func handleFilterRentingorder(with filterDataModel: FilterDataModel, rentingOrders: [RentingOrder]) -> [RentingOrder] {
-        var filterRentingOrders = [RentingOrder]()
-        let timeData = filterDataModel.timeData
-        let startDate = timeData?.startDate
-        let endDate = timeData?.endDate
-        let statusName = filterDataModel.status?.name
-        // Filter by Status
-        filterRentingOrders = (statusName == nil || statusName == "all-statuses".localized) ? rentingOrders : rentingOrders.filter({$0.rentingOrderStatus?.name == statusName})
-        // Filter by DateTime
-        filterRentingOrders = (startDate == nil && endDate == nil) ? filterRentingOrders : rentingOrders.filter({$0.startByDate >= startDate! && $0.endByDate <= endDate!})
-        return filterRentingOrders
-    }
+fileprivate extension PurchaseOrderListVC {
+//    func handleFilterRentingorder(with filterDataModel: FilterDataModel, rentingOrders: [RentingOrder]) -> [RentingOrder] {
+//        var filterRentingOrders = [RentingOrder]()
+//        let timeData = filterDataModel.timeData
+//        let startDate = timeData?.startDate
+//        let endDate = timeData?.endDate
+//        let statusName = filterDataModel.status?.name
+//        // Filter by Status
+//        filterRentingOrders = (statusName == nil || statusName == "all-statuses".localized) ? rentingOrders : rentingOrders.filter({$0.rentingOrderStatus?.name == statusName})
+//        // Filter by DateTime
+//        filterRentingOrders = (startDate == nil && endDate == nil) ? filterRentingOrders : rentingOrders.filter({$0.startByDate >= startDate! && $0.endByDate <= endDate!})
+//        return filterRentingOrders
+//    }
 }

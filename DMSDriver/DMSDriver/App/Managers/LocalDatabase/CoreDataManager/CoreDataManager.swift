@@ -34,6 +34,7 @@ enum Entity:String {
     case CoreTruck = "CoreTruck"
     case CoreTruckType = "CoreTruckType"
     case CoreRentingOrderDetail = "CoreRentingOrderDetail"
+    case CorePurchaseOrderStatus = "CorePurchaseOrderStatus"
 
 }
 
@@ -132,6 +133,7 @@ class _CoreDataManager {
         clearDatabase(entity: .CoreTruckType)
         clearDatabase(entity: .CoreRentingOrderDetail)
         clearDatabase(entity: .CoreRentingOrder)
+        clearDatabase(entity: .CorePurchaseOrderStatus)
     }
     
     func clearDatabase(entity:Entity) {
@@ -935,6 +937,17 @@ class _CoreDataManager {
         }
     }
     
+    func updatePurchaseOrderStatus(_ list:[PurchaseOrderStatus]) {
+        clearDatabase(entity: .CorePurchaseOrderStatus)
+        self.persistentContainer.performBackgroundTask {[weak self] (context) in
+            list.forEach { (status) in
+                let coreRentingOrderStatus = self?.createRecordForEntity(Entity.CorePurchaseOrderStatus.rawValue, inManagedObjectContext: context) as? CorePurchaseOrderStatus
+                coreRentingOrderStatus?.setAttributeFrom(status)
+                self?.saveContext(context)
+            }
+        }
+    }
+    
     func updateListStatus(_ list:[Status]) {
         clearDatabase(entity: .CoreStatus)
         self.persistentContainer.performBackgroundTask {[weak self]  (context) in
@@ -1041,6 +1054,16 @@ class _CoreDataManager {
     func getListRentingOrderStatus() -> [RentingOrderStatus] {
         var results:[RentingOrderStatus] = []
         let items = fetchRecordsForEntity(Entity.CoreRentingOrderStatus.rawValue, inManagedObjectContext: self.persistentContainer.viewContext) as? [CoreRentingOrderStatus]
+        items?.forEach({ (core) in
+            results.append(core.convertToStatusModel())
+        })
+        
+        return results
+    }
+    
+    func getListPurchaseOrderStatus() -> [PurchaseOrderStatus] {
+        var results:[PurchaseOrderStatus] = []
+        let items = fetchRecordsForEntity(Entity.CorePurchaseOrderStatus.rawValue, inManagedObjectContext: self.persistentContainer.viewContext) as? [CorePurchaseOrderStatus]
         items?.forEach({ (core) in
             results.append(core.convertToStatusModel())
         })

@@ -170,6 +170,11 @@
         <relationship name="to" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoreLocation" inverseName="to" inverseEntity="CoreLocation" syncable="YES"/>
         <relationship name="url" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="CoreUrlFile" inverseName="order" inverseEntity="CoreUrlFile" syncable="YES"/>
     </entity>
+    <entity name="CorePurchaseOrderStatus" representedClassName="CorePurchaseOrderStatus" syncable="YES" codeGenerationType="class">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="CoreReason" representedClassName="CoreReason" syncable="YES" codeGenerationType="class">
         <attribute name="catalogCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="catalogId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -385,5 +390,6 @@
         <element name="CoreUrlFile" positionX="-532.75" positionY="121.26171875" width="128" height="90"/>
         <element name="CoreUserInfo" positionX="-567" positionY="153" width="128" height="195"/>
         <element name="CoreWarehouse" positionX="-578" positionY="243" width="128" height="135"/>
+        <element name="CorePurchaseOrderStatus" positionX="-576" positionY="144" width="128" height="90"/>
     </elements>
 </model>

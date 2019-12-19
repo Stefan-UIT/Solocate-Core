@@ -172,8 +172,8 @@
                                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="ref-code"/>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LxQ-tK-0wb">
-                                                                            <rect key="frame" x="285.5" y="3" width="34.5" height="16"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="LxQ-tK-0wb">
+                                                                            <rect key="frame" x="315" y="3" width="5" height="16"/>
                                                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -200,7 +200,7 @@
                                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="customer-name"/>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zah-fK-NBG">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="252" text="-" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zah-fK-NBG">
                                                                             <rect key="frame" x="136" y="8.5" width="184" height="7"/>
                                                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                             <nil key="textColor"/>
@@ -230,8 +230,8 @@
                                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="details"/>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qUv-Vn-dbp">
-                                                                            <rect key="frame" x="285.5" y="3" width="34.5" height="16"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qUv-Vn-dbp">
+                                                                            <rect key="frame" x="315" y="3" width="5" height="16"/>
                                                                             <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
                                                                             <nil key="textColor"/>
                                                                             <nil key="highlightedColor"/>
@@ -299,17 +299,17 @@
                                         <color key="textColor" red="0.3411764706" green="0.45098039220000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGU-yb-G01">
-                                        <rect key="frame" x="30" y="49" width="106" height="16.5"/>
-                                        <string key="text">Here is your plan
-
-</string>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" text="Here is your plan" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGU-yb-G01">
+                                        <rect key="frame" x="30" y="49" width="315" height="16.5"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="16.5" id="7Xh-2M-n3a"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.3411764706" green="0.45098039220000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4ai-FZ-jVd">
-                                        <rect key="frame" x="140" y="57.5" width="0.0" height="0.0"/>
+                                        <rect key="frame" x="349" y="57.5" width="0.0" height="0.0"/>
                                         <fontDescription key="fontDescription" name="OpenSans-Regular" family="Open Sans" pointSize="14"/>
                                         <color key="textColor" red="0.3411764706" green="0.45098039220000002" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -317,6 +317,7 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
+                                    <constraint firstItem="wW3-Ci-VXt" firstAttribute="trailing" secondItem="XGU-yb-G01" secondAttribute="trailing" constant="30" id="4Hz-qG-bPX"/>
                                     <constraint firstItem="ea6-hh-xse" firstAttribute="leading" secondItem="mvY-Hm-vYy" secondAttribute="leading" constant="30" id="GLZ-Bd-nkw"/>
                                     <constraint firstItem="XGU-yb-G01" firstAttribute="top" secondItem="ea6-hh-xse" secondAttribute="bottom" constant="4" id="JvF-dC-JY6"/>
                                     <constraint firstItem="ea6-hh-xse" firstAttribute="top" secondItem="mvY-Hm-vYy" secondAttribute="top" constant="10" id="Lt5-Q6-nfs"/>
@@ -343,6 +344,7 @@
                         <viewLayoutGuide key="safeArea" id="kGg-b3-PfF"/>
                     </view>
                     <connections>
+                        <outlet property="dateLbl" destination="XGU-yb-G01" id="YC5-I3-zoi"/>
                         <outlet property="tbvContent" destination="JKA-J2-VhX" id="w2L-P0-MqV"/>
                     </connections>
                 </viewController>

@@ -97,6 +97,22 @@ extension BaseAPIService {
     }
     
     @discardableResult
+    func getListPurchaseOrderStatus(callback: @escaping APICallback<ResponseArrData<PurchaseOrderStatus>>) -> APIRequest {
+        return request(method: .GET,
+                       path: PATH_REQUEST_URL.GET_LIST_PURCHASE_ORDER_STATUS.URL,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func getListPurchaseOrderTypes(callback: @escaping APICallback<ResponseArrData<Order.OrderTypeModel>>) -> APIRequest {
+        return request(method: .GET,
+                       path: PATH_REQUEST_URL.GET_LIST_PURCHASE_ORDER_STATUS.URL,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
     func getDriversByCoordinator(callback: @escaping APICallback<CoordinatorDriverModel>) -> APIRequest {
         return request(method: .GET,
                        path: PATH_REQUEST_URL.GET_DRIVER_BY_COORDINATOR.URL,
