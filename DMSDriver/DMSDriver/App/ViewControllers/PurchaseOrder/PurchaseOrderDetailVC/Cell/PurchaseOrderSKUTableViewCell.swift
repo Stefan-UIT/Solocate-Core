@@ -34,7 +34,7 @@ class PurchaseOrderSKUTableViewCell: UITableViewCell {
     func configure(purchaseOrderSKU: PurchaseOrder.Detail) {
         skuLbl.text = Slash(purchaseOrderSKU.name)
         quantityLbl.text = IntSlash(purchaseOrderSKU.pivot?.qty)
-        uomLbl.text = IntSlash(purchaseOrderSKU.id)
+        uomLbl.text = Slash(purchaseOrderSKU.pivot?.uom?.name)
         batchIdLbl.text = Slash(purchaseOrderSKU.pivot?.batch_id)
         barcodeLbl.text = Slash(purchaseOrderSKU.pivot?.bcd)
         deliveringQtyLbl.text = IntSlash(purchaseOrderSKU.pivot?.deliveringQty)

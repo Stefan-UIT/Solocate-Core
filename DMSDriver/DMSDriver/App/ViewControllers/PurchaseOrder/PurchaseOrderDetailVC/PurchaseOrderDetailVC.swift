@@ -105,7 +105,7 @@ class PurchaseOrderDetailVC: BaseViewController {
         let purchasePUCloseTime = OrderDetailInforRow("close-time".localized, Slash(_order.from?.end_time))
         let purchasePUTimeRange = OrderDetailInforRow("time-range".localized, Slash(_order.from?.start_time?.rangeTime(_order.to?.end_time)))
         let purchasePUServiceTime = OrderDetailInforRow("service-time".localized, IntSlash(_order.from?.srvc_time))
-        let purchasePUActualTime = OrderDetailInforRow("actual-time".localized, "-")
+        let purchasePUActualTime = OrderDetailInforRow("actual-time".localized, Slash(_order.from?.actualTime))
         
         purchaseOrderPickup.append(purchasePUAddress)
         purchaseOrderPickup.append(fromAddressDetailRecord)
@@ -132,7 +132,7 @@ class PurchaseOrderDetailVC: BaseViewController {
         let purchaseDeliveryCloseTime = OrderDetailInforRow("close-time".localized, Slash(_order.to?.end_time))
         let purchaseDeliveryTimeRange = OrderDetailInforRow("time-range".localized, Slash(_order.from?.start_time?.rangeTime(_order.to?.end_time)))
         let purchaseDeliveryServiceTime = OrderDetailInforRow("service-time".localized, IntSlash(_order.to?.srvc_time))
-        let purchaseDeliveryActualTime = OrderDetailInforRow("actual-time".localized, "-")
+        let purchaseDeliveryActualTime = OrderDetailInforRow("actual-time".localized, Slash(_order.to?.actualTime))
         
         purchaseOrderDelivery.append(purchaseDeliveryAddress)
         purchaseOrderDelivery.append(toAddressDetailRecord)
