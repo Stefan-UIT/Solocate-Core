@@ -39,10 +39,10 @@ class PurchaseOrderListTableViewCell: UITableViewCell {
         if let dueDate = purchaseOrder.dueDate?.date {
             date = ShortDateFormater.string(from:dueDate)
         }
-        if let start = purchaseOrder.from?.start_time?.date {
+        if let start = purchaseOrder.dueDateFrom?.date {
             startDate = Hour24Formater.string(from:start)
         }
-        if let end = purchaseOrder.to?.end_time?.date {
+        if let end = purchaseOrder.dueDateTo?.date {
             endDate = Hour24Formater.string(from:end)
         }
 //        self.rentingOrder = rentingOrder
