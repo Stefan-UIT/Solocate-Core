@@ -79,10 +79,10 @@ extension String {
         var startTime = ""
         var endTime = ""
         if let start = self.date {
-            startTime = VNDateFormater.string(from:start)
+            startTime = ShortNormalDateFormater.string(from:start)
         }
         if let end = toTime?.date {
-            endTime = VNDateFormater.string(from:end)
+            endTime = ShortNormalDateFormater.string(from:end)
         }
         
         rangeTime = startTime + "\n" + endTime
