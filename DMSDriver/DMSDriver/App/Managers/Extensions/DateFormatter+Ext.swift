@@ -22,7 +22,7 @@ let HourFormater = DateFormatter.hourFormater
 let ServerDateFormater = DateFormatter.serverDateFormater
 let ShortDateFormater = DateFormatter.shortDate
 let NormalDateFormater = DateFormatter.normalDateFormater
-
+let VNDateFormater = DateFormatter.displayDateTimeVN
 
 //MARK: - DateFormatter Instance
 extension DateFormatter {

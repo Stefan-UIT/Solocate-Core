@@ -75,9 +75,17 @@ extension String {
     }
     
     func rangeTime(_ toTime:String?) -> String {
-        guard let _toTime = toTime else { return "-" }
         var rangeTime = ""
-        rangeTime = self + " - " + _toTime
+        var startTime = ""
+        var endTime = ""
+        if let start = self.date {
+            startTime = VNDateFormater.string(from:start)
+        }
+        if let end = toTime?.date {
+            endTime = VNDateFormater.string(from:end)
+        }
+        
+        rangeTime = startTime + "\n" + endTime
         return rangeTime
     }
 }
