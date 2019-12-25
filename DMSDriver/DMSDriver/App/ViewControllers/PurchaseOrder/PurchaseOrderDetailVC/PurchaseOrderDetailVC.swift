@@ -79,7 +79,7 @@ class PurchaseOrderDetailVC: BaseViewController {
         let purchaseDivision = OrderDetailInforRow("division".localized,Slash(_order.division?.name))
         let purchaseRefCode = OrderDetailInforRow("ref-code".localized, Slash(_order.referenceCode))
         let purchaseCustomer = OrderDetailInforRow("customer-name".localized, Slash(_order.customer?.userName))
-        let purchaseDueDateRange = OrderDetailInforRow("due-date-range".localized, Slash(_order.from?.start_time?.rangeTime(_order.to?.end_time)))
+        let purchaseDueDateRange = OrderDetailInforRow("due-date-range".localized, Slash(_order.dueDateFrom?.rangeTime(_order.dueDateTo)))
         let purchaseZone = OrderDetailInforRow("zone".localized, Slash(_order.zone?.name))
         
         purchaseOrderInfo.append(purchaseId)
@@ -94,10 +94,10 @@ class PurchaseOrderDetailVC: BaseViewController {
         // Cell PurchaseOrder Pickup
         var fromStartDate = "NA".localized
         var fromEndDate = "NA".localized
-        if let start = _order.to?.start_time?.date {
+        if let start = _order.from?.start_time?.date {
             fromStartDate = Hour24Formater.string(from:start)
         }
-        if let end = _order.to?.end_time?.date {
+        if let end = _order.from?.end_time?.date {
             fromEndDate = Hour24Formater.string(from:end)
         }
         let purchasePUAddress = OrderDetailInforRow("address".localized, Slash(_order.from?.address))
@@ -134,7 +134,7 @@ class PurchaseOrderDetailVC: BaseViewController {
         if let end = _order.to?.end_time?.date {
             toEndDate = Hour24Formater.string(from:end)
         }
-        let purchaseDeliveryAddress = OrderDetailInforRow("address".localized, Slash(_order.to?.address))
+        let purchaseDeliveryAddress = OrderDetailInforRow("Address".localized, Slash(_order.to?.address))
         let toFloor = Slash(_order.to?.floor)
         let toApartment = Slash(_order.to?.apartment)
         let toNumber = Slash(_order.to?.number)

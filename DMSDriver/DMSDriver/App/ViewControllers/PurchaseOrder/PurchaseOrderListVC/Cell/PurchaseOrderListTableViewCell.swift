@@ -37,11 +37,11 @@ class PurchaseOrderListTableViewCell: UITableViewCell {
         var endDate = "NA".localized
         var date = ""
         if let start = purchaseOrder.from?.start_time?.date {
-            startDate = HourFormater.string(from:start)
+            startDate = Hour24Formater.string(from:start)
+            date = ShortDateFormater.string(from:start)
         }
         if let end = purchaseOrder.to?.end_time?.date {
-            endDate = HourFormater.string(from:end)
-            date = ShortDateFormater.string(from: end)
+            endDate = Hour24Formater.string(from:end)
         }
 //        self.rentingOrder = rentingOrder
         orderIdLbl.text = "#"+"\(purchaseOrder.id)"

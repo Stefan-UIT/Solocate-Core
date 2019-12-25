@@ -71,6 +71,8 @@ class PurchaseOrder: Order {
     var zoneId:Int?
     var referenceCode:String?
     var dueDate:String?
+    var dueDateFrom: String?
+    var dueDateTo: String?
     
     override init() {
         super.init()
@@ -94,5 +96,7 @@ class PurchaseOrder: Order {
         division <- map["purchase_division"]
         customer <- map["purchase_customer"]
         details <- map["purchase_details"]
+        dueDateFrom <- map["due_dt_from"]
+        dueDateTo <- map["due_dt_to"]
     }
 }
