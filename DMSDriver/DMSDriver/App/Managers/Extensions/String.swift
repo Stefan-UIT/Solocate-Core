@@ -70,6 +70,10 @@ extension String {
         return NormalDateFormater.date(from: self)
     }
     
+    var time: Date? {
+        return NormalTimeFormater.date(from: self)
+    }
+    
     func replaceDoubleQuoteIfNeeded() -> String {
         return self.replacingOccurrences(of: "\"", with: "\\\"")
     }
