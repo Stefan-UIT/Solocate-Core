@@ -92,13 +92,13 @@ class PurchaseOrderDetailVC: BaseViewController {
         
         
         // Cell PurchaseOrder Pickup
-        var fromStartDate = "NA".localized
-        var fromEndDate = "NA".localized
-        if let start = _order.from?.start_time?.date {
-            fromStartDate = Hour24Formater.string(from:start)
+        var fromOpenTime = "NA".localized
+        var fromCloseTime = "NA".localized
+        if let start = _order.from?.openTime?.date {
+            fromOpenTime = Hour24Formater.string(from:start)
         }
-        if let end = _order.from?.end_time?.date {
-            fromEndDate = Hour24Formater.string(from:end)
+        if let end = _order.from?.closeTime?.date {
+            fromCloseTime = Hour24Formater.string(from:end)
         }
         let purchasePUAddress = OrderDetailInforRow("address".localized, Slash(_order.from?.address))
         let fromFloor = Slash(_order.from?.floor)
@@ -108,8 +108,8 @@ class PurchaseOrderDetailVC: BaseViewController {
         let fromAddressDetailRecord = OrderDetailInforRow("floor-apt-number".localized,fromAddressDetail,false)
         let purchasePUConsigneeName = OrderDetailInforRow("consignee-name".localized, Slash(_order.from?.ctt_name))
         let purchasePUConsigneePhone = OrderDetailInforRow("consignee-phone".localized, Slash(_order.from?.ctt_phone))
-        let purchasePUOpenTime = OrderDetailInforRow("open-time".localized, Slash(fromStartDate))
-        let purchasePUCloseTime = OrderDetailInforRow("close-time".localized, Slash(fromEndDate))
+        let purchasePUOpenTime = OrderDetailInforRow("open-time".localized, Slash(fromOpenTime))
+        let purchasePUCloseTime = OrderDetailInforRow("close-time".localized, Slash(fromCloseTime))
         let purchasePUTimeRange = OrderDetailInforRow("time-range".localized, Slash(_order.from?.start_time?.rangeTime(_order.from?.end_time)))
         let purchasePUServiceTime = OrderDetailInforRow("service-time".localized, IntSlash(_order.from?.srvc_time))
         let purchasePUActualTime = OrderDetailInforRow("actual-time".localized, Slash(_order.from?.actualTime))
@@ -126,13 +126,13 @@ class PurchaseOrderDetailVC: BaseViewController {
         
         
         // Cell PurchaseOrder Delivery
-        var toStartDate = "NA".localized
-        var toEndDate = "NA".localized
-        if let start = _order.to?.start_time?.date {
-            toStartDate = Hour24Formater.string(from:start)
+        var toOpenTime = "NA".localized
+        var toCloseTime = "NA".localized
+        if let start = _order.to?.openTime?.date {
+            toOpenTime = Hour24Formater.string(from:start)
         }
-        if let end = _order.to?.end_time?.date {
-            toEndDate = Hour24Formater.string(from:end)
+        if let end = _order.to?.closeTime?.date {
+            toCloseTime = Hour24Formater.string(from:end)
         }
         let purchaseDeliveryAddress = OrderDetailInforRow("Address".localized, Slash(_order.to?.address))
         let toFloor = Slash(_order.to?.floor)
@@ -142,8 +142,8 @@ class PurchaseOrderDetailVC: BaseViewController {
         let toAddressDetailRecord = OrderDetailInforRow("floor-apt-number".localized,toAddressDetail,false)
         let purchaseDeliveryConsigneeName = OrderDetailInforRow("consignee-name".localized, Slash(_order.to?.ctt_name))
         let purchaseDeliveryConsigneePhone = OrderDetailInforRow("consignee-phone".localized, Slash(_order.to?.ctt_phone))
-        let purchaseDeliveryOpenTime = OrderDetailInforRow("open-time".localized, Slash(toStartDate))
-        let purchaseDeliveryCloseTime = OrderDetailInforRow("close-time".localized, Slash(toEndDate))
+        let purchaseDeliveryOpenTime = OrderDetailInforRow("open-time".localized, Slash(toOpenTime))
+        let purchaseDeliveryCloseTime = OrderDetailInforRow("close-time".localized, Slash(toCloseTime))
         let purchaseDeliveryTimeRange = OrderDetailInforRow("time-range".localized, Slash(_order.to?.start_time?.rangeTime(_order.to?.end_time)))
         let purchaseDeliveryServiceTime = OrderDetailInforRow("service-time".localized, IntSlash(_order.to?.srvc_time))
         let purchaseDeliveryActualTime = OrderDetailInforRow("actual-time".localized, Slash(_order.to?.actualTime))
