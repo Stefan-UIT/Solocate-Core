@@ -24,7 +24,7 @@ struct SocketConstants {
     static let SERVER_DEV = "http://dms.gadot.dev.seldatdirect.com"
     static let SERVER_QC = "http://dms.gadot.qc.seldatdirect.com"
     static let SERVER_DEMO = "http://solocate.ashdodb.demo.seldatdirect.com"
-    static let SERVER_STAGING = "http://solocate.ashdodb.staging.seldatdirect.com"
+    static let SERVER_STAGING = "http://dms.gadot.staging.seldatdirect.com"
     static let SERVER_PROD = "http://dms-customization.seldatdirect.com"
     static let SOCKET_LOGIN = "request-login"
     static let SOCKET_LOGOUT = "request-logout"

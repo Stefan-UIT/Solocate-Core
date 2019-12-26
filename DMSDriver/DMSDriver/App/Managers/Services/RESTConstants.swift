@@ -128,11 +128,11 @@ class RESTConstants: NSObject {
         let type = SDBuildConf.currentEnvironment
         switch type {
         case .Development:
-            serverURL = "https://dms.gadot.dev.seldatdirect.com/"
+            serverURL = SocketConstants.SERVER_DEV + "/"
         case .QC:
-            serverURL = "https://dms.gadot.qc.seldatdirect.com/"
+            serverURL = SocketConstants.SERVER_QC + "/"
         case .Staging:
-            serverURL = ""
+            serverURL = SocketConstants.SERVER_STAGING + "/"
         case .Demo:
             serverURL = ""
         case .Live:
