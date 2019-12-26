@@ -94,10 +94,10 @@ class PurchaseOrderDetailVC: BaseViewController {
         // Cell PurchaseOrder Pickup
         var fromOpenTime = ""
         var fromCloseTime = ""
-        if let start = _order.from?.openTime?.date {
+        if let start = _order.from?.openTime?.time {
             fromOpenTime = Hour24Formater.string(from:start)
         }
-        if let end = _order.from?.closeTime?.date {
+        if let end = _order.from?.closeTime?.time {
             fromCloseTime = Hour24Formater.string(from:end)
         }
         let purchasePUAddress = OrderDetailInforRow("address".localized, Slash(_order.from?.address))
@@ -128,10 +128,10 @@ class PurchaseOrderDetailVC: BaseViewController {
         // Cell PurchaseOrder Delivery
         var toOpenTime = ""
         var toCloseTime = ""
-        if let start = _order.to?.openTime?.date {
+        if let start = _order.to?.openTime?.time {
             toOpenTime = Hour24Formater.string(from:start)
         }
-        if let end = _order.to?.closeTime?.date {
+        if let end = _order.to?.closeTime?.time {
             toCloseTime = Hour24Formater.string(from:end)
         }
         let purchaseDeliveryAddress = OrderDetailInforRow("Address".localized, Slash(_order.to?.address))
