@@ -33,24 +33,24 @@ class PurchaseOrderListTableViewCell: UITableViewCell {
     }
     
     func configureCell(_ purchaseOrder:PurchaseOrder) {
+        var startTime = "NA".localized
+        var endTime = "NA".localized
         var startDate = "NA".localized
         var endDate = "NA".localized
-        var date = ""
-        if let dueDate = purchaseOrder.dueDate?.date {
-            date = ShortDateFormater.string(from:dueDate)
-        }
         if let start = purchaseOrder.dueDateFrom?.date {
-            startDate = Hour24Formater.string(from:start)
+            startTime = Hour24Formater.string(from:start)
+            startDate = ShortDateFormater.string(from:start)
         }
         if let end = purchaseOrder.dueDateTo?.date {
-            endDate = Hour24Formater.string(from:end)
+            endTime = Hour24Formater.string(from:end)
+            endDate = ShortDateFormater.string(from:end)
         }
 //        self.rentingOrder = rentingOrder
         orderIdLbl.text = "#"+"\(purchaseOrder.id)"
         statusLbl.text = purchaseOrder.status?.name?.localized
         statusLbl.textColor = purchaseOrder.colorStatus
-        rangeDateLbl.text = startDate + " - " + endDate
-        dateLbl.text = date
+        rangeDateLbl.text = startTime + " - " + endTime
+        dateLbl.text = startDate + " - " + endDate
         
         refCodeLbl.text = Slash(purchaseOrder.referenceCode)
         customerNameLbl.text = Slash(purchaseOrder.customer?.userName)

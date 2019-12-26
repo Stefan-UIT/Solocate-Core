@@ -92,8 +92,8 @@ class PurchaseOrderDetailVC: BaseViewController {
         
         
         // Cell PurchaseOrder Pickup
-        var fromOpenTime = "NA".localized
-        var fromCloseTime = "NA".localized
+        var fromOpenTime = ""
+        var fromCloseTime = ""
         if let start = _order.from?.openTime?.date {
             fromOpenTime = Hour24Formater.string(from:start)
         }
@@ -126,8 +126,8 @@ class PurchaseOrderDetailVC: BaseViewController {
         
         
         // Cell PurchaseOrder Delivery
-        var toOpenTime = "NA".localized
-        var toCloseTime = "NA".localized
+        var toOpenTime = ""
+        var toCloseTime = ""
         if let start = _order.to?.openTime?.date {
             toOpenTime = Hour24Formater.string(from:start)
         }
