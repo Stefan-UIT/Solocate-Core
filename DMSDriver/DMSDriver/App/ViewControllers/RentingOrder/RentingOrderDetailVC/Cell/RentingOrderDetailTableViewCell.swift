@@ -77,7 +77,7 @@ class RentingOrderDetailTableViewCell: UITableViewCell {
         }
         
         truckTypeLabel.text = rentingOrderDetail.truckType?.name
-        truckLabel.text = "\(rentingOrderDetail.truck?.id ?? 0)"
+        truckLabel.text = IntSlash(rentingOrderDetail.truck?.id)
         skulistLabel.text = rentingOrderDetail.skulist
         driverLabel.text = rentingOrderDetail.driver?.userName
     }
@@ -85,13 +85,13 @@ class RentingOrderDetailTableViewCell: UITableViewCell {
     
     func tankerPlateNum(with index:Int, rentingOrderDetail: RentingOrder.RentingOrderDetail) -> String {
         var result = ""
-        result = (rentingOrderDetail.tanker?.tankers?[index].plateNum) ?? ""
+        result = Slash(rentingOrderDetail.tanker?.tankers?[index].plateNum)
         return result
     }
     
     func trailerTankerTypeName(with index:Int, rentingOrderDetail: RentingOrder.RentingOrderDetail) -> String {
         var result = ""
-        result = (rentingOrderDetail.tanker?.tankerType?[index].name) ?? ""
+        result = Slash(rentingOrderDetail.tanker?.tankerType?[index].name)
         return result
     }
 }
