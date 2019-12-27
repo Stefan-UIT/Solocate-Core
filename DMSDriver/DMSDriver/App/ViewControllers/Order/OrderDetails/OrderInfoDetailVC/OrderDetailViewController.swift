@@ -181,11 +181,22 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         
         guard let order = orderDetail else { return }
         
-        let startFromDate = Slash(order.from?.start_time)
-        let endFromDate = Slash(order.from?.end_time)
-        
-        let startToDate = Slash(order.to?.start_time)
-        let endToDate = Slash(order.to?.end_time)
+        var startFromDate = ""
+        if let start = order.from?.start_time?.date {
+            startFromDate = Slash(ShortNormalDateFormater.string(from: start))
+        }
+        var endFromDate = ""
+        if let end = order.from?.end_time?.date {
+            endFromDate = Slash(ShortNormalDateFormater.string(from: end))
+        }
+        var startToDate = ""
+        if let start = order.to?.start_time?.date {
+            startToDate = Slash(ShortNormalDateFormater.string(from: start))
+        }
+        var endToDate = ""
+        if let end = order.to?.end_time?.date {
+            endToDate = Slash(ShortNormalDateFormater.string(from: end))
+        }
         
         let customerItem = OrderDetailInforRow("customer-name".localized,
                                              Slash(order.customer?.userName))

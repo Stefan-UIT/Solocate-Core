@@ -62,11 +62,11 @@ class OrderItemTableViewCell: UITableViewCell {
         var endDate = "NA".localized
         var dateDate = "NA".localized
         if let start = order.from?.start_time?.date {
-            startDate = HourFormater.string(from:start)
+            startDate = Hour24Formater.string(from:start)
+            dateDate = DateFormatter.shortDate.string(from:start)
         }
         if let end = order.to?.end_time?.date {
-            endDate = HourFormater.string(from:end)
-            dateDate = DateFormatter.shortDate.string(from:end)
+            endDate = Hour24Formater.string(from:end)
         }
         
 //        lblNumber?.text = "\(order.seq)."

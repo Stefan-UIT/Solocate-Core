@@ -37,11 +37,11 @@ class RouteTableViewCell: UITableViewCell {
         var endDate = "NA".localized
         var stringDate = "NA".localized
         if let start = route.start_time.date {
-            startDate = HourFormater.string(from:start)
+            startDate = Hour24Formater.string(from:start)
+            stringDate = DateFormatter.shortDate.string(from: start)
         }
         if let end = route.end_time.date {
-            endDate = HourFormater.string(from:end)
-            stringDate = DateFormatter.shortDate.string(from: end)
+            endDate = Hour24Formater.string(from:end)
         }
 
         routeIDLabel.text = "#\(route.id)"
