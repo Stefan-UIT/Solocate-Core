@@ -33,7 +33,7 @@ extension DateFormatter {
     static let displayDateVietNames = DateFormatter(format: "dd/MM/yyyy");
     static let displayDateUS = DateFormatter(format: "MM/dd/yyyy");
     static let displayDateTimeUS = DateFormatter(format: "MM/dd/yyyy HH:mm");
-    static let hourFormater = DateFormatter(format: "H:mm a");
+    static let hourFormater = DateFormatter(format: "h:mm a");
     static let hour24Formater = DateFormatter(format: "HH:mm");
     static let displayDateTimeVN = DateFormatter(format: "dd/MM/yyyy HH:mm");
     static let shortDate = DateFormatter(format: "MMM dd");
