@@ -70,14 +70,26 @@ extension String {
         return NormalDateFormater.date(from: self)
     }
     
+    var time: Date? {
+        return NormalTimeFormater.date(from: self)
+    }
+    
     func replaceDoubleQuoteIfNeeded() -> String {
         return self.replacingOccurrences(of: "\"", with: "\\\"")
     }
     
     func rangeTime(_ toTime:String?) -> String {
-        guard let _toTime = toTime else { return "-" }
         var rangeTime = ""
-        rangeTime = self + " - " + _toTime
+        var startTime = ""
+        var endTime = ""
+        if let start = self.date {
+            startTime = ShortNormalDateFormater.string(from:start)
+        }
+        if let end = toTime?.date {
+            endTime = ShortNormalDateFormater.string(from:end)
+        }
+        
+        rangeTime = startTime + "\n" + endTime
         return rangeTime
     }
 }

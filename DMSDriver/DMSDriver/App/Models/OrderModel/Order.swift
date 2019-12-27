@@ -144,6 +144,8 @@ class Address: BaseModel {
     var apartment:String?
     var number:String?
     var actualTime:String?
+    var openTime:String?
+    var closeTime: String?
     
     override init() {
         super.init()
@@ -171,6 +173,8 @@ class Address: BaseModel {
         apartment <- map["apt"]
         number <- map["number"]
         actualTime <- map["act_time"]
+        openTime <- map["open_time"]
+        closeTime <- map["close_time"]
     }
     
     func toCoreLocation(context:NSManagedObjectContext) -> CoreLocation {

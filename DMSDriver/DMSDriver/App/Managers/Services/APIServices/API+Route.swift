@@ -61,7 +61,10 @@ extension BaseAPIService {
     @discardableResult
     func getPurchaseOrders(filterMode:FilterDataModel, page:Int = 1, callback: @escaping APICallback<ResponseDataModel<ResponseDataListModel<PurchaseOrder>>>) -> APIRequest {
         let startDate = DateFormatter.displayDateUS.string(from: filterMode.timeData?.startDate ?? Date())
-        let endDate = DateFormatter.displayDateUS.string(from: filterMode.timeData?.endDate ?? Date())
+        var endDate = ""
+        if filterMode.timeData?.endDate != nil {
+            endDate = DateFormatter.displayDateUS.string(from: filterMode.timeData?.endDate ?? Date())
+        }
         let status = filterMode.status
         let urlString = PATH_REQUEST_URL.GET_PURCHASE_ORDERS.URL
         var path = String(format: urlString,startDate,endDate)

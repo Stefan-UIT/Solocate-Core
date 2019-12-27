@@ -50,7 +50,7 @@ class PurchaseOrderListVC: BaseViewController {
         let filterTimeData = filterModel.timeData
         let dateTitle = filterTimeData?.title ?? ""
         var dateString = ""
-        if filterTimeData?.type == TimeItemType.TimeItemTypeToday {
+        if filterTimeData?.type == TimeItemType.TimeItemTypeToday || filterTimeData?.type == TimeItemType.TimeItemFromNow {
             dateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date())
         } else {
             dateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date()) + " - " + ShortDateFormater.string(from: filterTimeData?.endDate ?? Date())
@@ -66,7 +66,7 @@ class PurchaseOrderListVC: BaseViewController {
     private func initVar() {
         if timeData == nil {
             let dataManager = TimeData()
-            timeData = dataManager.getTimeDataItemType(type: .TimeItemTypeToday)
+            timeData = dataManager.getTimeDataItemType(type: .TimeItemFromNow)
             filterModel.timeData = timeData
             dataManager.setTimeDataItemDefault(item: filterModel.timeData!)
         }

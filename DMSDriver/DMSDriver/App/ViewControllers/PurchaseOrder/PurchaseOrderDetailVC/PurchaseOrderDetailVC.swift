@@ -79,7 +79,7 @@ class PurchaseOrderDetailVC: BaseViewController {
         let purchaseDivision = OrderDetailInforRow("division".localized,Slash(_order.division?.name))
         let purchaseRefCode = OrderDetailInforRow("ref-code".localized, Slash(_order.referenceCode))
         let purchaseCustomer = OrderDetailInforRow("customer-name".localized, Slash(_order.customer?.userName))
-        let purchaseDueDateRange = OrderDetailInforRow("due-date-range".localized, Slash(_order.from?.start_time?.rangeTime(_order.to?.end_time)))
+        let purchaseDueDateRange = OrderDetailInforRow("due-date-range".localized, Slash(_order.dueDateFrom?.rangeTime(_order.dueDateTo)))
         let purchaseZone = OrderDetailInforRow("zone".localized, Slash(_order.zone?.name))
         
         purchaseOrderInfo.append(purchaseId)
@@ -92,7 +92,14 @@ class PurchaseOrderDetailVC: BaseViewController {
         
         
         // Cell PurchaseOrder Pickup
-        
+        var fromOpenTime = ""
+        var fromCloseTime = ""
+        if let start = _order.from?.openTime?.time {
+            fromOpenTime = Hour24Formater.string(from:start)
+        }
+        if let end = _order.from?.closeTime?.time {
+            fromCloseTime = Hour24Formater.string(from:end)
+        }
         let purchasePUAddress = OrderDetailInforRow("address".localized, Slash(_order.from?.address))
         let fromFloor = Slash(_order.from?.floor)
         let fromApartment = Slash(_order.from?.apartment)
@@ -101,9 +108,9 @@ class PurchaseOrderDetailVC: BaseViewController {
         let fromAddressDetailRecord = OrderDetailInforRow("floor-apt-number".localized,fromAddressDetail,false)
         let purchasePUConsigneeName = OrderDetailInforRow("consignee-name".localized, Slash(_order.from?.ctt_name))
         let purchasePUConsigneePhone = OrderDetailInforRow("consignee-phone".localized, Slash(_order.from?.ctt_phone))
-        let purchasePUOpenTime = OrderDetailInforRow("open-time".localized, Slash(_order.from?.start_time))
-        let purchasePUCloseTime = OrderDetailInforRow("close-time".localized, Slash(_order.from?.end_time))
-        let purchasePUTimeRange = OrderDetailInforRow("time-range".localized, Slash(_order.from?.start_time?.rangeTime(_order.to?.end_time)))
+        let purchasePUOpenTime = OrderDetailInforRow("open-time".localized, Slash(fromOpenTime))
+        let purchasePUCloseTime = OrderDetailInforRow("close-time".localized, Slash(fromCloseTime))
+        let purchasePUTimeRange = OrderDetailInforRow("time-range".localized, Slash(_order.from?.start_time?.rangeTime(_order.from?.end_time)))
         let purchasePUServiceTime = OrderDetailInforRow("service-time".localized, IntSlash(_order.from?.srvc_time))
         let purchasePUActualTime = OrderDetailInforRow("actual-time".localized, Slash(_order.from?.actualTime))
         
@@ -119,8 +126,15 @@ class PurchaseOrderDetailVC: BaseViewController {
         
         
         // Cell PurchaseOrder Delivery
-        
-        let purchaseDeliveryAddress = OrderDetailInforRow("address".localized, Slash(_order.to?.address))
+        var toOpenTime = ""
+        var toCloseTime = ""
+        if let start = _order.to?.openTime?.time {
+            toOpenTime = Hour24Formater.string(from:start)
+        }
+        if let end = _order.to?.closeTime?.time {
+            toCloseTime = Hour24Formater.string(from:end)
+        }
+        let purchaseDeliveryAddress = OrderDetailInforRow("Address".localized, Slash(_order.to?.address))
         let toFloor = Slash(_order.to?.floor)
         let toApartment = Slash(_order.to?.apartment)
         let toNumber = Slash(_order.to?.number)
@@ -128,9 +142,9 @@ class PurchaseOrderDetailVC: BaseViewController {
         let toAddressDetailRecord = OrderDetailInforRow("floor-apt-number".localized,toAddressDetail,false)
         let purchaseDeliveryConsigneeName = OrderDetailInforRow("consignee-name".localized, Slash(_order.to?.ctt_name))
         let purchaseDeliveryConsigneePhone = OrderDetailInforRow("consignee-phone".localized, Slash(_order.to?.ctt_phone))
-        let purchaseDeliveryOpenTime = OrderDetailInforRow("open-time".localized, Slash(_order.to?.start_time))
-        let purchaseDeliveryCloseTime = OrderDetailInforRow("close-time".localized, Slash(_order.to?.end_time))
-        let purchaseDeliveryTimeRange = OrderDetailInforRow("time-range".localized, Slash(_order.from?.start_time?.rangeTime(_order.to?.end_time)))
+        let purchaseDeliveryOpenTime = OrderDetailInforRow("open-time".localized, Slash(toOpenTime))
+        let purchaseDeliveryCloseTime = OrderDetailInforRow("close-time".localized, Slash(toCloseTime))
+        let purchaseDeliveryTimeRange = OrderDetailInforRow("time-range".localized, Slash(_order.to?.start_time?.rangeTime(_order.to?.end_time)))
         let purchaseDeliveryServiceTime = OrderDetailInforRow("service-time".localized, IntSlash(_order.to?.srvc_time))
         let purchaseDeliveryActualTime = OrderDetailInforRow("actual-time".localized, Slash(_order.to?.actualTime))
         

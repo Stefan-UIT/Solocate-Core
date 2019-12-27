@@ -11,6 +11,7 @@ import ObjectMapper
 
 enum TimeItemType:Int {
     case TimeItemTypeAll = 0
+    case TimeItemFromNow
     case TimeItemTypeToday
     case TimeItemTypeYesterday
     case TimeItemTypeTomorrow
@@ -339,6 +340,7 @@ class TimeData: NSObject {//You should get it from [TimeData getTimeDataItemType
     
     class func arrItemTitle() -> [String] {
         return ["all-time".localized,
+                "from-now".localized,
                 "today".localized,
                 "yesterday".localized,
                 "tomorrow".localized,
@@ -400,6 +402,12 @@ class TimeData: NSObject {//You should get it from [TimeData getTimeDataItemType
                 start = arr.0;
                 end = arr.1;
                 subTitle = DateFormatter.displayDateUS.string(from: end ?? Date())
+                
+            case .TimeItemFromNow:
+                let arr = Date().getTodayStartEndDates()
+                start = arr.0;
+                end = nil;
+                subTitle = DateFormatter.displayDateUS.string(from: start ?? Date())
                 
             case .TimeItemTypeToday:
                 let arr = Date().getTodayStartEndDates()
