@@ -973,7 +973,7 @@ class _CoreDataManager {
             results.append(core.convertToRoute())
         })
         
-        return results.sorted(by: {$0.id < $1.id})
+        return results.sorted(by: {$0.id > $1.id})
     }
     
     func getRoute(_ routeID: String) -> Route {
@@ -995,7 +995,7 @@ class _CoreDataManager {
             results.append(core.convertToRentingOrder())
         })
         
-        return results.sorted(by: {$0.id < $1.id})
+        return results.sorted(by: {$0.id > $1.id})
     }
     
     func getRentingOrder(_ rentingId: Int) -> RentingOrder {
