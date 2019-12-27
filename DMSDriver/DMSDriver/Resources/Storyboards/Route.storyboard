@@ -1622,12 +1622,14 @@
                                                                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                                                                         <constraints>
                                                                                                             <constraint firstItem="5RB-Ol-V78" firstAttribute="top" secondItem="1Qx-sk-odv" secondAttribute="top" constant="3" id="4G8-53-t7M"/>
+                                                                                                            <constraint firstAttribute="bottom" secondItem="C4D-L6-JwU" secondAttribute="bottom" constant="3" id="INe-Bd-21Q"/>
                                                                                                             <constraint firstItem="C4D-L6-JwU" firstAttribute="leading" secondItem="5RB-Ol-V78" secondAttribute="trailing" constant="8" id="IfH-Mw-zIC"/>
                                                                                                             <constraint firstItem="5RB-Ol-V78" firstAttribute="leading" secondItem="1Qx-sk-odv" secondAttribute="leading" constant="15" id="aNn-Pd-n4y"/>
                                                                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="cHn-sY-bKW"/>
                                                                                                             <constraint firstItem="C4D-L6-JwU" firstAttribute="centerY" secondItem="1Qx-sk-odv" secondAttribute="centerY" id="eHZ-pH-zjs"/>
                                                                                                             <constraint firstAttribute="trailing" secondItem="C4D-L6-JwU" secondAttribute="trailing" constant="15" id="eON-zm-hsv"/>
                                                                                                             <constraint firstItem="5RB-Ol-V78" firstAttribute="centerY" secondItem="1Qx-sk-odv" secondAttribute="centerY" id="xFH-ku-I6x"/>
+                                                                                                            <constraint firstItem="C4D-L6-JwU" firstAttribute="top" secondItem="1Qx-sk-odv" secondAttribute="top" constant="3" id="ynP-pD-5Lp"/>
                                                                                                         </constraints>
                                                                                                     </view>
                                                                                                     <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="751" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="SFz-GB-EPG">
@@ -1654,7 +1656,9 @@
                                                                                                             <constraint firstItem="4px-yq-WPb" firstAttribute="centerY" secondItem="SFz-GB-EPG" secondAttribute="centerY" id="0k7-om-x0W"/>
                                                                                                             <constraint firstItem="vAq-cd-jd1" firstAttribute="leading" secondItem="4px-yq-WPb" secondAttribute="trailing" constant="8" id="E4J-Gi-8nu"/>
                                                                                                             <constraint firstAttribute="trailing" secondItem="vAq-cd-jd1" secondAttribute="trailing" constant="15" id="QR2-y2-Pjh"/>
+                                                                                                            <constraint firstItem="vAq-cd-jd1" firstAttribute="top" secondItem="SFz-GB-EPG" secondAttribute="top" constant="3" id="V4b-vz-vqO"/>
                                                                                                             <constraint firstItem="4px-yq-WPb" firstAttribute="leading" secondItem="SFz-GB-EPG" secondAttribute="leading" constant="15" id="aZJ-Pi-r0X"/>
+                                                                                                            <constraint firstAttribute="bottom" secondItem="vAq-cd-jd1" secondAttribute="bottom" constant="3" id="czH-6e-IWz"/>
                                                                                                             <constraint firstItem="vAq-cd-jd1" firstAttribute="centerY" secondItem="SFz-GB-EPG" secondAttribute="centerY" id="g9G-yp-a1y"/>
                                                                                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="25" id="tB2-hz-507"/>
                                                                                                         </constraints>
@@ -2497,6 +2501,7 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="0.0"/>
                                         <subviews>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t6b-mi-ChQ">
+                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_ramp_assign_driver" translatesAutoresizingMaskIntoConstraints="NO" id="rSQ-XI-G7t">
                                                         <rect key="frame" x="-12.5" y="6" width="25" height="25"/>
@@ -2515,6 +2520,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rmE-n7-Tkp">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                         <connections>
                                                             <action selector="onAssignDriverTouchUp:" destination="D22-kb-CLf" eventType="touchUpInside" id="ShH-0s-ftP"/>
                                                         </connections>
@@ -2541,6 +2547,7 @@
                                                 </userDefinedRuntimeAttributes>
                                             </view>
                                             <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2Hu-QJ-8Ak">
+                                                <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                 <subviews>
                                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ic_ramp_assign_truck" translatesAutoresizingMaskIntoConstraints="NO" id="csK-vY-G3N">
                                                         <rect key="frame" x="-12.5" y="6" width="25" height="25"/>
@@ -2559,6 +2566,7 @@
                                                         </userDefinedRuntimeAttributes>
                                                     </label>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gIT-fW-USL">
+                                                        <rect key="frame" x="0.0" y="0.0" width="1000" height="1000"/>
                                                         <connections>
                                                             <action selector="onAssignTruckTouchUp:" destination="D22-kb-CLf" eventType="touchUpInside" id="PiX-rn-p60"/>
                                                         </connections>
