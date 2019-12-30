@@ -129,6 +129,11 @@ extension AppDelegate {
         if SERVICES().socket.defaultSocket.status != .connected{
             SERVICES().socket.connect(token: E(Caches().user?.token))
         }
+        self.getListStatus()
+        self.getListRouteStatus()
+        self.getListRentingOrderStatus()
+        self.getListPurchaseOrderStatus()
+        self.getReasonList()
         
         DMSLocationManager.startUpdatingDriverLocationIfNeeded()
         ReachabilityManager.startMonitoring()
@@ -151,6 +156,67 @@ extension AppDelegate {
                 return
             }
         })
+    }
+    
+    // MARK: - Get Matter Data
+    func getListStatus()  {
+        SERVICES().API.getListStatus { (result) in
+            switch result{
+            case .object(let obj):
+                guard let list = obj.data else {return}
+                CoreDataManager.updateListStatus(list)
+            case .error(_ ):
+                break
+            }
+        }
+    }
+    
+    func getListRouteStatus() {
+        SERVICES().API.getListRouteStatus { (result) in
+            switch result{
+            case .object(let obj):
+                guard let list = obj.data?.data else {return}
+                CoreDataManager.updateRouteListStatus(list)
+            case .error(_ ):
+                break
+            }
+        }
+    }
+    
+    func getListRentingOrderStatus() {
+        SERVICES().API.getListRentingOrderStatus { (result) in
+            switch result {
+            case .object(let obj):
+                guard let list = obj.data else { return }
+                CoreDataManager.updateRentingOrderStatus(list)
+            case .error(_ ):
+                break
+            }
+        }
+    }
+    
+    func getListPurchaseOrderStatus() {
+        SERVICES().API.getListPurchaseOrderStatus { (result) in
+            switch result {
+            case .object(let obj):
+                guard let list = obj.data else { return }
+                CoreDataManager.updatePurchaseOrderStatus(list)
+            case .error(_ ):
+                break
+            }
+        }
+    }
+    
+    func getReasonList() {
+        SERVICES().API.getReasonList {(result) in
+            switch result{
+            case .object(let obj):
+                guard let list = obj.data else {return}
+                CoreDataManager.updateListReason(list) // Update reason list to local DB
+            case .error(_):
+                break
+            }
+        }
     }
 }
  
