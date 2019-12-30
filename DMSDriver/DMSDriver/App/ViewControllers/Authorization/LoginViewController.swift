@@ -230,13 +230,6 @@ fileprivate extension LoginViewController {
                 }
                 
                 App().loginSuccess()
-                self?.getListStatus()
-                self?.getListRouteStatus()
-                self?.getListRentingOrderStatus()
-                self?.getListPurchaseOrderStatus()
-                
-                // Fetch reasons save to local DB
-                self?.getReasonList()
                 
             case .error(let error):
                 self?.dismissLoadingIndicator()
@@ -258,65 +251,6 @@ fileprivate extension LoginViewController {
         }
     }
     
-    func getListStatus()  {
-        SERVICES().API.getListStatus { (result) in
-            switch result{
-            case .object(let obj):
-                guard let list = obj.data else {return}
-                CoreDataManager.updateListStatus(list)
-            case .error(_ ):
-                break
-            }
-        }
-    }
-    
-    func getListRouteStatus() {
-        SERVICES().API.getListRouteStatus { (result) in
-            switch result{
-            case .object(let obj):
-                guard let list = obj.data?.data else {return}
-                CoreDataManager.updateRouteListStatus(list)
-            case .error(_ ):
-                break
-            }
-        }
-    }
-    
-    func getListRentingOrderStatus() {
-        SERVICES().API.getListRentingOrderStatus { (result) in
-            switch result {
-            case .object(let obj):
-                guard let list = obj.data else { return }
-                CoreDataManager.updateRentingOrderStatus(list)
-            case .error(_ ):
-                break
-            }
-        }
-    }
-    
-    func getListPurchaseOrderStatus() {
-        SERVICES().API.getListPurchaseOrderStatus { (result) in
-            switch result {
-            case .object(let obj):
-                guard let list = obj.data else { return }
-                CoreDataManager.updatePurchaseOrderStatus(list)
-            case .error(_ ):
-                break
-            }
-        }
-    }
-    
-    func getReasonList() {
-        SERVICES().API.getReasonList {(result) in
-            switch result{
-            case .object(let obj):
-                guard let list = obj.data else {return}
-                CoreDataManager.updateListReason(list) // Update reason list to local DB
-            case .error(_):
-                break
-            }
-        }
-    }
 }
 
 extension LoginViewController: ForgetPasswordViewDelegate {
