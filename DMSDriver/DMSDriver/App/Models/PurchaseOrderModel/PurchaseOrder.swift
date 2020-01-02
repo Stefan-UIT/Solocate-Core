@@ -89,7 +89,7 @@ class PurchaseOrder: Order {
         referenceCode <- map["ref_code"]
         dueDate <- map["due_dt"]
         status <- map["purchase_status"]
-        orderType <- map["purchase_type"]
+        typeID <- map["purchase_type_id"]
         zone <- map["purchase_zone"]
         from <- map["purchase_from"]
         to <- map["purchase_to"]
