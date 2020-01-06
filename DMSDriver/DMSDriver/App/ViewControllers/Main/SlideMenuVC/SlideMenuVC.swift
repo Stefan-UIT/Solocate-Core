@@ -210,11 +210,19 @@ extension SlideMenuVC:UITableViewDelegate{
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
             
         case .LOGOUT:
-            DispatchQueue.main.async {
-                self.navigationController?.dismiss(animated: false, completion: {
-                    self.handleLogOut()
-                })
-            }
+            let alert = UIAlertController(title: "are-you-sure-you-want-to-logout".localized, message: "", preferredStyle: UIAlertController.Style.alert)
+            
+            alert.addAction(UIAlertAction(title: "cancel".localized, style: UIAlertAction.Style.default, handler: nil))
+            
+            alert.addAction(UIAlertAction(title: "ok".localized, style: UIAlertAction.Style.default, handler: { action in
+                DispatchQueue.main.async {
+                    self.navigationController?.dismiss(animated: false, completion: {
+                        self.handleLogOut()
+                    })
+                }
+            }))
+            self.present(alert, animated: true, completion: nil)
+            
         case .PURCHASEORDER:
             let vc:PurchaseOrderListVC = .loadSB(SB: .PurchaseOrder)
             
