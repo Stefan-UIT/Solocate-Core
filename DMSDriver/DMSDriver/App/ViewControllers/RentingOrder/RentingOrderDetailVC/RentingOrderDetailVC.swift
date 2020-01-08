@@ -334,7 +334,9 @@ extension RentingOrderDetailVC {
                 self?.fetchData()
                 break
             case .error(let error):
-                self?.showAlertView(error.getMessage())
+                self?.showAlertView(error.getMessage(), completionHandler: { (action) in
+                    self?.fetchData(showLoading: true)
+                })
             }
         }
     }

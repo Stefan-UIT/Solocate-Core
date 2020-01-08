@@ -375,7 +375,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                 self?.orderDetail?.cod_rcvd = "\(value)"
                 self?.handleFinishAction()
             case .error(let error):
-                self?.showAlertView(error.description)
+                self?.showAlertView(error.getMessage(), completionHandler: { (action) in
+                    self?.fetchData(showLoading: true)
+                })
             }
         }
     }
@@ -1302,7 +1304,9 @@ extension OrderDetailViewController{
                 let oldStatus = CoreDataManager.getStatus(withCode: oldStatusCode)
                 order.status = oldStatus
                 self?.updateButtonStatus()
-                self?.showAlertView(error.getMessage())
+                self?.showAlertView(error.getMessage(), completionHandler: { (action) in
+                    self?.fetchData(showLoading: true)
+                })
             }
         }
     }
@@ -1323,7 +1327,9 @@ extension OrderDetailViewController{
                 self?.fetchData()
                 
             case .error(let error):
-                self?.showAlertView(error.getMessage())
+                self?.showAlertView(error.getMessage(), completionHandler: { (action) in
+                    self?.fetchData(showLoading: true)
+                })
                 break
             }
         }
@@ -1341,7 +1347,9 @@ extension OrderDetailViewController{
                 self?.fetchData()
                 
             case .error(let error):
-                self?.showAlertView(error.getMessage())
+                self?.showAlertView(error.getMessage(), completionHandler: { (action) in
+                    self?.fetchData(showLoading: true)
+                })
             }
         }
     }
@@ -1367,7 +1375,9 @@ extension OrderDetailViewController{
                 })
                 
             case .error(let error):
-                self?.showAlertView(error.getMessage())
+                self?.showAlertView(error.getMessage(), completionHandler: { (action) in
+                    self?.fetchData(showLoading: true)
+                })
             }
         }
     }
@@ -1382,7 +1392,9 @@ extension OrderDetailViewController{
                     self?.isHaveMoreLegs = object.data
                     self?.handleShowingButtonStatus()
                 case .error(let error):
-                    self?.showAlertView(error.getMessage())
+                    self?.showAlertView(error.getMessage(), completionHandler: { (action) in
+                        self?.fetchData(showLoading: true)
+                    })
                 }
             }
         }
@@ -1399,7 +1411,9 @@ extension OrderDetailViewController{
                     self?.popViewController()
                 })
             case .error(let error):
-                self?.showAlertView(error.getMessage())
+                self?.showAlertView(error.getMessage(), completionHandler: { (action) in
+                    self?.fetchData(showLoading: true)
+                })
             }
         }
     }

@@ -91,7 +91,9 @@ extension NoteManagementViewController {
                 return
                 
             case .error(let error):
-                self?.showAlertView(error.getMessage())
+                self?.showAlertView(error.getMessage(), completionHandler: { (action) in
+                    self?.fetchOrderData()
+                })
             }
         }
     }
@@ -110,7 +112,9 @@ extension NoteManagementViewController {
                 return
                 
             case .error(let error):
-                self?.showAlertView(error.getMessage())
+                self?.showAlertView(error.getMessage(), completionHandler: { (action) in
+                    self?.fetchRouteData()
+                })
             }
         }
     }
