@@ -81,7 +81,7 @@ class SlideMenuVC: BaseViewController {
     fileprivate let rowIndentifierCell = "SlideMenuRowCell"
     private let CELL_HEIGHT:CGFloat = 100
 
-    var currentItem:MenuItemType = .DASHBOARD
+    var currentItem:MenuItemType = .ROUTES
     var returnedItemTimeDataManager = TimeData()
     var purchaseOrderTimeDataManager = TimeData()
     var taskTimeDataManager = TimeData()
