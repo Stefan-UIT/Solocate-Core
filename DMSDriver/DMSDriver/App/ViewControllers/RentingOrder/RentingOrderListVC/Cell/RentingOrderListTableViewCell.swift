@@ -35,13 +35,13 @@ class RentingOrderListTableViewCell: UITableViewCell {
     func configureCellWithRentingOrder(_ rentingOrder:RentingOrder) {
         var startTime = "NA".localized
         var endTime = "NA".localized
-        var dueDate = "NA".localized
+//        var dueDate = "NA".localized
         if let start = rentingOrder.startDate?.date {
-            startTime = HourFormater.string(from:start)
+            startTime = OnlyDateFormater.string(from:start)
         }
         if let end = rentingOrder.endDate?.date {
-            endTime = HourFormater.string(from:end)
-            dueDate = ShortDateFormater.string(from: end)
+            endTime = OnlyDateFormater.string(from:end)
+//            dueDate = ShortDateFormater.string(from: end)
         }
         self.rentingOrder = rentingOrder
         orderIdLbl.text = "#"+"\(rentingOrder.id)"
@@ -49,9 +49,9 @@ class RentingOrderListTableViewCell: UITableViewCell {
         statusLbl.textColor = rentingOrder.rentingOrderStatusColor
         startDateLbl.text = startTime + " - "
         endDateLbl.text = endTime
-        dateLbl.text = dueDate
-        refCodeLbl.text = "\(rentingOrder.referenceCode)"
-        customerLbl.text = rentingOrder.rentingOrderCustomer?.userName ?? ""
-        detailsLbl.text = "\(rentingOrder.rentingOrderDetails?.count ?? 0)"
+//        dateLbl.text = dueDate
+        refCodeLbl.text = Slash(rentingOrder.referenceCode)
+        customerLbl.text = Slash(rentingOrder.rentingOrderCustomer?.userName)
+        detailsLbl.text = IntSlash(rentingOrder.rentingOrderDetails?.count)
     }
 }

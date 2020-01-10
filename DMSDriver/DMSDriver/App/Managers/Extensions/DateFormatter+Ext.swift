@@ -42,6 +42,6 @@ extension DateFormatter {
     static let normalDateFormater = DateFormatter(format: "yyyy/MM/dd HH:mm:ss");
     static let shortNormalDateFormater = DateFormatter(format: "yyyy/MM/dd HH:mm");
     static let normalTimeFormater = DateFormatter(format: "HH:mm:ss");
-    static let onlyDateFormater = DateFormatter(format: "yyy/MM/dd");
+    static let onlyDateFormater = DateFormatter(format: "MMM/dd/yyyy");
     
 }
