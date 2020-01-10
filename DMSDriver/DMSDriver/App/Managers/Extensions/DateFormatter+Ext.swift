@@ -24,6 +24,7 @@ let ShortDateFormater = DateFormatter.shortDate
 let NormalDateFormater = DateFormatter.normalDateFormater
 let ShortNormalDateFormater = DateFormatter.shortNormalDateFormater
 let NormalTimeFormater = DateFormatter.normalTimeFormater
+let OnlyDateFormater = DateFormatter.onlyDateFormater
 
 //MARK: - DateFormatter Instance
 extension DateFormatter {
@@ -40,6 +41,7 @@ extension DateFormatter {
     static let serverDateFormater = DateFormatter(format: "yyyy/MM/dd HH:mm:ss");
     static let normalDateFormater = DateFormatter(format: "yyyy/MM/dd HH:mm:ss");
     static let shortNormalDateFormater = DateFormatter(format: "yyyy/MM/dd HH:mm");
-    static let normalTimeFormater = DateFormatter(format: "HH:mm:ss")
+    static let normalTimeFormater = DateFormatter(format: "HH:mm:ss");
+    static let onlyDateFormater = DateFormatter(format: "yyy/MM/dd");
     
 }

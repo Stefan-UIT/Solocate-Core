@@ -78,15 +78,15 @@ extension String {
         return self.replacingOccurrences(of: "\"", with: "\\\"")
     }
     
-    func rangeTime(_ toTime:String?) -> String {
+    func rangeTime(_ toTime:String?,_ isOnlyDate: Bool = false) -> String {
         var rangeTime = ""
         var startTime = ""
         var endTime = ""
         if let start = self.date {
-            startTime = ShortNormalDateFormater.string(from:start)
+            startTime = isOnlyDate ? OnlyDateFormater.string(from: start) : ShortNormalDateFormater.string(from:start)
         }
         if let end = toTime?.date {
-            endTime = ShortNormalDateFormater.string(from:end)
+            endTime = isOnlyDate ? OnlyDateFormater.string(from: end) : ShortNormalDateFormater.string(from:end)
         }
         
         rangeTime = startTime + "\n" + endTime

@@ -91,7 +91,7 @@ class RentingOrderDetailVC: BaseViewController {
         let rentingOrderID = RentingOrderDetailInforRow("renting-order-id".localized,"\(_rentingOrder.id)")
         let rentingRefCode = RentingOrderDetailInforRow("ref-code".localized,"\(_rentingOrder.referenceCode)")
         let rentingCustomer = RentingOrderDetailInforRow("customer-name".localized, Slash(_rentingOrder.rentingOrderCustomer?.userName))
-        let rentingDateRange = RentingOrderDetailInforRow("date-range".localized,Slash(_rentingOrder.startDate?.rangeTime(_rentingOrder.endDate)))
+        let rentingDateRange = RentingOrderDetailInforRow("date-range".localized,Slash(_rentingOrder.startDate?.rangeTime(_rentingOrder.endDate, true)))
         
         rentingOrderInfo.append(rentingOrderID)
         rentingOrderInfo.append(rentingRefCode)
