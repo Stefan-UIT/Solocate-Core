@@ -77,7 +77,7 @@ class RentingOrderDetailTableViewCell: UITableViewCell {
         }
         
         truckTypeLabel.text = rentingOrderDetail.truckType?.name
-        truckLabel.text = IntSlash(rentingOrderDetail.truck?.id)
+        truckLabel.text = Slash(rentingOrderDetail.truck?.plateNum)
         skulistLabel.text = rentingOrderDetail.skulist
         driverLabel.text = rentingOrderDetail.driver?.userName
     }
