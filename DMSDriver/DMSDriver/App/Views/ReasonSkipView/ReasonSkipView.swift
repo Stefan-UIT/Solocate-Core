@@ -35,6 +35,7 @@ class ReasonSkipView: BaseView {
       if isCancelledReason {
          getReasonList()
       } else {
+         titleLabel.text = "please-select-a-reason-for-partial-delivered".localized
          getReturnReasonList()
       }
    }
