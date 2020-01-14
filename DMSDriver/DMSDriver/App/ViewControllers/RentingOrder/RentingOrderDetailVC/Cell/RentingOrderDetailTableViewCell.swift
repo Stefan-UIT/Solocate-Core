@@ -8,6 +8,15 @@
 
 import UIKit
 
+enum UpdateStatusButton {
+    case START_RENTING_ORDER
+    case FINISH_RENTING_ORDER
+}
+
+protocol RentingOrderDetailTableViewCellDelegate: NSObjectProtocol {
+    func updateStatus(itemId:Int, nextStatus: Int)
+    func cancelOrder(itemId:Int, nextStatus: Int)
+}
 
 class RentingOrderDetailTableViewCell: UITableViewCell {
     
@@ -27,6 +36,16 @@ class RentingOrderDetailTableViewCell: UITableViewCell {
     @IBOutlet weak var trailerTankerType2NameLabel: UILabel!
     @IBOutlet weak var tanker2NameLabel: UILabel!
     var rentingOrderDetail:RentingOrder.RentingOrderDetail!
+    
+    @IBOutlet weak var detailStatusLabel: UILabel!
+    @IBOutlet weak var vActionView: UIView!
+    @IBOutlet weak var cancelButton: UIButton!
+    @IBOutlet weak var positiveButton: UIButton!
+    @IBOutlet var vActionViewHeightConstant:NSLayoutConstraint!
+    var typeUpdateBtn: UpdateStatusButton = .START_RENTING_ORDER
+    weak var delegate: RentingOrderDetailTableViewCellDelegate?
+    
+    let V_ACTION_VIEW_HEIGHT_CONSTRAINT:CGFloat = 50
     
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -80,6 +99,10 @@ class RentingOrderDetailTableViewCell: UITableViewCell {
         truckLabel.text = Slash(rentingOrderDetail.truck?.plateNum)
         skulistLabel.text = rentingOrderDetail.skulist
         driverLabel.text = rentingOrderDetail.driver?.userName
+        guard let _status = rentingOrderDetail.status else { return }
+        detailStatusLabel.text = _status.name
+        detailStatusLabel.textColor = RentingOrderDetailStatusCode(rawValue: _status.code!)?.color
+        updateStatusButtonView()
     }
     
     
@@ -94,4 +117,54 @@ class RentingOrderDetailTableViewCell: UITableViewCell {
         result = Slash(rentingOrderDetail.tanker?.tankerType?[index].name)
         return result
     }
+    
+    func isAssignedToDriver(_ driverId: Int?) -> Bool {
+        if Caches().user?.userInfo?.id == driverId {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func updateStatusButtonView() {
+        cancelButton.setTitle("Cancel".localized.uppercased(), for: .normal)
+        cancelButton.backgroundColor = AppColor.redColor
+        if rentingOrderDetail?.status?.id == RentingOrderDetailStatusCode.InProgress.code {
+            positiveButton.setTitle("Finish".localized.uppercased(), for: .normal)
+            positiveButton.backgroundColor = AppColor.greenColor
+            typeUpdateBtn = .FINISH_RENTING_ORDER
+            self.handleShowingUpdateStatusView(true)
+        } else if rentingOrderDetail?.status?.id == RentingOrderDetailStatusCode.NewStatus.code {
+            positiveButton.setTitle("Start".localized.uppercased(), for: .normal)
+            positiveButton.backgroundColor = AppColor.greenColor
+            self.handleShowingUpdateStatusView(true)
+            typeUpdateBtn = .START_RENTING_ORDER
+        }
+
+        if isAssignedToDriver(rentingOrderDetail.driverId) {
+            self.handleShowingUpdateStatusView(true)
+        } else {
+            self.handleShowingUpdateStatusView(false)
+        }
+    }
+    
+    func handleShowingUpdateStatusView(_ isShow: Bool) {
+        vActionView.isHidden = !isShow
+        vActionViewHeightConstant.constant = isShow ? V_ACTION_VIEW_HEIGHT_CONSTRAINT : 0
+    }
+    
+    // MARK: - Action
+    @IBAction func didTapUpdateStatusButton(_ sender: Any) {
+        switch typeUpdateBtn {
+        case .START_RENTING_ORDER:
+            self.delegate?.updateStatus(itemId: rentingOrderDetail.id, nextStatus: RentingOrderDetailStatusCode.InProgress.code)
+        case .FINISH_RENTING_ORDER:
+            self.delegate?.updateStatus(itemId: rentingOrderDetail.id, nextStatus: RentingOrderDetailStatusCode.Finished.code)
+        }
+    }
+    
+    @IBAction func didTapCancelButton(_ sender: Any) {
+        self.delegate?.cancelOrder(itemId: rentingOrderDetail.id, nextStatus: RentingOrderDetailStatusCode.Cancelled.code)
+    }
+    
 }

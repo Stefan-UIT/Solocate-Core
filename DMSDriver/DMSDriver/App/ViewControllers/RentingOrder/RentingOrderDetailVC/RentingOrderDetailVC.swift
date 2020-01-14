@@ -21,11 +21,6 @@ class RentingOrderDetailVC: BaseViewController {
         }()
     }
     
-    enum UpdateStatusButton {
-        case START_RENTING_ORDER
-        case FINISH_RENTING_ORDER
-    }
-    
     @IBOutlet weak var tbvContent: UITableView?
     @IBOutlet weak var statusButtonView: UIView!
     @IBOutlet weak var updateStatusButton: UIButton!
@@ -44,12 +39,9 @@ class RentingOrderDetailVC: BaseViewController {
     fileprivate var shouldFilterOrderItemsList = true
     
     fileprivate let cellHeight: CGFloat = 65.0
-    fileprivate let orderItemsPaddingTop: CGFloat = 40.0
-    fileprivate let orderItemCellHeight: CGFloat = 130.0
     
     var dateStringFilter = Date().toString()
     var rentingOrder: RentingOrder?
-    var typeUpdateBtn: UpdateStatusButton = .START_RENTING_ORDER
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,10 +72,6 @@ class RentingOrderDetailVC: BaseViewController {
         if rentingOrder != nil {
             _rentingOrder = rentingOrder!
         }
-//        updateStatusButton?.isHidden = false
-//        taskInforStatus.removeAll()
-//        taskInforRows.removeAll()
-//        taskInstruction.removeAll()
         rentingOrderInfo.removeAll()
         rentingSKUS.removeAll()
         
@@ -102,7 +90,6 @@ class RentingOrderDetailVC: BaseViewController {
     
     override func updateUI()  {
         super.updateUI()
-        self.updateStatusButtonView()
         tbvContent?.reloadData()
     }
     
@@ -116,54 +103,48 @@ class RentingOrderDetailVC: BaseViewController {
         tbvContent?.rowHeight = UITableView.automaticDimension
     }
     
-    func updateStatusButtonView() {
-        if rentingOrder?.rentingOrderStatus?.code == RentingOrderStatusCode.Finished.rawValue || rentingOrder?.rentingOrderStatus?.code == RentingOrderStatusCode.Cancelled.rawValue {
-            self.handleShowingUpdateStatusView(false)
-        } else {
-            cancelStatusButton.setTitle("Cancel".localized.uppercased(), for: .normal)
-            cancelStatusButton.backgroundColor = AppColor.redColor
-            self.handleShowingUpdateStatusView(true)
-            updateStatusButton.isHidden = true
-        }
-        if rentingOrder?.rentingOrderStatus?.code == RentingOrderStatusCode.InProgress.rawValue {
-            updateStatusButton.setTitle("Finish".localized.uppercased(), for: .normal)
-            updateStatusButton.backgroundColor = AppColor.greenColor
-            typeUpdateBtn = .FINISH_RENTING_ORDER
-            self.handleShowingUpdateStatusView(true)
-        } else if rentingOrder?.rentingOrderStatus?.code == RentingOrderStatusCode.FullyAssigned.rawValue {
-            updateStatusButton.setTitle("Start".localized.uppercased(), for: .normal)
-            updateStatusButton.backgroundColor = AppColor.greenColor
-            self.handleShowingUpdateStatusView(true)
-            typeUpdateBtn = .START_RENTING_ORDER
-        }
-    }
-    
-    func handleShowingUpdateStatusView(_ isShow: Bool) {
-        tableViewBottomConstraint.constant = isShow ? 50 : 0
-        statusButtonView.isHidden = !isShow
-        updateStatusButton.isHidden = !isShow
-    }
-    
     // MARK: - Action
-    @IBAction func didTapUpdateStatusButton(_ sender: Any) {
-        switch typeUpdateBtn {
-        case .START_RENTING_ORDER:
-            self.updateRentingOrderStatus(RentingOrderStatusCode.InProgress.code, rentingOrder: rentingOrder!)
-        case .FINISH_RENTING_ORDER:
-            self.updateRentingOrderStatus(RentingOrderStatusCode.Finished.code, rentingOrder: rentingOrder!)
-        }
-    }
-    
-    @IBAction func didTapCancelButton(_ sender: Any) {
-        self.updateRentingOrderStatus(RentingOrderStatusCode.Cancelled.code, rentingOrder: rentingOrder!)
-    }
-    
-    func handleFisnishedAction() {
-        // Finished Order and show NotePopup
-    }
-    
-    func handleCancelAction() {
+    func handleFisnishedAction(itemId:Int, nextStatus: Int) {
+        let alert = UIAlertController(title: "you-are-going-to-finish-this-detail-are-you-sure".localized, message: "", preferredStyle: UIAlertController.Style.alert)
         
+        alert.addAction(UIAlertAction(title: "cancel".localized, style: UIAlertAction.Style.default, handler: nil))
+        
+        alert.addAction(UIAlertAction(title: "ok".localized, style: UIAlertAction.Style.default, handler: { action in
+            // Call API
+            self.updateRentingOrderStatus(nextStatus: nextStatus, rentingOrderDetailId: itemId, messageCancel: nil)
+        }))
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    func handleCancelAction(itemId:Int, nextStatus: Int) {
+        let alert = UIAlertController(title: "please-input-the-reason".localized, message: "", preferredStyle: .alert)
+        let submitAction = UIAlertAction(title: "submit".localized, style: .default, handler: { (action) -> Void in
+            // Get TextFields text
+            let numberOfRequestTxt = alert.textFields![0]
+            let reason = numberOfRequestTxt.text
+            // Call API
+            self.updateRentingOrderStatus(nextStatus: nextStatus, rentingOrderDetailId: itemId, messageCancel: reason)
+        })
+        submitAction.isEnabled = false
+        // Cancel button
+        let cancel = UIAlertAction(title: "Cancel", style: .destructive, handler: { (action) -> Void in })
+        
+        // textField
+        alert.addTextField { (textField: UITextField) in
+            textField.placeholder = ""
+            textField.keyboardType = .asciiCapableNumberPad
+            NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: textField, queue: OperationQueue.main, using:
+                {_ in
+                    let textCount = textField.text?.trimmingCharacters(in: .whitespacesAndNewlines).count ?? 0
+                    let textIsNotEmpty = textCount > 0
+                    submitAction.isEnabled = textIsNotEmpty
+            })
+        }
+        
+        // Add actions
+        alert.addAction(cancel)
+        alert.addAction(submitAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
 }
@@ -238,6 +219,8 @@ extension RentingOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
         case .SKUS:
             let cell = tbvContent?.dequeueReusableCell(withIdentifier: "RentingOrderDetailTableViewCell", for: indexPath) as! RentingOrderDetailTableViewCell
             guard let rentingOrderDetail = rentingOrder?.rentingOrderDetails?[indexPath.row] else {return cell}
+            cell.delegate = self
+            cell.rentingOrderDetail = rentingOrderDetail
             cell.configureCellWithRentingOrderDetail(rentingOrderDetail)
             return cell
         }
@@ -253,38 +236,6 @@ extension RentingOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
         
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        /*
-//         let orderSection:OrderDetailSection = OrderDetailSection(rawValue: indexPath.section)!
-//         let row = indexPath.row
-//         switch orderSection {
-//         case .sectionInformation:
-//
-//         if row == informationRows.count - 2 ||
-//         row == informationRows.count - 3 ||
-//         row == informationRows.count - 4{// Phone row
-//         let item = informationRows[row]
-//
-//         if !isEmpty(item.content){
-//         let urlString = "tel://\(item.content)"
-//         if let url = URL(string: urlString) {
-//         UIApplication.shared.open(url, options: [:], completionHandler: nil)
-//         }
-//         }
-//
-//         }else if (row == informationRows.count - 1){ //Address row
-//         let vc:OrderDetailMapViewController = .loadSB(SB: .Order)
-//         if let _task = task {
-//         vc.orderLocation = _item.location
-//         }
-//         self.navigationController?.pushViewController( vc, animated: true)
-//         }
-//
-//         default:
-//         break
-//         }
-//         */
-//    }
 }
 
 //MARK: API
@@ -325,8 +276,8 @@ extension RentingOrderDetailVC {
         }
     }
     
-    func updateRentingOrderStatus(_ rentingOrderStatus: Int, rentingOrder: RentingOrder){
-        SERVICES().API.updateRentingOrderStatus(rentingOrderStatus, rentingOrder: rentingOrder) {[weak self] (result) in
+    func updateRentingOrderStatus(nextStatus: Int, rentingOrderDetailId: Int, messageCancel: String?){
+        SERVICES().API.updateRentingOrderStatus(nextStatus: nextStatus, rentingOrderDetailId: rentingOrderDetailId, message: messageCancel) {[weak self] (result) in
             self?.dismissLoadingIndicator()
             switch result{
             case .object(_):
@@ -340,5 +291,14 @@ extension RentingOrderDetailVC {
             }
         }
     }
+}
+
+extension RentingOrderDetailVC: RentingOrderDetailTableViewCellDelegate {
+    func cancelOrder(itemId: Int, nextStatus: Int) {
+        self.handleCancelAction(itemId: itemId, nextStatus: nextStatus)
+    }
     
+    func updateStatus(itemId: Int, nextStatus: Int) {
+        self.handleFisnishedAction(itemId: itemId, nextStatus: nextStatus)
+    }
 }
