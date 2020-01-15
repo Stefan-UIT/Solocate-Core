@@ -637,6 +637,8 @@
 		760C0A99233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C0A97233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift */; };
 		760C46FD233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C46FC233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift */; };
 		760C46FE233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760C46FC233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift */; };
+		761271CD23CEB86300CD1EC7 /* CoreRentingOrderDetailStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761271CC23CEB86300CD1EC7 /* CoreRentingOrderDetailStatus.swift */; };
+		761271CE23CEB86300CD1EC7 /* CoreRentingOrderDetailStatus.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761271CC23CEB86300CD1EC7 /* CoreRentingOrderDetailStatus.swift */; };
 		761ED78823A7698C005826B6 /* PurchaseOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 761ED78723A7698C005826B6 /* PurchaseOrder.storyboard */; };
 		761ED78923A7698C005826B6 /* PurchaseOrder.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 761ED78723A7698C005826B6 /* PurchaseOrder.storyboard */; };
 		761ED79123A76AD6005826B6 /* PurchaseOrderListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 761ED79023A76AD6005826B6 /* PurchaseOrderListVC.swift */; };
@@ -1204,6 +1206,7 @@
 		760B209C23068F7500E96A12 /* CoreRouteStatus+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreRouteStatus+Ext.swift"; sourceTree = "<group>"; };
 		760C0A97233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderDetailTableViewCell.swift; sourceTree = "<group>"; };
 		760C46FC233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadOrderDetailSKUTableViewCell.swift; sourceTree = "<group>"; };
+		761271CC23CEB86300CD1EC7 /* CoreRentingOrderDetailStatus.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreRentingOrderDetailStatus.swift; sourceTree = "<group>"; };
 		761ED78723A7698C005826B6 /* PurchaseOrder.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = PurchaseOrder.storyboard; sourceTree = "<group>"; };
 		761ED79023A76AD6005826B6 /* PurchaseOrderListVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderListVC.swift; sourceTree = "<group>"; };
 		761ED79323A76AF0005826B6 /* PurchaseOrderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderDetailVC.swift; sourceTree = "<group>"; };
@@ -3293,6 +3296,7 @@
 				7622BCF72382855F008792C8 /* CoreTruckType+Ext.swift */,
 				7622BCFA238299A0008792C8 /* CoreRentingOrderDetail+Ext.swift */,
 				76B8EE8923A9E5DC00F28CAD /* CorePurchaseOrderStatus+Ext.swift */,
+				761271CC23CEB86300CD1EC7 /* CoreRentingOrderDetailStatus.swift */,
 			);
 			path = CoreDataModel;
 			sourceTree = "<group>";
@@ -4168,6 +4172,7 @@
 				2A443B0822648C5A00CB6508 /* ReasonSkipView.swift in Sources */,
 				2A443B0922648C5A00CB6508 /* ResultsRequestModel.swift in Sources */,
 				2A443B0A22648C5A00CB6508 /* APIError.swift in Sources */,
+				761271CD23CEB86300CD1EC7 /* CoreRentingOrderDetailStatus.swift in Sources */,
 				2A443B0B22648C5A00CB6508 /* HeaderSectionCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -4428,6 +4433,7 @@
 				3B66B928210B1149000BDFEF /* ForgetPasswordView.swift in Sources */,
 				3B66B827210B113D000BDFEF /* UIImage+Extensions.swift in Sources */,
 				3B014954217D7EA50097FEB6 /* TaskModel.swift in Sources */,
+				761271CE23CEB86300CD1EC7 /* CoreRentingOrderDetailStatus.swift in Sources */,
 				3B556BE0223A4CED00E6CED6 /* RouteDetailOrderListClvCell.swift in Sources */,
 				3B66B82D210B113D000BDFEF /* Locale+Extensions.swift in Sources */,
 				3B66B804210B113D000BDFEF /* NSString+SDString.m in Sources */,

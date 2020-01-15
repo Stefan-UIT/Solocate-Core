@@ -132,6 +132,7 @@ extension AppDelegate {
         self.getListStatus()
         self.getListRouteStatus()
         self.getListRentingOrderStatus()
+        self.getListRentingOrderDetailStatus()
         self.getListPurchaseOrderStatus()
         self.getReasonList()
         
@@ -189,6 +190,18 @@ extension AppDelegate {
             case .object(let obj):
                 guard let list = obj.data else { return }
                 CoreDataManager.updateRentingOrderStatus(list)
+            case .error(_ ):
+                break
+            }
+        }
+    }
+    
+    func getListRentingOrderDetailStatus() {
+        SERVICES().API.getListRentingOrderDetailStatus { (result) in
+            switch result {
+            case .object(let obj):
+                guard let list = obj.data else { return }
+                CoreDataManager.updateRentingOrderDetailStatus(list)
             case .error(_ ):
                 break
             }

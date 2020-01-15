@@ -10,6 +10,56 @@ import UIKit
 import ObjectMapper
 import CoreData
 
+enum RentingOrderDetailStatusCode: String {
+    case NewStatus = "OP"
+    case InProgress = "IP"
+    case Finished = "FH"
+    case Cancelled = "CC"
+    
+    var statusName: String {
+        switch self {
+        case .NewStatus:
+            return "New".localized
+        case .InProgress:
+            return "in-progress".localized
+        case .Finished:
+            return "Finished".localized
+        case .Cancelled:
+            return "Cancelled".localized
+        }
+    }
+    
+    var color:UIColor {
+        get {
+            switch self {
+            case .NewStatus:
+                return AppColor.newStatus;
+            case .InProgress:
+                return AppColor.InTransit;
+            case .Finished:
+                return AppColor.deliveryStatus;
+            case .Cancelled:
+                return AppColor.redColor;
+            }
+        }
+    }
+    
+    var code:Int {
+        get {
+            switch self {
+            case .NewStatus:
+                return 1
+            case .InProgress:
+                return 2
+            case .Finished:
+                return 3
+            case .Cancelled:
+                return 4
+            }
+        }
+    }
+}
+
 enum RentingOrderStatusCode: String {
     case NewStatus = "OP"
     case PartlyAssigned = "PA"
@@ -74,6 +124,7 @@ enum RentingOrderStatusCode: String {
 //MARK: RENTING
 class RentingOrderCompany: BasicModel { }
 class RentingOrderStatus: BasicModel { }
+class RentingOrderDetailStatus: BasicModel { }
 
 class RentingOrder: BaseModel {
     
@@ -346,7 +397,7 @@ class RentingOrder: BaseModel {
                 tankerType <- map["tanker_type"]
             }
         }
-        
+        var status:BasicModel?
         var id = -1
         var rentingOrderID = -1
         var truckTypeId = -1
@@ -369,6 +420,7 @@ class RentingOrder: BaseModel {
         
         override func mapping(map: Map) {
             id <- map["id"]
+            status <- map["renting_order_detail_status"]
             rentingOrderID <- map["renting_order_id"]
             truckTypeId <- map["truck_type_id"]
             truckId <- map["truck_id"]

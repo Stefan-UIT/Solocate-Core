@@ -210,6 +210,11 @@
         <relationship name="truck" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreTruck" inverseName="rentingTruck" inverseEntity="CoreTruck" syncable="YES"/>
         <relationship name="truckType" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CoreTruckType" inverseName="rentingTruckType" inverseEntity="CoreTruckType" syncable="YES"/>
     </entity>
+    <entity name="CoreRentingOrderDetailStatus" representedClassName="CoreRentingOrderDetailStatus" syncable="YES" codeGenerationType="class">
+        <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="CoreRentingOrderStatus" representedClassName="CoreRentingOrderStatus" syncable="YES" codeGenerationType="class">
         <attribute name="code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -374,6 +379,7 @@
         <element name="CoreLocation" positionX="-576" positionY="144" width="128" height="330"/>
         <element name="CoreNote" positionX="-576" positionY="144" width="128" height="300"/>
         <element name="CoreOrder" positionX="-54" positionY="-9" width="128" height="1590"/>
+        <element name="CorePurchaseOrderStatus" positionX="-576" positionY="144" width="128" height="90"/>
         <element name="CoreReason" positionX="-261.1484375" positionY="280.81640625" width="128" height="165"/>
         <element name="CoreRentingOrder" positionX="-558" positionY="162" width="128" height="240"/>
         <element name="CoreRentingOrderDetail" positionX="-567" positionY="153" width="128" height="165"/>
@@ -390,6 +396,6 @@
         <element name="CoreUrlFile" positionX="-532.75" positionY="121.26171875" width="128" height="90"/>
         <element name="CoreUserInfo" positionX="-567" positionY="153" width="128" height="195"/>
         <element name="CoreWarehouse" positionX="-578" positionY="243" width="128" height="135"/>
-        <element name="CorePurchaseOrderStatus" positionX="-576" positionY="144" width="128" height="90"/>
+        <element name="CoreRentingOrderDetailStatus" positionX="-576" positionY="144" width="128" height="90"/>
     </elements>
 </model>

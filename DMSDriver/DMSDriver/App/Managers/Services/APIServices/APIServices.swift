@@ -97,6 +97,11 @@ extension BaseAPIService {
     }
     
     @discardableResult
+    func getListRentingOrderDetailStatus(callback: @escaping APICallback<ResponseArrData<RentingOrderDetailStatus>>) -> APIRequest {
+        return request(method: .GET, path: PATH_REQUEST_URL.GET_LIST_RENTING_ORDER_DETAIL_STATUS.URL, input: .empty, callback: callback);
+    }
+    
+    @discardableResult
     func getListPurchaseOrderStatus(callback: @escaping APICallback<ResponseArrData<PurchaseOrderStatus>>) -> APIRequest {
         return request(method: .GET,
                        path: PATH_REQUEST_URL.GET_LIST_PURCHASE_ORDER_STATUS.URL,
@@ -107,7 +112,7 @@ extension BaseAPIService {
     @discardableResult
     func getListPurchaseOrderTypes(callback: @escaping APICallback<ResponseArrData<Order.OrderTypeModel>>) -> APIRequest {
         return request(method: .GET,
-                       path: PATH_REQUEST_URL.GET_LIST_PURCHASE_ORDER_STATUS.URL,
+                       path: PATH_REQUEST_URL.GET_LIST_PURCHASE_ORDER_TYPES.URL,
                        input: .empty,
                        callback: callback);
     }
