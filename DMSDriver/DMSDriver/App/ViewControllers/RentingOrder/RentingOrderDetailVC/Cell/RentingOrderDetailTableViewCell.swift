@@ -141,11 +141,11 @@ class RentingOrderDetailTableViewCell: UITableViewCell {
             typeUpdateBtn = .START_RENTING_ORDER
         }
 
-        if isAssignedToDriver(rentingOrderDetail.driverId) {
-            self.handleShowingUpdateStatusView(true)
-        } else {
-            self.handleShowingUpdateStatusView(false)
-        }
+//        if isAssignedToDriver(rentingOrderDetail.driverId) {
+//            self.handleShowingUpdateStatusView(true)
+//        } else {
+//            self.handleShowingUpdateStatusView(false)
+//        }
     }
     
     func handleShowingUpdateStatusView(_ isShow: Bool) {
