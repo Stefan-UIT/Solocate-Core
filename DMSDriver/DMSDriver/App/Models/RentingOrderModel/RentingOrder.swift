@@ -124,6 +124,7 @@ enum RentingOrderStatusCode: String {
 //MARK: RENTING
 class RentingOrderCompany: BasicModel { }
 class RentingOrderStatus: BasicModel { }
+class RentingOrderDetailStatus: BasicModel { }
 
 class RentingOrder: BaseModel {
     
