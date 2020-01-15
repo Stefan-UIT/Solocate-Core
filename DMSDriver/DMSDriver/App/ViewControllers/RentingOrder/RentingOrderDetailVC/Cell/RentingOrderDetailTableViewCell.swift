@@ -98,7 +98,7 @@ class RentingOrderDetailTableViewCell: UITableViewCell {
         truckTypeLabel.text = rentingOrderDetail.truckType?.name
         truckLabel.text = Slash(rentingOrderDetail.truck?.plateNum)
         skulistLabel.text = rentingOrderDetail.skulist
-        driverLabel.text = rentingOrderDetail.driver?.userName
+        driverLabel.text = Slash(rentingOrderDetail.driver?.userName)
         guard let _status = rentingOrderDetail.status else { return }
         detailStatusLabel.text = _status.name
         detailStatusLabel.textColor = RentingOrderDetailStatusCode(rawValue: _status.code!)?.color
@@ -127,22 +127,20 @@ class RentingOrderDetailTableViewCell: UITableViewCell {
     }
     
     func updateStatusButtonView() {
-        cancelButton.setTitle("Cancel".localized.uppercased(), for: .normal)
-        cancelButton.backgroundColor = AppColor.redColor
-        if rentingOrderDetail?.status?.id == RentingOrderDetailStatusCode.InProgress.code {
-            positiveButton.setTitle("Finish".localized.uppercased(), for: .normal)
-            positiveButton.backgroundColor = AppColor.greenColor
-            typeUpdateBtn = .FINISH_RENTING_ORDER
-            self.handleShowingUpdateStatusView(true)
-        } else if rentingOrderDetail?.status?.id == RentingOrderDetailStatusCode.NewStatus.code {
-            positiveButton.setTitle("Start".localized.uppercased(), for: .normal)
-            positiveButton.backgroundColor = AppColor.greenColor
-            self.handleShowingUpdateStatusView(true)
-            typeUpdateBtn = .START_RENTING_ORDER
-        }
-
         if isAssignedToDriver(rentingOrderDetail.driverId) {
-            self.handleShowingUpdateStatusView(true)
+            cancelButton.setTitle("Cancel".localized.uppercased(), for: .normal)
+            cancelButton.backgroundColor = AppColor.redColor
+            if rentingOrderDetail?.status?.id == RentingOrderDetailStatusCode.InProgress.code {
+                positiveButton.setTitle("Finish".localized.uppercased(), for: .normal)
+                positiveButton.backgroundColor = AppColor.greenColor
+                typeUpdateBtn = .FINISH_RENTING_ORDER
+                self.handleShowingUpdateStatusView(true)
+            } else if rentingOrderDetail?.status?.id == RentingOrderDetailStatusCode.NewStatus.code {
+                positiveButton.setTitle("Start".localized.uppercased(), for: .normal)
+                positiveButton.backgroundColor = AppColor.greenColor
+                self.handleShowingUpdateStatusView(true)
+                typeUpdateBtn = .START_RENTING_ORDER
+            }
         } else {
             self.handleShowingUpdateStatusView(false)
         }
