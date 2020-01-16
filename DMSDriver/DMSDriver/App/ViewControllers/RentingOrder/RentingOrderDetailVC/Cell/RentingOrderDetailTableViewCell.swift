@@ -127,9 +127,9 @@ class RentingOrderDetailTableViewCell: UITableViewCell {
     }
     
     func updateStatusButtonView() {
+        cancelButton.setTitle("Cancel".localized.uppercased(), for: .normal)
+        cancelButton.backgroundColor = AppColor.redColor
         if isAssignedToDriver(rentingOrderDetail.driverId) {
-            cancelButton.setTitle("Cancel".localized.uppercased(), for: .normal)
-            cancelButton.backgroundColor = AppColor.redColor
             if rentingOrderDetail?.status?.id == RentingOrderDetailStatusCode.InProgress.code {
                 positiveButton.setTitle("Finish".localized.uppercased(), for: .normal)
                 positiveButton.backgroundColor = AppColor.greenColor
@@ -140,6 +140,8 @@ class RentingOrderDetailTableViewCell: UITableViewCell {
                 positiveButton.backgroundColor = AppColor.greenColor
                 self.handleShowingUpdateStatusView(true)
                 typeUpdateBtn = .START_RENTING_ORDER
+            } else if rentingOrderDetail?.status?.id == RentingOrderDetailStatusCode.Finished.code || rentingOrderDetail?.status?.id == RentingOrderDetailStatusCode.Cancelled.code {
+                self.handleShowingUpdateStatusView(false)
             }
         } else {
             self.handleShowingUpdateStatusView(false)
