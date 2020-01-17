@@ -52,6 +52,8 @@ class PurchaseOrderListVC: BaseViewController {
         var dateString = ""
         if filterTimeData?.type == TimeItemType.TimeItemTypeToday || filterTimeData?.type == TimeItemType.TimeItemFromNow {
             dateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date())
+        } else if filterTimeData?.type == TimeItemType.TimeItemTypeAll {
+            dateString = ""
         } else {
             dateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date()) + " - " + ShortDateFormater.string(from: filterTimeData?.endDate ?? Date())
         }

@@ -61,6 +61,8 @@ class RentingOrderListVC: BaseViewController {
         var dateString = ""
         if filterTimeData?.type == TimeItemType.TimeItemTypeToday {
             dateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date())
+        } else if filterTimeData?.type == TimeItemType.TimeItemTypeAll {
+            dateString = ""
         } else {
             dateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date()) + " - " + ShortDateFormater.string(from: filterTimeData?.endDate ?? Date())
         }
@@ -145,10 +147,10 @@ private extension RentingOrderListVC {
 extension RentingOrderListVC: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         if indexPaths.contains(where: isLoadingCell) {
-            if !(currentPage == totalPages) {
-                self.isInfiniteScrolling = true
-                self.fetchData()
-            }
+//            if !(currentPage == totalPages) {
+//                self.isInfiniteScrolling = true
+//                self.fetchData()
+//            }
         }
     }
 }
