@@ -51,7 +51,8 @@ extension BaseAPIService {
         if let _statusId = status?.id {
             path = path + "&renting_order_status_id=\(_statusId)"
         }
-        path = path + "&page=\(page)&limit=10"
+        path = path + "&limit=9999"
+//        path = path + "&page=\(page)&limit=10"
         return request(method: .GET,
                        path:path,
                        input: APIInput.empty,
