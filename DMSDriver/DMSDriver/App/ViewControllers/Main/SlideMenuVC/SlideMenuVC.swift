@@ -85,6 +85,7 @@ class SlideMenuVC: BaseViewController {
     var returnedItemTimeDataManager = TimeData()
     var purchaseOrderTimeDataManager = TimeData()
     var taskTimeDataManager = TimeData()
+    var previousItem:Int = MenuItemType.DASHBOARD.rawValue
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -160,7 +161,9 @@ extension SlideMenuVC:UITableViewDelegate{
         return
     }
     
-
+    if menuType != MenuItemType.LOGOUT {
+        previousItem = indexPath.row
+    }
     
     if currentItem != menuType{
         currentItem = menuType
@@ -212,7 +215,10 @@ extension SlideMenuVC:UITableViewDelegate{
         case .LOGOUT:
             let alert = UIAlertController(title: "are-you-sure-you-want-to-logout".localized, message: "", preferredStyle: UIAlertController.Style.alert)
             
-            alert.addAction(UIAlertAction(title: "cancel".localized, style: UIAlertAction.Style.default, handler: nil))
+            alert.addAction(UIAlertAction(title: "cancel".localized, style: UIAlertAction.Style.default, handler: { action in
+                self.currentItem = MenuItemType.init(rawValue: self.previousItem)!
+                self.tbvContent?.reloadData()
+            }))
             
             alert.addAction(UIAlertAction(title: "ok".localized, style: UIAlertAction.Style.default, handler: { action in
                 DispatchQueue.main.async {
