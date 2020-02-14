@@ -326,6 +326,23 @@ class Order: BaseModel {
                 return package?.cd == PackageE.Pallet.rawValue
             }
         }
+        var refCode:String?
+        
+        var nameReferenceCode: String? {
+            var result:String?
+            if name == nil && refCode == nil {
+                return result
+            } else if refCode == nil {
+                result = name
+                return result
+            } else if name == nil {
+                result = refCode
+                return result
+            } else {
+                result = name! + " - " + refCode!
+            }
+            return result
+        }
         
         override init() {
             super.init()
@@ -340,13 +357,12 @@ class Order: BaseModel {
             name <- map["name"]
             order_id <- map["order_id"]
             package_id <- map["package_id"]
-            
-
             package <- map["package"]
             barCode <- map["barcode"]
             packageRefId <- map["pkg_ref_id"]
             unit <- map["unit"]
             pivot <- map["pivot"]
+            refCode <- map["ref_cd"]
         }
         
         enum DetailUpdateType {

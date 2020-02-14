@@ -97,7 +97,7 @@ class RentingOrderDetailTableViewCell: UITableViewCell {
         
         truckTypeLabel.text = rentingOrderDetail.truckType?.name
         truckLabel.text = Slash(rentingOrderDetail.truck?.plateNum)
-        skulistLabel.text = rentingOrderDetail.skulist
+        skulistLabel.text = Slash(rentingOrderDetail.skulist)
         driverLabel.text = Slash(rentingOrderDetail.driver?.userName)
         guard let _status = rentingOrderDetail.status else { return }
         detailStatusLabel.text = _status.name
