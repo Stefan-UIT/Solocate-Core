@@ -14,7 +14,7 @@ extension CoreSKU {
         name = orderDetail.name
         barcode = orderDetail.pivot?.bcd
         batchId = orderDetail.pivot?.batch_id
-        qty = Int16(orderDetail.pivot?.qty ?? 0)
+        qty = Int32(orderDetail.pivot?.qty ?? 0)
         loadedQty = Int16(orderDetail.pivot?.loadedQty ?? 0)
         deliveredQty = Int16(orderDetail.pivot?.deliveredQty ?? 0)
     }

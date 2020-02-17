@@ -482,10 +482,10 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Vl-qh-5gd">
-                                                    <rect key="frame" x="15" y="1" width="345" height="298"/>
+                                                    <rect key="frame" x="15" y="1" width="345" height="370"/>
                                                     <subviews>
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="rgf-jx-QJZ">
-                                                            <rect key="frame" x="0.0" y="8" width="345" height="290"/>
+                                                            <rect key="frame" x="0.0" y="8" width="345" height="362"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8Qs-sB-78N">
                                                                     <rect key="frame" x="0.0" y="0.0" width="345" height="30"/>
@@ -723,7 +723,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="leh-yQ-6dr">
-                                                                    <rect key="frame" x="0.0" y="210" width="345" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="210" width="345" height="122"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="SKU list" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NBT-Hi-mq3">
                                                                             <rect key="frame" x="15" y="7" width="50" height="16"/>
@@ -735,8 +735,8 @@
                                                                                 <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="SKU list"/>
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mGy-VN-YUg">
-                                                                            <rect key="frame" x="75" y="5" width="255" height="20"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="mGy-VN-YUg">
+                                                                            <rect key="frame" x="75" y="5" width="255" height="112"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="VT7-va-cYc"/>
                                                                             </constraints>
@@ -751,13 +751,13 @@
                                                                         <constraint firstItem="NBT-Hi-mq3" firstAttribute="top" secondItem="leh-yQ-6dr" secondAttribute="top" constant="7" id="HwX-be-jK4"/>
                                                                         <constraint firstItem="NBT-Hi-mq3" firstAttribute="leading" secondItem="leh-yQ-6dr" secondAttribute="leading" constant="15" id="I99-8j-jh0"/>
                                                                         <constraint firstItem="mGy-VN-YUg" firstAttribute="top" secondItem="leh-yQ-6dr" secondAttribute="top" constant="5" id="M8a-GV-hn3"/>
-                                                                        <constraint firstAttribute="height" constant="30" id="OgB-J5-nIF"/>
+                                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="30" id="OgB-J5-nIF"/>
                                                                         <constraint firstAttribute="bottom" secondItem="mGy-VN-YUg" secondAttribute="bottom" constant="5" id="sIV-bL-8aJ"/>
                                                                         <constraint firstItem="mGy-VN-YUg" firstAttribute="leading" secondItem="NBT-Hi-mq3" secondAttribute="trailing" constant="10" id="t26-mG-4Ez"/>
                                                                     </constraints>
                                                                 </view>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="a2v-HD-NIL">
-                                                                    <rect key="frame" x="0.0" y="240" width="345" height="50"/>
+                                                                    <rect key="frame" x="0.0" y="332" width="345" height="30"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Driver" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Nyh-ZF-TPa">
                                                                             <rect key="frame" x="15" y="7" width="37.5" height="16"/>
@@ -770,7 +770,7 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZIk-x0-qbG">
-                                                                            <rect key="frame" x="62.5" y="5" width="267.5" height="40"/>
+                                                                            <rect key="frame" x="62.5" y="5" width="267.5" height="20"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="3te-Gi-IyL"/>
                                                                             </constraints>
@@ -802,7 +802,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="LPx-CF-Kwn">
-                                                    <rect key="frame" x="15" y="299" width="345" height="50"/>
+                                                    <rect key="frame" x="15" y="371" width="345" height="50"/>
                                                     <subviews>
                                                         <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="mGa-ji-kDK">
                                                             <rect key="frame" x="0.0" y="0.0" width="345" height="50"/>
@@ -878,7 +878,7 @@
                                                     </constraints>
                                                 </view>
                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Zhl-g8-XzR">
-                                                    <rect key="frame" x="0.0" y="349" width="375" height="3"/>
+                                                    <rect key="frame" x="0.0" y="421" width="375" height="3"/>
                                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="3" id="5cn-PC-c9H"/>

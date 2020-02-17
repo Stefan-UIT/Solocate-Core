@@ -277,7 +277,7 @@
         <attribute name="materialId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="packageId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="qty" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="qty" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="refCode" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="unitTypeId" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="updatedAt" optional="YES" attributeType="String" syncable="YES"/>
@@ -383,6 +383,7 @@
         <element name="CoreReason" positionX="-261.1484375" positionY="280.81640625" width="128" height="165"/>
         <element name="CoreRentingOrder" positionX="-558" positionY="162" width="128" height="240"/>
         <element name="CoreRentingOrderDetail" positionX="-567" positionY="153" width="128" height="165"/>
+        <element name="CoreRentingOrderDetailStatus" positionX="-576" positionY="144" width="128" height="90"/>
         <element name="CoreRentingOrderStatus" positionX="-616.34375" positionY="-3.58203125" width="128" height="90"/>
         <element name="CoreRequest" positionX="-200.59765625" positionY="132.25390625" width="128" height="165"/>
         <element name="CoreRoute" positionX="-416.171875" positionY="443.79296875" width="128" height="465"/>
@@ -396,6 +397,5 @@
         <element name="CoreUrlFile" positionX="-532.75" positionY="121.26171875" width="128" height="90"/>
         <element name="CoreUserInfo" positionX="-567" positionY="153" width="128" height="195"/>
         <element name="CoreWarehouse" positionX="-578" positionY="243" width="128" height="135"/>
-        <element name="CoreRentingOrderDetailStatus" positionX="-576" positionY="144" width="128" height="90"/>
     </elements>
 </model>

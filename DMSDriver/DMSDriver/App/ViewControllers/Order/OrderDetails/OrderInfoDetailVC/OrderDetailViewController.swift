@@ -204,6 +204,10 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                                                Slash(order.consigneeName))
         let remark = OrderDetailInforRow("remark".localized,
                                               Slash(order.remark))
+        let remarkForDriver = OrderDetailInforRow("remark-for-driver".localized,
+                                                  Slash(order.remarkDriver))
+        let remarkForLocation = OrderDetailInforRow("remark-for-location".localized,
+                                                    Slash(order.remarkLocation))
         let orderId = OrderDetailInforRow("order-id".localized,"#\(order.id)")
         
         //NEW
@@ -221,6 +225,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforDetail.append(division)
         orderInforDetail.append(zone)
         orderInforDetail.append(remark)
+        orderInforDetail.append(remarkForDriver)
+        orderInforDetail.append(remarkForLocation)
         //orderInforStatus.append(urgency)
         
 //        if  (order.statusOrder == .CancelStatus ||
