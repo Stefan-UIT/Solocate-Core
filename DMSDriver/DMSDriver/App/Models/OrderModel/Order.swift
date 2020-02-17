@@ -599,6 +599,8 @@ class Order: BaseModel {
     var wmsManifestNumber:String?
     var partialDeliveredReason:Reason?
     var remark:String?
+    var remarkDriver:String?
+    var remarkLocation:String?
     
     // NEW
     var division:BasicModel?
@@ -760,6 +762,8 @@ class Order: BaseModel {
         }
         partialDeliveredReason    <- map["reason"]
         remark    <- map["remark"]
+        remarkDriver <- map["remark_driver"]
+        remarkLocation <- map["remark_location"]
         division <- map["shipping_division"]
         zone <- map["shipping_zone"]
     }
