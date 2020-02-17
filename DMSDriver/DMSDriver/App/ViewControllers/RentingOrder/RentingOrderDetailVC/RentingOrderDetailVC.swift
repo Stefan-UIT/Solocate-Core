@@ -241,7 +241,7 @@ extension RentingOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
 //MARK: API
 extension RentingOrderDetailVC {
     func fetchData(showLoading:Bool = false)  {
-        getRentingOrderDetail()
+        getRentingOrderDetail(isFetch: showLoading)
     }
     
     private func getRentingOrderDetail(isFetch:Bool = false) {

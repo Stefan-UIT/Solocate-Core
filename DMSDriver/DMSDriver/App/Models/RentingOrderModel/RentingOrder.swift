@@ -139,6 +139,21 @@ class RentingOrder: BaseModel {
         var barcode:Int?
         var packageId:Int?
         
+        var nameReferenceCode: String? {
+            var result:String?
+            if name == nil && referenceCode == nil {
+                return result
+            } else if referenceCode == nil {
+                result = name
+                return result
+            } else if name == nil {
+                result = referenceCode
+                return result
+            } else {
+                result = name! + " - " + referenceCode!
+            }
+            return result
+        }
         override init() {
             super.init()
         }
@@ -432,11 +447,16 @@ class RentingOrder: BaseModel {
             driverId <- map["driver_id"]
         }
         
-        var skulist: String {
+        var skulist: String? {
             get {
-                var _skuList = ""
+                var _skuList:String?
                 for each in 0..<(sku?.count ?? 0){
-                    _skuList = _skuList == "" ? (sku?[each].name ?? "") : _skuList + ", " + (sku?[each].name ?? "")
+                    if _skuList == nil {
+                        _skuList = sku?[each].nameReferenceCode
+                    } else {
+                        guard let _nextSKU = sku?[each].nameReferenceCode else { break }
+                        _skuList = _skuList! + ", " + _nextSKU
+                    }
                 }
                 return _skuList
             }
