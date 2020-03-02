@@ -225,7 +225,7 @@ fileprivate extension RentingOrderListVC {
                             self?.page = (self?.currentPage ?? 1) + 1
                         }
                         self?.rentingOrders.append(data)
-                        self?.rentingOrders = self?.rentingOrders.sorted(by: {$0.id > $1.id}) ?? []
+//                        self?.rentingOrders = self?.rentingOrders.sorted(by: {$0.id > $1.id}) ?? []
                         CoreDataManager.saveRentingOrder(data)
                         strongSelf.tbvContent?.reloadData()
                         self?.isFetchInProgress = false

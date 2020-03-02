@@ -984,8 +984,8 @@ class _CoreDataManager {
         items?.forEach({ (core) in
             results.append(core.convertToRoute())
         })
-        
-        return results.sorted(by: {$0.id > $1.id})
+//        return results.sorted(by: {$0.id > $1.id})
+        return results
     }
     
     func getRoute(_ routeID: String) -> Route {
@@ -1007,7 +1007,8 @@ class _CoreDataManager {
             results.append(core.convertToRentingOrder())
         })
         
-        return results.sorted(by: {$0.id > $1.id})
+//        return results.sorted(by: {$0.id > $1.id})
+        return results
     }
     
     func getRentingOrder(_ rentingId: Int) -> RentingOrder {
