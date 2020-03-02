@@ -238,8 +238,8 @@ class RentingOrder: BaseModel {
                     _coreTruckType.updatedAt = updatedAt
                     _coreTruckType.updatedBy = Int16(updatedBy ?? 0)
                     
-                    print("Find DB At: ", FileManager.default.urls(for: .documentDirectory,
-                                                                   in: .userDomainMask).last ?? "Not Found!")
+//                    print("Find DB At: ", FileManager.default.urls(for: .documentDirectory,
+//                                                                   in: .userDomainMask).last ?? "Not Found!")
                     do {
                         try context.save()
                     } catch {
@@ -385,8 +385,8 @@ class RentingOrder: BaseModel {
                     _coreTruck.createdAt = createdAt
                     _coreTruck.updatedAt = updatedAt
                     
-                    print("Find DB At: ", FileManager.default.urls(for: .documentDirectory,
-                                                                   in: .userDomainMask).last ?? "Not Found!")
+//                    print("Find DB At: ", FileManager.default.urls(for: .documentDirectory,
+//                                                                   in: .userDomainMask).last ?? "Not Found!")
                     do {
                         try context.save()
                     } catch {
