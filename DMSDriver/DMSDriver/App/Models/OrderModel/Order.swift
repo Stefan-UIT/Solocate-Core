@@ -208,8 +208,8 @@ class Address: BaseModel {
             _coreLocation.seq = Int16(seq)
             _coreLocation.srvcTime = Int64(srvc_time ?? 0)
             
-            print("Find DB At: ", FileManager.default.urls(for: .documentDirectory,
-                                                           in: .userDomainMask).last ?? "Not Found!")
+//            print("Find DB At: ", FileManager.default.urls(for: .documentDirectory,
+//                                                           in: .userDomainMask).last ?? "Not Found!")
             do {
                 try context.save()
             } catch {

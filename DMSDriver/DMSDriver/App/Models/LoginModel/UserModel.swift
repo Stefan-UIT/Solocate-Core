@@ -89,8 +89,8 @@ class UserModel: BaseModel {
                 _coreUserInfo.phone = phone
                 _coreUserInfo.companyId = Int16(companyID ?? -1)
                 
-                print("Find DB At: ", FileManager.default.urls(for: .documentDirectory,
-                                                               in: .userDomainMask).last ?? "Not Found!")
+//                print("Find DB At: ", FileManager.default.urls(for: .documentDirectory,
+//                                                               in: .userDomainMask).last ?? "Not Found!")
                 do {
                     try context.save()
                 } catch {

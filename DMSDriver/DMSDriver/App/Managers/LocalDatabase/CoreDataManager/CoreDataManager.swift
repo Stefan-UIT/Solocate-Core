@@ -86,9 +86,9 @@ class _CoreDataManager {
     // MARK: - Core Data Saving support
     
     func saveContext (_ objectContext:NSManagedObjectContext? = nil) {
-        print("Find DB At: ", FileManager.default.urls(for: .documentDirectory,
-                                                       in: .userDomainMask).last ?? "Not Found!")
-    
+//        print("Find DB At: ", FileManager.default.urls(for: .documentDirectory,
+//                                                       in: .userDomainMask).last ?? "Not Found!")
+//    
         var context = persistentContainer.viewContext
         if let _objectContext = objectContext {
             context = _objectContext
@@ -984,8 +984,8 @@ class _CoreDataManager {
         items?.forEach({ (core) in
             results.append(core.convertToRoute())
         })
-        
-        return results.sorted(by: {$0.id > $1.id})
+//        return results.sorted(by: {$0.id > $1.id})
+        return results
     }
     
     func getRoute(_ routeID: String) -> Route {
@@ -1007,7 +1007,8 @@ class _CoreDataManager {
             results.append(core.convertToRentingOrder())
         })
         
-        return results.sorted(by: {$0.id > $1.id})
+//        return results.sorted(by: {$0.id > $1.id})
+        return results
     }
     
     func getRentingOrder(_ rentingId: Int) -> RentingOrder {
