@@ -74,12 +74,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
-            timestampString = "598346306.441892"
+            timestampString = "606217061.936188"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1137"
-            endingLineNumber = "1137"
-            landmarkName = "handleShowingButtonStatusWithPickedUpType()"
+            startingLineNumber = "1157"
+            endingLineNumber = "1157"
+            landmarkName = "handleShowingButtonStatus()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -127,8 +127,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "18"
             endingLineNumber = "18"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "viewDidLoad()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -143,8 +143,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "55"
             endingLineNumber = "55"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "downloadFiles(withCompletionHandler:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -159,8 +159,40 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "31"
             endingLineNumber = "31"
-            landmarkName = "unknown"
-            landmarkType = "0">
+            landmarkName = "fetchMultiLanguageFiles()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Solocate_Core.LoadingViewController.fetchMultiLanguageFiles() -&gt; ()"
+                  moduleName = "Solocate Core"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/trungvo/solocate_core/DMSDriver/DMSDriver/App/ViewControllers/Loading/LoadingViewController.swift"
+                  timestampString = "606212844.531726"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "31">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Solocate_Core.APIOutput&lt;Solocate_Core.ResponseDataListModel&lt;Solocate_Core.LanguageModel&gt;, Solocate_Core.APIError&gt;) -&gt; () in Solocate_Core.LoadingViewController.fetchMultiLanguageFiles() -&gt; ()"
+                  moduleName = "Solocate Core"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/trungvo/solocate_core/DMSDriver/DMSDriver/App/ViewControllers/Loading/LoadingViewController.swift"
+                  timestampString = "606212844.5338171"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "33"
+                  endingLineNumber = "33"
+                  offsetFromSymbolStart = "155">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
