@@ -74,11 +74,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
-            timestampString = "606217061.936188"
+            timestampString = "606301156.339415"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1157"
-            endingLineNumber = "1157"
+            startingLineNumber = "1174"
+            endingLineNumber = "1174"
             landmarkName = "handleShowingButtonStatus()"
             landmarkType = "7">
          </BreakpointContent>
@@ -105,38 +105,6 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DMSDriver/App/Managers/SocketIO/SocketManager.swift"
-            timestampString = "598157769.293274"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "33"
-            endingLineNumber = "33"
-            landmarkName = "unknown"
-            landmarkType = "0">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DMSDriver/App/ViewControllers/Loading/LoadingViewController.swift"
-            timestampString = "604491992.334718"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "DMSDriver/App/ViewControllers/Loading/LoadingViewController.swift"
             timestampString = "604492005.320159"
             startingColumnNumber = "9223372036854775807"
@@ -153,46 +121,14 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "DMSDriver/App/ViewControllers/Loading/LoadingViewController.swift"
-            timestampString = "604492007.457971"
+            filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
+            timestampString = "606301156.340158"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "31"
-            endingLineNumber = "31"
-            landmarkName = "fetchMultiLanguageFiles()"
+            startingLineNumber = "1038"
+            endingLineNumber = "1038"
+            landmarkName = "skuLoadedQuantityInputView(_:_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "Solocate_Core.LoadingViewController.fetchMultiLanguageFiles() -&gt; ()"
-                  moduleName = "Solocate Core"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/trungvo/solocate_core/DMSDriver/DMSDriver/App/ViewControllers/Loading/LoadingViewController.swift"
-                  timestampString = "606212844.531726"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "31"
-                  endingLineNumber = "31"
-                  offsetFromSymbolStart = "31">
-               </Location>
-               <Location
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (Solocate_Core.APIOutput&lt;Solocate_Core.ResponseDataListModel&lt;Solocate_Core.LanguageModel&gt;, Solocate_Core.APIError&gt;) -&gt; () in Solocate_Core.LoadingViewController.fetchMultiLanguageFiles() -&gt; ()"
-                  moduleName = "Solocate Core"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/trungvo/solocate_core/DMSDriver/DMSDriver/App/ViewControllers/Loading/LoadingViewController.swift"
-                  timestampString = "606212844.5338171"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "33"
-                  endingLineNumber = "33"
-                  offsetFromSymbolStart = "155">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

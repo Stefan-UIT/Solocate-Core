@@ -477,6 +477,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    
     // MARK: - ACTION
     @IBAction func tapUpdateStatusButtonAction(_ sender: UIButton) {
         handleUpdatingStatus()
@@ -970,12 +971,22 @@ extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
         //
     }
     
+    func handleShowingSKULoadedQuantityInputView(detail:Order.Detail) {
+        let loadedQtyInputView = SKULoadedQuantityInputView()
+        loadedQtyInputView.delegate = self
+        loadedQtyInputView.configureView(detail: detail)
+        loadedQtyInputView.showViewInWindow()
+    }
+    
     func openCamera() {
         let vc:ScanBarCodeViewController =  ScanBarCodeViewController.loadSB(SB: .Order)
         vc.didScan = {[weak self](code) in
-//            self?.strSearch = code
-//            self?.searchView?.vSearch?.tfSearch?.text = code
-//            self?.doSearch(strSearch: code)
+            
+            if let detail = self?.orderDetail?.getDetail(barcode: code) { self?.handleShowingSKULoadedQuantityInputView(detail:detail)
+            } else {
+                self?.showAlertView("The SKU’s barcode is incorrect, please recheck with the Admin")
+            }
+            
         }
         
         self.navigationController?.present(vc, animated: true, completion: nil)
@@ -1019,6 +1030,12 @@ extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
                 self?.uploadMultipleFile(files: data)
             }
         }
+    }
+}
+
+extension OrderDetailViewController:SKULoadedQuantityInputViewDelegate {
+    func skuLoadedQuantityInputView(_ view: SKULoadedQuantityInputView, _ loadedQty: Int) {
+        self.tableView?.reloadData()
     }
 }
 
