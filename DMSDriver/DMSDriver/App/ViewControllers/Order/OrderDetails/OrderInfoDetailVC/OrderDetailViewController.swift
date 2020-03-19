@@ -598,7 +598,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 headerCell.btnEdit?.isHidden = isHidden
             case .sectionNatureOfGoods:
                 headerCell.btnEdit?.setTitleColor(AppColor.mainColor, for: .normal)
-                headerCell.btnEdit?.isHidden = false
+                headerCell.btnEdit?.isHidden = !_orderDetail.isNewStatus
             case .sectionPictures:
                 headerCell.btnEdit?.isHidden = !statusesShouldAllowToSignAndUpload
 //            case .sectionAddNote:

@@ -4585,10 +4585,10 @@
 					"$(CONFIGURATION_BUILD_DIR)",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DDEVELOPMENT";
-				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.gadot.debug;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.core;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = Gadot_Debug_Development;
+				PROVISIONING_PROFILE_SPECIFIER = Solocate_Core_Development;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 5.0;
@@ -4618,7 +4618,7 @@
 					"$(CONFIGURATION_BUILD_DIR)",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DDEVELOPMENT";
-				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.gadot.debug;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.core;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = Gadot_Debug_AppStore_;
