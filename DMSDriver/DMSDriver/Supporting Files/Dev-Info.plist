@@ -52,7 +52,7 @@
 		<true/>
 		<key>NSExceptionDomains</key>
 		<dict>
-			<key>dms.gadot.dev.seldatdirect.com</key>
+			<key>apigw-live3.seldatdirect.com</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
@@ -63,7 +63,7 @@
 				<key>NSIncludesSubdomains</key>
 				<true/>
 			</dict>
-			<key>dms.gadot.staging.seldatdirect.com</key>
+			<key>dms.gadot.dev.seldatdirect.com</key>
 			<dict>
 				<key>NSExceptionAllowsInsecureHTTPLoads</key>
 				<true/>
