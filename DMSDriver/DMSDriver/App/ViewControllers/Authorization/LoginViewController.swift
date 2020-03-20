@@ -109,8 +109,7 @@ class LoginViewController: BaseViewController {
 //            segEvironmentControl?.segmentTitles = [ChooseEvironment.Development.name,
 //                                                   ChooseEvironment.QC.name,
 //                                                   ChooseEvironment.Demo.name]
-            segEvironmentControl?.segmentTitles = [ChooseEvironment.Development.name,
-            ChooseEvironment.QC.name, ChooseEvironment.Staging.name ]
+            segEvironmentControl?.segmentTitles = [ChooseEvironment.Development.name]
             segEvironmentControl?.selectedSegmentIndex = 0
         }
     }
