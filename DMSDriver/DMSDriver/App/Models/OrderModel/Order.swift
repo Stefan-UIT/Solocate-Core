@@ -107,15 +107,18 @@ enum StatusOrder: String {
 }
 
 enum OrderType:Int {
-    case delivery = 1
+    case empty = 0
+    case delivery
     case pickup
     
     var name:String {
         switch self {
+        case .delivery:
+            return "Delivery".localized
         case .pickup:
             return "Pickup".localized
-        default:
-            return "Delivery".localized
+        case .empty:
+            return ""
         }
     }
 }
@@ -537,6 +540,7 @@ class Order: BaseModel {
     var customer_name:String {
         get {
             var fullname = ""
+            guard let _customer = customer else { return fullname}
             fullname = (customer?.lastName ?? "") + " " + (customer?.firstName ?? "")
             return fullname
         }
@@ -646,7 +650,7 @@ class Order: BaseModel {
     }()
     
     lazy var orderType:OrderType = {
-        return OrderType.init(rawValue: typeID) ?? OrderType.delivery
+        return OrderType.init(rawValue: typeID) ?? OrderType.empty
     }()
     
     var isPickUpType:Bool {
