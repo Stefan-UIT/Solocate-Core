@@ -363,6 +363,10 @@
 		2E96D06122C4CFED00DA29C5 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E96D05F22C4CFED00DA29C5 /* LoadingViewController.swift */; };
 		2E9E08A622A8FDA4005E420C /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */; };
 		2E9E08A722A8FDA4005E420C /* NoteTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */; };
+		2EA204FA2423360A009395C9 /* SKULoadedQuantityInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA204F72423360A009395C9 /* SKULoadedQuantityInputView.swift */; };
+		2EA204FB2423360A009395C9 /* SKULoadedQuantityInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EA204F72423360A009395C9 /* SKULoadedQuantityInputView.swift */; };
+		2EA204FC2423360A009395C9 /* SKULoadedQuantityInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EA204F82423360A009395C9 /* SKULoadedQuantityInputView.xib */; };
+		2EA204FD2423360A009395C9 /* SKULoadedQuantityInputView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EA204F82423360A009395C9 /* SKULoadedQuantityInputView.xib */; };
 		2EF1AAD9233B745700689A87 /* OrderDetailSKUCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1AAD8233B745700689A87 /* OrderDetailSKUCell.swift */; };
 		2EF1AADA233B745700689A87 /* OrderDetailSKUCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF1AAD8233B745700689A87 /* OrderDetailSKUCell.swift */; };
 		2EF35D7F22EEAB3100131D33 /* AssignDriverTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF35D7E22EEAB3100131D33 /* AssignDriverTableViewCell.swift */; };
@@ -758,7 +762,7 @@
 		2A42050922576AF000789837 /* ContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
 		2A42050A22576AF000789837 /* ContentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
 		2A42555A2251F08E00D55FEA /* ResponseDataDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDataDashboard.swift; sourceTree = "<group>"; };
-		2A443B4E22648C5A00CB6508 /* Gadot Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Gadot Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A443B4E22648C5A00CB6508 /* Solocate Core.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Solocate Core.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailLocationListClvCell.swift; sourceTree = "<group>"; };
 		2AC97C5A224DF7F600DD07AE /* CommonUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
 		2AC97C5C224E009400DD07AE /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
@@ -784,6 +788,8 @@
 		2E96D05F22C4CFED00DA29C5 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
 		2E98332D22D6F17200386992 /* DMSDriver-Dev.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "DMSDriver-Dev.entitlements"; sourceTree = "<group>"; };
 		2E9E08A522A8FDA4005E420C /* NoteTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteTableViewCell.swift; sourceTree = "<group>"; };
+		2EA204F72423360A009395C9 /* SKULoadedQuantityInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SKULoadedQuantityInputView.swift; sourceTree = "<group>"; };
+		2EA204F82423360A009395C9 /* SKULoadedQuantityInputView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SKULoadedQuantityInputView.xib; sourceTree = "<group>"; };
 		2EF1AAD8233B745700689A87 /* OrderDetailSKUCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderDetailSKUCell.swift; sourceTree = "<group>"; };
 		2EF35D7E22EEAB3100131D33 /* AssignDriverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignDriverTableViewCell.swift; sourceTree = "<group>"; };
 		2EF35D8122EEAC3C00131D33 /* AssignDriverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignDriverViewController.swift; sourceTree = "<group>"; };
@@ -1552,6 +1558,15 @@
 			path = Cell;
 			sourceTree = "<group>";
 		};
+		2EA204F62423360A009395C9 /* SKULoadedQuantityInputView */ = {
+			isa = PBXGroup;
+			children = (
+				2EA204F72423360A009395C9 /* SKULoadedQuantityInputView.swift */,
+				2EA204F82423360A009395C9 /* SKULoadedQuantityInputView.xib */,
+			);
+			path = SKULoadedQuantityInputView;
+			sourceTree = "<group>";
+		};
 		2EF35D7822EEAACE00131D33 /* AssignDriver */ = {
 			isa = PBXGroup;
 			children = (
@@ -2079,7 +2094,7 @@
 			isa = PBXGroup;
 			children = (
 				3B66B74D210B1051000BDFEF /* Gadot Live.app */,
-				2A443B4E22648C5A00CB6508 /* Gadot Dev.app */,
+				2A443B4E22648C5A00CB6508 /* Solocate Core.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -2797,6 +2812,7 @@
 			isa = PBXGroup;
 			children = (
 				769216152422A0E9000091C3 /* DropDownVC */,
+				2EA204F62423360A009395C9 /* SKULoadedQuantityInputView */,
 				185FC76C228D303100B085BC /* BaseSearchView */,
 				191D38F1228553FB0062B69B /* LocationDetailView */,
 				3B66B78F210B113C000BDFEF /* AlertPickerView */,
@@ -3589,9 +3605,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2A443A2C22648C5A00CB6508 /* Gadot Dev */ = {
+		2A443A2C22648C5A00CB6508 /* Solocate Core */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2A443B4A22648C5A00CB6508 /* Build configuration list for PBXNativeTarget "Gadot Dev" */;
+			buildConfigurationList = 2A443B4A22648C5A00CB6508 /* Build configuration list for PBXNativeTarget "Solocate Core" */;
 			buildPhases = (
 				FA95DBFCD982B3026B3D6EAC /* [CP] Check Pods Manifest.lock */,
 				2A443A2E22648C5A00CB6508 /* Sources */,
@@ -3605,9 +3621,9 @@
 			);
 			dependencies = (
 			);
-			name = "Gadot Dev";
+			name = "Solocate Core";
 			productName = DMSDriver;
-			productReference = 2A443B4E22648C5A00CB6508 /* Gadot Dev.app */;
+			productReference = 2A443B4E22648C5A00CB6508 /* Solocate Core.app */;
 			productType = "com.apple.product-type.application";
 		};
 		3B66B74C210B1051000BDFEF /* Gadot Live */ = {
@@ -3711,7 +3727,7 @@
 			);
 			projectRoot = "";
 			targets = (
-				2A443A2C22648C5A00CB6508 /* Gadot Dev */,
+				2A443A2C22648C5A00CB6508 /* Solocate Core */,
 				3B66B74C210B1051000BDFEF /* Gadot Live */,
 			);
 		};
@@ -3790,6 +3806,7 @@
 				2A443B3C22648C5A00CB6508 /* ScrollMenuCell.xib in Resources */,
 				2A443B3D22648C5A00CB6508 /* Dashboard.storyboard in Resources */,
 				2A443B3E22648C5A00CB6508 /* RouteListHeaderTableView.xib in Resources */,
+				2EA204FC2423360A009395C9 /* SKULoadedQuantityInputView.xib in Resources */,
 				2A443B3F22648C5A00CB6508 /* FilterDataListVC.xib in Resources */,
 				2A443B4022648C5A00CB6508 /* ChangePasswordTableViewCell.xib in Resources */,
 				2A443B4122648C5A00CB6508 /* ChangePasswordView.xib in Resources */,
@@ -3828,6 +3845,7 @@
 				185FC777228D303100B085BC /* HSearchView.xib in Resources */,
 				3B454C4F222CCD260064F455 /* FilterByDatePopupView.xib in Resources */,
 				3B2B8B56222E135B00ACDDFE /* FilterByDatePopupCustomCell.xib in Resources */,
+				2EA204FD2423360A009395C9 /* SKULoadedQuantityInputView.xib in Resources */,
 				3B66B864210B113D000BDFEF /* Order.storyboard in Resources */,
 				762A51332420B444002C1399 /* Business.storyboard in Resources */,
 				3B66B862210B113D000BDFEF /* Login.storyboard in Resources */,
@@ -4194,6 +4212,7 @@
 				2A443AAD22648C5A00CB6508 /* PopoverDelegate.swift in Sources */,
 				199F489222843D6D00DB6F7F /* GroupLocatonModel.swift in Sources */,
 				2A443AAE22648C5A00CB6508 /* ItemsSectionView.swift in Sources */,
+				2EA204FA2423360A009395C9 /* SKULoadedQuantityInputView.swift in Sources */,
 				2E1BE35022F14FFD005F9BB5 /* ReturnedItemDetailVC.swift in Sources */,
 				2A443AAF22648C5A00CB6508 /* Button.swift in Sources */,
 				2A443AB022648C5A00CB6508 /* UIButton.swift in Sources */,
@@ -4552,6 +4571,7 @@
 				3B66B84E210B113D000BDFEF /* APIServices.swift in Sources */,
 				2E96D06122C4CFED00DA29C5 /* LoadingViewController.swift in Sources */,
 				3B7695EA21CA20A70032B142 /* HistoryNotifyVC.swift in Sources */,
+				2EA204FB2423360A009395C9 /* SKULoadedQuantityInputView.swift in Sources */,
 				2EF35D8022EEAB3100131D33 /* AssignDriverTableViewCell.swift in Sources */,
 				760C46FE233C6C7B008802D1 /* LoadOrderDetailSKUTableViewCell.swift in Sources */,
 				3B66B828210B113D000BDFEF /* UISearchBar+Extensions.swift in Sources */,
@@ -4721,10 +4741,10 @@
 					"$(CONFIGURATION_BUILD_DIR)",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DDEVELOPMENT";
-				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.gadot.debug;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.core;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = Gadot_Debug_Development;
+				PROVISIONING_PROFILE_SPECIFIER = Solocate_Core_Development;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 5.0;
@@ -4754,7 +4774,7 @@
 					"$(CONFIGURATION_BUILD_DIR)",
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DDEVELOPMENT";
-				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.gadot.debug;
+				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.core;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = Gadot_Debug_AppStore_;
@@ -4949,7 +4969,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2A443B4A22648C5A00CB6508 /* Build configuration list for PBXNativeTarget "Gadot Dev" */ = {
+		2A443B4A22648C5A00CB6508 /* Build configuration list for PBXNativeTarget "Solocate Core" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2A443B4B22648C5A00CB6508 /* Debug */,

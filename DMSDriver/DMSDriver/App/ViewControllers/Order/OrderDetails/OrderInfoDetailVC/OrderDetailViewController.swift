@@ -58,6 +58,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     fileprivate let cellIdentifier = "OrderDetailTableViewCell"
     fileprivate let cellSKUInfoIdentifier = "OrderDetailSKUCell"
     fileprivate let headerCellIdentifier = "OrderDetailHeaderCell"
+    fileprivate let headerCellSKUIdentifier = "OrderDetailSKUHeaderCell"
     fileprivate let addressCellIdentifier =  "OrderDetailAddressCell"
     fileprivate let orderDropdownCellIdentifier = "OrderDetailDropdownCell"
     fileprivate let orderDetailMapCellIdentifier = "OrderDetailMapCell"
@@ -221,12 +222,12 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforDetail.append(orderType)
         orderInforDetail.append(purchaseOrderID)
         orderInforDetail.append(customerItem)
-        orderInforDetail.append(consigneeName)
-        orderInforDetail.append(division)
+//        orderInforDetail.append(consigneeName)
+//        orderInforDetail.append(division)
         orderInforDetail.append(zone)
         orderInforDetail.append(remark)
-        orderInforDetail.append(remarkForDriver)
-        orderInforDetail.append(remarkForLocation)
+//        orderInforDetail.append(remarkForDriver)
+//        orderInforDetail.append(remarkForLocation)
         //orderInforStatus.append(urgency)
         
 //        if  (order.statusOrder == .CancelStatus ||
@@ -275,21 +276,22 @@ class OrderDetailViewController: BaseOrderDetailViewController {
 
         orderInforFrom.append(fromLocationName)
         orderInforFrom.append(fromAddress)
-        orderInforFrom.append(fromAddressDetailRecord)
+        
         orderInforFrom.append(fromContactName)
         orderInforFrom.append(fromContactPhone)
-        orderInforFrom.append(fromStartTime)
-        orderInforFrom.append(fromEndtime)
-        orderInforFrom.append(fromServiceTime)
+        orderInforFrom.append(fromAddressDetailRecord)
+//        orderInforFrom.append(fromStartTime)
+//        orderInforFrom.append(fromEndtime)
+//        orderInforFrom.append(fromServiceTime)
 
         orderInforTo.append(toLocationName)
         orderInforTo.append(toAddress)
-        orderInforTo.append(toAddressDetailRecord)
         orderInforTo.append(toContactName)
         orderInforTo.append(toContactPhone)
-        orderInforTo.append(toStartTime)
-        orderInforTo.append(tomEndtime)
-        orderInforTo.append(toServiceTime)
+        orderInforTo.append(toAddressDetailRecord)
+//        orderInforTo.append(toStartTime)
+//        orderInforTo.append(tomEndtime)
+//        orderInforTo.append(toServiceTime)
 
         tableView?.reloadData()
     }
@@ -475,6 +477,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
+    
     // MARK: - ACTION
     @IBAction func tapUpdateStatusButtonAction(_ sender: UIButton) {
         handleUpdatingStatus()
@@ -567,7 +570,10 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if let _orderDetail = self.orderDetail, let headerCell = tableView.dequeueReusableCell(withIdentifier: headerCellIdentifier) as? OrderDetailTableViewCell{
+        let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section)!
+
+        let identifier = orderSection == .sectionNatureOfGoods ? headerCellSKUIdentifier : headerCellIdentifier
+        if let _orderDetail = self.orderDetail, let headerCell = tableView.dequeueReusableCell(withIdentifier: identifier) as? OrderDetailTableViewCell{
             headerCell.nameLabel?.text = arrTitleHeader[section];
             headerCell.btnEdit?.tag = section
             headerCell.delegate = self
@@ -576,7 +582,6 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
             
             let statusesShouldAllowToSignAndUpload = (_orderDetail.isInTransit || _orderDetail.isFinished)
             let statusesNotAllowToSignAnUpload = (_orderDetail.isPartialDelivered || _orderDetail.isDelivery)
-            let orderSection:OrderDetailSection = OrderDetailSection(rawValue: section)!
             switch orderSection {
             case .sectionOrderInfo:
                 headerCell.btnStatus?.isHidden = false
@@ -591,6 +596,9 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 var isHidden = hasSigned || !statusesShouldAllowToSignAndUpload
                 isHidden = statusesNotAllowToSignAnUpload ? true : isHidden
                 headerCell.btnEdit?.isHidden = isHidden
+            case .sectionNatureOfGoods:
+                headerCell.btnEdit?.setTitleColor(AppColor.mainColor, for: .normal)
+                headerCell.btnEdit?.isHidden = !_orderDetail.isNewStatus
             case .sectionPictures:
                 headerCell.btnEdit?.isHidden = !statusesShouldAllowToSignAndUpload
 //            case .sectionAddNote:
@@ -963,6 +971,27 @@ extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
         //
     }
     
+    func handleShowingSKULoadedQuantityInputView(detail:Order.Detail) {
+        let loadedQtyInputView = SKULoadedQuantityInputView()
+        loadedQtyInputView.delegate = self
+        loadedQtyInputView.configureView(detail: detail)
+        loadedQtyInputView.showViewInWindow()
+    }
+    
+    func openCamera() {
+        let vc:ScanBarCodeViewController =  ScanBarCodeViewController.loadSB(SB: .Order)
+        vc.didScan = {[weak self](code) in
+            
+            if let detail = self?.orderDetail?.getDetail(barcode: code) { self?.handleShowingSKULoadedQuantityInputView(detail:detail)
+            } else {
+                self?.showAlertView("The SKU’s barcode is incorrect, please recheck with the Admin")
+            }
+            
+        }
+        
+        self.navigationController?.present(vc, animated: true, completion: nil)
+    }
+    
     func didSelectEdit(_ cell: OrderDetailTableViewCell, _ btn: UIButton) {
         guard let orderSection = OrderDetailSection(rawValue:btn.tag) else {
             return
@@ -972,6 +1001,8 @@ extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
             doAddPictures()
         case .sectionSignature:
             doAddSignature()
+        case .sectionNatureOfGoods:
+            openCamera()
 //        case .sectionAddNote:
 //            redirectToAddNoteVC()
         default:
@@ -999,6 +1030,12 @@ extension OrderDetailViewController: OrderDetailTableViewCellDelegate {
                 self?.uploadMultipleFile(files: data)
             }
         }
+    }
+}
+
+extension OrderDetailViewController:SKULoadedQuantityInputViewDelegate {
+    func skuLoadedQuantityInputView(_ view: SKULoadedQuantityInputView, _ loadedQty: Int) {
+        self.tableView?.reloadData()
     }
 }
 

@@ -905,6 +905,11 @@ class Order: BaseModel {
         return false //pod_req == 1 && pictures?.count ?? 0 <= 0
     }
     
+    func getDetail(barcode:String) -> Order.Detail? {
+        let array = details?.filter({$0.pivot?.bcd == barcode})
+        return array?.first ?? nil
+    }
+    
 //    func validUpdateStatusOrder() -> Bool {
 //        var valid = true
 //        for item in details ?? []  {
