@@ -194,8 +194,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         if let start = order.to?.start_time?.date {
             startToDate = Slash(ShortNormalDateFormater.string(from: start))
         }
-        var toDueDate = ""
-        if let dueDate = order.to?.end_time?.date {
+        var endToDate = ""
+        if let end = order.to?.end_time?.date {
             endToDate = Slash(ShortNormalDateFormater.string(from: end))
         }
         
@@ -256,9 +256,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let toAddress = OrderDetailInforRow("Address".localized, E(order.to?.address),true)
         let toContactName = OrderDetailInforRow("contact-name".localized,order.to?.ctt_name ?? "-")
         let toContactPhone = OrderDetailInforRow("contact-phone".localized,order.to?.ctt_phone ?? "-", true)
-//        let toStartTime = OrderDetailInforRow("start-time".localized,startToDate,false)
-//        let tomEndtime = OrderDetailInforRow("end-time".localized,endToDate,false)
-        let toDueDate = OrderDetailInforRow("due-date".localized,endToDate,false)
+        let toStartTime = OrderDetailInforRow("start-time".localized,startToDate,false)
+        let tomEndtime = OrderDetailInforRow("end-time".localized,endToDate,false)
         let toLocationName = OrderDetailInforRow("location-name".localized, Slash(order.to?.loc_name),false)
         let toServiceTime = OrderDetailInforRow("service-time".localized,Slash(order.to?.serviceTime),false)
         
@@ -281,7 +280,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforFrom.append(fromContactName)
         orderInforFrom.append(fromContactPhone)
         orderInforFrom.append(fromAddressDetailRecord)
-        
 //        orderInforFrom.append(fromStartTime)
 //        orderInforFrom.append(fromEndtime)
 //        orderInforFrom.append(fromServiceTime)
