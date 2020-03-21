@@ -29,6 +29,7 @@ class CustomerModel: BaseModel {
     var companyId = -1
     var customerId = -1
     var customers:UserModel.UserInfo?
+    var types:[BasicModel]?
     
     override init() {
         super.init()
@@ -58,6 +59,7 @@ class CustomerModel: BaseModel {
         companyId <- map["company_id"]
         customerId <- map["customer_id"]
         customers <- map["customers"]
+        types <- map["types"]
         
     }
 }

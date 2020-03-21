@@ -9,6 +9,12 @@
 import Foundation
 import ObjectMapper
 
+enum BusinessOrderLocationType: String {
+    case Pickup = "PK"
+    case Warehouse = "WH"
+    case Customer = "CS"
+}
+
 enum BusinessOrderType: String {
     case Pickup = "Pick Up"
     case Delivery =  "Delivery"
@@ -136,6 +142,7 @@ class BusinessOrder: Order {
     var dueDate:String?
     var dueDateFrom: String?
     var dueDateTo: String?
+    var customerBO:CustomerModel?
     
     override init() {
         super.init()
@@ -193,3 +200,4 @@ class BusinessOrder: Order {
     }
 }
 
+class ZoneModel:BasicModel { }

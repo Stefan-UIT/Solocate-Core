@@ -10,12 +10,14 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DropDownViewController" customModule="Gadot_Dev" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DropDownViewController" customModule="Gadot_Live" customModuleProvider="target">
             <connections>
                 <outlet property="contentView" destination="5Er-vS-13I" id="6uR-rs-UEf"/>
                 <outlet property="contentViewHeightConstraint" destination="Usb-bC-Lb5" id="qtY-dB-pWG"/>
                 <outlet property="datePickerBGView" destination="u3y-KA-TWn" id="78q-aQ-pXG"/>
                 <outlet property="datePickerView" destination="lTt-NL-brg" id="FE5-9H-Mqn"/>
+                <outlet property="pickerCancelButton" destination="8tQ-33-9GF" id="JqP-PK-7k0"/>
+                <outlet property="pickerOKButton" destination="xvi-eW-YDp" id="FdD-ma-pbK"/>
                 <outlet property="searchTextField" destination="9Qi-DA-aDW" id="ikG-YW-scd"/>
                 <outlet property="tbvContent" destination="XvF-ne-605" id="YZh-kb-T5g"/>
                 <outlet property="tbvContentHeightConstraint" destination="X6Y-gW-Vmj" id="JbR-0B-LnP"/>
@@ -34,12 +36,64 @@
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="psN-MR-exc">
                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" title="Button"/>
                     <connections>
                         <action selector="tapBackGround:" destination="-1" eventType="touchUpInside" id="hed-jH-cEg"/>
                     </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u3y-KA-TWn">
+                    <rect key="frame" x="27.5" y="235.5" width="320" height="256"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CgD-cU-AfC">
+                            <rect key="frame" x="0.0" y="216" width="320" height="40"/>
+                            <subviews>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8tQ-33-9GF">
+                                    <rect key="frame" x="0.0" y="0.0" width="160" height="40"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <state key="normal" title="Cancel">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="didTapPickerCancelBtn:" destination="-1" eventType="touchUpInside" id="jFh-8h-5Ui"/>
+                                    </connections>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xvi-eW-YDp">
+                                    <rect key="frame" x="160" y="0.0" width="160" height="40"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <state key="normal" title="OK">
+                                        <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </state>
+                                    <connections>
+                                        <action selector="didTapPickerOKBtn:" destination="-1" eventType="touchUpInside" id="NNu-WY-bNk"/>
+                                    </connections>
+                                </button>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstAttribute="bottom" secondItem="8tQ-33-9GF" secondAttribute="bottom" id="5L3-M3-7bM"/>
+                                <constraint firstItem="xvi-eW-YDp" firstAttribute="top" secondItem="CgD-cU-AfC" secondAttribute="top" id="GqV-7Y-n4O"/>
+                                <constraint firstItem="8tQ-33-9GF" firstAttribute="width" secondItem="CgD-cU-AfC" secondAttribute="width" multiplier="1/2" id="L5e-pT-fx4"/>
+                                <constraint firstItem="xvi-eW-YDp" firstAttribute="leading" secondItem="8tQ-33-9GF" secondAttribute="trailing" id="O8V-it-4II"/>
+                                <constraint firstAttribute="bottom" secondItem="xvi-eW-YDp" secondAttribute="bottom" id="PpN-I1-TKp"/>
+                                <constraint firstItem="8tQ-33-9GF" firstAttribute="top" secondItem="CgD-cU-AfC" secondAttribute="top" id="SH6-ix-TxG"/>
+                                <constraint firstAttribute="height" constant="40" id="n7P-nw-obC"/>
+                                <constraint firstAttribute="trailing" secondItem="xvi-eW-YDp" secondAttribute="trailing" id="uPa-k0-5r9"/>
+                                <constraint firstItem="8tQ-33-9GF" firstAttribute="leading" secondItem="CgD-cU-AfC" secondAttribute="leading" id="xhK-Xo-ESv"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="CgD-cU-AfC" firstAttribute="leading" secondItem="u3y-KA-TWn" secondAttribute="leading" id="0pD-bt-rWj"/>
+                        <constraint firstAttribute="bottom" secondItem="CgD-cU-AfC" secondAttribute="bottom" id="KoC-CM-dBQ"/>
+                        <constraint firstAttribute="trailing" secondItem="CgD-cU-AfC" secondAttribute="trailing" id="MHH-m0-CBc"/>
+                    </constraints>
+                    <userDefinedRuntimeAttributes>
+                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                            <real key="value" value="15"/>
+                        </userDefinedRuntimeAttribute>
+                    </userDefinedRuntimeAttributes>
+                </view>
+                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y4I-0r-DOr">
                     <rect key="frame" x="27.5" y="235.5" width="320" height="216"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <userDefinedRuntimeAttributes>
@@ -47,7 +101,7 @@
                             <real key="value" value="15"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
-                </view>
+                </pickerView>
                 <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="lTt-NL-brg">
                     <rect key="frame" x="27.5" y="235.5" width="320" height="216"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -63,15 +117,6 @@
                         <action selector="didSelectDate:" destination="-1" eventType="valueChanged" id="qwa-3Q-fQn"/>
                     </connections>
                 </datePicker>
-                <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Y4I-0r-DOr">
-                    <rect key="frame" x="27.5" y="235.5" width="320" height="216"/>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <userDefinedRuntimeAttributes>
-                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                            <real key="value" value="15"/>
-                        </userDefinedRuntimeAttribute>
-                    </userDefinedRuntimeAttributes>
-                </pickerView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5Er-vS-13I">
                     <rect key="frame" x="30" y="125" width="315" height="300"/>
                     <subviews>
@@ -177,9 +222,9 @@
                 <constraint firstItem="psN-MR-exc" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="HyM-Oi-3oo"/>
                 <constraint firstItem="Y4I-0r-DOr" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="VNc-9T-kYT"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="psN-MR-exc" secondAttribute="bottom" id="bPq-8v-qiU"/>
-                <constraint firstItem="u3y-KA-TWn" firstAttribute="height" secondItem="lTt-NL-brg" secondAttribute="height" id="bzd-Xo-rZR"/>
-                <constraint firstItem="u3y-KA-TWn" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" id="feu-Q9-FEn"/>
+                <constraint firstItem="u3y-KA-TWn" firstAttribute="bottom" secondItem="lTt-NL-brg" secondAttribute="bottom" constant="40" id="fA8-0k-Zsf"/>
                 <constraint firstItem="5Er-vS-13I" firstAttribute="centerY" secondItem="fnl-2z-Ty3" secondAttribute="centerY" multiplier="4/5" id="gcf-mS-uiN"/>
+                <constraint firstItem="u3y-KA-TWn" firstAttribute="top" secondItem="lTt-NL-brg" secondAttribute="top" id="h1i-Yg-h7s"/>
                 <constraint firstItem="u3y-KA-TWn" firstAttribute="width" secondItem="lTt-NL-brg" secondAttribute="width" id="hVX-Yh-zIW"/>
                 <constraint firstItem="lTt-NL-brg" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="m3x-Om-CaL"/>
                 <constraint firstItem="5Er-vS-13I" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="o1w-ee-TDk"/>

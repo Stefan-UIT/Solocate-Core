@@ -10,17 +10,49 @@ import UIKit
 
 enum DropDownType {
     case InputText
-    case SelecteText
-    case Option
     case Time
     case Calendar
+    case OrderType
+    case Customer
+    case Address
+    case SKU
+    case UOM
+    case Zone
 }
 
 protocol DropDownViewControllerDelegate: NSObjectProtocol {
-    func didSelectItem(item:String)
+    func didSelectItem(item:DropDownModel)
     func didDoneEditText(item:String)
     func didSelectTime(item:String)
     func didSelectDate(date:Date)
+}
+
+class DropDownModel: BasicModel {
+    var result:String?
+    var customers: [CustomerModel]?
+    var skus:[SKUModel]?
+    var uoms:[UOMModel]?
+    var zones:[ZoneModel]?
+    
+    func addCustomers(_ customers:[CustomerModel]) -> DropDownModel {
+        self.customers = customers
+        return self
+    }
+    
+    func addSKUs(_ skus:[SKUModel]) -> DropDownModel {
+        self.skus = skus
+        return self
+    }
+    
+    func addUOMs(_ uoms:[UOMModel]) -> DropDownModel {
+        self.uoms = uoms
+        return self
+    }
+    
+    func addZones(_ zones:[ZoneModel]) -> DropDownModel {
+        self.zones = zones
+        return self
+    }
 }
 
 class DropDownViewController: UIViewController {
@@ -39,6 +71,8 @@ class DropDownViewController: UIViewController {
     
     @IBOutlet weak var timePickerView: UIPickerView!
     @IBOutlet weak var datePickerView: UIDatePicker!
+    @IBOutlet weak var pickerCancelButton: UIButton!
+    @IBOutlet weak var pickerOKButton: UIButton!
     
     let cellIndentifier = "DropDownTableViewCell"
     let SPACING_HEIGHT:CGFloat = 15
@@ -46,13 +80,18 @@ class DropDownViewController: UIViewController {
     let TABLEVIEW_HEIGHT:CGFloat = 180
     let TEXT_FIELD_HEIGHT:CGFloat = 80
     let CONTENT_VIEW_HEIGHT:CGFloat = 300
-    var itemsOrigin:[String]?
-    var itemsDisplay:[String]?
+    var itemsOrigin:[Any] = []
+    var itemsDisplay:[Any] = []
+    var itemDropDown:DropDownModel?
+    
+    
     weak var delegate:DropDownViewControllerDelegate?
     var dropDownStyle: DropDownType = .InputText
     var editString:String?
     var time:[String] = []
     var titleContent:String?
+    var timePicker:String?
+    var datePicker:Date?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,18 +114,21 @@ class DropDownViewController: UIViewController {
         timePickerView.isHidden = true
         datePickerView.isHidden = true
         datePickerBGView.isHidden = true
+        pickerCancelButton.backgroundColor = AppColor.redColor
+        pickerOKButton.backgroundColor = AppColor.buttonColor
         switch dropDownStyle {
         case .InputText:
             tbvContent?.isHidden = true
             tbvContentHeightConstraint.constant = 0
             contentViewHeightConstraint.constant = CONTENT_VIEW_HEIGHT - TABLEVIEW_HEIGHT
-        case .SelecteText:
+        case .Address:
             break
-        case .Option:
+        case .OrderType, .Customer, .SKU, .Zone, .UOM:
             textFieldView.isHidden = true
             textFieldViewHeightConstraint.constant = 0
             contentViewHeightConstraint.constant = CONTENT_VIEW_HEIGHT - TEXT_FIELD_HEIGHT
         case .Time:
+            datePickerBGView.isHidden = false
             timePickerView.isHidden = false
             contentView.isHidden = true
         case .Calendar:
@@ -121,6 +163,28 @@ class DropDownViewController: UIViewController {
     }
     
     func initVar() {
+        itemsOrigin = []
+        switch dropDownStyle {
+        case .OrderType:
+            itemsOrigin = ["pick-up".localized, "Delivery".localized]
+        case .Customer:
+            guard let _customers = itemDropDown?.customers else { return }
+            itemsOrigin = _customers
+        case .Address:
+            guard let _customers = itemDropDown?.customers else { return }
+            itemsOrigin = _customers
+        case .SKU:
+            guard let _skus = itemDropDown?.skus else { return }
+            itemsOrigin = _skus
+        case .UOM:
+            guard let _uoms = itemDropDown?.uoms else { return }
+            itemsOrigin = _uoms
+        case .Zone:
+            guard let _zone = itemDropDown?.zones else { return }
+            itemsOrigin = _zone
+        @unknown default:
+            break
+        }
         itemsDisplay = itemsOrigin
         setupTimeData()
     }
@@ -173,10 +237,25 @@ class DropDownViewController: UIViewController {
     }
     
     @IBAction func didSelectDate(_ sender: UIDatePicker) {
-        self.delegate?.didSelectDate(date: sender.date)
+        self.datePicker = sender.date
     }
     
+    @IBAction func didTapPickerCancelBtn(_ sender: UIButton) {
+        self.dismiss()
+    }
     
+    @IBAction func didTapPickerOKBtn(_ sender: UIButton) {
+        switch dropDownStyle {
+        case .Time:
+            delegate?.didSelectTime(item: timePicker ?? "")
+            self.dismiss()
+        case .Calendar:
+            self.delegate?.didSelectDate(date: datePicker ?? Date())
+            self.dismiss()
+        @unknown default:
+            break
+        }
+    }
     
     
 }
@@ -187,7 +266,13 @@ extension DropDownViewController: UITextFieldDelegate {
             let textRange = Range(range, in: text) {
             let updatedText = text.replacingCharacters(in: textRange,
                                                        with: string)
-            itemsDisplay = itemsOrigin?.filter{ $0.contains(updatedText) }
+            switch dropDownStyle {
+            case .Address:
+                let item = itemsOrigin as? [CustomerModel]
+                itemsDisplay = (item?.filter{ $0.address.contains(updatedText) }) ?? []
+            @unknown default:
+                break
+            }
             if updatedText == "" {
                 itemsDisplay = itemsOrigin
             }
@@ -204,17 +289,60 @@ extension DropDownViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return itemsDisplay?.count ?? 0
+        return itemsDisplay.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIndentifier, for: indexPath) as! DropDownTableViewCell
-        cell.configureCell(itemsDisplay?[indexPath.row] ?? "")
+        switch dropDownStyle {
+        case .OrderType:
+            cell.configureCell(itemsDisplay[indexPath.row] as! String)
+        case .Customer:
+            let item = itemsDisplay as! [CustomerModel]
+            cell.configureCell(item[indexPath.row].name)
+        case .Address:
+            let item = itemsDisplay as! [CustomerModel]
+            cell.configureCell(item[indexPath.row].address)
+        case .SKU:
+            let item = itemsDisplay as! [SKUModel]
+            cell.configureCell(item[indexPath.row].skuName)
+        case .UOM:
+            let item = itemsDisplay as! [UOMModel]
+            cell.configureCell(item[indexPath.row].name ?? "")
+        case .Zone:
+            let item = itemsDisplay as! [ZoneModel]
+            cell.configureCell(item[indexPath.row].name ?? "")
+        @unknown default:
+            break
+        }
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.delegate?.didSelectItem(item: itemsDisplay?[indexPath.row] ?? "")
+        let item = DropDownModel()
+        switch dropDownStyle {
+        case .OrderType:
+            let text = itemsDisplay[indexPath.row] as! String
+            item.result = text
+        case .Customer:
+            let itemSelect = itemsDisplay[indexPath.row] as? CustomerModel
+            item.customers = [itemSelect] as? [CustomerModel]
+        case .Address:
+            let itemSelect = itemsDisplay[indexPath.row] as? CustomerModel
+            item.customers = [itemSelect] as? [CustomerModel]
+        case .SKU:
+            let itemSelect = itemsDisplay[indexPath.row] as? SKUModel
+            item.skus = [itemSelect] as? [SKUModel]
+        case .UOM:
+            let itemSelect = itemsDisplay[indexPath.row] as? UOMModel
+            item.uoms = [itemSelect] as? [UOMModel]
+        case .Zone:
+            let itemSelect = itemsDisplay[indexPath.row] as? ZoneModel
+            item.zones = [itemSelect] as? [ZoneModel]
+        @unknown default:
+            break
+        }
+        self.delegate?.didSelectItem(item: item)
         self.dismiss()
     }
     
@@ -234,7 +362,7 @@ extension DropDownViewController: UIPickerViewDelegate, UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        delegate?.didSelectTime(item: time[row])
+        self.timePicker = time[row]
     }
     
 }

@@ -18,7 +18,7 @@
         <!--Business Order ListVC-->
         <scene sceneID="RMg-se-yhz">
             <objects>
-                <viewController storyboardIdentifier="BusinessOrderListVC" id="Lo5-9B-hd0" customClass="BusinessOrderListVC" customModule="Gadot_Dev" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BusinessOrderListVC" id="Lo5-9B-hd0" customClass="BusinessOrderListVC" customModule="Gadot_Live" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Gsm-Sy-VZz">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,7 +27,7 @@
                                 <rect key="frame" x="0.0" y="105.5" width="375" height="561.5"/>
                                 <color key="backgroundColor" red="0.94117647059999998" green="0.94117647059999998" blue="0.95686274510000002" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BusinessOrderTableViewCell" rowHeight="210" id="Lfv-vj-ioc" customClass="BusinessOrderTableViewCell" customModule="Gadot_Dev" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BusinessOrderTableViewCell" rowHeight="210" id="Lfv-vj-ioc" customClass="BusinessOrderTableViewCell" customModule="Gadot_Live" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="210"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lfv-vj-ioc" id="zVU-wc-Iuc">
@@ -337,7 +337,7 @@
         <!--Business Order DetailVC-->
         <scene sceneID="sJV-D4-pSy">
             <objects>
-                <viewController storyboardIdentifier="BusinessOrderDetailVC" id="3UN-Y6-g0x" customClass="BusinessOrderDetailVC" customModule="Gadot_Dev" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BusinessOrderDetailVC" id="3UN-Y6-g0x" customClass="BusinessOrderDetailVC" customModule="Gadot_Live" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CDU-FE-cdK">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -346,7 +346,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" red="0.8980392157" green="0.8980392157" blue="0.8980392157" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailHeaderCell" rowHeight="65" id="4WY-JI-KE3" customClass="OrderDetailTableViewCell" customModule="Gadot_Dev" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailHeaderCell" rowHeight="65" id="4WY-JI-KE3" customClass="OrderDetailTableViewCell" customModule="Gadot_Live" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="65"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="4WY-JI-KE3" id="keV-Q2-J2r">
@@ -418,7 +418,7 @@
                                             <outlet property="nameLabel" destination="FMV-m3-Q8H" id="Ew5-jD-Jzq"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailTableViewCell" rowHeight="92" id="Lbx-xk-2Nh" customClass="PurchaseOrderDetailTableViewCell" customModule="Gadot_Dev" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="OrderDetailTableViewCell" rowHeight="92" id="Lbx-xk-2Nh" customClass="PurchaseOrderDetailTableViewCell" customModule="Gadot_Live" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="120.5" width="375" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Lbx-xk-2Nh" id="LgK-XU-DhO">
@@ -438,7 +438,7 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sS9-uJ-T0h">
-                                                            <rect key="frame" x="51" y="5" width="279" height="82"/>
+                                                            <rect key="frame" x="56.5" y="5" width="273.5" height="82"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="lSb-RG-I4b"/>
                                                             </constraints>
@@ -446,12 +446,23 @@
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OQX-a5-lea">
+                                                            <rect key="frame" x="41" y="13" width="5.5" height="16"/>
+                                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
+                                                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="NO"/>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
                                                     </subviews>
                                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                     <constraints>
-                                                        <constraint firstItem="sS9-uJ-T0h" firstAttribute="leading" secondItem="19G-4c-JoW" secondAttribute="trailing" constant="10" id="HBD-Nt-MS8"/>
                                                         <constraint firstItem="19G-4c-JoW" firstAttribute="top" secondItem="8kY-IY-rY9" secondAttribute="top" constant="13" id="IMp-6u-NoQ"/>
                                                         <constraint firstAttribute="bottom" secondItem="sS9-uJ-T0h" secondAttribute="bottom" constant="5" id="QKe-U8-Kzj"/>
+                                                        <constraint firstItem="OQX-a5-lea" firstAttribute="leading" secondItem="19G-4c-JoW" secondAttribute="trailing" id="YHb-O4-baI"/>
+                                                        <constraint firstItem="sS9-uJ-T0h" firstAttribute="leading" secondItem="OQX-a5-lea" secondAttribute="trailing" constant="10" id="b9w-p9-slt"/>
+                                                        <constraint firstItem="OQX-a5-lea" firstAttribute="top" secondItem="8kY-IY-rY9" secondAttribute="top" constant="13" id="d3X-u0-rgu"/>
                                                         <constraint firstItem="19G-4c-JoW" firstAttribute="leading" secondItem="8kY-IY-rY9" secondAttribute="leading" constant="15" id="eFe-xJ-KMM"/>
                                                         <constraint firstAttribute="trailing" secondItem="sS9-uJ-T0h" secondAttribute="trailing" constant="15" id="ezH-Xc-yjd"/>
                                                         <constraint firstItem="sS9-uJ-T0h" firstAttribute="top" secondItem="8kY-IY-rY9" secondAttribute="top" constant="5" id="sHy-03-yeW"/>
@@ -472,7 +483,7 @@
                                             <outlet property="nameLabel" destination="19G-4c-JoW" id="1cO-Op-sch"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BusinessOrderPickerTableViewCell" rowHeight="100" id="yTL-oo-umt" customClass="BusinessOrderPickerTableViewCell" customModule="Gadot_Dev" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BusinessOrderPickerTableViewCell" rowHeight="100" id="yTL-oo-umt" customClass="BusinessOrderPickerTableViewCell" customModule="Gadot_Live" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="212.5" width="375" height="100"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="yTL-oo-umt" id="b5h-Mi-WIh">
@@ -492,10 +503,10 @@
                                                             </userDefinedRuntimeAttributes>
                                                         </label>
                                                         <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="45h-Lz-Xdo">
-                                                            <rect key="frame" x="51" y="5" width="279" height="90"/>
+                                                            <rect key="frame" x="56.5" y="5" width="273.5" height="90"/>
                                                             <subviews>
                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGX-Hu-177">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="266.5" height="90"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="261" height="90"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="g2I-yu-Heg"/>
                                                                     </constraints>
@@ -504,7 +515,7 @@
                                                                     <nil key="highlightedColor"/>
                                                                 </label>
                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AnW-GG-HCc">
-                                                                    <rect key="frame" x="271.5" y="42.5" width="7.5" height="5"/>
+                                                                    <rect key="frame" x="266" y="42.5" width="7.5" height="5"/>
                                                                     <constraints>
                                                                         <constraint firstAttribute="width" secondItem="AnW-GG-HCc" secondAttribute="height" multiplier="1.5" id="BcI-U4-hgl"/>
                                                                         <constraint firstAttribute="height" constant="5" id="GAD-bl-4Ah"/>
@@ -512,7 +523,7 @@
                                                                     <state key="normal" image="ic_dropdownblue"/>
                                                                 </button>
                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LGZ-AN-xOy">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="279" height="90"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="273.5" height="90"/>
                                                                     <connections>
                                                                         <action selector="onbtnClickDropdownWithBtn:" destination="yTL-oo-umt" eventType="touchUpInside" id="OqI-uo-TM0"/>
                                                                     </connections>
@@ -533,6 +544,15 @@
                                                                 <constraint firstAttribute="bottom" secondItem="LGZ-AN-xOy" secondAttribute="bottom" id="uSB-HK-JXS"/>
                                                             </constraints>
                                                         </view>
+                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="*" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bdG-M6-4J5">
+                                                            <rect key="frame" x="41" y="13" width="5.5" height="16"/>
+                                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
+                                                            <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="NO"/>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EFO-1G-0pF">
                                                             <rect key="frame" x="51" y="5" width="279" height="90"/>
                                                             <constraints>
@@ -549,12 +569,14 @@
                                                         <constraint firstItem="8Kq-tC-RoB" firstAttribute="leading" secondItem="ghf-Tl-7CP" secondAttribute="leading" constant="15" id="2vM-bz-MuA"/>
                                                         <constraint firstAttribute="trailing" secondItem="45h-Lz-Xdo" secondAttribute="trailing" constant="15" id="8ZN-aK-2Iz"/>
                                                         <constraint firstAttribute="bottom" secondItem="EFO-1G-0pF" secondAttribute="bottom" constant="5" id="AnS-zd-eP6"/>
+                                                        <constraint firstItem="45h-Lz-Xdo" firstAttribute="leading" secondItem="bdG-M6-4J5" secondAttribute="trailing" constant="10" id="ArF-pk-H1c"/>
                                                         <constraint firstAttribute="trailing" secondItem="EFO-1G-0pF" secondAttribute="trailing" constant="15" id="Htx-f0-sXk"/>
                                                         <constraint firstItem="EFO-1G-0pF" firstAttribute="top" secondItem="ghf-Tl-7CP" secondAttribute="top" constant="5" id="N19-tD-7wT"/>
                                                         <constraint firstAttribute="bottom" secondItem="45h-Lz-Xdo" secondAttribute="bottom" constant="5" id="Nao-1X-zYx"/>
                                                         <constraint firstItem="8Kq-tC-RoB" firstAttribute="top" secondItem="ghf-Tl-7CP" secondAttribute="top" constant="13" id="h4a-aS-Adc"/>
+                                                        <constraint firstItem="bdG-M6-4J5" firstAttribute="leading" secondItem="8Kq-tC-RoB" secondAttribute="trailing" id="hpS-2F-mBh"/>
                                                         <constraint firstItem="EFO-1G-0pF" firstAttribute="leading" secondItem="8Kq-tC-RoB" secondAttribute="trailing" constant="10" id="k7E-Pl-aZZ"/>
-                                                        <constraint firstItem="45h-Lz-Xdo" firstAttribute="leading" secondItem="8Kq-tC-RoB" secondAttribute="trailing" constant="10" id="obB-dh-0LH"/>
+                                                        <constraint firstItem="bdG-M6-4J5" firstAttribute="top" secondItem="ghf-Tl-7CP" secondAttribute="top" constant="13" id="lfh-lp-aF4"/>
                                                     </constraints>
                                                 </view>
                                             </subviews>
@@ -574,10 +596,11 @@
                                             <outlet property="editContainerView" destination="45h-Lz-Xdo" id="flZ-J6-KKf"/>
                                             <outlet property="iconDropDown" destination="AnW-GG-HCc" id="zf9-Wb-xQf"/>
                                             <outlet property="nameLabel" destination="8Kq-tC-RoB" id="jWR-d5-WnC"/>
+                                            <outlet property="requireMarkLabel" destination="bdG-M6-4J5" id="pCv-fu-GdU"/>
                                             <outlet property="vContent" destination="ghf-Tl-7CP" id="i8v-pb-tOX"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BusinessOrderConfirmTableViewCell" rowHeight="50" id="BHD-fm-nsz" customClass="BusinessOrderConfirmTableViewCell" customModule="Gadot_Dev" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BusinessOrderConfirmTableViewCell" rowHeight="50" id="BHD-fm-nsz" customClass="BusinessOrderConfirmTableViewCell" customModule="Gadot_Live" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="312.5" width="375" height="50"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BHD-fm-nsz" id="ejh-w8-tYh">
@@ -627,7 +650,7 @@
                                             <outlet property="submitView" destination="lKu-Pl-wQX" id="eP6-P6-d2e"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BusinessOrderItemTableViewCell" rowHeight="177" id="F7y-Ny-UxO" customClass="BusinessOrderItemTableViewCell" customModule="Gadot_Dev" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="BusinessOrderItemTableViewCell" rowHeight="177" id="F7y-Ny-UxO" customClass="BusinessOrderItemTableViewCell" customModule="Gadot_Live" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="362.5" width="375" height="177"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="F7y-Ny-UxO" id="vTX-MI-ckA">

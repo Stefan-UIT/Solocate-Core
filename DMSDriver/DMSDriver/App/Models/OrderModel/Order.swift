@@ -540,7 +540,7 @@ class Order: BaseModel {
     var customer_name:String {
         get {
             var fullname = ""
-            guard let _customer = customer else { return fullname}
+            guard customer != nil else { return fullname}
             fullname = (customer?.lastName ?? "") + " " + (customer?.firstName ?? "")
             return fullname
         }

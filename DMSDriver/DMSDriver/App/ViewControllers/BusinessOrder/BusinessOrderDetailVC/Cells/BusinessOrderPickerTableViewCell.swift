@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BusinessOrderPickerTableViewCellDelegate:class {
-    func didSelectedDopdown(_ cell:BusinessOrderPickerTableViewCell,_ btn:UIButton , style:DropDownType ,indexPath:IndexPath,_ data:[String],_ titleContent:String)
+    func didSelectedDopdown(_ cell:BusinessOrderPickerTableViewCell,_ btn:UIButton , style:DropDownType ,indexPath:IndexPath,_ item:DropDownModel,_ titleContent:String)
     
 }
 
@@ -20,17 +20,17 @@ struct BusinessOrderForRow {
     var textColor:UIColor?
     var isEditingBO = false
     var style:DropDownType
-    var data:[String] = []
+    var data:DropDownModel?
     var isRequire:Bool = false
     
-    init(title:String , content:String, _ isHighlight:Bool = false, _ textColor:UIColor? = nil, isEditing:Bool, style:DropDownType, _ data:[String]? = [],isRequire:Bool) {
+    init(title:String , content:String, _ isHighlight:Bool = false, _ textColor:UIColor? = nil, isEditing:Bool, style:DropDownType, _ item:DropDownModel? = nil,isRequire:Bool) {
         self.title = title
         self.content = content
         self.isHighlight = isHighlight
         self.textColor = textColor
         self.isEditingBO = isEditing
         self.style = style
-        self.data = data ?? []
+        self.data = data ?? nil
         self.isRequire = isRequire
     }
 }
@@ -45,6 +45,7 @@ class BusinessOrderPickerTableViewCell: UITableViewCell {
     @IBOutlet weak var iconDropDown: UIButton!
     @IBOutlet weak var contentEditLabel: UILabel?
     @IBOutlet weak var editContainerView: UIView!
+    @IBOutlet weak var requireMarkLabel: UILabel!
     
     weak var delegate:BusinessOrderPickerTableViewCellDelegate?
     var indexPath:IndexPath?
@@ -56,7 +57,7 @@ class BusinessOrderPickerTableViewCell: UITableViewCell {
         }
     }
     var dropDownType:DropDownType?
-    var dataContent:[String]?
+    var dataContent:DropDownModel?
     var titleContent:String?
     
     override func awakeFromNib() {
@@ -74,12 +75,14 @@ class BusinessOrderPickerTableViewCell: UITableViewCell {
         iconDropDown.tintColor = AppColor.greenColor
         isEditingBO = item.isEditingBO
         if isEditingBO {
-            vContent?.backgroundColor = isRequire ? AppColor.white : AppColor.grayColor
-            let displayMessage = dropDownType == DropDownType.Option ? "please-select" : "tap-to-edit"
+            requireMarkLabel.isHidden = !isRequire
+            let isOption = dropDownType == DropDownType.OrderType || dropDownType == DropDownType.Customer || dropDownType == DropDownType.Address || dropDownType == DropDownType.SKU || dropDownType == DropDownType.UOM
+            let displayMessage = isOption ? "please-select" : "tap-to-edit"
             let textString = (item.content == "-" || item.content == "") ? displayMessage : item.content
             contentEditLabel?.text = textString
             contentEditLabel?.textColor = AppColor.greenColor
         } else {
+            requireMarkLabel.isHidden = true
             contentLabel?.text = item.content
         }
         if let color = item.textColor {
@@ -98,8 +101,12 @@ class BusinessOrderPickerTableViewCell: UITableViewCell {
     }
     
     @IBAction func onbtnClickDropdown(btn:UIButton){
-        guard let _indexPath = indexPath, let _style = dropDownType, let _data = dataContent, let _title = titleContent else { return }
-        delegate?.didSelectedDopdown(self, btn, style: _style, indexPath: _indexPath, _data, _title)
+        guard let _indexPath = indexPath, let _style = dropDownType, let _title = titleContent else { return }
+        var itemDropDown = DropDownModel()
+        if dataContent != nil {
+            itemDropDown = dataContent!
+        }
+        delegate?.didSelectedDopdown(self, btn, style: _style, indexPath: _indexPath, itemDropDown, _title)
     }
 
 }

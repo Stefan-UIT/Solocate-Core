@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BusinessOrderItemTableViewCellDelegate: NSObjectProtocol {
-    func didSelectedDopdown(_ cell:BusinessOrderItemTableViewCell,_ btn:UIButton , style:DropDownType,_ data:[String]?,_ titleContent:String,tag:Int, indexPath: IndexPath)
+    func didSelectedDopdown(_ cell:BusinessOrderItemTableViewCell,_ btn:UIButton , style:DropDownType,_ itemDropDown:DropDownModel?,_ titleContent:String,tag:Int, indexPath: IndexPath)
 }
 
 class BusinessOrderItemTableViewCell: UITableViewCell {
@@ -101,7 +101,9 @@ class BusinessOrderItemTableViewCell: UITableViewCell {
     
     @IBAction func didTapSKUDropDown(_ sender: UIButton) {
         guard let _item = item, let _indexPath = indexPath else { return }
-        self.delegate?.didSelectedDopdown(self, sender, style: _item.skuStyle, _item.skuDataList, _item.skuTitle, tag: SKU_CONTENT_INDEX, indexPath: _indexPath)
+        let itemDropDown = DropDownModel()
+        itemDropDown.skus = _item.skuDataList
+        self.delegate?.didSelectedDopdown(self, sender, style: _item.skuStyle, itemDropDown, _item.skuTitle, tag: SKU_CONTENT_INDEX, indexPath: _indexPath)
     }
     
     @IBAction func didTapQuantityDropDown(_ sender: UIButton) {
@@ -111,7 +113,9 @@ class BusinessOrderItemTableViewCell: UITableViewCell {
     
     @IBAction func didTapUOMDropDown(_ sender: UIButton) {
         guard let _item = item,  let _indexPath = indexPath else { return }
-        self.delegate?.didSelectedDopdown(self, sender, style: _item.uomStyle, _item.uomDataList, _item.uomTitle, tag: UOM_CONTENT_INDEX, indexPath: _indexPath)
+        let itemDropDown = DropDownModel()
+        itemDropDown.uoms = _item.uomDataList
+        self.delegate?.didSelectedDopdown(self, sender, style: _item.uomStyle, itemDropDown, _item.uomTitle, tag: UOM_CONTENT_INDEX, indexPath: _indexPath)
     }
     
     @IBAction func didTapBatchDropDown(_ sender: UIButton) {
@@ -119,39 +123,4 @@ class BusinessOrderItemTableViewCell: UITableViewCell {
         self.delegate?.didSelectedDopdown(self, sender, style: _item.batchIdStyle, nil, _item.batchIdTitle, tag: BATCH_CONTENT_INDEX, indexPath: _indexPath)
     }
 
-}
-
-class SKUModel : BasicModel {
-    var itemContent:[String] = []
-    var skuTitle:String = "sku".localized
-    var skuStyle:DropDownType = .Option
-    var skuDataList:[String] = []
-    var uomDataList:[String] = []
-    var quantityTitle:String = "quantity".localized
-    var qtyStyle:DropDownType = .InputText
-    var uomTitle:String = "uom".localized
-    var uomStyle:DropDownType = .Option
-    var batchIdTitle:String = "batchId".localized
-    var batchIdStyle:DropDownType = .InputText
-    
-    func createSKUItem(skuContent:String, skuDataList:[String], uomDataList:[String], qtyContent:String, uomContent:String, batchContent:String) -> SKUModel {
-        self.skuDataList = skuDataList
-        self.uomDataList = uomDataList
-        self.itemContent.append(skuContent)
-        self.itemContent.append(qtyContent)
-        self.itemContent.append(uomContent)
-        self.itemContent.append(batchContent)
-        return self
-    }
-    
-    func createEditSKUItem(skuDataList:[String], uomDataList:[String]) -> SKUModel{
-        self.skuDataList = skuDataList
-        self.uomDataList = uomDataList
-        let emptyText = ""
-        self.itemContent.append(emptyText)
-        self.itemContent.append(emptyText)
-        self.itemContent.append(emptyText)
-        self.itemContent.append(emptyText)
-        return self
-    }
 }

@@ -39,9 +39,8 @@ extension BaseAPIService {
     }
     
     @discardableResult
-    func getCustomerList(orderId:Int,_ isWarehouse:Bool? = true, callback: @escaping APICallback<ResponseDataListModel<CustomerModel>>) -> APIRequest {
-//        let code = isWarehouse ? "WH" : "CS"
-        let url = String(format:PATH_REQUEST_URL.GET_CUSTOMER_LIST.URL , orderId, "WH")
+    func getCustomerList(callback: @escaping APICallback<ResponseDataListModel<CustomerModel>>) -> APIRequest {
+        let url = String(format:PATH_REQUEST_URL.GET_CUSTOMER_LIST.URL)
         return request(method: .GET,
                        path: url,
                        input: .empty,
@@ -49,9 +48,28 @@ extension BaseAPIService {
     }
 
     @discardableResult
-    func getSKUList(callback: @escaping APICallback<ResponseArrData<Reason>>) -> APIRequest {
+    func getSKUList(callback: @escaping APICallback<ResponseDataListModel<SKUModel>>) -> APIRequest {
+        let url = String(format:PATH_REQUEST_URL.GET_SKU_LIST.URL)
         return request(method: .GET,
-                       path:  PATH_REQUEST_URL.GET_REASON_LIST.URL,
+                       path: url,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func getUOMList(callback: @escaping APICallback<ResponseDataListModel<UOMModel>>) -> APIRequest {
+        let url = String(format:PATH_REQUEST_URL.GET_UOM_LIST.URL)
+        return request(method: .GET,
+                       path: url,
+                       input: .empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func getZoneList(callback: @escaping APICallback<ResponseDataListModel<ZoneModel>>) -> APIRequest {
+        let url = String(format:PATH_REQUEST_URL.GET_ZONE_LIST.URL)
+        return request(method: .GET,
+                       path: url,
                        input: .empty,
                        callback: callback);
     }

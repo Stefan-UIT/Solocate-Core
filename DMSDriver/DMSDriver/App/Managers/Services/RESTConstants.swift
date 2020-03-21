@@ -93,7 +93,10 @@ enum PATH_REQUEST_URL: String{
     case GET_RETURN_REASON_LIST = "masterdata/v1/return-reasons/list-active"
     case REQUEST_MORE_LEGS = "transaction/v1/shipping-orders/%@/check-more-legs"
     case GET_MORE_LEGS = "transaction/v1/shipping-orders/%@/more-legs"
-    case GET_CUSTOMER_LIST = "masterdata/v1/locations/list-active?customer_id=%@&cd=%@"
+    case GET_CUSTOMER_LIST = "masterdata/v1/locations/list-active"
+    case GET_SKU_LIST = "masterdata/v1/sku/list-active"
+    case GET_UOM_LIST = "masterdata/v1/units/list-active"
+    case GET_ZONE_LIST = "masterdata/v1/zones/list-active"
     
     var URL:String  {
         return rawValue
