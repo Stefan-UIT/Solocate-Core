@@ -43,7 +43,7 @@ class BusinessOrderDetailVC: BaseViewController {
     fileprivate let CELL_HEIGHT: CGFloat = 65.0
     fileprivate let FOOTER_HEIGHT: CGFloat = 10.0
     
-    private var customerBO = CustomerModel()
+
     private var pickupItem = Address()
     private var deliveryItem = Address()
     private var skuItems:[BusinessOrder.Detail] = []
@@ -52,17 +52,17 @@ class BusinessOrderDetailVC: BaseViewController {
     var dateStringFilter = Date().toString()
     var order:BusinessOrder?
     var isEditingBO:Bool = false
-    var isShowingDropDownView:Bool = false
-    var customerList:[CustomerModel] = []
+    var customerList:[UserModel.UserInfo] = []
     var skuList:[SKUModel] = []
-    var addressPickUpList:[CustomerModel] = []
-    var addressDeliveryList:[CustomerModel] = []
+    var addressPickUpList:[Address] = []
+    var addressDeliveryList:[Address] = []
     var uomList:[UOMModel] = []
     
-    var customers:[CustomerModel]?
+    var customers:[UserModel.UserInfo]?
+    var locations:[Address]?
     var skus:[SKUModel]?
     var uoms:[UOMModel]?
-    var zones:[ZoneModel]?
+    var zones:[Zone] = []
     
     var isOrderInfoFilled:Bool = false
     var currentIndexPath:IndexPath?
@@ -73,7 +73,7 @@ class BusinessOrderDetailVC: BaseViewController {
         updateUI()
 //        fetchData(showLoading: true)
         initVar()
-        setupDataList()
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -104,16 +104,43 @@ class BusinessOrderDetailVC: BaseViewController {
         tbvContent?.reloadData()
     }
     
-    func setupDataDetailInforRows() {
+    func addZone(isPickup: Bool) {
+        var _order:BusinessOrder!
+        if order != nil {
+            _order = order!
+        }
+        let itemZone = DropDownModel().addZones(zones)
+        let zone = BusinessOrderForRow(title: "zone".localized,
+                                       content: Slash(_order.zone?.name),
+                                       isEditing: isEditingBO,
+                                       style: .Zone,
+                                       itemZone,
+                                       isRequire: _order.isRequireEdit(_order?.zone?.name, .Zone))
+        
+        if isPickup {
+            removeZone()
+            businessOrderPickupInfo.append(zone)
+        } else {
+            removeZone()
+            businessOrderDeliveryInfo.append(zone)
+        }
+        tbvContent?.reloadData()
+    }
+    
+    func removeZone() {
+        if businessOrderDeliveryInfo.last?.title == "zone".localized {
+            businessOrderDeliveryInfo.removeLast()
+        } else if businessOrderPickupInfo.last?.title == "zone".localized {
+            businessOrderPickupInfo.removeLast()
+        }
+    }
+    
+    func setupDataDetailInfoforRows() {
         var _order:BusinessOrder!
         if order != nil {
             _order = order!
         }
         businessOrderInfo.removeAll()
-        businessOrderPickupInfo.removeAll()
-        businessOrderDeliveryInfo.removeAll()
-        businessOrderItem.removeAll()
-        
         
         let orderTypeString = _order.orderType.name
         let orderType = BusinessOrderForRow(title: "order-type".localized,
@@ -123,16 +150,21 @@ class BusinessOrderDetailVC: BaseViewController {
                                             isRequire: _order.isRequireEdit(orderTypeString, .OrderType))
         let itemCustomer = DropDownModel().addCustomers(customerList)
         let customer = BusinessOrderForRow(title: "customer".localized,
-                                           content: Slash(_order.customerBO?.name),
+                                           content: Slash(_order.customer_name),
                                            isEditing: isEditingBO,
                                            style: .Customer,
                                            itemCustomer,
-                                           isRequire: _order.isRequireEdit(_order.customerBO?.name, .Customer))
-        let dueDate = BusinessOrderForRow(title: "due-date".localized,
-                                          content: Slash(_order.dueDate),
+                                           isRequire: _order.isRequireEdit(_order.customer_name, .Customer))
+        let dueDateFrom = BusinessOrderForRow(title: "due-date-from".localized,
+                                          content: Slash(_order.dueDateFrom),
                                           isEditing: isEditingBO,
                                           style: .Calendar,
-                                          isRequire: _order.isRequireEdit(_order.dueDate, .DueDate))
+                                          isRequire: _order.isRequireEdit(_order.dueDateFrom, .DueDate))
+        let dueDateTo = BusinessOrderForRow(title: "due-date-to".localized,
+                                            content: Slash(_order.dueDateTo),
+                                            isEditing: isEditingBO,
+                                            style: .Calendar,
+                                            isRequire: _order.isRequireEdit(_order.dueDateTo, .DueDate))
         let remark = BusinessOrderForRow(title: "remark".localized,
                                           content: Slash(_order.remark),
                                           isEditing: isEditingBO,
@@ -141,12 +173,24 @@ class BusinessOrderDetailVC: BaseViewController {
         
         businessOrderInfo.append(orderType)
         businessOrderInfo.append(customer)
-        businessOrderInfo.append(dueDate)
+        businessOrderInfo.append(dueDateFrom)
+        businessOrderInfo.append(dueDateTo)
         businessOrderInfo.append(remark)
+        setupDataAddressAndSKUInRow()
+    }
+    
+    private func setupDataAddressAndSKUInRow() {
+        var _order:BusinessOrder!
+        if order != nil {
+            _order = order!
+        }
         
+        businessOrderPickupInfo.removeAll()
+        businessOrderDeliveryInfo.removeAll()
+        businessOrderItem.removeAll()
         // pick-up
         let orderPU = _order.from
-        let itemPickUp = DropDownModel().addCustomers(addressPickUpList)
+        let itemPickUp = DropDownModel().addLocations(addressPickUpList)
         let addressPU = BusinessOrderForRow(title: "Address".localized,
                                             content: Slash(orderPU?.address),
                                             isEditing: isEditingBO,
@@ -200,7 +244,7 @@ class BusinessOrderDetailVC: BaseViewController {
         
         // delivery
         let orderDV = _order.to
-        let itemDelivery = DropDownModel().addCustomers(addressDeliveryList)
+        let itemDelivery = DropDownModel().addLocations(addressDeliveryList)
         let addressDV = BusinessOrderForRow(title: "Address".localized,
                                             content: Slash(orderDV?.address),
                                             isEditing: isEditingBO,
@@ -252,6 +296,10 @@ class BusinessOrderDetailVC: BaseViewController {
         businessOrderDeliveryInfo.append(consigneeNameDV)
         businessOrderDeliveryInfo.append(consigneePhoneDV)
         
+        //Zone
+        let isPickup = _order.typeID == OrderType.pickup.rawValue ? true : false
+        self.addZone(isPickup: isPickup)
+        
         //item
         tbvContent?.reloadData()
         guard let details = _order?.details else { return }
@@ -273,9 +321,9 @@ class BusinessOrderDetailVC: BaseViewController {
         super.updateUI()
         tbvContent?.allowsSelection = isEditingBO
         if isEditingBO {
-            setupDataDetailInforRows()
+            setupDataList()
         } else {
-            setupDataDetailInforRows()
+            setupDataDetailInfoforRows()
         }
         
         tbvContent?.reloadData()
@@ -293,9 +341,7 @@ class BusinessOrderDetailVC: BaseViewController {
 
 extension BusinessOrderDetailVC: DMSNavigationServiceDelegate {
     func didSelectedBackAction() {
-        if !isShowingDropDownView {
-            self.navigationController?.popViewController(animated: true)
-        }
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
@@ -424,7 +470,8 @@ extension BusinessOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
         let section:BusinessOrderSection = BusinessOrderSection(rawValue: indexPath.section)!
         switch section {
         case .Submit:
-            print(order)
+            guard let _order = order else { return }
+            self.submitCreateBO(order: _order)
         @unknown default:
             return tableView.deselectRow(at: indexPath, animated: false)
         }
@@ -484,8 +531,7 @@ extension BusinessOrderDetailVC: BusinessOrderItemTableViewCellDelegate {
         vc.delegate = self
         vc.modalPresentationStyle = .overCurrentContext
         vc.modalTransitionStyle = .crossDissolve
-        self.isShowingDropDownView = true
-        present(vc, animated: true, completion: nil)
+        App().window?.rootViewController?.present(vc, animated: true, completion: nil)
     }
     
 }
@@ -501,8 +547,7 @@ extension BusinessOrderDetailVC: BusinessOrderPickerTableViewCellDelegate {
         vc.delegate = self
         vc.modalPresentationStyle = .overCurrentContext
         vc.modalTransitionStyle = .crossDissolve
-        self.isShowingDropDownView = true
-        present(vc, animated: true, completion: nil)
+        App().window?.rootViewController?.present(vc, animated: true, completion: nil)
     }
     
 }
@@ -588,18 +633,46 @@ extension BusinessOrderDetailVC {
         }
     }
     
+    private func submitCreateBO(order:BusinessOrder) {
+        self.showLoadingIndicator()
+        SERVICES().API.createBusinessOrder(order: order) {[weak self] (result) in
+            switch result {
+            case .object(let _):
+                self?.dismissLoadingIndicator()
+                self?.showAlertView("uploaded-succesful".localized)
+            case .error(let error):
+                self?.dismissLoadingIndicator()
+                self?.showAlertView(error.getMessage())
+            }
+        }
+    }
+    
     private func getCustomerList() {
         self.showLoadingIndicator()
         SERVICES().API.getCustomerList() {[weak self] (result) in
             switch result {
             case .object(let data):
                 self?.customers = data.data
-                self?.dismissLoadingIndicator()
-//                self?.getSKUList()
+//                self?.dismissLoadingIndicator()
+                self?.getLocationsList()
             case .error(let error):
                 self?.dismissLoadingIndicator()
                 self?.showAlertView(error.getMessage())
             }
+        }
+    }
+    
+    private func getLocationsList() {
+        SERVICES().API.getLocationsList() {[weak self] (result) in
+            switch result {
+            case .object(let data):
+                self?.locations = data.data
+                self?.getSKUList()
+            case .error(let error):
+                self?.dismissLoadingIndicator()
+                self?.showAlertView(error.getMessage())
+            }
+            
         }
     }
     
@@ -633,7 +706,9 @@ extension BusinessOrderDetailVC {
         SERVICES().API.getZoneList() {[weak self] (result) in
             switch result {
             case .object(let data):
-                self?.zones = data.data
+                guard let _zones = data.data else { return }
+                self?.zones = _zones
+                self?.setupDataDetailInfoforRows()
                 self?.dismissLoadingIndicator()
             case .error(let error):
                 self?.dismissLoadingIndicator()
@@ -658,6 +733,16 @@ extension BusinessOrderDetailVC {
         checkOrderInfoFilled()
     }
     
+    func renewAddressSKUData() {
+        businessOrderPickupInfo.removeAll()
+        businessOrderDeliveryInfo.removeAll()
+        businessOrderItem.removeAll()
+        order?.from = nil
+        order?.to = nil
+        order?.details = []
+        setupDataAddressAndSKUInRow()
+    }
+    
     func checkOrderTypeRow() {
         if order?.typeID != 0 && order?.typeID != nil {
             customerList = []
@@ -670,20 +755,20 @@ extension BusinessOrderDetailVC {
     }
     
     func checkCustomerRow() {
-        guard let _customerBO = order?.customerBO, let _customersList = customers, let _typeID = order?.typeID else { return }
+        guard let _locationsList = locations, let _typeID = order?.typeID else { return }
         
-        var tempAddressPickUP:[CustomerModel] = []
-        var tempAddressDelivery:[CustomerModel] = []
+        var tempAddressPickUP:[Address] = []
+        var tempAddressDelivery:[Address] = []
         let orderType:OrderType = OrderType(rawValue: _typeID)!
         switch orderType {
         case .delivery:
-            for (_,customer) in _customersList.enumerated() {
-                for index in 0..<(customer.types?.count ?? 0) {
-                    if customer.types?[index].code == BusinessOrderLocationType.Warehouse.rawValue || customer.types?[index].code == BusinessOrderLocationType.Pickup.rawValue {
-                        tempAddressPickUP.append(customer)
+            for (_,location) in _locationsList.enumerated() {
+                for index in 0..<(location.types?.count ?? 0) {
+                    if location.types?[index].code == BusinessOrderLocationType.Warehouse.rawValue || location.types?[index].code == BusinessOrderLocationType.Pickup.rawValue {
+                        tempAddressPickUP.append(location)
                         break
                     } else {
-                        tempAddressDelivery.append(customer)
+                        tempAddressDelivery.append(location)
                         break
                     }
                 }
@@ -691,18 +776,18 @@ extension BusinessOrderDetailVC {
             let rowCustomer = BusinessOrderAddressInfoRow.ADDRESS.rawValue
             addressDeliveryList = tempAddressDelivery
             addressPickUpList = tempAddressPickUP
-            let itemDropDownDelivery  = DropDownModel().addCustomers(addressDeliveryList)
-            let itemDropDownPickUp  = DropDownModel().addCustomers(addressPickUpList)
+            let itemDropDownDelivery  = DropDownModel().addLocations(addressDeliveryList)
+            let itemDropDownPickUp  = DropDownModel().addLocations(addressPickUpList)
             businessOrderDeliveryInfo[rowCustomer].data = itemDropDownDelivery
             businessOrderPickupInfo[rowCustomer].data = itemDropDownPickUp
         case .pickup:
-            for (_,customer) in _customersList.enumerated() {
-                for index in 0..<(customer.types?.count ?? 0) {
-                    if customer.types?[index].code == BusinessOrderLocationType.Warehouse.rawValue {
-                        tempAddressDelivery.append(customer)
+            for (_,location) in _locationsList.enumerated() {
+                for index in 0..<(location.types?.count ?? 0) {
+                    if location.types?[index].code == BusinessOrderLocationType.Warehouse.rawValue {
+                        tempAddressDelivery.append(location)
                         break
                     } else {
-                        tempAddressPickUP.append(customer)
+                        tempAddressPickUP.append(location)
                         break
                     }
                 }
@@ -710,35 +795,42 @@ extension BusinessOrderDetailVC {
             let rowCustomer = BusinessOrderAddressInfoRow.ADDRESS.rawValue
             addressDeliveryList = tempAddressDelivery
             addressPickUpList = tempAddressPickUP
-            let itemDropDownDelivery  = DropDownModel().addCustomers(addressDeliveryList)
-            let itemDropDownPickUp  = DropDownModel().addCustomers(addressPickUpList)
+            let itemDropDownDelivery  = DropDownModel().addLocations(addressDeliveryList)
+            let itemDropDownPickUp  = DropDownModel().addLocations(addressPickUpList)
             businessOrderDeliveryInfo[rowCustomer].data = itemDropDownDelivery
             businessOrderPickupInfo[rowCustomer].data = itemDropDownPickUp
         case .empty:
             return
         }
 
-        guard let _skus = skus , let _uoms = uoms else { return }
+        guard let _skus = skus , let _uoms = uoms , let orderCustomers = customers else  { return }
         
         skuList = []
         uomList = []
-        addressPickUpList = []
-        addressDeliveryList = []
+//        addressPickUpList = []
+//        addressDeliveryList = []
         var tempSKUList:[SKUModel] = []
-        for (_,sku) in _skus.enumerated() {
-            // Check SKU available for Customer
-            for index in 0..<(sku.customers?.count ?? 0) {
-                if sku.customers?[index].id == _customerBO.id {
+        
+        var listIDCustomers:[Int] = []
+        for (_,orderCustomer) in orderCustomers.enumerated() {
+            listIDCustomers.append(orderCustomer.id)
+        }
+        
+        for (_, sku) in _skus.enumerated() {
+            for index in 0..<(sku.customers?.count ?? 0){
+                if listIDCustomers.contains(sku.customers?[index].id ?? 0) {
                     tempSKUList.append(sku)
+                    break
                 }
             }
         }
+        
         skuList = tempSKUList
         uomList = _uoms
     }
     
     func checkOrderInfoFilled() {
-        isOrderInfoFilled = order?.typeID != nil && order?.customerBO != nil && (order?.dueDate != nil || order?.dueDate?.isEmpty == false)
+        isOrderInfoFilled = order?.typeID != nil && order?.customer != nil && (order?.dueDateFrom != nil || order?.dueDateFrom?.isEmpty == false) &&  (order?.dueDateTo?.isEmpty == false || order?.dueDateTo != nil)
         tbvContent?.reloadData()
     }
     
@@ -772,12 +864,24 @@ extension BusinessOrderDetailVC {
             order?.typeID = _orderType == BusinessOrderType.Pickup.rawValue ? BusinessOrderType.Pickup.typeId : BusinessOrderType.Delivery.typeId
             order?.orderType = OrderType(rawValue: _order.typeID)!
             textContent = order!.orderType.name
+            let isPickup = _orderType == BusinessOrderType.Pickup.rawValue ? true : false
+            renewAddressSKUData()
+            addZone(isPickup: isPickup)
         case .CUSTOMER:
             guard let _customer = item?.customers?.first else { return }
-            order?.customerBO = _customer
-            textContent = order?.customerBO?.name
-        case .DUE_DATE:
-            order?.dueDate = textContent
+            order?.customer = _customer
+            order?.customerId = String(_customer.id)
+            order?.customerLocationId = String(_customer.id)
+            textContent = order?.customer_name
+            renewAddressSKUData()
+        case .DUE_DATE_FROM:
+            guard let _date = item?.date else { return }
+            order?.dueDateFrom = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
+            textContent = order?.dueDateFrom
+        case .DUE_DATE_TO:
+            guard let _date = item?.date else { return }
+            order?.dueDateTo = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
+            textContent = order?.dueDateTo
         case .REMARK:
             order?.remark = textContent
         }
@@ -790,13 +894,16 @@ extension BusinessOrderDetailVC {
         var textContent = result
         switch infoRow {
         case .ADDRESS:
-            guard let _customer = item?.customers?.first else { return }
-            pickupItem.address = _customer.address
-            pickupItem.floor = _customer.floor
-            pickupItem.apartment = _customer.apartment
-            pickupItem.number = _customer.number
-            pickupItem.ctt_name = _customer.contactName
-            pickupItem.ctt_phone = _customer.phone
+            guard let _address = item?.locations?.first else { return }
+            pickupItem.id = _address.id
+            pickupItem.address = _address.address
+            pickupItem.floor = _address.floor
+            pickupItem.apartment = _address.apartment
+            pickupItem.number = _address.number
+            pickupItem.ctt_name = _address.ctt_name
+            pickupItem.ctt_phone = _address.phone
+            pickupItem.lattd = _address.lattd
+            pickupItem.lngtd = _address.lngtd
             textContent = pickupItem.address
         case .FLOOR:
             pickupItem.floor = textContent
@@ -812,9 +919,19 @@ extension BusinessOrderDetailVC {
             pickupItem.ctt_name = textContent
         case .CONSIGNEE_PHONE:
             pickupItem.ctt_phone = textContent
+        case .ZONE:
+            guard let _zone = item?.zones?.first else { return }
+            let zone:Zone = _zone
+            order?.zone = zone
+            textContent = zone.name
         }
         businessOrderPickupInfo[row].content = Slash(textContent)
         order?.from = pickupItem
+        if order?.typeID == OrderType.pickup.rawValue {
+            order?.customerLocationId = String(pickupItem.id)
+        } else {
+            order?.wareHouseId = String(pickupItem.id)
+        }
         setupViewAfterEdit()
     }
     
@@ -823,13 +940,16 @@ extension BusinessOrderDetailVC {
         var textContent = result
         switch infoRow {
         case .ADDRESS:
-            guard let _customer = item?.customers?.first else { return }
-            deliveryItem.address = _customer.address
-            deliveryItem.floor = _customer.floor
-            deliveryItem.apartment = _customer.apartment
-            deliveryItem.number = _customer.number
-            deliveryItem.ctt_name = _customer.contactName
-            deliveryItem.ctt_phone = _customer.phone
+            guard let _address = item?.locations?.first else { return }
+            deliveryItem.id = _address.id
+            deliveryItem.address = _address.address
+            deliveryItem.floor = _address.floor
+            deliveryItem.apartment = _address.apartment
+            deliveryItem.number = _address.number
+            deliveryItem.ctt_name = _address.ctt_name
+            deliveryItem.ctt_phone = _address.phone
+            deliveryItem.lattd = _address.lattd
+            deliveryItem.lngtd = _address.lngtd
             textContent = deliveryItem.address
         case .FLOOR:
             deliveryItem.floor = textContent
@@ -845,37 +965,54 @@ extension BusinessOrderDetailVC {
             deliveryItem.ctt_name = textContent
         case .CONSIGNEE_PHONE:
             deliveryItem.ctt_phone = textContent
+        case .ZONE:
+            guard let _zone = item?.zones?.first else { return }
+            let zone:Zone = _zone
+            order?.zone = zone
+            textContent = zone.name
         }
         businessOrderDeliveryInfo[row].content = Slash(textContent)
         order?.to = deliveryItem
+        order?.customerLocationId = String(deliveryItem.id)
+        if order?.typeID == OrderType.delivery.rawValue {
+            order?.customerLocationId = String(deliveryItem.id)
+        } else {
+            order?.wareHouseId = String(deliveryItem.id)
+        }
         setupViewAfterEdit()
     }
     
     func editOrderSKUInfo(row: Int,index: Int, result:String?,item:DropDownModel?) {
         let index:BusinessOrderSKUInfoRow = BusinessOrderSKUInfoRow(rawValue: index)!
         var textContent = result
+        if skuItems[row].pivot == nil {
+            let json:[String:Any] = ["qty":0, "uom":["id":0,
+                                                     "name":"",
+                                                     "code":""],
+                                     "batch_id":""]
+            let pivot = BusinessOrder.Detail.Pivot(JSON: json)
+            skuItems[row].pivot = pivot
+        }
         switch index {
         case .SKU:
             guard let _sku = item?.skus?.first else { return }
             skuItems[row] = _sku
             textContent = _sku.skuName
         case .QUANTITY:
-            let json:[String:Any] = ["qty":Int(textContent ?? "") ?? 0]
-            let pivot = BusinessOrder.Detail.Pivot(JSON: json)
-            skuItems[row].pivot = pivot
+            skuItems[row].pivot?.qty = Int(textContent ?? "") ?? 0
         case .UOM:
             guard let _uom = item?.uoms?.first else { return }
-            let json:[String:Any] = ["uom":_uom.toJSON()]
-            let pivot = BusinessOrder.Detail.Pivot(JSON: json)
-            skuItems[row].pivot = pivot
+            skuItems[row].pivot?.uom = _uom
             textContent = skuItems[row].pivot?.uom?.name ?? ""
         case .BATCH_ID:
-            let json:[String:Any] = ["batch_id":textContent ?? ""]
-            let pivot = BusinessOrder.Detail.Pivot(JSON: json)
-            skuItems[row].pivot = pivot
+            skuItems[row].pivot?.batch_id = textContent
         }
         businessOrderItem[row].itemContent[currentTag ?? 0]  = Slash(textContent)
         order?.details = skuItems
+        skuItems[row].skuId = String(skuItems[row].id)
+        skuItems[row].batchId = skuItems[row].pivot?.batch_id ?? ""
+        skuItems[row].unitId = skuItems[row].pivot?.uom?.id ?? -1
+        skuItems[row].qty = skuItems[row].pivot?.qty ?? -1
         setupViewAfterEdit()
     }
     

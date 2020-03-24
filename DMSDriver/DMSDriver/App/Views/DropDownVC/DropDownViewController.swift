@@ -24,18 +24,24 @@ protocol DropDownViewControllerDelegate: NSObjectProtocol {
     func didSelectItem(item:DropDownModel)
     func didDoneEditText(item:String)
     func didSelectTime(item:String)
-    func didSelectDate(date:Date)
 }
 
 class DropDownModel: BasicModel {
     var result:String?
-    var customers: [CustomerModel]?
+    var customers: [UserModel.UserInfo]?
+    var locations: [Address]?
     var skus:[SKUModel]?
     var uoms:[UOMModel]?
-    var zones:[ZoneModel]?
+    var zones:[Zone]?
+    var date:Date?
     
-    func addCustomers(_ customers:[CustomerModel]) -> DropDownModel {
+    func addCustomers(_ customers:[UserModel.UserInfo]) -> DropDownModel {
         self.customers = customers
+        return self
+    }
+    
+    func addLocations(_ locations:[Address]) -> DropDownModel {
+        self.locations = locations
         return self
     }
     
@@ -49,8 +55,13 @@ class DropDownModel: BasicModel {
         return self
     }
     
-    func addZones(_ zones:[ZoneModel]) -> DropDownModel {
+    func addZones(_ zones:[Zone]) -> DropDownModel {
         self.zones = zones
+        return self
+    }
+    
+    func addDate(_ date:Date) -> DropDownModel {
+        self.date = date
         return self
     }
 }
@@ -123,7 +134,9 @@ class DropDownViewController: UIViewController {
             contentViewHeightConstraint.constant = CONTENT_VIEW_HEIGHT - TABLEVIEW_HEIGHT
         case .Address:
             break
-        case .OrderType, .Customer, .SKU, .Zone, .UOM:
+        case .UOM:
+            break
+        case .OrderType, .Customer, .SKU, .Zone:
             textFieldView.isHidden = true
             textFieldViewHeightConstraint.constant = 0
             contentViewHeightConstraint.constant = CONTENT_VIEW_HEIGHT - TEXT_FIELD_HEIGHT
@@ -144,7 +157,7 @@ class DropDownViewController: UIViewController {
     }
     
     func setupDatePickerView() {
-        datePickerView.datePickerMode = .date
+        datePickerView.datePickerMode = .dateAndTime
         let date = Date()
         datePickerView.minimumDate = date
     }
@@ -171,8 +184,8 @@ class DropDownViewController: UIViewController {
             guard let _customers = itemDropDown?.customers else { return }
             itemsOrigin = _customers
         case .Address:
-            guard let _customers = itemDropDown?.customers else { return }
-            itemsOrigin = _customers
+            guard let _locations = itemDropDown?.locations else { return }
+            itemsOrigin = _locations
         case .SKU:
             guard let _skus = itemDropDown?.skus else { return }
             itemsOrigin = _skus
@@ -192,7 +205,7 @@ class DropDownViewController: UIViewController {
     func setupTimeData() {
         var hour:Int = 0
         var min:Int = 0
-        for hourIndex in 0..<25 {
+        for hourIndex in 0..<24 {
             hour = hourIndex
             for minIndex in 0..<4 {
                 min = minIndex == 0 ? minIndex : min+15
@@ -250,7 +263,8 @@ class DropDownViewController: UIViewController {
             delegate?.didSelectTime(item: timePicker ?? "")
             self.dismiss()
         case .Calendar:
-            self.delegate?.didSelectDate(date: datePicker ?? Date())
+            let item = DropDownModel().addDate(datePicker ?? Date())
+            self.delegate?.didSelectItem(item: item)
             self.dismiss()
         @unknown default:
             break
@@ -268,8 +282,11 @@ extension DropDownViewController: UITextFieldDelegate {
                                                        with: string)
             switch dropDownStyle {
             case .Address:
-                let item = itemsOrigin as? [CustomerModel]
-                itemsDisplay = (item?.filter{ $0.address.contains(updatedText) }) ?? []
+                let item = itemsOrigin as? [Address]
+                itemsDisplay = (item?.filter{ $0.address?.contains(updatedText) ?? false }) ?? []
+            case .UOM:
+                let item = itemsOrigin as? [UOMModel]
+                itemsDisplay = (item?.filter{$0.name?.contains(updatedText) ?? false }) ?? []
             @unknown default:
                 break
             }
@@ -298,11 +315,11 @@ extension DropDownViewController: UITableViewDelegate, UITableViewDataSource {
         case .OrderType:
             cell.configureCell(itemsDisplay[indexPath.row] as! String)
         case .Customer:
-            let item = itemsDisplay as! [CustomerModel]
-            cell.configureCell(item[indexPath.row].name)
+            let item = itemsDisplay as! [UserModel.UserInfo]
+            cell.configureCell(item[indexPath.row].userName ?? "")
         case .Address:
-            let item = itemsDisplay as! [CustomerModel]
-            cell.configureCell(item[indexPath.row].address)
+            let item = itemsDisplay as! [Address]
+            cell.configureCell(item[indexPath.row].address ?? "")
         case .SKU:
             let item = itemsDisplay as! [SKUModel]
             cell.configureCell(item[indexPath.row].skuName)
@@ -310,7 +327,7 @@ extension DropDownViewController: UITableViewDelegate, UITableViewDataSource {
             let item = itemsDisplay as! [UOMModel]
             cell.configureCell(item[indexPath.row].name ?? "")
         case .Zone:
-            let item = itemsDisplay as! [ZoneModel]
+            let item = itemsDisplay as! [Zone]
             cell.configureCell(item[indexPath.row].name ?? "")
         @unknown default:
             break
@@ -325,11 +342,11 @@ extension DropDownViewController: UITableViewDelegate, UITableViewDataSource {
             let text = itemsDisplay[indexPath.row] as! String
             item.result = text
         case .Customer:
-            let itemSelect = itemsDisplay[indexPath.row] as? CustomerModel
-            item.customers = [itemSelect] as? [CustomerModel]
+            let itemSelect = itemsDisplay[indexPath.row] as? UserModel.UserInfo
+            item.customers = [itemSelect] as? [UserModel.UserInfo]
         case .Address:
-            let itemSelect = itemsDisplay[indexPath.row] as? CustomerModel
-            item.customers = [itemSelect] as? [CustomerModel]
+            let itemSelect = itemsDisplay[indexPath.row] as? Address
+            item.locations = [itemSelect] as? [Address]
         case .SKU:
             let itemSelect = itemsDisplay[indexPath.row] as? SKUModel
             item.skus = [itemSelect] as? [SKUModel]
@@ -337,8 +354,8 @@ extension DropDownViewController: UITableViewDelegate, UITableViewDataSource {
             let itemSelect = itemsDisplay[indexPath.row] as? UOMModel
             item.uoms = [itemSelect] as? [UOMModel]
         case .Zone:
-            let itemSelect = itemsDisplay[indexPath.row] as? ZoneModel
-            item.zones = [itemSelect] as? [ZoneModel]
+            let itemSelect = itemsDisplay[indexPath.row] as? Zone
+            item.zones = [itemSelect] as? [Zone]
         @unknown default:
             break
         }

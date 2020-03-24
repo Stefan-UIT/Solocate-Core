@@ -84,8 +84,8 @@ class BusinessOrderItemTableViewCell: UITableViewCell {
             quantityContentLabel.textColor = AppColor.greenColor
             uomContentLabel.textColor = AppColor.greenColor
             batchIdContentLbl.textColor = AppColor.greenColor
-            let SELECT_TEXT = "Please select"
-            let TAP_EDIT_TEXT = "Tap to edit"
+            let SELECT_TEXT = "please-select".localized
+            let TAP_EDIT_TEXT = "tap-to-edit".localized
             skuContentLabel.text = (skuContent == "-" || skuContent == "") ? SELECT_TEXT : skuContent
             quantityContentLabel.text = (qtyContent == "-" || qtyContent == "" ) ? TAP_EDIT_TEXT : qtyContent
             uomContentLabel.text = (uomContent == "-" || uomContent == "") ? SELECT_TEXT : uomContent

@@ -637,8 +637,6 @@
 		3BF838D5218976B30056C4F1 /* RouteListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B00D04F2151F9D700B0B062 /* RouteListVC.swift */; };
 		760B209D23068F7500E96A12 /* CoreRouteStatus+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760B209C23068F7500E96A12 /* CoreRouteStatus+Ext.swift */; };
 		760B209E23068F7500E96A12 /* CoreRouteStatus+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760B209C23068F7500E96A12 /* CoreRouteStatus+Ext.swift */; };
-		760B8BCC2424A64F005D893E /* CustomerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760B8BCB2424A64F005D893E /* CustomerModel.swift */; };
-		760B8BCD2424A650005D893E /* CustomerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760B8BCB2424A64F005D893E /* CustomerModel.swift */; };
 		760B8BD62424CF99005D893E /* SKUModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760B8BD52424CF99005D893E /* SKUModel.swift */; };
 		760B8BD72424CF99005D893E /* SKUModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760B8BD52424CF99005D893E /* SKUModel.swift */; };
 		760B8BDA2424D740005D893E /* UOMModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 760B8BD92424D740005D893E /* UOMModel.swift */; };
@@ -1242,7 +1240,6 @@
 		6406D038FB02DBF80C11EACD /* Pods-DMSDriver-Dev.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-DMSDriver-Dev.release.xcconfig"; path = "Pods/Target Support Files/Pods-DMSDriver-Dev/Pods-DMSDriver-Dev.release.xcconfig"; sourceTree = "<group>"; };
 		6BF942DD28D96E7B083B3DD5 /* Pods-Ashdod Live.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Ashdod Live.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Ashdod Live/Pods-Ashdod Live.debug.xcconfig"; sourceTree = "<group>"; };
 		760B209C23068F7500E96A12 /* CoreRouteStatus+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreRouteStatus+Ext.swift"; sourceTree = "<group>"; };
-		760B8BCB2424A64F005D893E /* CustomerModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomerModel.swift; sourceTree = "<group>"; };
 		760B8BD52424CF99005D893E /* SKUModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SKUModel.swift; sourceTree = "<group>"; };
 		760B8BD92424D740005D893E /* UOMModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UOMModel.swift; sourceTree = "<group>"; };
 		760C0A97233A134100BC2D9E /* RentingOrderDetailTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RentingOrderDetailTableViewCell.swift; sourceTree = "<group>"; };
@@ -2552,7 +2549,6 @@
 			children = (
 				760B8BD82424D735005D893E /* UOMModel */,
 				760B8BD32424CF8A005D893E /* SKUModel */,
-				760B8BC92424A642005D893E /* CustomerModel */,
 				76680B392423D4DB00CD578F /* BusinessOrder */,
 				761ED7A223A779C2005826B6 /* PurchaseOrderModel */,
 				76BFFD722339F60F0021E01A /* RentingOrderModel */,
@@ -3424,14 +3420,6 @@
 				3BF838D12189589A0056C4F1 /* BaseScrollMenuView.swift */,
 			);
 			path = BaseScrollMenuView;
-			sourceTree = "<group>";
-		};
-		760B8BC92424A642005D893E /* CustomerModel */ = {
-			isa = PBXGroup;
-			children = (
-				760B8BCB2424A64F005D893E /* CustomerModel.swift */,
-			);
-			path = CustomerModel;
 			sourceTree = "<group>";
 		};
 		760B8BD32424CF8A005D893E /* SKUModel */ = {
@@ -4356,7 +4344,6 @@
 				2A443B0522648C5A00CB6508 /* DriverModel.swift in Sources */,
 				2E1BE35622F191C4005F9BB5 /* ReturnedItemQuantityCell.swift in Sources */,
 				2A443B0622648C5A00CB6508 /* ScrollMenuCell.swift in Sources */,
-				760B8BCC2424A64F005D893E /* CustomerModel.swift in Sources */,
 				760B8BD62424CF99005D893E /* SKUModel.swift in Sources */,
 				2A443B0722648C5A00CB6508 /* CoreAttachFile+Ext.swift in Sources */,
 				2A443B0822648C5A00CB6508 /* ReasonSkipView.swift in Sources */,
@@ -4548,7 +4535,6 @@
 				3B66B8EB210B1149000BDFEF /* UserRole.swift in Sources */,
 				3B66B911210B1149000BDFEF /* OrderListViewController.swift in Sources */,
 				3B66B8FB210B1149000BDFEF /* ReasonListViewController.swift in Sources */,
-				760B8BCD2424A650005D893E /* CustomerModel.swift in Sources */,
 				3B66B917210B1149000BDFEF /* LoginViewController.swift in Sources */,
 				3B66B905210B1149000BDFEF /* PictureTableViewCell.swift in Sources */,
 				3B66B91D210B1149000BDFEF /* BaseNV.swift in Sources */,

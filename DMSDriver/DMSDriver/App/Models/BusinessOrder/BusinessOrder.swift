@@ -32,7 +32,8 @@ enum BusinessOrderType: String {
 enum BusinessOrderInfoRow: Int {
     case ORDER_TYPE = 0
     case CUSTOMER
-    case DUE_DATE
+    case DUE_DATE_FROM
+    case DUE_DATE_TO
     case REMARK
 }
 
@@ -45,6 +46,7 @@ enum BusinessOrderAddressInfoRow: Int {
     case CLOSE_TIME
     case CONSIGNEE_NAME
     case CONSIGNEE_PHONE
+    case ZONE
 }
 
 enum BusinessOrderSKUInfoRow: Int {
@@ -64,6 +66,7 @@ enum RequireRow {
     case Address
     case OpenTime
     case CloseTime
+    case Zone
     case None
 }
 
@@ -142,7 +145,9 @@ class BusinessOrder: Order {
     var dueDate:String?
     var dueDateFrom: String?
     var dueDateTo: String?
-    var customerBO:CustomerModel?
+    var customerId: String?
+    var customerLocationId: String?
+    var wareHouseId: String?
     
     override init() {
         super.init()
@@ -158,16 +163,19 @@ class BusinessOrder: Order {
         zoneId <- map["zone_id"]
         referenceCode <- map["ref_code"]
         dueDate <- map["due_dt"]
-        status <- map["business_status"]
-        typeID <- map["business_type_id"]
-        zone <- map["business_zone"]
-        from <- map["business_from"]
-        to <- map["business_to"]
-        division <- map["business_division"]
-        customer <- map["business_customer"]
-        details <- map["business_details"]
+        status <- map["purchase_status"]
+        typeID <- map["purchase_type_id"]
+        zone <- map["purchase_zone"]
+        from <- map["purchase_from"]
+        to <- map["purchase_to"]
+        division <- map["purchase_division"]
+        customer <- map["purchase_customer"]
+        details <- map["purchase_details"]
         dueDateFrom <- map["due_dt_from"]
         dueDateTo <- map["due_dt_to"]
+        customerId <- map["cus_id"]
+        customerLocationId <- map["cus_loc_id"]
+        wareHouseId <- map["whs_id"]
     }
     
     func isRequireEdit(_ content: String?,_ requireSection: RequireRow) -> Bool {
@@ -191,6 +199,8 @@ class BusinessOrder: Order {
                 return true
             case .CloseTime:
                 return true
+            case .Zone:
+                return true
             case .None:
                 return false
             }
@@ -200,4 +210,3 @@ class BusinessOrder: Order {
     }
 }
 
-class ZoneModel:BasicModel { }

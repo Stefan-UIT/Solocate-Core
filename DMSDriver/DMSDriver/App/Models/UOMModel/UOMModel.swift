@@ -9,18 +9,4 @@
 import Foundation
 import ObjectMapper
 
-class UOMModel: BasicModel {
-    var customers:[CustomerModel]?
-    
-    override init() {
-        super.init()
-    }
-    
-    required init?(map: Map) {
-        super.init()
-    }
-    
-    override func mapping(map: Map) {
-        customers <- map["customers"]
-    }
-}
+class UOMModel: BasicModel { }

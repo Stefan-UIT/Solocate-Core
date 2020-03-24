@@ -30,7 +30,7 @@ struct BusinessOrderForRow {
         self.textColor = textColor
         self.isEditingBO = isEditing
         self.style = style
-        self.data = data ?? nil
+        self.data = item ?? nil
         self.isRequire = isRequire
     }
 }
@@ -76,7 +76,7 @@ class BusinessOrderPickerTableViewCell: UITableViewCell {
         isEditingBO = item.isEditingBO
         if isEditingBO {
             requireMarkLabel.isHidden = !isRequire
-            let isOption = dropDownType == DropDownType.OrderType || dropDownType == DropDownType.Customer || dropDownType == DropDownType.Address || dropDownType == DropDownType.SKU || dropDownType == DropDownType.UOM
+            let isOption = dropDownType == DropDownType.OrderType || dropDownType == DropDownType.Customer || dropDownType == DropDownType.Address || dropDownType == DropDownType.SKU || dropDownType == DropDownType.UOM || dropDownType == DropDownType.Zone
             let displayMessage = isOption ? "please-select" : "tap-to-edit"
             let textString = (item.content == "-" || item.content == "") ? displayMessage : item.content
             contentEditLabel?.text = textString

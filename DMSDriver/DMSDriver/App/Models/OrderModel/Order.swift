@@ -149,6 +149,8 @@ class Address: BaseModel {
     var actualTime:String?
     var openTime:String?
     var closeTime: String?
+    var customers:[UserModel.UserInfo]?
+    var types:[BasicModel]?
     
     override init() {
         super.init()
@@ -162,6 +164,12 @@ class Address: BaseModel {
         id <- map["id"]
         address <- map["address"]
         lattd <- map["lattd"]
+        if lattd == nil {
+            lattd <- map["latitude"]
+        }
+        if lngtd == nil {
+            lngtd <- map["longitude"]
+        }
         lngtd <- map["lngtd"]
         name <- map["ctt_name"]
         phone <- map["ctt_phone"]
@@ -178,6 +186,8 @@ class Address: BaseModel {
         actualTime <- map["act_time"]
         openTime <- map["open_time"]
         closeTime <- map["close_time"]
+        customers <- map["customers"]
+        types <- map["types"]
     }
     
     func toCoreLocation(context:NSManagedObjectContext) -> CoreLocation {
@@ -324,6 +334,13 @@ class Order: BaseModel {
         var wmsOrderCode:String?
         // NEW
         var pivot:Pivot?
+        
+        // BusinessOrder
+        var skuId: String?
+        var qty: Int?
+        var unitId: Int?
+        var batchId: String?
+        
         var isPallet:Bool {
             get {
                 return package?.cd == PackageE.Pallet.rawValue
@@ -366,6 +383,12 @@ class Order: BaseModel {
             unit <- map["unit"]
             pivot <- map["pivot"]
             refCode <- map["ref_cd"]
+            
+            // Business Order
+            skuId <- map["sku_id"]
+            qty <- map["qty"]
+            unitId <- map["unit_id"]
+            batchId <- map["batch_id"]
         }
         
         enum DetailUpdateType {

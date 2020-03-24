@@ -22,10 +22,21 @@ extension BaseAPIService {
         if let _statusId = status?.id {
             path = path + "&business_status_ids=\(_statusId)"
         }
-        path = path + "&page=\(page)&limit=10"
+        path = path + "&page=\(page)&limit=10&sort[purchase_order_id]=desc&"
         return request(method: .GET,
                        path:path,
                        input: APIInput.empty,
+                       callback: callback);
+    }
+    
+    @discardableResult
+    func createBusinessOrder(order:BusinessOrder, callback: @escaping APICallback<ResponseDataModel<ResponseDataListModel<BusinessOrder>>>) -> APIRequest {
+        
+        let path = PATH_REQUEST_URL.CREATE_BUSINESS_ORDER.URL
+        let params = order.toJSON()
+        return request(method: .POST,
+                       path:path,
+                       input: .json(params),
                        callback: callback);
     }
     
@@ -39,12 +50,18 @@ extension BaseAPIService {
     }
     
     @discardableResult
-    func getCustomerList(callback: @escaping APICallback<ResponseDataListModel<CustomerModel>>) -> APIRequest {
+    func getCustomerList(callback: @escaping APICallback<ResponseDataListModel<UserModel.UserInfo>>) -> APIRequest {
         let url = String(format:PATH_REQUEST_URL.GET_CUSTOMER_LIST.URL)
         return request(method: .GET,
                        path: url,
                        input: .empty,
                        callback: callback);
+    }
+    
+    @discardableResult
+    func getLocationsList(callback: @escaping APICallback<ResponseDataListModel<Address>>) -> APIRequest {
+        let url = String(format:PATH_REQUEST_URL.GET_LOCATION_LIST.URL)
+        return request(method: .GET, path: url, input: .empty, callback: callback)
     }
 
     @discardableResult
@@ -66,7 +83,7 @@ extension BaseAPIService {
     }
     
     @discardableResult
-    func getZoneList(callback: @escaping APICallback<ResponseDataListModel<ZoneModel>>) -> APIRequest {
+    func getZoneList(callback: @escaping APICallback<ResponseDataListModel<Zone>>) -> APIRequest {
         let url = String(format:PATH_REQUEST_URL.GET_ZONE_LIST.URL)
         return request(method: .GET,
                        path: url,

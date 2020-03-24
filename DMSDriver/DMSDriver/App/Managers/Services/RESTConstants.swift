@@ -23,8 +23,8 @@ enum PATH_REQUEST_URL: String{
     case GET_RAMP_ROUTES_BY_DATE = "transaction/v1/mobile/routes/by-ramp?start_time=%@&end_time=%@"
     case GET_ROUTES_LIST = "transaction/v1/routes?from_start_time=%@&to_start_time=%@"
     case GET_RENTING_ORDERS = "transaction/v1/renting-orders?from_dt=%@&to_dt=%@"
-    case GET_PURCHASE_ORDERS = "transaction/v1/purchase-orders?due_dt_from=%@&due_dt_to=%@"
-    case GET_BUSINESS_ORDERS = "transaction/v1/business-orders?due_dt_from=%@&due_dt_to=%@"
+    case GET_PURCHASE_ORDERS = "transaction/v1/purchase-orders?due_dt_from=%@&due_dt_to=%@-----remove"
+    case GET_BUSINESS_ORDERS = "transaction/v1/purchase-orders?due_dt_from=%@&due_dt_to=%@"
     case GET_ROUTE_BY_COORDINATOR = "backend-api/v1/routes/all-route-by-coordinator?date=%@"
     case GET_PACKAGES_IN_ROUTE = "backend-api/v1/routes/get-packages-by-driver?id=%@&date=%@"
 //    case GET_ORDER_DETAIL = "transaction/v1/orders/%@"
@@ -93,10 +93,12 @@ enum PATH_REQUEST_URL: String{
     case GET_RETURN_REASON_LIST = "masterdata/v1/return-reasons/list-active"
     case REQUEST_MORE_LEGS = "transaction/v1/shipping-orders/%@/check-more-legs"
     case GET_MORE_LEGS = "transaction/v1/shipping-orders/%@/more-legs"
-    case GET_CUSTOMER_LIST = "masterdata/v1/locations/list-active"
+    case GET_CUSTOMER_LIST = "auth/v1/admin/users/by-role/BCO"
+    case GET_LOCATION_LIST = "masterdata/v1/locations/list-active"
     case GET_SKU_LIST = "masterdata/v1/sku/list-active"
     case GET_UOM_LIST = "masterdata/v1/units/list-active"
     case GET_ZONE_LIST = "masterdata/v1/zones/list-active"
+    case CREATE_BUSINESS_ORDER = "transaction/v1/purchase-orders"
     
     var URL:String  {
         return rawValue

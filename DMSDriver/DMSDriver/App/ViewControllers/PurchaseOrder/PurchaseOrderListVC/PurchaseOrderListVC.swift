@@ -76,7 +76,7 @@ class PurchaseOrderListVC: BaseViewController {
     
     func setupNavigateBar() {
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.Filter_Menu, "".localized)
+        App().navigationService.updateNavigationBar(.Filter_Button, "".localized)
     }
     
     func setupTableView() {
@@ -164,6 +164,13 @@ extension PurchaseOrderListVC:DMSNavigationServiceDelegate {
     //    func didSelectedBackOrMenu() {
     //        showSideMenu()
     //    }
+    
+    func didSelectedAddButton(_ sender: UIBarButtonItem) {
+        let vc:BusinessOrderDetailVC = PurchaseOrderDetailVC.loadSB(SB: .BusinessOrder)
+        vc.order = BusinessOrder()
+        vc.isEditingBO = true
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
     func didSelectedMenuAction() {
         showSideMenu()

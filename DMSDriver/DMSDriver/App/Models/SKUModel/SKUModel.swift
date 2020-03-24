@@ -9,8 +9,8 @@
 import Foundation
 import ObjectMapper
 
-class SKUModel: BusinessOrder.Detail {
-    var customers:[CustomerModel]?
+class SKUModel: Order.Detail {
+    var customers:[UserModel.UserInfo]?
     
     var itemContent:[String] = []
     var skuTitle:String = "sku".localized
@@ -36,12 +36,13 @@ class SKUModel: BusinessOrder.Detail {
     override init() {
         super.init()
     }
-    
+
     required init?(map: Map) {
         super.init()
     }
     
     override func mapping(map: Map) {
+        super.mapping(map: map)
         customers <- map["customers"]
     }
     
