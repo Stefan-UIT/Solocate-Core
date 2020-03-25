@@ -29,11 +29,26 @@ enum BusinessOrderType: String {
     }
 }
 
+enum BusinessOrderCOD: String {
+    case YES = "Yes"
+    case NO =  "No"
+    
+    var id: Int {
+        switch self {
+        case .NO:
+            return 0
+        case .YES:
+            return 1
+        }
+    }
+}
+
 enum BusinessOrderInfoRow: Int {
     case ORDER_TYPE = 0
     case CUSTOMER
     case DUE_DATE_FROM
     case DUE_DATE_TO
+    case COD
     case REMARK
 }
 
@@ -148,6 +163,7 @@ class BusinessOrder: Order {
     var customerId: String?
     var customerLocationId: String?
     var wareHouseId: String?
+    var cod:Int?
     
     override init() {
         super.init()
@@ -176,6 +192,7 @@ class BusinessOrder: Order {
         customerId <- map["cus_id"]
         customerLocationId <- map["cus_loc_id"]
         wareHouseId <- map["whs_id"]
+        cod <- map["cod"]
     }
     
     func isRequireEdit(_ content: String?,_ requireSection: RequireRow) -> Bool {

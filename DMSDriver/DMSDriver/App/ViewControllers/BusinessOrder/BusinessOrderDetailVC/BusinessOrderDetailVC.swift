@@ -49,7 +49,6 @@ class BusinessOrderDetailVC: BaseViewController {
     private var skuItems:[BusinessOrder.Detail] = []
     private var uomItem = BasicModel()
     
-    var dateStringFilter = Date().toString()
     var order:BusinessOrder?
     var isEditingBO:Bool = false
     var customerList:[UserModel.UserInfo] = []
@@ -65,20 +64,19 @@ class BusinessOrderDetailVC: BaseViewController {
     var zones:[Zone] = []
     
     var isOrderInfoFilled:Bool = false
+    var isEnableSubmit:Bool = false
     var currentIndexPath:IndexPath?
     var currentTag:Int?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         updateUI()
-//        fetchData(showLoading: true)
         initVar()
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-//        fetchData(showLoading: true)
     }
     
     override func updateNavigationBar() {
@@ -141,6 +139,7 @@ class BusinessOrderDetailVC: BaseViewController {
             _order = order!
         }
         businessOrderInfo.removeAll()
+        businessOrderItem.removeAll()
         
         let orderTypeString = _order.orderType.name
         let orderType = BusinessOrderForRow(title: "order-type".localized,
@@ -150,11 +149,11 @@ class BusinessOrderDetailVC: BaseViewController {
                                             isRequire: _order.isRequireEdit(orderTypeString, .OrderType))
         let itemCustomer = DropDownModel().addCustomers(customerList)
         let customer = BusinessOrderForRow(title: "customer".localized,
-                                           content: Slash(_order.customer_name),
+                                           content: Slash(_order.customer?.userName),
                                            isEditing: isEditingBO,
                                            style: .Customer,
                                            itemCustomer,
-                                           isRequire: _order.isRequireEdit(_order.customer_name, .Customer))
+                                           isRequire: _order.isRequireEdit(_order.customer?.userName, .Customer))
         let dueDateFrom = BusinessOrderForRow(title: "due-date-from".localized,
                                           content: Slash(_order.dueDateFrom),
                                           isEditing: isEditingBO,
@@ -165,6 +164,14 @@ class BusinessOrderDetailVC: BaseViewController {
                                             isEditing: isEditingBO,
                                             style: .Calendar,
                                             isRequire: _order.isRequireEdit(_order.dueDateTo, .DueDate))
+    
+        let codContent = _order.id == BusinessOrderCOD.YES.id ? BusinessOrderCOD.YES.rawValue : BusinessOrderCOD.NO.rawValue
+        let cashOnDelivery = BusinessOrderForRow(title: "cash-on-delivery".localized,
+                                                 content: Slash(codContent),
+                                                 isEditing: isEditingBO,
+                                                 style: .COD,
+                                                 isRequire: _order.isRequireEdit(codContent, .None))
+        
         let remark = BusinessOrderForRow(title: "remark".localized,
                                           content: Slash(_order.remark),
                                           isEditing: isEditingBO,
@@ -175,7 +182,11 @@ class BusinessOrderDetailVC: BaseViewController {
         businessOrderInfo.append(customer)
         businessOrderInfo.append(dueDateFrom)
         businessOrderInfo.append(dueDateTo)
+        businessOrderInfo.append(cashOnDelivery)
         businessOrderInfo.append(remark)
+        if isEditingBO {
+            addNewSKU()
+        }
         setupDataAddressAndSKUInRow()
     }
     
@@ -187,7 +198,6 @@ class BusinessOrderDetailVC: BaseViewController {
         
         businessOrderPickupInfo.removeAll()
         businessOrderDeliveryInfo.removeAll()
-        businessOrderItem.removeAll()
         // pick-up
         let orderPU = _order.from
         let itemPickUp = DropDownModel().addLocations(addressPickUpList)
@@ -302,19 +312,21 @@ class BusinessOrderDetailVC: BaseViewController {
         
         //item
         tbvContent?.reloadData()
-        guard let details = _order?.details else { return }
-        if details.count != 0 {
-            for (_,detail) in _order.details!.enumerated() {
-                let skuItem = SKUModel().createSKUItem(skuContent: Slash(detail.name),
-                                                       skuDataList: skuList,
-                                                       uomDataList: uomList,
-                                                       qtyContent: IntSlash(detail.pivot?.qty),
-                                                       uomContent: Slash(detail.pivot?.uom?.name),
-                                                       batchContent: Slash(detail.pivot?.batch_id))
-                businessOrderItem.append(skuItem)
+        if !isEditingBO {
+            guard let details = _order?.details else { return }
+            if details.count != 0 {
+                for (_,detail) in _order.details!.enumerated() {
+                    let skuItem = SKUModel().createSKUItem(skuContent: Slash(detail.name),
+                                                           skuDataList: skuList,
+                                                           uomDataList: uomList,
+                                                           qtyContent: IntSlash(detail.pivot?.qty),
+                                                           uomContent: Slash(detail.pivot?.uom?.name),
+                                                           batchContent: Slash(detail.pivot?.batch_id))
+                    businessOrderItem.append(skuItem)
+                }
             }
+            tbvContent?.reloadData()
         }
-        tbvContent?.reloadData()
     }
     
     override func updateUI()  {
@@ -323,7 +335,7 @@ class BusinessOrderDetailVC: BaseViewController {
         if isEditingBO {
             setupDataList()
         } else {
-            setupDataDetailInfoforRows()
+            fetchData(showLoading: true)
         }
         
         tbvContent?.reloadData()
@@ -470,6 +482,9 @@ extension BusinessOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
         let section:BusinessOrderSection = BusinessOrderSection(rawValue: indexPath.section)!
         switch section {
         case .Submit:
+            if !isEnableSubmit {
+                return
+            }
             guard let _order = order else { return }
             self.submitCreateBO(order: _order)
         @unknown default:
@@ -478,7 +493,7 @@ extension BusinessOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        let isCanEdit = self.isEditingBO
+        let isCanEdit = self.isEditingBO && skuItems.count > 1
         return isCanEdit
     }
     
@@ -514,6 +529,8 @@ extension BusinessOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
     
     func businessOrderConfirmInfoCell(_ tableView: UITableView, _ indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: businessConfirmCellIndentifier, for: indexPath) as! BusinessOrderConfirmTableViewCell
+        cell.submitView.backgroundColor = isEnableSubmit ? AppColor.greenColor : AppColor.grayColor
+        cell.submitView.textColor = isEnableSubmit ? AppColor.white : AppColor.black
         cell.selectionStyle = .none
         return cell
     }
@@ -553,21 +570,9 @@ extension BusinessOrderDetailVC: BusinessOrderPickerTableViewCellDelegate {
 }
 
 extension BusinessOrderDetailVC: DropDownViewControllerDelegate {
-    func didSelectTime(item: String) {
-        editItemInRow(item)
-    }
     
     func didSelectItem(item: DropDownModel) {
-        editItemInRow(nil, item)
-    }
-    
-    func didDoneEditText(item: String) {
         editItemInRow(item)
-    }
-    
-    func didSelectDate(date: Date) {
-        let contentText = OnlyDateFormater.string(from: date)
-        editItemInRow(contentText)
     }
     
     
@@ -600,10 +605,10 @@ extension BusinessOrderDetailVC: OrderDetailTableViewCellDelegate {
 //MARK: API
 extension BusinessOrderDetailVC {
     func fetchData(showLoading:Bool = false)  {
-        getRentingOrderDetail()
+        getBusinessOrderDetail()
     }
     
-    private func getRentingOrderDetail(isFetch:Bool = false) {
+    private func getBusinessOrderDetail(isFetch:Bool = false) {
         if ReachabilityManager.isNetworkAvailable {
             guard let _orderID = order?.id else { return }
             if !isFetch {
@@ -616,7 +621,7 @@ extension BusinessOrderDetailVC {
                     guard let _orderDetail = object.data else { return }
                     self?.order = _orderDetail
                     self?.initVar()
-                    self?.updateUI()
+                    self?.setupDataDetailInfoforRows()
                 //                    CoreDataManager.updateOrderDetail(_orderDetail) // update orderdetail to DB local
                 case .error(let error):
                     self?.showAlertView(error.getMessage())
@@ -731,15 +736,14 @@ extension BusinessOrderDetailVC {
         checkOrderTypeRow()
         checkCustomerRow()
         checkOrderInfoFilled()
+        checkRequire()
     }
     
     func renewAddressSKUData() {
         businessOrderPickupInfo.removeAll()
         businessOrderDeliveryInfo.removeAll()
-        businessOrderItem.removeAll()
         order?.from = nil
         order?.to = nil
-        order?.details = []
         setupDataAddressAndSKUInRow()
     }
     
@@ -807,8 +811,6 @@ extension BusinessOrderDetailVC {
         
         skuList = []
         uomList = []
-//        addressPickUpList = []
-//        addressDeliveryList = []
         var tempSKUList:[SKUModel] = []
         
         var listIDCustomers:[Int] = []
@@ -824,7 +826,10 @@ extension BusinessOrderDetailVC {
                 }
             }
         }
-        
+        // This code add SKU/UOM Datalist for First businessOrderItem because we create null data in first time access BODetailVC
+        businessOrderItem.first?.skuDataList = tempSKUList
+        businessOrderItem.first?.uomDataList = _uoms
+        //
         skuList = tempSKUList
         uomList = _uoms
     }
@@ -834,20 +839,25 @@ extension BusinessOrderDetailVC {
         tbvContent?.reloadData()
     }
     
-    func editItemInRow(_ result:String? = nil, _ item:DropDownModel? = nil) {
+    func checkRequire() {
+        isEnableSubmit = order?.typeID != nil && order?.customer != nil && (order?.dueDateFrom != nil || order?.dueDateFrom?.isEmpty == false) &&  (order?.dueDateTo?.isEmpty == false || order?.dueDateTo != nil) && order?.from != nil && order?.to != nil && order?.zoneId != nil && order?.details != nil
+        tbvContent?.reloadData()
+    }
+    
+    func editItemInRow(_ item:DropDownModel) {
         guard let _indexPath = currentIndexPath else { return }
         let section = _indexPath.section
         let row = _indexPath.row
         let sectionInfo:BusinessOrderSection = BusinessOrderSection(rawValue: section)!
         switch sectionInfo {
         case .OrderInfo:
-            editOrderInfo(row: row, result: result, item: item)
+            editOrderInfo(row: row, item: item)
         case .Pickup:
-            editOrderPickupInfo(row: row, result: result, item: item)
+            editOrderPickupInfo(row: row, item: item)
         case .Delivery:
-            editOrderDeliveryInfo(row: row, result: result, item: item)
+            editOrderDeliveryInfo(row: row, item: item)
         case .SKUS:
-            editOrderSKUInfo(row: row, index: (currentTag ?? 0), result: result, item: item)
+            editOrderSKUInfo(row: row, index: (currentTag ?? 0), item: item)
         case .Submit:
             break
         }
@@ -855,12 +865,12 @@ extension BusinessOrderDetailVC {
         tbvContent?.reloadData()
     }
     
-    func editOrderInfo(row:Int, result:String?, item:DropDownModel?) {
-        var textContent = result
+    func editOrderInfo(row:Int, item:DropDownModel) {
+        var textContent = item.result
         let infoRow:BusinessOrderInfoRow = BusinessOrderInfoRow(rawValue: row)!
         switch infoRow {
         case .ORDER_TYPE:
-            guard let _orderType = item?.result, let _order = order else { return }
+            guard let _orderType = item.result, let _order = order else { return }
             order?.typeID = _orderType == BusinessOrderType.Pickup.rawValue ? BusinessOrderType.Pickup.typeId : BusinessOrderType.Delivery.typeId
             order?.orderType = OrderType(rawValue: _order.typeID)!
             textContent = order!.orderType.name
@@ -868,20 +878,22 @@ extension BusinessOrderDetailVC {
             renewAddressSKUData()
             addZone(isPickup: isPickup)
         case .CUSTOMER:
-            guard let _customer = item?.customers?.first else { return }
+            guard let _customer = item.customers?.first else { return }
             order?.customer = _customer
             order?.customerId = String(_customer.id)
             order?.customerLocationId = String(_customer.id)
             textContent = order?.customer_name
             renewAddressSKUData()
         case .DUE_DATE_FROM:
-            guard let _date = item?.date else { return }
+            guard let _date = item.date else { return }
             order?.dueDateFrom = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
             textContent = order?.dueDateFrom
         case .DUE_DATE_TO:
-            guard let _date = item?.date else { return }
+            guard let _date = item.date else { return }
             order?.dueDateTo = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
             textContent = order?.dueDateTo
+        case .COD:
+            order?.cod = textContent == BusinessOrderCOD.YES.rawValue ? BusinessOrderCOD.YES.id : BusinessOrderCOD.NO.id
         case .REMARK:
             order?.remark = textContent
         }
@@ -889,9 +901,9 @@ extension BusinessOrderDetailVC {
         setupViewAfterEdit()
         tbvContent?.reloadData()
     }
-    func editOrderPickupInfo(row:Int,result:String?,item:DropDownModel?) {
+    func editOrderPickupInfo(row:Int, item:DropDownModel?) {
         let infoRow:BusinessOrderAddressInfoRow = BusinessOrderAddressInfoRow(rawValue: row)!
-        var textContent = result
+        var textContent = item?.result
         switch infoRow {
         case .ADDRESS:
             guard let _address = item?.locations?.first else { return }
@@ -922,7 +934,7 @@ extension BusinessOrderDetailVC {
         case .ZONE:
             guard let _zone = item?.zones?.first else { return }
             let zone:Zone = _zone
-            order?.zone = zone
+            order?.zoneId = order?.zone?.id
             textContent = zone.name
         }
         businessOrderPickupInfo[row].content = Slash(textContent)
@@ -935,9 +947,9 @@ extension BusinessOrderDetailVC {
         setupViewAfterEdit()
     }
     
-    func editOrderDeliveryInfo(row:Int,result:String?,item:DropDownModel?) {
+    func editOrderDeliveryInfo(row:Int,item:DropDownModel?) {
         let infoRow:BusinessOrderAddressInfoRow = BusinessOrderAddressInfoRow(rawValue: row)!
-        var textContent = result
+        var textContent = item?.result
         switch infoRow {
         case .ADDRESS:
             guard let _address = item?.locations?.first else { return }
@@ -982,9 +994,9 @@ extension BusinessOrderDetailVC {
         setupViewAfterEdit()
     }
     
-    func editOrderSKUInfo(row: Int,index: Int, result:String?,item:DropDownModel?) {
+    func editOrderSKUInfo(row: Int,index: Int, item:DropDownModel?) {
         let index:BusinessOrderSKUInfoRow = BusinessOrderSKUInfoRow(rawValue: index)!
-        var textContent = result
+        var textContent = item?.result
         if skuItems[row].pivot == nil {
             let json:[String:Any] = ["qty":0, "uom":["id":0,
                                                      "name":"",

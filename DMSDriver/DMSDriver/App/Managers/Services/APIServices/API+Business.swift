@@ -17,7 +17,7 @@ extension BaseAPIService {
             endDate = DateFormatter.displayDateUS.string(from: filterMode.timeData?.endDate ?? Date())
         }
         let status = filterMode.status
-        let urlString = PATH_REQUEST_URL.GET_BUSINESS_ORDERS.URL
+        let urlString = PATH_REQUEST_URL.GET_PURCHASE_ORDERS.URL
         var path = String(format: urlString,startDate,endDate)
         if let _statusId = status?.id {
             path = path + "&business_status_ids=\(_statusId)"
@@ -42,7 +42,7 @@ extension BaseAPIService {
     
     @discardableResult
     func getBusinessOrderDetail(orderId:String, callback: @escaping APICallback<ResponseDataModel<BusinessOrder>>) -> APIRequest {
-        let url = String(format:PATH_REQUEST_URL.GET_BUSINESS_ORDER_DETAIL.URL , orderId)
+        let url = String(format:PATH_REQUEST_URL.GET_PURCHASE_ORDER_DETAIL.URL , orderId)
         return request(method: .GET,
                        path: url,
                        input: .empty,

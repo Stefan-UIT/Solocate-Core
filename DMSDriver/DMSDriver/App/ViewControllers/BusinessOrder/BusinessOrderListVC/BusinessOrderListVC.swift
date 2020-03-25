@@ -61,64 +61,6 @@ class BusinessOrderListVC: BaseViewController {
         lblDate?.text = date + " for " + dateTitle + " " + dateString
     }
     
-    //demo
-    private func hardcoreData() {
-        let fakeOrder = BusinessOrder()
-        fakeOrder.divisionId = 5
-        fakeOrder.dueDate = "13/12/2020"
-        fakeOrder.id = 234
-        fakeOrder.typeID = 1
-        
-        let fakeCustomer = UserModel.UserInfo()
-        fakeCustomer.firstName = "Seldat"
-        fakeCustomer.lastName = "Inc"
-        fakeCustomer.userName = "Orgit"
-        fakeOrder.customer = fakeCustomer
-        fakeOrder.remark = "TEST REMARK"
-        fakeOrder.startTime = "2019-10-21 12:22:33"
-        fakeOrder.endTime = "2019-10-21 22:22:33"
-        fakeOrder.dueDateFrom = "2019-10-22 12:22:33"
-        fakeOrder.dueDateTo = "2019-10-22 14:22:33"
-        fakeOrder.status = Status()
-        let fakeStatus = Status()
-        fakeStatus.id = 0
-        fakeStatus.name = "New"
-        fakeStatus.code = "NW"
-        fakeOrder.status = fakeStatus
-        let fakeFrom = Address()
-        fakeFrom.address = "72/24 Phan Dang Luu Phuong 15 Quan Phu Nhuan"
-        fakeFrom.floor = "4th"
-        fakeFrom.apartment = "Seldat"
-        fakeFrom.number = "01"
-        fakeFrom.openTime = "14:30"
-        fakeFrom.closeTime = "16:30"
-        fakeFrom.ctt_name = "Trung Vo"
-        fakeFrom.ctt_phone = "099999999"
-        
-        let fakeTo = Address()
-        fakeTo.address = "268 To Hien Thanh Quan 10"
-        fakeTo.floor = "2th"
-        fakeTo.apartment = "Mirae"
-        fakeTo.number = "03"
-        fakeTo.openTime = "19:30"
-        fakeTo.closeTime = "20:30"
-        fakeTo.ctt_name = "Phong Nguyen"
-        fakeTo.ctt_phone = "099999999"
-        
-        let fakeSKU =  BusinessOrder.Detail()
-        fakeSKU.name = "SKU01"
-        let jsonPivot:[String : Any] = ["qty":1000,"batch_id":"205","uom":["name":"Piece 1"]]
-        let fakePivot = BusinessOrder.Detail.Pivot(JSON: jsonPivot)
-        fakeSKU.pivot = fakePivot
-        
-        fakeOrder.from = fakeFrom
-        fakeOrder.to = fakeTo
-        fakeOrder.details = []
-        fakeOrder.details?.append(fakeSKU)
-        
-        order.append(fakeOrder)
-    }
-    
     override func updateNavigationBar() {
         setupNavigateBar()
     }
@@ -149,8 +91,7 @@ class BusinessOrderListVC: BaseViewController {
     }
     
     @objc func fetchData(isShowLoading:Bool = true)  {
-        self.hardcoreData()
-//        getBusinessOrders(filterMode: filterModel, isShowLoading: isShowLoading, isFetch: true)
+        getBusinessOrders(filterMode: filterModel, isShowLoading: isShowLoading, isFetch: true)
     }
     
     //    func updateRouteList(routeNeedUpdate:Route) {

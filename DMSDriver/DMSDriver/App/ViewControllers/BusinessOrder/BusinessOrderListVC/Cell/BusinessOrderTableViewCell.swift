@@ -17,6 +17,8 @@ class BusinessOrderTableViewCell: UITableViewCell {
     @IBOutlet weak var orderTypeLabel: UILabel!
     @IBOutlet weak var customerNameLabel: UILabel!
     @IBOutlet weak var remarkLabel: UILabel!
+    @IBOutlet weak var itemsLabel: UILabel!
+    
     var purchaseOrder:BusinessOrder!
     
     override func awakeFromNib() {
@@ -50,8 +52,9 @@ class BusinessOrderTableViewCell: UITableViewCell {
         dueDateLabel.text = startDate + " - " + endDate
         
         orderTypeLabel.text = Slash(businessOrder.orderType.name)
-        customerNameLabel.text = Slash(businessOrder.customer_name)
-        remarkLabel.text = IntSlash(businessOrder.details?.count)
+        customerNameLabel.text = Slash(businessOrder.customer?.userName)
+        remarkLabel.text = Slash(businessOrder.remark)
+        itemsLabel.text = IntSlash(businessOrder.details?.count)
     }
 
 }

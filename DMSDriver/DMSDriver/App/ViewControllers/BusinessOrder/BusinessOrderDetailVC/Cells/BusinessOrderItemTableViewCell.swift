@@ -32,6 +32,8 @@ class BusinessOrderItemTableViewCell: UITableViewCell {
     
     @IBOutlet var iconButtons:[UIButton]!
     
+    @IBOutlet var requireLabel: [UILabel]!
+    
     weak var delegate: BusinessOrderItemTableViewCellDelegate?
     var item:SKUModel? {
         didSet {
@@ -70,6 +72,9 @@ class BusinessOrderItemTableViewCell: UITableViewCell {
         quantityLbl.isHidden = isEditingBO
         uomLabel.isHidden = isEditingBO
         batchIdLbl.isHidden = isEditingBO
+        for (_,label) in requireLabel.enumerated() {
+            label.isHidden = !isEditingBO
+        }
         
         let skuContent =  item.itemContent[SKU_CONTENT_INDEX]
         let qtyContent = item.itemContent[QTY_CONTENT_INDEX]

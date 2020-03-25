@@ -14,6 +14,7 @@ enum DropDownType {
     case Calendar
     case OrderType
     case Customer
+    case COD
     case Address
     case SKU
     case UOM
@@ -22,8 +23,6 @@ enum DropDownType {
 
 protocol DropDownViewControllerDelegate: NSObjectProtocol {
     func didSelectItem(item:DropDownModel)
-    func didDoneEditText(item:String)
-    func didSelectTime(item:String)
 }
 
 class DropDownModel: BasicModel {
@@ -62,6 +61,11 @@ class DropDownModel: BasicModel {
     
     func addDate(_ date:Date) -> DropDownModel {
         self.date = date
+        return self
+    }
+    
+    func addText(_ text:String) -> DropDownModel {
+        self.result = text
         return self
     }
 }
@@ -136,7 +140,7 @@ class DropDownViewController: UIViewController {
             break
         case .UOM:
             break
-        case .OrderType, .Customer, .SKU, .Zone:
+        case .OrderType, .Customer, .SKU, .Zone, .COD:
             textFieldView.isHidden = true
             textFieldViewHeightConstraint.constant = 0
             contentViewHeightConstraint.constant = CONTENT_VIEW_HEIGHT - TEXT_FIELD_HEIGHT
@@ -160,6 +164,7 @@ class DropDownViewController: UIViewController {
         datePickerView.datePickerMode = .dateAndTime
         let date = Date()
         datePickerView.minimumDate = date
+        datePickerView.maximumDate = date
     }
     
     func setupKeyboard() {
@@ -183,6 +188,8 @@ class DropDownViewController: UIViewController {
         case .Customer:
             guard let _customers = itemDropDown?.customers else { return }
             itemsOrigin = _customers
+        case .COD:
+            itemsOrigin = ["yes".localized, "no".localized]
         case .Address:
             guard let _locations = itemDropDown?.locations else { return }
             itemsOrigin = _locations
@@ -241,7 +248,8 @@ class DropDownViewController: UIViewController {
     }
     
     @IBAction func tapOKTextFieldBtn(_ sender: Any) {
-        delegate?.didDoneEditText(item: editString ?? "")
+        let item = DropDownModel().addText(editString ?? "")
+        delegate?.didSelectItem(item: item)
         self.dismiss()
     }
     
@@ -260,7 +268,8 @@ class DropDownViewController: UIViewController {
     @IBAction func didTapPickerOKBtn(_ sender: UIButton) {
         switch dropDownStyle {
         case .Time:
-            delegate?.didSelectTime(item: timePicker ?? "")
+            let item = DropDownModel().addText(timePicker ?? "")
+            delegate?.didSelectItem(item: item)
             self.dismiss()
         case .Calendar:
             let item = DropDownModel().addDate(datePicker ?? Date())
@@ -317,6 +326,8 @@ extension DropDownViewController: UITableViewDelegate, UITableViewDataSource {
         case .Customer:
             let item = itemsDisplay as! [UserModel.UserInfo]
             cell.configureCell(item[indexPath.row].userName ?? "")
+        case .COD:
+            cell.configureCell(itemsDisplay[indexPath.row] as! String)
         case .Address:
             let item = itemsDisplay as! [Address]
             cell.configureCell(item[indexPath.row].address ?? "")
@@ -344,6 +355,9 @@ extension DropDownViewController: UITableViewDelegate, UITableViewDataSource {
         case .Customer:
             let itemSelect = itemsDisplay[indexPath.row] as? UserModel.UserInfo
             item.customers = [itemSelect] as? [UserModel.UserInfo]
+        case .COD:
+            let text = itemsDisplay[indexPath.row] as! String
+            item.result = text
         case .Address:
             let itemSelect = itemsDisplay[indexPath.row] as? Address
             item.locations = [itemSelect] as? [Address]
