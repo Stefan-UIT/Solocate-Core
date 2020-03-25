@@ -629,6 +629,10 @@ class Order: BaseModel {
     var remarkDriver:String?
     var remarkLocation:String?
     
+    var dueDate:String?
+    var dueDateFrom: String?
+    var dueDateTo: String?
+    
     // NEW
     var division:BasicModel?
     var zone:BasicModel?
@@ -793,6 +797,9 @@ class Order: BaseModel {
         remarkLocation <- map["remark_location"]
         division <- map["shipping_division"]
         zone <- map["shipping_zone"]
+        dueDate <- map["due_dt"]
+        dueDateFrom <- map["due_dt_from"]
+        dueDateTo <- map["due_dt_to"]
     }
     
     
