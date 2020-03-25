@@ -33,6 +33,7 @@ enum PATH_REQUEST_URL: String{
     case GET_PURCHASE_ORDER_DETAIL = "transaction/v1/purchase-orders/%@"
     case GET_BUSINESS_ORDER_DETAIL = "transaction/v1/business-orders/%@"
 //    case UPDATE_ORDER_STATUS = "transaction/v1/mobile/orders/%@/%@"
+    case UPDATE_ROUTE_STATUS = "transaction/v1/routes/%@/change-state/%@"
     case UPDATE_ORDER_STATUS = "transaction/v1/shipping-orders/%@/change-state/%@"
     case UPDATE_RENTING_ORDER_DETAIL_STATUS = "transaction/v1/renting-orders/change-detail-status/%@"
     case UPDATE_ORDER = "transaction/v1/mobile/orders/%@"

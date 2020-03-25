@@ -168,6 +168,9 @@ class Route: BaseModel {
         case InProgess = "IP"
         case Finished = "DV"
         case Canceled = "CC"
+        case Draft = "DR"
+        case Accepted = "AC"
+        case Rejected = "RJ"
         
         var name: String {
             get {
@@ -180,18 +183,45 @@ class Route: BaseModel {
                     return "Finished".localized;
                 case .Canceled:
                     return "Cancelled".localized;
+                case .Draft:
+                    return "Draft".localized
+                case .Accepted:
+                    return "Accepted-by-driver".localized
+                case .Rejected:
+                    return "Rejected-by-driver".localized
                 }
             }
-            
+        }
+        
+        var id:Int {
+            get {
+                switch self {
+                case .New:
+                    return 1
+                case .InProgess:
+                    return 2
+                case .Finished:
+                    return 3
+                case .Canceled:
+                    return 4
+                case .Draft:
+                    return 5
+                case .Accepted:
+                    return 6
+                case .Rejected:
+                    return 7
+                }
+            }
         }
         
         func convertToStatus() -> Status {
             let result = Status()
             result.code = rawValue
             result.name = name
+            result.id = id
             return result
         }
-
+        
     }
   
     var  id = -1
@@ -428,13 +458,13 @@ class Route: BaseModel {
         get{
             
             switch E(status?.code) {
-            case "OP":
+            case "OP", "AC", "DR":
                 return AppColor.newStatus;
             case "IP":
                 return AppColor.InTransit;
             case "DV":
                 return AppColor.deliveryStatus;
-            case "CC":
+            case "CC", "RJ":
                 return AppColor.redColor;
             default:
                 return AppColor.white;
