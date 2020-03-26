@@ -1,16 +1,16 @@
 //
-//  PurchaseOrderListVC.swift
+//  BusinessOrderListVC.swift
 //  DMSDriver
 //
-//  Created by Phong Nguyen on 12/16/19.
-//  Copyright © 2019 machnguyen_uit. All rights reserved.
+//  Created by Phong Nguyen on 3/17/20.
+//  Copyright © 2020 machnguyen_uit. All rights reserved.
 //
 
 import UIKit
 import SideMenu
 
-class PurchaseOrderListVC: BaseViewController {
-
+class BusinessOrderListVC: BaseViewController {
+    
     @IBOutlet weak var tbvContent:UITableView?
     @IBOutlet weak var lblDate:UILabel!
     
@@ -21,7 +21,7 @@ class PurchaseOrderListVC: BaseViewController {
     
     var isFetchInProgress = false
     var isInfiniteScrolling = false
-    var order:[PurchaseOrder] = []
+    var order:[BusinessOrder] = []
     var page:Int = 1
     var currentPage:Int = 1
     var totalPages:Int = 1
@@ -91,7 +91,7 @@ class PurchaseOrderListVC: BaseViewController {
     }
     
     @objc func fetchData(isShowLoading:Bool = true)  {
-        getRentingOrders(filterMode: filterModel, isShowLoading: isShowLoading, isFetch: true)
+        getBusinessOrders(filterMode: filterModel, isShowLoading: isShowLoading, isFetch: true)
     }
     
     //    func updateRouteList(routeNeedUpdate:Route) {
@@ -109,14 +109,13 @@ class PurchaseOrderListVC: BaseViewController {
 
 
 // MARK: - UICollectionViewDataSource
-extension PurchaseOrderListVC: UITableViewDataSource {
+extension BusinessOrderListVC: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return order.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tbvContent?.dequeueReusableCell(withIdentifier: "PurchaseOrderListTableViewCell", for: indexPath) as! PurchaseOrderListTableViewCell
-        //        guard let _order = self.rentingOrder else { return UITableViewCell() }
+        let cell = tbvContent?.dequeueReusableCell(withIdentifier: "BusinessOrderTableViewCell", for: indexPath) as! BusinessOrderTableViewCell
         let _order = order[indexPath.row]
         cell.configureCell(_order)
         return cell
@@ -133,22 +132,23 @@ extension PurchaseOrderListVC: UITableViewDataSource {
 }
 
 //MARK: - UICollectionViewDelegate
-extension PurchaseOrderListVC: UITableViewDelegate {
+extension BusinessOrderListVC: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: false)
-        let vc:PurchaseOrderDetailVC = PurchaseOrderDetailVC.loadSB(SB: .PurchaseOrder)
+        let vc:BusinessOrderDetailVC = BusinessOrderDetailVC.loadSB(SB: .BusinessOrder)
         vc.order = order[indexPath.row]
+        vc.isEditingBO = false
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
 
-private extension PurchaseOrderListVC {
+private extension BusinessOrderListVC {
     func isLoadingCell(for indexPath: IndexPath) -> Bool {
         return indexPath.row + 1 >= self.order.count
     }
 }
 
-extension PurchaseOrderListVC: UITableViewDataSourcePrefetching {
+extension BusinessOrderListVC: UITableViewDataSourcePrefetching {
     func tableView(_ tableView: UITableView, prefetchRowsAt indexPaths: [IndexPath]) {
         if indexPaths.contains(where: isLoadingCell) {
             if !(currentPage == totalPages) {
@@ -160,7 +160,7 @@ extension PurchaseOrderListVC: UITableViewDataSourcePrefetching {
 }
 
 //MARK: - DMSNavigationServiceDelegate
-extension PurchaseOrderListVC:DMSNavigationServiceDelegate {
+extension BusinessOrderListVC:DMSNavigationServiceDelegate {
     //    func didSelectedBackOrMenu() {
     //        showSideMenu()
     //    }
@@ -194,9 +194,9 @@ extension PurchaseOrderListVC:DMSNavigationServiceDelegate {
 }
 
 // MARK: -API
-fileprivate extension PurchaseOrderListVC {
+fileprivate extension BusinessOrderListVC {
     
-    func getRentingOrders(filterMode:FilterDataModel, isShowLoading:Bool = true, isFetch:Bool = false) {
+    func getBusinessOrders(filterMode:FilterDataModel, isShowLoading:Bool = true, isFetch:Bool = false) {
         if ReachabilityManager.isNetworkAvailable {
             guard !isFetchInProgress else {
                 return
@@ -211,10 +211,10 @@ fileprivate extension PurchaseOrderListVC {
                 self.isInfiniteScrolling = false
             } else {
                 self.page = 1
-                self.order = [PurchaseOrder]()
+                self.order = [BusinessOrder]()
                 tbvContent?.reloadData()
             }
-            SERVICES().API.getPurchaseOrders(filterMode: filterMode, page: page) {[weak self] (result) in
+            SERVICES().API.getBusinessOrders(filterMode: filterMode, page: page) {[weak self] (result) in
                 self?.dismissLoadingIndicator()
                 self?.tbvContent?.endRefreshControl()
                 guard let strongSelf = self else {
@@ -225,14 +225,14 @@ fileprivate extension PurchaseOrderListVC {
                     if let data = obj.data?.data {
                         self?.totalPages = obj.data?.meta?.total_pages ?? 1
                         self?.currentPage = obj.data?.meta?.current_page ?? 1
-
+                        
                         if self?.currentPage != self?.totalPages {
                             self?.page = (self?.currentPage ?? 1) + 1
                         }
                         self?.order.append(data)
                         strongSelf.tbvContent?.reloadData()
                         self?.isFetchInProgress = false
-                }
+                    }
                 case .error(let error):
                     self?.isFetchInProgress = false
                     strongSelf.showAlertView(error.getMessage())
@@ -247,26 +247,26 @@ fileprivate extension PurchaseOrderListVC {
 }
 
 //MARK: - CoreData
-fileprivate extension PurchaseOrderListVC {
-//    func getRentingOrders() -> [RentingOrder] {
-//        let results = CoreDataManager.getListRentingOrder()
-//        return results
-//    }
-//
+fileprivate extension BusinessOrderListVC {
+    //    func getBusinessOrders() -> [BusinessOrder] {
+    //        let results = CoreDataManager.getListRentingOrder()
+    //        return results
+    //    }
+    //
 }
 
 //MARK: - Filter Routes
-fileprivate extension PurchaseOrderListVC {
-//    func handleFilterRentingorder(with filterDataModel: FilterDataModel, rentingOrders: [RentingOrder]) -> [RentingOrder] {
-//        var filterRentingOrders = [RentingOrder]()
-//        let timeData = filterDataModel.timeData
-//        let startDate = timeData?.startDate
-//        let endDate = timeData?.endDate
-//        let statusName = filterDataModel.status?.name
-//        // Filter by Status
-//        filterRentingOrders = (statusName == nil || statusName == "all-statuses".localized) ? rentingOrders : rentingOrders.filter({$0.rentingOrderStatus?.name == statusName})
-//        // Filter by DateTime
-//        filterRentingOrders = (startDate == nil && endDate == nil) ? filterRentingOrders : rentingOrders.filter({$0.startByDate >= startDate! && $0.endByDate <= endDate!})
-//        return filterRentingOrders
-//    }
+fileprivate extension BusinessOrderListVC {
+    //    func handleFilterRentingorder(with filterDataModel: FilterDataModel, rentingOrders: [RentingOrder]) -> [RentingOrder] {
+    //        var filterRentingOrders = [RentingOrder]()
+    //        let timeData = filterDataModel.timeData
+    //        let startDate = timeData?.startDate
+    //        let endDate = timeData?.endDate
+    //        let statusName = filterDataModel.status?.name
+    //        // Filter by Status
+    //        filterRentingOrders = (statusName == nil || statusName == "all-statuses".localized) ? rentingOrders : rentingOrders.filter({$0.rentingOrderStatus?.name == statusName})
+    //        // Filter by DateTime
+    //        filterRentingOrders = (startDate == nil && endDate == nil) ? filterRentingOrders : rentingOrders.filter({$0.startByDate >= startDate! && $0.endByDate <= endDate!})
+    //        return filterRentingOrders
+    //    }
 }

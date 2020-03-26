@@ -130,6 +130,7 @@ public enum SBName : String {
     case LoadUnloadOrder = "LoadUnloadOrder";
     case RentingOrder = "RentingOrder";
     case PurchaseOrder = "PurchaseOrder"
+    case BusinessOrder = "Business"
 }
 
 func MAX<T>(_ x: T, _ y: T) -> T where T : Comparable {

@@ -11,6 +11,7 @@ enum MenuItemType : Int {
   case TASK
     case RETURNEDITEMS
     case PURCHASEORDER
+    case BUSINESSORDER
   case ALERT
   case LOGOUT
   
@@ -42,6 +43,8 @@ enum MenuItemType : Int {
       return "Logout".localized.uppercased()
     case .PURCHASEORDER:
         return "purchase-order".localized.uppercased()
+    case .BUSINESSORDER:
+        return "business-order".localized.uppercased()
     }
   }
   
@@ -67,6 +70,8 @@ enum MenuItemType : Int {
       return #imageLiteral(resourceName: "ic_logout")
     case .PURCHASEORDER:
         return #imageLiteral(resourceName: "ic_orderlist")
+    case .BUSINESSORDER:
+        return #imageLiteral(resourceName: "ic_orderlist")
     }
   }
 }
@@ -84,6 +89,7 @@ class SlideMenuVC: BaseViewController {
     var currentItem:MenuItemType = .ROUTES
     var returnedItemTimeDataManager = TimeData()
     var purchaseOrderTimeDataManager = TimeData()
+    var businessOrderTimeDataManager = TimeData()
     var taskTimeDataManager = TimeData()
     var previousItem:Int = MenuItemType.DASHBOARD.rawValue
     
@@ -238,6 +244,9 @@ extension SlideMenuVC:UITableViewDelegate{
                 vc.selectedTimeData = purchaseOrderTimeDataManager.getTimeDataItemType(type: .TimeItemTypeToday)
                 purchaseOrderTimeDataManager.setTimeDataItemDefault(item: vc.selectedTimeData!)
             }
+            App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
+        case .BUSINESSORDER:
+            let vc:BusinessOrderListVC = .loadSB(SB: .BusinessOrder)
             App().mainVC?.rootNV?.setViewControllers([vc], animated: false)
         }
     }

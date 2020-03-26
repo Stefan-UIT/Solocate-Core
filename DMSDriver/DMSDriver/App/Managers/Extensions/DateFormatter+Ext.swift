@@ -25,6 +25,7 @@ let NormalDateFormater = DateFormatter.normalDateFormater
 let ShortNormalDateFormater = DateFormatter.shortNormalDateFormater
 let NormalTimeFormater = DateFormatter.normalTimeFormater
 let OnlyDateFormater = DateFormatter.onlyDateFormater
+let DateTimeUSWithSecond = DateFormatter.displayDateTimeUSWithSecond
 
 //MARK: - DateFormatter Instance
 extension DateFormatter {
@@ -43,5 +44,6 @@ extension DateFormatter {
     static let shortNormalDateFormater = DateFormatter(format: "yyyy/MM/dd HH:mm");
     static let normalTimeFormater = DateFormatter(format: "HH:mm:ss");
     static let onlyDateFormater = DateFormatter(format: "MMM/dd/yyyy");
+    static let displayDateTimeUSWithSecond = DateFormatter(format: "MM/dd/yyyy HH:mm:ss");
     
 }

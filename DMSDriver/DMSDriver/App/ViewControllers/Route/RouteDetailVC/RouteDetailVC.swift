@@ -73,12 +73,15 @@ class RouteDetailVC: BaseViewController {
 
     
     @IBOutlet weak var vanLoadButtonView: UIView!
+    @IBOutlet weak var rejectButtonView: UIView!
+    @IBOutlet weak var acceptButtonView: UIView!
     
     var isOrderFiltering:Bool = false
     
     var route:Route?
     var dateStringFilter:String = Date().toString()
-
+    var oldRouteStatus = Status()
+    var nextRouteStatus = Status()
 
     var displayMode:RouteDetailDisplayMode = ReachabilityManager.isNetworkAvailable ? .DisplayModeMap : .DisplayModeStops{
         didSet{
@@ -98,6 +101,7 @@ class RouteDetailVC: BaseViewController {
         initUI()
 //        initFloatButton()
 //        handleShowingActionsContainer()
+        updateActionsUI()
         setupCollectionView()
         setupScrollMenuView()
     }
@@ -258,6 +262,22 @@ class RouteDetailVC: BaseViewController {
         self.redirectToLoadingPackageVC()
     }
     
+    @IBAction func onRejectTouchUp(_ sender: UIButton) {
+        self.showAlertView("are-you-sure-you-want-to-reject-this-route".localized, positiveTitle: "ok".localized, positiveAction: { (action) in
+            self.nextRouteStatus = Route.RouteStatus.Rejected.convertToStatus()
+            self.route?.status = self.nextRouteStatus
+            self.updateRouteStatus(route: self.route)
+        })
+    }
+    
+    @IBAction func onAcceptTouchUp(_ sender: UIButton) {
+        self.showAlertView("are-you-sure-you-want-to-accept-this-route".localized, positiveTitle: "ok".localized, positiveAction: { (action) in
+            self.nextRouteStatus = Route.RouteStatus.Accepted.convertToStatus()
+            self.route?.status = self.nextRouteStatus
+            self.updateRouteStatus(route: self.route)
+        })
+    }
+    
 }
 
 //MARK: - UICollectionViewDataSource
@@ -389,13 +409,15 @@ extension RouteDetailVC{
     
     func updateActionsUI() {
         guard let _route = route else { return }
-        assignDriverButtonView.isHidden = true
+//            assignDriverButtonView.isHidden = true
         assignTruckButtonView.isHidden = true
-        vanLoadButtonView.isHidden = !_route.isHasOrderNeedToBeLoaded
+        vanLoadButtonView.isHidden = true
+        rejectButtonView.backgroundColor = AppColor.redColor
+        acceptButtonView.backgroundColor = AppColor.greenColor
         
-        let shouldHideActionsContainer = (assignDriverButtonView.isHidden && assignTruckButtonView.isHidden && vanLoadButtonView.isHidden)
-        actionsViewContainer.isHidden = shouldHideActionsContainer
-        actionViewContainerHeightConstraint.constant = shouldHideActionsContainer ? 0.0 : 50.0
+        let isRequire = route?.status?.code == Route.RouteStatus.New.rawValue
+        actionsViewContainer.isHidden = !isRequire
+        actionViewContainerHeightConstraint.constant = isRequire ? 50.0 : 0.0
     }
     
     @objc func fetchData()  {
@@ -420,7 +442,7 @@ extension RouteDetailVC{
                     strongSelf.clvContent?.isHidden = false
                     strongSelf.clvContent?.reloadData()
                     strongSelf.initUI()
-                    
+                    strongSelf.updateActionsUI()
                     
                      guard let data = obj.data else {return}
                      CoreDataManager.updateRoute(data) // Update route to DB local
@@ -435,6 +457,25 @@ extension RouteDetailVC{
             self.clvContent?.isHidden = false
             self.clvContent?.reloadData()
             self.initUI()
+            self.updateActionsUI()
+        }
+    }
+    
+    func updateRouteStatus(route:Route?){
+        guard let _route = route else { return }
+        if self.hasNetworkConnection {
+            self.showLoadingIndicator()
+        }
+        SERVICES().API.updateRouteStatus(route:_route) {[weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(_):
+                self?.fetchData()
+                break
+            case .error(let error):
+                self?.route?.status = self?.oldRouteStatus
+                self?.showAlertView(error.getMessage())
+            }
         }
     }
 }

@@ -123,9 +123,10 @@ extension UIBarButtonItem {
         return item
     }
     
-    class func barButtonItem(with image:UIImage, target: Any, action: Selector) -> UIBarButtonItem {
+    class func barButtonItem(with image:UIImage, imageType:ImageType? = nil, target: Any, action: Selector) -> UIBarButtonItem {
         let frame = CGRect(x: 0, y: 0, width: 24, height: 24)
         let button = customButton(with: image,
+                                  imageType: imageType,
                                   frame: frame,
                                   target: target,
                                   action: action)
@@ -234,19 +235,22 @@ extension UIBarButtonItem {
     }
 
     fileprivate class func customButton(with image: UIImage,
+                                        imageType:ImageType? = nil,
                                         highlightedImage: UIImage? = nil,
                                         frame: CGRect,
                                         imageEdgeInsets: UIEdgeInsets = UIEdgeInsets.zero,
                                         target: Any,
                                         action: Selector) -> UIButton {
         let button = UIButton(type: .custom)
-
+        if let _imageType = imageType, _imageType == .Button {
+            button.imageView?.tintColor = AppColor.mainColor
+        }
         button.setImage(image, for: .normal)
         button.setImage(highlightedImage, for: .highlighted)
         button.addTarget(target, action: action, for: .touchUpInside)
         button.frame = frame
         button.imageEdgeInsets = imageEdgeInsets
-
+        
         return button
     }
 

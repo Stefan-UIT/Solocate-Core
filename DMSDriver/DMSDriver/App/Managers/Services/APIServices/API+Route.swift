@@ -128,4 +128,17 @@ extension BaseAPIService {
                        callback: callback);
     }
     
+    @discardableResult
+    func updateRouteStatus(route: Route, callback: @escaping APICallback<ResponseDataModel<Route>>) -> APIRequest? {
+        let path = String(format:PATH_REQUEST_URL.UPDATE_ROUTE_STATUS.URL,  "\(route.id)","\(route.status?.id ?? 0)")
+        //        if ReachabilityManager.isNetworkAvailable {
+        return request(method: .PUT,
+                       path: path,
+                       input: .empty,
+                       callback: callback);
+        //        } else {
+        //            return nil
+        //        }
+    }
+    
 }
