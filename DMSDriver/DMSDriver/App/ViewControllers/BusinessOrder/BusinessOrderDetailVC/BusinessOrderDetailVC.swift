@@ -70,9 +70,7 @@ class BusinessOrderDetailVC: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        updateUI()
         initVar()
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -157,12 +155,12 @@ class BusinessOrderDetailVC: BaseViewController {
         let dueDateFrom = BusinessOrderForRow(title: "due-date-from".localized,
                                           content: Slash(_order.dueDateFrom),
                                           isEditing: isEditingBO,
-                                          style: .Calendar,
+                                          style: .CalendarStart,
                                           isRequire: _order.isRequireEdit(_order.dueDateFrom, .DueDate))
         let dueDateTo = BusinessOrderForRow(title: "due-date-to".localized,
                                             content: Slash(_order.dueDateTo),
                                             isEditing: isEditingBO,
-                                            style: .Calendar,
+                                            style: .CalendarEnd,
                                             isRequire: _order.isRequireEdit(_order.dueDateTo, .DueDate))
     
         let codContent = _order.id == BusinessOrderCOD.YES.id ? BusinessOrderCOD.YES.rawValue : BusinessOrderCOD.NO.rawValue
@@ -242,6 +240,16 @@ class BusinessOrderDetailVC: BaseViewController {
                                                   isEditing: isEditingBO,
                                                   style: .InputText,
                                                   isRequire: _order.isRequireEdit(orderPU?.ctt_phone, .None))
+        let startTimePU = BusinessOrderForRow(title: "start-time".localized,
+                                              content: Slash(orderPU?.start_time),
+                                              isEditing: isEditingBO,
+                                              style: .CalendarStart,
+                                              isRequire: _order.isRequireEdit(orderPU?.start_time, .None))
+        let endTimePU = BusinessOrderForRow(title: "end-time".localized,
+                                              content: Slash(orderPU?.end_time),
+                                              isEditing: isEditingBO,
+                                              style: .CalendarEnd,
+                                              isRequire: _order.isRequireEdit(orderPU?.end_time, .None))
         
         businessOrderPickupInfo.append(addressPU)
         businessOrderPickupInfo.append(floorPU)
@@ -251,6 +259,8 @@ class BusinessOrderDetailVC: BaseViewController {
         businessOrderPickupInfo.append(closeTimePU)
         businessOrderPickupInfo.append(consigneeNamePU)
         businessOrderPickupInfo.append(consigneePhonePU)
+        businessOrderPickupInfo.append(startTimePU)
+        businessOrderPickupInfo.append(endTimePU)
         
         // delivery
         let orderDV = _order.to
@@ -296,7 +306,16 @@ class BusinessOrderDetailVC: BaseViewController {
                                                    isEditing: isEditingBO,
                                                    style: .InputText,
                                                    isRequire: _order.isRequireEdit(orderDV?.ctt_phone, .None))
-        
+        let startTimeDV = BusinessOrderForRow(title: "start-time".localized,
+                                              content: Slash(orderDV?.start_time),
+                                              isEditing: isEditingBO,
+                                              style: .CalendarStart,
+                                              isRequire: _order.isRequireEdit(orderDV?.start_time, .None))
+        let endTimeDV = BusinessOrderForRow(title: "end-time".localized,
+                                            content: Slash(orderDV?.end_time),
+                                            isEditing: isEditingBO,
+                                            style: .CalendarEnd,
+                                            isRequire: _order.isRequireEdit(orderDV?.end_time, .None))
         businessOrderDeliveryInfo.append(addressDV)
         businessOrderDeliveryInfo.append(floorDV)
         businessOrderDeliveryInfo.append(apartmentDV)
@@ -305,6 +324,8 @@ class BusinessOrderDetailVC: BaseViewController {
         businessOrderDeliveryInfo.append(closeTimeDV)
         businessOrderDeliveryInfo.append(consigneeNameDV)
         businessOrderDeliveryInfo.append(consigneePhoneDV)
+        businessOrderDeliveryInfo.append(startTimeDV)
+        businessOrderDeliveryInfo.append(endTimeDV)
         
         //Zone
         let isPickup = _order.typeID == OrderType.pickup.rawValue ? true : false
@@ -543,7 +564,7 @@ extension BusinessOrderDetailVC: BusinessOrderItemTableViewCellDelegate {
         self.currentTag = tag
         let vc = DropDownViewController()
         vc.titleContent = titleContent
-        vc.dropDownStyle = style
+        vc.dropDownType = style
         vc.itemDropDown = itemDropDown
         vc.delegate = self
         vc.modalPresentationStyle = .overCurrentContext
@@ -559,7 +580,7 @@ extension BusinessOrderDetailVC: BusinessOrderPickerTableViewCellDelegate {
         self.currentIndexPath = indexPath
         let vc = DropDownViewController()
         vc.titleContent = titleContent
-        vc.dropDownStyle = style
+        vc.dropDownType = style
         vc.itemDropDown = item
         vc.delegate = self
         vc.modalPresentationStyle = .overCurrentContext
@@ -642,9 +663,11 @@ extension BusinessOrderDetailVC {
         self.showLoadingIndicator()
         SERVICES().API.createBusinessOrder(order: order) {[weak self] (result) in
             switch result {
-            case .object(let _):
+            case .object(_):
                 self?.dismissLoadingIndicator()
-                self?.showAlertView("uploaded-succesful".localized)
+                self?.showAlertView("uploaded-successful".localized, completionHandler: { (action) in
+                    self?.navigationController?.popViewController(animated: true)
+                })
             case .error(let error):
                 self?.dismissLoadingIndicator()
                 self?.showAlertView(error.getMessage())
@@ -658,7 +681,6 @@ extension BusinessOrderDetailVC {
             switch result {
             case .object(let data):
                 self?.customers = data.data
-//                self?.dismissLoadingIndicator()
                 self?.getLocationsList()
             case .error(let error):
                 self?.dismissLoadingIndicator()
@@ -841,6 +863,10 @@ extension BusinessOrderDetailVC {
     
     func checkRequire() {
         isEnableSubmit = order?.typeID != nil && order?.customer != nil && (order?.dueDateFrom != nil || order?.dueDateFrom?.isEmpty == false) &&  (order?.dueDateTo?.isEmpty == false || order?.dueDateTo != nil) && order?.from != nil && order?.to != nil && order?.zoneId != nil && order?.details != nil
+        for index in 0..<(order?.details?.count ?? 0){
+            isEnableSubmit = order?.details?[index].pivot?.uom != nil && order?.details?[index].pivot?.batch_id != nil && order?.details?[index].pivot?.qty != nil
+        }
+        
         tbvContent?.reloadData()
     }
     
@@ -885,13 +911,24 @@ extension BusinessOrderDetailVC {
             textContent = order?.customer_name
             renewAddressSKUData()
         case .DUE_DATE_FROM:
-            guard let _date = item.date else { return }
+            guard let _date = item.dateStart else { return }
             order?.dueDateFrom = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
             textContent = order?.dueDateFrom
+            let data = DropDownModel()
+            data.dateStart = order?.dueDateFrom?.dateUS
+            data.dateEnd = order?.dueDateTo?.dateUS
+            businessOrderInfo[row].data = data
+            businessOrderInfo[row+1].data = data
+            
         case .DUE_DATE_TO:
-            guard let _date = item.date else { return }
+            guard let _date = item.dateEnd else { return }
             order?.dueDateTo = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
             textContent = order?.dueDateTo
+            let data = DropDownModel()
+            data.dateStart = order?.dueDateFrom?.dateUS
+            data.dateEnd = order?.dueDateTo?.dateUS
+            businessOrderInfo[row].data = data
+            businessOrderInfo[row-1].data = data
         case .COD:
             order?.cod = textContent == BusinessOrderCOD.YES.rawValue ? BusinessOrderCOD.YES.id : BusinessOrderCOD.NO.id
         case .REMARK:
@@ -931,11 +968,28 @@ extension BusinessOrderDetailVC {
             pickupItem.ctt_name = textContent
         case .CONSIGNEE_PHONE:
             pickupItem.ctt_phone = textContent
+        case .START_TIME:
+            guard let _date = item?.dateStart else { return }
+            pickupItem.start_time = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
+            textContent = pickupItem.start_time
+            let data = DropDownModel()
+            data.dateStart = pickupItem.start_time?.dateUS
+            data.dateEnd = pickupItem.end_time?.dateUS
+            businessOrderPickupInfo[row].data = data
+            businessOrderPickupInfo[row+1].data = data
+        case .END_TIME:
+            guard let _date = item?.dateEnd else { return }
+            pickupItem.end_time = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
+            textContent = pickupItem.end_time
+            let data = DropDownModel()
+            data.dateStart = pickupItem.start_time?.dateUS
+            data.dateEnd = pickupItem.end_time?.dateUS
+            businessOrderPickupInfo[row].data = data
+            businessOrderPickupInfo[row-1].data = data
         case .ZONE:
             guard let _zone = item?.zones?.first else { return }
-            let zone:Zone = _zone
-            order?.zoneId = order?.zone?.id
-            textContent = zone.name
+            order?.zoneId = _zone.id
+            textContent = _zone.name
         }
         businessOrderPickupInfo[row].content = Slash(textContent)
         order?.from = pickupItem
@@ -977,11 +1031,28 @@ extension BusinessOrderDetailVC {
             deliveryItem.ctt_name = textContent
         case .CONSIGNEE_PHONE:
             deliveryItem.ctt_phone = textContent
+        case .START_TIME:
+            guard let _date = item?.dateStart else { return }
+            pickupItem.start_time = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
+            textContent = pickupItem.start_time
+            let data = DropDownModel()
+            data.dateStart = pickupItem.start_time?.dateUS
+            data.dateEnd = pickupItem.end_time?.dateUS
+            businessOrderDeliveryInfo[row].data = data
+            businessOrderDeliveryInfo[row+1].data = data
+        case .END_TIME:
+            guard let _date = item?.dateEnd else { return }
+            pickupItem.end_time = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
+            textContent = pickupItem.end_time
+            let data = DropDownModel()
+            data.dateStart = pickupItem.start_time?.dateUS
+            data.dateEnd = pickupItem.end_time?.dateUS
+            businessOrderDeliveryInfo[row].data = data
+            businessOrderDeliveryInfo[row-1].data = data
         case .ZONE:
             guard let _zone = item?.zones?.first else { return }
-            let zone:Zone = _zone
-            order?.zone = zone
-            textContent = zone.name
+            order?.zoneId = _zone.id
+            textContent = _zone.name
         }
         businessOrderDeliveryInfo[row].content = Slash(textContent)
         order?.to = deliveryItem

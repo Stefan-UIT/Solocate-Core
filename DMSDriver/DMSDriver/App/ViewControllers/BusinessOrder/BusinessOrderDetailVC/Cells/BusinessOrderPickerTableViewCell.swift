@@ -77,7 +77,7 @@ class BusinessOrderPickerTableViewCell: UITableViewCell {
         if isEditingBO {
             requireMarkLabel.isHidden = !isRequire
             let isOption = dropDownType == DropDownType.OrderType || dropDownType == DropDownType.Customer || dropDownType == DropDownType.Address || dropDownType == DropDownType.SKU || dropDownType == DropDownType.UOM || dropDownType == DropDownType.Zone
-            let displayMessage = isOption ? "please-select" : "tap-to-edit"
+            let displayMessage = isOption ? "please-select".localized : "tap-to-edit".localized
             let textString = (item.content == "-" || item.content == "") ? displayMessage : item.content
             contentEditLabel?.text = textString
             contentEditLabel?.textColor = AppColor.greenColor

@@ -61,6 +61,8 @@ enum BusinessOrderAddressInfoRow: Int {
     case CLOSE_TIME
     case CONSIGNEE_NAME
     case CONSIGNEE_PHONE
+    case START_TIME
+    case END_TIME
     case ZONE
 }
 
@@ -171,6 +173,7 @@ class BusinessOrder: Order {
     }
     
     override func mapping(map: Map) {
+        super.mapping(map: map)
         id <- map["id"]
         divisionId <- map["division_id"]
         zoneId <- map["zone_id"]

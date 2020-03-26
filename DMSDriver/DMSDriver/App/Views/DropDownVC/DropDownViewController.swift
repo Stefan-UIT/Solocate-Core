@@ -11,7 +11,8 @@ import UIKit
 enum DropDownType {
     case InputText
     case Time
-    case Calendar
+    case CalendarStart
+    case CalendarEnd
     case OrderType
     case Customer
     case COD
@@ -19,6 +20,7 @@ enum DropDownType {
     case SKU
     case UOM
     case Zone
+    case Number
 }
 
 protocol DropDownViewControllerDelegate: NSObjectProtocol {
@@ -32,7 +34,8 @@ class DropDownModel: BasicModel {
     var skus:[SKUModel]?
     var uoms:[UOMModel]?
     var zones:[Zone]?
-    var date:Date?
+    var dateStart:Date?
+    var dateEnd:Date?
     
     func addCustomers(_ customers:[UserModel.UserInfo]) -> DropDownModel {
         self.customers = customers
@@ -59,8 +62,13 @@ class DropDownModel: BasicModel {
         return self
     }
     
-    func addDate(_ date:Date) -> DropDownModel {
-        self.date = date
+    func addDateFrom(_ date:Date) -> DropDownModel {
+        self.dateStart = date
+        return self
+    }
+    
+    func addDateTo(_ date:Date) -> DropDownModel {
+        self.dateEnd = date
         return self
     }
     
@@ -88,6 +96,9 @@ class DropDownViewController: UIViewController {
     @IBOutlet weak var datePickerView: UIDatePicker!
     @IBOutlet weak var pickerCancelButton: UIButton!
     @IBOutlet weak var pickerOKButton: UIButton!
+    @IBOutlet weak var actionButtonsView: UIView!
+    @IBOutlet weak var actionButtonsContraintHeight: NSLayoutConstraint!
+    
     
     let cellIndentifier = "DropDownTableViewCell"
     let SPACING_HEIGHT:CGFloat = 15
@@ -101,7 +112,7 @@ class DropDownViewController: UIViewController {
     
     
     weak var delegate:DropDownViewControllerDelegate?
-    var dropDownStyle: DropDownType = .InputText
+    var dropDownType: DropDownType = .InputText
     var editString:String?
     var time:[String] = []
     var titleContent:String?
@@ -131,15 +142,20 @@ class DropDownViewController: UIViewController {
         datePickerBGView.isHidden = true
         pickerCancelButton.backgroundColor = AppColor.redColor
         pickerOKButton.backgroundColor = AppColor.buttonColor
-        switch dropDownStyle {
+        switch dropDownType {
         case .InputText:
             tbvContent?.isHidden = true
             tbvContentHeightConstraint.constant = 0
             contentViewHeightConstraint.constant = CONTENT_VIEW_HEIGHT - TABLEVIEW_HEIGHT
-        case .Address:
+        case .Address, .UOM:
+            actionButtonsView?.isHidden = true
+            actionButtonsContraintHeight.constant = 0
             break
-        case .UOM:
-            break
+        case .Number:
+            searchTextField.keyboardType = .numberPad
+            tbvContent?.isHidden = true
+            tbvContentHeightConstraint.constant = 0
+            contentViewHeightConstraint.constant = CONTENT_VIEW_HEIGHT - TABLEVIEW_HEIGHT
         case .OrderType, .Customer, .SKU, .Zone, .COD:
             textFieldView.isHidden = true
             textFieldViewHeightConstraint.constant = 0
@@ -148,7 +164,7 @@ class DropDownViewController: UIViewController {
             datePickerBGView.isHidden = false
             timePickerView.isHidden = false
             contentView.isHidden = true
-        case .Calendar:
+        case .CalendarStart, .CalendarEnd:
             datePickerBGView.isHidden = false
             datePickerView.isHidden = false
             contentView.isHidden = true
@@ -164,7 +180,12 @@ class DropDownViewController: UIViewController {
         datePickerView.datePickerMode = .dateAndTime
         let date = Date()
         datePickerView.minimumDate = date
-        datePickerView.maximumDate = date
+        if let dateFrom = itemDropDown?.dateStart {
+            datePickerView.minimumDate = dateFrom
+        }
+        if let dateTo = itemDropDown?.dateEnd {
+            datePickerView.maximumDate = dateTo
+        }
     }
     
     func setupKeyboard() {
@@ -182,7 +203,7 @@ class DropDownViewController: UIViewController {
     
     func initVar() {
         itemsOrigin = []
-        switch dropDownStyle {
+        switch dropDownType {
         case .OrderType:
             itemsOrigin = ["pick-up".localized, "Delivery".localized]
         case .Customer:
@@ -266,13 +287,17 @@ class DropDownViewController: UIViewController {
     }
     
     @IBAction func didTapPickerOKBtn(_ sender: UIButton) {
-        switch dropDownStyle {
+        switch dropDownType {
         case .Time:
             let item = DropDownModel().addText(timePicker ?? "")
             delegate?.didSelectItem(item: item)
             self.dismiss()
-        case .Calendar:
-            let item = DropDownModel().addDate(datePicker ?? Date())
+        case .CalendarStart:
+            let item = DropDownModel().addDateFrom(datePicker ?? Date())
+            self.delegate?.didSelectItem(item: item)
+            self.dismiss()
+        case .CalendarEnd:
+            let item = DropDownModel().addDateTo(datePicker ?? Date())
             self.delegate?.didSelectItem(item: item)
             self.dismiss()
         @unknown default:
@@ -289,7 +314,7 @@ extension DropDownViewController: UITextFieldDelegate {
             let textRange = Range(range, in: text) {
             let updatedText = text.replacingCharacters(in: textRange,
                                                        with: string)
-            switch dropDownStyle {
+            switch dropDownType {
             case .Address:
                 let item = itemsOrigin as? [Address]
                 itemsDisplay = (item?.filter{ $0.address?.contains(updatedText) ?? false }) ?? []
@@ -320,7 +345,7 @@ extension DropDownViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellIndentifier, for: indexPath) as! DropDownTableViewCell
-        switch dropDownStyle {
+        switch dropDownType {
         case .OrderType:
             cell.configureCell(itemsDisplay[indexPath.row] as! String)
         case .Customer:
@@ -348,7 +373,7 @@ extension DropDownViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let item = DropDownModel()
-        switch dropDownStyle {
+        switch dropDownType {
         case .OrderType:
             let text = itemsDisplay[indexPath.row] as! String
             item.result = text
