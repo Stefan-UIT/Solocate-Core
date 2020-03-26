@@ -157,9 +157,6 @@ class BusinessOrder: Order {
     var divisionId:Int?
     var zoneId:Int?
     var referenceCode:String?
-    var dueDate:String?
-    var dueDateFrom: String?
-    var dueDateTo: String?
     var customerId: String?
     var customerLocationId: String?
     var wareHouseId: String?
@@ -178,7 +175,6 @@ class BusinessOrder: Order {
         divisionId <- map["division_id"]
         zoneId <- map["zone_id"]
         referenceCode <- map["ref_code"]
-        dueDate <- map["due_dt"]
         status <- map["purchase_status"]
         typeID <- map["purchase_type_id"]
         zone <- map["purchase_zone"]
@@ -187,8 +183,6 @@ class BusinessOrder: Order {
         division <- map["purchase_division"]
         customer <- map["purchase_customer"]
         details <- map["purchase_details"]
-        dueDateFrom <- map["due_dt_from"]
-        dueDateTo <- map["due_dt_to"]
         customerId <- map["cus_id"]
         customerLocationId <- map["cus_loc_id"]
         wareHouseId <- map["whs_id"]
