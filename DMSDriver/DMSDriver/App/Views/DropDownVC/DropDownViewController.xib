@@ -12,6 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DropDownViewController" customModule="Gadot_Live" customModuleProvider="target">
             <connections>
+                <outlet property="actionButtonsContraintHeight" destination="Yk9-FR-U5j" id="de3-pA-jUE"/>
+                <outlet property="actionButtonsView" destination="7eG-Te-ddy" id="U4g-nB-VF9"/>
                 <outlet property="contentView" destination="5Er-vS-13I" id="6uR-rs-UEf"/>
                 <outlet property="contentViewHeightConstraint" destination="Usb-bC-Lb5" id="qtY-dB-pWG"/>
                 <outlet property="datePickerBGView" destination="u3y-KA-TWn" id="78q-aQ-pXG"/>
@@ -148,42 +150,53 @@
                                         <constraint firstAttribute="height" constant="1" id="IO3-CT-ZMh"/>
                                     </constraints>
                                 </view>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XRq-Jh-V4v">
-                                    <rect key="frame" x="240" y="46" width="60" height="29"/>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="7eG-Te-ddy">
+                                    <rect key="frame" x="0.0" y="41" width="315" height="39"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XRq-Jh-V4v">
+                                            <rect key="frame" x="240" y="4.5" width="60" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="60" id="x82-QI-BI1"/>
+                                            </constraints>
+                                            <state key="normal" title="OK"/>
+                                            <connections>
+                                                <action selector="tapOKTextFieldBtn:" destination="-1" eventType="touchUpInside" id="hUN-tX-KSs"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eMK-fj-tny">
+                                            <rect key="frame" x="175" y="4.5" width="60" height="30"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="60" id="9xi-Se-xt6"/>
+                                            </constraints>
+                                            <state key="normal" title="Cancel"/>
+                                            <connections>
+                                                <action selector="tapCancelTextFieldBtn:" destination="-1" eventType="touchUpInside" id="Lva-AW-tlt"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
-                                        <constraint firstAttribute="width" constant="60" id="x82-QI-BI1"/>
+                                        <constraint firstItem="XRq-Jh-V4v" firstAttribute="centerY" secondItem="7eG-Te-ddy" secondAttribute="centerY" id="4zt-fW-V7X"/>
+                                        <constraint firstAttribute="trailing" secondItem="XRq-Jh-V4v" secondAttribute="trailing" constant="15" id="Gmv-I7-k6O"/>
+                                        <constraint firstAttribute="height" constant="39" id="Yk9-FR-U5j"/>
+                                        <constraint firstItem="XRq-Jh-V4v" firstAttribute="leading" secondItem="eMK-fj-tny" secondAttribute="trailing" constant="5" id="pQ9-b0-lQU"/>
+                                        <constraint firstItem="eMK-fj-tny" firstAttribute="centerY" secondItem="7eG-Te-ddy" secondAttribute="centerY" id="ziO-Bf-rxA"/>
                                     </constraints>
-                                    <state key="normal" title="OK"/>
-                                    <connections>
-                                        <action selector="tapOKTextFieldBtn:" destination="-1" eventType="touchUpInside" id="hUN-tX-KSs"/>
-                                    </connections>
-                                </button>
-                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="eMK-fj-tny">
-                                    <rect key="frame" x="175" y="46" width="60" height="29"/>
-                                    <constraints>
-                                        <constraint firstAttribute="width" constant="60" id="9xi-Se-xt6"/>
-                                    </constraints>
-                                    <state key="normal" title="Cancel"/>
-                                    <connections>
-                                        <action selector="tapCancelTextFieldBtn:" destination="-1" eventType="touchUpInside" id="Lva-AW-tlt"/>
-                                    </connections>
-                                </button>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
-                                <constraint firstAttribute="bottom" secondItem="XRq-Jh-V4v" secondAttribute="bottom" constant="5" id="1nn-bu-krP"/>
-                                <constraint firstItem="eMK-fj-tny" firstAttribute="top" secondItem="bI4-zP-WL9" secondAttribute="bottom" constant="5" id="FVu-ty-Hxe"/>
+                                <constraint firstAttribute="trailing" secondItem="7eG-Te-ddy" secondAttribute="trailing" id="5Fx-PB-rJD"/>
                                 <constraint firstAttribute="trailing" secondItem="bI4-zP-WL9" secondAttribute="trailing" constant="15" id="KL1-3M-3QA"/>
-                                <constraint firstItem="XRq-Jh-V4v" firstAttribute="leading" secondItem="eMK-fj-tny" secondAttribute="trailing" constant="5" id="KNg-eD-hVI"/>
                                 <constraint firstItem="bI4-zP-WL9" firstAttribute="top" secondItem="9Qi-DA-aDW" secondAttribute="bottom" id="MNZ-DI-yud"/>
                                 <constraint firstItem="9Qi-DA-aDW" firstAttribute="leading" secondItem="7k4-rY-JLP" secondAttribute="leading" constant="15" id="Okm-ps-qnD"/>
                                 <constraint firstAttribute="height" constant="80" id="RvY-kk-lra"/>
                                 <constraint firstAttribute="trailing" secondItem="9Qi-DA-aDW" secondAttribute="trailing" constant="15" id="S0W-nt-iPO"/>
-                                <constraint firstAttribute="trailing" secondItem="XRq-Jh-V4v" secondAttribute="trailing" constant="15" id="Vll-gP-84O"/>
                                 <constraint firstItem="9Qi-DA-aDW" firstAttribute="top" secondItem="7k4-rY-JLP" secondAttribute="top" id="bmM-uL-uj1"/>
                                 <constraint firstItem="bI4-zP-WL9" firstAttribute="leading" secondItem="7k4-rY-JLP" secondAttribute="leading" constant="15" id="cKI-lL-RPD"/>
-                                <constraint firstItem="XRq-Jh-V4v" firstAttribute="top" secondItem="bI4-zP-WL9" secondAttribute="bottom" constant="5" id="id7-D5-pDT"/>
-                                <constraint firstAttribute="bottom" secondItem="eMK-fj-tny" secondAttribute="bottom" constant="5" id="tEy-ZZ-6az"/>
+                                <constraint firstItem="7eG-Te-ddy" firstAttribute="top" secondItem="bI4-zP-WL9" secondAttribute="bottom" id="nVS-oa-bIX"/>
+                                <constraint firstItem="7eG-Te-ddy" firstAttribute="leading" secondItem="7k4-rY-JLP" secondAttribute="leading" id="oLA-ky-ivs"/>
+                                <constraint firstAttribute="bottom" secondItem="7eG-Te-ddy" secondAttribute="bottom" id="wvO-u3-s0M"/>
                             </constraints>
                         </view>
                         <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="XvF-ne-605">

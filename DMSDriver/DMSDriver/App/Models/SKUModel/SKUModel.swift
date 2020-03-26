@@ -18,10 +18,10 @@ class SKUModel: Order.Detail {
     var skuDataList:[SKUModel] = []
     var uomDataList:[UOMModel] = []
     var quantityTitle:String = "quantity".localized
-    var qtyStyle:DropDownType = .InputText
+    var qtyStyle:DropDownType = .Number
     var uomTitle:String = "uom".localized
     var uomStyle:DropDownType = .UOM
-    var batchIdTitle:String = "batchId".localized
+    var batchIdTitle:String = "batch-id".localized
     var batchIdStyle:DropDownType = .InputText
     
     
