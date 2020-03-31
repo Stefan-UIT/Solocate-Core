@@ -31,9 +31,11 @@ class RouteDetailLoadPlanListClvCell: UICollectionViewCell {
     @IBOutlet weak var iconPlatenumBtn: UIButton!
     
     @IBOutlet weak var iconDropDownWeightConstant: NSLayoutConstraint!
+    @IBOutlet weak var loadplanHeaderView: UIView!
     
-    let LOAD_PLAN_VIEW_HEIGHT:CGFloat = 140.0
-    let LOAD_PLAN_VIEW_HEIGHT_TACHOGRAPH:CGFloat = 170.0
+    
+    let LOAD_PLAN_VIEW_HEIGHT:CGFloat = 130.0
+    let LOAD_PLAN_VIEW_HEIGHT_TACHOGRAPH:CGFloat = 160.0
     
     
     fileprivate let headerCellIdentifier = "RouteDetailLoadPlanHeaderTbvCell"
@@ -78,6 +80,7 @@ class RouteDetailLoadPlanListClvCell: UICollectionViewCell {
         tachographView.isHidden = !isTachograph
         loadPlanInfoHeightConstraint.constant = isTachograph ? LOAD_PLAN_VIEW_HEIGHT_TACHOGRAPH : LOAD_PLAN_VIEW_HEIGHT
         scrollViewHeightConstraint.constant = estimateHeightForTableView()
+        loadplanHeaderView.roundCornersLRT()
         loadplanInfoView.roundCornersLRB()
         iconDropDownWeightConstant.constant = isLiquid ? 7.5 : 0
         
@@ -137,9 +140,9 @@ extension RouteDetailLoadPlanListClvCell: UITableViewDelegate, UITableViewDataSo
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        if let _compartment = dataDisplay?.compartments?[section], let headerCell = tableView.dequeueReusableCell(withIdentifier: headerCellIdentifier) as? RouteDetailLoadPlanHeaderTbvCell{
+        if let routeTypeId = route?.routeType?.id ,let _compartment = dataDisplay?.compartments?[section], let headerCell = tableView.dequeueReusableCell(withIdentifier: headerCellIdentifier) as? RouteDetailLoadPlanHeaderTbvCell{
             
-            let routeType:Route.RouteType = Route.RouteType(rawValue: (route?.routeType?.id ?? 0))!
+            guard let routeType:Route.RouteType = Route.RouteType(rawValue: routeTypeId) else { return nil }
             switch routeType {
             case .Liquid:
                 headerCell.configureHeaderLiquidType(_compartment)
