@@ -15,12 +15,12 @@ class RouteDetailLocationListClvCell: UICollectionViewCell {
     @IBOutlet weak var noOrdersLabel: UILabel?
     
     fileprivate let cellIdentifier = "LocationListTbvCell"
-
+    
     fileprivate var locationsList:[Order] = []
     private var groupLocationList:[GroupLocatonModel] = []
 
     var dateStringFilter = ""
-    var rootVC: BaseViewController?
+    weak var rootVC: BaseViewController?
     var route: Route? {
         didSet {
             initData()
