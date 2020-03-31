@@ -128,7 +128,7 @@ class FilterDataListVC: BaseViewController {
         allStatuses.name = "all-statuses".localized
         arrRentingOrderStatus.append(allStatuses)
         if CoreDataManager.getListRentingOrderStatus().count == 0 {
-            self.getListRentingOrderStatus()
+//            self.getListRentingOrderStatus()
         }
         arrRentingOrderStatus.append(CoreDataManager.getListRentingOrderStatus())
     }
