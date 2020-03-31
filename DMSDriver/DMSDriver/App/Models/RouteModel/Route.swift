@@ -11,12 +11,37 @@ import ObjectMapper
 import GoogleMaps
 
 //MARK: - TRUCK
-class TruckType: BasicModel { }
 class Tanker: Truck { }
 class Status: BasicModel { }
 class Urgency: BasicModel { }
 class Company: BasicModel { }
 class Zone: BasicModel { }
+
+class TruckType: BasicModel {
+    var numberOfCompartments:Int? = -1
+    var maxVol:String? = ""
+    var tachograph:Int? = -1
+    
+    func isTachograph() -> Bool {
+        let isTachograph = tachograph == 1 ? true : false
+        return isTachograph
+    }
+    
+    override init() {
+        super.init()
+    }
+    
+    required init?(map: Map) {
+        super.init()
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        numberOfCompartments <- map["num_of_compartments"]
+        maxVol <- map["max_vol"]
+        tachograph <- map["tachograph"]
+    }
+}
 
 class TankerJSON: BaseModel {
     var id:Int?
@@ -163,6 +188,34 @@ class ResponseGetRouteList: BaseModel {
 //MARK: - Route
 class Route: BaseModel {
     
+    enum RouteType:Int {
+        case Liquid = 1
+        case Packed = 2
+        
+        var name: String {
+            get {
+                switch self {
+                case .Liquid:
+                    return "liquid".localized
+                case .Packed:
+                    return "packed".localized;
+                }
+            }
+        }
+        
+        var code: String {
+            get {
+                switch self {
+                case .Liquid:
+                    return "LQ".localized
+                case .Packed:
+                    return "PK".localized;
+                }
+            }
+        }
+        
+    }
+    
     enum RouteStatus:String {
         case New = "OP"
         case InProgess = "IP"
@@ -254,6 +307,7 @@ class Route: BaseModel {
     var company:Company?
     var loadVolume:Int?
     var assignedInfo:[AssignedInfo]?
+    var routeType:BasicModel?
     
     
     // NEW
@@ -323,6 +377,11 @@ class Route: BaseModel {
         order?.status = status
     }
     
+    func routeTypeName() -> String {
+        guard let _routeTypeName = routeType?.name else { return ""}
+        return _routeTypeName
+    }
+    
     class AssignedInfo: BaseModel {
         var id:Int?
         var routeID:Int?
@@ -387,6 +446,7 @@ class Route: BaseModel {
 //        guard let array = tankersJSON else { return }
 //
 //        tankers = array.map({$0.tanker ?? Tanker()})
+        routeType <- map["route_type"]
     }
     
     var ordersAbleToLoad:[Order] {
