@@ -63,6 +63,7 @@ class Compartment:BaseModel {
         var routeTankerId: Int = -1
         var compartmentId: Int = -1
         var shippingOrderId: Int = -1
+        var shippingOrderDetailId = -1
         var quantity: Int = -1
         var color: String = ""
         var routeTankerCompartmentId: Int = -1
@@ -92,6 +93,7 @@ class Compartment:BaseModel {
             package <- map["package"]
             pivot <- map["pivot"]
             seq <- map["seq_plt"]
+            shippingOrderDetailId <- map["so_detail_id"]
         }
         
         

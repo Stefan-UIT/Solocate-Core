@@ -27,7 +27,7 @@ class RouteDetailLoadPlanItemTbvCell: UITableViewCell {
     }
     
     func configurePacked(_ detail: Compartment.Detail) {
-        orderLabel.text = "order".localized + " " + IntSlash(detail.shippingOrderId)
+        orderLabel.text = "order".localized + " " + IntSlash(detail.shippingOrderDetailId)
         skuLabel.text = detail.name
         unitLabel.text = Slash(detail.seq)
     }

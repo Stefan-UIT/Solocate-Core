@@ -23,20 +23,23 @@ class RouteDetailLoadPlanListClvCell: UICollectionViewCell {
     @IBOutlet weak var tachographLbl: UILabel!
     @IBOutlet weak var routeTypeLbl: UILabel!
     @IBOutlet weak var tachographView: UIView!
+    @IBOutlet weak var loadplanInfoView: UIStackView!
     @IBOutlet weak var loadPlanInfoHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var tbvContentHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var scrollViewHeightConstraint: NSLayoutConstraint!
     
     @IBOutlet weak var platenumBtn: UIButton!
     @IBOutlet weak var iconPlatenumBtn: UIButton!
     
-    let LOAD_PLAN_VIEW_HEIGHT:CGFloat = 60.0
-    let LOAD_PLAN_VIEW_HEIGHT_TACHOGRAPH:CGFloat = 90.0
+    @IBOutlet weak var iconDropDownWeightConstant: NSLayoutConstraint!
+    
+    let LOAD_PLAN_VIEW_HEIGHT:CGFloat = 140.0
+    let LOAD_PLAN_VIEW_HEIGHT_TACHOGRAPH:CGFloat = 170.0
     
     
     fileprivate let headerCellIdentifier = "RouteDetailLoadPlanHeaderTbvCell"
     fileprivate let itemCellIdentifier = "RouteDetailLoadPlanItemTbvCell"
     private var groupLocationList:[GroupLocatonModel] = []
-    private var HEIGHT_HEADER:CGFloat = 50
+    private var HEIGHT_HEADER:CGFloat = 40
     
     var route: Route? {
         didSet {
@@ -74,7 +77,9 @@ class RouteDetailLoadPlanListClvCell: UICollectionViewCell {
         iconPlatenumBtn.isHidden = !isLiquid
         tachographView.isHidden = !isTachograph
         loadPlanInfoHeightConstraint.constant = isTachograph ? LOAD_PLAN_VIEW_HEIGHT_TACHOGRAPH : LOAD_PLAN_VIEW_HEIGHT
-        tbvContentHeightConstraint.constant = estimateHeightForTableView()
+        scrollViewHeightConstraint.constant = estimateHeightForTableView()
+        loadplanInfoView.roundCornersLRB()
+        iconDropDownWeightConstant.constant = isLiquid ? 7.5 : 0
         
         platenumLbl.text = Slash(dataDisplay?.plateNumber)
         maxVolumeLbl.text = IntSlash(dataDisplay?.maxVolume)
@@ -88,14 +93,10 @@ class RouteDetailLoadPlanListClvCell: UICollectionViewCell {
     }
     
     private func estimateHeightForTableView() -> CGFloat {
-        let numberOfCompartments = dataDisplay?.compartments?.count ?? 0
-        var numberOfDetail = 0
-        for index in 0..<numberOfCompartments {
-            numberOfDetail = numberOfDetail + (dataDisplay?.compartments?[index].detail?.count ?? 0)
-        }
-        
-        let height = numberOfCompartments*50 + numberOfDetail*30
-        return CGFloat(integerLiteral: height)
+        let numberOfSection = dataDisplay?.compartments?.count ?? 0
+        let accuracyHeight = CGFloat(numberOfSection*10)
+        let height = loadPlanInfoHeightConstraint.constant + (tbvContent?.frame.height ?? 0) + accuracyHeight
+        return height
     }
     
     @IBAction func didTapPlatenumBtn(sender: UIButton) {
@@ -148,13 +149,14 @@ extension RouteDetailLoadPlanListClvCell: UITableViewDelegate, UITableViewDataSo
             let headerView = UIView()
             headerView.addSubview(headerCell)
             headerCell.frame = CGRect(x: 0, y: 0, width: (tbvContent?.frame.width ?? 0), height: HEIGHT_HEADER)
+            headerView.roundCornersLRT()
             return headerView;
         }
         return nil
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return CGFloat.leastNormalMagnitude
+        return 10
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -172,6 +174,10 @@ extension RouteDetailLoadPlanListClvCell: UITableViewDelegate, UITableViewDataSo
                 itemCell.configureLiquid(_compartmentDetail)
             case .Packed:
                 itemCell.configurePacked(_compartmentDetail)
+            }
+            let isLastCell = dataDisplay?.compartments?[indexPath.section].detail?.count == (indexPath.row + 1)
+            if isLastCell {
+                itemCell.roundCornersLRB()
             }
             return itemCell
         }

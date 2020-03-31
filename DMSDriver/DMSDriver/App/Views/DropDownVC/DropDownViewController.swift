@@ -377,7 +377,7 @@ extension DropDownViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configureCell(item[indexPath.row].name ?? "")
         case .PlateNumber:
             let item = itemsDisplay as! [Truck]
-            cell.configureCell(item[indexPath.row].name)
+            cell.configureCell(item[indexPath.row].plateNumber)
         @unknown default:
             break
         }
