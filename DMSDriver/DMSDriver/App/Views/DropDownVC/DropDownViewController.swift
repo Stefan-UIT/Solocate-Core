@@ -21,6 +21,7 @@ enum DropDownType {
     case UOM
     case Zone
     case Number
+    case PlateNumber
 }
 
 protocol DropDownViewControllerDelegate: NSObjectProtocol {
@@ -36,6 +37,7 @@ class DropDownModel: BasicModel {
     var zones:[Zone]?
     var dateStart:Date?
     var dateEnd:Date?
+    var truck:[Truck]?
     
     func addCustomers(_ customers:[UserModel.UserInfo]) -> DropDownModel {
         self.customers = customers
@@ -74,6 +76,11 @@ class DropDownModel: BasicModel {
     
     func addText(_ text:String) -> DropDownModel {
         self.result = text
+        return self
+    }
+    
+    func addTruck(_ truck:[Truck]) -> DropDownModel {
+        self.truck = truck
         return self
     }
 }
@@ -156,7 +163,7 @@ class DropDownViewController: UIViewController {
             tbvContent?.isHidden = true
             tbvContentHeightConstraint.constant = 0
             contentViewHeightConstraint.constant = CONTENT_VIEW_HEIGHT - TABLEVIEW_HEIGHT
-        case .OrderType, .Customer, .SKU, .Zone, .COD:
+        case .OrderType, .Customer, .SKU, .Zone, .COD, .PlateNumber:
             textFieldView.isHidden = true
             textFieldViewHeightConstraint.constant = 0
             contentViewHeightConstraint.constant = CONTENT_VIEW_HEIGHT - TEXT_FIELD_HEIGHT
@@ -223,6 +230,9 @@ class DropDownViewController: UIViewController {
         case .Zone:
             guard let _zone = itemDropDown?.zones else { return }
             itemsOrigin = _zone
+        case .PlateNumber:
+            guard let _truck = itemDropDown?.truck else { return }
+            itemsOrigin = _truck
         @unknown default:
             break
         }
@@ -365,6 +375,9 @@ extension DropDownViewController: UITableViewDelegate, UITableViewDataSource {
         case .Zone:
             let item = itemsDisplay as! [Zone]
             cell.configureCell(item[indexPath.row].name ?? "")
+        case .PlateNumber:
+            let item = itemsDisplay as! [Truck]
+            cell.configureCell(item[indexPath.row].name)
         @unknown default:
             break
         }
@@ -395,6 +408,9 @@ extension DropDownViewController: UITableViewDelegate, UITableViewDataSource {
         case .Zone:
             let itemSelect = itemsDisplay[indexPath.row] as? Zone
             item.zones = [itemSelect] as? [Zone]
+        case .PlateNumber:
+            let itemSelect = itemsDisplay[indexPath.row] as? Truck
+            item.truck = [itemSelect] as? [Truck]
         @unknown default:
             break
         }

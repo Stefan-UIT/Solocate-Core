@@ -49,7 +49,7 @@ class RouteDetailOrderListClvCell: UICollectionViewCell {
             filterDataWithTapDisplay()
         }
     }
-    var rootVC: RouteDetailVC?
+    weak var rootVC: RouteDetailVC?
     var dateStringFilter = ""
     
     override func awakeFromNib() {

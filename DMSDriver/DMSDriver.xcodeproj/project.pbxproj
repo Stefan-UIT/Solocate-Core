@@ -683,6 +683,12 @@
 		762CC61323794F6200D25CCD /* CoreNote+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 762CC61123794F6200D25CCD /* CoreNote+Ext.swift */; };
 		7661BCC523A8AEBF00F57B13 /* PurchaseOrderSKUTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7661BCC423A8AEBF00F57B13 /* PurchaseOrderSKUTableViewCell.swift */; };
 		7661BCC623A8AEBF00F57B13 /* PurchaseOrderSKUTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7661BCC423A8AEBF00F57B13 /* PurchaseOrderSKUTableViewCell.swift */; };
+		7662905B242D932E00DA162C /* RouteDetailLoadPlanListClvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662905A242D932E00DA162C /* RouteDetailLoadPlanListClvCell.swift */; };
+		7662905C242D932E00DA162C /* RouteDetailLoadPlanListClvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7662905A242D932E00DA162C /* RouteDetailLoadPlanListClvCell.swift */; };
+		76629061242DA9F900DA162C /* RouteDetailLoadPlanHeaderTbvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76629060242DA9F900DA162C /* RouteDetailLoadPlanHeaderTbvCell.swift */; };
+		76629062242DA9F900DA162C /* RouteDetailLoadPlanHeaderTbvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76629060242DA9F900DA162C /* RouteDetailLoadPlanHeaderTbvCell.swift */; };
+		76629064242DAA1700DA162C /* RouteDetailLoadPlanItemTbvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76629063242DAA1700DA162C /* RouteDetailLoadPlanItemTbvCell.swift */; };
+		76629065242DAA1700DA162C /* RouteDetailLoadPlanItemTbvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76629063242DAA1700DA162C /* RouteDetailLoadPlanItemTbvCell.swift */; };
 		766752AE24236A2300D69956 /* BusinessOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766752AD24236A2300D69956 /* BusinessOrderTableViewCell.swift */; };
 		766752AF24236A2300D69956 /* BusinessOrderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766752AD24236A2300D69956 /* BusinessOrderTableViewCell.swift */; };
 		766752B224236F0000D69956 /* BusinessOrderConfirmTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766752B124236F0000D69956 /* BusinessOrderConfirmTableViewCell.swift */; };
@@ -1263,6 +1269,9 @@
 		762A51452420CCC5002C1399 /* BusinessOrderDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessOrderDetailVC.swift; sourceTree = "<group>"; };
 		762CC61123794F6200D25CCD /* CoreNote+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CoreNote+Ext.swift"; sourceTree = "<group>"; };
 		7661BCC423A8AEBF00F57B13 /* PurchaseOrderSKUTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PurchaseOrderSKUTableViewCell.swift; sourceTree = "<group>"; };
+		7662905A242D932E00DA162C /* RouteDetailLoadPlanListClvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailLoadPlanListClvCell.swift; sourceTree = "<group>"; };
+		76629060242DA9F900DA162C /* RouteDetailLoadPlanHeaderTbvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailLoadPlanHeaderTbvCell.swift; sourceTree = "<group>"; };
+		76629063242DAA1700DA162C /* RouteDetailLoadPlanItemTbvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailLoadPlanItemTbvCell.swift; sourceTree = "<group>"; };
 		766752AD24236A2300D69956 /* BusinessOrderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessOrderTableViewCell.swift; sourceTree = "<group>"; };
 		766752B124236F0000D69956 /* BusinessOrderConfirmTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessOrderConfirmTableViewCell.swift; sourceTree = "<group>"; };
 		766752B4242375A200D69956 /* BusinessOrderItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessOrderItemTableViewCell.swift; sourceTree = "<group>"; };
@@ -2025,6 +2034,7 @@
 		3B556BDB223A4C5900E6CED6 /* Cell */ = {
 			isa = PBXGroup;
 			children = (
+				76629058242D930E00DA162C /* RouteDetailLoadPlanListClvCell */,
 				2AB4A984224B78720019F196 /* RouteDetailLocationListClvCell */,
 				3B556BDE223A4C8400E6CED6 /* RouteDetailOrderListClvCell */,
 				3B556BDD223A4C5E00E6CED6 /* RouteDetailMapClvCell */,
@@ -3525,6 +3535,24 @@
 			path = BusinessOrderDetailVC;
 			sourceTree = "<group>";
 		};
+		76629058242D930E00DA162C /* RouteDetailLoadPlanListClvCell */ = {
+			isa = PBXGroup;
+			children = (
+				7662905E242DA9D700DA162C /* Cells */,
+				7662905A242D932E00DA162C /* RouteDetailLoadPlanListClvCell.swift */,
+			);
+			path = RouteDetailLoadPlanListClvCell;
+			sourceTree = "<group>";
+		};
+		7662905E242DA9D700DA162C /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				76629060242DA9F900DA162C /* RouteDetailLoadPlanHeaderTbvCell.swift */,
+				76629063242DAA1700DA162C /* RouteDetailLoadPlanItemTbvCell.swift */,
+			);
+			path = Cells;
+			sourceTree = "<group>";
+		};
 		76680B392423D4DB00CD578F /* BusinessOrder */ = {
 			isa = PBXGroup;
 			children = (
@@ -4116,6 +4144,7 @@
 				2A443A5A22648C5A00CB6508 /* TaskListVC.swift in Sources */,
 				7622BCEF23828531008792C8 /* CoreTanker+Ext.swift in Sources */,
 				2A443A5B22648C5A00CB6508 /* BuildConfiguration.swift in Sources */,
+				76629064242DAA1700DA162C /* RouteDetailLoadPlanItemTbvCell.swift in Sources */,
 				2A443A5C22648C5A00CB6508 /* GMSMapview+Ext.swift in Sources */,
 				76BFFD6F2339F4660021E01A /* RentingOrderListTableViewCell.swift in Sources */,
 				2A443A5D22648C5A00CB6508 /* ReachabilityManager.swift in Sources */,
@@ -4185,6 +4214,7 @@
 				76BFFD6C2339D8B50021E01A /* RentingOrderListVC.swift in Sources */,
 				2A443A9022648C5A00CB6508 /* CoreCoordinatorRoute+Ext.swift in Sources */,
 				2A443A9122648C5A00CB6508 /* TaskDetailVC.swift in Sources */,
+				7662905B242D932E00DA162C /* RouteDetailLoadPlanListClvCell.swift in Sources */,
 				185FC772228D303100B085BC /* BaseSearchView.swift in Sources */,
 				2A443A9222648C5A00CB6508 /* FilterDataListFooterView.swift in Sources */,
 				2A443A9322648C5A00CB6508 /* UILabel.swift in Sources */,
@@ -4241,6 +4271,7 @@
 				2A443AB922648C5A00CB6508 /* ReasonListViewController.swift in Sources */,
 				766752B224236F0000D69956 /* BusinessOrderConfirmTableViewCell.swift in Sources */,
 				2A443ABA22648C5A00CB6508 /* LoginViewController.swift in Sources */,
+				76629061242DA9F900DA162C /* RouteDetailLoadPlanHeaderTbvCell.swift in Sources */,
 				762A51382420B513002C1399 /* BusinessOrderListVC.swift in Sources */,
 				2A443ABB22648C5A00CB6508 /* PictureTableViewCell.swift in Sources */,
 				2A443ABC22648C5A00CB6508 /* BaseNV.swift in Sources */,
@@ -4467,6 +4498,7 @@
 				2E920A6E22EFF09D000AD8EF /* AssignTruckViewController.swift in Sources */,
 				3B66B842210B113D000BDFEF /* Constants.swift in Sources */,
 				2E1BE34D22F14FFD005F9BB5 /* ReturnedItemListVC.swift in Sources */,
+				7662905C242D932E00DA162C /* RouteDetailLoadPlanListClvCell.swift in Sources */,
 				3B66B820210B113D000BDFEF /* UIImageView+Extensions.swift in Sources */,
 				3B66B81A210B113D000BDFEF /* ImagePickerView.swift in Sources */,
 				3B556BE2223A4D0400E6CED6 /* RouteDetailMapClvCell.swift in Sources */,
@@ -4522,6 +4554,7 @@
 				3B2B8B5A222E380600ACDDFE /* PopoverDelegate.swift in Sources */,
 				199F489322843D6D00DB6F7F /* GroupLocatonModel.swift in Sources */,
 				3B66B902210B1149000BDFEF /* ItemsSectionView.swift in Sources */,
+				76629065242DAA1700DA162C /* RouteDetailLoadPlanItemTbvCell.swift in Sources */,
 				2E1BE35122F14FFD005F9BB5 /* ReturnedItemDetailVC.swift in Sources */,
 				3B66B83E210B113D000BDFEF /* Button.swift in Sources */,
 				3B66B80A210B113D000BDFEF /* UIButton.swift in Sources */,
@@ -4643,6 +4676,7 @@
 				2E1BE35722F191C4005F9BB5 /* ReturnedItemQuantityCell.swift in Sources */,
 				7622BCE923823BB5008792C8 /* CoreUserInfo+Ext.swift in Sources */,
 				3B13CBF0211A8FF400A93E18 /* ScrollMenuCell.swift in Sources */,
+				76629062242DA9F900DA162C /* RouteDetailLoadPlanHeaderTbvCell.swift in Sources */,
 				3BEAB86D214260CD0039CFBB /* CoreAttachFile+Ext.swift in Sources */,
 				76B8EE8C23A9E5E000F28CAD /* CorePurchaseOrderStatus+Ext.swift in Sources */,
 				3B80E3DC22279D1B005A2E75 /* ReasonSkipView.swift in Sources */,

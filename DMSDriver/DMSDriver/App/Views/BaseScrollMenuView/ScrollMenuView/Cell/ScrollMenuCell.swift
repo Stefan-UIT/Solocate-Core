@@ -37,6 +37,7 @@ class ScrollMenuCell: UICollectionViewCell {
    
     
     @objc func setupUI(){
+        lblTitle?.font = UIFont.systemFont(ofSize: 12)
         vContent?.cornerRadius = cornerRadiusCell
     }
     

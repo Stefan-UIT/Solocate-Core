@@ -35,6 +35,7 @@ enum RouteDetailDisplayMode:Int,CaseIterable {
     case DisplayModeMap = 0
     case DisplayModeStops
     case DisplayModeLocations
+    case DisplayLoadPlan
     
     static var count: Int {
         return RouteDetailDisplayMode.DisplayModeLocations.hashValue + 1
@@ -69,7 +70,8 @@ class RouteDetailVC: BaseViewController {
     //MARK: - VARIABLE
     private let identifierOrderListCell = "RouteDetailOrderListClvCell"
     private let identifieMapCell = "RouteDetailMapClvCell"
-    private let identifieLocationsCell = "RouteDetailLocationListClvCell"
+    private let identifierLocationsCell = "RouteDetailLocationListClvCell"
+    private let identifierLoadPlanCell = "RouteDetailLoadPlanListClvCell"
 
     
     @IBOutlet weak var vanLoadButtonView: UIView!
@@ -202,6 +204,7 @@ class RouteDetailVC: BaseViewController {
         let mapMode = MenuItem("Map".localized.uppercased())
         let orderMode = MenuItem("Orders".localized.uppercased())
         let locationMode = MenuItem("locations".localized.uppercased())
+        let loadPlanMode = MenuItem("load-plan".localized.uppercased())
 
         menuScrollView?.roundedCorners([.layerMaxXMinYCorner,
                                         .layerMinXMinYCorner,
@@ -213,7 +216,7 @@ class RouteDetailVC: BaseViewController {
         menuScrollView?.cornerRadiusCell = 10
         menuScrollView?.delegate = self
         menuScrollView?.isHidden = false
-        let dataSource = [mapMode,orderMode,locationMode]
+        let dataSource = [mapMode,orderMode,locationMode,loadPlanMode]
         menuScrollView?.dataSource = dataSource
         menuScrollView?.reloadData()
     }
@@ -305,6 +308,8 @@ extension RouteDetailVC: UICollectionViewDataSource {
             
         case .DisplayModeLocations:
             return cellLocationsList(collectionView, indexPath)
+        case .DisplayLoadPlan:
+            return cellLoadPlan(collectionView, indexPath)
         }
     }
     
@@ -325,8 +330,16 @@ extension RouteDetailVC: UICollectionViewDataSource {
     }
     
     func cellLocationsList(_ collectionView:UICollectionView,_ indexPath:IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifieLocationsCell,
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifierLocationsCell,
                                                       for: indexPath) as! RouteDetailLocationListClvCell
+        cell.rootVC = self
+        cell.route = route
+        return cell
+    }
+    
+    func cellLoadPlan(_ collectionView:UICollectionView,_ indexPath:IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: identifierLoadPlanCell,
+                                                      for: indexPath) as! RouteDetailLoadPlanListClvCell
         cell.rootVC = self
         cell.route = route
         return cell

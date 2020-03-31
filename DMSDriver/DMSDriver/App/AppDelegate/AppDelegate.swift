@@ -131,8 +131,8 @@ extension AppDelegate {
         }
         self.getListStatus()
         self.getListRouteStatus()
-        self.getListRentingOrderStatus()
-        self.getListRentingOrderDetailStatus()
+//        self.getListRentingOrderStatus()
+//        self.getListRentingOrderDetailStatus()
         self.getListPurchaseOrderStatus()
         self.getReasonList()
         

@@ -73,9 +73,9 @@ extension ScrollMenuView:UICollectionViewDataSource,UICollectionViewDelegateFlow
     }
     
     func getWithCellWith(_ text:String) -> CGFloat {
-        let size = text.sizeOfString(usingFont: Font.arialRegular(with: 14))
-        let width = size.width + 50
-        return width > 90 ? width : 90
+        let size = text.sizeOfString(usingFont: Font.arialRegular(with: 12))
+        let width = size.width + 30
+        return width > 70 ? width : 70
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -104,7 +104,7 @@ extension ScrollMenuView: UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         indexSelect = indexPath.row;
         clvContent?.reloadData()
-        
+        clvContent?.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         delegate?.didSelectItemMenu(view: self, indexPath: indexPath)
     }
 }
