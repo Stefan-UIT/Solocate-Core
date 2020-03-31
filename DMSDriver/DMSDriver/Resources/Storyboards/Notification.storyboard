@@ -18,7 +18,7 @@
         <!--History NotifyVC-->
         <scene sceneID="f4L-us-Tg6">
             <objects>
-                <viewController storyboardIdentifier="HistoryNotifyVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Dir-Zd-WyD" customClass="HistoryNotifyVC" customModule="Gadot_Dev" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HistoryNotifyVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="Dir-Zd-WyD" customClass="HistoryNotifyVC" customModule="Gadot_Live" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="hcz-CK-yWJ"/>
                         <viewControllerLayoutGuide type="bottom" id="qX0-y2-fjI"/>
@@ -35,7 +35,7 @@
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HistoryNotifyCell" rowHeight="167" id="Bqw-km-mWg" customClass="HistoryNotifyCell" customModule="Gadot_Dev" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="none" indentationWidth="10" reuseIdentifier="HistoryNotifyCell" rowHeight="167" id="Bqw-km-mWg" customClass="HistoryNotifyCell" customModule="Gadot_Live" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="375" height="167"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Bqw-km-mWg" id="Tdu-Av-FDd">
@@ -240,7 +240,7 @@
         <!--History Notify DetailVC-->
         <scene sceneID="JSi-NS-J5F">
             <objects>
-                <viewController storyboardIdentifier="HistoryNotifyDetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="f90-pe-eDV" customClass="HistoryNotifyDetailVC" customModule="Gadot_Dev" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="HistoryNotifyDetailVC" useStoryboardIdentifierAsRestorationIdentifier="YES" id="f90-pe-eDV" customClass="HistoryNotifyDetailVC" customModule="Gadot_Live" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="o9o-Ng-ZwD">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -297,7 +297,7 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryNotifyDetailDiscCell" rowHeight="92" id="cxb-j6-9uc" customClass="HistoryNotifyDetailCell" customModule="Gadot_Dev" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryNotifyDetailDiscCell" rowHeight="92" id="cxb-j6-9uc" customClass="HistoryNotifyDetailCell" customModule="Gadot_Live" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="55.5" width="375" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="cxb-j6-9uc" id="XYd-sD-f67">
@@ -346,7 +346,7 @@
                                             <outlet property="vContent" destination="lpP-4l-g7f" id="Hhm-x4-MER"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryNotifyDetailCell" rowHeight="92" id="0nL-zL-Mx0" customClass="HistoryNotifyDetailCell" customModule="Gadot_Dev" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryNotifyDetailCell" rowHeight="92" id="0nL-zL-Mx0" customClass="HistoryNotifyDetailCell" customModule="Gadot_Live" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="147.5" width="375" height="92"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="0nL-zL-Mx0" id="fEx-x0-0XH">
@@ -409,7 +409,7 @@
                                             <outlet property="vContent" destination="u5Q-6Y-L2d" id="9fa-eS-cfS"/>
                                         </connections>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryNotifyDetailHeaderCell" rowHeight="104" id="v6Z-6A-dXs" customClass="HistoryNotifyDetailCell" customModule="Gadot_Dev" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="HistoryNotifyDetailHeaderCell" rowHeight="104" id="v6Z-6A-dXs" customClass="HistoryNotifyDetailCell" customModule="Gadot_Live" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="239.5" width="375" height="104"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="v6Z-6A-dXs" id="yfN-SP-aWV">
