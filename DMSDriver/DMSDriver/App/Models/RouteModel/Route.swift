@@ -308,6 +308,7 @@ class Route: BaseModel {
     var loadVolume:Int?
     var assignedInfo:[AssignedInfo]?
     var routeType:BasicModel?
+    var routeTypeId:Int?
     
     
     // NEW
@@ -378,7 +379,9 @@ class Route: BaseModel {
     }
     
     func routeTypeName() -> String {
-        guard let _routeTypeName = routeType?.name else { return ""}
+        guard let _routeTypeName = routeType?.name else {
+            return Route.RouteType(rawValue: routeTypeId ?? 0)?.name ?? ""
+        }
         return _routeTypeName
     }
     
@@ -447,6 +450,7 @@ class Route: BaseModel {
 //
 //        tankers = array.map({$0.tanker ?? Tanker()})
         routeType <- map["route_type"]
+        routeTypeId <- map["route_type_id"]
     }
     
     var ordersAbleToLoad:[Order] {
