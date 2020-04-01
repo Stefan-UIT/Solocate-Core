@@ -764,7 +764,7 @@ class Order: BaseModel {
         urgent_type_id <- map["urgent_type_id"]
         status <- map["shipping_status"]
         driver_id <- map["driver_id"]
-        route <- map["route"]
+        route <- map["shipping_route"]
         
         if  let dataFrom = map["shipping_from"].currentValue as? String{
             from    = Address(JSON: dataFrom.parseToJSON() ?? [:])
