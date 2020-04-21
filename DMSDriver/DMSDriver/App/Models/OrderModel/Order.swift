@@ -173,6 +173,9 @@ class Address: BaseModel {
         lngtd <- map["lngtd"]
         name <- map["ctt_name"]
         phone <- map["ctt_phone"]
+        if phone == nil {
+            phone <- map["phone"]
+        }
         start_time <- map["start_time"]
         end_time <- map["end_time"]
         srvc_time <- map["srvc_time"]
