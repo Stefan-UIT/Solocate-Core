@@ -62,6 +62,7 @@ class BusinessOrderDetailVC: BaseViewController {
     var skus:[SKUModel]?
     var uoms:[UOMModel]?
     var zones:[Zone] = []
+    var companyId:Int?
     
     var isOrderInfoFilled:Bool = false
     var isEnableSubmit:Bool = false
@@ -105,13 +106,14 @@ class BusinessOrderDetailVC: BaseViewController {
         if order != nil {
             _order = order!
         }
+        _order.zone = autoFillZone()
         let itemZone = DropDownModel().addZones(zones)
         let zone = BusinessOrderForRow(title: "zone".localized,
                                        content: Slash(_order.zone?.name),
                                        isEditing: isEditingBO,
                                        style: .Zone,
                                        itemZone,
-                                       isRequire: _order.isRequireEdit(_order?.zone?.name, .Zone))
+                                       isRequire: _order.isRequireEdit(_order?.zone?.name, .None))
         
         if isPickup {
             removeZone()
@@ -121,6 +123,16 @@ class BusinessOrderDetailVC: BaseViewController {
             businessOrderDeliveryInfo.append(zone)
         }
         tbvContent?.reloadData()
+    }
+    
+    func autoFillZone() -> Zone {
+        for index in 0..<zones.count {
+            if zones[index].companyId == self.companyId {
+                order?.zoneId = zones[index].id
+                return zones[index]
+            }
+        }
+        return Zone()
     }
     
     func removeZone() {
@@ -207,49 +219,49 @@ class BusinessOrderDetailVC: BaseViewController {
                                             isRequire: _order.isRequireEdit(orderPU?.address, .Address))
         let floorPU = BusinessOrderForRow(title: "Floor".localized,
                                          content: Slash(orderPU?.floor),
-                                         isEditing: isEditingBO,
+                                         isEditing: false,
                                          style: .InputText,
                                          isRequire: _order.isRequireEdit(orderPU?.floor, .None))
         let apartmentPU = BusinessOrderForRow(title: "Apartment".localized,
                                           content: Slash(orderPU?.apartment),
-                                          isEditing: isEditingBO,
+                                          isEditing: false,
                                           style: .InputText,
                                           isRequire: _order.isRequireEdit(orderPU?.apartment, .None))
         let numberPU = BusinessOrderForRow(title: "number".localized,
                                               content: Slash(orderPU?.number),
-                                              isEditing: isEditingBO,
+                                              isEditing: false,
                                               style: .InputText,
                                               isRequire: _order.isRequireEdit(orderPU?.number, .None))
         let openTimePU = BusinessOrderForRow(title: "open-time".localized,
                                            content: Slash(orderPU?.openTime),
                                            isEditing: isEditingBO,
                                            style: .Time,
-                                           isRequire: _order.isRequireEdit(orderPU?.openTime, .None))
+                                           isRequire: _order.isRequireEdit(orderPU?.openTime, .OpenTime))
         let closeTimePU = BusinessOrderForRow(title: "close-time".localized,
                                              content: Slash(orderPU?.closeTime),
                                              isEditing: isEditingBO,
                                              style: .Time,
-                                             isRequire: _order.isRequireEdit(orderPU?.closeTime, .None))
+                                             isRequire: _order.isRequireEdit(orderPU?.closeTime, .CloseTime))
         let consigneeNamePU = BusinessOrderForRow(title: "consignee-name".localized,
                                            content: Slash(orderPU?.ctt_name),
-                                           isEditing: isEditingBO,
+                                           isEditing: false,
                                            style: .InputText,
                                            isRequire: _order.isRequireEdit(orderPU?.ctt_name, .None))
         let consigneePhonePU = BusinessOrderForRow(title: "consignee-phone".localized,
                                                   content: Slash(orderPU?.ctt_phone),
-                                                  isEditing: isEditingBO,
+                                                  isEditing: false,
                                                   style: .InputText,
                                                   isRequire: _order.isRequireEdit(orderPU?.ctt_phone, .None))
         let startTimePU = BusinessOrderForRow(title: "start-time".localized,
                                               content: Slash(orderPU?.start_time),
                                               isEditing: isEditingBO,
                                               style: .CalendarStart,
-                                              isRequire: _order.isRequireEdit(orderPU?.start_time, .None))
+                                              isRequire: _order.isRequireEdit(orderPU?.start_time, .StartTime))
         let endTimePU = BusinessOrderForRow(title: "end-time".localized,
                                               content: Slash(orderPU?.end_time),
                                               isEditing: isEditingBO,
                                               style: .CalendarEnd,
-                                              isRequire: _order.isRequireEdit(orderPU?.end_time, .None))
+                                              isRequire: _order.isRequireEdit(orderPU?.end_time, .EndTime))
         
         businessOrderPickupInfo.append(addressPU)
         businessOrderPickupInfo.append(floorPU)
@@ -273,49 +285,49 @@ class BusinessOrderDetailVC: BaseViewController {
                                             isRequire: _order.isRequireEdit(orderDV?.address, .Address))
         let floorDV = BusinessOrderForRow(title: "Floor".localized,
                                           content: Slash(orderDV?.floor),
-                                          isEditing: isEditingBO,
+                                          isEditing: false,
                                           style: .InputText,
                                           isRequire: _order.isRequireEdit(orderDV?.floor, .None))
         let apartmentDV = BusinessOrderForRow(title: "Apartment".localized,
                                               content: Slash(orderDV?.apartment),
-                                              isEditing: isEditingBO,
+                                              isEditing: false,
                                               style: .InputText,
                                               isRequire: _order.isRequireEdit(orderDV?.apartment, .None))
         let numberDV = BusinessOrderForRow(title: "number".localized,
                                            content: Slash(orderDV?.number),
-                                           isEditing: isEditingBO,
+                                           isEditing: false,
                                            style: .InputText,
                                            isRequire: _order.isRequireEdit(orderDV?.number, .None))
         let openTimeDV = BusinessOrderForRow(title: "open-time".localized,
                                              content: Slash(orderDV?.openTime),
                                              isEditing: isEditingBO,
                                              style: .Time,
-                                             isRequire: _order.isRequireEdit(orderDV?.openTime, .None))
+                                             isRequire: _order.isRequireEdit(orderDV?.openTime, .OpenTime))
         let closeTimeDV = BusinessOrderForRow(title: "close-time".localized,
                                               content: Slash(orderDV?.closeTime),
                                               isEditing: isEditingBO,
                                               style: .Time,
-                                              isRequire: _order.isRequireEdit(orderDV?.closeTime, .None))
+                                              isRequire: _order.isRequireEdit(orderDV?.closeTime, .CloseTime))
         let consigneeNameDV = BusinessOrderForRow(title: "consignee-name".localized,
                                                   content: Slash(orderDV?.ctt_name),
-                                                  isEditing: isEditingBO,
+                                                  isEditing: false,
                                                   style: .InputText,
                                                   isRequire: _order.isRequireEdit(orderDV?.ctt_name, .None))
         let consigneePhoneDV = BusinessOrderForRow(title: "consignee-phone".localized,
                                                    content: Slash(orderDV?.ctt_phone),
-                                                   isEditing: isEditingBO,
+                                                   isEditing: false,
                                                    style: .InputText,
                                                    isRequire: _order.isRequireEdit(orderDV?.ctt_phone, .None))
         let startTimeDV = BusinessOrderForRow(title: "start-time".localized,
                                               content: Slash(orderDV?.start_time),
                                               isEditing: isEditingBO,
                                               style: .CalendarStart,
-                                              isRequire: _order.isRequireEdit(orderDV?.start_time, .None))
+                                              isRequire: _order.isRequireEdit(orderDV?.start_time, .StartTime))
         let endTimeDV = BusinessOrderForRow(title: "end-time".localized,
                                             content: Slash(orderDV?.end_time),
                                             isEditing: isEditingBO,
                                             style: .CalendarEnd,
-                                            isRequire: _order.isRequireEdit(orderDV?.end_time, .None))
+                                            isRequire: _order.isRequireEdit(orderDV?.end_time, .EndTime))
         businessOrderDeliveryInfo.append(addressDV)
         businessOrderDeliveryInfo.append(floorDV)
         businessOrderDeliveryInfo.append(apartmentDV)
@@ -342,7 +354,8 @@ class BusinessOrderDetailVC: BaseViewController {
                                                            uomDataList: uomList,
                                                            qtyContent: IntSlash(detail.pivot?.qty),
                                                            uomContent: Slash(detail.pivot?.uom?.name),
-                                                           batchContent: Slash(detail.pivot?.batch_id))
+                                                           batchContent: Slash(detail.pivot?.batch_id),
+                                                           barcodeContent: Slash(detail.pivot?.bcd))
                     businessOrderItem.append(skuItem)
                 }
             }
@@ -570,6 +583,10 @@ extension BusinessOrderDetailVC: BusinessOrderItemTableViewCellDelegate {
         vc.modalPresentationStyle = .overCurrentContext
         vc.modalTransitionStyle = .crossDissolve
         App().window?.rootViewController?.present(vc, animated: true, completion: nil)
+    }
+    
+    func didSelectShowBarcode() {
+        self.tbvContent?.reloadData()
     }
     
 }
@@ -862,9 +879,9 @@ extension BusinessOrderDetailVC {
     }
     
     func checkRequire() {
-        isEnableSubmit = order?.typeID != nil && order?.customer != nil && (order?.dueDateFrom != nil || order?.dueDateFrom?.isEmpty == false) &&  (order?.dueDateTo?.isEmpty == false || order?.dueDateTo != nil) && order?.from != nil && order?.to != nil && order?.zoneId != nil && order?.details != nil
+        isEnableSubmit = order?.typeID != nil && order?.customer != nil && (order?.dueDateFrom != nil || order?.dueDateFrom?.isEmpty == false) &&  (order?.dueDateTo?.isEmpty == false || order?.dueDateTo != nil) && order?.from != nil && order?.to != nil && order?.zoneId != nil && order?.details != nil && order?.to?.start_time != nil && order?.to?.end_time != nil && order?.to?.openTime != nil && order?.to?.closeTime != nil && order?.from?.start_time != nil && order?.from?.end_time != nil && order?.from?.openTime != nil && order?.from?.closeTime != nil 
         for index in 0..<(order?.details?.count ?? 0){
-            isEnableSubmit = order?.details?[index].pivot?.uom != nil && order?.details?[index].pivot?.batch_id != nil && order?.details?[index].pivot?.qty != nil
+            isEnableSubmit = order?.details?[index].pivot?.uom != nil && order?.details?[index].pivot?.qty != nil
         }
         
         tbvContent?.reloadData()
@@ -909,6 +926,7 @@ extension BusinessOrderDetailVC {
             order?.customerId = String(_customer.id)
             order?.customerLocationId = String(_customer.id)
             textContent = order?.customer_name
+            self.companyId = item.customers?.first?.companyID
             renewAddressSKUData()
         case .DUE_DATE_FROM:
             guard let _date = item.dateStart else { return }
@@ -938,6 +956,35 @@ extension BusinessOrderDetailVC {
         setupViewAfterEdit()
         tbvContent?.reloadData()
     }
+    
+    func autoFillAddressData(_ address: Address, isPickup: Bool) {
+        let FLOOR_ROW:Int = 1
+        let APARTMENT_ROW:Int = 2
+        let NUMBER_ROW:Int = 3
+        let OPEN_ROW:Int = 4
+        let CLOSE_ROW:Int = 5
+        let CTT_NAME_ROW:Int = 6
+        let CTT_PHONE_ROW:Int = 7
+        
+        if isPickup {
+            businessOrderPickupInfo[FLOOR_ROW].content = Slash(address.floor)
+            businessOrderPickupInfo[APARTMENT_ROW].content = Slash(address.apartment)
+            businessOrderPickupInfo[NUMBER_ROW].content = Slash(address.number)
+            businessOrderPickupInfo[OPEN_ROW].content = Slash(address.openTime)
+            businessOrderPickupInfo[CLOSE_ROW].content = Slash(address.closeTime)
+            businessOrderPickupInfo[CTT_NAME_ROW].content = Slash(address.ctt_name)
+            businessOrderPickupInfo[CTT_PHONE_ROW].content = Slash(address.ctt_phone)
+        } else {
+            businessOrderDeliveryInfo[FLOOR_ROW].content = Slash(address.floor)
+            businessOrderDeliveryInfo[APARTMENT_ROW].content = Slash(address.apartment)
+            businessOrderDeliveryInfo[NUMBER_ROW].content = Slash(address.number)
+            businessOrderDeliveryInfo[OPEN_ROW].content = Slash(address.openTime)
+            businessOrderDeliveryInfo[CLOSE_ROW].content = Slash(address.closeTime)
+            businessOrderDeliveryInfo[CTT_NAME_ROW].content = Slash(address.ctt_name)
+            businessOrderDeliveryInfo[CTT_PHONE_ROW].content = Slash(address.ctt_phone)
+        }
+    }
+    
     func editOrderPickupInfo(row:Int, item:DropDownModel?) {
         let infoRow:BusinessOrderAddressInfoRow = BusinessOrderAddressInfoRow(rawValue: row)!
         var textContent = item?.result
@@ -953,6 +1000,7 @@ extension BusinessOrderDetailVC {
             pickupItem.ctt_phone = _address.phone
             pickupItem.lattd = _address.lattd
             pickupItem.lngtd = _address.lngtd
+            autoFillAddressData(_address, isPickup: true)
             textContent = pickupItem.address
         case .FLOOR:
             pickupItem.floor = textContent
@@ -1016,6 +1064,7 @@ extension BusinessOrderDetailVC {
             deliveryItem.ctt_phone = _address.phone
             deliveryItem.lattd = _address.lattd
             deliveryItem.lngtd = _address.lngtd
+            autoFillAddressData(_address, isPickup: false)
             textContent = deliveryItem.address
         case .FLOOR:
             deliveryItem.floor = textContent
@@ -1080,15 +1129,25 @@ extension BusinessOrderDetailVC {
         case .SKU:
             guard let _sku = item?.skus?.first else { return }
             skuItems[row] = _sku
+            if _sku.uom != nil {
+                let json:[String:Any] = ["uom":["id":(_sku.uom?.id ?? 0),
+                                                "name":(_sku.uom?.name ?? ""),
+                                                         "code":(_sku.uom?.code ?? "")]]
+                let pivot = BusinessOrder.Detail.Pivot(JSON: json)
+                skuItems[row].pivot = pivot
+                businessOrderItem[row].itemContent[BusinessOrderSKUInfoRow.UOM.rawValue] = Slash(skuItems[row].pivot?.uom?.name)
+            }
             textContent = _sku.skuName
         case .QUANTITY:
             skuItems[row].pivot?.qty = Int(textContent ?? "") ?? 0
-        case .UOM:
-            guard let _uom = item?.uoms?.first else { return }
-            skuItems[row].pivot?.uom = _uom
-            textContent = skuItems[row].pivot?.uom?.name ?? ""
+        case .UOM: break
+//            guard let _uom = item?.uoms?.first else { return }
+//            skuItems[row].pivot?.uom = _uom
+//            textContent = skuItems[row].pivot?.uom?.name ?? ""
         case .BATCH_ID:
             skuItems[row].pivot?.batch_id = textContent
+        case .BARCODE:
+            skuItems[row].bcd = textContent
         }
         businessOrderItem[row].itemContent[currentTag ?? 0]  = Slash(textContent)
         order?.details = skuItems
@@ -1096,6 +1155,7 @@ extension BusinessOrderDetailVC {
         skuItems[row].batchId = skuItems[row].pivot?.batch_id ?? ""
         skuItems[row].unitId = skuItems[row].pivot?.uom?.id ?? -1
         skuItems[row].qty = skuItems[row].pivot?.qty ?? -1
+        skuItems[row].bcd = String(skuItems[row].bcd ?? "")
         setupViewAfterEdit()
     }
     

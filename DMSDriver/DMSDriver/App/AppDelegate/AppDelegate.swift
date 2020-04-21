@@ -47,7 +47,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             Server: \#(buildConfiguration.serverUrlString())
             <=====
             """#)
-    
+        if #available(iOS 13.0, *) {
+            window!.overrideUserInterfaceStyle = .light
+        }
         GMSServices.provideAPIKey(Network.googleAPIKey)
         SVProgressHUD.setDefaultStyle(.dark)
    

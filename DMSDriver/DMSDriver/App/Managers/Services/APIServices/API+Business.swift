@@ -20,7 +20,7 @@ extension BaseAPIService {
         let urlString = PATH_REQUEST_URL.GET_PURCHASE_ORDERS.URL
         var path = String(format: urlString,startDate,endDate)
         if let _statusId = status?.id {
-            path = path + "&business_status_ids=\(_statusId)"
+            path = path + "&purchase_status_ids=\(_statusId)"
         }
         path = path + "&page=\(page)&limit=10&sort[purchase_order_id]=desc&"
         return request(method: .GET,

@@ -38,7 +38,11 @@ class BaseViewController: UIViewController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
-        return UIStatusBarStyle.default
+        if #available(iOS 13.0, *) {
+            return UIStatusBarStyle.darkContent
+        } else {
+            return UIStatusBarStyle.default
+        }
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -52,12 +52,24 @@ class BaseView: UIView {
     func showViewInView(superView : UIView, isHiddenStatusBar:Bool? = nil) {
         self.translatesAutoresizingMaskIntoConstraints = false
         
-        let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow
-        statusBarWindow?.alpha = 0.0
-        
-        if let isHiddenStatusBar = isHiddenStatusBar {
-            if isHiddenStatusBar == false {
-                statusBarWindow?.alpha = 1.0
+        if #available(iOS 13.0, *) {
+            let statusBarWindow =  UIView()
+            statusBarWindow.frame = UIApplication.shared.keyWindow?.windowScene?.statusBarManager!.statusBarFrame as! CGRect
+            statusBarWindow.alpha = 0.0
+            if let isHiddenStatusBar = isHiddenStatusBar {
+                if isHiddenStatusBar == false {
+                    statusBarWindow.alpha = 1.0
+                }
+            }
+            UIApplication.shared.keyWindow?.addSubview(statusBarWindow)
+        } else {
+            let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow
+            statusBarWindow?.alpha = 0.0
+           
+            if let isHiddenStatusBar = isHiddenStatusBar {
+                if isHiddenStatusBar == false {
+                    statusBarWindow?.alpha = 1.0
+                }
             }
         }
         superView.addSubview(self)
@@ -92,8 +104,15 @@ class BaseView: UIView {
     }
     
     func showViewInTop(superView : UIView) {
-        let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow
-        statusBarWindow?.alpha = 0.0
+        if #available(iOS 13.0, *) {
+            let statusBarWindow =  UIView()
+            statusBarWindow.frame = UIApplication.shared.keyWindow?.windowScene?.statusBarManager!.statusBarFrame as! CGRect
+            statusBarWindow.alpha = 0.0
+            UIApplication.shared.keyWindow?.addSubview(statusBarWindow)
+        } else {
+            let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow
+            statusBarWindow?.alpha = 0.0
+        }
         self.translatesAutoresizingMaskIntoConstraints = false
         
         superView.addSubview(self)
@@ -114,8 +133,15 @@ class BaseView: UIView {
     }
     
     override func removeFromSuperview() {
-        let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow
-        statusBarWindow?.alpha = 1.0
+        if #available(iOS 13.0, *) {
+            let statusBarWindow =  UIView()
+            statusBarWindow.frame = UIApplication.shared.keyWindow?.windowScene?.statusBarManager!.statusBarFrame as! CGRect
+            statusBarWindow.alpha = 1.0
+            UIApplication.shared.keyWindow?.addSubview(statusBarWindow)
+        } else {
+            let statusBarWindow = UIApplication.shared.value(forKey: "statusBarWindow") as? UIWindow
+            statusBarWindow?.alpha = 1.0
+        }
         super.removeFromSuperview()
     }
 }

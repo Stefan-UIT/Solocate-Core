@@ -173,6 +173,9 @@ class Address: BaseModel {
         lngtd <- map["lngtd"]
         name <- map["ctt_name"]
         phone <- map["ctt_phone"]
+        if phone == nil {
+            phone <- map["phone"]
+        }
         start_time <- map["start_time"]
         end_time <- map["end_time"]
         srvc_time <- map["srvc_time"]
@@ -340,6 +343,7 @@ class Order: BaseModel {
         var qty: Int?
         var unitId: Int?
         var batchId: String?
+        var bcd : String?
         
         var isPallet:Bool {
             get {
@@ -389,6 +393,7 @@ class Order: BaseModel {
             qty <- map["qty"]
             unitId <- map["unit_id"]
             batchId <- map["batch_id"]
+            bcd <- map["bcd"]
         }
         
         enum DetailUpdateType {

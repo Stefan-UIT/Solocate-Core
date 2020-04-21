@@ -12,7 +12,6 @@ import UIKit
  */
 open class FloatyViewController: UIViewController {
   public let floaty = Floaty()
-  var statusBarStyle: UIStatusBarStyle = .default
   
   override open func viewDidLoad() {
     super.viewDidLoad()
@@ -21,7 +20,11 @@ open class FloatyViewController: UIViewController {
   
   override open var preferredStatusBarStyle: UIStatusBarStyle {
     get {
-      return statusBarStyle
+        if #available(iOS 13.0, *) {
+            return UIStatusBarStyle.darkContent
+        } else {
+            return UIStatusBarStyle.default
+        }
     }
   }
 }
