@@ -88,7 +88,15 @@ extension AppDelegate {
     }
     
     var statusBarView: UIView? {
-        return UIApplication.shared.value(forKey: "statusBar") as? UIView
+        if #available(iOS 13.0, *) {
+           let statusBarUIView =  UIView()
+           statusBarUIView.frame = UIApplication.shared.keyWindow?.windowScene?.statusBarManager!.statusBarFrame as! CGRect
+            statusBarUIView.backgroundColor = UIColor.black
+           return statusBarUIView
+        } else {
+           return UIApplication.shared.value(forKey: "statusBar") as! UIView
+           
+        }
     }
     
     func showAlertView(_ title:String? = nil, _ message: String? = nil,

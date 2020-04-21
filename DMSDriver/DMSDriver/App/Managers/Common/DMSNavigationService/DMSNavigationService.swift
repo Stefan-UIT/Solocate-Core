@@ -182,7 +182,7 @@ extension DMSNavigationService {
     
     func updateNavigationBar(_ barStyle:BarStyle,
                              _ title:String,
-                             _ backgrondBar:UIColor = UIColor.white,
+                             _ backgrondBar:UIColor = AppColor.white,
                              _ useLargeTitle:Bool = false,
                              _ subMainTitle:String? = nil) {
         if useLargeTitle == true {

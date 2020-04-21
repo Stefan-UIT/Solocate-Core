@@ -22,7 +22,11 @@ class BaseNV: UINavigationController {
     }
     
     override var preferredStatusBarStyle: UIStatusBarStyle{
-        return statusBarStyle
+        if #available(iOS 13.0, *) {
+            return UIStatusBarStyle.darkContent
+        } else {
+            return UIStatusBarStyle.default
+        }
     }
 
     override func didReceiveMemoryWarning() {

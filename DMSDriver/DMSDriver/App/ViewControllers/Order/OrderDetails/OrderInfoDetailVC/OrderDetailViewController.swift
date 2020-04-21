@@ -257,7 +257,6 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let fromAddressDetail = "\(fromFloor)/\(fromApartment)/\(fromNumber)"
         let fromAddressDetailRecord = OrderDetailInforRow("floor-apt-number".localized,fromAddressDetail,false)
 
-        
         // Delivery Location
         let toAddress = OrderDetailInforRow("Address".localized, E(order.to?.address),true)
         let toContactName = OrderDetailInforRow("contact-name".localized,order.to?.ctt_name ?? "-")
