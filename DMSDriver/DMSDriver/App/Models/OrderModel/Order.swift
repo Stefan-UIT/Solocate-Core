@@ -343,6 +343,7 @@ class Order: BaseModel {
         var qty: Int?
         var unitId: Int?
         var batchId: String?
+        var bcd : String?
         
         var isPallet:Bool {
             get {
@@ -392,6 +393,7 @@ class Order: BaseModel {
             qty <- map["qty"]
             unitId <- map["unit_id"]
             batchId <- map["batch_id"]
+            bcd <- map["bcd"]
         }
         
         enum DetailUpdateType {

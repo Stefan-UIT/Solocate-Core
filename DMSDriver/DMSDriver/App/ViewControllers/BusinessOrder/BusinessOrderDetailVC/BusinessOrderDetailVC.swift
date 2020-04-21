@@ -354,7 +354,8 @@ class BusinessOrderDetailVC: BaseViewController {
                                                            uomDataList: uomList,
                                                            qtyContent: IntSlash(detail.pivot?.qty),
                                                            uomContent: Slash(detail.pivot?.uom?.name),
-                                                           batchContent: Slash(detail.pivot?.batch_id))
+                                                           batchContent: Slash(detail.pivot?.batch_id),
+                                                           barcodeContent: Slash(detail.pivot?.bcd))
                     businessOrderItem.append(skuItem)
                 }
             }
@@ -582,6 +583,10 @@ extension BusinessOrderDetailVC: BusinessOrderItemTableViewCellDelegate {
         vc.modalPresentationStyle = .overCurrentContext
         vc.modalTransitionStyle = .crossDissolve
         App().window?.rootViewController?.present(vc, animated: true, completion: nil)
+    }
+    
+    func didSelectShowBarcode() {
+        self.tbvContent?.reloadData()
     }
     
 }
@@ -1141,6 +1146,8 @@ extension BusinessOrderDetailVC {
 //            textContent = skuItems[row].pivot?.uom?.name ?? ""
         case .BATCH_ID:
             skuItems[row].pivot?.batch_id = textContent
+        case .BARCODE:
+            skuItems[row].bcd = textContent
         }
         businessOrderItem[row].itemContent[currentTag ?? 0]  = Slash(textContent)
         order?.details = skuItems
@@ -1148,6 +1155,7 @@ extension BusinessOrderDetailVC {
         skuItems[row].batchId = skuItems[row].pivot?.batch_id ?? ""
         skuItems[row].unitId = skuItems[row].pivot?.uom?.id ?? -1
         skuItems[row].qty = skuItems[row].pivot?.qty ?? -1
+        skuItems[row].bcd = String(skuItems[row].bcd ?? "")
         setupViewAfterEdit()
     }
     

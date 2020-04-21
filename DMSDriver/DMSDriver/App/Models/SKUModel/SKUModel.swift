@@ -24,6 +24,8 @@ class SKUModel: Order.Detail {
     var uomStyle:DropDownType = .UOM
     var batchIdTitle:String = "batch-id".localized
     var batchIdStyle:DropDownType = .InputText
+    var barcodeTitle:String = "Barcode".localized
+    var barcodeStyle:DropDownType = .InputText
     
     
     var skuName: String {
@@ -49,13 +51,14 @@ class SKUModel: Order.Detail {
     }
     
     
-    func createSKUItem(skuContent:String, skuDataList:[SKUModel], uomDataList:[UOMModel], qtyContent:String, uomContent:String, batchContent:String) -> SKUModel {
+    func createSKUItem(skuContent:String, skuDataList:[SKUModel], uomDataList:[UOMModel], qtyContent:String, uomContent:String, batchContent:String, barcodeContent:String) -> SKUModel {
         self.skuDataList = skuDataList
         self.uomDataList = uomDataList
         self.itemContent.append(skuContent)
         self.itemContent.append(qtyContent)
         self.itemContent.append(uomContent)
         self.itemContent.append(batchContent)
+        self.itemContent.append(barcodeContent)
         return self
     }
     
@@ -63,6 +66,7 @@ class SKUModel: Order.Detail {
         self.skuDataList = skuDataList
         self.uomDataList = uomDataList
         let emptyText = ""
+        self.itemContent.append(emptyText)
         self.itemContent.append(emptyText)
         self.itemContent.append(emptyText)
         self.itemContent.append(emptyText)

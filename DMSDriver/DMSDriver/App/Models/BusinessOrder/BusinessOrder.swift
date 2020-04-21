@@ -71,6 +71,7 @@ enum BusinessOrderSKUInfoRow: Int {
     case QUANTITY
     case UOM
     case BATCH_ID
+    case BARCODE
 }
 
 enum RequireRow {
