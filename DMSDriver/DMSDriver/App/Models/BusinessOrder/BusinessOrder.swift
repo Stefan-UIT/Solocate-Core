@@ -83,7 +83,8 @@ enum RequireRow {
     case Address
     case OpenTime
     case CloseTime
-    case Zone
+    case StartTime
+    case EndTime
     case None
 }
 
@@ -213,7 +214,9 @@ class BusinessOrder: Order {
                 return true
             case .CloseTime:
                 return true
-            case .Zone:
+            case .StartTime:
+                return true
+            case .EndTime:
                 return true
             case .None:
                 return false

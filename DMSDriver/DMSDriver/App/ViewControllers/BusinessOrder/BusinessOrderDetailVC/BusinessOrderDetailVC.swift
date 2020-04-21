@@ -62,6 +62,7 @@ class BusinessOrderDetailVC: BaseViewController {
     var skus:[SKUModel]?
     var uoms:[UOMModel]?
     var zones:[Zone] = []
+    var companyId:Int?
     
     var isOrderInfoFilled:Bool = false
     var isEnableSubmit:Bool = false
@@ -105,13 +106,14 @@ class BusinessOrderDetailVC: BaseViewController {
         if order != nil {
             _order = order!
         }
+        _order.zone = autoFillZone()
         let itemZone = DropDownModel().addZones(zones)
         let zone = BusinessOrderForRow(title: "zone".localized,
                                        content: Slash(_order.zone?.name),
                                        isEditing: isEditingBO,
                                        style: .Zone,
                                        itemZone,
-                                       isRequire: _order.isRequireEdit(_order?.zone?.name, .Zone))
+                                       isRequire: _order.isRequireEdit(_order?.zone?.name, .None))
         
         if isPickup {
             removeZone()
@@ -121,6 +123,16 @@ class BusinessOrderDetailVC: BaseViewController {
             businessOrderDeliveryInfo.append(zone)
         }
         tbvContent?.reloadData()
+    }
+    
+    func autoFillZone() -> Zone {
+        for index in 0..<zones.count {
+            if zones[index].companyId == self.companyId {
+                order?.zoneId = zones[index].id
+                return zones[index]
+            }
+        }
+        return Zone()
     }
     
     func removeZone() {
@@ -224,12 +236,12 @@ class BusinessOrderDetailVC: BaseViewController {
                                            content: Slash(orderPU?.openTime),
                                            isEditing: isEditingBO,
                                            style: .Time,
-                                           isRequire: _order.isRequireEdit(orderPU?.openTime, .None))
+                                           isRequire: _order.isRequireEdit(orderPU?.openTime, .OpenTime))
         let closeTimePU = BusinessOrderForRow(title: "close-time".localized,
                                              content: Slash(orderPU?.closeTime),
                                              isEditing: isEditingBO,
                                              style: .Time,
-                                             isRequire: _order.isRequireEdit(orderPU?.closeTime, .None))
+                                             isRequire: _order.isRequireEdit(orderPU?.closeTime, .CloseTime))
         let consigneeNamePU = BusinessOrderForRow(title: "consignee-name".localized,
                                            content: Slash(orderPU?.ctt_name),
                                            isEditing: isEditingBO,
@@ -244,12 +256,12 @@ class BusinessOrderDetailVC: BaseViewController {
                                               content: Slash(orderPU?.start_time),
                                               isEditing: isEditingBO,
                                               style: .CalendarStart,
-                                              isRequire: _order.isRequireEdit(orderPU?.start_time, .None))
+                                              isRequire: _order.isRequireEdit(orderPU?.start_time, .StartTime))
         let endTimePU = BusinessOrderForRow(title: "end-time".localized,
                                               content: Slash(orderPU?.end_time),
                                               isEditing: isEditingBO,
                                               style: .CalendarEnd,
-                                              isRequire: _order.isRequireEdit(orderPU?.end_time, .None))
+                                              isRequire: _order.isRequireEdit(orderPU?.end_time, .EndTime))
         
         businessOrderPickupInfo.append(addressPU)
         businessOrderPickupInfo.append(floorPU)
@@ -862,9 +874,9 @@ extension BusinessOrderDetailVC {
     }
     
     func checkRequire() {
-        isEnableSubmit = order?.typeID != nil && order?.customer != nil && (order?.dueDateFrom != nil || order?.dueDateFrom?.isEmpty == false) &&  (order?.dueDateTo?.isEmpty == false || order?.dueDateTo != nil) && order?.from != nil && order?.to != nil && order?.zoneId != nil && order?.details != nil
+        isEnableSubmit = order?.typeID != nil && order?.customer != nil && (order?.dueDateFrom != nil || order?.dueDateFrom?.isEmpty == false) &&  (order?.dueDateTo?.isEmpty == false || order?.dueDateTo != nil) && order?.from != nil && order?.to != nil && order?.zoneId != nil && order?.details != nil && order?.to?.start_time != nil && order?.to?.end_time != nil && order?.to?.openTime != nil && order?.to?.closeTime != nil && order?.from?.start_time != nil && order?.from?.end_time != nil && order?.from?.openTime != nil && order?.from?.closeTime != nil 
         for index in 0..<(order?.details?.count ?? 0){
-            isEnableSubmit = order?.details?[index].pivot?.uom != nil && order?.details?[index].pivot?.batch_id != nil && order?.details?[index].pivot?.qty != nil
+            isEnableSubmit = order?.details?[index].pivot?.uom != nil && order?.details?[index].pivot?.qty != nil
         }
         
         tbvContent?.reloadData()
@@ -909,6 +921,7 @@ extension BusinessOrderDetailVC {
             order?.customerId = String(_customer.id)
             order?.customerLocationId = String(_customer.id)
             textContent = order?.customer_name
+            self.companyId = item.customers?.first?.companyID
             renewAddressSKUData()
         case .DUE_DATE_FROM:
             guard let _date = item.dateStart else { return }

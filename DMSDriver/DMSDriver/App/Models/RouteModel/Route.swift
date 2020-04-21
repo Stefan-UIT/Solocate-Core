@@ -15,7 +15,22 @@ class Tanker: Truck { }
 class Status: BasicModel { }
 class Urgency: BasicModel { }
 class Company: BasicModel { }
-class Zone: BasicModel { }
+class Zone: BasicModel {
+    var companyId:Int? = -1
+    
+    override init() {
+        super.init()
+    }
+    
+    required init?(map: Map) {
+        super.init()
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        companyId <- map["company_id"]
+    }
+}
 
 class TruckType: BasicModel {
     var numberOfCompartments:Int? = -1
