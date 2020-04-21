@@ -11,6 +11,7 @@ import ObjectMapper
 
 class SKUModel: Order.Detail {
     var customers:[UserModel.UserInfo]?
+    var uom:UOMModel?
     
     var itemContent:[String] = []
     var skuTitle:String = "sku".localized
@@ -44,6 +45,7 @@ class SKUModel: Order.Detail {
     override func mapping(map: Map) {
         super.mapping(map: map)
         customers <- map["customers"]
+        uom <- map["uom"]
     }
     
     

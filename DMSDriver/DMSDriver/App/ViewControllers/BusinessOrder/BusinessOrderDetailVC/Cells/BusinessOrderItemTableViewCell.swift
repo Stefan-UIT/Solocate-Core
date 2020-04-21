@@ -93,7 +93,7 @@ class BusinessOrderItemTableViewCell: UITableViewCell {
             let TAP_EDIT_TEXT = "tap-to-edit".localized
             skuContentLabel.text = (skuContent == "-" || skuContent == "") ? SELECT_TEXT : skuContent
             quantityContentLabel.text = (qtyContent == "-" || qtyContent == "" ) ? TAP_EDIT_TEXT : qtyContent
-            uomContentLabel.text = (uomContent == "-" || uomContent == "") ? SELECT_TEXT : uomContent
+            uomContentLabel.text = (uomContent == "-" || uomContent == "") ? "-" : uomContent
             batchIdContentLbl.text = (batchContent == "-" || batchContent == "") ? TAP_EDIT_TEXT : batchContent
         } else {
             skulabel.text = skuContent
@@ -117,10 +117,10 @@ class BusinessOrderItemTableViewCell: UITableViewCell {
     }
     
     @IBAction func didTapUOMDropDown(_ sender: UIButton) {
-        guard let _item = item,  let _indexPath = indexPath else { return }
-        let itemDropDown = DropDownModel()
-        itemDropDown.uoms = _item.uomDataList
-        self.delegate?.didSelectedDopdown(self, sender, style: _item.uomStyle, itemDropDown, _item.uomTitle, tag: UOM_CONTENT_INDEX, indexPath: _indexPath)
+//        guard let _item = item,  let _indexPath = indexPath else { return }
+//        let itemDropDown = DropDownModel()
+//        itemDropDown.uoms = _item.uomDataList
+//        self.delegate?.didSelectedDopdown(self, sender, style: _item.uomStyle, itemDropDown, _item.uomTitle, tag: UOM_CONTENT_INDEX, indexPath: _indexPath)
     }
     
     @IBAction func didTapBatchDropDown(_ sender: UIButton) {

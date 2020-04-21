@@ -1093,13 +1093,21 @@ extension BusinessOrderDetailVC {
         case .SKU:
             guard let _sku = item?.skus?.first else { return }
             skuItems[row] = _sku
+            if _sku.uom != nil {
+                let json:[String:Any] = ["uom":["id":(_sku.uom?.id ?? 0),
+                                                "name":(_sku.uom?.name ?? ""),
+                                                         "code":(_sku.uom?.code ?? "")]]
+                let pivot = BusinessOrder.Detail.Pivot(JSON: json)
+                skuItems[row].pivot = pivot
+                businessOrderItem[row].itemContent[BusinessOrderSKUInfoRow.UOM.rawValue] = Slash(skuItems[row].pivot?.uom?.name)
+            }
             textContent = _sku.skuName
         case .QUANTITY:
             skuItems[row].pivot?.qty = Int(textContent ?? "") ?? 0
-        case .UOM:
-            guard let _uom = item?.uoms?.first else { return }
-            skuItems[row].pivot?.uom = _uom
-            textContent = skuItems[row].pivot?.uom?.name ?? ""
+        case .UOM: break
+//            guard let _uom = item?.uoms?.first else { return }
+//            skuItems[row].pivot?.uom = _uom
+//            textContent = skuItems[row].pivot?.uom?.name ?? ""
         case .BATCH_ID:
             skuItems[row].pivot?.batch_id = textContent
         }

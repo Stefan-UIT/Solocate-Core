@@ -897,7 +897,7 @@
                                                                                     <nil key="textColor"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
-                                                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z1F-lX-kK2">
+                                                                                <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z1F-lX-kK2">
                                                                                     <rect key="frame" x="259" y="14.5" width="7.5" height="5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" secondItem="Z1F-lX-kK2" secondAttribute="height" multiplier="1.5" id="9Vl-mv-7Co"/>
@@ -1099,7 +1099,6 @@
                                             <outlet property="uomLabel" destination="fKl-o3-H2s" id="1nn-JQ-ZAg"/>
                                             <outletCollection property="iconButtons" destination="yGZ-mL-hIT" collectionClass="NSMutableArray" id="JcK-up-Hxw"/>
                                             <outletCollection property="iconButtons" destination="Ngm-u3-tB1" collectionClass="NSMutableArray" id="1xR-3X-ipw"/>
-                                            <outletCollection property="iconButtons" destination="Z1F-lX-kK2" collectionClass="NSMutableArray" id="JhO-II-456"/>
                                             <outletCollection property="iconButtons" destination="mnR-UE-Bo0" collectionClass="NSMutableArray" id="cRd-5C-BbP"/>
                                             <outletCollection property="requireLabel" destination="m4R-cl-sr9" collectionClass="NSMutableArray" id="2LJ-T2-4NO"/>
                                             <outletCollection property="requireLabel" destination="jsV-CD-icx" collectionClass="NSMutableArray" id="l60-dq-p0H"/>
