@@ -36,11 +36,7 @@ class BusinessOrderItemTableViewCell: UITableViewCell {
     @IBOutlet weak var batchIdContentLbl: UILabel!
     @IBOutlet weak var barcodeContentLbl: UILabel!
     
-    @IBOutlet weak var showBarcodeView: UIView!
     @IBOutlet weak var barecodeView: UIView!
-    
-    @IBOutlet weak var showBarcodeButton: UIButton!
-    
     
     @IBOutlet var iconButtons:[UIButton]!
     
@@ -81,9 +77,8 @@ class BusinessOrderItemTableViewCell: UITableViewCell {
         quantityEditContentView.isHidden = !isEditingBO
         uomEditContentView.isHidden = !isEditingBO
         batchIdEditContentView.isHidden = !isEditingBO
-        showBarcodeView.isHidden = !isEditingBO
-        barecodeView.isHidden = !showBarcodeButton.isSelected
         barcodeContentView.isHidden = !isEditingBO
+        barecodeView.isHidden = !(item.isShowBarcode ?? false)
         
         skulabel.isHidden = isEditingBO
         quantityLbl.isHidden = isEditingBO
@@ -99,10 +94,7 @@ class BusinessOrderItemTableViewCell: UITableViewCell {
         let qtyContent = item.itemContent[QTY_CONTENT_INDEX]
         let uomContent = item.itemContent[UOM_CONTENT_INDEX]
         let batchContent = item.itemContent[BATCH_CONTENT_INDEX]
-        var barcodeContent = ""
-        if showBarcodeButton.isSelected {
-            barcodeContent = item.itemContent[BARCODE_INDEX]
-        }
+        let barcodeContent = item.itemContent[BARCODE_INDEX]
         
         if isEditingBO {
             for (_,button) in iconButtons.enumerated() {
@@ -121,9 +113,6 @@ class BusinessOrderItemTableViewCell: UITableViewCell {
             batchIdContentLbl.text = (batchContent == "-" || batchContent == "") ? TAP_EDIT_TEXT : batchContent
             barcodeContentLbl.text = (barcodeContent == "-" || barcodeContent == "") ? TAP_EDIT_TEXT : barcodeContent
         } else {
-            barcodeContent = item.itemContent[BARCODE_INDEX]
-            barecodeView.isHidden = false
-            barecodeView.isHidden = barcodeContent == ""
             skulabel.text = skuContent
             quantityLbl.text = qtyContent
             uomLabel.text = uomContent
@@ -155,10 +144,6 @@ class BusinessOrderItemTableViewCell: UITableViewCell {
     @IBAction func didTapBatchDropDown(_ sender: UIButton) {
         guard let _item = item, let _indexPath = indexPath else { return }
         self.delegate?.didSelectedDopdown(self, sender, style: _item.batchIdStyle, nil, _item.batchIdTitle, tag: BATCH_CONTENT_INDEX, indexPath: _indexPath)
-    }
-    @IBAction func didTapShowBarcodeButton(_ sender: Any) {
-        showBarcodeButton.isSelected = !showBarcodeButton.isSelected
-        self.delegate?.didSelectShowBarcode()
     }
 
     @IBAction func didTapBarcodeDropDown(_ sender: UIButton) {

@@ -694,7 +694,7 @@
                                                             <rect key="frame" x="0.0" y="0.0" width="345" height="176.5"/>
                                                             <subviews>
                                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vl0-Gy-31i">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="345" height="29.5"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="345" height="35.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="SKU" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NX8-lS-OOi">
                                                                             <rect key="frame" x="15" y="10" width="29" height="16"/>
@@ -707,10 +707,10 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="m5I-8a-w8m">
-                                                                            <rect key="frame" x="59.5" y="5" width="270.5" height="19.5"/>
+                                                                            <rect key="frame" x="59.5" y="5" width="270.5" height="25.5"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Q3f-cg-HVu">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="258" height="19.5"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="258" height="25.5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="EVQ-oL-bu2"/>
                                                                                     </constraints>
@@ -719,7 +719,7 @@
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yGZ-mL-hIT">
-                                                                                    <rect key="frame" x="263" y="7" width="7.5" height="5"/>
+                                                                                    <rect key="frame" x="263" y="10" width="7.5" height="5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="5" id="n2L-EC-BPQ"/>
                                                                                         <constraint firstAttribute="width" secondItem="yGZ-mL-hIT" secondAttribute="height" multiplier="1.5" id="rNj-7J-jQx"/>
@@ -727,7 +727,7 @@
                                                                                     <state key="normal" image="ic_dropdownblue"/>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cPQ-1P-Xid">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="270.5" height="19.5"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="270.5" height="25.5"/>
                                                                                     <connections>
                                                                                         <action selector="didTapSKUDropDown:" destination="F7y-Ny-UxO" eventType="touchUpInside" id="jCw-wE-rJi"/>
                                                                                     </connections>
@@ -749,7 +749,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C4g-4z-U48">
-                                                                            <rect key="frame" x="59.5" y="5" width="270.5" height="19.5"/>
+                                                                            <rect key="frame" x="59.5" y="5" width="270.5" height="25.5"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="1t3-6e-nEe"/>
                                                                             </constraints>
@@ -785,7 +785,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gWG-FH-rHm">
-                                                                    <rect key="frame" x="0.0" y="29.5" width="345" height="29.5"/>
+                                                                    <rect key="frame" x="0.0" y="35.5" width="345" height="35"/>
                                                                     <subviews>
                                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Quantity" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wnF-LF-cbw">
                                                                             <rect key="frame" x="15" y="10" width="52.5" height="16"/>
@@ -798,10 +798,10 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="bfO-pb-lks">
-                                                                            <rect key="frame" x="83" y="5" width="247" height="19.5"/>
+                                                                            <rect key="frame" x="83" y="5" width="247" height="25"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ekD-3p-d5G">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="234.5" height="19.5"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="234.5" height="25"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="x7y-hu-Ng3"/>
                                                                                     </constraints>
@@ -810,7 +810,7 @@
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ngm-u3-tB1">
-                                                                                    <rect key="frame" x="239.5" y="7" width="7.5" height="5"/>
+                                                                                    <rect key="frame" x="239.5" y="10" width="7.5" height="5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="5" id="D4b-dP-Aku"/>
                                                                                         <constraint firstAttribute="width" secondItem="Ngm-u3-tB1" secondAttribute="height" multiplier="1.5" id="FhY-zj-mm6"/>
@@ -818,7 +818,7 @@
                                                                                     <state key="normal" image="ic_dropdownblue"/>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0rv-ze-yeF">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="247" height="19.5"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="247" height="25"/>
                                                                                     <connections>
                                                                                         <action selector="didTapQuantityDropDown:" destination="F7y-Ny-UxO" eventType="touchUpInside" id="MeL-Gy-zFd"/>
                                                                                     </connections>
@@ -840,7 +840,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1DM-E9-9Q4">
-                                                                            <rect key="frame" x="83" y="5" width="247" height="19.5"/>
+                                                                            <rect key="frame" x="83" y="5" width="247" height="25"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="oyV-J9-Se3"/>
                                                                             </constraints>
@@ -876,7 +876,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ZOs-7n-lm0">
-                                                                    <rect key="frame" x="0.0" y="59" width="345" height="29.5"/>
+                                                                    <rect key="frame" x="0.0" y="70.5" width="345" height="35.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="UOM" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ERn-Vo-NCQ">
                                                                             <rect key="frame" x="15" y="10" width="33" height="16"/>
@@ -889,10 +889,10 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="4aT-LI-eev">
-                                                                            <rect key="frame" x="63.5" y="5" width="266.5" height="19.5"/>
+                                                                            <rect key="frame" x="63.5" y="5" width="266.5" height="25.5"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vm2-hi-hHf">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="254" height="19.5"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="254" height="25.5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="wxB-Pz-mc9"/>
                                                                                     </constraints>
@@ -901,7 +901,7 @@
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Z1F-lX-kK2">
-                                                                                    <rect key="frame" x="259" y="7" width="7.5" height="5"/>
+                                                                                    <rect key="frame" x="259" y="10.5" width="7.5" height="5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" secondItem="Z1F-lX-kK2" secondAttribute="height" multiplier="1.5" id="9Vl-mv-7Co"/>
                                                                                         <constraint firstAttribute="height" constant="5" id="y4G-z8-rUy"/>
@@ -909,7 +909,7 @@
                                                                                     <state key="normal" image="ic_dropdownblue"/>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zgd-4m-J1a">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="266.5" height="19.5"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="266.5" height="25.5"/>
                                                                                     <connections>
                                                                                         <action selector="didTapUOMDropDown:" destination="F7y-Ny-UxO" eventType="touchUpInside" id="2GO-1e-ORr"/>
                                                                                     </connections>
@@ -931,7 +931,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fKl-o3-H2s">
-                                                                            <rect key="frame" x="63.5" y="5" width="266.5" height="19.5"/>
+                                                                            <rect key="frame" x="63.5" y="5" width="266.5" height="25.5"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="thl-Xd-OP9"/>
                                                                             </constraints>
@@ -967,7 +967,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="g7G-E1-xsb">
-                                                                    <rect key="frame" x="0.0" y="88.5" width="345" height="29"/>
+                                                                    <rect key="frame" x="0.0" y="106" width="345" height="35"/>
                                                                     <subviews>
                                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Batch ID" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ks3-qC-60o">
                                                                             <rect key="frame" x="15" y="10" width="54" height="16"/>
@@ -980,10 +980,10 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UYi-68-g9o">
-                                                                            <rect key="frame" x="84.5" y="5" width="245.5" height="19"/>
+                                                                            <rect key="frame" x="84.5" y="5" width="245.5" height="25"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bpE-Al-Wr1">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="233" height="19"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="233" height="25"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="9QP-Xq-LgN"/>
                                                                                     </constraints>
@@ -992,7 +992,7 @@
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mnR-UE-Bo0">
-                                                                                    <rect key="frame" x="238" y="7" width="7.5" height="5"/>
+                                                                                    <rect key="frame" x="238" y="10" width="7.5" height="5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" secondItem="mnR-UE-Bo0" secondAttribute="height" multiplier="1.5" id="14K-q4-Nqf"/>
                                                                                         <constraint firstAttribute="height" constant="5" id="jbl-w8-bjh"/>
@@ -1000,7 +1000,7 @@
                                                                                     <state key="normal" image="ic_dropdownblue"/>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z0p-lm-paY">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="245.5" height="19"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="245.5" height="25"/>
                                                                                     <connections>
                                                                                         <action selector="didTapBatchDropDown:" destination="F7y-Ny-UxO" eventType="touchUpInside" id="Jtx-Ce-zP9"/>
                                                                                     </connections>
@@ -1022,7 +1022,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DrL-bF-lYW">
-                                                                            <rect key="frame" x="324.5" y="5" width="5.5" height="19"/>
+                                                                            <rect key="frame" x="324.5" y="5" width="5.5" height="25"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="e0m-px-g2g"/>
                                                                             </constraints>
@@ -1056,43 +1056,8 @@
                                                                         <constraint firstItem="rg2-L2-2dJ" firstAttribute="leading" secondItem="ks3-qC-60o" secondAttribute="trailing" id="yN5-nT-Rxp"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gN4-MQ-9O6">
-                                                                    <rect key="frame" x="0.0" y="117.5" width="345" height="29.5"/>
-                                                                    <subviews>
-                                                                        <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Show Barcode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WhQ-Gp-Tie">
-                                                                            <rect key="frame" x="15" y="10" width="91.5" height="16"/>
-                                                                            <fontDescription key="fontDescription" name="ArialMT" family="Arial" pointSize="14"/>
-                                                                            <color key="textColor" red="0.28235294119999998" green="0.36470588240000001" blue="0.43921568630000002" alpha="1" colorSpace="calibratedRGB"/>
-                                                                            <nil key="highlightedColor"/>
-                                                                            <userDefinedRuntimeAttributes>
-                                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="maskToBounds" value="NO"/>
-                                                                                <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="show-barcode"/>
-                                                                            </userDefinedRuntimeAttributes>
-                                                                        </label>
-                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="CIB-cb-Vdz">
-                                                                            <rect key="frame" x="305" y="5" width="20" height="20"/>
-                                                                            <constraints>
-                                                                                <constraint firstAttribute="height" constant="20" id="PgP-Kx-60m"/>
-                                                                                <constraint firstAttribute="width" secondItem="CIB-cb-Vdz" secondAttribute="height" id="StX-KE-S5Q"/>
-                                                                            </constraints>
-                                                                            <state key="normal" title="Button" image="check_normal"/>
-                                                                            <state key="selected" image="check_selected"/>
-                                                                            <connections>
-                                                                                <action selector="didTapShowBarcodeButton:" destination="F7y-Ny-UxO" eventType="touchUpInside" id="CMq-aB-FjW"/>
-                                                                            </connections>
-                                                                        </button>
-                                                                    </subviews>
-                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="Ep5-sa-pVO"/>
-                                                                        <constraint firstItem="WhQ-Gp-Tie" firstAttribute="leading" secondItem="gN4-MQ-9O6" secondAttribute="leading" constant="15" id="ZkV-2f-Kc4"/>
-                                                                        <constraint firstItem="CIB-cb-Vdz" firstAttribute="centerY" secondItem="gN4-MQ-9O6" secondAttribute="centerY" id="hps-va-DdM"/>
-                                                                        <constraint firstItem="WhQ-Gp-Tie" firstAttribute="top" secondItem="gN4-MQ-9O6" secondAttribute="top" constant="10" id="iiK-nw-yh4"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="CIB-cb-Vdz" secondAttribute="trailing" constant="20" id="kyI-NN-vx2"/>
-                                                                    </constraints>
-                                                                </view>
                                                                 <view clipsSubviews="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Eyj-Qs-log">
-                                                                    <rect key="frame" x="0.0" y="147" width="345" height="29.5"/>
+                                                                    <rect key="frame" x="0.0" y="141" width="345" height="35.5"/>
                                                                     <subviews>
                                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="255" verticalHuggingPriority="251" horizontalCompressionResistancePriority="755" text="Barcode" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="699-mV-qM1">
                                                                             <rect key="frame" x="15" y="10" width="52.5" height="16"/>
@@ -1105,10 +1070,10 @@
                                                                             </userDefinedRuntimeAttributes>
                                                                         </label>
                                                                         <view contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ipV-76-GzP">
-                                                                            <rect key="frame" x="77.5" y="5" width="252.5" height="19.5"/>
+                                                                            <rect key="frame" x="77.5" y="5" width="252.5" height="25.5"/>
                                                                             <subviews>
                                                                                 <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Please select" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DKx-A7-0Zk">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="19.5"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="240" height="25.5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="cn2-Sa-3Wh"/>
                                                                                     </constraints>
@@ -1117,7 +1082,7 @@
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wwi-NC-NRl">
-                                                                                    <rect key="frame" x="245" y="7.5" width="7.5" height="5"/>
+                                                                                    <rect key="frame" x="245" y="10.5" width="7.5" height="5"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="width" secondItem="wwi-NC-NRl" secondAttribute="height" multiplier="1.5" id="BP2-tM-0Pt"/>
                                                                                         <constraint firstAttribute="height" constant="5" id="gbw-y9-RYf"/>
@@ -1125,7 +1090,7 @@
                                                                                     <state key="normal" image="ic_dropdownblue"/>
                                                                                 </button>
                                                                                 <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hrR-O8-MT9">
-                                                                                    <rect key="frame" x="0.0" y="0.0" width="252.5" height="19.5"/>
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="252.5" height="25.5"/>
                                                                                     <connections>
                                                                                         <action selector="didTapBarcodeDropDown:" destination="F7y-Ny-UxO" eventType="touchUpInside" id="dEt-j7-8qg"/>
                                                                                     </connections>
@@ -1147,7 +1112,7 @@
                                                                             </constraints>
                                                                         </view>
                                                                         <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="-" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OI9-bZ-gec">
-                                                                            <rect key="frame" x="77.5" y="5" width="252.5" height="19.5"/>
+                                                                            <rect key="frame" x="77.5" y="5" width="252.5" height="25.5"/>
                                                                             <constraints>
                                                                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="20" id="fx7-DX-u3v"/>
                                                                             </constraints>
@@ -1213,8 +1178,6 @@
                                             <outlet property="quantityContentLabel" destination="ekD-3p-d5G" id="7jc-8p-og2"/>
                                             <outlet property="quantityEditContentView" destination="bfO-pb-lks" id="YWJ-G1-XlT"/>
                                             <outlet property="quantityLbl" destination="1DM-E9-9Q4" id="o46-IQ-Y9Q"/>
-                                            <outlet property="showBarcodeButton" destination="CIB-cb-Vdz" id="dD4-ot-jXE"/>
-                                            <outlet property="showBarcodeView" destination="gN4-MQ-9O6" id="bNC-Z3-QOa"/>
                                             <outlet property="skuContentLabel" destination="Q3f-cg-HVu" id="Tyn-ox-4Ez"/>
                                             <outlet property="skuEditContentView" destination="m5I-8a-w8m" id="Bjm-2Z-9OG"/>
                                             <outlet property="skulabel" destination="C4g-4z-U48" id="3bf-hN-OlV"/>
@@ -1256,8 +1219,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="check_normal" width="24" height="24"/>
-        <image name="check_selected" width="24" height="24"/>
         <image name="ic_add" width="40" height="40"/>
         <image name="ic_dropdownblue" width="20" height="12"/>
     </resources>

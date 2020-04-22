@@ -184,14 +184,23 @@ class DropDownViewController: UIViewController {
     }
     
     func setupDatePickerView() {
-        datePickerView.datePickerMode = .dateAndTime
-        let date = Date()
-        datePickerView.minimumDate = date
-        if let dateFrom = itemDropDown?.dateStart {
-            datePickerView.minimumDate = dateFrom
-        }
-        if let dateTo = itemDropDown?.dateEnd {
-            datePickerView.maximumDate = dateTo
+        switch dropDownType {
+        case .CalendarStart:
+            datePickerView.datePickerMode = .dateAndTime
+            let date = Date()
+            datePickerView.minimumDate = date
+            if let dateTo = itemDropDown?.dateEnd {
+                datePickerView.maximumDate = dateTo
+            }
+        case .CalendarEnd:
+            datePickerView.datePickerMode = .dateAndTime
+            let date = Date()
+            datePickerView.minimumDate = date
+            if let dateFrom = itemDropDown?.dateStart {
+                datePickerView.minimumDate = dateFrom
+            }
+        @unknown default:
+            break
         }
     }
     

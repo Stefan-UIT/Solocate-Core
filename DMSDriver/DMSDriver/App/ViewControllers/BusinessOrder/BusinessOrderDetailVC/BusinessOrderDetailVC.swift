@@ -879,10 +879,12 @@ extension BusinessOrderDetailVC {
     }
     
     func checkRequire() {
-        isEnableSubmit = order?.typeID != nil && order?.customer != nil && (order?.dueDateFrom != nil || order?.dueDateFrom?.isEmpty == false) &&  (order?.dueDateTo?.isEmpty == false || order?.dueDateTo != nil) && order?.from != nil && order?.to != nil && order?.zoneId != nil && order?.details != nil && order?.to?.start_time != nil && order?.to?.end_time != nil && order?.to?.openTime != nil && order?.to?.closeTime != nil && order?.from?.start_time != nil && order?.from?.end_time != nil && order?.from?.openTime != nil && order?.from?.closeTime != nil 
+        var isQualitySubmit = false
         for index in 0..<(order?.details?.count ?? 0){
-            isEnableSubmit = order?.details?[index].pivot?.uom != nil && order?.details?[index].pivot?.qty != nil
+            isQualitySubmit = order?.details?[index].pivot?.uom != nil && order?.details?[index].pivot?.qty != nil
         }
+        
+        isEnableSubmit = order?.typeID != nil && order?.customer != nil && (order?.dueDateFrom != nil || order?.dueDateFrom?.isEmpty == false) &&  (order?.dueDateTo?.isEmpty == false || order?.dueDateTo != nil) && order?.from != nil && order?.to != nil && order?.zoneId != nil && order?.details != nil && order?.to?.start_time != nil && order?.to?.end_time != nil && order?.to?.openTime != nil && order?.to?.closeTime != nil && order?.from?.start_time != nil && order?.from?.end_time != nil && order?.from?.openTime != nil && order?.from?.closeTime != nil && isQualitySubmit
         
         tbvContent?.reloadData()
     }
@@ -1082,8 +1084,8 @@ extension BusinessOrderDetailVC {
             deliveryItem.ctt_phone = textContent
         case .START_TIME:
             guard let _date = item?.dateStart else { return }
-            pickupItem.start_time = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
-            textContent = pickupItem.start_time
+            deliveryItem.start_time = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
+            textContent = deliveryItem.start_time
             let data = DropDownModel()
             data.dateStart = pickupItem.start_time?.dateUS
             data.dateEnd = pickupItem.end_time?.dateUS
@@ -1091,8 +1093,8 @@ extension BusinessOrderDetailVC {
             businessOrderDeliveryInfo[row+1].data = data
         case .END_TIME:
             guard let _date = item?.dateEnd else { return }
-            pickupItem.end_time = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
-            textContent = pickupItem.end_time
+            deliveryItem.end_time = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
+            textContent = deliveryItem.end_time
             let data = DropDownModel()
             data.dateStart = pickupItem.start_time?.dateUS
             data.dateEnd = pickupItem.end_time?.dateUS
@@ -1137,7 +1139,9 @@ extension BusinessOrderDetailVC {
                 skuItems[row].pivot = pivot
                 businessOrderItem[row].itemContent[BusinessOrderSKUInfoRow.UOM.rawValue] = Slash(skuItems[row].pivot?.uom?.name)
             }
+            businessOrderItem[row].barcodeBool = _sku.barcodeBool
             textContent = _sku.skuName
+            tbvContent?.reloadData()
         case .QUANTITY:
             skuItems[row].pivot?.qty = Int(textContent ?? "") ?? 0
         case .UOM: break

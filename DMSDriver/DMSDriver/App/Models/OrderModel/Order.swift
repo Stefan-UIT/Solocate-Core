@@ -333,6 +333,7 @@ class Order: BaseModel {
         var package:Package?
         var unit:Unit?
         var barCode:String?
+        var barcodeBool:Int?
         var packageRefId:Int?
         var wmsOrderCode:String?
         // NEW
@@ -351,6 +352,11 @@ class Order: BaseModel {
             }
         }
         var refCode:String?
+        
+        var isShowBarcode: Bool? {
+            let isShow = barcodeBool == 1 ? true : false
+            return isShow
+        }
         
         var nameReferenceCode: String? {
             var result:String?
@@ -383,6 +389,7 @@ class Order: BaseModel {
             package_id <- map["package_id"]
             package <- map["package"]
             barCode <- map["barcode"]
+            barcodeBool <- map["barcode"]
             packageRefId <- map["pkg_ref_id"]
             unit <- map["unit"]
             pivot <- map["pivot"]
