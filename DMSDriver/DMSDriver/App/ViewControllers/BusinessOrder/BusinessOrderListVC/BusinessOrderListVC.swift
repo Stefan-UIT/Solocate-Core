@@ -13,6 +13,7 @@ class BusinessOrderListVC: BaseViewController {
     
     @IBOutlet weak var tbvContent:UITableView?
     @IBOutlet weak var lblDate:UILabel!
+    @IBOutlet weak var nodataLbl: UILabel!
     
     var timeData:TimeDataItem?
     var filterModel = FilterDataModel()
@@ -33,6 +34,7 @@ class BusinessOrderListVC: BaseViewController {
         setupTableView()
         initVar()
         initUI()
+        showNoResultLabel()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -45,6 +47,10 @@ class BusinessOrderListVC: BaseViewController {
     }
     
     // MARK: - Setup View
+    
+    private func showNoResultLabel() {
+        nodataLbl.isHidden = !(order.count == 0)
+    }
     
     private func initUI() {
         let filterTimeData = filterModel.timeData
@@ -232,6 +238,7 @@ fileprivate extension BusinessOrderListVC {
                         self?.order.append(data)
                         strongSelf.tbvContent?.reloadData()
                         self?.isFetchInProgress = false
+                        self?.showNoResultLabel()
                     }
                 case .error(let error):
                     self?.isFetchInProgress = false

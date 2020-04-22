@@ -308,6 +308,15 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Have no orders" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EoF-ja-fZa">
+                                <rect key="frame" x="136.5" y="367.5" width="102.5" height="18"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="15"/>
+                                <color key="textColor" red="0.37254901959999998" green="0.37254901959999998" blue="0.37254901959999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="localizeKey" value="you-have-no-orders"/>
+                                </userDefinedRuntimeAttributes>
+                            </label>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zCk-2e-w2A">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="85.5"/>
                                 <subviews>
@@ -346,10 +355,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
                             <constraint firstItem="DVL-ZC-c82" firstAttribute="trailing" secondItem="zCk-2e-w2A" secondAttribute="trailing" id="31G-Om-Xcy"/>
+                            <constraint firstItem="EoF-ja-fZa" firstAttribute="centerY" secondItem="C1V-Bj-aHy" secondAttribute="centerY" id="Kaf-JT-eI4"/>
                             <constraint firstItem="zCk-2e-w2A" firstAttribute="top" secondItem="DVL-ZC-c82" secondAttribute="top" id="LSg-AF-pcK"/>
                             <constraint firstItem="zCk-2e-w2A" firstAttribute="leading" secondItem="Gsm-Sy-VZz" secondAttribute="leading" id="THd-tg-Z74"/>
                             <constraint firstItem="DVL-ZC-c82" firstAttribute="bottom" secondItem="C1V-Bj-aHy" secondAttribute="bottom" id="XnY-uD-kAC"/>
                             <constraint firstItem="C1V-Bj-aHy" firstAttribute="leading" secondItem="DVL-ZC-c82" secondAttribute="leading" id="d93-b8-Ru8"/>
+                            <constraint firstItem="EoF-ja-fZa" firstAttribute="centerX" secondItem="C1V-Bj-aHy" secondAttribute="centerX" id="hmh-pl-OkP"/>
                             <constraint firstItem="C1V-Bj-aHy" firstAttribute="top" secondItem="zCk-2e-w2A" secondAttribute="bottom" id="qWa-xT-74S"/>
                             <constraint firstItem="DVL-ZC-c82" firstAttribute="trailing" secondItem="C1V-Bj-aHy" secondAttribute="trailing" id="sHU-nI-zDS"/>
                         </constraints>
@@ -357,6 +368,7 @@
                     </view>
                     <connections>
                         <outlet property="lblDate" destination="t16-K0-BiB" id="e6B-29-Wau"/>
+                        <outlet property="nodataLbl" destination="EoF-ja-fZa" id="RwS-sA-vxC"/>
                         <outlet property="tbvContent" destination="C1V-Bj-aHy" id="Srp-15-osK"/>
                     </connections>
                 </viewController>
