@@ -61,7 +61,9 @@ class BusinessOrderListVC: BaseViewController {
         } else if filterTimeData?.type == TimeItemType.TimeItemTypeAll {
             dateString = ""
         } else {
-            dateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date()) + " - " + ShortDateFormater.string(from: filterTimeData?.endDate ?? Date())
+            let startDateString = ShortDateFormater.string(from: filterTimeData?.startDate ?? Date())
+            let endDateString = ShortDateFormater.string(from: filterTimeData?.endDate ?? Date())
+            dateString = startDateString == endDateString ? startDateString : startDateString + " - " + endDateString
         }
         let date = "here-is-your-plan".localized
         lblDate?.text = date + " for " + dateTitle + " " + dateString
