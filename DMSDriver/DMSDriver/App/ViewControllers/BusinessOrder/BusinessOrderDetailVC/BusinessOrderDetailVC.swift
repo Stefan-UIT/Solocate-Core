@@ -808,11 +808,13 @@ extension BusinessOrderDetailVC {
             for (_,location) in _locationsList.enumerated() {
                 for index in 0..<(location.types?.count ?? 0) {
                     if location.types?[index].code == BusinessOrderLocationType.Warehouse.rawValue || location.types?[index].code == BusinessOrderLocationType.Pickup.rawValue {
-                        tempAddressPickUP.append(location)
-                        break
+                        if tempAddressPickUP.last?.id != location.id {
+                            tempAddressPickUP.append(location)
+                        }
                     } else {
-                        tempAddressDelivery.append(location)
-                        break
+                        if tempAddressDelivery.last?.id != location.id {
+                            tempAddressDelivery.append(location)
+                        }
                     }
                 }
             }
@@ -827,11 +829,13 @@ extension BusinessOrderDetailVC {
             for (_,location) in _locationsList.enumerated() {
                 for index in 0..<(location.types?.count ?? 0) {
                     if location.types?[index].code == BusinessOrderLocationType.Warehouse.rawValue {
-                        tempAddressDelivery.append(location)
-                        break
+                        if tempAddressDelivery.last?.id != location.id {
+                            tempAddressDelivery.append(location)
+                        }
                     } else {
-                        tempAddressPickUP.append(location)
-                        break
+                        if tempAddressPickUP.last?.id != location.id {
+                            tempAddressPickUP.append(location)
+                        }
                     }
                 }
             }
