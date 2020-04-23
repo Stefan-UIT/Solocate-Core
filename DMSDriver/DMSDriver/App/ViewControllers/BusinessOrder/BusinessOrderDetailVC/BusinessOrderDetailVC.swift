@@ -42,7 +42,10 @@ class BusinessOrderDetailVC: BaseViewController {
     fileprivate let HEADER_HEIGHT: CGFloat = 60.0
     fileprivate let CELL_HEIGHT: CGFloat = 65.0
     fileprivate let FOOTER_HEIGHT: CGFloat = 10.0
-    
+    fileprivate let OPEN_TIME_ROW:Int = 4
+    fileprivate let CLOSE_TIME_ROW:Int = 5
+    fileprivate let START_TIME_ROW:Int = 8
+    fileprivate let END_TIME_ROW:Int = 9
 
     private var pickupItem = Address()
     private var deliveryItem = Address()
@@ -996,7 +999,7 @@ extension BusinessOrderDetailVC {
         var textContent = item?.result
         switch infoRow {
         case .ADDRESS:
-            guard let _address = item?.locations?.first else { return }
+            guard let _address = item?.locations?.first, let _customers = _address.customers else { return }
             pickupItem.id = _address.id
             pickupItem.address = _address.address
             pickupItem.floor = _address.floor
@@ -1006,6 +1009,18 @@ extension BusinessOrderDetailVC {
             pickupItem.ctt_phone = _address.phone
             pickupItem.lattd = _address.lattd
             pickupItem.lngtd = _address.lngtd
+            
+            for (_,customer) in _customers.enumerated() {
+                if customer.pivot?.customerId!.toString() == order?.customerId {
+                    pickupItem.openTime = customer.pivot?.openTime
+                    pickupItem.closeTime = customer.pivot?.closeTime
+                    break
+                } else {
+                    pickupItem.openTime = ""
+                    pickupItem.closeTime = ""
+                }
+            }
+            
             autoFillAddressData(_address, isPickup: true)
             textContent = pickupItem.address
         case .FLOOR:
@@ -1029,8 +1044,8 @@ extension BusinessOrderDetailVC {
             let data = DropDownModel()
             data.dateStart = pickupItem.start_time?.dateUS
             data.dateEnd = pickupItem.end_time?.dateUS
-            businessOrderPickupInfo[row].data = data
-            businessOrderPickupInfo[row+1].data = data
+            businessOrderPickupInfo[START_TIME_ROW].data = data
+            businessOrderPickupInfo[END_TIME_ROW].data = data
         case .END_TIME:
             guard let _date = item?.dateEnd else { return }
             pickupItem.end_time = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
@@ -1038,14 +1053,16 @@ extension BusinessOrderDetailVC {
             let data = DropDownModel()
             data.dateStart = pickupItem.start_time?.dateUS
             data.dateEnd = pickupItem.end_time?.dateUS
-            businessOrderPickupInfo[row].data = data
-            businessOrderPickupInfo[row-1].data = data
+            businessOrderPickupInfo[START_TIME_ROW].data = data
+            businessOrderPickupInfo[END_TIME_ROW].data = data
         case .ZONE:
             guard let _zone = item?.zones?.first else { return }
             order?.zoneId = _zone.id
             textContent = _zone.name
         }
         businessOrderPickupInfo[row].content = Slash(textContent)
+        businessOrderPickupInfo[OPEN_TIME_ROW].content = Slash(pickupItem.openTime)
+        businessOrderPickupInfo[CLOSE_TIME_ROW].content = Slash(pickupItem.closeTime)
         order?.from = pickupItem
         if order?.typeID == OrderType.pickup.rawValue {
             order?.customerLocationId = String(pickupItem.id)
@@ -1060,7 +1077,7 @@ extension BusinessOrderDetailVC {
         var textContent = item?.result
         switch infoRow {
         case .ADDRESS:
-            guard let _address = item?.locations?.first else { return }
+            guard let _address = item?.locations?.first, let _customers = _address.customers else { return }
             deliveryItem.id = _address.id
             deliveryItem.address = _address.address
             deliveryItem.floor = _address.floor
@@ -1070,6 +1087,18 @@ extension BusinessOrderDetailVC {
             deliveryItem.ctt_phone = _address.phone
             deliveryItem.lattd = _address.lattd
             deliveryItem.lngtd = _address.lngtd
+            
+            for (_,customer) in _customers.enumerated() {
+                if customer.pivot?.customerId!.toString() == order?.customerId {
+                    deliveryItem.openTime = customer.pivot?.openTime
+                    deliveryItem.closeTime = customer.pivot?.closeTime
+                    break
+                } else {
+                    pickupItem.openTime = ""
+                    pickupItem.closeTime = ""
+                }
+            }
+            
             autoFillAddressData(_address, isPickup: false)
             textContent = deliveryItem.address
         case .FLOOR:
@@ -1093,8 +1122,8 @@ extension BusinessOrderDetailVC {
             let data = DropDownModel()
             data.dateStart = pickupItem.start_time?.dateUS
             data.dateEnd = pickupItem.end_time?.dateUS
-            businessOrderDeliveryInfo[row].data = data
-            businessOrderDeliveryInfo[row+1].data = data
+            businessOrderDeliveryInfo[START_TIME_ROW].data = data
+            businessOrderDeliveryInfo[END_TIME_ROW].data = data
         case .END_TIME:
             guard let _date = item?.dateEnd else { return }
             deliveryItem.end_time = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
@@ -1102,14 +1131,16 @@ extension BusinessOrderDetailVC {
             let data = DropDownModel()
             data.dateStart = pickupItem.start_time?.dateUS
             data.dateEnd = pickupItem.end_time?.dateUS
-            businessOrderDeliveryInfo[row].data = data
-            businessOrderDeliveryInfo[row-1].data = data
+            businessOrderDeliveryInfo[START_TIME_ROW].data = data
+            businessOrderDeliveryInfo[END_TIME_ROW].data = data
         case .ZONE:
             guard let _zone = item?.zones?.first else { return }
             order?.zoneId = _zone.id
             textContent = _zone.name
         }
         businessOrderDeliveryInfo[row].content = Slash(textContent)
+        businessOrderDeliveryInfo[OPEN_TIME_ROW].content = Slash(deliveryItem.openTime)
+        businessOrderDeliveryInfo[CLOSE_TIME_ROW].content = Slash(deliveryItem.closeTime)
         order?.to = deliveryItem
         order?.customerLocationId = String(deliveryItem.id)
         if order?.typeID == OrderType.delivery.rawValue {

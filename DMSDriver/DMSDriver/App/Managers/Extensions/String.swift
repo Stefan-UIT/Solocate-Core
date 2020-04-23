@@ -97,3 +97,10 @@ extension String {
         return rangeTime
     }
 }
+
+extension Int {
+    func toString() -> String {
+        let result = String(self)
+        return result
+    }
+}

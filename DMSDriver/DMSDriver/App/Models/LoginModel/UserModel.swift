@@ -15,6 +15,32 @@ class UserModel: BaseModel {
     
     class UserInfo: BaseModel {
         
+        struct Pivot:Mappable {
+            var locationId:Int?
+            var customerId:Int?
+            var consigneeName:String?
+            var consigneePhone:String?
+            var consigneeEmail:String?
+            var openTime:String?
+            var closeTime:String?
+            var remark:String?
+            
+            init?(map: Map) {
+                //
+            }
+            
+            mutating func mapping(map: Map) {
+                locationId <- map["location_id"]
+                customerId <- map["customer_id"]
+                consigneeName <- map["consignee_name"]
+                consigneePhone <- map["consignee_phone"]
+                consigneeEmail <- map["consignee_email"]
+                openTime <- map["open_time"]
+                closeTime <- map["close_time"]
+                remark <- map["remark"]
+            }
+        }
+        
         var id: Int = 0
         var email: String?
         var firstName : String?
@@ -29,6 +55,7 @@ class UserModel: BaseModel {
         var companyID: Int?
         var supervisorID: Int?
         var company:Company?
+        var pivot:Pivot?
         
         required init?(map: Map) {
             super.init()
@@ -56,6 +83,7 @@ class UserModel: BaseModel {
             avatar_thumb <- map[KEY_AVARTAR_THUMB]
             companyID <- map["company_id"]
             company <- map["company"]
+            pivot <- map["pivot"]
 
             let user_name = map[KEY_USER_NAME].currentValue
             
