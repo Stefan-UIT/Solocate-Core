@@ -44,6 +44,8 @@ class BusinessOrderDetailVC: BaseViewController {
     fileprivate let FOOTER_HEIGHT: CGFloat = 10.0
     fileprivate let OPEN_TIME_ROW:Int = 4
     fileprivate let CLOSE_TIME_ROW:Int = 5
+    fileprivate let CONSIGNEE_NAME_ROW:Int = 6
+    fileprivate let CONSIGNEE_PHONE_ROW:Int = 7
     fileprivate let START_TIME_ROW:Int = 8
     fileprivate let END_TIME_ROW:Int = 9
 
@@ -888,7 +890,7 @@ extension BusinessOrderDetailVC {
     func checkRequire() {
         var isQualitySubmit = false
         for index in 0..<(order?.details?.count ?? 0){
-            isQualitySubmit = order?.details?[index].pivot?.uom != nil && order?.details?[index].pivot?.qty != nil
+            isQualitySubmit = order?.details?[index].pivot?.uom != nil && order?.details?[index].pivot?.qty != nil && order?.details?[index].pivot?.qty != 0
         }
         
         isEnableSubmit = order?.typeID != nil && order?.customer != nil && (order?.dueDateFrom != nil || order?.dueDateFrom?.isEmpty == false) &&  (order?.dueDateTo?.isEmpty == false || order?.dueDateTo != nil) && order?.from != nil && order?.to != nil && order?.zoneId != nil && order?.details != nil && order?.to?.start_time != nil && order?.to?.end_time != nil && order?.to?.openTime != nil && order?.to?.closeTime != nil && order?.from?.start_time != nil && order?.from?.end_time != nil && order?.from?.openTime != nil && order?.from?.closeTime != nil && isQualitySubmit
@@ -1014,10 +1016,14 @@ extension BusinessOrderDetailVC {
                 if customer.pivot?.customerId!.toString() == order?.customerId {
                     pickupItem.openTime = customer.pivot?.openTime
                     pickupItem.closeTime = customer.pivot?.closeTime
+                    pickupItem.ctt_name = customer.pivot?.consigneeName
+                    pickupItem.ctt_phone = customer.pivot?.consigneePhone
                     break
                 } else {
                     pickupItem.openTime = ""
                     pickupItem.closeTime = ""
+                    pickupItem.ctt_name = ""
+                    pickupItem.ctt_phone = ""
                 }
             }
             
@@ -1061,6 +1067,8 @@ extension BusinessOrderDetailVC {
             textContent = _zone.name
         }
         businessOrderPickupInfo[row].content = Slash(textContent)
+        businessOrderPickupInfo[CONSIGNEE_NAME_ROW].content = Slash(pickupItem.ctt_name)
+        businessOrderPickupInfo[CONSIGNEE_PHONE_ROW].content = Slash(pickupItem.phone)
         businessOrderPickupInfo[OPEN_TIME_ROW].content = Slash(pickupItem.openTime)
         businessOrderPickupInfo[CLOSE_TIME_ROW].content = Slash(pickupItem.closeTime)
         order?.from = pickupItem
@@ -1083,8 +1091,6 @@ extension BusinessOrderDetailVC {
             deliveryItem.floor = _address.floor
             deliveryItem.apartment = _address.apartment
             deliveryItem.number = _address.number
-            deliveryItem.ctt_name = _address.ctt_name
-            deliveryItem.ctt_phone = _address.phone
             deliveryItem.lattd = _address.lattd
             deliveryItem.lngtd = _address.lngtd
             
@@ -1092,10 +1098,14 @@ extension BusinessOrderDetailVC {
                 if customer.pivot?.customerId!.toString() == order?.customerId {
                     deliveryItem.openTime = customer.pivot?.openTime
                     deliveryItem.closeTime = customer.pivot?.closeTime
+                    deliveryItem.ctt_name = customer.pivot?.consigneeName
+                    deliveryItem.ctt_phone = customer.pivot?.consigneePhone
                     break
                 } else {
-                    pickupItem.openTime = ""
-                    pickupItem.closeTime = ""
+                    deliveryItem.openTime = ""
+                    deliveryItem.closeTime = ""
+                    deliveryItem.ctt_name = ""
+                    deliveryItem.ctt_phone = ""
                 }
             }
             
@@ -1139,6 +1149,8 @@ extension BusinessOrderDetailVC {
             textContent = _zone.name
         }
         businessOrderDeliveryInfo[row].content = Slash(textContent)
+        businessOrderDeliveryInfo[CONSIGNEE_NAME_ROW].content = Slash(deliveryItem.ctt_name)
+        businessOrderDeliveryInfo[CONSIGNEE_PHONE_ROW].content = Slash(deliveryItem.phone)
         businessOrderDeliveryInfo[OPEN_TIME_ROW].content = Slash(deliveryItem.openTime)
         businessOrderDeliveryInfo[CLOSE_TIME_ROW].content = Slash(deliveryItem.closeTime)
         order?.to = deliveryItem
@@ -1166,6 +1178,13 @@ extension BusinessOrderDetailVC {
         case .SKU:
             guard let _sku = item?.skus?.first else { return }
             skuItems[row] = _sku
+            
+            // reset Quantity
+            let json:[String:Any] = ["qty":0]
+            let pivot = BusinessOrder.Detail.Pivot(JSON: json)
+            skuItems[row].pivot = pivot
+            businessOrderItem[row].itemContent[BusinessOrderSKUInfoRow.QUANTITY.rawValue] = IntSlash(skuItems[row].pivot?.qty)
+            
             if _sku.uom != nil {
                 let json:[String:Any] = ["uom":["id":(_sku.uom?.id ?? 0),
                                                 "name":(_sku.uom?.name ?? ""),
