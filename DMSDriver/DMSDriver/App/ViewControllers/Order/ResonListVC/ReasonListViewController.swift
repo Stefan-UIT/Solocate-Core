@@ -23,6 +23,11 @@ class ReasonListViewController: BaseViewController {
     
     fileprivate var reasonList:[Reason] = [Reason]()
     fileprivate var selectedIndex: Int = -1
+    var isHasSelectedReason:Bool {
+        get {
+            return selectedIndex > -1
+        }
+    }
     var orderDetail: Order?
     var task: TaskModel?
     var routeID: Int = -1
