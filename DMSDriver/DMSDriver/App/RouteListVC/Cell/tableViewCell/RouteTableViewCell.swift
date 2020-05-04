@@ -44,7 +44,7 @@ class RouteTableViewCell: UITableViewCell {
             endDate = Hour24Formater.string(from:end)
         }
 
-        routeIDLabel.text = "#\(route.id)"
+        routeIDLabel.text = "#\(route.companySeqID ?? "")"
         statusLabel.text = route.status?.name?.localized
         statusLabel.textColor = route.colorStatus
         startTimeLabel.text = startDate + " - "

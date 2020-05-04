@@ -145,7 +145,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
     private func initUI()  {
         self.setupTableView()
-        lblOrderId?.text = "order".localized + " #\(orderDetail?.id ?? 0)"
+        lblOrderId?.text = "order".localized + " #\(orderDetail?.companySeqID ?? "")"
         
         var timeStart = "NA".localized
         var timeEnd = "NA".localized
@@ -211,7 +211,7 @@ class OrderDetailViewController: BaseOrderDetailViewController {
                                                   Slash(order.remarkDriver))
         let remarkForLocation = OrderDetailInforRow("remark-for-location".localized,
                                                     Slash(order.remarkLocation))
-        let orderId = OrderDetailInforRow("order-id".localized,"#\(order.id)")
+        let orderId = OrderDetailInforRow("order-id".localized,"#\(order.companySeqID ?? "")")
         
         //NEW
         let orderType = OrderDetailInforRow("order-type".localized,order.orderType.name)

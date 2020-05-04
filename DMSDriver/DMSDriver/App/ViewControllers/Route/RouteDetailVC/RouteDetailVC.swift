@@ -180,7 +180,7 @@ class RouteDetailVC: BaseViewController {
         if let end = route?.end_time.date {
             endDate = HourFormater.string(from:end)
         }
-        lblRoute?.text = "Route".localized + " #\(route?.id ?? 0)"
+        lblRoute?.text = "Route".localized + " #\(route?.companySeqID ?? "")"
         lblTime?.text = "\(startDate) - \(endDate)"
         lblStatus?.text = route?.status?.name?.localized
         lblStatus?.textColor = route?.colorStatus

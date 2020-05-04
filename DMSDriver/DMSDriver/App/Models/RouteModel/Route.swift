@@ -324,6 +324,7 @@ class Route: BaseModel {
     var assignedInfo:[AssignedInfo]?
     var routeType:BasicModel?
     var routeTypeId:Int?
+    var companySeqID:String?
     
     
     // NEW
@@ -466,6 +467,7 @@ class Route: BaseModel {
 //        tankers = array.map({$0.tanker ?? Tanker()})
         routeType <- map["route_type"]
         routeTypeId <- map["route_type_id"]
+        companySeqID <- map["comp_seq_id"]
     }
     
     var ordersAbleToLoad:[Order] {

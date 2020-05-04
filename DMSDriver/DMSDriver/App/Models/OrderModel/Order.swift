@@ -648,6 +648,7 @@ class Order: BaseModel {
     // NEW
     var division:BasicModel?
     var zone:BasicModel?
+    var companySeqID:String?
     
     var consigneeName:String? {
         get {
@@ -812,6 +813,7 @@ class Order: BaseModel {
         dueDate <- map["due_dt"]
         dueDateFrom <- map["due_dt_from"]
         dueDateTo <- map["due_dt_to"]
+        companySeqID <- map["comp_seq_id"]
     }
     
     

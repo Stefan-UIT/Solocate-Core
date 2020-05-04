@@ -70,7 +70,7 @@ class OrderItemTableViewCell: UITableViewCell {
         }
         
 //        lblNumber?.text = "\(order.seq)."
-        lblTitle?.text = String(format: "#%d".localized, order.id)
+        lblTitle?.text = "#\(order.companySeqID ?? "")"
         lblCustomerName?.text = order.customer?.userName
         lblConsigneeName?.text = order.consigneeName
         lblQuantity?.text = "\(detail.pivot?.qty ?? 0)"

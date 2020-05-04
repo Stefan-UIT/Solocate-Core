@@ -45,7 +45,7 @@ class BusinessOrderTableViewCell: UITableViewCell {
             endDate = ShortDateFormater.string(from:end)
         }
         //        self.rentingOrder = rentingOrder
-        routeIdLabel.text = "#"+"\(businessOrder.id)"
+        routeIdLabel.text = "#" + Slash(businessOrder.companySeqID)
         statusLabel.text = businessOrder.status?.name?.localized
         statusLabel.textColor = businessOrder.colorStatus
         timeLabel.text = startTime + " - " + endTime
