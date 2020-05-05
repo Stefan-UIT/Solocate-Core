@@ -354,7 +354,15 @@ extension DropDownViewController: UITextFieldDelegate {
 }
 
 extension DropDownViewController: UITableViewDelegate, UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        return (dropDownType != .Address) ? CELL_HEIGHT : CELL_HEIGHT*2
+//    }
+//
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return (dropDownType == .Address) ? UITableView.automaticDimension : CELL_HEIGHT
+    }
+    
+    func tableView(_ tableView: UITableView, estimatedHeightForRowAt indexPath: IndexPath) -> CGFloat {
         return CELL_HEIGHT
     }
     
@@ -374,7 +382,8 @@ extension DropDownViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configureCell(itemsDisplay[indexPath.row] as! String)
         case .Address:
             let item = itemsDisplay as! [Address]
-            cell.configureCell(item[indexPath.row].address ?? "")
+            
+            cell.configureCell(item[indexPath.row].fullAddress)
         case .SKU:
             let item = itemsDisplay as! [SKUModel]
             cell.configureCell(item[indexPath.row].skuName)

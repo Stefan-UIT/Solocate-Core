@@ -681,7 +681,14 @@ extension BusinessOrderDetailVC {
         }
     }
     
+    func setLocationToOrder() {
+        guard let _order = order else { return }
+        _order.customerLocationId = (_order.isPickUpType) ? String(pickupItem.id) : String(deliveryItem.id)
+        _order.wareHouseId = (_order.isPickUpType) ? String(deliveryItem.id) : String(pickupItem.id)
+    }
+    
     private func submitCreateBO(order:BusinessOrder) {
+        setLocationToOrder()
         self.showLoadingIndicator()
         SERVICES().API.createBusinessOrder(order: order) {[weak self] (result) in
             switch result {
@@ -1072,11 +1079,11 @@ extension BusinessOrderDetailVC {
         businessOrderPickupInfo[OPEN_TIME_ROW].content = Slash(pickupItem.openTime)
         businessOrderPickupInfo[CLOSE_TIME_ROW].content = Slash(pickupItem.closeTime)
         order?.from = pickupItem
-        if order?.typeID == OrderType.pickup.rawValue {
-            order?.customerLocationId = String(pickupItem.id)
-        } else {
-            order?.wareHouseId = String(pickupItem.id)
-        }
+//        if order?.typeID == OrderType.pickup.rawValue {
+//            order?.customerLocationId = String(pickupItem.id)
+//        } else {
+//            order?.wareHouseId = String(pickupItem.id)
+//        }
         setupViewAfterEdit()
     }
     
@@ -1155,11 +1162,11 @@ extension BusinessOrderDetailVC {
         businessOrderDeliveryInfo[CLOSE_TIME_ROW].content = Slash(deliveryItem.closeTime)
         order?.to = deliveryItem
         order?.customerLocationId = String(deliveryItem.id)
-        if order?.typeID == OrderType.delivery.rawValue {
-            order?.customerLocationId = String(deliveryItem.id)
-        } else {
-            order?.wareHouseId = String(deliveryItem.id)
-        }
+//        if order?.typeID == OrderType.delivery.rawValue {
+//            order?.customerLocationId = String(deliveryItem.id)
+//        } else {
+//            order?.wareHouseId = String(deliveryItem.id)
+//        }
         setupViewAfterEdit()
     }
     

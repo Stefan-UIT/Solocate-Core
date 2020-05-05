@@ -126,6 +126,18 @@ enum OrderType:Int {
 
 class Address: BaseModel {
     var id:Int = -1
+    var fullAddress:String {
+        get {
+            var result = ""
+            if let _name = name {
+                result = _name
+            }
+            if let addr = address {
+                result += " - " + addr
+            }
+            return result
+        }
+    }
     var address:String?
     var lattd:String?
     var lngtd:String?
@@ -162,6 +174,7 @@ class Address: BaseModel {
     
     override func mapping(map: Map) {
         id <- map["id"]
+        name <- map["name"]
         address <- map["address"]
         lattd <- map["lattd"]
         if lattd == nil {
@@ -171,7 +184,7 @@ class Address: BaseModel {
             lngtd <- map["longitude"]
         }
         lngtd <- map["lngtd"]
-        name <- map["ctt_name"]
+//        name <- map["ctt_name"]
         phone <- map["ctt_phone"]
         if phone == nil {
             phone <- map["phone"]
