@@ -77,6 +77,8 @@ enum PATH_REQUEST_URL: String{
     case GET_LIST_RENTING_ORDER_STATUS = "masterdata/v1/renting-order-statuses/list-active"
     case GET_LIST_PURCHASE_ORDER_STATUS = "masterdata/v1/purchase-order-statuses/list-active"
     case GET_LIST_PURCHASE_ORDER_TYPES = "masterdata/v1/purchase-order-types/list-active"
+    case GET_WAREHOUSE_LOCATION_BY_CUSTOMER = "masterdata/v1/locations/list-active?customer_id=%@&cd=WH"
+    case GET_CUSTOMER_LOCATION_BY_CUSTOMER = "masterdata/v1/locations/list-active?customer_id=%@&cd=CS"
     case GET_LIST_RENTING_ORDER_DETAIL_STATUS = "masterdata/v1/renting-order-detail-statuses/list-active"
     case GET_ALL_ROUTE_INPROGESS = "transaction/v1/routes/in-progress" // API not done
     case GET_LIST_ALERT = "masterdata/v1/mobile/alerts/driver-alerts"

@@ -710,6 +710,7 @@ extension BusinessOrderDetailVC {
             switch result {
             case .object(let data):
                 self?.customers = data.data
+                self?.customerList = data.data ?? []
                 self?.getLocationsList()
             case .error(let error):
                 self?.dismissLoadingIndicator()
@@ -784,7 +785,7 @@ extension BusinessOrderDetailVC {
     }
     
     func setupViewAfterEdit() {
-        checkOrderTypeRow()
+//        checkOrderTypeRow()
         checkCustomerRow()
         checkOrderInfoFilled()
         checkRequire()
@@ -807,6 +808,14 @@ extension BusinessOrderDetailVC {
             let item = DropDownModel().addCustomers(customerList)
             businessOrderInfo[rowCustomer].data = item
         }
+    }
+    
+    func updateCustomersDropDownUI() {
+        guard let _customers = customers else { return }
+        customerList = _customers
+        let rowCustomer = BusinessOrderInfoRow.CUSTOMER.rawValue
+        let item = DropDownModel().addCustomers(customerList)
+        businessOrderInfo[rowCustomer].data = item
     }
     
     func checkCustomerRow() {
@@ -943,8 +952,8 @@ extension BusinessOrderDetailVC {
             order?.customer = _customer
             order?.customerId = String(_customer.id)
             order?.customerLocationId = String(_customer.id)
-            textContent = order?.customer_name
-            self.companyId = item.customers?.first?.companyID
+            textContent = _customer.userName
+            self.companyId = _customer.companyID
             renewAddressSKUData()
         case .DUE_DATE_FROM:
             guard let _date = item.dateStart else { return }
@@ -1168,6 +1177,10 @@ extension BusinessOrderDetailVC {
 //            order?.wareHouseId = String(deliveryItem.id)
 //        }
         setupViewAfterEdit()
+    }
+    
+    func getLocations() {
+        
     }
     
     func editOrderSKUInfo(row: Int,index: Int, item:DropDownModel?) {

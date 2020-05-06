@@ -117,6 +117,16 @@ extension BaseAPIService {
                        callback: callback);
     }
     
+    
+    @discardableResult
+    func fetchWarehouseLocations(byCustomer customerID:String, callback: @escaping APICallback<ResponseArrData<Address>>) -> APIRequest {
+        let path = String(format: PATH_REQUEST_URL.GET_WAREHOUSE_LOCATION_BY_CUSTOMER.URL, customerID)
+        return request(method: .GET,
+                       path: path,
+                       input: .empty,
+                       callback: callback);
+    }
+    
     @discardableResult
     func getDriversByCoordinator(callback: @escaping APICallback<CoordinatorDriverModel>) -> APIRequest {
         return request(method: .GET,

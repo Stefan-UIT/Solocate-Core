@@ -133,7 +133,11 @@ class Address: BaseModel {
                 result = _name
             }
             if let addr = address {
-                result += " - " + addr
+                if result.isEmpty {
+                    result = addr
+                } else {
+                    result += " - " + addr
+                }
             }
             return result
         }
