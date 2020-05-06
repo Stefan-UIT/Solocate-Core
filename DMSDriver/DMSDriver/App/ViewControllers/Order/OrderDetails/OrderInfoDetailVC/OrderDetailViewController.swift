@@ -50,6 +50,9 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     @IBOutlet weak var navigateButton: UIButton!
     @IBOutlet weak var addNoteButton: UIButton!
     
+    @IBOutlet weak var vHeaderActionsHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var vActionsHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var headerActionsView: UIView!
     fileprivate var orderInforDetail = [OrderDetailInforRow]()
     fileprivate var orderInforFrom = [OrderDetailInforRow]()
     fileprivate var orderInforTo = [OrderDetailInforRow]()
@@ -78,7 +81,19 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initUI()
+        handleShowingActionsUI()
         fetchData(showLoading: true)
+        
+    }
+    
+    func handleShowingActionsUI() {
+        guard let _route = route else { return }
+        vHeaderActionsHeightConstraint.constant = (_route.isNewStatus) ? 0.0 : 55.0
+        vActionsHeightConstraint.constant = (_route.isNewStatus) ? 0.0 : 55.0
+        addNoteButton.isHidden = _route.isNewStatus
+        if (_route.isNewStatus) {
+            headerActionsView.removeFromSuperview()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -603,7 +618,7 @@ extension OrderDetailViewController: UITableViewDataSource, UITableViewDelegate 
                 headerCell.btnEdit?.isHidden = isHidden
             case .sectionNatureOfGoods:
                 headerCell.btnEdit?.setTitleColor(AppColor.mainColor, for: .normal)
-                headerCell.btnEdit?.isHidden = !_orderDetail.isNewStatus
+                headerCell.btnEdit?.isHidden = !_orderDetail.isNewStatus || route?.isNewStatus ?? false
             case .sectionPictures:
                 headerCell.btnEdit?.isHidden = !statusesShouldAllowToSignAndUpload
 //            case .sectionAddNote:
@@ -810,7 +825,7 @@ fileprivate extension OrderDetailViewController {
         cell.delegate = self
         let isNotUpdate = detail.pivot?.deliveredQty == 0
         cell.tempActualQty = isNotUpdate ? nil : tempActualQty[detail.pivot?.id ?? 0]
-        cell.configureCell(detail: detail, order: order)
+        cell.configureCell(detail: detail, order: order, route:route)
         cell.vContent?.cornerRadius = 0
         if indexPath.row == order.details!.count - 1{
             cell.vContent?.roundCornersLRB()

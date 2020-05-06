@@ -75,23 +75,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0D386FBF-C642-4B73-BBED-F9C35C5729F7"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/OrderDetailViewController.swift"
-            timestampString = "606395014.039257"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1175"
-            endingLineNumber = "1175"
-            landmarkName = "handleShowingButtonStatus()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "55B03766-0DA0-4180-A377-9C7D37E6BEF2"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -109,23 +92,6 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "FC0EA32D-C7A2-4E11-AFF0-72ED17D502E1"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "DMSDriver/App/ViewControllers/Loading/LoadingViewController.swift"
-            timestampString = "604492005.320159"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "55"
-            endingLineNumber = "55"
-            landmarkName = "downloadFiles(withCompletionHandler:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             uuid = "96781CFB-2BD2-474D-A816-DB1F5D18D0EB"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
@@ -134,10 +100,26 @@
             timestampString = "606395014.039933"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "1039"
-            endingLineNumber = "1039"
+            startingLineNumber = "1055"
+            endingLineNumber = "1055"
             landmarkName = "OrderDetailViewController"
             landmarkType = "21">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8FE48A6E-E5C9-44CD-97F9-6A91A9D73EC9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DMSDriver/App/ViewControllers/Order/OrderDetails/OrderInfoDetailVC/Cell/OrderDetailSKUCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "59"
+            endingLineNumber = "59"
+            landmarkName = "configureCell(detail:order:route:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -326,6 +326,12 @@ class Route: BaseModel {
     var routeTypeId:Int?
     var companySeqID:String?
     
+    var isNewStatus:Bool {
+        get {
+            return status?.code == RouteStatus.New.rawValue
+        }
+    }
+    
     
     // NEW
     var tankers:[Tanker]?

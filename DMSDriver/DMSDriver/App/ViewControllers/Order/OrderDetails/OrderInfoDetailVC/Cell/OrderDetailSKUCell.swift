@@ -21,7 +21,7 @@ class OrderDetailSKUCell: UITableViewCell {
     @IBOutlet weak var loadedQtyLabel: UILabel!
     @IBOutlet weak var loadedQtyViewContainer: UIView!
     @IBOutlet weak var loadedQtyHeightConstraint: NSLayoutConstraint!
-    @IBOutlet weak var deliveredQtyTextField: UITextField!
+    @IBOutlet weak var deliveredQtyTextField: UITextField?
     var detail:Order.Detail!
     var tempActualQty:Int?
     @IBOutlet weak var vContent: UIView!
@@ -29,14 +29,14 @@ class OrderDetailSKUCell: UITableViewCell {
     @IBOutlet weak var deliveredQtyStaticLabel: UILabel!
     
     @IBOutlet weak var loadedQtyStaticLabel: UILabel!
-    @IBOutlet weak var deliveredQtyHeightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var deliveredQtyHeightConstraint: NSLayoutConstraint?
     
-    @IBOutlet weak var deliveredQtyViewContainer: UIView!
+    @IBOutlet weak var deliveredQtyViewContainer: UIView?
     weak var delegate:OrderDetailSKUCellDelegate?
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        deliveredQtyTextField.delegate = self
+        deliveredQtyTextField?.delegate = self
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -45,7 +45,7 @@ class OrderDetailSKUCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
-    func configureCell(detail:Order.Detail, order:Order) {
+    func configureCell(detail:Order.Detail, order:Order, route:Route?) {
         self.detail = detail
         nameLabel.text = Slash(detail.nameReferenceCode)
         barcodeLabel.text = Slash(detail.pivot?.bcd)
@@ -56,6 +56,10 @@ class OrderDetailSKUCell: UITableViewCell {
         updateLoadedQtyUI(order:order)
         handleDisablingTextField(order:order)
         updateDeliveredTextFieldValue(order: order)
+        guard let _route = route else { return }
+        if _route.isNewStatus {
+            deliveredQtyViewContainer?.removeFromSuperview()
+        }
     }
     
     func updateDeliveredTextFieldValue(order:Order) {
@@ -69,12 +73,12 @@ class OrderDetailSKUCell: UITableViewCell {
             actualQty = (order.isNewStatus) ? orderLoadedQty : orderActualQty
             actualQty = actualQty == "0" ? String(format: "\(tempActualQty ?? 0)") : actualQty
         }
-        deliveredQtyTextField.text = actualQty
+        deliveredQtyTextField?.text = actualQty
     }
     
     func handleDisablingTextField(order:Order) {
         let isDisabled = order.isCancelled || order.isFinished
-        deliveredQtyTextField.isEnabled = !isDisabled
+        deliveredQtyTextField?.isEnabled = !isDisabled
     }
     
     func updateDeliverdQtyUI(order:Order) {
@@ -89,8 +93,8 @@ class OrderDetailSKUCell: UITableViewCell {
     }
     
     func deliveryQtyViewContainer(isHidden:Bool) {
-        deliveredQtyHeightConstraint.constant = isHidden ? 0.0 : 25.0
-        deliveredQtyViewContainer.isHidden = isHidden
+        deliveredQtyHeightConstraint?.constant = isHidden ? 0.0 : 25.0
+        deliveredQtyViewContainer?.isHidden = isHidden
     }
     
     func loadedQtyViewContainer(isHidden:Bool) {
