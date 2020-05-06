@@ -133,7 +133,7 @@ extension SlideMenuVC: UITableViewDataSource{
         if menutype == .LOGOUT {
             return MAX(ScreenSize.SCREEN_HEIGHT - (CGFloat(((MenuItemType.count - 2) * 65)) + 200), 65)
         }
-        if menutype == .RENTINGORDERS || menutype == .DASHBOARD || menutype == .COUNTER || menutype == .ALERT || menutype == .RETURNEDITEMS || menutype == .TASK {
+        if menutype == .RENTINGORDERS || menutype == .DASHBOARD || menutype == .COUNTER || menutype == .ALERT || menutype == .RETURNEDITEMS || menutype == .TASK || menutype == .PURCHASEORDER {
             return 0
         }
     }
