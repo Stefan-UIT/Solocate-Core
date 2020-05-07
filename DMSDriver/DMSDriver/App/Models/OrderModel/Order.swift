@@ -168,6 +168,11 @@ class Address: BaseModel {
     var customers:[UserModel.UserInfo]?
     var types:[BasicModel]?
     
+    func getCustomer(customerID:Int) -> UserModel.UserInfo? {
+        let array = customers?.filter({$0.id == customerID})
+        return array?.first
+    }
+    
     override init() {
         super.init()
     }

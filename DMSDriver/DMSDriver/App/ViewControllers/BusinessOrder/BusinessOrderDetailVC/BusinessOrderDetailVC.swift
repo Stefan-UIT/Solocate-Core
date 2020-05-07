@@ -1015,6 +1015,7 @@ extension BusinessOrderDetailVC {
     }
     
     func editOrderPickupInfo(row:Int, item:DropDownModel?) {
+        guard let _order = order else { return }
         let infoRow:BusinessOrderAddressInfoRow = BusinessOrderAddressInfoRow(rawValue: row)!
         var textContent = item?.result
         switch infoRow {
@@ -1025,25 +1026,32 @@ extension BusinessOrderDetailVC {
             pickupItem.floor = _address.floor
             pickupItem.apartment = _address.apartment
             pickupItem.number = _address.number
-            pickupItem.ctt_name = _address.ctt_name
-            pickupItem.ctt_phone = _address.phone
+            
             pickupItem.lattd = _address.lattd
             pickupItem.lngtd = _address.lngtd
-            
-            for (_,customer) in _customers.enumerated() {
-                if customer.pivot?.customerId!.toString() == order?.customerId {
-                    pickupItem.openTime = customer.pivot?.openTime
-                    pickupItem.closeTime = customer.pivot?.closeTime
-                    pickupItem.ctt_name = customer.pivot?.consigneeName
-                    pickupItem.ctt_phone = customer.pivot?.consigneePhone
-                    break
-                } else {
-                    pickupItem.openTime = ""
-                    pickupItem.closeTime = ""
-                    pickupItem.ctt_name = ""
-                    pickupItem.ctt_phone = ""
-                }
+            let customerID = Int(_order.customerId ?? "") ?? -1
+            if let customer = _address.getCustomer(customerID: customerID) {
+                pickupItem.ctt_name = Slash(customer.pivot?.consigneeName)
+                pickupItem.ctt_phone = Slash(customer.pivot?.consigneePhone)
+                pickupItem.openTime = Slash(customer.pivot?.openTime)
+                pickupItem.closeTime = Slash(customer.pivot?.closeTime)
             }
+            
+            
+//            for (_,customer) in _customers.enumerated() {
+//                if customer.pivot?.customerId!.toString() == order?.customerId {
+//                    pickupItem.openTime = customer.pivot?.openTime
+//                    pickupItem.closeTime = customer.pivot?.closeTime
+//                    pickupItem.ctt_name = customer.pivot?.consigneeName
+//                    pickupItem.ctt_phone = customer.pivot?.consigneePhone
+//                    break
+//                } else {
+//                    pickupItem.openTime = ""
+//                    pickupItem.closeTime = ""
+//                    pickupItem.ctt_name = ""
+//                    pickupItem.ctt_phone = ""
+//                }
+//            }
             
             autoFillAddressData(_address, isPickup: true)
             textContent = pickupItem.address
