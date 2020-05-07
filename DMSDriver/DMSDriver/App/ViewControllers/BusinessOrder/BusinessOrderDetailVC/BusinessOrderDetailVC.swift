@@ -932,8 +932,25 @@ extension BusinessOrderDetailVC {
             isQualitySubmit = order?.details?[index].pivot?.uom != nil && order?.details?[index].pivot?.qty != nil && order?.details?[index].pivot?.qty != 0
         }
         
-        isEnableSubmit = order?.typeID != nil && order?.customer != nil && (order?.dueDateFrom != nil || order?.dueDateFrom?.isEmpty == false) &&  (order?.dueDateTo?.isEmpty == false || order?.dueDateTo != nil) && order?.from != nil && order?.to != nil && order?.zoneId != nil && order?.details != nil && order?.to?.start_time != nil && order?.to?.end_time != nil && order?.to?.openTime != nil && order?.to?.closeTime != nil && order?.from?.start_time != nil && order?.from?.end_time != nil && order?.from?.openTime != nil && order?.from?.closeTime != nil && isQualitySubmit
+        let isOrderTypeFilled = order?.typeID != nil
+        let isCustomerFilled = order?.customer != nil
+        let isDueDateFromFilled = (order?.dueDateFrom != nil || order?.dueDateFrom?.isEmpty == false)
+        let isDueDateToFilled = (order?.dueDateTo?.isEmpty == false || order?.dueDateTo != nil)
+        let isAddressFromFilled = order?.from != nil
+        let isAddressToFilled = order?.to != nil
+        let isZoneFilled = order?.zoneId != nil
+        let isDetailFilled = order?.details != nil
+        let isToStartTimeFilled = order?.to?.start_time != nil
+        let isToEndTimeFilled = order?.to?.end_time != nil
+        let isToOpenTimeFilled = order?.to?.openTime != nil
+        let isToCloseTimeFilled = order?.to?.closeTime != nil
+        let isFromStartTimeFilled = order?.from?.start_time != nil
+        let isFromEndTimeFilled = order?.from?.end_time != nil
+        let isFromOpenTimeFilled = order?.from?.openTime != nil
+        let isFromCloseTimeFilled = order?.from?.closeTime != nil
         
+        isEnableSubmit = isOrderTypeFilled && isCustomerFilled && isDueDateFromFilled && isDueDateToFilled && isAddressFromFilled && isAddressToFilled && isZoneFilled && isDetailFilled && isToStartTimeFilled && isToEndTimeFilled && isToOpenTimeFilled && isToCloseTimeFilled && isFromStartTimeFilled && isFromEndTimeFilled && isFromOpenTimeFilled && isFromCloseTimeFilled && isQualitySubmit
+          
         tbvContent?.reloadData()
     }
     
