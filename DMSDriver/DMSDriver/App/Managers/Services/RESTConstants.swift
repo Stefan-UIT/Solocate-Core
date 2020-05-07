@@ -98,7 +98,7 @@ enum PATH_REQUEST_URL: String{
     case GET_MORE_LEGS = "transaction/v1/shipping-orders/%@/more-legs"
     case GET_CUSTOMER_LIST = "auth/v1/admin/users/by-role/BCO"
     case GET_LOCATION_LIST = "masterdata/v1/locations/list-active"
-    case GET_SKU_LIST = "masterdata/v1/sku/list-active"
+    case GET_SKU_LIST = "masterdata/v1/sku/list-active?customer_id=%@"
     case GET_UOM_LIST = "masterdata/v1/units/list-active"
     case GET_ZONE_LIST = "masterdata/v1/zones/list-active"
     case CREATE_BUSINESS_ORDER = "transaction/v1/purchase-orders"

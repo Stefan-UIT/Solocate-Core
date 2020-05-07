@@ -726,7 +726,6 @@ extension BusinessOrderDetailVC {
             case .object(let data):
                 self?.customers = data.data
                 self?.customerList = data.data ?? []
-                self?.getLocationsList()
             case .error(let error):
                 self?.dismissLoadingIndicator()
                 self?.showAlertView(error.getMessage())
@@ -734,22 +733,9 @@ extension BusinessOrderDetailVC {
         }
     }
     
-    private func getLocationsList() {
-        SERVICES().API.getLocationsList() {[weak self] (result) in
-            switch result {
-            case .object(let data):
-                self?.locations = data.data
-                self?.getSKUList()
-            case .error(let error):
-                self?.dismissLoadingIndicator()
-                self?.showAlertView(error.getMessage())
-            }
-            
-        }
-    }
     
-    private func getSKUList() {
-        SERVICES().API.getSKUList() {[weak self] (result) in
+    private func getSKUList(_ customerId:String) {
+        SERVICES().API.getSKUList(byCustomer: customerId) {[weak self] (result) in
             switch result {
             case .object(let data):
                 self?.skus = data.data
@@ -876,26 +862,26 @@ extension BusinessOrderDetailVC {
         
         skuList = []
         uomList = []
-        var tempSKUList:[SKUModel] = []
+//        var tempSKUList:[SKUModel] = []
         
         var listIDCustomers:[Int] = []
         for (_,orderCustomer) in orderCustomers.enumerated() {
             listIDCustomers.append(orderCustomer.id)
         }
         
-        for (_, sku) in _skus.enumerated() {
-            for index in 0..<(sku.customers?.count ?? 0){
-                if listIDCustomers.contains(sku.customers?[index].id ?? 0) {
-                    tempSKUList.append(sku)
-                    break
-                }
-            }
-        }
+//        for (_, sku) in _skus.enumerated() {
+//            for index in 0..<(sku.customers?.count ?? 0){
+//                if listIDCustomers.contains(sku.customers?[index].id ?? 0) {
+//                    tempSKUList.append(sku)
+//                    break
+//                }
+//            }
+//        }
         // This code add SKU/UOM Datalist for First businessOrderItem because we create null data in first time access BODetailVC
-        businessOrderItem.first?.skuDataList = tempSKUList
+//        businessOrderItem.first?.skuDataList = skus
         businessOrderItem.first?.uomDataList = _uoms
         //
-        skuList = tempSKUList
+//        skuList = skus
         uomList = _uoms
     }
     

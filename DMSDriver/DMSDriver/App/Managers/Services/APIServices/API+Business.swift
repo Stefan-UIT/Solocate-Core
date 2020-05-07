@@ -65,7 +65,7 @@ extension BaseAPIService {
     }
 
     @discardableResult
-    func getSKUList(callback: @escaping APICallback<ResponseDataListModel<SKUModel>>) -> APIRequest {
+    func getSKUList(byCustomer customerID:String, callback: @escaping APICallback<ResponseDataListModel<SKUModel>>) -> APIRequest {
         let url = String(format:PATH_REQUEST_URL.GET_SKU_LIST.URL)
         return request(method: .GET,
                        path: url,
