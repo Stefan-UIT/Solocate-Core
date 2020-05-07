@@ -20,14 +20,15 @@ class RouteDetailLoadPlanItemTbvCell: UITableViewCell {
     }
     
     func configureLiquid(_ detail: Compartment.Detail) {
-        orderLabel.text = "order".localized + " " + IntSlash(detail.shippingOrderId)
-        skuLabel.text = "sku".localized + " " + IntSlash(detail.pivot?.sku_id)
-        unitLabel.text = IntSlash(detail.quantity) + " " + "L"
+        orderLabel.text = "order".localized + " " + Slash(detail.pivot?.shippingOrder?.companySeqID)
+//        skuLabel.text = "sku".localized + " " + IntSlash(detail.pivot?.sku_id)
+        skuLabel.text = detail.name
+        unitLabel.text = IntSlash(detail.quantity)
         
     }
     
     func configurePacked(_ detail: Compartment.Detail) {
-        orderLabel.text = "order".localized + " " + IntSlash(detail.shippingOrderDetailId)
+        orderLabel.text = "order".localized + " " + Slash(detail.pivot?.shippingOrder?.companySeqID)
         skuLabel.text = detail.name
         unitLabel.text = Slash(detail.seq)
     }

@@ -37,6 +37,14 @@ class UserModel: BaseModel {
                 consigneeEmail <- map["consignee_email"]
                 openTime <- map["open_time"]
                 closeTime <- map["close_time"]
+                
+                if openTime != nil && openTime?.count > 5 {
+                    openTime?.removeLast(3)
+                }
+                if closeTime != nil && closeTime?.count > 5 {
+                    closeTime?.removeLast(3)
+                }
+                
                 remark <- map["remark"]
             }
         }

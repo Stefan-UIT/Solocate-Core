@@ -40,6 +40,7 @@ class Compartment:BaseModel {
             var deliveredQty:Int?
             var loadedQty:Int?
             var returnedQty:Int?
+            var shippingOrder:Order?
             
             init?(map: Map) {
                 //
@@ -56,6 +57,7 @@ class Compartment:BaseModel {
                 loadedQty <- map["loaded_qty"]
                 deliveredQty <- map["delivered_qty"]
                 returnedQty <- map["returned_qty"]
+                shippingOrder <- map["shipping_order"]
             }
         }
         

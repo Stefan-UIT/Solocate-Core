@@ -257,7 +257,7 @@ class DropDownViewController: UIViewController {
             for minIndex in 0..<4 {
                 min = minIndex == 0 ? minIndex : min+15
                 let minute = min == 0 ? "00" : String(min)
-                let timeString = String(format: "%d:%@",hour,minute)
+                let timeString = String(format: "%02d:%@",hour,minute)
                 time.append(timeString)
             }
         }
@@ -336,7 +336,7 @@ extension DropDownViewController: UITextFieldDelegate {
             switch dropDownType {
             case .Address:
                 let item = itemsOrigin as? [Address]
-                itemsDisplay = (item?.filter{ $0.address?.contains(updatedText) ?? false }) ?? []
+                itemsDisplay = (item?.filter{ $0.fullAddress.lowercased().contains(updatedText.lowercased())}) ?? []
             case .UOM:
                 let item = itemsOrigin as? [UOMModel]
                 itemsDisplay = (item?.filter{$0.name?.contains(updatedText) ?? false }) ?? []
@@ -386,7 +386,7 @@ extension DropDownViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configureCell(item[indexPath.row].fullAddress)
         case .SKU:
             let item = itemsDisplay as! [SKUModel]
-            cell.configureCell(item[indexPath.row].skuName)
+            cell.configureCell(item[indexPath.row].name ?? item[indexPath.row].skuName )
         case .UOM:
             let item = itemsDisplay as! [UOMModel]
             cell.configureCell(item[indexPath.row].name ?? "")

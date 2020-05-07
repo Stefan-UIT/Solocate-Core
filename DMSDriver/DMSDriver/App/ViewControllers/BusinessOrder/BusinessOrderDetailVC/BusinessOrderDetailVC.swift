@@ -194,6 +194,17 @@ class BusinessOrderDetailVC: BaseViewController {
                                           style: .InputText,
                                           isRequire: _order.isRequireEdit(_order.remark, .None))
         
+        if !isEditingBO {
+            //routeIdLabel.text = "#" + Slash(businessOrder.companySeqID)
+            let idText = "#" + Slash(_order.companySeqID)
+            let boIDLabel = BusinessOrderForRow(title: "ID".localized,
+            content: idText ,
+            isEditing: false,
+            style: .InputText,
+            isRequire: false)
+            businessOrderInfo.append(boIDLabel)
+        }
+        
         businessOrderInfo.append(orderType)
         businessOrderInfo.append(customer)
         businessOrderInfo.append(dueDateFrom)
@@ -728,9 +739,10 @@ extension BusinessOrderDetailVC {
         SERVICES().API.getCustomerList() {[weak self] (result) in
             switch result {
             case .object(let data):
+                self?.dismissLoadingIndicator()
                 self?.customers = data.data
                 self?.customerList = data.data ?? []
-                self?.getLocationsList()
+                self?.setupDataDetailInfoforRows()
             case .error(let error):
                 self?.dismissLoadingIndicator()
                 self?.showAlertView(error.getMessage())
@@ -738,25 +750,14 @@ extension BusinessOrderDetailVC {
         }
     }
     
-    private func getLocationsList() {
-        SERVICES().API.getLocationsList() {[weak self] (result) in
-            switch result {
-            case .object(let data):
-                self?.locations = data.data
-                self?.getSKUList()
-            case .error(let error):
-                self?.dismissLoadingIndicator()
-                self?.showAlertView(error.getMessage())
-            }
-            
-        }
-    }
     
-    private func getSKUList() {
-        SERVICES().API.getSKUList() {[weak self] (result) in
+    private func getSKUList(_ customerId:String) {
+        SERVICES().API.getSKUList(byCustomer: customerId) {[weak self] (result) in
             switch result {
             case .object(let data):
                 self?.skus = data.data
+                self?.businessOrderItem.first?.skuDataList = data.data ?? []
+                self?.skuList = data.data ?? []
                 self?.getUOMList()
             case .error(let error):
                 self?.dismissLoadingIndicator()
@@ -784,7 +785,7 @@ extension BusinessOrderDetailVC {
             case .object(let data):
                 guard let _zones = data.data else { return }
                 self?.zones = _zones
-                self?.setupDataDetailInfoforRows()
+//                self?.setupDataDetailInfoforRows()
                 self?.dismissLoadingIndicator()
             case .error(let error):
                 self?.dismissLoadingIndicator()
@@ -876,31 +877,32 @@ extension BusinessOrderDetailVC {
     func checkCustomerRow() {
         guard let customerId = order?.customerId else { return }
         self.fetchWarehouseLocations(customerId)
-        guard let _skus = skus , let _uoms = uoms , let orderCustomers = customers else  { return }
+            self.getSKUList(customerId)
+//        guard let _skus = skus , let _uoms = uoms , let orderCustomers = customers else  { return }
         
-        skuList = []
-        uomList = []
-        var tempSKUList:[SKUModel] = []
+//        skuList = []
+//        uomList = []
+//        var tempSKUList:[SKUModel] = []
         
-        var listIDCustomers:[Int] = []
-        for (_,orderCustomer) in orderCustomers.enumerated() {
-            listIDCustomers.append(orderCustomer.id)
-        }
+//        var listIDCustomers:[Int] = []
+//        for (_,orderCustomer) in orderCustomers.enumerated() {
+//            listIDCustomers.append(orderCustomer.id)
+//        }
         
-        for (_, sku) in _skus.enumerated() {
-            for index in 0..<(sku.customers?.count ?? 0){
-                if listIDCustomers.contains(sku.customers?[index].id ?? 0) {
-                    tempSKUList.append(sku)
-                    break
-                }
-            }
-        }
+//        for (_, sku) in _skus.enumerated() {
+//            for index in 0..<(sku.customers?.count ?? 0){
+//                if listIDCustomers.contains(sku.customers?[index].id ?? 0) {
+//                    tempSKUList.append(sku)
+//                    break
+//                }
+//            }
+//        }
         // This code add SKU/UOM Datalist for First businessOrderItem because we create null data in first time access BODetailVC
-        businessOrderItem.first?.skuDataList = tempSKUList
-        businessOrderItem.first?.uomDataList = _uoms
+//        businessOrderItem.first?.skuDataList = skus
+//        businessOrderItem.first?.uomDataList = _uoms
         //
-        skuList = tempSKUList
-        uomList = _uoms
+//        skuList = skus
+//        uomList = _uoms
     }
     
     func fetchAddressList() {
@@ -1151,7 +1153,7 @@ extension BusinessOrderDetailVC {
         }
         businessOrderPickupInfo[row].content = Slash(textContent)
         businessOrderPickupInfo[CONSIGNEE_NAME_ROW].content = Slash(pickupItem.ctt_name)
-        businessOrderPickupInfo[CONSIGNEE_PHONE_ROW].content = Slash(pickupItem.phone)
+        businessOrderPickupInfo[CONSIGNEE_PHONE_ROW].content = Slash(pickupItem.ctt_phone)
         businessOrderPickupInfo[OPEN_TIME_ROW].content = Slash(pickupItem.openTime)
         businessOrderPickupInfo[CLOSE_TIME_ROW].content = Slash(pickupItem.closeTime)
         order?.from = pickupItem
@@ -1242,7 +1244,7 @@ extension BusinessOrderDetailVC {
         }
         businessOrderDeliveryInfo[row].content = Slash(textContent)
         businessOrderDeliveryInfo[CONSIGNEE_NAME_ROW].content = Slash(deliveryItem.ctt_name)
-        businessOrderDeliveryInfo[CONSIGNEE_PHONE_ROW].content = Slash(deliveryItem.phone)
+        businessOrderDeliveryInfo[CONSIGNEE_PHONE_ROW].content = Slash(deliveryItem.ctt_phone)
         businessOrderDeliveryInfo[OPEN_TIME_ROW].content = Slash(deliveryItem.openTime)
         businessOrderDeliveryInfo[CLOSE_TIME_ROW].content = Slash(deliveryItem.closeTime)
         order?.to = deliveryItem
@@ -1290,7 +1292,7 @@ extension BusinessOrderDetailVC {
                 businessOrderItem[row].itemContent[BusinessOrderSKUInfoRow.UOM.rawValue] = Slash(skuItems[row].pivot?.uom?.name)
             }
             businessOrderItem[row].barcodeBool = _sku.barcodeBool
-            textContent = _sku.skuName
+            textContent = Slash(_sku.name)
             tbvContent?.reloadData()
         case .QUANTITY:
             skuItems[row].pivot?.qty = Int(textContent ?? "") ?? 1

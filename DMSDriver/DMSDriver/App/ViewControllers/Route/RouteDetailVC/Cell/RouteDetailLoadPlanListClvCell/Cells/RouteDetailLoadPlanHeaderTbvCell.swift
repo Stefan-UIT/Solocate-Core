@@ -19,11 +19,11 @@ class RouteDetailLoadPlanHeaderTbvCell: UITableViewCell {
     
     func configureHeaderLiquidType(_ compartment: Compartment) {
         compartmentLabel.text = "compartment-id".localized + IntSlash(compartment.compartmentId)
-        unitLabel.text = Slash(compartment.vol) + "L"
+        unitLabel.text = Slash(compartment.vol)
     }
     
     func configureHeaderPackedType(_ compartment: Compartment) {
-        compartmentLabel.text = Slash(compartment.compartmentName)
+        unitLabel.text = Slash(compartment.compartmentName)
         compartmentLabel.text = IntSlash(compartment.maxNumCompartment)
     }
 
