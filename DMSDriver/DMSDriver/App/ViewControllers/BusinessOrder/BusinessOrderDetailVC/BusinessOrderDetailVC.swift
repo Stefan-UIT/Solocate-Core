@@ -947,6 +947,7 @@ extension BusinessOrderDetailVC {
             let isPickup = _orderType == BusinessOrderType.Pickup.rawValue ? true : false
             renewAddressSKUData()
             addZone(isPickup: isPickup)
+            // check
         case .CUSTOMER:
             guard let _customer = item.customers?.first else { return }
             order?.customer = _customer
