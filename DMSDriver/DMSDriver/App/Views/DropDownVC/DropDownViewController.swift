@@ -336,7 +336,7 @@ extension DropDownViewController: UITextFieldDelegate {
             switch dropDownType {
             case .Address:
                 let item = itemsOrigin as? [Address]
-                itemsDisplay = (item?.filter{ $0.address?.contains(updatedText) ?? false }) ?? []
+                itemsDisplay = (item?.filter{ $0.fullAddress.lowercased().contains(updatedText.lowercased())}) ?? []
             case .UOM:
                 let item = itemsOrigin as? [UOMModel]
                 itemsDisplay = (item?.filter{$0.name?.contains(updatedText) ?? false }) ?? []
