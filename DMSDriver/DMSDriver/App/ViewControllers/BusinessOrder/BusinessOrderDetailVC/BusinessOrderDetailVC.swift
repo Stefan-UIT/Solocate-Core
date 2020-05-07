@@ -1108,6 +1108,7 @@ extension BusinessOrderDetailVC {
     }
     
     func editOrderDeliveryInfo(row:Int,item:DropDownModel?) {
+        guard let _order = order else { return }
         let infoRow:BusinessOrderAddressInfoRow = BusinessOrderAddressInfoRow(rawValue: row)!
         var textContent = item?.result
         switch infoRow {
@@ -1121,20 +1122,28 @@ extension BusinessOrderDetailVC {
             deliveryItem.lattd = _address.lattd
             deliveryItem.lngtd = _address.lngtd
             
-            for (_,customer) in _customers.enumerated() {
-                if customer.pivot?.customerId!.toString() == order?.customerId {
-                    deliveryItem.openTime = customer.pivot?.openTime
-                    deliveryItem.closeTime = customer.pivot?.closeTime
-                    deliveryItem.ctt_name = customer.pivot?.consigneeName
-                    deliveryItem.ctt_phone = customer.pivot?.consigneePhone
-                    break
-                } else {
-                    deliveryItem.openTime = ""
-                    deliveryItem.closeTime = ""
-                    deliveryItem.ctt_name = ""
-                    deliveryItem.ctt_phone = ""
-                }
+            let customerID = Int(_order.customerId ?? "") ?? -1
+            if let customer = _address.getCustomer(customerID: customerID) {
+                deliveryItem.ctt_name = Slash(customer.pivot?.consigneeName)
+                deliveryItem.ctt_phone = Slash(customer.pivot?.consigneePhone)
+                deliveryItem.openTime = Slash(customer.pivot?.openTime)
+                deliveryItem.closeTime = Slash(customer.pivot?.closeTime)
             }
+            
+//            for (_,customer) in _customers.enumerated() {
+//                if customer.pivot?.customerId!.toString() == order?.customerId {
+//                    deliveryItem.openTime = customer.pivot?.openTime
+//                    deliveryItem.closeTime = customer.pivot?.closeTime
+//                    deliveryItem.ctt_name = customer.pivot?.consigneeName
+//                    deliveryItem.ctt_phone = customer.pivot?.consigneePhone
+//                    break
+//                } else {
+//                    deliveryItem.openTime = ""
+//                    deliveryItem.closeTime = ""
+//                    deliveryItem.ctt_name = ""
+//                    deliveryItem.ctt_phone = ""
+//                }
+//            }
             
             autoFillAddressData(_address, isPickup: false)
             textContent = deliveryItem.address
