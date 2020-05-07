@@ -257,7 +257,7 @@ class DropDownViewController: UIViewController {
             for minIndex in 0..<4 {
                 min = minIndex == 0 ? minIndex : min+15
                 let minute = min == 0 ? "00" : String(min)
-                let timeString = String(format: "%d:%@",hour,minute)
+                let timeString = String(format: "%02d:%@",hour,minute)
                 time.append(timeString)
             }
         }

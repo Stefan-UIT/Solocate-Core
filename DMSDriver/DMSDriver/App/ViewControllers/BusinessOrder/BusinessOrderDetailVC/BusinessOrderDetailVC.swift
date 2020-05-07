@@ -1095,7 +1095,7 @@ extension BusinessOrderDetailVC {
         }
         businessOrderPickupInfo[row].content = Slash(textContent)
         businessOrderPickupInfo[CONSIGNEE_NAME_ROW].content = Slash(pickupItem.ctt_name)
-        businessOrderPickupInfo[CONSIGNEE_PHONE_ROW].content = Slash(pickupItem.phone)
+        businessOrderPickupInfo[CONSIGNEE_PHONE_ROW].content = Slash(pickupItem.ctt_phone)
         businessOrderPickupInfo[OPEN_TIME_ROW].content = Slash(pickupItem.openTime)
         businessOrderPickupInfo[CLOSE_TIME_ROW].content = Slash(pickupItem.closeTime)
         order?.from = pickupItem
@@ -1186,7 +1186,7 @@ extension BusinessOrderDetailVC {
         }
         businessOrderDeliveryInfo[row].content = Slash(textContent)
         businessOrderDeliveryInfo[CONSIGNEE_NAME_ROW].content = Slash(deliveryItem.ctt_name)
-        businessOrderDeliveryInfo[CONSIGNEE_PHONE_ROW].content = Slash(deliveryItem.phone)
+        businessOrderDeliveryInfo[CONSIGNEE_PHONE_ROW].content = Slash(deliveryItem.ctt_phone)
         businessOrderDeliveryInfo[OPEN_TIME_ROW].content = Slash(deliveryItem.openTime)
         businessOrderDeliveryInfo[CLOSE_TIME_ROW].content = Slash(deliveryItem.closeTime)
         order?.to = deliveryItem
