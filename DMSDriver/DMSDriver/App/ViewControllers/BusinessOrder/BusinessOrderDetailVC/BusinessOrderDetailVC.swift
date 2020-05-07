@@ -42,10 +42,11 @@ class BusinessOrderDetailVC: BaseViewController {
     fileprivate let HEADER_HEIGHT: CGFloat = 60.0
     fileprivate let CELL_HEIGHT: CGFloat = 65.0
     fileprivate let FOOTER_HEIGHT: CGFloat = 10.0
-    fileprivate let OPEN_TIME_ROW:Int = 4
-    fileprivate let CLOSE_TIME_ROW:Int = 5
-    fileprivate let CONSIGNEE_NAME_ROW:Int = 6
-    fileprivate let CONSIGNEE_PHONE_ROW:Int = 7
+    fileprivate let CONSIGNEE_NAME_ROW:Int = 4
+    fileprivate let CONSIGNEE_PHONE_ROW:Int = 5
+    fileprivate let OPEN_TIME_ROW:Int = 6
+    fileprivate let CLOSE_TIME_ROW:Int = 7
+    
     fileprivate let START_TIME_ROW:Int = 8
     fileprivate let END_TIME_ROW:Int = 9
 
@@ -1036,6 +1037,7 @@ extension BusinessOrderDetailVC {
     }
     
     func editOrderPickupInfo(row:Int, item:DropDownModel?) {
+        guard let _order = order else { return }
         let infoRow:BusinessOrderAddressInfoRow = BusinessOrderAddressInfoRow(rawValue: row)!
         var textContent = item?.result
         switch infoRow {
@@ -1046,25 +1048,32 @@ extension BusinessOrderDetailVC {
             pickupItem.floor = _address.floor
             pickupItem.apartment = _address.apartment
             pickupItem.number = _address.number
-            pickupItem.ctt_name = _address.ctt_name
-            pickupItem.ctt_phone = _address.phone
+            
             pickupItem.lattd = _address.lattd
             pickupItem.lngtd = _address.lngtd
-            
-            for (_,customer) in _customers.enumerated() {
-                if customer.pivot?.customerId!.toString() == order?.customerId {
-                    pickupItem.openTime = customer.pivot?.openTime
-                    pickupItem.closeTime = customer.pivot?.closeTime
-                    pickupItem.ctt_name = customer.pivot?.consigneeName
-                    pickupItem.ctt_phone = customer.pivot?.consigneePhone
-                    break
-                } else {
-                    pickupItem.openTime = ""
-                    pickupItem.closeTime = ""
-                    pickupItem.ctt_name = ""
-                    pickupItem.ctt_phone = ""
-                }
+            let customerID = Int(_order.customerId ?? "") ?? -1
+            if let customer = _address.getCustomer(customerID: customerID) {
+                pickupItem.ctt_name = Slash(customer.pivot?.consigneeName)
+                pickupItem.ctt_phone = Slash(customer.pivot?.consigneePhone)
+                pickupItem.openTime = Slash(customer.pivot?.openTime)
+                pickupItem.closeTime = Slash(customer.pivot?.closeTime)
             }
+            
+            
+//            for (_,customer) in _customers.enumerated() {
+//                if customer.pivot?.customerId!.toString() == order?.customerId {
+//                    pickupItem.openTime = customer.pivot?.openTime
+//                    pickupItem.closeTime = customer.pivot?.closeTime
+//                    pickupItem.ctt_name = customer.pivot?.consigneeName
+//                    pickupItem.ctt_phone = customer.pivot?.consigneePhone
+//                    break
+//                } else {
+//                    pickupItem.openTime = ""
+//                    pickupItem.closeTime = ""
+//                    pickupItem.ctt_name = ""
+//                    pickupItem.ctt_phone = ""
+//                }
+//            }
             
             autoFillAddressData(_address, isPickup: true)
             textContent = pickupItem.address
@@ -1120,6 +1129,7 @@ extension BusinessOrderDetailVC {
     }
     
     func editOrderDeliveryInfo(row:Int,item:DropDownModel?) {
+        guard let _order = order else { return }
         let infoRow:BusinessOrderAddressInfoRow = BusinessOrderAddressInfoRow(rawValue: row)!
         var textContent = item?.result
         switch infoRow {
@@ -1133,20 +1143,28 @@ extension BusinessOrderDetailVC {
             deliveryItem.lattd = _address.lattd
             deliveryItem.lngtd = _address.lngtd
             
-            for (_,customer) in _customers.enumerated() {
-                if customer.pivot?.customerId!.toString() == order?.customerId {
-                    deliveryItem.openTime = customer.pivot?.openTime
-                    deliveryItem.closeTime = customer.pivot?.closeTime
-                    deliveryItem.ctt_name = customer.pivot?.consigneeName
-                    deliveryItem.ctt_phone = customer.pivot?.consigneePhone
-                    break
-                } else {
-                    deliveryItem.openTime = ""
-                    deliveryItem.closeTime = ""
-                    deliveryItem.ctt_name = ""
-                    deliveryItem.ctt_phone = ""
-                }
+            let customerID = Int(_order.customerId ?? "") ?? -1
+            if let customer = _address.getCustomer(customerID: customerID) {
+                deliveryItem.ctt_name = Slash(customer.pivot?.consigneeName)
+                deliveryItem.ctt_phone = Slash(customer.pivot?.consigneePhone)
+                deliveryItem.openTime = Slash(customer.pivot?.openTime)
+                deliveryItem.closeTime = Slash(customer.pivot?.closeTime)
             }
+            
+//            for (_,customer) in _customers.enumerated() {
+//                if customer.pivot?.customerId!.toString() == order?.customerId {
+//                    deliveryItem.openTime = customer.pivot?.openTime
+//                    deliveryItem.closeTime = customer.pivot?.closeTime
+//                    deliveryItem.ctt_name = customer.pivot?.consigneeName
+//                    deliveryItem.ctt_phone = customer.pivot?.consigneePhone
+//                    break
+//                } else {
+//                    deliveryItem.openTime = ""
+//                    deliveryItem.closeTime = ""
+//                    deliveryItem.ctt_name = ""
+//                    deliveryItem.ctt_phone = ""
+//                }
+//            }
             
             autoFillAddressData(_address, isPickup: false)
             textContent = deliveryItem.address

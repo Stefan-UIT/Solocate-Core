@@ -57,10 +57,10 @@ enum BusinessOrderAddressInfoRow: Int {
     case FLOOR
     case APARTMENT
     case NUMBER
-    case OPEN_TIME
-    case CLOSE_TIME
     case CONSIGNEE_NAME
     case CONSIGNEE_PHONE
+    case OPEN_TIME
+    case CLOSE_TIME
     case START_TIME
     case END_TIME
     case ZONE
