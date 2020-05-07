@@ -42,10 +42,11 @@ class BusinessOrderDetailVC: BaseViewController {
     fileprivate let HEADER_HEIGHT: CGFloat = 60.0
     fileprivate let CELL_HEIGHT: CGFloat = 65.0
     fileprivate let FOOTER_HEIGHT: CGFloat = 10.0
-    fileprivate let OPEN_TIME_ROW:Int = 4
-    fileprivate let CLOSE_TIME_ROW:Int = 5
-    fileprivate let CONSIGNEE_NAME_ROW:Int = 6
-    fileprivate let CONSIGNEE_PHONE_ROW:Int = 7
+    fileprivate let CONSIGNEE_NAME_ROW:Int = 4
+    fileprivate let CONSIGNEE_PHONE_ROW:Int = 5
+    fileprivate let OPEN_TIME_ROW:Int = 6
+    fileprivate let CLOSE_TIME_ROW:Int = 7
+    
     fileprivate let START_TIME_ROW:Int = 8
     fileprivate let END_TIME_ROW:Int = 9
 
