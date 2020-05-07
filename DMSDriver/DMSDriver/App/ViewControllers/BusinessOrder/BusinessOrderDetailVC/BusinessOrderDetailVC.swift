@@ -752,6 +752,8 @@ extension BusinessOrderDetailVC {
             switch result {
             case .object(let data):
                 self?.skus = data.data
+                self?.businessOrderItem.first?.skuDataList = data.data ?? []
+                self?.skuList = data.data ?? []
                 self?.getUOMList()
             case .error(let error):
                 self?.dismissLoadingIndicator()
@@ -779,7 +781,7 @@ extension BusinessOrderDetailVC {
             case .object(let data):
                 guard let _zones = data.data else { return }
                 self?.zones = _zones
-                self?.setupDataDetailInfoforRows()
+//                self?.setupDataDetailInfoforRows()
                 self?.dismissLoadingIndicator()
             case .error(let error):
                 self?.dismissLoadingIndicator()
@@ -871,16 +873,17 @@ extension BusinessOrderDetailVC {
     func checkCustomerRow() {
         guard let customerId = order?.customerId else { return }
         self.fetchWarehouseLocations(customerId)
-        guard let _skus = skus , let _uoms = uoms , let orderCustomers = customers else  { return }
+            self.getSKUList(customerId)
+//        guard let _skus = skus , let _uoms = uoms , let orderCustomers = customers else  { return }
         
-        skuList = []
-        uomList = []
+//        skuList = []
+//        uomList = []
 //        var tempSKUList:[SKUModel] = []
         
-        var listIDCustomers:[Int] = []
-        for (_,orderCustomer) in orderCustomers.enumerated() {
-            listIDCustomers.append(orderCustomer.id)
-        }
+//        var listIDCustomers:[Int] = []
+//        for (_,orderCustomer) in orderCustomers.enumerated() {
+//            listIDCustomers.append(orderCustomer.id)
+//        }
         
 //        for (_, sku) in _skus.enumerated() {
 //            for index in 0..<(sku.customers?.count ?? 0){
@@ -892,10 +895,10 @@ extension BusinessOrderDetailVC {
 //        }
         // This code add SKU/UOM Datalist for First businessOrderItem because we create null data in first time access BODetailVC
 //        businessOrderItem.first?.skuDataList = skus
-        businessOrderItem.first?.uomDataList = _uoms
+//        businessOrderItem.first?.uomDataList = _uoms
         //
 //        skuList = skus
-        uomList = _uoms
+//        uomList = _uoms
     }
     
     func fetchAddressList() {
@@ -1271,7 +1274,7 @@ extension BusinessOrderDetailVC {
                 businessOrderItem[row].itemContent[BusinessOrderSKUInfoRow.UOM.rawValue] = Slash(skuItems[row].pivot?.uom?.name)
             }
             businessOrderItem[row].barcodeBool = _sku.barcodeBool
-            textContent = _sku.skuName
+            textContent = Slash(_sku.name)
             tbvContent?.reloadData()
         case .QUANTITY:
             skuItems[row].pivot?.qty = Int(textContent ?? "") ?? 0

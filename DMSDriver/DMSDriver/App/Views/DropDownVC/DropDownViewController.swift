@@ -386,7 +386,7 @@ extension DropDownViewController: UITableViewDelegate, UITableViewDataSource {
             cell.configureCell(item[indexPath.row].fullAddress)
         case .SKU:
             let item = itemsDisplay as! [SKUModel]
-            cell.configureCell(item[indexPath.row].skuName)
+            cell.configureCell(item[indexPath.row].name ?? item[indexPath.row].skuName )
         case .UOM:
             let item = itemsDisplay as! [UOMModel]
             cell.configureCell(item[indexPath.row].name ?? "")
