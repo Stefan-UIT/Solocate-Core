@@ -900,7 +900,7 @@ extension BusinessOrderDetailVC {
     }
     
     func checkOrderInfoFilled() {
-        isOrderInfoFilled = order?.typeID != nil && order?.customer != nil && (order?.dueDateFrom != nil || order?.dueDateFrom?.isEmpty == false) &&  (order?.dueDateTo?.isEmpty == false || order?.dueDateTo != nil)
+        isOrderInfoFilled = order?.typeID != nil && order?.customer != nil
         tbvContent?.reloadData()
     }
     
