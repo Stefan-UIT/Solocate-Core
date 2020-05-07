@@ -816,6 +816,7 @@ extension BusinessOrderDetailVC {
         let rowCustomer = BusinessOrderInfoRow.CUSTOMER.rawValue
         let item = DropDownModel().addCustomers(customerList)
         businessOrderInfo[rowCustomer].data = item
+        // comment
     }
     
     func checkCustomerRow() {
