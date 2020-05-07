@@ -194,7 +194,7 @@ class BusinessOrder: Order {
         cod <- map["cod"]
     }
     
-    func isRequireEdit(_ content: String?,_ requireSection: RequireRow) -> Bool {
+    func isRequireEdit(_ content: String?,_ requireSection: RequireRow,_ isCustomer: Bool? = nil) -> Bool {
         if content?.isEmpty == true || (content == nil) {
             switch requireSection {
             case .OrderType:
@@ -212,13 +212,13 @@ class BusinessOrder: Order {
             case .Address:
                 return true
             case .OpenTime:
-                return true
+                return isCustomer ?? false
             case .CloseTime:
-                return true
+                return isCustomer ?? false
             case .StartTime:
-                return true
+                return isCustomer ?? false
             case .EndTime:
-                return true
+                return isCustomer ?? false
             case .None:
                 return false
             }

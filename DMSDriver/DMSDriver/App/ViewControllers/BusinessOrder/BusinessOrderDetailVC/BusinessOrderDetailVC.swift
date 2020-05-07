@@ -215,7 +215,7 @@ class BusinessOrderDetailVC: BaseViewController {
         businessOrderPickupInfo.removeAll()
         businessOrderDeliveryInfo.removeAll()
         // pick-up
-        
+        var isCustomer:Bool = false
         var addressPickupList:[Address] = []
         var addressDeliveryList:[Address] = []
         let orderType:OrderType = OrderType(rawValue: _order.typeID)!
@@ -223,9 +223,11 @@ class BusinessOrderDetailVC: BaseViewController {
         case .delivery:
             addressPickupList = addressWarehouseList
             addressDeliveryList = addressCustomerList
+            isCustomer = false
         case .pickup:
             addressPickupList = addressCustomerList
             addressDeliveryList = addressWarehouseList
+            isCustomer = true
         case .empty:
             return
         }
@@ -256,12 +258,12 @@ class BusinessOrderDetailVC: BaseViewController {
                                            content: Slash(orderPU?.openTime),
                                            isEditing: isEditingBO,
                                            style: .Time,
-                                           isRequire: _order.isRequireEdit(orderPU?.openTime, .OpenTime))
+                                           isRequire: _order.isRequireEdit(orderPU?.openTime, .OpenTime,isCustomer))
         let closeTimePU = BusinessOrderForRow(title: "close-time".localized,
                                              content: Slash(orderPU?.closeTime),
                                              isEditing: isEditingBO,
                                              style: .Time,
-                                             isRequire: _order.isRequireEdit(orderPU?.closeTime, .CloseTime))
+                                             isRequire: _order.isRequireEdit(orderPU?.closeTime, .CloseTime,isCustomer))
         let consigneeNamePU = BusinessOrderForRow(title: "consignee-name".localized,
                                            content: Slash(orderPU?.ctt_name),
                                            isEditing: false,
@@ -276,12 +278,12 @@ class BusinessOrderDetailVC: BaseViewController {
                                               content: Slash(orderPU?.start_time),
                                               isEditing: isEditingBO,
                                               style: .CalendarStart,
-                                              isRequire: _order.isRequireEdit(orderPU?.start_time, .StartTime))
+                                              isRequire: _order.isRequireEdit(orderPU?.start_time, .StartTime,isCustomer))
         let endTimePU = BusinessOrderForRow(title: "end-time".localized,
                                               content: Slash(orderPU?.end_time),
                                               isEditing: isEditingBO,
                                               style: .CalendarEnd,
-                                              isRequire: _order.isRequireEdit(orderPU?.end_time, .EndTime))
+                                              isRequire: _order.isRequireEdit(orderPU?.end_time, .EndTime,isCustomer))
         
         businessOrderPickupInfo.append(addressPU)
         businessOrderPickupInfo.append(floorPU)
@@ -322,12 +324,12 @@ class BusinessOrderDetailVC: BaseViewController {
                                              content: Slash(orderDV?.openTime),
                                              isEditing: isEditingBO,
                                              style: .Time,
-                                             isRequire: _order.isRequireEdit(orderDV?.openTime, .OpenTime))
+                                             isRequire: _order.isRequireEdit(orderDV?.openTime, .OpenTime,!isCustomer))
         let closeTimeDV = BusinessOrderForRow(title: "close-time".localized,
                                               content: Slash(orderDV?.closeTime),
                                               isEditing: isEditingBO,
                                               style: .Time,
-                                              isRequire: _order.isRequireEdit(orderDV?.closeTime, .CloseTime))
+                                              isRequire: _order.isRequireEdit(orderDV?.closeTime, .CloseTime,!isCustomer))
         let consigneeNameDV = BusinessOrderForRow(title: "consignee-name".localized,
                                                   content: Slash(orderDV?.ctt_name),
                                                   isEditing: false,
@@ -342,12 +344,12 @@ class BusinessOrderDetailVC: BaseViewController {
                                               content: Slash(orderDV?.start_time),
                                               isEditing: isEditingBO,
                                               style: .CalendarStart,
-                                              isRequire: _order.isRequireEdit(orderDV?.start_time, .StartTime))
+                                              isRequire: _order.isRequireEdit(orderDV?.start_time, .StartTime,!isCustomer))
         let endTimeDV = BusinessOrderForRow(title: "end-time".localized,
                                             content: Slash(orderDV?.end_time),
                                             isEditing: isEditingBO,
                                             style: .CalendarEnd,
-                                            isRequire: _order.isRequireEdit(orderDV?.end_time, .EndTime))
+                                            isRequire: _order.isRequireEdit(orderDV?.end_time, .EndTime,!isCustomer))
         businessOrderDeliveryInfo.append(addressDV)
         businessOrderDeliveryInfo.append(floorDV)
         businessOrderDeliveryInfo.append(apartmentDV)
@@ -643,6 +645,8 @@ extension BusinessOrderDetailVC: OrderDetailTableViewCellDelegate {
     
     func didSelectEdit(_ cell: OrderDetailTableViewCell, _ btn: UIButton) {
         self.addNewSKU()
+        self.checkRequire()
+        self.tbvContent?.reloadData()
     }
     
     func didSelectGo(_ cell: OrderDetailTableViewCell, _ btn: UIButton) {
@@ -837,7 +841,7 @@ extension BusinessOrderDetailVC {
     
     func setupViewAfterEdit() {
 //        checkOrderTypeRow()
-        checkCustomerRow()
+//        checkCustomerRow()
         checkOrderInfoFilled()
         checkRequire()
     }
@@ -928,8 +932,12 @@ extension BusinessOrderDetailVC {
     
     func checkRequire() {
         var isQualitySubmit = false
-        for index in 0..<(order?.details?.count ?? 0){
-            isQualitySubmit = order?.details?[index].pivot?.uom != nil && order?.details?[index].pivot?.qty != nil && order?.details?[index].pivot?.qty != 0
+        let amountOfDetails = order?.details?.count ?? 0
+        for index in 0..<(amountOfDetails){
+            isQualitySubmit = order?.details?[index].pivot?.uom != nil && order?.details?[index].pivot?.qty != nil && order?.details?[index].pivot?.qty > 0
+        }
+        if skuItems.count > amountOfDetails {
+            isQualitySubmit = false
         }
         
         let isOrderTypeFilled = order?.typeID != nil
@@ -949,7 +957,15 @@ extension BusinessOrderDetailVC {
         let isFromOpenTimeFilled = order?.from?.openTime != nil
         let isFromCloseTimeFilled = order?.from?.closeTime != nil
         
-        isEnableSubmit = isOrderTypeFilled && isCustomerFilled && isDueDateFromFilled && isDueDateToFilled && isAddressFromFilled && isAddressToFilled && isZoneFilled && isDetailFilled && isToStartTimeFilled && isToEndTimeFilled && isToOpenTimeFilled && isToCloseTimeFilled && isFromStartTimeFilled && isFromEndTimeFilled && isFromOpenTimeFilled && isFromCloseTimeFilled && isQualitySubmit
+        let orderType:OrderType = OrderType(rawValue: order?.typeID ?? 0)!
+        switch orderType {
+        case .delivery:
+            isEnableSubmit = isOrderTypeFilled && isCustomerFilled && isDueDateFromFilled && isDueDateToFilled && isAddressFromFilled && isAddressToFilled && isZoneFilled && isDetailFilled && isToStartTimeFilled && isToEndTimeFilled && isToOpenTimeFilled && isToCloseTimeFilled && isQualitySubmit
+        case .pickup:
+            isEnableSubmit = isOrderTypeFilled && isCustomerFilled && isDueDateFromFilled && isDueDateToFilled && isAddressFromFilled && isAddressToFilled && isZoneFilled && isDetailFilled && isFromStartTimeFilled && isFromEndTimeFilled && isFromOpenTimeFilled && isFromCloseTimeFilled && isQualitySubmit
+        case .empty:
+            return
+        }
           
         tbvContent?.reloadData()
     }
@@ -987,6 +1003,7 @@ extension BusinessOrderDetailVC {
             let isPickup = _orderType == BusinessOrderType.Pickup.rawValue ? true : false
             renewAddressSKUData()
             addZone(isPickup: isPickup)
+            checkCustomerRow()
             // check
         case .CUSTOMER:
             guard let _customer = item.customers?.first else { return }
@@ -996,6 +1013,7 @@ extension BusinessOrderDetailVC {
             textContent = _customer.userName
             self.companyId = _customer.companyID
             renewAddressSKUData()
+            checkCustomerRow()
         case .DUE_DATE_FROM:
             guard let _date = item.dateStart else { return }
             order?.dueDateFrom = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
@@ -1245,7 +1263,7 @@ extension BusinessOrderDetailVC {
         let index:BusinessOrderSKUInfoRow = BusinessOrderSKUInfoRow(rawValue: index)!
         var textContent = item?.result
         if skuItems[row].pivot == nil {
-            let json:[String:Any] = ["qty":0, "uom":["id":0,
+            let json:[String:Any] = ["qty":1, "uom":["id":0,
                                                      "name":"",
                                                      "code":""],
                                      "batch_id":""]
@@ -1258,13 +1276,13 @@ extension BusinessOrderDetailVC {
             skuItems[row] = _sku
             
             // reset Quantity
-            let json:[String:Any] = ["qty":0]
+            let json:[String:Any] = ["qty":1]
             let pivot = BusinessOrder.Detail.Pivot(JSON: json)
             skuItems[row].pivot = pivot
             businessOrderItem[row].itemContent[BusinessOrderSKUInfoRow.QUANTITY.rawValue] = IntSlash(skuItems[row].pivot?.qty)
             
             if _sku.uom != nil {
-                let json:[String:Any] = ["uom":["id":(_sku.uom?.id ?? 0),
+                let json:[String:Any] = ["qty":1,"uom":["id":(_sku.uom?.id ?? 0),
                                                 "name":(_sku.uom?.name ?? ""),
                                                          "code":(_sku.uom?.code ?? "")]]
                 let pivot = BusinessOrder.Detail.Pivot(JSON: json)
@@ -1275,7 +1293,7 @@ extension BusinessOrderDetailVC {
             textContent = _sku.skuName
             tbvContent?.reloadData()
         case .QUANTITY:
-            skuItems[row].pivot?.qty = Int(textContent ?? "") ?? 0
+            skuItems[row].pivot?.qty = Int(textContent ?? "") ?? 1
         case .UOM: break
 //            guard let _uom = item?.uoms?.first else { return }
 //            skuItems[row].pivot?.uom = _uom
@@ -1290,7 +1308,7 @@ extension BusinessOrderDetailVC {
         skuItems[row].skuId = String(skuItems[row].id)
         skuItems[row].batchId = skuItems[row].pivot?.batch_id ?? ""
         skuItems[row].unitId = skuItems[row].pivot?.uom?.id ?? -1
-        skuItems[row].qty = skuItems[row].pivot?.qty ?? -1
+        skuItems[row].qty = skuItems[row].pivot?.qty ?? 1
         skuItems[row].bcd = String(skuItems[row].bcd ?? "")
         setupViewAfterEdit()
     }
