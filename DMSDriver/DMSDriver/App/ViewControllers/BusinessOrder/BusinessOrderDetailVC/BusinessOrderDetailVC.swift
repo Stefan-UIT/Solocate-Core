@@ -742,35 +742,6 @@ extension BusinessOrderDetailVC {
                 self?.dismissLoadingIndicator()
                 self?.customers = data.data
                 self?.customerList = data.data ?? []
-                self?.setupDataDetailInfoforRows()
-            case .error(let error):
-                self?.dismissLoadingIndicator()
-                self?.showAlertView(error.getMessage())
-            }
-        }
-    }
-    
-    
-    private func getSKUList(_ customerId:String) {
-        SERVICES().API.getSKUList(byCustomer: customerId) {[weak self] (result) in
-            switch result {
-            case .object(let data):
-                self?.skus = data.data
-                self?.businessOrderItem.first?.skuDataList = data.data ?? []
-                self?.skuList = data.data ?? []
-                self?.getUOMList()
-            case .error(let error):
-                self?.dismissLoadingIndicator()
-                self?.showAlertView(error.getMessage())
-            }
-        }
-    }
-    
-    private func getUOMList() {
-        SERVICES().API.getUOMList() {[weak self] (result) in
-            switch result {
-            case .object(let data):
-                self?.uoms = data.data
                 self?.getZoneList()
             case .error(let error):
                 self?.dismissLoadingIndicator()
@@ -785,7 +756,42 @@ extension BusinessOrderDetailVC {
             case .object(let data):
                 guard let _zones = data.data else { return }
                 self?.zones = _zones
-//                self?.setupDataDetailInfoforRows()
+                self?.setupDataDetailInfoforRows()
+                self?.dismissLoadingIndicator()
+            case .error(let error):
+                self?.dismissLoadingIndicator()
+                self?.showAlertView(error.getMessage())
+            }
+        }
+    }
+    
+    private func fetchDataList(){
+        guard let customerId = order?.customerId else { return }
+        self.showLoadingIndicator()
+        getSKUList(customerId)
+    }
+    
+    private func getSKUList(_ customerId:String) {
+        SERVICES().API.getSKUList(byCustomer: customerId) {[weak self] (result) in
+            switch result {
+            case .object(let data):
+                self?.skus = data.data
+                self?.businessOrderItem.first?.skuDataList = data.data ?? []
+                self?.skuList = data.data ?? []
+                self?.fetchWarehouseLocations(customerId)
+            case .error(let error):
+                self?.dismissLoadingIndicator()
+                self?.showAlertView(error.getMessage())
+            }
+        }
+    }
+    
+    private func getUOMList() {
+        SERVICES().API.getUOMList() {[weak self] (result) in
+            switch result {
+            case .object(let data):
+                self?.uoms = data.data
+                self?.setupNewDataList()
                 self?.dismissLoadingIndicator()
             case .error(let error):
                 self?.dismissLoadingIndicator()
@@ -795,16 +801,12 @@ extension BusinessOrderDetailVC {
     }
     
     private func fetchWarehouseLocations(_ customerId:String) {
-        self.showLoadingIndicator()
         SERVICES().API.fetchWarehouseLocations(byCustomer: customerId) {[weak self] (result) in
             switch result {
             case .object(let data):
-                if let addressList = data.data {
-                    self?.addressWarehouseList = addressList
-                    self?.fetchCustomerLocations(customerId)
-                } else {
-                    self?.dismissLoadingIndicator()
-                }
+                guard let addressList = data.data else { return }
+                self?.addressWarehouseList = addressList
+                self?.fetchCustomerLocations(customerId)
             case .error(let error):
                 self?.dismissLoadingIndicator()
                 self?.showAlertView(error.getMessage())
@@ -816,13 +818,9 @@ extension BusinessOrderDetailVC {
         SERVICES().API.fetchCustomerLocations(byCustomer: customerId) {[weak self] (result) in
             switch result {
             case .object(let data):
-                if let addressList = data.data {
-                    self?.addressCustomerList = addressList
-                    self?.fetchAddressList()
-                    self?.dismissLoadingIndicator()
-                } else {
-                    self?.dismissLoadingIndicator()
-                }
+                guard let addressList = data.data else { return}
+                self?.addressCustomerList = addressList
+                self?.getUOMList()
             case .error(let error):
                 self?.dismissLoadingIndicator()
                 self?.showAlertView(error.getMessage())
@@ -874,39 +872,15 @@ extension BusinessOrderDetailVC {
         businessOrderInfo[rowCustomer].data = item
     }
     
-    func checkCustomerRow() {
-        guard let customerId = order?.customerId else { return }
-        self.fetchWarehouseLocations(customerId)
-            self.getSKUList(customerId)
-//        guard let _skus = skus , let _uoms = uoms , let orderCustomers = customers else  { return }
-        
-//        skuList = []
-//        uomList = []
-//        var tempSKUList:[SKUModel] = []
-        
-//        var listIDCustomers:[Int] = []
-//        for (_,orderCustomer) in orderCustomers.enumerated() {
-//            listIDCustomers.append(orderCustomer.id)
-//        }
-        
-//        for (_, sku) in _skus.enumerated() {
-//            for index in 0..<(sku.customers?.count ?? 0){
-//                if listIDCustomers.contains(sku.customers?[index].id ?? 0) {
-//                    tempSKUList.append(sku)
-//                    break
-//                }
-//            }
-//        }
+    func setupNewDataList() {
+        guard let _typeID = order?.typeID, let _skus = skus , let _uoms = uoms else { return }
         // This code add SKU/UOM Datalist for First businessOrderItem because we create null data in first time access BODetailVC
-//        businessOrderItem.first?.skuDataList = skus
-//        businessOrderItem.first?.uomDataList = _uoms
-        //
-//        skuList = skus
-//        uomList = _uoms
-    }
-    
-    func fetchAddressList() {
-        guard let _typeID = order?.typeID else { return }
+        businessOrderItem.first?.skuDataList = _skus
+        businessOrderItem.first?.uomDataList = _uoms
+        
+        skuList = _skus
+        uomList = _uoms
+        
         let orderType:OrderType = OrderType(rawValue: _typeID)!
         switch orderType {
         case .delivery:
@@ -1005,7 +979,7 @@ extension BusinessOrderDetailVC {
             let isPickup = _orderType == BusinessOrderType.Pickup.rawValue ? true : false
             renewAddressSKUData()
             addZone(isPickup: isPickup)
-            checkCustomerRow()
+            fetchDataList()
             // check
         case .CUSTOMER:
             guard let _customer = item.customers?.first else { return }
@@ -1015,7 +989,7 @@ extension BusinessOrderDetailVC {
             textContent = _customer.userName
             self.companyId = _customer.companyID
             renewAddressSKUData()
-            checkCustomerRow()
+            fetchDataList()
         case .DUE_DATE_FROM:
             guard let _date = item.dateStart else { return }
             order?.dueDateFrom = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
