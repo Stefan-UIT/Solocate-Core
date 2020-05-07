@@ -58,8 +58,8 @@ class BusinessOrderDetailVC: BaseViewController {
     var isEditingBO:Bool = false
     var customerList:[UserModel.UserInfo] = []
     var skuList:[SKUModel] = []
-    var addressPickUpList:[Address] = []
-    var addressDeliveryList:[Address] = []
+    var addressCustomerList:[Address] = []
+    var addressWarehouseList:[Address] = []
     var uomList:[UOMModel] = []
     
     var customers:[UserModel.UserInfo]?
@@ -214,8 +214,22 @@ class BusinessOrderDetailVC: BaseViewController {
         businessOrderPickupInfo.removeAll()
         businessOrderDeliveryInfo.removeAll()
         // pick-up
+        
+        var addressPickupList:[Address] = []
+        var addressDeliveryList:[Address] = []
+        let orderType:OrderType = OrderType(rawValue: _order.typeID)!
+        switch orderType {
+        case .delivery:
+            addressPickupList = addressWarehouseList
+            addressDeliveryList = addressCustomerList
+        case .pickup:
+            addressPickupList = addressCustomerList
+            addressDeliveryList = addressWarehouseList
+        case .empty:
+            return
+        }
         let orderPU = _order.from
-        let itemPickUp = DropDownModel().addLocations(addressPickUpList)
+        let itemPickUp = DropDownModel().addLocations(addressPickupList)
         let addressPU = BusinessOrderForRow(title: "Address".localized,
                                             content: Slash(orderPU?.address),
                                             isEditing: isEditingBO,
@@ -774,6 +788,42 @@ extension BusinessOrderDetailVC {
         }
     }
     
+    private func fetchWarehouseLocations(_ customerId:String) {
+        self.showLoadingIndicator()
+        SERVICES().API.fetchWarehouseLocations(byCustomer: customerId) {[weak self] (result) in
+            switch result {
+            case .object(let data):
+                if let addressList = data.data {
+                    self?.addressWarehouseList = addressList
+                    self?.fetchCustomerLocations(customerId)
+                } else {
+                    self?.dismissLoadingIndicator()
+                }
+            case .error(let error):
+                self?.dismissLoadingIndicator()
+                self?.showAlertView(error.getMessage())
+            }
+        }
+    }
+    
+    private func fetchCustomerLocations(_ customerId:String) {
+        SERVICES().API.fetchCustomerLocations(byCustomer: customerId) {[weak self] (result) in
+            switch result {
+            case .object(let data):
+                if let addressList = data.data {
+                    self?.addressCustomerList = addressList
+                    self?.fetchAddressList()
+                    self?.dismissLoadingIndicator()
+                } else {
+                    self?.dismissLoadingIndicator()
+                }
+            case .error(let error):
+                self?.dismissLoadingIndicator()
+                self?.showAlertView(error.getMessage())
+            }
+        }
+    }
+    
 }
 
 // MARK: - FUNCTION FOR EDIT BUSINESS ORDER
@@ -816,62 +866,11 @@ extension BusinessOrderDetailVC {
         let rowCustomer = BusinessOrderInfoRow.CUSTOMER.rawValue
         let item = DropDownModel().addCustomers(customerList)
         businessOrderInfo[rowCustomer].data = item
-        // comment
     }
     
     func checkCustomerRow() {
-        guard let _locationsList = locations, let _typeID = order?.typeID else { return }
-        
-        var tempAddressPickUP:[Address] = []
-        var tempAddressDelivery:[Address] = []
-        let orderType:OrderType = OrderType(rawValue: _typeID)!
-        switch orderType {
-        case .delivery:
-            for (_,location) in _locationsList.enumerated() {
-                for index in 0..<(location.types?.count ?? 0) {
-                    if location.types?[index].code == BusinessOrderLocationType.Warehouse.rawValue || location.types?[index].code == BusinessOrderLocationType.Pickup.rawValue {
-                        if tempAddressPickUP.last?.id != location.id {
-                            tempAddressPickUP.append(location)
-                        }
-                    } else {
-                        if tempAddressDelivery.last?.id != location.id {
-                            tempAddressDelivery.append(location)
-                        }
-                    }
-                }
-            }
-            let rowCustomer = BusinessOrderAddressInfoRow.ADDRESS.rawValue
-            addressDeliveryList = tempAddressDelivery
-            addressPickUpList = tempAddressPickUP
-            let itemDropDownDelivery  = DropDownModel().addLocations(addressDeliveryList)
-            let itemDropDownPickUp  = DropDownModel().addLocations(addressPickUpList)
-            businessOrderDeliveryInfo[rowCustomer].data = itemDropDownDelivery
-            businessOrderPickupInfo[rowCustomer].data = itemDropDownPickUp
-        case .pickup:
-            for (_,location) in _locationsList.enumerated() {
-                for index in 0..<(location.types?.count ?? 0) {
-                    if location.types?[index].code == BusinessOrderLocationType.Warehouse.rawValue {
-                        if tempAddressDelivery.last?.id != location.id {
-                            tempAddressDelivery.append(location)
-                        }
-                    } else {
-                        if tempAddressPickUP.last?.id != location.id {
-                            tempAddressPickUP.append(location)
-                        }
-                    }
-                }
-            }
-            let rowCustomer = BusinessOrderAddressInfoRow.ADDRESS.rawValue
-            addressDeliveryList = tempAddressDelivery
-            addressPickUpList = tempAddressPickUP
-            let itemDropDownDelivery  = DropDownModel().addLocations(addressDeliveryList)
-            let itemDropDownPickUp  = DropDownModel().addLocations(addressPickUpList)
-            businessOrderDeliveryInfo[rowCustomer].data = itemDropDownDelivery
-            businessOrderPickupInfo[rowCustomer].data = itemDropDownPickUp
-        case .empty:
-            return
-        }
-
+        guard let customerId = order?.customerId else { return }
+        self.fetchWarehouseLocations(customerId)
         guard let _skus = skus , let _uoms = uoms , let orderCustomers = customers else  { return }
         
         skuList = []
@@ -897,6 +896,28 @@ extension BusinessOrderDetailVC {
         //
         skuList = tempSKUList
         uomList = _uoms
+    }
+    
+    func fetchAddressList() {
+        guard let _typeID = order?.typeID else { return }
+        let orderType:OrderType = OrderType(rawValue: _typeID)!
+        switch orderType {
+        case .delivery:
+            let rowCustomer = BusinessOrderAddressInfoRow.ADDRESS.rawValue
+            let itemDropDownDelivery  = DropDownModel().addLocations(addressCustomerList)
+            let itemDropDownPickUp  = DropDownModel().addLocations(addressWarehouseList)
+            businessOrderDeliveryInfo[rowCustomer].data = itemDropDownDelivery
+            businessOrderPickupInfo[rowCustomer].data = itemDropDownPickUp
+        case .pickup:
+            let rowCustomer = BusinessOrderAddressInfoRow.ADDRESS.rawValue
+            let itemDropDownDelivery  = DropDownModel().addLocations(addressWarehouseList)
+            let itemDropDownPickUp  = DropDownModel().addLocations(addressCustomerList)
+            businessOrderDeliveryInfo[rowCustomer].data = itemDropDownDelivery
+            businessOrderPickupInfo[rowCustomer].data = itemDropDownPickUp
+        case .empty:
+            return
+        }
+        tbvContent?.reloadData()
     }
     
     func checkOrderInfoFilled() {
