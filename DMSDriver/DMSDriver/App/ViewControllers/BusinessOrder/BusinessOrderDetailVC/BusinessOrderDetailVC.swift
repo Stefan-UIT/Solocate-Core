@@ -194,6 +194,17 @@ class BusinessOrderDetailVC: BaseViewController {
                                           style: .InputText,
                                           isRequire: _order.isRequireEdit(_order.remark, .None))
         
+        if !isEditingBO {
+            //routeIdLabel.text = "#" + Slash(businessOrder.companySeqID)
+            let idText = "#" + Slash(_order.companySeqID)
+            let boIDLabel = BusinessOrderForRow(title: "ID".localized,
+            content: idText ,
+            isEditing: false,
+            style: .InputText,
+            isRequire: false)
+            businessOrderInfo.append(boIDLabel)
+        }
+        
         businessOrderInfo.append(orderType)
         businessOrderInfo.append(customer)
         businessOrderInfo.append(dueDateFrom)
@@ -724,8 +735,10 @@ extension BusinessOrderDetailVC {
         SERVICES().API.getCustomerList() {[weak self] (result) in
             switch result {
             case .object(let data):
+                self?.dismissLoadingIndicator()
                 self?.customers = data.data
                 self?.customerList = data.data ?? []
+                self?.setupDataDetailInfoforRows()
             case .error(let error):
                 self?.dismissLoadingIndicator()
                 self?.showAlertView(error.getMessage())
