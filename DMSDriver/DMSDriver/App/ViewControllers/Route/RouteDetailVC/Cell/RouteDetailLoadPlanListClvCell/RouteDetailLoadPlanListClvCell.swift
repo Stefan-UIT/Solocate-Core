@@ -95,10 +95,18 @@ class RouteDetailLoadPlanListClvCell: UICollectionViewCell {
         tbvContent?.dataSource = self
     }
     
+    // We need estimate Height due to missing accuracy height of frame for scroll view
     private func estimateHeightForTableView() -> CGFloat {
+        var accuracyHeight:CGFloat = 0
         let numberOfSection = dataDisplay?.compartments?.count ?? 0
-        let accuracyHeight = CGFloat(numberOfSection*10)
-        let height = loadPlanInfoHeightConstraint.constant + (tbvContent?.frame.height ?? 0) + accuracyHeight
+        for section in 0..<numberOfSection {
+            let numberOfCompartmentDetails = dataDisplay?.compartments?[section].detail?.count ?? 0
+            accuracyHeight = CGFloat(numberOfCompartmentDetails*40) + accuracyHeight // change the value multiplier to adjust the accuracy you want
+        }
+        let missingHeightForSpaceLine:CGFloat = CGFloat(8*(numberOfSection - 1))
+        accuracyHeight = CGFloat(numberOfSection*50) + accuracyHeight + missingHeightForSpaceLine
+        
+        let height = loadPlanInfoHeightConstraint.constant + accuracyHeight
         return height
     }
     
