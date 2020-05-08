@@ -112,7 +112,9 @@ class BusinessOrderDetailVC: BaseViewController {
         if order != nil {
             _order = order!
         }
-        _order.zone = autoFillZone()
+        if isEditingBO {
+            _order.zone = autoFillZone()
+        }
         let itemZone = DropDownModel().addZones(zones)
         let zone = BusinessOrderForRow(title: "zone".localized,
                                        content: Slash(_order.zone?.name),
@@ -382,7 +384,7 @@ class BusinessOrderDetailVC: BaseViewController {
             guard let details = _order?.details else { return }
             if details.count != 0 {
                 for (_,detail) in _order.details!.enumerated() {
-                    let skuItem = SKUModel().createSKUItem(skuContent: Slash(detail.name),
+                    let skuItem = SKUModel().createSKUItem(detail:detail, skuContent: Slash(detail.name),
                                                            skuDataList: skuList,
                                                            uomDataList: uomList,
                                                            qtyContent: IntSlash(detail.pivot?.qty),
