@@ -54,13 +54,18 @@ class SKUModel: Order.Detail {
     func createSKUItem(detail:Order.Detail, skuContent:String, skuDataList:[SKUModel], uomDataList:[UOMModel], qtyContent:String, uomContent:String, batchContent:String, barcodeContent:String) -> SKUModel {
         self.skuDataList = skuDataList
         self.uomDataList = uomDataList
+        
+        //add
+        self.barCode = detail.barCode
+        self.barcodeBool = detail.barcodeBool
+        self.pivot = detail.pivot
+        self.bcd = detail.bcd
+        
         self.itemContent.append(skuContent)
         self.itemContent.append(qtyContent)
         self.itemContent.append(uomContent)
         self.itemContent.append(batchContent)
         self.itemContent.append(barcodeContent)
-        self.barCode = detail.barCode
-        self.barcodeBool = detail.barcodeBool
         return self
     }
     

@@ -78,7 +78,8 @@ class BusinessOrderItemTableViewCell: UITableViewCell {
         uomEditContentView.isHidden = !isEditingBO
         batchIdEditContentView.isHidden = !isEditingBO
         barcodeContentView.isHidden = !isEditingBO
-        barecodeView.isHidden = item.isHideBarcode
+        barecodeView.isHidden = !item.isShowBarcode
+        
         
         skulabel.isHidden = isEditingBO
         quantityLbl.isHidden = isEditingBO

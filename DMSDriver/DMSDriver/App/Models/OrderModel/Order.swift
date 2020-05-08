@@ -375,10 +375,10 @@ class Order: BaseModel {
         }
         var refCode:String?
         
-        var isHideBarcode: Bool {
+        var isShowBarcode: Bool {
             get {
-                let isHide = barcodeBool == 0 ? true : false
-                return isHide
+                let isShow = barcodeBool == 1 ? true : false
+                return isShow
             }
         }
         
