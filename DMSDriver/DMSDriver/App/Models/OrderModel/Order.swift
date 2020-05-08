@@ -375,9 +375,11 @@ class Order: BaseModel {
         }
         var refCode:String?
         
-        var isShowBarcode: Bool? {
-            let isShow = barcodeBool == 1 ? true : false
-            return isShow
+        var isHideBarcode: Bool {
+            get {
+                let isHide = barcodeBool == 0 ? true : false
+                return isHide
+            }
         }
         
         var nameReferenceCode: String? {
