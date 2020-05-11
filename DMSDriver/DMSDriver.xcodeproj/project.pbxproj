@@ -323,6 +323,7 @@
 		2AC97C5B224DF7F600DD07AE /* CommonUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC97C5A224DF7F600DD07AE /* CommonUtils.swift */; };
 		2AC97C5D224E009400DD07AE /* Double+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2AC97C5C224E009400DD07AE /* Double+Ext.swift */; };
 		2ADE1D062253068100BE4092 /* GMSMapview+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2ADE1D052253068100BE4092 /* GMSMapview+Ext.swift */; };
+		2E1B3A9724693F7C00636485 /* RentingOrderDetailInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 76E633A6234DE7140039E556 /* RentingOrderDetailInfoTableViewCell.swift */; };
 		2E1BE34C22F14FFD005F9BB5 /* ReturnedItemListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BE34622F14FFD005F9BB5 /* ReturnedItemListVC.swift */; };
 		2E1BE34D22F14FFD005F9BB5 /* ReturnedItemListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BE34622F14FFD005F9BB5 /* ReturnedItemListVC.swift */; };
 		2E1BE34E22F14FFD005F9BB5 /* ReturnedItemClvCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2E1BE34822F14FFD005F9BB5 /* ReturnedItemClvCell.swift */; };
@@ -770,7 +771,7 @@
 		2A42050922576AF000789837 /* ContentCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentCell.swift; sourceTree = "<group>"; };
 		2A42050A22576AF000789837 /* ContentCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContentCell.xib; sourceTree = "<group>"; };
 		2A42555A2251F08E00D55FEA /* ResponseDataDashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponseDataDashboard.swift; sourceTree = "<group>"; };
-		2A443B4E22648C5A00CB6508 /* Solocate Orgit Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Solocate Orgit Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2A443B4E22648C5A00CB6508 /* Solocate Dev.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Solocate Dev.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2AB4A989224B78C70019F196 /* RouteDetailLocationListClvCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteDetailLocationListClvCell.swift; sourceTree = "<group>"; };
 		2AC97C5A224DF7F600DD07AE /* CommonUtils.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonUtils.swift; sourceTree = "<group>"; };
 		2AC97C5C224E009400DD07AE /* Double+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Double+Ext.swift"; sourceTree = "<group>"; };
@@ -866,7 +867,7 @@
 		3B5D79222178346700EA49CC /* DateFormatter+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Ext.swift"; sourceTree = "<group>"; };
 		3B5D7925217834B300EA49CC /* Date extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Date extensions.swift"; sourceTree = "<group>"; };
 		3B6193F8221FA981006651EA /* StartRouteOrderVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StartRouteOrderVC.swift; sourceTree = "<group>"; };
-		3B66B74D210B1051000BDFEF /* Solocate Orgit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Solocate Orgit.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		3B66B74D210B1051000BDFEF /* Solocate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Solocate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3B66B758210B1051000BDFEF /* DMSDriver.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DMSDriver.xcdatamodel; sourceTree = "<group>"; };
 		3B66B767210B113C000BDFEF /* LocationTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LocationTracker.swift; sourceTree = "<group>"; };
 		3B66B76A210B113C000BDFEF /* UIView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIView.swift; sourceTree = "<group>"; };
@@ -2106,8 +2107,8 @@
 		3B66B74E210B1051000BDFEF /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				3B66B74D210B1051000BDFEF /* Solocate Orgit.app */,
-				2A443B4E22648C5A00CB6508 /* Solocate Orgit Dev.app */,
+				3B66B74D210B1051000BDFEF /* Solocate.app */,
+				2A443B4E22648C5A00CB6508 /* Solocate Dev.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -3645,9 +3646,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2A443A2C22648C5A00CB6508 /* Solocate Orgit */ = {
+		2A443A2C22648C5A00CB6508 /* Solocate Dev */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2A443B4A22648C5A00CB6508 /* Build configuration list for PBXNativeTarget "Solocate Orgit" */;
+			buildConfigurationList = 2A443B4A22648C5A00CB6508 /* Build configuration list for PBXNativeTarget "Solocate Dev" */;
 			buildPhases = (
 				FA95DBFCD982B3026B3D6EAC /* [CP] Check Pods Manifest.lock */,
 				2A443A2E22648C5A00CB6508 /* Sources */,
@@ -3661,14 +3662,14 @@
 			);
 			dependencies = (
 			);
-			name = "Solocate Orgit";
+			name = "Solocate Dev";
 			productName = DMSDriver;
-			productReference = 2A443B4E22648C5A00CB6508 /* Solocate Orgit Dev.app */;
+			productReference = 2A443B4E22648C5A00CB6508 /* Solocate Dev.app */;
 			productType = "com.apple.product-type.application";
 		};
-		3B66B74C210B1051000BDFEF /* Solocate Orgit Live */ = {
+		3B66B74C210B1051000BDFEF /* Solocate */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 3B66B762210B1052000BDFEF /* Build configuration list for PBXNativeTarget "Solocate Orgit Live" */;
+			buildConfigurationList = 3B66B762210B1052000BDFEF /* Build configuration list for PBXNativeTarget "Solocate" */;
 			buildPhases = (
 				76E92A434B13EAEE47C1A624 /* [CP] Check Pods Manifest.lock */,
 				3B66B749210B1051000BDFEF /* Sources */,
@@ -3682,9 +3683,9 @@
 			);
 			dependencies = (
 			);
-			name = "Solocate Orgit Live";
+			name = Solocate;
 			productName = DMSDriver;
-			productReference = 3B66B74D210B1051000BDFEF /* Solocate Orgit.app */;
+			productReference = 3B66B74D210B1051000BDFEF /* Solocate.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -3767,8 +3768,8 @@
 			);
 			projectRoot = "";
 			targets = (
-				2A443A2C22648C5A00CB6508 /* Solocate Orgit */,
-				3B66B74C210B1051000BDFEF /* Solocate Orgit Live */,
+				2A443A2C22648C5A00CB6508 /* Solocate Dev */,
+				3B66B74C210B1051000BDFEF /* Solocate */,
 			);
 		};
 /* End PBXProject section */
@@ -4590,6 +4591,7 @@
 				3B4BBF7D2214085800EA7485 /* RouteListHeaderTableView.swift in Sources */,
 				2E96D05722C4C81300DA29C5 /* LanguageModel.swift in Sources */,
 				3BF838D22189589A0056C4F1 /* BaseScrollMenuView.swift in Sources */,
+				2E1B3A9724693F7C00636485 /* RentingOrderDetailInfoTableViewCell.swift in Sources */,
 				193BDBC22282E4BC005D716B /* LocationListTbvCell.swift in Sources */,
 				3B66B91B210B1149000BDFEF /* BaseViewController.swift in Sources */,
 				3B66B92D210B1149000BDFEF /* AlertMessageView.swift in Sources */,
@@ -4791,7 +4793,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DDEVELOPMENT";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.core;
-				PRODUCT_NAME = "Solocate Orgit Dev";
+				PRODUCT_NAME = "Solocate Dev";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "Solocate_\bOrgit_Development_Dev";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
@@ -4825,7 +4827,7 @@
 				);
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DDEVELOPMENT";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.core;
-				PRODUCT_NAME = "Solocate Orgit Dev";
+				PRODUCT_NAME = "Solocate Dev";
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = "Solocate_\bOrgit_Development_Dev";
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
@@ -4975,7 +4977,7 @@
 				MARKETING_VERSION = 0.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DPRODUCTION";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.core.live;
-				PRODUCT_NAME = "Solocate Orgit";
+				PRODUCT_NAME = Solocate;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = Solocate_Core_Development;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
@@ -5010,7 +5012,7 @@
 				MARKETING_VERSION = 0.0.1;
 				OTHER_SWIFT_FLAGS = "$(inherited) -D COCOAPODS -DPRODUCTION";
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.core.live;
-				PRODUCT_NAME = "Solocate Orgit";
+				PRODUCT_NAME = Solocate;
 				PROVISIONING_PROFILE = "";
 				PROVISIONING_PROFILE_SPECIFIER = Solocate_Core_Development;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
@@ -5023,7 +5025,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2A443B4A22648C5A00CB6508 /* Build configuration list for PBXNativeTarget "Solocate Orgit" */ = {
+		2A443B4A22648C5A00CB6508 /* Build configuration list for PBXNativeTarget "Solocate Dev" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				2A443B4B22648C5A00CB6508 /* Debug */,
@@ -5041,7 +5043,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		3B66B762210B1052000BDFEF /* Build configuration list for PBXNativeTarget "Solocate Orgit Live" */ = {
+		3B66B762210B1052000BDFEF /* Build configuration list for PBXNativeTarget "Solocate" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				3B66B763210B1052000BDFEF /* Debug */,
