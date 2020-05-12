@@ -236,7 +236,7 @@ class Route: BaseModel {
         case InProgess = "IP"
         case Finished = "DV"
         case Canceled = "CC"
-        case Draft = "DR"
+//        case Draft = "DR"
         case Accepted = "AC"
         case Rejected = "RJ"
         
@@ -251,8 +251,8 @@ class Route: BaseModel {
                     return "Finished".localized;
                 case .Canceled:
                     return "Cancelled".localized;
-                case .Draft:
-                    return "Draft".localized
+//                case .Draft:
+//                    return "Draft".localized
                 case .Accepted:
                     return "Accepted-by-driver".localized
                 case .Rejected:
@@ -272,8 +272,8 @@ class Route: BaseModel {
                     return 3
                 case .Canceled:
                     return 4
-                case .Draft:
-                    return 5
+//                case .Draft:
+//                    return 5
                 case .Accepted:
                     return 6
                 case .Rejected:
