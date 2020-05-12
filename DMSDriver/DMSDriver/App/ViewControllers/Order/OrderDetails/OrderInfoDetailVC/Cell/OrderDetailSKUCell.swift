@@ -57,7 +57,7 @@ class OrderDetailSKUCell: UITableViewCell {
         handleDisablingTextField(order:order)
         updateDeliveredTextFieldValue(order: order)
         guard let _route = route else { return }
-        if _route.isNewStatus {
+        if _route.isNewStatus || _route.isRejectedStatus  {
             deliveredQtyViewContainer?.removeFromSuperview()
         }
     }

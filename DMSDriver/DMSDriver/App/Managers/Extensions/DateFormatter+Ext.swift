@@ -52,7 +52,7 @@ extension DateFormatter {
     {
         self.dateFormat = "yyyy/MM/dd HH:mm:ss"
         let date = self.date(from: date)
-        self.dateFormat = "dd-MM-yyyy HH:mm"
+        self.dateFormat = "dd/MM/yyyy HH:mm"
         return  self.string(from: date!)
 
     }

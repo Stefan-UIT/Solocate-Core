@@ -120,7 +120,9 @@ class FilterDataListVC: BaseViewController {
         if CoreDataManager.getListRouteStatus().count == 0 {
             self.getListRouteStatus()
         }
-        arrRouteStatus.append(CoreDataManager.getListRouteStatus())
+        let routeStatuses = CoreDataManager.getListRouteStatus()
+        let routeStatusWithoutDraft = routeStatuses.filter({$0.code != "DR"})
+        arrRouteStatus.append(routeStatusWithoutDraft)
     }
     
     private func setupRentingOrderStatus() {
