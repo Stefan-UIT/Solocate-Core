@@ -88,10 +88,11 @@ class OrderDetailViewController: BaseOrderDetailViewController {
     
     func handleShowingActionsUI() {
         guard let _route = route else { return }
-        vHeaderActionsHeightConstraint.constant = (_route.isNewStatus) ? 0.0 : 55.0
-        vActionsHeightConstraint.constant = (_route.isNewStatus) ? 0.0 : 55.0
-        addNoteButton.isHidden = _route.isNewStatus
-        if (_route.isNewStatus) {
+        let isHidden = _route.isNewStatus || _route.isRejectedStatus
+        vHeaderActionsHeightConstraint.constant = (isHidden) ? 0.0 : 55.0
+        vActionsHeightConstraint.constant = (isHidden) ? 0.0 : 55.0
+        addNoteButton.isHidden = isHidden
+        if (isHidden) {
             headerActionsView.removeFromSuperview()
         }
     }

@@ -82,6 +82,11 @@ extension String {
         return self.replacingOccurrences(of: "\"", with: "\\\"")
     }
     
+    func convertDateToDisplay() -> String? {
+        let result = DateFormatter().convertDateFromServer(self)
+        return result
+    }
+    
     func rangeTime(_ toTime:String?,_ isOnlyDate: Bool = false) -> String {
         var rangeTime = ""
         var startTime = ""

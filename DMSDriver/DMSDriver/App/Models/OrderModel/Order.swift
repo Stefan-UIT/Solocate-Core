@@ -149,6 +149,18 @@ class Address: BaseModel {
     var phone:String?
     var start_time:String?
     var end_time:String?
+    var startTimeDisplay:String? {
+        get {
+            return start_time?.convertDateToDisplay()
+        }
+    }
+    
+    var endTimeDisplay:String? {
+        get {
+            return end_time?.convertDateToDisplay()
+        }
+    }
+    
     var srvc_time:Int?
     var serviceTime:String {
         guard let minutes = srvc_time else { return "" }
@@ -167,6 +179,13 @@ class Address: BaseModel {
     var closeTime: String?
     var customers:[UserModel.UserInfo]?
     var types:[BasicModel]?
+//
+//    func convertDateToDisplay(date:String?) -> String? {
+//        guard let data = date else { return nil }
+//        let result = DateFormatter().convertDateFromServer(data)
+//        return result
+//    }
+    
     
     func getCustomer(customerID:Int) -> UserModel.UserInfo? {
         let array = customers?.filter({$0.id == customerID})
@@ -211,6 +230,12 @@ class Address: BaseModel {
         actualTime <- map["act_time"]
         openTime <- map["open_time"]
         closeTime <- map["close_time"]
+        if openTime != nil && openTime?.count > 5 {
+            openTime?.removeLast(3)
+        }
+        if closeTime != nil && closeTime?.count > 5 {
+            closeTime?.removeLast(3)
+        }
         customers <- map["customers"]
         types <- map["types"]
     }
@@ -668,6 +693,19 @@ class Order: BaseModel {
     var dueDate:String?
     var dueDateFrom: String?
     var dueDateTo: String?
+    
+    var dueDateFromDisplay:String? {
+        get {
+            return dueDateFrom?.convertDateToDisplay()
+        }
+    }
+    
+    var dueDateToDisplay:String? {
+        get {
+            return dueDateTo?.convertDateToDisplay()
+        }
+    }
+    
     
     // NEW
     var division:BasicModel?

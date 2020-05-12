@@ -173,12 +173,12 @@ class BusinessOrderDetailVC: BaseViewController {
                                            itemCustomer,
                                            isRequire: _order.isRequireEdit(_order.customer?.userName, .Customer))
         let dueDateFrom = BusinessOrderForRow(title: "due-date-from".localized,
-                                          content: Slash(_order.dueDateFrom),
+                                              content: Slash(_order.dueDateFromDisplay),
                                           isEditing: isEditingBO,
                                           style: .CalendarStart,
                                           isRequire: _order.isRequireEdit(_order.dueDateFrom, .DueDate))
         let dueDateTo = BusinessOrderForRow(title: "due-date-to".localized,
-                                            content: Slash(_order.dueDateTo),
+                                            content: Slash(_order.dueDateToDisplay),
                                             isEditing: isEditingBO,
                                             style: .CalendarEnd,
                                             isRequire: _order.isRequireEdit(_order.dueDateTo, .DueDate))
@@ -288,12 +288,12 @@ class BusinessOrderDetailVC: BaseViewController {
                                                   style: .InputText,
                                                   isRequire: _order.isRequireEdit(orderPU?.ctt_phone, .None))
         let startTimePU = BusinessOrderForRow(title: "start-time".localized,
-                                              content: Slash(orderPU?.start_time),
+                                              content: Slash(orderPU?.startTimeDisplay),
                                               isEditing: isEditingBO,
                                               style: .CalendarStart,
                                               isRequire: _order.isRequireEdit(orderPU?.start_time, .StartTime,isCustomer))
         let endTimePU = BusinessOrderForRow(title: "end-time".localized,
-                                              content: Slash(orderPU?.end_time),
+                                              content: Slash(orderPU?.endTimeDisplay),
                                               isEditing: isEditingBO,
                                               style: .CalendarEnd,
                                               isRequire: _order.isRequireEdit(orderPU?.end_time, .EndTime,isCustomer))
@@ -354,12 +354,12 @@ class BusinessOrderDetailVC: BaseViewController {
                                                    style: .InputText,
                                                    isRequire: _order.isRequireEdit(orderDV?.ctt_phone, .None))
         let startTimeDV = BusinessOrderForRow(title: "start-time".localized,
-                                              content: Slash(orderDV?.start_time),
+                                              content: Slash(orderDV?.startTimeDisplay),
                                               isEditing: isEditingBO,
                                               style: .CalendarStart,
                                               isRequire: _order.isRequireEdit(orderDV?.start_time, .StartTime,!isCustomer))
         let endTimeDV = BusinessOrderForRow(title: "end-time".localized,
-                                            content: Slash(orderDV?.end_time),
+                                            content: Slash(orderDV?.endTimeDisplay),
                                             isEditing: isEditingBO,
                                             style: .CalendarEnd,
                                             isRequire: _order.isRequireEdit(orderDV?.end_time, .EndTime,!isCustomer))
@@ -994,7 +994,7 @@ extension BusinessOrderDetailVC {
             fetchDataList()
         case .DUE_DATE_FROM:
             guard let _date = item.dateStart else { return }
-            order?.dueDateFrom = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
+            order?.dueDateFrom = DateFormatter.mobileDateDisplayFormatter.string(from: _date)
             textContent = order?.dueDateFrom
             let data = DropDownModel()
             data.dateStart = order?.dueDateFrom?.dateUS
@@ -1004,7 +1004,7 @@ extension BusinessOrderDetailVC {
             
         case .DUE_DATE_TO:
             guard let _date = item.dateEnd else { return }
-            order?.dueDateTo = DateFormatter.displayDateTimeUSWithSecond.string(from: _date)
+            order?.dueDateTo = DateFormatter.mobileDateDisplayFormatter.string(from: _date)
             textContent = order?.dueDateTo
             let data = DropDownModel()
             data.dateStart = order?.dueDateFrom?.dateUS

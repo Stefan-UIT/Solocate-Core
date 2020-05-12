@@ -46,4 +46,15 @@ extension DateFormatter {
     static let onlyDateFormater = DateFormatter(format: "MMM/dd/yyyy");
     static let displayDateTimeUSWithSecond = DateFormatter(format: "MM/dd/yyyy HH:mm:ss");
     
+    static let mobileDateDisplayFormatter = DateFormatter(format: "dd-MM-yyyy HH:mm");
+    
+    func convertDateFromServer(_ date: String) -> String
+    {
+        self.dateFormat = "yyyy/MM/dd HH:mm:ss"
+        let date = self.date(from: date)
+        self.dateFormat = "dd-MM-yyyy HH:mm"
+        return  self.string(from: date!)
+
+    }
+    
 }

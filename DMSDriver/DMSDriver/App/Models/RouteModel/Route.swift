@@ -332,6 +332,12 @@ class Route: BaseModel {
         }
     }
     
+    var isRejectedStatus:Bool {
+        get {
+            return status?.code == RouteStatus.Rejected.rawValue
+        }
+    }
+    
     
     // NEW
     var tankers:[Tanker]?
