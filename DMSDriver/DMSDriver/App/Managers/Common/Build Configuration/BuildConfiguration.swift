@@ -40,11 +40,15 @@ struct BuildConfiguration {
     let tagetBuild:TagetBuild
     var currentEnvironment: ChooseEvironment {
         get {
+            #if DEVELOPMENT  // check taget
             let number = UserDefaults.standard.integer(forKey: "ENVIRONMENT")
             guard let environment = ChooseEvironment(rawValue: number)  else {
                 return .Development
             }
             return environment
+            #else
+            return .Live
+            #endif
         }
     }
     init() {

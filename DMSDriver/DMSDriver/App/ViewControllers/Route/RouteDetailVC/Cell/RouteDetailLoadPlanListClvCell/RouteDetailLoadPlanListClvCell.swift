@@ -85,7 +85,7 @@ class RouteDetailLoadPlanListClvCell: UICollectionViewCell {
         iconDropDownWeightConstant.constant = isLiquid ? 7.5 : 0
         
         platenumLbl.text = Slash(dataDisplay?.plateNumber)
-        maxVolumeLbl.text = IntSlash(dataDisplay?.maxVolume)
+        maxVolumeLbl.text = Slash(dataDisplay?.maxVolume)
         tachographLbl.text = (dataDisplay?.type?.isTachograph() ?? false) ? "yes".localized : "no".localized
         routeTypeLbl.text = route?.routeTypeName()
     }

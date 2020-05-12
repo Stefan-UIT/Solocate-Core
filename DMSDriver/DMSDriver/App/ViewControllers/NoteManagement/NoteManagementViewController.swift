@@ -41,7 +41,8 @@ class NoteManagementViewController: BaseViewController {
     override func updateNavigationBar()  {
         super.updateNavigationBar()
         App().navigationService.delegate = self
-        let title = (isRouteNoteManagement) ? ("Route".localized + " #\(route!.id)") : ("order".localized + " #\(order!.id)")
+        let titleID = (isRouteNoteManagement) ? Slash(route?.companySeqID) : Slash(order?.companySeqID)
+        let title = (isRouteNoteManagement) ? ("Route".localized + " #\(titleID)") : ("order".localized + " #\(titleID)")
         App().navigationService.updateNavigationBar(.BackOnly, title.localized, AppColor.white, true)
     }
     

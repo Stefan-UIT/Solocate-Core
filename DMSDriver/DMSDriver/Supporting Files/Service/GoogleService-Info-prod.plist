@@ -2,39 +2,35 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
-	<string>ca-app-pub-3940256099942544/2934735716</string>
-	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
-	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>457132314338-fjkavgadr5e6jglpj661v2rm7ued36eg.apps.googleusercontent.com</string>
+	<string>449387755237-b0r1p1vkf9eb60k5po3fgu1tjfci2h7d.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.457132314338-fjkavgadr5e6jglpj661v2rm7ued36eg</string>
+	<string>com.googleusercontent.apps.449387755237-b0r1p1vkf9eb60k5po3fgu1tjfci2h7d</string>
 	<key>API_KEY</key>
-	<string>AIzaSyDV2uNetDmPSocX5vqMJ949T4_DPwhgCsM</string>
+	<string>AIzaSyC8o0vW-IVQTmpfLti3z--wRiO97dZuLCk</string>
 	<key>GCM_SENDER_ID</key>
-	<string>457132314338</string>
+	<string>449387755237</string>
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.seldatinc.directmail</string>
+	<string>com.seldatinc.solocate.core.live</string>
 	<key>PROJECT_ID</key>
-	<string>directmail-prod</string>
+	<string>solocate-core</string>
 	<key>STORAGE_BUCKET</key>
-	<string>directmail-prod.appspot.com</string>
+	<string>solocate-core.appspot.com</string>
 	<key>IS_ADS_ENABLED</key>
-	<true></true>
+	<false></false>
 	<key>IS_ANALYTICS_ENABLED</key>
 	<false></false>
 	<key>IS_APPINVITE_ENABLED</key>
-	<false></false>
+	<true></true>
 	<key>IS_GCM_ENABLED</key>
 	<true></true>
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:457132314338:ios:05a78ebfcd0913c7</string>
+	<string>1:449387755237:ios:fbc7b10cc9de33b2a0c60c</string>
 	<key>DATABASE_URL</key>
-	<string>https://directmail-prod.firebaseio.com</string>
+	<string>https://solocate-core.firebaseio.com</string>
 </dict>
 </plist>

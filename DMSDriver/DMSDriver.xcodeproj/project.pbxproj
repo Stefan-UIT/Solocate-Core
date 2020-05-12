@@ -4776,7 +4776,7 @@
 				CODE_SIGN_ENTITLEMENTS = "DMSDriver-Dev.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
@@ -4795,7 +4795,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.core;
 				PRODUCT_NAME = "Solocate Dev";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Solocate_\bOrgit_Development_Dev";
+				PROVISIONING_PROFILE_SPECIFIER = Solocate_Core_Development;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 5.0;
@@ -4811,7 +4811,7 @@
 				CODE_SIGN_ENTITLEMENTS = "DMSDriver-Dev.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 20;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -4829,7 +4829,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.core;
 				PRODUCT_NAME = "Solocate Dev";
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = "Solocate_\bOrgit_Development_Dev";
+				PROVISIONING_PROFILE_SPECIFIER = Solocate_Core_Development;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 5.0;
@@ -4959,7 +4959,7 @@
 				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 21;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
@@ -4979,7 +4979,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.core.live;
 				PRODUCT_NAME = Solocate;
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = Solocate_Core_Development;
+				PROVISIONING_PROFILE_SPECIFIER = Solocate_Orgit_Live_Development;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 5.0;
@@ -4995,7 +4995,7 @@
 				CODE_SIGN_ENTITLEMENTS = DMSDriver/DMSDriver.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
-				CURRENT_PROJECT_VERSION = 19;
+				CURRENT_PROJECT_VERSION = 21;
 				DEFINES_MODULE = YES;
 				DEVELOPMENT_TEAM = T7R2AKHVA7;
 				FRAMEWORK_SEARCH_PATHS = (
@@ -5014,7 +5014,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.seldatinc.solocate.core.live;
 				PRODUCT_NAME = Solocate;
 				PROVISIONING_PROFILE = "";
-				PROVISIONING_PROFILE_SPECIFIER = Solocate_Core_Development;
+				PROVISIONING_PROFILE_SPECIFIER = Solocate_Orgit_Live_Development;
 				SWIFT_OBJC_BRIDGING_HEADER = "$(PROJECT_DIR)/DMSDriver/Supporting Files/BridgingHeaders/DMSDriver-Bridging-Header.h";
 				SWIFT_OBJC_INTERFACE_HEADER_NAME = "$(SWIFT_MODULE_NAME)-Swift.h";
 				SWIFT_VERSION = 5.0;

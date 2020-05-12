@@ -139,7 +139,7 @@ class Truck:BaseModel {
     var name = "-"
     var plateNumber = "-"
     var maxLoad = 0
-    var maxVolume = 0
+    var maxVolume:String?
     var maxFloor = 0
     var type:TruckType?
     var compartments:[Compartment]?
@@ -157,7 +157,19 @@ class Truck:BaseModel {
         id <- map["id"]
         name <- map["name"]
         maxLoad <- map["max_load"]
-        maxVolume <- map["max_vol"]
+//        maxVolume <- map["max_vol"]
+        
+        var maxVol: Any?
+        maxVol <- map["max_vol"]
+        
+        if maxVol != nil {
+            if maxVol is String {
+                maxVolume = maxVol as! String
+            } else {
+                maxVolume = "\(maxVol!)"
+            }
+        }
+        
         maxFloor <- map["max_floor"]
         type <- map["type"]
         plateNumber <- map["plate_number"]
