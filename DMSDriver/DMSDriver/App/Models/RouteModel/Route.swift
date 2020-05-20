@@ -202,7 +202,18 @@ class ResponseGetRouteList: BaseModel {
 
 //MARK: - Route
 class Route: BaseModel {
+    var isLiquidType:Bool {
+        get {
+            guard let routeTypeID = self.routeType?.id else { return false }
+            return routeTypeID == RouteType.Liquid.rawValue
+        }
+    }
     
+    var isPackedType:Bool {
+        get {
+            return !isLiquid
+        }
+    }
     enum RouteType:Int {
         case Liquid = 1
         case Packed = 2

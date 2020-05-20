@@ -23,9 +23,14 @@ class RouteTableViewCell: UITableViewCell {
     @IBOutlet weak var trailerTankerLabel: UILabel!
     @IBOutlet weak var companyLabel: UILabel!
     @IBOutlet weak var truckLabel: UILabel!
-    @IBOutlet weak var loadVolumeLabel: UILabel!
+    @IBOutlet weak var routeTypeLabel: UILabel!
     
+    @IBOutlet weak var trailerTankerViewContainer: UIView!
     
+    @IBOutlet weak var volumeLabel: UILabel!
+    @IBOutlet weak var numberLabel: UILabel!
+    @IBOutlet weak var numberOfPalletsViewContainer: UIView!
+    @IBOutlet weak var volumeViewContainer: UIView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
@@ -57,8 +62,15 @@ class RouteTableViewCell: UITableViewCell {
         companyLabel.text = Slash(route.company?.name)
         truckLabel.text = Slash(route.truck?.plateNumber)
         trailerTankerLabel.text = Slash(route.trailerTankerName)
-        let loadValue = Double(route.loadVolume ?? 0).rounded(toPlaces: 1)
-        loadVolumeLabel.text = "\(loadValue)" + "%"
+        routeTypeLabel.text = Slash(route.routeTypeName())
+        if route.isPackedType {
+            trailerTankerViewContainer.isHidden = true
+            volumeViewContainer.isHidden = true
+            
+            
+        }
+//        let loadValue = Double(route.loadVolume ?? 0).rounded(toPlaces: 1)
+//        loadVolumeLabel.text = "\(loadValue)" + "%"
     }
     
 }

@@ -282,6 +282,7 @@ import Crashlytics
                         }
                         
                         self?.routes.append(data)
+                        self?.sortRoutes()
                         CoreDataManager.saveRoutes(self?.routes ?? [])
 //                        self?.routes = self?.routes.sorted(by: {$0.id > $1.id}) ?? []
                         strongSelf.lblNoResult?.isHidden = (strongSelf.routes.count > 0)
@@ -304,6 +305,9 @@ import Crashlytics
             tableView.reloadData()
         }
         
+    }
+    func sortRoutes() {
+        self.routes = self.routes.sorted(by: {$0.id > $1.id}) ?? []
     }
     
  }
