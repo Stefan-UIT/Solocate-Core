@@ -249,9 +249,10 @@ extension RouteDetailOrderListClvCell:BaseSearchViewDelegate{
         let newSearchString = strSearch?.components(separatedBy: "\n").first?.lowercased()
         if !isEmpty(newSearchString) {
             dataDisplay = dataOrigin.filter({ (item) -> Bool in
-                let orderid = "\(item.id)"
-                let isExist =  orderid.contains(newSearchString!)
-                return isExist
+                if let orderid = item.companySeqID {
+                    return orderid.contains(newSearchString!)
+                }
+                return false
             })
             
         }else {

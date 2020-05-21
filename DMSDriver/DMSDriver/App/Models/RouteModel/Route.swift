@@ -214,6 +214,8 @@ class Route: BaseModel {
             return !isLiquidType
         }
     }
+    
+    var numberOfPallets:Int = 0
     enum RouteType:Int {
         case Liquid = 1
         case Packed = 2
@@ -491,6 +493,7 @@ class Route: BaseModel {
         routeType <- map["route_type"]
         routeTypeId <- map["route_type_id"]
         companySeqID <- map["comp_seq_id"]
+        numberOfPallets <- map["number_of_pallets"]
     }
     
     var ordersAbleToLoad:[Order] {

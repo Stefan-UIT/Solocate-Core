@@ -66,8 +66,14 @@ class RouteTableViewCell: UITableViewCell {
         if route.isPackedType {
             trailerTankerViewContainer.isHidden = true
             volumeViewContainer.isHidden = true
-            
-            
+            numberOfPalletsViewContainer.isHidden = false
+            numberLabel.text = IntSlash(route.numberOfPallets)
+        } else {
+            trailerTankerViewContainer.isHidden = false
+            numberOfPalletsViewContainer.isHidden = true
+            volumeViewContainer.isHidden = false
+            let loadValue = Double(route.loadVolume ?? 0).rounded(toPlaces: 1)
+            volumeLabel.text = "\(loadValue)" + "%"
         }
 //        let loadValue = Double(route.loadVolume ?? 0).rounded(toPlaces: 1)
 //        loadVolumeLabel.text = "\(loadValue)" + "%"
