@@ -23,7 +23,7 @@ class RouteDetailLoadPlanItemTbvCell: UITableViewCell {
         orderLabel.text = "order".localized + " " + Slash(detail.pivot?.shippingOrder?.companySeqID)
 //        skuLabel.text = "sku".localized + " " + IntSlash(detail.pivot?.sku_id)
         skuLabel.text = detail.name
-        unitLabel.text = IntSlash(detail.quantity)
+        unitLabel.text = detail.quantityDisplay
         
     }
     

@@ -321,7 +321,10 @@ class Order: BaseModel {
             mutating func mapping(map: Map) {
                 id <- map["id"]
                 name <- map["name"]
-                cd <- map["cd"]
+                cd <- map["code"]
+                if cd == nil {
+                    cd <- map["cd"]
+                }
             }
         }
         

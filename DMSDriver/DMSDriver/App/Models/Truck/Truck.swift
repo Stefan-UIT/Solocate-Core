@@ -41,6 +41,7 @@ class Compartment:BaseModel {
             var loadedQty:Int?
             var returnedQty:Int?
             var shippingOrder:Order?
+            var unit:Order.Detail.Unit?
             
             init?(map: Map) {
                 //
@@ -58,6 +59,7 @@ class Compartment:BaseModel {
                 deliveredQty <- map["delivered_qty"]
                 returnedQty <- map["returned_qty"]
                 shippingOrder <- map["shipping_order"]
+                unit <- map["unit"]
             }
         }
         
@@ -67,6 +69,13 @@ class Compartment:BaseModel {
         var shippingOrderId: Int = -1
         var shippingOrderDetailId = -1
         var quantity: Int = -1
+        var quantityDisplay:String {
+            get {
+                guard let unitName = pivot?.unit?.cd else { return "" }
+                let result = "\(quantity) " + unitName
+                return result
+            }
+        }
         var color: String = ""
         var routeTankerCompartmentId: Int = -1
         var name: String = ""
@@ -107,6 +116,12 @@ class Compartment:BaseModel {
     var seq: Int = -1
     var name:String = ""
     var vol:String = ""
+    var volNameDisplay:String {
+        get {
+            guard let unitName = detail?.first?.pivot?.unit?.cd else { return vol }
+            return vol + " " + unitName
+        }
+    }
     var detail:[Detail]?
     var compartmentName:String? = ""
     var maxNumCompartment:Int? = -1
@@ -140,9 +155,21 @@ class Truck:BaseModel {
     var plateNumber = "-"
     var maxLoad = 0
     var maxVolume:String?
+    var maxVolumeName:String {
+        get {
+            return Slash(maxVolume) + " " + unitName
+        }
+    }
     var maxFloor = 0
     var type:TruckType?
     var compartments:[Compartment]?
+    
+    var unitName:String {
+        get {
+            guard let unitName = compartments?.first?.detail?.first?.pivot?.unit?.cd else { return "" }
+            return unitName
+        }
+    }
     
     override init() {
         super.init()
