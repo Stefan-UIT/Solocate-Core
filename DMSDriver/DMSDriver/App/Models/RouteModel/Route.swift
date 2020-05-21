@@ -211,7 +211,7 @@ class Route: BaseModel {
     
     var isPackedType:Bool {
         get {
-            return !isLiquid
+            return !isLiquidType
         }
     }
     enum RouteType:Int {

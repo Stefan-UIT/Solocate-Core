@@ -1237,8 +1237,8 @@ fileprivate extension OrderDetailViewController{
             return
         }
 
-//        let isHidden = (_order.isCancelled || _order.isFinished)
-        let isHidden = _order.isCancelled
+        let isHidden = (_order.isCancelled || _order.isFinished)
+//        let isHidden = _order.isCancelled
         updateStatusButton?.isHidden = isHidden
         copyUpdateStatusButton()
         vAction?.isHidden = isHidden
