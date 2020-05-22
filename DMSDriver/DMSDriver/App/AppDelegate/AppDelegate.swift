@@ -70,6 +70,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return true
     }
     
+    func disableSlideMenu() {
+        guard let gesture = mainVC?.slideMenuGesture else { return }
+        gesture.isEnabled = false
+    }
+    
+    func enableSlideMenu() {
+        guard let gesture = mainVC?.slideMenuGesture else { return }
+        gesture.isEnabled = true
+    }
+    
     func applicationDidBecomeActive(_ application: UIApplication) {
         // DMSLocationManager.startUpdatingDriverLocationIfNeeded()
         ReachabilityManager.startMonitoring()

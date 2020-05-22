@@ -171,6 +171,8 @@ class Truck:BaseModel {
         }
     }
     
+    var totalMaxPallets:Int?
+    
     override init() {
         super.init()
     }
@@ -204,5 +206,6 @@ class Truck:BaseModel {
             plateNumber <- map["plate_num"]
         }
         compartments <- map["compartments"]
+        totalMaxPallets <- map["total_max_pallet"]
     }
 }

@@ -99,7 +99,7 @@ class RouteDetailLoadPlanListClvCell: UICollectionViewCell {
             maxVolumeLbl.text = Slash(dataDisplay?.maxVolumeName)
         } else {
             numberOfPalletsViewContainer.isHidden = false
-            numberOfPalletLabel.text = IntSlash(_route.numberOfPallets) 
+            numberOfPalletLabel.text = IntSlash(_route.truck?.totalMaxPallets)
         }
     }
     

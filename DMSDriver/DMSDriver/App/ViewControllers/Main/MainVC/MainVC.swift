@@ -17,6 +17,7 @@ class MainVC: BaseViewController {
     
     var rootNV:BaseNV?
     var menuVC:SlideMenuVC?
+    var slideMenuGesture:UIPanGestureRecognizer!
     
     
     override func viewDidLoad() {
@@ -45,7 +46,7 @@ class MainVC: BaseViewController {
         SideMenuManager.default.menuAnimationTransformScaleFactor = 1
         SideMenuManager.default.menuWidth = ScreenSize.SCREEN_WIDTH - 50
         if let viewR = rootNV?.view {
-            SideMenuManager.default.menuAddPanGestureToPresent(toView: viewR)
+            slideMenuGesture = SideMenuManager.default.menuAddPanGestureToPresent(toView: viewR)
         }
 
         if Constants.isLeftToRight {

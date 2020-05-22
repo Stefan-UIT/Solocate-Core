@@ -78,6 +78,7 @@ class BusinessOrderDetailVC: BaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         initVar()
+        App().disableSlideMenu()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -112,9 +113,9 @@ class BusinessOrderDetailVC: BaseViewController {
         if order != nil {
             _order = order!
         }
-        if isEditingBO {
-            _order.zone = autoFillZone()
-        }
+//        if isEditingBO {
+//            _order.zone = autoFillZone()
+//        }
         let itemZone = DropDownModel().addZones(zones)
         let zone = BusinessOrderForRow(title: "zone".localized,
                                        content: Slash(_order.zone?.name),
@@ -571,6 +572,8 @@ extension BusinessOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
             businessOrderItem.remove(at: indexPath.row)
             skuItems.remove(at: indexPath.row)
             tbvContent?.deleteRows(at: [indexPath], with: .bottom )
+            tbvContent?.reloadData()
+            self.checkRequire()
         }
     }
     
@@ -908,15 +911,21 @@ extension BusinessOrderDetailVC {
         tbvContent?.reloadData()
     }
     
+    func isAllSKUSelected() -> Bool {
+        let array = skuItems.filter({$0.id == -1})
+        return array.count == 0
+    }
+    
     func checkRequire() {
         var isQualitySubmit = false
         let amountOfDetails = order?.details?.count ?? 0
         for index in 0..<(amountOfDetails){
             isQualitySubmit = order?.details?[index].pivot?.uom != nil && order?.details?[index].pivot?.qty != nil && order?.details?[index].pivot?.qty > 0
         }
-        if skuItems.count > amountOfDetails {
+        if skuItems.count > amountOfDetails || !isAllSKUSelected() {
             isQualitySubmit = false
         }
+        
         
         let isOrderTypeFilled = order?.typeID != nil
         let isCustomerFilled = order?.customer != nil
@@ -1065,12 +1074,11 @@ extension BusinessOrderDetailVC {
             pickupItem.lattd = _address.lattd
             pickupItem.lngtd = _address.lngtd
             let customerID = Int(_order.customerId ?? "") ?? -1
-            if let customer = _address.getCustomer(customerID: customerID) {
-                pickupItem.ctt_name = Slash(customer.pivot?.consigneeName)
-                pickupItem.ctt_phone = Slash(customer.pivot?.consigneePhone)
-                pickupItem.openTime = Slash(customer.pivot?.openTime)
-                pickupItem.closeTime = Slash(customer.pivot?.closeTime)
-            }
+            let customer = _address.getCustomer(customerID: customerID)
+            pickupItem.ctt_name = Slash(customer?.pivot?.consigneeName)
+            pickupItem.ctt_phone = Slash(customer?.pivot?.consigneePhone)
+            pickupItem.openTime = Slash(customer?.pivot?.openTime)
+            pickupItem.closeTime = Slash(customer?.pivot?.closeTime)
             
             
 //            for (_,customer) in _customers.enumerated() {
@@ -1157,12 +1165,11 @@ extension BusinessOrderDetailVC {
             deliveryItem.lngtd = _address.lngtd
             
             let customerID = Int(_order.customerId ?? "") ?? -1
-            if let customer = _address.getCustomer(customerID: customerID) {
-                deliveryItem.ctt_name = Slash(customer.pivot?.consigneeName)
-                deliveryItem.ctt_phone = Slash(customer.pivot?.consigneePhone)
-                deliveryItem.openTime = Slash(customer.pivot?.openTime)
-                deliveryItem.closeTime = Slash(customer.pivot?.closeTime)
-            }
+            let customer = _address.getCustomer(customerID: customerID)
+            deliveryItem.ctt_name = Slash(customer?.pivot?.consigneeName)
+            deliveryItem.ctt_phone = Slash(customer?.pivot?.consigneePhone)
+            deliveryItem.openTime = Slash(customer?.pivot?.openTime)
+            deliveryItem.closeTime = Slash(customer?.pivot?.closeTime)
             
 //            for (_,customer) in _customers.enumerated() {
 //                if customer.pivot?.customerId!.toString() == order?.customerId {
