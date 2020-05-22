@@ -91,4 +91,15 @@ extension BaseAPIService {
                        callback: callback);
     }
     
+    @discardableResult
+    func fetchCities(byCityName cityName:String, callback: @escaping APICallback<ResponseDataListModel<City>>) -> APIRequest {
+        
+        let url = String(format:PATH_REQUEST_URL.GET_ZONE_BY_CITY_NAME.URL, cityName)
+        
+        return request(method: .GET,
+                       path: url,
+                       input: .empty,
+                       callback: callback);
+    }
+    
 }

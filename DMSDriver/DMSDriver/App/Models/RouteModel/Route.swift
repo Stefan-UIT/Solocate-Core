@@ -32,6 +32,23 @@ class Zone: BasicModel {
     }
 }
 
+class City: BasicModel {
+    var zone:Zone?
+    
+    override init() {
+        super.init()
+    }
+    
+    required init?(map: Map) {
+        super.init()
+    }
+    
+    override func mapping(map: Map) {
+        super.mapping(map: map)
+        zone <- map["zone"]
+    }
+}
+
 class TruckType: BasicModel {
     var numberOfCompartments:Int? = -1
     var maxVol:String? = ""

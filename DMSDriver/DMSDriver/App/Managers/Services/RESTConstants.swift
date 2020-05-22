@@ -102,6 +102,7 @@ enum PATH_REQUEST_URL: String{
     case GET_UOM_LIST = "masterdata/v1/units/list-active"
     case GET_ZONE_LIST = "masterdata/v1/zones/list-active"
     case CREATE_BUSINESS_ORDER = "transaction/v1/purchase-orders"
+    case GET_ZONE_BY_CITY_NAME = "masterdata/v1/zones/get-zone-by-city-name?city_name=%@"
     
     var URL:String  {
         return rawValue
