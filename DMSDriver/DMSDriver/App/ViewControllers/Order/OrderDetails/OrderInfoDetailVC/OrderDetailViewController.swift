@@ -1302,9 +1302,9 @@ extension OrderDetailViewController{
                     self?.initVar()
                     self?.updateUI()
                     CoreDataManager.updateOrderDetail(_orderDetail) // update orderdetail to DB local
-                    if _orderDetail.isFinished {
-                        self?.requestMoreLegs(orderID: _orderDetail.id)
-                    }
+//                    if _orderDetail.isFinished {
+//                        self?.requestMoreLegs(orderID: _orderDetail.id)
+//                    }
                 case .error(let error):
                     self?.showAlertView(error.getMessage())
                 }
@@ -1358,9 +1358,9 @@ extension OrderDetailViewController{
                 self?.tableView?.reloadData()
                 self?.tableView?.setContentOffset(.zero, animated: true)
                 
-                if order.isFinished {
-                    self?.requestMoreLegs(orderID: order.id)
-                }
+//                if order.isFinished {
+//                    self?.requestMoreLegs(orderID: order.id)
+//                }
                 
                 self?.didUpdateStatus?(order, nil)
                 
