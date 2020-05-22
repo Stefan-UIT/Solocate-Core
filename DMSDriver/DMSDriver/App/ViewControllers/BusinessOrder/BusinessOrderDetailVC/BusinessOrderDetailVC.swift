@@ -123,32 +123,48 @@ class BusinessOrderDetailVC: BaseViewController {
                                        style: .Zone,
                                        itemZone,
                                        isRequire: _order.isRequireEdit(_order?.zone?.name, .None))
-        
+        removeZone()
         if isPickup {
-            removeZone()
             businessOrderPickupInfo.append(zone)
         } else {
-            removeZone()
             businessOrderDeliveryInfo.append(zone)
         }
         tbvContent?.reloadData()
     }
     
-    func autoFillZone() -> Zone {
-        for index in 0..<zones.count {
-            if zones[index].companyId == self.companyId {
-                order?.zoneId = zones[index].id
-                return zones[index]
-            }
-        }
-        return Zone()
-    }
+//    func autoFillZone() -> Zone {
+//        for index in 0..<zones.count {
+//            if zones[index].companyId == self.companyId {
+//                order?.zoneId = zones[index].id
+//                return zones[index]
+//            }
+//        }
+//        return Zone()
+//    }
     
     func removeZone() {
         if businessOrderDeliveryInfo.last?.title == "zone".localized {
             businessOrderDeliveryInfo.removeLast()
         } else if businessOrderPickupInfo.last?.title == "zone".localized {
             businessOrderPickupInfo.removeLast()
+        }
+    }
+    
+    func autoFillZone(withCityName cityName:String) {
+        self.showLoadingIndicator()
+        SERVICES().API.fetchCities(byCityName: cityName) { [weak self] (result) in
+            self?.dismissLoadingIndicator()
+            switch result{
+            case .object(let object):
+                guard let cities = object.data, let zoneID = cities.first?.zone?.id else { return }
+                let array = self?.zones.filter({$0.id == zoneID})
+                
+                self?.order?.zoneId = zoneID
+                self?.order?.zone = array?.first
+                self?.addZone(isPickup: (self?.order!.isPickUpType)!)
+            case .error(let error):
+                self?.showAlertView(error.getMessage())
+            }
         }
     }
     
@@ -855,6 +871,8 @@ extension BusinessOrderDetailVC {
         businessOrderDeliveryInfo.removeAll()
         order?.from = nil
         order?.to = nil
+        order?.zoneId = nil
+        order?.zone = nil
         setupDataAddressAndSKUInRow()
     }
     
@@ -1056,6 +1074,14 @@ extension BusinessOrderDetailVC {
             businessOrderDeliveryInfo[CTT_NAME_ROW].content = Slash(address.ctt_name)
             businessOrderDeliveryInfo[CTT_PHONE_ROW].content = Slash(address.ctt_phone)
         }
+        var cityNameToFilter = ""
+        if order!.isPickUpType && isPickup {
+            cityNameToFilter = address.city ?? ""
+        } else if order!.isDeliveryType && !isPickup {
+            cityNameToFilter = address.city ?? ""
+        }
+        autoFillZone(withCityName: cityNameToFilter)
+        
     }
     
     func editOrderPickupInfo(row:Int, item:DropDownModel?) {

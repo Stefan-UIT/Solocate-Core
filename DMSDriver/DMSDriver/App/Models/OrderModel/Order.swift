@@ -179,6 +179,7 @@ class Address: BaseModel {
     var closeTime: String?
     var customers:[UserModel.UserInfo]?
     var types:[BasicModel]?
+    var city:String?
 //
 //    func convertDateToDisplay(date:String?) -> String? {
 //        guard let data = date else { return nil }
@@ -238,6 +239,7 @@ class Address: BaseModel {
         }
         customers <- map["customers"]
         types <- map["types"]
+        city <- map["city"]
     }
     
     func toCoreLocation(context:NSManagedObjectContext) -> CoreLocation {
