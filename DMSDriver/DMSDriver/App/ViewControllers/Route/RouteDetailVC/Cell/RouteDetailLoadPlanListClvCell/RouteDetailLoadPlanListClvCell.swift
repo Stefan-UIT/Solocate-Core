@@ -33,7 +33,11 @@ class RouteDetailLoadPlanListClvCell: UICollectionViewCell {
     @IBOutlet weak var iconDropDownWeightConstant: NSLayoutConstraint!
     @IBOutlet weak var loadplanHeaderView: UIView!
     
+    @IBOutlet weak var maxVolumeViewContainer: UIView!
     
+    @IBOutlet weak var numberOfPalletsViewContainer: UIView!
+    
+    @IBOutlet weak var numberOfPalletLabel: UILabel!
     let LOAD_PLAN_VIEW_HEIGHT:CGFloat = 130.0
     let LOAD_PLAN_VIEW_HEIGHT_TACHOGRAPH:CGFloat = 160.0
     
@@ -71,6 +75,7 @@ class RouteDetailLoadPlanListClvCell: UICollectionViewCell {
     }
     
     func updateUI() {
+        guard let _route = route else { return }
         let isLiquid = route?.routeType?.id == Route.RouteType.Liquid.rawValue
         let isTachograph = (dataDisplay?.type?.isTachograph() ?? false)
         platenumLbl.textColor = isLiquid ? AppColor.greenColor : .black
@@ -85,9 +90,17 @@ class RouteDetailLoadPlanListClvCell: UICollectionViewCell {
         iconDropDownWeightConstant.constant = isLiquid ? 7.5 : 0
         
         platenumLbl.text = Slash(dataDisplay?.plateNumber)
-        maxVolumeLbl.text = Slash(dataDisplay?.maxVolumeName)
+        
         tachographLbl.text = (dataDisplay?.type?.isTachograph() ?? false) ? "yes".localized : "no".localized
         routeTypeLbl.text = route?.routeTypeName()
+        
+        if _route.isLiquidType {
+            maxVolumeViewContainer.isHidden = false
+            maxVolumeLbl.text = Slash(dataDisplay?.maxVolumeName)
+        } else {
+            numberOfPalletsViewContainer.isHidden = false
+            numberOfPalletLabel.text = IntSlash(_route.numberOfPallets) 
+        }
     }
     
     func setupTableView() {
