@@ -512,14 +512,18 @@ class Route: BaseModel {
     
     var customerNameArr:[String] {
         get {
-           let array = orderList.unique(map: {$0.customer!.userName})
+            // remove empty name
+            let arrayTemp = orderList.filter({$0.customer?.userName != nil && !$0.customer!.userName!.isEmpty })
+           let array = arrayTemp.unique(map: {$0.customer!.userName})
             return array.map({$0.customer?.userName ?? ""})
         }
     }
     
     var consigneeNameArr:[String] {
         get {
-            let array = orderList.unique(map: {$0.consigneeName})
+            // remove empty name
+            let arrayTemp = orderList.filter({$0.consigneeName != nil && !$0.consigneeName!.isEmpty })
+            let array = arrayTemp.unique(map: {$0.consigneeName})
             return array.map({$0.consigneeName ?? ""})
         }
     }
