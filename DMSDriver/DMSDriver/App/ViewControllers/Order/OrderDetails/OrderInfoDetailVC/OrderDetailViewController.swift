@@ -233,14 +233,14 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let orderType = OrderDetailInforRow("order-type".localized,order.orderType.name)
         let division = OrderDetailInforRow("division".localized,Slash(order.division?.name))
         let zone = OrderDetailInforRow("zone".localized,Slash(order.zone?.name))
-        let purchaseOrderID = OrderDetailInforRow("purchase-order-id".localized,IntSlash(order.purchaseOrderID),true)
+        let businessOrderCompartmentID = OrderDetailInforRow("Bussiness Order Id".localized,Slash(order.businessOrder?.companySeqID),true)
         
 
         orderInforDetail.append(orderId)
         orderInforDetail.append(orderType)
-        orderInforDetail.append(purchaseOrderID)
+        orderInforDetail.append(businessOrderCompartmentID)
         orderInforDetail.append(customerItem)
-        orderInforDetail.append(routeType)
+//        orderInforDetail.append(routeType)
 //        orderInforDetail.append(consigneeName)
 //        orderInforDetail.append(division)
         orderInforDetail.append(zone)
@@ -265,6 +265,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let fromContactPhone = OrderDetailInforRow("contact-phone".localized,order.from?.ctt_phone ?? "-",true)
         let fromStartTime = OrderDetailInforRow("start-time".localized,Slash(startFromDate),false)
         let fromEndtime = OrderDetailInforRow("end-time".localized,Slash(endFromDate),false)
+        let fromOpenTime = OrderDetailInforRow("open-time".localized,Slash(order.from?.openTime),false)
+        let fromcloseTime = OrderDetailInforRow("close-time".localized,Slash(order.from?.closeTime),false)
         let fromServiceTime = OrderDetailInforRow("service-time".localized,Slash(order.from?.serviceTime),false)
         let fromFloor = Slash(order.from?.floor)
         let fromApartment = Slash(order.from?.apartment)
@@ -277,6 +279,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         let toAddress = OrderDetailInforRow("Address".localized, E(order.to?.address),true)
         let toContactName = OrderDetailInforRow("contact-name".localized,order.to?.ctt_name ?? "-")
         let toContactPhone = OrderDetailInforRow("contact-phone".localized,order.to?.ctt_phone ?? "-", true)
+        let toOpenTime = OrderDetailInforRow("open-time".localized,Slash(order.to?.openTime),false)
+        let toCloseTime = OrderDetailInforRow("close-time".localized,Slash(order.to?.closeTime),false)
         let toStartTime = OrderDetailInforRow("start-time".localized,Slash(startToDate),false)
         let tomEndtime = OrderDetailInforRow("end-time".localized,Slash(endToDate),false)
         let toLocationName = OrderDetailInforRow("location-name".localized, Slash(order.to?.loc_name),false)
@@ -301,6 +305,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforFrom.append(fromContactName)
         orderInforFrom.append(fromContactPhone)
         orderInforFrom.append(fromAddressDetailRecord)
+        orderInforFrom.append(fromOpenTime)
+        orderInforFrom.append(fromcloseTime)
         orderInforFrom.append(fromStartTime)
         orderInforFrom.append(fromEndtime)
 //        orderInforFrom.append(fromServiceTime)
@@ -310,6 +316,8 @@ class OrderDetailViewController: BaseOrderDetailViewController {
         orderInforTo.append(toContactName)
         orderInforTo.append(toContactPhone)
         orderInforTo.append(toAddressDetailRecord)
+        orderInforTo.append(toOpenTime)
+        orderInforTo.append(toCloseTime)
         orderInforTo.append(toStartTime)
         orderInforTo.append(tomEndtime)
 //        orderInforTo.append(toServiceTime)
@@ -825,7 +833,9 @@ fileprivate extension OrderDetailViewController {
         guard let order = orderDetail, let detail = order.details?[indexPath.row] else { return cell }
         cell.delegate = self
         let isNotUpdate = detail.pivot?.deliveredQty == 0
-        cell.tempActualQty = isNotUpdate ? nil : tempActualQty[detail.pivot?.id ?? 0]
+        let currentTempQty = tempActualQty[detail.pivot?.id ?? 0]
+        let isNotEnterTempQty = currentTempQty == nil || currentTempQty == 0
+        cell.tempActualQty = (isNotUpdate && isNotEnterTempQty) ? nil : tempActualQty[detail.pivot?.id ?? 0]
         cell.configureCell(detail: detail, order: order, route:route)
         cell.vContent?.cornerRadius = 0
         if indexPath.row == order.details!.count - 1{

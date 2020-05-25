@@ -590,6 +590,7 @@ class Order: BaseModel {
 
     var id = -1
     var purchaseOrderID = -1
+    var businessOrder:BusinessOrder?
     var from:Address?
     var to:Address?
     var route_id:Int = 0
@@ -831,6 +832,8 @@ class Order: BaseModel {
     
     override func mapping(map: Map) {
         id    <- map["id"]
+        
+        businessOrder    <- map["shipping_purchase"]
         purchaseOrderID    <- map["purchase_order_id"]
         route_id <- map["route_id"]
         status_id <- map["shipping_status_id"]

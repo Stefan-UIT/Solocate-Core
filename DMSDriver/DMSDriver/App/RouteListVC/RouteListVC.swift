@@ -282,9 +282,9 @@ import Crashlytics
                         }
                         
                         self?.routes.append(data)
-                        self?.sortRoutes()
+//                        self?.sortRoutes()
                         CoreDataManager.saveRoutes(self?.routes ?? [])
-//                        self?.routes = self?.routes.sorted(by: {$0.id > $1.id}) ?? []
+                        self?.routes = self?.routes.sorted(by: {$0.id > $1.id}) ?? []
                         strongSelf.lblNoResult?.isHidden = (strongSelf.routes.count > 0)
                         strongSelf.tableView.reloadData()
                         self?.isFetchInProgress = false

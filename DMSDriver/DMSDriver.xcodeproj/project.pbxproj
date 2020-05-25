@@ -376,6 +376,10 @@
 		2EF35D8322EEAC3C00131D33 /* AssignDriverViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF35D8122EEAC3C00131D33 /* AssignDriverViewController.swift */; };
 		2EF35D8622EED4DF00131D33 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF35D8522EED4DF00131D33 /* Driver.swift */; };
 		2EF35D8722EED4DF00131D33 /* Driver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF35D8522EED4DF00131D33 /* Driver.swift */; };
+		2EF51CDA247BB391002EA4B3 /* BusinessDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF51CD9247BB391002EA4B3 /* BusinessDetailHeaderView.swift */; };
+		2EF51CDB247BB392002EA4B3 /* BusinessDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2EF51CD9247BB391002EA4B3 /* BusinessDetailHeaderView.swift */; };
+		2EF51CDE247BB3B6002EA4B3 /* BusinessDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EF51CDD247BB3B6002EA4B3 /* BusinessDetailHeaderView.xib */; };
+		2EF51CDF247BB3B6002EA4B3 /* BusinessDetailHeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2EF51CDD247BB3B6002EA4B3 /* BusinessDetailHeaderView.xib */; };
 		3B0035F7216C614D0032519D /* TextViewInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0035F4216C614D0032519D /* TextViewInput.swift */; };
 		3B0035F8216C614D0032519D /* TextViewInput.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3B0035F5216C614D0032519D /* TextViewInput.xib */; };
 		3B0035F9216C614D0032519D /* TextViewInputController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3B0035F6216C614D0032519D /* TextViewInputController.swift */; };
@@ -803,6 +807,8 @@
 		2EF35D7E22EEAB3100131D33 /* AssignDriverTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignDriverTableViewCell.swift; sourceTree = "<group>"; };
 		2EF35D8122EEAC3C00131D33 /* AssignDriverViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AssignDriverViewController.swift; sourceTree = "<group>"; };
 		2EF35D8522EED4DF00131D33 /* Driver.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Driver.swift; sourceTree = "<group>"; };
+		2EF51CD9247BB391002EA4B3 /* BusinessDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessDetailHeaderView.swift; sourceTree = "<group>"; };
+		2EF51CDD247BB3B6002EA4B3 /* BusinessDetailHeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BusinessDetailHeaderView.xib; sourceTree = "<group>"; };
 		3B0035F4216C614D0032519D /* TextViewInput.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewInput.swift; sourceTree = "<group>"; };
 		3B0035F5216C614D0032519D /* TextViewInput.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TextViewInput.xib; sourceTree = "<group>"; };
 		3B0035F6216C614D0032519D /* TextViewInputController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextViewInputController.swift; sourceTree = "<group>"; };
@@ -3587,6 +3593,8 @@
 				769391472421CA2900506602 /* BusinessOrderPickerTableViewCell.swift */,
 				766752B124236F0000D69956 /* BusinessOrderConfirmTableViewCell.swift */,
 				766752B4242375A200D69956 /* BusinessOrderItemTableViewCell.swift */,
+				2EF51CD9247BB391002EA4B3 /* BusinessDetailHeaderView.swift */,
+				2EF51CDD247BB3B6002EA4B3 /* BusinessDetailHeaderView.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -3789,6 +3797,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2EF51CDE247BB3B6002EA4B3 /* BusinessDetailHeaderView.xib in Resources */,
 				2A443B0F22648C5A00CB6508 /* FilterDataTypeRowCell.xib in Resources */,
 				2A443B1022648C5A00CB6508 /* ContentCell.xib in Resources */,
 				2A443B1122648C5A00CB6508 /* Main.storyboard in Resources */,
@@ -3916,6 +3925,7 @@
 				3B66B924210B1149000BDFEF /* ChangeInviromentTableViewCell.xib in Resources */,
 				C73D9D56226DA17900452A0C /* GoogleService-Info.plist in Resources */,
 				3B0035F8216C614D0032519D /* TextViewInput.xib in Resources */,
+				2EF51CDF247BB3B6002EA4B3 /* BusinessDetailHeaderView.xib in Resources */,
 				3B1629DF221BF07800E7A83C /* FilterDataListHeaderInsertCell.xib in Resources */,
 				3B7695EC21CA20D70032B142 /* Notification.storyboard in Resources */,
 				3B13CBF1211A8FF400A93E18 /* ScrollMenuCell.xib in Resources */,
@@ -4188,6 +4198,7 @@
 				2A443A7B22648C5A00CB6508 /* APIServices+Alert.swift in Sources */,
 				2A443A7C22648C5A00CB6508 /* ChangePasswordTableViewCell.swift in Sources */,
 				2A443A7D22648C5A00CB6508 /* LogoutTableViewCell.swift in Sources */,
+				2EF51CDA247BB391002EA4B3 /* BusinessDetailHeaderView.swift in Sources */,
 				2A443A7E22648C5A00CB6508 /* OrderDetailMapViewController.swift in Sources */,
 				2EF1AAD9233B745700689A87 /* OrderDetailSKUCell.swift in Sources */,
 				2A443A7F22648C5A00CB6508 /* String.swift in Sources */,
@@ -4490,6 +4501,7 @@
 				2EF1AADA233B745700689A87 /* OrderDetailSKUCell.swift in Sources */,
 				3B66B809210B113D000BDFEF /* String.swift in Sources */,
 				3B66B91F210B1149000BDFEF /* AppDelegate.swift in Sources */,
+				2EF51CDB247BB392002EA4B3 /* BusinessDetailHeaderView.swift in Sources */,
 				3B66B84B210B113D000BDFEF /* RESTConstants.swift in Sources */,
 				3B7695F421CA24980032B142 /* PickerInputViewCell.swift in Sources */,
 				3B66B90A210B1149000BDFEF /* OrderDetailVC.swift in Sources */,

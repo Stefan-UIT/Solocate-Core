@@ -45,7 +45,7 @@ class AddNoteViewController: BaseViewController {
         super.updateNavigationBar()
         App().navigationService.delegate = self
         let title = "add-note".localized
-        App().navigationService.updateNavigationBar(.Back_AttachedFiles, title.localized, AppColor.white, true)
+        App().navigationService.updateNavigationBar(.BackOnly, title.localized, AppColor.white, true)
     }
     
     func handleShowingHintLabel() {
@@ -65,10 +65,16 @@ class AddNoteViewController: BaseViewController {
         }
     }
     
+    func encode(_ s: String) -> String {
+        let data = s.data(using: .nonLossyASCII, allowLossyConversion: true)!
+        return String(data: data, encoding: .utf8)!
+    }
+    
     // MARK: - ACTION
     @IBAction func submit(_ sender: UIButton) {
         let message = self.noteTextView?.text ?? ""
-        self.delegate?.didSubmitNote(message, images: self.attachedFiles)
+        let encodedMes = encode(message)
+        self.delegate?.didSubmitNote(encodedMes, images: self.attachedFiles)
         self.navigationController?.popViewController(animated: true)
     }
 

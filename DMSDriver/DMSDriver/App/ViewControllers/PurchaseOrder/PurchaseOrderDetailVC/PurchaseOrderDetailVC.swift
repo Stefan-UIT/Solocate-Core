@@ -60,7 +60,7 @@ class PurchaseOrderDetailVC: BaseViewController {
     //MARK: - Intialize
     func setupNavigateBar() {
         App().navigationService.delegate = self
-        App().navigationService.updateNavigationBar(.BackOnly, "purchase-order-detail".localized)
+        App().navigationService.updateNavigationBar(.BackOnly, "Business Order Detail".localized)
     }
     
     func setupDataDetailInforRows() {
@@ -74,7 +74,7 @@ class PurchaseOrderDetailVC: BaseViewController {
         purchaseOrderSKU.removeAll()
         
         // Cell PurchaseOrder Info
-        let purchaseId = OrderDetailInforRow("purchase-order-id".localized,IntSlash(_order.id))
+        let purchaseId = OrderDetailInforRow("ID".localized,Slash(_order.companySeqID))
         let purchaseOrderType = OrderDetailInforRow("order-type".localized, Slash(_order.orderType.name))
         let purchaseDivision = OrderDetailInforRow("division".localized,Slash(_order.division?.name))
         let purchaseRefCode = OrderDetailInforRow("ref-code".localized, Slash(_order.referenceCode))

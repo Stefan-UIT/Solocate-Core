@@ -79,6 +79,12 @@ class BusinessOrderDetailVC: BaseViewController {
         super.viewDidLoad()
         initVar()
         App().disableSlideMenu()
+        let xib = UINib(nibName: "BusinessDetailHeaderView", bundle: nil)
+        self.tbvContent?.register(
+            xib,
+            forHeaderFooterViewReuseIdentifier:
+                "BusinessDetailHeaderView"
+        )
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -495,12 +501,21 @@ extension BusinessOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        if let headerCell = tableView.dequeueReusableCell(withIdentifier: headerCellIdentifier) as? OrderDetailTableViewCell{
+        let headerSection:BusinessOrderSection = BusinessOrderSection(rawValue: section)!
+        if headerSection == .SKUS {
+            if let headerView = tableView.dequeueReusableHeaderFooterView(withIdentifier: "BusinessDetailHeaderView") as? BusinessDetailHeaderView {
+                headerView.addButton?.isHidden = !isEditingBO
+                headerView.addButton?.tag = section
+                headerView.delegate = self
+                return headerView
+            }
+        } else if let headerCell = tableView.dequeueReusableCell(withIdentifier: headerCellIdentifier) as? OrderDetailTableViewCell{
+            
             headerCell.nameLabel?.text = arrTitleHeader[section]
             headerCell.delegate = self
             headerCell.btnStatus?.isHidden = true
             headerCell.btnEdit?.isHidden = true
-            let headerSection:BusinessOrderSection = BusinessOrderSection(rawValue: section)!
+            
             switch headerSection {
             case .OrderInfo:
                 headerCell.btnStatus?.isHidden = isEditingBO ? true : false
@@ -518,9 +533,11 @@ extension BusinessOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
             case .Submit:
                 return headerCell
             }
-            let headerView = UIView()
+            let frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: HEADER_HEIGHT)
+            headerCell.frame = frame
+            let headerView = UIView(frame: frame)
             headerView.addSubview(headerCell)
-            headerCell.frame = CGRect(x: 0, y: 0, width: tableView.frame.width, height: HEADER_HEIGHT)
+            
             return headerView;
         }
         return nil
@@ -668,6 +685,14 @@ extension BusinessOrderDetailVC: DropDownViewControllerDelegate {
     }
     
     
+}
+
+extension BusinessOrderDetailVC: BusinessDetailHeaderViewDelegate {
+    func didTouchOnAddButton() {
+        self.addNewSKU()
+        self.checkRequire()
+        self.tbvContent?.reloadData()
+    }
 }
 
 extension BusinessOrderDetailVC: OrderDetailTableViewCellDelegate {
