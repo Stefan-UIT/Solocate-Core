@@ -494,7 +494,7 @@ extension BusinessOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
         case .Delivery:
             return HEADER_HEIGHT
         case .SKUS:
-            return HEADER_HEIGHT
+            return HEADER_HEIGHT - 8
         case .Submit:
             return CGFloat.leastNormalMagnitude
         }
@@ -604,8 +604,10 @@ extension BusinessOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
         if editingStyle == .delete {
             businessOrderItem.remove(at: indexPath.row)
             skuItems.remove(at: indexPath.row)
-            tbvContent?.deleteRows(at: [indexPath], with: .bottom )
-            tbvContent?.reloadData()
+            tbvContent?.beginUpdates()
+            tbvContent?.deleteRows(at: [indexPath], with: .left )
+            tbvContent?.endUpdates()
+//            tbvContent?.reloadData()
             self.checkRequire()
         }
     }

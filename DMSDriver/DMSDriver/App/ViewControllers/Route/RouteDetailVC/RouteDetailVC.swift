@@ -118,6 +118,7 @@ class RouteDetailVC: BaseViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        updateNavigationBar()
     }
     
     override func viewWillAppear(_ animated: Bool) {
