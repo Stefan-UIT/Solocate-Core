@@ -15,10 +15,10 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Cp-hO-9mV">
-                    <rect key="frame" x="15" y="0.0" width="384" height="896"/>
+                    <rect key="frame" x="15" y="0.0" width="384" height="894"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Items" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="D0g-Wk-Ez9">
-                            <rect key="frame" x="15" y="0.0" width="38" height="896"/>
+                            <rect key="frame" x="15" y="0.0" width="38" height="894"/>
                             <fontDescription key="fontDescription" name="AvenirNext-Bold" family="Avenir Next" pointSize="14"/>
                             <color key="textColor" red="0.035294117649999998" green="0.1529411765" blue="0.25882352939999997" alpha="1" colorSpace="calibratedRGB"/>
                             <nil key="highlightedColor"/>
@@ -27,7 +27,7 @@
                             </userDefinedRuntimeAttributes>
                         </label>
                         <button opaque="NO" contentMode="scaleAspectFit" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6qc-K6-WRc">
-                            <rect key="frame" x="339" y="428" width="40" height="40"/>
+                            <rect key="frame" x="339" y="427" width="40" height="40"/>
                             <state key="normal" image="ic_add"/>
                             <connections>
                                 <action selector="onAddButtonTouchUp:" destination="iN0-l3-epB" eventType="touchUpInside" id="CNo-1W-Qx6"/>
@@ -47,9 +47,9 @@
                     <viewLayoutGuide key="safeArea" id="RP7-HP-HWU"/>
                 </view>
             </subviews>
-            <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstAttribute="bottom" secondItem="1Cp-hO-9mV" secondAttribute="bottom" id="3J5-In-Mt2"/>
+                <constraint firstAttribute="bottom" secondItem="1Cp-hO-9mV" secondAttribute="bottom" constant="2" id="3J5-In-Mt2"/>
                 <constraint firstItem="1Cp-hO-9mV" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="6Ol-mN-pbs"/>
                 <constraint firstItem="1Cp-hO-9mV" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="15" id="OHg-n9-T8W"/>
                 <constraint firstItem="1Cp-hO-9mV" firstAttribute="trailing" secondItem="vUN-kp-3ea" secondAttribute="trailing" constant="-15" id="k7J-cw-pAr"/>

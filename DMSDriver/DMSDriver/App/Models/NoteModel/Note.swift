@@ -24,12 +24,23 @@ class Note: NSObject, Mappable {
     
   func mapping(map: Map) {
     id <- map["id"]
-    content <- map["content"]
     statusId <- map["status_id"]
     createdBy <- map["created_by"]
     status <- map["shipping_status"]
     createdAt <- map["created_at"]
+    content <- map["content"]
     
+    content = decode(content) ?? ""
   }
+    
+    func encode(_ s: String) -> String {
+        let data = s.data(using: .nonLossyASCII, allowLossyConversion: true)!
+        return String(data: data, encoding: .utf8)!
+    }
+    
+    func decode(_ s: String) -> String? {
+        let data = s.data(using: .utf8)!
+        return String(data: data, encoding: .nonLossyASCII)
+    }
 }
 
