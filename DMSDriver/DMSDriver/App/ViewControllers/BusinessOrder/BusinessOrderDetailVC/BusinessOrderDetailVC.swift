@@ -605,10 +605,10 @@ extension BusinessOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
             businessOrderItem.remove(at: indexPath.row)
             skuItems.remove(at: indexPath.row)
             order?.details = skuItems
-            tbvContent?.beginUpdates()
+//            tbvContent?.beginUpdates()
             tbvContent?.deleteRows(at: [indexPath], with: .left )
-            tbvContent?.endUpdates()
-//            tbvContent?.reloadData()
+//            tbvContent?.endUpdates()
+            tbvContent?.reloadData()
             self.checkRequire()
         }
     }
