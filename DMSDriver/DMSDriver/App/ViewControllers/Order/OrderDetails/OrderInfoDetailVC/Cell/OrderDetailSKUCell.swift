@@ -51,6 +51,11 @@ class OrderDetailSKUCell: UITableViewCell {
         barcodeLabel.text = Slash(detail.pivot?.bcd)
         batchIdLabel.text = Slash(detail.pivot?.batch_id)
         quantityLabel.text = IntSlash(detail.pivot?.qty)
+        if order.isNewStatus {
+            detail.pivot?.loadedQty = tempActualQty
+        } else if order.isInTransit {
+            detail.pivot?.deliveredQty = tempActualQty
+        }
         
         updateDeliverdQtyUI(order: order)
         updateLoadedQtyUI(order:order)
