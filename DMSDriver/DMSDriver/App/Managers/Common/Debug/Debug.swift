@@ -7,7 +7,8 @@ class Debug {
     
     var serverEnvironment:ServerEnvironment?
     var useServer: String?
-    lazy var disableLoggingForAPI = self.environmentBool(for: "DISABLE_API_LOG")
+//    lazy var disableLoggingForAPI = self.environmentBool(for: "DISABLE_API_LOG")
+    let disableLoggingForAPI = true
     
     init(useServer:String? = nil) {
         if SDBuildConf.tagetBuild == .Production {

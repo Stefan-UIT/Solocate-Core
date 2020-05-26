@@ -604,6 +604,7 @@ extension BusinessOrderDetailVC: UITableViewDataSource, UITableViewDelegate {
         if editingStyle == .delete {
             businessOrderItem.remove(at: indexPath.row)
             skuItems.remove(at: indexPath.row)
+            order?.details = skuItems
             tbvContent?.beginUpdates()
             tbvContent?.deleteRows(at: [indexPath], with: .left )
             tbvContent?.endUpdates()

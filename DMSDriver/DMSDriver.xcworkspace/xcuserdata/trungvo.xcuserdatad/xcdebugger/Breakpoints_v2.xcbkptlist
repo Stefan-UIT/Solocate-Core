@@ -3,4 +3,102 @@
    uuid = "73C604DD-F760-4666-8A06-6E3CAA66AEAE"
    type = "0"
    version = "2.0">
+   <Breakpoints>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "FCB229D2-49EC-47E4-9BF0-444630C62BD9"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DMSDriver/App/ViewControllers/Route/RouteDetailVC/RouteDetailVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "448"
+            endingLineNumber = "448"
+            landmarkName = "getRouteDetail(_:showLoading:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "FCB229D2-49EC-47E4-9BF0-444630C62BD9 - 133169ce0447581"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "Solocate_Dev.RouteDetailVC.getRouteDetail(_: Swift.String, showLoading: Swift.Bool) -&gt; ()"
+                  moduleName = "Solocate Dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/trungvo/solocate_core/DMSDriver/DMSDriver/App/ViewControllers/Route/RouteDetailVC/RouteDetailVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "448"
+                  endingLineNumber = "448"
+                  offsetFromSymbolStart = "238">
+               </Location>
+               <Location
+                  uuid = "FCB229D2-49EC-47E4-9BF0-444630C62BD9 - 5ecf8d7d874a14db"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (Solocate_Dev.APIOutput&lt;Solocate_Dev.ResponseDataModel&lt;Solocate_Dev.Route&gt;, Solocate_Dev.APIError&gt;) -&gt; () in Solocate_Dev.RouteDetailVC.getRouteDetail(_: Swift.String, showLoading: Swift.Bool) -&gt; ()"
+                  moduleName = "Solocate Dev"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/trungvo/solocate_core/DMSDriver/DMSDriver/App/ViewControllers/Route/RouteDetailVC/RouteDetailVC.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "448"
+                  endingLineNumber = "448"
+                  offsetFromSymbolStart = "224">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D9044802-BD72-4F1C-B9D6-4A7AA538F1F0"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DMSDriver/App/ViewControllers/Route/RouteDetailVC/RouteDetailVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "449"
+            endingLineNumber = "449"
+            landmarkName = "getRouteDetail(_:showLoading:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "3AE4D79D-EEC3-439C-8B50-0FBD8F5EF506"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DMSDriver/App/ViewControllers/Route/RouteDetailVC/RouteDetailVC.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "452"
+            endingLineNumber = "452"
+            landmarkName = "getRouteDetail(_:showLoading:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F34047CD-DAC9-4B52-AF4B-375C70257187"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "DMSDriver/App/Managers/Services/APIServices/API+Route.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "97"
+            endingLineNumber = "97"
+            landmarkName = "getRouteDetail(route:callback:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+   </Breakpoints>
 </Bucket>
